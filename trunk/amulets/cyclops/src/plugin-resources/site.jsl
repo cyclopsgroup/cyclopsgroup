@@ -44,7 +44,7 @@
 								<tr>
 									<td rowspan="2" height="60" align="left">
 										<a href="${pom.organization.url}">
-											<img src="${relativePath}${pom.organization.logo}" border="0"/>
+											<img src="${relativePath}${pom.organization.logo}" alt="${pom.organization.name}" border="0"/>
 										</a>
 									</td>
 									<td align="right">
@@ -53,7 +53,7 @@
 											<input type="hidden" name="domains" value="${pom.organization.url}"/>
 											Search in site
 											<input type="text" id="q" size="20" name="q" maxlength="255" value=""/>
-											<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search" align="absmiddle"/>
+											<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search"/>
 										</form>
 									</td>
 								</tr>
@@ -85,7 +85,7 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 												<x:expr select="$doc/document/properties/banner"/>
 											</j:set>
 										</x:if>
-										<img src="${relativePath}${bannerImage}" border="0"/>
+										<img src="${relativePath}${bannerImage}" alt="${pom.shortDescription}" border="0"/>
 									</td>
 								</tr>
 							</table>
