@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
-<!DOCTYPE dataset SYSTEM "file://tornado-data.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dataset name="all">
     <DUser UserId="1" UserName="guest" EncryptedPassword="Z3Vlc3Q=" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
     <DUser UserId="2" UserName="administrator" EncryptedPassword="YWRtaW5pc3RyYXRvcg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>

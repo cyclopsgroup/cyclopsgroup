@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+        <title>Maven Cross Torque Plugin</title>
+    </properties>
+    <body>
+        <section name="Objective">
+            <p>Some time a project which has its own torque schema, om and sqls depends on another torque enabled project. As a supplement of maven torque plugin, xtorque plugin provides torque operations for multi torque enabled projects.</p>
+            <p>Here is a list of goals of cross torque plugin</p>
+            <table>
+                <tr>
+                    <th>Goal Name</th>
+                    <th>Alias</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>xtorque:insert-sql</td>
+                    <td>torque:insert-sqls</td>
+                    <td>Copy the sqldb.map before executing all sqls. So the developer is able to control the order of sql execution.</td>
+                </tr>
+                <tr>
+                    <td>xtorque:datasql</td>
+                    <td>torque:datasqls</td>
+                    <td>Generate insert sqls from all the schema files.</td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>

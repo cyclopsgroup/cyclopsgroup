@@ -45,6 +45,7 @@
         <attainGoal name="torque:insert-sql"/>
     </goal>
     <goal name="torque:insert-sqls" prereqs="xtorque:insert-sql" description="Insert a set of SQL script"/>
+    
     <goal name="xtorque:doc" prereqs="torque:init">
         <j:set var="schemadir">${maven.gen.docs}/database</j:set>
         <mkdir dir="${schemadir}"/>
