@@ -31,7 +31,7 @@ public interface Waterview
      * Process request
      * 
      * @param runtime Runtime info
-     * @throws Exception Throw it out
+     * @throws Exception Thro`w it out
      */
     void process(UIRuntime runtime) throws Exception;
 }
