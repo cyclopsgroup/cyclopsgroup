@@ -11,6 +11,7 @@
                     <th>Name</th>
                     <th>URL</th>
                     <th>Description</th>
+                    <th>Status</th>
                 </tr>
                 <tr>
                     <td>tornado</td>
@@ -18,6 +19,7 @@
                         <a href="projects/tornado">http://cyclops-group.sourceforge.net/projects/tornado</a>
                     </td>
                     <td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
+                    <td>First version is released</td>
                 </tr>
                 <tr>
                     <td>amulets</td>
@@ -25,13 +27,31 @@
                         <a href="projects/amulets">http://cyclops-group.sourceforge.net/projects/amulets</a>
                     </td>
                     <td>Amulets are a set of maven plugins for the development of other projects.</td>
+                    <td>Two plugins are released. Several other plugins are still in planning.</td>
                 </tr>
                 <tr>
-                    <td>plexaros</td>
+                    <td>jmainboard</td>
                     <td>
-                        <a href="projects/plexaros">http://cyclops-group.sourceforge.net/projects/plexaros</a>
+                        <a href="projects/jmainboard">http://cyclops-group.sourceforge.net/projects/plexaros</a>
                     </td>
                     <td>A light weight plugable components framework. Additional module can be easily developed and plug into this framework.</td>
+                    <td>It is able to work now but not released yet.</td>
+                </tr>
+                <tr>
+                    <td>jrepo</td>
+                    <td>
+                        <a href="projects/jrepo">http://cyclops-group.sourceforge.net/project/jrepo</a>
+                    </td>
+                    <td>The goal of jrepo is creating a JAVA standard for Content Management System(CMS), and providing different implementation for it like file system implementation and database implementation. Also, jrepo will provide applications based on this standard which provides web based user interface.</td>
+                    <td>Just started</td>
+                </tr>
+                <tr>
+                    <td>jlone</td>
+                    <td>
+                        <a href="projects/jlone">http://cyclops-group.sourceforge.net/projects/jlone</a>
+                    </td>
+                    <td>Jlone will be a portal system based on JSR-168</td>
+                    <td>Nothing but an idea</td>
                 </tr>
                 <tr>
                     <td>shopwindow</td>
@@ -39,6 +59,7 @@
                         <a href="http://cyclops-group.sourceforge.net">http://cyclops-groups.sourceforge.net</a>
                     </td>
                     <td>The project is this website itself.</td>
+                    <td>Stable</td>
                 </tr>
                 <tr>
                     <td>a4trim</td>
@@ -46,6 +67,7 @@
                         <a href="projects/a4trim">http://cyclops-group.sourceforge.net/projects/a4trim</a>
                     </td>
                     <td>A simplified content management system based on Apache Jakarta Turbine.</td>
+                    <td>Stable</td>
                 </tr>
                 <tr>
                     <td>healthfarm</td>
@@ -53,6 +75,7 @@
                         <a href="projects/healthfarm">http://cyclops-group.sourceforge.net/projects/healthfarm</a>
                     </td>
                     <td>A demo web application based on Tornado, to show how to develop on Tornado. It is only a demo application therefore most of functions are not implemented.</td>
+                    <td>Released</td>
                 </tr>
                 <tr>
                     <td>dbdigger</td>
@@ -60,6 +83,7 @@
                         <a href="http://dbdigger.sourceforge.net">http://dbdigger.sourceforge.net</a>
                     </td>
                     <td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
+                    <td>I think it is dead. JDO could be a much better solution that it.</td>
                 </tr>
                 <tr>
                     <td>albumbuilder</td>
@@ -67,6 +91,7 @@
                         <a href="http://albumbuilder.sourceforge.net">http://albumbuilder.sourceforge.net</a>
                     </td>
                     <td>A tool to generate static photo album web site from folders of images.</td>
+                    <td>Dead lone time ago.</td>
                 </tr>
             </table>
         </section>
