@@ -18,10 +18,19 @@
 		<td>$renderer.render("navigations", "PathLinks.vm")</td>
 		<td>&nbsp;</td>
 	</tr>
-	<tr valign="top" style="padding: 10px;">
-		<td>$renderer.render("navigations", "MenuBar.vm")</td>
-		<td>$renderer.render("screens", $template)</td>
-		<td>$data.message</td>
+	<tr valign="top">
+		<td>
+			<table width="100%" cellspacing="1" cellpadding="10" bgcolor="CDCDCD">
+				<tr>
+					<td bgcolor="#DEDEDE">$renderer.render("navigations", "UserBar.vm")</td>
+				</tr>
+				<tr>
+					<td bgcolor="white">$renderer.render("navigations", "MenuBar.vm")</td>
+				</tr>
+			</table>
+		</td>
+		<td style="padding: 10px;">$renderer.render("screens", $template)</td>
+		<td style="padding: 10px;">$!data.message</td>
 	</tr>
 	<tr>
 		<td colspan="3" align="center">&nbsp;</td>

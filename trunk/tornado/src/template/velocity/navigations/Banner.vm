@@ -1,17 +1,8 @@
-<table width="100%">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td>&nbsp;</td>
-		<td align="right">&nbsp;</td>
+		<td rowspan="2">&nbsp;</td>
 	</tr>
-</table>
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-	<form method="post"
-		action="$link.setAction("UserIdentify").setPage("Redirect.vm")"
-		#if($data.tornadoUser.isAnonymous())
-			 onsubmit="this.redirectto.value=location.href"
-		#end
-	>
-	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")">
 	<tr>
 		<td valign="bottom">
 			<table cellpadding="0" cellspacing="0" border="0">
@@ -31,18 +22,5 @@
         		</tr>
         	</table>
 		</td>
-		<td align="right">
-			<font color="white">
-    			#if($data.tornadoUser.isAnonymous())
-        			Username: <input type="text" name="user_name" size="12" class="frame"/>
-        			Password: <input type="password" name="password" size="12" class="frame"/>
-        			<input type="submit" class="button" value="Signin" name="eventsubmit_doSignin"/>
-        		#else
-        			Welcom: $data.tornadoUser.name
-        			<input type="submit" class="button" value="Signout" name="eventsubmit_doSignout"/>
-        		#end
-    		</font>
-		</td>
 	</tr>
-	</form>
 </table>

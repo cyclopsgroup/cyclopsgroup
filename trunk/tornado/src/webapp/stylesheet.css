@@ -29,7 +29,6 @@ input.frame, textarea.frame {
 }
 td.bottom {
 	text-align: right;
-	background-color: #CEE7FF;
 	background-image: url('images/bottom_bg.gif');
 	padding: 3px;
 }
