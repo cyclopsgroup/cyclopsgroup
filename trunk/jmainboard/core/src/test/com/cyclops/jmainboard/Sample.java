@@ -194,6 +194,8 @@
  */
 package com.cyclops.jmainboard;
 
+import com.cyclops.jmainboard.impl.DefaultComponent;
+
 /** Sample component for testing
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
@@ -212,11 +214,11 @@ public class Sample extends DefaultComponent {
      * @param dependencies Array of dependencies
      */
     public Sample(String id, Sample[] dependencies) {
-        ComponentMetadata meta = new ComponentMetadata(id, 1.0f);
+        setId(id);
         for (int i = 0; i < dependencies.length; i++) {
-            meta.addDependency(dependencies[i]);
+            Sample sample = dependencies[i];
+            addDependency(sample);
         }
-        meta.setClassName(getClass().getName());
-        setMetadata(meta);
+        setVersion("1.0");
     }
 }

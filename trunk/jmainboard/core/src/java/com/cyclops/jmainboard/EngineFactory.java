@@ -192,14 +192,58 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.engine;
+package com.cyclops.jmainboard;
 
-/** Happens when recursive dependency occurs
+import java.io.File;
+import java.util.Properties;
+
+/** Engine factory class
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 8:25:59 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 13:09:37 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class RecursiveDependencyException extends Exception {
-
+public abstract class EngineFactory {
+    /** Key for basedir in context */
+    public static final String BASE_DIR = "basedir";
+    /** Key for engine in context */
+    public static final String ENGINE = Engine.class.getName();
+    /** Key for engine factory in context */
+    public static final String ENGINE_FACTORY = EngineFactory.class.getName();
+    /** Value for engine factory in context */
+    public static final String ENGINE_FACTORY_IMPL =
+        "com.cyclops.jmainboard.impl.DefaultEngineFactory";
+    /** Value for engine in context */
+    public static final String ENGINE_IMPL =
+        "com.cyclops.jmainboard.impl.DefaultEngine";
+    /** Method getInstance() in class EngineFactory
+     * @param props Initial context
+     * @return EngineFactory instance
+     * @throws Exception Exception for creation
+     */
+    public static EngineFactory getInstance(Properties props)
+        throws Exception {
+        Properties p = new Properties();
+        p.setProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
+        p.setProperty(ENGINE, ENGINE_IMPL);
+        p.setProperty(BASE_DIR, new File("").getAbsolutePath());
+        p.putAll(System.getProperties());
+        if (props != null) {
+            p.putAll(props);
+        }
+        String implName = p.getProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
+        EngineFactory ef =
+            (EngineFactory) Class.forName(implName).newInstance();
+        ef.getProperties().putAll(p);
+        return ef;
+    }
+    /** Method getProperties() in class EngineFactory
+     * @return Properties of this factory
+     */
+    public abstract Properties getProperties();
+    /** Create new Engine instance
+     * @return New engine instance
+     * @throws Exception Creation Exceptions
+     */
+    public abstract Engine newEngine() throws Exception;
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.0">
+	<view uin="V574ng9ds1cb4au551j9h">
+		<property name="$defaultDiagram" value="true"/>
+		<property name="$metaclass" value="Package Diagram"/>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.dandelion.engine.RecursiveDependencyException">
+			<property name="bounds" value="10,10,194,68"/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.engine.ComponentSorter">
+			<property name="bounds" value="10,230,133,94"/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.engine.JMainboardEngine">
+			<property name="bounds" value="224,10,100,94"/>
+		</reference>
+	</view>
+</nodeSet>

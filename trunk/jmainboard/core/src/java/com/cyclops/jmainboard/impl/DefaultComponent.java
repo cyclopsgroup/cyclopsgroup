@@ -192,56 +192,214 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.engine;
+package com.cyclops.jmainboard.impl;
 
-import java.util.LinkedList;
+import java.io.File;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Properties;
 
 import com.cyclops.jmainboard.Component;
+import com.cyclops.jmainboard.Engine;
 
-/** Tool to sort component before they are loaded
+/** Default implementation of Component interface
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 8:05:41 PM Mar 12, 2004
+ * Created at 7:51:12 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class ComponentSorter {
-    private LinkedList components = new LinkedList();
-    private void addBefore(Component toAdd, Component before)
-        throws RecursiveDependencyException {
-        int position = components.indexOf(before);
-        if (components.contains(toAdd)) {
-            if (components.indexOf(toAdd) > position) {
-                throw new RecursiveDependencyException();
-            }
-        } else {
-            components.add(position, toAdd);
+public class DefaultComponent extends BaseLoggable implements Component {
+    /** Properties wrapper */
+    private class PropertiesWrapper extends Properties {
+        private Properties parent;
+        /** Method getParent() in class PropertiesWrapper
+         * @return Parent properties
+         */
+        public Properties getParent() {
+            return parent;
         }
-        Component[] dependencies = toAdd.getDependencies();
-        for (int i = 0; i < dependencies.length; i++) {
-            Component dependency = dependencies[i];
-            addBefore(dependency, toAdd);
+
+        /** Method setParent() in class PropertiesWrapper
+         * @param p Parent properties
+         */
+        public void setParent(Properties p) {
+            parent = p;
+        }
+
+        /** Override method getProperty in the derived class
+         * @see java.util.Properties#getProperty(java.lang.String, java.lang.String)
+         */
+        public String getProperty(String key, String defaultValue) {
+            if (containsKey(key)) {
+                return super.getProperty(key, defaultValue);
+            } else {
+                return parent.getProperty(key, defaultValue);
+            }
+        }
+
+        /** Override method getProperty in the derived class
+         * @see java.util.Properties#getProperty(java.lang.String)
+         */
+        public String getProperty(String key) {
+            if (containsKey(key)) {
+                return super.getProperty(key);
+            } else {
+                return parent.getProperty(key);
+            }
+        }
+    }
+    private File componentHome;
+
+    private Hashtable dependencies = new Hashtable();
+    private HashSet dependencyIds = new HashSet();
+    private String description;
+    private Engine engine;
+    private String id;
+    private PropertiesWrapper properties = new PropertiesWrapper();
+    private String title;
+    private String version;
+
+    /** Method getComponentHome() in class DefaultComponent
+     * @return Home directory of this component
+     */
+    public File getComponentHome() {
+        return componentHome;
+    }
+
+    /** Override method getDependencies in the derived class
+     * @see com.cyclops.jmainboard.Component#getDependencies()
+     */
+    public Component[] getDependencies() {
+        return (Component[]) dependencies.values().toArray(
+            Component.EMPTY_ARRAY);
+    }
+
+    /** Override method getDescription in the derived class
+     * @see com.cyclops.jmainboard.Component#getDescription()
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /** Method getEngine() in class DefaultComponent
+     * @return Root engine object
+     */
+    public Engine getEngine() {
+        return engine;
+    }
+
+    /** Method getId() in class DefaultComponent
+     * @return Id of this component
+     */
+    public String getId() {
+        return id;
+    }
+
+    /** Override method getProperties in the derived class
+     * @see com.cyclops.jmainboard.Component#getProperties()
+     */
+    public Properties getProperties() {
+        return properties;
+    }
+
+    /** Override method getResource in the derived class
+     * @see com.cyclops.jmainboard.Component#getResource(java.lang.String)
+     */
+    public URL getResource(String resourcePath) {
+        URL ret = null;
+        try {
+            File file = new File(getComponentHome(), resourcePath);
+            ret = file.toURL();
+        } catch (Exception e) {
+            getLog().debug(
+                "Resource ["
+                    + resourcePath
+                    + "] in component ["
+                    + getId()
+                    + "] not found!",
+                e);
+        } finally {
+            return ret;
         }
     }
 
-    /** Method addComponent() in class ComponentSorter
-     * @param component Component to add
-     * @throws RecursiveDependencyException Occur when recursive dependency happens
+    /** Method getTitle() in class DefaultComponent
+     * @return Title of this component
      */
-    public void addComponent(Component component)
-        throws RecursiveDependencyException {
-        if (!components.contains(component)) {
-            components.addLast(component);
-        }
-        Component[] dependencies = component.getDependencies();
-        for (int i = 0; i < dependencies.length; i++) {
-            Component dependency = dependencies[i];
-            addBefore(dependency, component);
-        }
+    public String getTitle() {
+        return title;
     }
-    /** Get sorting result of components
-     * @return Array of components
+
+    /** Method getVersion() in class DefaultComponent
+     * @return Version of this component
      */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    public String getVersion() {
+        return version;
+    }
+
+    /** Method setComponentHome() in class DefaultComponent
+     * @param file Home directory of this component
+     */
+    public void setComponentHome(File file) {
+        componentHome = file;
+    }
+
+    /** Method setDescription() in class DefaultComponent
+     * @param string Description of this component
+     */
+    public void setDescription(String string) {
+        description = string;
+    }
+
+    /** Method setEngine() in class DefaultComponent
+     * @param engineInstance Engine instance
+     */
+    public void setEngine(Engine engineInstance) {
+        engine = engineInstance;
+        properties.setParent(engine.getProperties());
+    }
+
+    /** Method setId() in class DefaultComponent
+     * @param string Id of this component
+     */
+    public void setId(String string) {
+        id = string;
+    }
+
+    /** Method setTitle() in class DefaultComponent
+     * @param string Title of this component
+     */
+    public void setTitle(String string) {
+        title = string;
+    }
+
+    /** Method setVersion() in class DefaultComponent
+     * @param string Version of this component
+     */
+    public void setVersion(String string) {
+        version = string;
+    }
+
+    /** Method addDependencyId() in class DefaultComponent
+     * @param dependencyId Dependency Id
+     */
+    public void addDependencyId(String dependencyId) {
+        dependencyIds.add(dependencyId);
+    }
+
+    /** Method getDependencyIds() in class DefaultComponent
+     * @return Array of dependency ids
+     */
+    public String[] getDependencyIds() {
+        return (String[]) dependencyIds.toArray(new String[0]);
+    }
+
+    /** Method addDependency() in class DefaultComponent
+     * @param dependency Dependency component
+     */
+    public void addDependency(Component dependency) {
+        dependencyIds.add(dependency.getId());
+        dependencies.put(dependency.getId(), dependency);
     }
 }

@@ -192,137 +192,37 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.engine;
+package com.cyclops.jmainboard.impl;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Vector;
+import java.util.Properties;
 
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.ComponentLoader;
-import com.cyclops.jmainboard.ComponentMetadata;
 import com.cyclops.jmainboard.Engine;
-import com.cyclops.jmainboard.Service;
+import com.cyclops.jmainboard.EngineFactory;
 
-/** Dandelio Engine
+/** Default Engine Factory implmentation
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:56:05 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 13:25:14 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class JMainboardEngine implements Engine {
-
-    private Vector componentLoaders = new Vector();
-
-    private Vector components = new Vector();
-
-    /** Add a component loader instance
-     * @param componentLoader Component loader instance
+public class DefaultEngineFactory extends EngineFactory {
+    private Properties properties = new Properties();
+    /** Override method getProperties in the derived class
+     * @see com.cyclops.jmainboard.EngineFactory#getProperties()
      */
-    public void addComponentLoader(ComponentLoader componentLoader) {
-        componentLoaders.add(componentLoader);
+    public Properties getProperties() {
+        return properties;
     }
 
-    /** Method initialize() in class DandelioEngine
-     * Initalize the engine
+    /** Override method newEngine in the derived class
+     * @see com.cyclops.jmainboard.EngineFactory#newEngine()
      */
-    public void init() {
-        // preload components before really starting them
-        HashMap rawComponents = new HashMap();
-        for (Iterator i = componentLoaders.iterator(); i.hasNext();) {
-            ComponentLoader componentLoader = (ComponentLoader) i.next();
-            Component[] loadedComponents = componentLoader.loadComponents();
-            for (int j = 0; j < loadedComponents.length; j++) {
-                Component component = loadedComponents[j];
-                rawComponents.put(component.getId(), component);
-            }
-        }
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            ComponentMetadata metadata = component.getMetadata();
-            String[] dependencyIds = metadata.getDependencyIds();
-            for (int j = 0; j < dependencyIds.length; j++) {
-                String dependencyId = dependencyIds[j];
-                if (rawComponents.containsKey(dependencyId)) {
-                    Component dependency = (Component) rawComponents
-                            .get(dependencyId);
-                    metadata.addDependency(dependency);
-                } else {
-                    //What happens if the dependency is not found?
-                    System.out.println("Dependency [" + dependencyId
-                            + "] is not found for component ["
-                            + component.getId() + "]");
-                }
-            }
-        }
-
-        ComponentSorter componentSorter = new ComponentSorter();
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                componentSorter.addComponent(component);
-            } catch (RecursiveDependencyException e) {
-                //TODO do something here, later this exception will be handled properly
-                e.printStackTrace();
-            }
-        }
-        Component[] componentArray = componentSorter.getComponents();
-        for (int i = 0; i < componentArray.length; i++) {
-            Component component = componentArray[i];
-            components.add(component);
-        }
-
-        HashMap services = new HashMap();
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            for (Iterator j = services.values().iterator(); j.hasNext();) {
-                Service service = (Service) j.next();
-                service.register(component);
-            }
-            if (component instanceof Service) {
-                services.put(component.getId(), component);
-            }
-        }
-    }
-
-    /** Startup the engine
-     */
-    public void startup() {
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                if (component instanceof Service) {
-                    ((Service) component).startupService();
-                }
-            } catch (Exception e) {
-                //TODO Handle the initialization exception here
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /** Shutdown the engine
-     */
-    public void shutdown() {
-        for (ListIterator i = components.listIterator(components.size()); i
-                .hasPrevious();) {
-            Component component = (Component) i.previous();
-            try {
-                if (component instanceof Service) {
-                    ((Service) component).shutdownService();
-                }
-            } catch (Exception e) {
-                //TODO Handle the initialization exception here
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /** Get all components
-     * @return Array of all components
-     */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    public Engine newEngine() throws Exception {
+        String engineImpl = getProperties().getProperty(ENGINE, ENGINE_IMPL);
+        DefaultEngine engine =
+            (DefaultEngine) Class.forName(engineImpl).newInstance();
+        engine.getProperties().putAll(getProperties());
+        engine.init();
+        return engine;
     }
 }

@@ -192,98 +192,14 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.impl;
 
-import java.net.URL;
-
-/** Default implementation of Component interface
+/** Happens when recursive dependency occurs
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 7:51:12 PM Mar 12, 2004
+ * Created at 8:25:59 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultComponent implements Component, ResourceLocateable {
+public class RecursiveDependencyException extends Exception {
 
-    private Engine engine;
-
-    private ComponentMetadata metadata;
-
-    private ResourceLocator resourceLocator;
-
-    /** Override method getDependencies in the derived class
-     * @see com.cyclops.jmainboard.Component#getDependencies()
-     */
-    public Component[] getDependencies() {
-        return metadata.getDependencies();
-    }
-
-    /** Override method getEngine() of parent class
-     * @see com.cyclops.jmainboard.Component#getEngine()
-     */
-    public Engine getEngine() {
-        return engine;
-    }
-
-    /** Override method getId in the derived class
-     * @see com.cyclops.jmainboard.Component#getId()
-     */
-    public String getId() {
-        return metadata.getId();
-    }
-
-    /** Override method getMetadata in the derived class
-     * @see com.cyclops.jmainboard.Component#getMetadata()
-     */
-    public ComponentMetadata getMetadata() {
-        return metadata;
-    }
-
-    /** Override method getResource in the derived class
-     * @see com.cyclops.jmainboard.Component#getResource(java.lang.String)
-     */
-    public URL getResource(String resourcePath) {
-        return resourceLocator.getResource(this, resourcePath);
-    }
-
-    /** Override method getResourceLocator in the derived class
-     * @see com.cyclops.jmainboard.ResourceLocateable#getResourceLocator()
-     */
-    public ResourceLocator getResourceLocator() {
-        return resourceLocator;
-    }
-
-    /** Override method getVersion in the derived class
-     * @see com.cyclops.jmainboard.Component#getVersion()
-     */
-    public float getVersion() {
-        return metadata.getVersion();
-    }
-
-    /** Override method initialize in the derived class
-     * @see com.cyclops.jmainboard.Component#initialize()
-     */
-    public void initialize() throws Exception {
-        //Do nothing
-    }
-
-    /** Override method setEngine() of parent class
-     * @see com.cyclops.jmainboard.Component#setEngine(com.cyclops.jmainboard.Engine)
-     */
-    public void setEngine(Engine eng) {
-        engine = eng;
-    }
-
-    /** Override method setMetadata in the derived class
-     * @see com.cyclops.jmainboard.Component#setMetadata(com.cyclops.jmainboard.ComponentMetadata)
-     */
-    public void setMetadata(ComponentMetadata md) {
-        metadata = md;
-    }
-
-    /** Override method setResourceLocator in the derived class
-     * @see com.cyclops.jmainboard.ResourceLocateable#setResourceLocator(com.cyclops.jmainboard.ResourceLocator)
-     */
-    public void setResourceLocator(ResourceLocator rl) {
-        resourceLocator = rl;
-    }
 }

@@ -192,22 +192,144 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Properties;
+import java.util.Vector;
 
-/** Engine interface
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+import com.cyclops.jmainboard.Component;
+import com.cyclops.jmainboard.ComponentLoader;
+import com.cyclops.jmainboard.Engine;
+import com.cyclops.jmainboard.Service;
+
+/** Dandelio Engine
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * Created at 9:56:05 PM Mar 12, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface Engine {
+public class DefaultEngine implements Engine {
+    private Vector componentLoaders = new Vector();
+    private Vector components = new Vector();
+    private Properties properties = new Properties();
+
+    /** Add a component loader instance
+     * @param componentLoader Component loader instance
+     */
+    public void addComponentLoader(ComponentLoader componentLoader) {
+        componentLoaders.add(componentLoader);
+    }
+
+    /** Method initialize() in class DandelioEngine
+     * Initalize the engine
+     */
+    public void init() {
+        // preload components before really starting them
+        HashMap rawComponents = new HashMap();
+        for (Iterator i = componentLoaders.iterator(); i.hasNext();) {
+            ComponentLoader componentLoader = (ComponentLoader) i.next();
+            Component[] loadedComponents = componentLoader.loadComponents();
+            for (int j = 0; j < loadedComponents.length; j++) {
+                Component component = loadedComponents[j];
+                rawComponents.put(component.getId(), component);
+            }
+        }
+        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
+            DefaultComponent component = (DefaultComponent) i.next();
+            String[] dependencyIds = component.getDependencyIds();
+            for (int j = 0; j < dependencyIds.length; j++) {
+                String dependencyId = dependencyIds[j];
+                if (rawComponents.containsKey(dependencyId)) {
+                    Component dependency =
+                        (Component) rawComponents.get(dependencyId);
+                    component.addDependency(dependency);
+                } else {
+                    //What happens if the dependency is not found?
+                    System.out.println(
+                        "Dependency ["
+                            + dependencyId
+                            + "] is not found for component ["
+                            + component.getId()
+                            + "]");
+                }
+            }
+        }
+
+        ComponentSorter componentSorter = new ComponentSorter();
+        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            try {
+                componentSorter.addComponent(component);
+            } catch (RecursiveDependencyException e) {
+                //TODO do something here, later this exception will be handled properly
+                e.printStackTrace();
+            }
+        }
+        Component[] componentArray = componentSorter.getComponents();
+        for (int i = 0; i < componentArray.length; i++) {
+            Component component = componentArray[i];
+            components.add(component);
+        }
+
+        HashMap services = new HashMap();
+        for (Iterator i = components.iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            for (Iterator j = services.values().iterator(); j.hasNext();) {
+                Service service = (Service) j.next();
+                service.register(component);
+            }
+            if (component instanceof Service) {
+                services.put(component.getId(), component);
+            }
+        }
+    }
+
+    /** Startup the engine
+     */
+    public void startup() {
+        for (Iterator i = components.iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            try {
+                if (component instanceof Service) {
+                    ((Service) component).startupService();
+                }
+            } catch (Exception e) {
+                //TODO Handle the initialization exception here
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /** Shutdown the engine
+     */
+    public void shutdown() {
+        for (ListIterator i = components.listIterator(components.size());
+            i.hasPrevious();
+            ) {
+            Component component = (Component) i.previous();
+            try {
+                if (component instanceof Service) {
+                    ((Service) component).shutdownService();
+                }
+            } catch (Exception e) {
+                //TODO Handle the initialization exception here
+                e.printStackTrace();
+            }
+        }
+    }
     /** Get all components
      * @return Array of all components
      */
-    Component[] getComponents();
-    /** Method getProperties() in class Engine
-     * @return Properties of this engine
+    public Component[] getComponents() {
+        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    }
+    /** Override method getProperties in the derived class
+     * @see com.cyclops.jmainboard.Engine#getProperties()
      */
-    Properties getProperties();
+    public Properties getProperties() {
+        return properties;
+    }
 }

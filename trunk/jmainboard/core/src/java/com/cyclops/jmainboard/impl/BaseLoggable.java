@@ -192,113 +192,29 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.impl;
 
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Properties;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-/** Component Metadata class.
- * This class is a build-in class.
+/** Basic object with logger
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 11:02:41 AM Mar 13, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 12:04:06 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public final class ComponentMetadata extends Properties {
-    /** Empty array of metadata */
-    public static final ComponentMetadata[] EMPTY_ARRAY =
-        new ComponentMetadata[0];
-    private static final String[] EMPTY_STRING_ARRAY = new String[0];
-    private String className;
-    private HashSet dependencyIds = new HashSet();
-    private transient Hashtable dependencies = new Hashtable();
-    private String id;
-    private float version;
-
-    /** Constructor for class ComponentMetadata
-     * @param componentId Component id
-     * @param componentVersion Component version
+public class BaseLoggable {
+    private Log log = LogFactory.getLog(getClass());
+    /** Method getLog() in class BaseLoggable
+     * @return Log object
      */
-    public ComponentMetadata(String componentId, float componentVersion) {
-        setId(componentId);
-        setVersion(componentVersion);
+    public Log getLog() {
+        return log;
     }
-    /** Constructor for class ComponentMetadata
-     * @param componentId Component Id
+    /** Method setLog() in class BaseLoggable
+     * @param logger Log object
      */
-    public ComponentMetadata(String componentId) {
-        this(componentId, 1.0f);
-    }
-    /** Method addDependencyId() in class ComponentMetadata
-     * @param dependencyId String id of dependency
-     */
-    public void addDependencyId(String dependencyId) {
-        dependencyIds.add(dependencyId);
-    }
-    /** Method getClassName() in class ComponentDescriptor
-     * @return Implementation class name
-     */
-    public String getClassName() {
-        return className;
-    }
-    /** Method getDependencyIds() in class ComponentMetadata
-     * @return Array of ids of dependencies
-     */
-    public String[] getDependencyIds() {
-        return (String[]) dependencyIds.toArray(EMPTY_STRING_ARRAY);
-    }
-
-    /** Method getId() in class ComponentDescriptor
-     * @return Id of this component
-     */
-    public String getId() {
-        return id;
-    }
-
-    /** Method getVersion() in class ComponentDescriptor
-     * @return Version of this component
-     */
-    public float getVersion() {
-        return version;
-    }
-
-    /** Method setClassName() in class ComponentDescriptor
-     * @param string implementation of this component
-     */
-    public void setClassName(String string) {
-        setProperty("classname", string);
-        className = string;
-    }
-
-    /** Method setId() in class ComponentDescriptor
-     * @param string Id value
-     */
-    public void setId(String string) {
-        setProperty("id", string);
-        id = string;
-    }
-
-    /** Method setVersion() in class ComponentDescriptor
-     * @param f version value
-     */
-    public void setVersion(float f) {
-        setProperty("version", String.valueOf(f));
-        version = f;
-    }
-
-    /** Method addDependency() in class ComponentMetadata
-     * @param dependency Dependency component instance
-     */
-    public void addDependency(Component dependency) {
-        addDependencyId(dependency.getId());
-        dependencies.put(dependency.getId(), dependency);
-    }
-    /** Method getDependencies() in class ComponentMetadata
-     * @return Array of dependency components
-     */
-    public Component[] getDependencies() {
-        return (Component[]) dependencies.values().toArray(
-            Component.EMPTY_ARRAY);
+    public void setLog(Log logger) {
+        log = logger;
     }
 }

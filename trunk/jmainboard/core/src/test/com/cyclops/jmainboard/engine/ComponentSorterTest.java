@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard.engine;
 
+import com.cyclops.jmainboard.impl.ComponentSorter;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;

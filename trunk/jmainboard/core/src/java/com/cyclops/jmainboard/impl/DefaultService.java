@@ -192,22 +192,49 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.impl;
 
-import java.util.Properties;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 
-/** Engine interface
+import com.cyclops.jmainboard.Component;
+import com.cyclops.jmainboard.Service;
+
+/** Default empty implementation of Service
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public interface Engine {
-    /** Get all components
-     * @return Array of all components
+public class DefaultService extends DefaultComponent implements Service {
+
+    private Vector clients = new Vector();
+
+    /** Method getClientComponents in class DefaultService
+     * @return List of client components
      */
-    Component[] getComponents();
-    /** Method getProperties() in class Engine
-     * @return Properties of this engine
+    protected List getClientComponents() {
+        return Collections.unmodifiableList(clients);
+    }
+
+    /** Override method register() of parent class
+     * @see com.cyclops.jmainboard.Service#register(com.cyclops.jmainboard.Component)
      */
-    Properties getProperties();
+    public void register(Component client) {
+        clients.add(client);
+    }
+
+    /** Override method shutdownService() of parent class
+     * @see com.cyclops.jmainboard.Service#shutdownService()
+     */
+    public void shutdownService() throws Exception {
+        //Empty implementation
+    }
+
+    /** Override method startupService() of parent class
+     * @see com.cyclops.jmainboard.Service#startupService()
+     */
+    public void startupService() throws Exception {
+        //empty implementation
+    }
 }

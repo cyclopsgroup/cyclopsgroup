@@ -192,46 +192,56 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.impl;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
+import java.util.LinkedList;
 
-/** Default empty implementation of Service
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+import com.cyclops.jmainboard.Component;
+
+/** Tool to sort component before they are loaded
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * Created at 8:05:41 PM Mar 12, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultService extends DefaultComponent implements Service {
-
-    private Vector clients = new Vector();
-
-    /** Method getClientComponents in class DefaultService
-     * @return List of client components
-     */
-    protected List getClientComponents() {
-        return Collections.unmodifiableList(clients);
+public class ComponentSorter {
+    private LinkedList components = new LinkedList();
+    private void addBefore(Component toAdd, Component before)
+        throws RecursiveDependencyException {
+        int position = components.indexOf(before);
+        if (components.contains(toAdd)) {
+            if (components.indexOf(toAdd) > position) {
+                throw new RecursiveDependencyException();
+            }
+        } else {
+            components.add(position, toAdd);
+        }
+        Component[] dependencies = toAdd.getDependencies();
+        for (int i = 0; i < dependencies.length; i++) {
+            Component dependency = dependencies[i];
+            addBefore(dependency, toAdd);
+        }
     }
 
-    /** Override method register() of parent class
-     * @see com.cyclops.jmainboard.Service#register(com.cyclops.jmainboard.Component)
+    /** Method addComponent() in class ComponentSorter
+     * @param component Component to add
+     * @throws RecursiveDependencyException Occur when recursive dependency happens
      */
-    public void register(Component client) {
-        clients.add(client);
+    public void addComponent(Component component)
+        throws RecursiveDependencyException {
+        if (!components.contains(component)) {
+            components.addLast(component);
+        }
+        Component[] dependencies = component.getDependencies();
+        for (int i = 0; i < dependencies.length; i++) {
+            Component dependency = dependencies[i];
+            addBefore(dependency, component);
+        }
     }
-
-    /** Override method shutdownService() of parent class
-     * @see com.cyclops.jmainboard.Service#shutdownService()
+    /** Get sorting result of components
+     * @return Array of components
      */
-    public void shutdownService() throws Exception {
-        //Empty implementation
-    }
-
-    /** Override method startupService() of parent class
-     * @see com.cyclops.jmainboard.Service#startupService()
-     */
-    public void startupService() throws Exception {
-        //empty implementation
+    public Component[] getComponents() {
+        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
     }
 }

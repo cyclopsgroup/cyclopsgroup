@@ -195,6 +195,7 @@
 package com.cyclops.jmainboard;
 
 import java.net.URL;
+import java.util.Properties;
 
 /** Main component interface
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
@@ -203,14 +204,6 @@ import java.net.URL;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface Component {
-    /** Method setEngine in class Component
-     * @param engine Engine instance
-     */
-    void setEngine(Engine engine);
-    /** Method getEngine in class Component
-     * @return Engine instance
-     */
-    Engine getEngine();
     /** Empty array of component */
     Component[] EMPTY_ARRAY = new Component[0];
 
@@ -219,10 +212,24 @@ public interface Component {
      */
     Component[] getDependencies();
 
+    /** Method getDescription() in class Component
+     * @return Description of this component
+     */
+    String getDescription();
+    /** Method getEngine in class Component
+     * @return Engine instance
+     */
+    Engine getEngine();
+
     /** Get the id of this component
      * @return Id of this component
      */
     String getId();
+
+    /** Get other properties
+     * @return Properties
+     */
+    Properties getProperties();
 
     /** Method getResource() in class Component
      * @param resourcePath Path of resource
@@ -230,18 +237,13 @@ public interface Component {
      */
     URL getResource(String resourcePath);
 
+    /** Method getTitle() in class Component
+     * @return Title of this component
+     */
+    String getTitle();
+
     /** Get the version of this component
-     * @return Float version of this component
+     * @return String version of this component
      */
-    float getVersion();
-
-    /** Get metadata object
-     * @return Metadata object
-     */
-    ComponentMetadata getMetadata();
-
-    /** Set metadata object
-     * @param metadata Metadata instance
-     */
-    void setMetadata(ComponentMetadata metadata);
+    String getVersion();
 }
