@@ -192,46 +192,61 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros;
+package com.cyclops.plexaros.impl;
+
 import java.util.Hashtable;
 import java.util.Map;
-/** Base object with name and description
- * @author joeblack
+
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+
+import com.cyclops.plexaros.ObjectContainer;
+
+/** Default implementation of ObjectContainer interface
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * The class is created at 2004-1-6 11:02:41
+ * Created at 6:13:40 PM Jan 10, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class BaseObject {
-    private String name;
+public class BaseObjectContainer
+    extends AbstractLogEnabled
+    implements ObjectContainer {
     private String description;
+    private String name;
     private Hashtable properties = new Hashtable();
-    /** Get description value
-     * @return Description of this object
+
+    /** Override method getDescription in the derived class
+     * @see com.cyclops.plexaros.ObjectContainer#getDescription()
      */
     public String getDescription() {
         return description;
     }
-    /** Get name value
-     * @return Name of this object
+
+    /** Override method getName in the derived class
+     * @see com.cyclops.plexaros.ObjectContainer#getName()
      */
     public String getName() {
         return name;
     }
-    /** Get writable properties object
-     * @return Hashtable instance
+
+    /** Override method getProperties in the derived class
+     * @see com.cyclops.plexaros.ObjectContainer#getProperties()
      */
     public Map getProperties() {
         return properties;
     }
-    /** Set description of this value
+
+    /** Method setDescription() in class DefaultObjectContainer
      * @param string Description of this object
      */
     public void setDescription(String string) {
         description = string;
     }
-    /** Set name of this object
+
+    /** Method setName() in class DefaultObjectContainer
      * @param string Name of this object
      */
     public void setName(String string) {
         name = string;
     }
+
 }

@@ -192,190 +192,52 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros;
-import java.io.File;
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
+package com.cyclops.plexaros.impl;
+
+import java.net.URL;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Vector;
 
-import org.apache.commons.digester.Digester;
-/** Default engine implementation
- * @author joeblack
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+
+/** PluginFinder implementation which find plugins in classpath
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * The class is created at 2004-1-6 10:20:48
+ * Created at 4:45:52 PM Jan 11, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultEngine extends BaseObject implements Engine {
-    private Hashtable plugins = new Hashtable();
+public class ClasspathPluginFinder
+    extends BasePluginFinder
+    implements Configurable {
     private Vector pluginNames = new Vector();
-    /** Override method getPlugin() of super class
-     * @see com.cyclops.plexaros.Engine#getPlugin(java.lang.String)
+    private String rootPath;
+
+    /** Override method configure in the derived class
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public Plugin getPlugin(String pluginName) {
-        return (Plugin) plugins.get(pluginName);
+    public void configure(Configuration configuration)
+        throws ConfigurationException {
+        rootPath = configuration.getChild("root").getValue();
+        Configuration[] plugins =
+            configuration.getChild("plugins").getChildren("plugin");
+        for (int i = 0; i < plugins.length; i++) {
+            pluginNames.add(plugins[i].getValue());
+        }
     }
-    /** Override method getPlugins() of super class
-     * @see com.cyclops.plexaros.Engine#getPlugins()
+    /** Override method getPluginNames in the derived class
+     * @see com.cyclops.plexaros.impl.BasePluginFinder#getPluginNames()
      */
-    public Plugin[] getPlugins() {
-        ArrayList ret = new ArrayList();
-        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            ret.add(plugins.get(pluginName));
-        }
-        return (Plugin[]) ret.toArray(Plugin.EMPTY_ARRAY);
+    protected List getPluginNames() {
+        return pluginNames;
     }
-    /** Override method init() of super class
-     * @see com.cyclops.plexaros.Engine#init(java.util.Properties)
+
+    /** Override method getPluginResource in the derived class
+     * @see com.cyclops.plexaros.impl.BasePluginFinder#getPluginResource(java.lang.String, java.lang.String)
      */
-    public synchronized void start() {
-        String engineHome = (String) getProperties().get(ENGINE_HOME);
-        List names = getPluginNames(engineHome);
-        List allPlugins = loadPlugins(new File(engineHome), names);
-        registerPlugins(allPlugins);
-        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            Plugin plugin = (Plugin) getPlugin(pluginName);
-            plugin.start();
-        }
-    }
-    /** Try to register all plugins into engine
-     * @param allPlugins List of all plugins
-     */
-    protected void registerPlugins(List allPlugins) {
-        int registered = 1;
-        List tobeRegistered = new ArrayList();
-        tobeRegistered.addAll(allPlugins);
-        while (registered > 0) {
-            registered = 0;
-            List tobeRemoved = new ArrayList();
-            for (Iterator i = tobeRegistered.iterator(); i.hasNext();) {
-                Plugin plugin = (Plugin) i.next();
-                if (isAbleToRegister(plugin)) {
-                    registerPlugin(plugin);
-                    tobeRemoved.add(plugin);
-                    registered++;
-                }
-            }
-            tobeRegistered.removeAll(tobeRemoved);
-        }
-        if (!tobeRegistered.isEmpty()) {
-            System.out.println(tobeRegistered + " can't be registered");
-        }
-    }
-    private boolean isAbleToRegister(Plugin plugin) {
-        boolean ret = true;
-        String[] dependencies = plugin.getDependencyNames();
-        for (int i = 0; i < dependencies.length; i++) {
-            String dependency = dependencies[i];
-            if (!plugins.containsKey(dependency)) {
-                ret = false;
-                break;
-            }
-        }
-        return ret;
-    }
-    private void registerPlugin(Plugin plugin) {
-        if (plugins.containsKey(plugin.getName())) {
-            return;
-        }
-        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            Plugin existedPlugin = (Plugin) plugins.get(pluginName);
-            if (existedPlugin instanceof Service) {
-                try {
-                    ((Service) existedPlugin).register(plugin);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        plugins.put(plugin.getName(), plugin);
-        pluginNames.add(plugin.getName());
-    }
-    /** Load all plugins to a temp list
-     * @param engineHome Engine home directory
-     * @param names Names of plugins
-     * @return List of plugins loaded
-     */
-    protected List loadPlugins(File engineHome, List names) {
-        Digester digester = new Digester();
-        digester.addObjectCreate("plugin", PluginDescriptor.class);
-        digester.addBeanPropertySetter(
-            "plugin/properties/description",
-            "description");
-        digester.addBeanPropertySetter(
-            "plugin/properties/implementation",
-            "implementation");
-        digester.addCallMethod(
-            "plugin/dependencies/dependency",
-            "addDependency",
-            0);
-        List ret = new ArrayList();
-        for (Iterator i = names.iterator(); i.hasNext();) {
-            String name = (String) i.next();
-            try {
-                File pluginHome = new File(engineHome, "plugins/" + name);
-                digester.clear();
-                PluginDescriptor meta =
-                    (PluginDescriptor) digester.parse(
-                        new File(pluginHome, "plugin.xml"));
-                Plugin plugin =
-                    (Plugin) Class
-                        .forName(meta.getImplementation())
-                        .newInstance();
-                plugin.setEngine(this);
-                plugin.setName(name);
-                plugin.getProperties().put(
-                    Plugin.PLUGIN_HOME,
-                    pluginHome.getPath());
-                List dependencies = meta.getDependencies();
-                for (Iterator j = dependencies.iterator(); j.hasNext();) {
-                    String dependency = (String) j.next();
-                    plugin.addDepenedencyName(dependency);
-                }
-                ret.add(plugin);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return ret;
-    }
-    /** Get plugin names
-     * @param engineHome engine home directory
-     * @return List of plugin names
-     */
-    protected List getPluginNames(String engineHome) {
-        List ret = new ArrayList();
-        File folder = new File(engineHome + "/plugins");
-        if (folder.isDirectory()) {
-            File[] subfolders = folder.listFiles(new FileFilter() {
-                public boolean accept(File file) {
-                    return file.isDirectory()
-                        && new File(file, "plugin.xml").isFile();
-                }
-            });
-            for (int i = 0; i < subfolders.length; i++) {
-                File subfolder = subfolders[i];
-                ret.add(subfolder.getName());
-            }
-        }
-        return ret;
-    }
-    /** Override method stop() of super class
-     * @see com.cyclops.plexaros.Startable#stop()
-     */
-    public synchronized void stop() {
-        ListIterator i = pluginNames.listIterator(pluginNames.size());
-        while (i.hasPrevious()) {
-            String pluginName = (String) i.previous();
-            Plugin plugin = getPlugin(pluginName);
-            plugin.stop();
-        }
-        pluginNames.clear();
-        plugins.clear();
+    protected URL getPluginResource(String pluginName, String resource) {
+        String path = rootPath + "/" + pluginName + "/" + resource;
+        return getClass().getClassLoader().getResource(path);
     }
 }

@@ -192,17 +192,63 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros;
-/** Startable interface
+package com.cyclops.plexaros.impl;
+import java.io.File;
+import java.io.FileFilter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+/** PluginFinder which find plugins in a specified file system folder
  * @author joeblack
  *
- * The class is created at 2004-1-6 12:32:37
+ * The class is created at 2004-1-11 14:37:39
  */
-public interface Startable {
-    /** Start
+public class FileSystemPluginFinder
+    extends BasePluginFinder
+    implements Configurable {
+    private File folder;
+    /** Override method configure() of super class
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    void start();
-    /** Stop
+    public void configure(Configuration configuration)
+        throws ConfigurationException {
+        folder = new File(configuration.getChild("folder").getValue());
+    }
+    /** Override method getPluginNames in the derived class
+     * @see com.cyclops.plexaros.impl.BasePluginFinder#getPluginNames()
      */
-    void stop();
+    protected List getPluginNames() {
+        File[] subfolders = folder.listFiles(new FileFilter() {
+            public boolean accept(File file) {
+                return new File(file, "plugin.xml").isFile();
+            }
+        });
+        List names = new ArrayList();
+        for (int i = 0; i < subfolders.length; i++) {
+            File subfolder = subfolders[i];
+            names.add(subfolder.getName());
+        }
+        return names;
+    }
+    /** Override method getPluginResource in the derived class
+     * @see com.cyclops.plexaros.impl.BasePluginFinder#getPluginResource(java.lang.String, java.lang.String)
+     */
+    protected URL getPluginResource(String pluginName, String resource) {
+        String path = pluginName;
+        if (resource.startsWith("/") || resource.startsWith("\\")) {
+            path += resource;
+        } else {
+            path += "/" + resource;
+        }
+        try {
+            return new File(folder, path).toURL();
+        } catch (Exception e) {
+            getLogger().debug("Invalid reosurce " + resource + " requied", e);
+            return null;
+        }
+    }
 }

@@ -192,36 +192,200 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros;
-import java.util.Properties;
-/** Factory class of Engine
+package com.cyclops.plexaros.impl;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+import java.util.Vector;
+
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.collections.CollectionUtils;
+
+import com.cyclops.plexaros.Engine;
+import com.cyclops.plexaros.Plugin;
+import com.cyclops.plexaros.PluginDescriptor;
+import com.cyclops.plexaros.PluginFinder;
+import com.cyclops.plexaros.Service;
+/** Default engine implementation
  * @author joeblack
  *
- * The class is created at 2004-1-6 0:24:34
+ * The class is created at 2004-1-6 10:20:48
  */
-public class EngineFactory {
-    /** Load engine with specified properties
-     * @param properties Specified properties
-     * @return Engine instance
-     * @throws Exception Anything wrong will be thrown out
+public class DefaultEngine
+    extends BaseObjectContainer
+    implements Engine, Configurable, Initializable, Serviceable {
+    private List pluginFinders = new ArrayList();
+    private Vector pluginNames = new Vector();
+    private Hashtable plugins = new Hashtable();
+    private ServiceManager serviceManager;
+    /** Override method configure in the derived class
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public Engine loadEngine(Properties properties) throws Exception {
-        Properties props = new Properties();
-        props.putAll(System.getProperties());
-        props.putAll(properties);
-        String engineClass =
-            properties.getProperty(
-                Engine.ENGINE_IMPLEMENTATION,
-                DefaultEngine.class.getName());
-        Engine engine = (Engine) Class.forName(engineClass).newInstance();
-        engine.getProperties().putAll(props);
-        return engine;
+    public void configure(Configuration configuration)
+        throws ConfigurationException {
+        Configuration[] finders =
+            configuration.getChild("pluginfinders").getChildren("pluginfinder");
+        for (int i = 0; i < finders.length; i++) {
+            String finderId = finders[i].getValue();
+            try {
+                PluginFinder finder =
+                    (PluginFinder) serviceManager.lookup(
+                        PluginFinder.ROLE + finderId);
+                pluginFinders.add(finder);
+            } catch (Exception e) {
+                getLogger().error("Load plugin finder error", e);
+            }
+        }
     }
-    /** Load engine with default settings
-     * @return Engine instance
-     * @throws Exception Anything wrong will be thrown out
+    /** Override method getPlugin() of super class
+     * @see com.cyclops.plexaros.Engine#getPlugin(java.lang.String)
      */
-    public Engine loadEngine() throws Exception {
-        return loadEngine(new Properties());
+    public Plugin getPlugin(String pluginName) {
+        return (Plugin) plugins.get(pluginName);
+    }
+    /** Override method getPlugins() of super class
+     * @see com.cyclops.plexaros.Engine#getPlugins()
+     */
+    public Plugin[] getPlugins() {
+        ArrayList ret = new ArrayList();
+        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
+            String pluginName = (String) i.next();
+            ret.add(plugins.get(pluginName));
+        }
+        return (Plugin[]) ret.toArray(Plugin.EMPTY_ARRAY);
+    }
+    /** Override method initialize in the derived class
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception {
+        List pluginDescriptors = new ArrayList();
+        for (Iterator i = pluginFinders.iterator(); i.hasNext();) {
+            PluginFinder finder = (PluginFinder) i.next();
+            CollectionUtils.addAll(pluginDescriptors, finder.findPlugins());
+        }
+        List allPlugins = new ArrayList();
+        for (Iterator i = pluginDescriptors.iterator(); i.hasNext();) {
+            PluginDescriptor descriptor = (PluginDescriptor) i.next();
+            try {
+                BasePlugin plugin =
+                    (BasePlugin) Class
+                        .forName(descriptor.getImplementation())
+                        .newInstance();
+                plugin.setEngine(this);
+                plugin.setDescriptor(descriptor);
+                allPlugins.add(plugin);
+            } catch (Exception e) {
+                getLogger().error(
+                    "Can't load plugin " + descriptor.getName(),
+                    e);
+            }
+        }
+        registerPlugins(allPlugins);
+    }
+    private boolean isAbleToRegister(BasePlugin plugin) {
+        boolean ret = true;
+        Set dependencies = plugin.getDependencies();
+        for (Iterator i = dependencies.iterator(); i.hasNext();) {
+            String dependency = (String) i.next();
+            if (!plugins.containsKey(dependency)) {
+                ret = false;
+                break;
+            }
+        }
+        return ret;
+    }
+    private void registerPlugin(Plugin plugin) {
+        if (plugins.containsKey(plugin.getName())) {
+            return;
+        }
+        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
+            String pluginName = (String) i.next();
+            Plugin existedPlugin = (Plugin) plugins.get(pluginName);
+            if (existedPlugin instanceof Service) {
+                try {
+                    ((Service) existedPlugin).registerClient(plugin);
+                } catch (Exception e) {
+                    getLogger().error(
+                        "Register a plugin "
+                            + pluginName
+                            + " to Service "
+                            + existedPlugin
+                            + " error",
+                        e);
+                }
+            }
+        }
+        plugins.put(plugin.getName(), plugin);
+        pluginNames.add(plugin.getName());
+    }
+    /** Try to register all plugins into engine
+     * @param allPlugins List of all plugins
+     */
+    protected void registerPlugins(List allPlugins) {
+        int registered = 1;
+        List tobeRegistered = new ArrayList();
+        tobeRegistered.addAll(allPlugins);
+        while (registered > 0) {
+            registered = 0;
+            List tobeRemoved = new ArrayList();
+            for (Iterator i = tobeRegistered.iterator(); i.hasNext();) {
+                BasePlugin plugin = (BasePlugin) i.next();
+                if (isAbleToRegister(plugin)) {
+                    registerPlugin(plugin);
+                    tobeRemoved.add(plugin);
+                    registered++;
+                }
+            }
+            tobeRegistered.removeAll(tobeRemoved);
+        }
+        if (!tobeRegistered.isEmpty()) {
+            System.out.println(tobeRegistered + " can't be registered");
+        }
+    }
+    /** Override method service in the derived class
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager sm) throws ServiceException {
+        System.out.println("ServiceManager is " + sm.getClass().getName());
+        serviceManager = sm;
+    }
+    /** Override method init() of super class
+     * @see com.cyclops.plexaros.Engine#init(java.util.Properties)
+     */
+    public synchronized void start() {
+        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
+            String pluginName = (String) i.next();
+            Plugin plugin = (Plugin) getPlugin(pluginName);
+            try {
+
+                plugin.start();
+            } catch (Exception e) {
+                getLogger().error("Start plugin error", e);
+            }
+        }
+    }
+    /** Override method stop in the derived class
+     * @see org.apache.avalon.framework.activity.Startable#stop()
+     */
+    public synchronized void stop() {
+        ListIterator i = pluginNames.listIterator(pluginNames.size());
+        while (i.hasPrevious()) {
+            String pluginName = (String) i.previous();
+            Plugin plugin = getPlugin(pluginName);
+            try {
+                plugin.stop();
+            } catch (Exception e) {
+                getLogger().error("Stop plugin error", e);
+            }
+        }
     }
 }
