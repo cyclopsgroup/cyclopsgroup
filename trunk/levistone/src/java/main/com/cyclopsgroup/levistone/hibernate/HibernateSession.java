@@ -23,15 +23,15 @@ import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
-import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 import com.cyclopsgroup.levistone.query.Query;
+import com.cyclopsgroup.levistone.spi.AbstractConnectionSession;
 
 /**
  * TODO Add javadoc for this class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HibernateSession extends BaseConnectionSession
+public class HibernateSession extends AbstractConnectionSession
 {
     /**
      * Constructor for class HibernateSession

@@ -19,20 +19,23 @@ package com.cyclopsgroup.levistone.torque;
 import java.sql.Connection;
 import java.util.Map;
 
+import org.apache.torque.om.ObjectKey;
+import org.apache.torque.om.Persistent;
+
 import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
-import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 import com.cyclopsgroup.levistone.query.Query;
+import com.cyclopsgroup.levistone.spi.AbstractConnectionSession;
 
 /**
  * Torque implemented session
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TorqueSession extends BaseConnectionSession
+public class TorqueSession extends AbstractConnectionSession
 {
 
     /**
@@ -78,8 +81,21 @@ public class TorqueSession extends BaseConnectionSession
      */
     public Object create(Class type, Object id) throws PersistenceException
     {
-        // TODO Auto-generated method stub
-        return null;
+        try
+        {
+            Persistent entity = (Persistent) create(type);
+            ObjectKey key = TorqueUtils.object2TorqueKey(id);
+            entity.setPrimaryKey(key);
+            return entity;
+        }
+        catch (PersistenceException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     /**
@@ -89,8 +105,14 @@ public class TorqueSession extends BaseConnectionSession
      */
     public void delete(Class type, Object entity) throws PersistenceException
     {
-        // TODO Auto-generated method stub
-
+        try
+        {
+            getPeerAdapter(type).doDelete(entity, getConnection());
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     /**
@@ -100,7 +122,11 @@ public class TorqueSession extends BaseConnectionSession
      */
     public void deleteById(Class type, Object id) throws PersistenceException
     {
-
+        Object entity = lookup(type, id);
+        if (entity != null)
+        {
+            delete(type, entity);
+        }
     }
 
     /**
@@ -164,8 +190,8 @@ public class TorqueSession extends BaseConnectionSession
      */
     public boolean exists(Class type, Object id) throws PersistenceException
     {
-        // TODO Auto-generated method stub
-        return false;
+        Object entity = lookup(type, id);
+        return entity != null;
     }
 
     /**
@@ -175,8 +201,19 @@ public class TorqueSession extends BaseConnectionSession
      */
     public Object getId(Class type, Object entity)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Persistent p = (Persistent) entity;
+        if (p.isNew())
+        {
+            return null;
+        }
+        ObjectKey ok = p.getPrimaryKey();
+        return TorqueUtils.torqueKey2Object(ok);
+    }
+
+    private TorquePeerAdapter getPeerAdapter(Class type) throws Exception
+    {
+        ToquePersistenceManager tpm = (ToquePersistenceManager) getPersistenceManager();
+        return tpm.getPeerAdapter(type);
     }
 
     /**
@@ -207,8 +244,15 @@ public class TorqueSession extends BaseConnectionSession
      */
     public void save(Class type, Object entity) throws PersistenceException
     {
-        // TODO Auto-generated method stub
-
+        try
+        {
+            Persistent p = (Persistent) entity;
+            p.save(getConnection());
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     /**

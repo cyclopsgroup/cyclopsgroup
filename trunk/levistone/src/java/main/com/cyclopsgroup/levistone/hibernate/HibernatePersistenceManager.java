@@ -23,15 +23,15 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.levistone.Session;
-import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 import com.cyclopsgroup.levistone.datasource.DefaultDataSourceManager;
+import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
 
 /**
  * Hibernate implemented persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HibernatePersistenceManager extends BasePersistenceManager
+public class HibernatePersistenceManager extends AbstractPersistenceManager
         implements Serviceable
 {
 
@@ -42,7 +42,7 @@ public class HibernatePersistenceManager extends BasePersistenceManager
     /**
      * Override method doCancelSession in super class of HibernatePersistenceManager
      * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCancelSession(Session session) throws Exception
     {
@@ -54,7 +54,7 @@ public class HibernatePersistenceManager extends BasePersistenceManager
     /**
      * Override method doCloseSession in super class of HibernatePersistenceManager
      * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCloseSession(Session session) throws Exception
     {
@@ -66,7 +66,7 @@ public class HibernatePersistenceManager extends BasePersistenceManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
     protected Session doOpenSession(String persistenceName, String sessionId)
             throws Exception

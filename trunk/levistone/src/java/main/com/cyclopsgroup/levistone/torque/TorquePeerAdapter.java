@@ -16,6 +16,13 @@
  */
 package com.cyclopsgroup.levistone.torque;
 
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.util.List;
+
+import org.apache.commons.beanutils.MethodUtils;
+import org.apache.torque.util.Criteria;
+
 /**
  * Torque peer adapter
  * 
@@ -23,5 +30,83 @@ package com.cyclopsgroup.levistone.torque;
  */
 public class TorquePeerAdapter
 {
-    private Class torquePeer;
+    private static final Class[] CRITERIA_CONNECTION_TYPES = new Class[] {
+            Criteria.class, Connection.class };
+
+    private Class[] entityConnectionTypes;
+
+    private Class entityType;
+
+    private Class peerType;
+
+    /**
+     * Constructor for class TorquePeerAdapter
+     *
+     * @param entityType
+     * @param peerType Entity type
+     * @throws Exception
+     */
+    public TorquePeerAdapter(Class entityType, Class peerType) throws Exception
+    {
+        this.entityType = entityType;
+        this.peerType = peerType;
+        entityConnectionTypes = new Class[] { entityType, Connection.class };
+    }
+
+    /**
+     * Call do delete method
+     *
+     * @param entity Entity to delete
+     * @param dbcon Database connection
+     * @throws Exception Throw it out
+     */
+    public void doDelete(Object entity, Connection dbcon) throws Exception
+    {
+        Method method = MethodUtils.getAccessibleMethod(peerType, "doDelete",
+                entityConnectionTypes);
+        method.invoke(null, new Object[] { entity, dbcon });
+    }
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @param entity
+     * @param dbcon
+     * @throws Exception
+     */
+    public void doInsert(Object entity, Connection dbcon) throws Exception
+    {
+        Method method = MethodUtils.getAccessibleMethod(peerType, "doInsert",
+                entityConnectionTypes);
+        method.invoke(null, new Object[] { entity, dbcon });
+    }
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @param criteria
+     * @param dbcon
+     * @return
+     * @throws Exception
+     */
+    public List doSelect(Criteria criteria, Connection dbcon) throws Exception
+    {
+        Method method = MethodUtils.getAccessibleMethod(peerType, "doSelect",
+                CRITERIA_CONNECTION_TYPES);
+        return (List) method.invoke(null, new Object[] { criteria, dbcon });
+    }
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @param entity
+     * @param dbcon
+     * @throws Exception
+     */
+    public void doUpdate(Object entity, Connection dbcon) throws Exception
+    {
+        Method method = MethodUtils.getAccessibleMethod(peerType, "doUpdate",
+                entityConnectionTypes);
+        method.invoke(null, new Object[] { entity, dbcon });
+    }
 }

@@ -17,19 +17,19 @@
 package com.cyclopsgroup.levistone.jdbc;
 
 import com.cyclopsgroup.levistone.Session;
-import com.cyclopsgroup.levistone.base.BasePersistenceManager;
+import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
 
 /**
  * Jdbc implemented persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JdbcPersistenceManager extends BasePersistenceManager
+public class JdbcPersistenceManager extends AbstractPersistenceManager
 {
     /**
      * Override method doCancelSession in super class of JdbcPersistenceManager
      * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCancelSession(Session session) throws Exception
     {
@@ -40,7 +40,7 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     /**
      * Override method doCloseSession in super class of JdbcPersistenceManager
      * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCloseSession(Session session) throws Exception
     {
@@ -51,7 +51,7 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
     protected Session doOpenSession(String persistenceName, String sessionId)
             throws Exception

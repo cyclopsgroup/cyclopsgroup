@@ -27,15 +27,15 @@ import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
-import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 import com.cyclopsgroup.levistone.query.Query;
+import com.cyclopsgroup.levistone.spi.AbstractConnectionSession;
 
 /**
  * JDBC implemented db session
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JdbcSession extends BaseConnectionSession
+public class JdbcSession extends AbstractConnectionSession
 {
     private boolean closed = false;
 

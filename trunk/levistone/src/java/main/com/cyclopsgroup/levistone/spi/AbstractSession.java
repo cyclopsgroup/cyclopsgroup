@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.base;
+package com.cyclopsgroup.levistone.spi;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -34,7 +34,7 @@ import com.cyclopsgroup.levistone.query.Query;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseSession implements Session
+public abstract class AbstractSession implements Session
 {
     private String id;
 
@@ -56,7 +56,7 @@ public abstract class BaseSession implements Session
      * @param name
      * @param id Id of this session
      */
-    protected BaseSession(PersistenceManager persistenceManager, String name,
+    protected AbstractSession(PersistenceManager persistenceManager, String name,
             String id)
     {
         this.persistenceManager = persistenceManager;

@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.base;
+package com.cyclopsgroup.levistone.spi;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -30,17 +30,19 @@ import com.cyclopsgroup.levistone.query.Query;
 
 /**
  * Base implementation of persistence manager
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BasePersistenceManager extends AbstractLogEnabled
+public abstract class AbstractPersistenceManager extends AbstractLogEnabled
         implements PersistenceManager
 {
     private Map activeSessions = ListOrderedMap.decorate(new Hashtable());
 
+    private long uniqueId = 0L;
+
     /**
      * Override method cancelSession in super class of BasePersistenceManager
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#cancelSession(com.cyclopsgroup.levistone.Session)
      */
     public void cancelSession(Session session) throws PersistenceException
@@ -61,7 +63,7 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
 
     /**
      * Override method closeSession in super class of BasePersistenceManager
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#closeSession(com.cyclopsgroup.levistone.Session)
      */
     public void closeSession(Session session) throws PersistenceException
@@ -82,7 +84,7 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
 
     /**
      * Override or implement method of parent class or interface
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.Class)
      */
     public Query createQuery(Class entityType)
@@ -97,19 +99,24 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
      */
     public NamedQuery createQuery(String name)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     protected abstract void doCancelSession(Session session) throws Exception;
 
+    /**
+     * Overrideable closing session method
+     *
+     * @param session Session to close
+     * @throws Exception Throw exception out
+     */
     protected abstract void doCloseSession(Session session) throws Exception;
 
     /**
      * Method doOpenSession() in class BasePersistenceManager
-     * 
+     *
      * @param persistenceName
-     * @param sessionId session id
+     * @param sessionId       session id
      * @return
      * @throws Exception
      */
@@ -118,7 +125,7 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
 
     /**
      * Override method getActiveSessions in super class of BasePersistenceManager
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#getActiveSessions()
      */
     public Session[] getActiveSessions()
@@ -128,7 +135,7 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
 
     /**
      * Override or implement method of parent class or interface
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#openSession()
      */
     public Session openSession() throws PersistenceException
@@ -138,15 +145,16 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
 
     /**
      * Override method openSession in super class of BasePersistenceManager
-     * 
+     *
      * @see com.cyclopsgroup.levistone.PersistenceManager#openSession(java.lang.String)
      */
-    public Session openSession(String persistenceName)
+    public synchronized Session openSession(String persistenceName)
             throws PersistenceException
     {
         try
         {
-            String id = null; //TODO add get new unique id logic
+            String id = String.valueOf(uniqueId++);
+
             Session session = doOpenSession(persistenceName, id);
             activeSessions.put(session.getId(), session);
             return session;

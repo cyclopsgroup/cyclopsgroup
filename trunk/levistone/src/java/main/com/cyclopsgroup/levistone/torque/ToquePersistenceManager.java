@@ -17,6 +17,7 @@
 package com.cyclopsgroup.levistone.torque;
 
 import java.sql.Connection;
+import java.util.Hashtable;
 
 import javax.sql.DataSource;
 
@@ -26,22 +27,24 @@ import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.levistone.DataSourceManager;
 import com.cyclopsgroup.levistone.Session;
-import com.cyclopsgroup.levistone.base.BasePersistenceManager;
+import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
 
 /**
  * Torque implemented persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ToquePersistenceManager extends BasePersistenceManager implements
+public class ToquePersistenceManager extends AbstractPersistenceManager implements
         Serviceable
 {
     private DataSourceManager dataSourceManager;
 
+    private Hashtable peerAdapters = new Hashtable();
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCancelSession(Session session) throws Exception
     {
@@ -55,7 +58,7 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCloseSession(Session session) throws Exception
     {
@@ -69,7 +72,7 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
     protected Session doOpenSession(String persistenceName, String sessionId)
             throws Exception
@@ -80,6 +83,26 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
         TorqueSession session = new TorqueSession(this, persistenceName,
                 sessionId, dbcon);
         return session;
+    }
+
+    /**
+     * Get peer adapter associated with a entity class
+     *
+     * @param type Entity class
+     * @return Peer adapter
+     * @throws Exception Throw it out if type mismatch
+     */
+    public synchronized TorquePeerAdapter getPeerAdapter(Class type)
+            throws Exception
+    {
+        if (peerAdapters.containsKey(type))
+        {
+            return (TorquePeerAdapter) peerAdapters.get(type);
+        }
+        Class peerType = Class.forName(type.getName() + "Peer");
+        TorquePeerAdapter peerAdapter = new TorquePeerAdapter(type, peerType);
+        peerAdapters.put(type, peerAdapter);
+        return peerAdapter;
     }
 
     /**

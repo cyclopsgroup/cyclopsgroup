@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.base;
+package com.cyclopsgroup.levistone.spi;
 
 import com.cyclopsgroup.levistone.QueryResult;
 
@@ -23,7 +23,7 @@ import com.cyclopsgroup.levistone.QueryResult;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseQueryResult implements QueryResult
+public abstract class AbstractQueryResult implements QueryResult
 {
     private int limit = -1;
 

@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.base;
+package com.cyclopsgroup.levistone.spi;
 
 import java.sql.Connection;
 
@@ -25,7 +25,7 @@ import com.cyclopsgroup.levistone.PersistenceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseConnectionSession extends BaseSession
+public abstract class AbstractConnectionSession extends AbstractSession
 {
     private Connection dbcon;
 
@@ -37,7 +37,7 @@ public abstract class BaseConnectionSession extends BaseSession
      * @param id Id of this session
      * @param dbcon Database connection
      */
-    public BaseConnectionSession(PersistenceManager persistenceManager,
+    public AbstractConnectionSession(PersistenceManager persistenceManager,
             String name, String id, Connection dbcon)
     {
         super(persistenceManager, name, id);
