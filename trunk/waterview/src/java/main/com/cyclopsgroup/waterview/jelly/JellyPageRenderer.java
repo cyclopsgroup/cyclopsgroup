@@ -5,6 +5,7 @@ package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -59,11 +60,20 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     private Map cache;
 
-    private boolean cacheScript = false;
-
     private JellyContext initialJellyContext;
 
     private boolean reloadable = false;
+
+    /**
+     * Manually clear cache
+     */
+    public void clearCache()
+    {
+        if (cache != null)
+        {
+            cache.clear();
+        }
+    }
 
     /**
      * Override method configure() in super class
@@ -74,10 +84,17 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     {
         int cacheSize = conf.getChild("cache-size").getValueAsInteger(-1);
         reloadable = conf.getChild("reloadable").getValueAsBoolean(false);
-        if (cacheSize > 1)
+        if (cacheSize >= 1)
         {
-            cacheScript = true;
             cache = new LRUMap(cacheSize);
+        }
+        else if (cacheSize == 0)
+        {
+            cache = null;
+        }
+        else
+        {
+            cache = new Hashtable();
         }
     }
 
@@ -130,7 +147,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             }
         }
         Script script = null;
-        if (cacheScript)
+        if (cache != null)
         {
             Entry entry = (Entry) cache.get(path);
             if (entry != null)
@@ -155,7 +172,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             Entry entry = new Entry();
             entry.script = script;
             entry.timestamp = timestamp;
-            if (cacheScript)
+            if (cache != null)
             {
                 cache.put(path, entry);
             }

@@ -69,7 +69,7 @@ public class PopulateToolsValve extends Valve implements Configurable
     {
         int repoSize = conf.getChild("application-tools")
                 .getAttributeAsInteger("size", -1);
-        if (repoSize <= 1)
+        if (repoSize <= 0)
         {
             applicationTools = new Hashtable();
         }

@@ -62,6 +62,17 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
     }
 
     /**
+     * Manually clear module cache
+     */
+    public void clearCache()
+    {
+        if (moduleCache != null)
+        {
+            moduleCache.clear();
+        }
+    }
+
+    /**
      * Override or implement method of parent class or interface
      * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
@@ -224,11 +235,11 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Resolve module as action
      *
-     * @param moduleName
-     * @param runtime
-     * @throws Exception
+     * @param moduleName Module name
+     * @param runtime Runtime object
+     * @throws Exception Throw it out
      */
     public void resolveAction(String moduleName, UIRuntime runtime)
             throws Exception
@@ -241,12 +252,12 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Resolve module as page
      *
-     * @param moduleName
-     * @param runtime
-     * @param pageContext
-     * @throws Exception
+     * @param moduleName Module name
+     * @param runtime Runtime object
+     * @param pageContext Page context
+     * @throws Exception Throw it out
      */
     public void resolvePage(String moduleName, UIRuntime runtime,
             Context pageContext) throws Exception
