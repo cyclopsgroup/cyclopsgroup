@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="plexaros">
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="Amulets" href="http://cyclops-group.sourceforge.net/projects/amulets"/>
+            <item name="Torque" href="http://db.apache.org/torque"/>
+            <item name="Maven" href="http://maven.apache.org"/>
+            <item name="Commons Jelly" href="http://jakarta.apache.org/commons/jelly"/>
+        </links>
+    </body>
+</project>
