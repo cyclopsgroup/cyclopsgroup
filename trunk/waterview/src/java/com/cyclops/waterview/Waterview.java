@@ -194,40 +194,25 @@
  */
 package com.cyclops.waterview;
 
-import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.configuration.Configuration;
-
-/** Core waterview component
+/** Waterview core interface
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class Waterview {
+public interface Waterview {
 
-    private Configuration configuration;
-
-    private Hashtable storage = new Hashtable();
+    /** Role of this object */
+    String ROLE = Waterview.class.getName();
 
     /** Method getApplicationStorage in class Waterview
-     * @return Map of application storage
+     * @return Map of application level objects
      */
-    public Map getApplicationStorage() {
-        return storage;
-    }
+    Map getApplicationStorage();
 
-    /** Getter method for property
-     * @return Returns the configuration.
+    /** Method getRunDataFactory in class Waterview
+     * @return RunDataFactory instance
      */
-    public Configuration getConfiguration() {
-        return configuration;
-    }
-
-    /** Setter method for property
-     * @param c The configuration to set.
-     */
-    public void setConfiguration(Configuration c) {
-        configuration = c;
-    }
+    RunDataFactory getRunDataFactory();
 }

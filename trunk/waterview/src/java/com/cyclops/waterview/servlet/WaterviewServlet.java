@@ -194,8 +194,20 @@
  */
 package com.cyclops.waterview.servlet;
 
-import javax.servlet.http.HttpServlet;
+import java.io.IOException;
+import java.util.Enumeration;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.plexus.embed.Embedder;
+
+import com.cyclops.waterview.RunData;
+import com.cyclops.waterview.Waterview;
 
 /** Main servlet loader for waterview
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
@@ -204,4 +216,82 @@ import javax.servlet.http.HttpServlet;
  */
 public class WaterviewServlet extends HttpServlet {
 
+    private Embedder plexusEmbedder;
+
+    /** Override method destroy() of parent class
+     * @see javax.servlet.Servlet#destroy()
+     */
+    public void destroy() {
+        try {
+            getEmbedder().stop();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    /** Method getEmbedder in class WaterviewServlet
+     * @return Embedder object
+     */
+    public Embedder getEmbedder() {
+        return plexusEmbedder;
+    }
+
+    /** Method getWaterview in class WaterviewServlet
+     * @return Waterview instance
+     * @throws Exception Throw it out
+     */
+    public Waterview getWaterview() throws Exception {
+        return (Waterview) getEmbedder().lookup(Waterview.ROLE);
+    }
+
+    /** Override method init() of parent class
+     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
+     */
+    public void init(ServletConfig conf) throws ServletException {
+        Embedder embedder = new Embedder();
+        for (Enumeration e = conf.getInitParameterNames(); e.hasMoreElements();) {
+            String initParameterName = (String) e.nextElement();
+            embedder.addContextValue(initParameterName, conf
+                    .getInitParameter(initParameterName));
+        }
+        String plexusConf = conf.getInitParameter("plexus.conf");
+        if (StringUtils.isEmpty(plexusConf)) {
+            plexusConf = "WEB-INF/conf/plexus-conf.xml";
+        }
+        embedder.setConfiguration(conf.getServletContext().getRealPath(
+                plexusConf));
+        try {
+            embedder.start();
+            setEmbedder(embedder);
+        } catch (Exception e) {
+            throw new ServletException("Can't start plexus", e);
+        }
+    }
+
+    /** Override method service() of parent class
+     * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    protected void service(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Waterview waterview = getWaterview();
+            RunData rundata = waterview.getRunDataFactory().createRunData(
+                    request, response);
+        } catch (Exception e) {
+            if (e instanceof ServletException) {
+                throw (ServletException) e;
+            } else if (e instanceof IOException) {
+                throw (IOException) e;
+            } else {
+                throw new ServletException("Service exception", e);
+            }
+        }
+    }
+
+    /** Method setEmbedder in class WaterviewServlet
+     * @param embedder Embedder object
+     */
+    public void setEmbedder(Embedder embedder) {
+        plexusEmbedder = embedder;
+    }
 }

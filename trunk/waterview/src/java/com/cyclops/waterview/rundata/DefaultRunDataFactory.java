@@ -194,18 +194,15 @@
  */
 package com.cyclops.waterview.rundata;
 
-import java.util.Enumeration;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.configuration.BaseConfiguration;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclops.waterview.DefaultWaterview;
-import com.cyclops.waterview.RequestParameters;
 import com.cyclops.waterview.RunData;
+import com.cyclops.waterview.RunDataFactory;
 import com.cyclops.waterview.Waterview;
 
 /** Default implementation of RunData interface
@@ -213,101 +210,24 @@ import com.cyclops.waterview.Waterview;
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultRunData implements RunData {
+public class DefaultRunDataFactory implements RunDataFactory, Serviceable {
 
-    /** Empty class just to implements RequestParameter interface */
-    private class DefaultRequestParameters extends BaseConfiguration implements
-            RequestParameters {
-        //Empty class
-    }
+    private Waterview waterview;
 
-    private HttpServletRequest httpRequest;
-
-    private HttpServletResponse httpResponse;
-
-    private DefaultWaterview waterview;
-
-    private RequestParameters parameters = new DefaultRequestParameters();
-
-    /** Default constructor of DefaultRunData class
-     * @param wv Waterview component instance
-     * @param request Http request object
-     * @param response Http response object
+    /** Override method createRunData() of parent class
+     * @see com.cyclops.waterview.RunDataFactory#createRunData(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
-    public DefaultRunData(Waterview wv, HttpServletRequest request,
+    public RunData createRunData(HttpServletRequest request,
             HttpServletResponse response) {
-        httpRequest = request;
-        httpResponse = response;
-        initialize();
+        DefaultRunData rundata = new DefaultRunData(waterview, request,
+                response);
+        return rundata;
     }
 
-    private void initialize() {
-
-        for (Enumeration e = getHttpRequest().getParameterNames(); e
-                .hasMoreElements();) {
-            String paramName = (String) e.nextElement();
-            String[] paramValues = getHttpRequest().getParameterValues(
-                    paramName);
-            for (int i = 0; i < paramValues.length; i++) {
-                String paramValue = paramValues[i];
-                parameters.addProperty(paramName, paramValue);
-            }
-        }
-    }
-
-    /** Override method getHttpRequest() of parent class
-     * @see com.cyclops.waterview.RunData#getHttpRequest()
+    /** Override method service() of parent class
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public HttpServletRequest getHttpRequest() {
-        return httpRequest;
-    }
-
-    /** Override method getHttpResponse() of parent class
-     * @see com.cyclops.waterview.RunData#getHttpResponse()
-     */
-    public HttpServletResponse getHttpResponse() {
-        return httpResponse;
-    }
-
-    /** Override method getHttpSession() of parent class
-     * @see com.cyclops.waterview.RunData#getHttpSession()
-     */
-    public HttpSession getHttpSession() {
-        return httpRequest.getSession();
-    }
-
-    /** Override method getParameters() of parent class
-     * @see com.cyclops.waterview.RunData#getParameters()
-     */
-    public RequestParameters getParameters() {
-        return parameters;
-    }
-
-    /** Override method getApplicationStorage() of parent class
-     * @see com.cyclops.waterview.RunData#getApplicationStorage()
-     */
-    public Map getApplicationStorage() {
-        return getWaterview().getApplicationStorage();
-    }
-
-    /** Override method getRequestStorage() of parent class
-     * @see com.cyclops.waterview.RunData#getRequestStorage()
-     */
-    public Map getRequestStorage() {
-        return new HttpRequestStorage(getHttpRequest());
-    }
-
-    /** Override method getSessionStorage() of parent class
-     * @see com.cyclops.waterview.RunData#getSessionStorage()
-     */
-    public Map getSessionStorage() {
-        return new HttpSessionStorage(getHttpSession());
-    }
-
-    /** Override method getWaterview() of parent class
-     * @see com.cyclops.waterview.RunData#getWaterview()
-     */
-    public DefaultWaterview getWaterview() {
-        return waterview;
+    public void service(ServiceManager serviceManager) throws ServiceException {
+        waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
     }
 }

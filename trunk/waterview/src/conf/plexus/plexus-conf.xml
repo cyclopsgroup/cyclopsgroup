@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+    <component>
+        <role>com.cyclops.waterview.Waterview</role>
+        <implementation>com.cyclops.waterview.DefaultWaterview</implementation>
+    </component>
+    <component>
+        <role>com.cyclops.waterview.RunDataFactory</role>
+        <implementation>com.cyclops.waterview.rundata.RunDataFactory</implementation>
+    </component>
+</components>

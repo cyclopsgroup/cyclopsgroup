@@ -245,5 +245,5 @@ public interface RunData {
     /** Method getWaterview in class RunData
      * @return Waterview instance
      */
-    Waterview getWaterview();
+    DefaultWaterview getWaterview();
 }
