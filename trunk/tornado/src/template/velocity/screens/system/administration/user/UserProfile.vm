@@ -1,0 +1,40 @@
+<h2>User Profile</h2>
+<table width="100%">
+	<form method="get" action="$link.setPage("system,administration,user,UserProfile.vm")">
+	<tr>
+		<td>Account Name:</td>
+		<td><input type="text" name="user_name" value="$!userName" class="frame"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Display" class="button"/>
+		</td>
+	</tr>
+	</form>
+	#if($user)
+    	<tr>
+    		<td>Name: </td>
+    		<td>
+    			<input type="text" name="first_name" value="$user.firstName" size="15" class="frame"/>
+    			<input type="text" name="middle_name" value="$!user.middleName" size="5" class="frame"/>
+    			<input type="text" name="last_name" value="$user.lastName" size="15" class="frame"/>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>EMail:</td>
+    		<td><input type="text" name="email" value="$user.email" size="30" class="frame"/></td>
+    	</tr>
+    	<tr>
+    		<td>Description:</td>
+    		<td rowspan="2"><textarea name="description" cols="30" rows="2" class="frame">$!user.description</textarea></td>
+    	</tr>
+    	<tr>
+    		<td>&nbsp;</td>
+    	</tr>
+    	<tr>
+    		<td colspan="2" class="bottom">
+    			<input type="submit" class="button" value="Save Change" name="eventsubmit_doSave"/>
+    		</td>
+    	</tr>
+    #end
+</table>

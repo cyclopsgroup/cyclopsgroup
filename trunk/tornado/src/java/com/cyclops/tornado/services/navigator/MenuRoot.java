@@ -13,10 +13,10 @@ public class MenuRoot extends Menu {
     /** Empty MenuRoot array */
     public static final MenuRoot[] EMPTY_ARRAY = new MenuRoot[0];
     private boolean isDefault;
-    /** Same to isDefault()
+    /** Same to getDefault()
      * @return If this root is default
      */
-    public boolean getIsDefault() {
+    public boolean getDefault() {
         return isDefault;
     }
     /** Method isDefault()
@@ -25,10 +25,10 @@ public class MenuRoot extends Menu {
     public boolean isDefault() {
         return isDefault;
     }
-    /** Method setIsDefault()
+    /** Method setDefault()
      * @param b Is default value
      */
-    public void setIsDefault(boolean b) {
+    public void setDefault(boolean b) {
         isDefault = b;
     }
 

@@ -1,0 +1,37 @@
+#macro(navigatorBarItem $navigatorItem)
+	#set($collapse = false)
+	#if($navigator.currentPath.indexOf($navigatorItem) != -1)
+		#set($children = $navigator.getChildren($navigatorItem))
+		#if(!$children.isEmpty())
+    		#set($collapse = true)
+    	#end
+	#end
+	#set($icon = "images/arrow_right")
+	#if($collapse)
+		#set($icon="images/arrow_down")
+	#end
+	#if($navigator.currentMenu == $navigatorItem)
+		#set($icon = "${icon}_filled")
+	#end
+	<table cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td colspan="2">
+				<img align="absmiddle" src="$content.getURI("${icon}.gif")"/>
+				#if($navigatorItem == $navigator.currentMenu)
+					<b>$navigatorItem.name</b>
+				#else
+					<a href="$link.setPage($navigatorItem.href)">$navigatorItem.name</a>
+				#end
+			</td>
+		</tr>
+		#if($collapse)
+    		<tr>
+    			<td>#spacer(10 10)</td>
+   				<td>#foreach($child in $children) #navigatorBarItem($child) #end</td>
+    		</tr>
+		#end
+	</table>
+#end
+#foreach($item in $navigator.currentMenuRoot.children)
+	#navigatorBarItem($item)
+#end

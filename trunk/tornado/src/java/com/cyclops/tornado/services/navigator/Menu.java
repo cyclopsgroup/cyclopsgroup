@@ -6,11 +6,15 @@
  */
 package com.cyclops.tornado.services.navigator;
 import java.util.Vector;
+
+import org.apache.commons.lang.StringUtils;
 /**
  * @author joeblack
  * @since 2003-10-6 15:39:37
  */
 public class Menu {
+    /** Empty array */
+    public static final Menu[] EMPTY_ARRAY = new Menu[0];
     private static int uniqueId = 0;
     private Vector children = new Vector();
     private String href;
@@ -28,6 +32,16 @@ public class Menu {
     public void addChild(MenuItem item) {
         item.setParent(this);
         children.add(item);
+    }
+    /** Implementation of method equals() in this class
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object object) {
+        if (object instanceof Menu) {
+            return StringUtils.equals(href, ((Menu) object).getHref());
+        } else {
+            return false;
+        }
     }
     /** Method getChildren() in Class Menu
      * @return Array of MenuItem children
@@ -52,6 +66,12 @@ public class Menu {
      */
     public Menu getParent() {
         return parent;
+    }
+    /** Implementation of method hashCode() in this class
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode() {
+        return href.hashCode();
     }
     /** Method setHref() in Class MenuItem
      * @param string New value of href

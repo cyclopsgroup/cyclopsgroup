@@ -29,6 +29,7 @@ public class BaseUser extends TemplateScreen {
         throws Exception {
         ParameterParser params = data.getParameters();
         String userName = params.getString("user_name");
+        ctx.put("userName", userName);
         if (StringUtils.isEmpty(userName)) {
             data.setMessage("Please input user name");
         } else {
@@ -37,8 +38,10 @@ public class BaseUser extends TemplateScreen {
             List users = UserPeer.doSelect(crit);
             if (users.isEmpty()) {
                 data.setMessage("User [" + userName + "] doesn't exist");
+            } else {
+                dbuser = (User) users.get(0);
+                ctx.put("user", dbuser);
             }
-            dbuser = (User) users.get(0);
         }
     }
     /** Method getUserOM() in Class BaseUser

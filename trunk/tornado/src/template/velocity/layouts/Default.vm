@@ -2,17 +2,24 @@
 <html>
 <head>$renderer.render("navigations", "HtmlHeader.vm")</head>
 <body>
-<table width="100%" cellspacing="0">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td width="18%">#spacer(1 1)</td>
-		<td width="75%">#spacer(1 1)</td>
+		<td width="65%">#spacer(1 1)</td>
 		<td width="17%">#spacer(1 1)</td>
 	</tr>
 	<tr>
 		<td colspan="3" bgcolor="#003366">$renderer.render("navigations", "Banner.vm")</td>
 	</tr>
-	<tr valign="top">
+	<tr bgcolor="#0064C7" style="padding: 3px;">
+		<td>
+			<font color="white">Powered by</font>
+			<a href="http://cyclops-group.sourceforge.net/projects/tornado"><font color="white">Tornado</font></a></td>
+		<td>$renderer.render("navigations", "PathLinks.vm")</td>
 		<td>&nbsp;</td>
+	</tr>
+	<tr valign="top" style="padding: 10px;">
+		<td>$renderer.render("navigations", "MenuBar.vm")</td>
 		<td>$renderer.render("screens", $template)</td>
 		<td>$data.message</td>
 	</tr>

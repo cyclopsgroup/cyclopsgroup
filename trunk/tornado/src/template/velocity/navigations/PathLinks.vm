@@ -1,0 +1,10 @@
+<font color="white">
+#foreach($item in $navigator.currentPath)
+	/
+	#if($navigator.currentMenu == $item)
+		<b>$item.name</b>
+	#else
+		<a href="$link.setPage($item.href)"><font color="white">$item.name</font></a>
+	#end
+#end
+</font>

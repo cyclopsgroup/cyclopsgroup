@@ -45,4 +45,10 @@ public class SlowServiceManager extends TurbineServices {
         initMapping();
         isInit = true;
     }
+    /** Implementation of method getRealPath() in this class
+     * @see org.apache.fulcrum.ServiceBroker#getRealPath(java.lang.String)
+     */
+    public String getRealPath(String path) {
+        return "src/webapp/" + path;
+    }
 }

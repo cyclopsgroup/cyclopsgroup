@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-	<menu name="Home" isDefault="true" href="Index.vm">
+	<menu name="Home" default="true" href="Index.vm">
 		<item name="Index" href="Index.vm"/>
 		<item name="My Account" href="system,user,Index.vm">
 			<item name="User Profile" href="system,user,UserProfile.vm"/>

@@ -14,10 +14,26 @@ input, select, option, textarea {
 	font-size: 8pt;
 }
 input.button {
-	color: white;
-	font-weight: bold;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 8pt;
-	background-color: #003366;
-	border-color: #003366;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CDCDCD;
+	background-color: #EEEEEE;
+	color: black;
+}
+input.frame, textarea.frame {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CDCDCD;
+}
+td.bottom {
+	text-align: right;
+	background-color: #CEE7FF;
+	background-image: url('images/bottom_bg.gif');
+	padding: 3px;
+}
+a:link, a:visited {
+	color: #0064C7;
+	text-decoration: underline;
 }

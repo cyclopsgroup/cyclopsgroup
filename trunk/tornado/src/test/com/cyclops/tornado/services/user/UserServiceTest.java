@@ -12,7 +12,7 @@ import com.cyclops.tornado.TurbineTestCase;
  * @author joeblack
  * @since 2003-9-30 15:49:47
  */
-public class DefaultUserServiceTest extends TurbineTestCase {
+public class UserServiceTest extends TurbineTestCase {
     /** Method testAnonymous() in Class DefaultUserServiceTest
      */
     public void testAnonymous() {

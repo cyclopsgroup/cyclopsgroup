@@ -4,7 +4,7 @@
 		<td align="right">&nbsp;</td>
 	</tr>
 </table>
-<table width="100%">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<form method="post"
 		action="$link.setAction("UserIdentify").setPage("Redirect.vm")"
 		#if($data.tornadoUser.isAnonymous())
@@ -13,16 +13,35 @@
 	>
 	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")">
 	<tr>
-		<td>#foreach($menuRoot in $navigator.rootMenus) <a href="$link.setPage($menuRoot.href)"><b><font color="white">$menuRoot.name</font></b></a> #end</td>
+		<td valign="bottom">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>&nbsp;</td>
+        			#foreach($menuRoot in $navigator.menuRoots)
+        				#if($navigator.currentMenuRoot == $menuRoot)
+        					<td bgcolor="#0064C7"><img src="$content.getURI("images/tab_left.gif")" align="absmiddle"/>
+        						<b><font color="white">$menuRoot.name</font></b>
+        					<img src="$content.getURI("images/tab_right.gif")" align="absmiddle"/></td>
+        				#else
+        					<td bgcolor="#002244"><img src="$content.getURI("images/tab_left.gif")" align="absmiddle"/>
+        						<a href="$link.setPage($menuRoot.href)"><b><font color="white">$menuRoot.name</font></b></a>
+        					<img src="$content.getURI("images/tab_right.gif")" align="absmiddle"/></td>
+        				#end
+        			#end
+        		</tr>
+        	</table>
+		</td>
 		<td align="right">
-			#if($data.tornadoUser.isAnonymous())
-    			<input type="text" name="user_name" size="8"/>
-    			<input type="password" name="password" size="8"/>
-    			<input type="submit" class="button" value="Signin" name="eventsubmit_doSignin"/>
-    		#else
-    			<font color="white">Welcom: $data.tornadoUser.name</font>
-    			<input type="submit" class="button" value="Signout" name="eventsubmit_doSignout"/>
-    		#end
+			<font color="white">
+    			#if($data.tornadoUser.isAnonymous())
+        			Username: <input type="text" name="user_name" size="12" class="frame"/>
+        			Password: <input type="password" name="password" size="12" class="frame"/>
+        			<input type="submit" class="button" value="Signin" name="eventsubmit_doSignin"/>
+        		#else
+        			Welcom: $data.tornadoUser.name
+        			<input type="submit" class="button" value="Signout" name="eventsubmit_doSignout"/>
+        		#end
+    		</font>
 		</td>
 	</tr>
 	</form>

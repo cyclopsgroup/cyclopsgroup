@@ -16,5 +16,10 @@ public interface NavigatorService extends Service {
     /** Method getMenuToot() in Class NavigatorService
      * @return Array of root menus
      */
-    MenuRoot[] getRootMenus();
+    MenuRoot[] getMenuRoots();
+    /** Method getMenu()
+     * @param href  Href of the item
+     * @return Menu object, null if not found
+     */
+    Menu getMenu(String href);
 }

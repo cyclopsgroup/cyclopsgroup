@@ -10,6 +10,7 @@ import java.util.Hashtable;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.digester.Digester;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.tornado.services.BaseService;
 import com.cyclops.tornado.utils.ResourceFinder;
@@ -21,10 +22,39 @@ public class DefaultNavigatorService
     extends BaseService
     implements NavigatorService {
     private Hashtable menus = new Hashtable();
+    private Menu getMenu(Menu menu, String href) {
+        if (StringUtils.equals(menu.getHref(), href)) {
+            return menu;
+        } else {
+            MenuItem[] children = menu.getChildren();
+            for (int i = 0; i < children.length; i++) {
+                MenuItem item = children[i];
+                Menu ret = getMenu(item, href);
+                if (ret != null) {
+                    return ret;
+                }
+            }
+            return null;
+        }
+    }
+    /** Implementation of method getMenu() in this class
+     * @see com.cyclops.tornado.services.navigator.NavigatorService#getMenu(java.lang.String)
+     */
+    public Menu getMenu(String href) {
+        MenuRoot[] roots = getMenuRoots();
+        for (int i = 0; i < roots.length; i++) {
+            MenuRoot root = roots[i];
+            Menu ret = getMenu(root, href);
+            if (ret != null) {
+                return ret;
+            }
+        }
+        return null;
+    }
     /** Method getRootMenus()
      * @see com.cyclops.tornado.services.navigator.NavigatorService#getRootMenus()
      */
-    public MenuRoot[] getRootMenus() {
+    public MenuRoot[] getMenuRoots() {
         return (MenuRoot[]) menus.values().toArray(MenuRoot.EMPTY_ARRAY);
     }
     /** Method initialize()
@@ -42,6 +72,7 @@ public class DefaultNavigatorService
         digester.addObjectCreate("*/item", MenuItem.class);
         digester.addSetProperties("*/item");
         digester.addSetNext("*/item", "addChild");
+        digester.setNamespaceAware(false);
         for (int i = 0; i < resources.length; i++) {
             URL resource = resources[i];
             try {

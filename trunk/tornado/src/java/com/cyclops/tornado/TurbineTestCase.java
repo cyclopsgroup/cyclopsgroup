@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.fulcrum.TurbineServices;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.cyclops.tornado.services.SlowServiceManager;
 /**
