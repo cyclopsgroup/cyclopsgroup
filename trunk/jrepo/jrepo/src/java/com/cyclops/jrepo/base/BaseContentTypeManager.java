@@ -192,52 +192,75 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo.types;
+package com.cyclops.jrepo.base;
+
+import java.util.Hashtable;
 
 import com.cyclops.jrepo.ContentFactory;
 import com.cyclops.jrepo.ContentType;
+import com.cyclops.jrepo.ContentTypeManager;
+import com.cyclops.jrepo.RepositoryEngine;
 
-/** Default implementation of ContentType interface
+/** Base implementation of content type manager
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:26:27 PM Mar 19, 2004
+ * Created at 11:09:09 PM Mar 22, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public abstract class AbstractContentType implements ContentType {
-    private String name;
-    private ContentFactory contentFactory;
+public class BaseContentTypeManager
+    extends DefaultEngineReferenceable
+    implements ContentTypeManager {
+    private Hashtable contentFactories = new Hashtable();
+    private Hashtable contentTypes = new Hashtable();
+    /** Default constructor with a engine instance as parameter
+     * @param engine RepositoryEngine instance
+     */
+    public BaseContentTypeManager(RepositoryEngine engine) {
+        setRepositoryEngine(engine);
+    }
+    /** Override method addFactory in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#addFactory(com.cyclops.jrepo.ContentFactory)
+     */
+    public void addFactory(ContentFactory factory) {
+        factory.setRepositoryEngine(getRepositoryEngine());
+        contentFactories.put(factory.getName(), factory);
+    }
 
-    /** Method getName() in class AbstractContentType
-     * @return Name of the content type
+    /** Override method addtType in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#addtType(com.cyclops.jrepo.ContentType, java.lang.String)
      */
-    public String getName() {
-        if (name == null) {
-            return getDefaultName();
-        } else {
-            return name;
-        }
+    public void addType(ContentType contentType, String factoryName) {
+        ContentFactory factory = getFactory(factoryName);
+        contentType.setContentFactory(factory);
+        contentType.setRepositoryEngine(getRepositoryEngine());
+        contentTypes.put(contentType.getName(), contentType);
     }
-    /** Method setName() in class AbstractContentType
-     * @param string Set name of this content type
-     */
-    public void setName(String string) {
-        name = string;
-    }
-    /** Method getDefaultName() in class AbstractContentType
-     * @return Default content type name
-     */
-    protected abstract String getDefaultName();
 
-    /** Override method getContentFactory in the derived class
-     * @see com.cyclops.jrepo.ContentType#getContentFactory()
+    /** Override method getFactories in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#getFactories()
      */
-    public ContentFactory getContentFactory() {
-        return contentFactory;
+    public ContentFactory[] getFactories() {
+        return (ContentFactory[]) contentFactories.values().toArray(
+            ContentFactory.EMPTY_ARRAY);
     }
-    /** Override method setContentFactory in the derived class
-     * @see com.cyclops.jrepo.ContentType#setContentFactory(com.cyclops.jrepo.ContentFactory)
+
+    /** Override method getFactory in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#getFactory(java.lang.String)
      */
-    public void setContentFactory(ContentFactory factory) {
-        contentFactory = factory;
+    public ContentFactory getFactory(String factoryName) {
+        return (ContentFactory) contentFactories.get(factoryName);
+    }
+    /** Override method getType in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#getType(java.lang.String)
+     */
+    public ContentType getType(String typeName) {
+        return (ContentType) contentTypes.get(typeName);
+    }
+    /** Override method getTypes in the derived class
+     * @see com.cyclops.jrepo.ContentTypeManager#getTypes()
+     */
+    public ContentType[] getTypes() {
+        return (ContentType[]) contentTypes.values().toArray(
+            ContentType.EMPTY_ARRAY);
     }
 }

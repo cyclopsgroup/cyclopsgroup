@@ -200,11 +200,17 @@ package com.cyclops.jrepo.types;
  * Created at 9:29:18 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class FolderType extends AbstractContentType {
+public class FolderType extends BaseContentType {
+
     /** Default name of folder type */
     public static final String TYPE_NAME = "folder";
+    /** Constructor for class FolderType
+     */
+    public FolderType() {
+        super(TYPE_NAME);
+    }
     /** Override method getDefaultName in the derived class
-     * @see com.cyclops.jrepo.types.AbstractContentType#getDefaultName()
+     * @see com.cyclops.jrepo.types.BaseContentType#getDefaultName()
      */
     protected String getDefaultName() {
         return TYPE_NAME;

@@ -192,40 +192,63 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo;
+package com.cyclops.jrepo.types;
 
-/** Manage available content types
+import com.cyclops.jrepo.ContentFactory;
+import com.cyclops.jrepo.ContentType;
+import com.cyclops.jrepo.base.DefaultEngineReferenceable;
+
+/** Default implementation of ContentType interface
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:19:02 PM Mar 19, 2004
+ * Created at 9:26:27 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ContentTypeManager extends EngineReferenceable {
-    /** Register a content type factory
-     * @param factory ContentFactory instance to be added
+public class BaseContentType
+    extends DefaultEngineReferenceable
+    implements ContentType {
+    private String name;
+    private ContentFactory contentFactory;
+
+    /** Constructor for class BaseContentType
+     * @param typeName Name of this type
      */
-    void addFactory(ContentFactory factory);
-    /** Method addContentType() in class ContentTypeManager
-     * @param contentType Instance of ContentType to be added
-     * @param factoryName Name of content factory
+    public BaseContentType(String typeName) {
+        name = typeName;
+    }
+
+    /** Method getName() in class AbstractContentType
+     * @return Name of the content type
      */
-    void addType(ContentType contentType, String factoryName);
-    /** Method getContentFactories() in class ContentTypeManager
-     * @return Array of content factories
+    public String getName() {
+        if (name == null) {
+            return getDefaultName();
+        } else {
+            return name;
+        }
+    }
+    /** Method setName() in class AbstractContentType
+     * @param string Set name of this content type
      */
-    ContentFactory[] getFactories();
-    /** Get content factory by name
-     * @param factoryName ContentFactory name
-     * @return ContentFactory instance, null if not found
+    public void setName(String string) {
+        name = string;
+    }
+    /** Method getDefaultName() in class AbstractContentType
+     * @return Default content type name
      */
-    ContentFactory getFactory(String factoryName);
-    /** Method getContentType() in class ContentTypeManager
-     * @param typeName Name of content type
-     * @return Instance of ContentType, null if not found
+    protected String getDefaultName() {
+        return null;
+    }
+    /** Override method getContentFactory in the derived class
+     * @see com.cyclops.jrepo.ContentType#getContentFactory()
      */
-    ContentType getType(String typeName);
-    /** List all available content types
-     * @return Array of available content types
+    public ContentFactory getContentFactory() {
+        return contentFactory;
+    }
+    /** Override method setContentFactory in the derived class
+     * @see com.cyclops.jrepo.ContentType#setContentFactory(com.cyclops.jrepo.ContentFactory)
      */
-    ContentType[] getTypes();
+    public void setContentFactory(ContentFactory factory) {
+        contentFactory = factory;
+    }
 }

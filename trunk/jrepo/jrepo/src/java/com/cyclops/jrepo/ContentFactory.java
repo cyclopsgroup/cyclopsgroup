@@ -215,4 +215,8 @@ public interface ContentFactory extends EngineReferenceable {
         ContentType contentType,
         String contentName)
         throws Exception;
+    /** Method getName() in class ContentFactory
+     * @return Name of this factory
+     */
+    String getName();
 }

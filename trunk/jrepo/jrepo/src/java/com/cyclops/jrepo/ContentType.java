@@ -200,7 +200,7 @@ package com.cyclops.jrepo;
  * Created at 9:19:16 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ContentType {
+public interface ContentType extends EngineReferenceable {
     /** Empty array*/
     ContentType[] EMPTY_ARRAY = new ContentType[0];
 

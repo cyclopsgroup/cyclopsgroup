@@ -192,40 +192,29 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo;
+package com.cyclops.jrepo.base;
 
-/** Manage available content types
+import com.cyclops.jrepo.EngineReferenceable;
+import com.cyclops.jrepo.RepositoryEngine;
+
+/** Implementation of EngineReferenceable interface
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:19:02 PM Mar 19, 2004
+ * Created at 11:28:38 PM Mar 22, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ContentTypeManager extends EngineReferenceable {
-    /** Register a content type factory
-     * @param factory ContentFactory instance to be added
+public class DefaultEngineReferenceable implements EngineReferenceable {
+    private RepositoryEngine repositoryEngine;
+    /** Override method getRepositoryEngine in the derived class
+     * @see com.cyclops.jrepo.EngineReferenceable#getRepositoryEngine()
      */
-    void addFactory(ContentFactory factory);
-    /** Method addContentType() in class ContentTypeManager
-     * @param contentType Instance of ContentType to be added
-     * @param factoryName Name of content factory
+    public RepositoryEngine getRepositoryEngine() {
+        return repositoryEngine;
+    }
+    /** Override method setRepositoryEngine in the derived class
+     * @see com.cyclops.jrepo.EngineReferenceable#setRepositoryEngine(com.cyclops.jrepo.RepositoryEngine)
      */
-    void addType(ContentType contentType, String factoryName);
-    /** Method getContentFactories() in class ContentTypeManager
-     * @return Array of content factories
-     */
-    ContentFactory[] getFactories();
-    /** Get content factory by name
-     * @param factoryName ContentFactory name
-     * @return ContentFactory instance, null if not found
-     */
-    ContentFactory getFactory(String factoryName);
-    /** Method getContentType() in class ContentTypeManager
-     * @param typeName Name of content type
-     * @return Instance of ContentType, null if not found
-     */
-    ContentType getType(String typeName);
-    /** List all available content types
-     * @return Array of available content types
-     */
-    ContentType[] getTypes();
+    public void setRepositoryEngine(RepositoryEngine engineInstance) {
+        repositoryEngine = engineInstance;
+    }
 }

@@ -196,7 +196,7 @@ package com.cyclops.jrepository;
 
 import junit.framework.TestCase;
 
-/** TODO Add javadoc for this class
+/** Test case for FSRepositoryEngine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
  * Created at 10:51:18 PM Mar 22, 2004
