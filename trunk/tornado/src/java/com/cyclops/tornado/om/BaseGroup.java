@@ -33,160 +33,188 @@ public abstract class BaseGroup extends BaseObject
     private static final GroupPeer peer =
         new GroupPeer();
 
-        
-    /** The value for the id field */
-    private int id;
+                  
+        /**
+         * The value for the id field
+         */
+        private int id;
+              
+        /**
+         * The value for the group_name field
+         */
+        private String group_name;
+              
+        /**
+         * The value for the description field
+         */
+        private String description;
+                                                                                                              
+        /**
+         * The value for the is_system field
+         */
+        private boolean is_system = false;
+                                                                                                              
+        /**
+         * The value for the is_disabled field
+         */
+        private boolean is_disabled = false;
       
-    /** The value for the groupName field */
-    private String groupName;
       
-    /** The value for the description field */
-    private String description;
-                                                                
-    /** The value for the isSystem field */
-    private boolean isSystem = false;
-                                                                
-    /** The value for the isDisabled field */
-    private boolean isDisabled = false;
-  
-    
-    /**
-     * Get the Id
-     *
-     * @return int
-     */
-    public int getId()
-    {
-        return id;
-    }
+        /**
+         * Get the Id
+         *
+         * @return int
+         */
+        public int getId()
+        {
+            return id;
+        }
 
-        
-    /**
-     * Set the value of Id
-     *
-     * @param v new value
-     */
-    public void setId(int v) 
-    {
-    
-                  if (this.id != v)
-              {
-            this.id = v;
+                
+        /**
+         * Set the value of Id
+         *
+         * @param v new value
+         */
+        public void setId(int v) 
+        {
+          
+
+
+         if (this.id != v)
+        {
+             this.id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the GroupName
-     *
-     * @return String
-     */
-    public String getGroupName()
-    {
-        return groupName;
-    }
 
-        
-    /**
-     * Set the value of GroupName
-     *
-     * @param v new value
-     */
-    public void setGroupName(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.groupName, v))
-              {
-            this.groupName = v;
+             }
+
+
+        /**
+         * Get the GroupName
+         *
+         * @return String
+         */
+        public String getGroupName()
+        {
+            return group_name;
+        }
+
+                
+        /**
+         * Set the value of GroupName
+         *
+         * @param v new value
+         */
+        public void setGroupName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.group_name, v))
+        {
+             this.group_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the Description
-     *
-     * @return String
-     */
-    public String getDescription()
-    {
-        return description;
-    }
 
-        
-    /**
-     * Set the value of Description
-     *
-     * @param v new value
-     */
-    public void setDescription(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.description, v))
-              {
-            this.description = v;
+             }
+
+
+        /**
+         * Get the Description
+         *
+         * @return String
+         */
+        public String getDescription()
+        {
+            return description;
+        }
+
+                
+        /**
+         * Set the value of Description
+         *
+         * @param v new value
+         */
+        public void setDescription(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.description, v))
+        {
+             this.description = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the IsSystem
-     *
-     * @return boolean
-     */
-    public boolean getIsSystem()
-    {
-        return isSystem;
-    }
 
-        
-    /**
-     * Set the value of IsSystem
-     *
-     * @param v new value
-     */
-    public void setIsSystem(boolean v) 
-    {
-    
-                  if (this.isSystem != v)
-              {
-            this.isSystem = v;
+             }
+
+
+        /**
+         * Get the IsSystem
+         *
+         * @return boolean
+         */
+        public boolean getIsSystem()
+        {
+            return is_system;
+        }
+
+                
+        /**
+         * Set the value of IsSystem
+         *
+         * @param v new value
+         */
+        public void setIsSystem(boolean v) 
+        {
+          
+
+
+         if (this.is_system != v)
+        {
+             this.is_system = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the IsDisabled
-     *
-     * @return boolean
-     */
-    public boolean getIsDisabled()
-    {
-        return isDisabled;
-    }
 
-        
-    /**
-     * Set the value of IsDisabled
-     *
-     * @param v new value
-     */
-    public void setIsDisabled(boolean v) 
-    {
-    
-                  if (this.isDisabled != v)
-              {
-            this.isDisabled = v;
+             }
+
+
+        /**
+         * Get the IsDisabled
+         *
+         * @return boolean
+         */
+        public boolean getIsDisabled()
+        {
+            return is_disabled;
+        }
+
+                
+        /**
+         * Set the value of IsDisabled
+         *
+         * @param v new value
+         */
+        public void setIsDisabled(boolean v) 
+        {
+          
+
+
+         if (this.is_disabled != v)
+        {
+             this.is_disabled = v;
             setModified(true);
         }
-    
-        }
-  
+
+             }
+
+
+ 
     
      
+
+
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -195,7 +223,7 @@ public abstract class BaseGroup extends BaseObject
      */
     public void save() throws Exception
     {
-          if (isModified())
+         if (isModified())
         {
             if (isNew())
             {
@@ -207,19 +235,19 @@ public abstract class BaseGroup extends BaseObject
                 GroupPeer.doUpdate((Group) this);
             }
         }
-      }
+     }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-       *
+     *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-          if (isModified())
+         if (isModified())
         {
             try
             {
@@ -241,7 +269,8 @@ public abstract class BaseGroup extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-      }
+
+     }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -256,25 +285,28 @@ public abstract class BaseGroup extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-            // If this object has been modified, then save it to the database.
-            if (isModified())
+        // If this object has been modified, then save it to the database.
+        if (isModified())
+        {
+            if (isNew())
             {
-                if (isNew())
-                {
-                    GroupPeer.doInsert((Group) this, con);
-                    setNew(false);
-                }
-                else
-                {
-                    GroupPeer.doUpdate((Group) this, con);
-                }
+                GroupPeer.doInsert((Group) this, con);
+                setNew(false);
             }
-
+            else
+            {
+                GroupPeer.doUpdate((Group) this, con);
+            }
         }
 
+       }
 
-          
-      /**
+
+    
+    
+    
+
+        /**
      * Set the PrimaryKey using ObjectKey.
      *
      * @param  id ObjectKey
@@ -282,8 +314,8 @@ public abstract class BaseGroup extends BaseObject
     public void setPrimaryKey(ObjectKey key)
         
     {
-            setId(((NumberKey) key).intValue());
-        }
+                    setId(((NumberKey) key).intValue());
+            }
 
     /**
      * Set the PrimaryKey using a String.
@@ -292,41 +324,42 @@ public abstract class BaseGroup extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-            setId(Integer.parseInt(key));
-        }
+                    setId(Integer.parseInt(key));
+            }
 
-  
+
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-          return SimpleKey.keyFor(getId());
-      }
+        return SimpleKey.keyFor(getId());
+    }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-       */
-      public Group copy() throws TorqueException
+     */
+    public Group copy() throws TorqueException
     {
         return copyInto(new Group());
     }
-  
+
     protected Group copyInto(Group copyObj) throws TorqueException
     {
-          copyObj.setId(id);
-          copyObj.setGroupName(groupName);
-          copyObj.setDescription(description);
-          copyObj.setIsSystem(isSystem);
-          copyObj.setIsDisabled(isDisabled);
-  
-                    copyObj.setId(0);
-                                    
-  
+        copyObj.setId(id);
+        copyObj.setGroupName(group_name);
+        copyObj.setDescription(description);
+        copyObj.setIsSystem(is_system);
+        copyObj.setIsDisabled(is_disabled);
+
+                      copyObj.setId(0);
+                            
+
+
         return copyObj;
     }
 
@@ -345,21 +378,21 @@ public abstract class BaseGroup extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("Group:\n");
-        str.append("Id = ")
+              str.append("Id = ")
            .append(getId())
            .append("\n");
-        str.append("GroupName = ")
+              str.append("GroupName = ")
            .append(getGroupName())
            .append("\n");
-        str.append("Description = ")
+              str.append("Description = ")
            .append(getDescription())
            .append("\n");
-        str.append("IsSystem = ")
+              str.append("IsSystem = ")
            .append(getIsSystem())
            .append("\n");
-        str.append("IsDisabled = ")
+              str.append("IsDisabled = ")
            .append(getIsDisabled())
            .append("\n");
-        return(str.toString());
+              return(str.toString());
     }
 }

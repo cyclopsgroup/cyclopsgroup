@@ -7,13 +7,13 @@
         <column name="encrypted_password" required="true" type="VARCHAR" size="255" description="Encrypted Password"/>
         <column name="description" type="VARCHAR" size="255"/>
         <column name="is_system" type="BIT" required="true" default="0"/>
-        <column name="access_counter" type="INTEGER" required="true" default="0"/>
-        <column name="confirmed" type="VARCHAR" size="255"/>
         <column name="email" type="VARCHAR" size="255" required="true"/>
         <column name="first_name" type="VARCHAR" size="255" required="true"/>
+        <column name="middle_name" type="VARCHAR" size="30"/>
         <column name="last_name" type="VARCHAR" size="255" required="true"/>
-        <column name="last_login_time" type="BIGINT"/>
-        <column name="last_access_time" type="BIGINT"/>
+        <column name="last_signin" type="BIGINT"/>
+        <column name="signin_counter" type="INTEGER" required="true" default="0"/>
+        <column name="last_access" type="BIGINT"/>
         <column name="created_time" type="BIGINT" description="when this record is created"/>
         <column name="is_disabled" type="BIT" required="true" default="0" description="Is this user disabled"/>
         <unique name="unique_user_name">

@@ -18,7 +18,7 @@ import org.apache.fulcrum.TurbineServices;
 public class SlowServiceManager extends TurbineServices {
     private HashSet initializedServices = new HashSet();
     private boolean isInit = false;
-    /** Method getService()
+    /** Initialize this service if it's not initialized
      * @see org.apache.fulcrum.ServiceBroker#getService(java.lang.String)
      */
     public Service getService(String serviceName)
@@ -34,7 +34,7 @@ public class SlowServiceManager extends TurbineServices {
         }
         return super.getService(serviceName);
     }
-    /** Method init()
+    /** None of services is initialized here even its earlyInit is true
      * @see org.apache.fulcrum.BaseServiceBroker#init()
      */
     public void init() throws InitializationException {

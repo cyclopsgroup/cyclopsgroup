@@ -343,5 +343,6 @@
         <report>maven-pmd-plugin</report>
         <report>maven-simian-plugin</report>
         <report>maven-clover-plugin</report>
+        <report>maven-license-plugin</report>
     </reports>
 </project>

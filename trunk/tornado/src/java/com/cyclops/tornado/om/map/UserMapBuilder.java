@@ -58,23 +58,23 @@ public class UserMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_users");
         TableMap tMap = dbMap.getTable("c_tnd_users");
 
-        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-
-        tMap.setPrimaryKeyMethodInfo(tMap.getName());
-
-              tMap.addPrimaryKey("c_tnd_users.ID", new Integer(0));
-                    tMap.addColumn("c_tnd_users.USER_NAME", new String());
-                    tMap.addColumn("c_tnd_users.ENCRYPTED_PASSWORD", new String());
-                    tMap.addColumn("c_tnd_users.DESCRIPTION", new String());
-                    tMap.addColumn("c_tnd_users.IS_SYSTEM", new Boolean(true));
-                    tMap.addColumn("c_tnd_users.ACCESS_COUNTER", new Integer(0));
-                    tMap.addColumn("c_tnd_users.CONFIRMED", new String());
-                    tMap.addColumn("c_tnd_users.EMAIL", new String());
-                    tMap.addColumn("c_tnd_users.FIRST_NAME", new String());
-                    tMap.addColumn("c_tnd_users.LAST_NAME", new String());
-                    tMap.addColumn("c_tnd_users.LAST_LOGIN_TIME", new Long(0));
-                    tMap.addColumn("c_tnd_users.LAST_ACCESS_TIME", new Long(0));
-                    tMap.addColumn("c_tnd_users.CREATED_TIME", new Long(0));
-                    tMap.addColumn("c_tnd_users.IS_DISABLED", new Boolean(true));
-          }
+                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+        
+                tMap.setPrimaryKeyMethodInfo(tMap.getName());
+        
+                                      tMap.addPrimaryKey("c_tnd_users.ID", new Integer(0));
+                                                        tMap.addColumn("c_tnd_users.USER_NAME", new String());
+                                                        tMap.addColumn("c_tnd_users.ENCRYPTED_PASSWORD", new String());
+                                                        tMap.addColumn("c_tnd_users.DESCRIPTION", new String());
+                                                        tMap.addColumn("c_tnd_users.IS_SYSTEM", new Boolean(true));
+                                                        tMap.addColumn("c_tnd_users.EMAIL", new String());
+                                                        tMap.addColumn("c_tnd_users.FIRST_NAME", new String());
+                                                        tMap.addColumn("c_tnd_users.MIDDLE_NAME", new String());
+                                                        tMap.addColumn("c_tnd_users.LAST_NAME", new String());
+                                                        tMap.addColumn("c_tnd_users.LAST_SIGNIN", new Long(0));
+                                                        tMap.addColumn("c_tnd_users.SIGNIN_COUNTER", new Integer(0));
+                                                        tMap.addColumn("c_tnd_users.LAST_ACCESS", new Long(0));
+                                                        tMap.addColumn("c_tnd_users.CREATED_TIME", new Long(0));
+                                                        tMap.addColumn("c_tnd_users.IS_DISABLED", new Boolean(true));
+                              }
 }

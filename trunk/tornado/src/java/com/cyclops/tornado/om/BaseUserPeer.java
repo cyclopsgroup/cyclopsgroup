@@ -54,52 +54,53 @@ public abstract class BaseUserPeer
         return getMapBuilder(UserMapBuilder.CLASS_NAME);
     }
 
-      /** the column name for the ID field */
+    /** the column name for the ID field */
     public static final String ID;
-      /** the column name for the USER_NAME field */
+    /** the column name for the USER_NAME field */
     public static final String USER_NAME;
-      /** the column name for the ENCRYPTED_PASSWORD field */
+    /** the column name for the ENCRYPTED_PASSWORD field */
     public static final String ENCRYPTED_PASSWORD;
-      /** the column name for the DESCRIPTION field */
+    /** the column name for the DESCRIPTION field */
     public static final String DESCRIPTION;
-      /** the column name for the IS_SYSTEM field */
+    /** the column name for the IS_SYSTEM field */
     public static final String IS_SYSTEM;
-      /** the column name for the ACCESS_COUNTER field */
-    public static final String ACCESS_COUNTER;
-      /** the column name for the CONFIRMED field */
-    public static final String CONFIRMED;
-      /** the column name for the EMAIL field */
+    /** the column name for the EMAIL field */
     public static final String EMAIL;
-      /** the column name for the FIRST_NAME field */
+    /** the column name for the FIRST_NAME field */
     public static final String FIRST_NAME;
-      /** the column name for the LAST_NAME field */
+    /** the column name for the MIDDLE_NAME field */
+    public static final String MIDDLE_NAME;
+    /** the column name for the LAST_NAME field */
     public static final String LAST_NAME;
-      /** the column name for the LAST_LOGIN_TIME field */
-    public static final String LAST_LOGIN_TIME;
-      /** the column name for the LAST_ACCESS_TIME field */
-    public static final String LAST_ACCESS_TIME;
-      /** the column name for the CREATED_TIME field */
+    /** the column name for the LAST_SIGNIN field */
+    public static final String LAST_SIGNIN;
+    /** the column name for the SIGNIN_COUNTER field */
+    public static final String SIGNIN_COUNTER;
+    /** the column name for the LAST_ACCESS field */
+    public static final String LAST_ACCESS;
+    /** the column name for the CREATED_TIME field */
     public static final String CREATED_TIME;
-      /** the column name for the IS_DISABLED field */
+    /** the column name for the IS_DISABLED field */
     public static final String IS_DISABLED;
-  
+
     static
     {
-          ID = "c_tnd_users.ID";
-          USER_NAME = "c_tnd_users.USER_NAME";
-          ENCRYPTED_PASSWORD = "c_tnd_users.ENCRYPTED_PASSWORD";
-          DESCRIPTION = "c_tnd_users.DESCRIPTION";
-          IS_SYSTEM = "c_tnd_users.IS_SYSTEM";
-          ACCESS_COUNTER = "c_tnd_users.ACCESS_COUNTER";
-          CONFIRMED = "c_tnd_users.CONFIRMED";
-          EMAIL = "c_tnd_users.EMAIL";
-          FIRST_NAME = "c_tnd_users.FIRST_NAME";
-          LAST_NAME = "c_tnd_users.LAST_NAME";
-          LAST_LOGIN_TIME = "c_tnd_users.LAST_LOGIN_TIME";
-          LAST_ACCESS_TIME = "c_tnd_users.LAST_ACCESS_TIME";
-          CREATED_TIME = "c_tnd_users.CREATED_TIME";
-          IS_DISABLED = "c_tnd_users.IS_DISABLED";
-          if (Torque.isInit())
+    ID = "c_tnd_users.ID";
+    USER_NAME = "c_tnd_users.USER_NAME";
+    ENCRYPTED_PASSWORD = "c_tnd_users.ENCRYPTED_PASSWORD";
+    DESCRIPTION = "c_tnd_users.DESCRIPTION";
+    IS_SYSTEM = "c_tnd_users.IS_SYSTEM";
+    EMAIL = "c_tnd_users.EMAIL";
+    FIRST_NAME = "c_tnd_users.FIRST_NAME";
+    MIDDLE_NAME = "c_tnd_users.MIDDLE_NAME";
+    LAST_NAME = "c_tnd_users.LAST_NAME";
+    LAST_SIGNIN = "c_tnd_users.LAST_SIGNIN";
+    SIGNIN_COUNTER = "c_tnd_users.SIGNIN_COUNTER";
+    LAST_ACCESS = "c_tnd_users.LAST_ACCESS";
+    CREATED_TIME = "c_tnd_users.CREATED_TIME";
+    IS_DISABLED = "c_tnd_users.IS_DISABLED";
+
+        if (Torque.isInit())
         {
             try
             {
@@ -115,6 +116,7 @@ public abstract class BaseUserPeer
             Torque.registerMapBuilder(UserMapBuilder.CLASS_NAME);
         }
     }
+
  
     /** number of columns for this peer */
     public static final int numColumns =  14;
@@ -155,6 +157,7 @@ public abstract class BaseUserPeer
         }
         return c;
     }
+
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -199,7 +202,7 @@ public abstract class BaseUserPeer
     }
 
 
-  
+
     /**
      * Method to do inserts.
      *
@@ -227,7 +230,7 @@ public abstract class BaseUserPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                                                                      
+                                                                                                                                                                                                         
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -255,21 +258,21 @@ public abstract class BaseUserPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-          criteria.addSelectColumn(ID);
-          criteria.addSelectColumn(USER_NAME);
-          criteria.addSelectColumn(ENCRYPTED_PASSWORD);
-          criteria.addSelectColumn(DESCRIPTION);
-          criteria.addSelectColumn(IS_SYSTEM);
-          criteria.addSelectColumn(ACCESS_COUNTER);
-          criteria.addSelectColumn(CONFIRMED);
-          criteria.addSelectColumn(EMAIL);
-          criteria.addSelectColumn(FIRST_NAME);
-          criteria.addSelectColumn(LAST_NAME);
-          criteria.addSelectColumn(LAST_LOGIN_TIME);
-          criteria.addSelectColumn(LAST_ACCESS_TIME);
-          criteria.addSelectColumn(CREATED_TIME);
-          criteria.addSelectColumn(IS_DISABLED);
-      }
+            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(USER_NAME);
+            criteria.addSelectColumn(ENCRYPTED_PASSWORD);
+            criteria.addSelectColumn(DESCRIPTION);
+            criteria.addSelectColumn(IS_SYSTEM);
+            criteria.addSelectColumn(EMAIL);
+            criteria.addSelectColumn(FIRST_NAME);
+            criteria.addSelectColumn(MIDDLE_NAME);
+            criteria.addSelectColumn(LAST_NAME);
+            criteria.addSelectColumn(LAST_SIGNIN);
+            criteria.addSelectColumn(SIGNIN_COUNTER);
+            criteria.addSelectColumn(LAST_ACCESS);
+            criteria.addSelectColumn(CREATED_TIME);
+            criteria.addSelectColumn(IS_DISABLED);
+        }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -289,8 +292,8 @@ public abstract class BaseUserPeer
         {
             User obj = (User) cls.newInstance();
             UserPeer.populateObject(row, offset, obj);
-                  obj.setModified(false);
-              obj.setNew(false);
+                            obj.setModified(false);
+                        obj.setNew(false);
 
             return obj;
         }
@@ -320,21 +323,21 @@ public abstract class BaseUserPeer
     {
         try
         {
-                obj.setId(row.getValue(offset + 0).asInt());
-                  obj.setUserName(row.getValue(offset + 1).asString());
-                  obj.setEncryptedPassword(row.getValue(offset + 2).asString());
-                  obj.setDescription(row.getValue(offset + 3).asString());
-                  obj.setIsSystem(row.getValue(offset + 4).asBoolean());
-                  obj.setAccessCounter(row.getValue(offset + 5).asInt());
-                  obj.setConfirmed(row.getValue(offset + 6).asString());
-                  obj.setEmail(row.getValue(offset + 7).asString());
-                  obj.setFirstName(row.getValue(offset + 8).asString());
-                  obj.setLastName(row.getValue(offset + 9).asString());
-                  obj.setLastLoginTime(row.getValue(offset + 10).asLong());
-                  obj.setLastAccessTime(row.getValue(offset + 11).asLong());
-                  obj.setCreatedTime(row.getValue(offset + 12).asLong());
-                  obj.setIsDisabled(row.getValue(offset + 13).asBoolean());
-              }
+                            obj.setId(row.getValue(offset + 0).asInt());
+                                obj.setUserName(row.getValue(offset + 1).asString());
+                                obj.setEncryptedPassword(row.getValue(offset + 2).asString());
+                                obj.setDescription(row.getValue(offset + 3).asString());
+                                obj.setIsSystem(row.getValue(offset + 4).asBoolean());
+                                obj.setEmail(row.getValue(offset + 5).asString());
+                                obj.setFirstName(row.getValue(offset + 6).asString());
+                                obj.setMiddleName(row.getValue(offset + 7).asString());
+                                obj.setLastName(row.getValue(offset + 8).asString());
+                                obj.setLastSignin(row.getValue(offset + 9).asLong());
+                                obj.setSigninCounter(row.getValue(offset + 10).asInt());
+                                obj.setLastAccess(row.getValue(offset + 11).asLong());
+                                obj.setCreatedTime(row.getValue(offset + 12).asLong());
+                                obj.setIsDisabled(row.getValue(offset + 13).asBoolean());
+                            }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -397,12 +400,13 @@ public abstract class BaseUserPeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
+    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                                                                      
+                                                                                                                                                                                                         
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -438,9 +442,9 @@ public abstract class BaseUserPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-              results.add(UserPeer.row2Object(row, 1,
+            results.add(UserPeer.row2Object(row, 1,
                 UserPeer.getOMClass()));
-          }
+        }
         return results;
     }
  
@@ -456,8 +460,9 @@ public abstract class BaseUserPeer
     public static Class getOMClass()
         throws TorqueException
     {
-        return CLASS_DEFAULT;
-    }
+            return CLASS_DEFAULT;
+        }
+
 
     /**
      * Method to do updates.
@@ -488,8 +493,8 @@ public abstract class BaseUserPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                   selectCriteria.put(ID, criteria.remove(ID));
-                                                                                                                                        
+                                selectCriteria.put(ID, criteria.remove(ID));
+                                                                                                                                                                                                                                                                                                                         
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -533,7 +538,7 @@ public abstract class BaseUserPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                                                                      
+                                                                                                                                                                                                         
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -570,8 +575,8 @@ public abstract class BaseUserPeer
      */
     public static void doInsert(User obj) throws TorqueException
     {
-          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-          obj.setNew(false);
+                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+                obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -609,8 +614,8 @@ public abstract class BaseUserPeer
     public static void doInsert(User obj, Connection con)
         throws TorqueException
     {
-          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-          obj.setNew(false);
+                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+                obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -688,26 +693,28 @@ public abstract class BaseUserPeer
     public static Criteria buildCriteria( User obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-              if (!obj.isNew())
-                criteria.add(ID, obj.getId());
-                  criteria.add(USER_NAME, obj.getUserName());
-                  criteria.add(ENCRYPTED_PASSWORD, obj.getEncryptedPassword());
-                  criteria.add(DESCRIPTION, obj.getDescription());
-                  criteria.add(IS_SYSTEM, obj.getIsSystem());
-                  criteria.add(ACCESS_COUNTER, obj.getAccessCounter());
-                  criteria.add(CONFIRMED, obj.getConfirmed());
-                  criteria.add(EMAIL, obj.getEmail());
-                  criteria.add(FIRST_NAME, obj.getFirstName());
-                  criteria.add(LAST_NAME, obj.getLastName());
-                  criteria.add(LAST_LOGIN_TIME, obj.getLastLoginTime());
-                  criteria.add(LAST_ACCESS_TIME, obj.getLastAccessTime());
-                  criteria.add(CREATED_TIME, obj.getCreatedTime());
-                  criteria.add(IS_DISABLED, obj.getIsDisabled());
-          return criteria;
+                            if (!obj.isNew())
+                       criteria.add(ID, obj.getId());
+                                criteria.add(USER_NAME, obj.getUserName());
+                                criteria.add(ENCRYPTED_PASSWORD, obj.getEncryptedPassword());
+                                criteria.add(DESCRIPTION, obj.getDescription());
+                                criteria.add(IS_SYSTEM, obj.getIsSystem());
+                                criteria.add(EMAIL, obj.getEmail());
+                                criteria.add(FIRST_NAME, obj.getFirstName());
+                                criteria.add(MIDDLE_NAME, obj.getMiddleName());
+                                criteria.add(LAST_NAME, obj.getLastName());
+                                criteria.add(LAST_SIGNIN, obj.getLastSignin());
+                                criteria.add(SIGNIN_COUNTER, obj.getSigninCounter());
+                                criteria.add(LAST_ACCESS, obj.getLastAccess());
+                                criteria.add(CREATED_TIME, obj.getCreatedTime());
+                                criteria.add(IS_DISABLED, obj.getIsDisabled());
+                return criteria;
     }
+
  
+
     
-        /**
+    /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -721,7 +728,7 @@ public abstract class BaseUserPeer
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-  
+
     /**
      * Retrieve a single object by pk
      *
@@ -830,8 +837,8 @@ public abstract class BaseUserPeer
 
 
 
-  
-      /**
+
+    /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -843,4 +850,4 @@ public abstract class BaseUserPeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
-   }
+ }

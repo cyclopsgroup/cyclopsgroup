@@ -22,9 +22,9 @@ import org.apache.torque.om.Persistent;
 import org.apache.torque.util.Criteria;
 import org.apache.torque.util.Transaction;
 
-  
-    
-  
+   
+      
+   
 /**
  * You should not use this class directly.  It should not even be
  * extended all references should be to UserGroup
@@ -35,100 +35,118 @@ public abstract class BaseUserGroup extends BaseObject
     private static final UserGroupPeer peer =
         new UserGroupPeer();
 
-        
-    /** The value for the id field */
-    private int id;
+                  
+        /**
+         * The value for the id field
+         */
+        private int id;
+              
+        /**
+         * The value for the user_id field
+         */
+        private int user_id;
+              
+        /**
+         * The value for the group_id field
+         */
+        private int group_id;
       
-    /** The value for the userId field */
-    private int userId;
       
-    /** The value for the groupId field */
-    private int groupId;
-  
-    
-    /**
-     * Get the Id
-     *
-     * @return int
-     */
-    public int getId()
-    {
-        return id;
-    }
+        /**
+         * Get the Id
+         *
+         * @return int
+         */
+        public int getId()
+        {
+            return id;
+        }
 
-        
-    /**
-     * Set the value of Id
-     *
-     * @param v new value
-     */
-    public void setId(int v) 
-    {
-    
-                  if (this.id != v)
-              {
-            this.id = v;
+                
+        /**
+         * Set the value of Id
+         *
+         * @param v new value
+         */
+        public void setId(int v) 
+        {
+          
+
+
+         if (this.id != v)
+        {
+             this.id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the UserId
-     *
-     * @return int
-     */
-    public int getUserId()
-    {
-        return userId;
-    }
 
-        
-    /**
-     * Set the value of UserId
-     *
-     * @param v new value
-     */
-    public void setUserId(int v) 
-    {
-    
-                  if (this.userId != v)
-              {
-            this.userId = v;
+             }
+
+
+        /**
+         * Get the UserId
+         *
+         * @return int
+         */
+        public int getUserId()
+        {
+            return user_id;
+        }
+
+                
+        /**
+         * Set the value of UserId
+         *
+         * @param v new value
+         */
+        public void setUserId(int v) 
+        {
+          
+
+
+         if (this.user_id != v)
+        {
+             this.user_id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the GroupId
-     *
-     * @return int
-     */
-    public int getGroupId()
-    {
-        return groupId;
-    }
 
-        
-    /**
-     * Set the value of GroupId
-     *
-     * @param v new value
-     */
-    public void setGroupId(int v) 
-    {
-    
-                  if (this.groupId != v)
-              {
-            this.groupId = v;
+             }
+
+
+        /**
+         * Get the GroupId
+         *
+         * @return int
+         */
+        public int getGroupId()
+        {
+            return group_id;
+        }
+
+                
+        /**
+         * Set the value of GroupId
+         *
+         * @param v new value
+         */
+        public void setGroupId(int v) 
+        {
+          
+
+
+         if (this.group_id != v)
+        {
+             this.group_id = v;
             setModified(true);
         }
-    
-        }
-  
+
+             }
+
+
+ 
     
      
+
+
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -137,7 +155,7 @@ public abstract class BaseUserGroup extends BaseObject
      */
     public void save() throws Exception
     {
-          if (isModified())
+         if (isModified())
         {
             if (isNew())
             {
@@ -149,19 +167,19 @@ public abstract class BaseUserGroup extends BaseObject
                 UserGroupPeer.doUpdate((UserGroup) this);
             }
         }
-      }
+     }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-       *
+     *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-          if (isModified())
+         if (isModified())
         {
             try
             {
@@ -183,7 +201,8 @@ public abstract class BaseUserGroup extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-      }
+
+     }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -198,28 +217,33 @@ public abstract class BaseUserGroup extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-            // If this object has been modified, then save it to the database.
-            if (isModified())
+        // If this object has been modified, then save it to the database.
+        if (isModified())
+        {
+            if (isNew())
             {
-                if (isNew())
-                {
-                    UserGroupPeer.doInsert((UserGroup) this, con);
-                    setNew(false);
-                }
-                else
-                {
-                    UserGroupPeer.doUpdate((UserGroup) this, con);
-                }
+                UserGroupPeer.doInsert((UserGroup) this, con);
+                setNew(false);
             }
-
+            else
+            {
+                UserGroupPeer.doUpdate((UserGroup) this, con);
+            }
         }
 
+       }
 
-                      
-  
+
+    
+    
+        
+    
+        
+    
+    
+
     private final SimpleKey[] pks = new SimpleKey[3];
     private final ComboKey comboPK = new ComboKey(pks);
-    
     /**
      * Set the PrimaryKey with an ObjectKey
      *
@@ -229,25 +253,25 @@ public abstract class BaseUserGroup extends BaseObject
     {
         SimpleKey[] keys = (SimpleKey[]) key.getValue();
         SimpleKey tmpKey = null;
-                      setId(((NumberKey)keys[0]).intValue());
-                        setUserId(((NumberKey)keys[1]).intValue());
-                        setGroupId(((NumberKey)keys[2]).intValue());
-              }
+                             setId(((NumberKey)keys[0]).intValue());
+                                setUserId(((NumberKey)keys[1]).intValue());
+                                setGroupId(((NumberKey)keys[2]).intValue());
+                }
 
     /**
      * Set the PrimaryKey using SimpleKeys.
      *
-         * @param int id
-         * @param int userId
-         * @param int groupId
-         */
-    public void setPrimaryKey( int id, int userId, int groupId)
+     * @param int id
+     * @param int user_id
+     * @param int group_id
+     */
+    public void setPrimaryKey( int id, int user_id, int group_id)
         
     {
-            setId(id);
-            setUserId(userId);
-            setGroupId(groupId);
-        }
+         setId(id);
+         setUserId(user_id);
+         setGroupId(group_id);
+    }
 
     /**
      * Set the PrimaryKey using a String.
@@ -256,41 +280,43 @@ public abstract class BaseUserGroup extends BaseObject
     {
         setPrimaryKey(new ComboKey(key));
     }
-  
+
+
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-              pks[0] = SimpleKey.keyFor(getId());
-                  pks[1] = SimpleKey.keyFor(getUserId());
-                  pks[2] = SimpleKey.keyFor(getGroupId());
-                  return comboPK;
-      }
+            pks[0] = SimpleKey.keyFor(getId());
+                    pks[1] = SimpleKey.keyFor(getUserId());
+                    pks[2] = SimpleKey.keyFor(getGroupId());
+                    return comboPK;
+    }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-       */
-      public UserGroup copy() throws TorqueException
+     */
+    public UserGroup copy() throws TorqueException
     {
         return copyInto(new UserGroup());
     }
-  
+
     protected UserGroup copyInto(UserGroup copyObj) throws TorqueException
     {
-          copyObj.setId(id);
-          copyObj.setUserId(userId);
-          copyObj.setGroupId(groupId);
-  
-                    copyObj.setId(0);
-                              copyObj.setUserId(0);
-                              copyObj.setGroupId(0);
+        copyObj.setId(id);
+        copyObj.setUserId(user_id);
+        copyObj.setGroupId(group_id);
+
+                      copyObj.setId(0);
+                                  copyObj.setUserId(0);
+                                  copyObj.setGroupId(0);
             
-  
+
+
         return copyObj;
     }
 
@@ -309,15 +335,15 @@ public abstract class BaseUserGroup extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("UserGroup:\n");
-        str.append("Id = ")
+              str.append("Id = ")
            .append(getId())
            .append("\n");
-        str.append("UserId = ")
+              str.append("UserId = ")
            .append(getUserId())
            .append("\n");
-        str.append("GroupId = ")
+              str.append("GroupId = ")
            .append(getGroupId())
            .append("\n");
-        return(str.toString());
+              return(str.toString());
     }
 }

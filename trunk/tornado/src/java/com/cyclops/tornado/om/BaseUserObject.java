@@ -22,8 +22,8 @@ import org.apache.torque.om.Persistent;
 import org.apache.torque.util.Criteria;
 import org.apache.torque.util.Transaction;
 
-  
-  
+   
+   
 /**
  * You should not use this class directly.  It should not even be
  * extended all references should be to UserObject
@@ -34,160 +34,188 @@ public abstract class BaseUserObject extends BaseObject
     private static final UserObjectPeer peer =
         new UserObjectPeer();
 
-        
-    /** The value for the id field */
-    private int id;
+                  
+        /**
+         * The value for the id field
+         */
+        private int id;
+              
+        /**
+         * The value for the user_id field
+         */
+        private int user_id;
+              
+        /**
+         * The value for the object_key field
+         */
+        private String object_key;
+              
+        /**
+         * The value for the object_class_name field
+         */
+        private String object_class_name;
+              
+        /**
+         * The value for the object_data field
+         */
+        private String object_data;
       
-    /** The value for the userId field */
-    private int userId;
       
-    /** The value for the objectKey field */
-    private String objectKey;
-      
-    /** The value for the objectClassName field */
-    private String objectClassName;
-      
-    /** The value for the objectData field */
-    private String objectData;
-  
-    
-    /**
-     * Get the Id
-     *
-     * @return int
-     */
-    public int getId()
-    {
-        return id;
-    }
+        /**
+         * Get the Id
+         *
+         * @return int
+         */
+        public int getId()
+        {
+            return id;
+        }
 
-        
-    /**
-     * Set the value of Id
-     *
-     * @param v new value
-     */
-    public void setId(int v) 
-    {
-    
-                  if (this.id != v)
-              {
-            this.id = v;
+                
+        /**
+         * Set the value of Id
+         *
+         * @param v new value
+         */
+        public void setId(int v) 
+        {
+          
+
+
+         if (this.id != v)
+        {
+             this.id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the UserId
-     *
-     * @return int
-     */
-    public int getUserId()
-    {
-        return userId;
-    }
 
-        
-    /**
-     * Set the value of UserId
-     *
-     * @param v new value
-     */
-    public void setUserId(int v) 
-    {
-    
-                  if (this.userId != v)
-              {
-            this.userId = v;
+             }
+
+
+        /**
+         * Get the UserId
+         *
+         * @return int
+         */
+        public int getUserId()
+        {
+            return user_id;
+        }
+
+                
+        /**
+         * Set the value of UserId
+         *
+         * @param v new value
+         */
+        public void setUserId(int v) 
+        {
+          
+
+
+         if (this.user_id != v)
+        {
+             this.user_id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the ObjectKey
-     *
-     * @return String
-     */
-    public String getObjectKey()
-    {
-        return objectKey;
-    }
 
-        
-    /**
-     * Set the value of ObjectKey
-     *
-     * @param v new value
-     */
-    public void setObjectKey(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.objectKey, v))
-              {
-            this.objectKey = v;
+             }
+
+
+        /**
+         * Get the ObjectKey
+         *
+         * @return String
+         */
+        public String getObjectKey()
+        {
+            return object_key;
+        }
+
+                
+        /**
+         * Set the value of ObjectKey
+         *
+         * @param v new value
+         */
+        public void setObjectKey(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.object_key, v))
+        {
+             this.object_key = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the ObjectClassName
-     *
-     * @return String
-     */
-    public String getObjectClassName()
-    {
-        return objectClassName;
-    }
 
-        
-    /**
-     * Set the value of ObjectClassName
-     *
-     * @param v new value
-     */
-    public void setObjectClassName(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.objectClassName, v))
-              {
-            this.objectClassName = v;
+             }
+
+
+        /**
+         * Get the ObjectClassName
+         *
+         * @return String
+         */
+        public String getObjectClassName()
+        {
+            return object_class_name;
+        }
+
+                
+        /**
+         * Set the value of ObjectClassName
+         *
+         * @param v new value
+         */
+        public void setObjectClassName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.object_class_name, v))
+        {
+             this.object_class_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the ObjectData
-     *
-     * @return String
-     */
-    public String getObjectData()
-    {
-        return objectData;
-    }
 
-        
-    /**
-     * Set the value of ObjectData
-     *
-     * @param v new value
-     */
-    public void setObjectData(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.objectData, v))
-              {
-            this.objectData = v;
+             }
+
+
+        /**
+         * Get the ObjectData
+         *
+         * @return String
+         */
+        public String getObjectData()
+        {
+            return object_data;
+        }
+
+                
+        /**
+         * Set the value of ObjectData
+         *
+         * @param v new value
+         */
+        public void setObjectData(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.object_data, v))
+        {
+             this.object_data = v;
             setModified(true);
         }
-    
-        }
-  
+
+             }
+
+
+ 
     
      
+
+
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -196,7 +224,7 @@ public abstract class BaseUserObject extends BaseObject
      */
     public void save() throws Exception
     {
-          if (isModified())
+         if (isModified())
         {
             if (isNew())
             {
@@ -208,19 +236,19 @@ public abstract class BaseUserObject extends BaseObject
                 UserObjectPeer.doUpdate((UserObject) this);
             }
         }
-      }
+     }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-       *
+     *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-          if (isModified())
+         if (isModified())
         {
             try
             {
@@ -242,7 +270,8 @@ public abstract class BaseUserObject extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-      }
+
+     }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -257,25 +286,28 @@ public abstract class BaseUserObject extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-            // If this object has been modified, then save it to the database.
-            if (isModified())
+        // If this object has been modified, then save it to the database.
+        if (isModified())
+        {
+            if (isNew())
             {
-                if (isNew())
-                {
-                    UserObjectPeer.doInsert((UserObject) this, con);
-                    setNew(false);
-                }
-                else
-                {
-                    UserObjectPeer.doUpdate((UserObject) this, con);
-                }
+                UserObjectPeer.doInsert((UserObject) this, con);
+                setNew(false);
             }
-
+            else
+            {
+                UserObjectPeer.doUpdate((UserObject) this, con);
+            }
         }
 
+       }
 
-          
-      /**
+
+    
+    
+    
+
+        /**
      * Set the PrimaryKey using ObjectKey.
      *
      * @param  id ObjectKey
@@ -283,8 +315,8 @@ public abstract class BaseUserObject extends BaseObject
     public void setPrimaryKey(ObjectKey key)
         
     {
-            setId(((NumberKey) key).intValue());
-        }
+                    setId(((NumberKey) key).intValue());
+            }
 
     /**
      * Set the PrimaryKey using a String.
@@ -293,41 +325,42 @@ public abstract class BaseUserObject extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-            setId(Integer.parseInt(key));
-        }
+                    setId(Integer.parseInt(key));
+            }
 
-  
+
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-          return SimpleKey.keyFor(getId());
-      }
+        return SimpleKey.keyFor(getId());
+    }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-       */
-      public UserObject copy() throws TorqueException
+     */
+    public UserObject copy() throws TorqueException
     {
         return copyInto(new UserObject());
     }
-  
+
     protected UserObject copyInto(UserObject copyObj) throws TorqueException
     {
-          copyObj.setId(id);
-          copyObj.setUserId(userId);
-          copyObj.setObjectKey(objectKey);
-          copyObj.setObjectClassName(objectClassName);
-          copyObj.setObjectData(objectData);
-  
-                    copyObj.setId(0);
-                                    
-  
+        copyObj.setId(id);
+        copyObj.setUserId(user_id);
+        copyObj.setObjectKey(object_key);
+        copyObj.setObjectClassName(object_class_name);
+        copyObj.setObjectData(object_data);
+
+                      copyObj.setId(0);
+                            
+
+
         return copyObj;
     }
 
@@ -346,21 +379,21 @@ public abstract class BaseUserObject extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("UserObject:\n");
-        str.append("Id = ")
+              str.append("Id = ")
            .append(getId())
            .append("\n");
-        str.append("UserId = ")
+              str.append("UserId = ")
            .append(getUserId())
            .append("\n");
-        str.append("ObjectKey = ")
+              str.append("ObjectKey = ")
            .append(getObjectKey())
            .append("\n");
-        str.append("ObjectClassName = ")
+              str.append("ObjectClassName = ")
            .append(getObjectClassName())
            .append("\n");
-        str.append("ObjectData = ")
+              str.append("ObjectData = ")
            .append(getObjectData())
            .append("\n");
-        return(str.toString());
+              return(str.toString());
     }
 }

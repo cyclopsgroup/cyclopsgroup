@@ -22,9 +22,9 @@ import org.apache.torque.om.Persistent;
 import org.apache.torque.util.Criteria;
 import org.apache.torque.util.Transaction;
 
-  
-    
-  
+   
+      
+   
 /**
  * You should not use this class directly.  It should not even be
  * extended all references should be to GroupHierarchy
@@ -35,100 +35,118 @@ public abstract class BaseGroupHierarchy extends BaseObject
     private static final GroupHierarchyPeer peer =
         new GroupHierarchyPeer();
 
-        
-    /** The value for the id field */
-    private int id;
+                  
+        /**
+         * The value for the id field
+         */
+        private int id;
+              
+        /**
+         * The value for the group_id field
+         */
+        private int group_id;
+              
+        /**
+         * The value for the parent_group_id field
+         */
+        private int parent_group_id;
       
-    /** The value for the groupId field */
-    private int groupId;
       
-    /** The value for the parentGroupId field */
-    private int parentGroupId;
-  
-    
-    /**
-     * Get the Id
-     *
-     * @return int
-     */
-    public int getId()
-    {
-        return id;
-    }
+        /**
+         * Get the Id
+         *
+         * @return int
+         */
+        public int getId()
+        {
+            return id;
+        }
 
-        
-    /**
-     * Set the value of Id
-     *
-     * @param v new value
-     */
-    public void setId(int v) 
-    {
-    
-                  if (this.id != v)
-              {
-            this.id = v;
+                
+        /**
+         * Set the value of Id
+         *
+         * @param v new value
+         */
+        public void setId(int v) 
+        {
+          
+
+
+         if (this.id != v)
+        {
+             this.id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the GroupId
-     *
-     * @return int
-     */
-    public int getGroupId()
-    {
-        return groupId;
-    }
 
-        
-    /**
-     * Set the value of GroupId
-     *
-     * @param v new value
-     */
-    public void setGroupId(int v) 
-    {
-    
-                  if (this.groupId != v)
-              {
-            this.groupId = v;
+             }
+
+
+        /**
+         * Get the GroupId
+         *
+         * @return int
+         */
+        public int getGroupId()
+        {
+            return group_id;
+        }
+
+                
+        /**
+         * Set the value of GroupId
+         *
+         * @param v new value
+         */
+        public void setGroupId(int v) 
+        {
+          
+
+
+         if (this.group_id != v)
+        {
+             this.group_id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the ParentGroupId
-     *
-     * @return int
-     */
-    public int getParentGroupId()
-    {
-        return parentGroupId;
-    }
 
-        
-    /**
-     * Set the value of ParentGroupId
-     *
-     * @param v new value
-     */
-    public void setParentGroupId(int v) 
-    {
-    
-                  if (this.parentGroupId != v)
-              {
-            this.parentGroupId = v;
+             }
+
+
+        /**
+         * Get the ParentGroupId
+         *
+         * @return int
+         */
+        public int getParentGroupId()
+        {
+            return parent_group_id;
+        }
+
+                
+        /**
+         * Set the value of ParentGroupId
+         *
+         * @param v new value
+         */
+        public void setParentGroupId(int v) 
+        {
+          
+
+
+         if (this.parent_group_id != v)
+        {
+             this.parent_group_id = v;
             setModified(true);
         }
-    
-        }
-  
+
+             }
+
+
+ 
     
      
+
+
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -137,7 +155,7 @@ public abstract class BaseGroupHierarchy extends BaseObject
      */
     public void save() throws Exception
     {
-          if (isModified())
+         if (isModified())
         {
             if (isNew())
             {
@@ -149,19 +167,19 @@ public abstract class BaseGroupHierarchy extends BaseObject
                 GroupHierarchyPeer.doUpdate((GroupHierarchy) this);
             }
         }
-      }
+     }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-       *
+     *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-          if (isModified())
+         if (isModified())
         {
             try
             {
@@ -183,7 +201,8 @@ public abstract class BaseGroupHierarchy extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-      }
+
+     }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -198,25 +217,28 @@ public abstract class BaseGroupHierarchy extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-            // If this object has been modified, then save it to the database.
-            if (isModified())
+        // If this object has been modified, then save it to the database.
+        if (isModified())
+        {
+            if (isNew())
             {
-                if (isNew())
-                {
-                    GroupHierarchyPeer.doInsert((GroupHierarchy) this, con);
-                    setNew(false);
-                }
-                else
-                {
-                    GroupHierarchyPeer.doUpdate((GroupHierarchy) this, con);
-                }
+                GroupHierarchyPeer.doInsert((GroupHierarchy) this, con);
+                setNew(false);
             }
-
+            else
+            {
+                GroupHierarchyPeer.doUpdate((GroupHierarchy) this, con);
+            }
         }
 
+       }
 
-          
-      /**
+
+    
+    
+    
+
+        /**
      * Set the PrimaryKey using ObjectKey.
      *
      * @param  id ObjectKey
@@ -224,8 +246,8 @@ public abstract class BaseGroupHierarchy extends BaseObject
     public void setPrimaryKey(ObjectKey key)
         
     {
-            setId(((NumberKey) key).intValue());
-        }
+                    setId(((NumberKey) key).intValue());
+            }
 
     /**
      * Set the PrimaryKey using a String.
@@ -234,39 +256,40 @@ public abstract class BaseGroupHierarchy extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-            setId(Integer.parseInt(key));
-        }
+                    setId(Integer.parseInt(key));
+            }
 
-  
+
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-          return SimpleKey.keyFor(getId());
-      }
+        return SimpleKey.keyFor(getId());
+    }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-       */
-      public GroupHierarchy copy() throws TorqueException
+     */
+    public GroupHierarchy copy() throws TorqueException
     {
         return copyInto(new GroupHierarchy());
     }
-  
+
     protected GroupHierarchy copyInto(GroupHierarchy copyObj) throws TorqueException
     {
-          copyObj.setId(id);
-          copyObj.setGroupId(groupId);
-          copyObj.setParentGroupId(parentGroupId);
-  
-                    copyObj.setId(0);
-                        
-  
+        copyObj.setId(id);
+        copyObj.setGroupId(group_id);
+        copyObj.setParentGroupId(parent_group_id);
+
+                      copyObj.setId(0);
+                    
+
+
         return copyObj;
     }
 
@@ -285,15 +308,15 @@ public abstract class BaseGroupHierarchy extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("GroupHierarchy:\n");
-        str.append("Id = ")
+              str.append("Id = ")
            .append(getId())
            .append("\n");
-        str.append("GroupId = ")
+              str.append("GroupId = ")
            .append(getGroupId())
            .append("\n");
-        str.append("ParentGroupId = ")
+              str.append("ParentGroupId = ")
            .append(getParentGroupId())
            .append("\n");
-        return(str.toString());
+              return(str.toString());
     }
 }

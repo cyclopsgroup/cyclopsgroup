@@ -1,10 +1,10 @@
 <!ELEMENT dataset (
-    User|
-    UserObject|
-    Group|
-    GroupHierarchy|
-    UserGroup|
-    Acl)*>
+    User*,
+    UserObject*,
+    Group*,
+    GroupHierarchy*,
+    UserGroup*,
+    Acl*)>
 <!ATTLIST dataset
     name CDATA #REQUIRED
 >
@@ -16,13 +16,13 @@
     EncryptedPassword CDATA #REQUIRED
     Description CDATA #IMPLIED
     IsSystem CDATA #REQUIRED
-    AccessCounter CDATA #REQUIRED
-    Confirmed CDATA #IMPLIED
     Email CDATA #REQUIRED
     FirstName CDATA #REQUIRED
+    MiddleName CDATA #IMPLIED
     LastName CDATA #REQUIRED
-    LastLoginTime CDATA #IMPLIED
-    LastAccessTime CDATA #IMPLIED
+    LastSignin CDATA #IMPLIED
+    SigninCounter CDATA #REQUIRED
+    LastAccess CDATA #IMPLIED
     CreatedTime CDATA #IMPLIED
     IsDisabled CDATA #REQUIRED
 >

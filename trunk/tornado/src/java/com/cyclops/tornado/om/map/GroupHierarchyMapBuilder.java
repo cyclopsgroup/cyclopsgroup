@@ -58,16 +58,16 @@ public class GroupHierarchyMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_grphrch");
         TableMap tMap = dbMap.getTable("c_tnd_grphrch");
 
-        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-
-        tMap.setPrimaryKeyMethodInfo(tMap.getName());
-
-              tMap.addPrimaryKey("c_tnd_grphrch.ID", new Integer(0));
-                    tMap.addForeignKey(
+                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+        
+                tMap.setPrimaryKeyMethodInfo(tMap.getName());
+        
+                                      tMap.addPrimaryKey("c_tnd_grphrch.ID", new Integer(0));
+                                                        tMap.addForeignKey(
                 "c_tnd_grphrch.GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                "id");
-                    tMap.addForeignKey(
+                    "id");
+                                                        tMap.addForeignKey(
                 "c_tnd_grphrch.PARENT_GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                "id");
-          }
+                    "id");
+                              }
 }

@@ -33,430 +33,503 @@ public abstract class BaseUser extends BaseObject
     private static final UserPeer peer =
         new UserPeer();
 
-        
-    /** The value for the id field */
-    private int id;
+                  
+        /**
+         * The value for the id field
+         */
+        private int id;
+              
+        /**
+         * The value for the user_name field
+         */
+        private String user_name;
+              
+        /**
+         * The value for the encrypted_password field
+         */
+        private String encrypted_password;
+              
+        /**
+         * The value for the description field
+         */
+        private String description;
+                                                                                                              
+        /**
+         * The value for the is_system field
+         */
+        private boolean is_system = false;
+              
+        /**
+         * The value for the email field
+         */
+        private String email;
+              
+        /**
+         * The value for the first_name field
+         */
+        private String first_name;
+              
+        /**
+         * The value for the middle_name field
+         */
+        private String middle_name;
+              
+        /**
+         * The value for the last_name field
+         */
+        private String last_name;
+              
+        /**
+         * The value for the last_signin field
+         */
+        private long last_signin;
+                                                                            
+        /**
+         * The value for the signin_counter field
+         */
+        private int signin_counter = 0;
+              
+        /**
+         * The value for the last_access field
+         */
+        private long last_access;
+              
+        /**
+         * The value for the created_time field
+         */
+        private long created_time;
+                                                                                                              
+        /**
+         * The value for the is_disabled field
+         */
+        private boolean is_disabled = false;
       
-    /** The value for the userName field */
-    private String userName;
       
-    /** The value for the encryptedPassword field */
-    private String encryptedPassword;
-      
-    /** The value for the description field */
-    private String description;
-                                                                
-    /** The value for the isSystem field */
-    private boolean isSystem = false;
-                                          
-    /** The value for the accessCounter field */
-    private int accessCounter = 0;
-      
-    /** The value for the confirmed field */
-    private String confirmed;
-      
-    /** The value for the email field */
-    private String email;
-      
-    /** The value for the firstName field */
-    private String firstName;
-      
-    /** The value for the lastName field */
-    private String lastName;
-      
-    /** The value for the lastLoginTime field */
-    private long lastLoginTime;
-      
-    /** The value for the lastAccessTime field */
-    private long lastAccessTime;
-      
-    /** The value for the createdTime field */
-    private long createdTime;
-                                                                
-    /** The value for the isDisabled field */
-    private boolean isDisabled = false;
-  
-    
-    /**
-     * Get the Id
-     *
-     * @return int
-     */
-    public int getId()
-    {
-        return id;
-    }
+        /**
+         * Get the Id
+         *
+         * @return int
+         */
+        public int getId()
+        {
+            return id;
+        }
 
-        
-    /**
-     * Set the value of Id
-     *
-     * @param v new value
-     */
-    public void setId(int v) 
-    {
-    
-                  if (this.id != v)
-              {
-            this.id = v;
+                
+        /**
+         * Set the value of Id
+         *
+         * @param v new value
+         */
+        public void setId(int v) 
+        {
+          
+
+
+         if (this.id != v)
+        {
+             this.id = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the UserName
-     *
-     * @return String
-     */
-    public String getUserName()
-    {
-        return userName;
-    }
 
-        
-    /**
-     * Set the value of UserName
-     *
-     * @param v new value
-     */
-    public void setUserName(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.userName, v))
-              {
-            this.userName = v;
+             }
+
+
+        /**
+         * Get the UserName
+         *
+         * @return String
+         */
+        public String getUserName()
+        {
+            return user_name;
+        }
+
+                
+        /**
+         * Set the value of UserName
+         *
+         * @param v new value
+         */
+        public void setUserName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.user_name, v))
+        {
+             this.user_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the EncryptedPassword
-     *
-     * @return String
-     */
-    public String getEncryptedPassword()
-    {
-        return encryptedPassword;
-    }
 
-        
-    /**
-     * Set the value of EncryptedPassword
-     *
-     * @param v new value
-     */
-    public void setEncryptedPassword(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.encryptedPassword, v))
-              {
-            this.encryptedPassword = v;
+             }
+
+
+        /**
+         * Get the EncryptedPassword
+         *
+         * @return String
+         */
+        public String getEncryptedPassword()
+        {
+            return encrypted_password;
+        }
+
+                
+        /**
+         * Set the value of EncryptedPassword
+         *
+         * @param v new value
+         */
+        public void setEncryptedPassword(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.encrypted_password, v))
+        {
+             this.encrypted_password = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the Description
-     *
-     * @return String
-     */
-    public String getDescription()
-    {
-        return description;
-    }
 
-        
-    /**
-     * Set the value of Description
-     *
-     * @param v new value
-     */
-    public void setDescription(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.description, v))
-              {
-            this.description = v;
+             }
+
+
+        /**
+         * Get the Description
+         *
+         * @return String
+         */
+        public String getDescription()
+        {
+            return description;
+        }
+
+                
+        /**
+         * Set the value of Description
+         *
+         * @param v new value
+         */
+        public void setDescription(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.description, v))
+        {
+             this.description = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the IsSystem
-     *
-     * @return boolean
-     */
-    public boolean getIsSystem()
-    {
-        return isSystem;
-    }
 
-        
-    /**
-     * Set the value of IsSystem
-     *
-     * @param v new value
-     */
-    public void setIsSystem(boolean v) 
-    {
-    
-                  if (this.isSystem != v)
-              {
-            this.isSystem = v;
+             }
+
+
+        /**
+         * Get the IsSystem
+         *
+         * @return boolean
+         */
+        public boolean getIsSystem()
+        {
+            return is_system;
+        }
+
+                
+        /**
+         * Set the value of IsSystem
+         *
+         * @param v new value
+         */
+        public void setIsSystem(boolean v) 
+        {
+          
+
+
+         if (this.is_system != v)
+        {
+             this.is_system = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the AccessCounter
-     *
-     * @return int
-     */
-    public int getAccessCounter()
-    {
-        return accessCounter;
-    }
 
-        
-    /**
-     * Set the value of AccessCounter
-     *
-     * @param v new value
-     */
-    public void setAccessCounter(int v) 
-    {
-    
-                  if (this.accessCounter != v)
-              {
-            this.accessCounter = v;
+             }
+
+
+        /**
+         * Get the Email
+         *
+         * @return String
+         */
+        public String getEmail()
+        {
+            return email;
+        }
+
+                
+        /**
+         * Set the value of Email
+         *
+         * @param v new value
+         */
+        public void setEmail(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.email, v))
+        {
+             this.email = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the Confirmed
-     *
-     * @return String
-     */
-    public String getConfirmed()
-    {
-        return confirmed;
-    }
 
-        
-    /**
-     * Set the value of Confirmed
-     *
-     * @param v new value
-     */
-    public void setConfirmed(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.confirmed, v))
-              {
-            this.confirmed = v;
+             }
+
+
+        /**
+         * Get the FirstName
+         *
+         * @return String
+         */
+        public String getFirstName()
+        {
+            return first_name;
+        }
+
+                
+        /**
+         * Set the value of FirstName
+         *
+         * @param v new value
+         */
+        public void setFirstName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.first_name, v))
+        {
+             this.first_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the Email
-     *
-     * @return String
-     */
-    public String getEmail()
-    {
-        return email;
-    }
 
-        
-    /**
-     * Set the value of Email
-     *
-     * @param v new value
-     */
-    public void setEmail(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.email, v))
-              {
-            this.email = v;
+             }
+
+
+        /**
+         * Get the MiddleName
+         *
+         * @return String
+         */
+        public String getMiddleName()
+        {
+            return middle_name;
+        }
+
+                
+        /**
+         * Set the value of MiddleName
+         *
+         * @param v new value
+         */
+        public void setMiddleName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.middle_name, v))
+        {
+             this.middle_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the FirstName
-     *
-     * @return String
-     */
-    public String getFirstName()
-    {
-        return firstName;
-    }
 
-        
-    /**
-     * Set the value of FirstName
-     *
-     * @param v new value
-     */
-    public void setFirstName(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.firstName, v))
-              {
-            this.firstName = v;
+             }
+
+
+        /**
+         * Get the LastName
+         *
+         * @return String
+         */
+        public String getLastName()
+        {
+            return last_name;
+        }
+
+                
+        /**
+         * Set the value of LastName
+         *
+         * @param v new value
+         */
+        public void setLastName(String v) 
+        {
+          
+
+
+         if (!ObjectUtils.equals(this.last_name, v))
+        {
+             this.last_name = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the LastName
-     *
-     * @return String
-     */
-    public String getLastName()
-    {
-        return lastName;
-    }
 
-        
-    /**
-     * Set the value of LastName
-     *
-     * @param v new value
-     */
-    public void setLastName(String v) 
-    {
-    
-                  if (!ObjectUtils.equals(this.lastName, v))
-              {
-            this.lastName = v;
+             }
+
+
+        /**
+         * Get the LastSignin
+         *
+         * @return long
+         */
+        public long getLastSignin()
+        {
+            return last_signin;
+        }
+
+                
+        /**
+         * Set the value of LastSignin
+         *
+         * @param v new value
+         */
+        public void setLastSignin(long v) 
+        {
+          
+
+
+         if (this.last_signin != v)
+        {
+             this.last_signin = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the LastLoginTime
-     *
-     * @return long
-     */
-    public long getLastLoginTime()
-    {
-        return lastLoginTime;
-    }
 
-        
-    /**
-     * Set the value of LastLoginTime
-     *
-     * @param v new value
-     */
-    public void setLastLoginTime(long v) 
-    {
-    
-                  if (this.lastLoginTime != v)
-              {
-            this.lastLoginTime = v;
+             }
+
+
+        /**
+         * Get the SigninCounter
+         *
+         * @return int
+         */
+        public int getSigninCounter()
+        {
+            return signin_counter;
+        }
+
+                
+        /**
+         * Set the value of SigninCounter
+         *
+         * @param v new value
+         */
+        public void setSigninCounter(int v) 
+        {
+          
+
+
+         if (this.signin_counter != v)
+        {
+             this.signin_counter = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the LastAccessTime
-     *
-     * @return long
-     */
-    public long getLastAccessTime()
-    {
-        return lastAccessTime;
-    }
 
-        
-    /**
-     * Set the value of LastAccessTime
-     *
-     * @param v new value
-     */
-    public void setLastAccessTime(long v) 
-    {
-    
-                  if (this.lastAccessTime != v)
-              {
-            this.lastAccessTime = v;
+             }
+
+
+        /**
+         * Get the LastAccess
+         *
+         * @return long
+         */
+        public long getLastAccess()
+        {
+            return last_access;
+        }
+
+                
+        /**
+         * Set the value of LastAccess
+         *
+         * @param v new value
+         */
+        public void setLastAccess(long v) 
+        {
+          
+
+
+         if (this.last_access != v)
+        {
+             this.last_access = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the CreatedTime
-     *
-     * @return long
-     */
-    public long getCreatedTime()
-    {
-        return createdTime;
-    }
 
-        
-    /**
-     * Set the value of CreatedTime
-     *
-     * @param v new value
-     */
-    public void setCreatedTime(long v) 
-    {
-    
-                  if (this.createdTime != v)
-              {
-            this.createdTime = v;
+             }
+
+
+        /**
+         * Get the CreatedTime
+         *
+         * @return long
+         */
+        public long getCreatedTime()
+        {
+            return created_time;
+        }
+
+                
+        /**
+         * Set the value of CreatedTime
+         *
+         * @param v new value
+         */
+        public void setCreatedTime(long v) 
+        {
+          
+
+
+         if (this.created_time != v)
+        {
+             this.created_time = v;
             setModified(true);
         }
-    
-        }
-  
-    /**
-     * Get the IsDisabled
-     *
-     * @return boolean
-     */
-    public boolean getIsDisabled()
-    {
-        return isDisabled;
-    }
 
-        
-    /**
-     * Set the value of IsDisabled
-     *
-     * @param v new value
-     */
-    public void setIsDisabled(boolean v) 
-    {
-    
-                  if (this.isDisabled != v)
-              {
-            this.isDisabled = v;
+             }
+
+
+        /**
+         * Get the IsDisabled
+         *
+         * @return boolean
+         */
+        public boolean getIsDisabled()
+        {
+            return is_disabled;
+        }
+
+                
+        /**
+         * Set the value of IsDisabled
+         *
+         * @param v new value
+         */
+        public void setIsDisabled(boolean v) 
+        {
+          
+
+
+         if (this.is_disabled != v)
+        {
+             this.is_disabled = v;
             setModified(true);
         }
-    
-        }
-  
+
+             }
+
+
+ 
     
      
+
+
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -465,7 +538,7 @@ public abstract class BaseUser extends BaseObject
      */
     public void save() throws Exception
     {
-          if (isModified())
+         if (isModified())
         {
             if (isNew())
             {
@@ -477,19 +550,19 @@ public abstract class BaseUser extends BaseObject
                 UserPeer.doUpdate((User) this);
             }
         }
-      }
+     }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-       *
+     *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-          if (isModified())
+         if (isModified())
         {
             try
             {
@@ -511,7 +584,8 @@ public abstract class BaseUser extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-      }
+
+     }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -526,25 +600,28 @@ public abstract class BaseUser extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-            // If this object has been modified, then save it to the database.
-            if (isModified())
+        // If this object has been modified, then save it to the database.
+        if (isModified())
+        {
+            if (isNew())
             {
-                if (isNew())
-                {
-                    UserPeer.doInsert((User) this, con);
-                    setNew(false);
-                }
-                else
-                {
-                    UserPeer.doUpdate((User) this, con);
-                }
+                UserPeer.doInsert((User) this, con);
+                setNew(false);
             }
-
+            else
+            {
+                UserPeer.doUpdate((User) this, con);
+            }
         }
 
+       }
 
-          
-      /**
+
+    
+    
+    
+
+        /**
      * Set the PrimaryKey using ObjectKey.
      *
      * @param  id ObjectKey
@@ -552,8 +629,8 @@ public abstract class BaseUser extends BaseObject
     public void setPrimaryKey(ObjectKey key)
         
     {
-            setId(((NumberKey) key).intValue());
-        }
+                    setId(((NumberKey) key).intValue());
+            }
 
     /**
      * Set the PrimaryKey using a String.
@@ -562,50 +639,51 @@ public abstract class BaseUser extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-            setId(Integer.parseInt(key));
-        }
+                    setId(Integer.parseInt(key));
+            }
 
-  
+
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-          return SimpleKey.keyFor(getId());
-      }
+        return SimpleKey.keyFor(getId());
+    }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-       */
-      public User copy() throws TorqueException
+     */
+    public User copy() throws TorqueException
     {
         return copyInto(new User());
     }
-  
+
     protected User copyInto(User copyObj) throws TorqueException
     {
-          copyObj.setId(id);
-          copyObj.setUserName(userName);
-          copyObj.setEncryptedPassword(encryptedPassword);
-          copyObj.setDescription(description);
-          copyObj.setIsSystem(isSystem);
-          copyObj.setAccessCounter(accessCounter);
-          copyObj.setConfirmed(confirmed);
-          copyObj.setEmail(email);
-          copyObj.setFirstName(firstName);
-          copyObj.setLastName(lastName);
-          copyObj.setLastLoginTime(lastLoginTime);
-          copyObj.setLastAccessTime(lastAccessTime);
-          copyObj.setCreatedTime(createdTime);
-          copyObj.setIsDisabled(isDisabled);
-  
-                    copyObj.setId(0);
-                                                                                          
-  
+        copyObj.setId(id);
+        copyObj.setUserName(user_name);
+        copyObj.setEncryptedPassword(encrypted_password);
+        copyObj.setDescription(description);
+        copyObj.setIsSystem(is_system);
+        copyObj.setEmail(email);
+        copyObj.setFirstName(first_name);
+        copyObj.setMiddleName(middle_name);
+        copyObj.setLastName(last_name);
+        copyObj.setLastSignin(last_signin);
+        copyObj.setSigninCounter(signin_counter);
+        copyObj.setLastAccess(last_access);
+        copyObj.setCreatedTime(created_time);
+        copyObj.setIsDisabled(is_disabled);
+
+                      copyObj.setId(0);
+                                                                
+
+
         return copyObj;
     }
 
@@ -624,48 +702,48 @@ public abstract class BaseUser extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("User:\n");
-        str.append("Id = ")
+              str.append("Id = ")
            .append(getId())
            .append("\n");
-        str.append("UserName = ")
+              str.append("UserName = ")
            .append(getUserName())
            .append("\n");
-        str.append("EncryptedPassword = ")
+              str.append("EncryptedPassword = ")
            .append(getEncryptedPassword())
            .append("\n");
-        str.append("Description = ")
+              str.append("Description = ")
            .append(getDescription())
            .append("\n");
-        str.append("IsSystem = ")
+              str.append("IsSystem = ")
            .append(getIsSystem())
            .append("\n");
-        str.append("AccessCounter = ")
-           .append(getAccessCounter())
-           .append("\n");
-        str.append("Confirmed = ")
-           .append(getConfirmed())
-           .append("\n");
-        str.append("Email = ")
+              str.append("Email = ")
            .append(getEmail())
            .append("\n");
-        str.append("FirstName = ")
+              str.append("FirstName = ")
            .append(getFirstName())
            .append("\n");
-        str.append("LastName = ")
+              str.append("MiddleName = ")
+           .append(getMiddleName())
+           .append("\n");
+              str.append("LastName = ")
            .append(getLastName())
            .append("\n");
-        str.append("LastLoginTime = ")
-           .append(getLastLoginTime())
+              str.append("LastSignin = ")
+           .append(getLastSignin())
            .append("\n");
-        str.append("LastAccessTime = ")
-           .append(getLastAccessTime())
+              str.append("SigninCounter = ")
+           .append(getSigninCounter())
            .append("\n");
-        str.append("CreatedTime = ")
+              str.append("LastAccess = ")
+           .append(getLastAccess())
+           .append("\n");
+              str.append("CreatedTime = ")
            .append(getCreatedTime())
            .append("\n");
-        str.append("IsDisabled = ")
+              str.append("IsDisabled = ")
            .append(getIsDisabled())
            .append("\n");
-        return(str.toString());
+              return(str.toString());
     }
 }

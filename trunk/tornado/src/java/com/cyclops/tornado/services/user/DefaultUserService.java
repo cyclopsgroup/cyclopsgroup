@@ -57,5 +57,20 @@ public class DefaultUserService extends AbstractUserService {
         super.initialize(conf);
         getServiceBroker().getService(DatabaseService.SERVICE_NAME);
     }
-
+    /**
+     * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean)
+     */
+    protected User loadUser(String userName, boolean isAnonymous)
+        throws Exception {
+        User user = super.loadUser(userName, isAnonymous);
+        Criteria crit = new Criteria();
+        crit.and(UserPeer.USER_NAME, userName);
+        List rs = UserPeer.doSelect(crit);
+        com.cyclops.tornado.om.User dbuser =
+            (com.cyclops.tornado.om.User) rs.get(0);
+        if (user instanceof com.cyclops.tornado.om.User) {
+            dbuser.copyTo((com.cyclops.tornado.om.User) user);
+        }
+        return user;
+    }
 }

@@ -58,16 +58,16 @@ public class UserGroupMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_user_group");
         TableMap tMap = dbMap.getTable("c_tnd_user_group");
 
-        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-
-        tMap.setPrimaryKeyMethodInfo(tMap.getName());
-
-              tMap.addPrimaryKey("c_tnd_user_group.ID", new Integer(0));
-                    tMap.addForeignPrimaryKey(
+                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+        
+                tMap.setPrimaryKeyMethodInfo(tMap.getName());
+        
+                                      tMap.addPrimaryKey("c_tnd_user_group.ID", new Integer(0));
+                                                        tMap.addForeignPrimaryKey(
                 "c_tnd_user_group.USER_ID", new Integer(0) , "c_tnd_users" ,
-                "id");
-                    tMap.addForeignPrimaryKey(
+                    "id");
+                                                        tMap.addForeignPrimaryKey(
                 "c_tnd_user_group.GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                "id");
-          }
+                    "id");
+                              }
 }

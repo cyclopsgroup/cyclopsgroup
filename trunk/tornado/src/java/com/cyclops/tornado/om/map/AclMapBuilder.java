@@ -58,13 +58,13 @@ public class AclMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_acls");
         TableMap tMap = dbMap.getTable("c_tnd_acls");
 
-        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-
-        tMap.setPrimaryKeyMethodInfo(tMap.getName());
-
-              tMap.addPrimaryKey("c_tnd_acls.ID", new Integer(0));
-                    tMap.addColumn("c_tnd_acls.OWNER_NAME", new Integer(0));
-                    tMap.addColumn("c_tnd_acls.OWNER_TYPE", new String());
-                    tMap.addColumn("c_tnd_acls.PERMISSION", new String());
-          }
+                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+        
+                tMap.setPrimaryKeyMethodInfo(tMap.getName());
+        
+                                      tMap.addPrimaryKey("c_tnd_acls.ID", new Integer(0));
+                                                        tMap.addColumn("c_tnd_acls.OWNER_NAME", new Integer(0));
+                                                        tMap.addColumn("c_tnd_acls.OWNER_TYPE", new String());
+                                                        tMap.addColumn("c_tnd_acls.PERMISSION", new String());
+                              }
 }

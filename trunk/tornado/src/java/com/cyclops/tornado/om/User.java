@@ -1,9 +1,9 @@
 package com.cyclops.tornado.om;
-import java.util.Date;
-
 import org.apache.commons.httpclient.Base64;
-import org.apache.torque.TorqueException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.torque.om.Persistent;
+
+import com.cyclops.tornado.Referencable;
 /**
  * You should add additional methods to this class to meet the
  * application requirements.  This class will only be generated as
@@ -11,24 +11,31 @@ import org.apache.torque.om.Persistent;
  */
 public class User
     extends com.cyclops.tornado.om.BaseUser
-    implements Persistent {
-    /** Method getCreateDate()
-     * @see org.apache.fulcrum.security.entity.User#getCreateDate()
+    implements Persistent, Referencable {
+    private static final String REFERENCE_CATEGORY = "om.user";
+    /** Expose copyTo method
+     * @param user
      */
-    public Date getCreateDate() {
-        return new Date(getCreatedTime());
+    public void copyTo(User user) {
+        copyTo(user);
+        user.setNew(isNew());
+        user.setModified(isModified());
     }
-    /** Method getLastAccessDate()
-     * @see org.apache.fulcrum.security.entity.User#getLastAccessDate()
+    /** Full name of this user
+     * @return Fist name and last name
      */
-    public Date getLastAccessDate() {
-        return new Date(getLastAccessTime());
-    }
-    /** Method getLastLogin()
-     * @see org.apache.fulcrum.security.entity.User#getLastLogin()
-     */
-    public Date getLastLogin() {
-        return new Date(getLastLoginTime());
+    public String getFullName() {
+        StringBuffer sb = new StringBuffer();
+        if (!StringUtils.isEmpty(getFirstName())) {
+            sb.append(getFirstName());
+        }
+        if (!StringUtils.isEmpty(getMiddleName())) {
+            sb.append(" " + getMiddleName());
+        }
+        if (!StringUtils.isEmpty(getLastName())) {
+            sb.append(" " + getLastName());
+        }
+        return StringUtils.trim(sb.toString());
     }
     /** Method getPassword()
      * @see org.apache.fulcrum.security.entity.User#getPassword()
@@ -36,43 +43,22 @@ public class User
     public String getPassword() {
         return new String(Base64.decode(getEncryptedPassword().getBytes()));
     }
-    /** Method setCreateDate()
-     * @see org.apache.fulcrum.security.entity.User#setCreateDate(java.util.Date)
+    /**
+     * @see com.cyclops.tornado.Referencable#getReferenceCategory()
      */
-    public void setCreateDate(Date date) {
-        setCreatedTime(date.getTime());
+    public String getReferenceCategory() {
+        return REFERENCE_CATEGORY;
     }
-    /** Method setLastAccessDate()
-     * @see org.apache.fulcrum.security.entity.User#setLastAccessDate()
+    /**
+     * @see com.cyclops.tornado.Referencable#getReferenceKey()
      */
-    public void setLastAccessDate() {
-        setLastAccessTime(System.currentTimeMillis());
-    }
-    /** Method setLastLogin()
-     * @see org.apache.fulcrum.security.entity.User#setLastLogin(java.util.Date)
-     */
-    public void setLastLogin(Date date) {
-        setLastLoginTime(date.getTime());
+    public String getReferenceKey() {
+        return getUserName();
     }
     /** Method setPassword()
      * @see org.apache.fulcrum.security.entity.User#setPassword(java.lang.String)
      */
     public void setPassword(String pass) {
         setEncryptedPassword(new String(Base64.encode(pass.getBytes())));
-    }
-    /**
-     * @param user User object
-     * @throws TorqueException
-     */
-    public void copyTo(Object user) throws TorqueException {
-        if (user instanceof User) {
-            super.copyInto((User) user);
-        }
-    }
-    /**
-     * @return Fistname and last name
-     */
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
     }
 }
