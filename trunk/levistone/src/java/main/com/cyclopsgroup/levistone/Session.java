@@ -39,16 +39,6 @@ public interface Session
     Session[] EMPTY_ARRAY = new Session[0];
 
     /**
-     * Method cancel() in class Session
-     */
-    void cancel();
-
-    /**
-     * Method close() in class Session
-     */
-    void close();
-
-    /**
      * Execute named query with given attributes
      * 
      * @param query Named query object

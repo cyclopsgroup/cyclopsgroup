@@ -14,21 +14,25 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.jdbc;
+package com.cyclopsgroup.levistone.hibernate;
+
+import net.sf.hibernate.SessionFactory;
 
 import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 
 /**
- * Jdbc implemented persistence manager
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JdbcPersistenceManager extends BasePersistenceManager
+public class HibernatePersistenceManager extends BasePersistenceManager
 {
+    private SessionFactory sessionFactory;
+
     /**
-     * Override or implement method of parent class or interface
+     * Override method createQuery in super class of HibernatePersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
      */
@@ -39,7 +43,7 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     }
 
     /**
-     * Override method doCancelSession in super class of JdbcPersistenceManager
+     * Override method doCancelSession in super class of HibernatePersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
      */
@@ -50,7 +54,7 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     }
 
     /**
-     * Override method doCloseSession in super class of JdbcPersistenceManager
+     * Override method doCloseSession in super class of HibernatePersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
@@ -61,7 +65,7 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     }
 
     /**
-     * Override method doOpenSession in super class of JdbcPersistenceManager
+     * Override method doOpenSession in super class of HibernatePersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String)
      */

@@ -36,6 +36,48 @@ public abstract class BasePersistenceManager implements PersistenceManager
     private Map activeSessions = ListOrderedMap.decorate(new Hashtable());
 
     /**
+     * Override method cancelSession in super class of BasePersistenceManager
+     * 
+     * @see com.cyclopsgroup.levistone.PersistenceManager#cancelSession(com.cyclopsgroup.levistone.Session)
+     */
+    public void cancelSession(Session session) throws PersistenceException
+    {
+        try
+        {
+            doCancelSession(session);
+        }
+        catch (PersistenceException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    /**
+     * Override method closeSession in super class of BasePersistenceManager
+     * 
+     * @see com.cyclopsgroup.levistone.PersistenceManager#closeSession(com.cyclopsgroup.levistone.Session)
+     */
+    public void closeSession(Session session) throws PersistenceException
+    {
+        try
+        {
+            doCloseSession(session);
+        }
+        catch (PersistenceException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    /**
      * Override or implement method of parent class or interface
      * 
      * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.Class)
@@ -44,6 +86,10 @@ public abstract class BasePersistenceManager implements PersistenceManager
     {
         return new Query(entityType);
     }
+
+    protected abstract void doCancelSession(Session session) throws Exception;
+
+    protected abstract void doCloseSession(Session session) throws Exception;
 
     /**
      * Method doOpenSession() in class BasePersistenceManager
