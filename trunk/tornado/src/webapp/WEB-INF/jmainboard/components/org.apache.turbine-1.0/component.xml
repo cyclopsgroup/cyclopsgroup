@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <id>org.apache.turbine</id>
+    <version>1.0</version>
+    <title>Turbine JMainboard Component</title>
+    <description><![CDATA[JMainboard adapter for <a href="http://jakarta.apache.org/turbine">Apache Jakarta Turbine</a>]]></description>
+    <implementation>com.cyclops.jmainboard.components.turbine.TurbineComponent</implementation>
+    <properties />
+    <dependencies>
+        <dependency>org.apache.log4j</dependency>
+    </dependencies>
+</component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <id>com.cyclops.tornado</id>
+    <version>1.0</version>
+    <title>Cyclops Tornado JMainboard Component</title>
+    <description><![CDATA[JMainboard adapter for Tornado]]></description>
+    <implementation>com.cyclops.tornado.jmainboard.TornadoComponent</implementation>
+    <properties />
+    <dependencies>
+        <dependency>org.apache.log4j</dependency>
+        <dependency>org.apache.turbine</dependency>
+    </dependencies>
+</component>

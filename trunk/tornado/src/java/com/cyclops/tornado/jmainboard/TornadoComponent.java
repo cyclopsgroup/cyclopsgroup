@@ -1,4 +1,4 @@
-/**
+/*
  * Common Public License - v 1.0
  *
  *
@@ -192,36 +192,17 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.modules.actions.system.administration.group;
-import org.apache.turbine.ParameterParser;
-import org.apache.turbine.RunData;
-import org.apache.turbine.TemplateContext;
+package com.cyclops.tornado.jmainboard;
 
-import com.cyclops.tornado.bo.GroupBroker;
-import com.cyclops.tornado.modules.Action;
-import com.cyclops.tornado.om.Group;
-/** Create new Group page
- * @author joeblack
+import com.cyclops.jmainboard.impl.DefaultComponent;
+
+/** Tornado component Id
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * The class is created at 2003-11-18 17:40:28
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class CreateNew extends Action {
-    /** Override method doPerform() of super class
-     * @see org.apache.turbine.modules.actions.TemplateAction#doPerform(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
-     */
-    public void doPerform(RunData data, TemplateContext ctx) throws Exception {
-        ParameterParser params = data.getParameters();
-        String groupName = params.getString("group_name");
-        GroupBroker gb = (GroupBroker) getObjectBroker(GroupBroker.class, data);
-        Group old = gb.retrieveByName(groupName);
-        if (old != null) {
-            data.setMessage("Group [" + groupName + "] already exists");
-            return;
-        }
-        Group group = new Group();
-        group.setGroupName(groupName);
-        group.setDescription(params.getString("description"));
-        gb.save(group);
-        data.setMessage("Group [" + groupName + "] created");
-    }
+public class TornadoComponent extends DefaultComponent {
+
+    /** Tornado Component ID */
+    public static final String COMPONENT_ID = "com.cyclops.tornado";
 }
