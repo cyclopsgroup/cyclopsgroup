@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="Maven">
-	<title>Maven</title>
-	<body>
-		<links>
-			<item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
-			<item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
-			<item name="Fulcrum" href="http://jakarta.apache.org/turbine/fulcrum"/>
-			<item name="Maven" href="http://maven.apache.org/"/>
-		</links>
-		<menu name="Overview">
-			<item name="Home" href="/index.html"/>
-		</menu>
-		<menu name="For Developers">
-			<item name="Extended Services" href="/services/index.html" collapse="true">
-				<item name="User Service" href="/services/user.html"/>
-				<item name="Navigator Service" href="/services/navigator.html"/>
-				<item name="Selection Service" href="/services/selection.html"/>
-			</item>
-		</menu>
-	</body>
+    <title>Maven</title>
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
+            <item name="Fulcrum" href="http://jakarta.apache.org/turbine/fulcrum"/>
+            <item name="Maven" href="http://maven.apache.org/"/>
+        </links>
+        <menu name="Overview">
+            <item name="Home" href="/index.html"/>
+            <item name="Powered by" href="/poweredby.html"/>
+            <item name="Download and Install" href="/install.html"/>
+            <item name="Integration" href="/integration.html"/>
+            <item name="Road Map" href="/roadmap.html"/>
+        </menu>
+        <menu name="For Developers">
+            <item name="Extended Services" href="/services/index.html" collapse="true">
+                <item name="User Service" href="/services/user.html"/>
+                <item name="Navigator Service" href="/services/navigator.html"/>
+            </item>
+            <item name="Business Logic" href="/bizlogic.html"/>
+            <item name="Presentation Layer" href="/presentation.html"/>
+            <item name="Database Connection" href="/database.html"/>
+            <item name="Configuration" href="/configuration.html"/>
+        </menu>
+        <menu name="Project Documentation">
+            <item name="About" href="/index.html"/>
+            <item name="Project Info" href="/project-info.html" collapse="true">
+                <item name="Mailing Lists" href="/mail-lists.html"/>
+                <item name="Project Team" href="/team-list.html"/>
+                <item name="Dependencies" href="/dependencies.html"/>
+                <item name="Source Repository" href="/cvs-usage.html"/>
+                <item name="Issue Tracking" href="/issue-tracking.html"/>
+            </item>
+        </menu>
+    </body>
 </project>
