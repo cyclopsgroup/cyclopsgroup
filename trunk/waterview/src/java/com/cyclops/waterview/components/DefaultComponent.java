@@ -192,41 +192,51 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview.components;
 
-import java.io.IOException;
+import com.cyclops.waterview.Component;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Default implementation of component
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public class DefaultComponent implements Component
 {
-
+    /** Runtime id of this component */
+    private String id;
+    /** Display name of this component */
+    private String name;
+    /** Description of this component */
+    private String description;
     /**
-     * Override method doGet() of parent class
+     * Override method getId() of parent class
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.cyclops.waterview.Component#getId()
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final String getId()
     {
+        return id;
     }
 
     /**
-     * Override method doPost() of parent class
+     * Override method getName() of parent class
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.cyclops.waterview.Component#getName()
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final String getName()
     {
-        doGet(request, response);
+        return name;
     }
+
+    /**
+     * Override method getDescription() of parent class
+     *
+     * @see com.cyclops.waterview.Component#getDescription()
+     */
+    public final String getDescription()
+    {
+        return description;
+    }
+
 }

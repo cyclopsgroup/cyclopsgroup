@@ -192,41 +192,14 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview.components.velocity;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * TODO Add javadoc for this class
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public class VelocityComponent
 {
 
-    /**
-     * Override method doGet() of parent class
-     *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-    }
-
-    /**
-     * Override method doPost() of parent class
-     *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
 }

@@ -192,41 +192,30 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Container which is able to contain multiple components
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public interface Container extends Component
 {
+    /** Empty container array */
+    Container[] EMPTY_ARRAY = new Container[0];
 
     /**
-     * Override method doGet() of parent class
+     * Get a component object by a specified name
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @param componentId Id of the component
+     * @return Component instance, null if not found
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-    }
+    Component getComponent(String componentId);
 
     /**
-     * Override method doPost() of parent class
+     * Get or components in this container
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Array of component objects
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
+    Component[] getComponents();
 }

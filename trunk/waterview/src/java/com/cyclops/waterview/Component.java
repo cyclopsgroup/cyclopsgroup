@@ -192,41 +192,35 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Component interface for basic component
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public interface Component
 {
+    /** Emtpy component array */
+    Component[] EMPTY_ARRAY = new Component[0];
+    /**
+     * Unique identifier of component instance at runtime
+     *
+     * @return Id of this component
+     */
+    String getId();
 
     /**
-     * Override method doGet() of parent class
+     * Get display title of this component at runtime
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Display title of this component
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-    }
+    String getName();
 
     /**
-     * Override method doPost() of parent class
+     * Get long description for this component
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Description
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
+    String getDescription();
 }

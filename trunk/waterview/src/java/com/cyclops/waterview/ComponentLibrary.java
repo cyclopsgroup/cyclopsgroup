@@ -192,41 +192,131 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Interface of component library
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public abstract class ComponentLibrary
 {
+    /** All available libraries */
+    private static Map availableLibraries;
+
+    /** Empty array */
+    public static final ComponentLibrary[] EMPTY_ARRAY = new ComponentLibrary[0];
+    /** Library suffix constant */
+    private static final String SUFFIX_LIBRARY = ".library";
+    /** Url suffix constant */
+    private static final String SUFFIX_URL = ".url";
 
     /**
-     * Override method doGet() of parent class
+     * Lazy method to get availableLibraries map
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Map of available libraries referenced by urls
+     * @throws IOException Properties file accessing error
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    private static Map getAvailableLibraries() throws IOException
     {
+        if (availableLibraries == null)
+        {
+            availableLibraries = new HashMap();
+            Properties p = new Properties();
+            Enumeration resources =
+                ComponentLibrary.class.getClassLoader().getResources("META-INF/waterview-components.properties");
+            while (resources.hasMoreElements())
+            {
+                URL resource = (URL) resources.nextElement();
+                try
+                {
+                    p.load(resource.openStream());
+                }
+                catch (Exception e)
+                {
+                    //TODO handle this exception
+                    e.printStackTrace();
+                }
+            }
+            Enumeration names = p.propertyNames();
+            while (names.hasMoreElements())
+            {
+                String name = (String) names.nextElement();
+                if (!name.endsWith(SUFFIX_URL))
+                {
+                    continue;
+                }
+                String key = name.substring(0, name.length() - SUFFIX_URL.length());
+                if (!p.containsKey(key + SUFFIX_LIBRARY))
+                {
+                    continue;
+                }
+                String url = p.getProperty(name);
+                String libraryClassName = p.getProperty(key + SUFFIX_LIBRARY);
+                try
+                {
+                    availableLibraries.put(url, Class.forName(libraryClassName));
+                }
+                catch (Exception e)
+                {
+                    // TODO handle exception
+                    e.printStackTrace();
+                }
+            }
+        }
+        return Collections.unmodifiableMap(availableLibraries);
+    }
+    /**
+     * Get instance of library by a given name
+     *
+     * @param libraryName Given library name
+     * @return Null if not found
+     */
+    public static final synchronized ComponentLibrary getInstance(final String libraryName)
+    {
+        try
+        {
+            return (ComponentLibrary) getAvailableLibraries().get(libraryName);
+        }
+        catch (IOException e)
+        {
+            //TODO handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /**
+     * Get all available instance of libraries
+     *
+     * @return Array of all libraries
+     */
+    public static final synchronized ComponentLibrary[] getInstances()
+    {
+        try
+        {
+            return (ComponentLibrary[]) getAvailableLibraries().values().toArray(ComponentLibrary.EMPTY_ARRAY);
+        }
+        catch (IOException e)
+        {
+            //TODO handle exception
+            e.printStackTrace();
+            return ComponentLibrary.EMPTY_ARRAY;
+        }
     }
 
     /**
-     * Override method doPost() of parent class
+     * Get class of a specified component
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @param name Name of the component
+     * @return Class of it
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
+    public abstract Class getComponentClass(final String name);
 }

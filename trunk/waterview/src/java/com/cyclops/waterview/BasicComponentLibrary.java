@@ -192,41 +192,51 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
-import java.io.IOException;
+import java.util.HashMap;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Base component library
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public class BasicComponentLibrary extends ComponentLibrary
 {
+    /** Empty array */
+    private static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    /** Component registry map */
+    private HashMap componentRegistry = new HashMap();
 
     /**
-     * Override method doGet() of parent class
+     * Override method getComponentClass() of parent class
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.cyclops.waterview.ComponentLibrary#getComponentClass(java.lang.String)
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final Class getComponentClass(final String name)
     {
+        return (Class) componentRegistry.get(name);
     }
 
     /**
-     * Override method doPost() of parent class
+     * Get array of component names
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Array of names
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final String[] getNames()
     {
-        doGet(request, response);
+        return (String[]) componentRegistry.keySet().toArray(EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * Register a component class
+     *
+     * @param name Name of this component
+     * @param componentClass Class of the compnent
+     */
+    protected final synchronized void register(final String name, final Class componentClass)
+    {
+        componentRegistry.put(name, componentClass);
     }
 }

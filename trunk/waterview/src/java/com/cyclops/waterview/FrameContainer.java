@@ -192,41 +192,44 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Very similar to a container, but components inside it are named
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public interface FrameContainer extends Component
 {
+    /** Empty frame array */
+    FrameContainer[] EMPTY_ARRAY = new FrameContainer[0];
+    /**
+     * Clear a given frame
+     *
+     * @param frameName Name of the frame
+     */
+    void clearComponent(String frameName);
 
     /**
-     * Override method doGet() of parent class
+     * Get component in a frame
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @param frameName Name of the frame
+     * @return Component instance
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-    }
+    Component getFrameComponent(String frameName);
 
     /**
-     * Override method doPost() of parent class
+     * Get an array of frame names
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @return Array of frame names
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
+    String[] getFrameNames();
+
+    /**
+     * Set a component in frame
+     *
+     * @param frameName Name of frame
+     * @param component Component instance
+     */
+    void setComponent(String frameName, Component component);
 }

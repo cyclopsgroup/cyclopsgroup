@@ -192,41 +192,136 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview.components;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.cyclops.waterview.Component;
+import com.cyclops.waterview.FreeContainer;
 
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Default implementation of FreeContainer
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public class DefaultFrameContainer extends DefaultComponent implements FreeContainer
 {
-
+    /** components repository */
+    private Hashtable components = new Hashtable();
+    /** component ids repository */
+    private Vector componentIds = new Vector();
     /**
-     * Override method doGet() of parent class
+     * Override method addComponent() of parent class
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.cyclops.waterview.FreeContainer#addComponent(com.cyclops.waterview.Component)
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final void addComponent(final Component component)
     {
+        if (!components.containsKey(component.getId()))
+        {
+            components.put(component.getId(), component);
+            componentIds.add(component.getId());
+        }
     }
 
     /**
-     * Override method doPost() of parent class
+     * Override method getComponent() of parent class
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.cyclops.waterview.FreeContainer#getComponent(int)
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
+    public final Component getComponent(final int index)
     {
-        doGet(request, response);
+        String componentId = (String) componentIds.get(index);
+        return getComponent(componentId);
+    }
+
+    /**
+     * Override method getComponent() of parent class
+     *
+     * @see com.cyclops.waterview.Container#getComponent(java.lang.String)
+     */
+    public final Component getComponent(final String componentId)
+    {
+        if (componentId == null)
+        {
+            return null;
+        }
+        else
+        {
+            return (Component) components.get(componentId);
+        }
+    }
+
+    /**
+     * Override method getComponents() of parent class
+     *
+     * @see com.cyclops.waterview.Container#getComponents()
+     */
+    public final Component[] getComponents()
+    {
+        List ret = new ArrayList();
+        for (Iterator i = componentIds.iterator(); i.hasNext();)
+        {
+            String componentId = (String) i.next();
+            ret.add(getComponent(componentId));
+        }
+        return (Component[]) ret.toArray(Component.EMPTY_ARRAY);
+    }
+
+    /**
+     * Override method indexOf() of parent class
+     *
+     * @see com.cyclops.waterview.FreeContainer#indexOf(com.cyclops.waterview.Component)
+     */
+    public final int indexOf(final Component component)
+    {
+        return componentIds.indexOf(component.getId());
+    }
+
+    /**
+     * Override method moveBackward() of parent class
+     *
+     * @see com.cyclops.waterview.FreeContainer#moveBackward(com.cyclops.waterview.Component)
+     */
+    public final void moveBackward(final Component component)
+    {
+        int index = indexOf(component);
+        if (index <= 0)
+        {
+            return;
+        }
+        componentIds.remove(component.getId());
+        componentIds.add(index - 1, component.getId());
+    }
+
+    /**
+     * Override method moveForward() of parent class
+     *
+     * @see com.cyclops.waterview.FreeContainer#moveForward(com.cyclops.waterview.Component)
+     */
+    public final void moveForward(final Component component)
+    {
+        int index = indexOf(component);
+        if (index >= componentIds.size() - 1)
+        {
+            return;
+        }
+        componentIds.remove(component.getId());
+        componentIds.add(index + 1, component.getId());
+    }
+
+    /**
+     * Override method removeComponent() of parent class
+     *
+     * @see com.cyclops.waterview.FreeContainer#removeComponent(com.cyclops.waterview.Component)
+     */
+    public final void removeComponent(final Component component)
+    {
+        componentIds.remove(component.getId());
+        components.remove(component.getId());
     }
 }

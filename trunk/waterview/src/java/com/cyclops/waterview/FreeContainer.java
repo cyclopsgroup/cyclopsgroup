@@ -192,41 +192,58 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview.servlet;
+package com.cyclops.waterview;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** Main servlet loader for waterview
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * Free container
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="email:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public class WaterviewServlet extends HttpServlet
+public interface FreeContainer extends Container
 {
+    /** Free container which can contain however many components */
+    FreeContainer[] EMPTY_ARRAY = new FreeContainer[0];
+    /**
+     * Add a component at the end of components
+     *
+     * @param component Component to add
+     */
+    void addComponent(Component component);
 
     /**
-     * Override method doGet() of parent class
+     * Get a component on the specified position
      *
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @param index Index of the component
+     * @return Instance of component
      */
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-    }
+    Component getComponent(int index);
 
     /**
-     * Override method doPost() of parent class
+     * Get the index of a given component
      *
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @param component The given component
+     * @return Index of it
      */
-    protected final void doPost(final HttpServletRequest request, final HttpServletResponse response)
-        throws ServletException, IOException
-    {
-        doGet(request, response);
-    }
+    int indexOf(Component component);
+
+    /**
+     * Move backward a specified component
+     *
+     * @param component Component to move
+     */
+    void moveBackward(Component component);
+
+    /**
+     * Move forward a specified component
+     *
+     * @param component Component to move
+     */
+    void moveForward(Component component);
+
+    /**
+     * Remove a specified component
+     *
+     * @param component Component to remove
+     */
+    void removeComponent(Component component);
 }
