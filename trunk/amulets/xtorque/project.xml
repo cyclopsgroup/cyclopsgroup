@@ -6,7 +6,7 @@
     <name>Maven Cross Torque Plug-in</name>
     <currentVersion>1.0-b1</currentVersion>
     <shortDescription>Cross Torque Plugin for Maven</shortDescription>
-    <url>http://cyclops-group.sourceforge.net/project/amulets/multiproject/xtorque/</url>
+    <url>http://cyclops-group.sourceforge.net/project/amulets/multiproject/maven-xtorque-plugin/</url>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/maven-xtorque-plugin/</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/xtorque/</connection>
