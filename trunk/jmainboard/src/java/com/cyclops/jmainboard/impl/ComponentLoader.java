@@ -200,16 +200,13 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.tools.generic.RenderTool;
+import java.util.Properties;
 
 import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.model.ComponentModel;
 import com.cyclops.jmainboard.model.ModelParser;
 import com.cyclops.jmainboard.model.PropertyModel;
-import com.cyclops.jmainboard.utils.VelocityUtils;
+import com.cyclops.jmainboard.utils.PropertyRender;
 import com.cyclops.jmainboard.utils.VersionComparator;
 
 /** Tool to load all component instance
@@ -224,9 +221,23 @@ public class ComponentLoader extends LoggableObject {
 
     private Hashtable components = new Hashtable();
 
+    private DefaultEngine engine;
+
     private ModelParser modelParser = new ModelParser();
 
-    private DefaultEngine engine;
+    /** Load components without dependency objects and order
+     * @return List of component instances without dependencies
+     */
+    public Map getComponents() {
+        return Collections.unmodifiableMap(components);
+    }
+
+    /** Method getEngine in class ComponentLoader
+     * @return Engine instance
+     */
+    public DefaultEngine getEngine() {
+        return engine;
+    }
 
     /** Load components from Engine home
      * @param e Engine instance
@@ -240,63 +251,33 @@ public class ComponentLoader extends LoggableObject {
         }
     }
 
-    /** Load components without dependency objects and order
-     * @return List of component instances without dependencies
-     */
-    public Map getComponents() {
-        return Collections.unmodifiableMap(components);
-    }
-
-    private void loadComponents(File folder) {
-        if (folder == null || !folder.isDirectory()) {
-            return;
-        }
-        if (new File(folder, "component.xml").isFile()) {
-            loadComponent(folder);
-        } else {
-            getLog().debug(
-                "Load components from directory " + folder.getAbsolutePath());
-            File[] subfiles = folder.listFiles();
-            for (int i = 0; i < subfiles.length; i++) {
-                File subfile = subfiles[i];
-                loadComponents(subfile);
-            }
-        }
-    }
-
     private void loadComponent(File folder) {
-        getLog().debug(
-            "Load component from folder " + folder.getAbsolutePath());
+        getLog()
+                .debug("Load component from folder " + folder.getAbsolutePath());
         File descriptor = new File(folder, "component.xml");
         try {
-            Velocity.init();
-            ComponentModel cm =
-                (ComponentModel) modelParser.parse(descriptor.toURL());
-            DefaultComponent dc =
-                (DefaultComponent) Class
-                    .forName(cm.getImplementation())
-                    .newInstance();
-            dc.setEngine(engine);
+            ComponentModel cm = (ComponentModel) modelParser.parse(descriptor
+                    .toURL());
+            DefaultComponent dc = (DefaultComponent) Class.forName(
+                    cm.getImplementation()).newInstance();
+            Properties properties = getEngine().getProperties();
+            dc.setEngine(getEngine());
             dc.setComponentHome(folder);
-            VelocityContext ctx =
-                VelocityUtils.createContext(engine.getProperties());
             dc.setId(cm.getId());
             dc.setVersion(cm.getVersion());
-            dc.setTitle(RenderTool.eval(ctx, cm.getTitle()));
-            dc.setDescription(RenderTool.eval(ctx, cm.getDescription()));
+            dc.setTitle(PropertyRender.render(properties, cm.getTitle()));
+            dc.setDescription(PropertyRender.render(properties, cm
+                    .getDescription()));
             List props = cm.getProperties();
             for (Iterator i = props.iterator(); i.hasNext();) {
                 PropertyModel prop = (PropertyModel) i.next();
-                dc.getProperties().setProperty(
-                    prop.getName(),
-                    RenderTool.eval(ctx, prop.getValue()));
+                dc.getProperties().setProperty(prop.getName(),
+                        PropertyRender.render(properties, prop.getValue()));
             }
-            dc.getProperties().setProperty(
-                Component.COMPONENT,
-                cm.getImplementation());
-            dc.getProperties().setProperty(
-                Component.COMPONENT_HOME,
-                folder.getAbsolutePath());
+            dc.getProperties().setProperty(Component.COMPONENT,
+                    cm.getImplementation());
+            dc.getProperties().setProperty(Component.COMPONENT_HOME,
+                    folder.getAbsolutePath());
             List deps = cm.getDependencies();
             for (Iterator i = deps.iterator(); i.hasNext();) {
                 String dep = (String) i.next();
@@ -305,8 +286,7 @@ public class ComponentLoader extends LoggableObject {
             if (components.containsKey(dc.getId())) {
                 Component old = (Component) components.get(dc.getId());
                 if (VersionComparator
-                    .compare(dc.getVersion(), old.getVersion())
-                    > 0) {
+                        .compare(dc.getVersion(), old.getVersion()) > 0) {
                     components.put(dc.getId(), dc);
                 }
             } else {
@@ -314,6 +294,22 @@ public class ComponentLoader extends LoggableObject {
             }
         } catch (Exception e) {
             getLog().error("Load component error", e);
+        }
+    }
+
+    private void loadComponents(File folder) {
+        if (folder == null || !folder.isDirectory()) { return; }
+        if (new File(folder, "component.xml").isFile()) {
+            loadComponent(folder);
+        } else {
+            getLog().debug(
+                    "Load components from directory "
+                            + folder.getAbsolutePath());
+            File[] subfiles = folder.listFiles();
+            for (int i = 0; i < subfiles.length; i++) {
+                File subfile = subfiles[i];
+                loadComponents(subfile);
+            }
         }
     }
 }

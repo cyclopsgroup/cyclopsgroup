@@ -197,30 +197,34 @@ package com.cyclops.jmainboard.utils;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.velocity.VelocityContext;
+import org.apache.commons.lang.StringUtils;
 
-/** Help utilities for velocity
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** Property string expression rendering tool
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 21:00:11 2004-4-14
- * Edited with eclipse 2.1.3
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public final class VelocityUtils {
-    private VelocityUtils() {
-        //Do nothing here
-    }
-    /** Create a VelocityContext with a map instance
-     * @param map Map object as input object
-     * @return Result VelocityContext object
+public final class PropertyRender {
+
+    /** Replace ${object} to value expression
+     * @param properties Mapped objects
+     * @param template Template string
+     * @return Result of replacing
      */
-    public static VelocityContext createContext(Map map) {
-        VelocityContext ctx = new VelocityContext();
-        for (Iterator i = map.keySet().iterator(); i.hasNext();) {
-            Object key = (Object) i.next();
-            if (key instanceof String) {
-                ctx.put((String) key, map.get(key));
+    public static final String render(Map properties, String template) {
+        String ret = template;
+        for (Iterator i = properties.keySet().iterator(); i.hasNext();) {
+            String key = (String) i.next();
+            String keyExpr = "${" + key + "}";
+            if (template.indexOf(keyExpr) > -1) {
+                ret = StringUtils.replace(ret, keyExpr, properties.get(key)
+                        .toString());
             }
         }
-        return ctx;
+        return ret;
+    }
+
+    private PropertyRender() {
+        //do nothing
     }
 }

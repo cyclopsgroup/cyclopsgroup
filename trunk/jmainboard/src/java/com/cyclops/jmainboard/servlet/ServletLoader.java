@@ -192,241 +192,77 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.impl;
+package com.cyclops.jmainboard.servlet;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ListIterator;
+import java.util.Enumeration;
 import java.util.Properties;
-import java.util.Vector;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.PropertyConfigurator;
 
-import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.Engine;
-import com.cyclops.jmainboard.Service;
-import com.cyclops.jmainboard.utils.ComponentSorter;
+import com.cyclops.jmainboard.EngineFactory;
 
-/** Dandelio Engine
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** Servlet jmainboard loader
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 9:56:05 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultEngine extends LoggableObject implements Engine {
+public class ServletLoader extends HttpServlet {
 
-    private Vector componentDirectories = new Vector();
+    private Engine engine;
 
-    private Vector components = new Vector();
-
-    private File engineHome = new File("");
-
-    private Properties properties = new Properties();
-
-    /** Method addComponentDirectory in class DefaultEngine
-     * @param componentDirectory File object to be added
+    /** Method getEngine in class ServletLoader
+     * @return Jmainboard engine instance
      */
-    public void addComponentDirectory(File componentDirectory) {
-        if (!componentDirectories.contains(componentDirectory)) {
-            componentDirectories.add(componentDirectory);
+    public Engine getEngine() {
+        return engine;
+    }
+
+    /** Override method init() of parent class
+     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        Properties p = new Properties();
+        String applicationHome = config.getServletContext().getRealPath("");
+        p.setProperty(EngineFactory.APPLICATION_HOME, applicationHome);
+        for (Enumeration e = config.getInitParameterNames(); e
+                .hasMoreElements();) {
+            String attributeName = (String) e.nextElement();
+            String attributeValue = config.getInitParameter(attributeName);
+            p.setProperty(attributeName, attributeValue);
         }
-    }
+        try {
+            EngineFactory factory = EngineFactory.getInstance(p);
+            String instanceHome = config.getInitParameter("jmainboard.home");
 
-    /** Override method getComponent in the derived class
-     * @see com.cyclops.jmainboard.Engine#getComponent(java.lang.String)
-     */
-    public Component getComponent(String componentId) {
-        Component ret = null;
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            if (StringUtils.equals(component.getId(), componentId)) {
-                ret = component;
-                break;
-            }
-        }
-        return ret;
-    }
-
-    /** Method getComponentDirectories in class DefaultEngine
-     * @return Array of component directory File objects
-     */
-    public File[] getComponentDirectories() {
-        return (File[]) componentDirectories.toArray(new File[0]);
-    }
-
-    /** Get all components
-     * @return Array of all components
-     */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
-    }
-
-    /** Override method getEngineHome in the derived class
-     * @see com.cyclops.jmainboard.Engine#getEngineHome()
-     */
-    public File getEngineHome() {
-        return engineHome;
-    }
-
-    private void loadComponentDirectories() {
-        File defaultComponentDirectory = new File(getEngineHome(), "components");
-        componentDirectories.add(defaultComponentDirectory);
-        getLog().debug(
-                "Add " + defaultComponentDirectory.getAbsolutePath()
-                        + " as component directory");
-        String passedDirectories = getProperties().getProperty(
-                COMPONENT_DIRECTORY, "");
-        if (StringUtils.isEmpty(passedDirectories)) { return; }
-        String[] directories = StringUtils.split(passedDirectories, ";");
-        for (int i = 0; i < directories.length; i++) {
-            String directory = directories[i];
-            File componentDirectory = new File(directory);
-            addComponentDirectory(componentDirectory);
-            getLog().debug(
-                    "Add " + componentDirectory.getAbsolutePath()
-                            + " as component directory");
-        }
-    }
-
-    /** Override method getProperties in the derived class
-     * @see com.cyclops.jmainboard.Engine#getProperties()
-     */
-    public Properties getProperties() {
-        return properties;
-    }
-
-    /** Method initialize() in class DandelioEngine
-     * Initalize the engine
-     */
-    protected synchronized void init() {
-        File log4jFile = new File(getEngineHome(), "conf/log4j.properties");
-        if (log4jFile.isFile()) {
-            try {
-                Properties p = new Properties();
-                p.putAll(getProperties());
-                p.load(new FileInputStream(log4jFile));
-                PropertyConfigurator.configure(p);
-            } catch (Exception e) {
-                getLog().warn("Log4j configuration loading error", e);
-            }
-        }
-        getLog().trace("Load component directories");
-        loadComponentDirectories();
-
-        getLog().trace("Preload components from all component directories");
-        HashMap rawComponents = new HashMap();
-        ComponentLoader loader = new ComponentLoader();
-        loader.load(this);
-        rawComponents.putAll(loader.getComponents());
-
-        // Normalize dependencies
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
-            DefaultComponent component = (DefaultComponent) i.next();
-            String[] dependencyIds = component.getDependencyIds();
-            for (int j = 0; j < dependencyIds.length; j++) {
-                String dependencyId = dependencyIds[j];
-                if (rawComponents.containsKey(dependencyId)) {
-                    Component dependency = (Component) rawComponents
-                            .get(dependencyId);
-                    component.addDependency(dependency);
-                } else {
-                    getLog().error(
-                            "Dependency [" + dependencyId
-                                    + "] is not found for component ["
-                                    + component.getId() + "]");
+            if (StringUtils.isEmpty(instanceHome)) {
+                engine = factory.newEngine();
+            } else {
+                File appHome = new File(applicationHome);
+                File insHome = new File(appHome, instanceHome);
+                if (!insHome.isDirectory()) {
+                    insHome = new File(instanceHome);
                 }
+                engine = factory.newEngine(insHome);
             }
-        }
-        ComponentSorter componentSorter = new ComponentSorter();
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                componentSorter.addComponent(component);
-            } catch (Exception e) {
-                getLog().error("Recursive dependency!", e);
-            }
-        }
-        Component[] componentArray = componentSorter.getComponents();
-        for (int i = 0; i < componentArray.length; i++) {
-            Component component = componentArray[i];
-            components.add(component);
-        }
-        getLog().trace("Initialize all loaded components in order");
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                component.initialize();
-                getLog().debug(
-                        "Component " + component.getId() + "-"
-                                + component.getVersion() + " is initialized");
-            } catch (Exception e) {
-                getLog().warn("Can't initialize component " + component, e);
-            }
-        }
-        getLog().trace("Register client components for service components");
-        HashMap services = new HashMap();
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            if (component instanceof Service) {
-                services.put(component.getId(), component);
-            }
-            for (Iterator j = services.values().iterator(); j.hasNext();) {
-                Service service = (Service) j.next();
-                service.register(component);
-                getLog().debug(
-                        "Component " + component.getId()
-                                + " is registered as a client of service "
-                                + service.getId());
-            }
+            engine.startup();
+        } catch (Exception e) {
+            throw new ServletException(
+                    "Can't start jmainboard engine instance", e);
         }
     }
 
-    /** Method setEngineHome() in class DefaultEngine
-     * @param file Engine home directory
+    /** Override method destroy() of parent class
+     * @see javax.servlet.Servlet#destroy()
      */
-    public void setEngineHome(File file) {
-        engineHome = file;
-    }
-
-    /** Override method shutdown in the derived class
-     * @see com.cyclops.jmainboard.Engine#shutdown()
-     */
-    public synchronized void shutdown() {
-        for (ListIterator i = components.listIterator(components.size()); i
-                .hasPrevious();) {
-            Component component = (Component) i.previous();
-            try {
-                if (component instanceof DefaultService) {
-                    ((DefaultService) component).shutdown();
-                    ((DefaultService) component).setStarted(false);
-                }
-            } catch (Exception e) {
-                getLog()
-                        .warn(
-                                "Can't shutdown service [" + component.getId()
-                                        + "]", e);
-            }
-        }
-    }
-
-    /** Override method startup in the derived class
-     * @see com.cyclops.jmainboard.Engine#startup()
-     */
-    public synchronized void startup() {
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                if (component instanceof DefaultService) {
-                    ((DefaultService) component).startup();
-                    ((DefaultService) component).setStarted(true);
-                }
-            } catch (Exception e) {
-                getLog().warn(
-                        "Can't startup service [" + component.getId() + "]", e);
-            }
-        }
+    public void destroy() {
+        getEngine().shutdown();
+        super.destroy();
     }
 }

@@ -204,13 +204,16 @@ import java.util.Properties;
  * Edited with eclipse 2.1.3
  */
 public abstract class EngineFactory {
+
     /** Key for engine factory in context */
     public static final String ENGINE_FACTORY = EngineFactory.class.getName();
+
     /** Value for engine factory in context */
-    public static final String ENGINE_FACTORY_IMPL =
-        "com.cyclops.jmainboard.impl.DefaultEngineFactory";
-    /** JVM runtime folder */
-    public static final String BASEDIR = "basedir";
+    public static final String ENGINE_FACTORY_IMPL = "com.cyclops.jmainboard.impl.DefaultEngineFactory";
+
+    /** Application home directory */
+    public static final String APPLICATION_HOME = "application.home";
+
     /** Method getInstance() in class EngineFactory
      * @return EngineFactory instance
      * @throws Exception for creation
@@ -225,31 +228,34 @@ public abstract class EngineFactory {
      * @throws Exception Exception for creation
      */
     public static final EngineFactory getInstance(Properties props)
-        throws Exception {
+            throws Exception {
         Properties p = new Properties();
         p.setProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
         p.setProperty(Engine.ENGINE, Engine.ENGINE_IMPL);
         p.setProperty(Engine.ENGINE_HOME, new File("").getAbsolutePath());
-        p.setProperty(BASEDIR, new File("").getAbsolutePath());
+        p.setProperty(APPLICATION_HOME, new File("").getAbsolutePath());
         p.putAll(System.getProperties());
         if (props != null) {
             p.putAll(props);
         }
         String implName = p.getProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
-        EngineFactory ef =
-            (EngineFactory) Class.forName(implName).newInstance();
+        EngineFactory ef = (EngineFactory) Class.forName(implName)
+                .newInstance();
         ef.getProperties().putAll(p);
         return ef;
     }
+
     /** Method getProperties() in class EngineFactory
      * @return Properties of this factory
      */
     public abstract Properties getProperties();
+
     /** Create new Engine instance
      * @return New engine instance
      * @throws Exception Creation Exceptions
      */
     public abstract Engine newEngine() throws Exception;
+
     /** Method newEngine() in class EngineFactory
      * @param engineHome Home directory of engine
      * @return New engine instance
