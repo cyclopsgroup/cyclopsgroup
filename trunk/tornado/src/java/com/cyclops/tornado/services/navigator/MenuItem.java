@@ -16,6 +16,7 @@ public class MenuItem {
     private Vector children = new Vector();
     private String href;
     private MenuItem parent;
+    private String template;
     private String text;
     /** Method addChild() in Class MenuItem
      * @param item Node item to be add
@@ -42,6 +43,12 @@ public class MenuItem {
     public MenuItem getParent() {
         return parent;
     }
+    /** Method getTemplate() in Class MenuItem
+     * @return Template value
+     */
+    public String getTemplate() {
+        return template;
+    }
     /** Method getText() in Class MenuItem
      * @return Text message of this node
      */
@@ -66,6 +73,12 @@ public class MenuItem {
      */
     public void setParent(MenuItem item) {
         parent = item;
+    }
+    /** Method setTemplate() in Class MenuItem
+     * @param string New template value
+     */
+    public void setTemplate(String string) {
+        template = string;
     }
     /** Method setText() in Class MenuItem
      * @param string New text value

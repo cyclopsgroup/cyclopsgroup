@@ -10,6 +10,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.tornado.services.BaseService;
 /** Default implementation of UserService
@@ -40,7 +41,7 @@ public class DefaultUserService extends BaseService implements UserService {
                 try {
                     ArrayList tobeRemoved = new ArrayList();
                     for (Iterator i = userRepo.keySet().iterator();
-                            i.hasNext();) {
+                        i.hasNext();) {
                         String key = (String) i.next();
                         UserEntry entry = (UserEntry) userRepo.get(key);
                         if (entry.isExpired()) {
@@ -115,5 +116,31 @@ public class DefaultUserService extends BaseService implements UserService {
      */
     public void shutdown() {
         super.shutdown();
+    }
+    /** Method singin()
+     * @see com.cyclops.tornado.services.user.UserService#singin(java.lang.String, java.lang.String)
+     */
+    public void singin(String key, String userName) {
+        boolean existed = false;
+        for (Iterator i = userRepo.values().iterator(); i.hasNext();) {
+            UserEntry entry = (UserEntry) i.next();
+            if (StringUtils.equals(userName, entry.user.getName())) {
+                existed = true;
+                userRepo.put(key, entry);
+                entry.latestAccess = System.currentTimeMillis();
+                break;
+            }
+        }
+        if (!existed) {
+            User user = loadUser(userName, false);
+            UserEntry entry = new UserEntry(user);
+            userRepo.put(key, entry);
+        }
+    }
+    /** Method singout()
+     * @see com.cyclops.tornado.services.user.UserService#singout(java.lang.String)
+     */
+    public void singout(String key) {
+        userRepo.remove(key);
     }
 }

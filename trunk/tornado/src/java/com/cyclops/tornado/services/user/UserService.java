@@ -28,4 +28,13 @@ public interface UserService extends Service {
      * @return User object, null if this user is not active to this key
      */
     User getActiveUser(String key);
+    /** Method singinUser() in Class UserService
+     * @param key Key of this user session
+     * @param userName Name of the user
+     */
+    void singin(String key, String userName);
+    /** Method singout() in Class UserService
+     * @param key Key of this user session
+     */
+    void singout(String key);
 }

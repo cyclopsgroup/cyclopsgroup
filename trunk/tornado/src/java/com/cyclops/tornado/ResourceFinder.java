@@ -12,11 +12,14 @@ import java.util.Iterator;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * @author joeblack
  * @since 2003-9-29 23:22:52
  */
 public class ResourceFinder {
+    private static Log logger = LogFactory.getLog(ResourceFinder.class);
     /** Empty URL object array */
     public static final URL[] EMPTY_URL_ARRAY = new URL[0];
     private PathTransformable pathTransformer = new PathTransformable() {
@@ -33,6 +36,10 @@ public class ResourceFinder {
     public ResourceFinder(PathTransformable pt) {
         pathTransformer = pt;
     }
+    /** Method getResources() in Class ResourceFinder
+     * @param conf Configuration object contains the information of resources to be find
+     * @return Array of resources in form of URL object
+     */
     public URL[] getResources(Configuration conf) {
         ArrayList urls = new ArrayList();
         for (Iterator i = conf.getKeys(); i.hasNext();) {
@@ -55,6 +62,7 @@ public class ResourceFinder {
                         }
                     }
                 } catch (Exception e) {
+                    logger.error("Can't load resource " + path, e);
                 }
             }
         }

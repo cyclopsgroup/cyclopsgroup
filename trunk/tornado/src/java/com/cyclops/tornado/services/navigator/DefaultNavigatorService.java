@@ -8,6 +8,7 @@ package com.cyclops.tornado.services.navigator;
 import java.net.URL;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.digester.Digester;
 
 import com.cyclops.tornado.ResourceFinder;
 import com.cyclops.tornado.services.BaseService;
@@ -16,11 +17,39 @@ import com.cyclops.tornado.services.BaseService;
  * @since 2003-9-29 23:20:58
  */
 public class DefaultNavigatorService extends BaseService {
+    private class Item extends MenuItem {
+        public String getName() {
+            return getText();
+        }
+        public void setName(String name) {
+            setText(name);
+        }
+    }
     /** Method initialize()
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
     protected void initialize(Configuration conf) throws Exception {
         ResourceFinder rf = new ResourceFinder(this);
         URL[] resources = rf.getResources(conf);
+        MenuItem root = new MenuItem();
+        Digester digester = new Digester();
+        digester.addObjectCreate("menu", Item.class);
+        digester.addObjectCreate("item", Item.class);
+        digester.addSetProperties("item");
+        digester.addSetNext("item", "addChild");
+        for (int i = 0; i < resources.length; i++) {
+            URL resource = resources[i];
+            try {
+                digester.clear();
+                MenuItem rootItem =
+                    (MenuItem) digester.parse(resource.openStream());
+                MenuItem[] children = rootItem.getChildren();
+                for (int j = 0; j < children.length; j++) {
+                    root.addChild(children[j]);
+                }
+            } catch (Exception e) {
+                logger.debug("Resource " + resource + " loading failed!", e);
+            }
+        }
     }
 }

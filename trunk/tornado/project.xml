@@ -82,13 +82,22 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <dependency>
-            <id>commons-io</id>
-            <version>20030203.000550</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
+		<dependency>
+			<id>commons-digester</id>
+			<version>1.2</version>
+			<url>http://jakarta.apache.org/commons/digester</url>
+			<properties>
+				<war.bundle>true</war.bundle>
+			</properties>
+		</dependency>
+		<dependency>
+			<id>commons-io</id>
+			<version>20030203.000550</version>
+			<properties>
+				<war.bundle>true</war.bundle>
+			</properties>
+		</dependency>
+
         <dependency>
             <id>commons-pool</id>
             <version>20030825.183949</version>
