@@ -24,11 +24,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.cyclopsgroup.levistone.PersistenceManager;
-import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.TypedSession;
+import com.cyclopsgroup.levistone.query.Query;
 
 /**
  * Abstract base session implementation

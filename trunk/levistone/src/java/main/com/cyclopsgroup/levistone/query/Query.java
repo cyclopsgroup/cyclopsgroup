@@ -14,16 +14,12 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.cyclopsgroup.levistone.query.Alias;
-import com.cyclopsgroup.levistone.query.Condition;
-import com.cyclopsgroup.levistone.query.Field;
-import com.cyclopsgroup.levistone.query.OrderBy;
 
 /**
  * Query model object

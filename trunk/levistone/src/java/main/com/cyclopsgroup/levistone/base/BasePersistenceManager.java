@@ -24,8 +24,8 @@ import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
-import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.Session;
+import com.cyclopsgroup.levistone.query.Query;
 
 /**
  * Base implementation of persistence manager

@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.levistone;
 
+import com.cyclopsgroup.levistone.query.Query;
+
 /**
  * Named, predefined, parameterized query object
  * 

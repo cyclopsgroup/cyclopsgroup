@@ -21,11 +21,11 @@ import java.util.Map;
 
 import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceManager;
-import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
 import com.cyclopsgroup.levistone.TypedSession;
 import com.cyclopsgroup.levistone.base.BaseConnectionSession;
+import com.cyclopsgroup.levistone.query.Query;
 
 /**
  * Torque implemented session
