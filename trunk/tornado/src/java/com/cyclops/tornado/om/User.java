@@ -1,6 +1,7 @@
 package com.cyclops.tornado.om;
 import org.apache.commons.httpclient.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.apache.torque.TorqueException;
 import org.apache.torque.om.Persistent;
 
 import com.cyclops.tornado.Referencable;
@@ -16,8 +17,8 @@ public class User
     /** Expose copyTo method
      * @param user
      */
-    public void copyTo(User user) {
-        copyTo(user);
+    public void copyTo(User user) throws TorqueException {
+        copyInto(user);
         user.setNew(isNew());
         user.setModified(isModified());
     }

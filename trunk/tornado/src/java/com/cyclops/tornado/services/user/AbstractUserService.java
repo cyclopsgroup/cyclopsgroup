@@ -120,7 +120,7 @@ public abstract class AbstractUserService
         throws Exception {
         String userClassName =
             configuration.getString(
-                "user.classname",
+                "user.implementation",
                 DefaultUser.class.getName());
         User du = (User) Class.forName(userClassName).newInstance();
         du.setName(userName);

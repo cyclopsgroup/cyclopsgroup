@@ -29,7 +29,12 @@ public abstract class BaseService
     public void init() {
         try {
             setConfiguration(getConfiguration());
+            logger.debug(
+                "Start initializing service implementation "
+                    + getClass().getName());
             initialize(configuration);
+            logger.debug(
+                "Initialization finished for service " + getClass().getName());
         } catch (Exception e) {
             logger.error("Service " + getName() + "failed to initialize", e);
         } finally {

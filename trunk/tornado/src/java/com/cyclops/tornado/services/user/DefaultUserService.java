@@ -54,8 +54,8 @@ public class DefaultUserService extends AbstractUserService {
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
     protected void initialize(Configuration conf) throws Exception {
-        super.initialize(conf);
         getServiceBroker().getService(DatabaseService.SERVICE_NAME);
+        super.initialize(conf);
     }
     /**
      * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean)
