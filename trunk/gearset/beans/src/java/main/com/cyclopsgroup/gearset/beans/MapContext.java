@@ -62,7 +62,7 @@ public class MapContext implements Context
         }
         else
         {
-            return map.get(name);
+            return get(name);
         }
     }
 
@@ -73,6 +73,10 @@ public class MapContext implements Context
      */
     public Map getMap()
     {
+        if (map == null)
+        {
+            map = new HashMap();
+        }
         return map;
     }
 
@@ -101,17 +105,16 @@ public class MapContext implements Context
      */
     public void put(String name, Object object)
     {
-        if (map == null)
-        {
-            return;
-        }
         if (object == null)
         {
-            map.remove(name);
+            if (map != null)
+            {
+                map.remove(name);
+            }
         }
         else
         {
-            map.put(name, object);
+            getMap().put(name, object);
         }
     }
 }

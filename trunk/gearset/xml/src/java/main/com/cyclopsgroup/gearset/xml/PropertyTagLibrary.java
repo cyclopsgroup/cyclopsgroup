@@ -22,30 +22,52 @@ import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.commons.jelly.TagLibrary;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.cyclopsgroup.gearset.beans.LogEnabled;
 
 /**
  * Jelly tag library which find tag definitions from a given properties file
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public abstract class PropertyTagLibrary extends TagLibrary
+public abstract class PropertyTagLibrary extends TagLibrary implements
+        LogEnabled
 {
+
+    private Log logger;
+
     /**
      * Constructor of PropertyTagLibrary Tag classes are registered here
-     * 
-     * @throws IOException Possible resource accessing exception
-     * @throws ClassNotFoundException The class specified in definition could not be found
      */
-    public PropertyTagLibrary() throws IOException, ClassNotFoundException
+    public PropertyTagLibrary()
     {
-        Properties tagDefinition = getLibraryProperties();
-        for (Iterator i = tagDefinition.keySet().iterator(); i.hasNext();)
+        try
         {
-            String tagName = (String) i.next();
-            Class tagClass = Thread.currentThread().getContextClassLoader()
-                    .loadClass(tagDefinition.getProperty(tagName));
-            registerTag(tagName, tagClass);
+            Properties tagDefinition = getLibraryProperties();
+            for (Iterator i = tagDefinition.keySet().iterator(); i.hasNext();)
+            {
+                String tagName = (String) i.next();
+                try
+                {
+                    Class tagClass = Thread.currentThread()
+                            .getContextClassLoader().loadClass(
+                                    tagDefinition.getProperty(tagName));
+                    registerTag(tagName, tagClass);
+                }
+                catch (Exception e)
+                {
+                    getLogger().error(
+                            "Can't load tag class "
+                                    + tagDefinition.getProperty(tagName)
+                                    + " for tag " + tagName, e);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            getLogger().fatal("Can't initialize tag library", e);
         }
     }
 
@@ -67,9 +89,22 @@ public abstract class PropertyTagLibrary extends TagLibrary
      * 
      * @return Resource of properties file
      */
-    protected URL getLibraryResource()
+    protected abstract URL getLibraryResource();
+
+    /**
+     * Override method getLogger in super class of PropertyTagLibrary
+     * 
+     * @see com.cyclopsgroup.gearset.beans.LogEnabled#getLogger()
+     */
+    public Log getLogger()
     {
-        throw new NotImplementedException(getClass()
-                + ".getTagDefinitionResource()");
+        synchronized (this)
+        {
+            if (logger == null)
+            {
+                logger = LogFactory.getLog(getClass());
+            }
+        }
+        return logger;
     }
 }
