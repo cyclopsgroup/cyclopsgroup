@@ -71,11 +71,12 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 throws Exception
         {
             String module = StringUtils.chomp(page, "." + extension);
-            String path = category + '/' + module;
+            String requestedPage = category + '/' + module;
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
             for (int i = 0; i < packages.length; i++)
             {
+                String path = requestedPage;
                 String packageName = packages[i];
                 if (pageRenderer.exists(packageName, path))
                 {
@@ -103,7 +104,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                moduleResolver.resolvePage(path, runtime, context);
+                moduleResolver.resolvePage(requestedPage, runtime, context);
                 runtime.getOutput().println(
                         "Resource " + category + ":" + page + " is not found");
             }
