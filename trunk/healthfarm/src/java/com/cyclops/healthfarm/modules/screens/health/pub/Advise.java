@@ -243,18 +243,24 @@ public class Advise extends Screen {
         int thisYear = cal.get(Calendar.YEAR);
         ctx.put("age", new Integer(thisYear - up.getBirthYear()));
     }
+    /**
+     * Item class
+     * @author joeblack
+     *
+     * The class is created at 2003-12-30 15:07:56
+     */
     public class Item {
         private String name;
         private int calorie;
         private String description;
         /** TODO Add javadoc here!
-         * @return
+         * @return Int value of calorie
          */
         public int getCalorie() {
             return calorie;
         }
         /** TODO Add javadoc here!
-         * @return
+         * @return description of this meal
          */
         public String getDescription() {
             return description;

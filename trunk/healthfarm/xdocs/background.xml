@@ -7,6 +7,8 @@
     <body>
         <section name="Development Environment">
             <p>The project is managed and built by <a href="http://maven.apache.org">Maven</a>, which requires developer a little knowledge of maven usage. Please take a look at the maven <a href="http://maven.apache.org">web site</a>.</p>
+            <p>All source code in cyclops group are managed by CVS beyond SSH. Therefore, developers are required to have any kind of CVS and SSH client software. WinCVS and OpenSSH are recommended. CVS connection detail can be found at <a href="cvs-usage.html">Project Info/Source Repository</a>.</p>
+            <p>Presentation layer technology is not JSP but Velocity in this project. The guide document of velocity can be found <a href="http://jakarta.apache.org/velocity/user-guide.html">HERE</a>.</p>
         </section>
     </body>
 </document>

@@ -16,8 +16,6 @@
         </menu>
         <menu name="For Developers">
             <item name="Background" href="/background.html"/>
-            <item name="Prepare to participate" href="/prepare.html"/>
-            <item name="Get to know Tornado" href="/tornado.html"/>
             <item name="Database Schema" href="/database.html"/>
             <item name="Commit your code" href="/commit.html"/>
         </menu>
