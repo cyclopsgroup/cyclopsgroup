@@ -49,6 +49,17 @@ public class DefaultDataSourceManager extends AbstractLogEnabled implements
     private ServiceManager serviceManager;
 
     /**
+     * Add data source with given name
+     *
+     * @param name Data source name
+     * @param dataSource Data source object
+     */
+    public void addDataSource(String name, DataSource dataSource)
+    {
+        dataSources.put(name, dataSource);
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
@@ -90,7 +101,7 @@ public class DefaultDataSourceManager extends AbstractLogEnabled implements
             {
                 DataSource dataSource = (DataSource) serviceManager
                         .lookup(role);
-                dataSources.put(name, dataSource);
+                addDataSource(name, dataSource);
             }
             catch (Exception e)
             {

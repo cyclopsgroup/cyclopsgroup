@@ -40,17 +40,6 @@ public class HibernatePersistenceManager extends AbstractPersistenceManager
     private SessionFactory sessionFactory;
 
     /**
-     * Override method doCloseSession in super class of HibernatePersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
-     */
-    protected void doCloseSession(Session session) throws Exception
-    {
-        HibernateSession ses = (HibernateSession) session;
-        ses.getConnection().close();
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doOpenSession(java.lang.String, java.lang.String)

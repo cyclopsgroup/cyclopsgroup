@@ -72,14 +72,6 @@ public abstract class AbstractPersistenceManager extends AbstractLogEnabled
     }
 
     /**
-     * Overrideable closing session method
-     *
-     * @param session Session to close
-     * @throws Exception Throw exception out
-     */
-    protected abstract void doCloseSession(Session session) throws Exception;
-
-    /**
      * Method doOpenSession() in class BasePersistenceManager
      *
      * @param persistenceName

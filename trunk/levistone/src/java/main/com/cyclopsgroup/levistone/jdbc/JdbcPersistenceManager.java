@@ -27,15 +27,6 @@ import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
 public class JdbcPersistenceManager extends AbstractPersistenceManager
 {
     /**
-     * Override method doCloseSession in super class of JdbcPersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
-     */
-    protected void doCloseSession(Session session) throws Exception
-    {
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doOpenSession(java.lang.String, java.lang.String)

@@ -212,4 +212,14 @@ public class HibernateSession extends AbstractConnectionSession
         // TODO Auto-generated method stub
 
     }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.spi.AbstractSession#doClose()
+     */
+    protected void doClose() throws Exception
+    {
+        super.doClose();
+    }
 }

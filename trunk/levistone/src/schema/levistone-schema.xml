@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
+<database name="default" defaultIdMethod="none">
+   <table name="cg_levistone_user" javaName="User">
+      <column name="user_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true" autoIncrement="true"/>
+      <column name="user_name" type="CHAR" size="30" required="true"/>
+      <column name="email" type="VARCHAR" size="60" required="true"/>
+      <column name="birthday" type="DATE"/>
+      <column name="description" type="VARCHAR" size="255"/>
+      <unique name="user_name_index">
+         <unique-column name="user_name" position="1" direction="A"/>
+      </unique>
+   </table>
+   <table name="cg_levistone_address" javaName="Address">
+      <column name="address_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true" autoIncrement="true"/>
+      <column name="details1" type="VARCHAR" size="255" required="true"/>
+      <column name="details2" type="VARCHAR" size="255"/>
+      <column name="city" type="VARCHAR" size="60"/>
+      <column name="state" type="VARCHAR" size="30"/>
+      <column name="zip_code" type="VARCHAR" size="30" required="true"/>
+      <column name="country" type="CHAR" size="10" required="true" default="us"/>
+      <column name="user_id" type="BIGINT" required="true"/>
+      <foreign-key foreignTable="cg_levistone_user">
+         <reference local="user_id" foreign="user_id" position="1"/>
+      </foreign-key>
+   </table>
+</database>

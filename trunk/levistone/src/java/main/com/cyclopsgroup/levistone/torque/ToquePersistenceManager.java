@@ -21,9 +21,15 @@ import java.util.Hashtable;
 
 import javax.sql.DataSource;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.torque.Torque;
+import org.apache.torque.TorqueException;
 
 import com.cyclopsgroup.levistone.DataSourceManager;
 import com.cyclopsgroup.levistone.Session;
@@ -35,19 +41,28 @@ import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ToquePersistenceManager extends AbstractPersistenceManager
-        implements Serviceable
+        implements Serviceable, Configurable, Initializable
 {
+
+    /**
+     * 
+     * @uml.property name="dataSourceManager" 
+     */
     private DataSourceManager dataSourceManager;
 
+
     private Hashtable peerAdapters = new Hashtable();
+
+    private String torqueProperties;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    protected void doCloseSession(Session session) throws Exception
+    public void configure(Configuration conf) throws ConfigurationException
     {
+        torqueProperties = conf.getChild("properties").getValue();
     }
 
     /**
@@ -87,13 +102,46 @@ public class ToquePersistenceManager extends AbstractPersistenceManager
     }
 
     /**
+     * Init torque component
+     *
+     * @param props Torque property file
+     * @throws TorqueException Throw it out
+     */
+    public void init(String props) throws TorqueException
+    {
+        Torque.init(props);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        init(torqueProperties);
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        dataSourceManager = (DataSourceManager) serviceManager
-                .lookup(DataSourceManager.ROLE);
+        setDataSourceManager((DataSourceManager) serviceManager
+                .lookup(DataSourceManager.ROLE));
     }
+
+    /**
+     * Set data source manager
+     * 
+     * @param dataSourceManager Data source manager
+     * 
+     * @uml.property name="dataSourceManager"
+     */
+    void setDataSourceManager(DataSourceManager dataSourceManager) {
+        this.dataSourceManager = dataSourceManager;
+    }
+
 }
