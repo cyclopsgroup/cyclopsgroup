@@ -54,13 +54,13 @@ public class ServletUIRuntime implements UIRuntime
 
     private String pageBaseUrl;
 
+    private Context pageContext;
+
     private RequestValueParserAdapter requestValueParser;
 
     private ServiceManager serviceManager;
 
     private Context sessionContext;
-
-    private Context pageContext;
 
     /**
      * Default constructor of default web runtime
@@ -132,33 +132,6 @@ public class ServletUIRuntime implements UIRuntime
     }
 
     /**
-     * Override method getHttpServletRequest in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletRequest()
-     */
-    /*
-     * public HttpServletRequest getHttpServletRequest() { return httpServletRequest; }
-     */
-
-    /**
-     * Override method getHttpServletResponse in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletResponse()
-     */
-    /*
-     * public HttpServletResponse getHttpServletResponse() { return httpServletResponse; }
-     */
-
-    /**
-     * Override method getHttpSession in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpSession()
-     */
-    /*
-     * public HttpSession getHttpSession() { return getHttpServletRequest().getSession(true); }
-     */
-
-    /**
      * Override method getLocale in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getLocale()
@@ -196,6 +169,16 @@ public class ServletUIRuntime implements UIRuntime
     public String getPageBaseUrl()
     {
         return pageBaseUrl;
+    }
+
+    /**
+     * Override method getUIContext in super class of DefaultWebRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getPageContext()
+     */
+    public Context getPageContext()
+    {
+        return pageContext;
     }
 
     /**
@@ -246,16 +229,6 @@ public class ServletUIRuntime implements UIRuntime
     public TimeZone getTimeZone()
     {
         return TimeZone.getDefault();
-    }
-
-    /**
-     * Override method getUIContext in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getPageContext()
-     */
-    public Context getPageContext()
-    {
-        return pageContext;
     }
 
     /**

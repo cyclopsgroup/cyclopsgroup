@@ -25,7 +25,13 @@ import org.apache.commons.lang.exception.NestableException;
  */
 public class PageNotFoundException extends NestableException
 {
+
+    /**
+     * 
+     * @uml.property name="page" 
+     */
     private String page;
+
 
     /**
      * Constructor of PageNotFoundException
@@ -42,9 +48,11 @@ public class PageNotFoundException extends NestableException
      * Method getPage() in class PageNotFoundException
      * 
      * @return Page path
+     * 
+     * @uml.property name="page"
      */
-    public String getPage()
-    {
+    public String getPage() {
         return page;
     }
+
 }

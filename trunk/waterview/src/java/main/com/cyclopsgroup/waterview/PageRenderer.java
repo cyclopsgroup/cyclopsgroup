@@ -23,6 +23,7 @@ import com.cyclopsgroup.cyclib.Context;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
+
 public interface PageRenderer
 {
     /**
@@ -38,6 +39,8 @@ public interface PageRenderer
      * Get content type of rendered page
      * 
      * @return String content type
+     * 
+     * @uml.property name="contentType" 
      */
     String getContentType();
 

@@ -31,12 +31,16 @@ import com.cyclopsgroup.cyclib.ValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
+
 public interface UIRuntime
 {
+
     /**
      * Get modifiable processor list
      * 
      * @return Modifiable list
+     * 
+     * @uml.property name="actions" 
      */
     List getActions();
 
@@ -44,6 +48,8 @@ public interface UIRuntime
      * Get base url for this waterview application
      * 
      * @return Base url
+     * 
+     * @uml.property name="applicationBaseUrl" 
      */
     String getApplicationBaseUrl();
 
@@ -51,6 +57,8 @@ public interface UIRuntime
      * Get content type of request
      * 
      * @return Content type of request
+     * 
+     * @uml.property name="contentType" 
      */
     String getContentType();
 
@@ -58,6 +66,8 @@ public interface UIRuntime
      * Method getLocale() in class WebRuntime
      * 
      * @return Current local object
+     * 
+     * @uml.property name="locale" 
      */
     Locale getLocale();
 
@@ -65,6 +75,8 @@ public interface UIRuntime
      * Get output print writer object
      * 
      * @return PrintWriter object
+     * 
+     * @uml.property name="output" 
      */
     PrintWriter getOutput();
 
@@ -72,6 +84,8 @@ public interface UIRuntime
      * Method getRenderTemplate() in class WebRuntime
      * 
      * @return Render template
+     * 
+     * @uml.property name="page" 
      */
     String getPage();
 
@@ -79,6 +93,8 @@ public interface UIRuntime
      * Base url for page
      * 
      * @return Base url for page
+     * 
+     * @uml.property name="pageBaseUrl" 
      */
     String getPageBaseUrl();
 
@@ -86,6 +102,9 @@ public interface UIRuntime
      * Get context for page rendering
      * 
      * @return Context interface
+     * 
+     * @uml.property name="pageContext"
+     * @uml.associationEnd multiplicity="(0 1)"
      */
     Context getPageContext();
 
@@ -93,6 +112,9 @@ public interface UIRuntime
      * Get parameter parser for request parameters
      * 
      * @return Vaue parser interface
+     * 
+     * @uml.property name="requestParameters"
+     * @uml.associationEnd multiplicity="(0 1)"
      */
     ValueParser getRequestParameters();
 
@@ -100,6 +122,8 @@ public interface UIRuntime
      * Get path in request
      * 
      * @return Path in request
+     * 
+     * @uml.property name="requestPath" 
      */
     String getRequestPath();
 
@@ -107,6 +131,9 @@ public interface UIRuntime
      * Method getComponentManager() in class UIRuntime
      * 
      * @return Service manager instance
+     * 
+     * @uml.property name="serviceManager"
+     * @uml.associationEnd multiplicity="(0 1)"
      */
     ServiceManager getServiceManager();
 
@@ -114,13 +141,18 @@ public interface UIRuntime
      * Get context in session level
      * 
      * @return Context interface
+     * 
+     * @uml.property name="sessionContext"
+     * @uml.associationEnd multiplicity="(0 1)"
      */
     Context getSessionContext();
 
     /**
      * Get time zone for current request
-     *
+     * 
      * @return Time zone
+     * 
+     * @uml.property name="timeZone" 
      */
     TimeZone getTimeZone();
 
@@ -128,6 +160,8 @@ public interface UIRuntime
      * Set content type for response
      * 
      * @param contentType Content type
+     * 
+     * @uml.property name="contentType"
      */
     void setContentType(String contentType);
 
@@ -135,6 +169,9 @@ public interface UIRuntime
      * Method setRenderTemplate() in class WebRuntime
      * 
      * @param template
+     * 
+     * @uml.property name="page"
      */
     void setPage(String template);
+
 }

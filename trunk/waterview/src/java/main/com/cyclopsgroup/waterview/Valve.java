@@ -27,23 +27,41 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class Valve extends AbstractLogEnabled
 {
-    /** Empty valve array */
+
+    /**
+     * Empty valve array
+     * 
+     * @uml.property name="eMPTY_ARRAY"
+     * @uml.associationEnd multiplicity="(0 -1)"
+     */
     Valve[] EMPTY_ARRAY = new Valve[0];
 
-    /** Logger object */
+    /**
+     * Logger object
+     * 
+     * @uml.property name="logger"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     protected Log logger = LogFactory.getLog(getClass());
 
+    /**
+     * 
+     * @uml.property name="next"
+     * @uml.associationEnd multiplicity="(0 1)"
+     */
     private Valve next;
 
     /**
      * Getter method for next
-     *
+     * 
      * @return Returns the next.
+     * 
+     * @uml.property name="next"
      */
-    public Valve getNext()
-    {
+    public Valve getNext() {
         return next;
     }
+
 
     /**
      * Invoke this valve.
@@ -70,11 +88,13 @@ public abstract class Valve extends AbstractLogEnabled
 
     /**
      * Setter method for next
-     *
+     * 
      * @param next The next to set.
+     * 
+     * @uml.property name="next"
      */
-    public void setNext(Valve next)
-    {
+    public void setNext(Valve next) {
         this.next = next;
     }
+
 }

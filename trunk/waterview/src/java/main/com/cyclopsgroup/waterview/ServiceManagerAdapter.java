@@ -29,8 +29,19 @@ import org.codehaus.plexus.PlexusContainer;
  */
 public class ServiceManagerAdapter implements ServiceManager
 {
+
+    /**
+     * 
+     * @uml.property name="container"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     private PlexusContainer container;
 
+    /**
+     * 
+     * @uml.property name="logger"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     private Log logger = LogFactory.getLog(getClass());
 
     /**
