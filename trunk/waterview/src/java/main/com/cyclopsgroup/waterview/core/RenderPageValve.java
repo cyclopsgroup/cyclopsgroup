@@ -43,24 +43,24 @@ import com.cyclopsgroup.waterview.Valve;
  */
 public class RenderPageValve extends Valve implements Configurable, Serviceable
 {
+
     /**
      * Implementation of runtime page renderer
      */
     public class RuntimeRenderer implements RuntimePageRenderer
     {
-
         private Context context;
 
         private String extension;
 
-        private PageRenderer renderer;
+        private PageRenderer pageRenderer;
 
         private UIRuntime runtime;
 
-        private RuntimeRenderer(PageRenderer renderer, UIRuntime runtime,
+        private RuntimeRenderer(PageRenderer pageRenderer, UIRuntime runtime,
                 Context context, String extension)
         {
-            this.renderer = renderer;
+            this.pageRenderer = pageRenderer;
             this.runtime = runtime;
             this.context = context;
             this.extension = extension;
@@ -68,17 +68,38 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         }
 
         private void render(Context context, String packageName,
-                String modulePath, UIRuntime runtime) throws Exception
+                String modulePath, String errorModulePath, UIRuntime runtime)
+                throws Exception
         {
+            moduleResolver.resolvePage(modulePath, runtime, context);
             LocalizationTool parent = (LocalizationTool) context
                     .get(localizationName);
             Context newContext = new DefaultContext(context);
-            LocalizationTool localization = new LocalizationTool(parent,
-                    ResourceBundle.getBundle(packageName + "/" + modulePath
-                            + "_ResourceBundle", runtime.getLocale()));
-            newContext.put(localizationName, localization);
-            new RuntimeRenderer(renderer, runtime, newContext, extension);
-            renderer.render(newContext, packageName, modulePath, runtime);
+            try
+            {
+                LocalizationTool localization = new LocalizationTool(parent,
+                        ResourceBundle.getBundle(packageName + "/" + modulePath
+                                + "_ResourceBundle", runtime.getLocale()));
+                newContext.put(localizationName, localization);
+                newContext.put("renderer", new RuntimeRenderer(pageRenderer,
+                        runtime, newContext, extension));
+            }
+            catch (Exception ignored)
+            {
+                //ignore exception here
+            }
+
+            try
+            {
+                pageRenderer.render(newContext, packageName, modulePath,
+                        runtime);
+            }
+            catch (Exception e)
+            {
+                newContext.put("exception", e);
+                pageRenderer.render(newContext, packageName, errorModulePath,
+                        runtime);
+            }
         }
 
         /**
@@ -92,16 +113,17 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         {
             String module = StringUtils.chomp(page, "." + extension);
             String path = category + '/' + module;
+            String errorPath = category + '/' + errorModule;
             moduleResolver.resolvePage(path, runtime, context);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
             for (int i = 0; i < packages.length; i++)
             {
                 String packageName = packages[i];
-                if (renderer.exists(packageName, path))
+                if (pageRenderer.exists(packageName, path))
                 {
                     found = true;
-                    render(context, packageName, path, runtime);
+                    render(context, packageName, path, errorPath, runtime);
                     break;
                 }
                 String[] parts = StringUtils.split(page, '/');
@@ -109,11 +131,10 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 {
                     parts[j] = "Default";
                     path = category + '/' + StringUtils.join(parts);
-                    if (renderer.exists(packageName, path))
+                    if (pageRenderer.exists(packageName, path))
                     {
                         found = true;
-                        moduleResolver.resolvePage(path, runtime, context);
-                        render(context, packageName, path, runtime);
+                        render(context, packageName, path, errorPath, runtime);
                         break;
                     }
                     parts[j] = null;
@@ -125,12 +146,16 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                throw new PageNotFoundException(category + "/" + page);
+                context.put("exception", new PageNotFoundException(category
+                        + "/" + page));
+                render(category, errorModule + '.' + extension);
             }
         }
     }
 
     private String defaultCategory;
+
+    private String errorModule;
 
     private String localizationName;
 
@@ -168,6 +193,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         defaultCategory = conf.getChild("default-category").getValue("layout");
         localizationName = conf.getChild("localization").getAttribute("name",
                 "resourceBundle");
+        errorModule = conf.getChild("error-page").getValue("Error");
     }
 
     /**
