@@ -5,8 +5,20 @@
         <properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
     </properties>
     <body>
-        <section name="WHO IS IT?">
-            <p>Cyclops Groups Community is made up of a group of talented Java gurus who are tring to make their contribution to open source. At the beginning, we focus on solutions for some common questions like web application framework, database access tool or mathematics topics. All the projects are powered by <a href="http://www.apache.org">Apache</a> and <a href="http://www.werken.com">werken</a> open source projects, built by <a href="http://maven.apache.org">maven</a> and hosted in <a href="http://sourceforge.net">SourceForge.net</a>.</p>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td valign="top">
+                    <section name="Mission">
+                        <p>At the beginning, we focus on solutions for some common questions like application framework, database tool or mathematics topics.</p>
+                    </section>
+                </td>
+                <td align="right">
+                    <img src="images/lamp.gif"/>
+                </td>
+            </tr>
+        </table>
+        <section name="Who is it?">
+            <p>Cyclops Groups Community is made up of a group of talented Java gurus who are tring to make their contribution to open source. All the projects are powered by <a href="http://www.apache.org">Apache</a> and <a href="http://www.werken.com">werken</a> open source projects, built by <a href="http://maven.apache.org">maven</a> and hosted in <a href="http://sourceforge.net">SourceForge.net</a>.</p>
         </section>
     </body>
 </document>

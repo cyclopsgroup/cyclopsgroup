@@ -360,8 +360,8 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     </jsl:template>
     <jsl:template match="table" trim="true">
         <j:set var="rowcount" value="0"/>
-        <table cellpadding="3" cellspacing="1" border="0" width="100%">
-            <jsl:applyTemplates select="*"/>
+        <table width="100%" cellspacing="1">
+            <jsl:applyTemplates select="*|@*"/>
         </table>
     </jsl:template>
     <jsl:template match="tr" trim="true">
