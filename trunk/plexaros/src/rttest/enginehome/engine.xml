@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GB2312"?>
+<engine>
+	<properties>
+		<title>local plexaros engine for testing</title>
+		<description>just for test</description>
+	</properties>
+	<plugins>
+	</plugins>
+</engine>

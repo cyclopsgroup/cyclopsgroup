@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<properties>
+		<description>just for testing</description>
+		<implementation>com.cyclops.plexaros.impl.Test1Plugin</implementation>
+	</properties>
+	<dependencies>
+		<dependency>test1</dependency>
+	</dependencies>
+</plugin>

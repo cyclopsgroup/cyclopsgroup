@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application
+	2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<servlet>
+		<servlet-name>plexus</servlet-name>
+		<servlet-class>com.cyclops.plexaros.servlet.PlexusServlet</servlet-class>
+		<init-param>
+			<param-name>pleuxaros-home</param-name>
+			<param-value>WEB-INF/plexaros</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+</web-app>
