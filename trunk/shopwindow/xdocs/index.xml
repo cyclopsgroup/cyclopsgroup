@@ -9,12 +9,11 @@
             <tr>
                 <td valign="top">
                     <section name="Mission">
-                        <p>At the beginning, we focus on solutions for some common questions like application framework, database tool or mathematics topics.</p>
+                        <p>At the beginning, we focus on solutions for some common questions like application framework, database tool or mathematics problems.</p>
+                        <p>You can find a list of projects hosted in <a href="projects.html">this page</a>.</p>
                     </section>
                 </td>
-                <td align="right">
-                    <img src="images/lamp.gif"/>
-                </td>
+                <td align="right"><img src="images/lamp.gif"/></td>
             </tr>
         </table>
         <section name="Who is it?">

@@ -9,7 +9,7 @@
         <url>http://cyclops-group.sourceforge.net</url>
         <logo>/images/logo.gif</logo>
     </organization>
-    <logo>/images/blue-logo.gif</logo>
+    <logo>/images/shopwindow_logo.gif</logo>
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.shopwindow</package>
     <shortDescription>Portal site of Cyclops Group Community</shortDescription>

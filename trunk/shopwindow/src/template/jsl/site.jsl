@@ -106,6 +106,15 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                             <jsl:applyTemplates select="$doc/document/body/*"/>
                         </td>
                         <td bgcolor="#FFFFFF">
+                            <table border="0" cellspacing="3" width="100%">
+                                <tr>
+                                    <td align="center">
+                                        <a href="${pom.url}">
+                                            <img border="0" src="${relativePath}${pom.logo}" alt="${pom.name} site"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                             <jsl:applyTemplates select="$nav/body/links"/>
                         </td>
                     </tr>
@@ -217,11 +226,6 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     <!-- Process the breadcrumb navbar -->
     <jsl:template match="links" trim="true">
         <table width="100%" cellspacing="0" cellpadding="3">
-            <tr>
-                <td>
-                    <img src="${relativePath}/images/none.png" width="1" height="25"/>
-                </td>
-            </tr>
             <tr>
                 <td colspan="2" bgcolor="#F7941C">
                     <b>
