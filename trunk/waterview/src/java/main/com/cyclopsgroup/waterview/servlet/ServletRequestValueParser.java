@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.cyclib.ValueParser;
 
 /**
  * Servet request implemented value parser
@@ -40,32 +40,42 @@ public class ServletRequestValueParser extends ValueParser
     }
 
     /**
-     * Override method doGetValue in super class of ServletRequestValueParser
-     * 
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.cyclib.ValueParser#add(java.lang.String, java.lang.String)
      */
-    protected String doGetValue(String valueName) throws Exception
+    public void add(String name, String value)
     {
-        return getHttpServletRequest().getParameter(valueName);
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * Override method doGetValues in super class of ServletRequestValueParser
-     * 
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.cyclib.ValueParser#doGetValue(java.lang.String)
      */
-    protected String[] doGetValues(String valueName) throws Exception
+    protected String doGetValue(String name) throws Exception
     {
-        return getHttpServletRequest().getParameterValues(valueName);
+        return httpServletRequest.getParameter(name);
     }
 
     /**
-     * Getter method for property httpServletRequest
-     * 
-     * @return Returns the httpServletRequest.
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.cyclib.ValueParser#doGetValues(java.lang.String)
      */
-    public HttpServletRequest getHttpServletRequest()
+    protected String[] doGetValues(String name) throws Exception
     {
-        return httpServletRequest;
+        return httpServletRequest.getParameterValues(name);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.cyclib.ValueParser#remove(java.lang.String)
+     */
+    public void remove(String name)
+    {
+        throw new UnsupportedOperationException();
     }
 }

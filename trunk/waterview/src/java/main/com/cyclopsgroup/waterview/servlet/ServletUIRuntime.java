@@ -28,8 +28,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.cyclib.DefaultContext;
+import com.cyclopsgroup.cyclib.ValueParser;
 import com.cyclopsgroup.waterview.UIRuntime;
-import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * Default implementation of WebRuntime
