@@ -48,7 +48,7 @@ public class Picture
     private int width = -1;
 
     /**
-     * TODO Add javadoc for this method
+     * Generate thumbnail file with given max size
      *
      * @param thumbnailFile
      * @param maxWidth
