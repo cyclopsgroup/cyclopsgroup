@@ -54,7 +54,7 @@
             <url>http://jakarta.apache.org/velocity</url>
         </dependency>
         <dependency>
-            <id>velocity-tool</id>
+            <id>velocity-tools</id>
             <version>1.0</version>
             <url>http://jakarta.apache.org/velocity/tools</url>
         </dependency>
