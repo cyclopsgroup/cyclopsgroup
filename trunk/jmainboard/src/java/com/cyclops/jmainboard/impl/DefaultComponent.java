@@ -202,6 +202,7 @@ import java.util.Properties;
 
 import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.Engine;
+import com.cyclops.jmainboard.utils.*;
 
 /** Default implementation of Component interface
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>

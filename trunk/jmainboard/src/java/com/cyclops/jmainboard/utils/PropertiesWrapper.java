@@ -192,9 +192,11 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.impl;
+package com.cyclops.jmainboard.utils;
 
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 /** Properties wrapper with a parent properties
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
@@ -205,6 +207,15 @@ import java.util.Properties;
 public class PropertiesWrapper extends Properties {
 
     private Properties parent;
+    /** Override method entrySet in the derived class
+     * @see java.util.Map#entrySet()
+     */
+    public Set entrySet() {
+        Set ret = new HashSet();
+        ret.addAll(super.entrySet());
+        ret.addAll(getParent().entrySet());
+        return ret;
+    }
 
     /** Method getParent() in class PropertiesWrapper
      * @return Parent properties
