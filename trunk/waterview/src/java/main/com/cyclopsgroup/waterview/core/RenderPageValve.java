@@ -105,14 +105,12 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                throw new PageNotFoundException(page);
+                throw new PageNotFoundException(category + "/" + page);
             }
         }
     }
 
     private String defaultCategory;
-
-    private String defaultPage;
 
     private ModuleResolver moduleResolver;
 
@@ -147,7 +145,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
         }
         defaultCategory = conf.getChild("default-category").getValue("layout");
-        defaultPage = conf.getChild("default-page").getValue("Index.vm");
     }
 
     /**
@@ -158,36 +155,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
     public void invoke(UIRuntime runtime) throws Exception
     {
         String page = runtime.getPage();
-        if (StringUtils.isEmpty(page))
-        {
-            page = null;
-            String[] parts = StringUtils.split(runtime.getHttpServletRequest()
-                    .getPathInfo(), '|');
-            for (Iterator i = renderers.keySet().iterator(); i.hasNext()
-                    && page == null;)
-            {
-                String suffix = '.' + (String) i.next();
-                for (int j = 0; j < parts.length; j++)
-                {
-                    String part = parts[j];
-                    if (part.endsWith(suffix))
-                    {
-                        page = part;
-                        break;
-                    }
-                }
-            }
-        }
-        if (StringUtils.isEmpty(page))
-        {
-            page = defaultPage;
-        }
-        if (page.charAt(0) == '/')
-        {
-            page = page.substring(1);
-        }
-        runtime.setPage(page);
-        runtime.getUIContext().put("page", page);
         String extension = null;
         PageRenderer renderer = null;
         for (Iterator i = renderers.keySet().iterator(); i.hasNext();)

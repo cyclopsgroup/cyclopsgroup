@@ -94,10 +94,21 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
             runtime.getUIContext().put("velocityContext", vc);
         }
         String templatePath = getTemplatePath(packageName, module);
-        OutputStreamWriter output = new OutputStreamWriter(runtime
-                .getHttpServletResponse().getOutputStream());
+        OutputStreamWriter output = (OutputStreamWriter) runtime.getUIContext()
+                .get("velocityOutput");
+        boolean createNew = false;
+        if (output == null)
+        {
+            createNew = true;
+            output = new OutputStreamWriter(runtime.getHttpServletResponse()
+                    .getOutputStream());
+            runtime.getUIContext().put("velocityOutput", output);
+        }
         velocityComponent.mergeTemplate(templatePath, vc, output);
-        output.flush();
+        if (createNew)
+        {
+            output.flush();
+        }
     }
 
     /**

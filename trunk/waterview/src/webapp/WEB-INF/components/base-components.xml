@@ -15,7 +15,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <properties>${basedir}/WEB-INF/velocity.properties</properties>
-                <logtag>com.cyclopsgroup.waterview</logtag>
+                <logtag>org.apache.velocity</logtag>
             </configuration>
         </component>
     </components>

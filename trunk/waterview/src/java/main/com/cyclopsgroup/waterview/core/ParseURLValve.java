@@ -1,0 +1,80 @@
+/* ==========================================================================
+ * Copyright 2002-2004 Cyclops Group Community
+ * 
+ * Licensed under the Open Software License, Version 2.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://opensource.org/licenses/osl-2.1.php
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * =========================================================================
+ */
+package com.cyclopsgroup.waterview.core;
+
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.commons.lang.StringUtils;
+
+import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.Valve;
+
+/**
+ * Valve to prepare information contained by URL
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ */
+public class ParseURLValve extends Valve implements Configurable
+{
+
+    private String defaultPath;
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        defaultPath = conf.getChild("default-path").getValue("/Index.vm");
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.UIRuntime)
+     */
+    public void invoke(UIRuntime runtime) throws Exception
+    {
+        String pathInfo = runtime.getHttpServletRequest().getPathInfo();
+        if (StringUtils.isEmpty(pathInfo))
+        {
+            pathInfo = defaultPath;
+        }
+        String[] parts = StringUtils.split(runtime.getHttpServletRequest()
+                .getPathInfo(), '|');
+        for (int i = 0; i < parts.length; i++)
+        {
+            String part = parts[i];
+            if (part.charAt(0) == '/')
+            {
+                part = part.substring(1);
+            }
+            if (i == parts.length - 1)
+            {
+                runtime.setPage(part);
+                runtime.getUIContext().put("page", part);
+            }
+            else
+            {
+                runtime.getActions().add(part);
+            }
+        }
+        invokeNext(runtime);
+    }
+}

@@ -84,17 +84,15 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                 moduleResolver.resolve(runtime, action);
             }
         }
-        String[] parts = StringUtils.split(runtime.getHttpServletRequest()
-                .getPathInfo(), '|');
         for (Iterator i = actionExtensions.iterator(); i.hasNext();)
         {
             String suffix = '.' + (String) i.next();
-            for (int j = 0; j < parts.length; j++)
+            for (Iterator j = runtime.getActions().iterator(); j.hasNext();)
             {
-                String part = parts[j];
-                if (part.endsWith(suffix))
+                String action = (String) j.next();
+                if (action.endsWith(suffix))
                 {
-                    String module = StringUtils.chomp(part);
+                    String module = StringUtils.chomp(action);
                     moduleResolver.resolve(runtime, module);
                 }
             }
