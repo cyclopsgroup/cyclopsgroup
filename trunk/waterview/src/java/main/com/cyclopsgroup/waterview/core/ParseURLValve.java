@@ -14,25 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.core;
 
-import java.io.PrintWriter;
+import org.apache.avalon.framework.service.ServiceManager;
 
+import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * Web renderer
+ * Valve to parse URL
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Renderer
+public class ParseURLValve implements Valve
 {
 
     /**
-     * Render a page
+     * Override method process in super class of ParseURLValve
      * 
-     * @param runtime Runtime data
-     * @param out Output writer
-     * @throws Exception Throw it out
+     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime, org.apache.avalon.framework.service.ServiceManager)
      */
-    void render(UIRuntime runtime, PrintWriter out) throws Exception;
+    public void process(UIRuntime runtime, ServiceManager serviceManager)
+            throws Exception
+    {
+        String path = runtime.getHttpServletRequest().getPathInfo();
+    }
 }

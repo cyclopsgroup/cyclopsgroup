@@ -16,73 +16,25 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.util.LinkedList;
-
-import org.apache.commons.collections.ExtendedProperties;
-
 /**
- * TODO Add javadoc for class
+ * Waterview component
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class Waterview
+public interface Waterview
 {
-    private LinkedList valves = new LinkedList();
+    /** Role name of this component in container */
+    String ROLE = Waterview.class.getName();
 
     /**
-     * Method addValve() in class Pipeline
+     * Process request
      * 
-     * @param valve
+     * @param runtime Runtime info
+     * @throws Exception Throw it out
      */
-    public void addValve(WaterviewValve valve)
-    {
-        valves.add(valve);
-    }
-
-    /**
-     * Method getValves() in class Pipeline
-     * 
-     * @return
-     */
-    public WaterviewValve[] getValves()
-    {
-        return (WaterviewValve[]) valves.toArray(WaterviewValve.EMPTY_ARRAY);
-    }
-
-    /**
-     * Method init() in class WaterviewPipeline
-     * 
-     * @param props
-     * @throws Exception
-     */
-    public void init(ExtendedProperties props) throws Exception
-    {
-        String[] valveClassNames = props.getStringArray("pipeline.valve");
-        for (int i = 0; i < valveClassNames.length; i++)
-        {
-            String valveClassName = valveClassNames[i];
-            try
-            {
-                WaterviewValve valve = (WaterviewValve) Class.forName(
-                        valveClassName).newInstance();
-                addValve(valve);
-            }
-            catch (Exception e)
-            {
-                //TODO handle Exception
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Method process() in class WaterviewPipeline
-     * 
-     * @param runtime
-     * @throws Exception
-     */
-    public void process(UIRuntime runtime) throws Exception
-    {
-
-    }
+    void process(UIRuntime runtime) throws Exception;
+    
+    String[] getExtensions();
+    
+    Resolver getResolver(String extension);
 }

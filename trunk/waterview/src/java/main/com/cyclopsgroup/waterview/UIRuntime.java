@@ -66,7 +66,7 @@ public interface UIRuntime
      * 
      * @return Modifiable list
      */
-    List getProcessors();
+    List getActions();
 
     /**
      * Get context for page rendering

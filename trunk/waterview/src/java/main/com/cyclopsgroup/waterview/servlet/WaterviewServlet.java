@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -25,8 +26,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.embed.Embedder;
 
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
@@ -38,7 +42,26 @@ import com.cyclopsgroup.waterview.Waterview;
  */
 public class WaterviewServlet extends HttpServlet
 {
-    private Waterview waterview;
+    private Embedder embedder;
+
+    private Log logger = LogFactory.getLog(getClass());
+
+    /**
+     * Override method destroy in super class of WaterviewServlet
+     * 
+     * @see javax.servlet.Servlet#destroy()
+     */
+    public void destroy()
+    {
+        try
+        {
+            embedder.stop();
+        }
+        catch (Exception e)
+        {
+            logger.error("Can not stop plexus container", e);
+        }
+    }
 
     /**
      * Override method doGet in super class of WaterviewServlet
@@ -62,6 +85,16 @@ public class WaterviewServlet extends HttpServlet
         internallyProcess(request, response);
     }
 
+    /**
+     * Get plexus container
+     * 
+     * @return Plexus container object
+     */
+    public PlexusContainer getContainer()
+    {
+        return embedder.getContainer();
+    }
+
     private void handleException(Throwable e, UIRuntime runtime)
             throws ServletException
     {
@@ -75,28 +108,43 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
-        waterview = new Waterview();
-
-        String propertiesFile = config.getInitParameter("waterview.properties");
-        if (StringUtils.isEmpty(propertiesFile))
+        String conf = config.getInitParameter("conf");
+        if (StringUtils.isEmpty(conf))
         {
-            propertiesFile = "WEB-INF/waterview.properties";
+            conf = "WEB-INF/waterview-components.xml";
+        }
+        embedder = new Embedder();
+        embedder.addContextValue("basedir", config.getServletContext()
+                .getRealPath(""));
+        Enumeration i = config.getInitParameterNames();
+        while (i.hasMoreElements())
+        {
+            String key = (String) i.nextElement();
+            String value = config.getInitParameter(key);
+            embedder.addContextValue(key, value);
+        }
+        File file = new File(conf);
+        if (!file.isFile())
+        {
+            file = new File(config.getServletContext().getRealPath(conf));
+        }
+        if (!file.isFile())
+        {
+            file = new File(conf);
+        }
+        if (!file.isFile())
+        {
+            throw new ServletException("Can not find configuration file "
+                    + conf);
         }
         try
         {
-            ExtendedProperties props = new ExtendedProperties(propertiesFile);
-            Enumeration e = config.getInitParameterNames();
-            while (e.hasMoreElements())
-            {
-                String name = (String) e.nextElement();
-                props.setProperty(name, config.getInitParameter(name));
-            }
-            waterview.init(props.subset("waterview"));
+            embedder.setConfiguration(file.toURL());
+            embedder.start();
         }
         catch (Exception e)
         {
-            throw new ServletException("Can not initialize waterview with "
-                    + propertiesFile, e);
+            throw new ServletException("Init servlet error", e);
         }
     }
 
@@ -106,6 +154,8 @@ public class WaterviewServlet extends HttpServlet
         DefaultWebRuntime runtime = new DefaultWebRuntime(request, response);
         try
         {
+            Waterview waterview = (Waterview) getContainer().lookup(
+                    Waterview.ROLE);
             waterview.process(runtime);
         }
         catch (Throwable e)

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <configuration>
+                <pipeline>
+                    <valve>com.cyclopsgroup.waterview.core.ParseURLValve</valve>
+                    <valve>com.cyclopsgroup.waterview.core.RunModulesValve</valve>
+                    <valve>com.cyclopsgroup.waterview.core.RenderPageValve</valve>
+                </pipeline>
+                <resolvers>
+                    <resolver extension="do">com.cyclops.waterview.core.ActionResolver</resolver>
+                    <resolver extension="vm">com.cyclops.waterview.core.VelocityPageRenderer</resolver>
+                    <resolver extension="xml">com.cyclops.waterview.core.XMLPageResolver</resolver>
+                </resolvers>
+            </configuration>
+        </component>
+    </components>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+        </component>
+    </load-on-start>
+</component-set>

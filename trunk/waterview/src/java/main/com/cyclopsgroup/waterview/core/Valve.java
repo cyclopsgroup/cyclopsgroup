@@ -14,30 +14,29 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.valve;
+package com.cyclopsgroup.waterview.core;
 
-import org.apache.commons.collections.ExtendedProperties;
+import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.waterview.UIRuntime;
-import com.cyclopsgroup.waterview.WaterviewValve;
 
 /**
  * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ParseURLValve implements WaterviewValve
+public interface Valve
 {
+    /** Empty valve array */
+    Valve[] EMPTY_ARRAY = new Valve[0];
 
     /**
-     * Override method process in super class of ParseURLValve
+     * Method process() in class Valve
      * 
-     * @see com.cyclopsgroup.waterview.WaterviewValve#process(com.cyclopsgroup.waterview.UIRuntime, org.apache.commons.collections.ExtendedProperties)
+     * @param runtime
+     * @param serviceManager
+     * @throws Exception
      */
-    public void process(UIRuntime runtime, ExtendedProperties props)
-            throws Exception
-    {
-        String path = runtime.getHttpServletRequest().getPathInfo();
-
-    }
+    void process(UIRuntime runtime, ServiceManager serviceManager)
+            throws Exception;
 }

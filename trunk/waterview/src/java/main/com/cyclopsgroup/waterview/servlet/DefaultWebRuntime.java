@@ -36,11 +36,12 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class DefaultWebRuntime implements UIRuntime
 {
+
+    private LinkedList actions = new LinkedList();
+
     private HttpServletRequest httpServletRequest;
 
     private HttpServletResponse httpServletResponse;
-
-    private LinkedList processors = new LinkedList();
 
     private InheritableContext renderContext;
 
@@ -59,6 +60,16 @@ public class DefaultWebRuntime implements UIRuntime
         httpServletRequest = request;
         httpServletResponse = response;
         requestValueParser = new HttpRequestValueParser(request);
+    }
+
+    /**
+     * Override method getProcessors in super class of DefaultWebRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getActions()
+     */
+    public List getActions()
+    {
+        return actions;
     }
 
     /**
@@ -102,13 +113,13 @@ public class DefaultWebRuntime implements UIRuntime
     }
 
     /**
-     * Override method getProcessors in super class of DefaultWebRuntime
+     * Override method getRenderTemplate in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getProcessors()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getPage()
      */
-    public List getProcessors()
+    public String getPage()
     {
-        return processors;
+        return renderTemplate;
     }
 
     /**
@@ -119,16 +130,6 @@ public class DefaultWebRuntime implements UIRuntime
     public Context getRenderContext()
     {
         return renderContext;
-    }
-
-    /**
-     * Override method getRenderTemplate in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getPage()
-     */
-    public String getPage()
-    {
-        return renderTemplate;
     }
 
     /**
