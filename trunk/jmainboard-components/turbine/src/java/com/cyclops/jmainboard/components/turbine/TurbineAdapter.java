@@ -194,32 +194,26 @@
  */
 package com.cyclops.jmainboard.components.turbine;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.turbine.Turbine;
 import org.apache.turbine.TurbineConfig;
 
-import com.cyclops.jmainboard.Engine;
-import com.cyclops.jmainboard.EngineFactory;
+import com.cyclops.jmainboard.servlet.ServletLoader;
 
 /** Adapter for Turbine servlet
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class TurbineAdapter extends HttpServlet {
+public class TurbineAdapter extends ServletLoader {
 
     private Log log = LogFactory.getLog(getClass());
 
@@ -229,7 +223,7 @@ public class TurbineAdapter extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         turbineInstance.doGet(req, res);
     }
 
@@ -237,7 +231,7 @@ public class TurbineAdapter extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         turbineInstance.doPost(req, res);
     }
 
@@ -246,49 +240,18 @@ public class TurbineAdapter extends HttpServlet {
      */
     public void destroy() {
         turbineInstance.destroy();
+        super.destroy();
     }
 
     /** Override method init() of parent class
      * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
      */
     public void init(ServletConfig config) throws ServletException {
-        try {
-            initEngine(config);
-        } catch (Exception e) {
-            throw new ServletException(
-                "Can't start jmainboard engine instance",
-                e);
-        }
+        super.init(config);
         TurbineComponent component = TurbineComponent.getInstance();
         MutableServletConfig conf = new MutableServletConfig(config);
-        conf.getInitParameters().setProperty(
-            TurbineConfig.PROPERTIES_KEY,
-            component.getTurbineResources());
+        conf.getInitParameters().setProperty(TurbineConfig.PROPERTIES_KEY,
+                component.getTurbineResources());
         turbineInstance.init(conf);
-    }
-
-    private void initEngine(ServletConfig config) throws Exception {
-        Properties initProperties = new Properties();
-        for (Enumeration e = config.getInitParameterNames();
-            e.hasMoreElements();
-            ) {
-            String attributeName = (String) e.nextElement();
-            String attributeValue = config.getInitParameter(attributeName);
-            initProperties.setProperty(attributeName, attributeValue);
-        }
-        initProperties.setProperty(
-            "servlet.home",
-            config.getServletContext().getRealPath(""));
-        EngineFactory ef = EngineFactory.getInstance(initProperties);
-        Engine engine = null;
-        String engineHome = config.getInitParameter("jmainboard.home");
-        if (StringUtils.isEmpty(engineHome)) {
-            engine = ef.newEngine();
-        } else {
-            File engineHomeFile =
-                new File(config.getServletContext().getRealPath(engineHome));
-            engine = ef.newEngine(engineHomeFile);
-        }
-        engine.startup();
     }
 }
