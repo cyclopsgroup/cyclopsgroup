@@ -16,6 +16,13 @@
     EncryptedPassword CDATA #REQUIRED
     Description CDATA #IMPLIED
     IsSystem CDATA #REQUIRED
+    AccessCounter CDATA #REQUIRED
+    Confirmed CDATA #IMPLIED
+    Email CDATA #REQUIRED
+    FirstName CDATA #REQUIRED
+    LastName CDATA #REQUIRED
+    LastLoginTime CDATA #IMPLIED
+    LastAccessTime CDATA #IMPLIED
     CreatedTime CDATA #IMPLIED
     IsDisabled CDATA #REQUIRED
 >

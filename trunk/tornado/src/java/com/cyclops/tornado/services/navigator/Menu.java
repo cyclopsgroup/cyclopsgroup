@@ -11,6 +11,8 @@ import java.util.Vector;
  * @since 2003-10-6 15:39:37
  */
 public class Menu {
+    /** Empty Array */
+    public static final Menu[] EMPTY_ARRAY = new Menu[0];
     private Vector children = new Vector();
     private String name;
     /** Method addChild() in Class Menu

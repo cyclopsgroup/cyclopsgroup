@@ -7,7 +7,6 @@
 package com.cyclops.tornado.services.rundata;
 import java.util.Hashtable;
 
-import org.apache.commons.httpclient.Base64;
 import org.apache.fulcrum.security.session.SessionBindingEvent;
 
 import com.cyclops.tornado.om.User;
@@ -20,20 +19,26 @@ public class TornadoUser
     implements
         org.apache.fulcrum.security.entity.User,
         com.cyclops.tornado.services.user.User {
-    private Hashtable tempStorage = new Hashtable();
-    private Hashtable permStorage = new Hashtable();
     private boolean isAnonymous = true;
+    private Hashtable permStorage = new Hashtable();
+    private Hashtable tempStorage = new Hashtable();
     /** Method getAccessCounterForSession()
      * @see org.apache.fulcrum.security.entity.User#getAccessCounterForSession()
      */
     public int getAccessCounterForSession() {
         return getAccessCounter();
     }
-    /** Method getPassword()
-     * @see org.apache.fulcrum.security.entity.User#getPassword()
+    /** Method getName()
+     * @see org.apache.fulcrum.security.entity.SecurityEntity#getName()
      */
-    public String getPassword() {
-        return new String(Base64.decode(getEncryptedPassword().getBytes()));
+    public String getName() {
+        return getUserName();
+    }
+    /** Method getPerm()
+     * @see org.apache.fulcrum.security.entity.User#getPerm(java.lang.String)
+     */
+    public Object getPerm(String key) {
+        return getPerm(key, null);
     }
     /** Method getPerm()
      * @see org.apache.fulcrum.security.entity.User#getPerm(java.lang.String, java.lang.Object)
@@ -45,17 +50,17 @@ public class TornadoUser
             return defaultValue;
         }
     }
-    /** Method getPerm()
-     * @see org.apache.fulcrum.security.entity.User#getPerm(java.lang.String)
-     */
-    public Object getPerm(String key) {
-        return getPerm(key, null);
-    }
     /** Method getPermStorage()
      * @see org.apache.fulcrum.security.entity.User#getPermStorage()
      */
     public Hashtable getPermStorage() {
         return permStorage;
+    }
+    /** Method getTemp()
+     * @see org.apache.fulcrum.security.entity.User#getTemp(java.lang.String)
+     */
+    public Object getTemp(String key) {
+        return getTemp(key, null);
     }
     /** Method getTemp()
      * @see org.apache.fulcrum.security.entity.User#getTemp(java.lang.String, java.lang.Object)
@@ -66,12 +71,6 @@ public class TornadoUser
         } else {
             return defaultValue;
         }
-    }
-    /** Method getTemp()
-     * @see org.apache.fulcrum.security.entity.User#getTemp(java.lang.String)
-     */
-    public Object getTemp(String key) {
-        return getTemp(key, null);
     }
     /** Method getTempStorage()
      * @see org.apache.fulcrum.security.entity.User#getTempStorage()
@@ -97,6 +96,12 @@ public class TornadoUser
     public void incrementAccessCounterForSession() {
         incrementAccessCounter();
     }
+    /** Method isAnonymous()
+     * @see com.cyclops.tornado.services.user.User#isAnonymous()
+     */
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
     /** Method isConfirmed()
      * @see org.apache.fulcrum.security.entity.User#isConfirmed()
      */
@@ -115,17 +120,23 @@ public class TornadoUser
     public void setAccessCounterForSession(int counter) {
         setAccessCounter(counter);
     }
+    /** Method setAnonymous()
+     * @see com.cyclops.tornado.services.user.User#setAnonymous(boolean)
+     */
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
     /** Method setHasLoggedIn()
      * @see org.apache.fulcrum.security.entity.User#setHasLoggedIn(java.lang.Boolean)
      */
     public void setHasLoggedIn(Boolean hasLogin) {
         setAnonymous(!hasLogin.booleanValue());
     }
-    /** Method setPassword()
-     * @see org.apache.fulcrum.security.entity.User#setPassword(java.lang.String)
+    /** Method setName()
+     * @see org.apache.fulcrum.security.entity.SecurityEntity#setName(java.lang.String)
      */
-    public void setPassword(String pass) {
-        setEncryptedPassword(new String(Base64.encode(pass.getBytes())));
+    public void setName(String name) {
+        setUserName(name);
     }
     /** Method setPerm()
      * @see org.apache.fulcrum.security.entity.User#setPerm(java.lang.String, java.lang.Object)
@@ -168,29 +179,5 @@ public class TornadoUser
      */
     public void valueUnbound(SessionBindingEvent arg0) {
         // do nothing
-    }
-    /** Method getName()
-     * @see org.apache.fulcrum.security.entity.SecurityEntity#getName()
-     */
-    public String getName() {
-        return getUserName();
-    }
-    /** Method setName()
-     * @see org.apache.fulcrum.security.entity.SecurityEntity#setName(java.lang.String)
-     */
-    public void setName(String name) {
-        setUserName(name);
-    }
-    /** Method isAnonymous()
-     * @see com.cyclops.tornado.services.user.User#isAnonymous()
-     */
-    public boolean isAnonymous() {
-        return isAnonymous;
-    }
-    /** Method setAnonymous()
-     * @see com.cyclops.tornado.services.user.User#setAnonymous(boolean)
-     */
-    public void setAnonymous(boolean anonymous) {
-        isAnonymous = anonymous;
     }
 }

@@ -7,10 +7,8 @@
 package com.cyclops.tornado.services.user;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.httpclient.Base64;
 import org.apache.commons.lang.StringUtils;
-import org.apache.torque.util.BasePeer;
 import org.apache.torque.util.Criteria;
 
 import com.cyclops.tornado.om.UserPeer;
@@ -58,8 +56,10 @@ public class DefaultUserService extends AbstractUserService {
         User user = super.loadUser(userName, isAnonymous);
         Criteria crit = new Criteria();
         crit.and(UserPeer.USER_NAME, userName);
-        List rs = BasePeer.doSelect(crit);
-        BeanUtils.copyProperties(rs.get(0), user);
+        List rs = UserPeer.doSelect(crit);
+        com.cyclops.tornado.om.User dbuser =
+            (com.cyclops.tornado.om.User) rs.get(0);
+        dbuser.copyTo(user);
         user.setName(userName);
         user.setAnonymous(isAnonymous);
         return user;

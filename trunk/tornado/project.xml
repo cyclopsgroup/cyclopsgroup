@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <id>commons-configuration</id>
-            <version>1.0-dev</version>
+            <version>20030311.152757</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>

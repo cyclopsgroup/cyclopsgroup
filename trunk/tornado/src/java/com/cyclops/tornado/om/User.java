@@ -1,6 +1,8 @@
 package com.cyclops.tornado.om;
 import java.util.Date;
 
+import org.apache.commons.httpclient.Base64;
+import org.apache.torque.TorqueException;
 import org.apache.torque.om.Persistent;
 /**
  * You should add additional methods to this class to meet the
@@ -28,6 +30,12 @@ public class User
     public Date getLastLogin() {
         return new Date(getLastLoginTime());
     }
+    /** Method getPassword()
+     * @see org.apache.fulcrum.security.entity.User#getPassword()
+     */
+    public String getPassword() {
+        return new String(Base64.decode(getEncryptedPassword().getBytes()));
+    }
     /** Method setCreateDate()
      * @see org.apache.fulcrum.security.entity.User#setCreateDate(java.util.Date)
      */
@@ -45,5 +53,16 @@ public class User
      */
     public void setLastLogin(Date date) {
         setLastLoginTime(date.getTime());
+    }
+    /** Method setPassword()
+     * @see org.apache.fulcrum.security.entity.User#setPassword(java.lang.String)
+     */
+    public void setPassword(String pass) {
+        setEncryptedPassword(new String(Base64.encode(pass.getBytes())));
+    }
+    public void copyTo(Object user) throws TorqueException {
+        if (user instanceof User) {
+            super.copyInto((User) user);
+        }
     }
 }

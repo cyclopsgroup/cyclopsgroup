@@ -5,8 +5,6 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado;
-import java.io.FileInputStream;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -23,11 +21,11 @@ public class TurbineTestCase extends TestCase {
      */
     protected void setUp() throws Exception {
         super.setUp();
+        PropertiesConfiguration pc =
+            new PropertiesConfiguration("src/webapp/WEB-INF/conf/tr.properties");
         SlowServiceManager tsm = new SlowServiceManager();
-        PropertiesConfiguration pc = new PropertiesConfiguration();
-        pc.load(new FileInputStream("src/webapp/WEB-INF/conf/tr.properties"));
+        TurbineServices.setManager(tsm);
         tsm.setConfiguration(pc);
         tsm.init();
-        TurbineServices.setManager(tsm);
     }
 }

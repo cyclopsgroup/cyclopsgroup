@@ -11,10 +11,34 @@ CREATE TABLE c_tnd_users
 		            encrypted_password VARCHAR (255) NOT NULL,
 		            description VARCHAR (255),
 		            is_system BIT default 0 NOT NULL,
+		            access_counter INTEGER default 0 NOT NULL,
+		            confirmed VARCHAR (255),
+		            email VARCHAR (255) NOT NULL,
+		            first_name VARCHAR (255) NOT NULL,
+		            last_name VARCHAR (255) NOT NULL,
+		            last_login_time BIGINT,
+		            last_access_time BIGINT,
 		            created_time BIGINT,
 		            is_disabled BIT default 0 NOT NULL,
     PRIMARY KEY(id),
     UNIQUE (user_name)
+);
+
+# -----------------------------------------------------------------------
+# c_tnd_usrobjs
+# -----------------------------------------------------------------------
+drop table if exists c_tnd_usrobjs;
+
+CREATE TABLE c_tnd_usrobjs
+(
+		            id INTEGER NOT NULL,
+		            user_id INTEGER NOT NULL,
+		            object_key VARCHAR (255) NOT NULL,
+		            object_class_name VARCHAR (255) NOT NULL,
+		            object_data MEDIUMTEXT,
+    PRIMARY KEY(id),
+    FOREIGN KEY (user_id) REFERENCES c_tnd_users (id)
+    
 );
 
 # -----------------------------------------------------------------------
@@ -80,6 +104,7 @@ CREATE TABLE c_tnd_acls
 		            permission VARCHAR (255) NOT NULL,
     PRIMARY KEY(id)
 );
+  
   
   
   

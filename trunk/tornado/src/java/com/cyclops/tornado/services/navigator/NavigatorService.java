@@ -14,7 +14,7 @@ public interface NavigatorService extends Service {
     /** Service name in fulcrum container */
     String SERVICE_NAME = "NavigatorService";
     /** Method getMenuToot() in Class NavigatorService
-     * @return Root MenuItem node of menu
+     * @return Array of root menus
      */
-    MenuItem getMenuToot();
+    Menu[] getRootMenus();
 }

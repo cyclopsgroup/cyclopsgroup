@@ -17,7 +17,9 @@ import com.cyclops.tornado.utils.ResourceFinder;
  * @author joeblack
  * @since 2003-9-29 23:20:58
  */
-public class DefaultNavigatorService extends BaseService {
+public class DefaultNavigatorService
+    extends BaseService
+    implements NavigatorService {
     private Hashtable menus = new Hashtable();
     /** Method initialize()
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
@@ -41,5 +43,11 @@ public class DefaultNavigatorService extends BaseService {
                 logger.debug("Resource " + resource + " loading failed!", e);
             }
         }
+    }
+    /** Method getRootMenus()
+     * @see com.cyclops.tornado.services.navigator.NavigatorService#getRootMenus()
+     */
+    public Menu[] getRootMenus() {
+        return (Menu[]) menus.values().toArray(Menu.EMPTY_ARRAY);
     }
 }
