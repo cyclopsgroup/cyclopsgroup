@@ -1,0 +1,28 @@
+<h2>Create New Group</h2>
+<table width="100%">
+	<form method="post" action="$link.setAction("system.administration.GroupAction").setPage("system,administration,group,CreateNew.vm")">
+	<tr>
+		<td colspan="2" class="title">Input Group Information</td>
+	</tr>
+	<tr>
+		<td>Group Name:</td>
+		<td><input type="text" name="group_name"/></td>
+	</tr>
+	<tr>
+		<td>&#32;</td>
+		<td>Make sure the group name does not exist before you create it.</td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td rowspan="2"><textarea name="description" cols="40" rows="3"/></td>
+	</tr>
+	<tr>
+		<td>&#32;</td>
+	</tr>
+	<tr>
+		<td class="bottom" colspan="2">
+			<input type="submit" name="eventsubmit_doCreate" value="Create"/>
+		</td>
+	</tr>
+	</form>
+</table>
