@@ -92,7 +92,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         {
             String module = StringUtils.chomp(page, "." + extension);
             String path = category + '/' + module;
-            moduleResolver.resolve(path, runtime, context);
+            moduleResolver.resolvePage(path, runtime, context);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
             for (int i = 0; i < packages.length; i++)
@@ -112,7 +112,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                     if (renderer.exists(packageName, path))
                     {
                         found = true;
-                        moduleResolver.resolve(path, runtime, context);
+                        moduleResolver.resolvePage(path, runtime, context);
                         render(context, packageName, path, runtime);
                         break;
                     }
@@ -134,7 +134,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
 
     private String localizationName;
 
-    private ModuleResolver moduleResolver;
+    private ModuleManager moduleResolver;
 
     private Hashtable renderers;
 
@@ -210,6 +210,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
     public void service(ServiceManager manager) throws ServiceException
     {
         serviceManager = manager;
-        moduleResolver = (ModuleResolver) manager.lookup(ModuleResolver.ROLE);
+        moduleResolver = (ModuleManager) manager.lookup(ModuleManager.ROLE);
     }
 }

@@ -15,8 +15,8 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.core.ModuleResolver</role>
-            <implementation>com.cyclopsgroup.waterview.core.ModuleResolver</implementation>
+            <role>com.cyclopsgroup.waterview.core.ModuleManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.ModuleManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <action-resolver role="cyclopsgroup.waterview.resolver.classres"/>
@@ -53,8 +53,8 @@
             <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <resolver extension="do" role="cyclopsgroup.waterview.resolver.classres"/>
-                <resolver parameter="do" role="cyclopsgroup.waterview.resolver.classres"/>
+                <resolver extension="do" role="cyclopsgroup.waterview.resolver.default"/>
+                <resolver parameter="do" role="cyclopsgroup.waterview.resolver.default"/>
             </configuration>
         </component>
         <component>
@@ -84,12 +84,9 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>cyclopsgroup.waterview.resolver.classres</role>
-            <implementation>com.cyclopsgroup.waterview.core.ClassActionResolver</implementation>
+            <role>cyclopsgroup.waterview.resolver.default</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultActionResolver</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <cache-size>100</cache-size>
-            </configuration>
         </component>
     </components>
     <!--

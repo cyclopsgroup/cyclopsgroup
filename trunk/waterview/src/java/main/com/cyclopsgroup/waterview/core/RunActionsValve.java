@@ -46,7 +46,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
 
     private String moduleCategory;
 
-    private ModuleResolver moduleResolver;
+    private ModuleManager moduleResolver;
 
     private Map parameterActionResolvers = ListOrderedMap
             .decorate(new Hashtable());
@@ -112,8 +112,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                     String packageName = packageNames[j];
                     if (resolver.exists(packageName, action))
                     {
-                        resolver.resolve(packageName, action, runtime, runtime
-                                .getPageContext());
+                        resolver.resolve(packageName, action, runtime);
                         break;
                     }
                 }
@@ -136,8 +135,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                         String packageName = packageNames[k];
                         if (resolver.exists(packageName, action))
                         {
-                            resolver.resolve(packageName, action, runtime,
-                                    runtime.getPageContext());
+                            resolver.resolve(packageName, action, runtime);
                             break;
                         }
                     }
@@ -155,6 +153,6 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
     public void service(ServiceManager manager) throws ServiceException
     {
         serviceManager = manager;
-        moduleResolver = (ModuleResolver) manager.lookup(ModuleResolver.ROLE);
+        moduleResolver = (ModuleManager) manager.lookup(ModuleManager.ROLE);
     }
 }

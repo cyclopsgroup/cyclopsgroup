@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.cyclib.Context;
-
 /**
  * Action resolver interface
  * 
@@ -40,9 +38,8 @@ public interface ActionResolver
      * @param packageName
      * @param moduelName
      * @param runtime
-     * @param context input and output context
      * @throws Exception
      */
-    void resolve(String packageName, String moduelName, UIRuntime runtime,
-            Context context) throws Exception;
+    void resolve(String packageName, String moduelName, UIRuntime runtime)
+            throws Exception;
 }
