@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+        <title>Maven Cyclops Tools Plugin</title>
+    </properties>
+    <body>
+        <section name="Objective">
+            <p>maven tools for cyclops group community projects</p>
+            <p>Here is a list of goals of cross torque plugin</p>
+            <table>
+                <tr>
+                    <th>Goal Name</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>cyclops:xdoc</td>
+                    <td>Generate cyclops group style xdoc</td>
+                </tr>
+                <tr>
+                    <td>cyclops:site</td>
+                    <td>Generate cyclops group style site</td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>

@@ -24,6 +24,7 @@
                     <meta name="email" content="${author.attribute('email').value}"/>
                 </x:forEach>
                 <jsl:applyTemplates select="$doc/document/head/*"/>
+                <script language="javascript" src="${relativePath}/rsstransform.js"/>
             </head>
             <body>
                 <jsl:applyTemplates select="$doc/document/body/@*"/>

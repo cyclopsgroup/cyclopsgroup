@@ -11,8 +11,8 @@
                 <include name="**/*.*"/>
             </fileset>
         </copy>
-        <echo>${maven.cyclops.xdoc.jsl}</echo>
         <j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
+        <echo>Set the site template to ${newSite}</echo>
         ${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', newSite)}
         <attainGoal name="xdoc"/>
     </goal>
