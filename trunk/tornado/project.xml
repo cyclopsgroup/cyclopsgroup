@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
-    <name>cyclops-tornado</name>
-    <id>a4trim</id>
+    <name>tornado</name>
+    <id>tornado</id>
     <currentVersion>1.0-a1-SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://cyclops-group.sourceforge.net</url>
         <logo>/images/cyclops_logo.gif</logo>
     </organization>
-    <logo>/images/blue-logo.gif</logo>
+    <logo>/images/tornado_logo.gif</logo>
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.tornado</package>
     <shortDescription>A web application based on Jakarta Turbine</shortDescription>
@@ -82,22 +82,21 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-		<dependency>
-			<id>commons-digester</id>
-			<version>1.2</version>
-			<url>http://jakarta.apache.org/commons/digester</url>
-			<properties>
-				<war.bundle>true</war.bundle>
-			</properties>
-		</dependency>
-		<dependency>
-			<id>commons-io</id>
-			<version>20030203.000550</version>
-			<properties>
-				<war.bundle>true</war.bundle>
-			</properties>
-		</dependency>
-
+        <dependency>
+            <id>commons-digester</id>
+            <version>1.2</version>
+            <url>http://jakarta.apache.org/commons/digester</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <id>commons-io</id>
+            <version>20030203.000550</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
         <dependency>
             <id>commons-pool</id>
             <version>20030825.183949</version>
@@ -219,6 +218,14 @@
         <dependency>
             <id>servletapi</id>
             <version>2.3</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <id>stratum</id>
+            <version>1.0-b3</version>
+            <url>http://jakata.apache.org/turbine/stratum</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
