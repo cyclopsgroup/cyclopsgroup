@@ -34,6 +34,7 @@ public class PageNotFoundException extends NestableException
      */
     public PageNotFoundException(String page)
     {
+        super("Page [" + page + "] not found");
         this.page = page;
     }
 

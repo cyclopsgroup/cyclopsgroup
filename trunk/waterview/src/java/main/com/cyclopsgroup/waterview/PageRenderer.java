@@ -33,6 +33,13 @@ public interface PageRenderer
     boolean exists(String packageName, String page);
 
     /**
+     * Get content type of rendered page
+     *
+     * @return String content type
+     */
+    String getContentType();
+
+    /**
      * Render page to runtime
      *
      * @param packageName Page resource package name

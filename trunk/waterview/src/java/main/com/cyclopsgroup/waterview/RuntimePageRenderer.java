@@ -17,28 +17,21 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * interface to resolver action
+ * Runtime page renderer
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface ModuleResolver
+public interface RuntimePageRenderer
 {
-    /** Role name of this component in container */
-    String ROLE = ModuleResolver.class.getName();
+    /** Name in ui context */
+    String NAME_IN_CONTEXT = "renderer";
 
     /**
-     * Get package names
+     * Render page at runtime
      *
-     * @return Package names
+     * @param pagePackage Page package
+     * @param page Page path with extension
+     * @throws Exception Throw it out to page renderer
      */
-    String[] getModulePackages();
-
-    /**
-     * Resolve module with given module name
-     *
-     * @param runtime UIRuntime object
-     * @param module Module name
-     * @throws Exception Throw it out
-     */
-    void resolve(UIRuntime runtime, String module) throws Exception;
+    void render(String pagePackage, String page) throws Exception;
 }

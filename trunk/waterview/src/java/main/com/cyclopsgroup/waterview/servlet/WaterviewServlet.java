@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -97,9 +98,12 @@ public class WaterviewServlet extends HttpServlet
     }
 
     private void handleException(Throwable e, UIRuntime runtime)
-            throws ServletException
+            throws ServletException, IOException
     {
-        e.printStackTrace();
+        PrintStream out = new PrintStream(runtime.getHttpServletResponse()
+                .getOutputStream());
+        e.printStackTrace(out);
+        out.flush();
     }
 
     /**
@@ -109,53 +113,57 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
-        try {
-        String conf = config.getInitParameter("conf");
-        if (StringUtils.isEmpty(conf))
-        {
-            conf = "WEB-INF/waterview-components.xml";
-        }
-        embedder = new Embedder();
-        embedder.addContextValue("basedir", config.getServletContext()
-                .getRealPath(""));
-        Enumeration i = config.getInitParameterNames();
-        Properties initProperties = new Properties();
-        String waterviewHome = config.getServletContext().getRealPath("");
-        initProperties.put("waterview.home", waterviewHome);
-        while (i.hasMoreElements())
-        {
-            String key = (String) i.nextElement();
-            String value = config.getInitParameter(key);
-            embedder.addContextValue(key, value);
-            initProperties.setProperty(key, value);
-        }
-        File file = new File(conf);
-        if (!file.isFile())
-        {
-            file = new File(config.getServletContext().getRealPath(conf));
-        }
-        if (!file.isFile())
-        {
-            file = new File(conf);
-        }
-        if (!file.isFile())
-        {
-            throw new ServletException("Can not find configuration file "
-                    + conf);
-        }
         try
         {
-            System.setProperties(initProperties);
-            embedder.setConfiguration(file.toURL());
-            embedder.start();
-            Waterview waterview = (Waterview) embedder.lookup(Waterview.ROLE);
-            waterview.getProperties().putAll(initProperties);
+            String conf = config.getInitParameter("conf");
+            if (StringUtils.isEmpty(conf))
+            {
+                conf = "WEB-INF/waterview-components.xml";
+            }
+            embedder = new Embedder();
+            embedder.addContextValue("basedir", config.getServletContext()
+                    .getRealPath(""));
+            Enumeration i = config.getInitParameterNames();
+            Properties initProperties = new Properties();
+            String waterviewHome = config.getServletContext().getRealPath("");
+            initProperties.put("waterview.home", waterviewHome);
+            while (i.hasMoreElements())
+            {
+                String key = (String) i.nextElement();
+                String value = config.getInitParameter(key);
+                embedder.addContextValue(key, value);
+                initProperties.setProperty(key, value);
+            }
+            File file = new File(conf);
+            if (!file.isFile())
+            {
+                file = new File(config.getServletContext().getRealPath(conf));
+            }
+            if (!file.isFile())
+            {
+                file = new File(conf);
+            }
+            if (!file.isFile())
+            {
+                throw new ServletException("Can not find configuration file "
+                        + conf);
+            }
+            try
+            {
+                System.setProperties(initProperties);
+                embedder.setConfiguration(file.toURL());
+                embedder.start();
+                Waterview waterview = (Waterview) embedder
+                        .lookup(Waterview.ROLE);
+                waterview.getProperties().putAll(initProperties);
+            }
+            catch (Exception e)
+            {
+                throw new ServletException("Init plexus container error", e);
+            }
         }
-        catch (Exception e)
+        catch (Throwable e)
         {
-            throw new ServletException("Init plexus container error", e);
-        }
-        } catch (Throwable e) {
             e.printStackTrace();
         }
     }

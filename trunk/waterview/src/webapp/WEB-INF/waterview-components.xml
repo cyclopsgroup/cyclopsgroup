@@ -4,6 +4,7 @@
         <component>
             <role>com.cyclopsgroup.waterview.Waterview</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipeline>
                     <valve role="cyclopsgroup.waterview.valve.runactions"/>
@@ -12,8 +13,9 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.UIModuleResolver</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultUIModuleResolver</implementation>
+            <role>com.cyclopsgroup.waterview.ModuleResolver</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleResolver</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <cache-size>1000</cache-size>
                 <packages>
@@ -28,6 +30,7 @@
         <component>
             <role>cyclopsgroup.waterview.valve.runactions</role>
             <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <action-parameter>do</action-parameter>
             </configuration>
@@ -35,6 +38,7 @@
         <component>
             <role>cyclopsgroup.waterview.valve.renderpage</role>
             <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <renderer extension="vm" role="cyclopsgroup.waterview.renderer.velocity"/>
                 <renderer extension="xml" role="cyclopsgroup.waterview.renderer.jelly"/>
@@ -46,6 +50,7 @@
         <component>
             <role>cyclopsgroup.waterview.renderer.velocity</role>
             <implementation>com.cyclopsgroup.waterview.velocity.VelocityPageRenderer</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <cache-size>100</cache-size>
             </configuration>
@@ -53,6 +58,7 @@
         <component>
             <role>cyclopsgroup.waterview.renderer.jelly</role>
             <implementation>com.cyclopsgroup.waterview.jelly.JellyPageRenderer</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
         </component>
     </components>
     <!--

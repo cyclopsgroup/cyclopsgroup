@@ -26,9 +26,12 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.ModuleResolver;
+import com.cyclopsgroup.waterview.PageNotFoundException;
 import com.cyclopsgroup.waterview.PageRenderer;
+import com.cyclopsgroup.waterview.RuntimePageRenderer;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
@@ -40,7 +43,80 @@ import com.cyclopsgroup.waterview.Valve;
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
         Configurable, Serviceable
 {
+
+    /**
+     * Implementation of runtime page renderer
+     */
+    public class RuntimeRenderer implements RuntimePageRenderer
+    {
+        private PageRenderer renderer;
+
+        private UIRuntime runtime;
+
+        private String suffix;
+
+        private RuntimeRenderer(PageRenderer renderer, UIRuntime runtime,
+                String extension)
+        {
+            this.renderer = renderer;
+            this.runtime = runtime;
+            this.suffix = '.' + extension;
+            runtime.getUIContext().put(NAME_IN_CONTEXT, this);
+        }
+
+        /**
+         * Render method
+         *
+         * @param pagePackage Page package name
+         * @param page Page path
+         * @throws Exception Throw it out to page renderer
+         */
+        public void render(String pagePackage, String page) throws Exception
+        {
+            if (page.endsWith(suffix))
+            {
+                page = StringUtils.chomp(page, suffix);
+            }
+            String path = pagePackage + '/' + page;
+            moduleResolver.resolve(runtime, path);
+            String[] packages = moduleResolver.getModulePackages();
+            boolean found = false;
+            for (int i = 0; i < packages.length; i++)
+            {
+                String packageName = packages[i];
+                if (renderer.exists(packageName, path))
+                {
+                    found = true;
+                    renderer.render(runtime, packageName, path);
+                    break;
+                }
+                String[] parts = StringUtils.split(page, '/');
+                for (int j = parts.length - 1; j >= 0; j--)
+                {
+                    parts[j] = "Default";
+                    path = pagePackage + '/' + StringUtils.join(parts);
+                    if (renderer.exists(packageName, path))
+                    {
+                        found = true;
+                        renderer.render(runtime, packageName, path);
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    break;
+                }
+            }
+            if (!found)
+            {
+                throw new PageNotFoundException(page + suffix);
+            }
+        }
+    }
+
     private String entry;
+
+    private String homePage = "Index.vm";
 
     private ModuleResolver moduleResolver;
 
@@ -70,6 +146,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 getLogger().error("Page renderer [" + role + "] loading error",
                         e);
             }
@@ -85,12 +162,22 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void process(UIRuntime runtime) throws Exception
     {
         String page = runtime.getPage();
+        if (StringUtils.isEmpty(page))
+        {
+            page = homePage;
+        }
+        if (page.charAt(0) == '/')
+        {
+            page = page.substring(1);
+        }
+        runtime.setPage(page);
+        runtime.getUIContext().put("page", page);
         String extension = null;
         PageRenderer renderer = null;
         for (Iterator i = renderers.keySet().iterator(); i.hasNext();)
         {
             extension = (String) i.next();
-            String suffix = ',' + extension;
+            String suffix = '.' + extension;
             if (page.endsWith(suffix))
             {
                 renderer = (PageRenderer) renderers.get(extension);
@@ -99,10 +186,12 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         }
         if (renderer == null)
         {
-            return;
+            throw new PageNotFoundException(page);
         }
-
-        //TODO render page
+        runtime.getHttpServletResponse().setContentType(
+                renderer.getContentType());
+        RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, extension);
+        r.render(entry, page);
     }
 
     /**

@@ -28,6 +28,7 @@ import com.cyclopsgroup.waterview.UIRuntime;
 public class JellyPageRenderer extends AbstractLogEnabled implements
         PageRenderer, Configurable
 {
+
     /**
      * This is a simple inner class that will be the element cahed in LRMMap. Script object and timestamp of script resource is stored here
      */
@@ -37,6 +38,8 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
         private long timestamp;
     }
+
+    private static final String CONTENT_TYPE = "text/html";
 
     private static String getScriptPath(String packageName, String page)
     {
@@ -97,8 +100,19 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
         }
     }
 
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#getContentType()
+     */
+    public String getContentType()
+    {
+        return CONTENT_TYPE;
+    }
+
     private synchronized Script getScript(String path) throws Exception
     {
+
         URL resource = getClass().getClassLoader().getResource(path);
         if (resource == null)
         {
@@ -141,7 +155,10 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             Entry entry = new Entry();
             entry.script = script;
             entry.timestamp = timestamp;
-            cache.put(path, entry);
+            if (cacheScript)
+            {
+                cache.put(path, entry);
+            }
         }
         return script;
     }
@@ -175,6 +192,8 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             uic.put("jellyOutput", output);
         }
         String scriptPath = getScriptPath(packageName, page);
-        getScript(scriptPath).run(jc, output);
+        Script script = getScript(scriptPath);
+        script.run(jc, output);
+        output.flush();
     }
 }

@@ -24,6 +24,7 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.LRUMap;
+import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.UIModule;
@@ -66,6 +67,16 @@ public class DefaultModuleResolver extends AbstractLogEnabled implements
             Configuration packageCon = packages[i];
             modulePackages.add(packageCon.getValue());
         }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.ModuleResolver#getModulePackages()
+     */
+    public String[] getModulePackages()
+    {
+        return (String[]) modulePackages.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**

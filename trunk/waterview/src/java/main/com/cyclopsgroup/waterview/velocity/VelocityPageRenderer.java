@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
+import java.io.OutputStreamWriter;
 import java.util.Properties;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -36,6 +37,8 @@ import com.cyclopsgroup.waterview.UIRuntime;
 public class VelocityPageRenderer extends AbstractLogEnabled implements
         PageRenderer, Initializable
 {
+
+    private static final String CONTENT_TYPE = "text/html";
 
     private static String getTemplatePath(String packageName, String page)
     {
@@ -69,6 +72,16 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
     }
 
     /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#getContentType()
+     */
+    public String getContentType()
+    {
+        return CONTENT_TYPE;
+    }
+
+    /**
      * Override method initialize in super class of VelocityPageRenderer
      * 
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
@@ -95,7 +108,10 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
             vc = new VelocityContextAdapter(runtime.getUIContext());
             runtime.getUIContext().put("velocityContext", vc);
         }
-        velocityEngine.mergeTemplate(getTemplatePath(packageName, page), vc,
-                runtime.getHttpServletResponse().getWriter());
+        String templatePath = getTemplatePath(packageName, page);
+        OutputStreamWriter output = new OutputStreamWriter(runtime
+                .getHttpServletResponse().getOutputStream());
+        velocityEngine.mergeTemplate(templatePath, vc, output);
+        output.flush();
     }
 }

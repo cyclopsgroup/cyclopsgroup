@@ -46,7 +46,7 @@ public class ServletUIRuntime implements UIRuntime
 
     private HttpServletResponse httpServletResponse;
 
-    private String renderTemplate = "index.html";
+    private String page;
 
     private ServletRequestValueParser requestValueParser;
 
@@ -67,11 +67,13 @@ public class ServletUIRuntime implements UIRuntime
     {
         httpServletRequest = request;
         httpServletResponse = response;
+        page = request.getPathInfo();
         requestValueParser = new ServletRequestValueParser(request);
         serviceManager = services;
         Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
         DefaultUIContext ctx = new DefaultUIContext();
         ctx.getContent().putAll(waterview.getProperties());
+        ctx.put("runtime", this);
         uiContext = ctx;
     }
 
@@ -132,7 +134,7 @@ public class ServletUIRuntime implements UIRuntime
      */
     public String getPage()
     {
-        return renderTemplate;
+        return page;
     }
 
     /**
@@ -172,6 +174,6 @@ public class ServletUIRuntime implements UIRuntime
      */
     public void setPage(String template)
     {
-        renderTemplate = template;
+        page = template;
     }
 }
