@@ -62,10 +62,20 @@ div.subsection div.subsectionTitle
     color: #666666;
 }
 
+#bannerBlock
+{
+    background-color: #0B4499;
+}
+
+#bannerBlock a:link, #bannerBlock a:visited
+{
+    color: white;
+}
+
 #languageBarBlock
 {
-	background-color: #6DFFFF;
-	border-width: 0px 0px 1px 0px;
+    background-color: #CCCCCC;
+    border-width: 0px 0px 1px 0px;
     border-style: solid;
     border-color: #0044CC;
 }

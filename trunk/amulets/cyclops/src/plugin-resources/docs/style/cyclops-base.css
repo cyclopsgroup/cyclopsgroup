@@ -1,6 +1,6 @@
 body, td, th, select, input, li
 {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
     font-size: 11px;
 }
 
@@ -65,6 +65,19 @@ div.subsection div.subsectionTitle
     font-size: 18px;
 }
 
+#documentWrapperBlock
+{
+    text-align:center;
+}
+
+#documentBlock
+{
+    text-align: left;
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #bannerBlock
 {
     width: 100%;
@@ -73,24 +86,24 @@ div.subsection div.subsectionTitle
 
 #organizationBannerBlock
 {
-	float: left;
-	width: 60%;
-	vertical-align: middle;
+    float: left;
+    width: 67%;
+    vertical-align: middle;
 }
 
 #projectBannerBlock
 {
-	float: left;
-	width: 40%;
-	text-align: right;
-	vertical-align: middle;
+    float: left;
+    width: 33%;
+    height: 80px;
+    background: url(../images/banner_right.gif) right no-repeat;
 }
 
 #languageBarBlock
 {
-	width: 100%;
-	clear: both;
-	text-align: right;
+    width: 100%;
+    clear: both;
+    text-align: right;
 }
 
 #navigatorBlock
