@@ -32,6 +32,9 @@ public class NavigatorTool implements ApplicationTool, UserListener {
         return (NavigatorService) TurbineServices.getInstance().getService(
             NavigatorService.SERVICE_NAME);
     }
+    /** Get roots
+     * @return RootMenu object array
+     */
     public Menu[] getRootMenus() {
         return getNavigatorService().getRootMenus();
     }
