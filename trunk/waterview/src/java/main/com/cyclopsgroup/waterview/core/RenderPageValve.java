@@ -28,7 +28,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.PageNotFoundException;
 import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.RuntimePageRenderer;

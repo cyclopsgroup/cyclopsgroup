@@ -15,7 +15,7 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.ModuleResolver</role>
+            <role>com.cyclopsgroup.waterview.core.ModuleResolver</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultModuleResolver</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>

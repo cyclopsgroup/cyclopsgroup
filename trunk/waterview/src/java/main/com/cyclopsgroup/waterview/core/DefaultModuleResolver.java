@@ -27,7 +27,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.UIModule;
 import com.cyclopsgroup.waterview.UIRuntime;
 
@@ -73,7 +72,7 @@ public class DefaultModuleResolver extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleResolver#getModulePackages()
+     * @see com.cyclopsgroup.waterview.core.ModuleResolver#getModulePackages()
      */
     public String[] getModulePackages()
     {
@@ -83,7 +82,7 @@ public class DefaultModuleResolver extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleResolver#resolve(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
+     * @see com.cyclopsgroup.waterview.core.ModuleResolver#resolve(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
      */
     public void resolve(UIRuntime runtime, String path) throws Exception
     {
