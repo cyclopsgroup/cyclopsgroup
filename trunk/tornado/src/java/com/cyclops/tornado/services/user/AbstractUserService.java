@@ -346,7 +346,8 @@ public abstract class AbstractUserService
      * @see org.apache.fulcrum.Service#shutdown()
      */
     public void shutdown() {
-        checkingThread.stop();
+        checkingThread.interrupt();
+        checkingThread = null;
         userRepo.clear();
         userListeners.clear();
         anonymousUser = null;
