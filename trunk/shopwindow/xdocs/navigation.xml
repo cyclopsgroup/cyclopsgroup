@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="Maven">
     <title>Maven</title>
     <body>
@@ -12,6 +12,8 @@
                 <item name="My Resume" href="/resume.html"/>
                 <item name="Web Logs" href="/weblogs/joel/blog.html"/>
             </item>
+            <item name="Forums" href="/forum.html"/>
+            <item name="Summary at SF.net" href="http://sourceforge.net/projects/cyclops-group"/>
         </menu>
         <menu name="Hosted Projects">
             <item name="tornado" href="/projects/tornado/index.html"/>
