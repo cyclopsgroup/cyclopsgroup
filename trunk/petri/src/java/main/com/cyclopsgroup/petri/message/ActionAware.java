@@ -8,23 +8,16 @@
 package com.cyclopsgroup.petri.message;
 
 /**
- * Message which knows which subject it's gonna to invoke
+ * Message which knows the action
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public interface SubjectAware
+public interface ActionAware
 {
-
 	/**
-	 * Get subject object
+	 * Get action name
 	 *
-	 * @return Subject object
+	 * @return String value of action name
 	 */
-	Object getSubject();
-	/**
-	 * Get id of the subject
-	 *
-	 * @return Id of subject
-	 */
-	String getSubjectId();
+	String getAction();
 }

@@ -12,17 +12,17 @@ package com.cyclopsgroup.petri.definition;
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public interface State
+public interface Place
 {
 	/** Empty array */
-	State[] EMPTY_ARRAY = new State[0];
+	Place[] EMPTY_ARRAY = new Place[0];
 
 	/**
 	 * Get flow definition this state belongs to
 	 *
 	 * @return State machine object
 	 */
-	FlowDefinition getFlowDefinition();
+	NetDefinition getFlowDefinition();
 
 	/**
 	 * Get Id of this state
@@ -32,16 +32,16 @@ public interface State
 	String getId();
 
 	/**
-	 * Get inbound transition models attached to this state
+	 * Get inbound arcs
 	 *
-	 * @return Array of inbound transitions
+	 * @return Array of arcs
 	 */
-	Transition[] getInboundTransitions();
+	OutputArc[] getInboundArcs();
 
 	/**
-	 * Get outbound transition models attached to this state
+	 * Get outbound arcs
 	 *
-	 * @return Array of outbound transitions
+	 * @return Array of arcs
 	 */
-	Transition[] getOutboundTransitions();
+	InputArc[] getOutboundArcs();
 }

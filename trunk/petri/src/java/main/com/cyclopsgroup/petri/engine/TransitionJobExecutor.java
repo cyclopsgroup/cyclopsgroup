@@ -7,11 +7,13 @@
  */
 package com.cyclopsgroup.petri.engine;
 
-import com.cyclopsgroup.gearset.beans.Context;
-import com.cyclopsgroup.gearset.beans.SimpleLogEnabled;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.cyclopsgroup.petri.Case;
 import com.cyclopsgroup.petri.definition.Guard;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.NetContext;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Transition;
 import com.cyclopsgroup.petri.persistence.PersistenceManager;
 
@@ -20,8 +22,10 @@ import com.cyclopsgroup.petri.persistence.PersistenceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
-public class TransitionJobExecutor extends SimpleLogEnabled
+public class TransitionJobExecutor
 {
+    private static Log logger = LogFactory.getLog(TransitionJobExecutor.class);
+
     private static final TransitionJobExecutor ONLY_INSTANCE = new TransitionJobExecutor();
 
     /**
@@ -39,7 +43,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
 
     }
 
-    private boolean checkGuard(Guard guard, Context context)
+    private boolean checkGuard(Guard guard, NetContext context)
     {
         if (guard == null)
         {
@@ -51,7 +55,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
         }
         catch (Exception e)
         {
-            getLogger().warn("Guard checking error", e);
+            logger.warn("Guard checking error", e);
             return false;
         }
     }
@@ -63,10 +67,11 @@ public class TransitionJobExecutor extends SimpleLogEnabled
      * @param caseWrapper Case
      * @return Should this transition be triggered?
      */
-    public boolean checkPosition(Transition transition, CaseWrapper caseWrapper)
+    public boolean checkPosition(Transition transition,
+            StateMachineCase caseWrapper)
     {
-        State[] froms = transition.getFromStates();
-        if (transition.getInputStatesPolicy() == Transition.OR)
+        Place[] froms = transition.getFromStates();
+        if (transition.getInputPolicy() == Transition.OR)
         {
             boolean blocked = true;
             for (int i = 0; i < froms.length; i++)
@@ -82,7 +87,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
                 return false;
             }
         }
-        else if (transition.getInputStatesPolicy() == Transition.AND)
+        else if (transition.getInputPolicy() == Transition.AND)
         {
             boolean blocked = false;
             for (int i = 0; i < froms.length; i++)
@@ -102,19 +107,20 @@ public class TransitionJobExecutor extends SimpleLogEnabled
         return true;
     }
 
-    private void doTransition(Transition transition, CaseWrapper caseWrapper,
-            Context context, PersistenceManager persistenceManager)
+    private void doTransition(Transition transition,
+            StateMachineCase caseWrapper, NetContext context,
+            PersistenceManager persistenceManager)
     {
-        State[] froms = transition.getFromStates();
-        State[] tos = transition.getToStates();
+        Place[] froms = transition.getFromStates();
+        Place[] tos = transition.getToStates();
         for (int i = 0; i < froms.length; i++)
         {
-            State from = froms[i];
+            Place from = froms[i];
             caseWrapper.getCurrentStateSet().remove(from.getId());
         }
         for (int i = 0; i < tos.length; i++)
         {
-            State to = tos[i];
+            Place to = tos[i];
             caseWrapper.getCurrentStateSet().add(to.getId());
         }
         persistenceManager.updateCase(transition, caseWrapper);
@@ -126,7 +132,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
             }
             catch (Exception e)
             {
-                getLogger().warn("Task execution error", e);
+                logger.warn("Task execution error", e);
             }
         }
     }
@@ -139,8 +145,8 @@ public class TransitionJobExecutor extends SimpleLogEnabled
      * @param persistenceManager Persistence manager object
      * @return Created case object
      */
-    public CaseWrapper executeInitialTransition(Transition transition,
-            Context context, PersistenceManager persistenceManager)
+    public StateMachineCase executeInitialTransition(Transition transition,
+            NetContext context, PersistenceManager persistenceManager)
     {
         if (!transition.isInitial())
         {
@@ -152,7 +158,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
         }
         Case persistenceCase = persistenceManager.createCase(transition
                 .getFlowDefinition(), context);
-        CaseWrapper cw = new CaseWrapper(persistenceCase);
+        StateMachineCase cw = new StateMachineCase(persistenceCase);
         cw.getCurrentStateSet().clear();
         cw.getCurrentStateSet().add(
                 transition.getFlowDefinition().getEntrance().getId());
@@ -170,7 +176,7 @@ public class TransitionJobExecutor extends SimpleLogEnabled
      * @param persistenceManager Persistence manager object
      */
     public void executeStandardTransition(Transition transition,
-            CaseWrapper caseWrapper, Context context,
+            StateMachineCase caseWrapper, NetContext context,
             PersistenceManager persistenceManager)
     {
         if (transition.isInitial())

@@ -9,8 +9,8 @@ package com.cyclopsgroup.petri.syntax.core;
 
 import java.util.Hashtable;
 
-import com.cyclopsgroup.petri.definition.FlowDefinition;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.NetDefinition;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Transition;
 
 /**
@@ -18,7 +18,7 @@ import com.cyclopsgroup.petri.definition.Transition;
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public class DefaultFlowDefinition implements FlowDefinition
+public class DefaultFlowDefinition implements NetDefinition
 {
 	private static final String DEFAULT_ENTRANCE_NAME = "in";
 
@@ -49,7 +49,7 @@ public class DefaultFlowDefinition implements FlowDefinition
 	 *
 	 * @param state
 	 */
-	public void addState(State state)
+	public void addState(Place state)
 	{
 		states.put(state.getId(), state);
 	}
@@ -67,9 +67,9 @@ public class DefaultFlowDefinition implements FlowDefinition
 	/**
 	 * Override method getEntrance() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getEntrance()
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getEntrance()
 	 */
-	public State getEntrance()
+	public Place getEntrance()
 	{
 		return getState(entranceName);
 	}
@@ -77,9 +77,9 @@ public class DefaultFlowDefinition implements FlowDefinition
 	/**
 	 * Override method getExit() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getExit()
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getExit()
 	 */
-	public State getExit()
+	public Place getExit()
 	{
 		return getState(exitName);
 	}
@@ -87,7 +87,7 @@ public class DefaultFlowDefinition implements FlowDefinition
 	/**
 	 * Override method getId() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getId()
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getId()
 	 */
 	public String getId()
 	{
@@ -97,27 +97,27 @@ public class DefaultFlowDefinition implements FlowDefinition
 	/**
 	 * Override method getState() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getState(java.lang.String)
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getState(java.lang.String)
 	 */
-	public State getState(String stateId)
+	public Place getState(String stateId)
 	{
-		return (State) states.get(stateId);
+		return (Place) states.get(stateId);
 	}
 
 	/**
 	 * Override method getStates() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getStates()
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getStates()
 	 */
-	public State[] getStates()
+	public Place[] getStates()
 	{
-		return (State[]) states.values().toArray(State.EMPTY_ARRAY);
+		return (Place[]) states.values().toArray(Place.EMPTY_ARRAY);
 	}
 
 	/**
 	 * Override method getTransition() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getTransition(java.lang.String)
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getTransition(java.lang.String)
 	 */
 	public Transition getTransition(String transitionId)
 	{
@@ -127,7 +127,7 @@ public class DefaultFlowDefinition implements FlowDefinition
 	/**
 	 * Override method getTransitions() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.FlowDefinition#getTransitions()
+	 * @see com.cyclopsgroup.petri.definition.NetDefinition#getTransitions()
 	 */
 	public Transition[] getTransitions()
 	{

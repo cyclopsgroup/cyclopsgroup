@@ -7,74 +7,83 @@
  */
 package com.cyclopsgroup.petri.message;
 
+import java.io.Serializable;
+
 /**
  * Subject message
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public abstract class SubjectMessage implements UserAware, SubjectAware
+public abstract class SubjectMessage implements UserAware, SubjectAware,
+        ActionAware, Serializable
 {
-	private static final String DEFAULT_USER = "default";
+    private static final String DEFAULT_USER = "default";
 
-	private String action;
+    private String action;
 
-	private Object subject;
+    private String subjectId;
 
-	private String user;
+    private String user;
 
-	/**
-	 * Constructor of class SubjectMessage
-	 *
-	 * @param subjectObject
-	 * @param actionCode
-	 */
-	public SubjectMessage(Object subjectObject, String actionCode)
-	{
-		this(subjectObject, actionCode, DEFAULT_USER);
-	}
+    /**
+     * Constructor of class SubjectMessage
+     *
+     * @param subjectId
+     * @param actionCode
+     */
+    public SubjectMessage(String subjectId, String actionCode)
+    {
+        this(subjectId, actionCode, DEFAULT_USER);
+    }
 
-	/**
-	 * Constructor of class SubjectMessage
-	 *
-	 * @param subjectObject
-	 * @param actionCode
-	 * @param userName
-	 */
-	public SubjectMessage(Object subjectObject, String actionCode,
-			String userName)
-	{
-		subject = subjectObject;
-		action = actionCode;
-		user = userName;
-	}
+    /**
+     * Constructor of class SubjectMessage
+     *
+     * @param subjectId
+     * @param actionCode
+     * @param userName
+     */
+    public SubjectMessage(String subjectId, String actionCode, String userName)
+    {
+        this.subjectId = subjectId;
+        this.action = actionCode;
+        this.user = userName;
+    }
 
-	/**
-	 * Getter method for property action
-	 *
-	 * @return Returns the action.
-	 */
-	public String getAction()
-	{
-		return action;
-	}
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.petri.message.ActionAware#getAction()
+     */
+    public String getAction()
+    {
+        return action;
+    }
 
-	/**
-	 * Getter method for property subject
-	 *
-	 * @return Returns the subject.
-	 */
-	public Object getSubject()
-	{
-		return subject;
-	}
+    /**
+     * Override method getSubject() in super class
+     *
+     * @see com.cyclopsgroup.petri.message.SubjectAware#getSubject()
+     */
+    public abstract Object getSubject();
 
-	/**
-	 * Getter method for property user
-	 *
-	 * @return Returns the user.
-	 */
-	public String getUser()
-	{
-		return user;
-	}
+    /**
+     * Override method getSubjectId() in super class
+     *
+     * @see com.cyclopsgroup.petri.message.SubjectAware#getSubjectId()
+     */
+    public String getSubjectId()
+    {
+        return subjectId;
+    }
+
+    /**
+     * Getter method for property user
+     *
+     * @return Returns the user.
+     */
+    public String getUser()
+    {
+        return user;
+    }
 }

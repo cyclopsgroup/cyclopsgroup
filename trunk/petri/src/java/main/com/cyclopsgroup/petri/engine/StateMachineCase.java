@@ -5,9 +5,8 @@
  * Use is subject to license terms. License Agreement available at
  * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
  */
-package com.cyclopsgroup.petri.persistence.memory;
+package com.cyclopsgroup.petri.engine;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -17,52 +16,26 @@ import org.apache.commons.lang.ArrayUtils;
 import com.cyclopsgroup.petri.Case;
 
 /**
- * Memory implementation of case object
+ * Default implementation of Case
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public class MemoryCase implements Case
+public class StateMachineCase implements Case
 {
-
-    private HashMap attributes = new HashMap();
-
-    private String flowId;
-
-    private String id;
 
     private HashSet states = new HashSet();
 
-    /**
-     * Constructor of class MemoryCase
-     *
-     * @param caseId
-     * @param flowDefinitionId
-     */
-    public MemoryCase(String caseId, String flowDefinitionId)
-    {
-        id = caseId;
-        flowId = flowDefinitionId;
-    }
+    private Case wrappedCase;
 
     /**
-     * Copy all value from another case to this one
+     * Constructor of class CaseWrapper
      *
-     * @param anotherCase
+     * @param realCase Real case object came from persistence manager
      */
-    public void copyFrom(Case anotherCase)
+    public StateMachineCase(Case realCase)
     {
-        // NOTE: anotherCase usually is Wrapper of this case itself.
-        // So anotherCase.getAttributes() returns the same reference of attributes property in this class
-        // New attributes value must be saved temporarily before attributes.clear() is called
-        HashMap newAttributes = new HashMap(anotherCase.getAttributes());
-        attributes.clear();
-        attributes.putAll(newAttributes);
-        id = anotherCase.getId();
-        flowId = anotherCase.getFlowId();
-        //Same for states
-        String[] newStates = anotherCase.getCurrentStates();
-        states.clear();
-        CollectionUtils.addAll(states, newStates);
+        wrappedCase = realCase;
+        CollectionUtils.addAll(states, realCase.getCurrentStates());
     }
 
     /**
@@ -72,7 +45,7 @@ public class MemoryCase implements Case
      */
     public Map getAttributes()
     {
-        return attributes;
+        return wrappedCase.getAttributes();
     }
 
     /**
@@ -86,13 +59,23 @@ public class MemoryCase implements Case
     }
 
     /**
+     * Get modifiable current states
+     *
+     * @return HashSet object which contains the id of states
+     */
+    public HashSet getCurrentStateSet()
+    {
+        return states;
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.petri.Case#getFlowId()
      */
     public String getFlowId()
     {
-        return flowId;
+        return wrappedCase.getFlowId();
     }
 
     /**
@@ -102,6 +85,16 @@ public class MemoryCase implements Case
      */
     public String getId()
     {
-        return id;
+        return wrappedCase.getId();
+    }
+
+    /**
+     * Override method toString() in super class
+     *
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+        return wrappedCase.toString() + " at states " + states;
     }
 }

@@ -7,7 +7,6 @@
  */
 package com.cyclopsgroup.petri.definition;
 
-import com.cyclopsgroup.gearset.beans.Context;
 
 /**
  * Guard for transition
@@ -16,12 +15,12 @@ import com.cyclopsgroup.gearset.beans.Context;
  */
 public interface Guard
 {
-	/**
-	 * Evaluate result
-	 *
-	 * @param context Runtime context
-	 * @return True or false
-	 * @throws Exception Throw it out
-	 */
-	boolean evaluate(Context context) throws Exception;
+    /**
+     * Evaluate result
+     *
+     * @param context Runtime context
+     * @return True or false
+     * @throws Exception Throw it out
+     */
+    boolean evaluate(NetContext context) throws Exception;
 }

@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 
 import com.cyclopsgroup.petri.PurchaseOrder;
 import com.cyclopsgroup.petri.PurchaseOrderMessage;
-import com.cyclopsgroup.petri.definition.FlowDefinition;
+import com.cyclopsgroup.petri.definition.NetDefinition;
 import com.cyclopsgroup.petri.engine.StateMachine;
 import com.cyclopsgroup.petri.persistence.memory.MemoryPersistenceManager;
 import com.cyclopsgroup.petri.syntax.FlowDefinitionLoader;
@@ -30,7 +30,7 @@ public class StateMachineTest extends TestCase
 	 */
 	public void testReceiveMessage() throws Exception
 	{
-		FlowDefinition fd = FlowDefinitionLoader.getInstance()
+		NetDefinition fd = FlowDefinitionLoader.getInstance()
 				.getFlowDefinition("com.cyclopsgroup.petri.syntax.SimpleFlow1");
 		MemoryPersistenceManager mpm = new MemoryPersistenceManager();
 		StateMachine sm = new StateMachine(fd, mpm, false);

@@ -8,16 +8,20 @@
 package com.cyclopsgroup.petri.definition;
 
 /**
- * Timer transition trigger
+ * Interface to load a flow definition
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public interface TimerTrigger extends Trigger
+public interface NetDefinitionLoader
 {
+	/** Role name in container */
+	String ROLE = NetDefinitionLoader.class.getName();
+
 	/**
-	 * Get time to wait
+	 * Get flow definition with given id
 	 *
-	 * @return Milliseconds to wait
+	 * @param flowDefinitionId Flow definition id
+	 * @return Flow definition object
 	 */
-	long getWaitingPeriod();
+	NetDefinition getFlowDefinition(String flowDefinitionId);
 }

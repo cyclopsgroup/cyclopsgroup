@@ -10,7 +10,8 @@ package com.cyclopsgroup.petri.engine;
 import java.util.Map;
 
 import com.cyclopsgroup.petri.Case;
-import com.cyclopsgroup.petri.definition.FlowDefinition;
+import com.cyclopsgroup.petri.definition.NetContext;
+import com.cyclopsgroup.petri.definition.NetDefinition;
 
 /**
  * Workflow engine interface
@@ -19,48 +20,55 @@ import com.cyclopsgroup.petri.definition.FlowDefinition;
  */
 public interface WorkflowEngine
 {
-	/**
-	 * Deploy a given flow definition
-	 *
-	 * @param flowDefinition Flow definition object
-	 */
-	public void deployFlowDefinition(FlowDefinition flowDefinition);
+    /**
+     * Deploy a given flow definition
+     *
+     * @param flowDefinition Flow definition object
+     */
+    public void deployFlowDefinition(NetDefinition flowDefinition);
 
-	/**
-	 * Get deployed flow definition object
-	 *
-	 * @param flowDefinitionId Id of flow definition
-	 * @return Flow definition object
-	 */
-	public FlowDefinition getFlowDefinition(String flowDefinitionId);
+    /**
+     * Get deployed flow definition object
+     *
+     * @param flowDefinitionId Id of flow definition
+     * @return Flow definition object
+     */
+    public NetDefinition getFlowDefinition(String flowDefinitionId);
 
-	/**
-	 * Get all deployed flow definitions
-	 *
-	 * @return Array of flow definition objects
-	 */
-	FlowDefinition[] getFlowDefinitions();
+    /**
+     * Get all deployed flow definitions
+     *
+     * @return Array of flow definition objects
+     */
+    NetDefinition[] getFlowDefinitions();
 
-	/**
-	 * Receive a message object
-	 *
-	 * @param message Message object which could be any object
-	 */
-	public void receiveMessage(Object message);
+    /**
+     * Get initial context
+     *
+     * @return Initial context
+     */
+    public NetContext getInitialContext();
 
-	/**
-	 * Manually start a new case in specified flow process
-	 *
-	 * @param flowDefinitionId Flow definition Id
-	 * @param initialAttributes
-	 * @return Started new case object
-	 */
-	public Case startNewCase(String flowDefinitionId, Map initialAttributes);
+    /**
+     * Receive a message object
+     *
+     * @param message Message object which could be any object
+     */
+    public void receiveMessage(Object message);
 
-	/**
-	 * Remove a flow definition
-	 *
-	 * @param flowDefinitionId Id of flow defintion
-	 */
-	public void undeployFlowDefinition(String flowDefinitionId);
+    /**
+     * Manually start a new case in specified flow process
+     *
+     * @param flowDefinitionId Flow definition Id
+     * @param initialAttributes
+     * @return Started new case object
+     */
+    public Case startNewCase(String flowDefinitionId, Map initialAttributes);
+
+    /**
+     * Remove a flow definition
+     *
+     * @param flowDefinitionId Id of flow defintion
+     */
+    public void undeployFlowDefinition(String flowDefinitionId);
 }

@@ -15,7 +15,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.gearset.xml.RichTagSupport;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Transition;
 
 /**
@@ -36,9 +36,9 @@ public class TransitionTag extends RichTagSupport
 	 */
 	private void checkFirst() throws JellyTagException
 	{
-		State[] froms = getTransition().getFromStates();
+		Place[] froms = getTransition().getFromStates();
 		FlowDefinitionTag fdt = (FlowDefinitionTag) findAncestorWithClass(FlowDefinitionTag.class);
-		State exit = fdt.getFlowDefinition().getEntrance();
+		Place exit = fdt.getFlowDefinition().getEntrance();
 		for (int i = 0; i < froms.length; i++)
 		{
 			if (froms[i] == exit)
@@ -60,9 +60,9 @@ public class TransitionTag extends RichTagSupport
 	 */
 	private void checkLast() throws JellyTagException
 	{
-		State[] tos = getTransition().getToStates();
+		Place[] tos = getTransition().getToStates();
 		FlowDefinitionTag fdt = (FlowDefinitionTag) findAncestorWithClass(FlowDefinitionTag.class);
-		State exit = fdt.getFlowDefinition().getExit();
+		Place exit = fdt.getFlowDefinition().getExit();
 		for (int i = 0; i < tos.length; i++)
 		{
 			if (tos[i] == exit)
@@ -81,17 +81,17 @@ public class TransitionTag extends RichTagSupport
 
 	private void checkUnmoved() throws JellyTagException
 	{
-		State[] froms = getTransition().getFromStates();
+		Place[] froms = getTransition().getFromStates();
 		HashSet fromStateIds = new HashSet();
 		for (int i = 0; i < froms.length; i++)
 		{
-			State from = froms[i];
+			Place from = froms[i];
 			fromStateIds.add(from.getId());
 		}
-		State[] tos = getTransition().getToStates();
+		Place[] tos = getTransition().getToStates();
 		for (int i = 0; i < tos.length; i++)
 		{
-			State to = tos[i];
+			Place to = tos[i];
 			if (fromStateIds.contains(to.getId()))
 			{
 				throw new JellyTagException(

@@ -10,10 +10,10 @@ package com.cyclopsgroup.petri.engine;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.petri.definition.AutomaticTrigger;
-import com.cyclopsgroup.petri.definition.FlowDefinition;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.NetContext;
+import com.cyclopsgroup.petri.definition.NetDefinition;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Transition;
 import com.cyclopsgroup.petri.persistence.PersistenceManager;
 
@@ -39,14 +39,18 @@ public class TransitionJobChain
             transition = t;
         }
 
+
         /**
-         * Override method run in super class of NewJob
-         * 
-         * @see com.cyclopsgroup.petri.engine.TransitionJob#run(com.cyclopsgroup.gearset.beans.Context, com.cyclopsgroup.petri.persistence.PersistenceManager)
+         * TODO Add javadoc for this method
+         *
+         * @param context
+         * @param persistenceManager
          */
-        public void run(Context context, PersistenceManager persistenceManager)
+        public void run(NetContext context,
+                PersistenceManager persistenceManager)
         {
-            CaseWrapper caseWrapper = (CaseWrapper) context.get("workflowCase");
+            StateMachineCase caseWrapper = (StateMachineCase) context
+                    .get("workflowCase");
             TransitionJobExecutor.getInstance().executeStandardTransition(
                     transition, caseWrapper, context, persistenceManager);
         }
@@ -71,14 +75,15 @@ public class TransitionJobChain
      * @param persistenceManager
      * @param flowDefinition
      */
-    public void execute(Context context, PersistenceManager persistenceManager,
-            FlowDefinition flowDefinition)
+    public void execute(NetContext context,
+            PersistenceManager persistenceManager, NetDefinition flowDefinition)
     {
         while (!jobQueue.isEmpty())
         {
             TransitionJob job = (TransitionJob) jobQueue.removeFirst();
             job.run(context, persistenceManager);
-            CaseWrapper caseWrapper = (CaseWrapper) context.get("workflowCase");
+            StateMachineCase caseWrapper = (StateMachineCase) context
+                    .get("workflowCase");
             if (caseWrapper == null)
             {
                 return; //Only if initial transition failed to be triggered
@@ -87,7 +92,7 @@ public class TransitionJobChain
             HashMap newJobs = new HashMap();
             for (int i = 0; i < currentStates.length; i++)
             {
-                State currentState = flowDefinition.getState(currentStates[i]);
+                Place currentState = flowDefinition.getState(currentStates[i]);
                 Transition[] transitions = currentState
                         .getOutboundTransitions();
                 for (int j = 0; j < transitions.length; j++)

@@ -5,26 +5,32 @@
  * Use is subject to license terms. License Agreement available at
  * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
  */
-package com.cyclopsgroup.petri.message;
+package com.cyclopsgroup.petri.definition;
 
 /**
- * Message which knows which subject it's gonna to invoke
+ * Input arc for transition
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public interface SubjectAware
+public interface InputArc
 {
+	/** Empty input arc array */
+	InputArc[] EMPTY_ARRAY = new InputArc[0];
 
 	/**
-	 * Get subject object
+	 * Get from state
 	 *
-	 * @return Subject object
+	 * @return From state
 	 */
-	Object getSubject();
+	Place getFrom();
+
 	/**
-	 * Get id of the subject
+	 * Get to transition
 	 *
-	 * @return Id of subject
+	 * @return To transition object
 	 */
-	String getSubjectId();
+	Transition getTo();
+
+	//TODO I guess we will need it soon
+	//Guard getGuard();
 }

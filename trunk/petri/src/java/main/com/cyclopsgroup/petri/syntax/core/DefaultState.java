@@ -9,8 +9,8 @@ package com.cyclopsgroup.petri.syntax.core;
 
 import java.util.Hashtable;
 
-import com.cyclopsgroup.petri.definition.FlowDefinition;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.NetDefinition;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Transition;
 
 /**
@@ -18,9 +18,9 @@ import com.cyclopsgroup.petri.definition.Transition;
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public class DefaultState implements State
+public class DefaultState implements Place
 {
-	private FlowDefinition flowDefinition;
+	private NetDefinition flowDefinition;
 
 	private String id;
 
@@ -34,7 +34,7 @@ public class DefaultState implements State
 	 * @param stateId
 	 * @param definition
 	 */
-	public DefaultState(String stateId, FlowDefinition definition)
+	public DefaultState(String stateId, NetDefinition definition)
 	{
 		id = stateId;
 		flowDefinition = definition;
@@ -63,9 +63,9 @@ public class DefaultState implements State
 	/**
 	 * Override method getFlowDefinition() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.State#getFlowDefinition()
+	 * @see com.cyclopsgroup.petri.definition.Place#getFlowDefinition()
 	 */
-	public FlowDefinition getFlowDefinition()
+	public NetDefinition getFlowDefinition()
 	{
 		return flowDefinition;
 	}
@@ -73,7 +73,7 @@ public class DefaultState implements State
 	/**
 	 * Override method getId() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.State#getId()
+	 * @see com.cyclopsgroup.petri.definition.Place#getId()
 	 */
 	public String getId()
 	{
@@ -83,7 +83,7 @@ public class DefaultState implements State
 	/**
 	 * Override method getInboundTransitions() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.State#getInboundTransitions()
+	 * @see com.cyclopsgroup.petri.definition.Place#getInboundTransitions()
 	 */
 	public Transition[] getInboundTransitions()
 	{
@@ -94,7 +94,7 @@ public class DefaultState implements State
 	/**
 	 * Override method getOutboundTransitions() in super class
 	 *
-	 * @see com.cyclopsgroup.petri.definition.State#getOutboundTransitions()
+	 * @see com.cyclopsgroup.petri.definition.Place#getOutboundTransitions()
 	 */
 	public Transition[] getOutboundTransitions()
 	{

@@ -38,7 +38,7 @@ public interface Case
 	 *
 	 * @return Full name of state machine
 	 */
-	String getFlowDefinitionName();
+	String getFlowId();
 
 	/**
 	 * Method getId() in class Case

@@ -14,5 +14,10 @@ package com.cyclopsgroup.petri.definition;
  */
 public interface ScheduledTrigger extends Trigger
 {
-
+	/**
+	 * Get cron expression for this schedule
+	 *
+	 * @return String cron expression
+	 */
+	String getScheduleExpression();
 }

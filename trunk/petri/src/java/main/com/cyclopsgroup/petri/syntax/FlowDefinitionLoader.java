@@ -11,74 +11,57 @@ import java.net.URL;
 
 import org.apache.commons.jelly.JellyContext;
 
-import com.cyclopsgroup.petri.definition.FlowDefinition;
+import com.cyclopsgroup.petri.definition.NetDefinition;
+import com.evavi.common.syntax.AbstractSyntaxLoader;
 
 /**
  * Flow definition loader
- * 
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
+ *
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public class FlowDefinitionLoader extends AbstractSyntaxLoader
+public class FlowDefinitionLoader extends AbstractSyntaxLoader implements
+		com.cyclopsgroup.petri.definition.NetDefinitionLoader
 {
-    private static final FlowDefinitionLoader ONLY_INSTANCE = new FlowDefinitionLoader();
+	/**
+	 * Method createEmptyContext() in class FlowDefinitionLoader
+	 *
+	 * @return
+	 */
+	protected JellyContext createEmptyContext()
+	{
+		return new FlowDefinitionTagRegistry().createJellyContext();
+	}
 
-    /**
-     * Method getInstance() in class FlowDefinitionLoader
-     * 
-     * @return
-     */
-    public static final FlowDefinitionLoader getInstance()
-    {
-        return ONLY_INSTANCE;
-    }
+	/**
+	 * Method getFlowDefinition() in class FlowDefinitionLoader
+	 *
+	 * @param name
+	 * @return
+	 */
+	public NetDefinition getFlowDefinition(String name)
+	{
+		return (NetDefinition) getModel(name);
+	}
 
-    private FlowDefinitionLoader()
-    {
+	/**
+	 * Override method getResource() in super class
+	 *
+	 * @see com.evavi.common.syntax.AbstractSyntaxLoader#getResource(java.lang.String)
+	 */
+	public URL getResource(String name)
+	{
+		String path = name.replace('.', '/');
+		path += ".xml";
+		return getClass().getClassLoader().getResource(path);
+	}
 
-    }
-
-    /**
-     * Override method createEmptyContext() in super class
-     * 
-     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#createEmptyContext()
-     */
-    protected JellyContext createEmptyContext()
-    {
-        JellyContext ret = new JellyContext();
-        new FlowDefinitionTagRegistry().registerTagLibraries(ret);
-        return ret;
-    }
-
-    /**
-     * Method getFlowDefinition() in class FlowDefinitionLoader
-     * 
-     * @param name
-     * @return
-     */
-    public FlowDefinition getFlowDefinition(String name)
-    {
-        return (FlowDefinition) getModel(name);
-    }
-
-    /**
-     * Override method getResource() in super class
-     * 
-     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResource(java.lang.String)
-     */
-    public URL getResource(String name)
-    {
-        String path = name.replace('.', '/');
-        path += ".xml";
-        return getClass().getClassLoader().getResource(path);
-    }
-
-    /**
-     * Override method getResultKey() in super class
-     * 
-     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResultKey()
-     */
-    protected String getResultKey()
-    {
-        return "result";
-    }
+	/**
+	 * Override method getResultKey() in super class
+	 *
+	 * @see com.evavi.common.syntax.AbstractSyntaxLoader#getResultKey()
+	 */
+	protected String getResultKey()
+	{
+		return "result";
+	}
 }

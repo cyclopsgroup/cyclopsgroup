@@ -8,23 +8,20 @@
 package com.cyclopsgroup.petri.message;
 
 /**
- * Message which knows which subject it's gonna to invoke
+ * TODO Add java doc for this class
  *
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
  */
-public interface SubjectAware
+public interface MessageListener
 {
+	/** Empty array of message listener */
+	MessageListener[] EMPTY_ARRAY = new MessageListener[0];
 
 	/**
-	 * Get subject object
+	 * Handle message
 	 *
-	 * @return Subject object
+	 * @param message Message object
+	 * @throws Exception Throw it out
 	 */
-	Object getSubject();
-	/**
-	 * Get id of the subject
-	 *
-	 * @return Id of subject
-	 */
-	String getSubjectId();
+	void handleMessage(Object message) throws Exception;
 }

@@ -11,9 +11,9 @@ import java.util.Hashtable;
 
 import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.petri.definition.AutomaticTrigger;
-import com.cyclopsgroup.petri.definition.FlowDefinition;
+import com.cyclopsgroup.petri.definition.NetDefinition;
 import com.cyclopsgroup.petri.definition.Guard;
-import com.cyclopsgroup.petri.definition.State;
+import com.cyclopsgroup.petri.definition.Place;
 import com.cyclopsgroup.petri.definition.Task;
 import com.cyclopsgroup.petri.definition.Transition;
 import com.cyclopsgroup.petri.definition.Trigger;
@@ -47,7 +47,7 @@ public class DefaultTransition implements Transition
     {
     };
 
-    private FlowDefinition flowDefinition;
+    private NetDefinition flowDefinition;
 
     private Hashtable fromStates = new Hashtable();
 
@@ -73,7 +73,7 @@ public class DefaultTransition implements Transition
      * @param transitionId Transition ID
      * @param definition Flow definition
      */
-    public DefaultTransition(String transitionId, FlowDefinition definition)
+    public DefaultTransition(String transitionId, NetDefinition definition)
     {
         id = transitionId;
         flowDefinition = definition;
@@ -84,7 +84,7 @@ public class DefaultTransition implements Transition
      * 
      * @param state
      */
-    public void addFromState(State state)
+    public void addFromState(Place state)
     {
         fromStates.put(state.getId(), state);
     }
@@ -94,7 +94,7 @@ public class DefaultTransition implements Transition
      * 
      * @param state
      */
-    public void addToState(State state)
+    public void addToState(Place state)
     {
         toStates.put(state.getId(), state);
     }
@@ -104,7 +104,7 @@ public class DefaultTransition implements Transition
      * 
      * @see com.cyclopsgroup.petri.definition.Transition#getFlowDefinition()
      */
-    public FlowDefinition getFlowDefinition()
+    public NetDefinition getFlowDefinition()
     {
         return flowDefinition;
     }
@@ -114,9 +114,9 @@ public class DefaultTransition implements Transition
      * 
      * @see com.cyclopsgroup.petri.definition.Transition#getFromStates()
      */
-    public State[] getFromStates()
+    public Place[] getFromStates()
     {
-        return (State[]) fromStates.values().toArray(State.EMPTY_ARRAY);
+        return (Place[]) fromStates.values().toArray(Place.EMPTY_ARRAY);
     }
 
     /**
@@ -164,9 +164,9 @@ public class DefaultTransition implements Transition
      * 
      * @see com.cyclopsgroup.petri.definition.Transition#getToStates()
      */
-    public State[] getToStates()
+    public Place[] getToStates()
     {
-        return (State[]) toStates.values().toArray(State.EMPTY_ARRAY);
+        return (Place[]) toStates.values().toArray(Place.EMPTY_ARRAY);
     }
 
     /**

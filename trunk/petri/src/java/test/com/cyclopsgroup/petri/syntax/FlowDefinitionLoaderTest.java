@@ -9,7 +9,7 @@ package com.cyclopsgroup.petri.syntax;
 
 import junit.framework.TestCase;
 
-import com.cyclopsgroup.petri.definition.FlowDefinition;
+import com.cyclopsgroup.petri.definition.NetDefinition;
 import com.cyclopsgroup.petri.syntax.FlowDefinitionLoader;
 
 /**
@@ -25,7 +25,7 @@ public class FlowDefinitionLoaderTest extends TestCase
 	 */
 	public void testGetDefinitionLoader()
 	{
-		FlowDefinition fd = FlowDefinitionLoader.getInstance()
+		NetDefinition fd = FlowDefinitionLoader.getInstance()
 				.getFlowDefinition("com.cyclopsgroup.petri.syntax.SimpleFlow1");
 		System.out.println(fd);
 	}
