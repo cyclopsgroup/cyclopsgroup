@@ -43,19 +43,15 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     private static final String CONTENT_TYPE = "text/html";
 
-    private static String getScriptPath(String packageName, String page)
+    private static String getScriptPath(String packageName, String module)
     {
         StringBuffer scriptPath = new StringBuffer();
         if (StringUtils.isNotEmpty(packageName))
         {
             scriptPath.append(packageName.replace('.', '/'));
-            scriptPath.append("/");
+            scriptPath.append('/');
         }
-        scriptPath.append(page);
-        if (!page.endsWith(".jelly"))
-        {
-            scriptPath.append(".jelly");
-        }
+        scriptPath.append(module).append(".jelly");
         return scriptPath.toString();
     }
 
@@ -88,9 +84,9 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
      */
-    public boolean exists(String packageName, String page)
+    public boolean exists(String packageName, String module)
     {
-        String scriptPath = getScriptPath(packageName, page);
+        String scriptPath = getScriptPath(packageName, module);
         try
         {
             return getScript(scriptPath) != null;
@@ -170,7 +166,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
      */
-    public void render(UIRuntime runtime, String packageName, String page)
+    public void render(UIRuntime runtime, String packageName, String module)
             throws Exception
     {
         Context uic = runtime.getUIContext();
@@ -192,7 +188,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
                     .getOutputStream());
             uic.put("jellyOutput", output);
         }
-        String scriptPath = getScriptPath(packageName, page);
+        String scriptPath = getScriptPath(packageName, module);
         Script script = getScript(scriptPath);
         script.run(jc, output);
         output.flush();

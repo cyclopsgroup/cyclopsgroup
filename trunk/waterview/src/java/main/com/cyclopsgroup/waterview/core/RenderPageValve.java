@@ -70,11 +70,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
          */
         public void render(String category, String page) throws Exception
         {
-            if (page.endsWith(suffix))
-            {
-                page = StringUtils.chomp(page, suffix);
-            }
-            String path = category + '/' + page;
+            String module = StringUtils.chomp(page, suffix);
+            String path = category + '/' + module;
             moduleResolver.resolve(runtime, path);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
@@ -108,7 +105,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                throw new PageNotFoundException(page + suffix);
+                throw new PageNotFoundException(page);
             }
         }
     }

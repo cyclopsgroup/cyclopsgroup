@@ -42,7 +42,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
 
     private static final String CONTENT_TYPE = "text/html";
 
-    private static String getTemplatePath(String packageName, String page)
+    private static String getTemplatePath(String packageName, String module)
     {
         StringBuffer templatePath = new StringBuffer();
         if (StringUtils.isNotEmpty(packageName))
@@ -50,11 +50,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
             templatePath.append(packageName.replace('.', '/'));
             templatePath.append("/");
         }
-        templatePath.append(page);
-        if (!page.endsWith(".vm"))
-        {
-            templatePath.append(".vm");
-        }
+        templatePath.append(module).append(".vm");
         return templatePath.toString();
     }
 
@@ -67,10 +63,10 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
      */
-    public boolean exists(String packageName, String page)
+    public boolean exists(String packageName, String module)
     {
         return velocityComponent.templateExists(getTemplatePath(packageName,
-                page));
+                module));
     }
 
     /**
@@ -88,7 +84,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
      */
-    public void render(UIRuntime runtime, String packageName, String page)
+    public void render(UIRuntime runtime, String packageName, String module)
             throws Exception
     {
         Context vc = (Context) runtime.getUIContext().get("velocityContext");
@@ -97,7 +93,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
             vc = new VelocityContextAdapter(runtime.getUIContext());
             runtime.getUIContext().put("velocityContext", vc);
         }
-        String templatePath = getTemplatePath(packageName, page);
+        String templatePath = getTemplatePath(packageName, module);
         OutputStreamWriter output = new OutputStreamWriter(runtime
                 .getHttpServletResponse().getOutputStream());
         velocityComponent.mergeTemplate(templatePath, vc, output);
