@@ -16,13 +16,7 @@
  *  limitations under the License.
  * =========================================================================
  -->
-<p:page xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal" name="Default" package="com.cyclopsgroup.waterview.ui.layout">
-    <html>
-        <head>
-        </head>
-        <body>
-            <p:component category="body" page="${page}"/>
-            <p>Current page is ${page}</p>
-        </body>
-    </html>
+<p:page xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal" name="Error" package="com.cyclopsgroup.waterview.ui.body">
+   <h2>${exception.class.name}</h2>
+   <pre>${stackTrace}</pre>
 </p:page>

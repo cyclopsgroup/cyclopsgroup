@@ -200,6 +200,13 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     public void render(Context context, String packageName, String module,
             UIRuntime runtime) throws Exception
     {
+        String scriptPath = getScriptPath(packageName, module);
+        Script script = getScript(scriptPath);
+        /*
+         if (script == null)
+         {
+         return;
+         }*/
         XMLOutput jellyOutput = (XMLOutput) context.get("jellyOutput");
         if (jellyOutput == null)
         {
@@ -213,9 +220,6 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             String name = (String) i.next();
             jc.setVariable(name, context.get(name));
         }
-
-        String scriptPath = getScriptPath(packageName, module);
-        Script script = getScript(scriptPath);
         synchronized (script)
         {
             try

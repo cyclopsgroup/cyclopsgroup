@@ -67,49 +67,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             context.put(NAME, this);
         }
 
-        private void render(Context context, String packageName,
-                String modulePath, String errorModulePath, UIRuntime runtime)
+        private void internallyRender(String category, String page)
                 throws Exception
-        {
-            moduleResolver.resolvePage(modulePath, runtime, context);
-            LocalizationTool parent = (LocalizationTool) context
-                    .get(localizationName);
-            Context newContext = new DefaultContext(context);
-            try
-            {
-                LocalizationTool localization = new LocalizationTool(parent,
-                        ResourceBundle.getBundle(packageName + "/" + modulePath
-                                + "_ResourceBundle", runtime.getLocale()));
-                newContext.put(localizationName, localization);
-                newContext.put("renderer", new RuntimeRenderer(pageRenderer,
-                        runtime, newContext, extension));
-            }
-            catch (Exception ignored)
-            {
-                //ignore exception here
-            }
-
-            try
-            {
-                pageRenderer.render(newContext, packageName, modulePath,
-                        runtime);
-            }
-            catch (Exception e)
-            {
-                newContext.put("exception", e);
-                pageRenderer.render(newContext, packageName, errorModulePath,
-                        runtime);
-            }
-        }
-
-        /**
-         * Render method
-         * 
-         * @param category Page package name
-         * @param page Page path
-         * @throws Exception Throw it out to page renderer
-         */
-        public void render(String category, String page) throws Exception
         {
             String module = StringUtils.chomp(page, "." + extension);
             String path = category + '/' + module;
@@ -146,9 +105,52 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                context.put("exception", new PageNotFoundException(category
-                        + "/" + page));
-                render(category, errorModule + '.' + extension);
+                throw new PageNotFoundException(category + "/" + page);
+            }
+        }
+
+        private void render(Context context, String packageName,
+                String modulePath, String errorModulePath, UIRuntime runtime)
+                throws Exception
+        {
+            moduleResolver.resolvePage(modulePath, runtime, context);
+            LocalizationTool parent = (LocalizationTool) context
+                    .get(localizationName);
+            Context newContext = new DefaultContext(context);
+            try
+            {
+                LocalizationTool localization = new LocalizationTool(parent,
+                        ResourceBundle.getBundle(packageName + "/" + modulePath
+                                + "_ResourceBundle", runtime.getLocale()));
+                newContext.put(localizationName, localization);
+                newContext.put("renderer", new RuntimeRenderer(pageRenderer,
+                        runtime, newContext, extension));
+            }
+            catch (Exception ignored)
+            {
+                //ignore exception here
+            }
+
+            pageRenderer.render(newContext, packageName, modulePath, runtime);
+        }
+
+        /**
+         * Render method
+         * 
+         * @param category Page package name
+         * @param page Page path
+         * @throws Exception Throw it out to page renderer
+         */
+        public void render(String category, String page) throws Exception
+        {
+            try
+            {
+                internallyRender(category, page);
+            }
+            catch (Exception e)
+            {
+                context.put("exception", e);
+                internallyRender(category, errorModule + '.' + extension);
             }
         }
     }

@@ -32,7 +32,6 @@ public class PageNotFoundException extends NestableException
      */
     private String page;
 
-
     /**
      * Constructor of PageNotFoundException
      * 
@@ -40,7 +39,7 @@ public class PageNotFoundException extends NestableException
      */
     public PageNotFoundException(String page)
     {
-        super("Page [" + page + "] not found");
+        super("Page [" + page + "] is not found");
         this.page = page;
     }
 
@@ -51,8 +50,8 @@ public class PageNotFoundException extends NestableException
      * 
      * @uml.property name="page"
      */
-    public String getPage() {
+    public String getPage()
+    {
         return page;
     }
-
 }
