@@ -192,18 +192,60 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.utils;
 
+import java.util.LinkedList;
 
-/** Component loader
+import com.cyclops.jmainboard.Component;
+
+/** Tool to sort component before they are loaded
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:56:17 PM Mar 12, 2004
+ * Created at 8:05:41 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ComponentLoader {
-    /** load instance of component
+public class ComponentSorter {
+    private LinkedList components = new LinkedList();
+    private void addBefore(Component toAdd, Component before)
+        throws Exception {
+        int position = components.indexOf(before);
+        if (components.contains(toAdd)) {
+            if (components.indexOf(toAdd) > position) {
+                throw new Exception(
+                    "Recursive dependency between ["
+                        + toAdd.getId()
+                        + "] and ["
+                        + before.getId()
+                        + "]");
+            }
+        } else {
+            components.add(position, toAdd);
+        }
+        Component[] dependencies = toAdd.getDependencies();
+        for (int i = 0; i < dependencies.length; i++) {
+            Component dependency = dependencies[i];
+            addBefore(dependency, toAdd);
+        }
+    }
+
+    /** Method addComponent() in class ComponentSorter
+     * @param component Component to add
+     * @throws Exception Occur when recursive dependency happens
+     */
+    public void addComponent(Component component) throws Exception {
+        if (!components.contains(component)) {
+            components.addLast(component);
+        }
+        Component[] dependencies = component.getDependencies();
+        for (int i = 0; i < dependencies.length; i++) {
+            Component dependency = dependencies[i];
+            addBefore(dependency, component);
+        }
+    }
+    /** Get sorting result of components
      * @return Array of components
      */
-    Component[] loadComponents();
+    public Component[] getComponents() {
+        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    }
 }

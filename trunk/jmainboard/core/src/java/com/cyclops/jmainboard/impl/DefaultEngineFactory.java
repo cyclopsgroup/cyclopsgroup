@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard.impl;
 
+import java.io.File;
 import java.util.Properties;
 
 import com.cyclops.jmainboard.Engine;
@@ -218,10 +219,22 @@ public class DefaultEngineFactory extends EngineFactory {
      * @see com.cyclops.jmainboard.EngineFactory#newEngine()
      */
     public Engine newEngine() throws Exception {
-        String engineImpl = getProperties().getProperty(ENGINE, ENGINE_IMPL);
+        String engineHome = getProperties().getProperty(Engine.ENGINE_HOME, "");
+        return newEngine(new File(engineHome));
+    }
+    /** Override method newEngine in the derived class
+     * @see com.cyclops.jmainboard.EngineFactory#newEngine(java.io.File)
+     */
+    public Engine newEngine(File engineHome) throws Exception {
+        String engineImpl =
+            getProperties().getProperty(Engine.ENGINE, Engine.ENGINE_IMPL);
         DefaultEngine engine =
             (DefaultEngine) Class.forName(engineImpl).newInstance();
         engine.getProperties().putAll(getProperties());
+        engine.getProperties().setProperty(
+            Engine.ENGINE_HOME,
+            engineHome.getAbsolutePath());
+        engine.setEngineHome(engineHome);
         engine.init();
         return engine;
     }

@@ -192,100 +192,61 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.loader;
+package com.cyclops.jmainboard.utils;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Hashtable;
+import java.util.ArrayList;
+
+import junit.framework.TestCase;
 
 import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.ComponentLoader;
-import com.cyclops.jmainboard.ResourceLocator;
+import com.cyclops.jmainboard.Sample;
 
-/** Filesystem component loader implementation
+/** Testcase for ComponentSorter
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:58:13 PM Mar 12, 2004
+ * Created at 9:00:49 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class FileSystemComponentLoader
-    implements ComponentLoader, ResourceLocator {
-
-    private File loaderHome;
-    private Hashtable componentHomes = new Hashtable();
-    private Hashtable components = new Hashtable();
-
-    /** Constructor for class FileSystemComponentLoader
+public class ComponentSorterTest extends TestCase {
+    /** Method testSorter() in class ComponentSorterTest
+     * @throws Exception RecursiveDependencyException
      */
-    public FileSystemComponentLoader() {
-        this(System.getProperty("dandelion.loader.home", "dandelion"));
-    }
-    /** Constructor for class FileSystemComponentLoader
-     * @param homeDirectory Directory of home folder
-     */
-    public FileSystemComponentLoader(File homeDirectory) {
-        loaderHome = homeDirectory;
-    }
-    /** Constructor for class FileSystemComponentLoader
-     * @param path Path of home folder
-     */
-    public FileSystemComponentLoader(String path) {
-        this(new File(path));
-    }
-
-    /** Get home directory of this loader
-     * @return Home directory of this file loader
-     */
-    public File getLoaderHome() {
-        return loaderHome;
-    }
-
-    /** Set loader directory
-     * @param file Home directory of this file loader
-     */
-    public void setLoaderHome(File file) {
-        loaderHome = file;
-    }
-
-    /** Override method loadComponent in the derived class
-     * @see com.cyclops.jmainboard.ComponentLoader#loadComponent()
-     */
-    public Component[] loadComponents() {
-        loadComponents(loaderHome);
-        return (Component[]) components.values().toArray(Component.EMPTY_ARRAY);
-    }
-
-    private void loadComponents(File folder) {
-        if (folder.isDirectory()
-            && new File(folder, "component-descriptor.xml").isFile()) {
-            loadComponent(folder);
+    public void testSorter() throws Exception {
+        // Define a hierarchy
+        Sample f = new Sample("f", new Sample[0]);
+        Sample g = new Sample("g", new Sample[0]);
+        Sample h = new Sample("h", new Sample[] { f });
+        Sample c = new Sample("c", new Sample[] { g, h });
+        Sample e = new Sample("e", new Sample[] { f, c });
+        Sample d = new Sample("d", new Sample[0]);
+        Sample b = new Sample("b", new Sample[] { d, e });
+        Sample a = new Sample("a", new Sample[] { b, c });
+        //Add components
+        ComponentSorter sorter = new ComponentSorter();
+        sorter.addComponent(d);
+        sorter.addComponent(e);
+        sorter.addComponent(f);
+        sorter.addComponent(a);
+        sorter.addComponent(b);
+        sorter.addComponent(c);
+        sorter.addComponent(g);
+        sorter.addComponent(h);
+        //Collect result
+        ArrayList result = new ArrayList();
+        Component[] components = sorter.getComponents();
+        for (int i = 0; i < components.length; i++) {
+            result.add(components[i]);
         }
-        File[] subfiles = folder.listFiles();
-        for (int i = 0; i < subfiles.length; i++) {
-            File subfile = subfiles[i];
-            loadComponents(subfile);
-        }
+        //Assert results
+        assertTrue(result.indexOf(a) > result.indexOf(b));
+        assertTrue(result.indexOf(a) > result.indexOf(c));
+        assertTrue(result.indexOf(b) > result.indexOf(e));
+        assertTrue(result.indexOf(b) > result.indexOf(e));
+        assertTrue(result.indexOf(e) > result.indexOf(f));
+        assertTrue(result.indexOf(e) > result.indexOf(c));
+        assertTrue(result.indexOf(c) > result.indexOf(g));
+        assertTrue(result.indexOf(c) > result.indexOf(h));
+        assertTrue(result.indexOf(a) > result.indexOf(b));
+        assertTrue(result.indexOf(h) > result.indexOf(f));
     }
-
-    private void loadComponent(File folder) {
-        //TODO not implemented yet
-    }
-
-    /** Override method getResource in the derived class
-     * @see com.cyclops.jmainboard.ResourceLocator#getResource(com.cyclops.jmainboard.Component, java.lang.String)
-     */
-    public URL getResource(Component component, String resourcePath) {
-        File componentHome = (File) componentHomes.get(component.getId());
-        File resource = new File(componentHome, resourcePath);
-        if (resource.isFile()) {
-            try {
-                return resource.toURL();
-            } catch (Exception e) {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
-
 }

@@ -192,56 +192,45 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.impl;
+package com.cyclops.jmainboard.model;
 
-import java.util.LinkedList;
+import java.util.List;
 
-import com.cyclops.jmainboard.Component;
+import junit.framework.TestCase;
 
-/** Tool to sort component before they are loaded
+/** Test case for Model parser
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 8:05:41 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 15:12:32 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class ComponentSorter {
-    private LinkedList components = new LinkedList();
-    private void addBefore(Component toAdd, Component before)
-        throws RecursiveDependencyException {
-        int position = components.indexOf(before);
-        if (components.contains(toAdd)) {
-            if (components.indexOf(toAdd) > position) {
-                throw new RecursiveDependencyException();
-            }
-        } else {
-            components.add(position, toAdd);
-        }
-        Component[] dependencies = toAdd.getDependencies();
-        for (int i = 0; i < dependencies.length; i++) {
-            Component dependency = dependencies[i];
-            addBefore(dependency, toAdd);
-        }
-    }
-
-    /** Method addComponent() in class ComponentSorter
-     * @param component Component to add
-     * @throws RecursiveDependencyException Occur when recursive dependency happens
+public class ModelParserTest extends TestCase {
+    /** Method testParse() in class ModelParserTest
+     * @throws Exception Throw it to runner
      */
-    public void addComponent(Component component)
-        throws RecursiveDependencyException {
-        if (!components.contains(component)) {
-            components.addLast(component);
-        }
-        Component[] dependencies = component.getDependencies();
-        for (int i = 0; i < dependencies.length; i++) {
-            Component dependency = dependencies[i];
-            addBefore(dependency, component);
-        }
-    }
-    /** Get sorting result of components
-     * @return Array of components
-     */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    public void testParse() throws Exception {
+        ModelParser mp = new ModelParser();
+        ComponentModel cm =
+            mp.parse(getClass().getResource("test-component.xml"));
+        assertNotNull(cm);
+        assertEquals("com.cyclops.jmainboard.test", cm.getId());
+        assertEquals("1.0", cm.getVersion());
+        assertEquals("Test Component", cm.getTitle());
+        assertEquals("Just for testing", cm.getDescription());
+        assertEquals(
+            "com.cyclops.jmainboard.model.TestComponent",
+            cm.getImplementation());
+        List properties = cm.getProperties();
+        assertEquals(2, properties.size());
+        PropertyModel pm = (PropertyModel) properties.get(0);
+        assertEquals("property1", pm.getName());
+        assertEquals("aaa", pm.getValue());
+        pm = (PropertyModel) properties.get(1);
+        assertEquals("property2", pm.getName());
+        assertEquals("2", pm.getValue());
+        List deps = cm.getDependencies();
+        assertEquals(2, deps.size());
+        assertTrue(deps.contains("org.apache.turbine"));
+        assertTrue(deps.contains("org.apache.velocity"));
     }
 }

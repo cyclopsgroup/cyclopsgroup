@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard;
 
+import java.io.File;
 import java.util.Properties;
 
 /** Engine interface
@@ -202,6 +203,12 @@ import java.util.Properties;
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
 public interface Engine {
+    /** Key for basedir in context */
+    String ENGINE_HOME = "engine.home";
+    /** Key for engine in context */
+    String ENGINE = Engine.class.getName();
+    /** Value for engine in context */
+    String ENGINE_IMPL = "com.cyclops.jmainboard.impl.DefaultEngine";
     /** Get all components
      * @return Array of all components
      */
@@ -210,4 +217,9 @@ public interface Engine {
      * @return Properties of this engine
      */
     Properties getProperties();
+
+    /** Method getEngineHome() in class Engine
+     * @return Home directory of engine
+     */
+    File getEngineHome();
 }

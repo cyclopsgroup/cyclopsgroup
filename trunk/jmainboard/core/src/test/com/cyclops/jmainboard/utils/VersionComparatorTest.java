@@ -192,25 +192,35 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.loader;
+package com.cyclops.jmainboard.utils;
 
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.ComponentLoader;
+import junit.framework.TestCase;
 
-/** TODO Add javadoc for this class
+/** Test case for VersionComparator
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 12:00:04 PM Mar 13, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 16:45:15 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class DatabaseComponentLoader implements ComponentLoader {
-
-    /** Override method loadComponent in the derived class
-     * @see com.cyclops.jmainboard.ComponentLoader#loadComponent()
+public class VersionComparatorTest extends TestCase {
+    /** Method testCompareIntegers() in class VersionComparatorTest
      */
-    public Component[] loadComponents() {
-        // TODO Auto-generated method stub
-        return null;
+    public void testCompareIntegers() {
+        assertEquals(0, VersionComparator.compareIntegers("1", "1"));
+        assertEquals(1, VersionComparator.compareIntegers("11", "2"));
+        assertEquals(-1, VersionComparator.compareIntegers("5", "200"));
     }
-
+    /** Method testCompareFloats() in class VersionComparatorTest
+     */
+    public void testCompareFloats() {
+        assertEquals(1, VersionComparator.compareFloats("12", "5"));
+        assertEquals(1, VersionComparator.compareFloats("1.4.6", "1.3.9.9.18"));
+        assertEquals(1, VersionComparator.compareFloats("12.000.0", "9"));
+        assertEquals(-1, VersionComparator.compareFloats("1.5.3", "2"));
+    }
+    /** Method testCompare() in class VersionComparatorTest
+     */
+    public void testCompare() {
+        assertEquals(1, VersionComparator.compare("3.0-1.1.1", "1.4.6-5-5-01"));
+    }
 }

@@ -192,29 +192,96 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.impl;
+package com.cyclops.jmainboard.utils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang.StringUtils;
 
-/** Basic object with logger
+/** Version comparator utilities
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 12:04:06 2004-4-14
+ * Created at 16:31:14 2004-4-14
  * Edited with eclipse 2.1.3
  */
-public class BaseLoggable {
-    private Log log = LogFactory.getLog(getClass());
-    /** Method getLog() in class BaseLoggable
-     * @return Log object
-     */
-    public Log getLog() {
-        return log;
+public final class VersionComparator {
+    private VersionComparator() {
+        //Nothing
     }
-    /** Method setLog() in class BaseLoggable
-     * @param logger Log object
+    /** Compare to version expressions
+     * @param v1 Version expression
+     * @param v2 Version expresson
+     * @return Compare result
      */
-    public void setLog(Log logger) {
-        log = logger;
+    public static int compare(String v1, String v2) {
+        if (v1.indexOf('-') == -1) {
+            v1 += "-0";
+        }
+        if (v2.indexOf('-') == -1) {
+            v2 += "-0";
+        }
+        String[] s1 = StringUtils.split(v1, "-");
+        String[] s2 = StringUtils.split(v2, "-");
+        int result = 0;
+        for (int i = 0; i < Math.min(s1.length, s2.length); i++) {
+            result = compareLettersFloats(s1[i], s2[i]);
+            if (result != 0) {
+                break;
+            }
+        }
+        if (result == 0) {
+            return compareIntegers(
+                String.valueOf(s1.length),
+                String.valueOf(s2.length));
+        } else {
+            return result;
+        }
+    }
+    /** Compare to integer expressions
+     * @param v1 Integer expression
+     * @param v2 Integer expression
+     * @return Compare result
+     */
+    public static int compareIntegers(String v1, String v2) {
+        try {
+            return new Integer(v1).compareTo(new Integer(v2));
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    /** Compare to version expressions with numbers and dots
+     * @param v1 Version expression
+     * @param v2 Version expression
+     * @return Compare result
+     */
+    public static int compareFloats(String v1, String v2) {
+        if (v1.indexOf(".") == -1) {
+            v1 += ".0";
+        }
+        if (v2.indexOf(".") == -1) {
+            v2 += ".0";
+        }
+        String[] s1 = StringUtils.split(v1, ".");
+        String[] s2 = StringUtils.split(v2, ".");
+        int result = 0;
+        for (int i = 0; i < Math.min(s1.length, s2.length); i++) {
+            result = compareIntegers(s1[i], s2[i]);
+            if (result != 0) {
+                break;
+            }
+        }
+        if (result == 0) {
+            return compareIntegers(
+                String.valueOf(s1.length),
+                String.valueOf(s2.length));
+        } else {
+            return result;
+        }
+    }
+    /** Compare things like a1.0, beta3 or rc11.1
+     * @param v1 Version expression with letters and digits
+     * @param v2 Version expression with letters and digits
+     * @return Compare result
+     */
+    public static int compareLettersFloats(String v1, String v2) {
+        return compareFloats(v1, v2); //TODO not implemented yet
     }
 }

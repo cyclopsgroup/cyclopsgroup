@@ -204,18 +204,12 @@ import java.util.Properties;
  * Edited with eclipse 2.1.3
  */
 public abstract class EngineFactory {
-    /** Key for basedir in context */
-    public static final String BASE_DIR = "basedir";
-    /** Key for engine in context */
-    public static final String ENGINE = Engine.class.getName();
     /** Key for engine factory in context */
     public static final String ENGINE_FACTORY = EngineFactory.class.getName();
     /** Value for engine factory in context */
     public static final String ENGINE_FACTORY_IMPL =
         "com.cyclops.jmainboard.impl.DefaultEngineFactory";
-    /** Value for engine in context */
-    public static final String ENGINE_IMPL =
-        "com.cyclops.jmainboard.impl.DefaultEngine";
+
     /** Method getInstance() in class EngineFactory
      * @param props Initial context
      * @return EngineFactory instance
@@ -225,8 +219,8 @@ public abstract class EngineFactory {
         throws Exception {
         Properties p = new Properties();
         p.setProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
-        p.setProperty(ENGINE, ENGINE_IMPL);
-        p.setProperty(BASE_DIR, new File("").getAbsolutePath());
+        p.setProperty(Engine.ENGINE, Engine.ENGINE_IMPL);
+        p.setProperty(Engine.ENGINE_HOME, new File("").getAbsolutePath());
         p.putAll(System.getProperties());
         if (props != null) {
             p.putAll(props);
@@ -246,4 +240,10 @@ public abstract class EngineFactory {
      * @throws Exception Creation Exceptions
      */
     public abstract Engine newEngine() throws Exception;
+    /** Method newEngine() in class EngineFactory
+     * @param engineHome Home directory of engine
+     * @return New engine instance
+     * @throws Exception Creation Exception
+     */
+    public abstract Engine newEngine(File engineHome) throws Exception;
 }

@@ -192,62 +192,107 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.engine;
+package com.cyclops.jmainboard.model;
 
-import com.cyclops.jmainboard.impl.ComponentSorter;
 import java.util.ArrayList;
+import java.util.List;
 
-import junit.framework.TestCase;
-
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.Sample;
-
-/** Testcase for ComponentSorter
+/** Component model object
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:00:49 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 14:25:28 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class ComponentSorterTest extends TestCase {
-    /** Method testSorter() in class ComponentSorterTest
-     * @throws Exception RecursiveDependencyException
+public class ComponentModel {
+    private List dependencies = new ArrayList();
+    private String description;
+    private String id;
+    private String implementation;
+    private List properties = new ArrayList();
+    private String title;
+    private String version;
+    /** Method addDependency() in class ComponentModel
+     * @param dep Dependency id
      */
-    public void testSorter() throws Exception {
-        // Define a hierarchy
-        Sample f = new Sample("f", new Sample[0]);
-        Sample g = new Sample("g", new Sample[0]);
-        Sample h = new Sample("h", new Sample[] { f });
-        Sample c = new Sample("c", new Sample[] { g, h });
-        Sample e = new Sample("e", new Sample[] { f, c });
-        Sample d = new Sample("d", new Sample[0]);
-        Sample b = new Sample("b", new Sample[] { d, e });
-        Sample a = new Sample("a", new Sample[] { b, c });
-        //Add components
-        ComponentSorter sorter = new ComponentSorter();
-        sorter.addComponent(d);
-        sorter.addComponent(e);
-        sorter.addComponent(f);
-        sorter.addComponent(a);
-        sorter.addComponent(b);
-        sorter.addComponent(c);
-        sorter.addComponent(g);
-        sorter.addComponent(h);
-        //Collect result
-        ArrayList result = new ArrayList();
-        Component[] components = sorter.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            result.add(components[i]);
-        }
-        //Assert results
-        assertTrue(result.indexOf(a) > result.indexOf(b));
-        assertTrue(result.indexOf(a) > result.indexOf(c));
-        assertTrue(result.indexOf(b) > result.indexOf(e));
-        assertTrue(result.indexOf(b) > result.indexOf(e));
-        assertTrue(result.indexOf(e) > result.indexOf(f));
-        assertTrue(result.indexOf(e) > result.indexOf(c));
-        assertTrue(result.indexOf(c) > result.indexOf(g));
-        assertTrue(result.indexOf(c) > result.indexOf(h));
-        assertTrue(result.indexOf(a) > result.indexOf(b));
-        assertTrue(result.indexOf(h) > result.indexOf(f));
+    public void addDependency(String dep) {
+        dependencies.add(dep);
+    }
+    /** Method addProperty() in class ComponentModel
+     * @param mod PropertyModel instance
+     */
+    public void addProperty(PropertyModel mod) {
+        properties.add(mod);
+    }
+    /** Method getDependencies() in class ComponentModel
+     * @return List of dependency ids
+     */
+    public List getDependencies() {
+        return dependencies;
+    }
+    /** Method getDescription() in class ComponentModel
+     * @return Description
+     */
+    public String getDescription() {
+        return description;
+    }
+    /** Method getId() in class ComponentModel
+     * @return Id
+     */
+    public String getId() {
+        return id;
+    }
+    /** Method getImplementation() in class ComponentModel
+     * @return Implementation class name
+     */
+    public String getImplementation() {
+        return implementation;
+    }
+    /** Method getProperties() in class ComponentModel
+     * @return Properties list
+     */
+    public List getProperties() {
+        return properties;
+    }
+    /** Method getTitle() in class ComponentModel
+     * @return Title
+     */
+    public String getTitle() {
+        return title;
+    }
+    /** Method getVersion() in class ComponentModel
+     * @return Version
+     */
+    public String getVersion() {
+        return version;
+    }
+    /** Method setDescription() in class ComponentModel
+     * @param string Description
+     */
+    public void setDescription(String string) {
+        description = string;
+    }
+    /** Method setId() in class ComponentModel
+     * @param string Id
+     */
+    public void setId(String string) {
+        id = string;
+    }
+    /** Method setImplementation() in class ComponentModel
+     * @param string Implementation class name
+     */
+    public void setImplementation(String string) {
+        implementation = string;
+    }
+    /** Method setTitle() in class ComponentModel
+     * @param string Title
+     */
+    public void setTitle(String string) {
+        title = string;
+    }
+    /** Method setVersion() in class ComponentModel
+     * @param string Version
+     */
+    public void setVersion(String string) {
+        version = string;
     }
 }

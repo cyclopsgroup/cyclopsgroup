@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.0">
+	<view uin="V574ng9dt200ehc-rs6a9j">
+		<property name="$defaultDiagram" value="true"/>
+		<property name="$metaclass" value="Package Diagram"/>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.DefaultEngineFactory">
+			<property name="bounds" value="413,390,134,123"/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.ComponentLoader">
+			<property name="bounds" value="199,154,147,159"/>
+			<reference referencedUin="jdt:l_gnt:src:com.cyclops.jmainboard.impl.ComponentLoader:LoggableObject">
+				<property name="sourceAnchor" value="295,154"/>
+				<property name="targetAnchor" value="295,94"/>
+				<property name="bendpoints" value=""/>
+			</reference>
+			<reference referencedUin="jdt:l_ast:src:com.cyclops.jmainboard.impl.ComponentLoader:engine">
+				<property name="sourceAnchor" value="346,233"/>
+				<property name="targetAnchor" value="426,233"/>
+				<property name="bendpoints" value=""/>
+			</reference>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.DefaultComponent">
+			<property name="bounds" value="10,154,169,282"/>
+			<reference referencedUin="jdt:l_gnt:src:com.cyclops.jmainboard.impl.DefaultComponent:LoggableObject">
+				<property name="sourceAnchor" value="94,154"/>
+				<property name="targetAnchor" value="270,94"/>
+				<property name="bendpoints" value=""/>
+			</reference>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.DefaultService">
+			<property name="bounds" value="19,493,152,133"/>
+			<reference referencedUin="jdt:l_gnt:src:com.cyclops.jmainboard.impl.DefaultService:DefaultComponent">
+				<property name="sourceAnchor" value="95,493"/>
+				<property name="targetAnchor" value="95,436"/>
+				<property name="bendpoints" value=""/>
+			</reference>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.LoggableObject">
+			<property name="bounds" value="245,10,101,84"/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.DefaultEngine">
+			<property name="bounds" value="426,154,159,201"/>
+			<reference referencedUin="jdt:l_gnt:src:com.cyclops.jmainboard.impl.DefaultEngine:LoggableObject">
+				<property name="sourceAnchor" value="505,154"/>
+				<property name="targetAnchor" value="320,94"/>
+				<property name="bendpoints" value=""/>
+			</reference>
+		</reference>
+	</view>
+</nodeSet>

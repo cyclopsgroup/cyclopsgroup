@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -201,9 +202,9 @@ import java.util.Properties;
 import java.util.Vector;
 
 import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.ComponentLoader;
 import com.cyclops.jmainboard.Engine;
 import com.cyclops.jmainboard.Service;
+import com.cyclops.jmainboard.utils.ComponentSorter;
 
 /** Dandelio Engine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
@@ -211,10 +212,11 @@ import com.cyclops.jmainboard.Service;
  * Created at 9:56:05 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultEngine implements Engine {
+public class DefaultEngine extends LoggableObject implements Engine {
     private Vector componentLoaders = new Vector();
     private Vector components = new Vector();
     private Properties properties = new Properties();
+    private File engineHome = new File("");
 
     /** Add a component loader instance
      * @param componentLoader Component loader instance
@@ -229,14 +231,10 @@ public class DefaultEngine implements Engine {
     public void init() {
         // preload components before really starting them
         HashMap rawComponents = new HashMap();
-        for (Iterator i = componentLoaders.iterator(); i.hasNext();) {
-            ComponentLoader componentLoader = (ComponentLoader) i.next();
-            Component[] loadedComponents = componentLoader.loadComponents();
-            for (int j = 0; j < loadedComponents.length; j++) {
-                Component component = loadedComponents[j];
-                rawComponents.put(component.getId(), component);
-            }
-        }
+        ComponentLoader loader = new ComponentLoader();
+        loader.load(this);
+        rawComponents.putAll(loader.getComponents());
+        // Normalize dependencies
         for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
             DefaultComponent component = (DefaultComponent) i.next();
             String[] dependencyIds = component.getDependencyIds();
@@ -247,8 +245,7 @@ public class DefaultEngine implements Engine {
                         (Component) rawComponents.get(dependencyId);
                     component.addDependency(dependency);
                 } else {
-                    //What happens if the dependency is not found?
-                    System.out.println(
+                    getLog().error(
                         "Dependency ["
                             + dependencyId
                             + "] is not found for component ["
@@ -263,9 +260,8 @@ public class DefaultEngine implements Engine {
             Component component = (Component) i.next();
             try {
                 componentSorter.addComponent(component);
-            } catch (RecursiveDependencyException e) {
-                //TODO do something here, later this exception will be handled properly
-                e.printStackTrace();
+            } catch (Exception e) {
+                getLog().error("Recursive dependency!", e);
             }
         }
         Component[] componentArray = componentSorter.getComponents();
@@ -297,8 +293,9 @@ public class DefaultEngine implements Engine {
                     ((Service) component).startupService();
                 }
             } catch (Exception e) {
-                //TODO Handle the initialization exception here
-                e.printStackTrace();
+                getLog().error(
+                    "Can't startup service [" + component.getId() + "]",
+                    e);
             }
         }
     }
@@ -315,8 +312,9 @@ public class DefaultEngine implements Engine {
                     ((Service) component).shutdownService();
                 }
             } catch (Exception e) {
-                //TODO Handle the initialization exception here
-                e.printStackTrace();
+                getLog().error(
+                    "Can't shutdown service [" + component.getId() + "]",
+                    e);
             }
         }
     }
@@ -331,5 +329,18 @@ public class DefaultEngine implements Engine {
      */
     public Properties getProperties() {
         return properties;
+    }
+    /** Override method getEngineHome in the derived class
+     * @see com.cyclops.jmainboard.Engine#getEngineHome()
+     */
+    public File getEngineHome() {
+        return engineHome;
+    }
+
+    /** Method setEngineHome() in class DefaultEngine
+     * @param file Engine home directory
+     */
+    public void setEngineHome(File file) {
+        engineHome = file;
     }
 }

@@ -194,12 +194,99 @@
  */
 package com.cyclops.jmainboard.impl;
 
-/** Happens when recursive dependency occurs
+import java.io.File;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import com.cyclops.jmainboard.Component;
+import com.cyclops.jmainboard.model.ComponentModel;
+import com.cyclops.jmainboard.model.ModelParser;
+import com.cyclops.jmainboard.model.PropertyModel;
+import com.cyclops.jmainboard.utils.VersionComparator;
+
+/** Tool to load all component instance
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 8:25:59 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 13:47:28 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class RecursiveDependencyException extends Exception {
+public class ComponentLoader extends LoggableObject {
+    private ClassLoader classLoader;
+    private Hashtable components = new Hashtable();
+    private ModelParser modelParser = new ModelParser();
+    private DefaultEngine engine;
+    /** Load components from Engine home
+     * @param e Engine instance
+     */
+    public void load(DefaultEngine e) {
+        loadComponents(new File(e.getEngineHome(), "components"));
+        engine = e;
+    }
+    /** Load components without dependency objects and order
+     * @return List of component instances without dependencies
+     */
+    public Map getComponents() {
+        return Collections.unmodifiableMap(components);
+    }
 
+    private void loadComponents(File folder) {
+        if (folder == null || !folder.isDirectory()) {
+            return;
+        }
+        if (new File(folder, "component.xml").isFile()) {
+            loadComponent(folder);
+        } else {
+            File[] subfiles = folder.listFiles();
+            for (int i = 0; i < subfiles.length; i++) {
+                File subfile = subfiles[i];
+                loadComponents(subfile);
+            }
+        }
+    }
+    private void loadComponent(File folder) {
+        File descriptor = new File(folder, "component.xml");
+        try {
+            ComponentModel cm =
+                (ComponentModel) modelParser.parse(descriptor.toURL());
+            DefaultComponent dc =
+                (DefaultComponent) Class
+                    .forName(cm.getImplementation())
+                    .newInstance();
+            dc.setId(cm.getId());
+            dc.setVersion(cm.getVersion());
+            dc.setTitle(cm.getTitle());
+            dc.setDescription(cm.getDescription());
+            List props = cm.getProperties();
+            for (Iterator i = props.iterator(); i.hasNext();) {
+                PropertyModel prop = (PropertyModel) i.next();
+                dc.getProperties().setProperty(prop.getName(), prop.getValue());
+            }
+            dc.getProperties().setProperty(
+                Component.COMPONENT,
+                cm.getImplementation());
+            dc.getProperties().setProperty(
+                Component.COMPONENT_HOME,
+                folder.getAbsolutePath());
+            List deps = cm.getDependencies();
+            for (Iterator i = deps.iterator(); i.hasNext();) {
+                String dep = (String) i.next();
+                dc.addDependencyId(dep);
+            }
+            if (components.containsKey(dc.getId())) {
+                Component old = (Component) components.get(dc.getId());
+                if (VersionComparator
+                    .compare(dc.getVersion(), old.getVersion())
+                    > 0) {
+                    components.put(dc.getId(), dc);
+                }
+            } else {
+                components.put(dc.getId(), dc);
+            }
+        } catch (Exception e) {
+            getLog().error("Load component error", e);
+        }
+    }
 }

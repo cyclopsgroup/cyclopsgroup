@@ -192,22 +192,43 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.model;
 
-/** The service which can't handle resource by itself
+/** Property object model
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 11:45:34 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 14:31:59 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public interface ResourceLocateable {
-    /** Method setResourceLocator() in class ResourceLocateableComponent
-     * @param resourceLocator ResourceLocator instance
+public class PropertyModel {
+    private String name;
+    private String value;
+    /** Method getName() in class PropertyModel
+     * @return Name
      */
-    void setResourceLocator(ResourceLocator resourceLocator);
+    public String getName() {
+        return name;
+    }
 
-    /** Method getResourceLocator() in class ResourceLocateableComponent
-     * @return Instance of Resource Locator
+    /** Method getValue() in class PropertyModel
+     * @return Value
      */
-    ResourceLocator getResourceLocator();
+    public String getValue() {
+        return value;
+    }
+
+    /** Method setName() in class PropertyModel
+     * @param string Name
+     */
+    public void setName(String string) {
+        name = string;
+    }
+
+    /** Method setValue() in class PropertyModel
+     * @param string Value
+     */
+    public void setValue(String string) {
+        value = string;
+    }
+
 }

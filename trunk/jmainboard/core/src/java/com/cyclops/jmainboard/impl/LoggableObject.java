@@ -192,25 +192,29 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.loader;
+package com.cyclops.jmainboard.impl;
 
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.ComponentLoader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-/** Load component descriptors from classpath
+/** Basic object with logger
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 11:59:48 AM Mar 13, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 12:04:06 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public class ClasspathComponentLoader implements ComponentLoader {
-
-    /** Override method loadComponent in the derived class
-     * @see com.cyclops.jmainboard.ComponentLoader#loadComponent()
+public class LoggableObject {
+    private Log log = LogFactory.getLog(getClass());
+    /** Method getLog() in class BaseLoggable
+     * @return Log object
      */
-    public Component[] loadComponents() {
-        // TODO Auto-generated method stub
-        return null;
+    public Log getLog() {
+        return log;
     }
-
+    /** Method setLog() in class BaseLoggable
+     * @param logger Log object
+     */
+    public void setLog(Log logger) {
+        log = logger;
+    }
 }

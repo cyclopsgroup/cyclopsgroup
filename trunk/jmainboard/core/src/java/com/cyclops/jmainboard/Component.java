@@ -204,6 +204,10 @@ import java.util.Properties;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface Component {
+    /** Key of implementation name in context */
+    String COMPONENT = Component.class.getName();
+    /** Key of component home in context */
+    String COMPONENT_HOME = "component.home";
     /** Empty array of component */
     Component[] EMPTY_ARRAY = new Component[0];
 

@@ -209,7 +209,7 @@ import com.cyclops.jmainboard.Engine;
  * Created at 7:51:12 PM Mar 12, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultComponent extends BaseLoggable implements Component {
+public class DefaultComponent extends LoggableObject implements Component {
     /** Properties wrapper */
     private class PropertiesWrapper extends Properties {
         private Properties parent;

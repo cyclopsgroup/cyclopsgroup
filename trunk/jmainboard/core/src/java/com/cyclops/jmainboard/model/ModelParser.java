@@ -192,22 +192,53 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.model;
 
 import java.net.URL;
 
+import org.apache.commons.digester.Digester;
 
-/** Resource locator
+/** Model parser object to parse url to models
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 11:40:58 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Created at 14:33:21 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public interface ResourceLocator {
-    /** Method getResource() in class ResourceLocator
-     * @param component Component instance
-     * @param resourcePath Request path of resource
-     * @return URL instance, NULL is not found
+public class ModelParser {
+    private Digester digester = new Digester();
+    /** Constructor for class ModelParser */
+    public ModelParser() {
+        digester.addObjectCreate("component", ComponentModel.class);
+        digester.addBeanPropertySetter("component/id", "id");
+        digester.addBeanPropertySetter("component/version", "version");
+        digester.addBeanPropertySetter("component/title", "title");
+        digester.addBeanPropertySetter("component/description", "description");
+        digester.addBeanPropertySetter(
+            "component/implementation",
+            "implementation");
+        digester.addObjectCreate(
+            "component/properties/property",
+            PropertyModel.class);
+        digester.addSetProperties("component/properties/property");
+        digester.addBeanPropertySetter(
+            "component/properties/property",
+            "value");
+        digester.addSetNext(
+            "component/properties/property",
+            "addProperty",
+            PropertyModel.class.getName());
+        digester.addCallMethod(
+            "component/dependencies/dependency",
+            "addDependency",
+            0);
+    }
+    /** Method parse() in class ModelParser
+     * @param resource Resource to parse
+     * @return Parsing result
+     * @throws Exception Throw it anyway
      */
-    URL getResource(Component component, String resourcePath);
+    public ComponentModel parse(URL resource) throws Exception {
+        digester.clear();
+        return (ComponentModel) digester.parse(resource.openStream());
+    }
 }
