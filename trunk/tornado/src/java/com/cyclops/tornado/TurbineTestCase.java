@@ -23,9 +23,12 @@ public class TurbineTestCase extends TestCase {
         super.setUp();
         PropertiesConfiguration pc =
             new PropertiesConfiguration("src/webapp/WEB-INF/conf/tr.properties");
-        SlowServiceManager tsm = new SlowServiceManager();
-        TurbineServices.setManager(tsm);
-        tsm.setConfiguration(pc);
-        tsm.init();
+        if (!(TurbineServices.getInstance() instanceof SlowServiceManager)) {
+            SlowServiceManager tsm = new SlowServiceManager();
+            TurbineServices.setManager(tsm);
+            tsm.setConfiguration(pc);
+            tsm.init();
+            tsm.getService("DatabaseService");
+        }
     }
 }

@@ -18,8 +18,6 @@ import org.apache.regexp.REUtil;
  * @email g-cyclops@users.sourceforge.net
  */
 public class Passport {
-    /** Key in user temp storage */
-    public static final String KEY_IN_USER = "passport";
     /**
      * @author jiaqi guo
      * @email g-cyclops@users.sourceforge.net
@@ -90,7 +88,15 @@ public class Passport {
                 return false;
             }
         }
+        /** Implementation of method toString() in this class
+         * @see java.lang.Object#toString()
+         */
+        public String toString() {
+            return "P{" + expression + "}";
+        }
     }
+    /** Key in user temp storage */
+    public static final String KEY_IN_USER = "passport";
     private MultiHashMap repo = new MultiHashMap();
     /** Method accept()
      * @param asset Asset to be tested

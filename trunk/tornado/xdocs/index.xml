@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Tornado Project</title>
+		<author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+	</properties>
+	<body>
+		<section name="Overview">
+			<p>Tornado is a <a href="http://jakarta.apache.org/turbine/turbine-3">Apahce Jakarta Turbine 3</a> based web application framework. It enriched turbine with solutions for some common topic in web application design like Menu, Extended Properties, Data Grid Form and Division of Business Logic. Also, some of features in Turbine is enhanced like Security, Intake and Localization. The goal of Tornado is to further simplify the development of a Java based web application.</p>
+			<p>Tornado project is now active, but far away from release. Any participating of development is welcom. Please send email to <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a> to merge your idea into tornado.</p>
+		</section>
+	</body>
+</document>

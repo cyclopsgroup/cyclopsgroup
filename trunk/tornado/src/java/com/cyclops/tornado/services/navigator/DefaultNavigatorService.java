@@ -67,6 +67,7 @@ public class DefaultNavigatorService
         URL[] resources = rf.getResources(conf);
         MenuItem root = new MenuItem();
         Digester digester = new Digester();
+        //digester.push(new MenuProject());
         digester.addObjectCreate("project", MenuProject.class);
         digester.addObjectCreate("project/menu", MenuRoot.class);
         digester.addSetNext("project/menu", "addMenu");
@@ -74,7 +75,6 @@ public class DefaultNavigatorService
         digester.addObjectCreate("*/item", MenuItem.class);
         digester.addSetProperties("*/item");
         digester.addSetNext("*/item", "addChild");
-        digester.setNamespaceAware(false);
         for (int i = 0; i < resources.length; i++) {
             URL resource = resources[i];
             try {
@@ -87,6 +87,7 @@ public class DefaultNavigatorService
                     menus.put(menu.getName(), menu);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 logger.debug("Resource " + resource + " loading failed!", e);
             }
         }

@@ -5,9 +5,7 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.user;
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
-import org.apache.fulcrum.db.DatabaseService;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.bo.UserBroker;
@@ -44,14 +42,6 @@ public class DefaultUserService extends AbstractUserService {
             logger.error("User identification exception", e);
             return CHECK_RESULT_EXCEPTION;
         }
-    }
-    /** Implementation of method initialize() in this class
-     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
-     */
-    protected void initialize(Configuration conf, BrokerManager brokerManager)
-        throws Exception {
-        getServiceBroker().getService(DatabaseService.SERVICE_NAME);
-        super.initialize(conf, brokerManager);
     }
     /** Implementation of method loadUser() in this class
      * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean, com.cyclops.tornado.BrokerManager)

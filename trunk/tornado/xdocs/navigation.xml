@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="Maven">
-    <title>Maven</title>
-    <body>
-        <links>
-            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
-            <item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
-            <item name="Fulcrum" href="http://jakarta.apache.org/turbine/fulcrum"/>
-            <item name="Maven" href="http://maven.apache.org/"/>
-        </links>
-        <menu name="For Developers">
-            <item name="Extended Services" href="/services/index.html" collapse="true">
-                <item name="User Service" href="/services/user.html"/>
-                <item name="Navigator Service" href="/services/navigator.html"/>
-                <item name="Selection Service" href="/services/selection.html"/>
-            </item>
-        </menu>
-        <search/>
-    </body>
+	<title>Maven</title>
+	<body>
+		<links>
+			<item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+			<item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
+			<item name="Fulcrum" href="http://jakarta.apache.org/turbine/fulcrum"/>
+			<item name="Maven" href="http://maven.apache.org/"/>
+		</links>
+		<menu name="Overview">
+			<item name="Home" href="/index.html"/>
+		</menu>
+		<menu name="For Developers">
+			<item name="Extended Services" href="/services/index.html" collapse="true">
+				<item name="User Service" href="/services/user.html"/>
+				<item name="Navigator Service" href="/services/navigator.html"/>
+				<item name="Selection Service" href="/services/selection.html"/>
+			</item>
+		</menu>
+		<search/>
+	</body>
 </project>
