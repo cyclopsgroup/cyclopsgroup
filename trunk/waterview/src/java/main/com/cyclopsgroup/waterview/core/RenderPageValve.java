@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview.core;
 import java.io.PrintWriter;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -28,6 +29,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.waterview.PageNotFoundException;
 import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.RuntimePageRenderer;
@@ -65,6 +67,26 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             runtime.getUIContext().put(NAME, this);
         }
 
+        private void render(Context context, PrintWriter output,
+                String packageName, String modulePath, UIRuntime runtime)
+                throws Exception
+        {
+            LocalizationTool parent = (LocalizationTool) context.get(localizationName);
+            LocalizationTool localization = new LocalizationTool(parent, ResourceBundle.getBundle(
+                    packageName + "/" + modulePath + "_ResourceBundle", runtime
+                            .getLocale()));
+            context.put(localizationName, localization);
+            renderer.render(context, output, packageName, modulePath, runtime);
+            if (parent == null)
+            {
+                context.remove(localizationName);
+            }
+            else
+            {
+                context.put(localizationName, parent);
+            }
+        }
+
         /**
          * Render method
          *
@@ -86,8 +108,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 {
                     found = true;
                     //TODO: Change it to use new context soon
-                    renderer.render(runtime.getUIContext(), output,
-                            packageName, path, runtime);
+                    render(runtime.getUIContext(), output, packageName, path,
+                            runtime);
                     break;
                 }
                 String[] parts = StringUtils.split(page, '/');
@@ -99,8 +121,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                     {
                         found = true;
                         moduleResolver.resolve(runtime, path);
-                        renderer.render(runtime.getUIContext(), output,
-                                packageName, path, runtime);
+                        render(runtime.getUIContext(), output, packageName,
+                                path, runtime);
                         break;
                     }
                     parts[j] = null;
@@ -118,6 +140,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
     }
 
     private String defaultCategory;
+
+    private String localizationName;
 
     private ModuleResolver moduleResolver;
 
@@ -151,6 +175,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
         }
         defaultCategory = conf.getChild("default-category").getValue("layout");
+        localizationName = conf.getChild("localization").getAttribute("name",
+                "resourceBundle");
     }
 
     /**

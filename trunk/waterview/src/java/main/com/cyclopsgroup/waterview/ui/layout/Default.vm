@@ -17,10 +17,13 @@
 **#
 <html>
     <head>
-        <title>$rb.title</title>
+        <title>$r.title</title>
         <link rel="stylesheet" link="$content.url("style/base.css")" type="text/css"/>
     </head>
     <body>
-		$renderer.render("body", $page)
+        <div id="documentWrapper">
+            <div id="documentBody">$renderer.render("body", $page)</div>
+        </div>
+        <p>$r.current_page_is $page</p>
     </body>
 </html>

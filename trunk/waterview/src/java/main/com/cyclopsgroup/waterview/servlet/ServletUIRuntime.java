@@ -124,7 +124,7 @@ public class ServletUIRuntime implements UIRuntime
      */
     public Locale getLocale()
     {
-        return Locale.getDefault();
+        return getHttpServletRequest().getLocale();
     }
 
     /**
