@@ -72,8 +72,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         {
             String module = StringUtils.chomp(page, "." + extension);
             String path = category + '/' + module;
-            String errorPath = category + '/' + errorModule;
-            moduleResolver.resolvePage(path, runtime, context);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
             for (int i = 0; i < packages.length; i++)
@@ -82,7 +80,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 if (pageRenderer.exists(packageName, path))
                 {
                     found = true;
-                    render(context, packageName, path, errorPath, runtime);
+                    render(context, packageName, path, runtime);
                     break;
                 }
                 String[] parts = StringUtils.split(page, '/');
@@ -93,7 +91,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                     if (pageRenderer.exists(packageName, path))
                     {
                         found = true;
-                        render(context, packageName, path, errorPath, runtime);
+                        render(context, packageName, path, runtime);
                         break;
                     }
                     parts[j] = null;
@@ -105,13 +103,14 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             if (!found)
             {
-                throw new PageNotFoundException(category + "/" + page);
+                moduleResolver.resolvePage(path, runtime, context);
+                runtime.getOutput().println(
+                        "Resource " + category + ":" + page + " is not found");
             }
         }
 
         private void render(Context context, String packageName,
-                String modulePath, String errorModulePath, UIRuntime runtime)
-                throws Exception
+                String modulePath, UIRuntime runtime) throws Exception
         {
             moduleResolver.resolvePage(modulePath, runtime, context);
             LocalizationTool parent = (LocalizationTool) context
@@ -135,13 +134,11 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         }
 
         /**
-         * Render method
-         * 
-         * @param category Page package name
-         * @param page Page path
-         * @throws Exception Throw it out to page renderer
+         * Override or implement method of parent class or interface
+         *
+         * @see com.cyclopsgroup.waterview.RuntimePageRenderer#render(java.lang.String, java.lang.String)
          */
-        public void render(String category, String page) throws Exception
+        public void render(String category, String page)
         {
             try
             {
@@ -149,15 +146,12 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             catch (Exception e)
             {
-                context.put("exception", e);
-                internallyRender(category, errorModule + '.' + extension);
+                e.printStackTrace(runtime.getOutput());
             }
         }
     }
 
     private String defaultCategory;
-
-    private String errorModule;
 
     private String localizationName;
 
@@ -195,7 +189,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         defaultCategory = conf.getChild("default-category").getValue("layout");
         localizationName = conf.getChild("localization").getAttribute("name",
                 "resourceBundle");
-        errorModule = conf.getChild("error-page").getValue("Error");
     }
 
     /**
