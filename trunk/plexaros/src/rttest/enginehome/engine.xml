@@ -6,61 +6,32 @@
             <threshold>DEBUG</threshold>
         </logger>
     </logging>
-    <!--
-    <lifecycle-handler-manager implementation='org.codehaus.plexus.lifecycle.DefaultLifecycleHandlerManager'>
-        <default-lifecycle-handler-id>avalon</default-lifecycle-handler-id>
-        <lifecycle-handlers>
-            <lifecycle-handler implementation='org.codehaus.plexus.personality.plexus.PlexusLifecycleHandler'>
-                <id>avalon</id>
-                <name>Plexus Lifecycle Handler</name>
-                <begin-segment>
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.CompositionPhase' />
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.ConfigurePhase' />
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializePhase' />
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.StartPhase' />
-                </begin-segment>
-                <suspend-segment>
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.SuspendPhase' />
-                </suspend-segment>
-                <resume-segment>
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.ResumePhase' />
-                </resume-segment>
-                <end-segment>
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.StopPhase' />
-                    <phase implementation='org.codehaus.plexus.personality.plexus.lifecycle.phase.DisposePhase' />
-                </end-segment>
-            </lifecycle-handler>
-        </lifecycle-handlers>
-    </lifecycle-handler-manager>
-    -->
     <components>
         <component>
-            <role>com.cyclops.plexaros.Engine</role>
+            <role>plexaros.engine</role>
             <implementation>com.cyclops.plexaros.impl.DefaultEngine</implementation>
             <configuration>
                 <pluginfinders>
-                    <pluginfinder>filesystem</pluginfinder>
-                    <pluginfinder>classpath</pluginfinder>
+                    <pluginfinder>plexaros.pluginfinder.filesystem</pluginfinder>
+                    <pluginfinder>plexaros.pluginfinder.classpath</pluginfinder>
                 </pluginfinders>
             </configuration>
         </component>
         <component>
-            <role>com.cyclops.plexaros.PluginFinder</role>
-            <id>filesystem</id>
+            <role>plexaros.pluginfinder.filesystem</role>
             <implementation>com.cyclops.plexaros.impl.FileSystemPluginFinder</implementation>
             <configuration>
                 <folder>${plexus.home}/plugins</folder>
             </configuration>
         </component>
         <component>
-            <role>com.cyclops.plexaros.PluginFinder</role>
-            <id>classpath</id>
+            <role>plexaros.pluginfinder.classpath</role>
             <implementation>com.cyclops.plexaros.impl.ClasspathPluginFinder</implementation>
             <configuration>
                 <root>plexaros/plugins</root>
                 <plugins>
                     <plugin>p1</plugin>
-                    <plugin>p22</plugin>
+                    <plugin>p2</plugin>
                 </plugins>
             </configuration>
         </component>

@@ -239,6 +239,13 @@ public abstract class BasePluginFinder
             try {
                 URL descriptorFile =
                     getPluginResource(pluginName, "plugin.xml");
+                if (descriptorFile == null) {
+                    getLogger().info(
+                        "Plugin "
+                            + pluginName
+                            + " is not valid since the descriptor file not found");
+                    continue;
+                }
                 digester.clear();
                 DefaultPluginDescriptor descriptor =
                     (DefaultPluginDescriptor) digester.parse(

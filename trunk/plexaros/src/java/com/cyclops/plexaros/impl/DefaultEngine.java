@@ -235,11 +235,10 @@ public class DefaultEngine
         Configuration[] finders =
             configuration.getChild("pluginfinders").getChildren("pluginfinder");
         for (int i = 0; i < finders.length; i++) {
-            String finderId = finders[i].getValue();
+            String finderRole = finders[i].getValue();
             try {
                 PluginFinder finder =
-                    (PluginFinder) serviceManager.lookup(
-                        PluginFinder.ROLE + finderId);
+                    (PluginFinder) serviceManager.lookup(finderRole);
                 pluginFinders.add(finder);
             } catch (Exception e) {
                 getLogger().error("Load plugin finder error", e);

@@ -203,7 +203,7 @@ import org.apache.avalon.framework.activity.Startable;
  */
 public interface Engine extends ObjectContainer, Startable {
     /** Role of this component in plexus */
-    String ROLE = Engine.class.getName();
+    String ROLE = "plexaros.engine";
     /** Get a plugin instance
      * @param pluginName Name of this plugin
      * @return Plugin loaded, null if not found

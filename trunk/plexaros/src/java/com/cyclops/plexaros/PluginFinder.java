@@ -201,8 +201,6 @@ package com.cyclops.plexaros;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface PluginFinder {
-    /** Role in plexus */
-    String ROLE = PluginFinder.class.getName();
     /** Find plugin descriptors
      * @return Array of plugin descriptors
      */

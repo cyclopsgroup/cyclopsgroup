@@ -6,5 +6,11 @@
 			<item name="Configure it" href="/configure.html"/>
 			<item name="Developer Guide" href="/guide.html"/>
 		</menu>
+		<links>
+			<item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+			<item name="Plexus" href="http://plexus.codehaus.org"/>
+			<item name="Avalon Framework" href="http://avalon.apache.org/framework"/>
+			<item name="Maven" href="http://maven.apache.org"/>
+		</links>
 	</body>
 </project>
