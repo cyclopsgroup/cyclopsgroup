@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+    <title>Maven</title>
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="Plong" href="http://plone.org"/>
+            <item name="A Demo Site" href="http://209.183.203.45"/>
+            <item name="Vignette" href="http://www.vignette.com"/>
+        </links>
+        <menu name="Overview">
+            <item name="Home" href="/index.html"/>
+            <item name="Ideas" href="/ideas.html"/>
+            <item name="Proposed Architecture" href="/architecture.html"/>
+            <item name="Road Map" href="/roadmap.html"/>
+        </menu>
+    </body>
+</project>

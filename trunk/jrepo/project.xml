@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+    <pomVersion>3</pomVersion>
+    <id>jrepo-projects</id>
+    <name>Cyclops JRepo Projects</name>
+    <currentVersion>1.0</currentVersion>
+    <organization>
+        <name>Cyclops Group Alliance</name>
+        <url>http://cyclops-group.sourceforge.net/</url>
+        <logo>/images/cyclops_logo.gif</logo>
+    </organization>
+    <inceptionYear>2003</inceptionYear>
+    <logo>/images/jrepo_logo.gif</logo>
+    <!-- Gump integration -->
+    <description>jrepo is not a single product, application or server. It's a set of packages which include a framework of content management system, several implementation of it like file system implementation and database implementation, and presentation application for web users.</description>
+    <shortDescription>Content Management System Framework</shortDescription>
+    <url>http://cyclops-group.sourceforge.net/projects/jrepo/</url>
+    <siteAddress>shell.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/jrepo/</siteDirectory>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:jrepo</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:jrepo</developerConnection>
+        <url>http://cvs.sourceforge.net/viewcvs.cgi/cyclops-group/jrepo/</url>
+    </repository>
+    <developers>
+        <developer>
+            <name>Jiaqi Guo</name>
+            <id>jiaqi</id>
+            <email>chinajoeblack@hotmail.com</email>
+            <organization/>
+            <timezone>-6</timezone>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <dependencies>
+    </dependencies>
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+        </unitTest>
+    </build>
+</project>
