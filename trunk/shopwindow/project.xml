@@ -1,18 +1,18 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>shopwindow</name>
     <id>shopwindow</id>
     <currentVersion>1.0-b1-SNAPSHOT</currentVersion>
     <organization>
-        <name>Cyclops Group Alliance</name>
+        <name>Cyclops Group Community</name>
         <url>http://cyclops-group.sourceforge.net</url>
         <logo>/images/logo.gif</logo>
     </organization>
     <logo>/images/blue-logo.gif</logo>
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.shopwindow</package>
-    <shortDescription>A web application based on Jakarta Turbine</shortDescription>
+    <shortDescription>Portal site of Cyclops Group Community</shortDescription>
     <description>Please refer to http://cyclops-group.sourceforge.net</description>
     <url>http://cyclops-group.sourceforge.net</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
@@ -42,12 +42,10 @@
             <name>Jiaqi Guo</name>
             <id>jiaqi</id>
             <email>g-cyclops@users.sourceforge.net</email>
-            <organization>vTradEx Technology</organization>
             <roles>
-                <role>Architect</role>
-                <role>Java Developer</role>
+                <role>Developer</role>
             </roles>
-            <timezone>-8</timezone>
+            <timezone>-6</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -57,7 +55,7 @@
             <roles>
                 <role>Observer</role>
             </roles>
-            <timezone>-8</timezone>
+            <timezone>-6</timezone>
         </developer>
     </developers>
     <build>

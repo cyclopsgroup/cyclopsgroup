@@ -1,15 +1,9 @@
-function tableStart() {
-    document.write('<table border="0">');
-}
-function tableEnd() {
-    document.write('</table>');
-}
-function lineStart() {
-    document.write('<tr><td>');
-}
-function lineEnd() {
-    document.write('</td></tr>');
-}
-function languageLink(href, img, title) {
-    document.write('<a href="' + href  + '"><img src="' + img + '" alt="' + title + '" border="0" width="36" height="21"/></a>');
+function languageLink(link, lang, title, base) {
+    if(lang == "en"){
+        document.write('<a href="'+link+'">');
+    } else {
+        document.write('<a href="http://babelfish.altavista.com/babelfish/urltrurl?url='+link+'&lp=en_' + lang + '">');
+    }
+    document.write('<img src="'+base+'/images/countryflags/'+lang+'.gif" width="27" height="18" border="0" alt="'+title+'">');
+    document.write("</a>");
 }
