@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE dataset SYSTEM "file://tornado-data.dtd">
 <dataset name="all">
     <DUser UserId="1" UserName="guest" EncryptedPassword="Z3Vlc3Q=" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
@@ -32,4 +32,5 @@
     <DConf ConfId="21" ConfKey="services.NavigatorService.loader" ConfValue="resource"/>
     <DConf ConfId="22" ConfKey="services.NavigatorService.loader.resource.classname" ConfValue="com.cyclops.tornado.services.navigator.ResourceNavigatorLoader"/>
     <DConf ConfId="23" ConfKey="services.NavigatorService.loader.resource.name" ConfValue="portal.xml"/>
+    <DConf ConfId="24" ConfKey="services.NavigatorService.loader.resource.name" ConfValue="healthfarm.xml"/>
 </dataset>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<menu name="Health Advisor" href="health,Index.vm">
+		<item name="Daily Checking" href="health,DailyCheck.vm"/>
+		<item name="My Diet History" href="health,History.vm"/>
+		<item name="Set Standards" href="health,Settings.vm"/>
+	</menu>
+</project>

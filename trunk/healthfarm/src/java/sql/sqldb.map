@@ -7,3 +7,4 @@ tornado-schema-idtable-init.sql=default
 healthfarm-schema-idtable-init.sql=default
 
 tornado-data.sql=default
+healthfarm-data.sql=default
