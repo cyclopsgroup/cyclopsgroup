@@ -47,7 +47,7 @@
                 <role>Architect</role>
                 <role>Java Developer</role>
             </roles>
-            <timezone>+8</timezone>
+            <timezone>-8</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -57,7 +57,7 @@
             <roles>
                 <role>Observer</role>
             </roles>
-            <timezone>+8</timezone>
+            <timezone>-8</timezone>
         </developer>
     </developers>
     <dependencies>
