@@ -6,3 +6,6 @@ Model Folder
 *.ipr
 *.iws
 *.jpx
+*.jpx.local
+*.library
+*~
