@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:d="jelly:define" xmlns:j="jelly:core" xmlns:u="jelly:util" xmlns:v="jelly:velocity">
+	<!--
+	XDOC with cyclops jsl
+	-->
 	<goal description="Generate cyclops group project document"
 		name="cyclops:xdoc" prereqs="xdoc:init, cyclops:generate-gallery">
-		<copy todir="${maven.docs.dest}">
+		<copy todir="${maven.docs.dest}" preservelastmodified="true">
 			<fileset dir="${plugin.resources}/docs">
 				<include name="**/*.*"/>
 			</fileset>
 		</copy>
-		<copy todir="${maven.gen.docs}">
+		<copy todir="${maven.gen.docs}" preservelastmodified="true">
 			<fileset dir="${plugin.resources}/generated-xdocs">
 				<include name="**/*.*"/>
 			</fileset>
@@ -19,15 +22,21 @@
 		tempSite)} <attainGoal name="xdoc"/>
 		<delete file="${basedir}/${tempSite}"/>
 	</goal>
+	<!--
+	Site with cyclops jsl
+	-->
 	<goal description="Generate the whole site for cyclops group projects" name="cyclops:site">
 		<attainGoal name="site"/>
 		<attainGoal name="cyclops:xdoc"/>
 	</goal>
+	<!--
+	Generate photo gallery index and thumbnails
+	-->
 	<goal name="cyclops:generate-gallery">
 		<fileScanner var="indices">
 			<fileset dir="${maven.docs.src}">
 				<patternset>
-					<include name="**/${maven.cyclops.gallery.indexprops}"/>
+					<include name="${maven.cyclops.gallery.indexprops}"/>
 				</patternset>
 			</fileset>
 		</fileScanner>
