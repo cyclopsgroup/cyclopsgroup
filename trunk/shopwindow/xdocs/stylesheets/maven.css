@@ -8,14 +8,13 @@ body {
 }
 
 .section {
-    font-size: 14pt;
+    font-size: 15pt;
     font-weight: bold;
 }
 
-.app h4 {
-	 color: black;
-	 background-color: white;
-	 font-size: 11pt;
+.subsection {
+    font-size: 13pt;
+    font-weight: bold;
 }
 
 .a td {

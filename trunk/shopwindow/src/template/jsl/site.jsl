@@ -93,9 +93,13 @@
                 <td align="right"><img src="${relativePath}/images/banner_corner.gif"/></td>
                 <td rowspan="2" bgcolor="#D1DBE4" align="center">
                     <table>
-                        <form method="get" action="http://www.google.com">
+                        <form method="get" action="http://www.google.com/search">
+                            <input type="hidden" name="domains" value="${pom.url}"/>
+                            <input type="hidden" id="search" name="sitesearch" value="${pom.url}"/>
                             <tr>
-                                <td><input type="text" size="8" name="p"/></td>
+                                <td><a href="http://www.google.com"><img src="http://www.google.com/logos/Logo_25wht.gif" border="0"/></a></td>
+                                <td><input type="text" size="8" name="q"/></td>
+                                <td><input type="image" src="${relativePath}/images/right.gif" value="Go" name="btnG" title="Google Search in this site"/></td>
                              </tr>
                         </form>
                     </table>
@@ -139,7 +143,7 @@
           <table style='width:100%' border="0" cellspacing="0" cellpadding="4">
             <jsl:applyTemplates select="$nav/body/footer"/>
             <tr>
-              <td>
+              <td align="center">
                 <j:if test="${!empty(pom.organization.name)}">
                   <j:if test="${!empty(pom.inceptionYear)}">
                     <j:if test="${pom.inceptionYear == mavenCurrentYear}">
@@ -153,14 +157,8 @@
                     &#169; ${mavenCurrentYear}, ${pom.organization.name}
                   </j:if>
                 </j:if>
-
-                <j:if test="${date == 'bottom'}">
-                  - Last published: ${build.date}
-                </j:if>
+                <a href="mailto:g-cyclops@users.sourceforge.net">EMail to Joel Guo</a>
               </td>
-              <j:if test="${date == 'bottom-right'}">
-                <td style='width: auto; text-align:right'>Last published: ${build.date}</td>
-              </j:if>
             </tr>
           </table>
         </div>
@@ -210,44 +208,6 @@
     </table>
   </jsl:template>
 
-  <!-- Process the breadcrumb navbar -->
-  <jsl:template match="links" trim="false">
-    <j:set var="linkCount" value="1"/>
-    <x:forEach var="link" select="item">
-      <j:if test="${linkCount != 1}">|</j:if>
-      <j:set var="_name"><x:expr select="@name"/></j:set>
-      <j:set var="_link"><x:expr select="@href"/></j:set>
-      <doc:itemLink name="${_name}" link="${_link}"/>
-      <j:set var="linkCount" value="${1+linkCount}"/>
-    </x:forEach>
-  </jsl:template>
-
-  <!-- Google site search -->
-  <jsl:template match="search" trim="false">
-    <!-- Search code: http://www.google.com/searchcode.html -->
-    <!-- Google logos: http://www.google.com/stickers.html -->
-    <!-- Terms: http://www.google.com./services/terms_free.html -->
-    <div>
-      <strong>Search ${pom.name}</strong>
-      <form method="get" action="http://www.google.com/search">
-        <a class="navlink" href="http://www.google.com">
-          <img src="http://www.google.com/logos/Logo_25wht.gif" 
-               alt="Google" border="0" />
-        </a><p/>
-        <j:set var="siteURL" value="${pom.url}"/>
-        <!-- google fails on urls that end with / -->
-        <j:if test="${siteURL.endsWith('/')}">
-          <j:set var="URLLength" value="${siteURL.length() - 1}"/>
-          <j:set var="siteURL" value="${siteURL.substring(0, URLLength.intValue())}"/>
-        </j:if>
-        <input type="text" size="15" name="q" maxlength="255" value=""/>
-        <input type="submit" value="Go" name="btnG"/>
-        <input type="hidden" name="domains" value="${siteURL}"/>
-        <input type="hidden" id="search" name="sitesearch" value="${siteURL}"/>
-      </form>
-    </div>
-  </jsl:template>
-
   <!-- process a documentation section -->
   <jsl:template match="section" trim="false">
         <j:set var="_sectionName"><x:expr select="@name"/></j:set>
@@ -261,7 +221,7 @@
                         <img src="${relativePath}/images/right.gif" align="absmiddle"/>
                         <a name="${_sectionName}"><span class="section">${_sectionName}</span></a>
                     </td>
-                    <td> </td>
+                    <td align="right"><a href="#top">TOP</a></td>
                 </tr>
                 <tr>
                     <td colspan="2" background="${relativePath}/images/banner_bg.gif"><img src="${relativePath}/images/spacer.gif" width="2" height="2"/></td>
@@ -272,15 +232,17 @@
  </jsl:template>
 
   <jsl:template match="subsection" trim="false">
-    <div class="h4">
       <j:set var="_sectionName"><x:expr select="@name"/></j:set>
       <j:if test="${!empty(_sectionName)}">
-        <h4>
-          <a name="${_sectionName}">${_sectionName}</a>
-        </h4>
+        <table>
+            <tr>
+                <td><img src="${relativePath}/images/spacer.gif" width="20" heigth="15"/></td>
+                <td><img src="${relativePath}/images/small_right.gif"/></td>
+                <td><a name="${_sectionName}"><span class="subsection">${_sectionName}</span></a></td>
+            </tr>
+        </table>
       </j:if>
       <jsl:applyTemplates select="*"/>
-    </div>
   </jsl:template>
 
   <jsl:template match="source" trim="false">

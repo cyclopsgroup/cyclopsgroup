@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Cyclops Group Home</title>
+        <properties email="g-cyclops@user.sourceforge.net">Joel Guo</properties>
+    </properties>
+    <body>
+        <section name="WHO IS IT?">
+            <p>Cyclops Groups is made up of a group of talented Java gurus who are tring to do something. It's an alliance, an association. At the beginning, we focus on solutions for some common questions like web application framework, database access tool or mathematics topics. All the projects are powered by <a href="http://www.apache.org">Apache</a> and <a href="http://www.werken.com">werken</a> open source projects, built by <a href="http://maven.apache.org">maven</a> and hosted in <a href="http://sourceforge.net">SourceForge.net</a>.</p>
+        </section>
+        <section name="PROJECTS">
+            <p>Here is list of projects we are developing.</p>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>shopwindow</td>
+                    <td>
+                        <a href="http://cyclops-group.sourceforge.net">http://cyclops-groups.sourceforge.net</a>
+                    </td>
+                    <td>The project is this website itself.</td>
+                </tr>
+                <tr>
+                    <td>a4trim</td>
+                    <td>
+                        <a href="http://albumbuilder.sourceforge.net/a4trim">http://albumbuilder.sourceforge.net/a4trim</a>
+                    </td>
+                    <td>A simplified content management system based on Apache Jakarta Turbine.</td>
+                </tr>
+                <tr>
+                    <td>tornado</td>
+                    <td>
+                        <a href="http://cyclops-group.sourceforge.net/projects/tornado">http://cyclops-group.sourceforge.net/projects/tornado</a>
+                    </td>
+                    <td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
+                </tr>
+                <tr>
+                    <td>dbdigger</td>
+                    <td>
+                        <a href="http://dbdigger.sourceforge.net">http://dbdigger.sourceforge.net</a>
+                    </td>
+                    <td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
+                </tr>
+                <tr>
+                    <td>albumbuilder</td>
+                    <td>
+                        <a href="http://albumbuilder.sourceforge.net">http://albumbuilder.sourceforge.net</a>
+                    </td>
+                    <td>A tool to generate static photo album web site from folders of images.</td>
+                </tr>
+            </table>
+            <p>Since we are lack of developer now, some of these projects can not work properly. If you are interested in any of these projects, please feel free to send email to <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops@users.sourceforge.net</a>.</p>
+        </section>
+    </body>
+</document>
