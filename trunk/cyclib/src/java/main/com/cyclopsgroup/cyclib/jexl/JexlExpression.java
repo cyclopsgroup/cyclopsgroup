@@ -21,8 +21,6 @@ import java.util.Iterator;
 import org.apache.commons.jexl.ExpressionFactory;
 import org.apache.commons.jexl.JexlContext;
 import org.apache.commons.jexl.context.HashMapContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.cyclib.Expression;
@@ -34,8 +32,6 @@ import com.cyclopsgroup.cyclib.Expression;
  */
 public class JexlExpression implements Expression
 {
-    private static Log logger = LogFactory.getLog(JexlExpression.class);
-
     private org.apache.commons.jexl.Expression expression;
 
     /**
