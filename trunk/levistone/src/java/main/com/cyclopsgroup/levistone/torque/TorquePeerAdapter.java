@@ -14,32 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.base;
-
-import java.sql.Connection;
-
-import com.cyclopsgroup.levistone.Session;
+package com.cyclopsgroup.levistone.torque;
 
 /**
- * TODO Add javadoc for this class
+ * Torque peer adapter
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseConnectionTypedSession extends BaseTypedSession
+public class TorquePeerAdapter
 {
-    private Connection dbcon;
-
-    /**
-     * Constructor for class BaseConnectionTypedSession
-     *
-     * @param session
-     * @param type
-     * @param dbcon
-     */
-    public BaseConnectionTypedSession(Session session, Class type,
-            Connection dbcon)
-    {
-        super(session, type);
-        this.dbcon = dbcon;
-    }
+    private Class torquePeer;
 }

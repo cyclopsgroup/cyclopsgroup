@@ -22,7 +22,6 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 import com.cyclopsgroup.levistone.datasource.DefaultDataSourceManager;
@@ -39,17 +38,6 @@ public class HibernatePersistenceManager extends BasePersistenceManager
     private DefaultDataSourceManager dataSourceManager = new DefaultDataSourceManager();
 
     private SessionFactory sessionFactory;
-
-    /**
-     * Override method createQuery in super class of HibernatePersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
-     */
-    public NamedQuery createQuery(String name)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     /**
      * Override method doCancelSession in super class of HibernatePersistenceManager

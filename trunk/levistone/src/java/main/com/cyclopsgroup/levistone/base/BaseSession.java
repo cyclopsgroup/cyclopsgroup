@@ -27,7 +27,6 @@ import com.cyclopsgroup.levistone.PersistenceManager;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
 import com.cyclopsgroup.levistone.Session;
-import com.cyclopsgroup.levistone.TypedSession;
 import com.cyclopsgroup.levistone.query.Query;
 
 /**
@@ -76,14 +75,6 @@ public abstract class BaseSession implements Session
     }
 
     /**
-     * Create typed session instance
-     * 
-     * @param type Type of this typed session
-     * @return Typed session instance
-     */
-    protected abstract TypedSession createTypedSession(Class type);
-
-    /**
      * Override or implement method of parent class or interface
      * 
      * @see com.cyclopsgroup.levistone.Session#getId()
@@ -115,26 +106,11 @@ public abstract class BaseSession implements Session
         return persistenceManager;
     }
 
-    /**
-     * Override method getTypedSession in super class of BaseSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#getTypedSession(java.lang.Class)
-     */
-    public TypedSession getTypedSession(Class type)
-    {
-        if (typedSessions.containsKey(type))
-        {
-            return (TypedSession) typedSessions.get(type);
-        }
-        TypedSession typedSession = createTypedSession(type);
-        typedSessions.put(type, typedSession);
-        return typedSession;
-    }
 
     /**
-     * Override method lookup in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#lookup(com.cyclopsgroup.levistone.Query)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#lookup(com.cyclopsgroup.levistone.query.Query)
      */
     public Object lookup(Query query) throws QueryException
     {

@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
 import com.cyclopsgroup.levistone.Session;
@@ -87,6 +88,17 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
     public Query createQuery(Class entityType)
     {
         return new Query(entityType);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
+     */
+    public NamedQuery createQuery(String name)
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     protected abstract void doCancelSession(Session session) throws Exception;

@@ -41,6 +41,59 @@ public interface Session
     Session[] EMPTY_ARRAY = new Session[0];
 
     /**
+     * Create new entity object
+     * @param type Type of entity
+     *
+     * @return New created entity object
+     * @throws PersistenceException Persistence related exception
+     */
+    Object create(Class type) throws PersistenceException;
+
+    /**
+     * Create new entity with given id
+     *
+     * @param id Given id
+     * @param type Type of entity
+     * @return New created entity object
+     * @throws PersistenceException Persistence related exception
+     */
+    Object create(Class type, Object id) throws PersistenceException;
+
+    /**
+     * Delete entity from persistence manager
+     *
+     * @param entity Entity object
+     * @param type Type of entity
+     * @throws PersistenceException Persistence related exception
+     */
+    void delete(Class type, Object entity) throws PersistenceException;
+
+    /**
+     * Delete entity with given id
+     *
+     * @param id ID of entity
+     * @param type Type of entity
+     * @throws PersistenceException Persistence related exception
+     */
+    void deleteById(Class type, Object id) throws PersistenceException;
+
+    /**
+     * Release an entity from cache
+     *
+     * @param type Type of entity
+     * @param entity Entity object
+     */
+    void evict(Class type, Object entity);
+
+    /**
+     * Release an entity from cache
+     *
+     * @param type Type of entity
+     * @param id ID of entity
+     */
+    void evictById(Class type, Object id);
+
+    /**
      * Execute named query with given attributes
      * 
      * @param query Named query object
@@ -70,11 +123,30 @@ public interface Session
     QueryResult executeQuery(String sqlQuery) throws QueryException;
 
     /**
+     * Check out if an entity exists
+     *
+     * @param type Type of entity
+     * @param id Id of entity
+     * @return If such an entity exists
+     * @throws PersistenceException Persistence related exception
+     */
+    boolean exists(Class type, Object id) throws PersistenceException;
+
+    /**
      * Return session unique id
      * 
      * @return Session id
      */
     String getId();
+
+    /**
+     * Get primary key of given entity object
+     *
+     * @param type Type of entity
+     * @param entity Entity object
+     * @return Primary key
+     */
+    Object getId(Class type, Object entity);
 
     /**
      * Get name of the persistence definition
@@ -91,19 +163,21 @@ public interface Session
     PersistenceManager getPersistenceManager();
 
     /**
-     * Get type session with given entity type
-     * 
-     * @param entityType Class of entity
-     * @return Typed session object
-     */
-    TypedSession getTypedSession(Class entityType);
-
-    /**
      * If session is closed
      * 
      * @return If session is closed
      */
     boolean isClosed();
+
+    /**
+     * Lookup object with given id
+     *
+     * @param type Type of entity
+     * @param id Id of object
+     * @return Entity object or null if not found
+     * @throws PersistenceException Persistence related exception
+     */
+    Object lookup(Class type, Object id) throws PersistenceException;
 
     /**
      * Execute query and find out the first entity object
@@ -113,4 +187,13 @@ public interface Session
      * @throws QueryException
      */
     Object lookup(Query query) throws QueryException;
+
+    /**
+     * Save created or changed object into persistence
+     *
+     * @param type Type of entity
+     * @param entity Entity object
+     * @throws PersistenceException Persistence related exception
+     */
+    void save(Class type, Object entity) throws PersistenceException;
 }

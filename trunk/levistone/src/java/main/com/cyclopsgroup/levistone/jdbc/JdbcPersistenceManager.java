@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.levistone.jdbc;
 
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 
@@ -27,17 +26,6 @@ import com.cyclopsgroup.levistone.base.BasePersistenceManager;
  */
 public class JdbcPersistenceManager extends BasePersistenceManager
 {
-    /**
-     * Override or implement method of parent class or interface
-     * 
-     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
-     */
-    public NamedQuery createQuery(String name)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     /**
      * Override method doCancelSession in super class of JdbcPersistenceManager
      * 

@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.cyclopsgroup.levistone.NamedQuery;
+import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
-import com.cyclopsgroup.levistone.TypedSession;
 import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 import com.cyclopsgroup.levistone.query.Query;
 
@@ -37,7 +37,6 @@ import com.cyclopsgroup.levistone.query.Query;
  */
 public class JdbcSession extends BaseConnectionSession
 {
-
     private boolean closed = false;
 
     private List queryResults = new ArrayList();
@@ -92,12 +91,67 @@ public class JdbcSession extends BaseConnectionSession
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BaseConnectionSession#createTypedSession(java.lang.Class, java.sql.Connection)
+     * @see com.cyclopsgroup.levistone.Session#create(java.lang.Class)
      */
-    protected TypedSession createTypedSession(Class type, Connection dbcon)
+    public Object create(Class type) throws PersistenceException
     {
-        JdbcTypedSession typedSession = new JdbcTypedSession(this, type, dbcon);
-        return typedSession;
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#create(java.lang.Class, java.lang.Object)
+     */
+    public Object create(Class type, Object id) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#delete(java.lang.Class, java.lang.Object)
+     */
+    public void delete(Class type, Object entity) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#deleteById(java.lang.Class, java.lang.Object)
+     */
+    public void deleteById(Class type, Object id) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#evict(java.lang.Class, java.lang.Object)
+     */
+    public void evict(Class type, Object entity)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#evictById(java.lang.Class, java.lang.Object)
+     */
+    public void evictById(Class type, Object id)
+    {
+        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -113,9 +167,9 @@ public class JdbcSession extends BaseConnectionSession
     }
 
     /**
-     * Override method executeQuery in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.Query)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.query.Query)
      */
     public QueryResult executeQuery(Query query) throws QueryException
     {
@@ -135,6 +189,28 @@ public class JdbcSession extends BaseConnectionSession
     }
 
     /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#exists(java.lang.Class, java.lang.Object)
+     */
+    public boolean exists(Class type, Object id) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#getId(java.lang.Class, java.lang.Object)
+     */
+    public Object getId(Class type, Object entity)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
      * Override method isClosed in super class of JdbcSession
      * 
      * @see com.cyclopsgroup.levistone.Session#isClosed()
@@ -142,6 +218,17 @@ public class JdbcSession extends BaseConnectionSession
     public boolean isClosed()
     {
         return closed;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#lookup(java.lang.Class, java.lang.Object)
+     */
+    public Object lookup(Class type, Object id) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
@@ -164,5 +251,16 @@ public class JdbcSession extends BaseConnectionSession
         {
             logger.warn("Can not roll back the transaction");
         }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#save(java.lang.Class, java.lang.Object)
+     */
+    public void save(Class type, Object entity) throws PersistenceException
+    {
+        // TODO Auto-generated method stub
+
     }
 }

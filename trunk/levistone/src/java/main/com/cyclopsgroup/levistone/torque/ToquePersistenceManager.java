@@ -25,7 +25,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.levistone.DataSourceManager;
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 
@@ -38,17 +37,6 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
         Serviceable
 {
     private DataSourceManager dataSourceManager;
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
-     */
-    public NamedQuery createQuery(String name)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     /**
      * Override or implement method of parent class or interface
@@ -104,5 +92,4 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
         dataSourceManager = (DataSourceManager) serviceManager
                 .lookup(DataSourceManager.ROLE);
     }
-
 }
