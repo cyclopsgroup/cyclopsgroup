@@ -13,6 +13,7 @@
 	<inceptionYear>2003</inceptionYear>
 	<shortDescription>Software makes things simple, not complicated</shortDescription>
 	<url>http://cyclops-group.sourceforge.net</url>
+	<siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/</siteDirectory>
 	<developers>
 		<developer>
 			<name>Jiaqi Guo</name>
