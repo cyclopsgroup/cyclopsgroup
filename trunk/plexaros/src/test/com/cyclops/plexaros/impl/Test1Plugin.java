@@ -193,6 +193,9 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros.impl;
+
+import com.cyclops.plexaros.BasePlugin;
+
 /** Test plugin for testing
  * @author joeblack
  *

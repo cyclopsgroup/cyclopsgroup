@@ -195,76 +195,33 @@
 package com.cyclops.plexaros.impl;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.digester.Digester;
 
 import com.cyclops.plexaros.PluginDescriptor;
-import com.cyclops.plexaros.PluginFinder;
 
-/** Base plugin finder class
+/** Inner implementation of PluginDescriptor
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 4:09:12 PM Jan 11, 2004
+ * Created at 9:46:53 PM Jan 11, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public abstract class BasePluginFinder
-    extends AbstractLogEnabled
-    implements PluginFinder {
-    /** Override method findPlugins in the derived class
-     * @see com.cyclops.plexaros.PluginFinder#findPlugins()
+public class DefaultPluginDescriptor extends PluginDescriptor {
+    private BasePluginFinder pluginFinder;
+    /** Method getPluginFinder() in class DefaultPluginDescriptor
+     * @return BasePluginFinder object
      */
-    public PluginDescriptor[] findPlugins() {
-        Digester digester = new Digester();
-        digester.addObjectCreate("plugin", DefaultPluginDescriptor.class);
-        digester.addBeanPropertySetter(
-            "plugin/properties/description",
-            "description");
-        digester.addBeanPropertySetter(
-            "plugin/properties/implementation",
-            "implementation");
-        digester.addCallMethod(
-            "plugin/dependencies/dependency",
-            "addDependency",
-            0);
-
-        List pluginDescriptors = new ArrayList();
-
-        List names = getPluginNames();
-        for (Iterator i = names.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            try {
-                URL descriptorFile =
-                    getPluginResource(pluginName, "plugin.xml");
-                digester.clear();
-                DefaultPluginDescriptor descriptor =
-                    (DefaultPluginDescriptor) digester.parse(
-                        descriptorFile.openStream());
-                descriptor.setName(pluginName);
-                descriptor.setPluginFinder(this);
-                pluginDescriptors.add(descriptor);
-            } catch (Exception e) {
-                getLogger().error(
-                    "Find plugin descriptor error for plugin " + pluginName,
-                    e);
-            }
-        }
-        return (PluginDescriptor[]) pluginDescriptors.toArray(
-            PluginDescriptor.EMPTY_ARRAY);
+    BasePluginFinder getPluginFinder() {
+        return pluginFinder;
     }
-    /** Get all available plugin names in this finder
-     * @return List of plugin names, String objects in it
+    /** Override method getResource in the derived class
+     * @see com.cyclops.plexaros.PluginDescriptor#getResource(java.lang.String)
      */
-    protected abstract List getPluginNames();
-    /** Get a resource in a specified plugin
-     * @param pluginName Name of the plugin
-     * @param resource Resource path
-     * @return Resource URL object
+    public URL getResource(String path) {
+        return pluginFinder.getPluginResource(getName(), path);
+    }
+    /** Method setPluginFinder() in class DefaultPluginDescriptor
+     * @param finder BasePluginFinder object
      */
-    protected abstract URL getPluginResource(
-        String pluginName,
-        String resource);
+    void setPluginFinder(BasePluginFinder finder) {
+        pluginFinder = finder;
+    }
 }

@@ -193,10 +193,49 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros;
-/** Test plugin for testing
- * @author joeblack
+
+import java.io.File;
+
+import junit.framework.TestCase;
+
+import org.codehaus.plexus.embed.Embedder;
+
+/** Base plexaros test case class
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * The class is created at 2004-1-6 11:59:47
+ * Created at 9:01:55 PM Jan 11, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class Test1Plugin extends BasePlugin {
+public class PlexarosTestCase extends TestCase {
+    private Embedder plexusEmbedder;
+    /** Get embedder object
+     * @return Embedder object
+     */
+    protected Embedder getEmbedder() {
+        return plexusEmbedder;
+    }
+    /** Get Engine instance
+     * @return Engine instance
+     * @throws Exception can't find component
+     */
+    protected Engine getEngine() throws Exception {
+        return (Engine) getEmbedder().lookup(Engine.ROLE);
+    }
+
+    /** Override method setUp in the derived class
+     * @see junit.framework.TestCase#setUp()
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
+        plexusEmbedder =
+            Plexaros.startEmbedder(new File("src/rttest/enginehome"));
+    }
+
+    /** Override method tearDown in the derived class
+     * @see junit.framework.TestCase#tearDown()
+     */
+    protected void tearDown() throws Exception {
+        Plexaros.stopEmbedder(plexusEmbedder);
+        super.tearDown();
+    }
 }

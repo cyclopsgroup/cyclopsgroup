@@ -192,34 +192,29 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros.impl;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+package com.cyclops.plexaros;
 
-import junit.framework.TestCase;
-/** Test case for DefaultEngine
- * @author joeblack
+/** Test case for engine
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * The class is created at 2004-1-6 11:40:34
+ * Created at 9:09:30 PM Jan 11, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultEngineTest extends TestCase {
-    /** Test for method getPluginNames()
+public class EngineTest extends PlexarosTestCase {
+    /** Testcase for method getPlugins()
+     * @throws Exception Component setting errors
      */
-    public void testGetPluginNames() {
-        DefaultEngine de = new DefaultEngine();
-        List pluginNames = de.getPluginNames("src/rttest/enginehome");
-        assertTrue(pluginNames.contains("test1"));
-        assertTrue(pluginNames.contains("test2"));
+    public void testGetPlugins() throws Exception {
+        Plugin[] plugins = getEngine().getPlugins();
+        assertEquals(2, plugins.length);
+        assertEquals("test1", plugins[0].getName());
+        assertEquals("test2", plugins[1].getName());
     }
-    /**Test for method init(Properties)
+    /** Test case for getPlugin method
+     * @throws Exception Component setting errors
      */
-    public void testLoadPlugins() {
-        DefaultEngine de = new DefaultEngine();
-        List names = new ArrayList();
-        names.add("test1");
-        names.add("test2");
-        List plugins = de.loadPlugins(new File("src/rttest/enginehome"), names);
-        assertEquals(2, plugins.size());
+    public void testGetPlugin() throws Exception {
+        Plugin plugin = getEngine().getPlugin("test1");
+        assertNotNull(plugin);
     }
 }

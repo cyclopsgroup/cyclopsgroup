@@ -2,7 +2,7 @@
 <plugin>
 	<properties>
 		<description>just for testing</description>
-		<implementation>com.cyclops.plexaros.impl.Test1Plugin</implementation>
+		<implementation>com.cyclops.plexaros.impl.Test2Plugin</implementation>
 	</properties>
 	<dependencies>
 		<dependency>test1</dependency>

@@ -193,44 +193,60 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-import junit.framework.TestCase;
-/** Test case for DefaultEngine
- * @author joeblack
+import java.io.File;
+
+import org.codehaus.plexus.embed.Embedder;
+
+/** Plexaros Engine facade class
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * The class is created at 2004-1-6 11:40:34
+ * Created at 8:48:58 PM Jan 11, 2004
+ * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class DefaultEngineTest extends TestCase {
-    /** Test for method getPluginNames()
+public final class Plexaros {
+    /** Start plexus embedder with a home folder
+     * @param plexusHome Folder where the engine.xml locates
+     * @return Embedder object
+     * @throws Exception When embedder starts
      */
-    public void testGetPluginNames() {
-        DefaultEngine de = new DefaultEngine();
-        List pluginNames = de.getPluginNames("src/rttest/enginehome");
-        assertTrue(pluginNames.contains("test1"));
-        assertTrue(pluginNames.contains("test2"));
+    public static Embedder startEmbedder(File plexusHome) throws Exception {
+        Embedder embedder = new Embedder();
+        embedder.setConfiguration(new File(plexusHome, "engine.xml").getAbsolutePath());
+        embedder.addContextValue("plexus.home", plexusHome.getAbsolutePath());
+        embedder.start();
+        return embedder;
     }
-    /**Test for method init(Properties)
+    /** Start plexus embedder with a path to a resource
+     * @param resource Resource path
+     * @return Embedder instance
+     * @throws Exception When starts
      */
-    public void testLoadPlugins() {
-        DefaultEngine de = new DefaultEngine();
-        List names = new ArrayList();
-        names.add("test1");
-        names.add("test2");
-        List plugins = de.loadPlugins(new File("src/rttest/enginehome"), names);
-        assertEquals(2, plugins.size());
+    /*
+    public static Embedder startEmbedder(String resource) throws Exception {
+        return startEmbedder(
+            Plexaros.class.getClassLoader().getResource(resource));
+    }*/
+    /** Start plexus embedder with a URL
+     * @param plexusConfigurationFile URL to plexus configuration resource
+     * @return Embedder object
+     * @throws Exception When embedder starts
+     */
+    /*
+    public static Embedder startEmbedder(URL plexusConfigurationFile)
+        throws Exception {
+        Embedder embedder = new Embedder();
+        embedder.setConfiguration(plexusConfigurationFile);
+        embedder.start();
+        return embedder;
+    }*/
+    /** Stop an Embedder
+     * @param embedder Embedder to be stopped
+     * @throws Exception When embedder stops
+     */
+    public static void stopEmbedder(Embedder embedder) throws Exception {
+        embedder.stop();
     }
-    /** Test loading work
-     */
-    public void testStart() {
-        DefaultEngine de = new DefaultEngine();
-        de.getProperties().put(Engine.ENGINE_HOME, "src/rttest/enginehome");
-        de.start();
-        Plugin[] ps = de.getPlugins();
-        assertEquals(2, ps.length);
-        assertEquals("test1", ps[0].getName());
-        assertEquals("test2", ps[1].getName());
+    private Plexaros() {
     }
 }
