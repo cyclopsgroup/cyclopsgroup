@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu name="Home">
+	<item name="Index" value="/Index.vm"/>
+	<item name="About" value="/About.vm"/>
+</menu>

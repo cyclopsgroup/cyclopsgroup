@@ -4,16 +4,22 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package com.cyclops.tornado;
+package com.cyclops.tornado.utils;
 import java.io.File;
+import java.io.FileFilter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.regexp.RE;
+import org.apache.regexp.REUtil;
 /**
  * @author joeblack
  * @since 2003-9-29 23:22:52
@@ -27,9 +33,6 @@ public class ResourceFinder {
             return new File(relPath).getAbsolutePath();
         }
     };
-    /** Default constructor */
-    public ResourceFinder() {
-    }
     /** Constructor with a specified PathTransformer
      * @param pt PathTransformer object
      */
@@ -42,6 +45,7 @@ public class ResourceFinder {
      */
     public URL[] getResources(Configuration conf) {
         ArrayList urls = new ArrayList();
+        String pattern = conf.getString("pattern", "*");
         for (Iterator i = conf.getKeys(); i.hasNext();) {
             String key = (String) i.next();
             String[] paths = conf.getStringArray(key);
@@ -51,15 +55,25 @@ public class ResourceFinder {
                     if (StringUtils.equals(key, "resource")) {
                         urls.add(getClass().getClassLoader().getResource(path));
                     } else if (StringUtils.equals(key, "file")) {
-                        File file = new File(pathTransformer.getRealPath(path));
-                        if (file.isFile()) {
-                            urls.add(file.toURL());
+                        URL url = getFileURL(pathTransformer.getRealPath(path));
+                        if (url != null) {
+                            urls.add(url);
                         }
                     } else if (StringUtils.equals(key, "localfile")) {
-                        File file = new File(path);
-                        if (file.isFile()) {
-                            urls.add(file.toURL());
+                        URL url = getFileURL(path);
+                        if (url != null) {
+                            urls.add(url);
                         }
+                    } else if (StringUtils.equals(key, "path")) {
+                        CollectionUtils.addAll(
+                            urls,
+                            getPathURLs(
+                                pathTransformer.getRealPath(path),
+                                pattern));
+                    } else if (StringUtils.equals(key, "localpath")) {
+                        CollectionUtils.addAll(
+                            urls,
+                            getPathURLs(path, pattern));
                     }
                 } catch (Exception e) {
                     logger.error("Can't load resource " + path, e);
@@ -67,5 +81,35 @@ public class ResourceFinder {
             }
         }
         return (URL[]) urls.toArray(EMPTY_URL_ARRAY);
+    }
+    private URL getFileURL(String path) throws MalformedURLException {
+        File file = new File(path);
+        if (file.isFile()) {
+            return file.toURL();
+        } else {
+            return null;
+        }
+    }
+    private URL[] getPathURLs(String path, final String pattern)
+        throws MalformedURLException {
+        List ret = new ArrayList();
+        File dir = new File(path);
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles(new FileFilter() {
+                public boolean accept(File file) {
+                    try {
+                        RE re = REUtil.createRE("<" + pattern + ">");
+                        return re.match(file.getName());
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+            });
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                ret.add(file.toURL());
+            }
+        }
+        return (URL[]) ret.toArray(EMPTY_URL_ARRAY);
     }
 }

@@ -11,8 +11,8 @@ import java.util.Hashtable;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.digester.Digester;
 
-import com.cyclops.tornado.ResourceFinder;
 import com.cyclops.tornado.services.BaseService;
+import com.cyclops.tornado.utils.ResourceFinder;
 /**
  * @author joeblack
  * @since 2003-9-29 23:20:58

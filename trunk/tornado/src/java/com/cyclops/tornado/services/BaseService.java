@@ -9,7 +9,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.cyclops.tornado.PathTransformable;
+import com.cyclops.tornado.utils.PathTransformable;
 /**
  * @author joeblack
  * @since 2003-9-29 17:03:56
