@@ -68,10 +68,6 @@ public class NavigatorTool implements ApplicationTool {
         return (NavigatorService) TurbineServices.getInstance().getService(
             NavigatorService.SERVICE_NAME);
     }
-    private NavigatorService getService() {
-        return (NavigatorService) TurbineServices.getInstance().getService(
-            NavigatorService.SERVICE_NAME);
-    }
     /** Method init()
      * @see org.apache.turbine.services.pull.ApplicationTool#init(java.lang.Object)
      */
@@ -95,6 +91,9 @@ public class NavigatorTool implements ApplicationTool {
     public void refresh(String target) {
         String href = StringUtils.join(StringUtils.split(target, "/"), ",");
         Menu item = getNavigatorService().getMenu(href);
+        if (item == null) {
+            return;
+        }
         currentPath.clear();
         Menu parent = item;
         while (parent != null) {

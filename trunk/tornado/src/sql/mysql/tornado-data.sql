@@ -21,6 +21,9 @@ INSERT INTO c_tnd_confs (conf_id,conf_key,conf_value)
     VALUES (12,'services.UserService.listener','com.cyclops.tornado.modules.PassportBuilder');
 
 INSERT INTO c_tnd_confs (conf_id,conf_key,conf_value)
+    VALUES (13,'services.UserService.listener','com.cyclops.tornado.modules.UserSigninCounter');
+
+INSERT INTO c_tnd_confs (conf_id,conf_key,conf_value)
     VALUES (21,'services.NavigatorService.path','WEB-INF/conf/navigator');
 
 INSERT INTO c_tnd_confs (conf_id,conf_key,conf_value)

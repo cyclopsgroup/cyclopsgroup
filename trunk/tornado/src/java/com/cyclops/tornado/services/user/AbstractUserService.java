@@ -6,7 +6,6 @@
  */
 package com.cyclops.tornado.services.user;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
@@ -110,7 +109,16 @@ public abstract class AbstractUserService
         throws Exception {
         String anonymousUserName = conf.getString("user.anonymous", "guest");
         userTimeout = conf.getLong("user.timeout", DEFAULT_USER_TIMEOUT);
-        HashMap context = new HashMap();
+        String[] listeners = conf.getStringArray("listener");
+        for (int i = 0; listeners != null && i < listeners.length; i++) {
+            String listenerName = listeners[i];
+            try {
+                userListeners.add(
+                    (UserListener) Class.forName(listenerName).newInstance());
+            } catch (Exception e) {
+                logger.error("Create user listener error", e);
+            }
+        }
         try {
             anonymousUser = loadUser(anonymousUserName, true, brokerManager);
             userRepo.put(anonymousUser.getName(), new UserEntry(anonymousUser));

@@ -5,6 +5,8 @@ import org.apache.torque.TorqueException;
 import org.apache.torque.om.Persistent;
 
 import com.cyclops.tornado.Referencable;
+import com.cyclops.tornado.bo.CreatedTimeTrackable;
+import com.cyclops.tornado.bo.LastAccessTrackable;
 /**
  * You should add additional methods to this class to meet the
  * application requirements.  This class will only be generated as
@@ -12,7 +14,7 @@ import com.cyclops.tornado.Referencable;
  */
 public class User
     extends com.cyclops.tornado.om.BaseUser
-    implements Persistent, Referencable {
+    implements Persistent, Referencable, LastAccessTrackable, CreatedTimeTrackable {
     private static final String REFERENCE_CATEGORY = "om.user";
     /** Expose copyTo method
      * @param user
