@@ -19,15 +19,14 @@ package com.cyclopsgroup.waterview;
 import com.cyclopsgroup.cyclib.Context;
 
 /**
- * TODO Add javadoc for this class
+ * Action resolver interface
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface ActionResolver
 {
-
     /**
-     * TODO Add javadoc for this method
+     * Check if the action exists
      * 
      * @param packageName
      * @param moduleName
@@ -36,7 +35,7 @@ public interface ActionResolver
     boolean exists(String packageName, String moduleName);
 
     /**
-     * TODO Add javadoc for this method
+     * Do resolve the action
      * 
      * @param packageName
      * @param moduelName
