@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>News</title>
+        <title>Joel's Weblog</title>
         <author email="g-cyclops@users.sourceforge.net">Joel Guo</author>
     </properties>
     <body>
-        <section name="News">
-            <subsection name="10/01/2003">
+        <section name="10/01/2003">
+            <subsection name="News Title">
                 <p>sdfas fasf asd</p>
             </subsection>
         </section>

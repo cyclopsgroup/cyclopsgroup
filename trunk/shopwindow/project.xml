@@ -5,7 +5,7 @@
     <id>shopwindow</id>
     <currentVersion>1.0-b1-SNAPSHOT</currentVersion>
     <organization>
-        <name>Cyclops Group</name>
+        <name>Cyclops Group Alliance</name>
         <url>http://cyclops-group.sourceforge.net</url>
         <logo>/images/logo.gif</logo>
     </organization>
@@ -13,7 +13,7 @@
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.shopwindow</package>
     <shortDescription>A web application based on Jakarta Turbine</shortDescription>
-    <description>shopwindow is a web based simple content management system. Since it is in order to build a trim gallery web site, it's named shopwindow.</description>
+    <description>Please refer to http://cyclops-group.sourceforge.net</description>
     <url>http://cyclops-group.sourceforge.net</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs</siteDirectory>

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Stories Behind</title>
+        <title>News and Articles</title>
         <author email="g-cyclops@users.sourceforge.net">Joel Guo</author>
     </properties>
     <body>
-    <body>
-        <section name="Stories Behind">
-            <subsection name="10/01/2003">
+        <section name="10/01/2003">
+            <subsection name="News Title">
                 <p>sdfas fasf asd</p>
             </subsection>
         </section>
-    </body>
     </body>
 </document>
