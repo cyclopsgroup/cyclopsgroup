@@ -1,18 +1,19 @@
 <!ELEMENT dataset (
-    User*,
-    UserObject*,
-    Group*,
-    GroupHierarchy*,
-    UserGroup*,
-    Acl*,
-    Role*,
-    Conf*)>
+    DUser|
+    UserObject|
+    Group|
+    GroupHierarchy|
+    UserGroup|
+    Acl|
+    Role|
+    DConf|
+    DMenu)*>
 <!ATTLIST dataset
     name CDATA #REQUIRED
 >
 
-<!ELEMENT User EMPTY>
-<!ATTLIST User
+<!ELEMENT DUser EMPTY>
+<!ATTLIST DUser
     UserId CDATA #REQUIRED
     UserName CDATA #REQUIRED
     EncryptedPassword CDATA #REQUIRED
@@ -77,10 +78,19 @@
     Description CDATA #IMPLIED
 >
 
-<!ELEMENT Conf EMPTY>
-<!ATTLIST Conf
+<!ELEMENT DConf EMPTY>
+<!ATTLIST DConf
     ConfId CDATA #REQUIRED
     ConfKey CDATA #REQUIRED
     ConfValue CDATA #IMPLIED
+>
+
+<!ELEMENT DMenu EMPTY>
+<!ATTLIST DMenu
+    MenuId CDATA #REQUIRED
+    ParentId CDATA #REQUIRED
+    MenuName CDATA #REQUIRED
+    Description CDATA #IMPLIED
+    Href CDATA #REQUIRED
 >
 
