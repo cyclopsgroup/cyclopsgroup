@@ -14,34 +14,32 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.base;
 
-import org.apache.commons.lang.exception.NestableException;
+import java.sql.Connection;
+
+import com.cyclopsgroup.levistone.Session;
 
 /**
- * Levistone specified exception
+ * TODO Add javadoc for this class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PersistenceException extends NestableException
+public abstract class BaseConnectionTypedSession extends BaseTypedSession
 {
-    /**
-     * Constructor of PersistenceException
-     * 
-     * @param msg
-     */
-    public PersistenceException(String msg)
-    {
-        super(msg);
-    }
+    private Connection dbcon;
 
     /**
-     * Constructor of PersistenceException
-     * 
-     * @param e
+     * Constructor for class BaseConnectionTypedSession
+     *
+     * @param session
+     * @param type
+     * @param dbcon
      */
-    public PersistenceException(Throwable e)
+    public BaseConnectionTypedSession(Session session, Class type,
+            Connection dbcon)
     {
-        super(e);
+        super(session, type);
+        this.dbcon = dbcon;
     }
 }

@@ -25,37 +25,43 @@ import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
 import com.cyclopsgroup.levistone.TypedSession;
-import com.cyclopsgroup.levistone.base.BaseSession;
+import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 
 /**
  * Torque implemented session
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TorqueSession extends BaseSession
+public class TorqueSession extends BaseConnectionSession
 {
-    private Connection dbcon;
+
+    /**
+     * 
+     * @uml.property name="closed" 
+     */
+    private boolean closed = false;
+
 
     /**
      * Constructor for class TorqueSession
      *
      * @param persistenceManager
      * @param name
+     * @param id Id of session
      * @param dbcon
      */
     public TorqueSession(PersistenceManager persistenceManager, String name,
-            Connection dbcon)
+            String id, Connection dbcon)
     {
-        super(persistenceManager, name);
-        this.dbcon = dbcon;
+        super(persistenceManager, name, id, dbcon);
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BaseSession#createTypedSession(java.lang.Class)
+     * @see com.cyclopsgroup.levistone.base.BaseConnectionSession#createTypedSession(java.lang.Class, java.sql.Connection)
      */
-    protected TypedSession createTypedSession(Class type)
+    protected TypedSession createTypedSession(Class type, Connection dbcon)
     {
         return new TorqueTypedSession(this, type, dbcon);
     }
@@ -97,23 +103,22 @@ public class TorqueSession extends BaseSession
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.Session#getId()
-     */
-    public String getId()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.levistone.Session#isClosed()
      */
     public boolean isClosed()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return closed;
+    }
+
+    /**
+     * Setter method for closed
+     * 
+     * @param closed The closed to set.
+     * 
+     * @uml.property name="closed"
+     */
+    void setClosed(boolean closed) {
+        this.closed = closed;
     }
 
 }

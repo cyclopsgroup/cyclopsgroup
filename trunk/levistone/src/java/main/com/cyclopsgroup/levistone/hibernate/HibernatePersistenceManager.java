@@ -18,17 +18,26 @@ package com.cyclopsgroup.levistone.hibernate;
 
 import net.sf.hibernate.SessionFactory;
 
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+
 import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
+import com.cyclopsgroup.levistone.datasource.DefaultDataSourceManager;
 
 /**
- * TODO Add javadoc for class
+ * Hibernate implemented persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class HibernatePersistenceManager extends BasePersistenceManager
+        implements Serviceable
 {
+
+    private DefaultDataSourceManager dataSourceManager = new DefaultDataSourceManager();
+
     private SessionFactory sessionFactory;
 
     /**
@@ -49,8 +58,9 @@ public class HibernatePersistenceManager extends BasePersistenceManager
      */
     protected void doCancelSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        HibernateSession ses = (HibernateSession) session;
+        ses.getConnection().rollback();
+        ses.getConnection().close();
     }
 
     /**
@@ -60,18 +70,31 @@ public class HibernatePersistenceManager extends BasePersistenceManager
      */
     protected void doCloseSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        HibernateSession ses = (HibernateSession) session;
+        ses.getConnection().commit();
+        ses.getConnection().close();
     }
 
     /**
-     * Override method doOpenSession in super class of HibernatePersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
-    protected Session doOpenSession(String persistenceName) throws Exception
+    protected Session doOpenSession(String persistenceName, String sessionId)
+            throws Exception
     {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager arg0) throws ServiceException
+    {
+        // TODO Auto-generated method stub
+
     }
 }

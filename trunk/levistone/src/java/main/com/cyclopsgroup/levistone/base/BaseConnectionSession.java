@@ -1,0 +1,77 @@
+/* ==========================================================================
+ * Copyright 2002-2004 Cyclops Group Community
+ * 
+ * Licensed under the Open Software License, Version 2.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://opensource.org/licenses/osl-2.1.php
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * =========================================================================
+ */
+package com.cyclopsgroup.levistone.base;
+
+import java.sql.Connection;
+
+import com.cyclopsgroup.levistone.PersistenceManager;
+import com.cyclopsgroup.levistone.TypedSession;
+
+/**
+ * Base persistence session with connection
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ */
+public abstract class BaseConnectionSession extends BaseSession
+{
+    private Connection dbcon;
+
+    /**
+     * Constructor for class BaseConnectionSession
+     *
+     * @param persistenceManager
+     * @param name
+     * @param id Id of this session
+     * @param dbcon Database connection
+     */
+    public BaseConnectionSession(PersistenceManager persistenceManager,
+            String name, String id, Connection dbcon)
+    {
+        super(persistenceManager, name, id);
+        this.dbcon = dbcon;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.base.BaseSession#createTypedSession(java.lang.Class)
+     */
+    protected TypedSession createTypedSession(Class type)
+    {
+        return createTypedSession(type, dbcon);
+    }
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @param type
+     * @param dbcon
+     * @return Typed session instance
+     */
+    protected abstract TypedSession createTypedSession(Class type,
+            Connection dbcon);
+
+    /**
+     * Get associated db connection
+     *
+     * @return DBConnection object
+     */
+    public Connection getConnection()
+    {
+        return dbcon;
+    }
+}

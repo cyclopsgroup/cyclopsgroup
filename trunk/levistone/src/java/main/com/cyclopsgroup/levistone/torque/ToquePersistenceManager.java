@@ -16,26 +16,28 @@
  */
 package com.cyclopsgroup.levistone.torque;
 
+import java.sql.Connection;
+
+import javax.sql.DataSource;
+
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.torque.TorqueInstance;
 
+import com.cyclopsgroup.levistone.DataSourceManager;
 import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 
 /**
- * TODO Add javadoc for this class
+ * Torque implemented persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ToquePersistenceManager extends BasePersistenceManager implements
         Serviceable
 {
-    private ServiceManager serviceManager;
-
-    private TorqueInstance torqueInstance;
+    private DataSourceManager dataSourceManager;
 
     /**
      * Override or implement method of parent class or interface
@@ -55,8 +57,11 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
      */
     protected void doCancelSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        TorqueSession ses = (TorqueSession) session;
+        ses.setClosed(true);
+        Connection dbcon = ses.getConnection();
+        dbcon.rollback();
+        dbcon.close();
     }
 
     /**
@@ -66,19 +71,27 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
      */
     protected void doCloseSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        TorqueSession ses = (TorqueSession) session;
+        ses.setClosed(true);
+        Connection dbcon = ses.getConnection();
+        dbcon.commit();
+        dbcon.close();
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String)
+     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
-    protected Session doOpenSession(String persistenceName) throws Exception
+    protected Session doOpenSession(String persistenceName, String sessionId)
+            throws Exception
     {
-        // TODO Auto-generated method stub
-        return null;
+        DataSource dataSource = dataSourceManager
+                .getDataSource(persistenceName);
+        Connection dbcon = dataSource.getConnection();
+        TorqueSession session = new TorqueSession(this, persistenceName,
+                sessionId, dbcon);
+        return session;
     }
 
     /**
@@ -88,7 +101,8 @@ public class ToquePersistenceManager extends BasePersistenceManager implements
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        this.serviceManager = serviceManager;
+        dataSourceManager = (DataSourceManager) serviceManager
+                .lookup(DataSourceManager.ROLE);
     }
 
 }

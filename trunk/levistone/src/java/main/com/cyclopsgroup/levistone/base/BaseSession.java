@@ -36,8 +36,15 @@ import com.cyclopsgroup.levistone.TypedSession;
  */
 public abstract class BaseSession implements Session
 {
+
+    /**
+     * 
+     * @uml.property name="id" 
+     */
+    private String id;
+
     /** Logger */
-    protected transient Log logger = LogFactory.getLog(getClass());
+    protected Log logger = LogFactory.getLog(getClass());
 
     private String name;
 
@@ -50,11 +57,14 @@ public abstract class BaseSession implements Session
      * 
      * @param persistenceManager
      * @param name
+     * @param id Id of this session
      */
-    protected BaseSession(PersistenceManager persistenceManager, String name)
+    protected BaseSession(PersistenceManager persistenceManager, String name,
+            String id)
     {
         this.persistenceManager = persistenceManager;
         this.name = name;
+        this.id = id;
     }
 
     /**
@@ -64,6 +74,18 @@ public abstract class BaseSession implements Session
      * @return Typed session instance
      */
     protected abstract TypedSession createTypedSession(Class type);
+
+    /**
+     * Override or implement method of parent class or interface
+     * 
+     * @see com.cyclopsgroup.levistone.Session#getId()
+     * 
+     * @uml.property name="id"
+     */
+    public String getId()
+    {
+        return id;
+    }
 
     /**
      * Override method getName in super class of BaseSession

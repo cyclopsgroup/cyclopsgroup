@@ -61,11 +61,12 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     }
 
     /**
-     * Override method doOpenSession in super class of JdbcPersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String, java.lang.String)
      */
-    protected Session doOpenSession(String persistenceName) throws Exception
+    protected Session doOpenSession(String persistenceName, String sessionId)
+            throws Exception
     {
         // TODO Auto-generated method stub
         return null;

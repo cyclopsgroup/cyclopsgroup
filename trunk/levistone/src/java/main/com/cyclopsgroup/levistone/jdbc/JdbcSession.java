@@ -27,21 +27,18 @@ import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
-import com.cyclopsgroup.levistone.Session;
 import com.cyclopsgroup.levistone.TypedSession;
-import com.cyclopsgroup.levistone.base.BaseSession;
+import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 
 /**
  * JDBC implemented db session
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JdbcSession extends BaseSession implements Session
+public class JdbcSession extends BaseConnectionSession
 {
 
     private boolean closed = false;
-
-    private Connection dbcon;
 
     private List queryResults = new ArrayList();
 
@@ -50,13 +47,13 @@ public class JdbcSession extends BaseSession implements Session
      * 
      * @param persistenceManager JDBC persistence manager
      * @param name
+     * @param id Session id
      * @param dbcon DB connection
      */
     JdbcSession(JdbcPersistenceManager persistenceManager, String name,
-            Connection dbcon)
+            String id, Connection dbcon)
     {
-        super(persistenceManager, name);
-        this.dbcon = dbcon;
+        super(persistenceManager, name, id, dbcon);
     }
 
     private void closeQueryResults()
@@ -79,12 +76,12 @@ public class JdbcSession extends BaseSession implements Session
         closed = true;
         try
         {
-            if (dbcon.isClosed())
+            if (getConnection().isClosed())
             {
                 return;
             }
-            dbcon.commit();
-            dbcon.close();
+            getConnection().commit();
+            getConnection().close();
         }
         catch (SQLException e)
         {
@@ -93,11 +90,11 @@ public class JdbcSession extends BaseSession implements Session
     }
 
     /**
-     * Override method createTypedSession in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.base.BaseSession#createTypedSession(java.lang.Class)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.base.BaseConnectionSession#createTypedSession(java.lang.Class, java.sql.Connection)
      */
-    protected TypedSession createTypedSession(Class type)
+    protected TypedSession createTypedSession(Class type, Connection dbcon)
     {
         JdbcTypedSession typedSession = new JdbcTypedSession(this, type, dbcon);
         return typedSession;
@@ -138,17 +135,6 @@ public class JdbcSession extends BaseSession implements Session
     }
 
     /**
-     * Override method getId in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#getId()
-     */
-    public String getId()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
      * Override method isClosed in super class of JdbcSession
      * 
      * @see com.cyclopsgroup.levistone.Session#isClosed()
@@ -160,8 +146,6 @@ public class JdbcSession extends BaseSession implements Session
 
     /**
      * TODO Add javadoc for this method
-     *
-     * 
      */
     public void rollback()
     {
@@ -169,12 +153,12 @@ public class JdbcSession extends BaseSession implements Session
         closed = true;
         try
         {
-            if (dbcon.isClosed())
+            if (getConnection().isClosed())
             {
                 return;
             }
-            dbcon.rollback();
-            dbcon.close();
+            getConnection().rollback();
+            getConnection().close();
         }
         catch (SQLException e)
         {

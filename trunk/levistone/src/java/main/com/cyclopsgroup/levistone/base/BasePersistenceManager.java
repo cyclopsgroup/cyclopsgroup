@@ -97,11 +97,12 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
      * Method doOpenSession() in class BasePersistenceManager
      * 
      * @param persistenceName
+     * @param sessionId session id
      * @return
      * @throws Exception
      */
-    protected abstract Session doOpenSession(String persistenceName)
-            throws Exception;
+    protected abstract Session doOpenSession(String persistenceName,
+            String sessionId) throws Exception;
 
     /**
      * Override method getActiveSessions in super class of BasePersistenceManager
@@ -133,7 +134,8 @@ public abstract class BasePersistenceManager extends AbstractLogEnabled
     {
         try
         {
-            Session session = doOpenSession(persistenceName);
+            String id = null; //TODO add get new unique id logic
+            Session session = doOpenSession(persistenceName, id);
             activeSessions.put(session.getId(), session);
             return session;
         }

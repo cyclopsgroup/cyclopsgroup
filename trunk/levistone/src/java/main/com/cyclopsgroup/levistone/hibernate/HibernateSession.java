@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.levistone.hibernate;
 
+import java.sql.Connection;
 import java.util.Map;
 
 import com.cyclopsgroup.levistone.NamedQuery;
@@ -23,34 +24,35 @@ import com.cyclopsgroup.levistone.Query;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
 import com.cyclopsgroup.levistone.TypedSession;
-import com.cyclopsgroup.levistone.base.BaseSession;
+import com.cyclopsgroup.levistone.base.BaseConnectionSession;
 
 /**
  * TODO Add javadoc for this class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HibernateSession extends BaseSession
+public class HibernateSession extends BaseConnectionSession
 {
-    //private Session
     /**
      * Constructor for class HibernateSession
      *
      * @param persistenceManager
      * @param name
+     * @param id
+     * @param dbcon
      */
     public HibernateSession(HibernatePersistenceManager persistenceManager,
-            String name)
+            String name, String id, Connection dbcon)
     {
-        super(persistenceManager, name);
+        super(persistenceManager, name, id, dbcon);
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.base.BaseSession#createTypedSession(java.lang.Class)
+     * @see com.cyclopsgroup.levistone.base.BaseConnectionSession#createTypedSession(java.lang.Class, java.sql.Connection)
      */
-    protected TypedSession createTypedSession(Class type)
+    protected TypedSession createTypedSession(Class type, Connection dbcon)
     {
         // TODO Auto-generated method stub
         return null;

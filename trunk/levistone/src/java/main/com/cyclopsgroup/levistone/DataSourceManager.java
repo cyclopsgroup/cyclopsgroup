@@ -16,32 +16,27 @@
  */
 package com.cyclopsgroup.levistone;
 
-import org.apache.commons.lang.exception.NestableException;
+import javax.sql.DataSource;
 
 /**
- * Levistone specified exception
+ * Manager to provide data sources
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PersistenceException extends NestableException
+public interface DataSourceManager
 {
-    /**
-     * Constructor of PersistenceException
-     * 
-     * @param msg
-     */
-    public PersistenceException(String msg)
-    {
-        super(msg);
-    }
+
+    /** Default data source name */
+    String DEFAULT_NAME = "default";
+
+    /** Role name */
+    String ROLE = DataSourceManager.class.getName();
 
     /**
-     * Constructor of PersistenceException
-     * 
-     * @param e
+     * Get jdbc data source object
+     *
+     * @param name Data source object
+     * @return Data source object
      */
-    public PersistenceException(Throwable e)
-    {
-        super(e);
-    }
+    DataSource getDataSource(String name);
 }
