@@ -200,9 +200,6 @@ import java.util.Properties;
  * The class is created at 2004-1-6 0:24:34
  */
 public class EngineFactory {
-    /** Default engine implmentation */
-    public static final String DEFAULT_ENGINE_IMPLEMENTATION =
-        "com.cyclops.plexaros.impl.DefaultEngine";
     /** Load engine with specified properties
      * @param properties Specified properties
      * @return Engine instance
@@ -215,7 +212,7 @@ public class EngineFactory {
         String engineClass =
             properties.getProperty(
                 Engine.ENGINE_IMPLEMENTATION,
-                DEFAULT_ENGINE_IMPLEMENTATION);
+                DefaultEngine.class.getName());
         Engine engine = (Engine) Class.forName(engineClass).newInstance();
         engine.getProperties().putAll(props);
         return engine;

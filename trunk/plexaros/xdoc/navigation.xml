@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="plexaros">
+	<body>
+		<menu name="Overview">
+			<item name="Home" href="/index.html"/>
+			<item name="Configure it" href="/configure.html"/>
+			<item name="Developer Guide" href="/guide.html"/>
+		</menu>
+	</body>
+</project>

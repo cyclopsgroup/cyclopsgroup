@@ -1,4 +1,4 @@
-/*
+/**
  * Common Public License - v 1.0
  *
  *
@@ -192,16 +192,3 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros;
-/** Serviceable plugin interface
- * @author joeblack
- *
- * The class is created at 2004-1-6 9:56:57
- */
-public interface Service extends Plugin {
-    /** Ability to service another plugin
-     * @param laterPlugin Another plugin
-     * @throws Exception Anything wrong
-     */
-    void register(Plugin laterPlugin) throws Exception;
-}

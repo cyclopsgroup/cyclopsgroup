@@ -192,7 +192,7 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros.impl;
+package com.cyclops.plexaros;
 import java.util.Hashtable;
 import java.util.Map;
 /** Base object with name and description

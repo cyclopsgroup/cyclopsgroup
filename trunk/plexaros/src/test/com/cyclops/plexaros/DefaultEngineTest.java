@@ -192,52 +192,45 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros.impl;
+package com.cyclops.plexaros;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-/** Plugin meta information
+
+import junit.framework.TestCase;
+/** Test case for DefaultEngine
  * @author joeblack
  *
- * The class is created at 2004-1-6 11:26:03
+ * The class is created at 2004-1-6 11:40:34
  */
-public class PluginDescriptor extends BaseObject {
-    private List dependencies = new ArrayList();
-    private String description;
-    private String implementation;
-    /** Add a dependency
-     * @param name Name of the dependency
+public class DefaultEngineTest extends TestCase {
+    /** Test for method getPluginNames()
      */
-    public void addDependency(String name) {
-        dependencies.add(name);
+    public void testGetPluginNames() {
+        DefaultEngine de = new DefaultEngine();
+        List pluginNames = de.getPluginNames("src/rttest/enginehome");
+        assertTrue(pluginNames.contains("test1"));
+        assertTrue(pluginNames.contains("test2"));
     }
-    /** Get list of dependency names
-     * @return names
+    /**Test for method init(Properties)
      */
-    public List getDependencies() {
-        return dependencies;
+    public void testLoadPlugins() {
+        DefaultEngine de = new DefaultEngine();
+        List names = new ArrayList();
+        names.add("test1");
+        names.add("test2");
+        List plugins = de.loadPlugins(new File("src/rttest/enginehome"), names);
+        assertEquals(2, plugins.size());
     }
-    /** Get description value
-     * @return Description of this plugin
+    /** Test loading work
      */
-    public String getDescription() {
-        return description;
-    }
-    /** Get implementation class
-     * @return Implementation class
-     */
-    public String getImplementation() {
-        return implementation;
-    }
-    /** Set description value
-     * @param string Description value
-     */
-    public void setDescription(String string) {
-        description = string;
-    }
-    /** Set implementation class
-     * @param string Implementation class
-     */
-    public void setImplementation(String string) {
-        implementation = string;
+    public void testStart() {
+        DefaultEngine de = new DefaultEngine();
+        de.getProperties().put(Engine.ENGINE_HOME, "src/rttest/enginehome");
+        de.start();
+        Plugin[] ps = de.getPlugins();
+        assertEquals(2, ps.length);
+        assertEquals("test1", ps[0].getName());
+        assertEquals("test2", ps[1].getName());
     }
 }

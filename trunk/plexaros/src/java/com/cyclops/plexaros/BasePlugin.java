@@ -193,15 +193,69 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros;
-/** Serviceable plugin interface
+import java.io.File;
+import java.net.URL;
+import java.util.Vector;
+
+/** Default plugin class
  * @author joeblack
  *
- * The class is created at 2004-1-6 9:56:57
+ * The class is created at 2004-1-6 10:22:17
  */
-public interface Service extends Plugin {
-    /** Ability to service another plugin
-     * @param laterPlugin Another plugin
-     * @throws Exception Anything wrong
+public class BasePlugin extends BaseObject implements Plugin {
+    private Vector dependencyNames = new Vector();
+    private Engine engine;
+    /** Override method addDepenedencyName() of super class
+     * @see com.cyclops.plexaros.Plugin#addDepenedencyName(java.lang.String)
      */
-    void register(Plugin laterPlugin) throws Exception;
+    public void addDepenedencyName(String dependencyName) {
+        dependencyNames.add(dependencyName);
+    }
+    /** Override method getDependencyNames() of super class
+     * @see com.cyclops.plexaros.Plugin#getDependencyNames()
+     */
+    public String[] getDependencyNames() {
+        return (String[]) dependencyNames.toArray(new String[0]);
+    }
+    /** Override method getEngine() of super class
+     * @see com.cyclops.plexaros.Plugin#getEngine()
+     */
+    public Engine getEngine() {
+        return engine;
+    }
+    /** Get home of this plugin
+     * @return File object
+     */
+    public File getPluginHome() {
+        return new File((String) getProperties().get(PLUGIN_HOME));
+    }
+    /** Override method getResource() of super class
+     * @see com.cyclops.plexaros.Plugin#getResource(java.lang.String)
+     */
+    public URL getResource(String resourceName) {
+        File file = new File(getPluginHome(), resourceName);
+        try {
+            return file.toURL();
+        } catch (Exception e) {
+            return getClass().getClassLoader().getResource(resourceName);
+        }
+    }
+    /** Override method setEngine() of super class
+     * @see com.cyclops.plexaros.Plugin#setEngine(com.cyclops.plexaros.Engine)
+     */
+    public void setEngine(Engine e) {
+        engine = e;
+    }
+    /** Override method start() of super class
+     * @see com.cyclops.plexaros.Startable#start()
+     */
+    public void start() {
+        // TODO Auto-generated method stub
+    }
+    /** Override method stop() of super class
+     * @see com.cyclops.plexaros.Startable#stop()
+     */
+    public void stop() {
+        // TODO Auto-generated method stub
+    }
 }

@@ -12,7 +12,7 @@
     <logo>/images/plexaros_logo.gif</logo>
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.plexaros</package>
-    <shortDescription>A web application based on Plexus Summit</shortDescription>
+    <shortDescription>An application framework which</shortDescription>
     <description>
 --------To change this text, edit project.xml please--------
   </description>
@@ -38,7 +38,6 @@
             <id>joel</id>
             <email>chinajoeblack@hotmail.com</email>
             <roles>
-                <role>SA</role>
                 <role>Developer</role>
             </roles>
         </developer>
@@ -53,72 +52,6 @@
         </developer>
     </developers>
     <dependencies>
-        <dependency>
-            <groupId>plexus</groupId>
-            <artifactId>plexus-velocity</artifactId>
-            <version>1.0-beta-1</version>
-        </dependency>
-        <dependency>
-            <id>commons-logging</id>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <id>servletapi</id>
-            <version>2.3</version>
-        </dependency>
-        <dependency>
-            <id>velocity</id>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <id>xml-apis</id>
-            <version>1.0.b2</version>
-        </dependency>
-        <dependency>
-            <id>commons-fileupload</id>
-            <version>1.0-beta-1</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework-api</artifactId>
-            <version>4.1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>plexus</groupId>
-            <artifactId>plexus</artifactId>
-            <version>0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>classworlds</groupId>
-            <artifactId>classworlds</artifactId>
-            <version>1.0-rc3</version>
-        </dependency>
-        <!--
-     |
-     | Common test-time dependencies for all the components.
-     |
-     -->
-        <!-- Required for the InputSource class in the DefaultPlexusContainer -->
-        <dependency>
-            <groupId>xpp3</groupId>
-            <artifactId>xpp3</artifactId>
-            <version>1.1.2a</version>
-        </dependency>
-        <!--
-     |
-     | Required for the componentmanifest generation.
-     |
-     -->
-        <dependency>
-            <groupId>velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.4-dev</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-velocity</artifactId>
-            <version>20030211.144921</version>
-        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/java</sourceDirectory>

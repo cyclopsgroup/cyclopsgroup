@@ -192,189 +192,52 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.plexaros.impl;
-import java.io.File;
-import java.io.FileFilter;
+package com.cyclops.plexaros;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Vector;
-
-import org.apache.commons.digester.Digester;
-
-import com.cyclops.plexaros.Engine;
-import com.cyclops.plexaros.Plugin;
-import com.cyclops.plexaros.Service;
-/** Default engine implementation
+/** Plugin meta information
  * @author joeblack
  *
- * The class is created at 2004-1-6 10:20:48
+ * The class is created at 2004-1-6 11:26:03
  */
-public class DefaultEngine extends BaseObject implements Engine {
-    private Hashtable plugins = new Hashtable();
-    private Vector pluginNames = new Vector();
-    /** Override method getPlugin() of super class
-     * @see com.cyclops.plexaros.Engine#getPlugin(java.lang.String)
+public class PluginDescriptor extends BaseObject {
+    private List dependencies = new ArrayList();
+    private String description;
+    private String implementation;
+    /** Add a dependency
+     * @param name Name of the dependency
      */
-    public Plugin getPlugin(String pluginName) {
-        return (Plugin) plugins.get(pluginName);
+    public void addDependency(String name) {
+        dependencies.add(name);
     }
-    /** Override method getPlugins() of super class
-     * @see com.cyclops.plexaros.Engine#getPlugins()
+    /** Get list of dependency names
+     * @return names
      */
-    public Plugin[] getPlugins() {
-        ArrayList ret = new ArrayList();
-        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            ret.add(plugins.get(pluginName));
-        }
-        return (Plugin[]) ret.toArray(Plugin.EMPTY_ARRAY);
+    public List getDependencies() {
+        return dependencies;
     }
-    /** Override method init() of super class
-     * @see com.cyclops.plexaros.Engine#init(java.util.Properties)
+    /** Get description value
+     * @return Description of this plugin
      */
-    public synchronized void start() {
-        String engineHome = (String) getProperties().get(ENGINE_HOME);
-        List names = getPluginNames(engineHome);
-        List allPlugins = loadPlugins(new File(engineHome), names);
-        registerPlugins(allPlugins);
+    public String getDescription() {
+        return description;
     }
-    /** Try to register all plugins into engine
-     * @param allPlugins List of all plugins
+    /** Get implementation class
+     * @return Implementation class
      */
-    protected void registerPlugins(List allPlugins) {
-        int registered = 1;
-        List tobeRegistered = new ArrayList();
-        tobeRegistered.addAll(allPlugins);
-        while (registered > 0) {
-            registered = 0;
-            List tobeRemoved = new ArrayList();
-            for (Iterator i = tobeRegistered.iterator(); i.hasNext();) {
-                Plugin plugin = (Plugin) i.next();
-                if (isAbleToRegister(plugin)) {
-                    registerAndStartPlugin(plugin);
-                    tobeRemoved.add(plugin);
-                    registered++;
-                }
-            }
-            tobeRegistered.removeAll(tobeRemoved);
-        }
-        if (!tobeRegistered.isEmpty()) {
-            System.out.println(tobeRegistered + " can't be registered");
-        }
+    public String getImplementation() {
+        return implementation;
     }
-    private boolean isAbleToRegister(Plugin plugin) {
-        boolean ret = true;
-        String[] dependencies = plugin.getDependencyNames();
-        for (int i = 0; i < dependencies.length; i++) {
-            String dependency = dependencies[i];
-            if (!plugins.containsKey(dependency)) {
-                ret = false;
-                break;
-            }
-        }
-        return ret;
-    }
-    private void registerAndStartPlugin(Plugin plugin) {
-        if (plugins.containsKey(plugin.getName())) {
-            return;
-        }
-        for (Iterator i = pluginNames.iterator(); i.hasNext();) {
-            String pluginName = (String) i.next();
-            Plugin existedPlugin = (Plugin) plugins.get(pluginName);
-            if (existedPlugin instanceof Service) {
-                try {
-                    ((Service) existedPlugin).service(plugin);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        plugins.put(plugin.getName(), plugin);
-        pluginNames.add(plugin.getName());
-        plugin.start();
-    }
-    /** Load all plugins to a temp list
-     * @param engineHome Engine home directory
-     * @param names Names of plugins
-     * @return List of plugins loaded
+    /** Set description value
+     * @param string Description value
      */
-    protected List loadPlugins(File engineHome, List names) {
-        Digester digester = new Digester();
-        digester.addObjectCreate("plugin", PluginDescriptor.class);
-        digester.addBeanPropertySetter(
-            "plugin/properties/description",
-            "description");
-        digester.addBeanPropertySetter(
-            "plugin/properties/implementation",
-            "implementation");
-        digester.addCallMethod(
-            "plugin/dependencies/dependency",
-            "addDependency",
-            0);
-        List ret = new ArrayList();
-        for (Iterator i = names.iterator(); i.hasNext();) {
-            String name = (String) i.next();
-            try {
-                File pluginHome = new File(engineHome, "plugins/" + name);
-                digester.clear();
-                PluginDescriptor meta =
-                    (PluginDescriptor) digester.parse(
-                        new File(pluginHome, "plugin.xml"));
-                Plugin plugin =
-                    (Plugin) Class
-                        .forName(meta.getImplementation())
-                        .newInstance();
-                plugin.setEngine(this);
-                plugin.setName(name);
-                plugin.getProperties().put(
-                    Plugin.PLUGIN_HOME,
-                    pluginHome.getPath());
-                List dependencies = meta.getDependencies();
-                for (Iterator j = dependencies.iterator(); j.hasNext();) {
-                    String dependency = (String) j.next();
-                    plugin.addDepenedencyName(dependency);
-                }
-                ret.add(plugin);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return ret;
+    public void setDescription(String string) {
+        description = string;
     }
-    /** Get plugin names
-     * @param engineHome engine home directory
-     * @return List of plugin names
+    /** Set implementation class
+     * @param string Implementation class
      */
-    protected List getPluginNames(String engineHome) {
-        List ret = new ArrayList();
-        File folder = new File(engineHome + "/plugins");
-        if (folder.isDirectory()) {
-            File[] subfolders = folder.listFiles(new FileFilter() {
-                public boolean accept(File file) {
-                    return file.isDirectory();
-                }
-            });
-            for (int i = 0; i < subfolders.length; i++) {
-                File subfolder = subfolders[i];
-                ret.add(subfolder.getName());
-            }
-        }
-        return ret;
-    }
-    /** Override method stop() of super class
-     * @see com.cyclops.plexaros.Startable#stop()
-     */
-    public synchronized void stop() {
-        ListIterator i = pluginNames.listIterator(pluginNames.size());
-        while (i.hasPrevious()) {
-            String pluginName = (String) i.previous();
-            Plugin plugin = getPlugin(pluginName);
-            plugin.stop();
-        }
-        pluginNames.clear();
-        plugins.clear();
+    public void setImplementation(String string) {
+        implementation = string;
     }
 }
