@@ -40,7 +40,7 @@ public class ClassActionResolver extends AbstractLogEnabled implements
 {
     private Map cache;
 
-    private boolean disableCache = false;
+    private boolean cacheDisabled = false;
 
     /**
      * Override or implement method of parent class or interface
@@ -49,7 +49,8 @@ public class ClassActionResolver extends AbstractLogEnabled implements
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        disableCache = conf.getChild("disable-cache").getValueAsBoolean(false);
+        cacheDisabled = conf.getChild("cache-disabled")
+                .getValueAsBoolean(false);
         int cacheSize = conf.getChild("cache-size").getValueAsInteger(-1);
         if (cacheSize > 1)
         {
@@ -69,7 +70,7 @@ public class ClassActionResolver extends AbstractLogEnabled implements
     public boolean exists(String packageName, String moduleName)
     {
         String className = getClassName(packageName, moduleName);
-        if (!disableCache && cache.containsKey(className))
+        if (!cacheDisabled && cache.containsKey(className))
         {
             return true;
         }
@@ -119,7 +120,7 @@ public class ClassActionResolver extends AbstractLogEnabled implements
             throws Exception
     {
         String className = getClassName(packageName, moduleName);
-        if (!disableCache && cache.containsKey(className))
+        if (!cacheDisabled && cache.containsKey(className))
         {
             UIModule module = (UIModule) cache.get(className);
             module.process(runtime);
