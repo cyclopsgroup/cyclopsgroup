@@ -1,0 +1,42 @@
+#set($title = "Advanced Search")
+#if($rootId > 0) #set($title = "$title in #$rootCategory.categoryCode") #end
+#h2($title "searchfolder")
+<table width="100%">
+    <form method="get" action="$link.setPage("PreBrowse.vm")">
+    <input type="hidden" name="root_id" value="$rootId"/>
+    <tr>
+        <td>Keyword:</td>
+        <td>
+            <input type="text" name="keyword" size="15" value="$searchCriteria.keyword"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Product Code:</td>
+        <td>
+            #<input type="text" name="product_code" size="30" value="$searchCriteria.productCode"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        	<p>In Selected Categories:<br/>
+        	Press Ctrl to make multiple selection</p>
+        </td>
+        <td>
+            <select name="category_path" size="5" multiple="multiple">
+            	<option value="/"#if($searchCriteria.containsRootCategory()) selected="selected" #end>--------All Categories--------</option>
+                #foreach($category in $categories)
+                	#set($depth = $category.depth + 2)
+                	<option value="$category.categoryPath"#if($searchCriteria.categoryPaths.contains($category.categoryPath)) selected="selected"#end>#foreach($i in [1..$depth]) #if($i > 2)+#end #end #$category.categoryCode </option>
+                #end
+            </select>
+        </td>
+    </tr>
+    <tr>
+    	<td>&nbsp;</td>
+    	<td>Display <input type="text" name="page_size" value="$searchCriteria.pageSize" size="3"/> products per page</td>
+    </tr> 
+    <tr>
+        <td colspan="2" class="bottom"><input type="submit" value="Search" class="button"/></td>
+    </tr>
+    </form>
+</table>

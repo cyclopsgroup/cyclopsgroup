@@ -1,0 +1,22 @@
+#macro ( spacer $width $height )<img src="$content.getURI("images/spacer.gif")" width="$width" align="absbottom" height="$height" border="0"/>#end
+#macro ( heading $href $text)
+	<div>
+		<img src="$content.getURI("images/triangle.gif")" align="absbottom"/>
+		<a href="$href" class="heading">$text</a>
+	</div>
+#end
+#macro ( bgcolor ) #if($switch) bgcolor="#EEEEEE" #set($switch= false ) #else #set($switch = true) bgcolor="#DDDDDD" #end #end
+#macro( h2 $text $icon)
+<table width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<img src="$content.getURI("images/icon36/${icon}.gif")" align="absbottom"/>
+			<span style="font-size: 17pt; font-family: Arial Black; color: #6685A3">$text</span>
+		</td>
+		<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+		<td background="$content.getURI("images/banner_bg.gif")" colspan="2">#spacer(2 2)</td>
+	</tr>
+</table>
+#end
