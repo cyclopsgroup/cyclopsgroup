@@ -55,18 +55,21 @@ public class JexlExpression implements Expression
     public Object evaluate(Context context) throws Exception
     {
         JexlContext ctx = new HashMapContext();
-        String[] names = context.getNames();
-        for (int i = 0; i < names.length; i++)
+        if (context != null)
         {
-            String name = names[i];
-            Object object = context.get(name);
-            try
+            String[] names = context.getNames();
+            for (int i = 0; i < names.length; i++)
             {
-                ctx.getVars().put(name, object);
-            }
-            catch (Exception e)
-            {
-                logger.debug("Set value error", e);
+                String name = names[i];
+                Object object = context.get(name);
+                try
+                {
+                    ctx.getVars().put(name, object);
+                }
+                catch (Exception e)
+                {
+                    logger.debug("Set value error", e);
+                }
             }
         }
         return expression.evaluate(ctx);

@@ -14,29 +14,42 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.cyclib;
+package com.cyclopsgroup.cyclib.jexl;
 
 import junit.framework.TestCase;
 
+import com.cyclopsgroup.cyclib.DefaultContext;
+
 /**
- * Test case for default context
+ * Test case for jexl expression
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultContextTest extends TestCase
+public class JexlExpressionTest extends TestCase
 {
     /**
-     * Test getNames method
+     * Test evaluation
+     *
+     * @throws Exception Throw it out
      */
-    public void testGetNames()
+    public void testEvaluate1() throws Exception
     {
-        DefaultContext parent = new DefaultContext();
-        parent.put("a", "a");
-        parent.put("b", "b");
-        DefaultContext ctx = new DefaultContext(parent);
-        ctx.put("a", "c");
-        ctx.put("d", "d");
-        String[] names = ctx.getNames();
-        assertEquals(3, names.length);
+        JexlExpression je = new JexlExpression("1 + 1");
+        Object result = je.evaluate(null);
+        assertEquals(new Long(2), result);
+    }
+
+    /**
+     * Test evaluation
+     *
+     * @throws Exception Throw it out
+     */
+    public void testEvaluate2() throws Exception
+    {
+        JexlExpression je = new JexlExpression("a + 1");
+        DefaultContext dc = new DefaultContext();
+        dc.put("a", "abc");
+        Object result = je.evaluate(dc);
+        assertEquals("abc1", result);
     }
 }

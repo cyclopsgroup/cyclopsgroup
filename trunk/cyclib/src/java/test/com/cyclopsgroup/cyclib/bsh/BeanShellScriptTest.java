@@ -14,29 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.cyclib;
+package com.cyclopsgroup.cyclib.bsh;
 
 import junit.framework.TestCase;
 
 /**
- * Test case for default context
+ * Test case for beanshell script
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultContextTest extends TestCase
+public class BeanShellScriptTest extends TestCase
 {
     /**
-     * Test getNames method
+     * Test run method
+     *
+     * @throws Exception Throw it out
      */
-    public void testGetNames()
+    public void testRun() throws Exception
     {
-        DefaultContext parent = new DefaultContext();
-        parent.put("a", "a");
-        parent.put("b", "b");
-        DefaultContext ctx = new DefaultContext(parent);
-        ctx.put("a", "c");
-        ctx.put("d", "d");
-        String[] names = ctx.getNames();
-        assertEquals(3, names.length);
+        BeanShellScript script = new BeanShellScript(
+                "import java.util.List;\nString a = \"abc\"; \nreturn a");
+        Object result = script.run(null);
+        assertEquals("abc", result);
     }
 }

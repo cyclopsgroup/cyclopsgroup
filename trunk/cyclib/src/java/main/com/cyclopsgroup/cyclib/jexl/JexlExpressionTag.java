@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.cyclib.jelly.jexl;
+package com.cyclopsgroup.cyclib.jexl;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
@@ -25,7 +25,6 @@ import com.cyclopsgroup.cyclib.Condition;
 import com.cyclopsgroup.cyclib.ConditionHandler;
 import com.cyclopsgroup.cyclib.ExpressionHandler;
 import com.cyclopsgroup.cyclib.jelly.ExpressionCondition;
-import com.cyclopsgroup.cyclib.jexl.JexlExpression;
 
 /**
  * Jexl implemented java expression tag
