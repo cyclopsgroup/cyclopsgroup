@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:page xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal" name="Index" package="com.cyclopsgroup.waterview.ui.body">
+    <div id="body">
+        <h2>${r.welcom}</h2>
+        <p>dddddd</p>
+    </div>
+</p:page>

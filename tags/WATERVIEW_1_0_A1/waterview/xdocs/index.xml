@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Waterview Project</title>
+		<author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+	</properties>
+	<body>
+		<section name="Overview">
+			<p>Waterview is positioned as a highly componentized web application framework, which is an <a href="http://avalon.apache.org">avalon</a> standard and <a href="http://plexus.codehaus.org">plexus</a> container based, <a href="http://jakarta.apache.org/turbine">turbine</a> like servlet . Being similar to <a href="http://jakarta.apache.org/turbine">turbine</a>, presentation logic is abstracted with action/page and http requests are handled with a componentized and pluggable pipeline in waterview. Page could be interpreted with componentized and plugable renderer. Currently waterview is using <a href="http://jakarta.apache.org/velocity">velocity</a> and <a href="http://jakarta.apache.org/commons/jelly">jelly</a> as default page renderer. Componentized design allows developers to come up with their page renderers in an extremely simple way.</p>
+			<p>Waterview is under active development now. Any suggestion is welcom. Please feel free to <a href="mailto:jiaqi.guo@gmail.com">shoot me email</a> with your idea.</p>
+		</section>
+		<section name="Waterview vs. Turbine">
+			<p>Componentization and avalon standard is the difference between waterview and turbine 3.</p>
+			<p>The pattern of waterview is borrowed from <a href="http://jakarta.apache.org/turbine">turbine </a> while the implementation makes huge difference. Both turbine and waterview is introducing a pluggable web application but waterview makes the way of configuring pipeline valves, error handler, page renderers and other components (services in turbine) unified and generic. In waterview, all these elements are components defined in xml file for plexus container. </p>
+			<p>Basically the intention of waterview is to make turbine more componentized and unified,  eliminate the pipeline specific definition (pipeline xml), turbine specific configuration (TurbineResources.properties) and introduce avalon.</p>
+		</section>
+		<section name="Waterview vs. Summit">
+			<p>Well, one difference is waterview is called waterview and summit is called summit.</p>
+			<p>I would like to delete waterview directory from my CVS server if summit project is under active development today. Actaully several small projects in my list used to be based on summit. However, we can not even find this project any longer now.</p>
+		</section>
+		<section name="The Name">
+			<p>Waterview pwky is a road in north dallas, TX. Every morning I drive through that road with my wife. When it was time to name this project, waterview was the first thing came to my mind.</p>
+		</section>
+	</body>
+</document>
