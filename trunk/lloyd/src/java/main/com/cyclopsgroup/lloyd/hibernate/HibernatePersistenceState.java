@@ -14,17 +14,21 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.lloyd;
+package com.cyclopsgroup.lloyd.hibernate;
+
+import net.sf.hibernate.Session;
 
 /**
  * TODO Add javadoc for this class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface PermissionPersistenceManager
+public interface HibernatePersistenceState
 {
-
-    void addPermission2Role(String permission, Role role) throws Exception;
-
-    Role addRole(String roleName) throws Exception;
+    /**
+     * Get hibernate session
+     *
+     * @return Hibernate session
+     */
+    Session getSession();
 }

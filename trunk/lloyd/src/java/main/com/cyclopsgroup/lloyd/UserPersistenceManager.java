@@ -29,7 +29,7 @@ public interface UserPersistenceManager
      * @param groupName
      * @return Group object
      */
-    Group addGroup(String groupName);
+    Group addGroup(String groupName) throws Exception;
 
     /**
      * Add new user
@@ -38,7 +38,7 @@ public interface UserPersistenceManager
      * @param password
      * @return User object
      */
-    User addUser(String userName, String password);
+    User addUser(String userName, String password) throws Exception;
 
     /**
      * TODO Add javadoc for this method
@@ -46,7 +46,7 @@ public interface UserPersistenceManager
      * @param groupName
      * @return Group object
      */
-    Group getEnabledGroup(String groupName);
+    Group getEnabledGroup(String groupName) throws Exception;
 
     /**
      * Get active user by user name
@@ -54,7 +54,7 @@ public interface UserPersistenceManager
      * @param userName
      * @return User object
      */
-    User getEnabledUser(String userName);
+    User getEnabledUser(String userName) throws Exception;
 
     /**
      * TODO Add javadoc for this method
@@ -62,7 +62,7 @@ public interface UserPersistenceManager
      * @param groupId
      * @return Group object
      */
-    Group getGroup(long groupId);
+    Group getGroup(long groupId) throws Exception;
 
     /**
      * Get the groups this user belongs to
@@ -70,7 +70,7 @@ public interface UserPersistenceManager
      * @param user User object
      * @return Group array
      */
-    Group[] getGroups(User user);
+    Group[] getGroups(User user) throws Exception;
 
     /**
      * TODO Add javadoc for this method
@@ -78,7 +78,7 @@ public interface UserPersistenceManager
      * @param userId
      * @return User object
      */
-    User getUser(long userId);
+    User getUser(long userId) throws Exception;
 
     /**
      * TODO Add javadoc for this method
@@ -86,7 +86,7 @@ public interface UserPersistenceManager
      * @param user
      * @param group
      */
-    void joinGroup(User user, Group group);
+    void joinGroup(User user, Group group) throws Exception;
 
     /**
      * TODO Add javadoc for this method
@@ -94,12 +94,12 @@ public interface UserPersistenceManager
      * @param user
      * @param group
      */
-    void leaveGroup(User user, Group group);
+    void leaveGroup(User user, Group group) throws Exception;
 
     /**
      * TODO Add javadoc for this method
      *
      * @param user
      */
-    void saveUser(User user);
+    void saveUser(User user) throws Exception;
 }

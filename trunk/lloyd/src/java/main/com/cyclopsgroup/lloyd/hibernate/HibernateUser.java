@@ -14,17 +14,16 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.lloyd;
+package com.cyclopsgroup.lloyd.hibernate;
+
+import com.cyclopsgroup.lloyd.spi.DefaultUser;
 
 /**
- * TODO Add javadoc for this class
+ * Hibernate user entity
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface PermissionPersistenceManager
+public class HibernateUser extends DefaultUser
 {
 
-    void addPermission2Role(String permission, Role role) throws Exception;
-
-    Role addRole(String roleName) throws Exception;
 }

@@ -17,14 +17,11 @@
 package com.cyclopsgroup.lloyd;
 
 /**
- * TODO Add javadoc for this class
+ * Persistence state
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface PermissionPersistenceManager
+public interface PersistenceState
 {
 
-    void addPermission2Role(String permission, Role role) throws Exception;
-
-    Role addRole(String roleName) throws Exception;
 }

@@ -36,6 +36,14 @@ public interface SecurityManager
     boolean accept(RuntimeUser runtimeUser, Asset asset);
 
     /**
+     * Get permission persistence manager
+     * @param state State object 
+     * @return
+     */
+    PermissionPersistenceManager getPermissionPersistenceManager(
+            PersistenceState state);
+
+    /**
      * Get runtime user object
      *
      * @param runtimeId Runtime user id
@@ -45,10 +53,11 @@ public interface SecurityManager
 
     /**
      * Get user manager interface
+     * @param state State marking object
      *
      * @return User manager instanceF
      */
-    UserPersistenceManager getUserManager();
+    UserPersistenceManager getUserPersistenceManager(PersistenceState state);
 
     /**
      * Start runtime user with given user
