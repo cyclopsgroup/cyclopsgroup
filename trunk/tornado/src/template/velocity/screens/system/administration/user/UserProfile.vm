@@ -54,12 +54,15 @@
     	</tr>
     	#if($user.isDisabled)
     		<tr>
-    			<td colspan="2">User is deleted</td>
+    			<td colspan="2"><font color="red">User is deleted</font></td>
     		</tr>
     	#end
     	<tr>
     		<td colspan="2" class="bottom">
     			<input type="submit" value="Save Change" name="eventsubmit_doSaveprof"/>
+    			#if(!$user.isDisabled)
+    				<input type="submit" value="Delete" name="eventsubmit_doDelete"/>
+    			#end
     		</td>
     	</tr>
     	</form>

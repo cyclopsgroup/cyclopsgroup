@@ -1,0 +1,44 @@
+<h2>Create New User</h2>
+<table width="100%">
+	<tr>
+		<td colspan="2" class="title">Input User Information</td>
+	</tr>
+	<form method="post" action="$link.setAction("system.administration.UserAction").setPage("system,administration,user,CreateNew.vm")">
+	<tr>
+		<td>Account Name:</td>
+		<td><input type="text" name="user_name"/></td>
+	</tr>
+	<tr>
+		<td>Password:</td>
+		<td><input type="password" name="password"/></td>
+	</tr>
+	<tr>
+		<td>Confirm Password:</td>
+		<td><input type="password" name="password"/></td>
+	</tr>
+	<tr>
+		<td>Full Name:</td>
+		<td>
+			<input type="text" size="15" name="first_name"/>
+			<input type="text" size="5" name="middle_name"/>
+			<input type="text" size="15" name="last_name"/>
+		</td>
+	</tr>
+	<tr>
+		<td>Email:</td>
+		<td><input type="text" name="email" size="30"/></td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td rowspan="2"><textarea name="description" cols="40" rows="4"></textarea></td>
+	</tr>
+	<tr>
+		<td>&#32;</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Create" name="eventsubmit_doCreate"/>
+		</td>
+	</tr>
+	</form>
+</table>

@@ -1,0 +1,90 @@
+<h2>Permissions</h2>
+<table width="100%">
+	<tr>
+		<td colspan="2" class="title">Input Account Name</td>
+	</tr>
+	<form method="get" action="$link.setPage("system,administration,user,Permissions.vm")">
+	<tr>
+		<td>Account Name:</td>
+		<td><input type="text" name="user_name" value="$!userName"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Display"/>
+		</td>
+	</tr>
+	</form>
+</table>
+#if($user)
+    <table width="100%">
+    	<form method="post" action="$link.setAction("system.administration.PermissionAction").setPage("system,administration,user,Permissions.vm")">
+    	<input type="hidden" name="owner_type" value="U"/>
+    	<input type="hidden" name="owner_name" value="$user.userName"/>
+    	<input type="hidden" name="is_role" value="false"/>
+    	<tr>
+    		<td colspan="2" class="title">Permissions</td>
+    	</tr>
+    	#if(!$permissions.isEmpty())
+        	<tr>
+        		<th/>
+        		<th>Permission Expression</th>
+        	</tr>
+        	#foreach($permission in $permissions)
+        		<tr #xbgcolor()>
+        			<td><input type="checkbox" name="acl_id" value="$permission.aclId"/></td>
+        			<td>$permission.permission</td>
+        		</tr>
+        	#end
+        #end
+    	<tr>
+    		<td colspan="2" class="bottom">
+    			Accredit new permission
+    			<input type="text" size="30" name="expression"/>
+    			<input type="submit" value="Accredit" name="eventsubmit_doAccredit"/>
+    			#if(!$permissions.isEmpty())
+    				<input type="submit" value="Withdraw" name="eventsubmit_doWithdraw"/>
+    			#end
+    		</td>
+    	</tr>
+    	</form>
+    </table>
+    <table width="100%">
+    	<form method="post" action="$link.setAction("system.administration.PermissionAction").setPage("system,administration,user,Permissions.vm")">
+    	<input type="hidden" name="owner_type" value="U"/>
+    	<input type="hidden" name="owner_name" value="$user.userName"/>
+    	<input type="hidden" name="is_role" value="true"/>
+    	<tr>
+    		<td colspan="2" class="title">Roles</td>
+    	</tr>
+    	#if(!$roles.isEmpty())
+        	<tr>
+        		<th/>
+        		<th>Role Name</th>
+        	</tr>
+        	#foreach($role in $roles)
+        		<tr #xbgcolor()>
+        			<td><input type="checkbox" name="acl_id" value="$role.aclId"/></td>
+        			<td>$role.permission</td>
+        		</tr>
+        	#end
+        #end
+    	<tr>
+    		<td colspan="2" class="bottom">
+    			Accredit new permission
+    			#if(!$otherRoles.isEmpty())
+    				Accredit role
+    				<select name="expression">
+    					#foreach($role in $otherRoles)
+    						<option value="$role.roleName">$role.roleName</option>
+    					#end
+    				</select>
+    				<input type="submit" value="Accredit" name="eventsubmit_doAccredit"/>
+    			#end
+    			#if(!$roles.isEmpty())
+    				<input type="submit" value="Withdraw" name="eventsubmit_doWithdraw"/>
+    			#end
+    		</td>
+    	</tr>
+    	</form>
+    </table>
+#end

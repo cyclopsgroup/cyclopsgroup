@@ -13,6 +13,10 @@
 		<td><input type="text" name="keyword" size="0" value="$!keyword"/></td>
 	</tr>
 	<tr>
+		<td>Including Deleted?</td>
+		<td><input type="checkbox" name="including_deleted" value="true"#if($includingDeleted) checked="checked" #end/></td>
+	</tr>
+	<tr>
 		<td colspan="2" class="bottom">
 			<input type="submit" value="Search"/>
 		</td>
@@ -28,7 +32,7 @@
 			<th>Account Name</th>
 			<th>Full Name</th>
 			<th>Email</th>
-			<th>System</th>
+			<th>Deleted</th>
 			<th>Change Password</th>
 			<th>Groups</th>
 			<th>Permission and Roles</th>
@@ -38,7 +42,7 @@
 				<td><a href="$link.setPage("system,administration,user,UserProfile.vm").addPathInfo("user_name", $user.userName)" title="Profile">$user.userName</a></td>
 				<td>$user.fullName</td>
 				<td>$user.email</td>
-				<td>$user.isSystem</td>
+				<td>$user.isDisabled</td>
 				<td><a href="$link.setPage("system,administration,user,ChangePassword.vm").addPathInfo("user_name", $user.userName)" title="Change Password">GO</a></td>
 				<td><a href="$link.setPage("system,administration,user,Groups.vm").addPathInfo("user_name", $user.userName)" title="Change Groups">GO</a></td>
 				<td><a href="$link.setPage("system,administration,user,Permissions.vm").addPathInfo("user_name", $user.userName)" title="Permission and Roles">GO</a></td>

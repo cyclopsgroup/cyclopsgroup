@@ -42,10 +42,12 @@ public class UserBroker extends AbstractObjectBroker {
     /** Search user by user name of key word
      * @param name Account name, first name, middle name or last name, or part of them
      * @param keyword Email or description or part of them
+     * @param includingDeleted Whether or not including deleted records
      * @return List of User objects
      * @throws Exception TorqueException actually
      */
-    public List search(String name, String keyword) throws Exception {
+    public List search(String name, String keyword, boolean includingDeleted)
+        throws Exception {
         Criteria crit = new Criteria();
         if (!StringUtils.isEmpty(name)) {
             String part = "%" + name + "%";
@@ -66,6 +68,9 @@ public class UserBroker extends AbstractObjectBroker {
             Criteria.Criterion description =
                 crit.getNewCriterion(UserPeer.DESCRIPTION, part, Criteria.LIKE);
             crit.and(email.or(description));
+        }
+        if (!includingDeleted) {
+            crit.and(UserPeer.IS_DISABLED, false);
         }
         return query(crit);
     }

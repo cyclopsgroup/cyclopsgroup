@@ -27,11 +27,14 @@ public class Search extends Screen {
         ctx.put("userName", userName);
         String keyword = params.getString("keyword");
         ctx.put("keyword", keyword);
+        boolean includingDeleted =
+            params.getBoolean("including_deleted", false);
+        ctx.put("includingDeleted", Boolean.valueOf(includingDeleted));
         if (StringUtils.isEmpty(userName) && StringUtils.isEmpty(keyword)) {
             data.setMessage("Please input search hint");
             return;
         }
         UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
-        ctx.put("users", ub.search(userName, keyword));
+        ctx.put("users", ub.search(userName, keyword, includingDeleted));
     }
 }

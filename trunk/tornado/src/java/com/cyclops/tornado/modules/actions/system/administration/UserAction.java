@@ -51,4 +51,44 @@ public class UserAction extends Action {
         ub.save(user);
         data.setMessage("User profile [" + user.getUserName() + "] is updated");
     }
+    /** Method doCreate()
+     * @param data RunData object as input
+     * @param ctx TemplateContext as output
+     * @throws Exception From broker objects
+     */
+    public void doCreate(RunData data, TemplateContext ctx) throws Exception {
+        ParameterParser params = data.getParameters();
+        UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
+        String userName = params.getString("user_name");
+        User existed = ub.retrieveByName(userName);
+        if (existed != null) {
+            data.setMessage("User [" + userName + "] already exist");
+            return;
+        }
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(params.getString("password"));
+        user.setFirstName(params.getString("first_name"));
+        user.setMiddleName(params.getString("middle_name"));
+        user.setLastName(params.getString("last_name"));
+        user.setEmail(params.getString("email"));
+        user.setDescription(params.getString("description"));
+        ub.save(user);
+        data.setMessage("User [" + userName + "] created");
+    }
+    /** Method doDelete()
+     * @param data RunData object as input
+     * @param ctx TemplateContext as output
+     * @throws Exception From broker objects
+     */
+    public void doDelete(RunData data, TemplateContext ctx) throws Exception {
+        int id = data.getParameters().getInt("user_id");
+        UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
+        User user = (User) ub.retrieveByPK(id);
+        if (user != null) {
+            user.setIsDisabled(true);
+            ub.save(user);
+            data.setMessage("User [" + user.getUserName() + "] deleted.");
+        }
+    }
 }
