@@ -25,7 +25,13 @@ package com.cyclopsgroup.jlone;
  */
 public interface Container extends Content
 {
+    /** Empty container array */
     Content[] EMPTY_ARRAY = new Content[0];
 
+    /**
+     * Get all contents in this container
+     *
+     * @return Array of content
+     */
     Content[] getContents();
 }

@@ -25,9 +25,26 @@ package com.cyclopsgroup.jlone.persistence;
  */
 public interface PersistenceManager
 {
+    /**
+     * Get root data document
+     *
+     * @return Data document object
+     */
     DataDocument getDataDocument();
 
+    /**
+     * Get data document with given unique id
+     *
+     * @param id Unique id
+     * @return Data document object
+     */
     DataDocument load(long id);
 
-    DataDocument load(String fullPath);
+    /**
+     * Get data document with given path
+     *
+     * @param path Full path of content
+     * @return Data document object
+     */
+    DataDocument load(String path);
 }

@@ -25,11 +25,31 @@ package com.cyclopsgroup.jlone;
  */
 public interface ContentMetadata
 {
+    /**
+     * Get unique id of this content
+     *
+     * @return Long id of content
+     */
     long getId();
 
+    /**
+     * Get associated content manager object
+     *
+     * @return Content manager object
+     */
     ContentManager getManager();
 
+    /**
+     * Get container of this content
+     *
+     * @return Container of this content
+     */
     Container getParent();
 
+    /**
+     * Get full absolute path of this content
+     *
+     * @return Full path of content
+     */
     String getPath();
 }

@@ -25,5 +25,10 @@ package com.cyclopsgroup.jlone.persistence;
  */
 public interface DataDocument extends DataNode
 {
+    /**
+     * Get content type name
+     *
+     * @return Content type name
+     */
     String getTypeName();
 }

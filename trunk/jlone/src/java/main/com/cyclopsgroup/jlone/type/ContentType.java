@@ -25,7 +25,17 @@ package com.cyclopsgroup.jlone.type;
  */
 public interface ContentType
 {
+    /**
+     * Get factory of this content
+     *
+     * @return Content factory object
+     */
     ContentFactory getFactory();
 
+    /**
+     * Get full name of this content type
+     *
+     * @return Full name of content type
+     */
     String getName();
 }

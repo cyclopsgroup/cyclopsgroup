@@ -27,11 +27,34 @@ import com.cyclopsgroup.jlone.type.ContentType;
  */
 public interface ContentManager
 {
+    /**
+     * Get content by its unique id
+     *
+     * @param id Long unique id
+     * @return Content object
+     */
     Content getContent(long id);
 
+    /**
+     * Get content by its full path
+     *
+     * @param contentPath Full content path
+     * @return Content instance
+     */
     Content getContent(String contentPath);
 
+    /**
+     * Get root container content
+     *
+     * @return Root container content
+     */
     Container getRootContainer();
 
+    /**
+     * Get content type by its name
+     *
+     * @param typeName Full name of content type
+     * @return Content type object
+     */
     ContentType getType(String typeName);
 }

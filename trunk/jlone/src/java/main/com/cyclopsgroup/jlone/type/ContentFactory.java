@@ -21,7 +21,7 @@ import com.cyclopsgroup.jlone.Context;
 import com.cyclopsgroup.jlone.persistence.DataDocument;
 
 /**
- * TODO Add javadoc for class
+ * Generic content factory interface
  * 
  * @author <a href="mailto:jiiiaqi@yahoo.com">Jiaqi Guo </a>
  * 
@@ -29,7 +29,20 @@ import com.cyclopsgroup.jlone.persistence.DataDocument;
  */
 public interface ContentFactory
 {
+    /**
+     * Create new content from context and given id
+     *
+     * @param id Long id value
+     * @param context Context
+     * @return Created content object
+     */
     Content create(long id, Context context);
 
+    /**
+     * Load content from given DataDocument
+     *
+     * @param document DataDocument object
+     * @return Content object
+     */
     Content load(DataDocument document);
 }

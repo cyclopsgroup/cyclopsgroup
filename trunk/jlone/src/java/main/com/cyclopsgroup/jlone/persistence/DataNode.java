@@ -28,17 +28,53 @@ import java.io.OutputStream;
  */
 public interface DataNode
 {
+    /** Empty array */
     DataNode[] EMPTY_ARRAY = new DataNode[0];
-
+    
+    /**
+     * Get child node with given name
+     *
+     * @param fieldName Child name
+     * @return Child node object
+     */
     DataNode getChild(String fieldName);
 
+    /**
+     * Get child nodes with given name
+     *
+     * @param fieldName Name of the children
+     * @return Array of child nodes
+     */
     DataNode[] getChildren(String fieldName);
 
+    /**
+     * Get input stream of value of a field
+     *
+     * @param fieldName Name of the field
+     * @return InputStream of value
+     */
     InputStream getFieldAsStream(String fieldName);
 
+    /**
+     * Get string value of field
+     *
+     * @param fieldName Name of the field
+     * @return String value of the field
+     */
     String getFieldAsString(String fieldName);
 
+    /**
+     * Set string value of the field
+     *
+     * @param fieldName Field name
+     * @param value String value
+     */
     void setField(String fieldName, String value);
 
+    /**
+     * Get the output stream of the field value to set field value
+     *
+     * @return OutputStream of value of the field
+     */
     OutputStream setFieldAsStream();
 }
