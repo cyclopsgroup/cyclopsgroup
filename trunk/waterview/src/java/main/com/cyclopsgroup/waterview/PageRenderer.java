@@ -16,6 +16,10 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.io.PrintWriter;
+
+import com.cyclopsgroup.cyclib.Context;
+
 /**
  * Interface of page renderer
  * 
@@ -42,11 +46,13 @@ public interface PageRenderer
     /**
      * Render page to runtime
      *
+     * @param context Context to render the page
+     * @param output PrintWriter to write the page
      * @param packageName Page resource package name
-     * @param runtime UI Runtime object
      * @param module Module path without page extension
+     * @param runtime UI Runtime object
      * @throws Exception Throw it out
      */
-    void render(UIRuntime runtime, String packageName, String module)
-            throws Exception;
+    void render(Context context, PrintWriter output, String packageName,
+            String module, UIRuntime runtime) throws Exception;
 }

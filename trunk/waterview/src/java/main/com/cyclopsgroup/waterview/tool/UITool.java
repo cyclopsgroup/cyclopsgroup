@@ -34,7 +34,7 @@ public interface UITool
     void dispose(UIRuntime runtime) throws Exception;
 
     /**
-     * TODO Add javadoc for this method
+     * Name of tool
      *
      * @return Tool name
      */
@@ -49,7 +49,7 @@ public interface UITool
     void initialize(UIRuntime runtime) throws Exception;
 
     /**
-     * TODO Add javadoc for this method
+     * Set name of the tool
      *
      * @param toolName Tool name
      */

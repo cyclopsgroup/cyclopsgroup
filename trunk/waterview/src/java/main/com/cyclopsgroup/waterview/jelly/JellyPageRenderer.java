@@ -4,6 +4,7 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -178,19 +179,18 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.io.PrintWriter, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void render(UIRuntime runtime, String packageName, String module)
-            throws Exception
+    public void render(Context context, PrintWriter output, String packageName,
+            String module, UIRuntime runtime) throws Exception
     {
         Context uic = runtime.getUIContext();
 
-        XMLOutput output = (XMLOutput) uic.get("jellyOutput");
-        if (output == null)
+        XMLOutput jellyOutput = (XMLOutput) uic.get("jellyOutput");
+        if (jellyOutput == null)
         {
-            output = XMLOutput.createXMLOutput(runtime.getHttpServletResponse()
-                    .getOutputStream());
-            uic.put("jellyOutput", output);
+            jellyOutput = XMLOutput.createXMLOutput(output);
+            uic.put("jellyOutput", jellyOutput);
         }
 
         JellyContext oldJellyContext = (JellyContext) uic.get("jellyContext");
@@ -216,7 +216,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             uic.put("jellyContext", jc);
             try
             {
-                script.run(jc, output);
+                script.run(jc, jellyOutput);
                 output.flush();
             }
             catch (Exception e)

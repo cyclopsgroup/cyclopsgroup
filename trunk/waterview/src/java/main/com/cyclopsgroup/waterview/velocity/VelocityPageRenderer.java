@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
@@ -24,8 +24,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.context.Context;
 
+import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.cyclib.velocity.VelocityComponent;
 import com.cyclopsgroup.cyclib.velocity.VelocityContextAdapter;
 import com.cyclopsgroup.waterview.PageRenderer;
@@ -82,33 +82,14 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.io.PrintWriter, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void render(UIRuntime runtime, String packageName, String module)
-            throws Exception
+    public void render(Context context, PrintWriter output, String packageName,
+            String module, UIRuntime runtime) throws Exception
     {
-        Context vc = (Context) runtime.getUIContext().get("velocityContext");
-        if (vc == null)
-        {
-            vc = new VelocityContextAdapter(runtime.getUIContext());
-            runtime.getUIContext().put("velocityContext", vc);
-        }
+        VelocityContextAdapter vc = new VelocityContextAdapter(context);
         String templatePath = getTemplatePath(packageName, module);
-        OutputStreamWriter output = (OutputStreamWriter) runtime.getUIContext()
-                .get("velocityOutput");
-        boolean createNew = false;
-        if (output == null)
-        {
-            createNew = true;
-            output = new OutputStreamWriter(runtime.getHttpServletResponse()
-                    .getOutputStream());
-            runtime.getUIContext().put("velocityOutput", output);
-        }
         velocityComponent.mergeTemplate(templatePath, vc, output);
-        if (createNew)
-        {
-            output.flush();
-        }
     }
 
     /**

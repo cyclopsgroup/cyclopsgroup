@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.tool;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * TODO Add javadoc for this class
+ * Listener to listen each request
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
@@ -27,7 +27,7 @@ public interface RequestListener
 {
 
     /**
-     * TODO Add javadoc for this method
+     * Called after the request
      *
      * @param runtime
      * @throws Exception
@@ -35,7 +35,7 @@ public interface RequestListener
     void disposeForRequest(UIRuntime runtime) throws Exception;
 
     /**
-     * TODO Add javadoc for this method
+     * Called before the request
      *
      * @param runtime
      * @throws Exception

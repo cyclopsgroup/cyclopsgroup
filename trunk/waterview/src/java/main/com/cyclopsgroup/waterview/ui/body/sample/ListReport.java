@@ -34,7 +34,6 @@ public class ListReport extends Page
      */
     protected void build(UIRuntime runtime) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        //It's just a test
     }
 }

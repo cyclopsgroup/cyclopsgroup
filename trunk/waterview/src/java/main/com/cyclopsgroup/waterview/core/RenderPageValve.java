@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.io.PrintWriter;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -46,6 +47,9 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
      */
     public class RuntimeRenderer implements RuntimePageRenderer
     {
+
+        private PrintWriter output;
+
         private PageRenderer renderer;
 
         private UIRuntime runtime;
@@ -53,11 +57,12 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         private String suffix;
 
         private RuntimeRenderer(PageRenderer renderer, UIRuntime runtime,
-                String extension)
+                String extension, PrintWriter output)
         {
             this.renderer = renderer;
             this.runtime = runtime;
             this.suffix = '.' + extension;
+            this.output = output;
             runtime.getUIContext().put(NAME, this);
         }
 
@@ -81,7 +86,9 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 if (renderer.exists(packageName, path))
                 {
                     found = true;
-                    renderer.render(runtime, packageName, path);
+                    //TODO: Change it to use new context soon
+                    renderer.render(runtime.getUIContext(), output,
+                            packageName, path, runtime);
                     break;
                 }
                 String[] parts = StringUtils.split(page, '/');
@@ -93,7 +100,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                     {
                         found = true;
                         moduleResolver.resolve(runtime, path);
-                        renderer.render(runtime, packageName, path);
+                        renderer.render(runtime.getUIContext(), output,
+                                packageName, path, runtime);
                         break;
                     }
                     parts[j] = null;
@@ -173,8 +181,12 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         }
         runtime.getHttpServletResponse().setContentType(
                 renderer.getContentType());
-        RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, extension);
+        PrintWriter output = new PrintWriter(runtime.getHttpServletResponse()
+                .getOutputStream());
+        RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, extension,
+                output);
         r.render(defaultCategory, page);
+        output.flush();
         invokeNext(runtime);
     }
 
