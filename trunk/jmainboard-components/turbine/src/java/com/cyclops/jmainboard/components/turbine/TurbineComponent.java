@@ -197,16 +197,17 @@ package com.cyclops.jmainboard.components.turbine;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.ConfigurationUtils;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.EngineFactory;
 import com.cyclops.jmainboard.impl.DefaultService;
 
 /** Jakarta Turbine service for jmainboard
@@ -228,17 +229,22 @@ public class TurbineComponent extends DefaultService {
         return instance;
     }
 
-    private File turbineResources = new File(
-            "WEB-INF/conf/TurbineResources.properties");
+    private String turbineResources;
 
-    private void addProperties(BaseConfiguration conf,
-            PropertiesConfiguration props) {
+    private void addProperties(
+        BaseConfiguration conf,
+        PropertiesConfiguration props) {
         for (Iterator i = props.getKeys(); i.hasNext();) {
             String key = (String) i.next();
-            String[] values = props.getStringArray(key);
-            for (int j = 0; j < values.length; j++) {
-                String value = values[j];
-                conf.addProperty(key, value);
+            HashSet values = new HashSet();
+            CollectionUtils.addAll(values, props.getStringArray(key));
+            HashSet oldValues = new HashSet();
+            CollectionUtils.addAll(oldValues, conf.getStringArray(key));
+            for (Iterator j = values.iterator(); j.hasNext();) {
+                String value = (String) j.next();
+                if (!oldValues.contains(value)) {
+                    conf.addProperty(key, value);
+                }
             }
         }
     }
@@ -267,12 +273,13 @@ public class TurbineComponent extends DefaultService {
     /** Getter method for property
      * @return Returns the turbineResources.
      */
-    public File getTurbineResources() {
+    public String getTurbineResources() {
         return turbineResources;
     }
 
-    private void removeProperties(BaseConfiguration conf,
-            PropertiesConfiguration props) {
+    private void removeProperties(
+        BaseConfiguration conf,
+        PropertiesConfiguration props) {
         for (Iterator i = props.getKeys(); i.hasNext();) {
             String key = (String) i.next();
             String[] values = props.getStringArray(key);
@@ -299,7 +306,7 @@ public class TurbineComponent extends DefaultService {
     /** Setter method for property
      * @param tr The turbineResources to set.
      */
-    public void setTurbineResources(File tr) {
+    public void setTurbineResources(String tr) {
         turbineResources = tr;
     }
 
@@ -307,40 +314,59 @@ public class TurbineComponent extends DefaultService {
      * @see com.cyclops.jmainboard.Service#startup()
      */
     public void startup() {
-        String defaultTRPath = getProperties().getProperty(
-                EngineFactory.BASEDIR)
-                + "/WEB-INF/conf/TurbineResources.properties";
-        String trPath = getProperties().getProperty("turbine.tr.path",
-                defaultTRPath);
-        setTurbineResources(new File(trPath));
-        String removedTr = getProperties().getProperty("tr.removed.file",
+        String trPath =
+            getProperties().getProperty(
+                "turbine.tr.path",
+                "/WEB-INF/conf/TurbineResources.properties");
+        setTurbineResources(trPath);
+        String removedTr =
+            getProperties().getProperty(
+                "tr.removed.file",
                 "tr-removed.properties");
         String tr = getProperties().getProperty("tr.file", "tr.properties");
         BaseConfiguration conf = new BaseConfiguration();
         for (Iterator i = getClientComponents().iterator(); i.hasNext();) {
             Component client = (Component) i.next();
-            File removedTrFile = new File(getComponentHome(), removedTr);
+            File removedTrFile = new File(client.getComponentHome(), removedTr);
             if (removedTrFile.isFile()) {
                 try {
-                    PropertiesConfiguration removedProperties = new PropertiesConfiguration(
+                    PropertiesConfiguration removedProperties =
+                        new PropertiesConfiguration(
                             removedTrFile.getAbsolutePath());
                     removeProperties(conf, removedProperties);
+                    getLog().debug(
+                        "Properties in "
+                            + removedTrFile.getAbsolutePath()
+                            + " are removed from TurbineResources properties");
                 } catch (Exception e) {
                     getLog().warn("Remove turbine properties error", e);
                 }
             }
-            File trFile = new File(getComponentHome(), tr);
+            File trFile = new File(client.getComponentHome(), tr);
             if (trFile.isFile()) {
                 try {
-                    PropertiesConfiguration trProperties = new PropertiesConfiguration(
-                            trFile.getAbsolutePath());
+                    PropertiesConfiguration trProperties =
+                        new PropertiesConfiguration(trFile.getAbsolutePath());
                     addProperties(conf, trProperties);
+                    getLog().debug(
+                        "Properties in "
+                            + trFile.getAbsolutePath()
+                            + " are added into TurbineResources properties");
                 } catch (Exception e) {
                     getLog().warn("Add properties error", e);
                 }
             }
         }
-        dumpConfiguration(conf, getTurbineResources());
+        String servletHome =
+            getProperties().getProperty(
+                "servlet.home",
+                new File("").getAbsolutePath());
+        File targetTRFile =
+            new File(new File(servletHome), getTurbineResources());
+        dumpConfiguration(conf, targetTRFile);
+        getLog().debug(
+            "TurbineResources properties are dumped into file "
+                + targetTRFile.getAbsolutePath());
         instance = this;
     }
 }

@@ -17,8 +17,8 @@
             <id>commons-configuration</id>
             <version>20040121.140929</version>
             <url>http://jakarta.apache.org/commons/configuration</url>
-            </dependency>
-         <dependency>
+        </dependency>
+        <dependency>
             <id>commons-lang</id>
             <version>1.0.1</version>
             <url>http://jakarta.apache.org/commons/lang</url>
@@ -31,7 +31,13 @@
         <dependency>
             <id>jmainboard</id>
             <version>SNAPSHOT</version>
-            <url>http://cyclops-group.sourceforge.net/project/jmainboard</url>
+            <url>http://cyclops-group.sourceforge.net/projects/jmainboard</url>
+        </dependency>
+        <dependency>
+            <groupId>jmainboard</groupId>
+            <artifactId>jmainboard-log4j</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://cyclops-group.sourceforge.net/projects/jmainboard/components/log4j</url>
         </dependency>
         <dependency>
             <id>junit</id>

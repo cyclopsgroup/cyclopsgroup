@@ -196,6 +196,7 @@ package com.cyclops.jmainboard.components.log4j;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Properties;
 
 import org.apache.log4j.PropertyConfigurator;
 
@@ -216,14 +217,20 @@ public class Log4jComponent extends DefaultService {
      * @see com.cyclops.jmainboard.Service#startup()
      */
     public void startup() {
-        String log4jResource = getProperties().getProperty("descriptor",
-                "log4j.properties");
+        String log4jResource =
+            getProperties().getProperty("descriptor", "log4j.properties");
         for (Iterator i = getClientComponents().iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             try {
                 URL descriptor = component.getResource(log4jResource);
                 if (descriptor != null) {
-                    PropertyConfigurator.configure(descriptor);
+                    Properties p = new Properties();
+                    p.putAll(component.getProperties());
+                    p.load(descriptor.openStream());
+                    PropertyConfigurator.configure(p);
+                    getLog().debug(
+                        descriptor.getPath()
+                            + " is accepted as a log4j configuration file");
                 }
             } catch (Exception e) {
                 getLog().warn("Can't load component", e);

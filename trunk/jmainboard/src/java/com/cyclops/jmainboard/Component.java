@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Properties;
 
@@ -213,6 +214,11 @@ public interface Component {
 
     /** Empty array of component */
     Component[] EMPTY_ARRAY = new Component[0];
+
+    /** Get home directory of this component
+     * @return Home directory of this component
+     */
+    File getComponentHome();
 
     /** Get the components this component depends on
      * @return Dependency components
