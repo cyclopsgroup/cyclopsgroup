@@ -16,12 +16,9 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
@@ -43,25 +40,18 @@ public interface UIRuntime
     List getActions();
 
     /**
-     * Get original servlet request object
+     * Get base url for this waterview application
      * 
-     * @return HttpServletRequest object
+     * @return Base url
      */
-    HttpServletRequest getHttpServletRequest();
+    String getApplicationBaseUrl();
 
     /**
-     * Method getHttpServletResponse() in class Runtime
+     * Get content type of request
      * 
-     * @return HttpServletResponse object
+     * @return Content type of request
      */
-    HttpServletResponse getHttpServletResponse();
-
-    /**
-     * Method getHttpSession() in class Runtime
-     * 
-     * @return HttpSession object
-     */
-    HttpSession getHttpSession();
+    String getContentType();
 
     /**
      * Method getLocale() in class WebRuntime
@@ -71,11 +61,25 @@ public interface UIRuntime
     Locale getLocale();
 
     /**
+     * Get output print writer object
+     * 
+     * @return PrintWriter object
+     */
+    PrintWriter getOutput();
+
+    /**
      * Method getRenderTemplate() in class WebRuntime
      * 
      * @return Render template
      */
     String getPage();
+
+    /**
+     * Base url for page
+     * 
+     * @return Base url for page
+     */
+    String getPageBaseUrl();
 
     /**
      * Get parameter parser for request parameters
@@ -85,6 +89,13 @@ public interface UIRuntime
     ValueParser getRequestParameters();
 
     /**
+     * Get path in request
+     * 
+     * @return Path in request
+     */
+    String getRequestPath();
+
+    /**
      * Method getComponentManager() in class UIRuntime
      * 
      * @return Service manager instance
@@ -92,11 +103,25 @@ public interface UIRuntime
     ServiceManager getServiceManager();
 
     /**
+     * Get context in session level
+     * 
+     * @return Context interface
+     */
+    Context getSessionContext();
+
+    /**
      * Get context for page rendering
      * 
      * @return Context interface
      */
     Context getUIContext();
+
+    /**
+     * Set content type for response
+     * 
+     * @param contentType Content type
+     */
+    void setContentType(String contentType);
 
     /**
      * Method setRenderTemplate() in class WebRuntime

@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.servlet;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.Enumeration;
 
 import javax.servlet.ServletConfig;
@@ -101,13 +100,11 @@ public class WaterviewServlet extends HttpServlet
     private void handleException(Throwable e, UIRuntime runtime)
             throws ServletException, IOException
     {
-        runtime.getHttpServletResponse().setContentType("text/html");
-        PrintStream out = new PrintStream(runtime.getHttpServletResponse()
-                .getOutputStream());
-        out.print("<html><body><pre>");
-        e.printStackTrace(out);
-        out.print("</pre></body></html>");
-        out.flush();
+        runtime.setContentType("text/html");
+        runtime.getOutput().print("<html><body><pre>");
+        e.printStackTrace(runtime.getOutput());
+        runtime.getOutput().print("</pre></body></html>");
+        runtime.getOutput().flush();
     }
 
     /**
@@ -165,6 +162,7 @@ public class WaterviewServlet extends HttpServlet
         }
         finally
         {
+            runtime.getOutput().flush();
             response.getOutputStream().flush();
             response.getOutputStream().close();
         }

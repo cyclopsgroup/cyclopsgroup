@@ -40,7 +40,7 @@ public class ParseURLValve extends Valve implements Configurable
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -57,18 +57,17 @@ public class ParseURLValve extends Valve implements Configurable
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void invoke(UIRuntime runtime) throws Exception
     {
-        String pathInfo = runtime.getHttpServletRequest().getPathInfo();
+        String pathInfo = runtime.getRequestPath();
         if (StringUtils.isEmpty(pathInfo))
         {
             pathInfo = defaultPage;
         }
-        String[] parts = StringUtils.split(runtime.getHttpServletRequest()
-                .getPathInfo(), '|');
+        String[] parts = StringUtils.split(pathInfo, '|');
         String page = null;
         for (int i = 0; i < parts.length; i++)
         {

@@ -16,13 +16,10 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
-import java.io.PrintWriter;
-
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.cyclib.Context;
@@ -54,13 +51,11 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
         return templatePath.toString();
     }
 
-    private LRUMap templateCache;
-
     private VelocityComponent velocityComponent;
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
      */
     public boolean exists(String packageName, String module)
@@ -71,7 +66,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.PageRenderer#getContentType()
      */
     public String getContentType()
@@ -80,21 +75,21 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.io.PrintWriter, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
+     * Override method render in super class of VelocityPageRenderer
+     * 
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void render(Context context, PrintWriter output, String packageName,
-            String module, UIRuntime runtime) throws Exception
+    public void render(Context context, String packageName, String module,
+            UIRuntime runtime) throws Exception
     {
         VelocityContextAdapter vc = new VelocityContextAdapter(context);
         String templatePath = getTemplatePath(packageName, module);
-        velocityComponent.mergeTemplate(templatePath, vc, output);
+        velocityComponent.mergeTemplate(templatePath, vc, runtime.getOutput());
     }
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
     public void service(ServiceManager serviceManager) throws ServiceException

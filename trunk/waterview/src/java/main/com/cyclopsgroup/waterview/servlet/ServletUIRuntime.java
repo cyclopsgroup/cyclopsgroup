@@ -16,13 +16,13 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
@@ -38,18 +38,25 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class ServletUIRuntime implements UIRuntime
 {
-
     private LinkedList actions = new LinkedList();
+
+    private String applicationBaseUrl;
 
     private HttpServletRequest httpServletRequest;
 
     private HttpServletResponse httpServletResponse;
 
+    private PrintWriter output;
+
     private String page;
 
-    private ServletRequestValueParser requestValueParser;
+    private String pageBaseUrl;
+
+    private RequestValueParserAdapter requestValueParser;
 
     private ServiceManager serviceManager;
+
+    private Context sessionContext;
 
     private Context uiContext;
 
@@ -66,8 +73,23 @@ public class ServletUIRuntime implements UIRuntime
     {
         httpServletRequest = request;
         httpServletResponse = response;
-        requestValueParser = new ServletRequestValueParser(request);
+        output = new PrintWriter(response.getOutputStream());
+        requestValueParser = new RequestValueParserAdapter(request);
+        sessionContext = new SessionContextAdapter(request.getSession());
         serviceManager = services;
+
+        StringBuffer sb = new StringBuffer(request.getScheme());
+        sb.append("://").append(request.getServerName());
+        if (request.getServerPort() != 80)
+        {
+            sb.append(':').append(request.getServerPort());
+        }
+        sb.append(request.getContextPath());
+        applicationBaseUrl = sb.toString();
+
+        sb.append(request.getServletPath());
+        pageBaseUrl = sb.toString();
+
         DefaultContext ctx = new DefaultContext();
         ctx.put("runtime", this);
         ctx.put("context", ctx);
@@ -88,34 +110,51 @@ public class ServletUIRuntime implements UIRuntime
     }
 
     /**
+     * Override method getBaseUrl in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getApplicationBaseUrl()
+     */
+    public String getApplicationBaseUrl()
+    {
+        return applicationBaseUrl;
+    }
+
+    /**
+     * Override method getContentType in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getContentType()
+     */
+    public String getContentType()
+    {
+        return httpServletRequest.getContentType();
+    }
+
+    /**
      * Override method getHttpServletRequest in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletRequest()
      */
-    public HttpServletRequest getHttpServletRequest()
-    {
-        return httpServletRequest;
-    }
+    /*
+     * public HttpServletRequest getHttpServletRequest() { return httpServletRequest; }
+     */
 
     /**
      * Override method getHttpServletResponse in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletResponse()
      */
-    public HttpServletResponse getHttpServletResponse()
-    {
-        return httpServletResponse;
-    }
+    /*
+     * public HttpServletResponse getHttpServletResponse() { return httpServletResponse; }
+     */
 
     /**
      * Override method getHttpSession in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getHttpSession()
      */
-    public HttpSession getHttpSession()
-    {
-        return getHttpServletRequest().getSession(true);
-    }
+    /*
+     * public HttpSession getHttpSession() { return getHttpServletRequest().getSession(true); }
+     */
 
     /**
      * Override method getLocale in super class of DefaultWebRuntime
@@ -124,7 +163,17 @@ public class ServletUIRuntime implements UIRuntime
      */
     public Locale getLocale()
     {
-        return getHttpServletRequest().getLocale();
+        return httpServletRequest.getLocale();
+    }
+
+    /**
+     * Override method getOutput in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getOutput()
+     */
+    public PrintWriter getOutput()
+    {
+        return output;
     }
 
     /**
@@ -138,6 +187,16 @@ public class ServletUIRuntime implements UIRuntime
     }
 
     /**
+     * Override method getPageBaseUrl in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getPageBaseUrl()
+     */
+    public String getPageBaseUrl()
+    {
+        return pageBaseUrl;
+    }
+
+    /**
      * Override method getRequestParameters in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getRequestParameters()
@@ -145,6 +204,16 @@ public class ServletUIRuntime implements UIRuntime
     public ValueParser getRequestParameters()
     {
         return requestValueParser;
+    }
+
+    /**
+     * Override method getRequestPath in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getRequestPath()
+     */
+    public String getRequestPath()
+    {
+        return httpServletRequest.getPathInfo();
     }
 
     /**
@@ -158,6 +227,16 @@ public class ServletUIRuntime implements UIRuntime
     }
 
     /**
+     * Override method getSessionContext in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getSessionContext()
+     */
+    public Context getSessionContext()
+    {
+        return sessionContext;
+    }
+
+    /**
      * Override method getUIContext in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
@@ -165,6 +244,16 @@ public class ServletUIRuntime implements UIRuntime
     public Context getUIContext()
     {
         return uiContext;
+    }
+
+    /**
+     * Override method setContentType in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#setContentType(java.lang.String)
+     */
+    public void setContentType(String contentType)
+    {
+        httpServletResponse.setContentType(contentType);
     }
 
     /**

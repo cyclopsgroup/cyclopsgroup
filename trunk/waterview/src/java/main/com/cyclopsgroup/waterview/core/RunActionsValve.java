@@ -55,7 +55,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -112,7 +112,8 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                     String packageName = packageNames[j];
                     if (resolver.exists(packageName, action))
                     {
-                        resolver.resolve(packageName, action, runtime);
+                        resolver.resolve(packageName, action, runtime, runtime
+                                .getUIContext());
                         break;
                     }
                 }
@@ -135,13 +136,11 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                         String packageName = packageNames[k];
                         if (resolver.exists(packageName, action))
                         {
-                            resolver.resolve(packageName, action, runtime);
+                            resolver.resolve(packageName, action, runtime,
+                                    runtime.getUIContext());
                             break;
                         }
                     }
-                    String module = StringUtils.chomp(action);
-                    moduleResolver.resolve(runtime, moduleCategory + '/'
-                            + module);
                 }
             }
         }

@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.io.PrintWriter;
-
 import com.cyclopsgroup.cyclib.Context;
 
 /**
@@ -29,7 +27,7 @@ public interface PageRenderer
 {
     /**
      * Test if the specified page is available
-     *
+     * 
      * @param packageName Page resource package name
      * @param module Module path without page extension
      * @return Existing or not
@@ -38,21 +36,20 @@ public interface PageRenderer
 
     /**
      * Get content type of rendered page
-     *
+     * 
      * @return String content type
      */
     String getContentType();
 
     /**
      * Render page to runtime
-     *
+     * 
      * @param context Context to render the page
-     * @param output PrintWriter to write the page
      * @param packageName Page resource package name
      * @param module Module path without page extension
      * @param runtime UI Runtime object
      * @throws Exception Throw it out
      */
-    void render(Context context, PrintWriter output, String packageName,
-            String module, UIRuntime runtime) throws Exception;
+    void render(Context context, String packageName, String module,
+            UIRuntime runtime) throws Exception;
 }

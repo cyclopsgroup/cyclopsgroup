@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview;
 
+import com.cyclopsgroup.cyclib.Context;
+
 /**
  * TODO Add javadoc for this class
  * 
@@ -26,7 +28,7 @@ public interface ActionResolver
 
     /**
      * TODO Add javadoc for this method
-     *
+     * 
      * @param packageName
      * @param moduleName
      * @return If this module class exist
@@ -35,12 +37,13 @@ public interface ActionResolver
 
     /**
      * TODO Add javadoc for this method
-     *
+     * 
      * @param packageName
      * @param moduelName
      * @param runtime
+     * @param context input and output context
      * @throws Exception
      */
-    void resolve(String packageName, String moduelName, UIRuntime runtime)
-            throws Exception;
+    void resolve(String packageName, String moduelName, UIRuntime runtime,
+            Context context) throws Exception;
 }

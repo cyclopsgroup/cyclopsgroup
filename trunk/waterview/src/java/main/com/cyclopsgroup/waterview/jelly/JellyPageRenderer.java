@@ -4,7 +4,6 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -84,7 +83,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
      */
     public boolean exists(String packageName, String module)
@@ -103,7 +102,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.PageRenderer#getContentType()
      */
     public String getContentType()
@@ -166,7 +165,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception
@@ -177,19 +176,19 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.io.PrintWriter, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
+     * Override method render in super class of JellyPageRenderer
+     * 
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.cyclib.Context, java.lang.String, java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void render(Context context, PrintWriter output, String packageName,
-            String module, UIRuntime runtime) throws Exception
+    public void render(Context context, String packageName, String module,
+            UIRuntime runtime) throws Exception
     {
         Context uic = runtime.getUIContext();
 
         XMLOutput jellyOutput = (XMLOutput) uic.get("jellyOutput");
         if (jellyOutput == null)
         {
-            jellyOutput = XMLOutput.createXMLOutput(output);
+            jellyOutput = XMLOutput.createXMLOutput(runtime.getOutput());
             uic.put("jellyOutput", jellyOutput);
         }
 
@@ -217,7 +216,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             try
             {
                 script.run(jc, jellyOutput);
-                output.flush();
+                runtime.getOutput().flush();
             }
             catch (Exception e)
             {

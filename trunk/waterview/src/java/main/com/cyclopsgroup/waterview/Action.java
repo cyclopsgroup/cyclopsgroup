@@ -21,7 +21,7 @@ package com.cyclopsgroup.waterview;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public abstract class Action implements UIModule
+public interface Action
 {
 
     /**
@@ -30,15 +30,5 @@ public abstract class Action implements UIModule
      * @param runtime Runtime data object
      * @throws Exception Throw it to container
      */
-    protected abstract void execute(UIRuntime runtime) throws Exception;
-
-    /**
-     * Override method process in super class of Action
-     * 
-     * @see com.cyclopsgroup.waterview.UIModule#process(com.cyclopsgroup.waterview.UIRuntime)
-     */
-    public void process(UIRuntime runtime) throws Exception
-    {
-        execute(runtime);
-    }
+    void execute(UIRuntime runtime) throws Exception;
 }

@@ -18,8 +18,6 @@ package com.cyclopsgroup.waterview.tool;
 
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.UIRuntime;
@@ -33,11 +31,11 @@ public class LinkTool extends BaseUITool
 {
     private static final String ENCODING = "UTF-8";
 
-    private String baseUrl;
-
-    private String contentBaseUrl;
+    private String applicationBaseUrl;
 
     private String currentPath;
+
+    private String pageBaseUrl;
 
     private String pageSeparator;
 
@@ -47,7 +45,7 @@ public class LinkTool extends BaseUITool
 
     /**
      * Add action module
-     *
+     * 
      * @param action Action path
      * @return Link tool itself
      */
@@ -58,7 +56,7 @@ public class LinkTool extends BaseUITool
 
     /**
      * Add generic module path
-     *
+     * 
      * @param module Module path
      * @return Link tool itself
      */
@@ -77,7 +75,7 @@ public class LinkTool extends BaseUITool
 
     /**
      * Add page module
-     *
+     * 
      * @param page Page path
      * @return Link tool itself
      */
@@ -88,7 +86,7 @@ public class LinkTool extends BaseUITool
 
     /**
      * Add parameter into query string
-     *
+     * 
      * @param name Parameter name
      * @param value Parameter value
      * @return Link itself
@@ -112,7 +110,7 @@ public class LinkTool extends BaseUITool
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.tool.UITool#dispose(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void dispose(UIRuntime runtime) throws Exception
@@ -125,7 +123,7 @@ public class LinkTool extends BaseUITool
      * Get resource url
      * 
      * $link.getResource("images/logo.gif") will return http://localhhost:8080/waterview/images/logo.gif
-     *
+     * 
      * @param content Resource position
      * @return Full resource url
      */
@@ -133,40 +131,31 @@ public class LinkTool extends BaseUITool
     {
         if (content.charAt(0) == '/')
         {
-            return contentBaseUrl + content;
+            return applicationBaseUrl + content;
         }
-        return contentBaseUrl + '/' + content;
+        return applicationBaseUrl + '/' + content;
     }
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.tool.UITool#initialize(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void initialize(UIRuntime runtime) throws Exception
     {
-        HttpServletRequest req = runtime.getHttpServletRequest();
-        StringBuffer sb = new StringBuffer(req.getScheme());
-        sb.append("://").append(req.getServerName());
-        if (req.getServerPort() != 80)
-        {
-            sb.append(':').append(req.getServerPort());
-        }
-        sb.append(req.getContextPath());
-        contentBaseUrl = sb.toString();
-        sb.append(req.getServletPath());
-        baseUrl = sb.toString();
-        currentPath = req.getPathInfo();
+        applicationBaseUrl = runtime.getApplicationBaseUrl();
+        pageBaseUrl = runtime.getPageBaseUrl();
+        currentPath = runtime.getRequestPath();
     }
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     public String toString()
     {
-        StringBuffer ret = new StringBuffer(baseUrl);
+        StringBuffer ret = new StringBuffer(pageBaseUrl);
         if (path == null)
         {
             ret.append(currentPath);

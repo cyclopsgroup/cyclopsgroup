@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -64,7 +62,7 @@ public class PopulateToolsValve extends Valve implements Configurable
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -114,21 +112,20 @@ public class PopulateToolsValve extends Valve implements Configurable
     private UITool createSessionTool(UIRuntime runtime, ToolDef def)
             throws Exception
     {
-        HttpSession session = runtime.getHttpServletRequest().getSession();
         String name = "waterview_tool_" + def.name;
-        UITool tool = (UITool) session.getAttribute(name);
+        UITool tool = (UITool) runtime.getSessionContext().get(name);
         if (tool == null)
         {
             tool = (UITool) Class.forName(def.className).newInstance();
             tool.initialize(runtime);
-            session.setAttribute(name, tool);
+            runtime.getSessionContext().put(name, tool);
         }
         return tool;
     }
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void invoke(UIRuntime runtime) throws Exception

@@ -25,15 +25,16 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ListReport extends Page
+public class ListReport implements Page
 {
+
     /**
-     * Override or implement method of parent class or interface
-     *
+     * Override method prepare in super class of ListReport
+     * 
      * @see com.cyclopsgroup.waterview.Page#prepare(com.cyclopsgroup.waterview.UIRuntime, com.cyclopsgroup.cyclib.Context)
      */
-    protected void prepare(UIRuntime runtime, Context context) throws Exception
+    public void prepare(UIRuntime runtime, Context outputContext)
+            throws Exception
     {
-        //It's just a test
     }
 }

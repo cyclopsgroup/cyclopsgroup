@@ -25,7 +25,7 @@ import com.cyclopsgroup.cyclib.ValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRequestValueParser extends ValueParser
+public class RequestValueParserAdapter extends ValueParser
 {
     private HttpServletRequest httpServletRequest;
 
@@ -34,7 +34,7 @@ public class ServletRequestValueParser extends ValueParser
      * 
      * @param request Servlet request
      */
-    ServletRequestValueParser(HttpServletRequest request)
+    RequestValueParserAdapter(HttpServletRequest request)
     {
         httpServletRequest = request;
     }

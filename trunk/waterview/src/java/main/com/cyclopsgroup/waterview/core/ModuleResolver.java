@@ -28,6 +28,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 
+import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
@@ -52,7 +53,7 @@ public class ModuleResolver extends AbstractLogEnabled implements Configurable,
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -84,7 +85,7 @@ public class ModuleResolver extends AbstractLogEnabled implements Configurable,
 
     /**
      * Get package names
-     *
+     * 
      * @return String array of package name
      */
     public String[] getModulePackages()
@@ -93,20 +94,22 @@ public class ModuleResolver extends AbstractLogEnabled implements Configurable,
     }
 
     /**
-     * Resolve given action
-     *
+     * Resolve a given path with default resolver
+     * 
+     * @param path Path
      * @param runtime Runtime object
-     * @param path Module path
-     * @throws Exception Throw it out
+     * @param context Context object
+     * @throws Exception
      */
-    public void resolve(UIRuntime runtime, String path) throws Exception
+    public void resolve(String path, UIRuntime runtime, Context context)
+            throws Exception
     {
         for (Iterator i = modulePackages.iterator(); i.hasNext();)
         {
             String packageName = (String) i.next();
             if (actionResolver.exists(packageName, path))
             {
-                actionResolver.resolve(packageName, path, runtime);
+                actionResolver.resolve(packageName, path, runtime, context);
                 break;
             }
         }
@@ -114,7 +117,7 @@ public class ModuleResolver extends AbstractLogEnabled implements Configurable,
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
     public void service(ServiceManager manager) throws ServiceException
