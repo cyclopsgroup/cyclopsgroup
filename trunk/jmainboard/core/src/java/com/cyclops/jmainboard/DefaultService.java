@@ -194,78 +194,44 @@
  */
 package com.cyclops.jmainboard;
 
-import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 
-/** Default implementation of Component interface
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** Default empty implementation of Service
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 7:51:12 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultComponent implements Component, ResourceLocateable {
-    private ComponentMetadata metadata;
-    private ResourceLocator resourceLocator;
+public class DefaultService extends DefaultComponent implements Service {
 
-    /** Override method getDependencies in the derived class
-     * @see com.cyclops.jmainboard.Component#getDependencies()
+    private Vector clients = new Vector();
+
+    /** Method getClientComponents in class DefaultService
+     * @return List of client components
      */
-    public Component[] getDependencies() {
-        return metadata.getDependencies();
+    protected List getClientComponents() {
+        return Collections.unmodifiableList(clients);
     }
 
-    /** Override method getId in the derived class
-     * @see com.cyclops.jmainboard.Component#getId()
+    /** Override method register() of parent class
+     * @see com.cyclops.jmainboard.Service#register(com.cyclops.jmainboard.Component)
      */
-    public String getId() {
-        return metadata.getId();
+    public void register(Component client) {
+        clients.add(client);
     }
 
-    /** Override method getMetadata in the derived class
-     * @see com.cyclops.jmainboard.Component#getMetadata()
+    /** Override method shutdownService() of parent class
+     * @see com.cyclops.jmainboard.Service#shutdownService()
      */
-    public ComponentMetadata getMetadata() {
-        return metadata;
+    public void shutdownService() throws Exception {
+        //Empty implementation
     }
 
-    /** Override method getResource in the derived class
-     * @see com.cyclops.jmainboard.Component#getResource(java.lang.String)
+    /** Override method startupService() of parent class
+     * @see com.cyclops.jmainboard.Service#startupService()
      */
-    public URL getResource(String resourcePath) {
-        return resourceLocator.getResource(this, resourcePath);
-    }
-
-    /** Override method getResourceLocator in the derived class
-     * @see com.cyclops.jmainboard.ResourceLocateable#getResourceLocator()
-     */
-    public ResourceLocator getResourceLocator() {
-        return resourceLocator;
-    }
-
-    /** Override method getVersion in the derived class
-     * @see com.cyclops.jmainboard.Component#getVersion()
-     */
-    public float getVersion() {
-        return metadata.getVersion();
-    }
-
-    /** Override method initialize in the derived class
-     * @see com.cyclops.jmainboard.Component#initialize()
-     */
-    public void initialize() throws Exception {
-        //Do nothing
-    }
-
-    /** Override method setMetadata in the derived class
-     * @see com.cyclops.jmainboard.Component#setMetadata(com.cyclops.jmainboard.ComponentMetadata)
-     */
-    public void setMetadata(ComponentMetadata md) {
-        metadata = md;
-    }
-
-    /** Override method setResourceLocator in the derived class
-     * @see com.cyclops.jmainboard.ResourceLocateable#setResourceLocator(com.cyclops.jmainboard.ResourceLocator)
-     */
-    public void setResourceLocator(ResourceLocator rl) {
-        resourceLocator = rl;
+    public void startupService() throws Exception {
+        //empty implementation
     }
 }
