@@ -22,10 +22,10 @@ import java.util.Map;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
 import com.cyclopsgroup.levistone.Session;
+import com.cyclopsgroup.levistone.query.NamedQuery;
 import com.cyclopsgroup.levistone.query.Query;
 
 /**

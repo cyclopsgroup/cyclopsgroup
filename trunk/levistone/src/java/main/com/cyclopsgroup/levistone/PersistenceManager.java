@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.levistone;
 
+import com.cyclopsgroup.levistone.query.NamedQuery;
 import com.cyclopsgroup.levistone.query.Query;
 
 /**

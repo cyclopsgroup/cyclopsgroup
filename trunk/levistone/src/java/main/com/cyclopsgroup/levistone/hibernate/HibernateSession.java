@@ -19,10 +19,10 @@ package com.cyclopsgroup.levistone.hibernate;
 import java.sql.Connection;
 import java.util.Map;
 
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
+import com.cyclopsgroup.levistone.query.NamedQuery;
 import com.cyclopsgroup.levistone.query.Query;
 import com.cyclopsgroup.levistone.spi.AbstractConnectionSession;
 
@@ -116,7 +116,7 @@ public class HibernateSession extends AbstractConnectionSession
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.NamedQuery, java.util.Map)
+     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.query.NamedQuery, java.util.Map)
      */
     public QueryResult executeQuery(NamedQuery query, Map attributes)
             throws QueryException

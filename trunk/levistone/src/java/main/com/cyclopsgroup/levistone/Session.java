@@ -18,6 +18,7 @@ package com.cyclopsgroup.levistone;
 
 import java.util.Map;
 
+import com.cyclopsgroup.levistone.query.NamedQuery;
 import com.cyclopsgroup.levistone.query.Query;
 
 /**

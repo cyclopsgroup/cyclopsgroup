@@ -22,10 +22,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.cyclopsgroup.levistone.NamedQuery;
 import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
+import com.cyclopsgroup.levistone.query.NamedQuery;
 import com.cyclopsgroup.levistone.query.Query;
 import com.cyclopsgroup.levistone.spi.AbstractConnectionSession;
 
@@ -132,7 +132,7 @@ public class JdbcSession extends AbstractConnectionSession
     /**
      * Override method executeQuery in super class of JdbcSession
      * 
-     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.NamedQuery, java.util.Map)
+     * @see com.cyclopsgroup.levistone.Session#executeQuery(com.cyclopsgroup.levistone.query.NamedQuery, java.util.Map)
      */
     public QueryResult executeQuery(NamedQuery query, Map attributes)
             throws QueryException
