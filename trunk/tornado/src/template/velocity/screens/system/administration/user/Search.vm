@@ -1,0 +1,46 @@
+<h2>Search Users</h2>
+<table width="100%">
+	<form method="get" action="$link.setPage("system,administration,user,Search.vm")">
+	<tr>
+		<td class="title" colspan="2">Search Hint</td>
+	</tr>
+	<tr>
+		<td>Name:</td>
+		<td><input type="text" name="user_name" value="$!userName"/></td>
+	</tr>
+	<tr>
+		<td>Keyword:</td>
+		<td><input type="text" name="keyword" size="0" value="$!keyword"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Search"/>
+		</td>
+	</tr>
+	</form>
+</table>
+#if($users && !$users.isEmpty())
+    <table width="100%">
+    	<tr>
+    		<td colspan="6" class="title">Search Result</td>
+    	</tr>
+		<tr>
+			<th>Account Name</th>
+			<th>Full Name</th>
+			<th>Email</th>
+			<th>System</th>
+			<th>Singin Account</th>
+			<th>Last Singin</th>
+		</tr>
+		#foreach($user in $users)
+			<tr #xbgcolor()>
+				<td><a href="$link.setPage("system,administration,user,UserProfile.vm").addPathInfo("user_name", $user.userName)">$user.userName</a></td>
+				<td>$user.fullName</td>
+				<td>$user.email</td>
+				<td>$user.isSystem</td>
+				<td>$user.signinCounter</td>
+				<td>$user.lastSignin</td>
+			</tr>
+		#end
+	</table>
+#end 

@@ -49,3 +49,9 @@ tr.a {
 tr.b {
 	background-color: white;
 }
+th {
+	color: white;
+	background-color:#003366;
+	text-align: left;
+	font-weight: bold;
+}

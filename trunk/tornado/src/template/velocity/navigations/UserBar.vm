@@ -5,25 +5,25 @@
 			 onsubmit="this.redirectto.value=location.href"
 		#end
 	>
-	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")">
+	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")"/>
 	#if($data.tornadoUser.isAnonymous())
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="user_name" size="12" class="frame"/></td>
+			<td><input type="text" name="user_name" size="12"/></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type="password" name="password" size="12" class="frame"/></td>
+			<td><input type="password" name="password" size="12"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="bottom"><input type="submit" class="button" value="Signin" name="eventsubmit_doSignin"/></td>
+			<td colspan="2" class="bottom"><input type="submit" value="Signin" name="eventsubmit_doSignin"/></td>
 		</tr>
 	#else
 		<tr>
 			<td>Welcom: $data.tornadoUser.name</td>
 		</tr>
 		<tr>
-			<td class="bottom"><input type="submit" class="button" value="Signout" name="eventsubmit_doSignout"/></td>
+			<td class="bottom"><input type="submit" value="Signout" name="eventsubmit_doSignout"/></td>
 		</tr>
 	#end
 	</form>

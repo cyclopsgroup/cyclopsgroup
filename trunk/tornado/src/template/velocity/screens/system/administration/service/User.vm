@@ -10,34 +10,34 @@
 	<input type="hidden" name="conf_key" value="user.timeout"/>
 	<tr>
 		<td>User Implementation:</td>
-		<td><input type="text" name="conf_user.implementation" value="$!configuration.getString("user.implementation")" size="40" class="frame"/></td>
+		<td><input type="text" name="conf_user.implementation" value="$!configuration.getString("user.implementation")" size="40"/></td>
 	</tr>
 	<tr>
-		<td>&nbsp;</td>
+		<td>&#32;</td>
 		<td>Default value is com.cyclops.tornado.services.user.DefaultUser. User implementation class must implements com.cyclops.tornado.services.user.User interface.</td>
 	</tr>
 	<tr>
 		<td>Backend User Timeout:</td>
 		<td>
-			<input type="text" name="conf_user.timeout" value="$configuration.getLong("user.timeout", 1800000)" size="8" class="frame"/>
+			<input type="text" name="conf_user.timeout" value="$configuration.getLong("user.timeout", 1800000)" size="8"/>
 			ms
 		</td>
 	</tr>
 	<tr>
-		<td>&nbsp;</td>
+		<td>&#32;</td>
 		<td>Default value is 1800,000. How long system will wait for a signed out user, unit is milisecond.</td>
 	</tr>
 	<tr>
 		<td>User Checking Interval:</td>
 		<td>
-			<input type="text" name="conf_user.interval" value="$configuration.getLong("user.interval", 1000)" size="8" class="frame"/>
+			<input type="text" name="conf_user.interval" value="$configuration.getLong("user.interval", 1000)" size="8"/>
 			ms
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="bottom">
-			<input type="submit" class="button" value="Save Changes" name="eventsubmit_doSavevalues"/>
-			<input type="submit" class="button" value="Restart Service" name="eventsubmit_doRestart"/>
+			<input type="submit" value="Save Changes" name="eventsubmit_doSavevalues"/>
+			<input type="submit" value="Restart Service" name="eventsubmit_doRestart"/>
 		</td>
 	</tr>
 	</form>
@@ -55,17 +55,17 @@
 	#end
 	<tr>
 		<td>Add New Listener:</td>
-		<td><input type="text" name="addnew_value" class="frame" size="40"/></td>
+		<td><input type="text" name="addnew_value" size="40"/></td>
 	</tr>
 	<tr>
-		<td>&nbsp;</td>
+		<td>&#32;</td>
 		<td>Listener must implements com.cyclops.tornado.services.user.UserListener interface.</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="bottom">
-			<input type="submit" class="button" value="Add New" name="eventsubmit_doAddnew"/>
+			<input type="submit" value="Add New" name="eventsubmit_doAddnew"/>
 			#if(!$listeners.isEmpty())
-				<input type="submit" class="button" value="Delete" name="eventsubmit_doDelete"/>
+				<input type="submit" value="Delete" name="eventsubmit_doDelete"/>
 			#end
 		</td>
 	</tr>
