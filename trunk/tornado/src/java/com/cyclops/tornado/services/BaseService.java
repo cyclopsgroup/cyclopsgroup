@@ -12,16 +12,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.configuration.ConfigurationService;
-import com.cyclops.tornado.utils.PathTransformable;
 /**
  * @author joeblack
  * @since 2003-9-29 17:03:56
  *
  * Class BaseService in tornado project
  */
-public abstract class BaseService
-    extends org.apache.fulcrum.BaseService
-    implements PathTransformable {
+public abstract class BaseService extends org.apache.fulcrum.BaseService {
     /** Configuration object for this service */
     protected Configuration configuration;
     /** Log object used in the derived classes */

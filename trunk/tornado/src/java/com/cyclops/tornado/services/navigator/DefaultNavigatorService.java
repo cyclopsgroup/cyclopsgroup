@@ -5,18 +5,15 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.navigator;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.digester.Digester;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.BaseService;
 import com.cyclops.tornado.services.Restartable;
-import com.cyclops.tornado.utils.ResourceFinder;
 /**
  * @author joeblack
  * @since 2003-9-29 23:20:58
@@ -65,30 +62,23 @@ public class DefaultNavigatorService
      */
     protected void initialize(Configuration conf, BrokerManager brokerManager)
         throws Exception {
-        ResourceFinder rf = new ResourceFinder(this);
-        URL[] resources = rf.getResources(conf);
-        Digester digester = new Digester();
-        digester.addObjectCreate("project/menu", MenuRoot.class);
-        digester.addSetNext("project/menu", "addMenu");
-        digester.addSetProperties("project/menu");
-        digester.addObjectCreate("*/item", MenuItem.class);
-        digester.addSetProperties("*/item");
-        digester.addSetNext("*/item", "addChild");
-        for (int i = 0; i < resources.length; i++) {
-            URL resource = resources[i];
+        String[] loaderNames = conf.getStringArray("loader");
+        for (int i = 0; i < loaderNames.length; i++) {
+            String loaderName = loaderNames[i];
+            Configuration loaderConf = conf.subset("loader." + loaderName);
             try {
-                digester.clear();
-                MenuProject project = new MenuProject();
-                digester.push(project);
-                digester.parse(resource.openStream());
+                NavigatorLoader loader =
+                    (NavigatorLoader) Class
+                        .forName(loaderConf.getString("classname"))
+                        .newInstance();
+                MenuProject project = loader.load(loaderConf);
                 MenuRoot[] roots = project.getMenuRoots();
                 for (int j = 0; j < roots.length; j++) {
                     MenuRoot menu = roots[j];
                     menus.add(menu);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                logger.debug("Resource " + resource + " loading failed!", e);
+                logger.error("Loader error name=" + loaderName);
             }
         }
     }
