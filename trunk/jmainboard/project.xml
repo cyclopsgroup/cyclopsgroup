@@ -6,11 +6,11 @@
     <id>jmainboard</id>
     <currentVersion>1.0-dev</currentVersion>
     <siteAddress>shell.sourceforge.net</siteAddress>
-    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/jmainboard/multiprojects/core</siteDirectory>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/jmainboard/multiprojects</siteDirectory>
     <repository>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:jmainboard/core</connection>
-        <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:jmainboard/core</developerConnection>
-        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/jmainboard/core</url>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:jmainboard</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:jmainboard</developerConnection>
+        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/jmainboard</url>
     </repository>
     <dependencies>
         <dependency>

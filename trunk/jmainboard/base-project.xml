@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <id>jmainboard</id>
@@ -9,7 +9,7 @@
         <url>http://cyclops-group.sourceforge.net/</url>
         <logo>/images/cyclops_logo.gif</logo>
     </organization>
-    <inceptionYear>2003</inceptionYear>
+    <inceptionYear>2004</inceptionYear>
     <package>com.cyclops.jmainboard</package>
     <logo>/images/jmainboard_logo.gif</logo>
     <description>JMainboard framework and some components for it</description>
@@ -37,12 +37,14 @@
     <build>
         <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
         <sourceDirectory>src/java</sourceDirectory>
+        <aspectSourceDirectory/>
         <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
             </includes>
         </unitTest>
+        <integrationUnitTestSourceDirectory/>
     </build>
     <reports>
         <report>maven-jdepend-plugin</report>
