@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>healthfarm</name>
@@ -234,7 +234,7 @@
         </dependency>
         <dependency>
             <id>tornado</id>
-            <version>20031230.041150</version>
+            <version>SNAPSHOT</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -333,12 +333,6 @@
         </integrationUnitTest>
         <resources>
             <resource>
-                <directory>src/webapp/WEB-INF</directory>
-                <includes>
-                    <include>conf/**/*</include>
-                </includes>
-            </resource>
-            <resource>
                 <directory>src/template/velocity</directory>
                 <includes>
                     <include>**/*.vm</include>
@@ -366,7 +360,6 @@
         <report>maven-tasklist-plugin</report>
         <report>maven-pmd-plugin</report>
         <report>maven-simian-plugin</report>
-        <report>maven-clover-plugin</report>
         <report>maven-jcoverage-plugin</report>
         <report>maven-license-plugin</report>
     </reports>

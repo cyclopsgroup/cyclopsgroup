@@ -41,7 +41,7 @@ public abstract class BaseUserProfilePeer
     public static final String DATABASE_NAME = "default";
 
      /** the table name for this class */
-    public static final String TABLE_NAME = "c_hr_userprofiles";
+    public static final String TABLE_NAME = "c_hf_userprofiles";
 
     /**
      * @return the map builder for this peer
@@ -69,12 +69,12 @@ public abstract class BaseUserProfilePeer
   
     static
     {
-          PROFILE_ID = "c_hr_userprofiles.PROFILE_ID";
-          USER_ID = "c_hr_userprofiles.USER_ID";
-          BIRTH_YEAR = "c_hr_userprofiles.BIRTH_YEAR";
-          WEIGHT = "c_hr_userprofiles.WEIGHT";
-          HEIGHT = "c_hr_userprofiles.HEIGHT";
-          IS_FEMALE = "c_hr_userprofiles.IS_FEMALE";
+          PROFILE_ID = "c_hf_userprofiles.PROFILE_ID";
+          USER_ID = "c_hf_userprofiles.USER_ID";
+          BIRTH_YEAR = "c_hf_userprofiles.BIRTH_YEAR";
+          WEIGHT = "c_hf_userprofiles.WEIGHT";
+          HEIGHT = "c_hf_userprofiles.HEIGHT";
+          IS_FEMALE = "c_hf_userprofiles.IS_FEMALE";
           if (Torque.isInit())
         {
             try
@@ -530,7 +530,7 @@ public abstract class BaseUserProfilePeer
      */
     public static void doInsert(UserProfile obj) throws TorqueException
     {
-          doInsert(buildCriteria(obj));
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
           obj.setNew(false);
         obj.setModified(false);
     }
@@ -569,7 +569,7 @@ public abstract class BaseUserProfilePeer
     public static void doInsert(UserProfile obj, Connection con)
         throws TorqueException
     {
-          doInsert(buildCriteria(obj), con);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
           obj.setNew(false);
         obj.setModified(false);
     }
@@ -648,7 +648,8 @@ public abstract class BaseUserProfilePeer
     public static Criteria buildCriteria( UserProfile obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                  criteria.add(PROFILE_ID, obj.getProfileId());
+              if (!obj.isNew())
+                criteria.add(PROFILE_ID, obj.getProfileId());
                   criteria.add(USER_ID, obj.getUserId());
                   criteria.add(BIRTH_YEAR, obj.getBirthYear());
                   criteria.add(WEIGHT, obj.getWeight());

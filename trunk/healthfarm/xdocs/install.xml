@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Download and Install</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Before we start">
+            <p>Java JVM, MySQL database server and a J2EE compliant web server are required for running this demo application. Although HealthFarm is flexible enough to be deployed on diverse database and web servers, this binary distribution is only tested on MySQL database and Tomcat 4.0.x web server.</p>
+            <p>Make sure JDK, MySQL and Tomcat 4.0.x is properly installed on your machine. Check the JAVA_HOME variable in environment, and make sure your MySQL is working on port 3306.</p>
+        </section>
+        <section name="Download the WAR distribution">
+            <p>To run this application, you need to follow the steps below.</p>
+            <ol>
+            <li>Download the WAR distribution and MySQL SQL script from SourceForge.net.</li>
+            <li>Create database healthfarm in your local mysql server. Execute &quot;mysql&quot;, enter the mysql console. Execute &quot;create database healthfarm&quot;.</li>
+            <li>Execute SQL script.</li>
+            <li>Copy the WAR file into you local Tomcat 4.0 webapps folder, start tomcat and shut it down. Then the war is uncompressed. Edit WEB-INF/conf/service.properties, change the mysql user name and password. Start the Tomcat.</li>
+            <li>Open a web browser, visit http://localhost:8080/healthfarm. The port number could be different due to your local settings for Tomcat.</li>
+</ol>
+        </section>
+    </body>
+</document>

@@ -58,8 +58,9 @@ public class StandardMapBuilder implements MapBuilder
         dbMap.addTable("c_hf_standards");
         TableMap tMap = dbMap.getTable("c_hf_standards");
 
-        tMap.setPrimaryKeyMethod("none");
+        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
 
+        tMap.setPrimaryKeyMethodInfo(tMap.getName());
 
               tMap.addPrimaryKey("c_hf_standards.STANDARD_ID", new Integer(0));
                     tMap.addColumn("c_hf_standards.HEIGHT_FROM", new Integer(0));

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Development Environment</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Development Environment">
+            <p>The project is managed and built by <a href="http://maven.apache.org">Maven</a>, which requires developer a little knowledge of maven usage. Please take a look at the maven <a href="http://maven.apache.org">web site</a>.</p>
+        </section>
+    </body>
+</document>

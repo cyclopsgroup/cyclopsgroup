@@ -545,7 +545,7 @@ public abstract class BaseStandardPeer
      */
     public static void doInsert(Standard obj) throws TorqueException
     {
-          doInsert(buildCriteria(obj));
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
           obj.setNew(false);
         obj.setModified(false);
     }
@@ -584,7 +584,7 @@ public abstract class BaseStandardPeer
     public static void doInsert(Standard obj, Connection con)
         throws TorqueException
     {
-          doInsert(buildCriteria(obj), con);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
           obj.setNew(false);
         obj.setModified(false);
     }
@@ -663,7 +663,8 @@ public abstract class BaseStandardPeer
     public static Criteria buildCriteria( Standard obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                  criteria.add(STANDARD_ID, obj.getStandardId());
+              if (!obj.isNew())
+                criteria.add(STANDARD_ID, obj.getStandardId());
                   criteria.add(HEIGHT_FROM, obj.getHeightFrom());
                   criteria.add(HEIGHT_TO, obj.getHeightTo());
                   criteria.add(WEIGHT_FROM, obj.getWeightFrom());

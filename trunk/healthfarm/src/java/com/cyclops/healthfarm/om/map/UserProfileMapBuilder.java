@@ -55,17 +55,18 @@ public class UserProfileMapBuilder implements MapBuilder
     {
         dbMap = Torque.getDatabaseMap("default");
 
-        dbMap.addTable("c_hr_userprofiles");
-        TableMap tMap = dbMap.getTable("c_hr_userprofiles");
+        dbMap.addTable("c_hf_userprofiles");
+        TableMap tMap = dbMap.getTable("c_hf_userprofiles");
 
-        tMap.setPrimaryKeyMethod("none");
+        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
 
+        tMap.setPrimaryKeyMethodInfo(tMap.getName());
 
-              tMap.addPrimaryKey("c_hr_userprofiles.PROFILE_ID", new Integer(0));
-                    tMap.addColumn("c_hr_userprofiles.USER_ID", new Integer(0));
-                    tMap.addColumn("c_hr_userprofiles.BIRTH_YEAR", new Integer(0));
-                    tMap.addColumn("c_hr_userprofiles.WEIGHT", new Integer(0));
-                    tMap.addColumn("c_hr_userprofiles.HEIGHT", new Integer(0));
-                    tMap.addColumn("c_hr_userprofiles.IS_FEMALE", new Boolean(true));
+              tMap.addPrimaryKey("c_hf_userprofiles.PROFILE_ID", new Integer(0));
+                    tMap.addColumn("c_hf_userprofiles.USER_ID", new Integer(0));
+                    tMap.addColumn("c_hf_userprofiles.BIRTH_YEAR", new Integer(0));
+                    tMap.addColumn("c_hf_userprofiles.WEIGHT", new Integer(0));
+                    tMap.addColumn("c_hf_userprofiles.HEIGHT", new Integer(0));
+                    tMap.addColumn("c_hf_userprofiles.IS_FEMALE", new Boolean(true));
           }
 }

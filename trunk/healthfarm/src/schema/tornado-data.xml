@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+﻿<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 <!DOCTYPE dataset SYSTEM "file://tornado-data.dtd">
 <dataset name="all">
     <DUser UserId="1" UserName="guest" EncryptedPassword="Z3Vlc3Q=" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
@@ -21,6 +21,8 @@
     <Acl AclId="22" OwnerType="R" OwnerName="almighty" IsRole="0" Permission="action:*|do*"/>
     <Acl AclId="31" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:system,Index.vm"/>
     <Acl AclId="32" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:system,user,*.vm"/>
+    <Acl AclId="33" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:health,Index.vm"/>
+    <Acl AclId="34" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:health,pub,*.vm"/>
     <Acl AclId="36" OwnerType="R" OwnerName="basic" IsRole="0" Permission="action:UserIdentify|*"/>
     <Acl AclId="37" OwnerType="R" OwnerName="basic" IsRole="0" Permission="action:system.user.*|*"/>
     <Acl AclId="38" OwnerType="R" OwnerName="basic" IsRole="0" Permission="action:pub.*|*"/>
@@ -30,7 +32,6 @@
     <DConf ConfId="12" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.PassportBuilder"/>
     <DConf ConfId="13" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.UserSigninCounter"/>
     <DConf ConfId="21" ConfKey="services.NavigatorService.loader" ConfValue="resource"/>
-    <DConf ConfId="22" ConfKey="services.NavigatorService.loader.resource.classname" ConfValue="com.cyclops.tornado.services.navigator.ResourceNavigatorLoader"/>
-    <DConf ConfId="23" ConfKey="services.NavigatorService.loader.resource.name" ConfValue="portal.xml"/>
-    <DConf ConfId="24" ConfKey="services.NavigatorService.loader.resource.name" ConfValue="healthfarm.xml"/>
+    <DConf ConfId="22" ConfKey="services.NavigatorService.loader.resource.classname" ConfValue="com.cyclops.tornado.services.navigator.FolderNavigatorLoader"/>
+    <DConf ConfId="23" ConfKey="services.NavigatorService.loader.resource.folder" ConfValue="WEB-INF/conf/navigator"/>
 </dataset>
