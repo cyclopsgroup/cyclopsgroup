@@ -6,12 +6,13 @@ package com.cyclopsgroup.waterview.jelly;
 import java.io.File;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.collections.LRUMap;
+import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
@@ -58,7 +59,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
         return scriptPath.toString();
     }
 
-    private LRUMap cache;
+    private Map cache;
 
     private boolean cacheScript = false;
 

@@ -66,11 +66,14 @@ public class ServletUIRuntime implements UIRuntime
     {
         httpServletRequest = request;
         httpServletResponse = response;
-        page = request.getPathInfo();
         requestValueParser = new ServletRequestValueParser(request);
         serviceManager = services;
         DefaultContext ctx = new DefaultContext();
         ctx.put("runtime", this);
+        ctx.put("context", ctx);
+        ctx.put("params", requestValueParser);
+        ctx.put("request", request);
+        ctx.put("response", response);
         uiContext = ctx;
     }
 

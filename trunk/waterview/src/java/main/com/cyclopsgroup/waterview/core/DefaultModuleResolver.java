@@ -17,13 +17,14 @@
 package com.cyclopsgroup.waterview.core;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.collections.LRUMap;
+import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.ModuleResolver;
@@ -39,7 +40,7 @@ public class DefaultModuleResolver extends AbstractLogEnabled implements
         ModuleResolver, Configurable
 {
 
-    private LRUMap moduleCache;
+    private Map moduleCache;
 
     private Vector modulePackages;
 
@@ -110,7 +111,7 @@ public class DefaultModuleResolver extends AbstractLogEnabled implements
                     module = (UIModule) Class.forName(fullName).newInstance();
                     break;
                 }
-                catch (Exception e)
+                catch (ClassNotFoundException e)
                 {
                     //do nothing
                 }

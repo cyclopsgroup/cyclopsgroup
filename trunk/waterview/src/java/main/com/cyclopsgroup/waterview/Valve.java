@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview;
 
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public abstract class Valve
+public abstract class Valve extends AbstractLogEnabled
 {
     /** Empty valve array */
     Valve[] EMPTY_ARRAY = new Valve[0];

@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -36,7 +39,9 @@ import com.cyclopsgroup.waterview.Valve;
 public class RunActionsValve extends Valve implements Serviceable, Configurable
 {
 
-    private String actionParameterName;
+    private HashSet actionExtensions;
+
+    private HashSet actionParameters;
 
     private ModuleResolver moduleResolver;
 
@@ -47,7 +52,20 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        actionParameterName = conf.getChild("action-parameter").getValue("do");
+        Configuration[] confs = conf.getChildren("parameter-action");
+        actionParameters = new HashSet(confs.length);
+        for (int i = 0; i < confs.length; i++)
+        {
+            Configuration c = confs[i];
+            actionParameters.add(c.getAttribute("parameter"));
+        }
+        confs = conf.getChildren("extension-action");
+        actionExtensions = new HashSet(confs.length);
+        for (int i = 0; i < confs.length; i++)
+        {
+            Configuration c = confs[i];
+            actionParameters.add(c.getAttribute("extension"));
+        }
     }
 
     /**
@@ -57,10 +75,29 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
      */
     public void invoke(UIRuntime runtime) throws Exception
     {
-        String action = runtime.getRequestParameters().getString("do");
-        if (StringUtils.isNotEmpty(action))
+        for (Iterator i = actionParameters.iterator(); i.hasNext();)
         {
-            moduleResolver.resolve(runtime, action);
+            String param = (String) i.next();
+            String action = runtime.getRequestParameters().getString(param);
+            if (StringUtils.isNotEmpty(action))
+            {
+                moduleResolver.resolve(runtime, action);
+            }
+        }
+        String[] parts = StringUtils.split(runtime.getHttpServletRequest()
+                .getPathInfo(), '|');
+        for (Iterator i = actionExtensions.iterator(); i.hasNext();)
+        {
+            String suffix = '.' + (String) i.next();
+            for (int j = 0; j < parts.length; j++)
+            {
+                String part = parts[j];
+                if (part.endsWith(suffix))
+                {
+                    String module = StringUtils.chomp(part);
+                    moduleResolver.resolve(runtime, module);
+                }
+            }
         }
         invokeNext(runtime);
     }

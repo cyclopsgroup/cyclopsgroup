@@ -7,6 +7,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipeline>
+                    <valve role="cyclopsgroup.waterview.valve.populatetools"/>
                     <valve role="cyclopsgroup.waterview.valve.runactions"/>
                     <valve role="cyclopsgroup.waterview.valve.renderpage"/>
                 </pipeline>
@@ -28,11 +29,21 @@
         *************** VALVES ****************
         -->
         <component>
+            <role>cyclopsgroup.waterview.valve.populatetools</role>
+            <implementation>com.cyclopsgroup.waterview.tool.PopulateToolsValve</implementation>
+            <configuration>
+                <tools>
+                    <tool name="link" class="com.cyclopsgroup.waterview.tool.LinkTool"/>
+                </tools>
+            </configuration>
+        </component>
+        <component>
             <role>cyclopsgroup.waterview.valve.runactions</role>
             <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <action-parameter>do</action-parameter>
+                <extension-action extension="do"/>
+                <parameter-action parameter="do"/>
             </configuration>
         </component>
         <component>

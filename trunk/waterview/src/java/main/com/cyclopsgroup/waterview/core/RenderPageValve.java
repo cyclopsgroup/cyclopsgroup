@@ -115,7 +115,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
 
     private String defaultCategory;
 
-    private String homePage;
+    private String defaultPage;
 
     private ModuleResolver moduleResolver;
 
@@ -150,7 +150,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
         }
         defaultCategory = conf.getChild("default-category").getValue("layout");
-        homePage = conf.getChild("home-page").getValue("Index.vm");
+        defaultPage = conf.getChild("default-page").getValue("Index.vm");
     }
 
     /**
@@ -163,7 +163,27 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         String page = runtime.getPage();
         if (StringUtils.isEmpty(page))
         {
-            page = homePage;
+            page = null;
+            String[] parts = StringUtils.split(runtime.getHttpServletRequest()
+                    .getPathInfo(), '|');
+            for (Iterator i = renderers.keySet().iterator(); i.hasNext()
+                    && page == null;)
+            {
+                String suffix = '.' + (String) i.next();
+                for (int j = 0; j < parts.length; j++)
+                {
+                    String part = parts[j];
+                    if (part.endsWith(suffix))
+                    {
+                        page = part;
+                        break;
+                    }
+                }
+            }
+        }
+        if (StringUtils.isEmpty(page))
+        {
+            page = defaultPage;
         }
         if (page.charAt(0) == '/')
         {
