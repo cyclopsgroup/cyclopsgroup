@@ -203,7 +203,7 @@ import com.cyclops.healthfarm.biz.ProfileBroker;
 import com.cyclops.healthfarm.om.UserProfile;
 import com.cyclops.tornado.User;
 import com.cyclops.tornado.modules.Screen;
-/** TODO Add javadoc for this class here
+/** DailyCheck screen class
  * @author joeblack
  *
  * The class is created at 2003-12-30 0:59:50

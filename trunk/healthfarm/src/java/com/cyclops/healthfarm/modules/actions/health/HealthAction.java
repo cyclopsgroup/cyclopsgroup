@@ -207,7 +207,7 @@ import com.cyclops.tornado.modules.Action;
  * The class is created at 2003-12-30 1:45:33
  */
 public class HealthAction extends Action {
-    /** TODO Create user profile action
+    /** Create user profile action
      * @param data RunData object
      * @param ctx TemplateContext object
      * @throws Exception from inside
@@ -228,7 +228,7 @@ public class HealthAction extends Action {
         data.setMessage(
             "User profile for " + user.getUserName() + " is created");
     }
-    /** TODO Add javadoc here!
+    /** doChangeprof action
      * @param data RunData object
      * @param ctx TemplateContext object
      * @throws Exception from inside
@@ -248,10 +248,10 @@ public class HealthAction extends Action {
         pb.save(up);
         data.setMessage("User profile for " + user.getUserName() + " is saved");
     }
-    /** TODO Add javadoc here!
-     * @param data
-     * @param ctx
-     * @throws Exception
+    /** doAddrecord event in this action
+     * @param data RunData object
+     * @param ctx TemplateContext object
+     * @throws Exception throw out
      */
     public void doAddrecord(RunData data, TemplateContext ctx)
         throws Exception {

@@ -5,7 +5,5 @@ package com.cyclops.healthfarm.om;
  *  application requirements.  This class will only be generated as
  *  long as it does not already exist in the output directory.
  */
-public class UserProfilePeer
-    extends com.cyclops.healthfarm.om.BaseUserProfilePeer
-{
+public class UserProfilePeer extends BaseUserProfilePeer {
 }

@@ -207,7 +207,7 @@ import com.cyclops.healthfarm.biz.ProfileBroker;
 import com.cyclops.healthfarm.om.UserProfile;
 import com.cyclops.tornado.User;
 import com.cyclops.tornado.modules.Screen;
-/** TODO Add javadoc for this class here
+/** Advise screen class
  * @author joeblack
  *
  * The class is created at 2003-12-30 11:32:15
@@ -253,38 +253,38 @@ public class Advise extends Screen {
         private String name;
         private int calorie;
         private String description;
-        /** TODO Add javadoc here!
+        /** Get calorie value
          * @return Int value of calorie
          */
         public int getCalorie() {
             return calorie;
         }
-        /** TODO Add javadoc here!
+        /** Get description value
          * @return description of this meal
          */
         public String getDescription() {
             return description;
         }
-        /** TODO Add javadoc here!
-         * @return
+        /** get name value
+         * @return Name of advise
          */
         public String getName() {
             return name;
         }
-        /** TODO Add javadoc here!
-         * @param i
+        /** Set calorie value
+         * @param i New calorie value
          */
         public void setCalorie(int i) {
             calorie = i;
         }
-        /** TODO Add javadoc here!
-         * @param string
+        /** Set description value
+         * @param string Description value
          */
         public void setDescription(String string) {
             description = string;
         }
-        /** TODO Add javadoc here!
-         * @param string
+        /** Set name value
+         * @param string Name value
          */
         public void setName(String string) {
             name = string;
