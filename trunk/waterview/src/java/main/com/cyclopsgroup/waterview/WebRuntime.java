@@ -80,7 +80,7 @@ public interface WebRuntime
      * 
      * @return Render template
      */
-    String getRenderTemplate();
+    String getPage();
 
     /**
      * Get parameter parser for request parameters
@@ -94,5 +94,5 @@ public interface WebRuntime
      * 
      * @param template
      */
-    void setRenderTemplate(String template);
+    void setPage(String template);
 }

@@ -124,9 +124,9 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getRenderTemplate in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getRenderTemplate()
+     * @see com.cyclopsgroup.waterview.WebRuntime#getPage()
      */
-    public String getRenderTemplate()
+    public String getPage()
     {
         return renderTemplate;
     }
@@ -144,9 +144,9 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method setRenderTemplate in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#setRenderTemplate(java.lang.String)
+     * @see com.cyclopsgroup.waterview.WebRuntime#setPage(java.lang.String)
      */
-    public void setRenderTemplate(String template)
+    public void setPage(String template)
     {
         renderTemplate = template;
     }
