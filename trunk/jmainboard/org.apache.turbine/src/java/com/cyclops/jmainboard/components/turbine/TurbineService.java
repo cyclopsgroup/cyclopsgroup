@@ -192,11 +192,11 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.turbine;
+package com.cyclops.jmainboard.components.turbine;
 
 import java.util.List;
 
-import com.cyclops.jmainboard.DefaultService;
+import com.cyclops.jmainboard.impl.DefaultService;
 
 /** Jakarta Turbine service for jmainboard
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
@@ -205,12 +205,13 @@ import com.cyclops.jmainboard.DefaultService;
  */
 public class TurbineService extends DefaultService {
 
+    /** Component ID */
+    public static final String COMPONENT_ID = "org.apach.turbine";
+
     /** Override method startupService() of parent class
      * @see com.cyclops.jmainboard.Service#startupService()
      */
     public void startupService() throws Exception {
         List clients = getClientComponents();
-        getMetadata().getProperty("turbine.root", "");
-
     }
 }
