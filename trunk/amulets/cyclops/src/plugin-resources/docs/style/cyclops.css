@@ -20,7 +20,11 @@ a:link, a:visited {
 td.divisionCell {
     background-color: #336699;
 }
-
+th.frameRight {
+    background-color: #F7941C;
+    font-weight: bold; 
+    color: white;
+}
 
 #frameBodyTable, #headerSearchCell, #headerLanguageBarCell {
     background-color: #D1DBE4;
@@ -36,7 +40,4 @@ td.divisionCell {
 }
 #frameFooterCell {
     background-color: black;
-}
-#linksHeaderCell {
-    background-color: #F7941C;
 }
