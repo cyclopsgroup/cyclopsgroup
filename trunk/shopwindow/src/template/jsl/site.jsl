@@ -158,7 +158,7 @@
                     &#169; ${mavenCurrentYear}, ${pom.organization.name}
                   </j:if>
                 </j:if>
-                <a href="mailto:chinajoeblack@hotmail.com">EMail to Joel Guo</a>
+                <a href="mailto:g-cyclops@users.sourceforge.net">EMail to Joel Guo</a>
               </td>
             </tr>
           </table>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>shopwindow</name>
@@ -35,7 +35,7 @@
         <developer>
             <name>Jiaqi Guo</name>
             <id>jiaqi</id>
-            <email>chinajoeblack@hotmail.com</email>
+            <email>g-cyclops@users.sourceforge.net</email>
             <organization>vTradEx Technology</organization>
             <roles>
                 <role>Developer</role>
@@ -64,5 +64,6 @@
         <report>maven-changelog-plugin</report>
         <report>maven-file-activity-plugin</report>
         <report>maven-developer-activity-plugin</report>
+        <report>maven-license-plugin</report>
     </reports>
 </project>
