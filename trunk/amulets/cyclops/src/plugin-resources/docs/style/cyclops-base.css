@@ -1,5 +1,5 @@
 body, td, th, select, input, li {
-	font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 11px;
 }
 img {
@@ -8,12 +8,16 @@ img {
 th {
     font-weight: bold;
     text-align: left;
+    padding: 3px;
 }
 form {
     padding: 0px;
     border: 0px;
     margin: 0px;
 }
+
+
+
 div.section table.bodyTable {
     width: 100%;
 }
@@ -33,10 +37,13 @@ div.section {
 #frameLeftCell li.expanded {
     list-style-image: url(../images/expanded.gif);
 }
-div.section div.sectionTitle {
-    font-size: 20px;
+div.sectionTitle {
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
 }
-div.section div.subsectionTitle {
-    font-size: 18px;
-    text-indent: 20px;
+
+div.subsectionTitle {
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    margin-bottom: 10px;
 }

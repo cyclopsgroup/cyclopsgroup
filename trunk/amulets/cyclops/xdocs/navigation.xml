@@ -10,5 +10,6 @@
             <item name="Goals" href="/index.html"/>
             <item name="Roadmap" href="/roadmap.html"/>
         </menu>
+        <search/>
     </body>
 </project>
