@@ -16,10 +16,12 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
-import java.util.Vector;
 
+import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -38,13 +40,16 @@ import com.cyclopsgroup.waterview.Waterview;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
-        Configurable, Serviceable
+        Configurable, Serviceable, Initializable
 {
+
+    private Valve firstValve;
+
     private Properties properties;
 
     private ServiceManager serviceManager;
 
-    private Vector valves;
+    private List valveRoles;
 
     /**
      * Override method configure in super class of DefaultWaterview
@@ -58,20 +63,11 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
         Configuration[] valveConfs = conf.getChild("pipeline").getChildren(
                 "valve");
-        valves = new Vector();
+        valveRoles = new ArrayList(valveConfs.length);
         for (int i = 0; i < valveConfs.length; i++)
         {
             String valveRole = valveConfs[i].getAttribute("role");
-            try
-            {
-                Valve valve = (Valve) serviceManager.lookup(valveRole);
-                valves.add(valve);
-            }
-            catch (Exception e)
-            {
-                getLogger().error("Valve " + valveRole + " Can not be loaded ",
-                        e);
-            }
+            valveRoles.add(valveRole);
         }
     }
 
@@ -86,16 +82,41 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        boolean start = true;
+        Valve previous = null;
+        for (Iterator i = valveRoles.iterator(); i.hasNext();)
+        {
+            String valveRole = (String) i.next();
+            Valve valve = (Valve) serviceManager.lookup(valveRole);
+            if (start)
+            {
+                start = false;
+                firstValve = valve;
+            }
+            else
+            {
+                previous.setNext(valve);
+            }
+            previous = valve;
+        }
+    }
+
+    /**
      * Override method process in super class of DefaultWaterview
      * 
      * @see com.cyclopsgroup.waterview.Waterview#process(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void process(UIRuntime runtime) throws Exception
     {
-        for (Iterator i = valves.iterator(); i.hasNext();)
+        if (firstValve != null)
         {
-            Valve valve = (Valve) i.next();
-            valve.process(runtime);
+            firstValve.invoke(runtime);
         }
     }
 

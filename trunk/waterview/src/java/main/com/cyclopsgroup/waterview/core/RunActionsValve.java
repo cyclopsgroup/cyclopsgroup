@@ -19,7 +19,6 @@ package com.cyclopsgroup.waterview.core;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
@@ -34,8 +33,7 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RunActionsValve extends AbstractLogEnabled implements Valve,
-        Serviceable, Configurable
+public class RunActionsValve extends Valve implements Serviceable, Configurable
 {
 
     private String actionParameterName;
@@ -55,15 +53,16 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
     /**
      * Override method process in super class of RunResolverValve
      * 
-     * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
+     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime) throws Exception
+    public void invoke(UIRuntime runtime) throws Exception
     {
         String action = runtime.getRequestParameters().getString("do");
         if (StringUtils.isNotEmpty(action))
         {
             moduleResolver.resolve(runtime, action);
         }
+        invokeNext(runtime);
     }
 
     /**

@@ -29,9 +29,9 @@ public interface RuntimePageRenderer
     /**
      * Render page at runtime
      *
-     * @param pagePackage Page package
+     * @param category Page package
      * @param page Page path with extension
      * @throws Exception Throw it out to page renderer
      */
-    void render(String pagePackage, String page) throws Exception;
+    void render(String category, String page) throws Exception;
 }

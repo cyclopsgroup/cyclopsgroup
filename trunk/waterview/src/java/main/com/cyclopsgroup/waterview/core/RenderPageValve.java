@@ -22,7 +22,6 @@ import java.util.Iterator;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
@@ -40,10 +39,8 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve extends AbstractLogEnabled implements Valve,
-        Configurable, Serviceable
+public class RenderPageValve extends Valve implements Configurable, Serviceable
 {
-
     /**
      * Implementation of runtime page renderer
      */
@@ -67,17 +64,17 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         /**
          * Render method
          *
-         * @param pagePackage Page package name
+         * @param category Page package name
          * @param page Page path
          * @throws Exception Throw it out to page renderer
          */
-        public void render(String pagePackage, String page) throws Exception
+        public void render(String category, String page) throws Exception
         {
             if (page.endsWith(suffix))
             {
                 page = StringUtils.chomp(page, suffix);
             }
-            String path = pagePackage + '/' + page;
+            String path = category + '/' + page;
             moduleResolver.resolve(runtime, path);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
@@ -94,7 +91,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                 for (int j = parts.length - 1; j >= 0; j--)
                 {
                     parts[j] = "Default";
-                    path = pagePackage + '/' + StringUtils.join(parts);
+                    path = category + '/' + StringUtils.join(parts);
                     if (renderer.exists(packageName, path))
                     {
                         found = true;
@@ -102,6 +99,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                         renderer.render(runtime, packageName, path);
                         break;
                     }
+                    parts[j] = null;
                 }
                 if (found)
                 {
@@ -115,9 +113,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         }
     }
 
-    private String entry;
+    private String defaultCategory;
 
-    private String homePage = "Index.vm";
+    private String homePage;
 
     private ModuleResolver moduleResolver;
 
@@ -148,19 +146,19 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             catch (Exception e)
             {
                 e.printStackTrace();
-                getLogger().error("Page renderer [" + role + "] loading error",
-                        e);
+                logger.error("Page renderer [" + role + "] loading error", e);
             }
         }
-        entry = conf.getChild("entry").getValue("layout");
+        defaultCategory = conf.getChild("default-category").getValue("layout");
+        homePage = conf.getChild("home-page").getValue("Index.vm");
     }
 
     /**
      * Override method process in super class of RenderPageValve
      * 
-     * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
+     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime) throws Exception
+    public void invoke(UIRuntime runtime) throws Exception
     {
         String page = runtime.getPage();
         if (StringUtils.isEmpty(page))
@@ -192,7 +190,8 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         runtime.getHttpServletResponse().setContentType(
                 renderer.getContentType());
         RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, extension);
-        r.render(entry, page);
+        r.render(defaultCategory, page);
+        invokeNext(runtime);
     }
 
     /**

@@ -16,21 +16,64 @@
  */
 package com.cyclopsgroup.waterview;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Valve for pipeline
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Valve
+public abstract class Valve
 {
     /** Empty valve array */
     Valve[] EMPTY_ARRAY = new Valve[0];
 
+    /** Logger object */
+    protected Log logger = LogFactory.getLog(getClass());
+
+    private Valve next;
+
     /**
-     * Method process() in class Valve
-     * 
-     * @param runtime
-     * @throws Exception
+     * Getter method for next
+     *
+     * @return Returns the next.
      */
-    void process(UIRuntime runtime) throws Exception;
+    public Valve getNext()
+    {
+        return next;
+    }
+
+    /**
+     * Invoke this valve.
+     * Make sure to invokeNext valve
+     * 
+     * @param runtime Runtime context
+     * @throws Exception Throw it out
+     */
+    public abstract void invoke(UIRuntime runtime) throws Exception;
+
+    /**
+     * Invoke next valve
+     *
+     * @param runtime Runtime object
+     * @throws Exception Throw it out
+     */
+    protected final void invokeNext(UIRuntime runtime) throws Exception
+    {
+        if (getNext() != null)
+        {
+            getNext().invoke(runtime);
+        }
+    }
+
+    /**
+     * Setter method for next
+     *
+     * @param next The next to set.
+     */
+    public void setNext(Valve next)
+    {
+        this.next = next;
+    }
 }

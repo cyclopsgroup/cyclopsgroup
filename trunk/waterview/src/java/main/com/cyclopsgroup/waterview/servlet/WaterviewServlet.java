@@ -100,9 +100,12 @@ public class WaterviewServlet extends HttpServlet
     private void handleException(Throwable e, UIRuntime runtime)
             throws ServletException, IOException
     {
+        runtime.getHttpServletResponse().setContentType("text/html");
         PrintStream out = new PrintStream(runtime.getHttpServletResponse()
                 .getOutputStream());
+        out.print("<html><body><pre>");
         e.printStackTrace(out);
+        out.print("</pre></body></html>");
         out.flush();
     }
 
