@@ -33,6 +33,26 @@ import com.cyclopsgroup.gearset.runtime.MapContext;
  */
 public class JavaCompiledCodeTagTest extends TestCase
 {
+
+    /**
+     * Method testCompiler() in class JavaCompiledCodeTagTest
+     *
+     * @throws Exception
+     */
+    public void testCompiler() throws Exception
+    {
+        String script = ("import java.util.*;\n" + "\n"
+                + "public static int add(int a, int b) {\n"
+                + "    return a + b;\n" + "}\n");
+
+        Class c = new ClassBodyEvaluator(script).evaluate();
+        Method m = c.getMethod("add", new Class[]
+        { Integer.TYPE, Integer.TYPE });
+        Integer res = (Integer) m.invoke(null, new Object[]
+        { new Integer(7), new Integer(11), });
+        System.out.println("res = " + res);
+    }
+
     /**
      * Method testExecute() in class JavaCompiledCodeTagTest
      * 
@@ -55,19 +75,5 @@ public class JavaCompiledCodeTagTest extends TestCase
         ctx.put("a", new Integer(3));
         ctx.put("b", new ArrayList());
         System.out.println(tag.execute(ctx));
-    }
-
-    public void testCompiler() throws Exception
-    {
-        String script = ("import java.util.*;\n" + "\n"
-                + "public static int add(int a, int b) {\n"
-                + "    return a + b;\n" + "}\n");
-
-        Class c = new ClassBodyEvaluator(script).evaluate();
-        Method m = c.getMethod("add", new Class[]
-        { Integer.TYPE, Integer.TYPE });
-        Integer res = (Integer) m.invoke(null, new Object[]
-        { new Integer(7), new Integer(11), });
-        System.out.println("res = " + res);
     }
 }

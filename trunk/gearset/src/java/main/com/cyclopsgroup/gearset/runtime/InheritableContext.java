@@ -22,7 +22,6 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 
-
 /**
  * Context with a parent
  * 
@@ -81,13 +80,10 @@ public class InheritableContext extends MapContext
         {
             return super.getNames();
         }
-        else
-        {
-            HashSet names = new HashSet();
-            CollectionUtils.addAll(names, parent.getNames());
-            names.addAll(getMap().keySet());
-            return (String[]) names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        }
+        HashSet names = new HashSet();
+        CollectionUtils.addAll(names, parent.getNames());
+        names.addAll(getMap().keySet());
+        return (String[]) names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**

@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 
-
 /**
  * Map implemented context
  * 
@@ -61,10 +60,7 @@ public class MapContext implements Context
         {
             return null;
         }
-        else
-        {
-            return get(name);
-        }
+        return get(name);
     }
 
     /**
@@ -92,11 +88,7 @@ public class MapContext implements Context
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        else
-        {
-            return (String[]) map.keySet().toArray(
-                    ArrayUtils.EMPTY_STRING_ARRAY);
-        }
+        return (String[]) map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
