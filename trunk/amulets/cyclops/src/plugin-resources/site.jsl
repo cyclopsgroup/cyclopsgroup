@@ -70,7 +70,7 @@
 								<j:set var="showProjectDescription" value="${maven.cyclops.xdoc.showProjectDescription}"/>
 								<j:if test="${showProjectDescription}">
 									<h3>
-										<a href="${pom.url}" title="Go to $[pom.name}">${pom.name}</a>
+										<a href="${pom.url}" title="Go to ${pom.name}">${pom.name}</a>
 									</h3>
 									<p>
 										<a href="${pom.url}" title="Go to ${pom.name}">${pom.shortDescription}</a>
