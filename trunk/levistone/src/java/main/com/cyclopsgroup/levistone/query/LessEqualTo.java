@@ -21,7 +21,7 @@ package com.cyclopsgroup.levistone.query;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Equal extends Comparison
+public class LessEqualTo extends Comparison
 {
     /**
      * Constructor for class Equal
@@ -29,7 +29,7 @@ public class Equal extends Comparison
      * @param field Field object
      * @param value Value object
      */
-    public Equal(Field field, Object value)
+    public LessEqualTo(Field field, Object value)
     {
         super(field, value, Comparator.EQUAL);
     }
@@ -40,7 +40,7 @@ public class Equal extends Comparison
      * @param fieldName Field name
      * @param value Comparison value
      */
-    public Equal(String fieldName, Object value)
+    public LessEqualTo(String fieldName, Object value)
     {
         super(fieldName, value, Comparator.EQUAL);
     }
@@ -52,7 +52,7 @@ public class Equal extends Comparison
      * @param alias Alias name
      * @param value Comparison value
      */
-    public Equal(String fieldName, String alias, Object value)
+    public LessEqualTo(String fieldName, String alias, Object value)
     {
         super(fieldName, alias, value, Comparator.EQUAL);
     }

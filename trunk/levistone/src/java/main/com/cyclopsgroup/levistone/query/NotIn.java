@@ -16,44 +16,64 @@
  */
 package com.cyclopsgroup.levistone.query;
 
+import java.util.Collection;
+
 /**
  * Equal comparison
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NotEqual extends Comparison
+public class NotIn extends Comparison
 {
+
     /**
-     * Constructor for class NotEqual
+     * Constructor for class Equal
      *
      * @param field Field object
      * @param value Value object
      */
-    public NotEqual(Field field, Object value)
+    public NotIn(Field field, Object value)
     {
-        super(field, value, Comparator.NOT_EQUAL);
+        super(field, value, Comparator.NOT_IN);
+        checkCollection(value);
     }
 
     /**
-     * Constructor for class NotEqual
+     * Constructor for class Equal
      *
      * @param fieldName Field name
      * @param value Comparison value
      */
-    public NotEqual(String fieldName, Object value)
+    public NotIn(String fieldName, Object value)
     {
-        super(fieldName, value, Comparator.NOT_EQUAL);
+        super(fieldName, value, Comparator.NOT_IN);
+        checkCollection(value);
     }
 
     /**
-     * Constructor for class NotEqual
+     * Constructor for class Equal
      *
      * @param fieldName Field name
      * @param alias Alias name
      * @param value Comparison value
      */
-    public NotEqual(String fieldName, String alias, Object value)
+    public NotIn(String fieldName, String alias, Object value)
     {
-        super(fieldName, alias, value, Comparator.NOT_EQUAL);
+        super(fieldName, alias, value, Comparator.NOT_IN);
+        checkCollection(value);
+    }
+
+    private void checkCollection(Object value)
+    {
+        if (value instanceof Collection)
+        {
+            return;
+        }
+        if (value.getClass().isArray())
+        {
+            return;
+        }
+        throw new IllegalArgumentException(
+                "Value has to be a collection or array");
     }
 }

@@ -16,11 +16,14 @@
  */
 package com.cyclopsgroup.levistone;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.cyclopsgroup.levistone.query.Alias;
 import com.cyclopsgroup.levistone.query.Condition;
 import com.cyclopsgroup.levistone.query.Field;
+import com.cyclopsgroup.levistone.query.OrderBy;
 
 /**
  * Query model object
@@ -42,6 +45,12 @@ public class Query
      * @uml.property name="condition" 
      */
     private Condition condition;
+
+    /**
+     * 
+     * @uml.property name="orderBys" 
+     */
+    private List orderBys = new ArrayList();
 
     private HashMap selectedFields = new HashMap();
 
@@ -66,6 +75,48 @@ public class Query
     public void addAlias(String name, Class type)
     {
         aliases.put(name, new Alias(name, type));
+    }
+
+    /**
+     * Add ascending order by field
+     *
+     * @param fieldName Field name
+     */
+    public void addAscendingOrderBy(String fieldName)
+    {
+        orderBys.add(new OrderBy(fieldName, false));
+    }
+
+    /**
+     * Add ascending order by field
+     *
+     * @param fieldName Field name
+     * @param alias Alias name
+     */
+    public void addAscendingOrderBy(String fieldName, String alias)
+    {
+        orderBys.add(new OrderBy(fieldName, alias, false));
+    }
+
+    /**
+     * Add descending order by field
+     *
+     * @param fieldName Field name
+     */
+    public void addDescendingOrderBy(String fieldName)
+    {
+        orderBys.add(new OrderBy(fieldName, true));
+    }
+
+    /**
+     * Add descending order by field
+     *
+     * @param fieldName Field name
+     * @param alias Alias name
+     */
+    public void addDescendingOrderBy(String fieldName, String alias)
+    {
+        orderBys.add(new OrderBy(fieldName, alias, true));
     }
 
     /**
@@ -110,6 +161,18 @@ public class Query
     public Condition getCondition()
     {
         return condition;
+    }
+
+    /**
+     * Get all order by fields
+     * 
+     * @return Array of order by
+     * 
+     * @uml.property name="orderBys"
+     */
+    public OrderBy[] getOrderBys()
+    {
+        return (OrderBy[]) orderBys.toArray(OrderBy.EMPTY_ARRAY);
     }
 
     /**
