@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="dummy" xmlns:j="jelly:core">
+<document xmlns:j="jelly:core">
 	<properties>
 		<title>${descriptor.title}</title>
 		<author email="${maven.cyclops.user.email}">${maven.cyclops.user.fullname}</author>
@@ -9,16 +9,29 @@
 		<section name="${descriptor.title}">
 			<p>${descriptor.description}</p>
 			<table>
-				<j:forEach var="picture" items="${pictures.iterator()}">
-				<tr>
-					<th>File:</th>
-					<td>${picture.name}</td>
-					<th>Size:</th>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="4"></td>
-				</tr>
+				<j:useBean bagSize="2"
+					class="com.cyclopsgroup.amulets.cyclops.BaggedList" var="bagList"/>
+				<j:forEach items="${pictures}" var="picture">
+					<j:expr value="${bagList.add(picture)}"/>
+				</j:forEach>
+				<j:forEach items="${bagList.bags}" var="bag">
+					<tr>
+						<j:forEach items="${bag.iterator()}" var="picture">
+							<j:set var="fileName">${picture.fileName}</j:set>
+							<td>
+								<img alt="${fileName}" src="${maven.cyclops.gallery.tnfolder}/${fileName}"/>
+							</td>
+							<td>
+								<ul>
+									<li>
+										<a href="${fileName}" title="Directly get this image" target="_blank">Open</a>
+									</li>
+									<li>${picture.width} x ${picture.height}</li>
+									<li>${picture.file.length()} bytes</li>
+								</ul>
+							</td>
+						</j:forEach>
+					</tr>
 				</j:forEach>
 			</table>
 		</section>
