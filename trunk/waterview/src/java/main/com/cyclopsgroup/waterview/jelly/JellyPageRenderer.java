@@ -183,36 +183,24 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     public void render(Context context, String packageName, String module,
             UIRuntime runtime) throws Exception
     {
-        Context uic = runtime.getUIContext();
-
-        XMLOutput jellyOutput = (XMLOutput) uic.get("jellyOutput");
+        XMLOutput jellyOutput = (XMLOutput) context.get("jellyOutput");
         if (jellyOutput == null)
         {
             jellyOutput = XMLOutput.createXMLOutput(runtime.getOutput());
-            uic.put("jellyOutput", jellyOutput);
+            context.put("jellyOutput", jellyOutput);
         }
 
-        JellyContext oldJellyContext = (JellyContext) uic.get("jellyContext");
-        JellyContext jc = null;
-        if (oldJellyContext == null)
+        JellyContext jc = new JellyContext(initialJellyContext);
+        for (Iterator i = context.keys(); i.hasNext();)
         {
-            jc = new JellyContext(initialJellyContext);
-            for (Iterator i = uic.keys(); i.hasNext();)
-            {
-                String name = (String) i.next();
-                jc.setVariable(name, uic.get(name));
-            }
-        }
-        else
-        {
-            jc = new JellyContext(oldJellyContext);
+            String name = (String) i.next();
+            jc.setVariable(name, context.get(name));
         }
 
         String scriptPath = getScriptPath(packageName, module);
         Script script = getScript(scriptPath);
         synchronized (script)
         {
-            uic.put("jellyContext", jc);
             try
             {
                 script.run(jc, jellyOutput);
@@ -224,7 +212,6 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             }
             finally
             {
-                uic.put("jellyContext", oldJellyContext);
                 jc.getVariables().clear();
             }
         }

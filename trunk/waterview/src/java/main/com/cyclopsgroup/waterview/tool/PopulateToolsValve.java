@@ -151,7 +151,7 @@ public class PopulateToolsValve extends Valve implements Configurable
                 }
                 tool.setName(def.name);
                 processedTools.push(tool);
-                runtime.getUIContext().put(def.name, tool);
+                runtime.getPageContext().put(def.name, tool);
                 if (tool instanceof RequestListener)
                 {
                     ((RequestListener) tool).prepareForRequest(runtime);
@@ -176,7 +176,7 @@ public class PopulateToolsValve extends Valve implements Configurable
             while (!processedTools.isEmpty())
             {
                 UITool tool = (UITool) processedTools.pop();
-                runtime.getUIContext().remove(tool.getName());
+                runtime.getPageContext().remove(tool.getName());
                 try
                 {
                     if (tool instanceof RequestListener)

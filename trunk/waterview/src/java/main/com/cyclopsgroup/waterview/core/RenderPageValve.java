@@ -29,6 +29,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.cyclib.DefaultContext;
 import com.cyclopsgroup.waterview.PageNotFoundException;
 import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.RuntimePageRenderer;
@@ -47,19 +48,23 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
      */
     public class RuntimeRenderer implements RuntimePageRenderer
     {
+
+        private Context context;
+
+        private String extension;
+
         private PageRenderer renderer;
 
         private UIRuntime runtime;
 
-        private String suffix;
-
         private RuntimeRenderer(PageRenderer renderer, UIRuntime runtime,
-                String extension)
+                Context context, String extension)
         {
             this.renderer = renderer;
             this.runtime = runtime;
-            this.suffix = '.' + extension;
-            runtime.getUIContext().put(NAME, this);
+            this.context = context;
+            this.extension = extension;
+            context.put(NAME, this);
         }
 
         private void render(Context context, String packageName,
@@ -67,19 +72,13 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
         {
             LocalizationTool parent = (LocalizationTool) context
                     .get(localizationName);
+            Context newContext = new DefaultContext(context);
             LocalizationTool localization = new LocalizationTool(parent,
                     ResourceBundle.getBundle(packageName + "/" + modulePath
                             + "_ResourceBundle", runtime.getLocale()));
-            context.put(localizationName, localization);
-            renderer.render(context, packageName, modulePath, runtime);
-            if (parent == null)
-            {
-                context.remove(localizationName);
-            }
-            else
-            {
-                context.put(localizationName, parent);
-            }
+            newContext.put(localizationName, localization);
+            new RuntimeRenderer(renderer, runtime, newContext, extension);
+            renderer.render(newContext, packageName, modulePath, runtime);
         }
 
         /**
@@ -91,9 +90,9 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
          */
         public void render(String category, String page) throws Exception
         {
-            String module = StringUtils.chomp(page, suffix);
+            String module = StringUtils.chomp(page, "." + extension);
             String path = category + '/' + module;
-            moduleResolver.resolve(path, runtime, runtime.getUIContext());
+            moduleResolver.resolve(path, runtime, context);
             String[] packages = moduleResolver.getModulePackages();
             boolean found = false;
             for (int i = 0; i < packages.length; i++)
@@ -102,8 +101,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                 if (renderer.exists(packageName, path))
                 {
                     found = true;
-                    //TODO: Change it to use new context soon
-                    render(runtime.getUIContext(), packageName, path, runtime);
+                    render(context, packageName, path, runtime);
                     break;
                 }
                 String[] parts = StringUtils.split(page, '/');
@@ -114,10 +112,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
                     if (renderer.exists(packageName, path))
                     {
                         found = true;
-                        moduleResolver.resolve(path, runtime, runtime
-                                .getUIContext());
-                        render(runtime.getUIContext(), packageName, path,
-                                runtime);
+                        moduleResolver.resolve(path, runtime, context);
+                        render(context, packageName, path, runtime);
                         break;
                     }
                     parts[j] = null;
@@ -199,7 +195,8 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             throw new PageNotFoundException(page);
         }
         runtime.setContentType(renderer.getContentType());
-        RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, extension);
+        RuntimeRenderer r = new RuntimeRenderer(renderer, runtime, runtime
+                .getPageContext(), extension);
         r.render(defaultCategory, page);
         runtime.getOutput().flush();
         invokeNext(runtime);

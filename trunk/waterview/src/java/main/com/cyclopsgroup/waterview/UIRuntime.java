@@ -83,6 +83,13 @@ public interface UIRuntime
     String getPageBaseUrl();
 
     /**
+     * Get context for page rendering
+     * 
+     * @return Context interface
+     */
+    Context getPageContext();
+
+    /**
      * Get parameter parser for request parameters
      * 
      * @return Vaue parser interface
@@ -116,13 +123,6 @@ public interface UIRuntime
      * @return Time zone
      */
     TimeZone getTimeZone();
-
-    /**
-     * Get context for page rendering
-     * 
-     * @return Context interface
-     */
-    Context getUIContext();
 
     /**
      * Set content type for response

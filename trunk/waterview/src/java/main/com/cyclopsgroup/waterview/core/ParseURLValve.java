@@ -104,7 +104,7 @@ public class ParseURLValve extends Valve implements Configurable
             page = defaultPage;
         }
         runtime.setPage(page);
-        runtime.getUIContext().put("page", page);
+        runtime.getPageContext().put("page", page);
         invokeNext(runtime);
     }
 }

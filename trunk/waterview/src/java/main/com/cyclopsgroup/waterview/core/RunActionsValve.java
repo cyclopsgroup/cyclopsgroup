@@ -113,7 +113,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                     if (resolver.exists(packageName, action))
                     {
                         resolver.resolve(packageName, action, runtime, runtime
-                                .getUIContext());
+                                .getPageContext());
                         break;
                     }
                 }
@@ -137,7 +137,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                         if (resolver.exists(packageName, action))
                         {
                             resolver.resolve(packageName, action, runtime,
-                                    runtime.getUIContext());
+                                    runtime.getPageContext());
                             break;
                         }
                     }

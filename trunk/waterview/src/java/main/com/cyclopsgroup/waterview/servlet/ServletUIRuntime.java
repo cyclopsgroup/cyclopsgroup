@@ -60,7 +60,7 @@ public class ServletUIRuntime implements UIRuntime
 
     private Context sessionContext;
 
-    private Context uiContext;
+    private Context pageContext;
 
     /**
      * Default constructor of default web runtime
@@ -98,7 +98,7 @@ public class ServletUIRuntime implements UIRuntime
         ctx.put("params", requestValueParser);
         ctx.put("request", request);
         ctx.put("response", response);
-        uiContext = ctx;
+        pageContext = ctx;
     }
 
     /**
@@ -251,11 +251,11 @@ public class ServletUIRuntime implements UIRuntime
     /**
      * Override method getUIContext in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getPageContext()
      */
-    public Context getUIContext()
+    public Context getPageContext()
     {
-        return uiContext;
+        return pageContext;
     }
 
     /**
