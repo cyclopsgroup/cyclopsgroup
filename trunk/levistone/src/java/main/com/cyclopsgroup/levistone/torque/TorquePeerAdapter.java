@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import org.apache.commons.beanutils.MethodUtils;
+import org.apache.torque.om.ObjectKey;
 import org.apache.torque.util.Criteria;
 
 /**
@@ -33,11 +34,22 @@ public class TorquePeerAdapter
     private static final Class[] CRITERIA_CONNECTION_TYPES = new Class[] {
             Criteria.class, Connection.class };
 
-    private Class[] entityConnectionTypes;
+    private static final Class[] KEY_CONNECTION_TYPES = new Class[] {
+            ObjectKey.class, Connection.class };
+
+    private Method doDelete;
+
+    private Method doInsert;
+
+    private Method doSelect;
+
+    private Method doUpdate;
 
     private Class entityType;
 
     private Class peerType;
+
+    private Method retrieveByPK;
 
     /**
      * Constructor for class TorquePeerAdapter
@@ -50,7 +62,18 @@ public class TorquePeerAdapter
     {
         this.entityType = entityType;
         this.peerType = peerType;
-        entityConnectionTypes = new Class[] { entityType, Connection.class };
+        Class[] entityConnectionTypes = new Class[] { entityType,
+                Connection.class };
+        doInsert = MethodUtils.getAccessibleMethod(peerType, "doInsert",
+                entityConnectionTypes);
+        doUpdate = MethodUtils.getAccessibleMethod(peerType, "doUpdate",
+                entityConnectionTypes);
+        doDelete = MethodUtils.getAccessibleMethod(peerType, "doDelete",
+                entityConnectionTypes);
+        retrieveByPK = MethodUtils.getAccessibleMethod(peerType,
+                "retrieveByPK", KEY_CONNECTION_TYPES);
+        doSelect = MethodUtils.getAccessibleMethod(peerType, "doSelect",
+                CRITERIA_CONNECTION_TYPES);
     }
 
     /**
@@ -62,9 +85,7 @@ public class TorquePeerAdapter
      */
     public void doDelete(Object entity, Connection dbcon) throws Exception
     {
-        Method method = MethodUtils.getAccessibleMethod(peerType, "doDelete",
-                entityConnectionTypes);
-        method.invoke(null, new Object[] { entity, dbcon });
+        doDelete.invoke(null, new Object[] { entity, dbcon });
     }
 
     /**
@@ -76,9 +97,7 @@ public class TorquePeerAdapter
      */
     public void doInsert(Object entity, Connection dbcon) throws Exception
     {
-        Method method = MethodUtils.getAccessibleMethod(peerType, "doInsert",
-                entityConnectionTypes);
-        method.invoke(null, new Object[] { entity, dbcon });
+        doInsert.invoke(null, new Object[] { entity, dbcon });
     }
 
     /**
@@ -91,13 +110,11 @@ public class TorquePeerAdapter
      */
     public List doSelect(Criteria criteria, Connection dbcon) throws Exception
     {
-        Method method = MethodUtils.getAccessibleMethod(peerType, "doSelect",
-                CRITERIA_CONNECTION_TYPES);
-        return (List) method.invoke(null, new Object[] { criteria, dbcon });
+        return (List) doSelect.invoke(null, new Object[] { criteria, dbcon });
     }
 
     /**
-     * TODO Add javadoc for this method
+     * do update given entity
      *
      * @param entity
      * @param dbcon
@@ -105,8 +122,20 @@ public class TorquePeerAdapter
      */
     public void doUpdate(Object entity, Connection dbcon) throws Exception
     {
-        Method method = MethodUtils.getAccessibleMethod(peerType, "doUpdate",
-                entityConnectionTypes);
-        method.invoke(null, new Object[] { entity, dbcon });
+        doUpdate.invoke(null, new Object[] { entity, dbcon });
+    }
+
+    /**
+     * Retrieve entity by it's primary key
+     *
+     * @param key Torque key object
+     * @param dbcon DB Connection
+     * @return Entity
+     * @throws Exception Throw it out
+     */
+    public Object retrieveByPK(ObjectKey key, Connection dbcon)
+            throws Exception
+    {
+        return retrieveByPK.invoke(null, new Object[] { key, dbcon });
     }
 }

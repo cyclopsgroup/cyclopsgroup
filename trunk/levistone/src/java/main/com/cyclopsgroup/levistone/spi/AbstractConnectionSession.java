@@ -53,9 +53,13 @@ public abstract class AbstractConnectionSession extends AbstractSession
      */
     public void commit() throws PersistenceException
     {
+
         try
         {
-            getConnection().commit();
+            if (!getConnection().getAutoCommit())
+            {
+                getConnection().commit();
+            }
         }
         catch (SQLException e)
         {
@@ -95,7 +99,10 @@ public abstract class AbstractConnectionSession extends AbstractSession
     {
         try
         {
-            getConnection().rollback();
+            if (!getConnection().getAutoCommit())
+            {
+                getConnection().rollback();
+            }
         }
         catch (SQLException e)
         {

@@ -233,8 +233,15 @@ public class TorqueSession extends AbstractConnectionSession
      */
     public Object lookup(Class type, Object id) throws PersistenceException
     {
-        // TODO Auto-generated method stub
-        return null;
+        try
+        {
+            ObjectKey key = TorqueUtils.object2TorqueKey(id);
+            return getPeerAdapter(type).retrieveByPK(key, getConnection());
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     /**

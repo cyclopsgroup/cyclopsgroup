@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
+<database name="default">
+    <table name="ID_TABLE" idMethod="idbroker">
+        <column name="ID_TABLE_ID" required="true" primaryKey="true" type="INTEGER"/>
+        <column name="TABLE_NAME" required="true" size="255" type="VARCHAR"/>
+        <column name="NEXT_ID" type="INTEGER"/>
+        <column name="QUANTITY" type="INTEGER"/>
+        <unique>
+            <unique-column name="TABLE_NAME"/>
+        </unique>
+    </table>
+</database>

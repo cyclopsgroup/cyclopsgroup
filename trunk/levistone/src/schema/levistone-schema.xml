@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
-<database name="default" defaultIdMethod="none">
+<database name="default" defaultIdMethod="idbroker">
    <table name="cg_levistone_user" javaName="User">
-      <column name="user_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true" autoIncrement="true"/>
+      <column name="user_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true"/>
       <column name="user_name" type="CHAR" size="30" required="true"/>
       <column name="email" type="VARCHAR" size="60" required="true"/>
       <column name="birthday" type="DATE"/>
@@ -12,7 +12,7 @@
       </unique>
    </table>
    <table name="cg_levistone_address" javaName="Address">
-      <column name="address_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true" autoIncrement="true"/>
+      <column name="address_id" javaName="id" type="BIGINT" primaryKey="true" position="1" required="true"/>
       <column name="details1" type="VARCHAR" size="255" required="true"/>
       <column name="details2" type="VARCHAR" size="255"/>
       <column name="city" type="VARCHAR" size="60"/>
