@@ -13,7 +13,7 @@
 	<logo>/images/amulets_logo.gif</logo>
 	<shortDescription>Java Project Management Tools</shortDescription>
 	<url>http://cyclops-group.sourceforge.net/projects/amulets/multiproject/${pom.artifactId}</url>
-	<siteDirectory>/home/groups/c/cy/cyclops-group/htdocts/projects/amulets/multiprojects/${pom.artifactId}</siteDirectory>
+	<siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/${pom.artifactId}/</siteDirectory>
 	<developers/>
 	<dependencies/>
 	<build>
