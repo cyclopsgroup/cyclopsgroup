@@ -22,47 +22,27 @@
         <div>
             <table bgcolor="#003366" border="0" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td width="55%">
-                        <img height="1" width="1" src="../../images/spacer.gif" />
-                    </td>
-                    <td width="10%">
-                        <img height="1" width="1" src="../../images/spacer.gif" />
-                    </td>
-                    <td width="35%">
-                        <img height="1" width="1" src="../../images/spacer.gif" />
-                    </td>
+                    <td width="55%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
+                    <td width="10%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
+                    <td width="35%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
                 </tr>
                 <tr>
-                    <td rowspan="2">
-                        <a href="http://cyclops-group.sourceforge.net">
-                            <img height="60" border="0" alt="Cyclops Group Alliance" src="../../images/logo.gif" align="left" />
-                        </a>
-                    </td>
-                    <td align="right" colspan="2">
-                        <img src="../../images/banner_right.gif" />
-                    </td>
+                    <td rowspan="2"><a href="http://cyclops-group.sourceforge.net"><img height="60" border="0" alt="Cyclops Group Alliance" src="../../images/logo.gif" align="left" /></a></td>
+                    <td align="right" colspan="2"><img src="../../images/banner_right.gif" /></td>
                 </tr>
                 <tr>
-                    <td align="right">
-                        <img src="../../images/banner_corner.gif" />
-                    </td>
+                    <td align="right"><img src="../../images/banner_corner.gif" /></td>
                     <td bgcolor="#D1DBE4" rowspan="2" align="center">
                         <table>
                             <form action="http://www.google.com/search" method="get">
                                 <input name="domains" type="hidden" value="http://cyclops-group.sourceforge.net" />
                                 <input name="sitesearch" type="hidden" value="http://cyclops-group.sourceforge.net" id="search" />
                                 <tr>
-                                    <td>
-                                        <a href="http://www.google.com">
-                                            <img border="0" src="http://www.google.com/logos/Logo_25wht.gif" />
-                                        </a>
-                                    </td>
+                                    <td><a href="http://www.google.com"><img border="0" src="http://www.google.com/logos/Logo_25wht.gif" /></a></td>
                                     <td>
                                         <input name="q" size="8" type="text" />
                                     </td>
-                                    <td>
-                                        <input name="btnG" type="image" value="Go" title="Google Search in this site" src="../../images/right.gif" />
-                                    </td>
+                                    <td><input name="btnG" type="image" value="Go" title="Google Search in this site" src="../../images/right.gif" /></td>
                                 </tr>
                             </form>
                         </table>
