@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Hosted Projects</title>
@@ -32,7 +32,7 @@
                 <tr>
                     <td>jmainboard</td>
                     <td>
-                        <a href="projects/jmainboard">http://cyclops-group.sourceforge.net/projects/plexaros</a>
+                        <a href="projects/jmainboard">http://cyclops-group.sourceforge.net/projects/jmainboard</a>
                     </td>
                     <td>A light weight plugable components framework. Additional module can be easily developed and plug into this framework.</td>
                     <td>It is able to work now but not released yet.</td>
