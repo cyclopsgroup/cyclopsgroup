@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.bean;
+package com.cyclopsgroup.gearset.runtime;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -22,7 +22,6 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * Context with a parent

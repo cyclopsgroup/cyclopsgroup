@@ -14,14 +14,13 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.bean;
+package com.cyclopsgroup.gearset.runtime;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * Map implemented context

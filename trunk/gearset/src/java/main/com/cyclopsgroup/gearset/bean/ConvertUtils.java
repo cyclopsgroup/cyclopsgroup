@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.runtime;
+package com.cyclopsgroup.gearset.bean;
 
 import java.util.HashSet;
 
