@@ -13,6 +13,14 @@ import org.apache.torque.util.Criteria;
  * @email g-cyclops@users.sourceforge.net
  */
 public abstract class AbstractObjectBroker extends ObjectBroker {
+    public void delete(Criteria crit) throws Exception {
+        delete(getObjectClass(), crit);
+    }
+    public void deleteByPK(int id) throws Exception {
+        Criteria crit = new Criteria();
+        crit.and(getPrimaryKey(), id);
+        delete(crit);
+    }
     /** Method getObjectClass()
      * @return What class does this broker focus on
      */
@@ -25,7 +33,7 @@ public abstract class AbstractObjectBroker extends ObjectBroker {
      * @see com.cyclops.tornado.bo.ObjectBroker#query(java.lang.Class, org.apache.torque.util.Criteria)
      */
     public List query(Criteria crit) throws Exception {
-        return super.query(getObjectClass(), crit);
+        return query(getObjectClass(), crit);
     }
     /** Method queryAll()
      * @return All of records

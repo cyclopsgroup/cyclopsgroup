@@ -36,3 +36,10 @@ a:link, a:visited {
 	color: #0064C7;
 	text-decoration: underline;
 }
+td.title {
+	background-color: #0064C7;
+	color: white;
+	font-weight: bold;
+	padding: 3px;
+	text-indent: 10px;
+}

@@ -20,6 +20,15 @@ public class ObjectBroker implements DBConnectable {
     /** Default database name */
     public static final String DEFAULT_DATABASE_NAME = "default";
     private transient Connection connection;
+    public void delete(Class objectClass, Criteria crit) throws Exception {
+        Class peerClass = Class.forName(objectClass.getName() + "Peer");
+        Method doDelete =
+            MethodUtils.getAccessibleMethod(
+                peerClass,
+                "doDelete",
+                new Class[] { Criteria.class, Connection.class });
+        doDelete.invoke(null, new Object[] { crit, connection });
+    }
     /** Implementation of method getConnection() in this class
      * @see com.cyclops.tornado.bo.DBConnectable#getConnection()
      */
@@ -44,8 +53,8 @@ public class ObjectBroker implements DBConnectable {
             MethodUtils.getAccessibleMethod(
                 peerClass,
                 "doSelect",
-                new Class[] { Criteria.class });
-        return (List) doSelect.invoke(null, new Object[] { crit });
+                new Class[] { Criteria.class, Connection.class });
+        return (List) doSelect.invoke(null, new Object[] { crit, connection });
     }
     /** Method queryAll()
      * @param objectClass Object class

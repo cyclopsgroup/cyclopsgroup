@@ -1,5 +1,8 @@
 <h2>User Profile</h2>
 <table width="100%">
+	<tr>
+		<td colspan="2" class="title">Input Account Name</td>
+	</tr>
 	<form method="get" action="$link.setPage("system,administration,user,UserProfile.vm")">
 	<tr>
 		<td>Account Name:</td>
@@ -12,6 +15,9 @@
 	</tr>
 	</form>
 	#if($user)
+		<tr>
+			<td colspan="2" class="title">User Profile for $user.userName</td>
+		</tr>
 		<form method="post" action="$link.setAction("system.administration.UserAction").setPage("system,administration,user,UserProfile.vm")">
 		<input type="hidden" name="user_name" value="$user.userName"/>
 		<input type="hidden" name="user_id" value="$user.userId"/>
