@@ -1,0 +1,127 @@
+body, p, td {
+    font-family: Tahoma, Arial;
+    font-size: 9pt;
+    color: #000000;
+}
+body {
+    background-color: #FFFFFF;
+}
+input, textarea, select{
+    font-size: 9pt;
+    font-family: Tahoma, "ËÎÌו";
+}
+pre{
+    font-family: Tahoma;
+}
+th{
+    background-color: #006BB0; 
+    color: white;
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: left;
+    padding-top: 4px;
+    padding-left: 5px
+}
+a:link, a:visited{
+    text-decoration: none;
+    color: #222222;
+}
+a:active{
+    text-decoration: underline;
+    color: #FF0000;
+}
+a:link.r, a:visited.r{
+    color: white;
+}
+.r {
+    color: white;
+}
+.frame{
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #CCCCCC;
+}
+.noborder{
+    border-width: 0px;
+    border-style: none; 
+}
+.underline{
+    border-width: 1px;
+    border-style: solid;
+    border-color: white white black;
+}
+input.frame{
+    background-color: #FAFAFA;
+}
+input.frame, input.noborder, input.underline{
+    height: 19px;
+}
+input.button{ 
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 9pt;
+    height: 20px;
+}
+td.comment{
+    background-color: #F6F693;
+}
+td.input{
+    background-color: white;
+}
+td.bottom{
+    text-align: right;
+    background-color: #CCCCCC;
+}
+td.title{ 
+    text-indent: 20px;
+    font-weight: normal;
+    font-size:9pt;
+    background-color: #003885; 
+    color: white;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    padding-left: 7px;
+}
+td.t{
+    border-width: 1px;
+    border-style: outset;
+    border-color: white black black white;
+}
+table.t{
+    border-width: 1px;
+    border-style: inset;
+    border-color: black white white black;
+}
+table.frame{
+    background-color: #CCCCCC;
+    border: 0px; 
+}
+td.pushed{
+    border-width: 1px;
+    border-style: solid;
+    border-color: black white white black;
+}
+a:hover {
+    text-decoration: none;
+}
+textarea.frame {
+    background-color: #FAFAFA;
+}
+.tableName{
+    color: white;
+    text-weight: bold;
+}
+.s{
+    font-family: Tahoma;
+    font-size: 9px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.c{
+    font-family: Tahoma;
+    font-size: 9px;
+    color: #E21E2D;
+    text-decoration: none;
+}
