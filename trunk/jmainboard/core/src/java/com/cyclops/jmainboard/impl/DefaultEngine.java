@@ -201,6 +201,8 @@ import java.util.ListIterator;
 import java.util.Properties;
 import java.util.Vector;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.Engine;
 import com.cyclops.jmainboard.Service;
@@ -213,27 +215,53 @@ import com.cyclops.jmainboard.utils.ComponentSorter;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class DefaultEngine extends LoggableObject implements Engine {
-    private Vector componentLoaders = new Vector();
     private Vector components = new Vector();
-    private Properties properties = new Properties();
     private File engineHome = new File("");
+    private Properties properties = new Properties();
 
-    /** Add a component loader instance
-     * @param componentLoader Component loader instance
+    /** Override method getComponent in the derived class
+     * @see com.cyclops.jmainboard.Engine#getComponent(java.lang.String)
      */
-    public void addComponentLoader(ComponentLoader componentLoader) {
-        componentLoaders.add(componentLoader);
+    public Component getComponent(String componentId) {
+        Component ret = null;
+        for (Iterator i = components.iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            if (StringUtils.equals(component.getId(), componentId)) {
+                ret = component;
+                break;
+            }
+        }
+        return ret;
+    }
+    /** Get all components
+     * @return Array of all components
+     */
+    public Component[] getComponents() {
+        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
+    }
+    /** Override method getEngineHome in the derived class
+     * @see com.cyclops.jmainboard.Engine#getEngineHome()
+     */
+    public File getEngineHome() {
+        return engineHome;
+    }
+    /** Override method getProperties in the derived class
+     * @see com.cyclops.jmainboard.Engine#getProperties()
+     */
+    public Properties getProperties() {
+        return properties;
     }
 
     /** Method initialize() in class DandelioEngine
      * Initalize the engine
      */
-    public void init() {
+    protected void init() {
         // preload components before really starting them
         HashMap rawComponents = new HashMap();
         ComponentLoader loader = new ComponentLoader();
         loader.load(this);
         rawComponents.putAll(loader.getComponents());
+
         // Normalize dependencies
         for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
             DefaultComponent component = (DefaultComponent) i.next();
@@ -254,7 +282,7 @@ public class DefaultEngine extends LoggableObject implements Engine {
                 }
             }
         }
-
+        //Sort components and put results into components vector
         ComponentSorter componentSorter = new ComponentSorter();
         for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
             Component component = (Component) i.next();
@@ -269,7 +297,18 @@ public class DefaultEngine extends LoggableObject implements Engine {
             Component component = componentArray[i];
             components.add(component);
         }
-
+        //Initialize components in order
+        for (Iterator i = components.iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            try {
+                component.init();
+            } catch (Exception e) {
+                getLog().debug(
+                    "Can't initialize component [" + component + "]",
+                    e);
+            }
+        }
+        //Register clients for each service in order
         HashMap services = new HashMap();
         for (Iterator i = components.iterator(); i.hasNext();) {
             Component component = (Component) i.next();
@@ -283,24 +322,15 @@ public class DefaultEngine extends LoggableObject implements Engine {
         }
     }
 
-    /** Startup the engine
+    /** Method setEngineHome() in class DefaultEngine
+     * @param file Engine home directory
      */
-    public void startup() {
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                if (component instanceof Service) {
-                    ((Service) component).startupService();
-                }
-            } catch (Exception e) {
-                getLog().error(
-                    "Can't startup service [" + component.getId() + "]",
-                    e);
-            }
-        }
+    public void setEngineHome(File file) {
+        engineHome = file;
     }
 
-    /** Shutdown the engine
+    /** Override method shutdown in the derived class
+     * @see com.cyclops.jmainboard.Engine#shutdown()
      */
     public void shutdown() {
         for (ListIterator i = components.listIterator(components.size());
@@ -312,35 +342,29 @@ public class DefaultEngine extends LoggableObject implements Engine {
                     ((Service) component).shutdownService();
                 }
             } catch (Exception e) {
-                getLog().error(
+                getLog().debug(
                     "Can't shutdown service [" + component.getId() + "]",
                     e);
             }
         }
     }
-    /** Get all components
-     * @return Array of all components
+
+    /** Override method startup in the derived class
+     * @see com.cyclops.jmainboard.Engine#startup()
      */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
-    }
-    /** Override method getProperties in the derived class
-     * @see com.cyclops.jmainboard.Engine#getProperties()
-     */
-    public Properties getProperties() {
-        return properties;
-    }
-    /** Override method getEngineHome in the derived class
-     * @see com.cyclops.jmainboard.Engine#getEngineHome()
-     */
-    public File getEngineHome() {
-        return engineHome;
+    public void startup() {
+        for (Iterator i = components.iterator(); i.hasNext();) {
+            Component component = (Component) i.next();
+            try {
+                if (component instanceof Service) {
+                    ((Service) component).startupService();
+                }
+            } catch (Exception e) {
+                getLog().debug(
+                    "Can't startup service [" + component.getId() + "]",
+                    e);
+            }
+        }
     }
 
-    /** Method setEngineHome() in class DefaultEngine
-     * @param file Engine home directory
-     */
-    public void setEngineHome(File file) {
-        engineHome = file;
-    }
 }

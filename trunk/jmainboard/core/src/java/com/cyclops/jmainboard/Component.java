@@ -250,4 +250,9 @@ public interface Component {
      * @return String version of this component
      */
     String getVersion();
+
+    /** This method will be called once the component is ready to use
+     * @throws Exception Leave exceptions to engine
+     */
+    void init() throws Exception;
 }

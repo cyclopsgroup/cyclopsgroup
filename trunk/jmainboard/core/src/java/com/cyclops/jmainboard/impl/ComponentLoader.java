@@ -201,10 +201,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.tools.generic.RenderTool;
+
 import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.model.ComponentModel;
 import com.cyclops.jmainboard.model.ModelParser;
 import com.cyclops.jmainboard.model.PropertyModel;
+import com.cyclops.jmainboard.utils.VelocityUtils;
 import com.cyclops.jmainboard.utils.VersionComparator;
 
 /** Tool to load all component instance
@@ -222,8 +226,8 @@ public class ComponentLoader extends LoggableObject {
      * @param e Engine instance
      */
     public void load(DefaultEngine e) {
-        loadComponents(new File(e.getEngineHome(), "components"));
         engine = e;
+        loadComponents(new File(e.getEngineHome(), "components"));
     }
     /** Load components without dependency objects and order
      * @return List of component instances without dependencies
@@ -255,14 +259,18 @@ public class ComponentLoader extends LoggableObject {
                 (DefaultComponent) Class
                     .forName(cm.getImplementation())
                     .newInstance();
+            VelocityContext ctx =
+                VelocityUtils.createContext(engine.getProperties());
             dc.setId(cm.getId());
             dc.setVersion(cm.getVersion());
-            dc.setTitle(cm.getTitle());
-            dc.setDescription(cm.getDescription());
+            dc.setTitle(RenderTool.eval(ctx, cm.getTitle()));
+            dc.setDescription(RenderTool.eval(ctx, cm.getDescription()));
             List props = cm.getProperties();
             for (Iterator i = props.iterator(); i.hasNext();) {
                 PropertyModel prop = (PropertyModel) i.next();
-                dc.getProperties().setProperty(prop.getName(), prop.getValue());
+                dc.getProperties().setProperty(
+                    prop.getName(),
+                    RenderTool.eval(ctx, prop.getValue()));
             }
             dc.getProperties().setProperty(
                 Component.COMPONENT,

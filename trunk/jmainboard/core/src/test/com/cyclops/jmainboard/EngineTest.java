@@ -195,43 +195,45 @@
 package com.cyclops.jmainboard;
 
 import java.io.File;
-import java.util.Properties;
 
-/** Engine interface
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+import junit.framework.TestCase;
+
+/** Main test case
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * Created at 18:13:34 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public interface Engine {
-    /** Key for engine in context */
-    String ENGINE = Engine.class.getName();
-    /** Key for basedir in context */
-    String ENGINE_HOME = "engine.home";
-    /** Value for engine in context */
-    String ENGINE_IMPL = "com.cyclops.jmainboard.impl.DefaultEngine";
-    /** Get component by id
-     * @param componentId Component Id
-     * @return Component instance
+public class EngineTest extends TestCase {
+    private Engine engine;
+    /** Override method setUp in the derived class
+     * @see junit.framework.TestCase#setUp()
      */
-    Component getComponent(String componentId);
-    /** Get all components
-     * @return Array of all components
+    protected void setUp() throws Exception {
+        engine =
+            EngineFactory.getInstance().newEngine(new File("src/rttest/home"));
+        engine.startup();
+    }
+    /** Method testLoading() in class EngineTest
      */
-    Component[] getComponents();
-
-    /** Method getEngineHome() in class Engine
-     * @return Home directory of engine
+    public void testGetComponents() {
+        Component[] components = engine.getComponents();
+        for (int i = 0; i < components.length; i++) {
+            Component component = components[i];
+            System.out.println(component);
+        }
+    }
+    /** Method testGetComponent() in class EngineTest
      */
-    File getEngineHome();
-    /** Method getProperties() in class Engine
-     * @return Properties of this engine
+    public void testGetComponent() {
+        Component component =
+            engine.getComponent("com.cyclops.jmainboard.test1");
+        //assertNotNull(component);
+    }
+    /** Override method tearDown in the derived class
+     * @see junit.framework.TestCase#tearDown()
      */
-    Properties getProperties();
-    /** Method shutdown() in class Engine
-     */
-    void shutdown();
-
-    /** Method startup() in class Engine
-     */
-    void startup();
+    protected void tearDown() throws Exception {
+        engine.shutdown();
+    }
 }

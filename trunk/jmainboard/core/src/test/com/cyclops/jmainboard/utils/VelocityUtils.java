@@ -192,46 +192,35 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard;
+package com.cyclops.jmainboard.utils;
 
-import java.io.File;
-import java.util.Properties;
+import java.util.Iterator;
+import java.util.Map;
 
-/** Engine interface
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+import org.apache.velocity.VelocityContext;
+
+/** Help utilities for velocity
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * Created at 21:00:11 2004-4-14
+ * Edited with eclipse 2.1.3
  */
-public interface Engine {
-    /** Key for engine in context */
-    String ENGINE = Engine.class.getName();
-    /** Key for basedir in context */
-    String ENGINE_HOME = "engine.home";
-    /** Value for engine in context */
-    String ENGINE_IMPL = "com.cyclops.jmainboard.impl.DefaultEngine";
-    /** Get component by id
-     * @param componentId Component Id
-     * @return Component instance
+public final class VelocityUtils {
+    private VelocityUtils() {
+        //Do nothing here
+    }
+    /** Create a VelocityContext with a map instance
+     * @param map Map object as input object
+     * @return Result VelocityContext object
      */
-    Component getComponent(String componentId);
-    /** Get all components
-     * @return Array of all components
-     */
-    Component[] getComponents();
-
-    /** Method getEngineHome() in class Engine
-     * @return Home directory of engine
-     */
-    File getEngineHome();
-    /** Method getProperties() in class Engine
-     * @return Properties of this engine
-     */
-    Properties getProperties();
-    /** Method shutdown() in class Engine
-     */
-    void shutdown();
-
-    /** Method startup() in class Engine
-     */
-    void startup();
+    public static VelocityContext createContext(Map map) {
+        VelocityContext ctx = new VelocityContext();
+        for (Iterator i = map.keySet().iterator(); i.hasNext();) {
+            Object key = (Object) i.next();
+            if (key instanceof String) {
+                ctx.put((String) key, map.get(key));
+            }
+        }
+        return ctx;
+    }
 }

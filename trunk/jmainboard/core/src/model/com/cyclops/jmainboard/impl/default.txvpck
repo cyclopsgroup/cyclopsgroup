@@ -41,7 +41,7 @@
 			<property name="bounds" value="245,10,101,84"/>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.impl.DefaultEngine">
-			<property name="bounds" value="426,154,159,201"/>
+			<property name="bounds" value="426,154,159,175"/>
 			<reference referencedUin="jdt:l_gnt:src:com.cyclops.jmainboard.impl.DefaultEngine:LoggableObject">
 				<property name="sourceAnchor" value="505,154"/>
 				<property name="targetAnchor" value="320,94"/>

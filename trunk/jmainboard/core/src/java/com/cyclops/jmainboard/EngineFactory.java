@@ -209,13 +209,20 @@ public abstract class EngineFactory {
     /** Value for engine factory in context */
     public static final String ENGINE_FACTORY_IMPL =
         "com.cyclops.jmainboard.impl.DefaultEngineFactory";
+    /** Method getInstance() in class EngineFactory
+     * @return EngineFactory instance
+     * @throws Exception for creation
+     */
+    public static final EngineFactory getInstance() throws Exception {
+        return getInstance(null);
+    }
 
     /** Method getInstance() in class EngineFactory
      * @param props Initial context
      * @return EngineFactory instance
      * @throws Exception Exception for creation
      */
-    public static EngineFactory getInstance(Properties props)
+    public static final EngineFactory getInstance(Properties props)
         throws Exception {
         Properties p = new Properties();
         p.setProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);

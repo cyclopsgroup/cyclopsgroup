@@ -220,11 +220,15 @@ public class DefaultComponent extends LoggableObject implements Component {
             return parent;
         }
 
-        /** Method setParent() in class PropertiesWrapper
-         * @param p Parent properties
+        /** Override method getProperty in the derived class
+         * @see java.util.Properties#getProperty(java.lang.String)
          */
-        public void setParent(Properties p) {
-            parent = p;
+        public String getProperty(String key) {
+            if (containsKey(key)) {
+                return super.getProperty(key);
+            } else {
+                return parent.getProperty(key);
+            }
         }
 
         /** Override method getProperty in the derived class
@@ -238,15 +242,11 @@ public class DefaultComponent extends LoggableObject implements Component {
             }
         }
 
-        /** Override method getProperty in the derived class
-         * @see java.util.Properties#getProperty(java.lang.String)
+        /** Method setParent() in class PropertiesWrapper
+         * @param p Parent properties
          */
-        public String getProperty(String key) {
-            if (containsKey(key)) {
-                return super.getProperty(key);
-            } else {
-                return parent.getProperty(key);
-            }
+        public void setParent(Properties p) {
+            parent = p;
         }
     }
     private File componentHome;
@@ -259,6 +259,21 @@ public class DefaultComponent extends LoggableObject implements Component {
     private PropertiesWrapper properties = new PropertiesWrapper();
     private String title;
     private String version;
+
+    /** Method addDependency() in class DefaultComponent
+     * @param dependency Dependency component
+     */
+    public void addDependency(Component dependency) {
+        dependencyIds.add(dependency.getId());
+        dependencies.put(dependency.getId(), dependency);
+    }
+
+    /** Method addDependencyId() in class DefaultComponent
+     * @param dependencyId Dependency Id
+     */
+    public void addDependencyId(String dependencyId) {
+        dependencyIds.add(dependencyId);
+    }
 
     /** Method getComponentHome() in class DefaultComponent
      * @return Home directory of this component
@@ -273,6 +288,13 @@ public class DefaultComponent extends LoggableObject implements Component {
     public Component[] getDependencies() {
         return (Component[]) dependencies.values().toArray(
             Component.EMPTY_ARRAY);
+    }
+
+    /** Method getDependencyIds() in class DefaultComponent
+     * @return Array of dependency ids
+     */
+    public String[] getDependencyIds() {
+        return (String[]) dependencyIds.toArray(new String[0]);
     }
 
     /** Override method getDescription in the derived class
@@ -337,6 +359,12 @@ public class DefaultComponent extends LoggableObject implements Component {
     public String getVersion() {
         return version;
     }
+    /** Override method init in the derived class
+     * @see com.cyclops.jmainboard.Component#init()
+     */
+    public void init() {
+        //Do nothing in this base class
+    }
 
     /** Method setComponentHome() in class DefaultComponent
      * @param file Home directory of this component
@@ -380,26 +408,11 @@ public class DefaultComponent extends LoggableObject implements Component {
     public void setVersion(String string) {
         version = string;
     }
-
-    /** Method addDependencyId() in class DefaultComponent
-     * @param dependencyId Dependency Id
+    /** Override method toString in the derived class
+     * @see java.lang.Object#toString()
      */
-    public void addDependencyId(String dependencyId) {
-        dependencyIds.add(dependencyId);
+    public String toString() {
+        return getId() + "-" + getVersion() + "(" + getTitle() + ")";
     }
 
-    /** Method getDependencyIds() in class DefaultComponent
-     * @return Array of dependency ids
-     */
-    public String[] getDependencyIds() {
-        return (String[]) dependencyIds.toArray(new String[0]);
-    }
-
-    /** Method addDependency() in class DefaultComponent
-     * @param dependency Dependency component
-     */
-    public void addDependency(Component dependency) {
-        dependencyIds.add(dependency.getId());
-        dependencies.put(dependency.getId(), dependency);
-    }
 }
