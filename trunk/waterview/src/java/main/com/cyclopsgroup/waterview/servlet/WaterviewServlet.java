@@ -98,7 +98,7 @@ public class WaterviewServlet extends HttpServlet
     private void handleException(Throwable e, UIRuntime runtime)
             throws ServletException
     {
-        throw new ServletException("Waterview error", e);
+        e.printStackTrace();
     }
 
     /**

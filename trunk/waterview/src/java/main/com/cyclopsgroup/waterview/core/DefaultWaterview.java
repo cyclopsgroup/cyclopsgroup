@@ -41,7 +41,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         Configurable, Serviceable
 {
 
-    private String[] extensions;
+    private Resolver defaultResolver;
 
     private Hashtable resolvers;
 
@@ -75,6 +75,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         }
         Configuration[] resolverConfs = conf.getChild("resolvers").getChildren(
                 "resolver");
+        resolvers = new Hashtable();
         for (int i = 0; i < resolverConfs.length; i++)
         {
             Configuration resolverConf = resolverConfs[i];
@@ -92,13 +93,13 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
-     * Override method getExtensions in super class of DefaultWaterview
+     * Override method getDefaultResolver in super class of DefaultWaterview
      * 
-     * @see com.cyclopsgroup.waterview.Waterview#getExtensions()
+     * @see com.cyclopsgroup.waterview.Waterview#getDefaultResolver()
      */
-    public String[] getExtensions()
+    public Resolver getDefaultResolver()
     {
-        return extensions;
+        return defaultResolver;
     }
 
     /**

@@ -26,6 +26,10 @@ public interface Waterview
     /** Role name of this component in container */
     String ROLE = Waterview.class.getName();
 
+    Resolver getResolver(String extension);
+
+    Resolver getDefaultResolver();
+
     /**
      * Process request
      * 
@@ -33,8 +37,4 @@ public interface Waterview
      * @throws Exception Throw it out
      */
     void process(UIRuntime runtime) throws Exception;
-    
-    String[] getExtensions();
-    
-    Resolver getResolver(String extension);
 }

@@ -18,7 +18,9 @@ package com.cyclopsgroup.waterview.core;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
+import com.cyclopsgroup.waterview.Resolver;
 import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * Valve to parse URL
@@ -37,6 +39,58 @@ public class ParseURLValve implements Valve
             throws Exception
     {
         String path = runtime.getHttpServletRequest().getPathInfo();
-        System.out.println(path);
+        boolean extensionStarted = false;
+        StringBuffer subPath = new StringBuffer();
+        StringBuffer extension = new StringBuffer();
+        Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
+        String pagePath = null;
+        while (path.charAt(0) == '/')
+        {
+            path = path.substring(1);
+        }
+        if (!path.endsWith("/"))
+        {
+            path += '/';
+        }
+        for (int i = 0; i < path.length(); i++)
+        {
+            char ch = path.charAt(i);
+            if (ch == '.')
+            {
+                extensionStarted = true;
+            }
+            if (ch == '/')
+            {
+                Resolver resolver = null;
+                resolver = waterview.getResolver(extension.toString());
+
+                if (resolver == null)
+                {
+                    resolver = waterview.getDefaultResolver();
+                }
+                if (resolver != null)
+                {
+                    if (resolver.isRenderer())
+                    {
+                        runtime.setPage(subPath.toString());
+                    }
+                    else
+                    {
+                        runtime.getActions().add(subPath.toString());
+                    }
+                }
+                subPath = new StringBuffer();
+                extension = new StringBuffer();
+            }
+            else
+            {
+                subPath.append(ch);
+                if (extensionStarted && ch != '.')
+                {
+                    extension.append(ch);
+                }
+            }
+        }
+        runtime.getRenderContext().put("page", pagePath);
     }
 }

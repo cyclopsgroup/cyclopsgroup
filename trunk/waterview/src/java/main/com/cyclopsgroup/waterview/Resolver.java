@@ -19,15 +19,17 @@ package com.cyclopsgroup.waterview;
 import org.apache.avalon.framework.service.ServiceManager;
 
 /**
- * TODO Add javadoc for class
+ * Resolver
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public interface Resolver
 {
+    boolean isRenderer();
+
     /**
      * Method resolve() in class Resolver
-     *
+     * 
      * @param path
      * @param runtime
      * @param serviceManager
