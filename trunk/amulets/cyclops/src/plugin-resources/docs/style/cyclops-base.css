@@ -1,7 +1,8 @@
-body, td, th, select, input, li
+body, input, select, textarea
 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #666666;
 }
 
 body
@@ -70,83 +71,9 @@ div.subsection div.subsectionTitle
     line-height: 24px;
 }
 
-#documentWrapperBlock
-{
-    text-align:center;
-}
 
-#documentBlock
+div.source pre
 {
-    text-align: left;
-    width: 100%;
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#bannerBlock
-{
-    width: 100%;
-    clear: both;
-}
-
-#organizationBannerBlock
-{
-    float: left;
-    width: 67%;
-    vertical-align: middle;
-}
-
-#projectBannerBlock
-{
-    float: left;
-    width: 33%;
-    height: 80px;
-    background: url(../images/banner_right.gif) right no-repeat;
-}
-
-#projectBannerBlock h3
-{
-    font-weight: bold;
-    font-size: 14px;
-}
-
-#languageBarBlock
-{
-    width: 100%;
-    clear: both;
-    text-align: right;
-}
-
-#navigatorBlock
-{
-    float: left;
-    width: 17%;
-}
-
-#bodyBlock
-{
-    float:left;
-    width: 66%;
-    padding-top: 20px;
-}
-
-#adBlock
-{
-    float:left;
-    width: 15%;
-}
-
-#copyrightsBlock
-{
-    text-align: center;
-    width: 100%;
-    clear: both;
-}
-
-#poweredbyBlock
-{
-    text-align: center;
-    width: 100%;
-    clear: both;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 11px;
 }

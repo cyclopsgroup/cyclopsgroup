@@ -23,7 +23,7 @@
 				</x:if>
 				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-print.css" media="print"/>
 				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-base.css" media="all"/>
-				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops.css" media="all"/>
+				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-style.css" media="all"/>
 				<link rel="shortcut icon" href="${relativePath}/favicon.ico" type="image/x-icon"/>
 				<util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
 				<j:if test="${projectCssFile.exists()}">
@@ -36,125 +36,135 @@
 				</x:forEach>
 				<jsl:applyTemplates select="$doc/document/head/*"/>
 			</head>
-			<x:element name="body">
-				<j:whitespace trim="true">
-					<x:attribute name="class">composite</x:attribute>
-					<x:forEach var="attr" select="$doc/document/body/@*">
-						<x:attribute name="${attr.name}">${attr.value}</x:attribute>
-					</x:forEach>
-				</j:whitespace>
-				<div id="documentWrapperBlock">
-					<div id="documentBlock">
-						<div id="bannerBlock">
-							<div id="organizationBannerBlock">
-								<j:set var="logo" value="${pom.organization.logo}"/>
-								<j:if test="${!empty(logo)}">
-									<!-- set url to org or project url -->
-									<j:set var="url" value="${pom.organization.url}"/>
-									<j:if test="${!empty(url)}">
-										<j:set var="home" value="${pom.organization.url}"/>
-									</j:if>
-									<j:if test="${empty(url)}">
-										<j:set var="home" value="${pom.url}"/>
-									</j:if>
-									<!-- set image to relative or complete -->
-									<j:set var="image" value="${pom.organization.logo}"/>
-									<j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
-										<j:set var="image" value="${relativePath}${image}"/>
-									</j:if>
-									<a href="${home}" id="organizationLogo">
-										<img src="${image}" alt="${pom.organization.name}"/>
-									</a>
-								</j:if>
-							</div>
-							<div id="projectBannerBlock">
-								<j:set var="showProjectDescription" value="${maven.cyclops.xdoc.showProjectDescription}"/>
-								<j:if test="${showProjectDescription}">
-									<h3>
-										<a href="${pom.url}" title="Go to ${pom.name}">${pom.name}</a>
-									</h3>
-									<p>
-										<a href="${pom.url}" title="Go to ${pom.name}">${pom.shortDescription}</a>
-									</p>
-								</j:if>
-							</div>
-							<div id="languageBarBlock">
-								<script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
-								<script language="javascript" type="text/javascript"><![CDATA[
+			<body>
+				<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td align="center">
+							<table width="720" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td rowspan="2" height="60" align="left">
+										<a href="${pom.organization.url}">
+											<img src="${relativePath}${pom.organization.logo}" border="0"/>
+										</a>
+									</td>
+									<td align="right">
+										<form method="get" action="http://www.google.com/search">
+											<input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
+											<input type="hidden" name="domains" value="${pom.organization.url}"/>
+											Search in site
+											<input type="text" id="q" size="20" name="q" maxlength="255" value=""/>
+											<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search" align="absmiddle"/>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td align="right" valign="bottom" id="languageBarBlock">
+										<script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
+										<script language="javascript" type="text/javascript"><![CDATA[
 languageLinks("${pom.url}${location}", "${relativePath}");
 ]]></script>
-							</div>
-						</div>
-						<div id="navigatorBlock">
-							<p>
-								<img src="${relativePath}/images/none.png" width="1" height="20" alt=""/>
-							</p>
-							<x:if select="$nav">
-								<jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header']"/>
-							</x:if>
-							<jsl:applyTemplates select="$projectNav/body/menu"/>
-							<x:if select="$nav/body/links">
-								<jsl:applyTemplates select="$nav/body/links"/>
-							</x:if>
-							<x:if select="$nav/body/search">
-								<jsl:applyTemplates select="$nav/body/search"/>
-							</x:if>
-							<p>
-								<img src="${relativePath}/images/none.png" width="1" height="100" alt=""/>
-							</p>
-						</div>
-						<div id="bodyBlock">
-							<jsl:applyTemplates select="$doc/document/body/*"/>
-						</div>
-						<div id="adBlock">
-							<script language="javascript" type="text/javascript" src="${relativePath}/googleads.js"/>
-							<script language="javascript" type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"/>
-						</div>
-						<div id="copyrightsBlock">
-							<p style="padding: 3px">
-                            All rights reserved, 2002 ~ 2004, Cyclops Group. <span id="lastPublished">Last published: ${build.date}</span>
-							</p>
-							<jsl:applyTemplates select="$nav/body/footer"/>
-						</div>
-						<div id="poweredbyBlock">
-							<div align="center">
-								<table border="0" cellpadding="0" cellspacing="1">
-									<tr>
-										<td>
-											<img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" alt=""/>
-										</td>
-										<td>
-											<a href="http://validator.w3.org/check?uri=${pom.url}${location}">
-												<img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" width="88" height="31"/>
-											</a>
-										</td>
-										<td>
-											<a href="http://www.blogger.com" title="www.blogger.com">
-												<img src="http://buttons.blogger.com/bloggerbutton1.gif" width="88" height="31" border="0" alt="http://www.blogger.com"/>
-											</a>
-										</td>
-										<td>
-											<a href="http://sourceforge.net" title="sourceforge.net">
-												<img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0" alt="SourceForge Foundation"/>
-											</a>
-										</td>
-										<td>
-											<a href="http://maven.apache.org" title="maven.apache.org">
-												<img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0" alt="Powered by Maven"/>
-											</a>
-										</td>
-										<td>
-											<a href="http://sourceforge.net/donate/index.php?group_id=91358">
-												<img src="http://images.sourceforge.net/images/project-support.jpg" alt="Donate to Cyclops Group" border="0"/>
-											</a>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</x:element>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td height="4" bgcolor="#CCCCCC"/>
+					</tr>
+					<tr>
+						<td height="2"/>
+					</tr>
+					<tr>
+						<td align="center" class="banner">
+							<table width="720" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td>
+										<j:set var="bannerImage">/images/banners/default.jpg</j:set>
+										<x:if select="$doc/document/properties/banner">
+											<j:set var="bannerImage">
+												<x:expr select="$doc/document/properties/banner"/>
+											</j:set>
+										</x:if>
+										<img src="${relativePath}${bannerImage}" border="0"/>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td height="3" class="banner"/>
+					</tr>
+					<tr>
+						<td align="center">
+							<table width="720" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td width="25%" valign="top" id="navigatorBlock" align="left">
+										<x:if select="$nav">
+											<jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header']"/>
+										</x:if>
+										<jsl:applyTemplates select="$projectNav/body/menu"/>
+										<x:if select="$nav/body/links">
+											<jsl:applyTemplates select="$nav/body/links"/>
+										</x:if>
+										<p>
+											<img src="${relativePath}/images/none.png" width="1" height="100" alt=""/>
+										</p>
+									</td>
+									<td width="75%" align="left" valign="top" id="bodyBlock">
+										<jsl:applyTemplates select="$doc/document/body/*"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center" id="copyrightsBlock">
+										<p style="padding: 3px">
+                            All rights reserved, 2002 ~ 2004, Cyclops Group.</p>
+										<p>
+											<span id="lastPublished">Last published: ${build.date}</span>
+										</p>
+										<jsl:applyTemplates select="$nav/body/footer"/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center" id="poweredbyBlock">
+										<table border="0" cellpadding="0" cellspacing="1">
+											<tr>
+												<td>
+													<img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" alt=""/>
+												</td>
+												<td>
+													<a href="http://validator.w3.org/check?uri=${pom.url}${location}">
+														<img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" width="88" height="31"/>
+													</a>
+												</td>
+												<td>
+													<a href="http://www.blogger.com" title="www.blogger.com">
+														<img src="http://buttons.blogger.com/bloggerbutton1.gif" width="88" height="31" border="0" alt="http://www.blogger.com"/>
+													</a>
+												</td>
+												<td>
+													<a href="http://sourceforge.net" title="sourceforge.net">
+														<img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0" alt="SourceForge Foundation"/>
+													</a>
+												</td>
+												<td>
+													<a href="http://maven.apache.org" title="maven.apache.org">
+														<img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0" alt="Powered by Maven"/>
+													</a>
+												</td>
+												<td>
+													<a href="http://sourceforge.net/donate/index.php?group_id=91358">
+														<img src="http://images.sourceforge.net/images/project-support.jpg" alt="Donate to Cyclops Group" border="0"/>
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</body>
 		</html>
 	</jsl:template>
 	<!-- process the properties of the doc -->
@@ -246,40 +256,6 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 				</td>
 			</tr>
 		</table>
-	</jsl:template>
-	<!-- Google site search -->
-	<jsl:template match="search" trim="true">
-		<form method="get" action="http://www.google.com/search">
-			<input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
-			<table width="100%" cellspacing="0" border="0" class="menu">
-				<tr>
-					<th colspan="2">Google Search</th>
-				</tr>
-				<tr>
-					<td>Keyword</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="q" size="12" name="q" maxlength="255" value=""/>
-					</td>
-					<td>
-						<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search"/>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">Within</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<select name="domains" onchange="this.form.sitesearch.value=this.options[this.selectedIndex].value">
-							<option value="${pom.organization.url}" selected="selected">${pom.organization.name}</option>
-							<option value="${pom.url}">${pom.name}</option>
-							<option value="">Everything</option>
-						</select>
-					</td>
-				</tr>
-			</table>
-		</form>
 	</jsl:template>
 	<!-- process a documentation section -->
 	<jsl:template match="section" trim="true">
