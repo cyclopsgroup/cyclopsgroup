@@ -363,7 +363,7 @@ public class DefaultEngine
     public synchronized void start() {
         for (Iterator i = pluginNames.iterator(); i.hasNext();) {
             String pluginName = (String) i.next();
-            Plugin plugin = (Plugin) getPlugin(pluginName);
+            Plugin plugin = getPlugin(pluginName);
             try {
                 plugin.start();
             } catch (Exception e) {
