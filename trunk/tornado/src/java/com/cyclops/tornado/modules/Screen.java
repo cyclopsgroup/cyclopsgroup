@@ -8,6 +8,7 @@ package com.cyclops.tornado.modules;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.turbine.RunData;
+import org.apache.turbine.TemplateContext;
 import org.apache.turbine.TemplateScreen;
 
 import com.cyclops.tornado.BrokerManager;
@@ -17,8 +18,15 @@ import com.cyclops.tornado.bo.ObjectBroker;
  * @email g-cyclops@users.sourceforge.net
  */
 public class Screen extends TemplateScreen {
-    /** Logger object */
-    protected Log logger = LogFactory.getLog(getClass());
+    /** Method getBrokerManager()
+     * @param data RunData object
+     * @return BrokerManager instance
+     */
+    public static BrokerManager getBrokerManager(RunData data) {
+        BrokerManager brokerManager =
+            (BrokerManager) data.getTemp(BrokerManager.KEY_IN_CONTEXT);
+        return brokerManager;
+    }
     /** Method newObjectBroker()
      * @param instanceClass class of object broker
      * @param data RunData object
@@ -31,13 +39,13 @@ public class Screen extends TemplateScreen {
         throws Exception {
         return getBrokerManager(data).getObjectBroker(instanceClass);
     }
-    /** Method getBrokerManager()
-     * @param data RunData object
-     * @return BrokerManager instance
+    /** Logger object */
+    protected Log logger = LogFactory.getLog(getClass());
+    /** Implementation of method doBuildTemplate() in this class
+     * @see org.apache.turbine.modules.Module#doBuildTemplate(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
      */
-    public static BrokerManager getBrokerManager(RunData data) {
-        BrokerManager brokerManager =
-            (BrokerManager) data.getTemp(BrokerManager.KEY_IN_CONTEXT);
-        return brokerManager;
+    protected void doBuildTemplate(RunData arg0, TemplateContext arg1)
+        throws Exception {
+        //do nothing
     }
 }

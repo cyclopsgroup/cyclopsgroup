@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.turbine.RunData;
 import org.apache.turbine.TemplateAction;
+import org.apache.turbine.TemplateContext;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.bo.ObjectBroker;
@@ -17,8 +18,13 @@ import com.cyclops.tornado.bo.ObjectBroker;
  * @email g-cyclops@users.sourceforge.net
  */
 public class Action extends TemplateAction {
-    /** Logger object */
-    protected Log logger = LogFactory.getLog(getClass());
+    /** Method getBrokerManager()
+     * @param data RunData object
+     * @return BrokerManager instance
+     */
+    public static BrokerManager getBrokerManager(RunData data) {
+        return Screen.getBrokerManager(data);
+    }
     /** Method newObjectBroker()
      * @param instanceClass class of object broker
      * @param data RunData object
@@ -31,7 +37,12 @@ public class Action extends TemplateAction {
         throws Exception {
         return Screen.getObjectBroker(instanceClass, data);
     }
-    public static BrokerManager getBrokerManager(RunData data) {
-        return Screen.getBrokerManager(data);
+    /** Logger object */
+    protected Log logger = LogFactory.getLog(getClass());
+    /** Implementation of method doPerform() in this class
+     * @see org.apache.turbine.modules.actions.TemplateAction#doPerform(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
+     */
+    public void doPerform(RunData data, TemplateContext ctx) throws Exception {
+        //do nothing
     }
 }
