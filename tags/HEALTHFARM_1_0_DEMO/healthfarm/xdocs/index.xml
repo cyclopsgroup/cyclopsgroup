@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>What is HealthFarm?</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="What is HealthFarm">
+            <p>HealthFarm is a simple web application based on <a href="http://cyclops-group.sourceforge.net/projects/tornado">Tornado</a>, which helps people to understand how Tornado accelates the development process of java web application.</p>
+            <p>Current version of HealthFarm is demo version. I'm still working on it.</p>
+        </section>
+        <section name="Demo version restriction">
+            <p>A lot of features are not implemented in this project, here's a list of functions in HealthFarm.</p>
+            <table>
+                <tr>
+                    <th>Function Description</th>
+                    <th>Implemented?</th>
+                </tr>
+                <tr>
+                    <td>Associate additional information for diet to system users.</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Save every day record into database, provide query page.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Maintain the standard daily calorie amount for different kind of people.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Intelligently avoid ambiguous overlapped settings.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Multidimension reports for user diet, and analysis of them.</td>
+                    <td>No</td>
+                </tr>
+            </table>
+        </section>
+        <section name="XP methodology">
+            <p>The project is developed under the strict XP methodology, which makes it prossible for small team to deliver high quality, fully tested and well documentation equipped solutions rapidly. </p>
+            <p>Project Documentation detailedly described this project from many aspects.</p>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>What is HealthFarm?</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Schemas">
+            <table>
+                <tr>
+                    <td>
+                        <a href="database/id-table-schema.html">Id table</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="database/tornado-schema.html">Tornado</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="database/healthfarm-schema.html">HealthFarm</a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>

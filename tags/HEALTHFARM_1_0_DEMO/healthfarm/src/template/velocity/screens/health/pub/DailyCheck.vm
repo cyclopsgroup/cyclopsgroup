@@ -1,0 +1,107 @@
+<h2>Get your advice today</h2>
+#if($profileNotExist)
+	<table width="100%">
+		<form method="post" action="$link.setAction("health.HealthAction").setPage("health,pub,DailyCheck.vm")">
+		<tr>
+			<td colspan="2" class="title">You have not create your profile, please fill this form first</td>
+		</tr>
+		<tr>
+			<td>Year of birth:</td>
+			<td><input type="text" name="year_of_birth" size="5" value="1970"/></td>
+		</tr>
+		<tr>
+			<td>Weight:</td>
+			<td><input type="text" name="weight" size="4" value="180"/>Pounds</td>
+		</tr>
+		<tr>
+			<td>Height:</td>
+			<td><input type="text" name="height" size="4" value="180"/>CM</td>
+		</tr>
+		<tr>
+			<td>Gender:</td>
+			<td>
+				<input type="radio" name="is_female" value="false" checked="checked" id="checkMale"/>
+				<label for="checkMale">Male</label>
+				<input type="radio" name="is_female" value="true" id="checkFemale"/>
+				<label for="checkMale">Female</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="bottom" colspan="2">
+				<input type="submit" name="eventsubmit_doCreateprof" value="Create Profile"/>
+			</td>
+		</tr>
+		</form>
+	</table>
+#else
+	<table width="100%">
+		<form method="post" action="$link.setAction("health.HealthAction").setPage("health,pub,DailyCheck.vm")">
+		<tr>
+			<td colspan="2" class="title">Your Profile</td>
+		</tr>
+		<tr>
+			<td>Year of birth:</td>
+			<td><input type="text" name="year_of_birth" size="5" value="$profile.birthYear"/></td>
+		</tr>
+		<tr>
+			<td>Weight:</td>
+			<td><input type="text" name="weight" size="4" value="$profile.weight"/>Pounds</td>
+		</tr>
+		<tr>
+			<td>Height:</td>
+			<td><input type="text" name="height" size="4" value="$profile.height"/>CM</td>
+		</tr>
+		<tr>
+			<td>Gender:</td>
+			<td>
+				<input type="radio" name="is_female" value="false"#if(!$profile.isFemale) checked="checked"#end id="checkMale"/>
+				<label for="checkMale">Male</label>
+				<input type="radio" name="is_female" value="true"#if($profile.isFemale) checked="checked"#end id="checkFemale"/>
+				<label for="checkMale">Female</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="bottom" colspan="2">
+				<input type="submit" name="eventsubmit_doChangeprof" value="Save Changes"/>
+			</td>
+		</tr>
+		</form>
+	</table>
+	<br/>
+	<table width="100%">
+		<form method="post" action="$link.setAction("health.HealthAction").setPage("health,pub,Advise.vm")">
+		<tr>
+			<td class="title" colspan="4">How about your diet today?</td>
+		</tr>
+		<tr>
+			<th>Selected</th>
+			<th>Diet</th>
+			<th>Calorie</th>
+			<th>Description</th>
+		</tr>
+		#set($items = ["Breakfast", "Lunch", "Dinner", "Food at late night"])
+		#set($count = 0)
+		#foreach($item in $items)
+			<tr #xbgcolor()>
+				<td><input type="checkbox" name="item_index" value="$count" checked="checked"/></td>
+				<td><input type="hidden" name="title_${count}" value="$item" size="16"/>$item</td>
+				<td><input type="text" name="calorie_$count" value="0" size="8"/></td>
+				<td><input type="text" name="description_$count" size="30"/></td>
+			</tr>
+			#set($count = $count+1)
+		#end
+		#foreach($i in [1..4])
+			<tr #xbgcolor()>
+				<td><input type="checkbox" name="item_index" value="$count"/></td>
+				<td><input type="text" name="title_${count}" size="16"/></td>
+				<td><input type="text" name="calorie_$count" value="0" size="8"/></td>
+				<td><input type="text" name="description_$count" size="30"/></td>
+			</tr>
+			#set($count = $count+1)
+		#end
+		<tr>
+			<td colspan="4" class="bottom"><input type="submit" name="eventsubmit_doAddrecord" value="Get Advise"/></td>
+		</tr>
+		</form>
+	</table>
+#end
