@@ -5,11 +5,12 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.navigator;
+import java.net.URL;
 
 import org.apache.commons.configuration.Configuration;
 
+import com.cyclops.tornado.ResourceFinder;
 import com.cyclops.tornado.services.BaseService;
-
 /**
  * @author joeblack
  * @since 2003-9-29 23:20:58
@@ -19,6 +20,7 @@ public class DefaultNavigatorService extends BaseService {
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
     protected void initialize(Configuration conf) throws Exception {
-        // TODO Auto-generated method stub
+        ResourceFinder rf = new ResourceFinder(this);
+        URL[] resources = rf.getResources(conf);
     }
 }
