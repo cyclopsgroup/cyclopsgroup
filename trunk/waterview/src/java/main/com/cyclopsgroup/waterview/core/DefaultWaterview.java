@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Vector;
 
 import org.apache.avalon.framework.configuration.Configurable;
@@ -43,6 +44,8 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     private Resolver defaultResolver;
 
+    private Properties properties;
+
     private Hashtable resolvers;
 
     private ServiceManager serviceManager;
@@ -56,6 +59,9 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
+        properties = new Properties();
+        properties.putAll(System.getProperties());
+
         Configuration[] valveConfs = conf.getChild("pipeline").getChildren(
                 "valve");
         valves = new Vector();
@@ -103,6 +109,16 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
+     * Override method getProperties in super class of DefaultWaterview
+     * 
+     * @see com.cyclopsgroup.waterview.Waterview#getProperties()
+     */
+    public Properties getProperties()
+    {
+        return properties;
+    }
+
+    /**
      * Override method getResolver in super class of DefaultWaterview
      * 
      * @see com.cyclopsgroup.waterview.Waterview#getResolver(java.lang.String)
@@ -122,7 +138,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         for (Iterator i = valves.iterator(); i.hasNext();)
         {
             Valve valve = (Valve) i.next();
-            valve.process(runtime, serviceManager);
+            valve.process(runtime);
         }
     }
 

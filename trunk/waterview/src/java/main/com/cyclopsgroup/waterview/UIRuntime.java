@@ -23,8 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cyclopsgroup.gearset.bean.ValueParser;
-import com.cyclopsgroup.gearset.runtime.Context;
+import org.apache.avalon.framework.service.ServiceManager;
 
 /**
  * Runtime objects
@@ -33,6 +32,13 @@ import com.cyclopsgroup.gearset.runtime.Context;
  */
 public interface UIRuntime
 {
+    /**
+     * Get modifiable processor list
+     * 
+     * @return Modifiable list
+     */
+    List getActions();
+
     /**
      * Get original servlet request object
      * 
@@ -62,20 +68,6 @@ public interface UIRuntime
     Locale getLocale();
 
     /**
-     * Get modifiable processor list
-     * 
-     * @return Modifiable list
-     */
-    List getActions();
-
-    /**
-     * Get context for page rendering
-     * 
-     * @return Context interface
-     */
-    Context getRenderContext();
-
-    /**
      * Method getRenderTemplate() in class WebRuntime
      * 
      * @return Render template
@@ -83,11 +75,25 @@ public interface UIRuntime
     String getPage();
 
     /**
+     * Get context for page rendering
+     * 
+     * @return Context interface
+     */
+    UIContext getUIContext();
+
+    /**
      * Get parameter parser for request parameters
      * 
      * @return Vaue parser interface
      */
     ValueParser getRequestParameters();
+
+    /**
+     * Method getComponentManager() in class UIRuntime
+     * 
+     * @return
+     */
+    ServiceManager getServiceManager();
 
     /**
      * Method setRenderTemplate() in class WebRuntime

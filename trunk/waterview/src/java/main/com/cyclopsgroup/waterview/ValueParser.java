@@ -14,26 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.ui.body.sample;
+package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.waterview.Page;
-import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * List report page
+ * Value parser object
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ListReport implements Page
+public abstract class ValueParser
 {
-    /**
-     * Override method build in super class of ListReport
-     * 
-     * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime)
-     */
-    public void build(UIRuntime runtime) throws Exception
-    {
-        // TODO Auto-generated method stub
-
-    }
 }

@@ -14,26 +14,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.ui.body.sample;
+package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.waterview.Page;
-import com.cyclopsgroup.waterview.UIRuntime;
+import org.apache.commons.lang.exception.NestableException;
 
 /**
- * List report page
+ * TODO Add javadoc for class
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ListReport implements Page
+public class PageNotFoundException extends NestableException
 {
-    /**
-     * Override method build in super class of ListReport
-     * 
-     * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime)
-     */
-    public void build(UIRuntime runtime) throws Exception
-    {
-        // TODO Auto-generated method stub
+    private String page;
 
+    public PageNotFoundException(String page)
+    {
+        this.page = page;
+    }
+
+    public String getPage()
+    {
+        return page;
     }
 }

@@ -18,8 +18,6 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.Iterator;
 
-import org.apache.avalon.framework.service.ServiceManager;
-
 import com.cyclopsgroup.waterview.Resolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
@@ -31,27 +29,25 @@ import com.cyclopsgroup.waterview.Waterview;
  */
 public class RunResolverValve implements Valve
 {
+
     /**
      * Override method process in super class of RunResolverValve
      * 
-     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime, org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime, ServiceManager serviceManager)
-            throws Exception
+    public void process(UIRuntime runtime) throws Exception
     {
-
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String path = (String) i.next();
-            runModule(path, runtime, serviceManager);
+            runModule(path, runtime);
         }
-
     }
 
-    private void runModule(String path, UIRuntime runtime,
-            ServiceManager serviceManager) throws Exception
+    private void runModule(String path, UIRuntime runtime) throws Exception
     {
-        Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
+        Waterview waterview = (Waterview) runtime.getServiceManager().lookup(
+                Waterview.ROLE);
         int lastDotPosition = path.lastIndexOf('.');
         String extension = path.substring(lastDotPosition + 1);
         Resolver resolver = waterview.getResolver(extension);
@@ -61,7 +57,7 @@ public class RunResolverValve implements Valve
         }
         if (resolver != null)
         {
-            resolver.resolve(path, runtime, serviceManager);
+            resolver.resolve(path, runtime);
         }
     }
 }

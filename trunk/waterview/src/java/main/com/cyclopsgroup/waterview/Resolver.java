@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import org.apache.avalon.framework.service.ServiceManager;
 
 /**
  * Resolver
@@ -32,9 +31,7 @@ public interface Resolver
      * 
      * @param path
      * @param runtime
-     * @param serviceManager
      * @throws Exception
      */
-    void resolve(String path, UIRuntime runtime, ServiceManager serviceManager)
-            throws Exception;
+    void resolve(String path, UIRuntime runtime) throws Exception;
 }

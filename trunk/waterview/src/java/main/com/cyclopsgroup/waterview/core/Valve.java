@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import org.apache.avalon.framework.service.ServiceManager;
-
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -34,9 +32,7 @@ public interface Valve
      * Method process() in class Valve
      * 
      * @param runtime
-     * @param serviceManager
      * @throws Exception
      */
-    void process(UIRuntime runtime, ServiceManager serviceManager)
-            throws Exception;
+    void process(UIRuntime runtime) throws Exception;
 }

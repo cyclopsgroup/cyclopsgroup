@@ -16,9 +16,9 @@
  */
 package com.cyclopsgroup.waterview.ui.action.sample;
 
-import com.cyclopsgroup.gearset.bean.ValueParser;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * Create report action

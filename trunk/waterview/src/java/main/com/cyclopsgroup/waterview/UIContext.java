@@ -14,26 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.ui.body.sample;
-
-import com.cyclopsgroup.waterview.Page;
-import com.cyclopsgroup.waterview.UIRuntime;
+package com.cyclopsgroup.waterview;
 
 /**
- * List report page
+ * Context interface
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ListReport implements Page
+public interface UIContext
 {
-    /**
-     * Override method build in super class of ListReport
-     * 
-     * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime)
-     */
-    public void build(UIRuntime runtime) throws Exception
-    {
-        // TODO Auto-generated method stub
 
-    }
+    boolean containsKey(String key);
+
+    Object get(String name);
+
+    String[] getKeys();
+
+    void put(String name, Object object);
+
+    void remove(String key);
 }

@@ -141,8 +141,8 @@
         <dependency>
             <groupId>plexus</groupId>
             <artifactId>plexus</artifactId>
-            <version>20040901.173959</version>
-            <jar>plexus-20040901.173959.jar</jar>
+            <version>0.17</version>
+            <jar>plexus-0.17.jar</jar>
             <type>jar</type>
             <properties/>
         </dependency>

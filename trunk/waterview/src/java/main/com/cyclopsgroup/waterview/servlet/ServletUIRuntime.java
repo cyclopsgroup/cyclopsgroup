@@ -24,17 +24,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cyclopsgroup.gearset.bean.ValueParser;
-import com.cyclopsgroup.gearset.runtime.Context;
-import com.cyclopsgroup.gearset.runtime.InheritableContext;
+import org.apache.avalon.framework.service.ServiceManager;
+
+import com.cyclopsgroup.waterview.DefaultUIContext;
+import com.cyclopsgroup.waterview.UIContext;
 import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * Default implementation of WebRuntime
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class DefaultWebRuntime implements UIRuntime
+public class ServletUIRuntime implements UIRuntime
 {
 
     private LinkedList actions = new LinkedList();
@@ -43,23 +46,32 @@ public class DefaultWebRuntime implements UIRuntime
 
     private HttpServletResponse httpServletResponse;
 
-    private InheritableContext renderContext;
+    private UIContext uiContext;
 
     private String renderTemplate = "index.html";
 
     private HttpRequestValueParser requestValueParser;
+
+    private ServiceManager serviceManager;
 
     /**
      * Default constructor of default web runtime
      * 
      * @param request Http request object
      * @param response Http response object
+     * @param services ServiceManager object
      */
-    DefaultWebRuntime(HttpServletRequest request, HttpServletResponse response)
+    ServletUIRuntime(HttpServletRequest request, HttpServletResponse response,
+            ServiceManager services) throws Exception
     {
         httpServletRequest = request;
         httpServletResponse = response;
         requestValueParser = new HttpRequestValueParser(request);
+        serviceManager = services;
+        Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
+        DefaultUIContext ctx = new DefaultUIContext();
+        ctx.getContent().putAll(waterview.getProperties());
+        uiContext = ctx;
     }
 
     /**
@@ -70,6 +82,16 @@ public class DefaultWebRuntime implements UIRuntime
     public List getActions()
     {
         return actions;
+    }
+
+    /**
+     * Override method getComponentManager in super class of DefaultWebRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getComponentManager()
+     */
+    public ServiceManager getServiceManager()
+    {
+        return serviceManager;
     }
 
     /**
@@ -123,13 +145,13 @@ public class DefaultWebRuntime implements UIRuntime
     }
 
     /**
-     * Override method getRenderContext in super class of DefaultWebRuntime
+     * Override method getUIContext in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getRenderContext()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
      */
-    public Context getRenderContext()
+    public UIContext getUIContext()
     {
-        return renderContext;
+        return uiContext;
     }
 
     /**

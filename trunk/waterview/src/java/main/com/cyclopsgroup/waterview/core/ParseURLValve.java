@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import org.apache.avalon.framework.service.ServiceManager;
-
 import com.cyclopsgroup.waterview.Resolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
@@ -33,16 +31,16 @@ public class ParseURLValve implements Valve
     /**
      * Override method process in super class of ParseURLValve
      * 
-     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime, org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime, ServiceManager serviceManager)
-            throws Exception
+    public void process(UIRuntime runtime) throws Exception
     {
         String path = runtime.getHttpServletRequest().getPathInfo();
         boolean extensionStarted = false;
         StringBuffer subPath = new StringBuffer();
         StringBuffer extension = new StringBuffer();
-        Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
+        Waterview waterview = (Waterview) runtime.getServiceManager().lookup(
+                Waterview.ROLE);
         String pagePath = null;
         while (path.charAt(0) == '/')
         {
@@ -91,6 +89,6 @@ public class ParseURLValve implements Valve
                 }
             }
         }
-        runtime.getRenderContext().put("page", pagePath);
+        runtime.getUIContext().put("page", pagePath);
     }
 }

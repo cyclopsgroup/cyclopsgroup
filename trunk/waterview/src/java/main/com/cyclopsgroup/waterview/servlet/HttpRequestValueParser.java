@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.cyclopsgroup.gearset.bean.ValueParser;
+import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * Servet request implemented value parser

@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.gearset.runtime.Context;
-
 /**
  * TODO Add javadoc for class
  * 
@@ -30,8 +28,7 @@ public interface Page
      * Method build() in class Page
      * 
      * @param runtime
-     * @param context
      * @throws Exception
      */
-    void build(UIRuntime runtime, Context context) throws Exception;
+    void build(UIRuntime runtime) throws Exception;
 }

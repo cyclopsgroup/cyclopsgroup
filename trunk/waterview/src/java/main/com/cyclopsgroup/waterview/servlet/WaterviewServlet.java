@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -117,11 +118,15 @@ public class WaterviewServlet extends HttpServlet
         embedder.addContextValue("basedir", config.getServletContext()
                 .getRealPath(""));
         Enumeration i = config.getInitParameterNames();
+        Properties initProperties = new Properties();
+        String waterviewHome = config.getServletContext().getRealPath("");
+        initProperties.put("waterview.home", waterviewHome);
         while (i.hasMoreElements())
         {
             String key = (String) i.nextElement();
             String value = config.getInitParameter(key);
             embedder.addContextValue(key, value);
+            initProperties.setProperty(key, value);
         }
         File file = new File(conf);
         if (!file.isFile())
@@ -139,8 +144,11 @@ public class WaterviewServlet extends HttpServlet
         }
         try
         {
+            System.setProperties(initProperties);
             embedder.setConfiguration(file.toURL());
             embedder.start();
+            Waterview waterview = (Waterview) embedder.lookup(Waterview.ROLE);
+            waterview.getProperties().putAll(initProperties);
         }
         catch (Exception e)
         {
@@ -151,9 +159,11 @@ public class WaterviewServlet extends HttpServlet
     private void internallyProcess(HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException
     {
-        DefaultWebRuntime runtime = new DefaultWebRuntime(request, response);
+        ServletUIRuntime runtime = null;
         try
         {
+            runtime = new ServletUIRuntime(request, response,
+                    new ServiceManagerAdapter(embedder.getContainer()));
             Waterview waterview = (Waterview) getContainer().lookup(
                     Waterview.ROLE);
             waterview.process(runtime);
