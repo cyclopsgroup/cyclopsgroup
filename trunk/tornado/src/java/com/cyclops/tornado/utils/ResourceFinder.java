@@ -208,7 +208,7 @@ public final class ResourceFinder {
     /** Empty URL object array */
     public static final URL[] EMPTY_URL_ARRAY = new URL[0];
     private static Log logger = LogFactory.getLog(ResourceFinder.class);
-    private static final URL findResource(Class clazz, String name) {
+    private static URL findResource(Class clazz, String name) {
         String className =
             StringUtils.replaceOnce(
                 clazz.getName(),
@@ -221,7 +221,7 @@ public final class ResourceFinder {
      * @param name Resource name
      * @return URL object, null if not found
      */
-    public static final URL getResource(Class clazz, String name) {
+    public static URL getResource(Class clazz, String name) {
         Class c = clazz;
         URL ret = null;
         while (ret == null && c != null) {
@@ -235,7 +235,7 @@ public final class ResourceFinder {
      * @param names Resource name array
      * @return URL array result
      */
-    public static final URL[] getResources(Class clazz, String[] names) {
+    public static URL[] getResources(Class clazz, String[] names) {
         List ret = new ArrayList();
         for (int i = 0; i < names.length; i++) {
             String name = names[i];

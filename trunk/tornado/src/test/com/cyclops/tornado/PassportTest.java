@@ -207,6 +207,7 @@ public class PassportTest extends TestCase {
         passport.addPermission("aa:1|*|aaa");
         assertTrue(passport.accept(ta));
     }
+    /** Inner asset class */
     private final class TestAsset implements Asset {
         private String expression;
         private TestAsset(String expr) {

@@ -199,6 +199,7 @@ import junit.framework.TestCase;
  * @email g-cyclops@users.sourceforge.net
  */
 public class ResourceFinderTest extends TestCase {
+    /** Inner class */
     private class T extends ResourceFinderTest {
         //nothing
     }

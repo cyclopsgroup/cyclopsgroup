@@ -215,8 +215,8 @@ import com.cyclops.tornado.utils.ResourceFinder;
  * The class is created at 2003-12-30 2:16:00
  */
 public class FolderNavigatorLoader extends ResourceNavigatorLoader {
-
-    private class NameFilter implements FileFilter {
+    /** Name filter class */
+    private final class NameFilter implements FileFilter {
 
         private RE regexp;
 

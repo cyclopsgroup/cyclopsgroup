@@ -213,6 +213,7 @@ import com.cyclops.tornado.services.Restartable;
 public abstract class AbstractUserService
     extends BaseService
     implements UserService, Restartable {
+    /** Thread to check expired entry */
     private final class CheckingThread implements Runnable {
         public void run() {
             long checkInteval =
@@ -240,6 +241,7 @@ public abstract class AbstractUserService
             }
         }
     }
+    /** User entry */
     private final class UserEntry {
         private long latestAccess;
         private User user;

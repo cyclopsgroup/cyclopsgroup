@@ -195,7 +195,6 @@
 package com.cyclops.tornado.services;
 import java.util.HashSet;
 
-import org.apache.fulcrum.InstantiationException;
 import org.apache.fulcrum.Service;
 import org.apache.fulcrum.TurbineServices;
 /**
@@ -208,8 +207,7 @@ public class SlowServiceManager extends TurbineServices {
     /** Initialize this service if it's not initialized
      * @see org.apache.fulcrum.ServiceBroker#getService(java.lang.String)
      */
-    public Service getService(String serviceName)
-        throws InstantiationException {
+    public Service getService(String serviceName) {
         if (!initializedServices.contains(serviceName)) {
             try {
                 initService(serviceName);

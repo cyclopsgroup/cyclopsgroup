@@ -227,7 +227,7 @@ public class TornadoRunDataService extends TurbineRunDataService {
         HttpServletRequest request,
         HttpServletResponse response,
         ServletConfig config)
-        throws ServiceException, IllegalArgumentException {
+        throws ServiceException {
         RunData data = super.getRunData(key, request, response, config);
         data.setTemp(BrokerManager.KEY_IN_CONTEXT, new BrokerManager());
         return data;
