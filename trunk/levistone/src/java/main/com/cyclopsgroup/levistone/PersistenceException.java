@@ -16,12 +16,33 @@
  */
 package com.cyclopsgroup.levistone;
 
+import org.apache.commons.lang.exception.NestableException;
+
 /**
  * Levistone specified exception
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PersistenceException extends Exception
+public class PersistenceException extends NestableException
 {
 
+    /**
+     * Constructor of PersistenceException
+     * 
+     * @param msg
+     */
+    public PersistenceException(String msg)
+    {
+        super(msg);
+    }
+
+    /**
+     * Constructor of PersistenceException
+     * 
+     * @param e
+     */
+    public PersistenceException(Throwable e)
+    {
+        super(e);
+    }
 }

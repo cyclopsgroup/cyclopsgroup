@@ -27,22 +27,8 @@ public interface PersistenceManager
     String ROLE = PersistenceManager.class.getName();
 
     /**
-     * Cancel exsiting session
-     *
-     * @param session
-     */
-    void cancelSession(Session session);
-
-    /**
-     * Commit and close existing session
-     *
-     * @param session
-     */
-    void closeSession(Session session);
-
-    /**
      * Create empty query with given type
-     *
+     * 
      * @param entityType Type of entity class
      * @return New query object
      */
@@ -50,7 +36,7 @@ public interface PersistenceManager
 
     /**
      * Create named query with given name
-     *
+     * 
      * @param name Queyr name
      * @return Named query object
      */
@@ -58,14 +44,14 @@ public interface PersistenceManager
 
     /**
      * Get current active sessions
-     *
+     * 
      * @return Active session array
      */
     Session[] getActiveSessions();
 
     /**
      * Start new persistence session
-     *
+     * 
      * @return New session instance
      * @throws PersistenceException Persistence exception
      */
@@ -73,7 +59,7 @@ public interface PersistenceManager
 
     /**
      * Open new session with given persistence name
-     *
+     * 
      * @param persistenceName
      * @return
      * @throws PersistenceException

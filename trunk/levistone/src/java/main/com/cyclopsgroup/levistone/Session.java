@@ -26,6 +26,7 @@ import java.util.Map;
 
 public interface Session
 {
+
     /** Default session name */
     String DEFAULT_NAME = "default";
 
@@ -38,8 +39,18 @@ public interface Session
     Session[] EMPTY_ARRAY = new Session[0];
 
     /**
+     * Method cancel() in class Session
+     */
+    void cancel();
+
+    /**
+     * Method close() in class Session
+     */
+    void close();
+
+    /**
      * Execute named query with given attributes
-     *
+     * 
      * @param query Named query object
      * @param attributes Attribute values
      * @return Query result
@@ -50,7 +61,7 @@ public interface Session
 
     /**
      * Execute given query object
-     *
+     * 
      * @param query
      * @return
      * @throws QueryException
@@ -59,7 +70,7 @@ public interface Session
 
     /**
      * Execute sql string query
-     *
+     * 
      * @param sqlQuery Sql string
      * @return Query result
      * @throws QueryException
@@ -68,46 +79,46 @@ public interface Session
 
     /**
      * Return session unique id
-     *
+     * 
      * @return Session id
      */
     String getId();
 
     /**
      * Get name of the persistence definition
-     *
+     * 
      * @return Name of pm
      */
     String getName();
 
     /**
      * Get persistence manager hosting it
-     *
+     * 
      * @return PersistenceManager object
      */
     PersistenceManager getPersistenceManager();
 
     /**
+     * Get type session with given entity type
+     * 
+     * @param entityType Class of entity
+     * @return Typed session object
+     */
+    TypedSession getTypedSession(Class entityType);
+
+    /**
      * If session is closed
-     *
+     * 
      * @return If session is closed
      */
     boolean isClosed();
 
     /**
      * Execute query and find out the first entity object
-     *
+     * 
      * @param query Query object
      * @return Entity object or null if not found
      * @throws QueryException
      */
     Object lookup(Query query) throws QueryException;
-
-    /**
-     * Get type session with given entity type
-     *
-     * @param entityType Class of entity
-     * @return Typed session object
-     */
-    TypedSession type(Class entityType);
 }

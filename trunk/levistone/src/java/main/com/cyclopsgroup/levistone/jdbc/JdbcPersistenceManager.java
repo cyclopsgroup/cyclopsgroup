@@ -17,9 +17,8 @@
 package com.cyclopsgroup.levistone.jdbc;
 
 import com.cyclopsgroup.levistone.NamedQuery;
-import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.Session;
-import com.cyclopsgroup.levistone.spi.BasePersistenceManager;
+import com.cyclopsgroup.levistone.base.BasePersistenceManager;
 
 /**
  * Jdbc implemented persistence manager
@@ -28,32 +27,9 @@ import com.cyclopsgroup.levistone.spi.BasePersistenceManager;
  */
 public class JdbcPersistenceManager extends BasePersistenceManager
 {
-
     /**
      * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#cancelSession(com.cyclopsgroup.levistone.Session)
-     */
-    public void cancelSession(Session session)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#closeSession(com.cyclopsgroup.levistone.Session)
-     */
-    public void closeSession(Session session)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.String)
      */
     public NamedQuery createQuery(String name)
@@ -63,23 +39,11 @@ public class JdbcPersistenceManager extends BasePersistenceManager
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#getActiveSessions()
+     * Override method doOpenSession in super class of JdbcPersistenceManager
+     * 
+     * @see com.cyclopsgroup.levistone.base.BasePersistenceManager#doOpenSession(java.lang.String)
      */
-    public Session[] getActiveSessions()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#openSession(java.lang.String)
-     */
-    public Session openSession(String persistenceName)
-            throws PersistenceException
+    protected Session doOpenSession(String persistenceName) throws Exception
     {
         // TODO Auto-generated method stub
         return null;

@@ -14,37 +14,58 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone.spi;
+package com.cyclopsgroup.levistone.base;
 
-import com.cyclopsgroup.levistone.PersistenceException;
-import com.cyclopsgroup.levistone.PersistenceManager;
-import com.cyclopsgroup.levistone.Query;
-import com.cyclopsgroup.levistone.Session;
+import com.cyclopsgroup.levistone.QueryResult;
 
 /**
- * Base implementation of persistence manager
+ * Base query result implementation
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BasePersistenceManager implements PersistenceManager
+public abstract class BaseQueryResult implements QueryResult
 {
+    private int limit = -1;
+
+    private int offset = 0;
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.Class)
+     * @see com.cyclopsgroup.levistone.QueryResult#getLimit()
      */
-    public Query createQuery(Class entityType)
+    public int getLimit()
     {
-        return new Query(entityType);
+        return limit;
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.PersistenceManager#openSession()
+     * @see com.cyclopsgroup.levistone.QueryResult#getOffset()
      */
-    public Session openSession() throws PersistenceException
+    public int getOffset()
     {
-        return openSession(Session.DEFAULT_NAME);
+        return offset;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.QueryResult#setLimit(int)
+     */
+    public void setLimit(int limit)
+    {
+        this.limit = limit;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.QueryResult#setOffset(int)
+     */
+    public void setOffset(int offset)
+    {
+        this.offset = offset;
     }
 }

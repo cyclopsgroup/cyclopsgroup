@@ -23,5 +23,13 @@ package com.cyclopsgroup.levistone;
  */
 public class QueryException extends PersistenceException
 {
-
+    /**
+     * Constructor of QueryException
+     * 
+     * @param msg
+     */
+    public QueryException(String msg)
+    {
+        super(msg);
+    }
 }

@@ -29,8 +29,13 @@ public interface QueryResult
 {
 
     /**
+     * Release resources related to this query result
+     */
+    void close();
+
+    /**
      * Get count of result
-     *
+     * 
      * @return Integer count value
      */
     int count();
@@ -53,17 +58,16 @@ public interface QueryResult
      */
     int getOffset();
 
-
     /**
      * Get iterator of result
-     *
+     * 
      * @return Iterator of result
      */
     Iterator iterator();
 
     /**
      * Get list of result
-     *
+     * 
      * @return List of result
      */
     List list();
@@ -85,5 +89,4 @@ public interface QueryResult
      * @uml.property name="offset"
      */
     void setOffset(int offset);
-
 }
