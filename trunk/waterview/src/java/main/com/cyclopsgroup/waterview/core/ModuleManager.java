@@ -16,12 +16,15 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -39,6 +42,8 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
 {
     /** Role name in container */
     public static final String ROLE = ModuleManager.class.getName();
+
+    private Map moduleCache;
 
     private String[] modulePackageNames = ArrayUtils.EMPTY_STRING_ARRAY;
 
@@ -69,6 +74,19 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
         {
             Configuration packageCon = packages[i];
             addModulePackage(packageCon.getValue());
+        }
+        int cacheSize = conf.getChild("cache-size").getValueAsInteger(-1);
+        if (cacheSize < 0)
+        {
+            moduleCache = new Hashtable();
+        }
+        else if (cacheSize == 0)
+        {
+            moduleCache = null;
+        }
+        else
+        {
+            moduleCache = new LRUMap(cacheSize);
         }
     }
 
@@ -106,7 +124,14 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
         return (module instanceof Action) ? (Action) module : null;
     }
 
-    private Object getModule(String packageName, String moduleName)
+    /**
+     * Get module object
+     *
+     * @param packageName Package name
+     * @param moduleName Module name
+     * @return Module object or null if not found
+     */
+    protected Object getModule(String packageName, String moduleName)
     {
         String className = moduleName.replace('/', '.');
         if (StringUtils.isNotEmpty(packageName))
@@ -120,9 +145,18 @@ public class ModuleManager extends AbstractLogEnabled implements Configurable
                 className = packageName + '.' + className;
             }
         }
+        if (moduleCache != null && moduleCache.containsKey(className))
+        {
+            return moduleCache.get(className);
+        }
         try
         {
-            return Class.forName(className).newInstance();
+            Object ret = Class.forName(className).newInstance();
+            if (moduleCache != null)
+            {
+                moduleCache.put(className, ret);
+            }
+            return ret;
         }
         catch (Exception e)
         {
