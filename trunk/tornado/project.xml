@@ -31,16 +31,23 @@
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
             <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
         </mailingList>
+        <mailingList>
+            <name>Cyclops Group Develop</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop</archive>
+        </mailingList>
     </mailingLists>
     <developers>
         <developer>
             <name>Joel Guo</name>
             <id>joel</id>
-            <email>chinajoeblack@hotmail.com</email>
+            <email>g-cyclops@users.sourceforge.net</email>
             <roles>
-                <role>SA</role>
-                <role>Developer</role>
+                <role>Architect</role>
+                <role>Java Developer</role>
             </roles>
+            <timezone>+8</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -50,6 +57,7 @@
             <roles>
                 <role>Observer</role>
             </roles>
+            <timezone>+8</timezone>
         </developer>
     </developers>
     <dependencies>
@@ -306,6 +314,7 @@
         </dependency>
     </dependencies>
     <build>
+        <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
         <sourceDirectory>src/java</sourceDirectory>
         <aspectSourceDirectory/>
         <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
@@ -350,6 +359,7 @@
         <report>maven-pmd-plugin</report>
         <report>maven-simian-plugin</report>
         <report>maven-clover-plugin</report>
+        <report>maven-jcoverage-plugin</report>
         <report>maven-license-plugin</report>
     </reports>
 </project>
