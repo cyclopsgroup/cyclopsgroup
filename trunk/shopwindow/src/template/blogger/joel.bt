@@ -30,7 +30,7 @@
                     <a name="<$BlogItemTitle$>"></a>
                     <a name="<$BlogItemNumber$>"></a>
                     <div class="subsectionTitle"><$BlogItemTitle$></div>
-                    
+                </div>
             </BlogItemTitle>
             <p>
                 <$BlogItemBody$><br />

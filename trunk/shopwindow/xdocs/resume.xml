@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Jiaqi's Resume</title>
@@ -175,7 +175,7 @@
         <section name="Featured Projects">
             <subsection name="In Systems People">
                 <ul>
-                    <li>ZOPE, PLONE based content management system, 2/2004~Now. Roles: System Architect and Key Developer. The client of this system is Human Development department of World Band in Washington DC. Based on PLONE, this system reorganizes and centralizes mass of existed static content like web pages, documents, topics, news and discussions.</li>
+                    <li>ZOPE, PLONE based content management system, 2/2004~Now. Roles: System Architect and Key Developer. The client of this system is Human Development department of World Bank in Washington DC. Based on PLONE, this system reorganizes and centralizes mass of existed static content like web pages, documents, topics, news and discussions.</li>
                 </ul>
             </subsection>
             <subsection name="In vTradEx">
