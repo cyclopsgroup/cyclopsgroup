@@ -43,52 +43,49 @@
 					</x:forEach>
 				</j:whitespace>
 				<div id="bannerBlock">
-					<table border="0" cellpadding="0" cellpacing="0" width="100%">
-						<tr>
-							<td rowspan="2">
-								<j:set var="logo" value="${pom.organization.logo}"/>
-								<j:if test="${!empty(logo)}">
-									<!-- set url to org or project url -->
-									<j:set var="url" value="${pom.organization.url}"/>
-									<j:if test="${!empty(url)}">
-										<j:set var="home" value="${pom.organization.url}"/>
-									</j:if>
-									<j:if test="${empty(url)}">
-										<j:set var="home" value="${pom.url}"/>
-									</j:if>
-									<!-- set image to relative or complete -->
-									<j:set var="image" value="${pom.organization.logo}"/>
-									<j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
-										<j:set var="image" value="${relativePath}${image}"/>
-									</j:if>
-									<a href="${home}" id="organizationLogo">
-										<img src="${image}" alt="${pom.organization.name}"/>
-									</a>
-								</j:if>
-							</td>
-							<td align="right" valign="top">
-								<script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
-								<script language="javascript" type="text/javascript"><![CDATA[
-languageLinks("${pom.url}${location}", "${relativePath}");
-]]></script>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								<j:set var="pomlogo" value="${pom.logo}"/>
-								<a href="${pom.url}" title="Goto ${pom.name}">
-									<j:if test="${!empty(pomlogo)}">
-										<img src="${relativePath}${pomlogo}" border="0"/>
-									</j:if>
-									<j:if test="${empty(pomlogo)}">
+					<div id="organizationBannerBlock">
+						<j:set var="logo" value="${pom.organization.logo}"/>
+						<j:if test="${!empty(logo)}">
+							<!-- set url to org or project url -->
+							<j:set var="url" value="${pom.organization.url}"/>
+							<j:if test="${!empty(url)}">
+								<j:set var="home" value="${pom.organization.url}"/>
+							</j:if>
+							<j:if test="${empty(url)}">
+								<j:set var="home" value="${pom.url}"/>
+							</j:if>
+							<!-- set image to relative or complete -->
+							<j:set var="image" value="${pom.organization.logo}"/>
+							<j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
+								<j:set var="image" value="${relativePath}${image}"/>
+							</j:if>
+							<a href="${home}" id="organizationLogo">
+								<img src="${image}" alt="${pom.organization.name}"/>
+							</a>
+						</j:if>
+					</div>
+					<div id="projectBannerBlock">
+						<j:set var="pomlogo" value="${pom.logo}"/>
+						<a href="${pom.url}" title="Goto ${pom.name}">
+							<j:if test="${!empty(pomlogo)}">
+								<img src="${relativePath}${pomlogo}" border="0" alt="Goto ${pom.name}"/>
+							</j:if>
+							<j:if test="${empty(pomlogo)}">
 										${pom.name}
 									</j:if>
-								</a>
-							</td>
-						</tr>
-					</table>
+						</a>
+					</div>
+					<div id="languageBarBlock">
+						<script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
+						<script language="javascript" type="text/javascript"><![CDATA[
+languageLinks("${pom.url}${location}", "${relativePath}");
+]]></script>
+					</div>
 				</div>
 				<div id="navigatorBlock">
+					<p>
+						<img src="${relativePath}/images/none.png" width="1" height="20" alt=""/>
+					</p>
 					<x:if select="$nav">
 						<jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header']"/>
 					</x:if>
@@ -100,7 +97,7 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 						<jsl:applyTemplates select="$nav/body/search"/>
 					</x:if>
 					<p>
-						<img src="${relativePath}/images/none.png" width="1" height="100"/>
+						<img src="${relativePath}/images/none.png" width="1" height="100" alt=""/>
 					</p>
 				</div>
 				<div id="bodyBlock">
@@ -206,7 +203,7 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 		<table cellspacing="0" cellpadding="0" border="0">
 			<tr>
 				<td>
-					<img src="${relativePath}/images/li_${_state}.gif"/>
+					<img src="${relativePath}/images/li_${_state}.gif" alt="${_name}"/>
 				</td>
 				<td>
 					<j:if test="${navbean.isSelected(item.get(0))}">
@@ -245,19 +242,19 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 	</jsl:template>
 	<!-- Google site search -->
 	<jsl:template match="search" trim="true">
-		<table width="100%" cellspacing="0" border="0" class="menu">
-			<tr>
-				<th>Google Search</th>
-			</tr>
-			<form method="get" action="http://www.google.com/search">
-				<input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
+		<form method="get" action="http://www.google.com/search">
+			<input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
+			<table width="100%" cellspacing="0" border="0" class="menu">
+				<tr>
+					<th>Google Search</th>
+				</tr>
 				<tr>
 					<td>Keyword</td>
 				</tr>
 				<tr>
 					<td>
 						<input type="text" id="q" size="15" name="q" maxlength="255" value=""/>
-						<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search" align="absbottom"/>
+						<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search"/>
 					</td>
 				</tr>
 				<tr>
@@ -272,8 +269,8 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 						</select>
 					</td>
 				</tr>
-			</form>
-		</table>
+			</table>
+		</form>
 	</jsl:template>
 	<!-- process a documentation section -->
 	<jsl:template match="section" trim="true">

@@ -59,6 +59,7 @@ div.subsection
 div.subsection div.subsectionTitle
 {
     margin-bottom: 10px;
+    margin-top: 10px;
     font-family: Arial, Verdana, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 18px;
@@ -68,6 +69,28 @@ div.subsection div.subsectionTitle
 {
     width: 100%;
     clear: both;
+}
+
+#organizationBannerBlock
+{
+	float: left;
+	width: 60%;
+	vertical-align: middle;
+}
+
+#projectBannerBlock
+{
+	float: left;
+	width: 40%;
+	text-align: right;
+	vertical-align: middle;
+}
+
+#languageBarBlock
+{
+	width: 100%;
+	clear: both;
+	text-align: right;
 }
 
 #navigatorBlock

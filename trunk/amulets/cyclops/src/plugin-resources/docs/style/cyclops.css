@@ -47,7 +47,7 @@ div.section div.sectionTitle
 {
     border-width: 0px 0px 2px 0px;
     border-style: solid;
-    border-color: black;
+    border-color: #666666;
     text-indent: 28px;
     background: url(../images/big_right.gif) left center no-repeat;
 }
@@ -56,16 +56,18 @@ div.subsection div.subsectionTitle
 {
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: black;
-    text-indent: 20px;
+    border-color: #999999;
+    text-indent: 28px;
     background: url(../images/right.gif) left center no-repeat;
+    color: #666666;
 }
 
-#bannerBlock
+#languageBarBlock
 {
-    border-color: #0044CC;
-    border-width: 0px 0px 1px 0px;
+	background-color: #6DFFFF;
+	border-width: 0px 0px 1px 0px;
     border-style: solid;
+    border-color: #0044CC;
 }
 
 #navigatorBlock
