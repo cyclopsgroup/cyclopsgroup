@@ -194,7 +194,7 @@
  */
 package com.cyclops.jrepo;
 
-/** TODO Add javadoc for this class
+/** Manage properties
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
  * Created at 8:51:03 PM Mar 19, 2004

@@ -216,5 +216,28 @@ public interface RepositoryEngine {
      * @return Content instance
      */
     Content getContent(Container container, String contentName);
+    /** Get content from its path
+     * @param path Full path of content
+     * @return Instance of content, null if not found
+     */
     Content getContent(String path);
+    /** Create new content instance
+     * @param container Container of this content
+     * @param contentName Name of this content
+     * @param type ContentType of this content
+     * @return Empty instance of this content
+     */
+    Content create(Container container, String contentName, ContentType type);
+    /** Save content
+     * @param content Content instance to be save
+     */
+    void save(Content content);
+    /** Physically delete a content instance
+     * @param content Content to be delete
+     */
+    void delete(Content content);
+    /** Get instance of TypeManager
+     * @return Instance of TypeManager
+     */
+    ContentTypeManager getTypeManager();
 }

@@ -194,12 +194,12 @@
  */
 package com.cyclops.jrepo;
 
-/** TODO Add javadoc for this class
+/** Native file content
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
  * Created at 10:55:12 AM Mar 22, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface File extends FriendlyContent {
+public interface File extends Content {
 
 }

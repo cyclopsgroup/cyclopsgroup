@@ -194,8 +194,10 @@
  */
 package com.cyclops.jrepo.base;
 
-import com.cyclops.jrepo.Content;
 import com.cyclops.jrepo.Container;
+import com.cyclops.jrepo.Content;
+import com.cyclops.jrepo.ContentType;
+import com.cyclops.jrepo.ContentTypeManager;
 import com.cyclops.jrepo.RepositoryEngine;
 
 /** Basic implementation of RepositoryEngine
@@ -206,17 +208,24 @@ import com.cyclops.jrepo.RepositoryEngine;
  */
 public class BaseRepositoryEngine implements RepositoryEngine {
     private Container rootContainer;
-    /** Override method getRootContainer in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getRootContainer()
+
+    /** Override method create in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#create(com.cyclops.jrepo.Container, java.lang.String, com.cyclops.jrepo.ContentType)
      */
-    public Container getRootContainer() {
-        return rootContainer;
+    public Content create(
+        Container container,
+        String contentName,
+        ContentType type) {
+        // TODO Auto-generated method stub
+        return null;
     }
-    /** Method setRootContainer() in class BaseRepositoryEngine
-     * @param container Container instance
+
+    /** Override method delete in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#delete(com.cyclops.jrepo.Content)
      */
-    public void setRootContainer(Container container) {
-        rootContainer = container;
+    public void delete(Content content) {
+        // TODO Auto-generated method stub
+
     }
     /** Override method getContent in the derived class
      * @see com.cyclops.jrepo.RepositoryEngine#getContent(com.cyclops.jrepo.Container, java.lang.String)
@@ -240,6 +249,34 @@ public class BaseRepositoryEngine implements RepositoryEngine {
     public Content getContent(String path) {
         // TODO Auto-generated method stub
         return null;
+    }
+    /** Override method getRootContainer in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getRootContainer()
+     */
+    public Container getRootContainer() {
+        return rootContainer;
+    }
+
+    /** Override method getTypeManager in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getTypeManager()
+     */
+    public ContentTypeManager getTypeManager() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method save in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#save(com.cyclops.jrepo.Content)
+     */
+    public void save(Content content) {
+        // TODO Auto-generated method stub
+
+    }
+    /** Method setRootContainer() in class BaseRepositoryEngine
+     * @param container Container instance
+     */
+    public void setRootContainer(Container container) {
+        rootContainer = container;
     }
 
 }

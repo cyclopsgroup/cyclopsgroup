@@ -201,21 +201,31 @@ package com.cyclops.jrepo;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface ContentTypeManager extends EngineReferenceable {
+    /** Register a content type factory
+     * @param factory ContentFactory instance to be added
+     */
+    void addFactory(ContentFactory factory);
     /** Method addContentType() in class ContentTypeManager
      * @param contentType Instance of ContentType to be added
+     * @param factoryName Name of content factory
      */
-    void addContentType(ContentType contentType);
+    void addtType(ContentType contentType, String factoryName);
+    /** Method getContentFactories() in class ContentTypeManager
+     * @return Array of content factories
+     */
+    ContentFactory[] getFactories();
+    /** Get content factory by name
+     * @param factoryName ContentFactory name
+     * @return ContentFactory instance, null if not found
+     */
+    ContentFactory getFactory(String factoryName);
     /** Method getContentType() in class ContentTypeManager
      * @param typeName Name of content type
      * @return Instance of ContentType, null if not found
      */
-    ContentType getContentType(String typeName);
+    ContentType getType(String typeName);
     /** List all available content types
      * @return Array of available content types
      */
-    ContentType[] getContentTypes();
-    /** Method getContentFactories() in class ContentTypeManager
-     * @return Array of content factories
-     */
-    ContentFactory[] getContentFactories();
+    ContentType[] getTypes();
 }

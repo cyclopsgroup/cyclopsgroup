@@ -203,33 +203,52 @@ import java.util.Date;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface Content {
-    /** Name of name property */
-    String NAME_PROPERTY = "name";
-    /** Name of unique id property */
-    String UNIQUE_ID_PROPERTY = "uniqueid";
-    
+    /** Created time property name */
     String CREATED_TIME_PROPERTY = "createdtime";
-    String LAST_MODIFIED_PROPERTY = "lastmodified";
-    
+    /** Description property name */
+    String DESCRIPTION_PROPERTY = "description";
     /**Empty content array*/
     Content[] EMPTY_ARRAY = new Content[0];
-    /** Method getPropertyManager() in class Content
-     * @return instance of PropertyManager
-     */
-    PropertyManager getPropertyManager();
-    /** Method getUniqueId() in class Content
-     * @return Unique Id of this content
-     */
-    long getUniqueId();
+    /** Last modified property name */
+    String LAST_MODIFIED_PROPERTY = "lastmodified";
+    /** Name of name property */
+    String NAME_PROPERTY = "name";
+    /** Title property name */
+    String TITLE_PROPERTY = "title";
+    /** Name of unique id property */
+    String UNIQUE_ID_PROPERTY = "uniqueid";
     /** Method getContentType() in class Content
      * @return Instance of content type
      */
     ContentType getContentType();
+
+    /** Method getCreatedTime() in class Content
+     * @return Created time of this content
+     */
+    Date getCreatedTime();
+    /** Method getDescription() in class Content
+     * @return Description of this content
+     */
+    String getDescription();
+    /** Method getLastModified() in class Content
+     * @return Last modified time of this content
+     */
+    Date getLastModified();
     /** Method getName() in class Content
      * @return Name of this object
      */
     String getName();
-    
-    Date getCreatedTime();
-    Date getLastModified();
+    /** Method getPropertyManager() in class Content
+     * @return instance of PropertyManager
+     */
+    PropertyManager getPropertyManager();
+
+    /** Method getTitle() in class Content
+     * @return Title of this content
+     */
+    String getTitle();
+    /** Method getUniqueId() in class Content
+     * @return Unique Id of this content
+     */
+    long getUniqueId();
 }

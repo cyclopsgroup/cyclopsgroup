@@ -194,6 +194,7 @@
  */
 package com.cyclops.jrepo.base;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cyclops.jrepo.Content;
@@ -206,20 +207,48 @@ import com.cyclops.jrepo.PropertyManager;
  * Created at 11:55:10 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class BaseContent implements Content {
-    private PropertyManager propertyManager = new DefaultPropertyManager();
-    private ContentType contentType;
+public class BaseContent implements Content, Serializable {
+    private transient ContentType contentType;
+    private transient PropertyManager propertyManager =
+        new DefaultPropertyManager();
+    /** Simple way to get a property
+     * @param propertyName Name of property
+     * @return Value of property
+     */
+    public Object get(String propertyName) {
+        return getPropertyManager().getProperty(propertyName);
+    }
+    /** Simple way to get a property
+     * @param propertyName Name of property
+     * @param defaultValue Default value of property
+     * @return Value of property
+     */
+    public Object get(String propertyName, Object defaultValue) {
+        return getPropertyManager().getProperty(propertyName, defaultValue);
+    }
     /** Override method getContentType in the derived class
      * @see com.cyclops.jrepo.Content#getContentType()
      */
     public ContentType getContentType() {
         return contentType;
     }
-    /** Method setContentType() in class BaseContent
-     * @param type ContentType object
+    /** Override method getCreatedTime in the derived class
+     * @see com.cyclops.jrepo.Content#getCreatedTime()
      */
-    public void setContentType(ContentType type) {
-        contentType = type;
+    public Date getCreatedTime() {
+        return (Date) get(CREATED_TIME_PROPERTY);
+    }
+    /** Override method getDescription in the derived class
+     * @see com.cyclops.jrepo.Content#getDescription()
+     */
+    public String getDescription() {
+        return (String) get(DESCRIPTION_PROPERTY);
+    }
+    /** Override method getLastModified in the derived class
+     * @see com.cyclops.jrepo.Content#getLastModified()
+     */
+    public Date getLastModified() {
+        return (Date) get(LAST_MODIFIED_PROPERTY);
     }
     /** Override method getName in the derived class
      * @see com.cyclops.jrepo.Content#getName()
@@ -234,20 +263,12 @@ public class BaseContent implements Content {
     public PropertyManager getPropertyManager() {
         return propertyManager;
     }
-    /** Simple way to get a property
-     * @param propertyName Name of property
-     * @param defaultValue Default value of property
-     * @return Value of property
+
+    /** Override method getTitle in the derived class
+     * @see com.cyclops.jrepo.Content#getTitle()
      */
-    public Object get(String propertyName, Object defaultValue) {
-        return getPropertyManager().getProperty(propertyName, defaultValue);
-    }
-    /** Simple way to get a property
-     * @param propertyName Name of property
-     * @return Value of property
-     */
-    public Object get(String propertyName) {
-        return getPropertyManager().getProperty(propertyName);
+    public String getTitle() {
+        return (String) get(TITLE_PROPERTY);
     }
 
     /** Override method getUniqueId in the derived class
@@ -256,16 +277,11 @@ public class BaseContent implements Content {
     public long getUniqueId() {
         return ((Long) get(UNIQUE_ID_PROPERTY, new Long(-1L))).longValue();
     }
-    /** Override method getCreatedTime in the derived class
-     * @see com.cyclops.jrepo.Content#getCreatedTime()
+    /** Method setContentType() in class BaseContent
+     * @param type ContentType object
      */
-    public Date getCreatedTime() {
-        return (Date) get(CREATED_TIME_PROPERTY);
+    public void setContentType(ContentType type) {
+        contentType = type;
     }
-    /** Override method getLastModified in the derived class
-     * @see com.cyclops.jrepo.Content#getLastModified()
-     */
-    public Date getLastModified() {
-        return (Date) get(LAST_MODIFIED_PROPERTY);
-    }
+
 }
