@@ -78,7 +78,7 @@
         
           <title>
             Maven - 
-          News
+          News and Articles
         
           </title>
         
@@ -195,7 +195,7 @@
             <td><img src="../images/black_triangle.gif"></img></td>
             <td>
                 
-      		    <b><a href="../weblogs/news.html">News</a></b>
+      		    <b><a href="../weblogs/news.html">News and Articles</a></b>
       	        
       	        
             </td>
@@ -465,7 +465,7 @@
             <tr>
                 <td>
                     <img src="../images/right.gif" align="absmiddle"></img>
-                    <a name="News Weblog: <$BlogDateHeaderDate$>"><span class="section">News Weblog: <$BlogDateHeaderDate$></span></a>
+                    <a name="<$BlogDateHeaderDate$>"><span class="section"><$BlogDateHeaderDate$></span></a>
                 </td>
                 <td align="right"><a href="#top">TOP</a></td>
             </tr>

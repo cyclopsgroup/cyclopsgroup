@@ -170,6 +170,16 @@
                     <li>Procurement System with XMLRPC support. Roles: Developer. This procurement system is part of Eigenet Habahaba 2000, a ERP solution. It communicates with the ZOPE powered transaction platform in XMLRPC standard.</li>
                 </ul>
             </subsection>
+            <subsection name="Other Projects">
+                <ul>
+                    <li>2003/9. A4Trim project in SourceForge. Roles: Founder and developer. A4Trim is a simplified content management system. It associate content items with a tree structured category hierarchy. Project document is located at <a href="http://albumbuilder.sourceforge.net/a4trim">http://albumbuilder.sourceforge.net/a4trim</a>.</li>
+                    <li>2003/9. Cyclops Groups alliance Web Site. Roles: Founder and developer. This website is the index of all my open source projects. Check it out here <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a>. You can find this resume in the site.</li>
+                    <li>2003/7. Dbdigger in SourceForge. Roles: Founder and developer. A higher API than JDBC for database programming. The project is still under development. <a href="http://dbdigger.sourceforge.net">http://dbdigger.sourceforge.net</a>
+                    </li>
+                    <li>2003/6. Albumbuilder in SourceForge. Roles: Founder and developer. A tool based on Maven to generate html album website from folders of image files. <a href="http://albumbuilder.sourceforge.net">http://albumbuilder.sourceforge.net</a>.</li>
+                    <li>2002/9. My personal website. <a href="http://www.zope.org/Members/joeblack">http://www.zope.org/Members/joeblack</a>. Base on ZOPE application server and DTML language. I just made several pages and put some photos in it.</li>
+                </ul>
+            </subsection>
         </section>
         <section name="Education">
             <p>Zhejiang University. Location: Hangzhou, China. Time: 1996/7~20002/7

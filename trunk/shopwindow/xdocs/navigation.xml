@@ -4,7 +4,7 @@
     <body>
         <menu name="Overview">
             <item name="Home" href="/index.html"/>
-            <item name="News" href="/weblogs/news.html"/>
+            <item name="News and Articles" href="/weblogs/news.html"/>
             <item name="For Developers" href="/developers.html"/>
             <item name="Stories Behind" href="/weblogs/stories.html"/>
             <item name="About Joel" href="/about.html" collapse="true">
@@ -21,6 +21,11 @@
                 <item name="Dependencies" href="/dependencies.html"/>
                 <item name="Source Repository" href="/cvs-usage.html"/>
                 <item name="Issue Tracking" href="/issue-tracking.html"/>
+            </item>
+            <item name="Project Report" href="/maven-reports.html" collapse="true">
+                <item name="Change Log" href="/changelog-report.html"/>
+                <item name="File Activity" href="/file-activity-report.html"/>
+                <item name="Developer Activity" href="/developer-activity-report.html"/>
             </item>
             <item name="SourceForge Summary" href="http://sourceforge.net/projects/cyclops-group/"/>
         </menu>
