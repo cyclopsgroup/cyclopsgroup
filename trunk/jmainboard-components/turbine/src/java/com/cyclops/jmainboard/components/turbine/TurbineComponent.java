@@ -211,7 +211,7 @@ import com.cyclops.jmainboard.impl.DefaultService;
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class TurbineService extends DefaultService {
+public class TurbineComponent extends DefaultService {
 
     /** Component ID */
     public static final String COMPONENT_ID = "org.apach.turbine";
@@ -238,7 +238,7 @@ public class TurbineService extends DefaultService {
                             removedTrFile.getAbsolutePath());
                     removeProperties(conf, removedProperties);
                 } catch (Exception e) {
-                    getLog().debug("Remove turbine properties error", e);
+                    getLog().warn("Remove turbine properties error", e);
                 }
             }
             File trFile = new File(getComponentHome(), tr);
@@ -246,8 +246,9 @@ public class TurbineService extends DefaultService {
                 try {
                     PropertiesConfiguration trProperties = new PropertiesConfiguration(
                             trFile.getAbsolutePath());
+                    addProperties(conf, trProperties);
                 } catch (Exception e) {
-                    getLog().debug("Add properties error", e);
+                    getLog().warn("Add properties error", e);
                 }
             }
         }
@@ -274,6 +275,18 @@ public class TurbineService extends DefaultService {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void addProperties(BaseConfiguration conf,
+            PropertiesConfiguration props) {
+        for (Iterator i = props.getKeys(); i.hasNext();) {
+            String key = (String) i.next();
+            String[] values = props.getStringArray(key);
+            for (int j = 0; j < values.length; j++) {
+                String value = values[j];
+                conf.addProperty(key, value);
             }
         }
     }

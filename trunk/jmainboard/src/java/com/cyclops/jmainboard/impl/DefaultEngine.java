@@ -307,8 +307,8 @@ public class DefaultEngine extends LoggableObject implements Engine {
             try {
                 component.initialize();
             } catch (Exception e) {
-                getLog().debug(
-                        "Can't initialize component [" + component + "]", e);
+                getLog().warn("Can't initialize component [" + component + "]",
+                        e);
             }
         }
         //Register clients for each service in order
@@ -345,7 +345,7 @@ public class DefaultEngine extends LoggableObject implements Engine {
                 }
             } catch (Exception e) {
                 getLog()
-                        .debug(
+                        .warn(
                                 "Can't shutdown service [" + component.getId()
                                         + "]", e);
             }
@@ -363,7 +363,7 @@ public class DefaultEngine extends LoggableObject implements Engine {
                     ((Service) component).startup();
                 }
             } catch (Exception e) {
-                getLog().debug(
+                getLog().warn(
                         "Can't startup service [" + component.getId() + "]", e);
             }
         }

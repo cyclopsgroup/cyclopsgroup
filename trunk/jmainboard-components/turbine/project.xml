@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <extend>../base-project.xml</extend>
     <pomVersion>3</pomVersion>
@@ -27,6 +27,11 @@
             <id>commons-logging</id>
             <version>1.0.3</version>
             <url>http://jakarta.apache.org/commons/logging</url>
+        </dependency>
+        <dependency>
+            <id>jmainboard</id>
+            <version>SNAPSHOT</version>
+            <url>http://cyclops-group.sourceforge.net/project/jmainboard</url>
         </dependency>
         <dependency>
             <id>junit</id>
