@@ -192,98 +192,19 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo.base;
+package com.cyclops.jrepo;
 
 import java.util.Properties;
 
-import com.cyclops.jrepo.Container;
-import com.cyclops.jrepo.Content;
-import com.cyclops.jrepo.ContentType;
-import com.cyclops.jrepo.ContentTypeManager;
-import com.cyclops.jrepo.RepositoryEngine;
 
-/** Basic implementation of RepositoryEngine
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** Interface to manage content physically
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 11:52:30 PM Mar 19, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class BaseRepositoryEngine implements RepositoryEngine {
-    private Container rootContainer;
-
-    /** Override method create in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#create(com.cyclops.jrepo.Container, java.lang.String, com.cyclops.jrepo.ContentType)
-     */
-    public Content create(
-        Container container,
-        String contentName,
-        ContentType type) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** Override method delete in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#delete(com.cyclops.jrepo.Content)
-     */
-    public void delete(Content content) {
-        // TODO Auto-generated method stub
-
-    }
-    /** Override method getContent in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getContent(com.cyclops.jrepo.Container, java.lang.String)
-     */
-    public Content getContent(Container container, String contentName) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** Override method getContent in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getContent(long)
-     */
-    public Content getContent(long uniqueId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** Override method getContent in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getContent(java.lang.String)
-     */
-    public Content getContent(String path) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    /** Override method getRootContainer in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getRootContainer()
-     */
-    public Container getRootContainer() {
-        return rootContainer;
-    }
-
-    /** Override method getTypeManager in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#getTypeManager()
-     */
-    public ContentTypeManager getTypeManager() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** Override method save in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#save(com.cyclops.jrepo.Content)
-     */
-    public void save(Content content) {
-        // TODO Auto-generated method stub
-
-    }
-    /** Method setRootContainer() in class BaseRepositoryEngine
-     * @param container Container instance
-     */
-    public void setRootContainer(Container container) {
-        rootContainer = container;
-    }
-
-    /** Override method init in the derived class
-     * @see com.cyclops.jrepo.RepositoryEngine#init(java.util.Properties)
-     */
-    public void init(Properties properties) {
-    }
+public interface PersistentStorage {
+    Properties getProperties();
+    void setProperties(Properties p);
+    void save(Container container, Content content);
+    void delete(Container container, Content content);
 }

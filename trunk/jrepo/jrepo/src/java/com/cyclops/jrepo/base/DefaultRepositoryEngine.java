@@ -192,21 +192,115 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo;
+package com.cyclops.jrepo.base;
 
-/** Object which want to has ability to be referenced to an engine instance
+import java.util.Properties;
+
+import com.cyclops.jrepo.Container;
+import com.cyclops.jrepo.Content;
+import com.cyclops.jrepo.ContentType;
+import com.cyclops.jrepo.ContentTypeManager;
+import com.cyclops.jrepo.PersistentStorage;
+import com.cyclops.jrepo.PropertyManager;
+import com.cyclops.jrepo.RepositoryEngine;
+
+/** Basic implementation of RepositoryEngine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 10:21:40 PM Mar 19, 2004
+ * Created at 11:52:30 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface EngineReferenceable {
-    /** Set RepositoryEngine instance to this object
-     * @param engineInstance Engine instance
+public class DefaultRepositoryEngine implements RepositoryEngine {
+
+    private Container rootContainer;
+    private PersistentStorage persistentStorage;
+
+    /** Override method create in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#create(com.cyclops.jrepo.Container, java.lang.String, com.cyclops.jrepo.ContentType)
      */
-    void setRepositoryEngine(RepositoryEngine engineInstance);
-    /** Get RepositoryEngine instance referenced to this object
-     * @return RepositoryEngine instance
+    public Content create(Container container, String contentName,
+            ContentType type) {
+        Content ret = null;
+        try {
+            Content content = type.getContentFactory().createInstance(
+                    container, type, contentName);
+            PropertyManager pm = content.getPropertyManager();
+            pm.setProperty(Content.UNIQUE_ID_PROPERTY, new Long(System
+                    .currentTimeMillis()));
+            pm.setProperty(Content.NAME_PROPERTY, contentName);
+            save(content);
+        } catch (Exception e) {
+            //TODO handle exception
+        } finally {
+            return ret;
+        }
+    }
+
+    /** Override method delete in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#delete(com.cyclops.jrepo.Content)
      */
-    RepositoryEngine getRepositoryEngine();
+    public void delete(Content content) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(com.cyclops.jrepo.Container, java.lang.String)
+     */
+    public Content getContent(Container container, String contentName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(long)
+     */
+    public Content getContent(long uniqueId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(java.lang.String)
+     */
+    public Content getContent(String path) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method getRootContainer in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getRootContainer()
+     */
+    public Container getRootContainer() {
+        return rootContainer;
+    }
+
+    /** Override method getTypeManager in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getTypeManager()
+     */
+    public ContentTypeManager getTypeManager() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method save in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#save(com.cyclops.jrepo.Content)
+     */
+    public void save(Content content) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /** Method setRootContainer() in class BaseRepositoryEngine
+     * @param container Container instance
+     */
+    public void setRootContainer(Container container) {
+        rootContainer = container;
+    }
+
+    /** Override method init in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#init(java.util.Properties)
+     */
+    public void init(Properties properties) {
+    }
 }

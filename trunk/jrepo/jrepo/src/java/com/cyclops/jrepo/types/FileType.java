@@ -192,21 +192,27 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo;
+package com.cyclops.jrepo.types;
 
-/** Object which want to has ability to be referenced to an engine instance
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** TODO Add Javadoc for class
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 10:21:40 PM Mar 19, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public interface EngineReferenceable {
-    /** Set RepositoryEngine instance to this object
-     * @param engineInstance Engine instance
+public class FileType extends BaseContentType {
+
+    /** Default type name */
+    public static final String TYPE_NAME = "file";
+
+    /** Default constructor */
+    public FileType() {
+        super(TYPE_NAME);
+    }
+
+    /** Override method getDefaultName() of parent class
+     * @see com.cyclops.jrepo.types.BaseContentType#getDefaultName()
      */
-    void setRepositoryEngine(RepositoryEngine engineInstance);
-    /** Get RepositoryEngine instance referenced to this object
-     * @return RepositoryEngine instance
-     */
-    RepositoryEngine getRepositoryEngine();
+    protected String getDefaultName() {
+        return TYPE_NAME;
+    }
 }
