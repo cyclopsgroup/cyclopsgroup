@@ -194,153 +194,88 @@
  */
 package com.cyclops.jmainboard.components.turbine;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.regex.Pattern;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Vector;
 
-import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.commons.configuration.ConfigurationUtils;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.lang.StringUtils;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.EngineFactory;
-import com.cyclops.jmainboard.impl.DefaultService;
+import org.apache.commons.collections.CollectionUtils;
 
-/** Jakarta Turbine service for jmainboard
+/** ServletConfig adapter implementation
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class TurbineComponent extends DefaultService {
+public class MutableServletConfig implements ServletConfig {
 
-    /** Component ID */
-    public static final String COMPONENT_ID = "org.apach.turbine";
+    private Properties initParameters = new Properties();
 
-    private static TurbineComponent instance;
+    private ServletConfig wrappedServletConfig;
 
-    /** Method getInstance in class TurbineComponent
-     * @return Runtime instance of TurbineComponent
+    /** Default constructor
+     * @param originalConfig Original ServletConfig instance
      */
-    static final TurbineComponent getInstance() {
-        return instance;
+    public MutableServletConfig(ServletConfig originalConfig) {
+        setWrappedServletConfig(originalConfig);
     }
 
-    private File turbineResources = new File(
-            "WEB-INF/conf/TurbineResources.properties");
-
-    private void addProperties(BaseConfiguration conf,
-            PropertiesConfiguration props) {
-        for (Iterator i = props.getKeys(); i.hasNext();) {
-            String key = (String) i.next();
-            String[] values = props.getStringArray(key);
-            for (int j = 0; j < values.length; j++) {
-                String value = values[j];
-                conf.addProperty(key, value);
-            }
+    /** Override method getInitParameter() of parent class
+     * @see javax.servlet.ServletConfig#getInitParameter(java.lang.String)
+     */
+    public String getInitParameter(String name) {
+        if (initParameters.containsKey(name)) {
+            return initParameters.getProperty(name);
+        } else {
+            return wrappedServletConfig.getInitParameter(name);
         }
     }
 
-    private void dumpConfiguration(BaseConfiguration conf, File target) {
-        if (target.isFile()) {
-            target.delete();
-        }
-        File parent = target.getParentFile();
-        if (parent != null && !parent.isDirectory()) {
-            parent.mkdirs();
-        }
-        try {
-            FileOutputStream out = new FileOutputStream(target);
-            PrintStream ps = new PrintStream(out);
-            ConfigurationUtils.dump(conf, ps);
-            ps.flush();
-            ps.close();
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            getLog().error("Dump configuration error", e);
-        }
+    /** Override method getInitParameterNames() of parent class
+     * @see javax.servlet.ServletConfig#getInitParameterNames()
+     */
+    public Enumeration getInitParameterNames() {
+        HashSet names = new HashSet();
+        CollectionUtils.addAll(names, wrappedServletConfig
+                .getInitParameterNames());
+        CollectionUtils.addAll(names, initParameters.keys());
+        return new Vector(names).elements();
     }
 
     /** Getter method for property
-     * @return Returns the turbineResources.
+     * @return Returns the initParameters.
      */
-    public File getTurbineResources() {
-        return turbineResources;
+    public Properties getInitParameters() {
+        return initParameters;
     }
 
-    private void removeProperties(BaseConfiguration conf,
-            PropertiesConfiguration props) {
-        for (Iterator i = props.getKeys(); i.hasNext();) {
-            String key = (String) i.next();
-            String[] values = props.getStringArray(key);
-            for (int j = 0; j < values.length; j++) {
-                String value = values[j];
-                //Remove key|value from BaseConfiguration conf
-                if (StringUtils.equals("*", value)) {
-                    conf.clearProperty(key);
-                    break;
-                } else {
-                    String[] oldValues = conf.getStringArray(key);
-                    conf.clearProperty(key);
-                    for (int k = 0; k < oldValues.length; k++) {
-                        String oldValue = oldValues[k];
-                        if (!Pattern.matches(value, oldValue)) {
-                            conf.addProperty(key, oldValue);
-                        }
-                    }
-                }
-            }
-        }
+    /** Override method getServletContext() of parent class
+     * @see javax.servlet.ServletConfig#getServletContext()
+     */
+    public ServletContext getServletContext() {
+        return wrappedServletConfig.getServletContext();
+    }
+
+    /** Override method getServletName() of parent class
+     * @see javax.servlet.ServletConfig#getServletName()
+     */
+    public String getServletName() {
+        return wrappedServletConfig.getServletName();
+    }
+
+    /** Getter method for property
+     * @return Returns the wrappedServletConfig.
+     */
+    public ServletConfig getWrappedServletConfig() {
+        return wrappedServletConfig;
     }
 
     /** Setter method for property
-     * @param tr The turbineResources to set.
+     * @param config The wrappedServletConfig to set.
      */
-    public void setTurbineResources(File tr) {
-        turbineResources = tr;
-    }
-
-    /** Override method startup() of parent class
-     * @see com.cyclops.jmainboard.Service#startup()
-     */
-    public void startup() {
-        String defaultTRPath = getProperties().getProperty(
-                EngineFactory.BASEDIR)
-                + "/WEB-INF/conf/TurbineResources.properties";
-        String trPath = getProperties().getProperty("turbine.tr.path",
-                defaultTRPath);
-        setTurbineResources(new File(trPath));
-        String removedTr = getProperties().getProperty("tr.removed.file",
-                "tr-removed.properties");
-        String tr = getProperties().getProperty("tr.file", "tr.properties");
-        BaseConfiguration conf = new BaseConfiguration();
-        for (Iterator i = getClientComponents().iterator(); i.hasNext();) {
-            Component client = (Component) i.next();
-            File removedTrFile = new File(getComponentHome(), removedTr);
-            if (removedTrFile.isFile()) {
-                try {
-                    PropertiesConfiguration removedProperties = new PropertiesConfiguration(
-                            removedTrFile.getAbsolutePath());
-                    removeProperties(conf, removedProperties);
-                } catch (Exception e) {
-                    getLog().warn("Remove turbine properties error", e);
-                }
-            }
-            File trFile = new File(getComponentHome(), tr);
-            if (trFile.isFile()) {
-                try {
-                    PropertiesConfiguration trProperties = new PropertiesConfiguration(
-                            trFile.getAbsolutePath());
-                    addProperties(conf, trProperties);
-                } catch (Exception e) {
-                    getLog().warn("Add properties error", e);
-                }
-            }
-        }
-        dumpConfiguration(conf, getTurbineResources());
-        instance = this;
+    public void setWrappedServletConfig(ServletConfig config) {
+        wrappedServletConfig = config;
     }
 }

@@ -196,12 +196,17 @@ package com.cyclops.jmainboard.components.turbine;
 
 import junit.framework.TestCase;
 
-
 /** Test case for TurbineService
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class TurbineComponentTest extends TestCase{
+public class TurbineComponentTest extends TestCase {
 
+    /** Method testStartup in class TurbineComponentTest
+     * @throws Exception Let runner handle it
+     */
+    public void testStartup() throws Exception {
+        TurbineComponent tc = new TurbineComponent();
+    }
 }
