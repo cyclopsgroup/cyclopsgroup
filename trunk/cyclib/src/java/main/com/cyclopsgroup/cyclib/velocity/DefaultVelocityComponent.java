@@ -10,6 +10,7 @@ package com.cyclopsgroup.cyclib.velocity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
+import java.net.URL;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -47,15 +48,8 @@ public class DefaultVelocityComponent extends VelocityComponent implements
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        String props = conf.getChild("properties").getValue(
+        propertiesFile = conf.getChild("properties").getValue(
                 "velocity.properties");
-        File file = new File(basedir, props);
-        if (!file.isFile())
-        {
-            file = new File(props);
-        }
-        propertiesFile = file.getAbsolutePath();
-
         logTag = conf.getChild("logtag").getValue("runtime");
     }
 
@@ -94,13 +88,29 @@ public class DefaultVelocityComponent extends VelocityComponent implements
      */
     public void initialize() throws Exception
     {
-        if (!new File(propertiesFile).isFile())
+        File file = new File(basedir, propertiesFile);
+        if (!file.isFile())
         {
-            throw new FileNotFoundException("Velocity properties file ["
-                    + propertiesFile + "] is invalid");
+            file = new File(propertiesFile);
         }
-        ExtendedProperties props = new ExtendedProperties(propertiesFile);
-        props.setProperty("basedir", new File("").getAbsolutePath());
+        ExtendedProperties props = null;
+
+        if (file.isFile())
+        {
+            props = new ExtendedProperties(file.getAbsolutePath());
+        }
+        else
+        {
+            URL resource = getClass().getClassLoader().getResource(
+                    propertiesFile);
+            if (resource == null)
+            {
+                throw new FileNotFoundException("File [" + propertiesFile
+                        + "] not found in either filesytem or classpath");
+            }
+            props.load(resource.openStream());
+        }
+        props.setProperty("basedir", basedir);
         setExtendedProperties(props);
         init();
         Velocity.setExtendedProperties(props);
