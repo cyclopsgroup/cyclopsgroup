@@ -96,6 +96,22 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly</artifactId>
+            <version>20040601.171102</version>
+            <jar>commons-jelly-20040601.171102.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-jexl</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>1.0-beta-2</version>
+            <jar>commons-jexl-1.0-beta-2.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.0</version>
@@ -112,6 +128,14 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.5-beta-2</version>
+            <jar>dom4j-1.5-beta-2.jar</jar>
+            <type>jar</type>
+            <properties/>
         </dependency>
         <dependency>
             <groupId>jmx</groupId>
