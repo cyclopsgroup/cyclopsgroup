@@ -16,22 +16,33 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.Hashtable;
+import java.util.Iterator;
+
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 
+import com.cyclopsgroup.waterview.Resolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
 /**
- * TODO Add javadoc for class
+ * Valve to render page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
-        Configurable
+        Configurable, Serviceable
 {
+
+    private Hashtable renderers;
+
+    private ServiceManager serviceManager;
 
     /**
      * Override method configure in super class of RenderPageValve
@@ -40,8 +51,24 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        // TODO Auto-generated method stub
-
+        Configuration[] renderConfs = conf.getChildren("renderer");
+        renderers = new Hashtable(renderConfs.length);
+        for (int i = 0; i < renderConfs.length; i++)
+        {
+            Configuration renderConf = renderConfs[i];
+            String extension = renderConf.getAttribute("extension");
+            String role = renderConf.getAttribute("role");
+            try
+            {
+                Resolver renderer = (Resolver) serviceManager.lookup(role);
+                renderers.put(extension, renderer);
+            }
+            catch (Exception e)
+            {
+                getLogger().error("Page renderer [" + role + "] loading error",
+                        e);
+            }
+        }
     }
 
     /**
@@ -51,7 +78,26 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      */
     public boolean process(UIRuntime runtime) throws Exception
     {
-        // TODO Auto-generated method stub
-        return false;
+        String page = runtime.getPage();
+        for (Iterator i = renderers.keySet().iterator(); i.hasNext();)
+        {
+            String extension = (String) i.next();
+            if (page.endsWith('.' + extension))
+            {
+                Resolver renderer = (Resolver) renderers.get(extension);
+                renderer.resolve(page, runtime);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager manager) throws ServiceException
+    {
+        serviceManager = manager;
     }
 }
