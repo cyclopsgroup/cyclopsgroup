@@ -39,16 +39,7 @@ public class WaterviewServlet extends HttpServlet
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
-    }
-
-    /**
-     * Override method init in super class of MainServlet
-     * 
-     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
-     */
-    public void init(ServletConfig config) throws ServletException
-    {
-
+        internallyProcess(request, response);
     }
 
     /**
@@ -59,16 +50,45 @@ public class WaterviewServlet extends HttpServlet
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
+        internallyProcess(request, response);
     }
 
-    protected void process(HttpServletRequest request,
+    protected void doProcess(HttpServletRequest request,
             HttpServletResponse response) throws Exception
     {
-
+        String uri = request.getRequestURI();
+        System.out.println(uri);
     }
 
     protected void handleException(Throwable e)
     {
+        e.printStackTrace(System.err);
+    }
 
+    /**
+     * Override method init in super class of MainServlet
+     * 
+     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException
+    {
+    }
+
+    private void internallyProcess(HttpServletRequest request,
+            HttpServletResponse response) throws IOException
+    {
+        try
+        {
+            doProcess(request, response);
+        }
+        catch (Throwable e)
+        {
+            handleException(e);
+        }
+        finally
+        {
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+        }
     }
 }
