@@ -6,6 +6,7 @@
  */
 package com.cyclops.tornado.services.navigator;
 import java.net.URL;
+import java.util.Hashtable;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.digester.Digester;
@@ -17,14 +18,7 @@ import com.cyclops.tornado.services.BaseService;
  * @since 2003-9-29 23:20:58
  */
 public class DefaultNavigatorService extends BaseService {
-    private class Item extends MenuItem {
-        public String getName() {
-            return getText();
-        }
-        public void setName(String name) {
-            setText(name);
-        }
-    }
+    private Hashtable menus = new Hashtable();
     /** Method initialize()
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
@@ -33,20 +27,16 @@ public class DefaultNavigatorService extends BaseService {
         URL[] resources = rf.getResources(conf);
         MenuItem root = new MenuItem();
         Digester digester = new Digester();
-        digester.addObjectCreate("menu", Item.class);
-        digester.addObjectCreate("item", Item.class);
+        digester.addObjectCreate("menu", Menu.class);
+        digester.addObjectCreate("item", MenuItem.class);
         digester.addSetProperties("item");
         digester.addSetNext("item", "addChild");
         for (int i = 0; i < resources.length; i++) {
             URL resource = resources[i];
             try {
                 digester.clear();
-                MenuItem rootItem =
-                    (MenuItem) digester.parse(resource.openStream());
-                MenuItem[] children = rootItem.getChildren();
-                for (int j = 0; j < children.length; j++) {
-                    root.addChild(children[j]);
-                }
+                Menu menu = (Menu) digester.parse(resource.openStream());
+                menus.put(menu.getName(), menu);
             } catch (Exception e) {
                 logger.debug("Resource " + resource + " loading failed!", e);
             }

@@ -5,6 +5,9 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.user;
+
+import java.util.Hashtable;
+
 /**
  * @author joeblack
  * @since 2003-9-29 17:23:48
@@ -21,4 +24,12 @@ public interface User {
      * @return Whether or not this user is anonymous user
      */
     boolean isAnonymous();
+    /** Method getTempStorage() in Class User
+     * @return Temporary objects storage
+     */
+    Hashtable getTempStorage();
+    /** Method getPermStorage() in Class User
+     * @return Permanent objects storage
+     */
+    Hashtable getPermStorage();
 }

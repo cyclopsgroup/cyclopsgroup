@@ -5,6 +5,7 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.user;
+import java.util.Hashtable;
 /**
  * @author joeblack
  * @since 2003-9-29 17:40:57
@@ -12,11 +13,25 @@ package com.cyclops.tornado.services.user;
 public class DefaultUser implements User {
     private boolean isAnonymous;
     private String name;
+    private Hashtable permStorage = new Hashtable();
+    private Hashtable tempStorage = new Hashtable();
     /** Method getName()
      * @see com.cyclops.tornado.services.user.User#getName()
      */
     public String getName() {
         return name;
+    }
+    /** Method getPermStorage()
+     * @see com.cyclops.tornado.services.user.User#getPermStorage()
+     */
+    public Hashtable getPermStorage() {
+        return permStorage;
+    }
+    /** Method getTempStorage()
+     * @see com.cyclops.tornado.services.user.User#getTempStorage()
+     */
+    public Hashtable getTempStorage() {
+        return tempStorage;
     }
     /** Method isAnonymous()
      * @see com.cyclops.tornado.services.user.User#isAnonymous()

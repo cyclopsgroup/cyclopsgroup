@@ -19,16 +19,16 @@ import com.cyclops.tornado.PathTransformable;
 public abstract class BaseService
     extends org.apache.fulcrum.BaseService
     implements PathTransformable {
-    /** Log object used in the derived classes */
-    protected Log logger = LogFactory.getLog(getClass());
     /** Configuration object for this service */
     protected Configuration configuration;
+    /** Log object used in the derived classes */
+    protected Log logger = LogFactory.getLog(getClass());
     /** Method init()
      * @see org.apache.fulcrum.Service#init()
      */
     public void init() {
         try {
-            configuration = getConfiguration();
+            setConfiguration(getConfiguration());
             initialize(configuration);
         } catch (Exception e) {
             logger.error("Service " + getName() + "failed to initialize", e);
@@ -41,4 +41,10 @@ public abstract class BaseService
      * @throws Exception Any exception could be thrown
      */
     protected abstract void initialize(Configuration conf) throws Exception;
+    /** Method setConfiguration() in Class BaseService
+     * @param conf Configuration object
+     */
+    public void setConfiguration(Configuration conf) {
+        configuration = conf;
+    }
 }

@@ -1,0 +1,62 @@
+<!ELEMENT dataset (
+    User|
+    UserObject|
+    Group|
+    GroupHierarchy|
+    UserGroup|
+    Acl)*>
+<!ATTLIST dataset
+    name CDATA #REQUIRED
+>
+
+<!ELEMENT User EMPTY>
+<!ATTLIST User
+    Id CDATA #REQUIRED
+    UserName CDATA #REQUIRED
+    EncryptedPassword CDATA #REQUIRED
+    Description CDATA #IMPLIED
+    IsSystem CDATA #REQUIRED
+    CreatedTime CDATA #IMPLIED
+    IsDisabled CDATA #REQUIRED
+>
+
+<!ELEMENT UserObject EMPTY>
+<!ATTLIST UserObject
+    Id CDATA #REQUIRED
+    UserId CDATA #REQUIRED
+    ObjectKey CDATA #REQUIRED
+    ObjectClassName CDATA #REQUIRED
+    ObjectData CDATA #IMPLIED
+>
+
+<!ELEMENT Group EMPTY>
+<!ATTLIST Group
+    Id CDATA #REQUIRED
+    GroupName CDATA #REQUIRED
+    Description CDATA #IMPLIED
+    IsSystem CDATA #REQUIRED
+    IsDisabled CDATA #REQUIRED
+>
+
+<!ELEMENT GroupHierarchy EMPTY>
+<!ATTLIST GroupHierarchy
+    Id CDATA #REQUIRED
+    GroupId CDATA #REQUIRED
+    ParentGroupId CDATA #REQUIRED
+>
+
+<!ELEMENT UserGroup EMPTY>
+<!ATTLIST UserGroup
+    Id CDATA #REQUIRED
+    UserId CDATA #REQUIRED
+    GroupId CDATA #REQUIRED
+>
+
+<!ELEMENT Acl EMPTY>
+<!ATTLIST Acl
+    Id CDATA #REQUIRED
+    OwnerName CDATA #REQUIRED
+    OwnerType CDATA #REQUIRED
+    Permission CDATA #REQUIRED
+>
+
