@@ -59,8 +59,8 @@
             <configuration>
                 <root>plexaros/plugins</root>
                 <plugins>
-                    <plugin>test1</plugin>
-                    <plugin>test2</plugin>
+                    <plugin>p1</plugin>
+                    <plugin>p22</plugin>
                 </plugins>
             </configuration>
         </component>
