@@ -22,7 +22,10 @@
             </item>
             <item name="Business Logic" href="/bizlogic.html"/>
             <item name="Presentation Layer" href="/presentation.html"/>
-            <item name="Database Connection" href="/database.html"/>
+            <item name="Database" href="/database.html" collapse="true">
+                <item name="Id Table Schema" href="/torque/id-table-schema.html"/>
+                <item name="Tornado Schema" href="/torque/tornado-schema.html"/>
+            </item>
             <item name="Configuration" href="/configuration.html"/>
         </menu>
     </body>
