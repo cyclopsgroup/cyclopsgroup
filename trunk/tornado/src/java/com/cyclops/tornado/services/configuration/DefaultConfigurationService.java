@@ -1,4 +1,4 @@
-/**
+/*
  * Common Public License - v 1.0
  *
  *
@@ -193,6 +193,7 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.configuration;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -203,20 +204,24 @@ import org.apache.fulcrum.BaseService;
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.bo.ConfBroker;
 import com.cyclops.tornado.om.DConf;
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+
+/** Default implementation of ConfigurationService
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+ *
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultConfigurationService
-    extends BaseService
-    implements ConfigurationService {
+public class DefaultConfigurationService extends BaseService implements
+        ConfigurationService {
+
     private Configuration customizableConfiguration;
+
     /** Implementation of method getCustomizableConfiguration() in this class
      * @see com.cyclops.tornado.services.configuration.ConfigurationService#getCustomizableConfiguration()
      */
     public Configuration getCustomizableConfiguration() {
         return customizableConfiguration;
     }
+
     /** Implementation of method init() in this class
      * @see org.apache.fulcrum.Service#init()
      */
@@ -231,14 +236,15 @@ public class DefaultConfigurationService
             setInit(true);
         }
     }
+
     /** Implementation of method reload() in this class
      * @see com.cyclops.tornado.services.configuration.ConfigurationService#reload(com.cyclops.tornado.BrokerManager)
      */
     public synchronized void reload(BrokerManager brokerManager) {
         try {
             BaseConfiguration conf = new BaseConfiguration();
-            ConfBroker confb =
-                (ConfBroker) brokerManager.getObjectBroker(ConfBroker.class);
+            ConfBroker confb = (ConfBroker) brokerManager
+                    .getObjectBroker(ConfBroker.class);
             List rs = confb.queryAll();
             for (Iterator i = rs.iterator(); i.hasNext();) {
                 DConf confom = (DConf) i.next();

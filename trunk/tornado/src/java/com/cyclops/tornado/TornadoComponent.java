@@ -192,17 +192,58 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.jmainboard;
+package com.cyclops.tornado;
 
-import com.cyclops.jmainboard.impl.DefaultComponent;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
+import org.apache.fulcrum.Service;
+import org.apache.fulcrum.TurbineServices;
+
+import com.cyclops.jmainboard.impl.DefaultService;
 
 /** Tornado component Id
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class TornadoComponent extends DefaultComponent {
+public class TornadoComponent extends DefaultService {
 
     /** Tornado Component ID */
     public static final String COMPONENT_ID = "com.cyclops.tornado";
+
+    private static final String SERVICE_PREFIX = "service.";
+    private static final String CLASSNAME_SUFFIX = ".classname";
+    private static final String EMPTY_STRING = "";
+
+    /** Override method startup() of parent class
+     * @see com.cyclops.jmainboard.Service#startup()
+     */
+    public void startup() {
+        HashSet serviceNames = new HashSet();
+        Configuration conf = TurbineServices.getInstance().getConfiguration();
+        for (Iterator i = conf.getKeys(); i.hasNext();) {
+            String key = (String) i.next();
+            if (key.startsWith(SERVICE_PREFIX)
+                && key.endsWith(CLASSNAME_SUFFIX)) {
+                String serviceName = StringUtils.chomp(key, CLASSNAME_SUFFIX);
+                serviceName =
+                    StringUtils.replaceOnce(
+                        serviceName,
+                        SERVICE_PREFIX,
+                        EMPTY_STRING);
+                serviceNames.add(serviceName);
+            }
+        }
+        for (Iterator i = serviceNames.iterator(); i.hasNext();) {
+            String serviceName = (String) i.next();
+            Service service =
+                TurbineServices.getInstance().getService(serviceName);
+            if (service instanceof EngineReferenceable) {
+                ((EngineReferenceable) service).setEngine(getEngine());
+            }
+        }
+    }
 }

@@ -193,6 +193,7 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.navigator;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.net.URL;
@@ -207,14 +208,18 @@ import org.apache.regexp.REUtil;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.utils.ResourceFinder;
-/** TODO Add javadoc for this class here
+
+/** Folder files navigation loader
  * @author joeblack
  *
  * The class is created at 2003-12-30 2:16:00
  */
 public class FolderNavigatorLoader extends ResourceNavigatorLoader {
+
     private class NameFilter implements FileFilter {
+
         private RE regexp;
+
         private NameFilter(String pattern) {
             try {
                 regexp = REUtil.createRE("<" + pattern + ">");
@@ -222,6 +227,7 @@ public class FolderNavigatorLoader extends ResourceNavigatorLoader {
                 logger.error(e);
             }
         }
+
         /** Override method accept() of super class
          * @see java.io.FileFilter#accept(java.io.File)
          */
@@ -229,20 +235,20 @@ public class FolderNavigatorLoader extends ResourceNavigatorLoader {
             return regexp.match("<" + file.getName() + ">");
         }
     }
+
     private Log logger = LogFactory.getLog(getClass());
+
     /** Override method getResources() of super class
      * @see com.cyclops.tornado.services.navigator.ResourceNavigatorLoader#getResources(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
-    protected URL[] getResources(
-        Configuration conf,
-        BrokerManager brokerManager) {
+    protected URL[] getResources(Configuration conf, BrokerManager brokerManager) {
         String[] folders = conf.getStringArray("folder");
         String pattern = conf.getString("pattern", "*.xml");
         ArrayList ret = new ArrayList();
         for (int i = 0; i < folders.length; i++) {
             String folder = folders[i];
-            String extFolder =
-                TurbineServices.getInstance().getRealPath(folder);
+            String extFolder = TurbineServices.getInstance()
+                    .getRealPath(folder);
             File f = new File(extFolder);
             if (f.isDirectory()) {
                 File[] files = f.listFiles(new NameFilter(pattern));

@@ -193,6 +193,7 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.navigator;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -201,14 +202,16 @@ import org.apache.commons.configuration.Configuration;
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.bo.MenuBroker;
 import com.cyclops.tornado.om.DMenu;
-/** TODO Add javadoc for this class here
+
+/** Database navigator loader
  * @author joeblack
  *
  * The class is created at 2003-11-16 22:30:02
  */
 public class DBNavigatorLoader implements NavigatorLoader {
+
     private void addChildren(DMenu d, Menu menu, MenuBroker mb)
-        throws Exception {
+            throws Exception {
         List children = mb.queryChildren(d.getMenuId());
         for (Iterator i = children.iterator(); i.hasNext();) {
             DMenu dm = (DMenu) i.next();
@@ -218,13 +221,14 @@ public class DBNavigatorLoader implements NavigatorLoader {
             addChildren(dm, item, mb);
         }
     }
+
     /** Override method load() of super class
      * @see com.cyclops.tornado.services.navigator.NavigatorLoader#load(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
     public MenuProject load(Configuration conf, BrokerManager brokerManager)
-        throws Exception {
-        MenuBroker mb =
-            (MenuBroker) brokerManager.getObjectBroker(MenuBroker.class);
+            throws Exception {
+        MenuBroker mb = (MenuBroker) brokerManager
+                .getObjectBroker(MenuBroker.class);
         MenuProject project = new MenuProject();
         List roots = mb.queryRoots();
         for (Iterator i = roots.iterator(); i.hasNext();) {
@@ -236,6 +240,7 @@ public class DBNavigatorLoader implements NavigatorLoader {
         }
         return project;
     }
+
     private void setValues(DMenu d, Menu menu) {
         menu.setName(d.getMenuName());
         menu.setHref(d.getHref());

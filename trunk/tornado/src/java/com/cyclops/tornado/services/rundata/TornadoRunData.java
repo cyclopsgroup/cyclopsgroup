@@ -193,24 +193,26 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.rundata;
+
 import org.apache.fulcrum.TurbineServices;
 import org.apache.turbine.services.rundata.DefaultTurbineRunData;
 
 import com.cyclops.tornado.services.user.User;
 import com.cyclops.tornado.services.user.UserService;
-/** TODO Add javadoc for this class here
+
+/** Specified rundata implementation in tornado
  * @author joeblack
  *
  * The class is created at 2003-11-17 0:42:32
  */
 public class TornadoRunData extends DefaultTurbineRunData {
+
     /**
      * @return Tornado user object
      */
     public User getTornadoUser() {
-        UserService userService =
-            (UserService) TurbineServices.getInstance().getService(
-                UserService.SERVICE_NAME);
+        UserService userService = (UserService) TurbineServices.getInstance()
+                .getService(UserService.SERVICE_NAME);
         return userService.getActiveUser(getSession().getId());
     }
 }

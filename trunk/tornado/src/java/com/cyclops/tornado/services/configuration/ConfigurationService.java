@@ -1,4 +1,4 @@
-/**
+/*
  * Common Public License - v 1.0
  *
  *
@@ -193,21 +193,27 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.configuration;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.fulcrum.Service;
 
 import com.cyclops.tornado.BrokerManager;
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+
+/** ConfigurationService interface
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+ *
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
 public interface ConfigurationService extends Service {
+
     /** Service name in fulcrum */
     String SERVICE_NAME = "ConfigurationService";
+
     /** Get  root configuration
      * @return Root configuration object
      */
     Configuration getCustomizableConfiguration();
+
     /** Reload configuration content from database
      * @param brokerManager BrokerManager instance
      */

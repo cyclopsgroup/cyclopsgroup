@@ -1,4 +1,4 @@
-/**
+/*
  * Common Public License - v 1.0
  *
  *
@@ -193,46 +193,69 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services;
+
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.cyclops.jmainboard.Engine;
 import com.cyclops.tornado.BrokerManager;
+import com.cyclops.tornado.EngineReferenceable;
+import com.cyclops.tornado.TornadoComponent;
 import com.cyclops.tornado.services.configuration.ConfigurationService;
+
 /**
  * @author joeblack
  * @since 2003-9-29 17:03:56
  *
  * Class BaseService in tornado project
  */
-public abstract class BaseService extends org.apache.fulcrum.BaseService {
+public abstract class BaseService extends org.apache.fulcrum.BaseService
+        implements EngineReferenceable {
+
     /** Configuration object for this service */
     protected Configuration configuration;
+
+    private transient Engine engineInstance;
+
     /** Log object used in the derived classes */
     protected Log logger = LogFactory.getLog(getClass());
+
+    /** Override method getEngine() of parent class
+     * @see com.cyclops.tornado.EngineReferenceable#getEngine()
+     */
+    public Engine getEngine() {
+        return engineInstance;
+    }
+
+    /** Override method getTornadoComponent() of parent class
+     * @see com.cyclops.tornado.EngineReferenceable#getTornadoComponent()
+     */
+    public TornadoComponent getTornadoComponent() {
+        return (TornadoComponent) getEngine().getComponent(
+                TornadoComponent.COMPONENT_ID);
+    }
+
     /** Method init()
      * @see org.apache.fulcrum.Service#init()
      */
     public synchronized void init() {
         BrokerManager brokerManager = new BrokerManager();
         try {
-            ConfigurationService cs =
-                (ConfigurationService) getServiceBroker().getService(
-                    ConfigurationService.SERVICE_NAME);
-            Configuration conf =
-                cs.getCustomizableConfiguration().subset(
+            ConfigurationService cs = (ConfigurationService) getServiceBroker()
+                    .getService(ConfigurationService.SERVICE_NAME);
+            Configuration conf = cs.getCustomizableConfiguration().subset(
                     "services." + getName());
             if (conf == null) {
                 conf = new BaseConfiguration();
             }
             setConfiguration(conf);
-            logger.debug(
-                "Start initializing service implementation "
+            logger.debug("Start initializing service implementation "
                     + getClass().getName());
             initialize(configuration, brokerManager);
-            logger.debug(
-                "Initialization finished for service " + getClass().getName());
+            logger.debug("Initialization finished for service "
+                    + getClass().getName());
         } catch (Exception e) {
             logger.error("Service " + getName() + "failed to initialize", e);
         } finally {
@@ -240,15 +263,15 @@ public abstract class BaseService extends org.apache.fulcrum.BaseService {
             setInit(true);
         }
     }
+
     /** Derived classes will override this method to initialize service
      * @param conf Configuration object
      * @param brokerManager To access biz objects
      * @throws Exception Any exception could be thrown
      */
-    protected abstract void initialize(
-        Configuration conf,
-        BrokerManager brokerManager)
-        throws Exception;
+    protected abstract void initialize(Configuration conf,
+            BrokerManager brokerManager) throws Exception;
+
     /** All derived class can implements Restartable interface without add anycode
      * But make sure no problem will occur when shutdown(), init() methods are called consecutively before the service implements the interface
      * @see com.cyclops.tornado.services.Restartable#restart()
@@ -258,10 +281,18 @@ public abstract class BaseService extends org.apache.fulcrum.BaseService {
         setInit(false);
         init();
     }
+
     /** Method setConfiguration() in Class BaseService
      * @param conf Configuration object
      */
     public void setConfiguration(Configuration conf) {
         configuration = conf;
+    }
+
+    /** Override method setEngine() of parent class
+     * @see com.cyclops.tornado.EngineReferenceable#setEngine(com.cyclops.jmainboard.Engine)
+     */
+    public void setEngine(Engine engine) {
+        engineInstance = engine;
     }
 }

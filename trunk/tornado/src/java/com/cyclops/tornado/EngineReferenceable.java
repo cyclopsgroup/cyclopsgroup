@@ -1,4 +1,4 @@
-/**
+/*
  * Common Public License - v 1.0
  *
  *
@@ -192,28 +192,29 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.modules.actions.system.user;
-import org.apache.turbine.RunData;
-import org.apache.turbine.TemplateContext;
+package com.cyclops.tornado;
 
-import com.cyclops.tornado.modules.Action;
+import com.cyclops.jmainboard.Engine;
 
-/** Change user profile action
- * @author joeblack
+/** Object referenced to a engine
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * The class is created at 2003-11-14 21:23:54
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
- */
-public class ChangeProfile extends Action {
-    /** Implementation of method doPerform() in this class
-     * @see org.apache.turbine.modules.actions.TemplateAction#doPerform(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
-     */
-    public void doPerform(RunData data, TemplateContext ctx) throws Exception {
-        // TODO Not implemented
-        super.doPerform(data, ctx);
-    }
+public interface EngineReferenceable {
 
+    /** Method getEngine in class EngineReferenceable
+     * @return Engine instance
+     */
+    Engine getEngine();
+
+    /** Method getTornadoComponent in class EngineReferenceable
+     * @return TornadoComponent implementation
+     */
+    TornadoComponent getTornadoComponent();
+
+    /** Method setEngine in class EngineReferenceable
+     * @param engine Engine instance
+     */
+    void setEngine(Engine engine);
 }
