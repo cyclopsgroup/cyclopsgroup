@@ -194,10 +194,13 @@
  */
 package com.cyclops.jmainboard.components.log4j;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.apache.commons.configuration.ConfigurationConverter;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.cyclops.jmainboard.Component;
@@ -217,24 +220,51 @@ public class Log4jComponent extends DefaultService {
      * @see com.cyclops.jmainboard.Service#startup()
      */
     public void startup() {
-        String log4jResource =
-            getProperties().getProperty("descriptor", "log4j.properties");
+        String log4jResource = getProperties().getProperty("descriptor",
+                "log4j.properties");
+        Properties props = new Properties();
+        props.putAll(getEngine().getProperties());
+        File engineLog4j = new File(getEngine().getEngineHome(),
+                "conf/log4j.properties");
+        if (engineLog4j.isFile()) {
+            try {
+                props.load(engineLog4j.toURL().openStream());
+            } catch (Exception e) {
+                getLog().warn(
+                        "Can't load " + engineLog4j.getAbsolutePath()
+                                + " as log4j configuration file", e);
+            }
+        }
         for (Iterator i = getClientComponents().iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             try {
                 URL descriptor = component.getResource(log4jResource);
                 if (descriptor != null) {
+
+                    PropertiesConfiguration pc = new PropertiesConfiguration();
                     Properties p = new Properties();
                     p.putAll(component.getProperties());
-                    p.load(descriptor.openStream());
-                    PropertyConfigurator.configure(p);
-                    getLog().debug(
-                        descriptor.getPath()
-                            + " is accepted as a log4j configuration file");
+                    for (Iterator j = p.keySet().iterator(); j.hasNext();) {
+                        String key = (String) j.next();
+                        pc.setProperty(key, p.getProperty(key));
+                    }
+                    pc.load(descriptor.openStream());
+                    p = ConfigurationConverter.getProperties(pc);
+                    for (Iterator j = p.keySet().iterator(); j.hasNext();) {
+                        String key = (String) j.next();
+                        if (key.startsWith("log4j.")) {
+                            props.put(key, p.get(key));
+                        }
+                    }
+                    getLog()
+                            .debug(
+                                    descriptor.getPath()
+                                            + " is accepted as a log4j configuration file");
                 }
             } catch (Exception e) {
                 getLog().warn("Can't load component", e);
             }
         }
+        PropertyConfigurator.configure(props);
     }
 }
