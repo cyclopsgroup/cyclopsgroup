@@ -29,6 +29,11 @@ class VelocityContextAdapter implements Context
 {
     private UIContext uiContext;
 
+    /**
+     * Constructor of VelocityContextAdapter
+     * 
+     * @param context UIContext object
+     */
     VelocityContextAdapter(UIContext context)
     {
         uiContext = context;

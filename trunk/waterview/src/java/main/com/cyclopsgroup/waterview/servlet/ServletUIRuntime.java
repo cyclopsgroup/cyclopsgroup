@@ -46,13 +46,13 @@ public class ServletUIRuntime implements UIRuntime
 
     private HttpServletResponse httpServletResponse;
 
-    private UIContext uiContext;
-
     private String renderTemplate = "index.html";
 
-    private HttpRequestValueParser requestValueParser;
+    private ServletRequestValueParser requestValueParser;
 
     private ServiceManager serviceManager;
+
+    private UIContext uiContext;
 
     /**
      * Default constructor of default web runtime
@@ -60,13 +60,14 @@ public class ServletUIRuntime implements UIRuntime
      * @param request Http request object
      * @param response Http response object
      * @param services ServiceManager object
+     * @throws Exception Throw it out
      */
     ServletUIRuntime(HttpServletRequest request, HttpServletResponse response,
             ServiceManager services) throws Exception
     {
         httpServletRequest = request;
         httpServletResponse = response;
-        requestValueParser = new HttpRequestValueParser(request);
+        requestValueParser = new ServletRequestValueParser(request);
         serviceManager = services;
         Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
         DefaultUIContext ctx = new DefaultUIContext();
@@ -82,16 +83,6 @@ public class ServletUIRuntime implements UIRuntime
     public List getActions()
     {
         return actions;
-    }
-
-    /**
-     * Override method getComponentManager in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getComponentManager()
-     */
-    public ServiceManager getServiceManager()
-    {
-        return serviceManager;
     }
 
     /**
@@ -145,16 +136,6 @@ public class ServletUIRuntime implements UIRuntime
     }
 
     /**
-     * Override method getUIContext in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
-     */
-    public UIContext getUIContext()
-    {
-        return uiContext;
-    }
-
-    /**
      * Override method getRequestParameters in super class of DefaultWebRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getRequestParameters()
@@ -162,6 +143,26 @@ public class ServletUIRuntime implements UIRuntime
     public ValueParser getRequestParameters()
     {
         return requestValueParser;
+    }
+
+    /**
+     * Override method getServiceManager in super class of ServletUIRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getServiceManager()
+     */
+    public ServiceManager getServiceManager()
+    {
+        return serviceManager;
+    }
+
+    /**
+     * Override method getUIContext in super class of DefaultWebRuntime
+     * 
+     * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
+     */
+    public UIContext getUIContext()
+    {
+        return uiContext;
     }
 
     /**

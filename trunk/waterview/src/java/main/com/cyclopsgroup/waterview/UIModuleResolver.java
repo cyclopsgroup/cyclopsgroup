@@ -14,25 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core;
-
-import com.cyclopsgroup.waterview.UIRuntime;
+package com.cyclopsgroup.waterview;
 
 /**
- * Valve for pipeline
+ * interface to resolver action
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Valve
+public interface UIModuleResolver extends Resolver
 {
-    /** Empty valve array */
-    Valve[] EMPTY_ARRAY = new Valve[0];
-
-    /**
-     * Method process() in class Valve
-     * 
-     * @param runtime
-     * @throws Exception
-     */
-    void process(UIRuntime runtime) throws Exception;
+    /** Role name of this component in container */
+    String ROLE = UIModuleResolver.class.getName();
 }

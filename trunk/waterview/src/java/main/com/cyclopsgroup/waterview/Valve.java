@@ -16,34 +16,22 @@
  */
 package com.cyclopsgroup.waterview;
 
-import org.apache.commons.lang.exception.NestableException;
-
 /**
- * Exception to show that page is not found
+ * Valve for pipeline
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class PageNotFoundException extends NestableException
+public interface Valve
 {
-    private String page;
+    /** Empty valve array */
+    Valve[] EMPTY_ARRAY = new Valve[0];
 
     /**
-     * Constructor of PageNotFoundException
+     * Method process() in class Valve
      * 
-     * @param page Page string
+     * @param runtime
+     * @throws Exception
+     * @return Should continue?
      */
-    public PageNotFoundException(String page)
-    {
-        this.page = page;
-    }
-
-    /**
-     * Method getPage() in class PageNotFoundException
-     * 
-     * @return Page path
-     */
-    public String getPage()
-    {
-        return page;
-    }
+    boolean process(UIRuntime runtime) throws Exception;
 }

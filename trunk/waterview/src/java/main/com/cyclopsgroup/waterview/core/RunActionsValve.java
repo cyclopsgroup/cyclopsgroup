@@ -18,46 +18,57 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.Iterator;
 
-import com.cyclopsgroup.waterview.Resolver;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+
+import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
-import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.Valve;
 
 /**
  * Valve to run modules
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RunResolverValve implements Valve
+public class RunActionsValve extends AbstractLogEnabled implements Valve,
+        Serviceable
 {
+
+    private UIModuleResolver actionResolver;
 
     /**
      * Override method process in super class of RunResolverValve
      * 
-     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
+     * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime) throws Exception
+    public boolean process(UIRuntime runtime) throws Exception
     {
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String path = (String) i.next();
             runModule(path, runtime);
         }
+        return true;
     }
 
     private void runModule(String path, UIRuntime runtime) throws Exception
     {
-        Waterview waterview = (Waterview) runtime.getServiceManager().lookup(
-                Waterview.ROLE);
-        int lastDotPosition = path.lastIndexOf('.');
-        String extension = path.substring(lastDotPosition + 1);
-        Resolver resolver = waterview.getResolver(extension);
-        if (resolver == null)
+        if (actionResolver == null)
         {
-            resolver = waterview.getDefaultResolver();
+            return;
         }
-        if (resolver != null)
-        {
-            resolver.resolve(path, runtime);
-        }
+        actionResolver.resolve(path, runtime);
+    }
+
+    /**
+     * Override method service in super class of RunActionsValve
+     * 
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager manager) throws ServiceException
+    {
+        actionResolver = (UIModuleResolver) manager.lookup(UIModuleResolver.ROLE);
     }
 }

@@ -24,13 +24,41 @@ package com.cyclopsgroup.waterview;
 public interface UIContext
 {
 
+    /**
+     * If given variable name exists
+     *
+     * @param key Variable name
+     * @return If it exists
+     */
     boolean containsKey(String key);
 
+    /**
+     * Get variable from context
+     *
+     * @param name Name of the variable
+     * @return Variable object
+     */
     Object get(String name);
 
+    /**
+     * Get all available variable names
+     *
+     * @return String array of variable names
+     */
     String[] getKeys();
 
+    /**
+     * Method put() in class UIContext
+     *
+     * @param name
+     * @param object
+     */
     void put(String name, Object object);
 
+    /**
+     * Method remove() in class UIContext
+     *
+     * @param key
+     */
     void remove(String key);
 }

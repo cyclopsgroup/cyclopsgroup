@@ -20,16 +20,15 @@ import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
  * Jelly implemented page renderer
- *
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class JellyPageRenderer extends AbstractLogEnabled implements Resolver,
         Configurable
 {
     /**
-      * This is a simple inner class that will be the element cahed in LRMMap.
-      * Script object and timestamp of script resource is stored here
-      */
+     * This is a simple inner class that will be the element cahed in LRMMap. Script object and timestamp of script resource is stored here
+     */
     private class Entry
     {
         private Script script;
@@ -47,7 +46,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements Resolver,
 
     /**
      * Override method configure() in super class
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -111,18 +110,8 @@ public class JellyPageRenderer extends AbstractLogEnabled implements Resolver,
     }
 
     /**
-     * Override method isRenderer() in super class
-     *
-     * @see com.cyclopsgroup.waterview.Resolver#isRenderer()
-     */
-    public boolean isRenderer()
-    {
-        return true;
-    }
-
-    /**
      * Render the page and output the result into http response
-     *
+     * 
      * @see com.cyclopsgroup.waterview.Resolver#resolve(java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
     public void resolve(String path, UIRuntime runtime) throws Exception

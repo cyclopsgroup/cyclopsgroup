@@ -39,7 +39,7 @@ import com.cyclopsgroup.waterview.Waterview;
 /**
  * Main waterview servlet
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class WaterviewServlet extends HttpServlet
 {
@@ -109,6 +109,7 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
+        try {
         String conf = config.getInitParameter("conf");
         if (StringUtils.isEmpty(conf))
         {
@@ -152,7 +153,10 @@ public class WaterviewServlet extends HttpServlet
         }
         catch (Exception e)
         {
-            throw new ServletException("Init servlet error", e);
+            throw new ServletException("Init plexus container error", e);
+        }
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
     }
 

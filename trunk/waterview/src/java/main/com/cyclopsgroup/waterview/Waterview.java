@@ -28,16 +28,12 @@ public interface Waterview
     /** Role name of this component in container */
     String ROLE = Waterview.class.getName();
 
-    Resolver getDefaultResolver();
-
     /**
      * Method getProperties() in class Waterview
      * 
-     * @return
+     * @return Mutable properties
      */
     Properties getProperties();
-
-    Resolver getResolver(String extension);
 
     /**
      * Process request

@@ -16,79 +16,96 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import com.cyclopsgroup.waterview.Resolver;
+import java.util.HashSet;
+
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclopsgroup.waterview.UIRuntime;
-import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.Valve;
 
 /**
  * Valve to parse URL
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ParseURLValve implements Valve
+public class ParseURLValve extends AbstractLogEnabled implements Valve,
+        Configurable
 {
+
+    private HashSet actionExtensions = new HashSet();
+
+    private String defaultPage;
+
+    private HashSet pageExtensions = new HashSet();
+
+    private String pathSeparator;
+
+    /**
+     * Override method configure in super class of ParseURLValve
+     * 
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        pathSeparator = conf.getChild("path-separator").getValue(",");
+        defaultPage = conf.getChild("default-page").getValue("index.html");
+        Configuration[] extensions = conf.getChild("extensions").getChildren();
+        for (int i = 0; i < extensions.length; i++)
+        {
+            Configuration ext = extensions[i];
+            if (StringUtils.equals(ext.getName(), "page"))
+            {
+                pageExtensions.add(ext.getValue());
+            }
+            else if (StringUtils.equals(ext.getName(), "action"))
+            {
+                actionExtensions.add(ext.getValue());
+            }
+        }
+    }
 
     /**
      * Override method process in super class of ParseURLValve
      * 
-     * @see com.cyclopsgroup.waterview.core.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
+     * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void process(UIRuntime runtime) throws Exception
+    public boolean process(UIRuntime runtime) throws Exception
     {
         String path = runtime.getHttpServletRequest().getPathInfo();
-        boolean extensionStarted = false;
-        StringBuffer subPath = new StringBuffer();
-        StringBuffer extension = new StringBuffer();
-        Waterview waterview = (Waterview) runtime.getServiceManager().lookup(
-                Waterview.ROLE);
-        String pagePath = null;
-        while (path.charAt(0) == '/')
+        if (StringUtils.isEmpty(path))
         {
-            path = path.substring(1);
+            path = defaultPage;
         }
-        if (!path.endsWith("/"))
+        System.out.println(path);
+        String[] paths = StringUtils.split(path, pathSeparator);
+        for (int i = 0; i < paths.length; i++)
         {
-            path += '/';
-        }
-        for (int i = 0; i < path.length(); i++)
-        {
-            char ch = path.charAt(i);
-            if (ch == '.')
+            String subPath = paths[i];
+            int lastDot = subPath.lastIndexOf('.');
+            if (lastDot == -1)
             {
-                extensionStarted = true;
+                continue;
             }
-            if (ch == '/')
+            String ext = subPath.substring(lastDot + 1);
+            if (actionExtensions.contains(ext))
             {
-                Resolver resolver = null;
-                resolver = waterview.getResolver(extension.toString());
-
-                if (resolver == null)
-                {
-                    resolver = waterview.getDefaultResolver();
-                }
-                if (resolver != null)
-                {
-                    if (resolver.isRenderer())
-                    {
-                        runtime.setPage(subPath.toString());
-                    }
-                    else
-                    {
-                        runtime.getActions().add(subPath.toString());
-                    }
-                }
-                subPath = new StringBuffer();
-                extension = new StringBuffer();
+                runtime.getActions().add(subPath);
+                System.out.println("action -->" + subPath);
             }
-            else
+            else if (pageExtensions.contains(ext))
             {
-                subPath.append(ch);
-                if (extensionStarted && ch != '.')
-                {
-                    extension.append(ch);
-                }
+                runtime.setPage(subPath);
+                System.out.println("page -->" + subPath);
             }
         }
-        runtime.getUIContext().put("page", pagePath);
+        if (StringUtils.isEmpty(runtime.getPage()))
+        {
+            runtime.setPage(defaultPage);
+        }
+        return true;
     }
 }

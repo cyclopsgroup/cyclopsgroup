@@ -16,12 +16,13 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 
+import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -31,52 +32,84 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class RuntimeRenderer
 {
+
+    private Map cache;
+
     private UIRuntime uiRuntime;
 
     private VelocityEngine velocityEngine;
 
-    RuntimeRenderer(UIRuntime runtime, VelocityEngine engine)
+    /**
+     * Constructor of RuntimeRenderer
+     * 
+     * @param runtime Runtime object
+     * @param engine Velocity engine
+     * @param templateCache Reference to the template cache
+     */
+    RuntimeRenderer(UIRuntime runtime, VelocityEngine engine, Map templateCache)
     {
         uiRuntime = runtime;
         velocityEngine = engine;
+        this.cache = templateCache;
     }
 
-    private URL getTemplateResource(String prefix, String path)
+    private Template getTemplate(String path) throws Exception
     {
-        String fullName = "template/" + prefix + "/" + path;
-        ClassLoader classLoader = Thread.currentThread()
-                .getContextClassLoader();
-        URL resource = classLoader.getResource(fullName);
-        if (resource != null)
+        if (cache.containsKey(path))
         {
-            return resource;
+            return (Template) cache.get(path);
+        }
+        if (velocityEngine.templateExists(path))
+        {
+            Template template = velocityEngine.getTemplate(path);
+            cache.put(path, template);
+            return template;
+        }
+        return null;
+    }
+
+    private Template getTemplate(String prefix, String path) throws Exception
+    {
+        String fullName = prefix + "/" + path;
+        Template template = getTemplate(fullName);
+        if (template != null)
+        {
+            return template;
         }
         String[] paths = StringUtils.split(path, "/");
         int lastIndex = paths.length - 1;
-        while (resource == null && lastIndex >= 0)
+        while (template == null && lastIndex >= 0)
         {
             paths[lastIndex] = "Default.vm";
-            resource = classLoader.getResource(StringUtils.join(paths, "/"));
+            template = getTemplate(prefix + "/" + StringUtils.join(paths, "/"));
             paths[lastIndex] = null;
             lastIndex--;
         }
-        return resource;
+        return template;
     }
 
+    /**
+     * This method will be called in velocity page
+     * 
+     * @param prefix Prefix foler
+     * @param path Page path
+     * @return Empty string
+     * @throws Exception Throw it out
+     */
     public String render(String prefix, String path) throws Exception
     {
-        //TODO do something to execute module
-
-        URL resource = getTemplateResource(prefix, path);
-        if (resource == null)
+        UIModuleResolver actionResolver = (UIModuleResolver) uiRuntime
+                .getServiceManager().lookup(UIModuleResolver.ROLE);
+        String fullPath = prefix + "/" + path;
+        actionResolver.resolve(fullPath, uiRuntime);
+        Template template = getTemplate(prefix, path);
+        if (template != null)
         {
-            return "Can not find resource [" + prefix + "/" + path + "]";
+            VelocityContextAdapter ctx = new VelocityContextAdapter(uiRuntime
+                    .getUIContext());
+            template.merge(ctx, uiRuntime.getHttpServletResponse().getWriter());
         }
-        VelocityContextAdapter ctx = new VelocityContextAdapter(uiRuntime
-                .getUIContext());
-        velocityEngine.evaluate(ctx, uiRuntime.getHttpServletResponse()
-                .getWriter(), "error.vm", new InputStreamReader(resource
-                .openStream()));
+
         return StringUtils.EMPTY;
     }
 }

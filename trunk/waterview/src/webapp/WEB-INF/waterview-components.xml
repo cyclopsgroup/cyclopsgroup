@@ -6,18 +6,70 @@
             <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
             <configuration>
                 <pipeline>
-                    <valve>com.cyclopsgroup.waterview.core.ParseURLValve</valve>
-                    <valve>com.cyclopsgroup.waterview.core.RunModulesValve</valve>
-                    <valve>com.cyclopsgroup.waterview.core.RenderPageValve</valve>
+                    <valve role="cyclopsgroup.waterview.valve.parseurl"/>
+                    <valve role="cyclopsgroup.waterview.valve.runactions"/>
+                    <valve role="cyclopsgroup.waterview.valve.renderpage"/>
                 </pipeline>
-                <resolvers>
-                    <resolver extension="do">com.cyclops.waterview.core.ActionResolver</resolver>
-                    <resolver extension="vm">com.cyclops.waterview.core.VelocityPageRenderer</resolver>
-                    <resolver extension="xml">com.cyclops.waterview.core.XMLPageResolver</resolver>
-                </resolvers>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.UIModuleResolver</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultUIModuleResolver</implementation>
+            <configuration>
+                <cache-size>1000</cache-size>
+                <packages>
+                    <package>com.cyclopsgroup.waterview.ui</package>
+                    <package>com.cyclopsgroup.otherprj.ui</package>
+                </packages>
+            </configuration>
+        </component>
+        <!--
+        *************** VALVES ****************
+        -->
+        <component>
+            <role>cyclopsgroup.waterview.valve.parseurl</role>
+            <implementation>com.cyclopsgroup.waterview.core.ParseURLValve</implementation>
+            <configuration>
+                <path-separator>|</path-separator>
+                <default-page>Index.vm</default-page>
+                <extensions>
+                    <action>do</action>
+                    <page>vm</page>
+                    <page>xml</page>
+                    <page>html</page>
+                </extensions>
+            </configuration>
+        </component>
+        <component>
+            <role>cyclopsgroup.waterview.valve.runactions</role>
+            <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
+        </component>
+        <component>
+            <role>cyclopsgroup.waterview.valve.renderpage</role>
+            <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
+            <configuration>
+                <renderer extension="vm" role="cyclopsgroup.waterview.resolver.velocity"/>
+                <renderer extension="xml" role="com.cyclopsgroup.wateview.Resolver.Jelly"/>
+            </configuration>
+        </component>
+        <!--
+        *************** RESOLVERS ****************
+        -->
+        <component>
+            <role>cyclopsgroup.waterview.resolver.velocity</role>
+            <implementation>com.cyclopsgroup.waterview.velocity.VelocityPageRenderer</implementation>
+            <configuration>
+                <cache-size>100</cache-size>
+            </configuration>
+        </component>
+        <component>
+            <role>cyclopsgroup.waterview.resolver.jelly</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.JellyPageRenderer</implementation>
+        </component>
     </components>
+    <!--
+        *************** LOAD ON START ****************
+    -->
     <load-on-start>
         <component>
             <role>com.cyclopsgroup.waterview.Waterview</role>

@@ -14,75 +14,66 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.velocity;
+package com.cyclopsgroup.waterview.core;
 
-import java.util.Properties;
+import java.util.Vector;
 
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.LRUMap;
-import org.apache.velocity.app.VelocityEngine;
 
 import com.cyclopsgroup.waterview.Resolver;
+import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * TODO Add javadoc for class
+ * Default implementation of action resolver
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityPageRenderer extends AbstractLogEnabled implements
-        Resolver, Initializable, Configurable
+public class DefaultUIModuleResolver extends AbstractLogEnabled implements
+        UIModuleResolver, Configurable
 {
 
-    private LRUMap templateCache;
+    private LRUMap moduleCache;
 
-    private VelocityEngine velocityEngine;
-
-    private Properties velocityProps;
+    private Vector modulePackages;
 
     /**
-     * Override method configure in super class of VelocityPageRenderer
+     * Override method configure in super class of DefaultUIModuleResolver
      * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        velocityProps = new Properties();
-        Configuration[] velocityConfs = conf.getChild("velocity-properties")
-                .getChildren("property");
-        for (int i = 0; i < velocityConfs.length; i++)
+        int cacheSize = conf.getChild("cache-size").getValueAsInteger(0);
+        if (cacheSize > 1)
         {
-            Configuration velocityConf = velocityConfs[i];
-            velocityProps.setProperty(velocityConf.getAttribute("name"),
-                    velocityConf.getValue());
+            moduleCache = new LRUMap(cacheSize);
+        }
+        else
+        {
+            moduleCache = null;
+        }
+        Configuration[] packages = conf.getChild("packages").getChildren(
+                "package");
+        for (int i = 0; i < packages.length; i++)
+        {
+            Configuration packageCon = packages[i];
+            modulePackages.add(packageCon.getValue());
         }
     }
 
     /**
-     * Override method initialize in super class of VelocityPageRenderer
-     * 
-     * @see org.apache.avalon.framework.activity.Initializable#initialize()
-     */
-    public void initialize() throws Exception
-    {
-        velocityEngine = new VelocityEngine();
-        velocityEngine.init(velocityProps);
-    }
-
-    /**
-     * Override method resolve in super class of VelocityPageRenderer
+     * Override method resolve in super class of DefaultActionResolver
      * 
      * @see com.cyclopsgroup.waterview.Resolver#resolve(java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
      */
     public void resolve(String path, UIRuntime runtime) throws Exception
     {
-        RuntimeRenderer renderer = new RuntimeRenderer(runtime, velocityEngine,
-                templateCache);
-        runtime.getUIContext().put("renderer", renderer);
-        renderer.render("layout", path);
+        Resolver resolver = null;
+        
     }
 }

@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview;
 
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Value parser object
@@ -24,4 +25,60 @@ package com.cyclopsgroup.waterview;
  */
 public abstract class ValueParser
 {
+    /**
+     * Internally get string value
+     * 
+     * @param name Name of the variable
+     * @return String value of the variable
+     * @throws Exception Throw it out
+     */
+    protected abstract String doGetValue(String name) throws Exception;
+
+    /**
+     * Internally get string array value
+     * 
+     * @param name Name of the variable
+     * @return String array value
+     * @throws Exception Throw it out
+     */
+    protected String[] doGetValues(String name) throws Exception
+    {
+        return new String[]
+        { doGetValue(name) };
+    }
+
+    /**
+     * Get string value of an attribute
+     * 
+     * @param name Name of the variable
+     * @return String value
+     */
+    public String getString(String name)
+    {
+        return getString(name, StringUtils.EMPTY);
+    }
+
+    /**
+     * Get string value of attribute
+     * 
+     * @param name Name of the attribute
+     * @param defaultValue Defaut string value
+     * @return String value
+     */
+    public String getString(String name, String defaultValue)
+    {
+        try
+        {
+            String ret = doGetValue(name);
+            if (ret == null)
+            {
+                return defaultValue;
+            }
+            return ret;
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
 }

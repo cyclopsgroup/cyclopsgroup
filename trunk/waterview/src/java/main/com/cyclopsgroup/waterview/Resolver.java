@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-
 /**
  * Resolver
  * 
@@ -24,8 +23,6 @@ package com.cyclopsgroup.waterview;
  */
 public interface Resolver
 {
-    boolean isRenderer();
-
     /**
      * Method resolve() in class Resolver
      * 

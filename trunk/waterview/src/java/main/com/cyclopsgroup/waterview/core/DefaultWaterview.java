@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Vector;
@@ -29,8 +28,8 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.Resolver;
 import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.Valve;
 import com.cyclopsgroup.waterview.Waterview;
 
 /**
@@ -41,12 +40,7 @@ import com.cyclopsgroup.waterview.Waterview;
 public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         Configurable, Serviceable
 {
-
-    private Resolver defaultResolver;
-
     private Properties properties;
-
-    private Hashtable resolvers;
 
     private ServiceManager serviceManager;
 
@@ -67,45 +61,18 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         valves = new Vector();
         for (int i = 0; i < valveConfs.length; i++)
         {
-            String valveName = valveConfs[i].getValue();
+            String valveRole = valveConfs[i].getAttribute("role");
             try
             {
-                Valve valve = (Valve) Class.forName(valveName).newInstance();
+                Valve valve = (Valve) serviceManager.lookup(valveRole);
                 valves.add(valve);
             }
             catch (Exception e)
             {
-                getLogger().error("Valve " + valveName + " Can not be loaded ",
+                getLogger().error("Valve " + valveRole + " Can not be loaded ",
                         e);
             }
         }
-        Configuration[] resolverConfs = conf.getChild("resolvers").getChildren(
-                "resolver");
-        resolvers = new Hashtable();
-        for (int i = 0; i < resolverConfs.length; i++)
-        {
-            Configuration resolverConf = resolverConfs[i];
-            try
-            {
-                Resolver resolver = (Resolver) Class.forName(
-                        resolverConf.getValue()).newInstance();
-                resolvers.put(resolverConf.getAttribute("extension"), resolver);
-            }
-            catch (Exception e)
-            {
-                getLogger().error("Create resolver error", e);
-            }
-        }
-    }
-
-    /**
-     * Override method getDefaultResolver in super class of DefaultWaterview
-     * 
-     * @see com.cyclopsgroup.waterview.Waterview#getDefaultResolver()
-     */
-    public Resolver getDefaultResolver()
-    {
-        return defaultResolver;
     }
 
     /**
@@ -119,16 +86,6 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
-     * Override method getResolver in super class of DefaultWaterview
-     * 
-     * @see com.cyclopsgroup.waterview.Waterview#getResolver(java.lang.String)
-     */
-    public Resolver getResolver(String extension)
-    {
-        return (Resolver) resolvers.get(extension);
-    }
-
-    /**
      * Override method process in super class of DefaultWaterview
      * 
      * @see com.cyclopsgroup.waterview.Waterview#process(com.cyclopsgroup.waterview.UIRuntime)
@@ -138,7 +95,10 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         for (Iterator i = valves.iterator(); i.hasNext();)
         {
             Valve valve = (Valve) i.next();
-            valve.process(runtime);
+            if (!valve.process(runtime))
+            {
+                break;
+            }
         }
     }
 

@@ -13,6 +13,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>waterview</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/servlet/waterview/*</url-pattern>
     </servlet-mapping>
 </web-app>
