@@ -10,8 +10,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.torque.util.Criteria;
 
-import com.cyclops.tornado.om.User;
-import com.cyclops.tornado.om.UserPeer;
+import com.cyclops.tornado.om.DUser;
+import com.cyclops.tornado.om.DUserPeer;
 /**
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
@@ -21,29 +21,29 @@ public class UserBroker extends AbstractObjectBroker {
      * @see com.cyclops.tornado.bo.AbstractObjectBroker#getObjectClass()
      */
     protected Class getObjectClass() {
-        return User.class;
+        return DUser.class;
     }
     /** Implementation of method getPrimaryKey() in this class
      * @see com.cyclops.tornado.bo.AbstractObjectBroker#getPrimaryKey()
      */
     protected String getPrimaryKey() {
-        return UserPeer.USER_ID;
+        return DUserPeer.USER_ID;
     }
     /** Method retrieveByName()
      * @param userName Account name of user
-     * @return User object, null if not found
+     * @return DUser object, null if not found
      * @throws Exception torque exception
      */
-    public User retrieveByName(String userName) throws Exception {
+    public DUser retrieveByName(String userName) throws Exception {
         Criteria crit = new Criteria();
-        crit.and(UserPeer.USER_NAME, userName);
-        return (User) retrieve(crit);
+        crit.and(DUserPeer.USER_NAME, userName);
+        return (DUser) retrieve(crit);
     }
-    /** Search user by user name of key word
+    /** Search DUser by DUser name of key word
      * @param name Account name, first name, middle name or last name, or part of them
      * @param keyword Email or description or part of them
      * @param includingDeleted Whether or not including deleted records
-     * @return List of User objects
+     * @return List of DUser objects
      * @throws Exception TorqueException actually
      */
     public List search(String name, String keyword, boolean includingDeleted)
@@ -52,25 +52,31 @@ public class UserBroker extends AbstractObjectBroker {
         if (!StringUtils.isEmpty(name)) {
             String part = "%" + name + "%";
             Criteria.Criterion accountName =
-                crit.getNewCriterion(UserPeer.USER_NAME, part, Criteria.LIKE);
+                crit.getNewCriterion(DUserPeer.USER_NAME, part, Criteria.LIKE);
             Criteria.Criterion firstName =
-                crit.getNewCriterion(UserPeer.FIRST_NAME, part, Criteria.LIKE);
+                crit.getNewCriterion(DUserPeer.FIRST_NAME, part, Criteria.LIKE);
             Criteria.Criterion middleName =
-                crit.getNewCriterion(UserPeer.MIDDLE_NAME, part, Criteria.LIKE);
+                crit.getNewCriterion(
+                    DUserPeer.MIDDLE_NAME,
+                    part,
+                    Criteria.LIKE);
             Criteria.Criterion lastName =
-                crit.getNewCriterion(UserPeer.LAST_NAME, part, Criteria.LIKE);
+                crit.getNewCriterion(DUserPeer.LAST_NAME, part, Criteria.LIKE);
             crit.and(accountName.or(firstName).or(middleName).or(lastName));
         }
         if (!StringUtils.isEmpty(keyword)) {
             String part = "%" + keyword + "%";
             Criteria.Criterion email =
-                crit.getNewCriterion(UserPeer.EMAIL, part, Criteria.LIKE);
+                crit.getNewCriterion(DUserPeer.EMAIL, part, Criteria.LIKE);
             Criteria.Criterion description =
-                crit.getNewCriterion(UserPeer.DESCRIPTION, part, Criteria.LIKE);
+                crit.getNewCriterion(
+                    DUserPeer.DESCRIPTION,
+                    part,
+                    Criteria.LIKE);
             crit.and(email.or(description));
         }
         if (!includingDeleted) {
-            crit.and(UserPeer.IS_DISABLED, false);
+            crit.and(DUserPeer.IS_DISABLED, false);
         }
         return query(crit);
     }

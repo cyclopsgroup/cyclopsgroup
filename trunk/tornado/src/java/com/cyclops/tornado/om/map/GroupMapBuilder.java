@@ -58,14 +58,14 @@ public class GroupMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_groups");
         TableMap tMap = dbMap.getTable("c_tnd_groups");
 
-                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-        
-                tMap.setPrimaryKeyMethodInfo(tMap.getName());
-        
-                                      tMap.addPrimaryKey("c_tnd_groups.GROUP_ID", new Integer(0));
-                                                        tMap.addColumn("c_tnd_groups.GROUP_NAME", new String());
-                                                        tMap.addColumn("c_tnd_groups.DESCRIPTION", new String());
-                                                        tMap.addColumn("c_tnd_groups.IS_SYSTEM", new Boolean(true));
-                                                        tMap.addColumn("c_tnd_groups.IS_DISABLED", new Boolean(true));
-                              }
+        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+
+        tMap.setPrimaryKeyMethodInfo(tMap.getName());
+
+              tMap.addPrimaryKey("c_tnd_groups.GROUP_ID", new Integer(0));
+                    tMap.addColumn("c_tnd_groups.GROUP_NAME", new String());
+                    tMap.addColumn("c_tnd_groups.DESCRIPTION", new String());
+                    tMap.addColumn("c_tnd_groups.IS_SYSTEM", new Boolean(true));
+                    tMap.addColumn("c_tnd_groups.IS_DISABLED", new Boolean(true));
+          }
 }

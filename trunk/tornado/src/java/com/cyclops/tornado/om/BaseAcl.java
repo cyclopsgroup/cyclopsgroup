@@ -33,188 +33,160 @@ public abstract class BaseAcl extends BaseObject
     private static final AclPeer peer =
         new AclPeer();
 
-                  
-        /**
-         * The value for the acl_id field
-         */
-        private int acl_id;
-              
-        /**
-         * The value for the owner_name field
-         */
-        private String owner_name;
-              
-        /**
-         * The value for the owner_type field
-         */
-        private String owner_type;
-                                                                                                              
-        /**
-         * The value for the is_role field
-         */
-        private boolean is_role = false;
-              
-        /**
-         * The value for the permission field
-         */
-        private String permission;
+        
+    /** The value for the aclId field */
+    private int aclId;
       
+    /** The value for the ownerName field */
+    private String ownerName;
       
-        /**
-         * Get the AclId
-         *
-         * @return int
-         */
-        public int getAclId()
-        {
-            return acl_id;
-        }
+    /** The value for the ownerType field */
+    private String ownerType;
+                                                                
+    /** The value for the isRole field */
+    private boolean isRole = false;
+      
+    /** The value for the permission field */
+    private String permission;
+  
+    
+    /**
+     * Get the AclId
+     *
+     * @return int
+     */
+    public int getAclId()
+    {
+        return aclId;
+    }
 
-                
-        /**
-         * Set the value of AclId
-         *
-         * @param v new value
-         */
-        public void setAclId(int v) 
-        {
-          
-
-
-         if (this.acl_id != v)
-        {
-             this.acl_id = v;
+        
+    /**
+     * Set the value of AclId
+     *
+     * @param v new value
+     */
+    public void setAclId(int v) 
+    {
+    
+                  if (this.aclId != v)
+              {
+            this.aclId = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the OwnerName
-         *
-         * @return String
-         */
-        public String getOwnerName()
-        {
-            return owner_name;
+    
         }
+  
+    /**
+     * Get the OwnerName
+     *
+     * @return String
+     */
+    public String getOwnerName()
+    {
+        return ownerName;
+    }
 
-                
-        /**
-         * Set the value of OwnerName
-         *
-         * @param v new value
-         */
-        public void setOwnerName(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.owner_name, v))
-        {
-             this.owner_name = v;
+        
+    /**
+     * Set the value of OwnerName
+     *
+     * @param v new value
+     */
+    public void setOwnerName(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.ownerName, v))
+              {
+            this.ownerName = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the OwnerType
-         *
-         * @return String
-         */
-        public String getOwnerType()
-        {
-            return owner_type;
+    
         }
+  
+    /**
+     * Get the OwnerType
+     *
+     * @return String
+     */
+    public String getOwnerType()
+    {
+        return ownerType;
+    }
 
-                
-        /**
-         * Set the value of OwnerType
-         *
-         * @param v new value
-         */
-        public void setOwnerType(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.owner_type, v))
-        {
-             this.owner_type = v;
+        
+    /**
+     * Set the value of OwnerType
+     *
+     * @param v new value
+     */
+    public void setOwnerType(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.ownerType, v))
+              {
+            this.ownerType = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the IsRole
-         *
-         * @return boolean
-         */
-        public boolean getIsRole()
-        {
-            return is_role;
+    
         }
+  
+    /**
+     * Get the IsRole
+     *
+     * @return boolean
+     */
+    public boolean getIsRole()
+    {
+        return isRole;
+    }
 
-                
-        /**
-         * Set the value of IsRole
-         *
-         * @param v new value
-         */
-        public void setIsRole(boolean v) 
-        {
-          
-
-
-         if (this.is_role != v)
-        {
-             this.is_role = v;
+        
+    /**
+     * Set the value of IsRole
+     *
+     * @param v new value
+     */
+    public void setIsRole(boolean v) 
+    {
+    
+                  if (this.isRole != v)
+              {
+            this.isRole = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the Permission
-         *
-         * @return String
-         */
-        public String getPermission()
-        {
-            return permission;
+    
         }
+  
+    /**
+     * Get the Permission
+     *
+     * @return String
+     */
+    public String getPermission()
+    {
+        return permission;
+    }
 
-                
-        /**
-         * Set the value of Permission
-         *
-         * @param v new value
-         */
-        public void setPermission(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.permission, v))
-        {
-             this.permission = v;
+        
+    /**
+     * Set the value of Permission
+     *
+     * @param v new value
+     */
+    public void setPermission(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.permission, v))
+              {
+            this.permission = v;
             setModified(true);
         }
-
-             }
-
-
- 
+    
+        }
+  
     
      
-
-
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -223,7 +195,7 @@ public abstract class BaseAcl extends BaseObject
      */
     public void save() throws Exception
     {
-         if (isModified())
+          if (isModified())
         {
             if (isNew())
             {
@@ -235,19 +207,19 @@ public abstract class BaseAcl extends BaseObject
                 AclPeer.doUpdate((Acl) this);
             }
         }
-     }
+      }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-     *
+       *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-         if (isModified())
+          if (isModified())
         {
             try
             {
@@ -269,8 +241,7 @@ public abstract class BaseAcl extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-
-     }
+      }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -285,37 +256,34 @@ public abstract class BaseAcl extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-        // If this object has been modified, then save it to the database.
-        if (isModified())
-        {
-            if (isNew())
+            // If this object has been modified, then save it to the database.
+            if (isModified())
             {
-                AclPeer.doInsert((Acl) this, con);
-                setNew(false);
+                if (isNew())
+                {
+                    AclPeer.doInsert((Acl) this, con);
+                    setNew(false);
+                }
+                else
+                {
+                    AclPeer.doUpdate((Acl) this, con);
+                }
             }
-            else
-            {
-                AclPeer.doUpdate((Acl) this, con);
-            }
+
         }
 
-       }
 
-
-    
-    
-    
-
-        /**
+          
+      /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  acl_id ObjectKey
+     * @param  aclId ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setAclId(((NumberKey) key).intValue());
-            }
+            setAclId(((NumberKey) key).intValue());
+        }
 
     /**
      * Set the PrimaryKey using a String.
@@ -324,42 +292,41 @@ public abstract class BaseAcl extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setAclId(Integer.parseInt(key));
-            }
+            setAclId(Integer.parseInt(key));
+        }
 
-
+  
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getAclId());
-    }
+          return SimpleKey.keyFor(getAclId());
+      }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-     */
-    public Acl copy() throws TorqueException
+       */
+      public Acl copy() throws TorqueException
     {
         return copyInto(new Acl());
     }
-
+  
     protected Acl copyInto(Acl copyObj) throws TorqueException
     {
-        copyObj.setAclId(acl_id);
-        copyObj.setOwnerName(owner_name);
-        copyObj.setOwnerType(owner_type);
-        copyObj.setIsRole(is_role);
-        copyObj.setPermission(permission);
-
-                      copyObj.setAclId(0);
-                            
-
-
+          copyObj.setAclId(aclId);
+          copyObj.setOwnerName(ownerName);
+          copyObj.setOwnerType(ownerType);
+          copyObj.setIsRole(isRole);
+          copyObj.setPermission(permission);
+  
+                    copyObj.setAclId(0);
+                                    
+  
         return copyObj;
     }
 
@@ -378,21 +345,21 @@ public abstract class BaseAcl extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("Acl:\n");
-              str.append("AclId = ")
+        str.append("AclId = ")
            .append(getAclId())
            .append("\n");
-              str.append("OwnerName = ")
+        str.append("OwnerName = ")
            .append(getOwnerName())
            .append("\n");
-              str.append("OwnerType = ")
+        str.append("OwnerType = ")
            .append(getOwnerType())
            .append("\n");
-              str.append("IsRole = ")
+        str.append("IsRole = ")
            .append(getIsRole())
            .append("\n");
-              str.append("Permission = ")
+        str.append("Permission = ")
            .append(getPermission())
            .append("\n");
-              return(str.toString());
+        return(str.toString());
     }
 }

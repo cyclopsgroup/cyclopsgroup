@@ -11,13 +11,13 @@ import org.apache.torque.map.TableMap;
 
 /**
   */
-public class GroupHierarchyMapBuilder implements MapBuilder
+public class DConfMapBuilder implements MapBuilder
 {
     /**
      * The name of this class
      */
     public static final String CLASS_NAME =
-        "com.cyclops.tornado.om.map.GroupHierarchyMapBuilder";
+        "com.cyclops.tornado.om.map.DConfMapBuilder";
 
 
     /**
@@ -55,19 +55,15 @@ public class GroupHierarchyMapBuilder implements MapBuilder
     {
         dbMap = Torque.getDatabaseMap("default");
 
-        dbMap.addTable("c_tnd_grphrch");
-        TableMap tMap = dbMap.getTable("c_tnd_grphrch");
+        dbMap.addTable("c_tnd_confs");
+        TableMap tMap = dbMap.getTable("c_tnd_confs");
 
         tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
 
         tMap.setPrimaryKeyMethodInfo(tMap.getName());
 
-              tMap.addPrimaryKey("c_tnd_grphrch.HIERARCHY_ID", new Integer(0));
-                    tMap.addForeignKey(
-                "c_tnd_grphrch.GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                "group_id");
-                    tMap.addForeignKey(
-                "c_tnd_grphrch.PARENT_GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                "group_id");
+              tMap.addPrimaryKey("c_tnd_confs.CONF_ID", new Integer(0));
+                    tMap.addColumn("c_tnd_confs.CONF_KEY", new String());
+                    tMap.addColumn("c_tnd_confs.CONF_VALUE", new String());
           }
 }

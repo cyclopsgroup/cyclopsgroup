@@ -16,7 +16,7 @@
 	</form>
 </table>
 #if($user)
-    <table width="100%">
+    <table width="100%" class="frame">
     	<form method="post" action="$link.setAction("system.administration.PermissionAction").setPage("system,administration,user,Permissions.vm")">
     	<input type="hidden" name="owner_type" value="U"/>
     	<input type="hidden" name="owner_name" value="$user.userName"/>
@@ -48,7 +48,7 @@
     	</tr>
     	</form>
     </table>
-    <table width="100%">
+    <table width="100%" class="frame">
     	<form method="post" action="$link.setAction("system.administration.PermissionAction").setPage("system,administration,user,Permissions.vm")">
     	<input type="hidden" name="owner_type" value="U"/>
     	<input type="hidden" name="owner_name" value="$user.userName"/>

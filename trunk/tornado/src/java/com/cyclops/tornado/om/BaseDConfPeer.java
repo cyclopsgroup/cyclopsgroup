@@ -31,11 +31,9 @@ import com.workingdogs.village.Record;
 import com.cyclops.tornado.om.map.*;
 
 
-  
-  
 /**
  */
-public abstract class BaseUserGroupPeer
+public abstract class BaseDConfPeer
     extends BasePeer
 {
 
@@ -43,7 +41,7 @@ public abstract class BaseUserGroupPeer
     public static final String DATABASE_NAME = "default";
 
      /** the table name for this class */
-    public static final String TABLE_NAME = "c_tnd_user_group";
+    public static final String TABLE_NAME = "c_tnd_confs";
 
     /**
      * @return the map builder for this peer
@@ -53,21 +51,21 @@ public abstract class BaseUserGroupPeer
     public static MapBuilder getMapBuilder()
         throws TorqueException
     {
-        return getMapBuilder(UserGroupMapBuilder.CLASS_NAME);
+        return getMapBuilder(DConfMapBuilder.CLASS_NAME);
     }
 
-      /** the column name for the OBJECT_ID field */
-    public static final String OBJECT_ID;
-      /** the column name for the USER_ID field */
-    public static final String USER_ID;
-      /** the column name for the GROUP_ID field */
-    public static final String GROUP_ID;
+      /** the column name for the CONF_ID field */
+    public static final String CONF_ID;
+      /** the column name for the CONF_KEY field */
+    public static final String CONF_KEY;
+      /** the column name for the CONF_VALUE field */
+    public static final String CONF_VALUE;
   
     static
     {
-          OBJECT_ID = "c_tnd_user_group.OBJECT_ID";
-          USER_ID = "c_tnd_user_group.USER_ID";
-          GROUP_ID = "c_tnd_user_group.GROUP_ID";
+          CONF_ID = "c_tnd_confs.CONF_ID";
+          CONF_KEY = "c_tnd_confs.CONF_KEY";
+          CONF_VALUE = "c_tnd_confs.CONF_VALUE";
           if (Torque.isInit())
         {
             try
@@ -81,7 +79,7 @@ public abstract class BaseUserGroupPeer
         }
         else
         {
-            Torque.registerMapBuilder(UserGroupMapBuilder.CLASS_NAME);
+            Torque.registerMapBuilder(DConfMapBuilder.CLASS_NAME);
         }
     }
  
@@ -90,7 +88,7 @@ public abstract class BaseUserGroupPeer
 
     /** A class that can be returned by this peer. */
     protected static final String CLASSNAME_DEFAULT =
-        "com.cyclops.tornado.om.UserGroup";
+        "com.cyclops.tornado.om.DConf";
 
     /** A class that can be returned by this peer. */
     protected static final Class CLASS_DEFAULT = initClass(CLASSNAME_DEFAULT);
@@ -179,7 +177,7 @@ public abstract class BaseUserGroupPeer
     public static ObjectKey doInsert(Criteria criteria)
         throws TorqueException
     {
-        return BaseUserGroupPeer
+        return BaseDConfPeer
             .doInsert(criteria, (Connection) null);
     }
 
@@ -224,9 +222,9 @@ public abstract class BaseUserGroupPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-          criteria.addSelectColumn(OBJECT_ID);
-          criteria.addSelectColumn(USER_ID);
-          criteria.addSelectColumn(GROUP_ID);
+          criteria.addSelectColumn(CONF_ID);
+          criteria.addSelectColumn(CONF_KEY);
+          criteria.addSelectColumn(CONF_VALUE);
       }
 
     /**
@@ -238,15 +236,15 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static UserGroup row2Object(Record row,
+    public static DConf row2Object(Record row,
                                              int offset,
                                              Class cls)
         throws TorqueException
     {
         try
         {
-            UserGroup obj = (UserGroup) cls.newInstance();
-            UserGroupPeer.populateObject(row, offset, obj);
+            DConf obj = (DConf) cls.newInstance();
+            DConfPeer.populateObject(row, offset, obj);
                   obj.setModified(false);
               obj.setNew(false);
 
@@ -273,14 +271,14 @@ public abstract class BaseUserGroupPeer
      */
     public static void populateObject(Record row,
                                       int offset,
-                                      UserGroup obj)
+                                      DConf obj)
         throws TorqueException
     {
         try
         {
-                obj.setObjectId(row.getValue(offset + 0).asInt());
-                  obj.setUserId(row.getValue(offset + 1).asInt());
-                  obj.setGroupId(row.getValue(offset + 2).asInt());
+                obj.setConfId(row.getValue(offset + 0).asInt());
+                  obj.setConfKey(row.getValue(offset + 1).asString());
+                  obj.setConfValue(row.getValue(offset + 2).asString());
               }
         catch (DataSetException e)
         {
@@ -329,7 +327,7 @@ public abstract class BaseUserGroupPeer
     public static List doSelectVillageRecords(Criteria criteria)
         throws TorqueException
     {
-        return BaseUserGroupPeer
+        return BaseDConfPeer
             .doSelectVillageRecords(criteria, (Connection) null);
     }
 
@@ -385,8 +383,8 @@ public abstract class BaseUserGroupPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-              results.add(UserGroupPeer.row2Object(row, 1,
-                UserGroupPeer.getOMClass()));
+              results.add(DConfPeer.row2Object(row, 1,
+                DConfPeer.getOMClass()));
           }
         return results;
     }
@@ -416,7 +414,7 @@ public abstract class BaseUserGroupPeer
      */
     public static void doUpdate(Criteria criteria) throws TorqueException
     {
-         BaseUserGroupPeer
+         BaseDConfPeer
             .doUpdate(criteria, (Connection) null);
     }
 
@@ -435,10 +433,8 @@ public abstract class BaseUserGroupPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                   selectCriteria.put(OBJECT_ID, criteria.remove(OBJECT_ID));
-                       selectCriteria.put(USER_ID, criteria.remove(USER_ID));
-                       selectCriteria.put(GROUP_ID, criteria.remove(GROUP_ID));
-      
+                   selectCriteria.put(CONF_ID, criteria.remove(CONF_ID));
+                          
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -465,7 +461,7 @@ public abstract class BaseUserGroupPeer
      */
      public static void doDelete(Criteria criteria) throws TorqueException
      {
-         BaseUserGroupPeer
+         BaseDConfPeer
             .doDelete(criteria, (Connection) null);
      }
 
@@ -506,7 +502,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static List doSelect(UserGroup obj) throws TorqueException
+    public static List doSelect(DConf obj) throws TorqueException
     {
         return doSelect(buildCriteria(obj));
     }
@@ -517,7 +513,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(UserGroup obj) throws TorqueException
+    public static void doInsert(DConf obj) throws TorqueException
     {
           obj.setPrimaryKey(doInsert(buildCriteria(obj)));
           obj.setNew(false);
@@ -529,7 +525,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(UserGroup obj) throws TorqueException
+    public static void doUpdate(DConf obj) throws TorqueException
     {
         doUpdate(buildCriteria(obj));
         obj.setModified(false);
@@ -540,14 +536,14 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(UserGroup obj) throws TorqueException
+    public static void doDelete(DConf obj) throws TorqueException
     {
         doDelete(buildCriteria(obj));
     }
 
     /**
      * Method to do inserts.  This method is to be used during a transaction,
-     * otherwise use the doInsert(UserGroup) method.  It will take
+     * otherwise use the doInsert(DConf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to insert into the database.
@@ -555,7 +551,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(UserGroup obj, Connection con)
+    public static void doInsert(DConf obj, Connection con)
         throws TorqueException
     {
           obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
@@ -565,7 +561,7 @@ public abstract class BaseUserGroupPeer
 
     /**
      * Method to do update.  This method is to be used during a transaction,
-     * otherwise use the doUpdate(UserGroup) method.  It will take
+     * otherwise use the doUpdate(DConf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to update in the database.
@@ -573,7 +569,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(UserGroup obj, Connection con)
+    public static void doUpdate(DConf obj, Connection con)
         throws TorqueException
     {
         doUpdate(buildCriteria(obj), con);
@@ -582,7 +578,7 @@ public abstract class BaseUserGroupPeer
 
     /**
      * Method to delete.  This method is to be used during a transaction,
-     * otherwise use the doDelete(UserGroup) method.  It will take
+     * otherwise use the doDelete(DConf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to delete in the database.
@@ -590,7 +586,7 @@ public abstract class BaseUserGroupPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(UserGroup obj, Connection con)
+    public static void doDelete(DConf obj, Connection con)
         throws TorqueException
     {
         doDelete(buildCriteria(obj), con);
@@ -605,7 +601,7 @@ public abstract class BaseUserGroupPeer
      */
     public static void doDelete(ObjectKey pk) throws TorqueException
     {
-        BaseUserGroupPeer
+        BaseDConfPeer
            .doDelete(pk, (Connection) null);
     }
 
@@ -629,28 +625,37 @@ public abstract class BaseUserGroupPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-          SimpleKey[] keys = (SimpleKey[])pk.getValue();
-                    criteria.add(OBJECT_ID, keys[0]);
-                      criteria.add(USER_ID, keys[1]);
-                      criteria.add(GROUP_ID, keys[2]);
-                    return criteria;
+              criteria.add(CONF_ID, pk);
+          return criteria;
      }
 
     /** Build a Criteria object from the data object for this peer */
-    public static Criteria buildCriteria( UserGroup obj )
+    public static Criteria buildCriteria( DConf obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
               if (!obj.isNew())
-                criteria.add(OBJECT_ID, obj.getObjectId());
-              if (!obj.isNew())
-                criteria.add(USER_ID, obj.getUserId());
-              if (!obj.isNew())
-                criteria.add(GROUP_ID, obj.getGroupId());
+                criteria.add(CONF_ID, obj.getConfId());
+                  criteria.add(CONF_KEY, obj.getConfKey());
+                  criteria.add(CONF_VALUE, obj.getConfValue());
           return criteria;
     }
  
     
-    
+        /**
+     * Retrieve a single object by pk
+     *
+     * @param pk the primary key
+     * @throws TorqueException Any exceptions caught during processing will be
+     *         rethrown wrapped into a TorqueException.
+     * @throws NoRowsException Primary key was not found in database.
+     * @throws TooManyRowsException Primary key was not found in database.
+     */
+    public static DConf retrieveByPK(int pk)
+        throws TorqueException, NoRowsException, TooManyRowsException
+    {
+        return retrieveByPK(SimpleKey.keyFor(pk));
+    }
+  
     /**
      * Retrieve a single object by pk
      *
@@ -660,11 +665,11 @@ public abstract class BaseUserGroupPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static UserGroup retrieveByPK(ObjectKey pk)
+    public static DConf retrieveByPK(ObjectKey pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Connection db = null;
-        UserGroup retVal = null;
+        DConf retVal = null;
         try
         {
             db = Torque.getConnection(DATABASE_NAME);
@@ -687,7 +692,7 @@ public abstract class BaseUserGroupPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static UserGroup retrieveByPK(ObjectKey pk, Connection con)
+    public static DConf retrieveByPK(ObjectKey pk, Connection con)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Criteria criteria = buildCriteria(pk);
@@ -702,7 +707,7 @@ public abstract class BaseUserGroupPeer
         }
         else
         {
-            return (UserGroup)v.get(0);
+            return (DConf)v.get(0);
         }
     }
 
@@ -749,87 +754,13 @@ public abstract class BaseUserGroupPeer
         else
         {
             Criteria criteria = new Criteria();
-              Iterator iter = pks.iterator();
-            while (iter.hasNext())
-            {
-                ObjectKey pk = (ObjectKey)iter.next();
-                SimpleKey[] keys = (SimpleKey[])pk.getValue();
-                            Criteria.Criterion c0 = criteria.getNewCriterion(
-                        OBJECT_ID, keys[0], Criteria.EQUAL);
-                                    Criteria.Criterion c1 = criteria.getNewCriterion(
-                        USER_ID, keys[1], Criteria.EQUAL);
-                                    c0.and(c1);
-                              Criteria.Criterion c2 = criteria.getNewCriterion(
-                        GROUP_ID, keys[2], Criteria.EQUAL);
-                                    c1.and(c2);
-                          criteria.or(c0);
-            }
+              criteria.addIn( CONF_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;
     }
 
  
-    /**
-     * retrieve object using using pk values.
-     *
-       * @param object_id int
-       * @param user_id int
-       * @param group_id int
-       */
-    public static UserGroup retrieveByPK(
-       int object_id
-          , int user_id
-          , int group_id
-              ) throws TorqueException
-    {
-        Connection db = null;
-        UserGroup retVal = null;
-        try
-        {
-           db = Torque.getConnection(DATABASE_NAME);
-           retVal = retrieveByPK(
-         object_id
-          , user_id
-          , group_id
-                     , db);
-        }
-        finally
-        {
-            Torque.closeConnection(db);
-        }
-        return(retVal);
-    }
-
-      /**
-     * retrieve object using using pk values.
-     *
-       * @param object_id int
-       * @param user_id int
-       * @param group_id int
-       * @param Connection con
-     */
-    public static UserGroup retrieveByPK(
-       int object_id
-          , int user_id
-          , int group_id
-             ,Connection con) throws TorqueException
-    {
-
-        Criteria criteria = new Criteria(5);
-          criteria.add(OBJECT_ID, object_id);
-          criteria.add(USER_ID, user_id);
-          criteria.add(GROUP_ID, group_id);
-          List v = doSelect(criteria, con);
-        if (v.size() != 1)
-        {
-            throw new TorqueException("Failed to select one and only one row.");
-        }
-        else
-        {
-            return (UserGroup) v.get(0);
-        }
-    }
 
 
 

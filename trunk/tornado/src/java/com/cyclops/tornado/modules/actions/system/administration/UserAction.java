@@ -11,7 +11,7 @@ import org.apache.turbine.TemplateContext;
 
 import com.cyclops.tornado.bo.UserBroker;
 import com.cyclops.tornado.modules.Action;
-import com.cyclops.tornado.om.User;
+import com.cyclops.tornado.om.DUser;
 /**
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
@@ -27,7 +27,7 @@ public class UserAction extends Action {
         ParameterParser params = data.getParameters();
         String userName = params.getString("user_name");
         UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
-        User user = ub.retrieveByName(userName);
+        DUser user = ub.retrieveByName(userName);
         user.setPassword(params.getString("new_password"));
         ub.save(user);
         data.setMessage("Password for user " + userName + " is changed");
@@ -42,7 +42,7 @@ public class UserAction extends Action {
         ParameterParser params = data.getParameters();
         UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
         int userId = params.getInt("user_id");
-        User user = (User) ub.retrieveByPK(userId);
+        DUser user = (DUser) ub.retrieveByPK(userId);
         user.setFirstName(params.getString("first_name"));
         user.setMiddleName(params.getString("middle_name"));
         user.setLastName(params.getString("last_name"));
@@ -60,12 +60,12 @@ public class UserAction extends Action {
         ParameterParser params = data.getParameters();
         UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
         String userName = params.getString("user_name");
-        User existed = ub.retrieveByName(userName);
+        DUser existed = ub.retrieveByName(userName);
         if (existed != null) {
             data.setMessage("User [" + userName + "] already exist");
             return;
         }
-        User user = new User();
+        DUser user = new DUser();
         user.setUserName(userName);
         user.setPassword(params.getString("password"));
         user.setFirstName(params.getString("first_name"));
@@ -84,7 +84,7 @@ public class UserAction extends Action {
     public void doDelete(RunData data, TemplateContext ctx) throws Exception {
         int id = data.getParameters().getInt("user_id");
         UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
-        User user = (User) ub.retrieveByPK(id);
+        DUser user = (DUser) ub.retrieveByPK(id);
         if (user != null) {
             user.setIsDisabled(true);
             ub.save(user);

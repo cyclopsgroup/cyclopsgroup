@@ -31,7 +31,7 @@ import com.workingdogs.village.Record;
 import com.cyclops.tornado.om.map.*;
 
 
-   
+  
 /**
  */
 public abstract class BaseUserObjectPeer
@@ -55,26 +55,25 @@ public abstract class BaseUserObjectPeer
         return getMapBuilder(UserObjectMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the OBJECT_ID field */
+      /** the column name for the OBJECT_ID field */
     public static final String OBJECT_ID;
-    /** the column name for the USER_ID field */
+      /** the column name for the USER_ID field */
     public static final String USER_ID;
-    /** the column name for the OBJECT_KEY field */
+      /** the column name for the OBJECT_KEY field */
     public static final String OBJECT_KEY;
-    /** the column name for the OBJECT_CLASS_NAME field */
+      /** the column name for the OBJECT_CLASS_NAME field */
     public static final String OBJECT_CLASS_NAME;
-    /** the column name for the OBJECT_DATA field */
+      /** the column name for the OBJECT_DATA field */
     public static final String OBJECT_DATA;
-
+  
     static
     {
-    OBJECT_ID = "c_tnd_usrobjs.OBJECT_ID";
-    USER_ID = "c_tnd_usrobjs.USER_ID";
-    OBJECT_KEY = "c_tnd_usrobjs.OBJECT_KEY";
-    OBJECT_CLASS_NAME = "c_tnd_usrobjs.OBJECT_CLASS_NAME";
-    OBJECT_DATA = "c_tnd_usrobjs.OBJECT_DATA";
-
-        if (Torque.isInit())
+          OBJECT_ID = "c_tnd_usrobjs.OBJECT_ID";
+          USER_ID = "c_tnd_usrobjs.USER_ID";
+          OBJECT_KEY = "c_tnd_usrobjs.OBJECT_KEY";
+          OBJECT_CLASS_NAME = "c_tnd_usrobjs.OBJECT_CLASS_NAME";
+          OBJECT_DATA = "c_tnd_usrobjs.OBJECT_DATA";
+          if (Torque.isInit())
         {
             try
             {
@@ -90,7 +89,6 @@ public abstract class BaseUserObjectPeer
             Torque.registerMapBuilder(UserObjectMapBuilder.CLASS_NAME);
         }
     }
-
  
     /** number of columns for this peer */
     public static final int numColumns =  5;
@@ -131,7 +129,6 @@ public abstract class BaseUserObjectPeer
         }
         return c;
     }
-
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -176,7 +173,7 @@ public abstract class BaseUserObjectPeer
     }
 
 
-
+  
     /**
      * Method to do inserts.
      *
@@ -204,7 +201,7 @@ public abstract class BaseUserObjectPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -232,12 +229,12 @@ public abstract class BaseUserObjectPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(OBJECT_ID);
-            criteria.addSelectColumn(USER_ID);
-            criteria.addSelectColumn(OBJECT_KEY);
-            criteria.addSelectColumn(OBJECT_CLASS_NAME);
-            criteria.addSelectColumn(OBJECT_DATA);
-        }
+          criteria.addSelectColumn(OBJECT_ID);
+          criteria.addSelectColumn(USER_ID);
+          criteria.addSelectColumn(OBJECT_KEY);
+          criteria.addSelectColumn(OBJECT_CLASS_NAME);
+          criteria.addSelectColumn(OBJECT_DATA);
+      }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -257,8 +254,8 @@ public abstract class BaseUserObjectPeer
         {
             UserObject obj = (UserObject) cls.newInstance();
             UserObjectPeer.populateObject(row, offset, obj);
-                            obj.setModified(false);
-                        obj.setNew(false);
+                  obj.setModified(false);
+              obj.setNew(false);
 
             return obj;
         }
@@ -288,12 +285,12 @@ public abstract class BaseUserObjectPeer
     {
         try
         {
-                            obj.setObjectId(row.getValue(offset + 0).asInt());
-                                obj.setUserId(row.getValue(offset + 1).asInt());
-                                obj.setObjectKey(row.getValue(offset + 2).asString());
-                                obj.setObjectClassName(row.getValue(offset + 3).asString());
-                                obj.setObjectData(row.getValue(offset + 4).asString());
-                            }
+                obj.setObjectId(row.getValue(offset + 0).asInt());
+                  obj.setUserId(row.getValue(offset + 1).asInt());
+                  obj.setObjectKey(row.getValue(offset + 2).asString());
+                  obj.setObjectClassName(row.getValue(offset + 3).asString());
+                  obj.setObjectData(row.getValue(offset + 4).asString());
+              }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -356,13 +353,12 @@ public abstract class BaseUserObjectPeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
-    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -398,9 +394,9 @@ public abstract class BaseUserObjectPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(UserObjectPeer.row2Object(row, 1,
+              results.add(UserObjectPeer.row2Object(row, 1,
                 UserObjectPeer.getOMClass()));
-        }
+          }
         return results;
     }
  
@@ -416,9 +412,8 @@ public abstract class BaseUserObjectPeer
     public static Class getOMClass()
         throws TorqueException
     {
-            return CLASS_DEFAULT;
-        }
-
+        return CLASS_DEFAULT;
+    }
 
     /**
      * Method to do updates.
@@ -449,8 +444,8 @@ public abstract class BaseUserObjectPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(OBJECT_ID, criteria.remove(OBJECT_ID));
-                                                                                                          
+                   selectCriteria.put(OBJECT_ID, criteria.remove(OBJECT_ID));
+                                              
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -494,7 +489,7 @@ public abstract class BaseUserObjectPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -531,8 +526,8 @@ public abstract class BaseUserObjectPeer
      */
     public static void doInsert(UserObject obj) throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -570,8 +565,8 @@ public abstract class BaseUserObjectPeer
     public static void doInsert(UserObject obj, Connection con)
         throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -649,19 +644,17 @@ public abstract class BaseUserObjectPeer
     public static Criteria buildCriteria( UserObject obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                            if (!obj.isNew())
-                       criteria.add(OBJECT_ID, obj.getObjectId());
-                                criteria.add(USER_ID, obj.getUserId());
-                                criteria.add(OBJECT_KEY, obj.getObjectKey());
-                                criteria.add(OBJECT_CLASS_NAME, obj.getObjectClassName());
-                                criteria.add(OBJECT_DATA, obj.getObjectData());
-                return criteria;
+              if (!obj.isNew())
+                criteria.add(OBJECT_ID, obj.getObjectId());
+                  criteria.add(USER_ID, obj.getUserId());
+                  criteria.add(OBJECT_KEY, obj.getObjectKey());
+                  criteria.add(OBJECT_CLASS_NAME, obj.getObjectClassName());
+                  criteria.add(OBJECT_DATA, obj.getObjectData());
+          return criteria;
     }
-
  
-
     
-    /**
+        /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -675,7 +668,7 @@ public abstract class BaseUserObjectPeer
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-
+  
     /**
      * Retrieve a single object by pk
      *
@@ -784,8 +777,8 @@ public abstract class BaseUserObjectPeer
 
 
 
-
-    /**
+  
+      /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -797,4 +790,4 @@ public abstract class BaseUserObjectPeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
- }
+   }

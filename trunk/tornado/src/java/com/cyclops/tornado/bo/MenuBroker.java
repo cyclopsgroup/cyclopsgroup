@@ -1,4 +1,3 @@
-package com.cyclops.tornado;
 /**
  * Common Public License - v 1.0
  *
@@ -193,56 +192,46 @@ package com.cyclops.tornado;
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
+package com.cyclops.tornado.bo;
+import java.util.List;
 
-import java.util.ArrayList;
+import org.apache.torque.util.Criteria;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.fulcrum.TurbineServices;
-import org.apache.turbine.RunData;
-
-import com.cyclops.tornado.services.user.DefaultUser;
-import com.cyclops.tornado.services.user.UserService;
-/**
+import com.cyclops.tornado.om.DMenu;
+import com.cyclops.tornado.om.DMenuPeer;
+/** DMenu broker
  * @author joeblack
  *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ * The class is created at 2003-11-16 22:41:21
  */
-public class TornadoUser extends DefaultUser {
-    /** Empty array of this instance */
-    public static final TornadoUser[] EMPTY_ARRAY = new TornadoUser[0];
-    /** Get current user instance
-     * @param data RunData object
-     * @return User instance
+public class MenuBroker extends AbstractObjectBroker {
+    /** Override method getObjectClass() of super class
+     * @see com.cyclops.tornado.bo.AbstractObjectBroker#getObjectClass()
      */
-    public static final TornadoUser getInstance(RunData data) {
-        return getInstance(data.getSession().getId());
+    protected Class getObjectClass() {
+        return DMenu.class;
     }
-    /** Get current user instance
-     * @param key Key of user instance
-     * @return Instance of the user
+    /** Override method getPrimaryKey() of super class
+     * @see com.cyclops.tornado.bo.AbstractObjectBroker#getPrimaryKey()
      */
-    public static final TornadoUser getInstance(String key) {
-        UserService userService =
-            (UserService) TurbineServices.getInstance().getService(
-                UserService.SERVICE_NAME);
-        return (TornadoUser) userService.getActiveUser(key);
+    protected String getPrimaryKey() {
+        return DMenuPeer.MENU_ID;
     }
-    /** Get all active users
-     * @return Array of active users
+    /** Find child menu items
+     * @param parentId Parant id
+     * @return List DMenu objects
+     * @throws Exception From object broker
      */
-    public static final TornadoUser[] getInstances() {
-        UserService userService =
-            (UserService) TurbineServices.getInstance().getService(
-                UserService.SERVICE_NAME);
-        ArrayList temp = new ArrayList();
-        CollectionUtils.addAll(temp, userService.getActiveUsers());
-        return (TornadoUser[]) temp.toArray(EMPTY_ARRAY);
+    public List queryChildren(int parentId) throws Exception {
+        Criteria crit = new Criteria();
+        crit.and(DMenuPeer.PARENT_ID, parentId);
+        return query(crit);
     }
-    /** Method getPassport()
-     * @return Passport object
+    /** Find root menu items
+     * @return List of root DMenus
+     * @throws Exception From object broker
      */
-    public Passport getPassport() {
-        return (Passport) getTempStorage().get(Passport.KEY_IN_USER);
+    public List queryRoots() throws Exception {
+        return queryChildren(-1);
     }
 }

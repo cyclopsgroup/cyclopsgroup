@@ -17,9 +17,9 @@ public class TornadoUserTest extends TurbineTestCase {
      *  Test method
      */
     public void testAnonymous() {
-        TornadoUser[] users = TornadoUser.getInstances();
+        User[] users = User.getInstances();
         assertEquals(1, users.length);
-        TornadoUser anonymous = users[0];
+        User anonymous = users[0];
         assertEquals("guest", anonymous.getName());
         assertTrue(anonymous.isAnonymous());
     }

@@ -192,75 +192,52 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.services.user;
-import java.util.Date;
-import java.util.Hashtable;
-/**
+package com.cyclops.tornado.services.navigator;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.configuration.Configuration;
+
+import com.cyclops.tornado.BrokerManager;
+import com.cyclops.tornado.bo.MenuBroker;
+import com.cyclops.tornado.om.DMenu;
+/** TODO Add javadoc for this class here
  * @author joeblack
- * @since 2003-9-29 17:23:48
  *
+ * The class is created at 2003-11-16 22:30:02
  */
-public interface User {
-    /** Empty user object array */
-    User[] EMPTY_ARRAY = new User[0];
-    /** Implementation of method getCreatedTimeDate() in this class
-     * @return Created time of this user
+public class DBNavigatorLoader implements NavigatorLoader {
+    private void addChildren(DMenu d, Menu menu, MenuBroker mb)
+        throws Exception {
+        List children = mb.queryChildren(d.getMenuId());
+        for (Iterator i = children.iterator(); i.hasNext();) {
+            DMenu dm = (DMenu) i.next();
+            MenuItem item = new MenuItem();
+            setValues(dm, item);
+            menu.addChild(item);
+            addChildren(dm, item, mb);
+        }
+    }
+    /** Override method load() of super class
+     * @see com.cyclops.tornado.services.navigator.NavigatorLoader#load(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
-    Date getCreatedTimeDate();
-    /** Implementation of method getDescription() in this class
-     * @return Description of this user
-     */
-    String getDescription();
-    /** Implementation of method getEmail() in this class
-     * @return Email of this user
-     */
-    String getEmail();
-    /** Over riding method getFullName() of super class
-     * @return Full name of this user
-     */
-    String getFullName();
-    /** Method getId()
-     * @return Int value of id
-     */
-    int getId();
-    /** Implementation of method getLastSigninDate() in this class
-     * @return Last sign in date of this user
-     */
-    Date getLastSigninDate();
-    /** Name of this user
-     * @return User name
-     */
-    String getName();
-    /** Method getPermStorage() in Class User
-     * @return Permanent objects storage
-     */
-    Hashtable getPermStorage();
-    /** Implementation of method getSigninCounter() in this class
-     * @return How many time this user signin in this system
-     */
-    int getSigninCounter();
-    /** Method getTempStorage() in Class User
-     * @return Temporary objects storage
-     */
-    Hashtable getTempStorage();
-    /** Method isAnonymous() in Class User
-     * @return Whether or not this user is anonymous user
-     */
-    boolean isAnonymous();
-    /** Implementation of method isDisabled() in this class
-     * @return Is this user disabled from the system
-     */
-    boolean isDisabled();
-    /** Implementation of method isSystem() in this class
-     * @return Is this user a system user
-     */
-    boolean isSystem();
-    /** Method setAnonymous() in Class User
-     * @param anonymous If it is anonymous
-     */
-    void setAnonymous(boolean anonymous);
-    /** Method setName() in Class User
-     * @param name Name value
-     */
-    void setName(String name);
+    public MenuProject load(Configuration conf, BrokerManager brokerManager)
+        throws Exception {
+        MenuBroker mb =
+            (MenuBroker) brokerManager.getObjectBroker(MenuBroker.class);
+        MenuProject project = new MenuProject();
+        List roots = mb.queryRoots();
+        for (Iterator i = roots.iterator(); i.hasNext();) {
+            DMenu root = (DMenu) i.next();
+            MenuRoot mr = new MenuRoot();
+            setValues(root, mr);
+            addChildren(root, mr, mb);
+            project.addMenu(mr);
+        }
+        return project;
+    }
+    private void setValues(DMenu d, Menu menu) {
+        menu.setName(d.getMenuName());
+        menu.setHref(d.getHref());
+    }
 }

@@ -58,12 +58,12 @@ public class RoleMapBuilder implements MapBuilder
         dbMap.addTable("c_tnd_roles");
         TableMap tMap = dbMap.getTable("c_tnd_roles");
 
-                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-        
-                tMap.setPrimaryKeyMethodInfo(tMap.getName());
-        
-                                      tMap.addPrimaryKey("c_tnd_roles.ROLE_ID", new Integer(0));
-                                                        tMap.addColumn("c_tnd_roles.ROLE_NAME", new String());
-                                                        tMap.addColumn("c_tnd_roles.DESCRIPTION", new String());
-                              }
+        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+
+        tMap.setPrimaryKeyMethodInfo(tMap.getName());
+
+              tMap.addPrimaryKey("c_tnd_roles.ROLE_ID", new Integer(0));
+                    tMap.addColumn("c_tnd_roles.ROLE_NAME", new String());
+                    tMap.addColumn("c_tnd_roles.DESCRIPTION", new String());
+          }
 }

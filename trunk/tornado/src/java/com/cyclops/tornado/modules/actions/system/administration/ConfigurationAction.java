@@ -13,7 +13,7 @@ import org.apache.turbine.TemplateContext;
 
 import com.cyclops.tornado.bo.ConfBroker;
 import com.cyclops.tornado.modules.Action;
-import com.cyclops.tornado.om.Conf;
+import com.cyclops.tornado.om.DConf;
 import com.cyclops.tornado.services.Restartable;
 import com.cyclops.tornado.services.configuration.ConfigurationService;
 /**
@@ -31,7 +31,7 @@ public class ConfigurationAction extends Action {
         String serviceName = params.getString("service_name");
         String key = params.getString("addnew_key");
         String value = params.getString("addnew_value");
-        Conf conf = new Conf();
+        DConf conf = new DConf();
         conf.setConfKey("services." + serviceName + "." + key);
         conf.setConfValue(value);
         ConfBroker cb = (ConfBroker) getObjectBroker(ConfBroker.class, data);
@@ -89,7 +89,7 @@ public class ConfigurationAction extends Action {
             String key = keys[i];
             String fullKey = "services." + serviceName + "." + key;
             String value = params.getString("conf_" + key);
-            Conf conf = new Conf();
+            DConf conf = new DConf();
             conf.setConfKey(fullKey);
             conf.setConfValue(value);
             cb.saveSingle(conf);

@@ -7,11 +7,13 @@
 package com.cyclops.tornado.services.user;
 import java.util.Date;
 import java.util.Hashtable;
+
+import com.cyclops.tornado.om.DUser;
 /**
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
  */
-public class DefaultUser extends com.cyclops.tornado.om.User implements User {
+public class DefaultUser extends DUser implements User {
     private boolean isAnonymous;
     private Hashtable permStorage = new Hashtable();
     private Hashtable tempStorage = new Hashtable();

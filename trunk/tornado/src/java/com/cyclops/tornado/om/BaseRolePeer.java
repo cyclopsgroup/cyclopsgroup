@@ -54,20 +54,19 @@ public abstract class BaseRolePeer
         return getMapBuilder(RoleMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ROLE_ID field */
+      /** the column name for the ROLE_ID field */
     public static final String ROLE_ID;
-    /** the column name for the ROLE_NAME field */
+      /** the column name for the ROLE_NAME field */
     public static final String ROLE_NAME;
-    /** the column name for the DESCRIPTION field */
+      /** the column name for the DESCRIPTION field */
     public static final String DESCRIPTION;
-
+  
     static
     {
-    ROLE_ID = "c_tnd_roles.ROLE_ID";
-    ROLE_NAME = "c_tnd_roles.ROLE_NAME";
-    DESCRIPTION = "c_tnd_roles.DESCRIPTION";
-
-        if (Torque.isInit())
+          ROLE_ID = "c_tnd_roles.ROLE_ID";
+          ROLE_NAME = "c_tnd_roles.ROLE_NAME";
+          DESCRIPTION = "c_tnd_roles.DESCRIPTION";
+          if (Torque.isInit())
         {
             try
             {
@@ -83,7 +82,6 @@ public abstract class BaseRolePeer
             Torque.registerMapBuilder(RoleMapBuilder.CLASS_NAME);
         }
     }
-
  
     /** number of columns for this peer */
     public static final int numColumns =  3;
@@ -124,7 +122,6 @@ public abstract class BaseRolePeer
         }
         return c;
     }
-
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -169,7 +166,7 @@ public abstract class BaseRolePeer
     }
 
 
-
+  
     /**
      * Method to do inserts.
      *
@@ -197,7 +194,7 @@ public abstract class BaseRolePeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -225,10 +222,10 @@ public abstract class BaseRolePeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ROLE_ID);
-            criteria.addSelectColumn(ROLE_NAME);
-            criteria.addSelectColumn(DESCRIPTION);
-        }
+          criteria.addSelectColumn(ROLE_ID);
+          criteria.addSelectColumn(ROLE_NAME);
+          criteria.addSelectColumn(DESCRIPTION);
+      }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -248,8 +245,8 @@ public abstract class BaseRolePeer
         {
             Role obj = (Role) cls.newInstance();
             RolePeer.populateObject(row, offset, obj);
-                            obj.setModified(false);
-                        obj.setNew(false);
+                  obj.setModified(false);
+              obj.setNew(false);
 
             return obj;
         }
@@ -279,10 +276,10 @@ public abstract class BaseRolePeer
     {
         try
         {
-                            obj.setRoleId(row.getValue(offset + 0).asInt());
-                                obj.setRoleName(row.getValue(offset + 1).asString());
-                                obj.setDescription(row.getValue(offset + 2).asString());
-                            }
+                obj.setRoleId(row.getValue(offset + 0).asInt());
+                  obj.setRoleName(row.getValue(offset + 1).asString());
+                  obj.setDescription(row.getValue(offset + 2).asString());
+              }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -345,13 +342,12 @@ public abstract class BaseRolePeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
-    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -387,9 +383,9 @@ public abstract class BaseRolePeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(RolePeer.row2Object(row, 1,
+              results.add(RolePeer.row2Object(row, 1,
                 RolePeer.getOMClass()));
-        }
+          }
         return results;
     }
  
@@ -405,9 +401,8 @@ public abstract class BaseRolePeer
     public static Class getOMClass()
         throws TorqueException
     {
-            return CLASS_DEFAULT;
-        }
-
+        return CLASS_DEFAULT;
+    }
 
     /**
      * Method to do updates.
@@ -438,8 +433,8 @@ public abstract class BaseRolePeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ROLE_ID, criteria.remove(ROLE_ID));
-                                                            
+                   selectCriteria.put(ROLE_ID, criteria.remove(ROLE_ID));
+                          
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -483,7 +478,7 @@ public abstract class BaseRolePeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -520,8 +515,8 @@ public abstract class BaseRolePeer
      */
     public static void doInsert(Role obj) throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -559,8 +554,8 @@ public abstract class BaseRolePeer
     public static void doInsert(Role obj, Connection con)
         throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -638,17 +633,15 @@ public abstract class BaseRolePeer
     public static Criteria buildCriteria( Role obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                            if (!obj.isNew())
-                       criteria.add(ROLE_ID, obj.getRoleId());
-                                criteria.add(ROLE_NAME, obj.getRoleName());
-                                criteria.add(DESCRIPTION, obj.getDescription());
-                return criteria;
+              if (!obj.isNew())
+                criteria.add(ROLE_ID, obj.getRoleId());
+                  criteria.add(ROLE_NAME, obj.getRoleName());
+                  criteria.add(DESCRIPTION, obj.getDescription());
+          return criteria;
     }
-
  
-
     
-    /**
+        /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -662,7 +655,7 @@ public abstract class BaseRolePeer
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-
+  
     /**
      * Retrieve a single object by pk
      *
@@ -771,8 +764,8 @@ public abstract class BaseRolePeer
 
 
 
-
-    /**
+  
+      /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -784,4 +777,4 @@ public abstract class BaseRolePeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
- }
+   }

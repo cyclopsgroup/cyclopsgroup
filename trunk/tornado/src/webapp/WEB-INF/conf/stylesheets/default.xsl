@@ -14,6 +14,11 @@
             <xsl:apply-templates select="*|@*"/>
         </input>
     </xsl:template>
+    <xsl:template match="table[@class='frame']">
+    	<table cellspacing="1">
+    		<xsl:apply-templates select="*|@*"/>
+    	</table>
+    </xsl:template>
     <xsl:template match="textarea">
         <textarea class="frame">
             <xsl:apply-templates select="@*"/>

@@ -11,13 +11,13 @@ import org.apache.torque.map.TableMap;
 
 /**
   */
-public class ConfMapBuilder implements MapBuilder
+public class DMenuMapBuilder implements MapBuilder
 {
     /**
      * The name of this class
      */
     public static final String CLASS_NAME =
-        "com.cyclops.tornado.om.map.ConfMapBuilder";
+        "com.cyclops.tornado.om.map.DMenuMapBuilder";
 
 
     /**
@@ -55,15 +55,17 @@ public class ConfMapBuilder implements MapBuilder
     {
         dbMap = Torque.getDatabaseMap("default");
 
-        dbMap.addTable("c_tnd_confs");
-        TableMap tMap = dbMap.getTable("c_tnd_confs");
+        dbMap.addTable("c_tnd_menus");
+        TableMap tMap = dbMap.getTable("c_tnd_menus");
 
-                tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
-        
-                tMap.setPrimaryKeyMethodInfo(tMap.getName());
-        
-                                      tMap.addPrimaryKey("c_tnd_confs.CONF_ID", new Integer(0));
-                                                        tMap.addColumn("c_tnd_confs.CONF_KEY", new String());
-                                                        tMap.addColumn("c_tnd_confs.CONF_VALUE", new String());
-                              }
+        tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
+
+        tMap.setPrimaryKeyMethodInfo(tMap.getName());
+
+              tMap.addPrimaryKey("c_tnd_menus.MENU_ID", new Integer(0));
+                    tMap.addColumn("c_tnd_menus.PARENT_ID", new Integer(0));
+                    tMap.addColumn("c_tnd_menus.MENU_NAME", new String());
+                    tMap.addColumn("c_tnd_menus.DESCRIPTION", new String());
+                    tMap.addColumn("c_tnd_menus.HREF", new String());
+          }
 }

@@ -12,22 +12,22 @@ import com.cyclops.tornado.bo.LastAccessTrackable;
  * application requirements.  This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-public class User
-    extends com.cyclops.tornado.om.BaseUser
+public class DUser
+    extends com.cyclops.tornado.om.BaseDUser
     implements Persistent, Referencable, LastAccessTrackable, CreatedTimeTrackable {
     private static final String REFERENCE_CATEGORY = "om.user";
     /** Expose copyTo method
-     * @param user
-     */
-    public void copyTo(User user) throws TorqueException {
+            * @param user
+            */
+    public void copyTo(DUser user) throws TorqueException {
         copyInto(user);
         user.setNew(isNew());
         user.setModified(isModified());
         user.setUserId(getUserId());
     }
-    /** Full name of this user
-     * @return Fist name and last name
-     */
+    /*** Full name of this user
+            * @return Fist name and last name
+            */
     public String getFullName() {
         StringBuffer sb = new StringBuffer();
         if (!StringUtils.isEmpty(getFirstName())) {
@@ -41,27 +41,27 @@ public class User
         }
         return StringUtils.trim(sb.toString());
     }
-    /** Method getPassword()
-     * @see org.apache.fulcrum.security.entity.User#getPassword()
-     */
+    /*** Method getPassword()
+            * @see org.apache.fulcrum.security.entity.User#getPassword()
+           */
     public String getPassword() {
         return new String(Base64.decode(getEncryptedPassword().getBytes()));
     }
-    /**
-     * @see com.cyclops.tornado.Referencable#getReferenceCategory()
-     */
+    /***
+            * @see com.cyclops.tornado.Referencable#getReferenceCategory()
+            */
     public String getReferenceCategory() {
         return REFERENCE_CATEGORY;
     }
-    /**
-     * @see com.cyclops.tornado.Referencable#getReferenceKey()
-     */
+    /***
+            * @see com.cyclops.tornado.Referencable#getReferenceKey()
+            */
     public String getReferenceKey() {
         return getUserName();
     }
-    /** Method setPassword()
-     * @see org.apache.fulcrum.security.entity.User#setPassword(java.lang.String)
-     */
+    /*** Method setPassword()
+            * @see org.apache.fulcrum.security.entity.User#setPassword(java.lang.String)
+            */
     public void setPassword(String pass) {
         setEncryptedPassword(new String(Base64.encode(pass.getBytes())));
     }

@@ -33,118 +33,100 @@ public abstract class BaseRole extends BaseObject
     private static final RolePeer peer =
         new RolePeer();
 
-                  
-        /**
-         * The value for the role_id field
-         */
-        private int role_id;
-              
-        /**
-         * The value for the role_name field
-         */
-        private String role_name;
-              
-        /**
-         * The value for the description field
-         */
-        private String description;
+        
+    /** The value for the roleId field */
+    private int roleId;
       
+    /** The value for the roleName field */
+    private String roleName;
       
-        /**
-         * Get the RoleId
-         *
-         * @return int
-         */
-        public int getRoleId()
-        {
-            return role_id;
-        }
+    /** The value for the description field */
+    private String description;
+  
+    
+    /**
+     * Get the RoleId
+     *
+     * @return int
+     */
+    public int getRoleId()
+    {
+        return roleId;
+    }
 
-                
-        /**
-         * Set the value of RoleId
-         *
-         * @param v new value
-         */
-        public void setRoleId(int v) 
-        {
-          
-
-
-         if (this.role_id != v)
-        {
-             this.role_id = v;
+        
+    /**
+     * Set the value of RoleId
+     *
+     * @param v new value
+     */
+    public void setRoleId(int v) 
+    {
+    
+                  if (this.roleId != v)
+              {
+            this.roleId = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the RoleName
-         *
-         * @return String
-         */
-        public String getRoleName()
-        {
-            return role_name;
+    
         }
+  
+    /**
+     * Get the RoleName
+     *
+     * @return String
+     */
+    public String getRoleName()
+    {
+        return roleName;
+    }
 
-                
-        /**
-         * Set the value of RoleName
-         *
-         * @param v new value
-         */
-        public void setRoleName(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.role_name, v))
-        {
-             this.role_name = v;
+        
+    /**
+     * Set the value of RoleName
+     *
+     * @param v new value
+     */
+    public void setRoleName(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.roleName, v))
+              {
+            this.roleName = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the Description
-         *
-         * @return String
-         */
-        public String getDescription()
-        {
-            return description;
+    
         }
+  
+    /**
+     * Get the Description
+     *
+     * @return String
+     */
+    public String getDescription()
+    {
+        return description;
+    }
 
-                
-        /**
-         * Set the value of Description
-         *
-         * @param v new value
-         */
-        public void setDescription(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.description, v))
-        {
-             this.description = v;
+        
+    /**
+     * Set the value of Description
+     *
+     * @param v new value
+     */
+    public void setDescription(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.description, v))
+              {
+            this.description = v;
             setModified(true);
         }
-
-             }
-
-
- 
+    
+        }
+  
     
      
-
-
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -153,7 +135,7 @@ public abstract class BaseRole extends BaseObject
      */
     public void save() throws Exception
     {
-         if (isModified())
+          if (isModified())
         {
             if (isNew())
             {
@@ -165,19 +147,19 @@ public abstract class BaseRole extends BaseObject
                 RolePeer.doUpdate((Role) this);
             }
         }
-     }
+      }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-     *
+       *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-         if (isModified())
+          if (isModified())
         {
             try
             {
@@ -199,8 +181,7 @@ public abstract class BaseRole extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-
-     }
+      }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -215,37 +196,34 @@ public abstract class BaseRole extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-        // If this object has been modified, then save it to the database.
-        if (isModified())
-        {
-            if (isNew())
+            // If this object has been modified, then save it to the database.
+            if (isModified())
             {
-                RolePeer.doInsert((Role) this, con);
-                setNew(false);
+                if (isNew())
+                {
+                    RolePeer.doInsert((Role) this, con);
+                    setNew(false);
+                }
+                else
+                {
+                    RolePeer.doUpdate((Role) this, con);
+                }
             }
-            else
-            {
-                RolePeer.doUpdate((Role) this, con);
-            }
+
         }
 
-       }
 
-
-    
-    
-    
-
-        /**
+          
+      /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  role_id ObjectKey
+     * @param  roleId ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setRoleId(((NumberKey) key).intValue());
-            }
+            setRoleId(((NumberKey) key).intValue());
+        }
 
     /**
      * Set the PrimaryKey using a String.
@@ -254,40 +232,39 @@ public abstract class BaseRole extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setRoleId(Integer.parseInt(key));
-            }
+            setRoleId(Integer.parseInt(key));
+        }
 
-
+  
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getRoleId());
-    }
+          return SimpleKey.keyFor(getRoleId());
+      }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-     */
-    public Role copy() throws TorqueException
+       */
+      public Role copy() throws TorqueException
     {
         return copyInto(new Role());
     }
-
+  
     protected Role copyInto(Role copyObj) throws TorqueException
     {
-        copyObj.setRoleId(role_id);
-        copyObj.setRoleName(role_name);
-        copyObj.setDescription(description);
-
-                      copyObj.setRoleId(0);
-                    
-
-
+          copyObj.setRoleId(roleId);
+          copyObj.setRoleName(roleName);
+          copyObj.setDescription(description);
+  
+                    copyObj.setRoleId(0);
+                        
+  
         return copyObj;
     }
 
@@ -306,15 +283,15 @@ public abstract class BaseRole extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("Role:\n");
-              str.append("RoleId = ")
+        str.append("RoleId = ")
            .append(getRoleId())
            .append("\n");
-              str.append("RoleName = ")
+        str.append("RoleName = ")
            .append(getRoleName())
            .append("\n");
-              str.append("Description = ")
+        str.append("Description = ")
            .append(getDescription())
            .append("\n");
-              return(str.toString());
+        return(str.toString());
     }
 }

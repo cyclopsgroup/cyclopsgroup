@@ -33,7 +33,7 @@ import com.cyclops.tornado.om.map.*;
 
 /**
  */
-public abstract class BaseConfPeer
+public abstract class BaseDMenuPeer
     extends BasePeer
 {
 
@@ -41,7 +41,7 @@ public abstract class BaseConfPeer
     public static final String DATABASE_NAME = "default";
 
      /** the table name for this class */
-    public static final String TABLE_NAME = "c_tnd_confs";
+    public static final String TABLE_NAME = "c_tnd_menus";
 
     /**
      * @return the map builder for this peer
@@ -51,23 +51,28 @@ public abstract class BaseConfPeer
     public static MapBuilder getMapBuilder()
         throws TorqueException
     {
-        return getMapBuilder(ConfMapBuilder.CLASS_NAME);
+        return getMapBuilder(DMenuMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the CONF_ID field */
-    public static final String CONF_ID;
-    /** the column name for the CONF_KEY field */
-    public static final String CONF_KEY;
-    /** the column name for the CONF_VALUE field */
-    public static final String CONF_VALUE;
-
+      /** the column name for the MENU_ID field */
+    public static final String MENU_ID;
+      /** the column name for the PARENT_ID field */
+    public static final String PARENT_ID;
+      /** the column name for the MENU_NAME field */
+    public static final String MENU_NAME;
+      /** the column name for the DESCRIPTION field */
+    public static final String DESCRIPTION;
+      /** the column name for the HREF field */
+    public static final String HREF;
+  
     static
     {
-    CONF_ID = "c_tnd_confs.CONF_ID";
-    CONF_KEY = "c_tnd_confs.CONF_KEY";
-    CONF_VALUE = "c_tnd_confs.CONF_VALUE";
-
-        if (Torque.isInit())
+          MENU_ID = "c_tnd_menus.MENU_ID";
+          PARENT_ID = "c_tnd_menus.PARENT_ID";
+          MENU_NAME = "c_tnd_menus.MENU_NAME";
+          DESCRIPTION = "c_tnd_menus.DESCRIPTION";
+          HREF = "c_tnd_menus.HREF";
+          if (Torque.isInit())
         {
             try
             {
@@ -80,17 +85,16 @@ public abstract class BaseConfPeer
         }
         else
         {
-            Torque.registerMapBuilder(ConfMapBuilder.CLASS_NAME);
+            Torque.registerMapBuilder(DMenuMapBuilder.CLASS_NAME);
         }
     }
-
  
     /** number of columns for this peer */
-    public static final int numColumns =  3;
+    public static final int numColumns =  5;
 
     /** A class that can be returned by this peer. */
     protected static final String CLASSNAME_DEFAULT =
-        "com.cyclops.tornado.om.Conf";
+        "com.cyclops.tornado.om.DMenu";
 
     /** A class that can be returned by this peer. */
     protected static final Class CLASS_DEFAULT = initClass(CLASSNAME_DEFAULT);
@@ -124,7 +128,6 @@ public abstract class BaseConfPeer
         }
         return c;
     }
-
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -169,7 +172,7 @@ public abstract class BaseConfPeer
     }
 
 
-
+  
     /**
      * Method to do inserts.
      *
@@ -180,7 +183,7 @@ public abstract class BaseConfPeer
     public static ObjectKey doInsert(Criteria criteria)
         throws TorqueException
     {
-        return BaseConfPeer
+        return BaseDMenuPeer
             .doInsert(criteria, (Connection) null);
     }
 
@@ -197,7 +200,7 @@ public abstract class BaseConfPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                               
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -225,10 +228,12 @@ public abstract class BaseConfPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(CONF_ID);
-            criteria.addSelectColumn(CONF_KEY);
-            criteria.addSelectColumn(CONF_VALUE);
-        }
+          criteria.addSelectColumn(MENU_ID);
+          criteria.addSelectColumn(PARENT_ID);
+          criteria.addSelectColumn(MENU_NAME);
+          criteria.addSelectColumn(DESCRIPTION);
+          criteria.addSelectColumn(HREF);
+      }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -239,17 +244,17 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static Conf row2Object(Record row,
+    public static DMenu row2Object(Record row,
                                              int offset,
                                              Class cls)
         throws TorqueException
     {
         try
         {
-            Conf obj = (Conf) cls.newInstance();
-            ConfPeer.populateObject(row, offset, obj);
-                            obj.setModified(false);
-                        obj.setNew(false);
+            DMenu obj = (DMenu) cls.newInstance();
+            DMenuPeer.populateObject(row, offset, obj);
+                  obj.setModified(false);
+              obj.setNew(false);
 
             return obj;
         }
@@ -274,15 +279,17 @@ public abstract class BaseConfPeer
      */
     public static void populateObject(Record row,
                                       int offset,
-                                      Conf obj)
+                                      DMenu obj)
         throws TorqueException
     {
         try
         {
-                            obj.setConfId(row.getValue(offset + 0).asInt());
-                                obj.setConfKey(row.getValue(offset + 1).asString());
-                                obj.setConfValue(row.getValue(offset + 2).asString());
-                            }
+                obj.setMenuId(row.getValue(offset + 0).asInt());
+                  obj.setParentId(row.getValue(offset + 1).asInt());
+                  obj.setMenuName(row.getValue(offset + 2).asString());
+                  obj.setDescription(row.getValue(offset + 3).asString());
+                  obj.setHref(row.getValue(offset + 4).asString());
+              }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -330,7 +337,7 @@ public abstract class BaseConfPeer
     public static List doSelectVillageRecords(Criteria criteria)
         throws TorqueException
     {
-        return BaseConfPeer
+        return BaseDMenuPeer
             .doSelectVillageRecords(criteria, (Connection) null);
     }
 
@@ -345,13 +352,12 @@ public abstract class BaseConfPeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
-    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                               
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -387,9 +393,9 @@ public abstract class BaseConfPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(ConfPeer.row2Object(row, 1,
-                ConfPeer.getOMClass()));
-        }
+              results.add(DMenuPeer.row2Object(row, 1,
+                DMenuPeer.getOMClass()));
+          }
         return results;
     }
  
@@ -405,9 +411,8 @@ public abstract class BaseConfPeer
     public static Class getOMClass()
         throws TorqueException
     {
-            return CLASS_DEFAULT;
-        }
-
+        return CLASS_DEFAULT;
+    }
 
     /**
      * Method to do updates.
@@ -419,7 +424,7 @@ public abstract class BaseConfPeer
      */
     public static void doUpdate(Criteria criteria) throws TorqueException
     {
-         BaseConfPeer
+         BaseDMenuPeer
             .doUpdate(criteria, (Connection) null);
     }
 
@@ -438,8 +443,8 @@ public abstract class BaseConfPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(CONF_ID, criteria.remove(CONF_ID));
-                                                            
+                   selectCriteria.put(MENU_ID, criteria.remove(MENU_ID));
+                                              
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -466,7 +471,7 @@ public abstract class BaseConfPeer
      */
      public static void doDelete(Criteria criteria) throws TorqueException
      {
-         BaseConfPeer
+         BaseDMenuPeer
             .doDelete(criteria, (Connection) null);
      }
 
@@ -483,7 +488,7 @@ public abstract class BaseConfPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                               
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -507,7 +512,7 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static List doSelect(Conf obj) throws TorqueException
+    public static List doSelect(DMenu obj) throws TorqueException
     {
         return doSelect(buildCriteria(obj));
     }
@@ -518,10 +523,10 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(Conf obj) throws TorqueException
+    public static void doInsert(DMenu obj) throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -530,7 +535,7 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(Conf obj) throws TorqueException
+    public static void doUpdate(DMenu obj) throws TorqueException
     {
         doUpdate(buildCriteria(obj));
         obj.setModified(false);
@@ -541,14 +546,14 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(Conf obj) throws TorqueException
+    public static void doDelete(DMenu obj) throws TorqueException
     {
         doDelete(buildCriteria(obj));
     }
 
     /**
      * Method to do inserts.  This method is to be used during a transaction,
-     * otherwise use the doInsert(Conf) method.  It will take
+     * otherwise use the doInsert(DMenu) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to insert into the database.
@@ -556,17 +561,17 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(Conf obj, Connection con)
+    public static void doInsert(DMenu obj, Connection con)
         throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
     /**
      * Method to do update.  This method is to be used during a transaction,
-     * otherwise use the doUpdate(Conf) method.  It will take
+     * otherwise use the doUpdate(DMenu) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to update in the database.
@@ -574,7 +579,7 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(Conf obj, Connection con)
+    public static void doUpdate(DMenu obj, Connection con)
         throws TorqueException
     {
         doUpdate(buildCriteria(obj), con);
@@ -583,7 +588,7 @@ public abstract class BaseConfPeer
 
     /**
      * Method to delete.  This method is to be used during a transaction,
-     * otherwise use the doDelete(Conf) method.  It will take
+     * otherwise use the doDelete(DMenu) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to delete in the database.
@@ -591,7 +596,7 @@ public abstract class BaseConfPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(Conf obj, Connection con)
+    public static void doDelete(DMenu obj, Connection con)
         throws TorqueException
     {
         doDelete(buildCriteria(obj), con);
@@ -606,7 +611,7 @@ public abstract class BaseConfPeer
      */
     public static void doDelete(ObjectKey pk) throws TorqueException
     {
-        BaseConfPeer
+        BaseDMenuPeer
            .doDelete(pk, (Connection) null);
     }
 
@@ -630,25 +635,25 @@ public abstract class BaseConfPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(CONF_ID, pk);
+              criteria.add(MENU_ID, pk);
           return criteria;
      }
 
     /** Build a Criteria object from the data object for this peer */
-    public static Criteria buildCriteria( Conf obj )
+    public static Criteria buildCriteria( DMenu obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                            if (!obj.isNew())
-                       criteria.add(CONF_ID, obj.getConfId());
-                                criteria.add(CONF_KEY, obj.getConfKey());
-                                criteria.add(CONF_VALUE, obj.getConfValue());
-                return criteria;
+              if (!obj.isNew())
+                criteria.add(MENU_ID, obj.getMenuId());
+                  criteria.add(PARENT_ID, obj.getParentId());
+                  criteria.add(MENU_NAME, obj.getMenuName());
+                  criteria.add(DESCRIPTION, obj.getDescription());
+                  criteria.add(HREF, obj.getHref());
+          return criteria;
     }
-
  
-
     
-    /**
+        /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -657,12 +662,12 @@ public abstract class BaseConfPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Conf retrieveByPK(int pk)
+    public static DMenu retrieveByPK(int pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-
+  
     /**
      * Retrieve a single object by pk
      *
@@ -672,11 +677,11 @@ public abstract class BaseConfPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Conf retrieveByPK(ObjectKey pk)
+    public static DMenu retrieveByPK(ObjectKey pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Connection db = null;
-        Conf retVal = null;
+        DMenu retVal = null;
         try
         {
             db = Torque.getConnection(DATABASE_NAME);
@@ -699,7 +704,7 @@ public abstract class BaseConfPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Conf retrieveByPK(ObjectKey pk, Connection con)
+    public static DMenu retrieveByPK(ObjectKey pk, Connection con)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Criteria criteria = buildCriteria(pk);
@@ -714,7 +719,7 @@ public abstract class BaseConfPeer
         }
         else
         {
-            return (Conf)v.get(0);
+            return (DMenu)v.get(0);
         }
     }
 
@@ -761,7 +766,7 @@ public abstract class BaseConfPeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( CONF_ID, pks );
+              criteria.addIn( MENU_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;
@@ -771,8 +776,8 @@ public abstract class BaseConfPeer
 
 
 
-
-    /**
+  
+      /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -784,4 +789,4 @@ public abstract class BaseConfPeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
- }
+   }

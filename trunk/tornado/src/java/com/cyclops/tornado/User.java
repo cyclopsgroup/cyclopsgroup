@@ -192,75 +192,56 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.services.user;
-import java.util.Date;
-import java.util.Hashtable;
+package com.cyclops.tornado;
+import java.util.ArrayList;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.fulcrum.TurbineServices;
+import org.apache.turbine.RunData;
+
+import com.cyclops.tornado.services.user.DefaultUser;
+import com.cyclops.tornado.services.user.UserService;
 /**
  * @author joeblack
- * @since 2003-9-29 17:23:48
  *
+ * To change the template for this generated type comment go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-public interface User {
-    /** Empty user object array */
-    User[] EMPTY_ARRAY = new User[0];
-    /** Implementation of method getCreatedTimeDate() in this class
-     * @return Created time of this user
+public class User extends DefaultUser {
+    /** Empty array of this instance */
+    public static final User[] EMPTY_ARRAY = new User[0];
+    /** Get current user instance
+     * @param data RunData object
+     * @return User instance
      */
-    Date getCreatedTimeDate();
-    /** Implementation of method getDescription() in this class
-     * @return Description of this user
+    public static final User getInstance(RunData data) {
+        return getInstance(data.getSession().getId());
+    }
+    /** Get current user instance
+     * @param key Key of user instance
+     * @return Instance of the user
      */
-    String getDescription();
-    /** Implementation of method getEmail() in this class
-     * @return Email of this user
+    public static final User getInstance(String key) {
+        UserService userService =
+            (UserService) TurbineServices.getInstance().getService(
+                UserService.SERVICE_NAME);
+        return (User) userService.getActiveUser(key);
+    }
+    /** Get all active users
+     * @return Array of active users
      */
-    String getEmail();
-    /** Over riding method getFullName() of super class
-     * @return Full name of this user
+    public static final User[] getInstances() {
+        UserService userService =
+            (UserService) TurbineServices.getInstance().getService(
+                UserService.SERVICE_NAME);
+        ArrayList temp = new ArrayList();
+        CollectionUtils.addAll(temp, userService.getActiveUsers());
+        return (User[]) temp.toArray(EMPTY_ARRAY);
+    }
+    /** Method getPassport()
+     * @return Passport object
      */
-    String getFullName();
-    /** Method getId()
-     * @return Int value of id
-     */
-    int getId();
-    /** Implementation of method getLastSigninDate() in this class
-     * @return Last sign in date of this user
-     */
-    Date getLastSigninDate();
-    /** Name of this user
-     * @return User name
-     */
-    String getName();
-    /** Method getPermStorage() in Class User
-     * @return Permanent objects storage
-     */
-    Hashtable getPermStorage();
-    /** Implementation of method getSigninCounter() in this class
-     * @return How many time this user signin in this system
-     */
-    int getSigninCounter();
-    /** Method getTempStorage() in Class User
-     * @return Temporary objects storage
-     */
-    Hashtable getTempStorage();
-    /** Method isAnonymous() in Class User
-     * @return Whether or not this user is anonymous user
-     */
-    boolean isAnonymous();
-    /** Implementation of method isDisabled() in this class
-     * @return Is this user disabled from the system
-     */
-    boolean isDisabled();
-    /** Implementation of method isSystem() in this class
-     * @return Is this user a system user
-     */
-    boolean isSystem();
-    /** Method setAnonymous() in Class User
-     * @param anonymous If it is anonymous
-     */
-    void setAnonymous(boolean anonymous);
-    /** Method setName() in Class User
-     * @param name Name value
-     */
-    void setName(String name);
+    public Passport getPassport() {
+        return (Passport) getTempStorage().get(Passport.KEY_IN_USER);
+    }
 }

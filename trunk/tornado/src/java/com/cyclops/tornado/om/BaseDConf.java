@@ -25,126 +25,108 @@ import org.apache.torque.util.Transaction;
 
 /**
  * You should not use this class directly.  It should not even be
- * extended all references should be to Conf
+ * extended all references should be to DConf
  */
-public abstract class BaseConf extends BaseObject
+public abstract class BaseDConf extends BaseObject
 {
     /** The Peer class */
-    private static final ConfPeer peer =
-        new ConfPeer();
+    private static final DConfPeer peer =
+        new DConfPeer();
 
-                  
-        /**
-         * The value for the conf_id field
-         */
-        private int conf_id;
-              
-        /**
-         * The value for the conf_key field
-         */
-        private String conf_key;
-              
-        /**
-         * The value for the conf_value field
-         */
-        private String conf_value;
+        
+    /** The value for the confId field */
+    private int confId;
       
+    /** The value for the confKey field */
+    private String confKey;
       
-        /**
-         * Get the ConfId
-         *
-         * @return int
-         */
-        public int getConfId()
-        {
-            return conf_id;
-        }
+    /** The value for the confValue field */
+    private String confValue;
+  
+    
+    /**
+     * Get the ConfId
+     *
+     * @return int
+     */
+    public int getConfId()
+    {
+        return confId;
+    }
 
-                
-        /**
-         * Set the value of ConfId
-         *
-         * @param v new value
-         */
-        public void setConfId(int v) 
-        {
-          
-
-
-         if (this.conf_id != v)
-        {
-             this.conf_id = v;
+        
+    /**
+     * Set the value of ConfId
+     *
+     * @param v new value
+     */
+    public void setConfId(int v) 
+    {
+    
+                  if (this.confId != v)
+              {
+            this.confId = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the ConfKey
-         *
-         * @return String
-         */
-        public String getConfKey()
-        {
-            return conf_key;
+    
         }
+  
+    /**
+     * Get the ConfKey
+     *
+     * @return String
+     */
+    public String getConfKey()
+    {
+        return confKey;
+    }
 
-                
-        /**
-         * Set the value of ConfKey
-         *
-         * @param v new value
-         */
-        public void setConfKey(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.conf_key, v))
-        {
-             this.conf_key = v;
+        
+    /**
+     * Set the value of ConfKey
+     *
+     * @param v new value
+     */
+    public void setConfKey(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.confKey, v))
+              {
+            this.confKey = v;
             setModified(true);
         }
-
-             }
-
-
-        /**
-         * Get the ConfValue
-         *
-         * @return String
-         */
-        public String getConfValue()
-        {
-            return conf_value;
+    
         }
+  
+    /**
+     * Get the ConfValue
+     *
+     * @return String
+     */
+    public String getConfValue()
+    {
+        return confValue;
+    }
 
-                
-        /**
-         * Set the value of ConfValue
-         *
-         * @param v new value
-         */
-        public void setConfValue(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.conf_value, v))
-        {
-             this.conf_value = v;
+        
+    /**
+     * Set the value of ConfValue
+     *
+     * @param v new value
+     */
+    public void setConfValue(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.confValue, v))
+              {
+            this.confValue = v;
             setModified(true);
         }
-
-             }
-
-
- 
+    
+        }
+  
     
      
-
-
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
@@ -153,45 +135,45 @@ public abstract class BaseConf extends BaseObject
      */
     public void save() throws Exception
     {
-         if (isModified())
+          if (isModified())
         {
             if (isNew())
             {
-                ConfPeer.doInsert((Conf) this);
+                DConfPeer.doInsert((DConf) this);
                 setNew(false);
             }
             else
             {
-                ConfPeer.doUpdate((Conf) this);
+                DConfPeer.doUpdate((DConf) this);
             }
         }
-     }
+      }
 
     /**
      * Stores the object in the database.  If the object is new,
      * it inserts it; otherwise an update is performed.
-     *
+       *
      * @param dbName
      * @throws TorqueException
      */
     public void save(String dbName) throws TorqueException
     {
         Connection con = null;
-         if (isModified())
+          if (isModified())
         {
             try
             {
                 con = Torque.getConnection(dbName);
                 if (isNew())
                 {
-                    ConfPeer
-                        .doInsert((Conf) this, con);
+                    DConfPeer
+                        .doInsert((DConf) this, con);
                     setNew(false);
                 }
                 else
                 {
-                    ConfPeer
-                        .doUpdate((Conf) this, con);
+                    DConfPeer
+                        .doUpdate((DConf) this, con);
                 }
             }
             finally
@@ -199,8 +181,7 @@ public abstract class BaseConf extends BaseObject
                 Torque.closeConnection(con);
             }
         }
-
-     }
+      }
 
       /**
      * Stores the object in the database.  If the object is new,
@@ -215,37 +196,34 @@ public abstract class BaseConf extends BaseObject
     public void save(Connection con) throws TorqueException
     {
   
-        // If this object has been modified, then save it to the database.
-        if (isModified())
-        {
-            if (isNew())
+            // If this object has been modified, then save it to the database.
+            if (isModified())
             {
-                ConfPeer.doInsert((Conf) this, con);
-                setNew(false);
+                if (isNew())
+                {
+                    DConfPeer.doInsert((DConf) this, con);
+                    setNew(false);
+                }
+                else
+                {
+                    DConfPeer.doUpdate((DConf) this, con);
+                }
             }
-            else
-            {
-                ConfPeer.doUpdate((Conf) this, con);
-            }
+
         }
 
-       }
 
-
-    
-    
-    
-
-        /**
+          
+      /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  conf_id ObjectKey
+     * @param  confId ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setConfId(((NumberKey) key).intValue());
-            }
+            setConfId(((NumberKey) key).intValue());
+        }
 
     /**
      * Set the PrimaryKey using a String.
@@ -254,40 +232,39 @@ public abstract class BaseConf extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setConfId(Integer.parseInt(key));
-            }
+            setConfId(Integer.parseInt(key));
+        }
 
-
+  
     /**
      * returns an id that differentiates this object from others
      * of its class.
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getConfId());
-    }
+          return SimpleKey.keyFor(getConfId());
+      }
 
  
 
     /**
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
-     */
-    public Conf copy() throws TorqueException
+       */
+      public DConf copy() throws TorqueException
     {
-        return copyInto(new Conf());
+        return copyInto(new DConf());
     }
-
-    protected Conf copyInto(Conf copyObj) throws TorqueException
+  
+    protected DConf copyInto(DConf copyObj) throws TorqueException
     {
-        copyObj.setConfId(conf_id);
-        copyObj.setConfKey(conf_key);
-        copyObj.setConfValue(conf_value);
-
-                      copyObj.setConfId(0);
-                    
-
-
+          copyObj.setConfId(confId);
+          copyObj.setConfKey(confKey);
+          copyObj.setConfValue(confValue);
+  
+                    copyObj.setConfId(0);
+                        
+  
         return copyObj;
     }
 
@@ -297,7 +274,7 @@ public abstract class BaseConf extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      */
-    public ConfPeer getPeer()
+    public DConfPeer getPeer()
     {
         return peer;
     }
@@ -305,16 +282,16 @@ public abstract class BaseConf extends BaseObject
     public String toString()
     {
         StringBuffer str = new StringBuffer();
-        str.append("Conf:\n");
-              str.append("ConfId = ")
+        str.append("DConf:\n");
+        str.append("ConfId = ")
            .append(getConfId())
            .append("\n");
-              str.append("ConfKey = ")
+        str.append("ConfKey = ")
            .append(getConfKey())
            .append("\n");
-              str.append("ConfValue = ")
+        str.append("ConfValue = ")
            .append(getConfValue())
            .append("\n");
-              return(str.toString());
+        return(str.toString());
     }
 }

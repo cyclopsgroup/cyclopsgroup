@@ -15,7 +15,7 @@
 	</tr>
 	</form>
 </table>
-<table width="100%">
+<table width="100%" class="frame">
 	<form method="post" action="$link.setAction("system.administration.UserAction").setPage("system,administration,user,Groups.vm")">
 	#if($belongToGroups && !$belongToGroups.isEmpty())
 		<tr>

@@ -22,165 +22,164 @@ import org.apache.torque.om.Persistent;
 import org.apache.torque.util.Criteria;
 import org.apache.torque.util.Transaction;
 
-  
-  
+
 /**
  * You should not use this class directly.  It should not even be
- * extended all references should be to UserObject
+ * extended all references should be to DMenu
  */
-public abstract class BaseUserObject extends BaseObject
+public abstract class BaseDMenu extends BaseObject
 {
     /** The Peer class */
-    private static final UserObjectPeer peer =
-        new UserObjectPeer();
+    private static final DMenuPeer peer =
+        new DMenuPeer();
 
         
-    /** The value for the objectId field */
-    private int objectId;
+    /** The value for the menuId field */
+    private int menuId;
+                                          
+    /** The value for the parentId field */
+    private int parentId = -1;
       
-    /** The value for the userId field */
-    private int userId;
+    /** The value for the menuName field */
+    private String menuName;
       
-    /** The value for the objectKey field */
-    private String objectKey;
+    /** The value for the description field */
+    private String description;
       
-    /** The value for the objectClassName field */
-    private String objectClassName;
-      
-    /** The value for the objectData field */
-    private String objectData;
+    /** The value for the href field */
+    private String href;
   
     
     /**
-     * Get the ObjectId
+     * Get the MenuId
      *
      * @return int
      */
-    public int getObjectId()
+    public int getMenuId()
     {
-        return objectId;
+        return menuId;
     }
 
         
     /**
-     * Set the value of ObjectId
+     * Set the value of MenuId
      *
      * @param v new value
      */
-    public void setObjectId(int v) 
+    public void setMenuId(int v) 
     {
     
-                  if (this.objectId != v)
+                  if (this.menuId != v)
               {
-            this.objectId = v;
+            this.menuId = v;
             setModified(true);
         }
     
         }
   
     /**
-     * Get the UserId
+     * Get the ParentId
      *
      * @return int
      */
-    public int getUserId()
+    public int getParentId()
     {
-        return userId;
+        return parentId;
     }
 
         
     /**
-     * Set the value of UserId
+     * Set the value of ParentId
      *
      * @param v new value
      */
-    public void setUserId(int v) 
+    public void setParentId(int v) 
     {
     
-                  if (this.userId != v)
+                  if (this.parentId != v)
               {
-            this.userId = v;
+            this.parentId = v;
             setModified(true);
         }
     
         }
   
     /**
-     * Get the ObjectKey
+     * Get the MenuName
      *
      * @return String
      */
-    public String getObjectKey()
+    public String getMenuName()
     {
-        return objectKey;
+        return menuName;
     }
 
         
     /**
-     * Set the value of ObjectKey
+     * Set the value of MenuName
      *
      * @param v new value
      */
-    public void setObjectKey(String v) 
+    public void setMenuName(String v) 
     {
     
-                  if (!ObjectUtils.equals(this.objectKey, v))
+                  if (!ObjectUtils.equals(this.menuName, v))
               {
-            this.objectKey = v;
+            this.menuName = v;
             setModified(true);
         }
     
         }
   
     /**
-     * Get the ObjectClassName
+     * Get the Description
      *
      * @return String
      */
-    public String getObjectClassName()
+    public String getDescription()
     {
-        return objectClassName;
+        return description;
     }
 
         
     /**
-     * Set the value of ObjectClassName
+     * Set the value of Description
      *
      * @param v new value
      */
-    public void setObjectClassName(String v) 
+    public void setDescription(String v) 
     {
     
-                  if (!ObjectUtils.equals(this.objectClassName, v))
+                  if (!ObjectUtils.equals(this.description, v))
               {
-            this.objectClassName = v;
+            this.description = v;
             setModified(true);
         }
     
         }
   
     /**
-     * Get the ObjectData
+     * Get the Href
      *
      * @return String
      */
-    public String getObjectData()
+    public String getHref()
     {
-        return objectData;
+        return href;
     }
 
         
     /**
-     * Set the value of ObjectData
+     * Set the value of Href
      *
      * @param v new value
      */
-    public void setObjectData(String v) 
+    public void setHref(String v) 
     {
     
-                  if (!ObjectUtils.equals(this.objectData, v))
+                  if (!ObjectUtils.equals(this.href, v))
               {
-            this.objectData = v;
+            this.href = v;
             setModified(true);
         }
     
@@ -200,12 +199,12 @@ public abstract class BaseUserObject extends BaseObject
         {
             if (isNew())
             {
-                UserObjectPeer.doInsert((UserObject) this);
+                DMenuPeer.doInsert((DMenu) this);
                 setNew(false);
             }
             else
             {
-                UserObjectPeer.doUpdate((UserObject) this);
+                DMenuPeer.doUpdate((DMenu) this);
             }
         }
       }
@@ -227,14 +226,14 @@ public abstract class BaseUserObject extends BaseObject
                 con = Torque.getConnection(dbName);
                 if (isNew())
                 {
-                    UserObjectPeer
-                        .doInsert((UserObject) this, con);
+                    DMenuPeer
+                        .doInsert((DMenu) this, con);
                     setNew(false);
                 }
                 else
                 {
-                    UserObjectPeer
-                        .doUpdate((UserObject) this, con);
+                    DMenuPeer
+                        .doUpdate((DMenu) this, con);
                 }
             }
             finally
@@ -262,12 +261,12 @@ public abstract class BaseUserObject extends BaseObject
             {
                 if (isNew())
                 {
-                    UserObjectPeer.doInsert((UserObject) this, con);
+                    DMenuPeer.doInsert((DMenu) this, con);
                     setNew(false);
                 }
                 else
                 {
-                    UserObjectPeer.doUpdate((UserObject) this, con);
+                    DMenuPeer.doUpdate((DMenu) this, con);
                 }
             }
 
@@ -278,12 +277,12 @@ public abstract class BaseUserObject extends BaseObject
       /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  objectId ObjectKey
+     * @param  menuId ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-            setObjectId(((NumberKey) key).intValue());
+            setMenuId(((NumberKey) key).intValue());
         }
 
     /**
@@ -293,7 +292,7 @@ public abstract class BaseUserObject extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-            setObjectId(Integer.parseInt(key));
+            setMenuId(Integer.parseInt(key));
         }
 
   
@@ -303,7 +302,7 @@ public abstract class BaseUserObject extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-          return SimpleKey.keyFor(getObjectId());
+          return SimpleKey.keyFor(getMenuId());
       }
 
  
@@ -312,20 +311,20 @@ public abstract class BaseUserObject extends BaseObject
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
        */
-      public UserObject copy() throws TorqueException
+      public DMenu copy() throws TorqueException
     {
-        return copyInto(new UserObject());
+        return copyInto(new DMenu());
     }
   
-    protected UserObject copyInto(UserObject copyObj) throws TorqueException
+    protected DMenu copyInto(DMenu copyObj) throws TorqueException
     {
-          copyObj.setObjectId(objectId);
-          copyObj.setUserId(userId);
-          copyObj.setObjectKey(objectKey);
-          copyObj.setObjectClassName(objectClassName);
-          copyObj.setObjectData(objectData);
+          copyObj.setMenuId(menuId);
+          copyObj.setParentId(parentId);
+          copyObj.setMenuName(menuName);
+          copyObj.setDescription(description);
+          copyObj.setHref(href);
   
-                    copyObj.setObjectId(0);
+                    copyObj.setMenuId(0);
                                     
   
         return copyObj;
@@ -337,7 +336,7 @@ public abstract class BaseUserObject extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      */
-    public UserObjectPeer getPeer()
+    public DMenuPeer getPeer()
     {
         return peer;
     }
@@ -345,21 +344,21 @@ public abstract class BaseUserObject extends BaseObject
     public String toString()
     {
         StringBuffer str = new StringBuffer();
-        str.append("UserObject:\n");
-        str.append("ObjectId = ")
-           .append(getObjectId())
+        str.append("DMenu:\n");
+        str.append("MenuId = ")
+           .append(getMenuId())
            .append("\n");
-        str.append("UserId = ")
-           .append(getUserId())
+        str.append("ParentId = ")
+           .append(getParentId())
            .append("\n");
-        str.append("ObjectKey = ")
-           .append(getObjectKey())
+        str.append("MenuName = ")
+           .append(getMenuName())
            .append("\n");
-        str.append("ObjectClassName = ")
-           .append(getObjectClassName())
+        str.append("Description = ")
+           .append(getDescription())
            .append("\n");
-        str.append("ObjectData = ")
-           .append(getObjectData())
+        str.append("Href = ")
+           .append(getHref())
            .append("\n");
         return(str.toString());
     }

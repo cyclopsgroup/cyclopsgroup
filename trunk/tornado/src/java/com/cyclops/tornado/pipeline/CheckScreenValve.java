@@ -15,7 +15,7 @@ import org.apache.turbine.ValveContext;
 import org.apache.turbine.pipeline.AbstractValve;
 
 import com.cyclops.tornado.Passport;
-import com.cyclops.tornado.TornadoUser;
+import com.cyclops.tornado.User;
 import com.cyclops.tornado.modules.ScreenAsset;
 /**
  * @author jiaqi guo
@@ -29,7 +29,7 @@ public class CheckScreenValve extends AbstractValve {
     public void invoke(RunData data, ValveContext ctx)
         throws IOException, TurbineException {
         try {
-            TornadoUser user = TornadoUser.getInstance(data);
+            User user = User.getInstance(data);
             Passport passport = user.getPassport();
             ScreenAsset sa = new ScreenAsset(data.getTarget());
             if (!passport.accept(sa)) {

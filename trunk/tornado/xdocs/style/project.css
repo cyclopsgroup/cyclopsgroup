@@ -17,6 +17,12 @@ th {
     color: #336699 !important;
 }
 
+pre {
+    font-family: Courier New, Courier, mono;
+    font-size: 12px !important;
+    line-height: 13px;
+}
+
 a:link, a:visited {
     color: #003366 !important;
 }

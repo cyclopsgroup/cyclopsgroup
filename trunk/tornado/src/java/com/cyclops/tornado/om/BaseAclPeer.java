@@ -54,26 +54,25 @@ public abstract class BaseAclPeer
         return getMapBuilder(AclMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ACL_ID field */
+      /** the column name for the ACL_ID field */
     public static final String ACL_ID;
-    /** the column name for the OWNER_NAME field */
+      /** the column name for the OWNER_NAME field */
     public static final String OWNER_NAME;
-    /** the column name for the OWNER_TYPE field */
+      /** the column name for the OWNER_TYPE field */
     public static final String OWNER_TYPE;
-    /** the column name for the IS_ROLE field */
+      /** the column name for the IS_ROLE field */
     public static final String IS_ROLE;
-    /** the column name for the PERMISSION field */
+      /** the column name for the PERMISSION field */
     public static final String PERMISSION;
-
+  
     static
     {
-    ACL_ID = "c_tnd_acls.ACL_ID";
-    OWNER_NAME = "c_tnd_acls.OWNER_NAME";
-    OWNER_TYPE = "c_tnd_acls.OWNER_TYPE";
-    IS_ROLE = "c_tnd_acls.IS_ROLE";
-    PERMISSION = "c_tnd_acls.PERMISSION";
-
-        if (Torque.isInit())
+          ACL_ID = "c_tnd_acls.ACL_ID";
+          OWNER_NAME = "c_tnd_acls.OWNER_NAME";
+          OWNER_TYPE = "c_tnd_acls.OWNER_TYPE";
+          IS_ROLE = "c_tnd_acls.IS_ROLE";
+          PERMISSION = "c_tnd_acls.PERMISSION";
+          if (Torque.isInit())
         {
             try
             {
@@ -89,7 +88,6 @@ public abstract class BaseAclPeer
             Torque.registerMapBuilder(AclMapBuilder.CLASS_NAME);
         }
     }
-
  
     /** number of columns for this peer */
     public static final int numColumns =  5;
@@ -130,7 +128,6 @@ public abstract class BaseAclPeer
         }
         return c;
     }
-
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -175,7 +172,7 @@ public abstract class BaseAclPeer
     }
 
 
-
+  
     /**
      * Method to do inserts.
      *
@@ -203,7 +200,7 @@ public abstract class BaseAclPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -231,12 +228,12 @@ public abstract class BaseAclPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ACL_ID);
-            criteria.addSelectColumn(OWNER_NAME);
-            criteria.addSelectColumn(OWNER_TYPE);
-            criteria.addSelectColumn(IS_ROLE);
-            criteria.addSelectColumn(PERMISSION);
-        }
+          criteria.addSelectColumn(ACL_ID);
+          criteria.addSelectColumn(OWNER_NAME);
+          criteria.addSelectColumn(OWNER_TYPE);
+          criteria.addSelectColumn(IS_ROLE);
+          criteria.addSelectColumn(PERMISSION);
+      }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -256,8 +253,8 @@ public abstract class BaseAclPeer
         {
             Acl obj = (Acl) cls.newInstance();
             AclPeer.populateObject(row, offset, obj);
-                            obj.setModified(false);
-                        obj.setNew(false);
+                  obj.setModified(false);
+              obj.setNew(false);
 
             return obj;
         }
@@ -287,12 +284,12 @@ public abstract class BaseAclPeer
     {
         try
         {
-                            obj.setAclId(row.getValue(offset + 0).asInt());
-                                obj.setOwnerName(row.getValue(offset + 1).asString());
-                                obj.setOwnerType(row.getValue(offset + 2).asString());
-                                obj.setIsRole(row.getValue(offset + 3).asBoolean());
-                                obj.setPermission(row.getValue(offset + 4).asString());
-                            }
+                obj.setAclId(row.getValue(offset + 0).asInt());
+                  obj.setOwnerName(row.getValue(offset + 1).asString());
+                  obj.setOwnerType(row.getValue(offset + 2).asString());
+                  obj.setIsRole(row.getValue(offset + 3).asBoolean());
+                  obj.setPermission(row.getValue(offset + 4).asString());
+              }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -355,13 +352,12 @@ public abstract class BaseAclPeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
-    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -397,9 +393,9 @@ public abstract class BaseAclPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(AclPeer.row2Object(row, 1,
+              results.add(AclPeer.row2Object(row, 1,
                 AclPeer.getOMClass()));
-        }
+          }
         return results;
     }
  
@@ -415,9 +411,8 @@ public abstract class BaseAclPeer
     public static Class getOMClass()
         throws TorqueException
     {
-            return CLASS_DEFAULT;
-        }
-
+        return CLASS_DEFAULT;
+    }
 
     /**
      * Method to do updates.
@@ -448,8 +443,8 @@ public abstract class BaseAclPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ACL_ID, criteria.remove(ACL_ID));
-                                                                                                          
+                   selectCriteria.put(ACL_ID, criteria.remove(ACL_ID));
+                                              
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -493,7 +488,7 @@ public abstract class BaseAclPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                                                           
+                                
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -530,8 +525,8 @@ public abstract class BaseAclPeer
      */
     public static void doInsert(Acl obj) throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -569,8 +564,8 @@ public abstract class BaseAclPeer
     public static void doInsert(Acl obj, Connection con)
         throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -648,19 +643,17 @@ public abstract class BaseAclPeer
     public static Criteria buildCriteria( Acl obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                            if (!obj.isNew())
-                       criteria.add(ACL_ID, obj.getAclId());
-                                criteria.add(OWNER_NAME, obj.getOwnerName());
-                                criteria.add(OWNER_TYPE, obj.getOwnerType());
-                                criteria.add(IS_ROLE, obj.getIsRole());
-                                criteria.add(PERMISSION, obj.getPermission());
-                return criteria;
+              if (!obj.isNew())
+                criteria.add(ACL_ID, obj.getAclId());
+                  criteria.add(OWNER_NAME, obj.getOwnerName());
+                  criteria.add(OWNER_TYPE, obj.getOwnerType());
+                  criteria.add(IS_ROLE, obj.getIsRole());
+                  criteria.add(PERMISSION, obj.getPermission());
+          return criteria;
     }
-
  
-
     
-    /**
+        /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -674,7 +667,7 @@ public abstract class BaseAclPeer
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-
+  
     /**
      * Retrieve a single object by pk
      *
@@ -783,8 +776,8 @@ public abstract class BaseAclPeer
 
 
 
-
-    /**
+  
+      /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -796,4 +789,4 @@ public abstract class BaseAclPeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
- }
+   }

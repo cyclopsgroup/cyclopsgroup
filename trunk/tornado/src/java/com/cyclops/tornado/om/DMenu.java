@@ -9,8 +9,8 @@ import org.apache.torque.om.Persistent;
  * application requirements.  This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-public  class Conf
-    extends com.cyclops.tornado.om.BaseConf
+public  class DMenu
+    extends com.cyclops.tornado.om.BaseDMenu
     implements Persistent
 {
 }

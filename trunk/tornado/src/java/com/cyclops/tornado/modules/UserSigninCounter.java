@@ -7,7 +7,7 @@
 package com.cyclops.tornado.modules;
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.bo.UserBroker;
-import com.cyclops.tornado.om.User;
+import com.cyclops.tornado.om.DUser;
 import com.cyclops.tornado.services.user.UserEvent;
 import com.cyclops.tornado.services.user.UserListener;
 /**
@@ -24,12 +24,12 @@ public class UserSigninCounter implements UserListener {
         }
         BrokerManager bm = event.getBrokerManager();
         UserBroker ub = (UserBroker) bm.getObjectBroker(UserBroker.class);
-        User user = ub.retrieveByName(event.getUser().getName());
+        DUser user = ub.retrieveByName(event.getUser().getName());
         user.setLastSignin(System.currentTimeMillis());
         user.setSigninCounter(user.getSigninCounter() + 1);
         ub.save(user);
-        if (event.getUser() instanceof User) {
-            user.copyTo((User) event.getUser());
+        if (event.getUser() instanceof DUser) {
+            user.copyTo((DUser) event.getUser());
         }
     }
     /** Implementation of method onSingOut() in this class

@@ -12,13 +12,13 @@ import org.apache.turbine.TemplateContext;
 
 import com.cyclops.tornado.bo.UserBroker;
 import com.cyclops.tornado.modules.Screen;
-import com.cyclops.tornado.om.User;
+import com.cyclops.tornado.om.DUser;
 /**
  * @author joeblack
  * @since 2003-10-6 20:41:48
  */
 public class BaseUserScreen extends Screen {
-    private User dbuser;
+    private DUser dbuser;
     /** Method doBuildTemplate()
      * @see org.apache.turbine.modules.Module#doBuildTemplate(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
      */
@@ -43,7 +43,7 @@ public class BaseUserScreen extends Screen {
     /** Method getUserOM() in Class BaseUser
      * @return User OM object
      */
-    protected final User getUser() {
+    protected final DUser getUser() {
         return dbuser;
     }
 }

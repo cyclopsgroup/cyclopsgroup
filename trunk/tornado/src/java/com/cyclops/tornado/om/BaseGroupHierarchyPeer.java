@@ -31,8 +31,8 @@ import com.workingdogs.village.Record;
 import com.cyclops.tornado.om.map.*;
 
 
-   
-   
+  
+  
 /**
  */
 public abstract class BaseGroupHierarchyPeer
@@ -56,20 +56,19 @@ public abstract class BaseGroupHierarchyPeer
         return getMapBuilder(GroupHierarchyMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the HIERARCHY_ID field */
+      /** the column name for the HIERARCHY_ID field */
     public static final String HIERARCHY_ID;
-    /** the column name for the GROUP_ID field */
+      /** the column name for the GROUP_ID field */
     public static final String GROUP_ID;
-    /** the column name for the PARENT_GROUP_ID field */
+      /** the column name for the PARENT_GROUP_ID field */
     public static final String PARENT_GROUP_ID;
-
+  
     static
     {
-    HIERARCHY_ID = "c_tnd_grphrch.HIERARCHY_ID";
-    GROUP_ID = "c_tnd_grphrch.GROUP_ID";
-    PARENT_GROUP_ID = "c_tnd_grphrch.PARENT_GROUP_ID";
-
-        if (Torque.isInit())
+          HIERARCHY_ID = "c_tnd_grphrch.HIERARCHY_ID";
+          GROUP_ID = "c_tnd_grphrch.GROUP_ID";
+          PARENT_GROUP_ID = "c_tnd_grphrch.PARENT_GROUP_ID";
+          if (Torque.isInit())
         {
             try
             {
@@ -85,7 +84,6 @@ public abstract class BaseGroupHierarchyPeer
             Torque.registerMapBuilder(GroupHierarchyMapBuilder.CLASS_NAME);
         }
     }
-
  
     /** number of columns for this peer */
     public static final int numColumns =  3;
@@ -126,7 +124,6 @@ public abstract class BaseGroupHierarchyPeer
         }
         return c;
     }
-
 
     /**
      * Get the list of objects for a ResultSet.  Please not that your
@@ -171,7 +168,7 @@ public abstract class BaseGroupHierarchyPeer
     }
 
 
-
+  
     /**
      * Method to do inserts.
      *
@@ -199,7 +196,7 @@ public abstract class BaseGroupHierarchyPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -227,10 +224,10 @@ public abstract class BaseGroupHierarchyPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(HIERARCHY_ID);
-            criteria.addSelectColumn(GROUP_ID);
-            criteria.addSelectColumn(PARENT_GROUP_ID);
-        }
+          criteria.addSelectColumn(HIERARCHY_ID);
+          criteria.addSelectColumn(GROUP_ID);
+          criteria.addSelectColumn(PARENT_GROUP_ID);
+      }
 
     /**
      * Create a new object of type cls from a resultset row starting
@@ -250,8 +247,8 @@ public abstract class BaseGroupHierarchyPeer
         {
             GroupHierarchy obj = (GroupHierarchy) cls.newInstance();
             GroupHierarchyPeer.populateObject(row, offset, obj);
-                            obj.setModified(false);
-                        obj.setNew(false);
+                  obj.setModified(false);
+              obj.setNew(false);
 
             return obj;
         }
@@ -281,10 +278,10 @@ public abstract class BaseGroupHierarchyPeer
     {
         try
         {
-                            obj.setHierarchyId(row.getValue(offset + 0).asInt());
-                                obj.setGroupId(row.getValue(offset + 1).asInt());
-                                obj.setParentGroupId(row.getValue(offset + 2).asInt());
-                            }
+                obj.setHierarchyId(row.getValue(offset + 0).asInt());
+                  obj.setGroupId(row.getValue(offset + 1).asInt());
+                  obj.setParentGroupId(row.getValue(offset + 2).asInt());
+              }
         catch (DataSetException e)
         {
             throw new TorqueException(e);
@@ -347,13 +344,12 @@ public abstract class BaseGroupHierarchyPeer
     public static List doSelectVillageRecords(Criteria criteria, Connection con)
         throws TorqueException
     {
-    
         if (criteria.getSelectColumns().size() == 0)
         {
             addSelectColumns(criteria);
         }
 
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -389,9 +385,9 @@ public abstract class BaseGroupHierarchyPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(GroupHierarchyPeer.row2Object(row, 1,
+              results.add(GroupHierarchyPeer.row2Object(row, 1,
                 GroupHierarchyPeer.getOMClass()));
-        }
+          }
         return results;
     }
  
@@ -407,9 +403,8 @@ public abstract class BaseGroupHierarchyPeer
     public static Class getOMClass()
         throws TorqueException
     {
-            return CLASS_DEFAULT;
-        }
-
+        return CLASS_DEFAULT;
+    }
 
     /**
      * Method to do updates.
@@ -440,8 +435,8 @@ public abstract class BaseGroupHierarchyPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(HIERARCHY_ID, criteria.remove(HIERARCHY_ID));
-                                                            
+                   selectCriteria.put(HIERARCHY_ID, criteria.remove(HIERARCHY_ID));
+                          
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -485,7 +480,7 @@ public abstract class BaseGroupHierarchyPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                               
+                    
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -522,8 +517,8 @@ public abstract class BaseGroupHierarchyPeer
      */
     public static void doInsert(GroupHierarchy obj) throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj)));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj)));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -561,8 +556,8 @@ public abstract class BaseGroupHierarchyPeer
     public static void doInsert(GroupHierarchy obj, Connection con)
         throws TorqueException
     {
-                obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
-                obj.setNew(false);
+          obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
+          obj.setNew(false);
         obj.setModified(false);
     }
 
@@ -640,17 +635,15 @@ public abstract class BaseGroupHierarchyPeer
     public static Criteria buildCriteria( GroupHierarchy obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
-                            if (!obj.isNew())
-                       criteria.add(HIERARCHY_ID, obj.getHierarchyId());
-                                criteria.add(GROUP_ID, obj.getGroupId());
-                                criteria.add(PARENT_GROUP_ID, obj.getParentGroupId());
-                return criteria;
+              if (!obj.isNew())
+                criteria.add(HIERARCHY_ID, obj.getHierarchyId());
+                  criteria.add(GROUP_ID, obj.getGroupId());
+                  criteria.add(PARENT_GROUP_ID, obj.getParentGroupId());
+          return criteria;
     }
-
  
-
     
-    /**
+        /**
      * Retrieve a single object by pk
      *
      * @param pk the primary key
@@ -664,7 +657,7 @@ public abstract class BaseGroupHierarchyPeer
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
     }
-
+  
     /**
      * Retrieve a single object by pk
      *
@@ -773,8 +766,8 @@ public abstract class BaseGroupHierarchyPeer
 
 
 
-
-    /**
+  
+      /**
      * Returns the TableMap related to this peer.  This method is not
      * needed for general use but a specific application could have a need.
      *
@@ -786,4 +779,4 @@ public abstract class BaseGroupHierarchyPeer
     {
         return Torque.getDatabaseMap(DATABASE_NAME).getTable(TABLE_NAME);
     }
- }
+   }

@@ -5,7 +5,7 @@ package com.cyclops.tornado.om;
  *  application requirements.  This class will only be generated as
  *  long as it does not already exist in the output directory.
  */
-public class ConfPeer
-    extends com.cyclops.tornado.om.BaseConfPeer
+public class DUserPeer
+    extends com.cyclops.tornado.om.BaseDUserPeer
 {
 }
