@@ -193,6 +193,7 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 /** Plugin meta information
@@ -200,15 +201,19 @@ import java.util.List;
  *
  * The class is created at 2004-1-6 11:26:03
  */
-public class PluginDescriptor extends BaseObject {
+public abstract class PluginDescriptor {
+    /** Empty array of this class */
+    public static final PluginDescriptor[] EMPTY_ARRAY =
+        new PluginDescriptor[0];
     private List dependencies = new ArrayList();
     private String description;
     private String implementation;
+    private String name;
     /** Add a dependency
-     * @param name Name of the dependency
+     * @param dependencyName Name of the dependency
      */
-    public void addDependency(String name) {
-        dependencies.add(name);
+    public void addDependency(String dependencyName) {
+        dependencies.add(dependencyName);
     }
     /** Get list of dependency names
      * @return names
@@ -228,6 +233,12 @@ public class PluginDescriptor extends BaseObject {
     public String getImplementation() {
         return implementation;
     }
+    /** Method getName() in class PluginDescriptor
+     * @return Name of this plugin
+     */
+    public String getName() {
+        return name;
+    }
     /** Set description value
      * @param string Description value
      */
@@ -240,4 +251,15 @@ public class PluginDescriptor extends BaseObject {
     public void setImplementation(String string) {
         implementation = string;
     }
+    /** Method setName() in class PluginDescriptor
+     * @param string Name of this plugin
+     */
+    public void setName(String string) {
+        name = string;
+    }
+    /** Get resource from this plugin
+     * @param path Path of resource
+     * @return URL of resource
+     */
+    public abstract URL getResource(String path);
 }

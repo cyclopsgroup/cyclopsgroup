@@ -194,43 +194,23 @@
  */
 package com.cyclops.plexaros;
 import java.net.URL;
+
+import org.apache.avalon.framework.activity.Startable;
 /** Plugin
  * @author joeblack
  *
  * The class is created at 2004-1-6 0:15:01
  */
-public interface Plugin extends Startable, ObjectContainer {
-    /** Plugin home key */
-    String PLUGIN_HOME = "plexaros.plugin.home";
+public interface Plugin extends ObjectContainer, Startable {
     /** Empty array of Plugin interface */
     Plugin[] EMPTY_ARRAY = new Plugin[0];
-    /** Add a dependency plugin name
-     * @param dependencyName Name of dependency plugin
-     */
-    void addDepenedencyName(String dependencyName);
-    /** Get name of the dependent plugins
-     * @return Array of these names
-     */
-    String[] getDependencyNames();
     /** Get root engine of this plugin
      * @return Engine instance
      */
     Engine getEngine();
-    /** Get name of this plugin
-     * @return Name of this plugin
-     */
-    String getName();
     /** Get a resource within this plugin
      * @param resourceName Name of this resource
      * @return Resource URL
      */
     URL getResource(String resourceName);
-    /** Set engine instance
-     * @param engine Engine instance
-     */
-    void setEngine(Engine engine);
-    /** Set name of this plugin
-     * @param name Name of this plugin
-     */
-    void setName(String name);
 }

@@ -194,13 +194,17 @@
  */
 package com.cyclops.plexaros;
 
-/** Just an empty class in this package.
- * Any implementation plugin should be derived from this class
+/** interface to find plugins
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 11:00:35 PM Jan 10, 2004
+ * Created at 6:02:23 PM Jan 10, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class BasePlugin extends com.cyclops.plexaros.impl.BasePlugin {
-    //totally empty class
+public interface PluginFinder {
+    /** Role in plexus */
+    String ROLE = PluginFinder.class.getName();
+    /** Find plugin descriptors
+     * @return Array of plugin descriptors
+     */
+    PluginDescriptor[] findPlugins();
 }

@@ -203,5 +203,5 @@ public interface Service extends Plugin {
      * @param laterPlugin Another plugin
      * @throws Exception Anything wrong
      */
-    void register(Plugin laterPlugin) throws Exception;
+    void registerClient(Plugin laterPlugin) throws Exception;
 }

@@ -202,6 +202,15 @@ import java.util.Map;
  * The class is created at 2004-1-6 12:34:09
  */
 public interface ObjectContainer {
+    /** Method getDescription() in class ObjectContainer
+     * @return Description of this object
+     */
+    String getDescription();
+
+    /** Method getName() in class ObjectContainer
+     * @return Name of this object
+     */
+    String getName();
     /** Get property objects for this object
      * @return Writeable context
      */

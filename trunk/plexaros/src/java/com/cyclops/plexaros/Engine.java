@@ -193,16 +193,17 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros;
+
+import org.apache.avalon.framework.activity.Startable;
+
 /** The root engine
  * @author joeblack
  *
  * The class is created at 2004-1-6 0:14:46
  */
-public interface Engine extends Startable, ObjectContainer {
-    /** Engine implementation class key in environment */
-    String ENGINE_IMPLEMENTATION = "plexaros.engine.impl";
-    /** Local home key */
-    String ENGINE_HOME = "plexaros.engine.home";
+public interface Engine extends ObjectContainer, Startable {
+    /** Role of this component in plexus */
+    String ROLE = Engine.class.getName();
     /** Get a plugin instance
      * @param pluginName Name of this plugin
      * @return Plugin loaded, null if not found
