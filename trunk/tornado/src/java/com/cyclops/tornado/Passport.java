@@ -202,14 +202,12 @@ import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.regexp.RE;
 import org.apache.regexp.REUtil;
-/**
- * @author jiaqi  guo
- * @email g-cyclops@users.sourceforge.net
+/** Passport class which contains user permissions at runtime
+ * <a href="mailto:g-cyclops@users.sourceforge.net">jiaqi guo</a>
  */
 public class Passport {
-    /**
-     * @author jiaqi guo
-     * @email g-cyclops@users.sourceforge.net
+    /** Inner class Permission which implements Asset interface
+     * <a href="mailto:g-cyclops@users.sourceforge.net">jiaqi guo</a>
      */
     public class Permission implements Asset {
         private String expression;

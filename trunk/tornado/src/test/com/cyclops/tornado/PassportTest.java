@@ -195,8 +195,7 @@
 package com.cyclops.tornado;
 import junit.framework.TestCase;
 /**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">jiaqi guo</a>
  */
 public class PassportTest extends TestCase {
     /** Do some testing for a value

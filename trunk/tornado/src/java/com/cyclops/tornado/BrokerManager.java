@@ -196,8 +196,7 @@ package com.cyclops.tornado;
 import com.cyclops.tornado.bo.ConnectionManager;
 import com.cyclops.tornado.bo.ObjectBroker;
 /**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+ * <a href="mailto:g-cyclops@users.sourceforge.net">jiaqi guo</a>
  */
 public class BrokerManager extends ConnectionManager {
     /** Key of BrokerManager in context */

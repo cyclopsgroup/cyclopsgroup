@@ -195,7 +195,7 @@
 package com.cyclops.tornado;
 
 /**
- * @author joeblack
+ * <a href="mailto:g-cyclops@users.sourceforge.net">jiaqi guo</a>
  *
  * To change the template for this generated type comment go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
