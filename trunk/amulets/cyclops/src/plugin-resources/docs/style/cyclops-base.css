@@ -1,7 +1,7 @@
 body, td, th, select, input, li
 {
     font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 img
@@ -97,6 +97,12 @@ div.subsection div.subsectionTitle
     width: 33%;
     height: 80px;
     background: url(../images/banner_right.gif) right no-repeat;
+}
+
+#projectBannerBlock h3
+{
+    font-weight: normal;
+    font-size: 14px;
 }
 
 #languageBarBlock

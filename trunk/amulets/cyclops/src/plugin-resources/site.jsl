@@ -24,6 +24,7 @@
 				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-print.css" media="print"/>
 				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-base.css" media="all"/>
 				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops.css" media="all"/>
+				<link rel="shortcut icon" href="${relativePath}/favicon.ico" type="image/x-icon"/>
 				<util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
 				<j:if test="${projectCssFile.exists()}">
 					<link rel="stylesheet" type="text/css" href="${relativePath}/style/project.css" media="all"/>
@@ -223,10 +224,12 @@ languageLinks("${pom.url}${location}", "${relativePath}");
 			<j:if test="${!navbean.isCollapsed(item.get(0))}">
 				<x:set var="_childCount" select="count(./item)"/>
 				<j:if test="${_childCount.intValue() gt 0}">
-					<td/>
-					<td>
-						<jsl:applyTemplates select="item"/>
-					</td>
+					<tr>
+						<td/>
+						<td>
+							<jsl:applyTemplates select="item"/>
+						</td>
+					</tr>
 				</j:if>
 			</j:if>
 		</table>
