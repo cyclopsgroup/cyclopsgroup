@@ -17,41 +17,18 @@
 package com.cyclopsgroup.gearset.beans;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
- * Simple commons logging enabled object
+ * Loggable object
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class SimpleLogEnabled implements LogEnabled
+public interface LogEnabled
 {
-    private Log logger;
-
     /**
-     * Getter method for property logger
+     * Get commons log object associated to this object
      * 
-     * @return Returns the logger.
+     * @return Log object
      */
-    public Log getLogger()
-    {
-        synchronized (this)
-        {
-            if (logger == null)
-            {
-                logger = LogFactory.getLog(getClass());
-            }
-        }
-        return logger;
-    }
-
-    /**
-     * Setter method for property logger
-     * 
-     * @param commonsLogger The logger to set.
-     */
-    public void setLogger(Log commonsLogger)
-    {
-        logger = commonsLogger;
-    }
+    Log getLogger();
 }
