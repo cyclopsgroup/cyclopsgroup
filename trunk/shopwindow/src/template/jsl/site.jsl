@@ -50,7 +50,7 @@
                                 <tr>
                                     <td rowspan="2">
                                         <a href="${pom.organization.url}">
-                                            <img border="0" src="${relativePath}/images/logo.gif" width="480" height="60"/>
+                                            <img border="0" src="${relativePath}${pom.organization.logo}" height="60"/>
                                         </a>
                                     </td>
                                     <td colspan="2">
