@@ -21,7 +21,7 @@
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:shopwindow</connection>
         <developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:shopwindow</developerConnection>
-        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/shopwindow</url>
+        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/shopwindow/</url>
     </repository>
     <mailingLists>
         <mailingList>
