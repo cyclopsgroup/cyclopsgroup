@@ -37,5 +37,6 @@ public class ParseURLValve implements Valve
             throws Exception
     {
         String path = runtime.getHttpServletRequest().getPathInfo();
+        System.out.println(path);
     }
 }

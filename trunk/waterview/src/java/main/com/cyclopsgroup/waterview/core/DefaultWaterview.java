@@ -33,7 +33,7 @@ import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
 
 /**
- * TODO Add javadoc for class
+ * Default implementation of waterview
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */

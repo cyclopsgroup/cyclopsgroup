@@ -21,7 +21,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * TODO Add javadoc for class
+ * Valve for pipeline
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
