@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="JMainboard Core">
+    <title>Maven VDoclet Plugin</title>
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="JMainboard Home" href="http://cyclops-group.sourceforge.net/jmainboard"/>
+            <item name="JContainer.org" href="http://www.jcontainer.org"/>
+        </links>
+        <menu name="Overview">
+            <item name="JMainboard Core" href="/index.html"/>
+            <item name="Engine Design" href="/design.html"/>
+            <item name="Developer Guide" href="/devguide.html"/>
+            <item name="Sample Component" href="/sample.html"/>
+            <item name="Roadmap" href="/roadmap.html"/>
+        </menu>
+    </body>
+</project>

@@ -210,9 +210,12 @@ import com.cyclops.jmainboard.Engine;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class DefaultComponent extends LoggableObject implements Component {
+
     /** Properties wrapper */
     private class PropertiesWrapper extends Properties {
+
         private Properties parent;
+
         /** Method getParent() in class PropertiesWrapper
          * @return Parent properties
          */
@@ -249,15 +252,23 @@ public class DefaultComponent extends LoggableObject implements Component {
             parent = p;
         }
     }
+
     private File componentHome;
 
     private Hashtable dependencies = new Hashtable();
+
     private HashSet dependencyIds = new HashSet();
+
     private String description;
+
     private Engine engine;
+
     private String id;
+
     private PropertiesWrapper properties = new PropertiesWrapper();
+
     private String title;
+
     private String version;
 
     /** Method addDependency() in class DefaultComponent
@@ -287,7 +298,7 @@ public class DefaultComponent extends LoggableObject implements Component {
      */
     public Component[] getDependencies() {
         return (Component[]) dependencies.values().toArray(
-            Component.EMPTY_ARRAY);
+                Component.EMPTY_ARRAY);
     }
 
     /** Method getDependencyIds() in class DefaultComponent
@@ -335,12 +346,8 @@ public class DefaultComponent extends LoggableObject implements Component {
             ret = file.toURL();
         } catch (Exception e) {
             getLog().debug(
-                "Resource ["
-                    + resourcePath
-                    + "] in component ["
-                    + getId()
-                    + "] not found!",
-                e);
+                    "Resource [" + resourcePath + "] in component [" + getId()
+                            + "] not found!", e);
         } finally {
             return ret;
         }
@@ -359,6 +366,7 @@ public class DefaultComponent extends LoggableObject implements Component {
     public String getVersion() {
         return version;
     }
+
     /** Override method init in the derived class
      * @see com.cyclops.jmainboard.Component#init()
      */
@@ -408,6 +416,7 @@ public class DefaultComponent extends LoggableObject implements Component {
     public void setVersion(String string) {
         version = string;
     }
+
     /** Override method toString in the derived class
      * @see java.lang.Object#toString()
      */

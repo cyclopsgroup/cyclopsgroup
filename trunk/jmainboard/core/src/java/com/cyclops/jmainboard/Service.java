@@ -209,10 +209,10 @@ public interface Service extends Component {
     /** Method startupService() in class Service
      * @throws Exception Throw it out
      */
-    void startupService() throws Exception;
+    void startup() throws Exception;
 
     /** Method shutdownService() in class Service
      * @throws Exception Throw it out
      */
-    void shutdownService() throws Exception;
+    void shutdown() throws Exception;
 }

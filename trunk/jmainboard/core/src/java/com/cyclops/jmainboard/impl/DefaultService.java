@@ -225,16 +225,16 @@ public class DefaultService extends DefaultComponent implements Service {
     }
 
     /** Override method shutdownService() of parent class
-     * @see com.cyclops.jmainboard.Service#shutdownService()
+     * @see com.cyclops.jmainboard.Service#shutdown()
      */
-    public void shutdownService() throws Exception {
+    public void shutdown() throws Exception {
         //Empty implementation
     }
 
     /** Override method startupService() of parent class
-     * @see com.cyclops.jmainboard.Service#startupService()
+     * @see com.cyclops.jmainboard.Service#startup()
      */
-    public void startupService() throws Exception {
+    public void startup() throws Exception {
         //empty implementation
     }
 }

@@ -192,181 +192,40 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jmainboard.impl;
+package com.cyclops.jmainboard.components.log4j;
 
-import java.io.File;
-import java.util.HashMap;
+import java.net.URL;
 import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Properties;
-import java.util.Vector;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.Engine;
-import com.cyclops.jmainboard.Service;
-import com.cyclops.jmainboard.utils.ComponentSorter;
+import com.cyclops.jmainboard.impl.DefaultService;
 
-/** Dandelio Engine
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/** Log4j Component
+ * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
- * Created at 9:56:05 PM Mar 12, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultEngine extends LoggableObject implements Engine {
-
-    private Vector components = new Vector();
-
-    private File engineHome = new File("");
-
-    private Properties properties = new Properties();
-
-    /** Override method getComponent in the derived class
-     * @see com.cyclops.jmainboard.Engine#getComponent(java.lang.String)
+public class Log4jService extends DefaultService {
+    /** Component ID */
+    public static final String COMPONENT_ID = "org.apache.log4j";
+    /** Override method startup() of parent class
+     * @see com.cyclops.jmainboard.Service#startup()
      */
-    public Component getComponent(String componentId) {
-        Component ret = null;
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            if (StringUtils.equals(component.getId(), componentId)) {
-                ret = component;
-                break;
-            }
-        }
-        return ret;
-    }
-
-    /** Get all components
-     * @return Array of all components
-     */
-    public Component[] getComponents() {
-        return (Component[]) components.toArray(Component.EMPTY_ARRAY);
-    }
-
-    /** Override method getEngineHome in the derived class
-     * @see com.cyclops.jmainboard.Engine#getEngineHome()
-     */
-    public File getEngineHome() {
-        return engineHome;
-    }
-
-    /** Override method getProperties in the derived class
-     * @see com.cyclops.jmainboard.Engine#getProperties()
-     */
-    public Properties getProperties() {
-        return properties;
-    }
-
-    /** Method initialize() in class DandelioEngine
-     * Initalize the engine
-     */
-    protected void init() {
-        // preload components before really starting them
-        HashMap rawComponents = new HashMap();
-        ComponentLoader loader = new ComponentLoader();
-        loader.load(this);
-        rawComponents.putAll(loader.getComponents());
-
-        // Normalize dependencies
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
-            DefaultComponent component = (DefaultComponent) i.next();
-            String[] dependencyIds = component.getDependencyIds();
-            for (int j = 0; j < dependencyIds.length; j++) {
-                String dependencyId = dependencyIds[j];
-                if (rawComponents.containsKey(dependencyId)) {
-                    Component dependency = (Component) rawComponents
-                            .get(dependencyId);
-                    component.addDependency(dependency);
-                } else {
-                    getLog().error(
-                            "Dependency [" + dependencyId
-                                    + "] is not found for component ["
-                                    + component.getId() + "]");
-                }
-            }
-        }
-        //Sort components and put results into components vector
-        ComponentSorter componentSorter = new ComponentSorter();
-        for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
+    public void startup() throws Exception {
+        String log4jResource = getProperties().getProperty("descriptor",
+                "log4j.properties");
+        for (Iterator i = getClientComponents().iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             try {
-                componentSorter.addComponent(component);
-            } catch (Exception e) {
-                getLog().error("Recursive dependency!", e);
-            }
-        }
-        Component[] componentArray = componentSorter.getComponents();
-        for (int i = 0; i < componentArray.length; i++) {
-            Component component = componentArray[i];
-            components.add(component);
-        }
-        //Initialize components in order
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                component.init();
-            } catch (Exception e) {
-                getLog().debug(
-                        "Can't initialize component [" + component + "]", e);
-            }
-        }
-        //Register clients for each service in order
-        HashMap services = new HashMap();
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            if (component instanceof Service) {
-                services.put(component.getId(), component);
-            }
-            for (Iterator j = services.values().iterator(); j.hasNext();) {
-                Service service = (Service) j.next();
-                service.register(component);
-            }
-        }
-    }
-
-    /** Method setEngineHome() in class DefaultEngine
-     * @param file Engine home directory
-     */
-    public void setEngineHome(File file) {
-        engineHome = file;
-    }
-
-    /** Override method shutdown in the derived class
-     * @see com.cyclops.jmainboard.Engine#shutdown()
-     */
-    public void shutdown() {
-        for (ListIterator i = components.listIterator(components.size()); i
-                .hasPrevious();) {
-            Component component = (Component) i.previous();
-            try {
-                if (component instanceof Service) {
-                    ((Service) component).shutdown();
+                URL descriptor = component.getResource(log4jResource);
+                if (descriptor != null) {
+                    PropertyConfigurator.configure(descriptor);
                 }
             } catch (Exception e) {
-                getLog()
-                        .debug(
-                                "Can't shutdown service [" + component.getId()
-                                        + "]", e);
+                getLog().debug("Can't load component", e);
             }
         }
     }
-
-    /** Override method startup in the derived class
-     * @see com.cyclops.jmainboard.Engine#startup()
-     */
-    public void startup() {
-        for (Iterator i = components.iterator(); i.hasNext();) {
-            Component component = (Component) i.next();
-            try {
-                if (component instanceof Service) {
-                    ((Service) component).startup();
-                }
-            } catch (Exception e) {
-                getLog().debug(
-                        "Can't startup service [" + component.getId() + "]", e);
-            }
-        }
-    }
-
 }
