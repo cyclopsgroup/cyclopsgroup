@@ -59,36 +59,21 @@ public class JdbcSession extends BaseSession implements Session
         this.dbcon = dbcon;
     }
 
-    /**
-     * Override method cancel in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#cancel()
-     */
-    public void cancel()
+    private void closeQueryResults()
     {
-        closeQueryResults();
-        closed = true;
-        try
+        for (Iterator i = queryResults.iterator(); i.hasNext();)
         {
-            if (dbcon.isClosed())
-            {
-                return;
-            }
-            dbcon.rollback();
-            dbcon.close();
-        }
-        catch (SQLException e)
-        {
-            logger.warn("Can not roll back the transaction");
+            QueryResult queryResult = (QueryResult) i.next();
+            queryResult.close();
         }
     }
 
     /**
-     * Override method close in super class of JdbcSession
+     * TODO Add javadoc for this method
+     *
      * 
-     * @see com.cyclopsgroup.levistone.Session#close()
      */
-    public void close()
+    public void commit()
     {
         closeQueryResults();
         closed = true;
@@ -104,15 +89,6 @@ public class JdbcSession extends BaseSession implements Session
         catch (SQLException e)
         {
             logger.warn("Can not commit transaction", e);
-        }
-    }
-
-    private void closeQueryResults()
-    {
-        for (Iterator i = queryResults.iterator(); i.hasNext();)
-        {
-            QueryResult queryResult = (QueryResult) i.next();
-            queryResult.close();
         }
     }
 
@@ -180,5 +156,29 @@ public class JdbcSession extends BaseSession implements Session
     public boolean isClosed()
     {
         return closed;
+    }
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * 
+     */
+    public void rollback()
+    {
+        closeQueryResults();
+        closed = true;
+        try
+        {
+            if (dbcon.isClosed())
+            {
+                return;
+            }
+            dbcon.rollback();
+            dbcon.close();
+        }
+        catch (SQLException e)
+        {
+            logger.warn("Can not roll back the transaction");
+        }
     }
 }

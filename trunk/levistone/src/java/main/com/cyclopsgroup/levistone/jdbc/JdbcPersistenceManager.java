@@ -45,8 +45,8 @@ public class JdbcPersistenceManager extends BasePersistenceManager
      */
     protected void doCancelSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        JdbcSession js = (JdbcSession) session;
+        js.rollback();
     }
 
     /**
@@ -56,8 +56,8 @@ public class JdbcPersistenceManager extends BasePersistenceManager
      */
     protected void doCloseSession(Session session) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        JdbcSession js = (JdbcSession) session;
+        js.commit();
     }
 
     /**
