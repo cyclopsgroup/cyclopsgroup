@@ -9,17 +9,17 @@
             <table>
                 <tr>
                     <td>
-                        <a href="database/id-table-schema.xml">Id table</a>
+                        <a href="database/id-table-schema.html">Id table</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="database/tornado-schema.xml">Tornado</a>
+                        <a href="database/tornado-schema.html">Tornado</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="database/healthfarm-schema.xml">HealthFarm</a>
+                        <a href="database/healthfarm-schema.html">HealthFarm</a>
                     </td>
                 </tr>
             </table>
