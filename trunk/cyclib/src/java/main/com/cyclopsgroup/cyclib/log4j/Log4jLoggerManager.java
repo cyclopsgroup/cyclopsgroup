@@ -27,8 +27,8 @@ import org.codehaus.plexus.logging.Logger;
 
 /**
  * Log4j implemented Avalon Logger Manager
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
 public class Log4jLoggerManager extends AbstractLoggerManager implements
         Initializable, Configurable, Contextualizable
@@ -41,7 +41,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method configure() in super class
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration configuration)
@@ -53,17 +53,17 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
      */
-    public void contextualize(Context context) throws ContextException
+    public void contextualize(Context ctx) throws ContextException
     {
-        this.context = context;
+        this.context = ctx;
     }
 
     /**
      * Override method getActiveLoggerCount() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#getActiveLoggerCount()
      */
     public int getActiveLoggerCount()
@@ -73,7 +73,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method getLoggerForComponent() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#getLoggerForComponent(java.lang.String, java.lang.String)
      */
     public Logger getLoggerForComponent(String role, String hint)
@@ -94,7 +94,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method getThreshold() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#getThreshold()
      */
     public int getThreshold()
@@ -104,7 +104,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method getThreshold() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#getThreshold(java.lang.String, java.lang.String)
      */
     public int getThreshold(String role, String hint)
@@ -114,7 +114,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method initialize() in super class
-     *
+     * 
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception
@@ -149,7 +149,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method returnComponentLogger() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#returnComponentLogger(java.lang.String, java.lang.String)
      */
     public void returnComponentLogger(String role, String hint)
@@ -163,7 +163,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method setThreshold() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#setThreshold(int)
      */
     public void setThreshold(int threshold)
@@ -172,7 +172,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
     /**
      * Override method setThreshold() in super class
-     *
+     * 
      * @see org.codehaus.plexus.logging.LoggerManager#setThreshold(java.lang.String, java.lang.String, int)
      */
     public void setThreshold(String role, String hint, int threshold)

@@ -50,8 +50,8 @@ public class DefaultValueParser extends ValueParser
      */
     protected String doGetValue(String name) throws Exception
     {
-        String[] values = doGetValues(name);
-        return values.length == 0 ? null : values[0];
+        String[] stringValues = doGetValues(name);
+        return stringValues.length == 0 ? null : stringValues[0];
     }
 
     /**

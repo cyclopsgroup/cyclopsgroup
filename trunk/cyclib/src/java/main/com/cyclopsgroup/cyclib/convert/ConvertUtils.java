@@ -23,5 +23,5 @@ package com.cyclopsgroup.cyclib.convert;
  */
 public final class ConvertUtils
 {
-    private static ConvertBean defaultConvertBean = new ConvertBean();
+    //private static ConvertBean defaultConvertBean = new ConvertBean();
 }

@@ -25,8 +25,8 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.context.Context;
 
 /**
- * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
- *
+ * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo </a>
+ * 
  * Default implementation of velocity component
  */
 public class DefaultVelocityComponent extends VelocityComponent implements
@@ -42,7 +42,7 @@ public class DefaultVelocityComponent extends VelocityComponent implements
 
     /**
      * Override method configure()
-     *
+     * 
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
@@ -54,31 +54,30 @@ public class DefaultVelocityComponent extends VelocityComponent implements
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
      */
-    public void contextualize(
-            org.apache.avalon.framework.context.Context context)
+    public void contextualize(org.apache.avalon.framework.context.Context ctx)
             throws ContextException
     {
-        this.context = context;
+        this.context = ctx;
     }
 
     /**
      * Override or implement method of parent class or interface
-     *
+     * 
      * @see com.cyclopsgroup.cyclib.velocity.VelocityComponent#evaluate(org.apache.velocity.context.Context, java.lang.String)
      */
-    public String evaluate(Context context, String template) throws Exception
+    public String evaluate(Context ctx, String template) throws Exception
     {
         StringWriter sw = new StringWriter();
-        Velocity.evaluate(context, sw, logTag, template);
+        Velocity.evaluate(ctx, sw, logTag, template);
         return sw.toString();
     }
 
     /**
      * Override method initialize()
-     *
+     * 
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception
