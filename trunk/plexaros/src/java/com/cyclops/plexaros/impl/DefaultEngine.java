@@ -365,7 +365,6 @@ public class DefaultEngine
             String pluginName = (String) i.next();
             Plugin plugin = (Plugin) getPlugin(pluginName);
             try {
-
                 plugin.start();
             } catch (Exception e) {
                 getLogger().error("Start plugin error", e);
