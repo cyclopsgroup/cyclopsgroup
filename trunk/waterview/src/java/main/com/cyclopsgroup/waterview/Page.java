@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview;
 
+import com.cyclopsgroup.cyclib.Context;
+
 /**
  * Basic page class
  * 
@@ -23,14 +25,15 @@ package com.cyclopsgroup.waterview;
  */
 public abstract class Page implements UIModule
 {
-
     /**
-     * Method build() in class Page
-     * 
-     * @param runtime
-     * @throws Exception
+     * prepare data for page
+     *
+     * @param runtime Runtime object
+     * @param outputContext Output context for ui
+     * @throws Exception Throw it out
      */
-    protected abstract void build(UIRuntime runtime) throws Exception;
+    protected abstract void prepare(UIRuntime runtime, Context outputContext)
+            throws Exception;
 
     /**
      * Override method process in super class of Page
@@ -39,6 +42,6 @@ public abstract class Page implements UIModule
      */
     public void process(UIRuntime runtime) throws Exception
     {
-        build(runtime);
+        prepare(runtime, runtime.getUIContext());
     }
 }

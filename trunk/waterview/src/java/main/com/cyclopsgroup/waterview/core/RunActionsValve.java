@@ -43,6 +43,8 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
 
     private HashSet actionParameters;
 
+    private String moduleCategory;
+
     private ModuleResolver moduleResolver;
 
     /**
@@ -53,6 +55,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
     public void configure(Configuration conf) throws ConfigurationException
     {
         Configuration[] confs = conf.getChildren("parameter-action");
+        moduleCategory = conf.getChild("module-category").getValue("action");
         actionParameters = new HashSet(confs.length);
         for (int i = 0; i < confs.length; i++)
         {
@@ -81,7 +84,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
             String action = runtime.getRequestParameters().getString(param);
             if (StringUtils.isNotEmpty(action))
             {
-                moduleResolver.resolve(runtime, action);
+                moduleResolver.resolve(runtime, moduleCategory + '/' + action);
             }
         }
         for (Iterator i = actionExtensions.iterator(); i.hasNext();)
@@ -93,7 +96,8 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
                 if (action.endsWith(suffix))
                 {
                     String module = StringUtils.chomp(action);
-                    moduleResolver.resolve(runtime, module);
+                    moduleResolver.resolve(runtime, moduleCategory + '/'
+                            + module);
                 }
             }
         }

@@ -21,20 +21,6 @@
         <link rel="stylesheet" link="$content.url("style/base.css")" type="text/css"/>
     </head>
     <body>
-        <div id="pageBanner">
-        	$rb.current_page_is $page ($rb.title)
-        </div>
-        <div id="pageContent">
-            <div id="pageNavigator">
-                $renderer.render("navigator", $page)
-            </div>
-            <div id="pageBody">
-                $renderer.render("body", $page)
-            </div>
-            <div id="pageReferences">
-            </div>
-        </div>
-        <div id="pageFooter">
-        </div>
+		$renderer.render("body", $page)
     </body>
 </html>

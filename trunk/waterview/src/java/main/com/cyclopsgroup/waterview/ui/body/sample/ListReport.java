@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.ui.body.sample;
 
+import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.UIRuntime;
 
@@ -26,13 +27,12 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class ListReport extends Page
 {
-
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime)
+     * @see com.cyclopsgroup.waterview.Page#prepare(com.cyclopsgroup.waterview.UIRuntime, com.cyclopsgroup.cyclib.Context)
      */
-    protected void build(UIRuntime runtime) throws Exception
+    protected void prepare(UIRuntime runtime, Context context) throws Exception
     {
         //It's just a test
     }
