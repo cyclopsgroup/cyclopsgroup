@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-	<extend>../project.xml</extend>
-	<pomVersion>3</pomVersion>
-	<id>maven-cyclops-plugin</id>
-	<name>Amulets Cyclops Plugin</name>
-	<currentVersion>1.0-b2</currentVersion>
-	<organization>
-		<name>Cyclops Group</name>
-		<url>http://cyclops-group.sourceforge.net</url>
-		<logo>/images/cyclopsgroup_logo.gif</logo>
-	</organization>
-	<inceptionYear>2002</inceptionYear>
-	<shortDescription>Maven plugin for cyclopsgroup specific operations like cyclopsgroup project website generation.</shortDescription>
-	<url>http://cyclops-group.sourceforge.net/projects/amulets/multiproject/maven-cyclops-plugin</url>
-	<siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/maven-cyclops-plugin/</siteDirectory>
-	<repository>
-		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops/</connection>
-		<url>http://cvs.sourceforge.net/viewcvs/cyclops-group/amulets/cyclops</url>
-	</repository>
-	<developers>
-		<developer>
-			<name>Guo, Jiaqi</name>
-			<id>jiaqi</id>
-			<email>jiaqi.guo@gmail.com</email>
-			<organization>Evavi</organization>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-	</developers>
-	<build/>
+  <extend>../project.xml</extend>
+  <pomVersion>3</pomVersion>
+  <artifactId>maven-cyclops-plugin</artifactId>
+  <groupId>maven-cyclops-plugin</groupId>
+  <id>maven-cyclops-plugin</id>
+  <currentVersion>1.0-b3</currentVersion>
+  <organization>
+    <name>Cyclops Group</name>
+    <url>http://cyclops-group.sourceforge.net</url>
+    <logo>/images/cyclopsgroup_logo.gif</logo>
+  </organization>
+  <inceptionYear>2002</inceptionYear>
+  <shortDescription>Maven plugin for cyclopsgroup specific operations like cyclopsgroup project website generation.</shortDescription>
+  <url>http://cyclops-group.sourceforge.net/projects/amulets/multiproject/maven-cyclops-plugin</url>
+  <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/maven-cyclops-plugin/</siteDirectory>
+  <repository>
+    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops/</connection>
+    <url>http://cvs.sourceforge.net/viewcvs/cyclops-group/amulets/cyclops</url>
+  </repository>
+  <developers>
+    <developer>
+      <name>Guo, Jiaqi</name>
+      <id>jiaqi</id>
+      <email>jiaqi.guo@gmail.com</email>
+      <organization>Evavi</organization>
+      <timezone>-6</timezone>
+    </developer>
+  </developers>
+  <build />
 </project>
+
