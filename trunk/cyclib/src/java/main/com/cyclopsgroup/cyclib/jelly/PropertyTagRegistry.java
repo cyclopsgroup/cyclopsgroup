@@ -16,57 +16,34 @@
  */
 package com.cyclopsgroup.cyclib.jelly;
 
-import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.commons.jelly.TagLibrary;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * TODO Add javadoc for this class
+ * Property file defined tag registry
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public abstract class PropertyTagRegistry extends TagRegistry
 {
-
-    /**
-     * Load tag definition from given resource
-     *
-     * @param resource Given resource
-     * @return Properties object
-     * @throws Exception Throw it out
-     */
-    protected final static Properties load(URL resource) throws Exception
-    {
-        return PropertyLoader.load(resource);
-    }
-
-    /**
-     * Convenient method to load all properties definition
-     *
-     * @param path Given path
-     * @return Properties object
-     * @throws Exception Throw it out
-     */
-    protected final static Properties loadAll(String path) throws Exception
-    {
-        return PropertyLoader.loadAll(path);
-    }
-
     private Log logger = LogFactory.getLog(getClass());
 
     /**
      * Constructor for class PropertiesTagLibrary
+     * 
+     * @param libraryDefinitionPath tag definition path
      */
-    public PropertyTagRegistry()
+    public PropertyTagRegistry(String libraryDefinitionPath)
     {
         Properties props = null;
         try
         {
-            props = loadProperties();
+            props = PropertyLoader.loadAll(libraryDefinitionPath);
         }
         catch (Exception e)
         {
@@ -75,25 +52,37 @@ public abstract class PropertyTagRegistry extends TagRegistry
         for (Iterator i = props.keySet().iterator(); i.hasNext();)
         {
             String url = (String) i.next();
-
-            try
+            if (!url.endsWith(".url"))
             {
-                TagLibrary library = (TagLibrary) Class.forName(
-                        props.getProperty(url)).newInstance();
+                continue;
+            }
+            String libraryName = StringUtils.chomp(url, ".url");
+            if (props.containsKey(libraryName + ".class"))
+            {
+                String libraryClass = props.getProperty(libraryName + ".class");
+                try
+                {
+                    TagLibrary library = (TagLibrary) Class.forName(
+                            libraryClass).newInstance();
+                    registerTagLibrary(url, library);
+                }
+                catch (Exception e)
+                {
+                    logger.error("Can not register tag library [" + url + "]",
+                            e);
+                }
+            }
+            else if (props.containsKey(libraryName + ".tags"))
+            {
+                String tagDefinition = props.getProperty(libraryName + ".tags");
+                PropertyTagLibrary library = new PropertyTagLibrary(
+                        tagDefinition);
                 registerTagLibrary(url, library);
             }
-            catch (Exception e)
+            else
             {
-                logger.warn("Can not register tag library [" + url + "]", e);
+                logger.error("Invalid tag library definition [" + url + "]");
             }
         }
     }
-
-    /**
-     * Derived class has to implement this method to provide tag definition
-     *
-     * @return Tag definition properties
-     * @throws Exception Throw it out
-     */
-    protected abstract Properties loadProperties() throws Exception;
 }

@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.cyclib.jelly;
 
-import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
 
@@ -29,44 +28,20 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public abstract class PropertyTagLibrary extends TagLibrary
+public class PropertyTagLibrary extends TagLibrary
 {
-
-    /**
-     * Load tag definition from given resource
-     *
-     * @param resource Given resource
-     * @return Properties object
-     * @throws Exception Throw it out
-     */
-    protected final static Properties load(URL resource) throws Exception
-    {
-        return PropertyLoader.load(resource);
-    }
-
-    /**
-     * Convenient method to load all properties definition
-     *
-     * @param path Given path
-     * @return Properties object
-     * @throws Exception Throw it out
-     */
-    protected final static Properties loadAll(String path) throws Exception
-    {
-        return PropertyLoader.loadAll(path);
-    }
-
     private Log logger = LogFactory.getLog(getClass());
 
     /**
      * Constructor for class PropertiesTagLibrary
+     * @param tagDefinitionPath Path of tag definition properties file
      */
-    public PropertyTagLibrary()
+    public PropertyTagLibrary(String tagDefinitionPath)
     {
         Properties props = null;
         try
         {
-            props = loadProperties();
+            props = PropertyLoader.loadAll(tagDefinitionPath);
         }
         catch (Exception e)
         {
@@ -87,12 +62,4 @@ public abstract class PropertyTagLibrary extends TagLibrary
             }
         }
     }
-
-    /**
-     * Derived class has to implement this method to provide tag definition
-     *
-     * @return Tag definition properties
-     * @throws Exception Throw it out
-     */
-    protected abstract Properties loadProperties() throws Exception;
 }

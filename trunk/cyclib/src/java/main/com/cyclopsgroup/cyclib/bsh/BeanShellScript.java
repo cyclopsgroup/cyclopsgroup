@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.cyclib.bsh;
 
+import java.util.Iterator;
+
 import bsh.Interpreter;
 
 import com.cyclopsgroup.cyclib.Context;
@@ -50,10 +52,9 @@ public class BeanShellScript implements Script
         Interpreter interpreter = new Interpreter();
         if (context != null)
         {
-            String[] names = context.getNames();
-            for (int i = 0; i < names.length; i++)
+            for (Iterator i = context.keys(); i.hasNext();)
             {
-                String name = names[i];
+                String name = (String) i.next();
                 try
                 {
                     interpreter.set(name, context.get(name));

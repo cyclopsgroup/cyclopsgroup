@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.cyclib.jexl;
 
+import java.util.Iterator;
+
 import org.apache.commons.jexl.ExpressionFactory;
 import org.apache.commons.jexl.JexlContext;
 import org.apache.commons.jexl.context.HashMapContext;
@@ -57,10 +59,9 @@ public class JexlExpression implements Expression
         JexlContext ctx = new HashMapContext();
         if (context != null)
         {
-            String[] names = context.getNames();
-            for (int i = 0; i < names.length; i++)
+            for (Iterator i = context.keys(); i.hasNext();)
             {
-                String name = names[i];
+                String name = (String) i.next();
                 Object object = context.get(name);
                 try
                 {
@@ -68,7 +69,7 @@ public class JexlExpression implements Expression
                 }
                 catch (Exception e)
                 {
-                    logger.debug("Set value error", e);
+                    //Ignore exception here
                 }
             }
         }

@@ -33,27 +33,13 @@ public final class PropertyLoader
     private static Log logger = LogFactory.getLog(PropertyLoader.class);
 
     /**
-     * Load tag definition from given resource
-     *
-     * @param resource Given resource
-     * @return Properties object
-     * @throws Exception Throw it out
-     */
-    protected static Properties load(URL resource) throws Exception
-    {
-        Properties props = new Properties();
-        props.load(resource.openStream());
-        return props;
-    }
-
-    /**
      * Convenient method to load all properties definition
      *
      * @param path Given path
      * @return Properties object
      * @throws Exception Throw it out
      */
-    protected static Properties loadAll(String path) throws Exception
+    public static Properties loadAll(String path) throws Exception
     {
         Properties props = new Properties();
         Enumeration e = Thread.currentThread().getContextClassLoader()

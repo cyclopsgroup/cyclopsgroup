@@ -16,7 +16,11 @@
  */
 package com.cyclopsgroup.cyclib;
 
+import java.util.HashSet;
+
 import junit.framework.TestCase;
+
+import org.apache.commons.collections.CollectionUtils;
 
 /**
  * Test case for default context
@@ -36,7 +40,8 @@ public class DefaultContextTest extends TestCase
         DefaultContext ctx = new DefaultContext(parent);
         ctx.put("a", "c");
         ctx.put("d", "d");
-        String[] names = ctx.getNames();
-        assertEquals(3, names.length);
+        HashSet names = new HashSet();
+        CollectionUtils.addAll(names, ctx.keys());
+        assertEquals(3, names.size());
     }
 }

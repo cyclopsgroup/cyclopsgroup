@@ -17,6 +17,7 @@
 package com.cyclopsgroup.cyclib.jelly;
 
 import java.io.StringWriter;
+import java.util.Iterator;
 
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyException;
@@ -56,7 +57,7 @@ public class ExpressionTag extends TagSupport implements Expression
         }
         catch (JellyException e)
         {
-            throw new JellyTagException("", e);
+            throw new JellyTagException("Getting script error", e);
         }
     }
 
@@ -68,10 +69,9 @@ public class ExpressionTag extends TagSupport implements Expression
     public Object evaluate(Context ctx) throws Exception
     {
         JellyContext jc = new JellyContext(context);
-        String[] names = ctx.getNames();
-        for (int i = 0; i < names.length; i++)
+        for (Iterator i = ctx.keys(); i.hasNext();)
         {
-            String name = names[i];
+            String name = (String) i.next();
             jc.setVariable(name, ctx.get(name));
         }
         StringWriter sw = new StringWriter();

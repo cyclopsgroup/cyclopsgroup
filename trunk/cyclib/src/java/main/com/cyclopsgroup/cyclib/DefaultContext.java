@@ -17,10 +17,9 @@
 package com.cyclopsgroup.cyclib;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.collections.iterators.IteratorChain;
 
 /**
  * Default implementation of context
@@ -67,7 +66,7 @@ public class DefaultContext implements Context
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Get hash map content of this context
      *
      * @return HashMap content
      */
@@ -79,18 +78,15 @@ public class DefaultContext implements Context
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.cyclib.Context#getNames()
+     * @see com.cyclopsgroup.cyclib.Context#keys()
      */
-    public String[] getNames()
+    public Iterator keys()
     {
         if (parent == null)
         {
-            return (String[]) content.keySet().toArray(
-                    ArrayUtils.EMPTY_STRING_ARRAY);
+            return content.keySet().iterator();
         }
-        HashSet names = new HashSet(content.keySet());
-        CollectionUtils.addAll(names, parent.getNames());
-        return (String[]) names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return new IteratorChain(parent.keys(), content.keySet().iterator());
     }
 
     /**

@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.cyclib;
 
+import java.util.Iterator;
+
 /**
  * Runtime context interface
  * 
@@ -35,9 +37,9 @@ public interface Context
     /**
      * Get available variable names in this context
      *
-     * @return String array of names
+     * @return Iterator of variable names
      */
-    String[] getNames();
+    Iterator keys();
 
     /**
      * Put vriable into context
