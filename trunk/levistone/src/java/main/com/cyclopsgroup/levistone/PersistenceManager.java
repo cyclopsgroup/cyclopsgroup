@@ -41,7 +41,7 @@ public interface PersistenceManager
     void closeSession(Session session);
 
     /**
-     * TODO Add javadoc for this method
+     * Create empty query with given type
      *
      * @param entityType Type of entity class
      * @return New query object
@@ -49,9 +49,9 @@ public interface PersistenceManager
     Query createQuery(Class entityType);
 
     /**
-     * TODO Add javadoc for this method
+     * Create named query with given name
      *
-     * @param name
+     * @param name Queyr name
      * @return Named query object
      */
     NamedQuery createQuery(String name);
@@ -72,7 +72,7 @@ public interface PersistenceManager
     Session openSession() throws PersistenceException;
 
     /**
-     * TODO Add javadoc for this method
+     * Open new session with given persistence name
      *
      * @param persistenceName
      * @return

@@ -17,7 +17,7 @@
 package com.cyclopsgroup.levistone;
 
 /**
- * TODO Add javadoc for this class
+ * Query specified exception
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
