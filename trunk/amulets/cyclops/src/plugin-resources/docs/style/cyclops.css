@@ -3,6 +3,12 @@ body, td, select, input, li
     color: black;
 }
 
+body
+{
+    background: url(../images/body_bg.gif) repeat-x;
+    background-color: #A7B6F0;
+}
+
 a:link, a:visited
 {
     color: #3366CC;
@@ -22,12 +28,6 @@ div.section table.bodyTable th
     color: white;
 }
 
-table.menu th
-{
-    background-color: #0044CC;
-    color: white;
-}
-
 div.section table.bodyTable
 {
     background-color: #F6F6F6;
@@ -40,14 +40,14 @@ div.section table.bodyTable tr.a
 
 div.section table.bodyTable tr.b
 {
-    background-color: #EEEEEE;
+    background-color: #FFFBC5;
 }
 
 div.section div.sectionTitle
 {
     border-width: 0px 0px 2px 0px;
     border-style: solid;
-    border-color: #666666;
+    border-color: #CAD7EA;
     text-indent: 28px;
     background: url(../images/big_right.gif) left center no-repeat;
 }
@@ -56,10 +56,21 @@ div.subsection div.subsectionTitle
 {
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #999999;
+    border-color: #CAD7EA;
     text-indent: 28px;
     background: url(../images/right.gif) left center no-repeat;
     color: #666666;
+}
+
+#navigatorBlock table.menu th
+{
+    background-color: #CAD7EA;
+    color: #273156;
+}
+
+#documentBlock
+{
+    background-color: white;
 }
 
 #bannerBlock
@@ -74,23 +85,24 @@ div.subsection div.subsectionTitle
 
 #languageBarBlock
 {
-    background-color: #CCCCCC;
+    background: url(../images/button_bg.gif) bottom repeat-x;
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #0044CC;
+    border-color: #CAD7EA;
 }
 
 #navigatorBlock
 {
-    border-color: #0044CC;
-    border-width: 0px 1px 0px 0px;
+    background-color: #EEF1FD;
     border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: #CAD7EA;
 }
 
 #copyrightsBlock
 {
     border-width: 1px 0px 0px 0px;
     border-style: solid;
-    border-color: black;
+    border-color: #CAD7EA;
     margin-bottom: 20px;
 }

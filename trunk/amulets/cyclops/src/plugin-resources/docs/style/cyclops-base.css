@@ -1,7 +1,12 @@
 body, td, th, select, input, li
 {
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+body
+{
+    margin: 0px;
 }
 
 img
@@ -46,9 +51,9 @@ div.section
 
 div.section div.sectionTitle
 {
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-weight: normal;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 32px;
 }
 
 div.subsection
@@ -60,9 +65,9 @@ div.subsection div.subsectionTitle
 {
     margin-bottom: 10px;
     margin-top: 10px;
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-weight: normal;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
 }
 
 #documentWrapperBlock
@@ -73,7 +78,8 @@ div.subsection div.subsectionTitle
 #documentBlock
 {
     text-align: left;
-    width: 1024px;
+    width: 100%;
+    max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -101,7 +107,7 @@ div.subsection div.subsectionTitle
 
 #projectBannerBlock h3
 {
-    font-weight: normal;
+    font-weight: bold;
     font-size: 14px;
 }
 
