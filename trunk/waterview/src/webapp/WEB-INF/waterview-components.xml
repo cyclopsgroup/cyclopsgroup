@@ -6,7 +6,6 @@
             <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
             <configuration>
                 <pipeline>
-                    <valve role="cyclopsgroup.waterview.valve.parseurl"/>
                     <valve role="cyclopsgroup.waterview.valve.runactions"/>
                     <valve role="cyclopsgroup.waterview.valve.renderpage"/>
                 </pipeline>
@@ -27,22 +26,11 @@
         *************** VALVES ****************
         -->
         <component>
-            <role>cyclopsgroup.waterview.valve.parseurl</role>
-            <implementation>com.cyclopsgroup.waterview.core.ParseURLValve</implementation>
-            <configuration>
-                <path-separator>|</path-separator>
-                <default-page>Index.vm</default-page>
-                <extensions>
-                    <action>do</action>
-                    <page>vm</page>
-                    <page>xml</page>
-                    <page>html</page>
-                </extensions>
-            </configuration>
-        </component>
-        <component>
             <role>cyclopsgroup.waterview.valve.runactions</role>
             <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
+            <configuration>
+                <action-parameter>do</action-parameter>
+            </configuration>
         </component>
         <component>
             <role>cyclopsgroup.waterview.valve.renderpage</role>

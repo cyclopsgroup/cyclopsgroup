@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -32,10 +35,22 @@ import com.cyclopsgroup.waterview.Valve;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class RunActionsValve extends AbstractLogEnabled implements Valve,
-        Serviceable
+        Serviceable, Configurable
 {
 
+    private String actionParameterName;
+
     private ModuleResolver moduleResolver;
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        actionParameterName = conf.getChild("action-parameter").getValue("do");
+    }
 
     /**
      * Override method process in super class of RunResolverValve
