@@ -5,10 +5,6 @@
         <author email="g-cyclops@users.sourceforge.net">jiaqi guo</author>
     </properties>
     <body>
-        <section name="10/01/2003">
-            <subsection name="News Title">
-                <p>sdfas fasf asd</p>
-            </subsection>
-        </section>
+        <section name="@MAIN_SECTION@"/>
     </body>
 </document>

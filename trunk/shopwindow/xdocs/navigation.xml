@@ -5,21 +5,27 @@
         <menu name="Overview">
             <item name="Home" href="/index.html"/>
             <item name="News and Articles" href="/weblogs/news/blog.html"/>
-            <item name="For Developers" href="/developers.html"/>
-            <item name="Stories Behind" href="/weblogs/stories/blog.html"/>
+            <item name="Forums" href="/forum.html"/>
+            <item name="Hosted Projects" href="/projects.html" collapse="true">
+                <item name="tornado" href="/projects/tornado"/>
+                <item name="amulets" href="/projects/amulets"/>
+                <item name="a4trim" href="/projects/a4trim"/>
+                <item name="healthfarm" href="/projects/healthfarm"/>
+                <item name="dbdigger" href="http://dbdigger.sourceforge.net"/>
+                <item name="albumbuilder" href="http://albumbuilder.sourceforge.net"/>
+            </item>
             <item name="About Jiaqi" href="/about.html" collapse="true">
                 <item name="Contact Information" href="/contact.html"/>
                 <item name="My Resume" href="/resume.html"/>
                 <item name="Web Logs" href="/weblogs/joel/blog.html"/>
             </item>
-            <item name="Forums" href="/forum.html"/>
-            <item name="Summary at SF.net" href="http://sourceforge.net/projects/cyclops-group"/>
+            <item name="Project Summary" href="http://sourceforge.net/projects/cyclops-group"/>
         </menu>
-        <menu name="Hosted Projects">
-            <item name="tornado" href="/projects/tornado/index.html"/>
-            <item name="dbdigger" href="http://dbdigger.sourceforge.net/index.html"/>
-            <item name="albumbuilder" href="http://albumbuilder.sourceforge.net/index.html"/>
-            <item name="a4trim" href="/projects/a4trim/index.html"/>
+        <menu name="For Developers">
+            <item name="Get Involved" href="/developers.html"/>
+            <item name="Developer Howtos" href="/howtos.html"/>
+            <item name="Stories Behind" href="/weblogs/stories/blog.html"/>
+            <item name="Download and Release" href="/download.html"/>
         </menu>
     </body>
 </project>

@@ -1,212 +1,258 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-    <head>
-        <title>
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  
+      
+  
+
+      
+      
+      
+      
+      
+      
+        
+         
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+
+  
+  
+
+  
+  
+
+   
+   
+
+   
+   
+
+
+    
+	
+	
+
+    
+    
+      
+	
+	
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <html>
+      <head>
+        
+        
+          <title>
             Maven - 
           Joel's Weblog
         
           </title>
+        
+        
+        
         <style type="text/css">
           
           @import url("../../style/maven.css");
         </style>
-        <style type="text/css">
+        
+        
+        
+          <style type="text/css">
             @import url("../../style/project.css");
           </style>
-        <link rel="stylesheet" href="../../style/print.css" type="text/css" media="print" />
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-        <meta name="author" content="jiaqi guo" />
-        <meta name="email" content="g-cyclops@users.sourceforge.net" />
-    </head>
-    <body class="composite">
+        
+        
+        
+        <link rel="stylesheet" href="../../style/print.css" type="text/css" media="print"></link>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
+        
+          <meta name="author" content="jiaqi guo"></meta>
+          <meta name="email" content="g-cyclops@users.sourceforge.net"></meta>
+        
+        
+        
+        
+      </head>
+
+      <body class="composite">
+
         <div>
-            <table bgcolor="#003366" border="0" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="55%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
-                    <td width="10%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
-                    <td width="35%"><img height="1" width="1" src="../../images/spacer.gif" /></td>
-                </tr>
-                <tr>
-                    <td rowspan="2"><a href="http://cyclops-group.sourceforge.net"><img height="60" border="0" alt="Cyclops Group Alliance" src="../../images/logo.gif" align="left" /></a></td>
-                    <td align="right" colspan="2"><img src="../../images/banner_right.gif" /></td>
-                </tr>
-                <tr>
-                    <td align="right"><img src="../../images/banner_corner.gif" /></td>
-                    <td bgcolor="#D1DBE4" rowspan="2" align="center">
-                        <table>
-                            <form action="http://www.google.com/search" method="get">
-                                <input name="domains" type="hidden" value="http://cyclops-group.sourceforge.net" />
-                                <input name="sitesearch" type="hidden" value="http://cyclops-group.sourceforge.net" id="search" />
-                                <tr>
-                                    <td><a href="http://www.google.com"><img border="0" src="http://www.google.com/logos/Logo_25wht.gif" /></a></td>
-                                    <td>
-                                        <input name="q" size="8" type="text" />
-                                    </td>
-                                    <td><input name="btnG" type="image" value="Go" title="Google Search in this site" src="../../images/right.gif" /></td>
-                                </tr>
-                            </form>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td background="../../images/banner_bg.gif" style="padding: 2px;" colspan="2">
-                        <font color="white">
-                            <b>
-                                <small>Built by <a href="http://www.blogger.com"><font color="white">BLOGGER.com</font></a></small>
-                            </b>
-                        </font>
-                    </td>
-                </tr>
-            </table>
+          <table bgcolor="#003366" border="0" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="55%"><img height="1" width="1" src="../../images/spacer.gif"></img></td>
+                <td width="10%"><img height="1" width="1" src="../../images/spacer.gif"></img></td>
+                <td width="35%"><img height="1" width="1" src="../../images/spacer.gif"></img></td>
+            </tr>
+            <tr>
+              
+              <td rowspan="2">
+                
+                
+                  
+                  
+                  
+                    
+                  
+                  
+                  
+                  
+                  
+                    
+                  
+                  <a href="http://cyclops-group.sourceforge.net">
+                    <img height="60" border="0" alt="Cyclops Group Alliance" src="../../images/logo.gif" align="left"></img>
+                  </a>
+                
+              </td>
+              <td align="right" colspan="2"><img src="../../images/banner_right.gif"></img></td>
+            </tr>
+            <tr>
+                <td align="right"><img src="../../images/banner_corner.gif"></img></td>
+                <td bgcolor="#D1DBE4" rowspan="2" align="center">
+                    <table>
+                        <form action="http://www.google.com/search" method="get">
+                            <input name="domains" type="hidden" value="http://cyclops-group.sourceforge.net"></input>
+                            <input name="sitesearch" type="hidden" value="http://cyclops-group.sourceforge.net" id="search"></input>
+                            <tr>
+                                <td><a href="http://www.google.com"><img border="0" src="http://www.google.com/logos/Logo_25wht.gif"></img></a></td>
+                                <td><input name="q" size="8" type="text"></input></td>
+                                <td><input name="btnG" type="image" value="Go" title="Google Search in this site" src="../../images/right.gif"></input></td>
+                             </tr>
+                        </form>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td background="../../images/banner_bg.gif" style="padding: 2px;" colspan="2">
+                    <font color="white"><b><small>Last published: 01 January 2004
+                    </small></b></font>
+              </td>
+            </tr>
+          </table>
         </div>
-        <table border="0" width="100%" cellpadding="8" cellspacing="0">
-            <tr valign="top">
-                <td width="20%">
-                    <table bgcolor="#DDDDDD" width="100%" cellpadding="2" cellspacing="1">
-                        <tr>
-                            <th>Overview</th>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#EFEFEF">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />Home</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../weblogs/news/blog.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />News and Articles</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../developers.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />For Developers</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../weblogs/stories/blog.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />Stories Behind</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../about.html">
-                                                    <img class="handle" src="../../images/expanded.png" alt="" />About Jiaqi</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td>
-                                                        <img height="16" width="8" src="../../images/spacer.gif" />
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <a href="../../contact.html">
-                                                                <img class="handle" src="../../images/none.png" alt="" />Contact Information</a>
-                                                        </small>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> </td>
-                                                    <td />
-                                                </tr>
-                                            </table>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td>
-                                                        <img height="16" width="8" src="../../images/spacer.gif" />
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <a href="../../resume.html">
-                                                                <img class="handle" src="../../images/none.png" alt="" />My Resume</a>
-                                                        </small>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> </td>
-                                                    <td />
-                                                </tr>
-                                            </table>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td>
-                                                        <img height="16" width="8" src="../../images/spacer.gif" />
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <b>
-                                                                <a href="../../weblogs/joel/blog.html">
-                                                                    <img class="handle" src="../../images/none.png" alt="" />Web Logs</a>
-                                                            </b>
-                                                        </small>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> </td>
-                                                    <td />
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+        
+        <table border="0" width="100%" cellpadding="8" cellspacing="0"> 
+          <tr valign="top">
+            <td width="20%">
+                
+                <table bgcolor="#DDDDDD" width="100%" cellpadding="2" cellspacing="1">
+                    
+                      
+    <tr>
+        <th>Overview</th>
+    </tr>
+    <tr>
+        <td bgcolor="#EFEFEF">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../index.html"><img class="handle" src="../../images/none.png" alt=""></img>Home</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../weblogs/news/blog.html"><img class="handle" src="../../images/none.png" alt=""></img>News and Articles</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <table border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
@@ -219,17 +265,91 @@
             </small>
         </td>
     </tr>
+    
         <tr>
             <td> </td>
             <td></td>
         </tr>
+    
 </table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+    	
+          
+    	
+    
 <table border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
         <td>
             <small>
-      		<a href="http://sourceforge.net/projects/cyclops-group"><img class="handle" src="../../images/none.png" alt=""></img>Summary at SF.net</a>
+      	
+      	
+      		<a href="../../projects.html"><img class="handle" src="../../images/collapsed.png" alt=""></img>Hosted Projects</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+          
+    	
+    	
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../about.html"><img class="handle" src="../../images/expanded.png" alt=""></img>About Jiaqi</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../contact.html"><img class="handle" src="../../images/none.png" alt=""></img>Contact Information</a>
+      	
             </small>
         </td>
     </tr>
@@ -240,158 +360,359 @@
         </tr>
     
 </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Hosted Projects</th>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#EFEFEF">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../projects/tornado/index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />tornado</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="http://dbdigger.sourceforge.net/index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />dbdigger</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="http://albumbuilder.sourceforge.net/index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />albumbuilder</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../projects/a4trim/index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />a4trim</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Project Documentation</th>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#EFEFEF">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../index.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />About shopwindow</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../project-info.html">
-                                                    <img class="handle" src="../../images/collapsed.png" alt="" />Project Info</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="../../maven-reports.html">
-                                                    <img class="handle" src="../../images/collapsed.png" alt="" />Project Reports</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <img height="16" width="8" src="../../images/spacer.gif" />
-                                        </td>
-                                        <td>
-                                            <small>
-                                                <a href="http://maven.apache.org/development-process.html">
-                                                    <img class="handle" src="../../images/none.png" alt="" />Development Process</a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td />
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <div align="center">
-                        <img VSPACE="2" HSPACE="4" border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle" />
-                    </div>
-                </td>
-                <td width="75%">
-                    <div id="bodycol">
-                        <div class="app">
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../resume.html"><img class="handle" src="../../images/none.png" alt=""></img>My Resume</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      		<b><a href="../../weblogs/joel/blog.html"><img class="handle" src="../../images/none.png" alt=""></img>Web Logs</a></b>
+      	
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  </td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="http://sourceforge.net/projects/cyclops-group"><img class="handle" src="../../images/none.png" alt=""></img>Project Summary</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  </td>
+    </tr>
+  
+    <tr>
+        <th>For Developers</th>
+    </tr>
+    <tr>
+        <td bgcolor="#EFEFEF">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../developers.html"><img class="handle" src="../../images/none.png" alt=""></img>Get Involved</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../howtos.html"><img class="handle" src="../../images/none.png" alt=""></img>Developer Howtos</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../weblogs/stories/blog.html"><img class="handle" src="../../images/none.png" alt=""></img>Stories Behind</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../download.html"><img class="handle" src="../../images/none.png" alt=""></img>Download and Release</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  </td>
+    </tr>
+  
+                    
+                    
+    <tr>
+        <th>Project Documentation</th>
+    </tr>
+    <tr>
+        <td bgcolor="#EFEFEF">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../index.html"><img class="handle" src="../../images/none.png" alt=""></img>About shopwindow</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+    	
+          
+    	
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../project-info.html"><img class="handle" src="../../images/collapsed.png" alt=""></img>Project Info</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+    	
+          
+    	
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="../../maven-reports.html"><img class="handle" src="../../images/collapsed.png" alt=""></img>Project Reports</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+</table>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img height="16" width="8" src="../../images/spacer.gif"></img></td>
+        <td>
+            <small>
+      	
+      	
+      		<a href="http://maven.apache.org/development-process.html"><img class="handle" src="../../images/none.png" alt=""></img>Development Process</a>
+      	
+            </small>
+        </td>
+    </tr>
+    
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+    
+</table>
+  </td>
+    </tr>
+  
+                </table>
+                  <div align="center"><p>
+                    <img VSPACE="2" HSPACE="4" border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle"></img><br></br>
+                    <a href="http://sourceforge.net"><img height="31" border="0" width="88" alt="SourceForge.net Logo" src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1"></img></a><br></br>
+                    <a href="http://maven.apache.org"><img border="0" src="../../images/logos/maven-feather.png"></img></a></p>
+                  </div>
+            </td>
+            <td width="75%">
+              <div id="bodycol">
+                
+                <div class="app">
 <p>
   <BloggerArchives> <a href='<$BlogArchiveLink$>'><$BlogArchiveName$></a> | </BloggerArchives>
   <!-- Link to the front page, from your archives -->
@@ -447,9 +768,9 @@
         <a href="<$BlogItemArchiveFileName$>#<$BlogItemNumber$>"><$BlogItemDateTime$></a>
     </small></p>
 </Blogger>
-                        </div>
-                    </div>
-                </td>
+                </div>
+              </div>
+            </td>
             <td width="5%">
                 <script src="../../language.js" language="javascript"></script>
                 <script language="javascript">
@@ -473,26 +794,18 @@ showLanguage('es', 'es', 'Spanish');
 tableEnd();
                 </script>
             </td>
-            </tr>
+          </tr>
         </table>
         <div id="footer">
-            <table border="0" style="width:100%" cellpadding="4" cellspacing="0">
-                <tr>
-                    <td align="center">
-                
-                  
-                    
-                      y2003, Cyclops Group Alliance
-                    
-                    
-                  
-                  
-                
-
-                
+          <table border="0" style="width:100%" cellpadding="4" cellspacing="0">
+            
+            <tr>
+              <td align="center">
+                <p>Copyright 2003, 2004 Cyclops Group Community. All rights reserved</p>
               </td>
-                </tr>
-            </table>
+            </tr>
+          </table>
         </div>
-    </body>
-</html>
+      </body>
+    </html>
+  

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Hosted Projects</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Hosted Projects">
+            <table>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>tornado</td>
+                        <td>
+                            <a href="projects/tornado">http://cyclops-group.sourceforge.net/projects/tornado</a>
+                        </td>
+                        <td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
+                    </tr>
+                    <tr>
+                        <td>amulets</td>
+                        <td>
+                            <a href="projects/amulets">http://cyclops-group.sourceforge.net/projects/amulets</a>
+                        </td>
+                        <td>Amulets are a set of maven plugins for the development of other projects.</td>
+                    </tr>
+                    <tr>
+                        <td>shopwindow</td>
+                        <td>
+                            <a href="http://cyclops-group.sourceforge.net">http://cyclops-groups.sourceforge.net</a>
+                        </td>
+                        <td>The project is this website itself.</td>
+                    </tr>
+                    <tr>
+                        <td>a4trim</td>
+                        <td>
+                            <a href="projects/a4trim">http://cyclops-group.sourceforge.net/projects/a4trim</a>
+                        </td>
+                        <td>A simplified content management system based on Apache Jakarta Turbine.</td>
+                    </tr>
+                    <tr>
+                        <td>healthfarm</td>
+                        <td>
+                            <a href="projects/healthfarm">http://cyclops-group.sourceforge.net/projects/healthfarm</a>
+                        </td>
+                        <td>A demo web application based on Tornado, to show how to develop on Tornado. It is only a demo application therefore most of functions are not implemented.</td>
+                    </tr>
+                    <tr>
+                        <td>dbdigger</td>
+                        <td>
+                            <a href="http://dbdigger.sourceforge.net">http://dbdigger.sourceforge.net</a>
+                        </td>
+                        <td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
+                    </tr>
+                    <tr>
+                        <td>albumbuilder</td>
+                        <td>
+                            <a href="http://albumbuilder.sourceforge.net">http://albumbuilder.sourceforge.net</a>
+                        </td>
+                        <td>A tool to generate static photo album web site from folders of images.</td>
+                    </tr>
+                </table>
+            </table>
+        </section>
+    </body>
+</document>
