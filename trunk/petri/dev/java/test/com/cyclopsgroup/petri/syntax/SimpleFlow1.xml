@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow-definition package="com.evavi.bpm2.syntax" name="SimpleFlow1" entrance="in" exit="out"
+	xmlns="http://www.evavi.com/technology/bpm" xmlns:java="http://www.evavi.com/technology/common/java">
+	<states>
+		<state id="in"/>
+		<state id="ready"/>
+		<state id="waiting"/>
+		<state id="denied"/>
+		<state id="approved"/>
+		<state id="out"/>
+	</states>
+	<transitions>
+		<transition>
+			<message-trigger message-name="msg">
+				<subject-message-type subject-type="com.evavi.bpm2.PurchaseOrder" action="order.create"/>
+			</message-trigger>
+			<guard>
+				<java:condition><![CDATA[
+                    msg.getSubject().getTotalAmount() > 10
+                ]]></java:condition>
+			</guard>
+			<from state="in"/>
+			<to state="ready"/>
+			<task>
+				<java:shell>
+					<java:import>com.evavi.bpm2.PurchaseOrder</java:import>
+					<java:import>com.evavi.bpm2.message.SubjectMessage</java:import>
+					<java:code><![CDATA[
+						PurchaseOrder order = (PurchaseOrder) ((SubjectMessage) msg).getSubject();
+						System.out.println("Case "+ workflowCase.getId() + " for " + order + " is created");
+                        workflowCase.getAttributes().put("subjectId", order.getId());
+                    ]]></java:code>
+				</java:shell>
+			</task>
+		</transition>
+		<transition>
+			<message-trigger message-name="msg">
+				<subject-message-type subject-type="com.evavi.bpm2.PurchaseOrder" action="order.submit"/>
+			</message-trigger>
+			<guard>
+				<java:condition><![CDATA[
+                    msg.getSubject().getId().equals(workflowCase.getAttributes().get("subjectId"))
+                ]]></java:condition>
+			</guard>
+			<from state="ready"/>
+			<to state="waiting"/>
+			<task>
+				<java:shell>
+					<java:code><![CDATA[
+                        System.out.println("abcccc");
+						System.out.println(workflowCase.getAttributes().get("subjectId"));
+                    ]]></java:code>
+				</java:shell>
+			</task>
+		</transition>
+	</transitions>
+	<transition>
+		<automatic-trigger/>
+		<from state="waiting"/>
+		<to state="approved"/>
+		<!--
+		<guard>
+			<java:condition>workflowCase.getAttributes().get("subjectId").length() > 3 </java:condition>
+		</guard>
+		-->
+		<task>
+			<java:shell>
+				<java:code> System.out.println("yeeeeeha"); </java:code>
+			</java:shell>
+		</task>
+	</transition>
+	<transition>
+		<documentation>If nobody cares about this waiting case for 3 days and 12 hours and 30 minutes, state of this case will be automatically changed to 
+			denied</documentation>
+		<timer-trigger day="3" hour="12" minute="30"/>
+		<from state="waiting"/>
+		<to state="denied"/>
+	</transition>
+	<transition input-policy="or">
+		<from state="denied"/>
+		<from state="approved"/>
+		<to state="out"/>
+		<task>
+			<java:shell>
+				<java:code>
+					System.out.println("finished");
+				</java:code>
+			</java:shell>
+		</task>
+	</transition>
+</flow-definition>
