@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+    <title>Maven</title>
+    <body>
+        <menu name="Overview">
+            <item name="Home" href="/index.html"/>
+            <item name="Stories Behind" href="/stories.html"/>
+            <item name="Web Logs" collapse="true" href="/weblogs/index.html">
+                <item name="Log1" href="/weblogs/log1.html"/>
+                <item name="Log2" href="/weblogs/log1.html"/>
+                <item name="Log3" href="/weblogs/log1.html"/>
+            </item>
+        </menu>
+        <menu name="Project Documentation">
+            <item name="Project Info" href="/project-info.html" collapse="true">
+                <item name="Mailing Lists" href="/mail-lists.html"/>
+                <item name="Project Team" href="/team-list.html"/>
+                <item name="Source Repository" href="/cvs-usage.html"/>
+                <item name="Issue Tracking" href="/issue-tracking.html"/>
+            </item>
+            <item name="SourceForge Summary" href="http://sourceforge.net/projects/cyclops-group/"/>
+        </menu>
+        <menu name="Hosted Projects">
+            <item name="tornado" href="/tornado/index.html"/>
+            <item name="dbdigger" href="http://dbdigger.sourceforge.net/index.html"/>
+            <item name="albumbuilder" href="http://albumbuilder.sourceforge.net/index.html"/>
+            <item name="a4trim" href="http://albumbuilder.sourceforge.net/a4trim/index.html"/>
+        </menu>
+    </body>
+</project>

@@ -1,0 +1,54 @@
+body, p, td, input, select, textarea {
+    font-family: Arial;
+    font-size: 9pt;
+    color: #336699;
+}
+body {
+    margin: 0px;
+}
+
+.section {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.app h4 {
+	 color: black;
+	 background-color: white;
+	 font-size: 11pt;
+}
+
+.a td {
+ 	background: #FFFFFF;
+}
+
+.b td {
+ 	background: #F2F7FC;
+}
+th {
+    background-color: #547DAB;
+    color: white;
+    text-indent: 5px;
+    text-align: left;
+}
+
+#source {
+	 background-color: #fff;
+	 color: #000;
+	 border-right: 1px solid #888; 
+	 border-left: 1px solid #888; 
+	 border-top: 1px solid #888; 
+	 border-bottom: 1px solid #888; 
+	 margin-right: 7px;
+	 margin-left: 7px;
+	 margin-top: 1em;
+}
+
+#source pre {
+	 margin-right: 7px;
+	 margin-left: 7px;
+ }
+
+a:link, a:visited {
+	color: #224466;
+}
