@@ -10,3 +10,4 @@ cruisecontrol.xml
 *.jpx
 *.library
 *.local
+*.oif
