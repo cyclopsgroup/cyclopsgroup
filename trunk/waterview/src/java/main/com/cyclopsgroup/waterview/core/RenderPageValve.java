@@ -147,7 +147,6 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             }
             catch (Exception e)
             {
-                e.printStackTrace();
                 logger.error("Page renderer [" + role + "] loading error", e);
             }
         }
