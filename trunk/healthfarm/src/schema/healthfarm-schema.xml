@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
+<database name="default">
+    <table name="c_hf_standards" javaName="Standard" description="Prescribed daily calorie standard">
+        <column name="standard_id" required="true" primaryKey="true" type="INTEGER" description="Primary Key"/>    
+        <column name="height_from" required="true" type="INTEGER" description="Height from, CM"/>
+        <column name="height_to" required="true" type="INTEGER" description="Height to, CM"/>
+        <column name="weight_from" required="true" type="INTEGER" description="Weight from, Pound"/>
+        <column name="weight_to" required="true" type="INTEGER" description="Weight to, Pound"/>
+        <column name="age_from" required="true" type="INTEGER" description="Age from, year"/>
+        <column name="age_to" required="true" type="INTEGER" description="Age to, year"/>
+        <column name="is_female" required="true" type="BIT" default="0" description="Gender"/>
+        <column name="daily_calorie" required="true" type="INTEGER" description="Supposed daily calorie value"/>
+    </table>
+    <table name="c_hr_userprofiles" javaName="UserProfile" description="Additional user profile">
+        <column name="profile_id" required="true" primaryKey="true" type="INTEGER" description="Primary Key"/>
+        <column name="user_id" required="true" type="INTEGER" description="Foreign key to user table"/>
+        <column name="birth_year" required="true" type="INTEGER" description="Year of birthday"/>
+        <column name="weight" required="true" type="INTEGER" description="Weight of this user"/>
+        <column name="height" required="true" type="INTEGER" description="Height of this person"/>
+        <column name="is_female" required="true" type="BIT" default="0" description="Gender"/>
+    </table>
+</database>
