@@ -51,11 +51,12 @@ public class PropertyTagRegistry extends TagRegistry
         }
         for (Iterator i = props.keySet().iterator(); i.hasNext();)
         {
-            String url = (String) i.next();
-            if (!url.endsWith(".url"))
+            String key = (String) i.next();
+            if (!key.endsWith(".url"))
             {
                 continue;
             }
+            String url = props.getProperty(key);
             String libraryName = StringUtils.chomp(url, ".url");
             if (props.containsKey(libraryName + ".class"))
             {
