@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:j="jelly:core" xmlns:v="jelly:velocity">
-    <goal name="cyclops:xdoc" description="Generate cyclops group project document">
+    <goal name="cyclops:xdoc" description="Generate cyclops group project document" prereqs="xdoc:init">
         <copy todir="${maven.docs.dest}">
             <fileset dir="${plugin.resources}/docs">
                 <include name="**/*.*"/>
@@ -12,9 +12,11 @@
             </fileset>
         </copy>
         <j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
-        <echo>Set the site template to ${newSite}</echo>
-        ${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', newSite)}
+        <j:set var="tempSite">${maven.cyclops.xdoc.tempjsl}</j:set>
+        <copy tofile="${basedir}/${tempSite}" file="${newSite}"/>
+        ${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', tempSite)}
         <attainGoal name="xdoc"/>
+        <delete file="${basedir}/${tempSite}"/>
     </goal>
     <goal name="cyclops:site" description="Generate the whole site for cyclops group projects">
         <attainGoal name="site"/>
