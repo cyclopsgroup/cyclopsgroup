@@ -193,7 +193,7 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros.impl;
-/** TODO Add javadoc for this class here
+/** Test plugin for testing
  * @author joeblack
  *
  * The class is created at 2004-1-6 11:59:47

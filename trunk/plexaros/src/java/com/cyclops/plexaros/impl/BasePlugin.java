@@ -229,7 +229,7 @@ public class BasePlugin extends BaseObject implements Plugin {
      * @return File object
      */
     public File getPluginHome() {
-        return (File) getProperties().get(PLUGIN_HOME);
+        return new File((String) getProperties().get(PLUGIN_HOME));
     }
     /** Override method getResource() of super class
      * @see com.cyclops.plexaros.Plugin#getResource(java.lang.String)

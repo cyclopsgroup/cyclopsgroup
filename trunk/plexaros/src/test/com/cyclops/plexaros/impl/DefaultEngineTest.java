@@ -193,12 +193,11 @@
  * any resulting litigation.
  */
 package com.cyclops.plexaros.impl;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
-
-import com.cyclops.plexaros.Engine;
-import com.cyclops.plexaros.Plugin;
 /** Test case for DefaultEngine
  * @author joeblack
  *
@@ -215,16 +214,12 @@ public class DefaultEngineTest extends TestCase {
     }
     /**Test for method init(Properties)
      */
-    public void testInit() {
+    public void testLoadPlugins() {
         DefaultEngine de = new DefaultEngine();
-        de.getProperties().put(Engine.ENGINE_HOME, "src/rttest/enginehome");
-        de.start();
-        Plugin[] plugins = de.getPlugins();
-        assertEquals(2, plugins.length);
-        Plugin p2 = de.getPlugin("test2");
-        assertNotNull(p2);
-        String[] ds = p2.getDependencyNames();
-        assertEquals(1, ds.length);
-        assertEquals("test1", ds[0]);
+        List names = new ArrayList();
+        names.add("test1");
+        names.add("test2");
+        List plugins = de.loadPlugins(new File("src/rttest/enginehome"), names);
+        assertEquals(2, plugins.size());
     }
 }

@@ -200,7 +200,7 @@ import java.util.List;
  *
  * The class is created at 2004-1-6 11:26:03
  */
-public class PluginMeta extends BaseObject {
+public class PluginDescriptor extends BaseObject {
     private List dependencies = new ArrayList();
     private String description;
     private String implementation;
