@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Gallery-June 2004</title>
+		<properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
+		<banner>/images/banners/members.jpg</banner>
+	</properties>
+	<body>
+		<section name="Pictures">
+			<table>
+				<tr>
+					<td>
+						<img src="DSCN5130_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5195_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5208_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5209_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5216_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5221_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5228_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5283_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5284_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN5285_512.jpg"/>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</body>
+</document>

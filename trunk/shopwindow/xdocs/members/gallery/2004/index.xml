@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Cyclops Group Home</title>
+		<properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
+		<banner>/images/banners/members.jpg</banner>
+	</properties>
+	<body>
+		<section name="Index">
+			<table>
+				<tr>
+					<td><a href="1/index.html">January</a></td>
+				</tr>
+				<tr>
+					<td><a href="2/index.html">February</a></td>
+				</tr>
+				<tr>
+					<td><a href="4/index.html">April</a></td>
+				</tr>
+				<tr>
+					<td><a href="5/index.html">May</a></td>
+				</tr>
+				<tr>
+					<td><a href="6/index.html">June</a></td>
+				</tr>
+				<tr>
+					<td><a href="7/index.html">July</a></td>
+				</tr>
+				<tr>
+					<td><a href="9/index.html">September</a></td>
+				</tr>
+				<tr>
+					<td><a href="10/index.html">October</a></td>
+				</tr>
+				<tr>
+					<td><a href="11/index.html">November</a></td>
+				</tr>
+				<tr>
+					<td><a href="12/index.html">December</a></td>
+				</tr>
+			</table>
+		</section>
+	</body>
+</document>

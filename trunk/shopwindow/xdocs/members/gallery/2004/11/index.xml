@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Gallery-Nov 2004</title>
+		<properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
+		<banner>/images/banners/members.jpg</banner>
+	</properties>
+	<body>
+		<section name="Pictures">
+			<table>
+				<tr>
+					<td>
+						<img src="DSCN6081_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN6102_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN6131_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN6148_512.jpg"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="DSCN6213_512.jpg"/>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</body>
+</document>
