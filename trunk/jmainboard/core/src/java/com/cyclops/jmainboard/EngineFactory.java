@@ -209,6 +209,8 @@ public abstract class EngineFactory {
     /** Value for engine factory in context */
     public static final String ENGINE_FACTORY_IMPL =
         "com.cyclops.jmainboard.impl.DefaultEngineFactory";
+    /** JVM runtime folder */
+    public static final String BASEDIR = "basedir";
     /** Method getInstance() in class EngineFactory
      * @return EngineFactory instance
      * @throws Exception for creation
@@ -228,6 +230,7 @@ public abstract class EngineFactory {
         p.setProperty(ENGINE_FACTORY, ENGINE_FACTORY_IMPL);
         p.setProperty(Engine.ENGINE, Engine.ENGINE_IMPL);
         p.setProperty(Engine.ENGINE_HOME, new File("").getAbsolutePath());
+        p.setProperty(BASEDIR, new File("").getAbsolutePath());
         p.putAll(System.getProperties());
         if (props != null) {
             p.putAll(props);
