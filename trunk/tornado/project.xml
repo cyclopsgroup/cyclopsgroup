@@ -24,6 +24,14 @@
         <developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:tornado</developerConnection>
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/tornado</url>
     </repository>
+    <mailingLists>
+        <mailingList>
+            <name>Cyclops Group Member</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
+        </mailingList>
+    </mailingLists>
     <developers>
         <developer>
             <name>Joel Guo</name>

@@ -4,11 +4,18 @@ body {
 	margin-right: 0px;
 	margin-bottom: 0px;
 }
-body,td,th {
+body, td, th {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #003366;
 }
+th {
+	color: white;
+	background-color:#003366;
+	text-align: left;
+	font-weight: bold;
+}
+
 input, select, option, textarea {
 	font-family: Courier New, Courier, mono;
 	font-size: 8pt;
@@ -48,10 +55,4 @@ tr.a {
 }
 tr.b {
 	background-color: white;
-}
-th {
-	color: white;
-	background-color:#003366;
-	text-align: left;
-	font-weight: bold;
 }
