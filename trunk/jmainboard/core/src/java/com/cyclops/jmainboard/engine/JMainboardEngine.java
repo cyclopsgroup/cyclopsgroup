@@ -228,6 +228,7 @@ public class JMainboardEngine implements Engine {
      * Initalize the engine
      */
     public void init() {
+        // preload components before really starting them
         HashMap rawComponents = new HashMap();
         for (Iterator i = componentLoaders.iterator(); i.hasNext();) {
             ComponentLoader componentLoader = (ComponentLoader) i.next();
