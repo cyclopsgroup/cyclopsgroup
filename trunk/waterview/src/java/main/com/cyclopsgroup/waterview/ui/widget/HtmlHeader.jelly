@@ -18,6 +18,6 @@
  -->
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-	<title>$page</title>
+	<title>${page}</title>
 	<link ref="stylesheet" href="${content.getURL('style/default.css')}"/>
 </head>

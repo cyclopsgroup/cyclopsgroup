@@ -16,31 +16,35 @@
  *  limitations under the License.
  * =========================================================================
  -->
-<html xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal">
-    <head>
-        <p:include category="widget" page="HtmlHeader.x"/>
-    </head>
-    <body>
-        <table width="100%">
-            <tr>
-                <td colspan="3"><p:component category="widget" page="Banner.x"/></td>
-            </tr>
-            <tr>
-                <td width="20%" valign="top">
-                    <p:component category="navigator" page="${page}"/>
-                </td>
-                <td width="65%" valign="top">
-                    <p:component category="body" page="${page}"/>
-                </td>
-                <td width="15%" valign="top">
-                    <p:component category="reference" page="${page}"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <p:component category="widget" page="Footer.x"/>
-                </td>
-            </tr>
-        </table>
-    </body>
-</html>
+<p:page xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal" name="Default" package="com.cyclopsgroup.waterview.ui.layout">
+    <html>
+        <head>
+            <p:include category="widget" page="HtmlHeader.jelly"/>
+        </head>
+        <body>
+            <table width="100%">
+                <tr>
+                    <td colspan="3">
+                        <p:component category="widget" page="Banner.jelly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="20%" valign="top">
+                        <p:component category="navigator" page="${page}"/>
+                    </td>
+                    <td width="65%" valign="top">
+                        <p:component category="body" page="${page}"/>
+                    </td>
+                    <td width="15%" valign="top">
+                        <p:component category="reference" page="${page}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <p:component category="widget" page="Footer.jelly"/>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</p:page>

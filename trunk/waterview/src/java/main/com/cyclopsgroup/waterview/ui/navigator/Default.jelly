@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="navigator" />
+<p:page xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal" name="Default" package="com.cyclopsgroup.waterview.ui.layout">
+    <div id="body">
+        <h2>${rb.welcom}</h2>
+    </div>
+</p:page>

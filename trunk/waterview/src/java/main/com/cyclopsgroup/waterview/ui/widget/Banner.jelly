@@ -18,7 +18,7 @@
  -->
 <table width="100%" xmlns:f="http://www.cyclopsgroup.org/technology/waterview/form">
     <tr>
-        <td>&nbsp;</td>
+        <td> </td>
         <f:form method="get" action="$link.setPage('portal/SearchResult.jelly')">
             <td>
                 <f:input type="text" name="p" title="${rb.keyword_title}">

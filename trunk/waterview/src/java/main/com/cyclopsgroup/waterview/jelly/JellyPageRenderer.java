@@ -5,6 +5,7 @@ package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -183,13 +184,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
             throws Exception
     {
         Context uic = runtime.getUIContext();
-        SmartJellyContext jc = (SmartJellyContext) uic.get("jellyContext");
-        if (jc == null)
-        {
-            jc = new SmartJellyContext(initialJellyContext);
-            jc.addAllVariables(uic);
-            uic.put("jellyContext", jc);
-        }
+
         XMLOutput output = (XMLOutput) uic.get("jellyOutput");
         if (output == null)
         {
@@ -197,20 +192,42 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
                     .getOutputStream());
             uic.put("jellyOutput", output);
         }
+
+        JellyContext oldJellyContext = (JellyContext) uic.get("jellyContext");
+        JellyContext jc = null;
+        if (oldJellyContext == null)
+        {
+            jc = new JellyContext(initialJellyContext);
+            for (Iterator i = uic.keys(); i.hasNext();)
+            {
+                String name = (String) i.next();
+                jc.setVariable(name, uic.get(name));
+            }
+        }
+        else
+        {
+            jc = new JellyContext(oldJellyContext);
+        }
+
         String scriptPath = getScriptPath(packageName, module);
         Script script = getScript(scriptPath);
-        try
+        synchronized (script)
         {
-            script.run(jc, output);
-            output.flush();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            jc.clear();
+            uic.put("jellyContext", jc);
+            try
+            {
+                script.run(jc, output);
+                output.flush();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                uic.put("jellyContext", oldJellyContext);
+                jc.getVariables().clear();
+            }
         }
     }
 }
