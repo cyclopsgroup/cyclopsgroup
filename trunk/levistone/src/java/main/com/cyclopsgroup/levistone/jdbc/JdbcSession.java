@@ -17,7 +17,6 @@
 package com.cyclopsgroup.levistone.jdbc;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,30 +60,6 @@ public class JdbcSession extends AbstractConnectionSession
         {
             QueryResult queryResult = (QueryResult) i.next();
             queryResult.close();
-        }
-    }
-
-    /**
-     * TODO Add javadoc for this method
-     *
-     * 
-     */
-    public void commit()
-    {
-        closeQueryResults();
-        closed = true;
-        try
-        {
-            if (getConnection().isClosed())
-            {
-                return;
-            }
-            getConnection().commit();
-            getConnection().close();
-        }
-        catch (SQLException e)
-        {
-            logger.warn("Can not commit transaction", e);
         }
     }
 
@@ -211,16 +186,6 @@ public class JdbcSession extends AbstractConnectionSession
     }
 
     /**
-     * Override method isClosed in super class of JdbcSession
-     * 
-     * @see com.cyclopsgroup.levistone.Session#isClosed()
-     */
-    public boolean isClosed()
-    {
-        return closed;
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.levistone.Session#lookup(java.lang.Class, java.lang.Object)
@@ -229,28 +194,6 @@ public class JdbcSession extends AbstractConnectionSession
     {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    /**
-     * TODO Add javadoc for this method
-     */
-    public void rollback()
-    {
-        closeQueryResults();
-        closed = true;
-        try
-        {
-            if (getConnection().isClosed())
-            {
-                return;
-            }
-            getConnection().rollback();
-            getConnection().close();
-        }
-        catch (SQLException e)
-        {
-            logger.warn("Can not roll back the transaction");
-        }
     }
 
     /**

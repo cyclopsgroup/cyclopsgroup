@@ -17,12 +17,14 @@
 package com.cyclopsgroup.levistone.spi;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
 import com.cyclopsgroup.levistone.QueryException;
 import com.cyclopsgroup.levistone.QueryResult;
@@ -36,6 +38,9 @@ import com.cyclopsgroup.levistone.query.Query;
  */
 public abstract class AbstractSession implements Session
 {
+
+    boolean closed = false;
+
     private String id;
 
     /** Logger */
@@ -56,8 +61,8 @@ public abstract class AbstractSession implements Session
      * @param name
      * @param id Id of this session
      */
-    protected AbstractSession(PersistenceManager persistenceManager, String name,
-            String id)
+    protected AbstractSession(PersistenceManager persistenceManager,
+            String name, String id)
     {
         this.persistenceManager = persistenceManager;
         this.name = name;
@@ -73,6 +78,45 @@ public abstract class AbstractSession implements Session
     {
         queryResults.add(queryResult);
     }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#close()
+     */
+    public void close() throws PersistenceException
+    {
+        if (closed)
+        {
+            return;
+        }
+        try
+        {
+            for (Iterator i = queryResults.iterator(); i.hasNext();)
+            {
+                QueryResult queryResult = (QueryResult) i.next();
+                if (!queryResult.isClosed())
+                {
+                    queryResult.close();
+                }
+            }
+            doClose();
+        }
+        catch (PersistenceException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new PersistenceException(e);
+        }
+        finally
+        {
+            closed = true;
+        }
+    }
+
+    protected abstract void doClose() throws Exception;
 
     /**
      * Override or implement method of parent class or interface
@@ -106,6 +150,15 @@ public abstract class AbstractSession implements Session
         return persistenceManager;
     }
 
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#isClosed()
+     */
+    public boolean isClosed()
+    {
+        return closed;
+    }
 
     /**
      * Override or implement method of parent class or interface

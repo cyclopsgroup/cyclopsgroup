@@ -41,6 +41,19 @@ public interface Session
     Session[] EMPTY_ARRAY = new Session[0];
 
     /**
+     * Close session
+     * @throws PersistenceException throw it out
+     */
+    void close() throws PersistenceException;
+
+    /**
+     * Commit this session
+     *
+     * @throws PersistenceException Throw it out
+     */
+    void commit() throws PersistenceException;
+
+    /**
      * Create new entity object
      * @param type Type of entity
      *
@@ -187,6 +200,13 @@ public interface Session
      * @throws QueryException
      */
     Object lookup(Query query) throws QueryException;
+
+    /**
+     * Roll back this session
+     * 
+     * @throws PersistenceException Throw it out
+     */
+    void rollback() throws PersistenceException;
 
     /**
      * Save created or changed object into persistence

@@ -29,14 +29,6 @@ public interface PersistenceManager
     String ROLE = PersistenceManager.class.getName();
 
     /**
-     * Method cancelSession() in class PersistenceManager
-     * 
-     * @param session
-     * @throws PersistenceException
-     */
-    void cancelSession(Session session) throws PersistenceException;
-
-    /**
      * Method closeSession() in class PersistenceManager
      * 
      * @param session

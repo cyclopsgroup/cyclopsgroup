@@ -34,8 +34,8 @@ import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ToquePersistenceManager extends AbstractPersistenceManager implements
-        Serviceable
+public class ToquePersistenceManager extends AbstractPersistenceManager
+        implements Serviceable
 {
     private DataSourceManager dataSourceManager;
 
@@ -44,29 +44,10 @@ public class ToquePersistenceManager extends AbstractPersistenceManager implemen
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
-     */
-    protected void doCancelSession(Session session) throws Exception
-    {
-        TorqueSession ses = (TorqueSession) session;
-        ses.setClosed(true);
-        Connection dbcon = ses.getConnection();
-        dbcon.rollback();
-        dbcon.close();
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCloseSession(Session session) throws Exception
     {
-        TorqueSession ses = (TorqueSession) session;
-        ses.setClosed(true);
-        Connection dbcon = ses.getConnection();
-        dbcon.commit();
-        dbcon.close();
     }
 
     /**

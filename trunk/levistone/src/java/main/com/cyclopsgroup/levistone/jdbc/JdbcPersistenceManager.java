@@ -27,25 +27,12 @@ import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
 public class JdbcPersistenceManager extends AbstractPersistenceManager
 {
     /**
-     * Override method doCancelSession in super class of JdbcPersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
-     */
-    protected void doCancelSession(Session session) throws Exception
-    {
-        JdbcSession js = (JdbcSession) session;
-        js.rollback();
-    }
-
-    /**
      * Override method doCloseSession in super class of JdbcPersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
      */
     protected void doCloseSession(Session session) throws Exception
     {
-        JdbcSession js = (JdbcSession) session;
-        js.commit();
     }
 
     /**
@@ -56,7 +43,8 @@ public class JdbcPersistenceManager extends AbstractPersistenceManager
     protected Session doOpenSession(String persistenceName, String sessionId)
             throws Exception
     {
-        // TODO Auto-generated method stub
+        /*return new JdbcSession(this, persistenceName, sessionId,
+         this.g);*/
         return null;
     }
 }

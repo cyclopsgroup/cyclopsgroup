@@ -40,18 +40,6 @@ public class HibernatePersistenceManager extends AbstractPersistenceManager
     private SessionFactory sessionFactory;
 
     /**
-     * Override method doCancelSession in super class of HibernatePersistenceManager
-     * 
-     * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCancelSession(com.cyclopsgroup.levistone.Session)
-     */
-    protected void doCancelSession(Session session) throws Exception
-    {
-        HibernateSession ses = (HibernateSession) session;
-        ses.getConnection().rollback();
-        ses.getConnection().close();
-    }
-
-    /**
      * Override method doCloseSession in super class of HibernatePersistenceManager
      * 
      * @see com.cyclopsgroup.levistone.spi.AbstractPersistenceManager#doCloseSession(com.cyclopsgroup.levistone.Session)
@@ -59,7 +47,6 @@ public class HibernatePersistenceManager extends AbstractPersistenceManager
     protected void doCloseSession(Session session) throws Exception
     {
         HibernateSession ses = (HibernateSession) session;
-        ses.getConnection().commit();
         ses.getConnection().close();
     }
 

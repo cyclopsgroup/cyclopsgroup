@@ -17,7 +17,9 @@
 package com.cyclopsgroup.levistone.spi;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
+import com.cyclopsgroup.levistone.PersistenceException;
 import com.cyclopsgroup.levistone.PersistenceManager;
 
 /**
@@ -45,6 +47,36 @@ public abstract class AbstractConnectionSession extends AbstractSession
     }
 
     /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#commit()
+     */
+    public void commit() throws PersistenceException
+    {
+        try
+        {
+            getConnection().commit();
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.spi.AbstractSession#doClose()
+     */
+    protected void doClose() throws Exception
+    {
+        if (!getConnection().isClosed())
+        {
+            getConnection().close();
+        }
+    }
+
+    /**
      * Get associated db connection
      *
      * @return DBConnection object
@@ -52,5 +84,22 @@ public abstract class AbstractConnectionSession extends AbstractSession
     public Connection getConnection()
     {
         return dbcon;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.levistone.Session#rollback()
+     */
+    public void rollback() throws PersistenceException
+    {
+        try
+        {
+            getConnection().rollback();
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 }
