@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>cyclops-a4trim</name>
     <id>a4trim</id>
-    <currentVersion>1.0-b2-SNAPSHOT</currentVersion>
+    <currentVersion>1.0-b1</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://cyclops-group.sourceforge.net</url>
@@ -32,22 +32,14 @@
     </mailingLists>
     <developers>
         <developer>
-            <name>Joel Guo</name>
-            <id>joel</id>
-            <email>joeblack.guo@vtradex.com</email>
-            <organization>vTradEx Technology</organization>
+            <name>Jiaqi Guo</name>
+            <id>jiaqi</id>
+            <email>g-cyclops@users.sourceforge.net</email>
             <roles>
-                <role>Developer</role>
+                <role>Architect</role>
+                <role>Java Developer</role>
             </roles>
-        </developer>
-        <developer>
-            <name>Tom Chen</name>
-            <id>tom</id>
-            <email>tom.chen@jftech</email>
-            <organization>J.F. Tech</organization>
-            <roles>
-                <role>Observer</role>
-            </roles>
+            <timezone>-8</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -57,6 +49,17 @@
             <roles>
                 <role>Observer</role>
             </roles>
+            <timezone>-8</timezone>
+        </developer>
+        <developer>
+            <name>Tom Chen</name>
+            <email>tom@jftech.com</email>
+            <id>tom</id>
+            <organization>J.F.Tech</organization>
+            <roles>
+                <role>Observer</role>
+            </roles>
+            <timezone>-8</timezone>
         </developer>
     </developers>
     <dependencies>
