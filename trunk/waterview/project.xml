@@ -114,14 +114,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>gearset</groupId>
-            <artifactId>gearset</artifactId>
-            <version>20040921.034303</version>
-            <jar>gearset-20040921.034303.jar</jar>
-            <type>jar</type>
-            <properties/>
-        </dependency>
-        <dependency>
             <groupId>jmx</groupId>
             <artifactId>jmxri</artifactId>
             <version>1.2.1</version>
@@ -159,6 +151,14 @@
             <artifactId>servlet</artifactId>
             <version>2.3</version>
             <jar>servlet-2.3.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.4-rc1</version>
+            <jar>velocity-1.4-rc1.jar</jar>
             <type>jar</type>
             <properties/>
         </dependency>
