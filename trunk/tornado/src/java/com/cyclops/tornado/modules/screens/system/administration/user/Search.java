@@ -217,7 +217,7 @@ public class Search extends Screen {
         ctx.put("keyword", keyword);
         boolean includingDeleted =
             params.getBoolean("including_deleted", false);
-        ctx.put("includingDeleted", Boolean.valueOf(includingDeleted));
+        ctx.put("includingDeleted", new Boolean(includingDeleted));
         if (StringUtils.isEmpty(userName) && StringUtils.isEmpty(keyword)) {
             data.setMessage("Please input search hint");
             return;
