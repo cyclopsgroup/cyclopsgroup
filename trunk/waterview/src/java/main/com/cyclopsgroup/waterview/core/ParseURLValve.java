@@ -34,7 +34,6 @@ import com.cyclopsgroup.waterview.Valve;
  */
 public class ParseURLValve extends Valve implements Configurable
 {
-
     private String defaultPage;
 
     private HashSet pageExtensions;

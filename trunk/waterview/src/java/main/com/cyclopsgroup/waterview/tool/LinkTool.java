@@ -39,6 +39,8 @@ public class LinkTool extends BaseUITool
 
     private String currentPath;
 
+    private String pageSeparator;
+
     private StringBuffer path;
 
     private StringBuffer queryString;
@@ -68,7 +70,7 @@ public class LinkTool extends BaseUITool
         }
         else
         {
-            path.append('|').append(module);
+            path.append(pageSeparator).append(module);
         }
         return this;
     }
