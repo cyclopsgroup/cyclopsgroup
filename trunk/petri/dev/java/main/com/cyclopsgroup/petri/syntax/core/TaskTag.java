@@ -12,20 +12,30 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.petri.definition.Context;
+import com.cyclopsgroup.gearset.beans.Context;
+import com.cyclopsgroup.gearset.beans.Executable;
+import com.cyclopsgroup.gearset.xml.ExecutableSensible;
+import com.cyclopsgroup.gearset.xml.SyntaxUtils;
 import com.cyclopsgroup.petri.definition.Task;
-import com.evavi.common.syntax.Executable;
-import com.evavi.common.syntax.SyntaxUtils;
-import com.evavi.common.syntax.core.ExecutableReceivable;
 
 /**
  * task tag
  * 
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
-public class TaskTag extends TagSupport implements ExecutableReceivable, Task
+public class TaskTag extends TagSupport implements ExecutableSensible, Task
 {
     private Executable executable;
+
+    /**
+     * Override method acceptExecutable in super class of TaskTag
+     * 
+     * @see com.cyclopsgroup.gearset.xml.ExecutableSensible#acceptExecutable(com.cyclopsgroup.gearset.beans.Executable)
+     */
+    public void acceptExecutable(Executable e)
+    {
+        executable = e;
+    }
 
     /**
      * Override method doTag() in super class
@@ -48,20 +58,10 @@ public class TaskTag extends TagSupport implements ExecutableReceivable, Task
     /**
      * Override method execute in super class of TaskTag
      * 
-     * @see com.cyclopsgroup.petri.definition.Task#execute(com.cyclopsgroup.petri.definition.Context)
+     * @see com.cyclopsgroup.petri.definition.Task#execute(com.cyclopsgroup.gearset.beans.Context)
      */
     public void execute(Context ctx) throws Exception
     {
-        executable.execute(new CommonContextAdapter(ctx));
-    }
-
-    /**
-     * Override method receiveExecutable() in super class
-     * 
-     * @see com.evavi.common.syntax.core.ExecutableReceivable#receiveExecutable(com.evavi.common.syntax.Executable)
-     */
-    public void receiveExecutable(Executable e)
-    {
-        executable = e;
+        executable.execute(ctx);
     }
 }

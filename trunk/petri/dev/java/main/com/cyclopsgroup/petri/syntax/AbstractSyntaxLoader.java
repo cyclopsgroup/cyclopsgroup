@@ -14,7 +14,7 @@ import java.util.Hashtable;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.evavi.common.SimpleLogEnabled;
+import com.cyclopsgroup.gearset.beans.SimpleLogEnabled;
 
 /**
  * Base class for syntax loader
@@ -36,10 +36,8 @@ public abstract class AbstractSyntaxLoader extends SimpleLogEnabled
         /**
          * Constructor of class Entry
          * 
-         * @param modelObject
-         *                   Model object
-         * @param lastModifiedTimestamp
-         *                   Last modified time of resource
+         * @param modelObject Model object
+         * @param lastModifiedTimestamp Last modified time of resource
          */
         private Entry(Object modelObject, long lastModifiedTimestamp)
         {
@@ -88,6 +86,11 @@ public abstract class AbstractSyntaxLoader extends SimpleLogEnabled
     public Object getModel(String name)
     {
         URL resource = getResource(name);
+        if (resource == null)
+        {
+            throw new NullPointerException("Resource for flow definition "
+                    + name + " can not be found");
+        }
         Object ret = null;
         File resourceFile = new File(resource.getPath());
         if (cachedEntries.containsKey(name) && resourceFile.isFile())
@@ -119,8 +122,7 @@ public abstract class AbstractSyntaxLoader extends SimpleLogEnabled
     /**
      * Get resource of loaded url
      * 
-     * @param name
-     *                   Name of object requested
+     * @param name Name of object requested
      * @return URL of resource
      */
     public abstract URL getResource(String name);

@@ -7,21 +7,21 @@
  */
 package com.cyclopsgroup.petri.engine;
 
-import com.cyclopsgroup.petri.definition.Context;
+import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.petri.persistence.PersistenceManager;
 
 /**
  * TODO Add java doc for this class
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
 public interface TransitionJob
 {
-	/**
-	 * Method run() in class TransitionJob
-	 *
-	 * @param context
-	 * @param persistenceManager
-	 */
-	void run(Context context, PersistenceManager persistenceManager);
+    /**
+     * Method run() in class TransitionJob
+     * 
+     * @param context
+     * @param persistenceManager
+     */
+    void run(Context context, PersistenceManager persistenceManager);
 }

@@ -15,68 +15,70 @@ import com.cyclopsgroup.petri.definition.FlowDefinition;
 
 /**
  * Flow definition loader
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
 public class FlowDefinitionLoader extends AbstractSyntaxLoader
 {
-	private static final FlowDefinitionLoader ONLY_INSTANCE = new FlowDefinitionLoader();
+    private static final FlowDefinitionLoader ONLY_INSTANCE = new FlowDefinitionLoader();
 
-	/**
-	 * Method getInstance() in class FlowDefinitionLoader
-	 *
-	 * @return
-	 */
-	public static final FlowDefinitionLoader getInstance()
-	{
-		return ONLY_INSTANCE;
-	}
+    /**
+     * Method getInstance() in class FlowDefinitionLoader
+     * 
+     * @return
+     */
+    public static final FlowDefinitionLoader getInstance()
+    {
+        return ONLY_INSTANCE;
+    }
 
-	private FlowDefinitionLoader()
-	{
+    private FlowDefinitionLoader()
+    {
 
-	}
+    }
 
-	/**
-	 * Override method createEmptyContext() in super class
-	 *
-	 * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#createEmptyContext()
-	 */
-	protected JellyContext createEmptyContext()
-	{
-		return new FlowDefinitionTagRegistry().createJellyContext();
-	}
+    /**
+     * Override method createEmptyContext() in super class
+     * 
+     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#createEmptyContext()
+     */
+    protected JellyContext createEmptyContext()
+    {
+        JellyContext ret = new JellyContext();
+        new FlowDefinitionTagRegistry().registerTagLibraries(ret);
+        return ret;
+    }
 
-	/**
-	 * Method getFlowDefinition() in class FlowDefinitionLoader
-	 *
-	 * @param name
-	 * @return
-	 */
-	public FlowDefinition getFlowDefinition(String name)
-	{
-		return (FlowDefinition) getModel(name);
-	}
+    /**
+     * Method getFlowDefinition() in class FlowDefinitionLoader
+     * 
+     * @param name
+     * @return
+     */
+    public FlowDefinition getFlowDefinition(String name)
+    {
+        return (FlowDefinition) getModel(name);
+    }
 
-	/**
-	 * Override method getResource() in super class
-	 *
-	 * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResource(java.lang.String)
-	 */
-	public URL getResource(String name)
-	{
-		String path = name.replace('.', '/');
-		path += ".xml";
-		return getClass().getClassLoader().getResource(path);
-	}
+    /**
+     * Override method getResource() in super class
+     * 
+     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResource(java.lang.String)
+     */
+    public URL getResource(String name)
+    {
+        String path = name.replace('.', '/');
+        path += ".xml";
+        return getClass().getClassLoader().getResource(path);
+    }
 
-	/**
-	 * Override method getResultKey() in super class
-	 *
-	 * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResultKey()
-	 */
-	protected String getResultKey()
-	{
-		return "result";
-	}
+    /**
+     * Override method getResultKey() in super class
+     * 
+     * @see com.cyclopsgroup.petri.syntax.AbstractSyntaxLoader#getResultKey()
+     */
+    protected String getResultKey()
+    {
+        return "result";
+    }
 }

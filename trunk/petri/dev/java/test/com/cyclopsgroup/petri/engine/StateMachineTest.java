@@ -31,7 +31,7 @@ public class StateMachineTest extends TestCase
 	public void testReceiveMessage() throws Exception
 	{
 		FlowDefinition fd = FlowDefinitionLoader.getInstance()
-				.getFlowDefinition("com.evavi.bpm2.syntax.SimpleFlow1");
+				.getFlowDefinition("com.cyclopsgroup.petri.syntax.SimpleFlow1");
 		MemoryPersistenceManager mpm = new MemoryPersistenceManager();
 		StateMachine sm = new StateMachine(fd, mpm, false);
 		PurchaseOrder po1 = new PurchaseOrder("aaa", 11);

@@ -7,14 +7,27 @@
  */
 package com.cyclopsgroup.petri.syntax.core;
 
-import com.evavi.common.syntax.core.DummyTag;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.TagSupport;
+import org.apache.commons.jelly.XMLOutput;
 
 /**
  * Empty tag
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
-public class TransitionsTag extends DummyTag
+public class TransitionsTag extends TagSupport
 {
 
+    /**
+     * Override method doTag in super class of TransitionsTag
+     * 
+     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException
+    {
+        invokeBody(output);
+    }
 }

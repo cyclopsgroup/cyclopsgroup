@@ -26,7 +26,7 @@ public class FlowDefinitionLoaderTest extends TestCase
 	public void testGetDefinitionLoader()
 	{
 		FlowDefinition fd = FlowDefinitionLoader.getInstance()
-				.getFlowDefinition("com.evavi.bpm2.syntax.SimpleFlow1");
+				.getFlowDefinition("com.cyclopsgroup.petri.syntax.SimpleFlow1");
 		System.out.println(fd);
 	}
 }

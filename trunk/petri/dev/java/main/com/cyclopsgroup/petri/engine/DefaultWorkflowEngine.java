@@ -44,8 +44,7 @@ public class DefaultWorkflowEngine implements WorkflowEngine
         StateMachine stateMachine = new StateMachine(flowDefinition,
                 persistenceManager, asynchronous);
         stateMachines.put(flowDefinition.getId(), stateMachine);
-        stateMachine.getInitialContext().getContent().put("workflowEngine",
-                this);
+        stateMachine.getInitialContext().getMap().put("workflowEngine", this);
     }
 
     /**
@@ -94,8 +93,7 @@ public class DefaultWorkflowEngine implements WorkflowEngine
     /**
      * Setter method for property asynchronous
      * 
-     * @param isAsynchronous
-     *                   The asynchronous to set.
+     * @param isAsynchronous The asynchronous to set.
      */
     public void setAsynchronous(boolean isAsynchronous)
     {

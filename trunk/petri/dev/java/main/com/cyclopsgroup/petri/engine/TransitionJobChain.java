@@ -10,8 +10,8 @@ package com.cyclopsgroup.petri.engine;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.petri.definition.AutomaticTrigger;
-import com.cyclopsgroup.petri.definition.Context;
 import com.cyclopsgroup.petri.definition.FlowDefinition;
 import com.cyclopsgroup.petri.definition.State;
 import com.cyclopsgroup.petri.definition.Transition;
@@ -32,8 +32,7 @@ public class TransitionJobChain
         /**
          * Constructor of class NewJob
          * 
-         * @param t
-         *                   Transition
+         * @param t Transition
          */
         private NewJob(Transition t)
         {
@@ -43,7 +42,7 @@ public class TransitionJobChain
         /**
          * Override method run in super class of NewJob
          * 
-         * @see com.cyclopsgroup.petri.engine.TransitionJob#run(com.cyclopsgroup.petri.definition.Context, com.cyclopsgroup.petri.persistence.PersistenceManager)
+         * @see com.cyclopsgroup.petri.engine.TransitionJob#run(com.cyclopsgroup.gearset.beans.Context, com.cyclopsgroup.petri.persistence.PersistenceManager)
          */
         public void run(Context context, PersistenceManager persistenceManager)
         {

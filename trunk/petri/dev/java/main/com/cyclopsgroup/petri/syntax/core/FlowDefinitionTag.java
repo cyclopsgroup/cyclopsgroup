@@ -12,11 +12,11 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.gearset.xml.RichTagSupport;
+import com.cyclopsgroup.gearset.xml.SyntaxUtils;
 import com.cyclopsgroup.petri.definition.AutomaticTrigger;
 import com.cyclopsgroup.petri.definition.MessageTrigger;
 import com.cyclopsgroup.petri.definition.Transition;
-import com.evavi.common.syntax.RichTagSupport;
-import com.evavi.common.syntax.SyntaxUtils;
 
 /**
  * flow-definition tag

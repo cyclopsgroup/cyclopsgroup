@@ -12,18 +12,18 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.petri.definition.Context;
+import com.cyclopsgroup.gearset.beans.Condition;
+import com.cyclopsgroup.gearset.beans.Context;
+import com.cyclopsgroup.gearset.xml.ConditionSensible;
+import com.cyclopsgroup.gearset.xml.SyntaxUtils;
 import com.cyclopsgroup.petri.definition.Guard;
-import com.evavi.common.syntax.Condition;
-import com.evavi.common.syntax.SyntaxUtils;
-import com.evavi.common.syntax.core.ConditionReceivable;
 
 /**
  * Guard tag
  * 
  * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
-public class GuardTag extends TagSupport implements Guard, ConditionReceivable
+public class GuardTag extends TagSupport implements Guard, ConditionSensible
 {
     private Condition condition;
 
@@ -47,19 +47,19 @@ public class GuardTag extends TagSupport implements Guard, ConditionReceivable
     /**
      * Override method evaluate in super class of GuardTag
      * 
-     * @see com.cyclopsgroup.petri.definition.Guard#evaluate(com.cyclopsgroup.petri.definition.Context)
+     * @see com.cyclopsgroup.petri.definition.Guard#evaluate(com.cyclopsgroup.gearset.beans.Context)
      */
     public boolean evaluate(Context ctx) throws Exception
     {
-        return condition.check(new CommonContextAdapter(ctx));
+        return condition.check(ctx);
     }
 
     /**
-     * Override method receiveCondition() in super class
+     * Override method acceptCondition in super class of GuardTag
      * 
-     * @see com.evavi.common.syntax.core.ConditionReceivable#receiveCondition(com.evavi.common.syntax.Condition)
+     * @see com.cyclopsgroup.gearset.xml.ConditionSensible#acceptCondition(com.cyclopsgroup.gearset.beans.Condition)
      */
-    public void receiveCondition(Condition c)
+    public void acceptCondition(Condition c)
     {
         condition = c;
     }

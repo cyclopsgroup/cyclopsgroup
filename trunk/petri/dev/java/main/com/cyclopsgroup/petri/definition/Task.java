@@ -7,18 +7,20 @@
  */
 package com.cyclopsgroup.petri.definition;
 
+import com.cyclopsgroup.gearset.beans.Context;
+
 /**
  * Task which is attached to transition
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
 public interface Task
 {
-	/**
-	 * Execute the task
-	 *
-	 * @param context Runtime context
-	 * @throws Exception Just throw it out
-	 */
-	void execute(Context context) throws Exception;
+    /**
+     * Execute the task
+     * 
+     * @param context Runtime context
+     * @throws Exception Just throw it out
+     */
+    void execute(Context context) throws Exception;
 }

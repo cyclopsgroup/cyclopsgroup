@@ -11,9 +11,9 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.gearset.xml.RichTagSupport;
+import com.cyclopsgroup.gearset.xml.SyntaxUtils;
 import com.cyclopsgroup.petri.definition.ScheduledTrigger;
-import com.evavi.common.syntax.RichTagSupport;
-import com.evavi.common.syntax.SyntaxUtils;
 
 /**
  * TODO Add java doc for this class

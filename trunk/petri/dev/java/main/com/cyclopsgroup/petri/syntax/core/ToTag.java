@@ -12,7 +12,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.evavi.common.syntax.SyntaxUtils;
+import com.cyclopsgroup.gearset.xml.SyntaxUtils;
 
 /**
  * to tag

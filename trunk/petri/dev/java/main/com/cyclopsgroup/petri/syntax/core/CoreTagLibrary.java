@@ -9,24 +9,22 @@ package com.cyclopsgroup.petri.syntax.core;
 
 import java.net.URL;
 
-import com.evavi.common.syntax.PropertyTagLibrary;
+import com.cyclopsgroup.gearset.xml.PropertyTagLibrary;
 
 /**
- * TODO Add java doc for this class
- *
- * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo</a>
+ * Tag library for syntax package
+ * 
+ * @author <a href="mailto:jiaqi.guo@evavi.com">Jiaqi Guo </a>
  */
 public class CoreTagLibrary extends PropertyTagLibrary
 {
-
-	/**
-	 * Override method getTagMappingResource() in super class
-	 *
-	 * @see com.evavi.common.syntax.PropertyTagLibrary#getTagMappingResource()
-	 */
-	public URL getTagMappingResource()
-	{
-		return getClass().getResource("tag-mapping.properties");
-	}
-
+    /**
+     * Override method getLibraryResource in super class of CoreTagLibrary
+     * 
+     * @see com.cyclopsgroup.gearset.xml.PropertyTagLibrary#getLibraryResource()
+     */
+    protected URL getLibraryResource()
+    {
+        return getClass().getResource("tag-mapping.properties");
+    }
 }

@@ -7,6 +7,8 @@
  */
 package com.cyclopsgroup.petri.definition;
 
+import com.cyclopsgroup.gearset.beans.Context;
+
 /**
  * Guard for transition
  *

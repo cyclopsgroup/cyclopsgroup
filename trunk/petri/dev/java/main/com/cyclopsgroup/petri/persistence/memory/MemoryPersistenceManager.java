@@ -10,8 +10,8 @@ package com.cyclopsgroup.petri.persistence.memory;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.petri.Case;
-import com.cyclopsgroup.petri.definition.Context;
 import com.cyclopsgroup.petri.definition.FlowDefinition;
 import com.cyclopsgroup.petri.definition.Transition;
 import com.cyclopsgroup.petri.persistence.PersistenceManager;
@@ -30,7 +30,7 @@ public class MemoryPersistenceManager implements PersistenceManager
     /**
      * Override method createCase in super class of MemoryPersistenceManager
      * 
-     * @see com.cyclopsgroup.petri.persistence.PersistenceManager#createCase(com.cyclopsgroup.petri.definition.FlowDefinition, com.cyclopsgroup.petri.definition.Context)
+     * @see com.cyclopsgroup.petri.persistence.PersistenceManager#createCase(com.cyclopsgroup.petri.definition.FlowDefinition, com.cyclopsgroup.gearset.beans.Context)
      */
     public Case createCase(FlowDefinition flowDefinition, Context context)
     {

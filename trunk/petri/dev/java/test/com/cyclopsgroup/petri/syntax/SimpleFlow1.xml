@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow-definition package="com.evavi.bpm2.syntax" name="SimpleFlow1" entrance="in" exit="out"
+<flow-definition package="com.cyclopsgroup.petri.syntax" name="SimpleFlow1" entrance="in" exit="out"
 	xmlns="http://www.evavi.com/technology/bpm" xmlns:java="http://www.evavi.com/technology/common/java">
 	<states>
 		<state id="in"/>
