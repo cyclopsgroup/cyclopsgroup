@@ -67,8 +67,7 @@ public final class ConvertUtils
     /**
      * Convert string to boolean value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. false will be returned if conversion fails.
      */
     public static final boolean convert2Boolean(String value)
@@ -79,10 +78,8 @@ public final class ConvertUtils
     /**
      * Convert string to boolean value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default boolean value
+     * @param value String value
+     * @param defaultValue Default boolean value
      * @return Convert result
      */
     public static final boolean convert2Boolean(String value,
@@ -112,8 +109,7 @@ public final class ConvertUtils
     /**
      * Convert string to double value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. 0.0 will be returned if conversion fails.
      */
     public static final double convert2Double(String value)
@@ -124,10 +120,8 @@ public final class ConvertUtils
     /**
      * Convert string to double value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default double value
+     * @param value String value
+     * @param defaultValue Default double value
      * @return Convert result
      */
     public static final double convert2Double(String value, double defaultValue)
@@ -145,8 +139,7 @@ public final class ConvertUtils
     /**
      * Convert string to float value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. 0.0F will be returned if conversion fails.
      */
     public static final float convert2Float(String value)
@@ -157,10 +150,8 @@ public final class ConvertUtils
     /**
      * Convert string to float value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default float value
+     * @param value String value
+     * @param defaultValue Default float value
      * @return Convert result
      */
     public static final float convert2Float(String value, float defaultValue)
@@ -178,8 +169,7 @@ public final class ConvertUtils
     /**
      * Convert string to int value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. 0 will be returned if conversion fails.
      */
     public static final int convert2Int(String value)
@@ -190,10 +180,8 @@ public final class ConvertUtils
     /**
      * Convert string to int value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default int value
+     * @param value String value
+     * @param defaultValue Default int value
      * @return Convert result
      */
     public static final int convert2Int(String value, int defaultValue)
@@ -211,8 +199,7 @@ public final class ConvertUtils
     /**
      * Convert string to long value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. 0L will be returned if conversion fails.
      */
     public static final long convert2Long(String value)
@@ -223,10 +210,8 @@ public final class ConvertUtils
     /**
      * Convert string to long value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default long value
+     * @param value String value
+     * @param defaultValue Default long value
      * @return Convert result
      */
     public static final long convert2Long(String value, long defaultValue)
@@ -244,8 +229,7 @@ public final class ConvertUtils
     /**
      * Convert string to short value
      * 
-     * @param value
-     *                   String value
+     * @param value String value
      * @return Convert result. (short) 0 will be returned if conversion fails.
      */
     public static final short convert2Short(String value)
@@ -256,10 +240,8 @@ public final class ConvertUtils
     /**
      * Convert string to short value
      * 
-     * @param value
-     *                   String value
-     * @param defaultValue
-     *                   Default short value
+     * @param value String value
+     * @param defaultValue Default short value
      * @return Convert result
      */
     public static final short convert2Short(String value, short defaultValue)

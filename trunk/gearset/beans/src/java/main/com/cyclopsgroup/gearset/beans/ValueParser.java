@@ -29,33 +29,27 @@ public abstract class ValueParser
     /**
      * Method to override which provide the true value
      * 
-     * @param valueName
-     *                   Name of the value
+     * @param valueName Name of the value
      * @return String value
-     * @throws Exception
-     *                    Just throw it out
+     * @throws Exception Just throw it out
      */
     protected abstract String doGetValue(String valueName) throws Exception;
 
     /**
      * Method to override which provide the true value array
      * 
-     * @param valueName
-     *                   Name of the value
+     * @param valueName Name of the value
      * @return String value
-     * @throws Exception
-     *                    Just throw it out
+     * @throws Exception Just throw it out
      */
     protected abstract String[] doGetValues(String valueName) throws Exception;
 
     /**
      * Simple get method
      * 
-     * @param valueName
-     *                   Name of the value
+     * @param valueName Name of the value
      * @return String value
-     * @throws Exception
-     *                    Just throw it out
+     * @throws Exception Just throw it out
      */
     public final String get(String valueName) throws Exception
     {
@@ -65,8 +59,7 @@ public abstract class ValueParser
     /**
      * Get boolean value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final boolean getBoolean(String name)
@@ -77,10 +70,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default boolean value
+     * @param name Name of the variable
+     * @param defaultValue Default boolean value
      * @return Variable value as boolean, defaultValue will be returned if any exception happens
      */
     public final boolean getBoolean(String name, boolean defaultValue)
@@ -98,8 +89,7 @@ public abstract class ValueParser
     /**
      * Get double value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final double getDouble(String name)
@@ -110,10 +100,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default double value
+     * @param name Name of the variable
+     * @param defaultValue Default double value
      * @return Variable value as double, defaultValue will be returned if any exception happens
      */
     public final double getDouble(String name, double defaultValue)
@@ -131,8 +119,7 @@ public abstract class ValueParser
     /**
      * Get float value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final float getFloat(String name)
@@ -143,10 +130,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default float value
+     * @param name Name of the variable
+     * @param defaultValue Default float value
      * @return Variable value as float, defaultValue will be returned if any exception happens
      */
     public final float getFloat(String name, float defaultValue)
@@ -164,8 +149,7 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final int getInt(String name)
@@ -176,10 +160,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default int value
+     * @param name Name of the variable
+     * @param defaultValue Default int value
      * @return Variable value as int, defaultValue will be returned if any exception happens
      */
     public final int getInt(String name, int defaultValue)
@@ -197,8 +179,7 @@ public abstract class ValueParser
     /**
      * Get int array variable
      * 
-     * @param name
-     *                   Variable name
+     * @param name Variable name
      * @return Array of int
      */
     public final int[] getInts(String name)
@@ -209,10 +190,8 @@ public abstract class ValueParser
     /**
      * Get int array variable
      * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
+     * @param name Variable name
+     * @param defaultValue Default int array value
      * @return Int array, defaultValue will be returned if any exception occurs
      */
     public final int[] getInts(String name, int[] defaultValue)
@@ -237,8 +216,7 @@ public abstract class ValueParser
     /**
      * Get long value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final long getLong(String name)
@@ -249,10 +227,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default long value
+     * @param name Name of the variable
+     * @param defaultValue Default long value
      * @return Variable value as long, defaultValue will be returned if any exception happens
      */
     public final long getLong(String name, long defaultValue)
@@ -270,8 +246,7 @@ public abstract class ValueParser
     /**
      * Get long array variable
      * 
-     * @param name
-     *                   Variable name
+     * @param name Variable name
      * @return Array of long
      */
     public final long[] getLongs(String name)
@@ -282,10 +257,8 @@ public abstract class ValueParser
     /**
      * Get long array variable
      * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
+     * @param name Variable name
+     * @param defaultValue Default int array value
      * @return Long array, defaultValue will be returned if any exception occurs
      */
     public final long[] getLongs(String name, long[] defaultValue)
@@ -310,8 +283,7 @@ public abstract class ValueParser
     /**
      * Get short value of a variable
      * 
-     * @param name
-     *                   Name of the variable
+     * @param name Name of the variable
      * @return Variable value as int
      */
     public final short getShort(String name)
@@ -322,10 +294,8 @@ public abstract class ValueParser
     /**
      * Get int value of a variable
      * 
-     * @param name
-     *                   Name of the variable
-     * @param defaultValue
-     *                   Default short value
+     * @param name Name of the variable
+     * @param defaultValue Default short value
      * @return Variable value as short, defaultValue will be returned if any exception happens
      */
     public final short getShort(String name, short defaultValue)
@@ -343,8 +313,7 @@ public abstract class ValueParser
     /**
      * Get short array variable
      * 
-     * @param name
-     *                   Variable name
+     * @param name Variable name
      * @return Array of short
      */
     public final short[] getShorts(String name)
@@ -355,10 +324,8 @@ public abstract class ValueParser
     /**
      * Get short array variable
      * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
+     * @param name Variable name
+     * @param defaultValue Default int array value
      * @return Short array, defaultValue will be returned if any exception occurs
      */
     public final short[] getShorts(String name, short[] defaultValue)
@@ -383,8 +350,7 @@ public abstract class ValueParser
     /**
      * Get string value
      * 
-     * @param name
-     *                   Name
+     * @param name Name
      * @return String value. StringUtils.EMPTY will return if can't get the value
      */
     public final String getString(String name)
@@ -395,10 +361,8 @@ public abstract class ValueParser
     /**
      * Get string value
      * 
-     * @param name
-     *                   Name
-     * @param defaultValue
-     *                   Defualt value
+     * @param name Name
+     * @param defaultValue Defualt value
      * @return String value
      */
     public final String getString(String name, String defaultValue)
@@ -416,8 +380,7 @@ public abstract class ValueParser
     /**
      * Get string array
      * 
-     * @param name
-     *                   Variable name
+     * @param name Variable name
      * @return Array of string
      */
     public final String[] getStrings(String name)
@@ -428,10 +391,8 @@ public abstract class ValueParser
     /**
      * Get string array with given default value
      * 
-     * @param name
-     *                   Name of variable
-     * @param defaultValue
-     *                   String array value
+     * @param name Name of variable
+     * @param defaultValue String array value
      * @return String array
      */
     public final String[] getStrings(String name, String[] defaultValue)

@@ -44,8 +44,7 @@ public class MapValueParser extends ValueParser
     /**
      * Constructor of MapValueParser
      * 
-     * @param content
-     *                   Content map object
+     * @param content Content map object
      */
     public MapValueParser(Map content)
     {

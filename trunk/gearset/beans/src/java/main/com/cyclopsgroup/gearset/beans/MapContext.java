@@ -42,8 +42,7 @@ public class MapContext implements Context
     /**
      * Constructor of MapContext
      * 
-     * @param initialMap
-     *                   Initial map object
+     * @param initialMap Initial map object
      */
     public MapContext(Map initialMap)
     {
