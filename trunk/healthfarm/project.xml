@@ -233,7 +233,7 @@
         </dependency>
         <dependency>
             <id>tornado</id>
-            <version>SNAPSHOT</version>
+            <version>20031230.224307</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>

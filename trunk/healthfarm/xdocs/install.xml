@@ -9,15 +9,18 @@
             <p>Java JVM, MySQL database server and a J2EE compliant web server are required for running this demo application. Although HealthFarm is flexible enough to be deployed on diverse database and web servers, this binary distribution is only tested on MySQL database and Tomcat 4.0.x web server.</p>
             <p>Make sure JDK, MySQL and Tomcat 4.0.x is properly installed on your machine. Check the JAVA_HOME variable in environment, and make sure your MySQL is working on port 3306.</p>
         </section>
-        <section name="Download the WAR distribution">
+        <section name="Download, install and run">
             <p>To run this application, you need to follow the steps below.</p>
             <ol>
-            <li>Download the WAR distribution and MySQL SQL script from SourceForge.net.</li>
-            <li>Create database healthfarm in your local mysql server. Execute &quot;mysql&quot;, enter the mysql console. Execute &quot;create database healthfarm&quot;.</li>
-            <li>Execute SQL script.</li>
-            <li>Copy the WAR file into you local Tomcat 4.0 webapps folder, start tomcat and shut it down. Then the war is uncompressed. Edit WEB-INF/conf/service.properties, change the mysql user name and password. Start the Tomcat.</li>
-            <li>Open a web browser, visit http://localhost:8080/healthfarm. The port number could be different due to your local settings for Tomcat.</li>
-</ol>
+                <li>Download the WAR distribution and MySQL SQL script from SourceForge.net. Distribution of this version can be downloaded at <a href="http://prdownloads.sourceforge.net/cyclops-group">http://prdownloads.sourceforge.net/cyclops-group</a></li>
+                <li>Create database healthfarm in your local mysql server. Execute &quot;mysql&quot;, enter the mysql console. Execute &quot;create database healthfarm&quot;. Make sure the database name is &quot;healthfarm&quot;. In this document, the user and password of mysql server is presumed to be &quot;root&quot; and empty.</li>
+                <li>Execute SQL script. Unzip the mysql-script zip file, execute populate.bat. If your OS is not windows, just make sure all of the sql files are execute in &quot;healthfarm&quot; database according to the order listed in the populate.bat file.</li>
+                <li>Copy the WAR file into you local Tomcat 4.0 webapps folder, start tomcat and shut it down. Then the war is uncompressed. Edit WEB-INF/conf/service.properties, change the mysql user name and password(try to find services.DatabaseService.torque.dsfactory.default.connection part, there you can find username and password). Start the Tomcat again.</li>
+                <li>Open a web browser, visit http://localhost:8080/healthfarm. The port number could be different due to your local settings of Tomcat. The configuration file is located at ${your tomcat home}/conf/server.xml.</li>
+                <li>Sign in the system with &quot;john&quot;:&quot;john&quot;, goto &quot;Diet Advisor&quot;/&quot;Daily Diet Check&quot;, you can see that user &quot;john&quot; is required to input his birthyear, height and weight. Once these information are inputed, this page will lead you to check your daily food consumption and give advice.</li>
+                <li>Sign out the system and sign in as &quot;administrator&quot;:&quot;administrator&quot;, goto the &quot;Diet Advisor&quot; tab, you will find more links listed. Tornado filtered the navigator by permissions of each user, therefore the menu is different for each person.</li>
+            </ol>
+            <p>A lot links are still dead link now. Neither healthfarm nor tornado is finished project.</p>
         </section>
     </body>
 </document>

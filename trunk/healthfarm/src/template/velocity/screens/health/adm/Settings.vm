@@ -28,3 +28,31 @@
 	</tr>
 	</form>
 </table>
+<br/>
+<table width="100%">
+	<tr>
+		<th>Selected</th>
+		<th>Age</th>
+		<th>Height(CM)</th>
+		<th>Weight(Pound)</th>
+		<th>Calorie</th>
+	</tr>
+	#set($weight = 120)
+	#foreach($i in [1..6])
+		#set($weightEnd = $weight + 10)
+		<tr #xbgcolor()>
+			<td><input type="checkbox"/></td>
+			<td>20~25</td>
+			<td>170~180</td>
+			<td>${weight}~${weightEnd}</td>
+			<td><input type="text" size="8" value="1000"/></td>
+		</tr>
+		#set($weight = $weightEnd)
+	#end
+	<tr>
+		<td colspan="5" class="bottom">
+			<input type="submit" value="Save Changes"/>
+			<input type="submit" value="Delete"/>
+		</td>
+	</tr>
+</table>

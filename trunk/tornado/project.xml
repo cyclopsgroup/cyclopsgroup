@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>tornado</name>
@@ -45,7 +45,7 @@
                 <role>Architect</role>
                 <role>Java Developer</role>
             </roles>
-            <timezone>-8</timezone>
+            <timezone>-6</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -55,7 +55,7 @@
             <roles>
                 <role>Observer</role>
             </roles>
-            <timezone>-8</timezone>
+            <timezone>-6</timezone>
         </developer>
     </developers>
     <dependencies>
@@ -136,13 +136,6 @@
         <dependency>
             <id>commons-logging</id>
             <version>1.0.3</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-io</id>
-            <version>20030203.000550</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>

@@ -14,15 +14,19 @@
 	</tr>
 	<tr>
 		<td>Age:</td>
-		<td>From <input type="text" name="age_from" size="4"> ~ To <input type="text" name="age_from" size="4"></td>
+		<td>From <input type="text" name="age_from" size="6"/> ~ To <input type="text" name="age_from" size="6"/></td>
 	</tr>
 	<tr>
 		<td>Height:</td>
-		<td>From <input type="text" name="height_from" size="4"> ~ To <input type="text" name="height_from" size="4"> CM</td>
+		<td>From <input type="text" name="height_from" size="6"/> ~ To <input type="text" name="height_from" size="6"/> CM</td>
 	</tr>
 	<tr>
 		<td>Weight:</td>
-		<td>From <input type="text" name="weight_from" size="4"> ~ To <input type="text" name="weight_from" size="4"> Pounds</td>
+		<td>From <input type="text" name="weight_from" size="6"/> ~ To <input type="text" name="weight_from" size="6"/> Pounds</td>
+	</tr>
+	<tr>
+		<td>Standard Calorie Value:</td>
+		<td><input type="text" name="calorie" size="10"/></td>
 	</tr>
 	<tr>
 		<td colspan="2" class="bottom">
