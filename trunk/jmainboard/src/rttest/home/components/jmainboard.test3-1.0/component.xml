@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <id>com.cyclops.jmainboard.test3</id>
+    <version>1.0</version>
+    <title>Test Component</title>
+    <description><![CDATA[Just for testing]]></description>
+    <implementation>com.cyclops.jmainboard.TestComponent</implementation>
+    <properties>
+        <property name="property1">aaa</property>
+        <property name="property2">2</property>
+    </properties>
+    <dependencies/>
+</component>
