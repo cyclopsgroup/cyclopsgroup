@@ -26,6 +26,11 @@ import org.apache.commons.lang.exception.NestableException;
 public class PageNotFoundException extends NestableException
 {
     /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256999947650939193L;
+
+    /**
      * 
      * @uml.property name="page" 
      */

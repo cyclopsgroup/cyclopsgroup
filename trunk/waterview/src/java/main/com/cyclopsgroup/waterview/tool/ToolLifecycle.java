@@ -33,6 +33,11 @@ public class ToolLifecycle extends Enum
     /** Request level tool */
     public static final ToolLifecycle REQUEST = new ToolLifecycle("request");
 
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 4120851049289626419L;
+
     /** Session level tool */
     public static final ToolLifecycle SESSION = new ToolLifecycle("session");
 

@@ -41,6 +41,11 @@ import com.cyclopsgroup.waterview.WaterviewContainer;
  */
 public class WaterviewServlet extends HttpServlet
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3544955458881534002L;
+
     private PlexusContainer container;
 
     private Log logger = LogFactory.getLog(getClass());
