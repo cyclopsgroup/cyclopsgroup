@@ -24,7 +24,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.gearset.jelly.ConditionSensible;
+import com.cyclopsgroup.gearset.jelly.ConditionAcceptable;
 import com.cyclopsgroup.gearset.jelly.SyntaxUtils;
 import com.cyclopsgroup.gearset.runtime.Condition;
 import com.cyclopsgroup.gearset.runtime.Context;
@@ -34,7 +34,7 @@ import com.cyclopsgroup.gearset.runtime.Context;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class OrTag extends TagSupport implements ConditionSensible, Condition
+public class OrTag extends TagSupport implements ConditionAcceptable, Condition
 {
 
     private LinkedList conditions = new LinkedList();
@@ -42,7 +42,7 @@ public class OrTag extends TagSupport implements ConditionSensible, Condition
     /**
      * Override method acceptCondition in super class of OrTag
      * 
-     * @see com.cyclopsgroup.gearset.jelly.ConditionSensible#acceptCondition(com.cyclopsgroup.gearset.runtime.Condition)
+     * @see com.cyclopsgroup.gearset.jelly.ConditionAcceptable#acceptCondition(com.cyclopsgroup.gearset.runtime.Condition)
      */
     public void acceptCondition(Condition condition)
     {
@@ -78,7 +78,7 @@ public class OrTag extends TagSupport implements ConditionSensible, Condition
             JellyTagException
     {
         invokeBody(output);
-        SyntaxUtils.checkParent(this, ConditionSensible.class);
-        ((ConditionSensible) getParent()).acceptCondition(this);
+        SyntaxUtils.checkParent(this, ConditionAcceptable.class);
+        ((ConditionAcceptable) getParent()).acceptCondition(this);
     }
 }

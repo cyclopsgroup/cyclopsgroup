@@ -1,5 +1,3 @@
-package com.cyclopsgroup.gearset.runtime;
-
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
  * 
@@ -16,20 +14,21 @@ package com.cyclopsgroup.gearset.runtime;
  *  limitations under the License.
  * =========================================================================
  */
+package com.cyclopsgroup.gearset.jelly;
+
+import com.cyclopsgroup.gearset.runtime.Template;
 
 /**
- * Executable interface
+ * Something which can accept template
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Executable
+public interface TemplateAcceptable
 {
     /**
-     * Execute it
+     * Call accept template
      * 
-     * @param context Runtime context
-     * @return Execution result. Could be null
-     * @throws Exception Throw it out
+     * @param template Template object to accept
      */
-    Object execute(Context context) throws Exception;
+    void acceptTemplate(Template template);
 }

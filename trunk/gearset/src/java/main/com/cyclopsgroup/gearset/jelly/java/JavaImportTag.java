@@ -14,57 +14,37 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.jelly.common;
+package com.cyclopsgroup.gearset.jelly.java;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.gearset.jelly.ConditionAcceptable;
 import com.cyclopsgroup.gearset.jelly.SyntaxUtils;
-import com.cyclopsgroup.gearset.runtime.Condition;
-import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
- * TODO Add javadoc for class
+ * import tag
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class NotTag extends TagSupport implements ConditionAcceptable, Condition
+public class JavaImportTag extends TagSupport
 {
-    private Condition condition;
-
     /**
-     * Override method acceptCondition in super class of NotTag
-     * 
-     * @see com.cyclopsgroup.gearset.jelly.ConditionAcceptable#acceptCondition(com.cyclopsgroup.gearset.runtime.Condition)
-     */
-    public void acceptCondition(Condition c)
-    {
-        condition = c;
-    }
-
-    /**
-     * Override method check in super class of NotTag
-     * 
-     * @see com.cyclopsgroup.gearset.runtime.Condition#check(com.cyclopsgroup.gearset.runtime.Context)
-     */
-    public boolean check(Context ctx) throws Exception
-    {
-        return !condition.check(ctx);
-    }
-
-    /**
-     * Override method doTag in super class of NotTag
+     * Override method doTag in super class of JavaImportTag
      * 
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
-        invokeBody(output);
-        SyntaxUtils.checkParent(this, ConditionAcceptable.class);
-        ((ConditionAcceptable) getParent()).acceptCondition(this);
+        String importExpression = getBodyText();
+        if (StringUtils.isEmpty(importExpression))
+        {
+            throw new JellyTagException("Body of import tag can not be empty");
+        }
+        SyntaxUtils.checkParent(this, JavaCompiledCodeTag.class);
+        ((JavaCompiledCodeTag) getParent()).addImport(importExpression);
     }
 }

@@ -16,19 +16,19 @@
  */
 package com.cyclopsgroup.gearset.jelly;
 
-import com.cyclopsgroup.gearset.runtime.Condition;
+import com.cyclopsgroup.gearset.runtime.Expression;
 
 /**
- * Tag which is sensible to condition
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface ConditionSensible
+public interface ExpressionAcceptable
 {
     /**
-     * Reflect to an incoming condition
+     * Method acceptExpression() in class ExpressionAcceptable
      * 
-     * @param condition Condition object
+     * @param expression
      */
-    void acceptCondition(Condition condition);
+    void acceptExpression(Expression expression);
 }

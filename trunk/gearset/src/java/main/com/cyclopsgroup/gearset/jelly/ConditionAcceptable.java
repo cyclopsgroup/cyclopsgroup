@@ -16,19 +16,19 @@
  */
 package com.cyclopsgroup.gearset.jelly;
 
-import com.cyclopsgroup.gearset.runtime.Executable;
+import com.cyclopsgroup.gearset.runtime.Condition;
 
 /**
- * Tag which is sensible to executable
+ * Tag which is sensible to condition
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface ExecutableSensible
+public interface ConditionAcceptable
 {
     /**
-     * Method acceptExecutable() in class ExecutableSensible
+     * Reflect to an incoming condition
      * 
-     * @param executable
+     * @param condition Condition object
      */
-    void acceptExecutable(Executable executable);
+    void acceptCondition(Condition condition);
 }

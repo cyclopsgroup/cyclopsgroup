@@ -14,71 +14,74 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.jelly.common;
-
-import java.util.Iterator;
-import java.util.LinkedList;
+package com.cyclopsgroup.gearset.jelly.java;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
-import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.gearset.jelly.ActionAcceptable;
-import com.cyclopsgroup.gearset.jelly.SyntaxUtils;
-import com.cyclopsgroup.gearset.runtime.Action;
+import bsh.EvalError;
+import bsh.Interpreter;
+
 import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
- * Sequence of executables
+ * BSH script tag
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class SequenceTag extends TagSupport implements ActionAcceptable, Action
+public class JavaBSHTag extends AbstractJavaCodeTag
 {
 
-    private LinkedList actions = new LinkedList();
+    private String code;
 
     /**
-     * Override method acceptAction in super class of SequenceTag
-     * 
-     * @see com.cyclopsgroup.gearset.jelly.ActionAcceptable#acceptAction(com.cyclopsgroup.gearset.runtime.Action)
-     */
-    public void acceptAction(Action action)
-    {
-        actions.add(action);
-    }
-
-    /**
-     * Override method doTag in super class of SequenceTag
+     * Override method doTag in super class of JavaBSHTag
      * 
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
-        invokeBody(output);
-        SyntaxUtils.checkParent(this, ActionAcceptable.class);
+        code = getBodyText(false);
+        if (StringUtils.isEmpty(code))
+        {
+            throw new JellyTagException("Don't create empty bsh tag");
+        }
+        setResult();
     }
 
     /**
-     * Override method execute in super class of SequenceTag
+     * Override method execute in super class of JavaBSHTag
      * 
      * @see com.cyclopsgroup.gearset.runtime.Action#execute(com.cyclopsgroup.gearset.runtime.Context)
      */
     public Object execute(Context ctx) throws Exception
     {
-        Object ret = null;
-        for (Iterator i = actions.iterator(); i.hasNext();)
+        Interpreter interpreter = new Interpreter();
+        String[] names = ctx.getNames();
+        for (int i = 0; i < names.length; i++)
         {
-            Action executable = (Action) i.next();
-            Object result = executable.execute(ctx);
-            if (result != null)
+            String name = names[i];
+            Object value = ctx.get(name);
+            try
             {
-                ret = result;
+                interpreter.set(name, value);
+            }
+            catch (Exception ignored)
+            {
+                //ignore exception;
             }
         }
-        return ret;
+        try
+        {
+            return interpreter.eval(code);
+        }
+        catch (EvalError e)
+        {
+            throw new RuntimeException(e.getErrorSourceFile() + " @ line "
+                    + e.getErrorLineNumber(), e.getCause());
+        }
     }
-
 }
