@@ -11,12 +11,13 @@
 		<logo>/images/cyclopsgroup_logo.gif</logo>
 	</organization>
 	<inceptionYear>2004</inceptionYear>
-	<shortDescription>Waterview is a highly componentized web application framework using plugable page rendering tools like velocity and jelly</shortDescription>
+	<shortDescription>Waterview is a highly componentized web application framework plugable page rendering tools</shortDescription>
 	<developers>
 		<developer>
 			<name>Jiaqi Guo</name>
 			<id>jiaqi</id>
 			<email>jiaqi.guo@gmail.com</email>
+			<organization>Evavi</organization>
 			<roles>
 				<role>Developer</role>
 			</roles>
@@ -55,6 +56,7 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.7.0</version>
+			<url>http://jakarta.apache.org/commons/beanutils</url>
 			<properties>
 				<war.bundle>true</war.bundle>
 			</properties>
