@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:j="jelly:core" xmlns:doc="doc">
-    <goal name="xtorque:datasql" prereqs="torque:init">
-        <j:useBean var="fileScanner" class="com.cyclops.amulets.xtorque.FileScanner" folder="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.schema.dir')}" suffix="${maven.xtorque.data.suffix}"/>
-        <j:set var="dataModels">${fileScanner.modelNames}</j:set>
+    <!--
+==============================================
+=
+=  Copy and delete sqldb.map file
+=
+==============================================
+    -->
+    <goal name="xtorque:copy-sqlmap-file" prereqs="torque:init" description="Copy sqldb.map file into sql folder">
+        <j:set var="sqldbmap">${pom.getPluginContext('maven-torque-plugin').getVariable('torque.schema.dir')}/sqldb.map</j:set>
+        <j:set var="sqldir">${pom.getPluginContext('maven-torque-plugin').getVariable('torque.sql.dir')}</j:set>
+        <copy file="${sqldbmap}" todir="${sqldir}" overwrite="true"/>
     </goal>
-    <goal name="xtorque:insert-sql" description="Insert a set of SQL script from xtorque plugin">
-        <copy file="${maven.xtorque.sqldbmap}" todir="${maven.xtorque.sql.dir}"/>
+    <goal name="xtorque:delete-sqlmap-file" prereqs="torque:init" description="Delete sqldb.map file from sql folder">
+        <j:set var="sqldir">${pom.getPluginContext('maven-torque-plugin').getVariable('torque.sql.dir')}</j:set>
+        <delete file="${sqldir}/sqldb.map"/>
+    </goal>
+    <!--
+==============================================
+=
+=  Generate data sql files for multi torque projects
+=
+==============================================
+    -->
+    <goal name="xtorque:datasql" prereqs="torque:init" description="Generate data sql files for multi torque projects">
+        <attainGoal name="xtorque:copy-sqlmap-file"/>
+        <j:useBean var="fileScanner" class="com.cyclops.amulets.xtorque.FileScanner" folder="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.schema.dir')}" suffix="${maven.xtorque.data.suffix}"/>
+        <j:forEach var="dataModel" items="${fileScanner.modelNames}">
+            ${pom.getPluginContext('maven-torque-plugin').setVariable('torque.project', dataModel)}
+            <echo>Generating data sqls for ${pom.getPluginContext('maven-torque-plugin').getVariable('torque.project')}${maven.xtorque.data.suffix}</echo>
+            <attainGoal name="torque:datasql"/>
+        </j:forEach>
+    </goal>
+    <goal name="torque:datasqls" prereqs="xtorque:datasql" description="Generate data sql files for multi torque projects"/>
+    <!--
+==============================================
+=
+=  Insert a set of SQL script from xtorque plugin
+=
+==============================================
+    -->
+    <goal name="xtorque:insert-sql" prereqs="torque:init" description="Insert a set of SQL script from xtorque plugin">
+        <attainGoal name="xtorque:copy-sqlmap-file"/>
         <attainGoal name="torque:insert-sql"/>
     </goal>
     <goal name="torque:insert-sqls" prereqs="xtorque:insert-sql" description="Insert a set of SQL script"/>
