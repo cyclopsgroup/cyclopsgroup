@@ -300,7 +300,7 @@
                         <img VSPACE="2" HSPACE="4" border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle" />
                     </div>
                 </td>
-                <td width="80%">
+                <td width="75%">
                     <div id="bodycol">
                         <div class="app">
 <p>
@@ -361,6 +361,29 @@
                         </div>
                     </div>
                 </td>
+            <td width="5%">
+                <script src="../../language.js" language="javascript"></script>
+                <script language="javascript">
+function showLanguage(languageName, imageName, title) {
+    lineStart();
+    languageLink('http://babelfish.altavista.com/babelfish/urltrurl?url=http://cyclops-group.sourceforge.net/weblogs/stories/blog.html&amp;lp=en_' + languageName, 'http://www.worldatlas.com/webimage/flags/countrys/zzzflags/' + imageName + 'small.gif', title);
+    lineEnd();
+}
+tableStart();
+lineStart();
+languageLink('http://cyclops-group.sourceforge.net/weblogs/stories/blog.html', 'http://www.worldatlas.com/webimage/flags/countrys/zzzflags/uksmall.gif', 'Original English');
+lineEnd();
+showLanguage('zh', 'cn', 'Simplified Chinese');
+showLanguage('fr', 'fr', 'French');
+showLanguage('de', 'de', 'German');
+showLanguage('it', 'it', 'Italian');
+showLanguage('ja', 'jp', 'Japanese');
+showLanguage('ko', 'kr', 'Korean');
+showLanguage('pt', 'pt', 'Portuguese');
+showLanguage('es', 'es', 'Spanish');
+tableEnd();
+                </script>
+            </td>
             </tr>
         </table>
         <div id="footer">

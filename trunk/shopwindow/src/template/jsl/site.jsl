@@ -151,7 +151,7 @@
                 </table>
                 <div align="center"><img border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle" HSPACE="4" VSPACE="2" /></div>
             </td>
-            <td width="80%">
+            <td width="75%">
               <div id="bodycol">
                 <!-- Insert MAIN body here -->
                 <div class="app">
@@ -164,6 +164,29 @@
                   <jsl:applyTemplates select="$doc/document/body/goals" />
                 </div>
               </div>
+            </td>
+            <td width="5%">
+                <script language="javascript" src="${relativePath}/language.js"/>
+                <script language="javascript"><![CDATA[
+function showLanguage(languageName, imageName, title) {
+    lineStart();
+    languageLink('http://babelfish.altavista.com/babelfish/urltrurl?url=${pom.url}${location}&lp=en_' + languageName, 'http://www.worldatlas.com/webimage/flags/countrys/zzzflags/' + imageName + 'small.gif', title);
+    lineEnd();
+}
+tableStart();
+lineStart();
+languageLink('${pom.url}${location}', 'http://www.worldatlas.com/webimage/flags/countrys/zzzflags/uksmall.gif', 'Original English');
+lineEnd();
+showLanguage('zh', 'cn', 'Simplified Chinese');
+showLanguage('fr', 'fr', 'French');
+showLanguage('de', 'de', 'German');
+showLanguage('it', 'it', 'Italian');
+showLanguage('ja', 'jp', 'Japanese');
+showLanguage('ko', 'kr', 'Korean');
+showLanguage('pt', 'pt', 'Portuguese');
+showLanguage('es', 'es', 'Spanish');
+tableEnd();
+                ]]></script>
             </td>
           </tr>
         </table>

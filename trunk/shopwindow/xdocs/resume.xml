@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Stories Behind</title>
@@ -79,30 +79,30 @@
         </section>
         <section name="Objective">
             <ul>
-                <li>Senior Java Architect</li>
-                <li>Quality Assurance</li>
+                <li>Java Architect</li>
                 <li>Java Developer Lead</li>
+                <li>Quality Assurance, Test Engineer</li>
             </ul>
         </section>
         <section name="Summary">
             <ul>
-                <li>Strong self motivation for the latest technology, never stop learning. Extensive knowledge in java area, both J2EE and open source projects.</li>
-                <li>Good at developing in an XP way with automatic and continuous testing, documentation, integration and distribution support.</li>
+                <li>Extensive knowledge in java area, both J2EE and open source projects. Strong self motivation for the latest technology, never stop learning.</li>
                 <li>Experienced in full lifecycle of software development: analysis, design, development, code review, testing, debug, and quality assurance.</li>
                 <li>Good at working in a team, and helping the team achieve the best performance.</li>
+                <li>Good at developing in an XP way with automatic and continuous testing, documentation, integration and distribution support.</li>
                 <li>SCJP and MCSD certificated.</li>
             </ul>
         </section>
         <section name="Skills">
             <subsection name="JAVA">
                 <ul>
+                    <li>Five years of experience of Java development in J2EE standards including JSP, Servlet, EJB, JMS and JavaMail. Also experienced in JDBC, JNI and JNDI.</li>
+                    <li>Expert in XML and related JAVA technology including xerces, xalan, jdom and XMLRPC. Also be familiar with Web Service framework and related JAVA projects like Axis and SOAP.</li>
+                    <li>Expert in Java software designing and analyzing. A Java web application framework I designed makes the base of all vTradEx software products and solutions.</li>
+                    <li>Owner of many java open source projects in SourceForge, Check <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a> for details please.</li>
                     <li>Thorough understanding of XP development process with continuous and automatic testing, documentation, distribution and integration, powered by <a href="http://maven.apache.org">Maven</a>, <a href="http://ant.apache.org">Ant</a>, <a href="http://junit.org">JUNIT</a>, <a href="http://jakarta.apache.org/cactus">Cactus</a> and <a href="http://www.thecortex.net/clover">Clover</a>, etc.</li>
-                    <li>Expert in software designing and analyzing. One of the frameworks I designed makes the base of all vTradEx software products and solutions.</li>
-                    <li>Years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include <a href="http://jakarta.apace.org/turbine">Turbine</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>, <a href="http://avalon.apache.org">Avalon</a>, <a href="jakarta.apache.org/velocity">Velocity</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a>, <a href="http://jakarta.apache.org/lucene">Lucene</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a> and <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>, etc. </li>
+                    <li>Three years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include <a href="http://jakarta.apace.org/turbine">Turbine</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>, <a href="http://avalon.apache.org">Avalon</a>, <a href="jakarta.apache.org/struts">Struts</a>, <a href="jakarta.apache.org/velocity">Velocity</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a>, <a href="http://jakarta.apache.org/lucene">Lucene</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a> and <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>, etc. </li>
                     <li>Experience in development with Werken rule engine(<a href="http://drools.org">Drools</a>), workflow engine(<a href="http://werkflow.codehaus.org">Werkflow</a>) and petrinet(<a href="http://petridish.werken.com">Petridish</a>) model. </li>
-                    <li>Expert in XML and related JAVA technology like xerces, xalan and jdom. Also be familiar with Web Service framework and related JAVA projects like Axis and SOAP.</li>
-                    <li>Owner of five java open source projects in SourceForge, Check <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a> for details please.</li>
-                    <li>Four years of experience in developing below J2EE standards including JSP, Servlet, EJB, JMS, JavaMail etc. Also experienced in JDBC, JNI and JNDI.</li>
                     <li>Have deployment experience on Weblogic, Websphere, JBOSS, Resin, TOMCAT, Sun Iplanet  WebServer, AppServer, Portal Server and Identity Server.</li>
                 </ul>
             </subsection>
@@ -134,18 +134,18 @@
                 <p>Location: Shanghai, China.  Time: 3/2001~7/2003. Position: Java System Architect</p>
                 <p>Responsibility:
 <ul>
-                        <li>System Architect of most software products and solutions.</li>
+                        <li>Java developer lead in 90% projects</li>
+                        <li>System Architect of 70% software products and solutions</li>
                         <li>Manage the development department in shanghai office.</li>
-                        <li>Project manager of some projects.</li>
-                        <li>Be responsible for QA(quality assurance) of development.</li>
-                        <li>Participate in software developing.</li>
+                        <li>Project manager of 30% projects</li>
+                        <li>Be responsible for QA(quality assurance) of 100% projects</li>
                     </ul>
                 </p>
             </subsection>
             <subsection name="Eigenet Software">
                 <p>Location: Shanghai, China. Time: 7/2000~3/2001. Position: Software Engineer</p>
                 <p>Responsibility:<ul>
-                        <li>Product Manager. Analyze, design and develop ERP products.</li>
+                        <li>Product Manager. Product manager for several certain products including ROI analyzing tool, Market Platform and Sale System.</li>
                         <li>Software Engineer. Analyze, design and develop ERP product in JAVA and Python.</li>
                     </ul>
                 </p>
@@ -153,7 +153,7 @@
             <subsection name="Zhejiang University">
                 <p>Location: Hangzhou, China. Time: 9/1996~7/2000</p>
                 <p>Responsibility:<ul>
-                        <li>System Designer. Design and develop systems in VC, C/C++ and VB</li>
+                        <li>Software Developer. Design and develop web systems and desktop applications in VC, C/C++, ASP and VB</li>
                     </ul>
                 </p>
             </subsection>
