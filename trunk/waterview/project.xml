@@ -3,7 +3,7 @@
     <extend>${maven.repo.local}/cyclib/poms/cyclopsgroup.pom</extend>
     <pomVersion>3</pomVersion>
     <id>waterview</id>
-    <name>Waterview</name>
+    <name>waterview</name>
     <currentVersion>1.0-a1</currentVersion>
     <organization>
         <name>Cyclops Group</name>
