@@ -202,5 +202,9 @@ import junit.framework.TestCase;
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
 public class Log4jComponentTest extends TestCase {
-
+    /** Method testNone in class Log4jComponentTest
+     */
+    public void testNone() {
+        //do nothing
+    }
 }
