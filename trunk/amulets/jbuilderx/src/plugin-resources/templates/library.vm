@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+    <!--JBuilder Library Definition File-->
+    <fullname>${pom.artifactId}</fullname>
+    <class>
+    #foreach($lib in $pom.artifacts)
+        #set($path=$stringUtils.replaceOnce($lib.path, ':', '%|'))
+        #set($path=$stringUtils.replace($path, '\', '/'))
+        <path>[${path}]</path>
+    #end
+    </class>
+    <lastmodsaved>${now.time}</lastmodsaved>
+</library>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <extend>../project.xml</extend>
+    <pomVersion>3</pomVersion>
+    <id>maven-jbuilderx-plugin</id>
+    <name>Maven JBuilderX Plug-in</name>
+    <currentVersion>1.0-b1</currentVersion>
+    <shortDescription>JBuilder Plugin for Maven</shortDescription>
+    <url>http://cyclops-group.sourceforge.net/project/amulets/plugins/jbuilderx/</url>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/plugins/jbuilderx/</siteDirectory>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/jbuilderx/</connection>
+        <url>http://cvs.sourceforge.net/viewcvs/cyclops-group/amulets/jbuilderx</url>
+    </repository>
+    <dependencies>
+        <dependency>
+            <id>commons-lang</id>
+            <version>1.0-b1.1</version>
+            <url>http://jakarta.apache.org/commons/lang</url>
+        </dependency>
+        <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly-tags-velocity</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://jakarta.apache.org/commons/jelly/libs/velocity</url>
+        </dependency>
+    </dependencies>
+</project>
