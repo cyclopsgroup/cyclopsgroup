@@ -30,6 +30,12 @@
             <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
             <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
         </mailingList>
+        <mailingList>
+            <name>Cyclops Group Develop</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop</archive>
+        </mailingList>
     </mailingLists>
     <developers>
         <developer>
@@ -38,8 +44,10 @@
             <email>g-cyclops@users.sourceforge.net</email>
             <organization>vTradEx Technology</organization>
             <roles>
-                <role>Developer</role>
+                <role>Architect</role>
+                <role>Java Developer</role>
             </roles>
+            <timezone>-8</timezone>
         </developer>
         <developer>
             <name>Daisy Zhao</name>
@@ -49,6 +57,7 @@
             <roles>
                 <role>Observer</role>
             </roles>
+            <timezone>-8</timezone>
         </developer>
     </developers>
     <build>

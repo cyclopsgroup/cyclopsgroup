@@ -295,29 +295,40 @@
 
   <!-- process a documentation section -->
   <jsl:template match="section" trim="false">
-      <j:set var="_sectionName"><x:expr select="@name"/></j:set>
-      <j:if test="${!empty(_sectionName)}">
-          <p><img src="${relativePath}/images/right.gif" align="absmiddle"/> <a name="${_sectionName}" class="section">${_sectionName}</a></p>
-      </j:if>
-      <jsl:applyTemplates select="*"/>
-  </jsl:template>
-
-  <jsl:template match="subsection" trim="false">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
     <tr>
         <td colspan="2"><img src="${relativePath}/images/spacer.gif" width="15" height="15"/></td>
     </tr>   
     <tr>
         <td width="62%">
+        <j:set var="_sectionName"><x:expr select="@name"/></j:set>
+        <j:if test="${!empty(_sectionName)}">
+            <p><img src="${relativePath}/images/right.gif" align="absmiddle"/> <a name="${_sectionName}" class="section">${_sectionName}</a></p>
+        </j:if>
+        </td>
+        <td width="38%" align="right"><a href="#top"><img src="${relativePath}/images/icon_sortup.gif" border="0" alt="Goto Top of the Page"/></a></td>
+    </tr>
+    <tr>
+        <td bgcolor="#003366" colspan="2"><img src="${relativePath}/images/spacer.gif" width="2" height="2"/></td>
+    </tr>
+</table>
+      <jsl:applyTemplates select="*"/>
+  </jsl:template>
+
+  <jsl:template match="subsection" trim="false">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td><img src="${relativePath}/images/spacer.gif" width="10" height="10"/></td>
+    </tr>   
+    <tr>
+        <td>
+            <img src="${relativePath}/images/spacer.gif" width="20" height="15"/>
+            <img src="${relativePath}/images/icon_sortright.gif" align="absmiddle"/>
             <j:set var="_sectionName"><x:expr select="@name"/></j:set>
             <j:if test="${!empty(_sectionName)}">
                 <a name="${_sectionName}" class="subsection">${_sectionName}</a>
             </j:if>
         </td>
-        <td width="38%" align="right"><img src="${relativePath}/images/icon_sortdown.gif" width="15" height="15"/></td>
-    </tr>
-    <tr>
-        <td bgcolor="#336699" colspan="2"><img src="${relativePath}/images/spacer.gif" width="2" height="2"/></td>
     </tr>
 </table>
 <jsl:applyTemplates select="*"/>
