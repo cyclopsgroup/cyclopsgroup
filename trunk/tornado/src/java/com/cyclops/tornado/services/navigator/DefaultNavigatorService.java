@@ -6,7 +6,8 @@
  */
 package com.cyclops.tornado.services.navigator;
 import java.net.URL;
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.digester.Digester;
@@ -23,7 +24,7 @@ import com.cyclops.tornado.utils.ResourceFinder;
 public class DefaultNavigatorService
     extends BaseService
     implements NavigatorService, Restartable {
-    private Hashtable menus = new Hashtable();
+    private List menus = new ArrayList();
     private Menu getMenu(Menu menu, String href) {
         if (StringUtils.equals(menu.getHref(), href)) {
             return menu;
@@ -57,7 +58,7 @@ public class DefaultNavigatorService
      * @see com.cyclops.tornado.services.navigator.NavigatorService#getRootMenus()
      */
     public MenuRoot[] getMenuRoots() {
-        return (MenuRoot[]) menus.values().toArray(MenuRoot.EMPTY_ARRAY);
+        return (MenuRoot[]) menus.toArray(MenuRoot.EMPTY_ARRAY);
     }
     /** Implementation of method initialize() in this class
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
@@ -67,7 +68,6 @@ public class DefaultNavigatorService
         ResourceFinder rf = new ResourceFinder(this);
         URL[] resources = rf.getResources(conf);
         Digester digester = new Digester();
-        //digester.addObjectCreate("project", MenuProject.class);
         digester.addObjectCreate("project/menu", MenuRoot.class);
         digester.addSetNext("project/menu", "addMenu");
         digester.addSetProperties("project/menu");
@@ -78,13 +78,13 @@ public class DefaultNavigatorService
             URL resource = resources[i];
             try {
                 digester.clear();
-                digester.push(new MenuProject());
-                MenuProject project =
-                    (MenuProject) digester.parse(resource.openStream());
+                MenuProject project = new MenuProject();
+                digester.push(project);
+                digester.parse(resource.openStream());
                 MenuRoot[] roots = project.getMenuRoots();
                 for (int j = 0; j < roots.length; j++) {
                     MenuRoot menu = roots[j];
-                    menus.put(menu.getName(), menu);
+                    menus.add(menu);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

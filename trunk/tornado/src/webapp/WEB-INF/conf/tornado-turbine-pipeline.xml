@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline>
+  <name>TornadoTurbinePipeline</name>
+  <valves>
+    <valve className="org.apache.turbine.pipeline.DetermineActionValve"/>
+    <valve className="org.apache.turbine.pipeline.DetermineTargetValve"/>
+    <valve className="com.cyclops.tornado.modules.CheckScreenValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultSessionTimeoutValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultLoginValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultSessionValidationValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultACLCreationValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultActionValve"/>
+    <valve className="org.apache.turbine.pipeline.RunModulesValve"/>
+    <valve className="org.apache.turbine.pipeline.DefaultTargetValve"/>
+    <valve className="org.apache.turbine.pipeline.CleanUpValve"/>
+  </valves>
+</pipeline>

@@ -30,7 +30,16 @@ INSERT INTO c_tnd_user_group (object_id,user_id,group_id)
     VALUES (3,23,2);
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (1,'U','guest',1,'browse');
+    VALUES (1,'U','guest',0,'screen:Index.vm');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (2,'U','guest',0,'screen:Redirect.vm');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (3,'U','guest',0,'screen:pub,*.vm');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (6,'U','guest',0,'action:UserIdentify|doSignin');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
     VALUES (11,'G','administrators',1,'almighty');
@@ -45,31 +54,25 @@ INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
     VALUES (22,'R','almighty',0,'action:*|do*');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (31,'R','browse',0,'screen:Index.vm');
+    VALUES (31,'R','basic',0,'screen:system,Index.vm');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (32,'R','browse',0,'screen:Redirect.vm');
+    VALUES (32,'R','basic',0,'screen:system,user,*.vm');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (33,'R','browse',0,'screen:pub,*.vm');
+    VALUES (36,'R','basic',0,'action:UserIdentify|*');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (36,'R','browse',0,'action:UserIdentify|doSignin');
+    VALUES (37,'R','basic',0,'action:system.user.*|*');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (41,'R','basic',0,'screen:system,Index.vm');
-
-INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
-    VALUES (42,'R','basic',0,'screen:system,user,*.vm');
+    VALUES (38,'R','basic',0,'action:pub.*|*');
 
 INSERT INTO c_tnd_roles (role_id,role_name)
     VALUES (1,'almighty');
 
 INSERT INTO c_tnd_roles (role_id,role_name)
     VALUES (2,'basic');
-
-INSERT INTO c_tnd_roles (role_id,role_name)
-    VALUES (3,'browse');
 
 INSERT INTO c_tnd_confs (conf_id,conf_key,conf_value)
     VALUES (11,'services.UserService.user.implementation','com.cyclops.tornado.TornadoUser');
