@@ -16,7 +16,7 @@
     <description>
 --------To change this text, edit project.xml please--------
   </description>
-    <url>http://cyclops-groups.sourceforge.net/projects/tornado</url>
+    <url>http://cyclops-group.sourceforge.net/projects/tornado</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/tornado</siteDirectory>
     <repository>
@@ -257,6 +257,15 @@
           <groupId>torque</groupId>
           <artifactId>torque-gen</artifactId>
           <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>turbine</groupId>
+            <artifactId>turbine</artifactId>
+            <url>http://jakarta.apache.org/turbine/turbine-3</url>
+            <version>20030929.215136</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
         </dependency>
         <dependency>
             <id>village</id>

@@ -196,6 +196,7 @@ package com.cyclops.tornado;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.commons.collections.MultiHashMap;
@@ -203,7 +204,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.regexp.RE;
 import org.apache.regexp.REUtil;
 /**
- * @author jiaqi guo
+ * @author jiaqi  guo
  * @email g-cyclops@users.sourceforge.net
  */
 public class Passport {
