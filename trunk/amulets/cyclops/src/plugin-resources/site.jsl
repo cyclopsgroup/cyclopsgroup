@@ -36,6 +36,9 @@ th {
     text-align: left;
     text-indent: 5px;
 }
+div.section table.bodyTable {
+    width: 100%;
+}
 div.section table.bodyTable td {
     padding: 3px;
 }
@@ -143,15 +146,20 @@ div.section div.subsectionTitle {
                                     <td colspan="2" bgcolor="#D1DBE4">
                                         <script language="javascript" src="${relativePath}/language.js"/>
                                         <script language="javascript"><![CDATA[
-languageLink("${pom.url}${location}", "zh", "Translate this page into Simplified Chinese", "${relativePath}");
+languageLink("${pom.url}${location}", "nl", "Translate this page into Dutch", "${relativePath}");
 languageLink("${pom.url}${location}", "de", "Translate this page into German", "${relativePath}");
+languageLink("${pom.url}${location}", "el", "Translate this page into Greek", "${relativePath}");
 languageLink("${pom.url}${location}", "es", "Translate this page into Spanish", "${relativePath}");
 languageLink("${pom.url}${location}", "fr", "Translate this page into French", "${relativePath}");
 languageLink("${pom.url}${location}", "it", "Translate this page into Italian", "${relativePath}");
 languageLink("${pom.url}${location}", "ja", "Translate this page into Japanese", "${relativePath}");
 languageLink("${pom.url}${location}", "ka", "Translate this page into Korean", "${relativePath}");
 languageLink("${pom.url}${location}", "pt", "Translate this page into Portuguese", "${relativePath}");
-languageLink("${pom.url}${location}", "en", "Show original English version of this page", "${relativePath}");
+languageLink("${pom.url}${location}", "ru", "Translate this page into Russian", "${relativePath}");
+languageLink("${pom.url}${location}", "zh", "Translate this page into Simplified Chinese", "${relativePath}");
+languageLink("${pom.url}${location}", "zt", "Translate this page into Traditional Chinese", "${relativePath}");
+
+languageLink("${pom.url}${location}", "en", "Back to English version", "${relativePath}");
                                             ]]></script>
                                     </td>
                                 </tr>
