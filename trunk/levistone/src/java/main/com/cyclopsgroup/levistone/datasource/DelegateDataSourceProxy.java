@@ -29,7 +29,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractDataSourceProxy extends AbstractLogEnabled implements
+public abstract class DelegateDataSourceProxy extends AbstractLogEnabled implements
         DataSource
 {
     /**

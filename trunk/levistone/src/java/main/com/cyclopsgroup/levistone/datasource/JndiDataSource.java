@@ -25,14 +25,14 @@ import javax.sql.DataSource;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JndiDataSource extends AbstractDataSourceProxy
+public class JndiDataSource extends DelegateDataSourceProxy
 {
     private DataSource nestedDataSource;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.datasource.AbstractDataSourceProxy#getNestedDataSource()
+     * @see com.cyclopsgroup.levistone.datasource.DelegateDataSourceProxy#getNestedDataSource()
      */
     protected DataSource getNestedDataSource() throws SQLException
     {

@@ -33,7 +33,7 @@ import org.apache.commons.dbcp.BasicDataSource;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DbcpDataSource extends AbstractDataSourceProxy implements
+public class DbcpDataSource extends DelegateDataSourceProxy implements
         Configurable, Initializable
 {
 
@@ -61,7 +61,7 @@ public class DbcpDataSource extends AbstractDataSourceProxy implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.levistone.datasource.AbstractDataSourceProxy#getNestedDataSource()
+     * @see com.cyclopsgroup.levistone.datasource.DelegateDataSourceProxy#getNestedDataSource()
      */
     protected DataSource getNestedDataSource() throws SQLException
     {
