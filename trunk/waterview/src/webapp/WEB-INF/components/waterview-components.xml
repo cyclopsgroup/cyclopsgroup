@@ -33,7 +33,10 @@
             <role>cyclopsgroup.waterview.valve.parseurl</role>
             <implementation>com.cyclopsgroup.waterview.core.ParseURLValve</implementation>
             <configuration>
-                <default-path>/Index.vm</default-path>
+                <page-extensions>
+                    <page-extension>vm</page-extension>
+                    <page-extension>jelly</page-extension>
+                </page-extensions>
             </configuration>
         </component>
         <component>

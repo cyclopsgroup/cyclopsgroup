@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -32,7 +35,9 @@ import com.cyclopsgroup.waterview.Valve;
 public class ParseURLValve extends Valve implements Configurable
 {
 
-    private String defaultPath;
+    private String defaultPage;
+
+    private HashSet pageExtensions;
 
     /**
      * Override or implement method of parent class or interface
@@ -41,7 +46,14 @@ public class ParseURLValve extends Valve implements Configurable
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        defaultPath = conf.getChild("default-path").getValue("/Index.vm");
+        defaultPage = conf.getChild("default-page").getValue("Index.vm");
+        Configuration[] exts = conf.getChild("page-extensions").getChildren(
+                "page-extension");
+        pageExtensions = new HashSet(exts.length);
+        for (int i = 0; i < exts.length; i++)
+        {
+            pageExtensions.add(exts[i].getValue());
+        }
     }
 
     /**
@@ -54,10 +66,11 @@ public class ParseURLValve extends Valve implements Configurable
         String pathInfo = runtime.getHttpServletRequest().getPathInfo();
         if (StringUtils.isEmpty(pathInfo))
         {
-            pathInfo = defaultPath;
+            pathInfo = defaultPage;
         }
         String[] parts = StringUtils.split(runtime.getHttpServletRequest()
                 .getPathInfo(), '|');
+        String page = null;
         for (int i = 0; i < parts.length; i++)
         {
             String part = parts[i];
@@ -67,14 +80,33 @@ public class ParseURLValve extends Valve implements Configurable
             }
             if (i == parts.length - 1)
             {
-                runtime.setPage(part);
-                runtime.getUIContext().put("page", part);
+                boolean pageFound = false;
+                for (Iterator j = pageExtensions.iterator(); j.hasNext();)
+                {
+                    String extension = (String) j.next();
+                    if (part.endsWith('.' + extension))
+                    {
+                        page = part;
+                        pageFound = true;
+                        break;
+                    }
+                }
+                if (!pageFound)
+                {
+                    runtime.getActions().add(part);
+                }
             }
             else
             {
                 runtime.getActions().add(part);
             }
         }
+        if (StringUtils.isEmpty(page))
+        {
+            page = defaultPage;
+        }
+        runtime.setPage(page);
+        runtime.getUIContext().put("page", page);
         invokeNext(runtime);
     }
 }
