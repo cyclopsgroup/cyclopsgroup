@@ -14,36 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 /**
- * Named, predefined, parameterized query object
+ * Condition model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NamedQuery extends Query
+public abstract class Condition
 {
-    private String name;
-
-    /**
-     * Constructor for class NamedQuery
-     *
-     * @param type Type of returned object
-     * @param name Name of this query
-     */
-    public NamedQuery(Class type, String name)
-    {
-        super(type);
-        this.name = name;
-    }
-
-    /**
-     * Get name of this query
-     *
-     * @return Name of this query
-     */
-    public String getName()
-    {
-        return name;
-    }
+    /** Empty condition array */
+    public static final Condition[] EMPTY_ARRAY = new Condition[0];
 }

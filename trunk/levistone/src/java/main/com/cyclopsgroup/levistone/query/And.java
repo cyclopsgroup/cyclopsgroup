@@ -14,36 +14,20 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 /**
- * Named, predefined, parameterized query object
+ * And model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NamedQuery extends Query
+public class And extends ComboCondition
 {
-    private String name;
-
     /**
-     * Constructor for class NamedQuery
-     *
-     * @param type Type of returned object
-     * @param name Name of this query
+     * Constructor for class And
      */
-    public NamedQuery(Class type, String name)
+    public And()
     {
-        super(type);
-        this.name = name;
-    }
-
-    /**
-     * Get name of this query
-     *
-     * @return Name of this query
-     */
-    public String getName()
-    {
-        return name;
+        super(Combinator.AND);
     }
 }

@@ -16,6 +16,12 @@
  */
 package com.cyclopsgroup.levistone;
 
+import java.util.HashMap;
+
+import com.cyclopsgroup.levistone.query.Alias;
+import com.cyclopsgroup.levistone.query.Condition;
+import com.cyclopsgroup.levistone.query.Field;
+
 /**
  * Query model object
  * 
@@ -23,25 +29,118 @@ package com.cyclopsgroup.levistone;
  */
 public class Query
 {
-    private Class entityType;
+    /** Field name for all fields */
+    public static final String ALL_FIELDS = "*";
 
     /**
-     * Constructor for class Query
-     *
-     * @param entityType Entity class
+     * @uml.property name="aliases" 
      */
-    public Query(Class entityType)
+    private HashMap aliases = new HashMap();
+
+    /**
+     * 
+     * @uml.property name="condition" 
+     */
+    private Condition condition;
+
+    private HashMap selectedFields = new HashMap();
+
+    private Class type;
+
+    /**
+     * Type of returned object
+     *
+     * @param type Class object
+     */
+    public Query(Class type)
     {
-        this.entityType = entityType;
+        this.type = type;
     }
 
     /**
-     * Get current entity type
+     * Add new alias declaration
      *
-     * @return Class of entity
+     * @param name Name of alias
+     * @param type Type of entity
      */
-    public Class getEntityType()
+    public void addAlias(String name, Class type)
     {
-        return entityType;
+        aliases.put(name, new Alias(name, type));
+    }
+
+    /**
+     * Add selected field
+     *
+     * @param fieldName Field name
+     */
+    public void addSelectedField(String fieldName)
+    {
+        selectedFields.put(fieldName, new Field(fieldName));
+    }
+
+    /**
+     * Add selected field
+     *
+     * @param fieldName Field name
+     * @param alias Alias
+     */
+    public void addSelectedField(String fieldName, String alias)
+    {
+        String key = fieldName + "@" + alias;
+        selectedFields.put(key, new Field(fieldName, alias));
+    }
+
+    /**
+     * Get all aliases
+     *
+     * @return Alias model array
+     */
+    public Alias[] getAliases()
+    {
+        return (Alias[]) aliases.values().toArray(Alias.EMPTY_ARRAY);
+    }
+
+    /**
+     * Getter method for condition
+     * 
+     * @return Returns the condition.
+     * 
+     * @uml.property name="condition"
+     */
+    public Condition getCondition()
+    {
+        return condition;
+    }
+
+    /**
+     * Get all selected field
+     *
+     * @return Selected field models
+     */
+    public Field[] getSelectedFields()
+    {
+        return (Field[]) selectedFields.values().toArray(Field.EMPTY_ARRAY);
+    }
+
+    /**
+     * Get type of returned object
+     *
+     * @return Class of returned object
+     */
+    public Class getType()
+    {
+        return type;
+    }
+
+    /**
+     * Setter method for condition
+     * 
+     * @param condition The condition to set.
+     * 
+     * @uml.property name="condition"
+     */
+    public void setCondition(Condition condition)
+    {
+        this.condition = condition;
     }
 }

@@ -14,36 +14,41 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
+
+import org.apache.commons.lang.enum.Enum;
 
 /**
- * Named, predefined, parameterized query object
+ * Combinator of condition
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NamedQuery extends Query
+public final class Combinator extends Enum
 {
-    private String name;
+    /** And combinator */
+    public static final Combinator AND = new Combinator("and");
+
+    /** Or combinator */
+    public static final Combinator OR = new Combinator("or");
 
     /**
-     * Constructor for class NamedQuery
+     * Get instance of combinator with given value
      *
-     * @param type Type of returned object
-     * @param name Name of this query
+     * @param value Given value
+     * @return Combinator object
      */
-    public NamedQuery(Class type, String name)
+    public static Combinator valueOf(String value)
     {
-        super(type);
-        this.name = name;
+        return (Combinator) Enum.getEnum(Combinator.class, value);
     }
 
     /**
-     * Get name of this query
+     * Constructor for class Combinator
      *
-     * @return Name of this query
+     * @param value
      */
-    public String getName()
+    public Combinator(String value)
     {
-        return name;
+        super(value);
     }
 }

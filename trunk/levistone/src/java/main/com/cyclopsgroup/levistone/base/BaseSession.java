@@ -17,6 +17,7 @@
 package com.cyclopsgroup.levistone.base;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -36,11 +37,6 @@ import com.cyclopsgroup.levistone.TypedSession;
  */
 public abstract class BaseSession implements Session
 {
-
-    /**
-     * 
-     * @uml.property name="id" 
-     */
     private String id;
 
     /** Logger */
@@ -49,6 +45,8 @@ public abstract class BaseSession implements Session
     private String name;
 
     private PersistenceManager persistenceManager;
+
+    private List queryResults = new LinkedList();
 
     private HashMap typedSessions = new HashMap();
 
@@ -65,6 +63,16 @@ public abstract class BaseSession implements Session
         this.persistenceManager = persistenceManager;
         this.name = name;
         this.id = id;
+    }
+
+    /**
+     * Add query result into this session
+     *
+     * @param queryResult
+     */
+    protected void addQueryResult(QueryResult queryResult)
+    {
+        queryResults.add(queryResult);
     }
 
     /**

@@ -14,36 +14,64 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 /**
- * Named, predefined, parameterized query object
+ * Alias model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NamedQuery extends Query
+public class Alias
 {
+    /** Empty alias model array */
+    public static final Alias[] EMPTY_ARRAY = new Alias[0];
+
+    /**
+     * 
+     * @uml.property name="name" 
+     */
     private String name;
 
     /**
-     * Constructor for class NamedQuery
-     *
-     * @param type Type of returned object
-     * @param name Name of this query
+     * 
+     * @uml.property name="type" 
      */
-    public NamedQuery(Class type, String name)
+    private Class type;
+
+    /**
+     * Constructor for class Alias
+     *
+     * @param name
+     * @param type
+     */
+    public Alias(String name, Class type)
     {
-        super(type);
         this.name = name;
+        this.type = type;
     }
 
     /**
-     * Get name of this query
-     *
-     * @return Name of this query
+     * Getter method for name
+     * 
+     * @return Returns the name.
+     * 
+     * @uml.property name="name"
      */
     public String getName()
     {
         return name;
     }
+
+    /**
+     * Getter method for type
+     * 
+     * @return Returns the type.
+     * 
+     * @uml.property name="type"
+     */
+    public Class getType()
+    {
+        return type;
+    }
+
 }

@@ -27,7 +27,6 @@ import java.util.List;
 
 public interface QueryResult
 {
-
     /**
      * Release resources related to this query result
      */
@@ -57,6 +56,13 @@ public interface QueryResult
      * @uml.property name="offset"
      */
     int getOffset();
+
+    /**
+     * If this query result is closed
+     *
+     * @return If it's closed or not
+     */
+    boolean isClosed();
 
     /**
      * Get iterator of result

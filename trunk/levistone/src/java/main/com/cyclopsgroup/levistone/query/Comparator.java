@@ -16,12 +16,42 @@
  */
 package com.cyclopsgroup.levistone.query;
 
+import org.apache.commons.lang.enum.Enum;
+
 /**
- * Selected field query model
+ * Comparator model object
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SelectedField
+public final class Comparator extends Enum
 {
+    /** Equal comparator */
+    public static Comparator EQUAL = new Comparator("equal");
 
+    /** Greater thanl comparator */
+    public static Comparator GREATER = new Comparator("greater");
+
+    /** Not equal comparator */
+    public static Comparator NOT_EQUAL = new Comparator("not-equal");
+
+    /**
+     * Get comparator instance with given value
+     *
+     * @param value Comparator value
+     * @return Comparator instance
+     */
+    public static Comparator valueOf(String value)
+    {
+        return (Comparator) Enum.getEnum(Comparator.class, value);
+    }
+
+    /**
+     * Constructor for class Comparator
+     *
+     * @param value Value of this comparator
+     */
+    private Comparator(String value)
+    {
+        super(value);
+    }
 }

@@ -14,36 +14,62 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 /**
- * Named, predefined, parameterized query object
+ * Selected field query model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NamedQuery extends Query
+public final class Field
 {
-    private String name;
+    /** Empty selected field array */
+    public static final Field[] EMPTY_ARRAY = new Field[0];
+
+    private String alias;
+
+    private String fieldName;
 
     /**
-     * Constructor for class NamedQuery
+     * Constructor for class SelectedField
      *
-     * @param type Type of returned object
-     * @param name Name of this query
+     * @param fieldName
      */
-    public NamedQuery(Class type, String name)
+    public Field(String fieldName)
     {
-        super(type);
-        this.name = name;
+        super();
+        this.fieldName = fieldName;
     }
 
     /**
-     * Get name of this query
+     * Constructor for class SelectedField
      *
-     * @return Name of this query
+     * @param alias
+     * @param fieldName
      */
-    public String getName()
+    public Field(String fieldName, String alias)
     {
-        return name;
+        this.alias = alias;
+        this.fieldName = fieldName;
+    }
+
+    /**
+     * Alias of table this field belongs to
+     *
+     * @return Alias name
+     */
+    public String getAlias()
+    {
+        return alias;
+    }
+
+    /**
+     * Field name
+     *
+     * @return Field name
+     */
+    public String getFieldName()
+    {
+        return fieldName;
     }
 }
