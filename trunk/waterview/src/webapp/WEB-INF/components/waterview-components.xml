@@ -62,6 +62,7 @@
             <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
+                <localization name="r"/>
                 <renderer extension="vm" role="cyclopsgroup.waterview.renderer.velocity"/>
                 <renderer extension="jelly" role="cyclopsgroup.waterview.renderer.jelly"/>
             </configuration>
