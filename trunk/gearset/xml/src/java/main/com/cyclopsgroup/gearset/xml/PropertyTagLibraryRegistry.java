@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.gearset.xml;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,7 +23,6 @@ import java.util.Properties;
 
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.TagLibrary;
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -36,41 +34,38 @@ public abstract class PropertyTagLibraryRegistry
 {
     private HashMap tagLibraries = new HashMap();
 
+    /**
+     * Constructor of PropertyTagLibraryRegistry
+     * 
+     * @throws Exception
+     */
     public PropertyTagLibraryRegistry() throws Exception
     {
-        Properties props = getRegistryProperties();
-        for (Iterator i = props.keySet().iterator(); i.hasNext();)
+        URL[] resources = getRegistryResources();
+        for (int i = 0; i < resources.length; i++)
         {
-            String key = (String) i.next();
-            if (key.endsWith(".url"))
+            URL resource = resources[i];
+            Properties props = new Properties();
+            props.load(resource.openStream());
+            for (Iterator j = props.keySet().iterator(); j.hasNext();)
             {
-                String url = props.getProperty(key);
-                String name = StringUtils.chomp(key, ".url");
-                String libraryName = props.getProperty(name + ".library");
-                if (StringUtils.isEmpty(libraryName))
+                String key = (String) j.next();
+                if (key.endsWith(".url"))
                 {
-                    continue;
+                    String url = props.getProperty(key);
+                    String name = StringUtils.chomp(key, ".url");
+                    String libraryName = props.getProperty(name + ".library");
+                    if (StringUtils.isEmpty(libraryName))
+                    {
+                        continue;
+                    }
+                    TagLibrary library = (TagLibrary) Thread.currentThread()
+                            .getContextClassLoader().loadClass(libraryName)
+                            .newInstance();
+                    tagLibraries.put(url, library);
                 }
-                TagLibrary library = (TagLibrary) Thread.currentThread()
-                        .getContextClassLoader().loadClass(libraryName)
-                        .newInstance();
-                tagLibraries.put(url, library);
             }
         }
-    }
-
-    /**
-     * Load registry properties
-     * 
-     * @return Property object which contains tag-class mapping
-     * @throws IOException
-     *                    Possible resource accessing exception
-     */
-    protected Properties getRegistryProperties() throws IOException
-    {
-        Properties tagDefinition = new Properties();
-        tagDefinition.load(getRegistryResource().openStream());
-        return tagDefinition;
     }
 
     /**
@@ -78,17 +73,12 @@ public abstract class PropertyTagLibraryRegistry
      * 
      * @return Resource of properties file
      */
-    protected URL getRegistryResource()
-    {
-        throw new NotImplementedException(getClass()
-                + ".getTagDefinitionResource()");
-    }
+    protected abstract URL[] getRegistryResources();
 
     /**
      * Register all tag libraries in this registry to a given jelly context
      * 
-     * @param jellyContext
-     *                   JellyContext object
+     * @param jellyContext JellyContext object
      */
     public synchronized void registerTagLibraries(JellyContext jellyContext)
     {

@@ -16,7 +16,9 @@
  */
 package com.cyclopsgroup.gearset.xml;
 
+import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.Tag;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -31,12 +33,9 @@ public final class SyntaxUtils
     /**
      * Check whether the attribute value is empty
      * 
-     * @param attributeName
-     *                   Name of the attribute to check
-     * @param attributeValue
-     *                   Value of the attribute to check
-     * @throws MissingAttributeException
-     *                    If value is empty, throw it out
+     * @param attributeName Name of the attribute to check
+     * @param attributeValue Value of the attribute to check
+     * @throws MissingAttributeException If value is empty, throw it out
      */
     public static final void checkAttribute(String attributeName,
             String attributeValue) throws MissingAttributeException
@@ -44,6 +43,23 @@ public final class SyntaxUtils
         if (StringUtils.isEmpty(attributeValue))
         {
             throw new MissingAttributeException(attributeName);
+        }
+    }
+
+    /**
+     * Check parent tag class
+     * 
+     * @param currentTag Current tag object
+     * @param parentClass Parent class
+     * @throws JellyTagException Throw it if mismatch
+     */
+    public static final void checkParent(Tag currentTag, Class parentClass)
+            throws JellyTagException
+    {
+        if (!parentClass.isAssignableFrom(currentTag.getParent().getClass()))
+        {
+            throw new JellyTagException("parent of " + currentTag
+                    + " must be implemenetation of " + parentClass.getName());
         }
     }
 }

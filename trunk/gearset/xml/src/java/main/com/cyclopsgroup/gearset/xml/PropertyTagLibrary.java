@@ -34,10 +34,8 @@ public abstract class PropertyTagLibrary extends TagLibrary
     /**
      * Constructor of PropertyTagLibrary Tag classes are registered here
      * 
-     * @throws IOException
-     *                    Possible resource accessing exception
-     * @throws ClassNotFoundException
-     *                    The class specified in definition could not be found
+     * @throws IOException Possible resource accessing exception
+     * @throws ClassNotFoundException The class specified in definition could not be found
      */
     public PropertyTagLibrary() throws IOException, ClassNotFoundException
     {
@@ -55,8 +53,7 @@ public abstract class PropertyTagLibrary extends TagLibrary
      * Load tag definition properties
      * 
      * @return Property object which contains tag-class mapping
-     * @throws IOException
-     *                    Possible resource accessing exception
+     * @throws IOException Possible resource accessing exception
      */
     protected Properties getLibraryProperties() throws IOException
     {

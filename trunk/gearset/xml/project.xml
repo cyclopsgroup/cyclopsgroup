@@ -2,27 +2,66 @@
     <pomVersion>3</pomVersion>
     <artifactId>gearset-xml</artifactId>
     <name>gearset-xml</name>
-    <groupId>gearset-xml</groupId>
+    <groupId>gearset</groupId>
     <currentVersion>1.0</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.org</url>
-        <logo>http://www.cyclopsgroup.org/images/logo.gif</logo>
+        <logo>/images/logo.gif</logo>
     </organization>
     <inceptionYear>2004</inceptionYear>
     <logo>/images/logo.gif</logo>
     <repository/>
-    <mailingLists>
-        <mailingList>
-            <name>${pom.name} Dev List</name>
-        </mailingList>
-        <mailingList>
-            <name>${pom.name} User List</name>
-        </mailingList>
-    </mailingLists>
+    <dependencies>
+        <dependency>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly</artifactId>
+            <version>SNAPSHOT</version>
+            <jar>commons-jelly-SNAPSHOT.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-jexl</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>1.0-beta-2</version>
+            <jar>commons-jexl-1.0-beta-2.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+            <jar>commons-lang-2.0.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.3</version>
+            <jar>commons-logging-1.0.3.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+        	<groupId>gearset</groupId>
+        	<artifactId>gearset-beans</artifactId>
+        	<version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <jar>junit-3.8.1.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+    </dependencies>
     <build>
-        <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
