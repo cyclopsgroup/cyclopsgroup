@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="dummy" xmlns:j="jelly:core">
+	<properties>
+		<title>${descriptor.title}</title>
+		<author email="${maven.cyclops.user.email}">${maven.cyclops.user.fullname}</author>
+		<banner>${maven.cyclops.gallery.banner}</banner>
+	</properties>
+	<body>
+		<section name="${descriptor.title}">
+			<p>${descriptor.description}</p>
+			<table>
+				<j:forEach var="picture" items="${pictures.iterator()}">
+				<tr>
+					<th>File:</th>
+					<td>${picture.name}</td>
+					<th>Size:</th>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+				</j:forEach>
+			</table>
+		</section>
+	</body>
+</document>

@@ -1,26 +1,9 @@
-div.section table.bodyTable {
-    border-width: 1px;
-}
-div.section table.bodyTable td {
-    border-width: 1px;
-}
-
-#bannerBlock
+.hidewhenprint, .banner
 {
     display: none;
 }
 
-#navigatorBlock
+#bodyBlock
 {
-    display: none;
-}
-
-#adBlock
-{
-    display: none;
-}
-
-#poweredbyBlock
-{
-    display: none;
+    display: block !import;
 }
