@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ListReport implements Page
+public class ListReport extends Page
 {
     /**
      * Override method build in super class of ListReport

@@ -47,7 +47,7 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
     {
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
-            String path = (String) i.next();
+            String path = "action/" + (String) i.next();
             runModule(path, runtime);
         }
         return true;
@@ -69,6 +69,7 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager manager) throws ServiceException
     {
-        actionResolver = (UIModuleResolver) manager.lookup(UIModuleResolver.ROLE);
+        actionResolver = (UIModuleResolver) manager
+                .lookup(UIModuleResolver.ROLE);
     }
 }

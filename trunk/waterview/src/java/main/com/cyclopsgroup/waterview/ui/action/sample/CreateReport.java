@@ -25,14 +25,14 @@ import com.cyclopsgroup.waterview.ValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class CreateReport implements Action
+public class CreateReport extends Action
 {
     /**
      * Override method execute in super class of CreateReport
      * 
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void execute(UIRuntime runtime) throws Exception
+    protected void execute(UIRuntime runtime) throws Exception
     {
         ValueParser params = runtime.getRequestParameters();
         System.out.println(params);

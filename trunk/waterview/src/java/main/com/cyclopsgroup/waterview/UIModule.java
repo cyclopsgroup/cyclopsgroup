@@ -17,28 +17,17 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * A runnable module
+ * basic interface of ui module
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class Action implements UIModule
+public interface UIModule
 {
-
     /**
-     * Process given runtime object
+     * Process this module
      * 
-     * @param runtime Runtime data object
-     * @throws Exception Throw it to container
+     * @param runtime Runtime object
+     * @throws Exception Throw it out
      */
-    protected abstract void execute(UIRuntime runtime) throws Exception;
-
-    /**
-     * Override method process in super class of Action
-     * 
-     * @see com.cyclopsgroup.waterview.UIModule#process(com.cyclopsgroup.waterview.UIRuntime)
-     */
-    public void process(UIRuntime runtime) throws Exception
-    {
-        execute(runtime);
-    }
+    public void process(UIRuntime runtime) throws Exception;
 }

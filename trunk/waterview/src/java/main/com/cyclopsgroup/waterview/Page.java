@@ -17,11 +17,11 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * TODO Add javadoc for class
+ * Basic page class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Page
+public abstract class Page implements UIModule
 {
 
     /**
@@ -30,5 +30,15 @@ public interface Page
      * @param runtime
      * @throws Exception
      */
-    void build(UIRuntime runtime) throws Exception;
+    protected abstract void build(UIRuntime runtime) throws Exception;
+
+    /**
+     * Override method process in super class of Page
+     * 
+     * @see com.cyclopsgroup.waterview.UIModule#process(com.cyclopsgroup.waterview.UIRuntime)
+     */
+    public void process(UIRuntime runtime) throws Exception
+    {
+        build(runtime);
+    }
 }

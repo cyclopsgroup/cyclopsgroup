@@ -85,6 +85,10 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         for (int i = 0; i < paths.length; i++)
         {
             String subPath = paths[i];
+            if (subPath.charAt(0) == '/')
+            {
+                subPath = subPath.substring(1);
+            }
             int lastDot = subPath.lastIndexOf('.');
             if (lastDot == -1)
             {
