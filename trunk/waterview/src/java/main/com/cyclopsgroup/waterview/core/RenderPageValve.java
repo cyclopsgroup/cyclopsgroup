@@ -27,9 +27,8 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.DelegatePageRenderer;
+import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.PageRenderer;
-import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
@@ -43,7 +42,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
 {
     private String entry;
 
-    private UIModuleResolver moduleResolver;
+    private ModuleResolver moduleResolver;
 
     private Hashtable renderers;
 
@@ -67,9 +66,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             {
                 PageRenderer renderer = (PageRenderer) serviceManager
                         .lookup(role);
-                DelegatePageRenderer delegate = new DelegatePageRenderer(
-                        renderer);
-                renderers.put(extension, delegate);
+                renderers.put(extension, renderer);
             }
             catch (Exception e)
             {
@@ -88,15 +85,15 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void process(UIRuntime runtime) throws Exception
     {
         String page = runtime.getPage();
-        DelegatePageRenderer renderer = null;
         String extension = null;
+        PageRenderer renderer = null;
         for (Iterator i = renderers.keySet().iterator(); i.hasNext();)
         {
             extension = (String) i.next();
             String suffix = ',' + extension;
             if (page.endsWith(suffix))
             {
-                renderer = (DelegatePageRenderer) renderers.get(extension);
+                renderer = (PageRenderer) renderers.get(extension);
                 break;
             }
         }
@@ -104,9 +101,8 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         {
             return;
         }
-        runtime.getUIContext().put("delegateRenderer", renderer);
-        runtime.getUIContext().put("pageExtension", extension);
-        renderer.render(runtime, moduleResolver, entry, page);
+
+        //TODO render page
     }
 
     /**
@@ -117,7 +113,6 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void service(ServiceManager manager) throws ServiceException
     {
         serviceManager = manager;
-        moduleResolver = (UIModuleResolver) manager
-                .lookup(UIModuleResolver.ROLE);
+        moduleResolver = (ModuleResolver) manager.lookup(ModuleResolver.ROLE);
     }
 }

@@ -19,20 +19,13 @@ package com.cyclopsgroup.waterview.velocity;
 import java.util.Properties;
 
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.LRUMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.context.Context;
 
-import com.cyclopsgroup.waterview.DelegatePageRenderer;
 import com.cyclopsgroup.waterview.PageRenderer;
-import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -41,50 +34,38 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class VelocityPageRenderer extends AbstractLogEnabled implements
-        PageRenderer, Initializable, Configurable, Serviceable
+        PageRenderer, Initializable
 {
 
-    private class Renderer
+    private static String getTemplatePath(String packageName, String page)
     {
-        private UIRuntime runtime;
-
-        private Renderer(UIRuntime runtime)
+        StringBuffer templatePath = new StringBuffer();
+        if (StringUtils.isNotEmpty(packageName))
         {
-            this.runtime = runtime;
+            templatePath.append(packageName.replace('.', '/'));
+            templatePath.append("/");
         }
-
-        /**
-         * This method will be called from VM page
-         *
-         * @param packageName Page package name
-         * @param page Page path
-         * @return Empty string for outputing
-         * @throws Exception Throw it out
-         */
-        public String render(String packageName, String page) throws Exception
+        templatePath.append(page);
+        if (!page.endsWith(".vm"))
         {
-            DelegatePageRenderer renderer = (DelegatePageRenderer) runtime
-                    .getUIContext().get("delegateRenderer");
-            renderer.render(runtime, moduleResolver, packageName, page);
-            return StringUtils.EMPTY;
+            templatePath.append(".vm");
         }
+        return templatePath.toString();
     }
-
-    private UIModuleResolver moduleResolver;
 
     private LRUMap templateCache;
 
     private VelocityEngine velocityEngine;
 
     /**
-     * Override method configure in super class of VelocityPageRenderer
-     * 
-     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public boolean exists(String packageName, String page)
     {
-        int cacheSize = conf.getChild("cache-size").getValueAsInteger(1000);
-        templateCache = new LRUMap(cacheSize);
+        return velocityEngine
+                .templateExists(getTemplatePath(packageName, page));
     }
 
     /**
@@ -103,40 +84,18 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRenderer#pageExists(java.lang.String)
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
      */
-    public boolean pageExists(String page)
+    public void render(UIRuntime runtime, String packageName, String page)
+            throws Exception
     {
-        return velocityEngine.templateExists(page);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
-     */
-    public void render(UIRuntime runtime, String page) throws Exception
-    {
-        Renderer renderer = (Renderer) runtime.getUIContext().get("renderer");
-        if (renderer == null)
+        Context vc = (Context) runtime.getUIContext().get("velocityContext");
+        if (vc == null)
         {
-            renderer = new Renderer(runtime);
-            runtime.getUIContext().put("renderer", renderer);
+            vc = new VelocityContextAdapter(runtime.getUIContext());
+            runtime.getUIContext().put("velocityContext", vc);
         }
-        VelocityContextAdapter ctx = new VelocityContextAdapter(runtime
-                .getUIContext());
-        velocityEngine.mergeTemplate(page, ctx, runtime
-                .getHttpServletResponse().getWriter());
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException
-    {
-        moduleResolver = (UIModuleResolver) serviceManager
-                .lookup(UIModuleResolver.ROLE);
+        velocityEngine.mergeTemplate(getTemplatePath(packageName, page), vc,
+                runtime.getHttpServletResponse().getWriter());
     }
 }

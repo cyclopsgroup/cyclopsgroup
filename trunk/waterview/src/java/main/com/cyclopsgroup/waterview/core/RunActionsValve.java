@@ -16,14 +16,13 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.Iterator;
-
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.UIModuleResolver;
+import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
@@ -36,7 +35,7 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
         Serviceable
 {
 
-    private UIModuleResolver moduleResolver;
+    private ModuleResolver moduleResolver;
 
     /**
      * Override method process in super class of RunResolverValve
@@ -45,20 +44,11 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
      */
     public void process(UIRuntime runtime) throws Exception
     {
-        for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
+        String action = runtime.getRequestParameters().getString("do");
+        if (StringUtils.isNotEmpty(action))
         {
-            String path = "action/" + (String) i.next();
-            runModule(path, runtime);
+            moduleResolver.resolve(runtime, action);
         }
-    }
-
-    private void runModule(String path, UIRuntime runtime) throws Exception
-    {
-        if (moduleResolver == null)
-        {
-            return;
-        }
-        moduleResolver.resolve(runtime, path);
     }
 
     /**
@@ -68,7 +58,6 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager manager) throws ServiceException
     {
-        moduleResolver = (UIModuleResolver) manager
-                .lookup(UIModuleResolver.ROLE);
+        moduleResolver = (ModuleResolver) manager.lookup(ModuleResolver.ROLE);
     }
 }

@@ -14,8 +14,10 @@ import org.apache.commons.collections.LRUMap;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.PageRenderer;
+import com.cyclopsgroup.waterview.UIContext;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -36,6 +38,22 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
         private long timestamp;
     }
 
+    private static String getScriptPath(String packageName, String page)
+    {
+        StringBuffer scriptPath = new StringBuffer();
+        if (StringUtils.isNotEmpty(packageName))
+        {
+            scriptPath.append(packageName.replace('.', '/'));
+            scriptPath.append("/");
+        }
+        scriptPath.append(page);
+        if (!page.endsWith(".jelly"))
+        {
+            scriptPath.append(".jelly");
+        }
+        return scriptPath.toString();
+    }
+
     private LRUMap cache;
 
     private boolean cacheScript = false;
@@ -53,10 +71,29 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     {
         int cacheSize = conf.getChild("cache-size").getValueAsInteger(-1);
         reloadable = conf.getChild("reloadable").getValueAsBoolean(false);
-        if (cacheSize > 2)
+        if (cacheSize > 1)
         {
             cacheScript = true;
             cache = new LRUMap(cacheSize);
+        }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#exists(java.lang.String, java.lang.String)
+     */
+    public boolean exists(String packageName, String page)
+    {
+        String scriptPath = getScriptPath(packageName, page);
+        try
+        {
+            return getScript(scriptPath) != null;
+        }
+        catch (Exception e)
+        {
+            getLogger().warn("Load script error", e);
+            return false;
         }
     }
 
@@ -112,33 +149,32 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRenderer#pageExists(java.lang.String)
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
      */
-    public boolean pageExists(String page)
+    public void render(UIRuntime runtime, String packageName, String page)
+            throws Exception
     {
-        try
+        UIContext uic = runtime.getUIContext();
+        JellyContext jc = (JellyContext) uic.get("jellyContext");
+        if (jc == null)
         {
-            Script script = getScript(page);
-            return script != null;
+            jc = new JellyContext();
+            String[] keys = uic.getKeys();
+            for (int i = 0; i < keys.length; i++)
+            {
+                String name = keys[i];
+                jc.setVariable(name, uic.get(name));
+            }
+            uic.put("jellyContext", jc);
         }
-        catch (Exception e)
+        XMLOutput output = (XMLOutput) uic.get("jellyOutput");
+        if (output == null)
         {
-            getLogger().debug("Get script error", e);
-            return false;
+            output = XMLOutput.createXMLOutput(runtime.getHttpServletResponse()
+                    .getOutputStream());
+            uic.put("jellyOutput", output);
         }
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
-     */
-    public void render(UIRuntime runtime, String page) throws Exception
-    {
-        JellyContext jellyContext = new JellyContext(initialJellyContext);
-        XMLOutput output = XMLOutput.createXMLOutput(runtime
-                .getHttpServletResponse().getWriter());
-        Script script = getScript(page);
-        script.run(jellyContext, output);
+        String scriptPath = getScriptPath(packageName, page);
+        getScript(scriptPath).run(jc, output);
     }
 }

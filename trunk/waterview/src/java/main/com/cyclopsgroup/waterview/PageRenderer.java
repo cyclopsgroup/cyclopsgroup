@@ -26,17 +26,20 @@ public interface PageRenderer
     /**
      * Test if the specified page is available
      *
+     * @param packageName Page resource package name
      * @param page Page path
      * @return Existing or not
      */
-    boolean pageExists(String page);
+    boolean exists(String packageName, String page);
 
     /**
      * Render page to runtime
      *
+     * @param packageName Page resource package name
      * @param runtime UI Runtime object
      * @param page Page path with extension to render
      * @throws Exception Throw it out
      */
-    void render(UIRuntime runtime, String page) throws Exception;
+    void render(UIRuntime runtime, String packageName, String page)
+            throws Exception;
 }

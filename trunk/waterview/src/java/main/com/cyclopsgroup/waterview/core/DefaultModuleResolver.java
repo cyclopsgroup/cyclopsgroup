@@ -25,8 +25,8 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.LRUMap;
 
+import com.cyclopsgroup.waterview.ModuleResolver;
 import com.cyclopsgroup.waterview.UIModule;
-import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -34,8 +34,8 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultUIModuleResolver extends AbstractLogEnabled implements
-        UIModuleResolver, Configurable
+public class DefaultModuleResolver extends AbstractLogEnabled implements
+        ModuleResolver, Configurable
 {
 
     private LRUMap moduleCache;
@@ -71,7 +71,7 @@ public class DefaultUIModuleResolver extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.UIModuleResolver#resolve(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
+     * @see com.cyclopsgroup.waterview.ModuleResolver#resolve(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
      */
     public void resolve(UIRuntime runtime, String path) throws Exception
     {

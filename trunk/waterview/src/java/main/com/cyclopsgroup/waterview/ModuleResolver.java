@@ -21,10 +21,10 @@ package com.cyclopsgroup.waterview;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface UIModuleResolver
+public interface ModuleResolver
 {
     /** Role name of this component in container */
-    String ROLE = UIModuleResolver.class.getName();
+    String ROLE = ModuleResolver.class.getName();
 
     /**
      * Resolve module with given module name
