@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
+    <artifactId>waterview</artifactId>
     <name>waterview</name>
     <groupId>waterview</groupId>
-    <artifactId>waterview</artifactId>
     <currentVersion>1.0-b1-dev</currentVersion>
     <organization>
         <name>Cyclops Group</name>
@@ -88,17 +87,32 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
         </dependency>
         <dependency>
-            <groupId>servletapi</groupId>
-            <artifactId>servletapi</artifactId>
-            <version>2.2</version>
+            <groupId>gearset-beans</groupId>
+            <artifactId>gearset-beans</artifactId>
+            <version>SNAPSHOT</version>
+            <jar>gearset-beans-SNAPSHOT.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>servlet</groupId>
+            <artifactId>servlet</artifactId>
+            <version>2.3</version>
+            <jar>servlet-2.3.jar</jar>
+            <type>jar</type>
+            <properties/>
         </dependency>
     </dependencies>
     <build>
         <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
-        <sourceDirectory>src\java</sourceDirectory>
-        <unitTestSourceDirectory>src\test</unitTestSourceDirectory>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
