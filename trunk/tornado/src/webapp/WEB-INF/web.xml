@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<servlet>
+		<servlet-name>tornado</servlet-name>
+		<servlet-class>org.apache.turbine.Turbine</servlet-class>
+		<init-param>
+			<param-name>applicationRoot</param-name>
+			<param-value>webContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>properties</param-name>
+			<param-value>/WEB-INF/conf/tr.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>logs</web-resource-name>
+			<url-pattern>/logs/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+</web-app>
