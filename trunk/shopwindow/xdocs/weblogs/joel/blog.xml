@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Joel's Weblog</title>
         <author email="g-cyclops@users.sourceforge.net">jiaqi guo</author>
     </properties>
     <body>
-        <section name="@MAIN_SECTION@"/>
+        <h2>@MAIN_SECTION@</h2>
     </body>
 </document>

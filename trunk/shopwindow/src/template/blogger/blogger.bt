@@ -1,8 +1,11 @@
+<table width="100%" border="0" cellspacing="10">
+    <tr>
+        <td>
 <p>
   <BloggerArchives> <a href='<$BlogArchiveLink$>'><$BlogArchiveName$></a> | </BloggerArchives>
   <!-- Link to the front page, from your archives -->
   <script type="text/javascript">if (location.href.indexOf("archive")!=-1) document.write("<a href=\"<$BlogURL$>\">Current Posts</a>");</script> 
-</p>  
+</p>
         
 <Blogger>
     <BlogDateHeader>
@@ -53,3 +56,6 @@
         <a href="<$BlogItemArchiveFileName$>#<$BlogItemNumber$>"><$BlogItemDateTime$></a>
     </small></p>
 </Blogger>
+        </td>
+    </tr>
+</table>

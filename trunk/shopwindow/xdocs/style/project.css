@@ -7,7 +7,14 @@ body, td, th {
 	color: #003366;
 }
 .a td {
-    background-color: white !important;
+    background-color: WHITE;
+}
+.b td {
+    background-color: #EFEFEF;
+}
+img.handle {
+    border: 0;
+    padding-right: 2px;
 }
 th {
     font-weight: bold;
@@ -18,8 +25,8 @@ th {
 }
 
 .source {
-    font-family: Courier New, Courier, mono;
-    font-size: 12px !important;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+    font-size: 11px !important;
 }
 
 a:link, a:visited {
@@ -31,5 +38,8 @@ a.subsection {
 }
 a.section {
     font-size: 15pt;
-    font-weight: bold;
+}
+
+.section table {
+    background-color: #DDDDDD;
 }

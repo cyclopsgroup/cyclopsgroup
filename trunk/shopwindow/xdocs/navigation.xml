@@ -2,6 +2,15 @@
 <project name="Maven">
     <title>Maven</title>
     <body>
+        <links>
+            <item name="Apache Jakarta" href="http://jakarta.apache.org"/>
+            <item name="Maven" href="http://maven.apache.org"/>
+            <item name="Jelly" href="http://jakarta.apache.org/commons/jelly"/>
+            <item name="Code Haus" href="http://www.codehaus.org"/>
+            <item name="Source Forge" href="http://sourceforge.net"/>
+            <item name="vTradEx" href="http://www.vtradex.com"/>
+            <item name="Personal Album" href="http://www.zope.org/Members/joeblack"/>
+        </links>
         <menu name="Overview">
             <item name="Home" href="/index.html"/>
             <item name="News and Articles" href="/weblogs/news/blog.html"/>

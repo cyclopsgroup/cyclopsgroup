@@ -1,85 +1,83 @@
 <?xml version="1.0"?>
 <!-- stylesheet to be used -->
-<jsl:stylesheet select="$doc" xmlns:define="jelly:define" xmlns:j="jelly:core" xmlns:jsl="jelly:jsl" xmlns:log="jelly:log" xmlns:util="jelly:util" xmlns:x="jelly:xml" xmlns:doc="doc" xmlns="dummy" trim="false">
-    <jsl:template match="document" trim="false">
-        <j:whitespace trim="true">
-            <j:useBean var="navbean" class="org.apache.maven.NavBean"/>
-            <j:set var="location" value="${outFile.substring(destdir.length())}"/>
-            <util:replace var="location" oldChar="\" newChar="/" value="${location}"/>
-            <!-- Stores location for publish date / version -->
-            <j:set var="date">${maven.xdoc.date}</j:set>
-            <j:set var="templateDir">${basedir}/src/template/jsl</j:set>
-            <j:setProperties object="${navbean}" document="${doc}" location="${location}"/>
-            <x:doctype name="html" publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
-            <html>
-                <head>
-                    <title>
-                        <x:expr select="./properties/title"/>
-                    </title>
+<jsl:stylesheet select="$doc" xmlns:define="jelly:define" xmlns:j="jelly:core" xmlns:jsl="jelly:jsl" xmlns:log="jelly:log" xmlns:util="jelly:util" xmlns:x="jelly:xml" xmlns:doc="doc" xmlns="dummy" trim="true">
+    <jsl:template match="document" trim="true">
+        <j:useBean var="navbean" class="org.apache.maven.NavBean"/>
+        <j:set var="location" value="${outFile.substring(destdir.length())}"/>
+        <util:replace var="location" oldChar="\" newChar="/" value="${location}"/>
+        <!-- Stores location for publish date / version -->
+        <j:set var="date">${maven.xdoc.date}</j:set>
+        <j:set var="templateDir">${basedir}/src/template/jsl</j:set>
+        <j:setProperties object="${navbean}" document="${doc}" location="${location}"/>
+        <x:doctype name="html" publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
+        <html>
+            <head>
+                <title>
+                    <x:expr select="./properties/title"/>
+                </title>
+                <util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
+                <j:if test="${projectCssFile.exists()}">
                     <style type="text/css"><![CDATA[
-          @import url("${relativePath}/style/maven.css");
-        ]]></style>
-                    <util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
-                    <j:if test="${projectCssFile.exists()}">
-                        <style type="text/css"><![CDATA[
             @import url("${relativePath}/style/project.css");
           ]]></style>
-                    </j:if>
-                    <link rel="stylesheet" type="text/css" href="${relativePath}/style/print.css" media="print"/>
-                    <meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
-                    <meta http-equiv="Keyword" content="Cyclops Group Community, Java, Maven, Jiaqi Guo, g-cyclops@users.sourceforge.net, joeblack.guo, joeblack.guo@vtradex.com"/>
-                    <x:forEach var="author" select="./properties/author">
-                        <meta name="author" content="${author.text}"/>
-                        <meta name="email" content="${author.attribute('email').value}"/>
-                    </x:forEach>
-                    <jsl:applyTemplates select="$doc/document/head/*"/>
-                </head>
-                <body>
-                    <jsl:applyTemplates select="$doc/document/body/@*"/>
-                    <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DBE4">
-                        <tr>
-                            <td width="20%">
-                                <img src="images/none.png" width="1" height="1"/>
-                            </td>
-                            <td width="62%">
-                                <img src="images/none.png" width="1" height="1"/>
-                            </td>
-                            <td width="18%">
-                                <img src="images/none.png" width="1" height="1"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#003366">
-                                    <tr>
-                                        <td rowspan="2">
-                                            <img src="${relativePath}/images/logo.gif" width="480" height="60"/>
-                                        </td>
-                                        <td colspan="2">
-                                            <img src="${relativePath}/images/none.png" width="1" height="36"/>
-                                        </td>
-                                        <td align="right">
-                                            <img src="${relativePath}/images/banner_right.gif" width="216" height="36"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-                                            <img src="${relativePath}/images/banner_corner.gif" width="30" height="24"/>
-                                        </td>
-                                        <form action="http://www.google.com/search" method="get">
-                                            <input name="domains" type="hidden" value="${pom.organization.url}"/>
-                                            <input name="sitesearch" type="hidden" value="${pom.organization.url}"/>
-                                            <td colspan="2" rowspan="2" nowrap="nowrap" bgcolor="#D1DBE4">
+                </j:if>
+                <link rel="stylesheet" type="text/css" href="${relativePath}/style/print.css" media="print"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
+                <meta http-equiv="Keyword" content="Cyclops Group Community, Java, Maven, Jiaqi Guo, g-cyclops@users.sourceforge.net, joeblack.guo, joeblack.guo@vtradex.com"/>
+                <x:forEach var="author" select="./properties/author">
+                    <meta name="author" content="${author.text}"/>
+                    <meta name="email" content="${author.attribute('email').value}"/>
+                </x:forEach>
+                <jsl:applyTemplates select="$doc/document/head/*"/>
+            </head>
+            <body>
+                <jsl:applyTemplates select="$doc/document/body/@*"/>
+                <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DBE4">
+                    <tr>
+                        <td width="20%">
+                            <img src="images/none.png" width="1" height="1"/>
+                        </td>
+                        <td width="62%">
+                            <img src="images/none.png" width="1" height="1"/>
+                        </td>
+                        <td width="18%">
+                            <img src="images/none.png" width="1" height="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#003366">
+                                <tr>
+                                    <td rowspan="2">
+                                        <a href="${pom.organization.url}">
+                                            <img border="0" src="${relativePath}/images/logo.gif" width="480" height="60"/>
+                                        </a>
+                                    </td>
+                                    <td colspan="2">
+                                        <img src="${relativePath}/images/none.png" width="1" height="36"/>
+                                    </td>
+                                    <td align="right">
+                                        <img src="${relativePath}/images/banner_right.gif" width="216" height="36"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <img src="${relativePath}/images/banner_corner.gif" width="30" height="24"/>
+                                    </td>
+                                    <form action="http://www.google.com/search" method="get">
+                                        <input name="domains" type="hidden" value="${pom.organization.url}"/>
+                                        <input name="sitesearch" type="hidden" value="${pom.organization.url}"/>
+                                        <td colspan="2" rowspan="2" nowrap="nowrap" bgcolor="#D1DBE4">
           Search in site:
             <input name="q" type="text" size="8"/>
-                                                <input name="btnG" value="go" type="image" src="${relativePath}/images/right.gif" width="15" height="15" border="0"/>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" bgcolor="#D1DBE4">
-                                            <script language="javascript" src="${relativePath}/language.js"/>
-                                            <script language="javascript"><![CDATA[
+                                            <input name="btnG" value="go" type="image" src="${relativePath}/images/right.gif" width="15" height="15" border="0"/>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" bgcolor="#D1DBE4">
+                                        <script language="javascript" src="${relativePath}/language.js"/>
+                                        <script language="javascript"><![CDATA[
 languageLink("${pom.url}${location}", "zh", "Translate this page into Simplified Chinese", "${relativePath}");
 languageLink("${pom.url}${location}", "de", "Translate this page into German", "${relativePath}");
 languageLink("${pom.url}${location}", "es", "Translate this page into Spanish", "${relativePath}");
@@ -90,80 +88,77 @@ languageLink("${pom.url}${location}", "ka", "Translate this page into Korean", "
 languageLink("${pom.url}${location}", "pt", "Translate this page into Portuguese", "${relativePath}");
 languageLink("${pom.url}${location}", "en", "Show original English version of this page", "${relativePath}");
                                             ]]></script>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <td bgcolor="#D1DBE4">
-                                <table cellspacing="0" cellpadding="3" width="100%">
-                                    <x:if select="$nav">
-                                        <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search"/>
-                                    </x:if>
-                                    <jsl:applyTemplates select="$projectNav/body/menu"/>
-                                </table>
-                            </td>
-                            <td bgcolor="#FFFFFF">
-                                <table width="100%" border="0" cellspacing="10">
-                                    <tr>
-                                        <td>
-                                            <jsl:applyTemplates select="$doc/document/body/*"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td bgcolor="#FFFFFF">
-                            </td>
-                        </tr>
-                        <tr align="center">
-                            <td colspan="3" bgcolor="#000000">
-                                <table border="0">
-                                    <tr>
-                                        <td>
-                                            <font color="white">Copyright 2003, 2004 Cyclops Group Community. All rights reserved</font>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <table width="100%" border="0">
-                        <tr>
-                            <td align="right">
-                                <table border="0">
-                                    <tr>
-                                        <td><img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl"/></td>
-                                        <td>
-                                            <a href="http://www.blogger.com">
-                                                <img src="${relativePath}/images/blogger.gif" width="80" height="30" border="0"/>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="http://sourceforge.net">
-                                                <img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0"/>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="http://maven.apache.org">
-                                                <img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0"/>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </body>
-            </html>
-        </j:whitespace>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td bgcolor="#D1DBE4">
+                            <table cellspacing="0" cellpadding="3" width="100%">
+                                <x:if select="$nav">
+                                    <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search"/>
+                                </x:if>
+                                <jsl:applyTemplates select="$projectNav/body/menu"/>
+                            </table>
+                        </td>
+                        <td bgcolor="#FFFFFF">
+                            <jsl:applyTemplates select="$doc/document/body/*"/>
+                        </td>
+                        <td bgcolor="#FFFFFF">
+                            <jsl:applyTemplates select="$nav/body/links"/>
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="3" bgcolor="#000000">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <j:useBean var="now" class="java.util.Date"/>
+                                        <font color="white">Copyright 2003, 2004 Cyclops Group Community. All rights reserved. Last built at ${now}</font>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" border="0">
+                    <tr>
+                        <td align="right">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl"/>
+                                    </td>
+                                    <td>
+                                        <a href="http://www.blogger.com">
+                                            <img src="${relativePath}/images/blogger.gif" width="80" height="30" border="0"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="http://sourceforge.net">
+                                            <img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="http://maven.apache.org">
+                                            <img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>
     </jsl:template>
     <!-- process the properties of the doc -->
-    <jsl:template match="properties" trim="false">
+    <jsl:template match="properties" trim="true">
         <!-- stick head block here later -->
     </jsl:template>
     <!-- Process a menu for the navigation bar -->
-    <jsl:template match="menu" trim="false">
+    <jsl:template match="menu" trim="true">
         <tr>
             <th>
                 <x:expr select="@name"/>
@@ -175,7 +170,7 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
             </td>
         </tr>
     </jsl:template>
-    <jsl:template match="item" trim="false">
+    <jsl:template match="item" trim="true">
         <x:set var="item" select="."/>
         <x:set var="_name" select="string(@name)"/>
         <x:set var="_link" select="string(@href)"/>
@@ -220,22 +215,42 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         </table>
     </jsl:template>
     <!-- Process the breadcrumb navbar -->
-    <jsl:template match="links" trim="false">
-        <j:set var="linkCount" value="1"/>
-        <x:forEach var="link" select="item">
-            <j:if test="${linkCount != 1}">|</j:if>
-            <j:set var="_name">
-                <x:expr select="@name"/>
-            </j:set>
-            <j:set var="_link">
-                <x:expr select="@href"/>
-            </j:set>
-            <doc:itemLink name="${_name}" link="${_link}"/>
-            <j:set var="linkCount" value="${1+linkCount}"/>
-        </x:forEach>
+    <jsl:template match="links" trim="true">
+        <table width="100%" cellspacing="0" cellpadding="3">
+            <tr>
+                <td>
+                    <img src="${relativePath}/images/none.png" width="1" height="25"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" bgcolor="#F7941C">
+                    <b>
+                        <font color="white">Links</font>
+                    </b>
+                </td>
+            </tr>
+            <j:set var="linkCount" value="1"/>
+            <x:forEach var="link" select="item">
+                <tr>
+                    <td align="right">
+                        <img src="${relativePath}/images/right.gif"/>
+                    </td>
+                    <td>
+                        <j:set var="_name">
+                            <x:expr select="@name"/>
+                        </j:set>
+                        <j:set var="_link">
+                            <x:expr select="@href"/>
+                        </j:set>
+                        <doc:itemLink name="${_name}" link="${_link}"/>
+                        <j:set var="linkCount" value="${1+linkCount}"/>
+                    </td>
+                </tr>
+            </x:forEach>
+        </table>
     </jsl:template>
     <!-- Google site search -->
-    <jsl:template match="search" trim="false">
+    <jsl:template match="search" trim="true">
         <!-- Search code: http://www.google.com/searchcode.html -->
         <!-- Google logos: http://www.google.com/stickers.html -->
         <!-- Terms: http://www.google.com./services/terms_free.html -->
@@ -260,43 +275,49 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         </div>
     </jsl:template>
     <!-- process a documentation section -->
-    <jsl:template match="section" trim="false">
-        <j:whitespace trim="true">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td colspan="2">
-                        <img src="${relativePath}/images/spacer.gif" width="15" height="15"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="62%">
-                        <j:set var="_sectionName">
-                            <x:expr select="@name"/>
-                        </j:set>
-                        <j:if test="${!empty(_sectionName)}">
-                            <p>
-                                <img src="${relativePath}/images/right.gif" align="absmiddle"/>
-                                <a name="${_sectionName}" class="section">${_sectionName}</a>
-                            </p>
-                        </j:if>
-                    </td>
-                    <td width="38%" align="right">
-                        <a href="#top">
-                            <img src="${relativePath}/images/icon_sortup.gif" border="0" alt="Goto Top of the Page"/>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td bgcolor="#003366" colspan="2">
-                        <img src="${relativePath}/images/spacer.gif" width="2" height="2"/>
-                    </td>
-                </tr>
-            </table>
-            <jsl:applyTemplates select="*"/>
-        </j:whitespace>
+    <jsl:template match="section" trim="true">
+        <table width="100%" border="0" cellspacing="10">
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td colspan="2">
+                                <img src="${relativePath}/images/spacer.gif" width="15" height="15"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="62%">
+                                <j:set var="_sectionName">
+                                    <x:expr select="@name"/>
+                                </j:set>
+                                <j:if test="${!empty(_sectionName)}">
+                                    <p>
+                                        <img src="${relativePath}/images/right.gif" align="absmiddle"/>
+                                        <a name="${_sectionName}" class="section">${_sectionName}</a>
+                                    </p>
+                                </j:if>
+                            </td>
+                            <td width="38%" align="right">
+                                <a href="#top">
+                                    <img src="${relativePath}/images/icon_sortup.gif" border="0" alt="Goto Top of the Page"/>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#003366" colspan="2">
+                                <img src="${relativePath}/images/spacer.gif" width="2" height="2"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="section">
+                        <jsl:applyTemplates select="*"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </jsl:template>
-    <jsl:template match="subsection" trim="false">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <jsl:template match="subsection" trim="true">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: white">
             <tr>
                 <td>
                     <img src="${relativePath}/images/spacer.gif" width="10" height="10"/>
@@ -317,9 +338,9 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         </table>
         <jsl:applyTemplates select="*"/>
     </jsl:template>
-    <jsl:template match="source" trim="false">
+    <jsl:template match="source" trim="true">
         <div id="source">
-            <table width="100%" border="1" cellspacing="0">
+            <table width="100%" border="1" cellspacing="0" style="background-color: white">
                 <tr>
                     <td>
                         <pre class="source">
@@ -330,20 +351,20 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
             </table>
         </div>
     </jsl:template>
-    <jsl:template match="footer" trim="false">
+    <jsl:template match="footer" trim="true">
         <tr>
             <td>
                 <jsl:applyTemplates select="*"/>
             </td>
         </tr>
     </jsl:template>
-    <jsl:template match="table" trim="false">
+    <jsl:template match="table" trim="true">
         <j:set var="rowcount" value="0"/>
-        <table cellpadding="3" cellspacing="1" border="0" width="100%" bgcolor="#DDDDDD">
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
             <jsl:applyTemplates select="*"/>
         </table>
     </jsl:template>
-    <jsl:template match="tr" trim="false">
+    <jsl:template match="tr" trim="true">
         <j:choose>
             <j:when test="${rowMode == 'a'}">
                 <j:set var="rowMode" value="b"/>
@@ -354,7 +375,6 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         </j:choose>
         <!-- copy attributes FIXME: Shouldn't this only be colspan|rowspan? -->
         <tr class="${rowMode}">
-            <!--x:attribute name="class">${rowMode}</x:attribute-->
             <x:forEach var="attr" select="@*">
                 <x:attribute name="${attr.name}">${attr.value}</x:attribute>
             </x:forEach>
@@ -364,10 +384,10 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     <!--************************-->
     <!-- glossary documentation -->
     <!--************************-->
-    <jsl:template match="glossary" trim="false">
+    <jsl:template match="glossary" trim="true">
         <jsl:applyTemplates select="glossary-entries/glossary-entry"/>
     </jsl:template>
-    <jsl:template match="glossary-entry" trim="false">
+    <jsl:template match="glossary-entry" trim="true">
         <strong>
             <x:expr select="name"/>
         </strong>
@@ -378,7 +398,7 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     <!--************************-->
     <!-- goals documentation    -->
     <!--************************-->
-    <jsl:template match="goals" trim="false">
+    <jsl:template match="goals" trim="true">
         <!-- reset row alternation -->
         <j:set var="rowMode" value=""/>
         <div class="h3">
@@ -397,7 +417,7 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     <!-- a goal -->
     <!-- FIXME: this is copied from tr - there must be a way of
              calling templates in jsl? -->
-    <jsl:template match="goal" trim="false">
+    <jsl:template match="goal" trim="true">
         <j:choose>
             <j:when test="${rowMode == 'a'}">
                 <j:set var="rowMode" value="b"/>
@@ -422,14 +442,14 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         </tr>
     </jsl:template>
     <jsl:template match="description">
-        <jsl:copy trim="false">
-            <jsl:applyTemplates trim="false"/>
+        <jsl:copy trim="true">
+            <jsl:applyTemplates trim="true"/>
         </jsl:copy>
     </jsl:template>
     <!--************************-->
     <!-- changelog documentation-->
     <!--************************-->
-    <jsl:template match="changelog" trim="false">
+    <jsl:template match="changelog" trim="true">
         <j:set var="rowMode" value=""/>
         <table width="100%">
             <tr>
@@ -442,7 +462,7 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     </jsl:template>
     <!-- transform a changelog entry -->
     <!-- FIXME: tr code copied from above -->
-    <jsl:template match="changelog-entry" trim="false">
+    <jsl:template match="changelog-entry" trim="true">
         <j:choose>
             <j:when test="${rowMode == 'a'}">
                 <j:set var="rowMode" value="b"/>
@@ -482,15 +502,15 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         <br/>
     </jsl:template>
     <!-- remove the space at the end of parsed "a" anchors -->
-    <jsl:template match="a" trim="false">
+    <jsl:template match="a" trim="true">
         <jsl:copy trim="true">
             <jsl:applyTemplates trim="true"/>
         </jsl:copy>
     </jsl:template>
     <!-- copy any other elements through -->
-    <jsl:template match="*" trim="false">
-        <jsl:copy trim="false">
-            <jsl:applyTemplates trim="false"/>
+    <jsl:template match="*" trim="true">
+        <jsl:copy trim="true">
+            <jsl:applyTemplates trim="true"/>
         </jsl:copy>
     </jsl:template>
     <!-- element values don't pass through as text -->
