@@ -16,9 +16,11 @@
  */
 package com.cyclopsgroup.cyclib.jelly;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.jelly.DynaTagSupport;
 import org.apache.commons.jelly.JellyTagException;
+
+import com.cyclopsgroup.cyclib.DefaultValueParser;
+import com.cyclopsgroup.cyclib.ValueParser;
 
 /**
  * TagSupport with attribute support
@@ -27,14 +29,14 @@ import org.apache.commons.jelly.JellyTagException;
  */
 public abstract class RichTagSupport extends DynaTagSupport
 {
-    private ExtendedProperties attributes = new ExtendedProperties();
+    private ValueParser attributes = new DefaultValueParser();
 
     /**
      * Get attributes
      *
      * @return Attributes object
      */
-    public ExtendedProperties getAttributes()
+    public ValueParser getAttributes()
     {
         return attributes;
     }
@@ -47,6 +49,9 @@ public abstract class RichTagSupport extends DynaTagSupport
     public void setAttribute(String name, Object value)
             throws JellyTagException
     {
-        attributes.addProperty(name, value);
+        if (value != null)
+        {
+            attributes.set(name, value.toString());
+        }
     }
 }
