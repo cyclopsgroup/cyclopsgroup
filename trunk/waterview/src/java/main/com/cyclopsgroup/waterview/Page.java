@@ -14,23 +14,24 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.manager;
+package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
- * Object which can resolve an action from a given path
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface ActionResolver
+public interface Page
 {
+
     /**
-     * Resolve an action from a given path
+     * Method build() in class Page
      * 
-     * @param path Requested path
-     * @param packageName Package to find
-     * @return Action class
+     * @param runtime
+     * @param context
+     * @throws Exception
      */
-    Action resolve(String path, String packageName);
+    void build(UIRuntime runtime, Context context) throws Exception;
 }

@@ -27,14 +27,14 @@ import javax.servlet.http.HttpSession;
 import com.cyclopsgroup.gearset.bean.ValueParser;
 import com.cyclopsgroup.gearset.runtime.Context;
 import com.cyclopsgroup.gearset.runtime.InheritableContext;
-import com.cyclopsgroup.waterview.WebRuntime;
+import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
  * Default implementation of WebRuntime
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class DefaultWebRuntime implements WebRuntime
+public class DefaultWebRuntime implements UIRuntime
 {
     private HttpServletRequest httpServletRequest;
 
@@ -64,7 +64,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getHttpServletRequest in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getHttpServletRequest()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletRequest()
      */
     public HttpServletRequest getHttpServletRequest()
     {
@@ -74,7 +74,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getHttpServletResponse in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getHttpServletResponse()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpServletResponse()
      */
     public HttpServletResponse getHttpServletResponse()
     {
@@ -84,7 +84,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getHttpSession in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getHttpSession()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getHttpSession()
      */
     public HttpSession getHttpSession()
     {
@@ -94,7 +94,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getLocale in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getLocale()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getLocale()
      */
     public Locale getLocale()
     {
@@ -104,7 +104,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getProcessors in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getProcessors()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getProcessors()
      */
     public List getProcessors()
     {
@@ -114,7 +114,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getRenderContext in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getRenderContext()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getRenderContext()
      */
     public Context getRenderContext()
     {
@@ -124,7 +124,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getRenderTemplate in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getPage()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getPage()
      */
     public String getPage()
     {
@@ -134,7 +134,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method getRequestParameters in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#getRequestParameters()
+     * @see com.cyclopsgroup.waterview.UIRuntime#getRequestParameters()
      */
     public ValueParser getRequestParameters()
     {
@@ -144,7 +144,7 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Override method setRenderTemplate in super class of DefaultWebRuntime
      * 
-     * @see com.cyclopsgroup.waterview.WebRuntime#setPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.UIRuntime#setPage(java.lang.String)
      */
     public void setPage(String template)
     {

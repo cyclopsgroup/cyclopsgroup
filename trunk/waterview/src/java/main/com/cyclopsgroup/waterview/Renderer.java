@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview;
 
 import java.io.PrintWriter;
 
+
 /**
  * Web renderer
  * 
@@ -33,5 +34,5 @@ public interface Renderer
      * @param out Output writer
      * @throws Exception Throw it out
      */
-    void render(WebRuntime runtime, PrintWriter out) throws Exception;
+    void render(UIRuntime runtime, PrintWriter out) throws Exception;
 }

@@ -14,37 +14,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.manager;
+package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.waterview.Action;
+import org.apache.commons.collections.ExtendedProperties;
 
 /**
- * Default implementation of action resolver
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class DefaultActionResolver implements ActionResolver
+public interface WaterviewValve
 {
+    /** Empty valve array */
+    WaterviewValve[] EMPTY_ARRAY = new WaterviewValve[0];
+
     /**
-     * Override method resolve in super class of DefaultActionResolver
+     * Method process() in class WaterviewValve
      * 
-     * @see com.cyclopsgroup.waterview.manager.ActionResolver#resolve(java.lang.String, java.lang.String)
+     * @param runtime
+     * @param props
+     * @throws Exception
      */
-    public Action resolve(String path, String packageName)
-    {
-        String rpath = path.replace('/', '.');
-        if (!rpath.startsWith("."))
-        {
-            rpath += '.';
-        }
-        String className = packageName + rpath;
-        try
-        {
-            return (Action) Class.forName(className).newInstance();
-        }
-        catch (Exception ignored)
-        {
-            return null;
-        }
-    }
+    void process(UIRuntime runtime, ExtendedProperties props) throws Exception;
 }

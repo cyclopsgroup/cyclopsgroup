@@ -14,15 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.servlet;
+package com.cyclopsgroup.waterview.ui.action.sample;
 
+import com.cyclopsgroup.gearset.bean.ValueParser;
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * TODO Add javadoc for class
+ * Create report action
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ModuleManager
+public class CreateReport implements Action
 {
-
+    /**
+     * Override method execute in super class of CreateReport
+     * 
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.UIRuntime)
+     */
+    public void execute(UIRuntime runtime) throws Exception
+    {
+        ValueParser params = runtime.getRequestParameters();
+        System.out.println(params);
+    }
 }

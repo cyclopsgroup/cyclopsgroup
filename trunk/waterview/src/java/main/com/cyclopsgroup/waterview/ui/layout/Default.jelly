@@ -18,7 +18,7 @@
  -->
 <html xmlns:p="http://www.cyclopsgroup.org/technology/waterview/portal">
     <head>
-        <p:component category="widget" path="HtmlHeader.jelly" name="header"/>
+        <p:include category="widget" path="HtmlHeader.jelly" name="header"/>
     </head>
     <body>
         <table width="100%">
@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td width="20%" valign="top">
-                    <p:component category="left" path="${path}" name="left"/>
+                    <p:component category="navigator" path="${path}" name="left"/>
                 </td>
                 <td width="65%" valign="top">
                     <p:component category="body" path="${path}" name="body"/>

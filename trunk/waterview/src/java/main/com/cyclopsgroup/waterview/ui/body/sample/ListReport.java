@@ -14,22 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.ui.body.sample;
 
-
+import com.cyclopsgroup.gearset.runtime.Context;
+import com.cyclopsgroup.waterview.Page;
+import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * A runnable module
+ * List report page
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Action
+public class ListReport implements Page
 {
     /**
-     * Process given runtime object
+     * Override method build in super class of ListReport
      * 
-     * @param runtime Runtime data object
-     * @throws Exception Throw it to container
+     * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime, com.cyclopsgroup.gearset.runtime.Context)
      */
-    void execute(UIRuntime runtime) throws Exception;
+    public void build(UIRuntime runtime, Context context) throws Exception
+    {
+        // TODO Auto-generated method stub
+
+    }
 }

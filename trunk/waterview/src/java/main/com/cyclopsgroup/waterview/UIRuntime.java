@@ -31,7 +31,7 @@ import com.cyclopsgroup.gearset.runtime.Context;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface WebRuntime
+public interface UIRuntime
 {
     /**
      * Get original servlet request object

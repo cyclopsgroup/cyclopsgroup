@@ -17,19 +17,21 @@
 package com.cyclopsgroup.waterview;
 
 
-
 /**
- * A runnable module
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Action
+public interface Valve
 {
+    /** Empty valve array */
+    WaterviewValve[] EMPTY_ARRAY = new WaterviewValve[0];
+
     /**
-     * Process given runtime object
+     * Method process() in class WaterviewValve
      * 
-     * @param runtime Runtime data object
-     * @throws Exception Throw it to container
+     * @param runtime
+     * @throws Exception
      */
-    void execute(UIRuntime runtime) throws Exception;
+    void process(UIRuntime runtime) throws Exception;
 }

@@ -14,23 +14,30 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.manager;
+package com.cyclopsgroup.waterview.valve;
 
-import com.cyclopsgroup.waterview.Renderer;
+import org.apache.commons.collections.ExtendedProperties;
+
+import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.WaterviewValve;
 
 /**
  * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface RendererResolver
+public class ParseURLValve implements WaterviewValve
 {
+
     /**
-     * Method resolve() in class RendererResolver
+     * Override method process in super class of ParseURLValve
      * 
-     * @param path
-     * @param packageName
-     * @return
+     * @see com.cyclopsgroup.waterview.WaterviewValve#process(com.cyclopsgroup.waterview.UIRuntime, org.apache.commons.collections.ExtendedProperties)
      */
-    Renderer resolve(String path, String packageName);
+    public void process(UIRuntime runtime, ExtendedProperties props)
+            throws Exception
+    {
+        String path = runtime.getHttpServletRequest().getPathInfo();
+
+    }
 }

@@ -17,12 +17,19 @@
 package com.cyclopsgroup.waterview.servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.lang.StringUtils;
+
+import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * Main waterview servlet
@@ -31,6 +38,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WaterviewServlet extends HttpServlet
 {
+    private Waterview waterview;
+
     /**
      * Override method doGet in super class of WaterviewServlet
      * 
@@ -53,18 +62,10 @@ public class WaterviewServlet extends HttpServlet
         internallyProcess(request, response);
     }
 
-    private void doProcess(HttpServletRequest request,
-            HttpServletResponse response) throws Exception
+    private void handleException(Throwable e, UIRuntime runtime)
+            throws ServletException
     {
-        DefaultWebRuntime runtime = new DefaultWebRuntime(request, response);
-        runtime.getRenderContext().put("runtime", runtime);
-        runtime.getRenderContext().put("context", runtime.getRenderContext());
-        System.out.println(request.getPathInfo());
-    }
-
-    private void handleException(Throwable e)
-    {
-        e.printStackTrace(System.err);
+        throw new ServletException("Waterview error", e);
     }
 
     /**
@@ -74,18 +75,42 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
+        waterview = new Waterview();
+
+        String propertiesFile = config.getInitParameter("waterview.properties");
+        if (StringUtils.isEmpty(propertiesFile))
+        {
+            propertiesFile = "WEB-INF/waterview.properties";
+        }
+        try
+        {
+            ExtendedProperties props = new ExtendedProperties(propertiesFile);
+            Enumeration e = config.getInitParameterNames();
+            while (e.hasMoreElements())
+            {
+                String name = (String) e.nextElement();
+                props.setProperty(name, config.getInitParameter(name));
+            }
+            waterview.init(props.subset("waterview"));
+        }
+        catch (Exception e)
+        {
+            throw new ServletException("Can not initialize waterview with "
+                    + propertiesFile, e);
+        }
     }
 
     private void internallyProcess(HttpServletRequest request,
-            HttpServletResponse response) throws IOException
+            HttpServletResponse response) throws IOException, ServletException
     {
+        DefaultWebRuntime runtime = new DefaultWebRuntime(request, response);
         try
         {
-            doProcess(request, response);
+            waterview.process(runtime);
         }
         catch (Throwable e)
         {
-            handleException(e);
+            handleException(e, runtime);
         }
         finally
         {

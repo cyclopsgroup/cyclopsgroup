@@ -16,18 +16,19 @@
  *  limitations under the License.
  * =========================================================================
  -->
- <table width="100%" xmlns:f="http://www.cyclopsgroup.org/technology/waterview/form">
- 	<tr>
- 		<td>&nbsp;</td>
- 		<f:form method="get" action="$link.setPage("portal/SearchResult.jelly")">
- 			<td>
- 				<f:input type="text" name="p" title="${rb.keyword_title}">
- 					<f:description>${rb.keyword_description}</f:description>
- 					<f:validators>
- 						<f:empty-validator message="${rb.keyword_empty_message}" />
- 					</f:validators>
- 				</f:input>
- 				<f:button type="submit" title="${rb.do_search}"/>
- 			</td>
- 		</f:form>
- </table>
+<table width="100%" xmlns:f="http://www.cyclopsgroup.org/technology/waterview/form">
+    <tr>
+        <td>&nbsp;</td>
+        <f:form method="get" action="$link.setPage('portal/SearchResult.jelly')">
+            <td>
+                <f:input type="text" name="p" title="${rb.keyword_title}">
+                    <f:description>${rb.keyword_description}</f:description>
+                    <f:validators>
+                        <f:empty-validator message="${rb.keyword_empty_message}"/>
+                    </f:validators>
+                </f:input>
+                <f:button type="submit" title="${rb.do_search}"/>
+            </td>
+        </f:form>
+    </tr>
+</table>
