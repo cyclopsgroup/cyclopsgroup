@@ -4,7 +4,7 @@
     <artifactId>cyclib</artifactId>
     <name>cyclib</name>
     <groupId>cyclib</groupId>
-    <currentVersion>1.0</currentVersion>
+    <currentVersion>0.1</currentVersion>
     <inceptionYear>2004</inceptionYear>
     <logo>/images/logo.gif</logo>
     <dependencies>
