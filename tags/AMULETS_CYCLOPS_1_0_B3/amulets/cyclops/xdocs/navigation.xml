@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="Amulets" href="http://cyclops-group.sourceforge.net/projects/amulets"/>
+            <item name="Maven" href="http://maven.apache.org"/>
+        </links>
+        <menu name="Overview">
+            <item name="Goals" href="/index.html"/>
+            <item name="Roadmap" href="/roadmap.html"/>
+        </menu>
+        <search/>
+    </body>
+</project>

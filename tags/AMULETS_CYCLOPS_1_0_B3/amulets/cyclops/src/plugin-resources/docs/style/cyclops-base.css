@@ -1,0 +1,140 @@
+body, td, th, select, input, li
+{
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+img
+{
+    border-width: 0px;
+}
+
+th
+{
+    font-weight: bold;
+    text-align: left;
+    padding: 3px;
+}
+
+form
+{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+a.externalLink, a.externalLink:link, a.externalLink:visited, a.externalLink:active, a.externalLink:hover
+{
+    background: url(../images/external.png) right center no-repeat;
+    padding-right: 15px;
+}
+
+div.section table.bodyTable
+{
+    width: 100%;
+}
+
+div.section table.bodyTable td
+{
+    padding: 3px;
+}
+
+div.section
+{
+    padding: 10px;
+}
+
+div.section div.sectionTitle
+{
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 22px;
+}
+
+div.subsection
+{
+    padding-bottom: 10px;
+}
+
+div.subsection div.subsectionTitle
+{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+#documentWrapperBlock
+{
+    text-align:center;
+}
+
+#documentBlock
+{
+    text-align: left;
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#bannerBlock
+{
+    width: 100%;
+    clear: both;
+}
+
+#organizationBannerBlock
+{
+    float: left;
+    width: 67%;
+    vertical-align: middle;
+}
+
+#projectBannerBlock
+{
+    float: left;
+    width: 33%;
+    height: 80px;
+    background: url(../images/banner_right.gif) right no-repeat;
+}
+
+#languageBarBlock
+{
+    width: 100%;
+    clear: both;
+    text-align: right;
+}
+
+#navigatorBlock
+{
+    float: left;
+    width: 18%;
+}
+
+#bodyBlock
+{
+    float:left;
+    width: 66%;
+    padding-top: 20px;
+}
+
+#adBlock
+{
+    float:left;
+    width: 15%;
+}
+
+#copyrightsBlock
+{
+    text-align: center;
+    width: 100%;
+    clear: both;
+}
+
+#poweredbyBlock
+{
+    text-align: center;
+    width: 100%;
+    clear: both;
+}
