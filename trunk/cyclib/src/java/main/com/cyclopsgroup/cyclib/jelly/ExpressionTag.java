@@ -30,7 +30,7 @@ import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.cyclib.Expression;
 
 /**
- * TODO Add javadoc for this class
+ * Simple expression tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
