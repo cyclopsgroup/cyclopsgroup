@@ -205,15 +205,18 @@ import junit.framework.TestCase;
  * Edited with eclipse 2.1.3
  */
 public class EngineTest extends TestCase {
+
     private Engine engine;
+
     /** Override method setUp in the derived class
      * @see junit.framework.TestCase#setUp()
      */
     protected void setUp() throws Exception {
-        engine =
-            EngineFactory.getInstance().newEngine(new File("src/rttest/home"));
+        engine = EngineFactory.getInstance().newEngine(
+                new File("src/rttest/home"));
         engine.startup();
     }
+
     /** Method testLoading() in class EngineTest
      */
     public void testGetComponents() {
@@ -222,14 +225,21 @@ public class EngineTest extends TestCase {
             Component component = components[i];
             System.out.println(component);
         }
+        assertEquals(3, components.length);
     }
+
     /** Method testGetComponent() in class EngineTest
      */
     public void testGetComponent() {
-        Component component =
-            engine.getComponent("com.cyclops.jmainboard.test1");
-        //assertNotNull(component);
+        Component component = engine
+                .getComponent("com.cyclops.jmainboard.test1");
+        assertNotNull(component);
+        assertEquals("xyz", component.getProperties().getProperty("dddddddd",
+                "xyz"));
+        assertEquals("aaa", component.getProperties().getProperty("property1",
+                "aaa"));
     }
+
     /** Override method tearDown in the derived class
      * @see junit.framework.TestCase#tearDown()
      */

@@ -202,6 +202,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 import org.apache.velocity.tools.generic.RenderTool;
 
 import com.cyclops.jmainboard.Component;
@@ -262,10 +263,12 @@ public class ComponentLoader extends LoggableObject {
     private void loadComponent(File folder) {
         File descriptor = new File(folder, "component.xml");
         try {
+            Velocity.init();
             ComponentModel cm = (ComponentModel) modelParser.parse(descriptor
                     .toURL());
             DefaultComponent dc = (DefaultComponent) Class.forName(
                     cm.getImplementation()).newInstance();
+            dc.setEngine(engine);
             VelocityContext ctx = VelocityUtils.createContext(engine
                     .getProperties());
             dc.setId(cm.getId());
@@ -298,6 +301,7 @@ public class ComponentLoader extends LoggableObject {
             }
         } catch (Exception e) {
             getLog().error("Load component error", e);
+            e.printStackTrace();
         }
     }
 }
