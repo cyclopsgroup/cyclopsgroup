@@ -4,7 +4,8 @@
     Group*,
     GroupHierarchy*,
     UserGroup*,
-    Acl*)>
+    Acl*,
+    CTndRoles*)>
 <!ATTLIST dataset
     name CDATA #REQUIRED
 >
@@ -64,6 +65,14 @@
     Id CDATA #REQUIRED
     OwnerName CDATA #REQUIRED
     OwnerType CDATA #REQUIRED
+    IsRole CDATA #REQUIRED
     Permission CDATA #REQUIRED
+>
+
+<!ELEMENT CTndRoles EMPTY>
+<!ATTLIST CTndRoles
+    Id CDATA #REQUIRED
+    RoleName CDATA #REQUIRED
+    Description CDATA #IMPLIED
 >
 

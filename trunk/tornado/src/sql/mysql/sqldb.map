@@ -1,6 +1,6 @@
 #Sqlfile -> Database map
-#Fri Oct 17 22:47:33 PDT 2003
+#Tue Oct 21 14:50:36 PDT 2003
 tornado-schema-idtable-init.sql=default
-tornado-data.sql=default
-tornado-schema.sql=default
 id-table-schema.sql=default
+tornado-schema.sql=default
+tornado-data.sql=default

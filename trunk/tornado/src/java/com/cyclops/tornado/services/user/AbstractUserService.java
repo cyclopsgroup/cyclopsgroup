@@ -8,6 +8,7 @@ package com.cyclops.tornado.services.user;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Vector;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
@@ -22,18 +23,6 @@ import com.cyclops.tornado.services.BaseService;
 public abstract class AbstractUserService
     extends BaseService
     implements UserService {
-    private final class UserEntry {
-        private long latestAccess;
-        private User user;
-        private UserEntry(User usr) {
-            this.user = usr;
-            latestAccess = System.currentTimeMillis();
-        }
-        private boolean isExpired() {
-            return (!user.isAnonymous())
-                && System.currentTimeMillis() - latestAccess > userTimeout;
-        }
-    }
     private final class CheckingThread implements Runnable {
         public void run() {
             long checkInteval =
@@ -61,12 +50,29 @@ public abstract class AbstractUserService
             }
         }
     }
-    private static final long DEFAULT_USER_TIMEOUT = 1800000L;
+    private final class UserEntry {
+        private long latestAccess;
+        private User user;
+        private UserEntry(User usr) {
+            this.user = usr;
+            latestAccess = System.currentTimeMillis();
+        }
+        private boolean isExpired() {
+            return (!user.isAnonymous())
+                && System.currentTimeMillis() - latestAccess > userTimeout;
+        }
+    }
     private static final long DEFAULT_USER_INTEVAL = 1000L;
+    private static final long DEFAULT_USER_TIMEOUT = 1800000L;
     private User anonymousUser;
+    private Thread checkingThread;
+    private Vector userListeners = new Vector();
     private Hashtable userRepo = new Hashtable();
     private long userTimeout;
-    private Thread checkingThread;
+    /** Method checkUser()
+     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String)
+     */
+    public abstract int checkUser(String userName, String password);
     /** Method getActiveUser()
      * @see com.cyclops.tornado.services.user.UserService#getActiveUser(java.lang.String)
      */
@@ -108,6 +114,17 @@ public abstract class AbstractUserService
         checkingThread.setDaemon(true);
         checkingThread.setPriority(Thread.MIN_PRIORITY);
         checkingThread.start();
+        String[] listeners = conf.getStringArray("listener");
+        for (int i = 0; listeners != null && i < listeners.length; i++) {
+            String listenerName = listeners[i];
+            try {
+                UserListener ul =
+                    (UserListener) Class.forName(listenerName).newInstance();
+                userListeners.add(ul);
+            } catch (Exception e) {
+                logger.error("Load user listener error", e);
+            }
+        }
     }
     /** In default implementation, it load user object from database.
      * New implementation of this class can override this method to make different authorization way.
@@ -138,22 +155,33 @@ public abstract class AbstractUserService
      */
     public void singin(String key, String userName) {
         boolean existed = false;
+        User user = null;
         for (Iterator i = userRepo.values().iterator(); i.hasNext();) {
             UserEntry entry = (UserEntry) i.next();
             if (StringUtils.equals(userName, entry.user.getName())) {
                 existed = true;
                 userRepo.put(key, entry);
+                user = entry.user;
                 entry.latestAccess = System.currentTimeMillis();
                 break;
             }
         }
         if (!existed) {
             try {
-                User user = loadUser(userName, false);
-                UserEntry entry = new UserEntry(user);
+                User userInstance = loadUser(userName, false);
+                UserEntry entry = new UserEntry(userInstance);
                 userRepo.put(key, entry);
+                user = userInstance;
             } catch (Exception e) {
                 logger.error("Loading User Error", e);
+            }
+        }
+        for (Iterator i = userListeners.iterator(); i.hasNext();) {
+            UserListener ul = (UserListener) i.next();
+            try {
+                ul.onSingIn(user);
+            } catch (Exception e) {
+                logger.error("Trigger user signin error", e);
             }
         }
     }
@@ -161,10 +189,17 @@ public abstract class AbstractUserService
      * @see com.cyclops.tornado.services.user.UserService#singout(java.lang.String)
      */
     public void singout(String key) {
-        userRepo.remove(key);
+        if (userRepo.containsKey(key)) {
+            UserEntry entry = (UserEntry) userRepo.get(key);
+            for (Iterator i = userListeners.iterator(); i.hasNext();) {
+                UserListener listener = (UserListener) i.next();
+                try {
+                    listener.onSingOut(entry.user);
+                } catch (Exception e) {
+                    logger.error("Trigger user signout error", e);
+                }
+            }
+            userRepo.remove(key);
+        }
     }
-    /** Method checkUser()
-     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String)
-     */
-    public abstract int checkUser(String userName, String password);
 }

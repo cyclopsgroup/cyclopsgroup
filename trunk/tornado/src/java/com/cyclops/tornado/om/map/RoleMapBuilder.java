@@ -11,13 +11,13 @@ import org.apache.torque.map.TableMap;
 
 /**
   */
-public class AclMapBuilder implements MapBuilder
+public class RoleMapBuilder implements MapBuilder
 {
     /**
      * The name of this class
      */
     public static final String CLASS_NAME =
-        "com.cyclops.tornado.om.map.AclMapBuilder";
+        "com.cyclops.tornado.om.map.RoleMapBuilder";
 
 
     /**
@@ -55,17 +55,15 @@ public class AclMapBuilder implements MapBuilder
     {
         dbMap = Torque.getDatabaseMap("default");
 
-        dbMap.addTable("c_tnd_acls");
-        TableMap tMap = dbMap.getTable("c_tnd_acls");
+        dbMap.addTable("c_tnd_roles");
+        TableMap tMap = dbMap.getTable("c_tnd_roles");
 
                 tMap.setPrimaryKeyMethod(TableMap.ID_BROKER);
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_acls.ID", new Integer(0));
-                                                        tMap.addColumn("c_tnd_acls.OWNER_NAME", new String());
-                                                        tMap.addColumn("c_tnd_acls.OWNER_TYPE", new String());
-                                                        tMap.addColumn("c_tnd_acls.IS_ROLE", new Boolean(true));
-                                                        tMap.addColumn("c_tnd_acls.PERMISSION", new String());
+                                      tMap.addPrimaryKey("c_tnd_roles.ID", new Integer(0));
+                                                        tMap.addColumn("c_tnd_roles.ROLE_NAME", new String());
+                                                        tMap.addColumn("c_tnd_roles.DESCRIPTION", new String());
                               }
 }

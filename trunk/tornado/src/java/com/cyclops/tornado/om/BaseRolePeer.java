@@ -33,7 +33,7 @@ import com.cyclops.tornado.om.map.*;
 
 /**
  */
-public abstract class BaseAclPeer
+public abstract class BaseRolePeer
     extends BasePeer
 {
 
@@ -41,7 +41,7 @@ public abstract class BaseAclPeer
     public static final String DATABASE_NAME = "default";
 
      /** the table name for this class */
-    public static final String TABLE_NAME = "c_tnd_acls";
+    public static final String TABLE_NAME = "c_tnd_roles";
 
     /**
      * @return the map builder for this peer
@@ -51,27 +51,21 @@ public abstract class BaseAclPeer
     public static MapBuilder getMapBuilder()
         throws TorqueException
     {
-        return getMapBuilder(AclMapBuilder.CLASS_NAME);
+        return getMapBuilder(RoleMapBuilder.CLASS_NAME);
     }
 
     /** the column name for the ID field */
     public static final String ID;
-    /** the column name for the OWNER_NAME field */
-    public static final String OWNER_NAME;
-    /** the column name for the OWNER_TYPE field */
-    public static final String OWNER_TYPE;
-    /** the column name for the IS_ROLE field */
-    public static final String IS_ROLE;
-    /** the column name for the PERMISSION field */
-    public static final String PERMISSION;
+    /** the column name for the ROLE_NAME field */
+    public static final String ROLE_NAME;
+    /** the column name for the DESCRIPTION field */
+    public static final String DESCRIPTION;
 
     static
     {
-    ID = "c_tnd_acls.ID";
-    OWNER_NAME = "c_tnd_acls.OWNER_NAME";
-    OWNER_TYPE = "c_tnd_acls.OWNER_TYPE";
-    IS_ROLE = "c_tnd_acls.IS_ROLE";
-    PERMISSION = "c_tnd_acls.PERMISSION";
+    ID = "c_tnd_roles.ID";
+    ROLE_NAME = "c_tnd_roles.ROLE_NAME";
+    DESCRIPTION = "c_tnd_roles.DESCRIPTION";
 
         if (Torque.isInit())
         {
@@ -86,17 +80,17 @@ public abstract class BaseAclPeer
         }
         else
         {
-            Torque.registerMapBuilder(AclMapBuilder.CLASS_NAME);
+            Torque.registerMapBuilder(RoleMapBuilder.CLASS_NAME);
         }
     }
 
  
     /** number of columns for this peer */
-    public static final int numColumns =  5;
+    public static final int numColumns =  3;
 
     /** A class that can be returned by this peer. */
     protected static final String CLASSNAME_DEFAULT =
-        "com.cyclops.tornado.om.Acl";
+        "com.cyclops.tornado.om.Role";
 
     /** A class that can be returned by this peer. */
     protected static final Class CLASS_DEFAULT = initClass(CLASSNAME_DEFAULT);
@@ -186,7 +180,7 @@ public abstract class BaseAclPeer
     public static ObjectKey doInsert(Criteria criteria)
         throws TorqueException
     {
-        return BaseAclPeer
+        return BaseRolePeer
             .doInsert(criteria, (Connection) null);
     }
 
@@ -203,7 +197,7 @@ public abstract class BaseAclPeer
     public static ObjectKey doInsert(Criteria criteria, Connection con)
         throws TorqueException
     {
-                                                                           
+                                               
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -232,10 +226,8 @@ public abstract class BaseAclPeer
             throws TorqueException
     {
             criteria.addSelectColumn(ID);
-            criteria.addSelectColumn(OWNER_NAME);
-            criteria.addSelectColumn(OWNER_TYPE);
-            criteria.addSelectColumn(IS_ROLE);
-            criteria.addSelectColumn(PERMISSION);
+            criteria.addSelectColumn(ROLE_NAME);
+            criteria.addSelectColumn(DESCRIPTION);
         }
 
     /**
@@ -247,15 +239,15 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static Acl row2Object(Record row,
+    public static Role row2Object(Record row,
                                              int offset,
                                              Class cls)
         throws TorqueException
     {
         try
         {
-            Acl obj = (Acl) cls.newInstance();
-            AclPeer.populateObject(row, offset, obj);
+            Role obj = (Role) cls.newInstance();
+            RolePeer.populateObject(row, offset, obj);
                             obj.setModified(false);
                         obj.setNew(false);
 
@@ -282,16 +274,14 @@ public abstract class BaseAclPeer
      */
     public static void populateObject(Record row,
                                       int offset,
-                                      Acl obj)
+                                      Role obj)
         throws TorqueException
     {
         try
         {
                             obj.setId(row.getValue(offset + 0).asInt());
-                                obj.setOwnerName(row.getValue(offset + 1).asString());
-                                obj.setOwnerType(row.getValue(offset + 2).asString());
-                                obj.setIsRole(row.getValue(offset + 3).asBoolean());
-                                obj.setPermission(row.getValue(offset + 4).asString());
+                                obj.setRoleName(row.getValue(offset + 1).asString());
+                                obj.setDescription(row.getValue(offset + 2).asString());
                             }
         catch (DataSetException e)
         {
@@ -340,7 +330,7 @@ public abstract class BaseAclPeer
     public static List doSelectVillageRecords(Criteria criteria)
         throws TorqueException
     {
-        return BaseAclPeer
+        return BaseRolePeer
             .doSelectVillageRecords(criteria, (Connection) null);
     }
 
@@ -361,7 +351,7 @@ public abstract class BaseAclPeer
             addSelectColumns(criteria);
         }
 
-                                                                           
+                                               
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -397,8 +387,8 @@ public abstract class BaseAclPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(AclPeer.row2Object(row, 1,
-                AclPeer.getOMClass()));
+            results.add(RolePeer.row2Object(row, 1,
+                RolePeer.getOMClass()));
         }
         return results;
     }
@@ -429,7 +419,7 @@ public abstract class BaseAclPeer
      */
     public static void doUpdate(Criteria criteria) throws TorqueException
     {
-         BaseAclPeer
+         BaseRolePeer
             .doUpdate(criteria, (Connection) null);
     }
 
@@ -449,7 +439,7 @@ public abstract class BaseAclPeer
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
                                 selectCriteria.put(ID, criteria.remove(ID));
-                                                                                                          
+                                                            
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -476,7 +466,7 @@ public abstract class BaseAclPeer
      */
      public static void doDelete(Criteria criteria) throws TorqueException
      {
-         BaseAclPeer
+         BaseRolePeer
             .doDelete(criteria, (Connection) null);
      }
 
@@ -493,7 +483,7 @@ public abstract class BaseAclPeer
      public static void doDelete(Criteria criteria, Connection con)
         throws TorqueException
      {
-                                                                           
+                                               
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
         // another value so == check is okay and faster
@@ -517,7 +507,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static List doSelect(Acl obj) throws TorqueException
+    public static List doSelect(Role obj) throws TorqueException
     {
         return doSelect(buildCriteria(obj));
     }
@@ -528,7 +518,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(Acl obj) throws TorqueException
+    public static void doInsert(Role obj) throws TorqueException
     {
                 obj.setPrimaryKey(doInsert(buildCriteria(obj)));
                 obj.setNew(false);
@@ -540,7 +530,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(Acl obj) throws TorqueException
+    public static void doUpdate(Role obj) throws TorqueException
     {
         doUpdate(buildCriteria(obj));
         obj.setModified(false);
@@ -551,14 +541,14 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(Acl obj) throws TorqueException
+    public static void doDelete(Role obj) throws TorqueException
     {
         doDelete(buildCriteria(obj));
     }
 
     /**
      * Method to do inserts.  This method is to be used during a transaction,
-     * otherwise use the doInsert(Acl) method.  It will take
+     * otherwise use the doInsert(Role) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to insert into the database.
@@ -566,7 +556,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(Acl obj, Connection con)
+    public static void doInsert(Role obj, Connection con)
         throws TorqueException
     {
                 obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
@@ -576,7 +566,7 @@ public abstract class BaseAclPeer
 
     /**
      * Method to do update.  This method is to be used during a transaction,
-     * otherwise use the doUpdate(Acl) method.  It will take
+     * otherwise use the doUpdate(Role) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to update in the database.
@@ -584,7 +574,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(Acl obj, Connection con)
+    public static void doUpdate(Role obj, Connection con)
         throws TorqueException
     {
         doUpdate(buildCriteria(obj), con);
@@ -593,7 +583,7 @@ public abstract class BaseAclPeer
 
     /**
      * Method to delete.  This method is to be used during a transaction,
-     * otherwise use the doDelete(Acl) method.  It will take
+     * otherwise use the doDelete(Role) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to delete in the database.
@@ -601,7 +591,7 @@ public abstract class BaseAclPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(Acl obj, Connection con)
+    public static void doDelete(Role obj, Connection con)
         throws TorqueException
     {
         doDelete(buildCriteria(obj), con);
@@ -616,7 +606,7 @@ public abstract class BaseAclPeer
      */
     public static void doDelete(ObjectKey pk) throws TorqueException
     {
-        BaseAclPeer
+        BaseRolePeer
            .doDelete(pk, (Connection) null);
     }
 
@@ -645,15 +635,13 @@ public abstract class BaseAclPeer
      }
 
     /** Build a Criteria object from the data object for this peer */
-    public static Criteria buildCriteria( Acl obj )
+    public static Criteria buildCriteria( Role obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
                        criteria.add(ID, obj.getId());
-                                criteria.add(OWNER_NAME, obj.getOwnerName());
-                                criteria.add(OWNER_TYPE, obj.getOwnerType());
-                                criteria.add(IS_ROLE, obj.getIsRole());
-                                criteria.add(PERMISSION, obj.getPermission());
+                                criteria.add(ROLE_NAME, obj.getRoleName());
+                                criteria.add(DESCRIPTION, obj.getDescription());
                 return criteria;
     }
 
@@ -669,7 +657,7 @@ public abstract class BaseAclPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Acl retrieveByPK(int pk)
+    public static Role retrieveByPK(int pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
@@ -684,11 +672,11 @@ public abstract class BaseAclPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Acl retrieveByPK(ObjectKey pk)
+    public static Role retrieveByPK(ObjectKey pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Connection db = null;
-        Acl retVal = null;
+        Role retVal = null;
         try
         {
             db = Torque.getConnection(DATABASE_NAME);
@@ -711,7 +699,7 @@ public abstract class BaseAclPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static Acl retrieveByPK(ObjectKey pk, Connection con)
+    public static Role retrieveByPK(ObjectKey pk, Connection con)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Criteria criteria = buildCriteria(pk);
@@ -726,7 +714,7 @@ public abstract class BaseAclPeer
         }
         else
         {
-            return (Acl)v.get(0);
+            return (Role)v.get(0);
         }
     }
 

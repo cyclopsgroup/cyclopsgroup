@@ -99,11 +99,26 @@ drop table if exists c_tnd_acls;
 CREATE TABLE c_tnd_acls
 (
         id INTEGER NOT NULL,
-        owner_name INTEGER NOT NULL,
+        owner_name CHAR (30) NOT NULL,
         owner_type CHAR (1) NOT NULL,
+        is_role BIT default 0 NOT NULL,
         permission VARCHAR (255) NOT NULL,
     PRIMARY KEY(id)
 );
+
+# -----------------------------------------------------------------------
+# c_tnd_roles
+# -----------------------------------------------------------------------
+drop table if exists c_tnd_roles;
+
+CREATE TABLE c_tnd_roles
+(
+        id INTEGER NOT NULL,
+        role_name CHAR (30) NOT NULL,
+        description VARCHAR (255),
+    PRIMARY KEY(id)
+);
+  
   
   
   

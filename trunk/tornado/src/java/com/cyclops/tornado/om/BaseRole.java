@@ -25,13 +25,13 @@ import org.apache.torque.util.Transaction;
 
 /**
  * You should not use this class directly.  It should not even be
- * extended all references should be to Acl
+ * extended all references should be to Role
  */
-public abstract class BaseAcl extends BaseObject
+public abstract class BaseRole extends BaseObject
 {
     /** The Peer class */
-    private static final AclPeer peer =
-        new AclPeer();
+    private static final RolePeer peer =
+        new RolePeer();
 
                   
         /**
@@ -40,24 +40,14 @@ public abstract class BaseAcl extends BaseObject
         private int id;
               
         /**
-         * The value for the owner_name field
+         * The value for the role_name field
          */
-        private String owner_name;
+        private String role_name;
               
         /**
-         * The value for the owner_type field
+         * The value for the description field
          */
-        private String owner_type;
-                                                                                                              
-        /**
-         * The value for the is_role field
-         */
-        private boolean is_role = false;
-              
-        /**
-         * The value for the permission field
-         */
-        private String permission;
+        private String description;
       
       
         /**
@@ -91,29 +81,29 @@ public abstract class BaseAcl extends BaseObject
 
 
         /**
-         * Get the OwnerName
+         * Get the RoleName
          *
          * @return String
          */
-        public String getOwnerName()
+        public String getRoleName()
         {
-            return owner_name;
+            return role_name;
         }
 
                 
         /**
-         * Set the value of OwnerName
+         * Set the value of RoleName
          *
          * @param v new value
          */
-        public void setOwnerName(String v) 
+        public void setRoleName(String v) 
         {
           
 
 
-         if (!ObjectUtils.equals(this.owner_name, v))
+         if (!ObjectUtils.equals(this.role_name, v))
         {
-             this.owner_name = v;
+             this.role_name = v;
             setModified(true);
         }
 
@@ -121,89 +111,29 @@ public abstract class BaseAcl extends BaseObject
 
 
         /**
-         * Get the OwnerType
+         * Get the Description
          *
          * @return String
          */
-        public String getOwnerType()
+        public String getDescription()
         {
-            return owner_type;
+            return description;
         }
 
                 
         /**
-         * Set the value of OwnerType
+         * Set the value of Description
          *
          * @param v new value
          */
-        public void setOwnerType(String v) 
+        public void setDescription(String v) 
         {
           
 
 
-         if (!ObjectUtils.equals(this.owner_type, v))
+         if (!ObjectUtils.equals(this.description, v))
         {
-             this.owner_type = v;
-            setModified(true);
-        }
-
-             }
-
-
-        /**
-         * Get the IsRole
-         *
-         * @return boolean
-         */
-        public boolean getIsRole()
-        {
-            return is_role;
-        }
-
-                
-        /**
-         * Set the value of IsRole
-         *
-         * @param v new value
-         */
-        public void setIsRole(boolean v) 
-        {
-          
-
-
-         if (this.is_role != v)
-        {
-             this.is_role = v;
-            setModified(true);
-        }
-
-             }
-
-
-        /**
-         * Get the Permission
-         *
-         * @return String
-         */
-        public String getPermission()
-        {
-            return permission;
-        }
-
-                
-        /**
-         * Set the value of Permission
-         *
-         * @param v new value
-         */
-        public void setPermission(String v) 
-        {
-          
-
-
-         if (!ObjectUtils.equals(this.permission, v))
-        {
-             this.permission = v;
+             this.description = v;
             setModified(true);
         }
 
@@ -227,12 +157,12 @@ public abstract class BaseAcl extends BaseObject
         {
             if (isNew())
             {
-                AclPeer.doInsert((Acl) this);
+                RolePeer.doInsert((Role) this);
                 setNew(false);
             }
             else
             {
-                AclPeer.doUpdate((Acl) this);
+                RolePeer.doUpdate((Role) this);
             }
         }
      }
@@ -254,14 +184,14 @@ public abstract class BaseAcl extends BaseObject
                 con = Torque.getConnection(dbName);
                 if (isNew())
                 {
-                    AclPeer
-                        .doInsert((Acl) this, con);
+                    RolePeer
+                        .doInsert((Role) this, con);
                     setNew(false);
                 }
                 else
                 {
-                    AclPeer
-                        .doUpdate((Acl) this, con);
+                    RolePeer
+                        .doUpdate((Role) this, con);
                 }
             }
             finally
@@ -290,12 +220,12 @@ public abstract class BaseAcl extends BaseObject
         {
             if (isNew())
             {
-                AclPeer.doInsert((Acl) this, con);
+                RolePeer.doInsert((Role) this, con);
                 setNew(false);
             }
             else
             {
-                AclPeer.doUpdate((Acl) this, con);
+                RolePeer.doUpdate((Role) this, con);
             }
         }
 
@@ -343,21 +273,19 @@ public abstract class BaseAcl extends BaseObject
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
      */
-    public Acl copy() throws TorqueException
+    public Role copy() throws TorqueException
     {
-        return copyInto(new Acl());
+        return copyInto(new Role());
     }
 
-    protected Acl copyInto(Acl copyObj) throws TorqueException
+    protected Role copyInto(Role copyObj) throws TorqueException
     {
         copyObj.setId(id);
-        copyObj.setOwnerName(owner_name);
-        copyObj.setOwnerType(owner_type);
-        copyObj.setIsRole(is_role);
-        copyObj.setPermission(permission);
+        copyObj.setRoleName(role_name);
+        copyObj.setDescription(description);
 
                       copyObj.setId(0);
-                            
+                    
 
 
         return copyObj;
@@ -369,7 +297,7 @@ public abstract class BaseAcl extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      */
-    public AclPeer getPeer()
+    public RolePeer getPeer()
     {
         return peer;
     }
@@ -377,21 +305,15 @@ public abstract class BaseAcl extends BaseObject
     public String toString()
     {
         StringBuffer str = new StringBuffer();
-        str.append("Acl:\n");
+        str.append("Role:\n");
               str.append("Id = ")
            .append(getId())
            .append("\n");
-              str.append("OwnerName = ")
-           .append(getOwnerName())
+              str.append("RoleName = ")
+           .append(getRoleName())
            .append("\n");
-              str.append("OwnerType = ")
-           .append(getOwnerType())
-           .append("\n");
-              str.append("IsRole = ")
-           .append(getIsRole())
-           .append("\n");
-              str.append("Permission = ")
-           .append(getPermission())
+              str.append("Description = ")
+           .append(getDescription())
            .append("\n");
               return(str.toString());
     }

@@ -64,8 +64,14 @@
     </table>
     <table name="c_tnd_acls" javaName="Acl">
         <column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
-        <column name="owner_name" required="true" type="INTEGER"/>
+        <column name="owner_name" required="true" type="CHAR" size="30"/>
         <column name="owner_type" required="true" type="CHAR" size="1"/>
+        <column name="is_role" type="BIT" default="0" required="true"/>
         <column name="permission" type="VARCHAR" size="255" required="true"/>
+    </table>
+    <table name="c_tnd_roles" javaName="Role">
+    	<column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="role_name" required="true" type="CHAR" size="30"/>
+        <column name="description" type="VARCHAR" size="255"/>
     </table>
 </database>
