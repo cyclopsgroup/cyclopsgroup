@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:j="jelly:core" xmlns:v="jelly:velocity">
     <goal name="cyclops:xdoc" description="Generate cyclops group project document">
         <copy todir="${maven.docs.dest}">
@@ -15,5 +15,9 @@
         <j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
         ${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', newSite)}
         <attainGoal name="xdoc"/>
+    </goal>
+    <goal name="cyclops:site" description="Generate the whole site for cyclops group projects">
+        <attainGoal name="site"/>
+        <attainGoal name="cyclops:xdoc"/>
     </goal>
 </project>
