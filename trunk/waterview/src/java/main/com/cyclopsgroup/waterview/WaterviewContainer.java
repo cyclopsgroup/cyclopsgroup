@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.servlet;
+package com.cyclopsgroup.waterview;
 
 import java.io.File;
 import java.io.FileReader;

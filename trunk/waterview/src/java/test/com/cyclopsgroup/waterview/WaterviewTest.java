@@ -16,22 +16,22 @@
  */
 package com.cyclopsgroup.waterview;
 
-import junit.framework.TestCase;
-
 /**
- * Empty test case
+ * Test case for container
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class EmptyTest extends TestCase
+public class WaterviewTest extends WaterviewTestCase
 {
     /**
-     * Fake testing
+     * Test method to make sure component is there
      *
      * @throws Exception
      */
-    public void testConf() throws Exception
+    public void testComponent() throws Exception
     {
-        System.out.println("Alright");
+        Waterview waterview = (Waterview) getServiceManager().lookup(
+                Waterview.ROLE);
+        assertNotNull(waterview);
     }
 }

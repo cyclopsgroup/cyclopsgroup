@@ -30,8 +30,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
+import com.cyclopsgroup.waterview.ServiceManagerAdapter;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.WaterviewContainer;
 
 /**
  * Main waterview servlet

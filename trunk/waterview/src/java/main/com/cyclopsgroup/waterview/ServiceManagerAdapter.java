@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.servlet;
+package com.cyclopsgroup.waterview;
 
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -27,7 +27,7 @@ import org.codehaus.plexus.PlexusContainer;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-class ServiceManagerAdapter implements ServiceManager
+public class ServiceManagerAdapter implements ServiceManager
 {
     private PlexusContainer container;
 
@@ -38,7 +38,7 @@ class ServiceManagerAdapter implements ServiceManager
      * 
      * @param container Plexus container instance
      */
-    ServiceManagerAdapter(PlexusContainer container)
+    public ServiceManagerAdapter(PlexusContainer container)
     {
         this.container = container;
     }
