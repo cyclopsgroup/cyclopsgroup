@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Stories Behind</title>
@@ -98,7 +98,7 @@
                 <ul>
                     <li>Thorough understanding of XP development process with continuous and automatic testing, documentation, distribution and integration, powered by <a href="http://maven.apache.org">Maven</a>, <a href="http://ant.apache.org">Ant</a>, <a href="http://junit.org">JUNIT</a>, <a href="http://jakarta.apache.org/cactus">Cactus</a> and <a href="http://www.thecortex.net/clover">Clover</a>, etc.</li>
                     <li>Expert in software designing and analyzing. One of the frameworks I designed makes the base of all vTradEx software products and solutions.</li>
-                    <li>Years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include <a href="http://jakarta.apace.org/turbine">Turbine</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>, <a href="http://avalon.apache.org">Avalon</a>, <a href="jakarta.apache.org/velocity">Velocity</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a> and <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>, etc. </li>
+                    <li>Years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include <a href="http://jakarta.apace.org/turbine">Turbine</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>, <a href="http://avalon.apache.org">Avalon</a>, <a href="jakarta.apache.org/velocity">Velocity</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a>, <a href="http://jakarta.apache.org/lucene">Lucene</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a> and <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>, etc. </li>
                     <li>Experience in development with Werken rule engine(<a href="http://drools.org">Drools</a>), workflow engine(<a href="http://werkflow.codehaus.org">Werkflow</a>) and petrinet(<a href="http://petridish.werken.com">Petridish</a>) model. </li>
                     <li>Expert in XML and related JAVA technology like xerces, xalan and jdom. Also be familiar with Web Service framework and related JAVA projects like Axis and SOAP.</li>
                     <li>Owner of five java open source projects in SourceForge, Check <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a> for details please.</li>
@@ -228,13 +228,19 @@
                     <a href="ref_menghuai.doc">
                         <img src="images/word_icon.gif" alt="download recommendation letter from Menghuai Chen" border="0" align="right"/>
                     </a>
-                    <b>Menghuai Chen</b>. CEO and president of vTradEx Information Technology Co., Ltd,  Who used to be Vice President and Sales Director of NetEase.com Inc, General Manager of Unisys East China, Market Director of American Airline. Graduated from MIT Sloan School of Management with three master degrees.
+                    <b>Menghuai Chen</b>. CEO and president of vTradEx Information Technology Co., Ltd,  who used to be Vice President and Sales Director of NetEase.com Inc(NASDAQ:NTES), General Manager of Unisys East China, Market Director of American Airline. Graduated from MIT Sloan School of Management with three master degrees.
                 </li>
                 <li>
                     <a href="ref_fanyun.doc">
                         <img src="images/word_icon.gif" alt="download recommendation letter from Frank Fan" border="0" align="right"/>
                     </a>
                     <b>Frank Fan</b>. Vice president of vTradEx Information Technology Co., Ltd. Department manager in Unisys and Computer Associates.
+                </li>
+                <li>
+                    <a href="ref_alan.doc">
+                        <img src="images/word_icon.gif" alt="download recommendation letter from Alan Chen" border="0" align="right"/>
+                    </a>
+                    <b>Alan Chen</b>.Vice president of InsIt Technologies, Inc. Founder of NetEase.com(NASDAQ:NTES), ZOTN(HK:0231), and InsIt.
                 </li>
             </ul>
         </section>
