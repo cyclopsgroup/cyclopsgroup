@@ -1,0 +1,33 @@
+<project>
+    <pomVersion>3</pomVersion>
+    <artifactId>gearset-xml</artifactId>
+    <name>gearset-xml</name>
+    <groupId>gearset-xml</groupId>
+    <currentVersion>1.0</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.org</url>
+        <logo>http://www.cyclopsgroup.org/images/logo.gif</logo>
+    </organization>
+    <inceptionYear>2004</inceptionYear>
+    <logo>/images/logo.gif</logo>
+    <repository/>
+    <mailingLists>
+        <mailingList>
+            <name>${pom.name} Dev List</name>
+        </mailingList>
+        <mailingList>
+            <name>${pom.name} User List</name>
+        </mailingList>
+    </mailingLists>
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+        </unitTest>
+    </build>
+    <properties/>
+</project>
