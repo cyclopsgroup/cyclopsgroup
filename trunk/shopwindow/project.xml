@@ -16,7 +16,7 @@
 	<siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/</siteDirectory>
 	<developers>
 		<developer>
-			<name>Jiaqi Guo</name>
+			<name>Guo, Jiaqi</name>
 			<id>jiaqi</id>
 			<email>jiaqi.guo@gmail.com</email>
 			<roles>
@@ -25,7 +25,7 @@
 			<timezone>-6</timezone>
 		</developer>
 		<developer>
-			<name>Daisy Zhao</name>
+			<name>Zhao, Xuying</name>
 			<id>daisy</id>
 			<email>kxz024000@utdallas.edu</email>
 			<organization>U.T. Dallas</organization>
@@ -35,15 +35,6 @@
 			<timezone>-6</timezone>
 		</developer>
 	</developers>
-	<build>
-		<sourceDirectory>src/java</sourceDirectory>
-		<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-		<unitTest>
-			<includes>
-				<include>**/*Test.java</include>
-			</includes>
-		</unitTest>
-	</build>
 	<reports>
 		<report>maven-changelog-plugin</report>
 		<report>maven-file-activity-plugin</report>
