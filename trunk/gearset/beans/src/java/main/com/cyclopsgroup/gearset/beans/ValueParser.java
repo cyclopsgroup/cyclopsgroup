@@ -96,46 +96,6 @@ public abstract class ValueParser
     }
 
     /**
-     * Get boolean array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @return Array of boolean
-     */
-    public final boolean[] getBooleans(String name)
-    {
-        return getBooleans(name, ArrayUtils.EMPTY_BOOLEAN_ARRAY);
-    }
-
-    /**
-     * Get boolean array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
-     * @return Boolean array, defaultValue will be returned if any exception occurs
-     */
-    public final boolean[] getBooleans(String name, boolean[] defaultValue)
-    {
-        try
-        {
-            String[] values = doGetValues(name);
-            boolean[] ret = new boolean[values.length];
-            for (int i = 0; i < values.length; i++)
-            {
-                String value = values[i];
-                ret[i] = ConvertUtils.convert2Boolean(value);
-            }
-            return ret;
-        }
-        catch (Exception e)
-        {
-            return defaultValue;
-        }
-    }
-
-    /**
      * Get double value of a variable
      * 
      * @param name
@@ -169,46 +129,6 @@ public abstract class ValueParser
     }
 
     /**
-     * Get double array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @return Array of double
-     */
-    public final double[] getDoubles(String name)
-    {
-        return getDoubles(name, ArrayUtils.EMPTY_DOUBLE_ARRAY);
-    }
-
-    /**
-     * Get double array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
-     * @return Double array, defaultValue will be returned if any exception occurs
-     */
-    public final double[] getDoubles(String name, double[] defaultValue)
-    {
-        try
-        {
-            String[] values = doGetValues(name);
-            double[] ret = new double[values.length];
-            for (int i = 0; i < values.length; i++)
-            {
-                String value = values[i];
-                ret[i] = ConvertUtils.convert2Double(value);
-            }
-            return ret;
-        }
-        catch (Exception e)
-        {
-            return defaultValue;
-        }
-    }
-
-    /**
      * Get float value of a variable
      * 
      * @param name
@@ -236,46 +156,6 @@ public abstract class ValueParser
             return ConvertUtils.convert2Float(doGetValue(name), defaultValue);
         }
         catch (Exception swallowed)
-        {
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get float array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @return Array of float
-     */
-    public final float[] getFloats(String name)
-    {
-        return getFloats(name, ArrayUtils.EMPTY_FLOAT_ARRAY);
-    }
-
-    /**
-     * Get float array variable
-     * 
-     * @param name
-     *                   Variable name
-     * @param defaultValue
-     *                   Default int array value
-     * @return Float array, defaultValue will be returned if any exception occurs
-     */
-    public final float[] getFloats(String name, float[] defaultValue)
-    {
-        try
-        {
-            String[] values = doGetValues(name);
-            float[] ret = new float[values.length];
-            for (int i = 0; i < values.length; i++)
-            {
-                String value = values[i];
-                ret[i] = ConvertUtils.convert2Float(value);
-            }
-            return ret;
-        }
-        catch (Exception e)
         {
             return defaultValue;
         }
@@ -533,11 +413,27 @@ public abstract class ValueParser
         }
     }
 
+    /**
+     * Get string array
+     * 
+     * @param name
+     *                   Variable name
+     * @return Array of string
+     */
     public final String[] getStrings(String name)
     {
         return getStrings(name, ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
+    /**
+     * Get string array with given default value
+     * 
+     * @param name
+     *                   Name of variable
+     * @param defaultValue
+     *                   String array value
+     * @return String array
+     */
     public final String[] getStrings(String name, String[] defaultValue)
     {
         try

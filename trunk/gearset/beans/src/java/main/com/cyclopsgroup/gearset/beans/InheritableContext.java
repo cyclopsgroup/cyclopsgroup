@@ -23,7 +23,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
- * TODO Add javadoc for class
+ * Context with a parent
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
@@ -92,7 +92,7 @@ public class InheritableContext extends MapContext
     /**
      * Method getParent() in class InheritableContext
      * 
-     * @return
+     * @return Parent context
      */
     public Context getParent()
     {

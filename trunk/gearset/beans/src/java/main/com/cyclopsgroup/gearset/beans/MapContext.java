@@ -31,6 +31,9 @@ public class MapContext implements Context
 
     private Map map;
 
+    /**
+     * Constructor of MapContext
+     */
     public MapContext()
     {
         this(new HashMap());
@@ -64,6 +67,11 @@ public class MapContext implements Context
         }
     }
 
+    /**
+     * Get map object
+     * 
+     * @return Map object
+     */
     public Map getMap()
     {
         return map;

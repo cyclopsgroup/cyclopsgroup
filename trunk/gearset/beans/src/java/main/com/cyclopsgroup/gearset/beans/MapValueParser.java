@@ -33,8 +33,6 @@ public class MapValueParser extends ValueParser
 {
     private Map map;
 
-    private transient ArrayList tempArrayList = new ArrayList();
-
     /**
      * Constructor of MapValueParser
      */
@@ -81,50 +79,35 @@ public class MapValueParser extends ValueParser
      */
     protected String[] doGetValues(String valueName) throws Exception
     {
-        synchronized (tempArrayList)
+        ArrayList values = new ArrayList();
+        Object object = map.get(valueName);
+        if (object instanceof Collection)
         {
-            try
+            for (Iterator i = ((Collection) object).iterator(); i.hasNext();)
             {
-                Object object = map.get(valueName);
-                if (object instanceof Collection)
+                Object next = i.next();
+                if (next != null)
                 {
-                    for (Iterator i = ((Collection) object).iterator(); i
-                            .hasNext();)
-                    {
-                        Object next = i.next();
-                        if (next != null)
-                        {
-                            tempArrayList.add(next.toString());
-                        }
-                    }
+                    values.add(next.toString());
                 }
-                else if (object instanceof Object[])
-                {
-                    Object[] array = (Object[]) object;
-                    for (int i = 0; i < array.length; i++)
-                    {
-                        if (array[i] != null)
-                        {
-                            tempArrayList.add(array[i].toString());
-                        }
-                    }
-                }
-                else
-                {
-                    tempArrayList.add(object.toString());
-                }
-                return (String[]) tempArrayList
-                        .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                tempArrayList.clear();
             }
         }
+        else if (object instanceof Object[])
+        {
+            Object[] array = (Object[]) object;
+            for (int i = 0; i < array.length; i++)
+            {
+                if (array[i] != null)
+                {
+                    values.add(array[i].toString());
+                }
+            }
+        }
+        else
+        {
+            values.add(object.toString());
+        }
+        return (String[]) values.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**

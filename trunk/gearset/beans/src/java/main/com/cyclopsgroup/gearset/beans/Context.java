@@ -24,9 +24,29 @@ package com.cyclopsgroup.gearset.beans;
 public interface Context
 {
 
+    /**
+     * Get variable from context
+     * 
+     * @param name
+     *                   Name of variable
+     * @return Variable value
+     */
     Object get(String name);
 
+    /**
+     * Get name of variables avaible in this context
+     * 
+     * @return Array of string names
+     */
     String[] getNames();
 
+    /**
+     * Put new value to context
+     * 
+     * @param name
+     *                   Name of variabe
+     * @param object
+     *                   Value of variable
+     */
     void put(String name, Object object);
 }
