@@ -340,8 +340,9 @@ public class DefaultEngine extends LoggableObject implements Engine {
                 .hasPrevious();) {
             Component component = (Component) i.previous();
             try {
-                if (component instanceof Service) {
-                    ((Service) component).shutdown();
+                if (component instanceof DefaultService) {
+                    ((DefaultService) component).shutdown();
+                    ((DefaultService) component).setStarted(false);
                 }
             } catch (Exception e) {
                 getLog()
@@ -359,8 +360,9 @@ public class DefaultEngine extends LoggableObject implements Engine {
         for (Iterator i = components.iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             try {
-                if (component instanceof Service) {
-                    ((Service) component).startup();
+                if (component instanceof DefaultService) {
+                    ((DefaultService) component).startup();
+                    ((DefaultService) component).setStarted(true);
                 }
             } catch (Exception e) {
                 getLog().warn(

@@ -202,16 +202,21 @@ package com.cyclops.jmainboard;
  */
 public interface Service extends Component {
 
+    /** if the service is working
+     * @return If it's started, return true
+     */
+    boolean isStarted();
+
     /** Register client component
      * @param client Client component
      */
     void register(Component client);
 
-    /** Method startupService() in class Service
-     */
-    void startup();
-
     /** Method shutdownService() in class Service
      */
     void shutdown();
+
+    /** Method startupService() in class Service
+     */
+    void startup();
 }

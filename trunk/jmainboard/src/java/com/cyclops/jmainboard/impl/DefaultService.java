@@ -210,6 +210,8 @@ public class DefaultService extends DefaultComponent implements Service {
 
     private Vector clients = new Vector();
 
+    private boolean isStarted = false;
+
     /** Method getClientComponents in class DefaultService
      * @return List of client components
      */
@@ -217,11 +219,25 @@ public class DefaultService extends DefaultComponent implements Service {
         return Collections.unmodifiableList(clients);
     }
 
+    /** Override method isStarted() of parent class
+     * @see com.cyclops.jmainboard.Service#isStarted()
+     */
+    public boolean isStarted() {
+        return isStarted;
+    }
+
     /** Override method register() of parent class
      * @see com.cyclops.jmainboard.Service#register(com.cyclops.jmainboard.Component)
      */
     public void register(Component client) {
         clients.add(client);
+    }
+
+    /** Setter method for property
+     * @param b The isStarted to set.
+     */
+    void setStarted(boolean b) {
+        this.isStarted = b;
     }
 
     /** Override method shutdownService() of parent class
