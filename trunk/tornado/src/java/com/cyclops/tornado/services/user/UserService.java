@@ -13,6 +13,16 @@ import org.apache.fulcrum.Service;
  * Class
  */
 public interface UserService extends Service {
+    /** Check result code, check success */
+    int CHECK_RESULT_OK = 0;
+    /** Check result code, password error*/
+    int CHECK_RESULT_INCORRECT_PASSWORD = 1;
+    /** Check result code, invalid user name */
+    int CHECK_RESULT_INVALID_USER = 2;
+    /** Check result code, user is disabled */
+    int CHECK_RESULT_DISABLED_USER = 3;
+    /** Check result code, exception occurred */
+    int CHECK_RESULT_EXCEPTION = 4;
     /** Service name in fulcrum */
     String SERVICE_NAME = "UserService";
     /** Method getActiveUsers() in Class UserService
@@ -37,4 +47,10 @@ public interface UserService extends Service {
      * @param key Key of this user session
      */
     void singout(String key);
+    /** Method checkUser() in Class UserService
+     * @param userName Name of user
+     * @param password Password for signing
+     * @return Sigin result, refer to the constants about it pls.
+     */
+    int checkUser(String userName, String password);
 }

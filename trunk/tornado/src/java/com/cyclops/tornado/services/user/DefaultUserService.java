@@ -41,7 +41,8 @@ public class DefaultUserService extends BaseService implements UserService {
                 try {
                     ArrayList tobeRemoved = new ArrayList();
                     for (Iterator i = userRepo.keySet().iterator();
-                        i.hasNext();) {
+                        i.hasNext();
+                        ) {
                         String key = (String) i.next();
                         UserEntry entry = (UserEntry) userRepo.get(key);
                         if (entry.isExpired()) {
@@ -142,5 +143,11 @@ public class DefaultUserService extends BaseService implements UserService {
      */
     public void singout(String key) {
         userRepo.remove(key);
+    }
+    /** Method checkUser()
+     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String)
+     */
+    public int checkUser(String userName, String password) {
+        return CHECK_RESULT_OK;
     }
 }
