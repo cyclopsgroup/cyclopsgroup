@@ -41,6 +41,23 @@
     		<td>&#32;</td>
     	</tr>
     	<tr>
+    		<td>Is System User?</td>
+    		<td>$user.isSystem</td>
+    	</tr>
+    	<tr>
+    		<td>Last Signin:</td>
+    		<td>$user.lastSignin</td>
+    	</tr>
+    	<tr>
+    		<td>Signin Count:</td>
+    		<td>$user.signinCounter</td>
+    	</tr>
+    	#if($user.isDisabled)
+    		<tr>
+    			<td colspan="2">User is deleted</td>
+    		</tr>
+    	#end
+    	<tr>
     		<td colspan="2" class="bottom">
     			<input type="submit" value="Save Change" name="eventsubmit_doSaveprof"/>
     		</td>

@@ -1,0 +1,72 @@
+<h2>Groups Belonged to</h2>
+<table width="100%">
+	<tr>
+		<td colspan="2" class="title">Input Account Name</td>
+	</tr>
+	<form method="get" action="$link.setPage("system,administration,user,Groups.vm")">
+	<tr>
+		<td>Account Name:</td>
+		<td><input type="text" name="user_name" value="$!userName"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Display"/>
+		</td>
+	</tr>
+	</form>
+</table>
+<table width="100%">
+	<form method="post" action="$link.setAction("system.administration.UserAction").setPage("system,administration,user,Groups.vm")">
+	#if($belongToGroups && !$belongToGroups.isEmpty())
+		<tr>
+			<td colspan="4" class="title">User $user.userName belongs to these groups</td>
+		</tr>
+		<input type="hidden" name="user_name" value="$user.userName"/>
+		<input type="hidden" name="user_id" value="$user.userId"/>
+    	<tr>
+    		<th>&#32;</th>
+    		<th>Group Name</th>
+    		<th>System</th>
+    		<th>Description</th>
+    	</tr>
+    	#foreach($group in $belongToGroups)
+    		<tr #xbgcolor()>
+    			<td><input type="checkbox" name="group_id" value="$group.id"/></td>
+    			<td>$group.groupName</td>
+    			<td>$group.isSystem</td>
+    			<td>$!group.description</td>
+    		</tr>
+    	#end
+    	<tr>
+    		<td colspan="4" class="bottom">
+    			<input type="submit" value="Leave" name="eventsubmit_doLeavegroup"/>
+    		</td>
+    	</tr>
+    #end
+    #if($otherGroups && !$otherGroups.isEmpty())
+   		<tr>
+    		<td colspan="4" class="title">Join Other Groups</td>
+    	</tr>
+    	<tr>
+    		<th>&#32;</th>
+    		<th>Group Name</th>
+    		<th>System</th>
+    		<th>Description</th>
+    	</tr>
+    	#foreach($group in $otherGroups)
+    		<tr #xbgcolor()>
+    			<td><input type="checkbox" name="group_id" value="$group.id"/></td>
+    			<td>$group.groupName</td>
+    			<td>$group.isSystem</td>
+    			<td>$!group.description</td>
+    		</tr>
+    	#end
+    	<tr>
+    		<td colspan="4" class="bottom">
+    			<input type="submit" value="Join" name="eventsubmit_doJoingroup"/>
+    		</td>
+    	</tr>
+    #end
+   	</form>
+</table>
+

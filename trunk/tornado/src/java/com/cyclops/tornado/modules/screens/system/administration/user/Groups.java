@@ -26,6 +26,9 @@ public class Groups extends BaseUserScreen {
     protected void doBuildTemplate(RunData data, TemplateContext ctx)
         throws Exception {
         super.doBuildTemplate(data, ctx);
+        if (getUser() == null) {
+            return;
+        }
         GroupBroker gb = (GroupBroker) getObjectBroker(GroupBroker.class, data);
         List groups = gb.queryByUser(getUser().getUserId());
         ctx.put("belongToGroups", groups);
