@@ -28,6 +28,7 @@ import org.apache.commons.collections.iterators.IteratorChain;
  */
 public class DefaultContext implements Context
 {
+
     private HashMap content = new HashMap();
 
     private Context parent;
@@ -97,5 +98,15 @@ public class DefaultContext implements Context
     public void put(String name, Object variable)
     {
         content.put(name, variable);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.cyclib.Context#remove(java.lang.String)
+     */
+    public void remove(String name)
+    {
+        content.remove(name);
     }
 }

@@ -48,4 +48,11 @@ public interface Context
      * @param variable Variable value
      */
     void put(String name, Object variable);
+
+    /**
+     * Remove a variable
+     *
+     * @param name Variable name
+     */
+    void remove(String name);
 }
