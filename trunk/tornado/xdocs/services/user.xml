@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>User Service</title>
@@ -22,6 +22,10 @@ services.UserService.listener = com.cyclops.tornado.modules.PassportBuilder
 #services.UserService.listener = com.mycompany.myproject.modules.MyUserListener
 			]]></source>
             <p>earlyInit is true since many other features are based on UserService.</p>
+        </section>
+        <section name="Design">
+            <p>Because loading User instance could be a heavy work, the design is trying to avoid doing it repeatedly. UserEntry objects are squeezed between real User instances and client application of UserService. The design makes sure that there is only one user instance for each user name.</p>
+            <p><embed src="user_lifecycle.svg" width="640" height="640" type="image/svg-xml"/></p>
         </section>
     </body>
 </document>
