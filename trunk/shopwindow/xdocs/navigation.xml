@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project name="Maven">
     <title>Maven</title>
     <body>
@@ -33,7 +33,7 @@
             <item name="tornado" href="/projects/tornado/index.html"/>
             <item name="dbdigger" href="http://dbdigger.sourceforge.net/index.html"/>
             <item name="albumbuilder" href="http://albumbuilder.sourceforge.net/index.html"/>
-            <item name="a4trim" href="http://albumbuilder.sourceforge.net/a4trim/index.html"/>
+            <item name="a4trim" href="/projects/a4trim/index.html"/>
         </menu>
     </body>
 </project>

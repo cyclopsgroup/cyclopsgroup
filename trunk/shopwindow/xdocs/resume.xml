@@ -71,6 +71,9 @@
                     <li>
                         <a href="#Immigration Status">Immigration Status</a>
                     </li>
+                    <li>
+                        <a href="#References">References</a>
+                    </li>
                 </ol>
             </p>
         </section>
@@ -93,9 +96,9 @@
         <section name="Skills">
             <subsection name="JAVA">
                 <ul>
-                    <li>Thorough understanding of XP development process with continuous and automatic testing, documentation, distribution and integration, powered by Maven, Ant, JUNIT, Cactus and Clover, etc.</li>
+                    <li>Thorough understanding of XP development process with continuous and automatic testing, documentation, distribution and integration, powered by <a href="http://maven.apache.org">Maven</a>, <a href="http://ant.apache.org">Ant</a>, <a href="http://junit.org">JUNIT</a>, <a href="http://jakarta.apache.org/cactus">Cactus</a> and <a href="http://www.thecortex.net/clover">Clover</a>, etc.</li>
                     <li>Expert in software designing and analyzing. One of the frameworks I designed makes the base of all vTradEx software products and solutions.</li>
-                    <li>Years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include Turbine, Torque, Fulcrum, Avalon, Velocity, POI, JMeter, JFreeChart and Jakarta Commons projects, etc. </li>
+                    <li>Years of experience of using java open source projects in Apache foundation, Werken company, SourceForge and some other open source foundation. These projects include <a href="http://jakarta.apace.org/turbine">Turbine</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>, <a href="http://avalon.apache.org">Avalon</a>, <a href="jakarta.apache.org/velocity">Velocity</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a> and <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>, etc. </li>
                     <li>Experience in development with Werken rule engine(<a href="http://drools.org">Drools</a>), workflow engine(<a href="http://werkflow.codehaus.org">Werkflow</a>) and petrinet(<a href="http://petridish.werken.com">Petridish</a>) model. </li>
                     <li>Expert in XML and related JAVA technology like xerces, xalan and jdom. Also be familiar with Web Service framework and related JAVA projects like Axis and SOAP.</li>
                     <li>Owner of five java open source projects in SourceForge, Check <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a> for details please.</li>
@@ -158,15 +161,16 @@
         <section name="Featured Projects">
             <subsection name="In vTradEx">
                 <ul>
-                    <li>Pharos, 3/2001~Now. Roles: SA, PM, QA and developer. Pharos is the base of all other vTradEx projects in JAVA, it has been adopted since vTradEx development team was founded, and still in service now. Depending on apache and werken open source projects, Pharos contains a lot of features like workflow, security, O-R mapping etc. which enrich and simplify java web development. Current version of pharos is 5.2.</li>
+                    <li>Pharos, 3/2001~Now. Roles: SA, PM, QA and developer. Pharos is the base of all other vTradEx projects in JAVA, it has been adopted since vTradEx development team was founded, and still in service now. Depending on apache and werken open source projects, Pharos contains a lot of features like workflow, security, O-R mapping etc. which enrich and simplify java web development. The design is based on open source projects like Apache <a href="http://jakarta.apache.org/turbine">Turbine</a>, <a href="http://jakarta.apache.org/velocity">Velocity</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://maven.apache.org">Maven</a>, <a href="http://ant.apache.org">Ant</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a>, and Werken <a href="http://drools.org">Drools</a>, <a href="http://werkflow.codehaus.org">Werkflow</a>.  Current version of pharos is 5.2.</li>
                     <li>Sun Portal Integration Project, 5/2003~8/2003. Roles: SA and developer. The goal of this project is to integrate existing Domino OA, Applet based Oracle ERP 11i and some other systems with thousands of users into a Sun Portal System. The solution includes some of Sun products like Iplanet Web Server, App Server, Portal Server, Identity Server and Sun MetaView. The technologies covered by this project include JNDI, web browser certificates, Solaris deployment, JSP, Sun workflow engine in App Server, etc.</li>
                     <li>BPR of a vehicle logistic company, 7/2003~8/2003. Roles: SA and developer. The project is to develop a system for a refined business process, which integrates with tens of existing subsystem (coded in VFP, VB or JAVA, located in different cities) seamlessly. The solution is departed into two systems based on Pharos and Avalon.</li>
                     <li>CA Portal Integration project, 1/2003~5/2003. Roles: SA and QA. It integrates CA Portal, CA Harvest and Pharos, provides an auto-publish-from-Harvest-to-Portal solution.</li>
                     <li>Pilotlogistic, a total logistic solution product, 12/2002 ~ 5/2003. Roels: SA, QA and developer. This product targets generic logistic industrial, it covers OMS, WMS, TMS and Finance aspects of logistic companies.</li>
                     <li>Route Optimization Solution powered by ILOG Solver, 1/2003 ~ 5/2003.  Roles: SA and QA. The solution calculates optimized route for distribution of an logistic enterprise which has hundreds of stores in Shanghai. Supported by ILOG Solver, we integrated this C/C++ API supported product into our Java framework with JNI.</li>
-                    <li>Advanced PM System, 7/2002~3/2003. . Roles: SA, PM and QA. We developed this product for ourselves to manage our own projects. The product created a Test-Driven project management concept, which means in a project, all tasks, test cases and documents are combined to test stories. Current version is 2.1.</li>
-                    <li>Speedsale, an CRM product, 5/2002~3/2003. . Roles: SA, PM, QA and developer. This product provides workflow supported process control for sale activities other than ordinary CRM products. Based on Pharos, it imported a Rule Engine powered by werken drools for the first time. Current version of Speedsale is 3.4.</li>
-                    <li>Avalon based SMS transmitting server, 12/2001~2/2002. . It’s a backend process which receiving and processing SMS messages continuously, based on Avalon framework.</li>
+                    <li>Continuous Integration Backend Engine, 7/2002~5/2003. Roles: SA, QA and Developer. Automaticlly and Continuously check out code from CVS and generate reports and distribute the project everyday. The reports covers many aspect of the projects including testing result, testing coverage, database spec, development documentation. <a href="http://cyclops-group.sourceforge.net/projects/tornado/maven-reports.html">Here</a> is a sample of the building result. This engine is powered by projects lilke <a href="http://maven.apache.org">Maven</a>, <a href="http://jakata.apache.org/cactus">Cactus</a>, <a href="http://jakarta.apache.org/jmeter">JMeter</a> and <a href="http://www.thecortex.net/clover">Clover</a>.</li>
+                    <li>Advanced PM System, 7/2002~3/2003. Roles: SA, PM and QA. We developed this product for ourselves to manage our own projects. The product created a Test-Driven project management concept, which means in a project, all tasks, test cases and documents are combined to test stories. Current version is 2.1.</li>
+                    <li>Speedsale, an CRM product, 5/2002~3/2003. . Roles: SA, PM, QA and developer. This product provides workflow supported process flow control for sale activities other than ordinary CRM products. Based on Pharos, it imported a Rule Engine powered by werken <a href="http://drools.org">Drools</a> for the first time. Current version of Speedsale is 3.4.</li>
+                    <li>Apache <a href="http://avalon.apache.org">Avalon</a> based SMS transmitting server, 12/2001~2/2002. . It’s a backend process which receiving and processing SMS messages continuously, based on Avalon framework.</li>
                     <li>TMS with GPS support, 10/2001~3/2002.. Roles: SA, PM and developer. The system schedules and instructs drivers and vehicles, collects runtime data from GPS device in vehicles and generates reports for China Post.</li>
                     <li>Some websites. Roles, 8/2001: Developer. ASP powered websites, <a href="http://www.goldsgym.com.cn">http://www.goldsgym.com.cn</a> and <a href="http://www.agrosquare.com">http://www.agrosquare.com</a>.</li>
                 </ul>
@@ -201,18 +205,37 @@
         </section>
         <section name="Training and Award">
             <ul>
-                <li>SCJP: Sun Certificated Java Professional. 5/2003</li>
+                <li>
+                    <b>SCJP</b>: Sun Certificated Java Professional. 5/2003</li>
                 <li>Professional training for CA data warehouse products. 2/2002</li>
                 <li>Training for Project Management. 11/2001</li>
-                <li>MCSD: Microsoft Certificated Professional Solution Developer.9/2001</li>
+                <li>
+                    <b>MCSD</b>: Microsoft Certificated Professional Solution Developer.9/2001</li>
                 <li>Training for using Oracle9i JDeveloper. 7/2001</li>
                 <li>China Senior Programmer. 7/2000</li>
             </ul>
         </section>
-        <section name="Immigration Status">
+        <section name="Working Status">
             <ul>
+                <li>I can start to work immediately as soon as I get the offer</li>
                 <li>F2 visa now, Need H1 sponsorship.</li>
-                <li>I’m willing to relocated with my own fund.</li>
+                <li>I am willing to relocate with my own fund.</li>
+            </ul>
+        </section>
+        <section name="References">
+            <ul>
+                <li>
+                    <a href="ref_menghuai.doc">
+                        <img src="images/word_icon.gif" alt="download recommendation letter from Menghuai Chen" border="0" align="right"/>
+                    </a>
+                    <b>Menghuai Chen</b>. CEO and president of vTradEx Information Technology Co., Ltd,  Who used to be Vice President and Sales Director of NetEase.com Inc, General Manager of Unisys East China, Market Director of American Airline. Graduated from MIT Sloan School of Management with three master degrees.
+                </li>
+                <li>
+                    <a href="ref_fanyun.doc">
+                        <img src="images/word_icon.gif" alt="download recommendation letter from Frank Fan" border="0" align="right"/>
+                    </a>
+                    <b>Frank Fan</b>. Vice president of vTradEx Information Technology Co., Ltd. Department manager in Unisys and Computer Associates.
+                </li>
             </ul>
         </section>
     </body>
