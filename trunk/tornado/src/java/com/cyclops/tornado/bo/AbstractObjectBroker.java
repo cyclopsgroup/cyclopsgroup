@@ -5,6 +5,7 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.bo;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.torque.util.Criteria;
@@ -13,12 +14,32 @@ import org.apache.torque.util.Criteria;
  * @email g-cyclops@users.sourceforge.net
  */
 public abstract class AbstractObjectBroker extends ObjectBroker {
+    /** Delete records by a Criteria
+     * @param crit Criteria to delete
+     * @throws Exception TorqueException actually
+     */
     public void delete(Criteria crit) throws Exception {
         delete(getObjectClass(), crit);
     }
+    /** Delete a single record by it's primary key
+     * @param id PrimaryKey value
+     * @throws Exception TorqueException actually
+     */
     public void deleteByPK(int id) throws Exception {
         Criteria crit = new Criteria();
         crit.and(getPrimaryKey(), id);
+        delete(crit);
+    }
+    /** Delete record by a group of id
+     * @param ids Id array
+     * @throws Exception TorqueException actually
+     */
+    public void deleteByPKs(int[] ids) throws Exception {
+        if (ids == null || ids.length == 0) {
+            return;
+        }
+        Criteria crit = new Criteria();
+        crit.addIn(getPrimaryKey(), ids);
         delete(crit);
     }
     /** Method getObjectClass()
@@ -45,6 +66,19 @@ public abstract class AbstractObjectBroker extends ObjectBroker {
                 getPrimaryKey(),
                 (Object) null,
                 Criteria.NOT_EQUAL));
+    }
+    /** Find records by a group of primary keys
+     * @param ids Id array
+     * @return List of results
+     * @throws Exception TorqueException actually
+     */
+    public List queryByPKs(int[] ids) throws Exception {
+        if (ids == null || ids.length == 0) {
+            return Collections.EMPTY_LIST;
+        }
+        Criteria crit = new Criteria();
+        crit.addIn(getPrimaryKey(), ids);
+        return query(crit);
     }
     /** Implementation of method retrieve() in this class
      * @see com.cyclops.tornado.bo.ObjectBroker#retrieve(java.lang.Class, org.apache.torque.util.Criteria)

@@ -29,7 +29,7 @@ public abstract class BaseService
     /** Method init()
      * @see org.apache.fulcrum.Service#init()
      */
-    public void init() {
+    public synchronized void init() {
         BrokerManager brokerManager = new BrokerManager();
         try {
             ConfigurationService cs =
@@ -64,6 +64,15 @@ public abstract class BaseService
         Configuration conf,
         BrokerManager brokerManager)
         throws Exception;
+    /** All derived class can implements Restartable interface without add anycode
+     * But make sure no problem will occur when shutdown(), init() methods are called consecutively before the service implements the interface
+     * @see com.cyclops.tornado.services.Restartable#restart()
+     */
+    public synchronized void restart() throws Exception {
+        shutdown();
+        setInit(false);
+        init();
+    }
     /** Method setConfiguration() in Class BaseService
      * @param conf Configuration object
      */

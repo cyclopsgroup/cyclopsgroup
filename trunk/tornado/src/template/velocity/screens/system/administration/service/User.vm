@@ -1,4 +1,4 @@
-<h2>User Service Configuration</h2>
+<h2>User Service Settings</h2>
 <table width="100%">
 	<tr>
 		<td class="title" colspan="2">User Service Properties</td>
@@ -43,6 +43,7 @@
 	</form>
 	<form method="post" action="$link.setAction("system.administration.ConfigurationAction").setPage("system,administration,service,User.vm")">
 	<input type="hidden" name="service_name" value="UserService"/>
+	<input type="hidden" name="addnew_key" value="listener"/>
 	<tr>
 		<td colspan="2" class="title">User Listeners</td>
 	</tr>
@@ -54,7 +55,7 @@
 	#end
 	<tr>
 		<td>Add New Listener:</td>
-		<td><input type="text" name="conf_listener" class="frame" size="40"/></td>
+		<td><input type="text" name="addnew_value" class="frame" size="40"/></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>

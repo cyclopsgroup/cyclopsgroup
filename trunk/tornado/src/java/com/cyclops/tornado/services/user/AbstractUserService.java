@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.BaseService;
+import com.cyclops.tornado.services.Restartable;
 /** Default implementation of UserService
  * @author joeblack
  * @since 2003-9-29 17:21:32
@@ -24,7 +25,7 @@ import com.cyclops.tornado.services.BaseService;
  */
 public abstract class AbstractUserService
     extends BaseService
-    implements UserService {
+    implements UserService, Restartable {
     private final class CheckingThread implements Runnable {
         public void run() {
             long checkInteval =
@@ -150,6 +151,9 @@ public abstract class AbstractUserService
      */
     public void shutdown() {
         checkingThread.stop();
+        userRepo.clear();
+        userListeners.clear();
+        anonymousUser = null;
     }
     /** Implementation of method singin() in this class
      * @see com.cyclops.tornado.services.user.UserService#singin(java.lang.String, java.lang.String, com.cyclops.tornado.BrokerManager)

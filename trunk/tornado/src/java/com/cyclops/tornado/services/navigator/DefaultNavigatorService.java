@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.BaseService;
+import com.cyclops.tornado.services.Restartable;
 import com.cyclops.tornado.utils.ResourceFinder;
 /**
  * @author joeblack
@@ -21,7 +22,7 @@ import com.cyclops.tornado.utils.ResourceFinder;
  */
 public class DefaultNavigatorService
     extends BaseService
-    implements NavigatorService {
+    implements NavigatorService, Restartable {
     private Hashtable menus = new Hashtable();
     private Menu getMenu(Menu menu, String href) {
         if (StringUtils.equals(menu.getHref(), href)) {
@@ -89,5 +90,12 @@ public class DefaultNavigatorService
                 logger.debug("Resource " + resource + " loading failed!", e);
             }
         }
+    }
+    /** Implementation of method shutdown() in this class
+     * @see org.apache.fulcrum.Service#shutdown()
+     */
+    public void shutdown() {
+        menus.clear();
+        super.shutdown();
     }
 }
