@@ -203,6 +203,14 @@ import java.net.URL;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public interface Component {
+    /** Method setEngine in class Component
+     * @param engine Engine instance
+     */
+    void setEngine(Engine engine);
+    /** Method getEngine in class Component
+     * @return Engine instance
+     */
+    Engine getEngine();
     /** Empty array of component */
     Component[] EMPTY_ARRAY = new Component[0];
 

@@ -203,7 +203,11 @@ import java.net.URL;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class DefaultComponent implements Component, ResourceLocateable {
+
+    private Engine engine;
+
     private ComponentMetadata metadata;
+
     private ResourceLocator resourceLocator;
 
     /** Override method getDependencies in the derived class
@@ -211,6 +215,13 @@ public class DefaultComponent implements Component, ResourceLocateable {
      */
     public Component[] getDependencies() {
         return metadata.getDependencies();
+    }
+
+    /** Override method getEngine() of parent class
+     * @see com.cyclops.jmainboard.Component#getEngine()
+     */
+    public Engine getEngine() {
+        return engine;
     }
 
     /** Override method getId in the derived class
@@ -253,6 +264,13 @@ public class DefaultComponent implements Component, ResourceLocateable {
      */
     public void initialize() throws Exception {
         //Do nothing
+    }
+
+    /** Override method setEngine() of parent class
+     * @see com.cyclops.jmainboard.Component#setEngine(com.cyclops.jmainboard.Engine)
+     */
+    public void setEngine(Engine eng) {
+        engine = eng;
     }
 
     /** Override method setMetadata in the derived class
