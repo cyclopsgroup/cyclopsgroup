@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="plexaros">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project>
     <body>
         <links>
             <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
@@ -8,5 +8,9 @@
             <item name="Maven" href="http://maven.apache.org"/>
             <item name="Commons Jelly" href="http://jakarta.apache.org/commons/jelly"/>
         </links>
+        <menu name="Overview">
+            <item name="Goals" href="/index.html"/>
+            <item name="Roadmap" href="/roadmap.html"/>
+        </menu>
     </body>
 </project>

@@ -1,10 +1,9 @@
 body, td, select, input, li {
-	font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
-	color: #003366;
+    color: #003366;
 }
 th {
-    background-color: #CCCCFF !important;
-    color: #336699 !important;
+    background-color: #CCCCFF;
+    color: #336699;
 }
 div.section table.bodyTable {
     background-color: #DDDDDD;
@@ -17,4 +16,27 @@ div.section table.bodyTable tr.b {
 }
 a:link, a:visited {
     color: #002266;
+}
+td.divisionCell {
+    background-color: #336699;
+}
+
+
+#frameBodyTable, #headerSearchCell, #headerLanguageBarCell {
+    background-color: #D1DBE4;
+}
+#frameHeaderCell {
+    background-color: #003366;
+}
+#frameLeftCell {
+    background-color: #EFEFEF;
+}
+#frameBodyCell, #frameRightCell, #frameBottomCell {
+    background-color: white;
+}
+#frameFooterCell {
+    background-color: black;
+}
+#linksHeaderCell {
+    background-color: #F7941C;
 }

@@ -1,0 +1,45 @@
+body {
+    margin: 0px;
+}
+body, td, th, select, input, li {
+	font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+	font-size: 11px;
+}
+img {
+    border-width: 0px;
+}
+th {
+    font-weight: bold;
+    text-align: left;
+}
+form {
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+div.section table.bodyTable {
+    width: 100%;
+}
+div.section table.bodyTable td {
+    padding: 3px;
+}
+div.section {
+    padding: 10px;
+}
+#navcolumn li {
+    list-style-image: url(../images/collapsed.gif);
+    line-height: 18px;
+}
+#navcolumn li.expanded {
+    list-style-image: url(../images/expanded.gif);
+}
+#navcolumn ul {
+    margin-left: 20px;
+}
+div.section div.sectionTitle {
+    font-size: 20px;
+}
+div.section div.subsectionTitle {
+    font-size: 18px;
+    text-indent: 20px;
+}

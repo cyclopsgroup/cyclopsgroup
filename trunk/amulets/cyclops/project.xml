@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <extend>../project.xml</extend>
     <pomVersion>3</pomVersion>
@@ -6,7 +6,7 @@
     <name>Maven Cyclops Tools Plug-in</name>
     <currentVersion>1.0-b2</currentVersion>
     <shortDescription>Maven Cyclops Tools plugin</shortDescription>
-    <url>http://cyclops-group.sourceforge.net/project/amulets/multiproject/maven-cyclops-plugin/</url>
+    <url>http://cyclops-group.sourceforge.net/projects/amulets/multiproject/maven-cyclops-plugin</url>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/maven-cyclops-plugin/</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops/</connection>

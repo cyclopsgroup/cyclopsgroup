@@ -1,0 +1,9 @@
+.hidewhenprint {
+    display: none !important;
+}
+div.section table.bodyTable {
+    border-width: 1px;
+}
+div.section table.bodyTable td {
+    border-width: 1px;
+}
