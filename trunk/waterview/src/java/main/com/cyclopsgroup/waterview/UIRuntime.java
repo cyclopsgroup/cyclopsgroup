@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
@@ -108,6 +109,13 @@ public interface UIRuntime
      * @return Context interface
      */
     Context getSessionContext();
+
+    /**
+     * Get time zone for current request
+     *
+     * @return Time zone
+     */
+    TimeZone getTimeZone();
 
     /**
      * Get context for page rendering

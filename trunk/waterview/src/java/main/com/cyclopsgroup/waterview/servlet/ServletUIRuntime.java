@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,7 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class ServletUIRuntime implements UIRuntime
 {
+
     private LinkedList actions = new LinkedList();
 
     private String applicationBaseUrl;
@@ -234,6 +236,16 @@ public class ServletUIRuntime implements UIRuntime
     public Context getSessionContext()
     {
         return sessionContext;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.UIRuntime#getTimeZone()
+     */
+    public TimeZone getTimeZone()
+    {
+        return TimeZone.getDefault();
     }
 
     /**
