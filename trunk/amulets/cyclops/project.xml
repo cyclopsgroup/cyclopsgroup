@@ -17,6 +17,13 @@
 		<developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops</developerConnection>
 		<url>http://cvs.sourceforge.net/viewcvs.py/cyclops-group/amulets/cyclops</url>
 	</repository>
+	<versions>
+		<version>
+			<id>1.0-b3</id>
+			<name>1.0-b3</name>
+			<tag>AMULETS_CYCLOPS_1_0_B3</tag>
+		</version>
+	</versions>
 	<developers>
 		<developer>
 			<name>Guo, Jiaqi</name>
