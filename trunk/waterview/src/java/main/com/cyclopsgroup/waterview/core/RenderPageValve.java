@@ -58,7 +58,7 @@ public class RenderPageValve extends Valve implements Configurable, Serviceable
             this.renderer = renderer;
             this.runtime = runtime;
             this.suffix = '.' + extension;
-            runtime.getUIContext().put(NAME_IN_CONTEXT, this);
+            runtime.getUIContext().put(NAME, this);
         }
 
         /**

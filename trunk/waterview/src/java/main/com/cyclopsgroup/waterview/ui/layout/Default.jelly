@@ -16,29 +16,29 @@
  *  limitations under the License.
  * =========================================================================
  -->
-<html xmlns:p="http://www.cyclopsgroup.org/technology/waterview/portal">
+<html xmlns:p="http://www.cyclopsgroup.com/projects/waterview/portal">
     <head>
-        <p:include category="widget" path="HtmlHeader.jelly" name="header"/>
+        <p:include category="widget" page="HtmlHeader.x"/>
     </head>
     <body>
         <table width="100%">
             <tr>
-                <td colspan="3"><p:component category="widget" path="Banner.vm" name="banner"/></td>
+                <td colspan="3"><p:component category="widget" page="Banner.x"/></td>
             </tr>
             <tr>
                 <td width="20%" valign="top">
-                    <p:component category="navigator" path="${path}" name="left"/>
+                    <p:component category="navigator" page="${page}"/>
                 </td>
                 <td width="65%" valign="top">
-                    <p:component category="body" path="${path}" name="body"/>
+                    <p:component category="body" page="${page}"/>
                 </td>
                 <td width="15%" valign="top">
-                    <p:component category="reference" path="${path}" name="reference"/>
+                    <p:component category="reference" page="${page}"/>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <p:component category="widget" path="Footer.vm" name="footer"/>
+                    <p:component category="widget" page="Footer.x"/>
                 </td>
             </tr>
         </table>

@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -19,6 +20,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.cyclib.jelly.PropertyTagRegistry;
 import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.UIRuntime;
 
@@ -28,8 +30,20 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class JellyPageRenderer extends AbstractLogEnabled implements
-        PageRenderer, Configurable
+        PageRenderer, Configurable, Initializable
 {
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        initialJellyContext = new PropertyTagRegistry(
+                "META-INF/cyclopsgroup/waterview-tag-registry.properties")
+                .createContext();
+    }
 
     /**
      * This is a simple inner class that will be the element cahed in LRMMap. Script object and timestamp of script resource is stored here
@@ -59,7 +73,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
 
     private boolean cacheScript = false;
 
-    private JellyContext initialJellyContext = new JellyContext();
+    private JellyContext initialJellyContext;
 
     private boolean reloadable = false;
 
@@ -173,7 +187,7 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
         JellyContext jc = (JellyContext) uic.get("jellyContext");
         if (jc == null)
         {
-            jc = new JellyContext();
+            jc = new JellyContext(initialJellyContext);
             for (Iterator i = uic.keys(); i.hasNext();)
             {
                 String name = (String) i.next();

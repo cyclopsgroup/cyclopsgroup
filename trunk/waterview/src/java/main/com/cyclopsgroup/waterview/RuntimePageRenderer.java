@@ -24,7 +24,7 @@ package com.cyclopsgroup.waterview;
 public interface RuntimePageRenderer
 {
     /** Name in ui context */
-    String NAME_IN_CONTEXT = "renderer";
+    String NAME = "renderer";
 
     /**
      * Render page at runtime
