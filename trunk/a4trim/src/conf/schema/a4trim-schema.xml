@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
+<database name="default" defaultIdMethod="idbroker">
+    <table name="c_a4trim_categories" javaName="Category" description="Product Category">
+        <column name="category_id" required="true" primaryKey="true" type="INTEGER" description="Book Id"/>
+        <column name="parent_id" required="true" type="INTEGER" default="-1" description="Parent category id"/>
+        <column name="category_path" required="true" type="VARCHAR" size="255" description="ID path like /1/11/24/"/>
+        <column name="category_code" required="true" type="VARCHAR" size="255" description="Category Code"/>
+        <column name="depth" required="true" type="INTEGER" default="0" description="depth of the tree"/>
+        <column name="description" type="LONGVARCHAR" description="Description"/>
+        <column name="thumbnail_uri" type="VARCHAR" size="255" description="Thumbnail image data"/>
+        <column name="thumbnail_available" type="BIT" required="true" default="0"/>
+        <unique name="unique_category_code">
+            <unique-column name="category_code"/>
+        </unique>
+        <unique name="unique_category_path">
+            <unique-column name="category_path"/>
+        </unique>
+    </table>
+    <table name="c_a4trim_products" javaName="Product" description="Product">
+        <column name="product_id" required="true" primaryKey="true" type="INTEGER" description="Book Id"/>
+        <column name="product_code" required="true" type="VARCHAR" size="255" description="code"/>
+        <column name="description" type="LONGVARCHAR" description="Description"/>
+        <column name="thumbnail_uri" type="VARCHAR" size="255" description="Thumbnail image data"/>
+        <column name="thumbnail_available" type="BIT" required="true" default="0"/>
+        <column name="image_uri" type="VARCHAR" size="255"/>
+        <column name="image_available" type="BIT" required="true" default="0"/>
+        <column name="attribute1" type="VARCHAR" size="255"/>
+        <column name="attribute2" type="VARCHAR" size="255"/>
+        <column name="attribute3" type="VARCHAR" size="255"/>
+        <column name="attribute4" type="VARCHAR" size="255"/>
+        <column name="attribute5" type="VARCHAR" size="255"/>
+        <unique name="unique_product_code">
+            <unique-column name="product_code"/>
+        </unique>
+    </table>
+    <table name="c_a4trim_prd_cat" javaName="ProductCategory" description="Product category link">
+    	<column name="id" required="true" primaryKey="true" type="INTEGER" description="Primary Key"/>
+        <column name="product_id" required="true" type="INTEGER" description="Product Id"/>
+        <column name="category_id" required="true" type="INTEGER" description=" Category Id"/>
+        <column name="category_path" required="true" type="VARCHAR" size="255" description="Category path, redundant field"/>
+        <foreign-key foreignTable="c_a4trim_products">
+            <reference local="product_id" foreign="product_id"/>
+        </foreign-key>
+        <foreign-key foreignTable="c_a4trim_categories">
+            <reference local="category_id" foreign="category_id"/>
+        </foreign-key>
+        <unique name="unique-data">
+            <unique-column name="product_id"/>
+            <unique-column name="category_id"/>
+        </unique>
+    </table>
+</database>
