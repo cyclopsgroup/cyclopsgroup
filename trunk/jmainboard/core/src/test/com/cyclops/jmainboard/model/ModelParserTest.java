@@ -213,7 +213,7 @@ public class ModelParserTest extends TestCase {
         ModelParser mp = new ModelParser();
         ComponentModel cm =
             mp.parse(
-                new File("src/rttest/home/components/com.cyclops.jmainboard.test1/component.xml")
+                new File("src/rttest/home/components/jmainboard.test1-1.0/component.xml")
                     .toURL());
         assertNotNull(cm);
         assertEquals("com.cyclops.jmainboard.test1", cm.getId());
