@@ -28,11 +28,26 @@ public final class Comparator extends Enum
     /** Equal comparator */
     public static Comparator EQUAL = new Comparator("equal");
 
-    /** Greater thanl comparator */
+    /** Greater than comparator */
     public static Comparator GREATER = new Comparator("greater");
+
+    /** Greater equal than comparator */
+    public static Comparator GREATER_EQUAL = new Comparator("greater-equal");
+
+    /** In comparator */
+    public static Comparator IN = new Comparator("in");
+
+    /** Less than comparator */
+    public static Comparator LESS = new Comparator("less");
+
+    /** Less equal than comparator */
+    public static Comparator LESS_EQUAL = new Comparator("less-equal");
 
     /** Not equal comparator */
     public static Comparator NOT_EQUAL = new Comparator("not-equal");
+
+    /** Not in comparator */
+    public static Comparator NOT_IN = new Comparator("not-in");
 
     /**
      * Get comparator instance with given value
