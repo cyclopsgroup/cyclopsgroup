@@ -122,8 +122,9 @@
                     <jsl:applyTemplates select="$nav/body/menu"/>
                 </x:if>
               </table>
+                <div align="center"><img border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle" HSPACE="4" VSPACE="2" /></div>
             </td>
-            <td rowspan="2">
+            <td>
               <div id="bodycol">
                 <!-- Insert MAIN body here -->
                 <div class="app">

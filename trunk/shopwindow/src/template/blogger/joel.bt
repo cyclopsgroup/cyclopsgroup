@@ -78,7 +78,7 @@
         
           <title>
             Maven - 
-          Joel's Weblog
+          Jiaqi's Weblog
         
           </title>
         
@@ -87,7 +87,7 @@
         <link rel="stylesheet" href="../../style/maven.css" type="text/css"></link>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
         
-          <meta name="author" content="Joel Guo"></meta>
+          <meta name="author" content="Jiaqi Guo"></meta>
           <meta name="email" content="g-cyclops@users.sourceforge.net"></meta>
         
         
@@ -265,7 +265,7 @@
             <td>
                 
       	        
-      		    <a href="../../about.html">About Joel</a>
+      		    <a href="../../about.html">About Jiaqi</a>
       	        
             </td>
         </tr>
@@ -538,8 +538,9 @@
   
                 
               </table>
+<div align="center"><img border="0" alt="Free Web Counters" src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" ALIGN="middle" HSPACE="4" VSPACE="2" /></div>
             </td>
-            <td rowspan="2">
+            <td>
               <div id="bodycol">
                 
                 <div class="app">
@@ -604,7 +605,7 @@
                   
                   
                 
-                <a href="mailto:g-cyclops@users.sourceforge.net">EMail to Joel Guo</a>
+                <a href="mailto:g-cyclops@users.sourceforge.net">EMail to Jiaqi Guo</a>
               </td>
             </tr>
           </table>

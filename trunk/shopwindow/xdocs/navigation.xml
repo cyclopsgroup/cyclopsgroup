@@ -7,7 +7,7 @@
             <item name="News and Articles" href="/weblogs/news/blog.html"/>
             <item name="For Developers" href="/developers.html"/>
             <item name="Stories Behind" href="/weblogs/stories/blog.html"/>
-            <item name="About Joel" href="/about.html" collapse="true">
+            <item name="About Jiaqi" href="/about.html" collapse="true">
                 <item name="Contact Information" href="/contact.html"/>
                 <item name="My Resume" href="/resume.html"/>
                 <item name="Web Logs" href="/weblogs/joel/blog.html"/>
