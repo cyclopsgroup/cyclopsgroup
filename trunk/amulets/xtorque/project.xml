@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <extend>../project.xml</extend>
     <pomVersion>3</pomVersion>
@@ -6,8 +6,8 @@
     <name>Maven Cross Torque Plug-in</name>
     <currentVersion>1.0-b1</currentVersion>
     <shortDescription>Cross Torque Plugin for Maven</shortDescription>
-    <url>http://cyclops-group.sourceforge.net/project/amulets/plugins/xtorque/</url>
-    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/plugins/xtorque/</siteDirectory>
+    <url>http://cyclops-group.sourceforge.net/project/amulets/multiproject/xtorque/</url>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/xtorque/</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/xtorque/</connection>
         <url>http://cvs.sourceforge.net/viewcvs/cyclops-group/amulets/xtorque</url>
