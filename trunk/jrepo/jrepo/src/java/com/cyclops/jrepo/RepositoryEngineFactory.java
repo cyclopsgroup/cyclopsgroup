@@ -196,56 +196,28 @@ package com.cyclops.jrepo;
 
 import java.util.Properties;
 
-/** Core
+/** Factory of RepositoryEngine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:14:09 PM Mar 19, 2004
+ * Created at 2:12:04 PM Mar 23, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface RepositoryEngine {
-    /** Class name */
-    String REPOSITORY_ENGINE = RepositoryEngine.class.getName();
-    /** Method getRootContainer() in class RepositoryEngine
-     * @return Root container of this repository
+public interface RepositoryEngineFactory {
+    /** Name of ths class */
+    String REPOSITORY_ENGINE_FACTORY = RepositoryEngineFactory.class.getName();
+    /** Default implementation of this interface */
+    String DEFAULT_IMPLEMENTATION = "com.cyclops.jrepo.base.DefaultRepositoryEngineFactory";
+    /** Method setProperties() in class RepositoryEngineFactory
+     * @param properties Properties object
      */
-    Container getRootContainer();
-    /** Method getContent() in class RepositoryEngine
-     * @param uniqueId Unique Id of content
-     * @return Content instance
+    void setProperties(Properties properties);
+    /** Method getProperties() in class RepositoryEngineFactory
+     * @return Properties object
      */
-    Content getContent(long uniqueId);
-    /** Method getContent() in class RepositoryEngine
-     * @param container Content container
-     * @param contentName Name of content
-     * @return Content instance
+    Properties getProperties();
+    /** Method createRepositoryEngine() in class RepositoryEngineFactory
+     * @return RepositoryEngine instance
+     * @throws Exception exceptions won't be handled here
      */
-    Content getContent(Container container, String contentName);
-    /** Get content from its path
-     * @param path Full path of content
-     * @return Instance of content, null if not found
-     */
-    Content getContent(String path);
-    /** Create new content instance
-     * @param container Container of this content
-     * @param contentName Name of this content
-     * @param type ContentType of this content
-     * @return Empty instance of this content
-     */
-    Content create(Container container, String contentName, ContentType type);
-    /** Save content
-     * @param content Content instance to be save
-     */
-    void save(Content content);
-    /** Physically delete a content instance
-     * @param content Content to be delete
-     */
-    void delete(Content content);
-    /** Get instance of TypeManager
-     * @return Instance of TypeManager
-     */
-    ContentTypeManager getTypeManager();
-    /** Initialize engine with properties
-     * @param properties Properties for initialization
-     */
-    void init(Properties properties);
+    RepositoryEngine createRepositoryEngine() throws Exception;
 }

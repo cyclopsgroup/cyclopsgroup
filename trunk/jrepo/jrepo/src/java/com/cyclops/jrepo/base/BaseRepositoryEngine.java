@@ -194,6 +194,8 @@
  */
 package com.cyclops.jrepo.base;
 
+import java.util.Properties;
+
 import com.cyclops.jrepo.Container;
 import com.cyclops.jrepo.Content;
 import com.cyclops.jrepo.ContentType;
@@ -279,4 +281,9 @@ public class BaseRepositoryEngine implements RepositoryEngine {
         rootContainer = container;
     }
 
+    /** Override method init in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#init(java.util.Properties)
+     */
+    public void init(Properties properties) {
+    }
 }

@@ -194,7 +194,12 @@
  */
 package com.cyclops.jrepository;
 
+import java.util.Properties;
+
 import junit.framework.TestCase;
+
+import com.cyclops.jrepo.JRepo;
+import com.cyclops.jrepo.RepositoryEngine;
 
 /** Test case for FSRepositoryEngine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
@@ -203,5 +208,16 @@ import junit.framework.TestCase;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class FSRepositoryEngineTest extends TestCase {
-
+    /** Method testLoading() in class FSRepositoryEngineTest
+     * @throws Exception Pass exceptions to text runner
+     */
+    public void testLoading() throws Exception {
+        Properties p = new Properties();
+        p.setProperty(
+            RepositoryEngine.REPOSITORY_ENGINE,
+            FSRepositoryEngine.class.getName());
+        RepositoryEngine engine = JRepo.getEngine(p);
+        assertNotNull(engine);
+        System.out.println(engine);
+    }
 }

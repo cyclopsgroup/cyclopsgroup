@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <extend>../project.xml</extend>
+    <pomVersion>3</pomVersion>
+    <id>jrepo-api</id>
+    <name>JRepo API</name>
+    <currentVersion>1.0</currentVersion>
+    <description>API for JRepo implementation provider</description>
+    <shortDescription>API for JRepo implementation provider</shortDescription>
+    <url>http://cyclops-group.sourceforge.net/projects/jrepo/jrepo</url>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/jrepo/multiproject/jrepo</siteDirectory>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:jrepo/jrepo/</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:jrepo/jrepo/</developerConnection>
+        <url>http://cvs.sourceforge.net/viewcvs.py/cyclops-group/jrepo/jrepo</url>
+    </repository>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+    </dependencies>
+</project>

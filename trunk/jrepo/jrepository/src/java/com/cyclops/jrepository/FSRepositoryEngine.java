@@ -205,18 +205,20 @@ import com.cyclops.jrepo.base.BaseRepositoryEngine;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class FSRepositoryEngine extends BaseRepositoryEngine {
+    /** Constructor for class FSRepositoryEngine
+     */
     public FSRepositoryEngine() {
         repositoryHome = new java.io.File("jrepo");
     }
     private java.io.File repositoryHome;
     /** Method getRepositoryHome() in class FSRepositoryEngine
-     * @return
+     * @return Home of repository
      */
     public File getRepositoryHome() {
         return repositoryHome;
     }
     /** Method setRepositoryHome() in class FSRepositoryEngine
-     * @param file
+     * @param file Home directory of respository
      */
     public void setRepositoryHome(File file) {
         repositoryHome = file;
