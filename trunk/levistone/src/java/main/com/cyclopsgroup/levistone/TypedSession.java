@@ -27,30 +27,34 @@ public interface TypedSession
      * Create new entity object
      *
      * @return New created entity object
+     * @throws PersistenceException Persistence related exception
      */
-    Object create();
+    Object create() throws PersistenceException;
 
     /**
      * Create new entity with given id
      *
      * @param id Given id
      * @return New created entity object
+     * @throws PersistenceException Persistence related exception
      */
-    Object create(Object id);
+    Object create(Object id) throws PersistenceException;
 
     /**
      * Delete entity from persistence manager
      *
      * @param entity Entity object
+     * @throws PersistenceException Persistence related exception
      */
-    void delete(Object entity);
+    void delete(Object entity) throws PersistenceException;
 
     /**
      * Delete entity with given id
      *
      * @param id ID of entity
+     * @throws PersistenceException Persistence related exception
      */
-    void deleteById(Object id);
+    void deleteById(Object id) throws PersistenceException;
 
     /**
      * Release an entity from cache
@@ -71,8 +75,9 @@ public interface TypedSession
      *
      * @param id Id of entity
      * @return If such an entity exists
+     * @throws PersistenceException Persistence related exception
      */
-    boolean exists(Object id);
+    boolean exists(Object id) throws PersistenceException;
 
     /**
      * Get primary key of given entity object
@@ -108,13 +113,15 @@ public interface TypedSession
      *
      * @param id Id of object
      * @return Entity object or null if not found
+     * @throws PersistenceException Persistence related exception
      */
-    Object lookup(Object id);
+    Object lookup(Object id) throws PersistenceException;
 
     /**
      * Save created or changed object into persistence
      *
      * @param entity Entity object
+     * @throws PersistenceException Persistence related exception
      */
-    void save(Object entity);
+    void save(Object entity) throws PersistenceException;
 }

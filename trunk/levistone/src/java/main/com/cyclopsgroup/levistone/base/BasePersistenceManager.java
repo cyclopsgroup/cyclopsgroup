@@ -19,6 +19,7 @@ package com.cyclopsgroup.levistone.base;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.cyclopsgroup.levistone.PersistenceException;
@@ -31,7 +32,8 @@ import com.cyclopsgroup.levistone.Session;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BasePersistenceManager implements PersistenceManager
+public abstract class BasePersistenceManager extends AbstractLogEnabled
+        implements PersistenceManager
 {
     private Map activeSessions = ListOrderedMap.decorate(new Hashtable());
 
