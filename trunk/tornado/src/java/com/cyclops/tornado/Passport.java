@@ -7,6 +7,7 @@
 package com.cyclops.tornado;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.apache.commons.collections.MultiHashMap;
@@ -139,5 +140,17 @@ public class Passport {
             }
             repo.put(p.getName(), p);
         }
+    }
+    /** Method getPermissions()
+     * @return All permission contains in this passport
+     */
+    public Collection getPermissions() {
+        return Collections.unmodifiableCollection(repo.values());
+    }
+    /** Implementation of method toString() in this class
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "PASSPORT{" + repo + "}";
     }
 }

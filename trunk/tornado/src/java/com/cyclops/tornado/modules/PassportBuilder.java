@@ -11,6 +11,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.fulcrum.TurbineServices;
+
+import com.cyclops.tornado.Asset;
 import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.Passport;
 import com.cyclops.tornado.bo.AclBroker;
@@ -20,6 +23,7 @@ import com.cyclops.tornado.om.Group;
 import com.cyclops.tornado.services.user.User;
 import com.cyclops.tornado.services.user.UserEvent;
 import com.cyclops.tornado.services.user.UserListener;
+import com.cyclops.tornado.services.user.UserService;
 /**
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
@@ -75,6 +79,19 @@ public class PassportBuilder implements UserListener {
                 passport.addPermission(acl.getPermission());
             }
         }
+        if (!user.isAnonymous()) {
+            UserService us =
+                (UserService) TurbineServices.getInstance().getService(
+                    UserService.SERVICE_NAME);
+            Passport def =
+                (Passport) us.getAnonymousUser().getTempStorage().get(
+                    Passport.KEY_IN_USER);
+            for (Iterator i = def.getPermissions().iterator(); i.hasNext();) {
+                Asset permission = (Asset) i.next();
+                passport.addPermission(permission.getAssetCode());
+            }
+        }
+        user.getTempStorage().put(Passport.KEY_IN_USER, passport);
     }
     /** Implementation of method onSingOut() in this class
      * @see com.cyclops.tornado.services.user.UserListener#onSingOut(com.cyclops.tornado.services.user.UserEvent)

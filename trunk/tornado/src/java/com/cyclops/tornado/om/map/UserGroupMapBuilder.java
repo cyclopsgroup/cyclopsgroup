@@ -62,7 +62,7 @@ public class UserGroupMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_user_group.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_user_group.OBJECT_ID", new Integer(0));
                                                         tMap.addForeignPrimaryKey(
                 "c_tnd_user_group.USER_ID", new Integer(0) , "c_tnd_users" ,
                     "user_id");

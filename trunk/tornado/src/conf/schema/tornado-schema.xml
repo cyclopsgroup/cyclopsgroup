@@ -52,7 +52,7 @@
         </foreign-key>
     </table>
     <table name="c_tnd_user_group" javaName="UserGroup" description="Link of user and group">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="object_id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
         <column name="user_id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
         <column name="group_id" required="true" primaryKey="true" type="INTEGER" description="Group Id"/>
         <foreign-key foreignTable="c_tnd_users">

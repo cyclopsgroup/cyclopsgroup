@@ -56,7 +56,7 @@
 
 <!ELEMENT UserGroup EMPTY>
 <!ATTLIST UserGroup
-    Id CDATA #REQUIRED
+    ObjectId CDATA #REQUIRED
     UserId CDATA #REQUIRED
     GroupId CDATA #REQUIRED
 >

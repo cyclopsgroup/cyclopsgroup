@@ -56,10 +56,4 @@ public class TornadoUser extends DefaultUser {
     public Passport getPassport() {
         return (Passport) getTempStorage().get(Passport.KEY_IN_USER);
     }
-    /** Method setPassport()
-     * @param passport Passport object
-     */
-    public void setPassport(Passport passport) {
-        getTempStorage().put(Passport.KEY_IN_USER, passport);
-    }
 }

@@ -18,7 +18,6 @@ public class PassportTest extends TestCase {
         passport.addPermission("aa:1|*|aaa");
         assertTrue(passport.accept(ta));
     }
-    
     private class TestAsset implements Asset {
         private String expression;
         private TestAsset(String expr) {

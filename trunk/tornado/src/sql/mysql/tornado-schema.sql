@@ -81,10 +81,10 @@ drop table if exists c_tnd_user_group;
 
 CREATE TABLE c_tnd_user_group
 (
-        id INTEGER NOT NULL,
+        object_id INTEGER NOT NULL,
         user_id INTEGER NOT NULL,
         group_id INTEGER NOT NULL,
-    PRIMARY KEY(id,user_id,group_id),
+    PRIMARY KEY(object_id,user_id,group_id),
     FOREIGN KEY (user_id) REFERENCES c_tnd_users (user_id)
     ,
     FOREIGN KEY (group_id) REFERENCES c_tnd_groups (group_id)

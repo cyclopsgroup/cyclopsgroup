@@ -1,1 +1,2 @@
 #macro ( spacer $width $height )<img src="$content.getURI("images/spacer.gif")" width="$width" align="absbottom" height="$height" border="0"/>#end
+#macro ( xbgcolor ) #if($isXBgColor) class="a" #set($isXBgColor = false) #else class="b" #set($isXBgColor = true) #end #end

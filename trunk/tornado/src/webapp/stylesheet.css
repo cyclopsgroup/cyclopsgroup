@@ -43,3 +43,9 @@ td.title {
 	padding: 3px;
 	text-indent: 10px;
 }
+tr.a {
+	background-color: #EEEEEE;
+}
+tr.b {
+	background-color: white;
+}

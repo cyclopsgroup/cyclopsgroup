@@ -9,5 +9,5 @@ package com.cyclops.tornado.modules.screens.system.administration.user;
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
  */
-public class UserProfile extends BaseUser {
+public class UserProfile extends BaseUserScreen {
 }

@@ -48,7 +48,7 @@
 		<td colspan="2" class="title">User Listeners</td>
 	</tr>
 	#foreach($listener in $listeners)
-		<tr>
+		<tr #xbgcolor()>
 			<td align="right"><input type="checkbox" name="conf_id" value="$listener.confId"/></td>
 			<td>$listener.confValue</td>
 		</tr>

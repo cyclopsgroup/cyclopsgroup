@@ -56,8 +56,8 @@ public abstract class BaseUserGroupPeer
         return getMapBuilder(UserGroupMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ID field */
-    public static final String ID;
+    /** the column name for the OBJECT_ID field */
+    public static final String OBJECT_ID;
     /** the column name for the USER_ID field */
     public static final String USER_ID;
     /** the column name for the GROUP_ID field */
@@ -65,7 +65,7 @@ public abstract class BaseUserGroupPeer
 
     static
     {
-    ID = "c_tnd_user_group.ID";
+    OBJECT_ID = "c_tnd_user_group.OBJECT_ID";
     USER_ID = "c_tnd_user_group.USER_ID";
     GROUP_ID = "c_tnd_user_group.GROUP_ID";
 
@@ -227,7 +227,7 @@ public abstract class BaseUserGroupPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(OBJECT_ID);
             criteria.addSelectColumn(USER_ID);
             criteria.addSelectColumn(GROUP_ID);
         }
@@ -281,7 +281,7 @@ public abstract class BaseUserGroupPeer
     {
         try
         {
-                            obj.setId(row.getValue(offset + 0).asInt());
+                            obj.setObjectId(row.getValue(offset + 0).asInt());
                                 obj.setUserId(row.getValue(offset + 1).asInt());
                                 obj.setGroupId(row.getValue(offset + 2).asInt());
                             }
@@ -440,7 +440,7 @@ public abstract class BaseUserGroupPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ID, criteria.remove(ID));
+                                selectCriteria.put(OBJECT_ID, criteria.remove(OBJECT_ID));
                                          selectCriteria.put(USER_ID, criteria.remove(USER_ID));
                                          selectCriteria.put(GROUP_ID, criteria.remove(GROUP_ID));
               
@@ -635,7 +635,7 @@ public abstract class BaseUserGroupPeer
     {
         Criteria criteria = new Criteria();
           SimpleKey[] keys = (SimpleKey[])pk.getValue();
-                    criteria.add(ID, keys[0]);
+                    criteria.add(OBJECT_ID, keys[0]);
                         criteria.add(USER_ID, keys[1]);
                         criteria.add(GROUP_ID, keys[2]);
                       return criteria;
@@ -646,7 +646,7 @@ public abstract class BaseUserGroupPeer
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(ID, obj.getId());
+                       criteria.add(OBJECT_ID, obj.getObjectId());
                             if (!obj.isNew())
                        criteria.add(USER_ID, obj.getUserId());
                             if (!obj.isNew())
@@ -762,7 +762,7 @@ public abstract class BaseUserGroupPeer
                 ObjectKey pk = (ObjectKey)iter.next();
                 SimpleKey[] keys = (SimpleKey[])pk.getValue();
                                                     Criteria.Criterion c0 = criteria.getNewCriterion(
-                        ID, keys[0], Criteria.EQUAL);
+                        OBJECT_ID, keys[0], Criteria.EQUAL);
                                                                             Criteria.Criterion c1 = criteria.getNewCriterion(
                         USER_ID, keys[1], Criteria.EQUAL);
                                                                 c0.and(c1);
@@ -780,12 +780,12 @@ public abstract class BaseUserGroupPeer
     /**
      * retrieve object using using pk values.
      *
-     * @param id int
+     * @param object_id int
      * @param user_id int
      * @param group_id int
      */
     public static UserGroup retrieveByPK(
-     int id
+     int object_id
             , int user_id
             , int group_id
                 ) throws TorqueException
@@ -796,7 +796,7 @@ public abstract class BaseUserGroupPeer
         {
            db = Torque.getConnection(DATABASE_NAME);
            retVal = retrieveByPK(
-                                      id
+                                      object_id
                                          , user_id
                                          , group_id
                                          , db);
@@ -811,20 +811,20 @@ public abstract class BaseUserGroupPeer
     /**
      * retrieve object using using pk values.
      *
-     * @param id int
+     * @param object_id int
      * @param user_id int
      * @param group_id int
      * @param Connection con
      */
     public static UserGroup retrieveByPK(
-     int id
+     int object_id
             , int user_id
             , int group_id
                ,Connection con) throws TorqueException
     {
 
         Criteria criteria = new Criteria(5);
-        criteria.add(ID, id);
+        criteria.add(OBJECT_ID, object_id);
         criteria.add(USER_ID, user_id);
         criteria.add(GROUP_ID, group_id);
         List v = doSelect(criteria, con);

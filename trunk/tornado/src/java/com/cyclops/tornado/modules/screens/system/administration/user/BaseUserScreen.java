@@ -17,7 +17,7 @@ import com.cyclops.tornado.om.User;
  * @author joeblack
  * @since 2003-10-6 20:41:48
  */
-public class BaseUser extends Screen {
+public class BaseUserScreen extends Screen {
     private User dbuser;
     /** Method doBuildTemplate()
      * @see org.apache.turbine.modules.Module#doBuildTemplate(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)

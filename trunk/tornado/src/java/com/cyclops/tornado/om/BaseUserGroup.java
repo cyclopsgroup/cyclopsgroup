@@ -37,9 +37,9 @@ public abstract class BaseUserGroup extends BaseObject
 
                   
         /**
-         * The value for the id field
+         * The value for the object_id field
          */
-        private int id;
+        private int object_id;
               
         /**
          * The value for the user_id field
@@ -53,29 +53,29 @@ public abstract class BaseUserGroup extends BaseObject
       
       
         /**
-         * Get the Id
+         * Get the ObjectId
          *
          * @return int
          */
-        public int getId()
+        public int getObjectId()
         {
-            return id;
+            return object_id;
         }
 
                 
         /**
-         * Set the value of Id
+         * Set the value of ObjectId
          *
          * @param v new value
          */
-        public void setId(int v) 
+        public void setObjectId(int v) 
         {
           
 
 
-         if (this.id != v)
+         if (this.object_id != v)
         {
-             this.id = v;
+             this.object_id = v;
             setModified(true);
         }
 
@@ -253,7 +253,7 @@ public abstract class BaseUserGroup extends BaseObject
     {
         SimpleKey[] keys = (SimpleKey[]) key.getValue();
         SimpleKey tmpKey = null;
-                             setId(((NumberKey)keys[0]).intValue());
+                             setObjectId(((NumberKey)keys[0]).intValue());
                                 setUserId(((NumberKey)keys[1]).intValue());
                                 setGroupId(((NumberKey)keys[2]).intValue());
                 }
@@ -261,14 +261,14 @@ public abstract class BaseUserGroup extends BaseObject
     /**
      * Set the PrimaryKey using SimpleKeys.
      *
-     * @param int id
+     * @param int object_id
      * @param int user_id
      * @param int group_id
      */
-    public void setPrimaryKey( int id, int user_id, int group_id)
+    public void setPrimaryKey( int object_id, int user_id, int group_id)
         
     {
-         setId(id);
+         setObjectId(object_id);
          setUserId(user_id);
          setGroupId(group_id);
     }
@@ -288,7 +288,7 @@ public abstract class BaseUserGroup extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-            pks[0] = SimpleKey.keyFor(getId());
+            pks[0] = SimpleKey.keyFor(getObjectId());
                     pks[1] = SimpleKey.keyFor(getUserId());
                     pks[2] = SimpleKey.keyFor(getGroupId());
                     return comboPK;
@@ -307,11 +307,11 @@ public abstract class BaseUserGroup extends BaseObject
 
     protected UserGroup copyInto(UserGroup copyObj) throws TorqueException
     {
-        copyObj.setId(id);
+        copyObj.setObjectId(object_id);
         copyObj.setUserId(user_id);
         copyObj.setGroupId(group_id);
 
-                      copyObj.setId(0);
+                      copyObj.setObjectId(0);
                                   copyObj.setUserId(0);
                                   copyObj.setGroupId(0);
             
@@ -335,8 +335,8 @@ public abstract class BaseUserGroup extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("UserGroup:\n");
-              str.append("Id = ")
-           .append(getId())
+              str.append("ObjectId = ")
+           .append(getObjectId())
            .append("\n");
               str.append("UserId = ")
            .append(getUserId())

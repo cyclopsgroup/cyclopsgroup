@@ -6,9 +6,25 @@
     <User UserId="21" UserName="jason" EncryptedPassword="amFzb24=" IsSystem="0" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
     <User UserId="22" UserName="john" EncryptedPassword="am9obg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
     <User UserId="23" UserName="joel" EncryptedPassword="am9lbA==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <Group GroupId="1" GroupName="administrators" IsSystem="1" IsDisabled="0"/>
+    <Group GroupId="2" GroupName="users" IsSystem="1" IsDisabled="0"/>
+    <UserGroup ObjectId="1" UserId="2" GroupId="1"/>
+    <UserGroup ObjectId="2" UserId="22" GroupId="2"/>
+    <UserGroup ObjectId="3" UserId="23" GroupId="2"/>
+    <Acl AclId="1" OwnerType="U" OwnerName="guest" IsRole="1" Permission="browse"/>
+    <Acl AclId="11" OwnerType="G" OwnerName="administrators" IsRole="1" Permission="almighty"/>
+    <Acl AclId="12" OwnerType="G" OwnerName="users" IsRole="1" Permission="basic"/>
+    <Acl AclId="21" OwnerType="R" OwnerName="almighty" IsRole="0" Permission="screen:*.vm"/>
+    <Acl AclId="22" OwnerType="R" OwnerName="almighty" IsRole="0" Permission="action:*|do*"/>
+    <Acl AclId="31" OwnerType="R" OwnerName="browse" IsRole="0" Permission="screen:Index.vm"/>
+    <Acl AclId="32" OwnerType="R" OwnerName="browse" IsRole="0" Permission="screen:Redirect.vm"/>
+    <Acl AclId="36" OwnerType="R" OwnerName="browse" IsRole="0" Permission="action:UserIdentify|doSignin"/>
+    <Role RoleId="1" RoleName="almighty"/>
+    <Role RoleId="2" RoleName="basic"/>
+    <Role RoleId="3" RoleName="browse"/>
     <Conf ConfId="11" ConfKey="services.UserService.user.implementation" ConfValue="com.cyclops.tornado.TornadoUser"/>
     <Conf ConfId="12" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.PassportBuilder"/>
-    <Conf ConfId="12" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.UserSigninCounter"/>
+    <Conf ConfId="13" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.UserSigninCounter"/>
     <Conf ConfId="21" ConfKey="services.NavigatorService.path" ConfValue="WEB-INF/conf/navigator"/>
     <Conf ConfId="22" ConfKey="services.NavigatorService.pattern" ConfValue="*.xml"/>
 </dataset>

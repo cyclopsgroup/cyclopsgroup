@@ -1,2 +1,2 @@
-<p>Hello World</p>
-#foreach($root in $navigator.rootMenus) $root  #foreach($child in $navigator.getChildren($root)) $child #end #end
+<h2>Hello World</h2>
+$data.tornadoUser.passport, $data.tornadoUser.name

@@ -23,6 +23,7 @@ public class User
         copyInto(user);
         user.setNew(isNew());
         user.setModified(isModified());
+        user.setUserId(getUserId());
     }
     /** Full name of this user
      * @return Fist name and last name

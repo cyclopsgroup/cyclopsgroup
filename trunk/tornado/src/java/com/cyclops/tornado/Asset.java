@@ -10,6 +10,8 @@ package com.cyclops.tornado;
  * @email g-cyclops@users.sourceforge.net
  */
 public interface Asset {
+    /** Empty Asset array */
+    Asset[] EMPTY_ARRAY = new Asset[0];
     /** In format of name:value1|value2|value3...
      * @return Code of this asset
      */
