@@ -1,0 +1,22 @@
+#h2("Add Product" "notepad")
+<table width="100%">
+	<form method="post" action="$link.setAction("ProductAction").setPage("admin,AddProduct.vm")" enctype="multipart/form-data">
+	<tr>
+		<td>Product Code:</td>
+		<td>#<input type="text" name="product_code" size="30"/></td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td><textarea name="description" cols="40" rows="5"></textarea></td>
+	</tr>
+	<tr>
+		<td>Upload a Image:</td>
+		<td><input type="file" name="upload_image"></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" value="Add" class="button" name="eventsubmit_doAdd"/>
+		</td>
+	</tr>
+	</form>
+</table>

@@ -1,0 +1,41 @@
+#h2("Product Information" "notepad")
+<table width="100%">
+	<form method="get" action="$link.setPage("admin,EditProduct.vm")">
+	<input type="hidden" name="product_code" value="$product.productCode"/>
+	<tr>
+		<td>Product Code:</td>
+		<td><big><b>#$product.productCode</b></big></td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td>$!product.description</td>
+	</tr>
+	#if($product.thumbnailAvailable)
+		<tr>
+			<td>Photo:</td>
+			<td><a href="$content.getURI($product.imageUri)" target="_blank"><img src="$content.getURI($product.thumbnailUri)" border="0"/></a></td>
+		</tr>
+	#end
+	<tr>
+		<td>Associated Categories:</td>
+		<td>#if($categories.isEmpty()) <font color="red">This product is not associated with any category!</a> #else
+			<table width="100%">
+			#foreach($category in $categories)
+				<tr #bgcolor()>
+					<td>#$category.categoryCode</td>
+					<td>$!category.description</td>
+				</tr>
+			#end
+			</table>
+		#end</td>
+	</tr>
+	<tr>
+		<td class="bottom" colspan="2">
+			<input type="button" value=" OK " class="button" onclick="history.go(-1)"/>
+			#if($a4trim.isAdmin)
+				<input type="submit" value="Edit" class="button"/>
+			#end
+		</td>
+	</tr>
+	</form>
+</table>

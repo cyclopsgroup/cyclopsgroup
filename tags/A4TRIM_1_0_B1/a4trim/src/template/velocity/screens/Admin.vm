@@ -1,0 +1,3 @@
+<script language="javascript">
+location.href="$link.setPage("Index.vm")";
+</script>
