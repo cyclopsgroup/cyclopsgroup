@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Road Map</title>
+		<author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+	</properties>
+	<body>
+		<section name="Road Map">
+			<p>Waterview is going to be an extremely efficient and componentized web application framework. It allows developer to plug their valves, reolvers and renderers into it.</p>
+		</section>
+	</body>
+</document>

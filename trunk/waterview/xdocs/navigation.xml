@@ -2,7 +2,6 @@
 <project>
     <body>
         <links>
-            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
             <item name="Turbine" href="http://jakarta.apache.org/turbine"/>
             <item name="Avalon" href="http://avalon.apache.org"/>
             <item name="Plexus" href="http://plexus.codehaus.org"/>
@@ -12,6 +11,8 @@
         <menu name="Overview">
             <item name="Home" href="/index.html"/>
             <item name="Roadmap" href="/roadmap.html"/>
+            <item name="Design" href="/design.html"/>
+            <item name="About" href="/about.html"/>
         </menu>
         <search/>
     </body>

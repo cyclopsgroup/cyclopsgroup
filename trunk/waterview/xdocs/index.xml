@@ -18,8 +18,5 @@
 			<p>Well, one difference is waterview is called waterview and summit is called summit.</p>
 			<p>I would like to delete waterview directory from my CVS server if summit project is under active development today. Actaully several small projects in my list used to be based on summit. However, we can not even find this project any longer now.</p>
 		</section>
-		<section name="The Name">
-			<p>Waterview pwky is a road in north dallas, TX. Every morning I drive through that road with my wife. When it was time to name this project, waterview was the first thing came to my mind.</p>
-		</section>
 	</body>
 </document>
