@@ -92,8 +92,7 @@ public class ConfigurationAction extends Action {
             Conf conf = new Conf();
             conf.setConfKey(fullKey);
             conf.setConfValue(value);
-            cb.deleteByKey(fullKey);
-            cb.save(conf);
+            cb.saveSingle(conf);
         }
         noticeFinished(data);
     }
