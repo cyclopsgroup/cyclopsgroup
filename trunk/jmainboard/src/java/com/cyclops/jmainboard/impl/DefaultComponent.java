@@ -348,9 +348,8 @@ public class DefaultComponent extends LoggableObject implements Component {
             getLog().debug(
                     "Resource [" + resourcePath + "] in component [" + getId()
                             + "] not found!", e);
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /** Method getTitle() in class DefaultComponent
