@@ -13,11 +13,17 @@
                         <p>You can find a list of projects hosted in <a href="projects.html">this page</a>.</p>
                     </section>
                 </td>
-                <td align="right"><img src="images/lamp.gif"/></td>
+                <td align="right">
+                    <img src="images/lamp.gif"/>
+                </td>
             </tr>
         </table>
         <section name="Who is it?">
             <p>Cyclops Groups Community is made up of a group of talented Java gurus who are tring to make their contribution to open source. All the projects are powered by <a href="http://www.apache.org">Apache</a> and <a href="http://www.werken.com">werken</a> open source projects, built by <a href="http://maven.apache.org">maven</a> and hosted in <a href="http://sourceforge.net">SourceForge.net</a>.</p>
+        </section>
+        <section name="What we have">
+            <p>
+                <a href="projects.html">Hosted Projects</a> is a detail list of projects hosted here.</p>
         </section>
     </body>
 </document>

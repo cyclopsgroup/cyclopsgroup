@@ -27,6 +27,13 @@
                     <td>Amulets are a set of maven plugins for the development of other projects.</td>
                 </tr>
                 <tr>
+                    <td>plexaros</td>
+                    <td>
+                        <a href="projects/plexaros">http://cyclops-group.sourceforge.net/projects/plexaros</a>
+                    </td>
+                    <td>A light weight plugable components framework. Additional module can be easily developed and plug into this framework.</td>
+                </tr>
+                <tr>
                     <td>shopwindow</td>
                     <td>
                         <a href="http://cyclops-group.sourceforge.net">http://cyclops-groups.sourceforge.net</a>

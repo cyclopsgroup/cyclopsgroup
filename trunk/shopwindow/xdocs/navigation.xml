@@ -18,6 +18,7 @@
             <item name="Hosted Projects" href="/projects.html" collapse="true">
                 <item name="tornado" href="/projects/tornado"/>
                 <item name="amulets" href="/projects/amulets"/>
+                <item name="plexaros" href="/projects/plexaros"/>
                 <item name="a4trim" href="/projects/a4trim"/>
                 <item name="healthfarm" href="/projects/healthfarm"/>
                 <item name="dbdigger" href="http://dbdigger.sourceforge.net"/>
