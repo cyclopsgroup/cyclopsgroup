@@ -77,7 +77,7 @@ public abstract class BaseUserObjectPeer
         {
             try
             {
-                getMapBuilder();
+                getMapBuilder(UserObjectMapBuilder.CLASS_NAME);
             }
             catch (Exception e)
             {
@@ -117,7 +117,7 @@ public abstract class BaseUserObjectPeer
         {
             log.error("A FATAL ERROR has occurred which should not "
                 + "have happened under any circumstance.  Please notify "
-                + "the Torque developers <turbine-torque-dev@jakarta.apache.org> "
+                + "the Torque developers <torque-dev@db.apache.org> "
                 + "and give as many details as possible (including the error "
                 + "stack trace).", t);
 

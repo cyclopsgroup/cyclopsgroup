@@ -254,12 +254,9 @@
             </properties>
         </dependency>
         <dependency>
-            <id>turbine</id>
-            <version>3.0-20030929.215136</version>
-            <url>http://jakarta.apache.org/turbine/turbine-3</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
+          <groupId>torque</groupId>
+          <artifactId>torque-gen</artifactId>
+          <version>3.1</version>
         </dependency>
         <dependency>
             <id>village</id>
