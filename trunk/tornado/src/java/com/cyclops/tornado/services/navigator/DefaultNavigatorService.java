@@ -30,9 +30,10 @@ public class DefaultNavigatorService
         MenuItem root = new MenuItem();
         Digester digester = new Digester();
         digester.addObjectCreate("menu", Menu.class);
-        digester.addObjectCreate("item", MenuItem.class);
-        digester.addSetProperties("item");
-        digester.addSetNext("item", "addChild");
+        digester.addSetProperties("menu");
+        digester.addObjectCreate("*/item", MenuItem.class);
+        digester.addSetProperties("*/item");
+        digester.addSetNext("*/item", "addChild");
         for (int i = 0; i < resources.length; i++) {
             URL resource = resources[i];
             try {

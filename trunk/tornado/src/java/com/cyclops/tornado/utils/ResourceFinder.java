@@ -99,7 +99,7 @@ public class ResourceFinder {
                 public boolean accept(File file) {
                     try {
                         RE re = REUtil.createRE("<" + pattern + ">");
-                        return re.match(file.getName());
+                        return re.match("<" + file.getName() + ">");
                     } catch (Exception e) {
                         return false;
                     }

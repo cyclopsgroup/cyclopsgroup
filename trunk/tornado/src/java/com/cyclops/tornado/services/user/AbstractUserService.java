@@ -103,7 +103,7 @@ public abstract class AbstractUserService
         String anonymousUserName = conf.getString("user.anonymous", "guest");
         userTimeout = conf.getLong("user.timeout", DEFAULT_USER_TIMEOUT);
         anonymousUser = loadUser(anonymousUserName, true);
-        userRepo.put(anonymousUser.getName(), anonymousUser);
+        userRepo.put(anonymousUser.getName(), new UserEntry(anonymousUser));
         checkingThread = new Thread(new CheckingThread());
         checkingThread.setDaemon(true);
         checkingThread.setPriority(Thread.MIN_PRIORITY);

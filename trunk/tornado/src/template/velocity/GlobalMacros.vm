@@ -1,0 +1,1 @@
+#macro ( spacer $width $height )<img src="$content.getURI("images/spacer.gif")" width="$width" align="absbottom" height="$height" border="0"/>#end

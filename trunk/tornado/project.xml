@@ -314,9 +314,9 @@
         </integrationUnitTest>
         <resources>
             <resource>
-                <directory>src/classpath</directory>
+                <directory>src/webapp/WEB-INF</directory>
                 <includes>
-                    <include>**/*</include>
+                    <include>conf/**/*</include>
                 </includes>
             </resource>
             <resource>

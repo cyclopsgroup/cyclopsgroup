@@ -1,0 +1,12 @@
+<table width="100%">
+	<form method="post" action="$link.setAction("UserIdentify").setPage("Redirect.vm")" onsubmit="this.redirectto.value=location.href">
+	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")">
+	<tr>
+		<td align="right">
+			<input type="text" name="user_name" size="6"/>
+			<input type="password" name="password" size="6"/>
+			<input type="submit" value="Signin" name="eventsubmit_doLogin"/>
+		</td>
+	</tr>
+	</form>
+</table>

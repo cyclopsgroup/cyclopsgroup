@@ -1,0 +1,15 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+}
+input, select, option, textarea {
+	font-family: Courier New'
+	font-size: 9pt;
+}

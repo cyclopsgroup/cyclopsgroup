@@ -19,7 +19,7 @@ import com.cyclops.tornado.services.user.UserListener;
  */
 public class NavigatorTool implements ApplicationTool, UserListener {
     /** Method getChildren() in Class NavigatorTool
-     * @param menu
+     * @param menu Menu item
      * @return Array of MenuItem objects
      */
     public MenuItem[] getChildren(Menu menu) {
