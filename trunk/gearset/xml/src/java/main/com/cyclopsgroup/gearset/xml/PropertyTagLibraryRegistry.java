@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
 
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.TagLibrary;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
@@ -43,6 +44,7 @@ public abstract class PropertyTagLibraryRegistry
             String key = (String) i.next();
             if (key.endsWith(".url"))
             {
+                String url = props.getProperty(key);
                 String name = StringUtils.chomp(key, ".url");
                 String libraryName = props.getProperty(name + ".library");
                 if (StringUtils.isEmpty(libraryName))
@@ -52,20 +54,9 @@ public abstract class PropertyTagLibraryRegistry
                 TagLibrary library = (TagLibrary) Thread.currentThread()
                         .getContextClassLoader().loadClass(libraryName)
                         .newInstance();
-                tagLibraries.put(key, library);
+                tagLibraries.put(url, library);
             }
         }
-    }
-
-    /**
-     * Specify the resource of properties file
-     * 
-     * @return Resource of properties file
-     */
-    protected URL getRegistryResource()
-    {
-        throw new NotImplementedException(getClass()
-                + ".getTagDefinitionResource()");
     }
 
     /**
@@ -80,5 +71,32 @@ public abstract class PropertyTagLibraryRegistry
         Properties tagDefinition = new Properties();
         tagDefinition.load(getRegistryResource().openStream());
         return tagDefinition;
+    }
+
+    /**
+     * Specify the resource of properties file
+     * 
+     * @return Resource of properties file
+     */
+    protected URL getRegistryResource()
+    {
+        throw new NotImplementedException(getClass()
+                + ".getTagDefinitionResource()");
+    }
+
+    /**
+     * Register all tag libraries in this registry to a given jelly context
+     * 
+     * @param jellyContext
+     *                   JellyContext object
+     */
+    public synchronized void registerTagLibraries(JellyContext jellyContext)
+    {
+        for (Iterator i = tagLibraries.keySet().iterator(); i.hasNext();)
+        {
+            String url = (String) i.next();
+            TagLibrary library = (TagLibrary) tagLibraries.get(url);
+            jellyContext.registerTagLibrary(url, library);
+        }
     }
 }
