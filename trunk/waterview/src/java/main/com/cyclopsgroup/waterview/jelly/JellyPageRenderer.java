@@ -5,6 +5,7 @@ package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Iterator;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -16,8 +17,8 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.waterview.PageRenderer;
-import com.cyclopsgroup.waterview.UIContext;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -171,15 +172,14 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     public void render(UIRuntime runtime, String packageName, String page)
             throws Exception
     {
-        UIContext uic = runtime.getUIContext();
+        Context uic = runtime.getUIContext();
         JellyContext jc = (JellyContext) uic.get("jellyContext");
         if (jc == null)
         {
             jc = new JellyContext();
-            String[] keys = uic.getKeys();
-            for (int i = 0; i < keys.length; i++)
+            for (Iterator i = uic.keys(); i.hasNext();)
             {
-                String name = keys[i];
+                String name = (String) i.next();
                 jc.setVariable(name, uic.get(name));
             }
             uic.put("jellyContext", jc);

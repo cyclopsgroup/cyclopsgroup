@@ -17,15 +17,17 @@
 package com.cyclopsgroup.waterview.velocity;
 
 import java.io.OutputStreamWriter;
-import java.util.Properties;
 
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.LRUMap;
 import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 
+import com.cyclopsgroup.cyclib.velocity.VelocityComponent;
+import com.cyclopsgroup.cyclib.velocity.VelocityContextAdapter;
 import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.UIRuntime;
 
@@ -35,7 +37,7 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class VelocityPageRenderer extends AbstractLogEnabled implements
-        PageRenderer, Initializable
+        PageRenderer, Serviceable
 {
 
     private static final String CONTENT_TYPE = "text/html";
@@ -58,7 +60,7 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
 
     private LRUMap templateCache;
 
-    private VelocityEngine velocityEngine;
+    private VelocityComponent velocityComponent;
 
     /**
      * Override or implement method of parent class or interface
@@ -67,8 +69,8 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
      */
     public boolean exists(String packageName, String page)
     {
-        return velocityEngine
-                .templateExists(getTemplatePath(packageName, page));
+        return velocityComponent.templateExists(getTemplatePath(packageName,
+                page));
     }
 
     /**
@@ -79,19 +81,6 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
     public String getContentType()
     {
         return CONTENT_TYPE;
-    }
-
-    /**
-     * Override method initialize in super class of VelocityPageRenderer
-     * 
-     * @see org.apache.avalon.framework.activity.Initializable#initialize()
-     */
-    public void initialize() throws Exception
-    {
-        velocityEngine = new VelocityEngine();
-        Properties props = new Properties();
-        props.load(getClass().getResourceAsStream("velocity.properties"));
-        velocityEngine.init(props);
     }
 
     /**
@@ -111,7 +100,18 @@ public class VelocityPageRenderer extends AbstractLogEnabled implements
         String templatePath = getTemplatePath(packageName, page);
         OutputStreamWriter output = new OutputStreamWriter(runtime
                 .getHttpServletResponse().getOutputStream());
-        velocityEngine.mergeTemplate(templatePath, vc, output);
+        velocityComponent.mergeTemplate(templatePath, vc, output);
         output.flush();
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        velocityComponent = (VelocityComponent) serviceManager
+                .lookup(VelocityComponent.ROLE);
     }
 }

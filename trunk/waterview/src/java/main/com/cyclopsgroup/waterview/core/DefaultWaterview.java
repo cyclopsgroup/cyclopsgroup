@@ -19,7 +19,6 @@ package com.cyclopsgroup.waterview.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -45,8 +44,6 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     private Valve firstValve;
 
-    private Properties properties;
-
     private ServiceManager serviceManager;
 
     private List valveRoles;
@@ -58,9 +55,6 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        properties = new Properties();
-        properties.putAll(System.getProperties());
-
         Configuration[] valveConfs = conf.getChild("pipeline").getChildren(
                 "valve");
         valveRoles = new ArrayList(valveConfs.length);
@@ -69,16 +63,6 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
             String valveRole = valveConfs[i].getAttribute("role");
             valveRoles.add(valveRole);
         }
-    }
-
-    /**
-     * Override method getProperties in super class of DefaultWaterview
-     * 
-     * @see com.cyclopsgroup.waterview.Waterview#getProperties()
-     */
-    public Properties getProperties()
-    {
-        return properties;
     }
 
     /**

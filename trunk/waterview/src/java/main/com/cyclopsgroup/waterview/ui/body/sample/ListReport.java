@@ -26,12 +26,13 @@ import com.cyclopsgroup.waterview.UIRuntime;
  */
 public class ListReport extends Page
 {
+
     /**
-     * Override method build in super class of ListReport
-     * 
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.Page#build(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public void build(UIRuntime runtime) throws Exception
+    protected void build(UIRuntime runtime) throws Exception
     {
         // TODO Auto-generated method stub
 

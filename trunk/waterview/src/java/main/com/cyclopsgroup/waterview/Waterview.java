@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.util.Properties;
 
 /**
  * Waterview component
@@ -27,13 +26,6 @@ public interface Waterview
 {
     /** Role name of this component in container */
     String ROLE = Waterview.class.getName();
-
-    /**
-     * Method getProperties() in class Waterview
-     * 
-     * @return Mutable properties
-     */
-    Properties getProperties();
 
     /**
      * Process request

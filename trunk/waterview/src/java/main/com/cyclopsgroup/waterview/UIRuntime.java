@@ -25,6 +25,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
+import com.cyclopsgroup.cyclib.Context;
+
 /**
  * Runtime objects
  * 
@@ -93,7 +95,7 @@ public interface UIRuntime
      * 
      * @return Context interface
      */
-    UIContext getUIContext();
+    Context getUIContext();
 
     /**
      * Method setRenderTemplate() in class WebRuntime

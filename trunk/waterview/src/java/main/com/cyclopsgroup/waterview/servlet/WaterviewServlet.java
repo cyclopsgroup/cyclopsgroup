@@ -16,11 +16,9 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Enumeration;
-import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,11 +26,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.embed.Embedder;
 
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
@@ -44,9 +40,11 @@ import com.cyclopsgroup.waterview.Waterview;
  */
 public class WaterviewServlet extends HttpServlet
 {
-    private Embedder embedder;
+    private PlexusContainer container;
 
     private Log logger = LogFactory.getLog(getClass());
+
+    private Waterview waterview;
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -57,11 +55,12 @@ public class WaterviewServlet extends HttpServlet
     {
         try
         {
-            embedder.stop();
+            container.release(waterview);
+            container.dispose();
         }
         catch (Exception e)
         {
-            logger.error("Can not stop plexus container", e);
+            logger.error("Can properly stop plexus container", e);
         }
     }
 
@@ -94,7 +93,7 @@ public class WaterviewServlet extends HttpServlet
      */
     public PlexusContainer getContainer()
     {
-        return embedder.getContainer();
+        return container;
     }
 
     private void handleException(Throwable e, UIRuntime runtime)
@@ -118,50 +117,26 @@ public class WaterviewServlet extends HttpServlet
     {
         try
         {
-            String conf = config.getInitParameter("conf");
-            if (StringUtils.isEmpty(conf))
-            {
-                conf = "WEB-INF/waterview-components.xml";
-            }
-            embedder = new Embedder();
-            embedder.addContextValue("basedir", config.getServletContext()
-                    .getRealPath(""));
+            container = new WaterviewContainer();
+            String basedir = config.getServletContext().getRealPath("");
+            container.addContextValue("basedir", basedir);
+            container.addContextValue("plexus.home", basedir);
             Enumeration i = config.getInitParameterNames();
-            Properties initProperties = new Properties();
-            String waterviewHome = config.getServletContext().getRealPath("");
-            initProperties.put("waterview.home", waterviewHome);
             while (i.hasMoreElements())
             {
                 String key = (String) i.nextElement();
                 String value = config.getInitParameter(key);
-                embedder.addContextValue(key, value);
-                initProperties.setProperty(key, value);
-            }
-            File file = new File(conf);
-            if (!file.isFile())
-            {
-                file = new File(config.getServletContext().getRealPath(conf));
-            }
-            if (!file.isFile())
-            {
-                file = new File(conf);
-            }
-            if (!file.isFile())
-            {
-                throw new ServletException("Can not find configuration file "
-                        + conf);
+                container.addContextValue(key, value);
             }
             try
             {
-                System.setProperties(initProperties);
-                embedder.setConfiguration(file.toURL());
-                embedder.start();
-                Waterview waterview = (Waterview) embedder
-                        .lookup(Waterview.ROLE);
-                waterview.getProperties().putAll(initProperties);
+                container.initialize();
+                container.start();
+                waterview = (Waterview) container.lookup(Waterview.ROLE);
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 throw new ServletException("Init plexus container error", e);
             }
         }
@@ -178,9 +153,7 @@ public class WaterviewServlet extends HttpServlet
         try
         {
             runtime = new ServletUIRuntime(request, response,
-                    new ServiceManagerAdapter(embedder.getContainer()));
-            Waterview waterview = (Waterview) getContainer().lookup(
-                    Waterview.ROLE);
+                    new ServiceManagerAdapter(container));
             waterview.process(runtime);
         }
         catch (Throwable e)

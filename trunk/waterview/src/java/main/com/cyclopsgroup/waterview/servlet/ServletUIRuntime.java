@@ -26,11 +26,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.waterview.DefaultUIContext;
-import com.cyclopsgroup.waterview.UIContext;
+import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.cyclib.DefaultContext;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.ValueParser;
-import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * Default implementation of WebRuntime
@@ -52,7 +51,7 @@ public class ServletUIRuntime implements UIRuntime
 
     private ServiceManager serviceManager;
 
-    private UIContext uiContext;
+    private Context uiContext;
 
     /**
      * Default constructor of default web runtime
@@ -70,9 +69,7 @@ public class ServletUIRuntime implements UIRuntime
         page = request.getPathInfo();
         requestValueParser = new ServletRequestValueParser(request);
         serviceManager = services;
-        Waterview waterview = (Waterview) serviceManager.lookup(Waterview.ROLE);
-        DefaultUIContext ctx = new DefaultUIContext();
-        ctx.getContent().putAll(waterview.getProperties());
+        DefaultContext ctx = new DefaultContext();
         ctx.put("runtime", this);
         uiContext = ctx;
     }
@@ -162,7 +159,7 @@ public class ServletUIRuntime implements UIRuntime
      * 
      * @see com.cyclopsgroup.waterview.UIRuntime#getUIContext()
      */
-    public UIContext getUIContext()
+    public Context getUIContext()
     {
         return uiContext;
     }
