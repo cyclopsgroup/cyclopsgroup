@@ -25,7 +25,6 @@ import org.apache.commons.lang.exception.NestableException;
  */
 public class PageNotFoundException extends NestableException
 {
-
     /**
      * 
      * @uml.property name="page" 

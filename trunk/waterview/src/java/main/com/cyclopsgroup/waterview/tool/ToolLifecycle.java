@@ -25,6 +25,7 @@ import org.apache.commons.lang.enum.Enum;
  */
 public class ToolLifecycle extends Enum
 {
+
     /** Application level tool */
     public static final ToolLifecycle APPLICATION = new ToolLifecycle(
             "application");
