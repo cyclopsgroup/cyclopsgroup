@@ -14,24 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.manager;
 
-import java.io.PrintWriter;
+import com.cyclopsgroup.waterview.Action;
 
 /**
- * Web renderer
+ * Object which can resolve an action from a given path
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Renderer
+public interface ActionResolver
 {
-
     /**
-     * Render a page
+     * Resolve an action from a given path
      * 
-     * @param runtime Runtime data
-     * @param out Output writer
-     * @throws Exception Throw it out
+     * @param path Requested path
+     * @param packageName Package to find
+     * @return Action class
      */
-    void render(WebRuntime runtime, PrintWriter out) throws Exception;
+    Action resolve(String path, String packageName);
 }

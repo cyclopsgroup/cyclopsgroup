@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<waterview debug="true">
+    <packages>
+        <package>
+            com.cyclops.waterview.module
+        </package>
+    </packages>
+    <resolvers>
+        <action extension="do"> 
+            com.cyclopsgroup.waterview.resolver.DefaultActionResolver
+        </action>
+        <renderer extension="vm"> 
+            com.cyclopsgroup.waterview.resolver.velocity.VelocityRenderer 
+        </renderer>
+        <renderer extension="jelly"> 
+            com.cyclopsgroup.waterview.resolver.jelly.JellyRenderer
+        </renderer>
+    </resolvers>
+</waterview>

@@ -16,22 +16,18 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.io.PrintWriter;
-
 /**
- * Web renderer
+ * A runnable module
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Renderer
+public interface Action
 {
-
     /**
-     * Render a page
+     * Process given runtime object
      * 
-     * @param runtime Runtime data
-     * @param out Output writer
-     * @throws Exception Throw it out
+     * @param runtime Runtime data object
+     * @throws Exception Throw it to container
      */
-    void render(WebRuntime runtime, PrintWriter out) throws Exception;
+    void execute(WebRuntime runtime) throws Exception;
 }

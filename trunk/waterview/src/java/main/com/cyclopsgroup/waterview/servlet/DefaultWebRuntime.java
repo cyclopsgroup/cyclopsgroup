@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cyclopsgroup.gearset.beans.Context;
-import com.cyclopsgroup.gearset.beans.InheritableContext;
-import com.cyclopsgroup.gearset.beans.ValueParser;
+import com.cyclopsgroup.gearset.bean.ValueParser;
+import com.cyclopsgroup.gearset.runtime.Context;
+import com.cyclopsgroup.gearset.runtime.InheritableContext;
 import com.cyclopsgroup.waterview.WebRuntime;
 
 /**
@@ -51,10 +51,8 @@ public class DefaultWebRuntime implements WebRuntime
     /**
      * Default constructor of default web runtime
      * 
-     * @param request
-     *                   Http request object
-     * @param response
-     *                   Http response object
+     * @param request Http request object
+     * @param response Http response object
      */
     DefaultWebRuntime(HttpServletRequest request, HttpServletResponse response)
     {

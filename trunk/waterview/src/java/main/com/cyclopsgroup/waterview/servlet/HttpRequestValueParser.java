@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.cyclopsgroup.gearset.beans.ValueParser;
+import com.cyclopsgroup.gearset.bean.ValueParser;
 
 /**
  * Servet request implemented value parser
@@ -32,8 +32,7 @@ public class HttpRequestValueParser extends ValueParser
     /**
      * Constructor of HttpRequestValueParser
      * 
-     * @param request
-     *                   Servlet request
+     * @param request Servlet request
      */
     HttpRequestValueParser(HttpServletRequest request)
     {
@@ -43,7 +42,7 @@ public class HttpRequestValueParser extends ValueParser
     /**
      * Override method doGetValue in super class of HttpRequestValueParser
      * 
-     * @see com.cyclopsgroup.gearset.beans.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.gearset.bean.ValueParser#doGetValue(java.lang.String)
      */
     protected String doGetValue(String valueName) throws Exception
     {
@@ -53,7 +52,7 @@ public class HttpRequestValueParser extends ValueParser
     /**
      * Override method doGetValues in super class of HttpRequestValueParser
      * 
-     * @see com.cyclopsgroup.gearset.beans.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.gearset.bean.ValueParser#doGetValues(java.lang.String)
      */
     protected String[] doGetValues(String valueName) throws Exception
     {

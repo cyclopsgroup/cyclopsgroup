@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cyclopsgroup.gearset.beans.Context;
-import com.cyclopsgroup.gearset.beans.ValueParser;
+import com.cyclopsgroup.gearset.bean.ValueParser;
+import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * Runtime objects

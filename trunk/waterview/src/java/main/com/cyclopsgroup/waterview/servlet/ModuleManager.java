@@ -14,22 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.servlet;
+
 
 /**
- * A runnable module
+ * TODO Add javadoc for class
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Processor
+public class ModuleManager
 {
-    /**
-     * Process given runtime object
-     * 
-     * @param runtime
-     *                   Runtime data object
-     * @throws Exception
-     *                    Throw it to container
-     */
-    void process(WebRuntime runtime) throws Exception;
+
 }
