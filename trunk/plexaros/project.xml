@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>plexaros</name>
@@ -14,7 +14,7 @@
     <package>com.cyclops.plexaros</package>
     <shortDescription>An application framework which</shortDescription>
     <description>--------To change this text, edit project.xml please--------</description>
-    <url>http://cyclops-groups.sourceforge.net/projects/plexaros</url>
+    <url>http://cyclops-group.sourceforge.net/projects/plexaros</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/plexaros</siteDirectory>
     <repository>

@@ -205,6 +205,14 @@ import org.codehaus.plexus.embed.Embedder;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public final class Plexaros {
+    /** Get engine instance from embedder
+     * @param embedder Embedder object
+     * @return Instance of Engine
+     * @throws Exception Anything could happen
+     */
+    public static Engine getEngine(Embedder embedder) throws Exception {
+        return (Engine) embedder.lookup(Engine.ROLE);
+    }
     /** Start plexus embedder with a home folder
      * @param plexusHome Folder where the engine.xml locates
      * @return Embedder object
@@ -212,34 +220,12 @@ public final class Plexaros {
      */
     public static Embedder startEmbedder(File plexusHome) throws Exception {
         Embedder embedder = new Embedder();
-        embedder.setConfiguration(new File(plexusHome, "engine.xml").getAbsolutePath());
+        embedder.setConfiguration(
+            new File(plexusHome, "engine.xml").getAbsolutePath());
         embedder.addContextValue("plexus.home", plexusHome.getAbsolutePath());
         embedder.start();
         return embedder;
     }
-    /** Start plexus embedder with a path to a resource
-     * @param resource Resource path
-     * @return Embedder instance
-     * @throws Exception When starts
-     */
-    /*
-    public static Embedder startEmbedder(String resource) throws Exception {
-        return startEmbedder(
-            Plexaros.class.getClassLoader().getResource(resource));
-    }*/
-    /** Start plexus embedder with a URL
-     * @param plexusConfigurationFile URL to plexus configuration resource
-     * @return Embedder object
-     * @throws Exception When embedder starts
-     */
-    /*
-    public static Embedder startEmbedder(URL plexusConfigurationFile)
-        throws Exception {
-        Embedder embedder = new Embedder();
-        embedder.setConfiguration(plexusConfigurationFile);
-        embedder.start();
-        return embedder;
-    }*/
     /** Stop an Embedder
      * @param embedder Embedder to be stopped
      * @throws Exception When embedder stops
