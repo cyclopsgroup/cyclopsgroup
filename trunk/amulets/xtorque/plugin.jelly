@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:j="jelly:core" xmlns:doc="doc">
+    <goal name="xtorque:init" description="Build classpath and define tasks">
+        <!-- Setup the classpath for torque plugins -->
+        <path id="xtorque-classpath">
+            <pathelement path="${plugin.getDependencyPath('commons-collections')}"/>
+            <pathelement path="${plugin.getDependencyPath('commons-lang')}"/>
+            <pathelement path="${plugin.getDependencyPath('log4j')}"/>
+            <pathelement path="${plugin.getDependencyPath('velocity')}"/>
+            <pathelement path="${plugin.getDependencyPath('village')}"/>
+            <pathelement path="${plugin.getDependencyPath('xercesImpl')}"/>
+            <pathelement path="${plugin.getDependencyPath('xml-apis')}"/>
+            <pathelement path="${plugin.getDependencyPath('torque:torque-gen')}"/>
+            <pathelement path="${pom.getDependencyClasspath()}"/>
+            <pathelement path="${plugin.resources}"/>
+            <path refid="maven.dependency.classpath"/>
+        </path>
+        <!-- The default.properties file will map old properties to the new ones along
+         with setting the correct defaults.
+
+         Note: I have no idea why this file is not already processed by the plugin..
+      -->
+        <property file="${maven.plugin.dir}/maven-torque-plugin-3.2/plugin.properties"/>
+        <!-- Define all of the tasks -->
+        <taskdef name="xtorque-data-model" classpathref="xtorque-classpath" classname="org.apache.torque.task.TorqueDataModelTask"/>
+    </goal>
     <!--
 ==============================================
 =
@@ -52,17 +76,16 @@
 =
 ==============================================
     -->
-    <goal name="xtorque:doc" prereqs="torque:init">
+    <goal name="xtorque:doc" prereqs="xtorque:init">
         <j:set var="schemadir">${maven.gen.docs}/database</j:set>
         <mkdir dir="${schemadir}"/>
         ${pom.getPluginContext('maven-torque-plugin').setVariable('torque.doc.format', 'anakia')}
         ${pom.getPluginContext('maven-torque-plugin').setVariable('torque.doc.dir', schemadir)}
         <attainGoal name="torque:doc"/>
-        ${pom.getPluginContext('maven-torque-plugin').setVariable('torque.template.om', 'templates/report.vm')}
-        <attainGoal name="torque:om"/>
-        <torque-data-model contextProperties="${torque.contextProperties}" controlTemplate="report.vm" templatePath="${plugin.resources}/templates" outputDirectory="${maven.gen.docs}" outputFile="schema-report.xml" targetDatabase="${torque.database}" targetPackage="${torque.targetPackage}" useClasspath="false">
+        <echo>${plugin.resources}</echo>
+        <xtorque-data-model contextProperties="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.contextProperties')}" controlTemplate="templates/report.vm" templatePath="${plugin.resources}" outputDirectory="${maven.gen.docs}" outputFile="schema-report.xml" targetDatabase="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.database')}" targetPackage="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.targetPackage')}" useClasspath="false">
             <fileset dir="${pom.getPluginContext('maven-torque-plugin').getVariable('torque.schema.dir')}" includes="*-${maven.xtorque.schema.suffix}"/>
-        </torque-data-model>
+        </xtorque-data-model>
     </goal>
     <goal name="maven-xtorque-plugin:register">
         <doc:registerReport name="Database Schemas" pluginName="xtorque" link="schema-report.html" description="Detail database schemas"/>
