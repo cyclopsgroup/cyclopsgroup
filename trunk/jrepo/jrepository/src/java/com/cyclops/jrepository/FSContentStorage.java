@@ -194,11 +194,49 @@
  */
 package com.cyclops.jrepository;
 
-/** TODO Add Javadoc for class
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import com.cyclops.jrepo.Container;
+import com.cyclops.jrepo.Content;
+import com.cyclops.jrepo.PersistentStorage;
+import com.cyclops.jrepo.base.AbstractPersistentStorage;
+
+/** Filesystem implementation of content storage
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class FSContentStorage {
+public class FSContentStorage extends AbstractPersistentStorage implements
+        PersistentStorage {
 
+    private File getFolderOfContainer(Container container) {
+        return null; //Waiting for implementation
+    }
+
+    /** Override method delete() of parent class
+     * @see com.cyclops.jrepo.PersistentStorage#delete(com.cyclops.jrepo.Container, com.cyclops.jrepo.Content)
+     */
+    public void delete(Container container, Content content) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /** Override method save() of parent class
+     * @see com.cyclops.jrepo.PersistentStorage#save(com.cyclops.jrepo.Container, com.cyclops.jrepo.Content)
+     */
+    public void save(Container container, Content content) {
+        File folder = getFolderOfContainer(container);
+        File file = new File(folder, content.getName());
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream(file));
+            oos.writeObject(content);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            //handle exception
+        }
+    }
 }

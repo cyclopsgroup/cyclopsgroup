@@ -196,7 +196,7 @@ package com.cyclops.jrepository;
 
 import java.io.File;
 
-import com.cyclops.jrepo.base.BaseRepositoryEngine;
+import com.cyclops.jrepo.base.DefaultRepositoryEngine;
 
 /** File system implementation of repository engine
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
@@ -204,7 +204,7 @@ import com.cyclops.jrepo.base.BaseRepositoryEngine;
  * Created at 11:13:23 AM Mar 22, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public class FSRepositoryEngine extends BaseRepositoryEngine {
+public class FSRepositoryEngine extends DefaultRepositoryEngine {
     /** Constructor for class FSRepositoryEngine
      */
     public FSRepositoryEngine() {
