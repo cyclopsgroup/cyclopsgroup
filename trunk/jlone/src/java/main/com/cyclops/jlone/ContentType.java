@@ -1,4 +1,4 @@
-/*
+/**
  * Common Public License - v 1.0
  *
  *
@@ -194,18 +194,12 @@
  */
 package com.cyclops.jlone;
 
-/** A page in the portal system
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * TODO Add java doc for this class
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public interface Page {
+public interface ContentType
+{
 
-    /** Empty array */
-    Page[] EMPTY_ARRAY = new Page[0];
-
-    /** Get main layout manager of this page
-     * @return Root layout manager of this page
-     */
-    LayoutManager getLayoutManager();
 }

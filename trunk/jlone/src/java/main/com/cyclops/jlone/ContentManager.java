@@ -194,44 +194,20 @@
  */
 package com.cyclops.jlone;
 
-/** Panel for components
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * TODO Add java doc for this class
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public interface Panel extends Component {
+public interface ContentManager
+{
+    Content getContent(Container container, String name);
 
-    /** Empty panel array */
-    Panel[] EMPTY_ARRAY = new Panel[0];
+    Content getContent(long uniqueId);
 
-    /** Add another component in this panel
-     * @param component Component to be added
-     */
-    void addComponent(Component component);
+    Content getContent(String path);
 
-    /** Get all components contained in this panel
-     * @return Array of contained components
-     */
-    Component[] getComponenets();
+    Content[] getContents(Container container);
 
-    /** Method indexOf in class Panel
-     * @param component Component to be found
-     * @return Index of the component, -1 if not found
-     */
-    int indexOf(Component component);
-
-    /** Method moveBackward in class Panel
-     * @param component Component to be moved
-     */
-    void moveBackward(Component component);
-
-    /** Method moveForward in class Panel
-     * @param component Component to be moved
-     */
-    void moveForward(Component component);
-
-    /** Remove a component from this panel if component exists
-     * @param component Component to be removed
-     */
-    void removeComponent(Component component);
+    Container getRootContainer();
 }

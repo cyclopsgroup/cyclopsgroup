@@ -194,28 +194,23 @@
  */
 package com.cyclops.jlone;
 
-/** Base component in portal
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * TODO Add java doc for this class
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public interface Component {
+public interface ContentMetadata
+{
 
-    /** Empty component array */
-    Component[] EMPTY_ARRAY = new Component[0];
+    long getId();
 
-    /** Description of this component
-     * @return Description of this component
-     */
-    String getDescription();
-
-    /** Get name of this component
-     * @return Name of this component
-     */
     String getName();
 
-    /** Title of this component which will be displayed
-     * @return Title of this component
-     */
+    Container getParent();
+
+    String getPath();
+
     String getTitle();
+
+    ContentType getType();
 }

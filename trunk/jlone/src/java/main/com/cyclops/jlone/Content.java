@@ -1,4 +1,4 @@
-/*
+/**
  * Common Public License - v 1.0
  *
  *
@@ -194,25 +194,14 @@
  */
 package com.cyclops.jlone;
 
-/** LayoutManager interface
- * LayoutManager is made up of several Panels with names
- * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
+/**
+ * TODO Add java doc for this class
  *
- * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a>
  */
-public interface LayoutManager extends Component {
+public interface Content
+{
+    Content[] EMPTY_ARRAY = new Content[0];
 
-    /** Empty layout manager array */
-    LayoutManager[] EMPTY_ARRAY = new LayoutManager[0];
-
-    /** Get names of all panels contained in this layout manager
-     * @return Name array of panels
-     */
-    String[] getPanelNames();
-
-    /** Get panel instance
-     * @param panelName Name of this panel
-     * @return Panel instance. None if panel doesn't exist
-     */
-    Panel getPanel(String panelName);
+    ContentMetadata getMetadata();
 }
