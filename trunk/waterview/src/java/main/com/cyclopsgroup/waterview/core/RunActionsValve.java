@@ -16,8 +16,9 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -25,8 +26,10 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
@@ -38,13 +41,17 @@ import com.cyclopsgroup.waterview.Valve;
 public class RunActionsValve extends Valve implements Serviceable, Configurable
 {
 
-    private HashSet actionExtensions;
-
-    private HashSet actionParameters;
+    private Map extensionActionResolvers = ListOrderedMap
+            .decorate(new Hashtable());
 
     private String moduleCategory;
 
     private ModuleResolver moduleResolver;
+
+    private Map parameterActionResolvers = ListOrderedMap
+            .decorate(new Hashtable());
+
+    private ServiceManager serviceManager;
 
     /**
      * Override or implement method of parent class or interface
@@ -53,20 +60,32 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        Configuration[] confs = conf.getChildren("parameter-action");
         moduleCategory = conf.getChild("module-category").getValue("action");
-        actionParameters = new HashSet(confs.length);
-        for (int i = 0; i < confs.length; i++)
+
+        Configuration[] resolvers = conf.getChildren("resolver");
+        for (int i = 0; i < resolvers.length; i++)
         {
-            Configuration c = confs[i];
-            actionParameters.add(c.getAttribute("parameter"));
-        }
-        confs = conf.getChildren("extension-action");
-        actionExtensions = new HashSet(confs.length);
-        for (int i = 0; i < confs.length; i++)
-        {
-            Configuration c = confs[i];
-            actionParameters.add(c.getAttribute("extension"));
+            Configuration resolverConf = resolvers[i];
+            String ext = resolverConf.getAttribute("extension", null);
+            String param = resolverConf.getAttribute("parameter", null);
+            String role = resolverConf.getAttribute("role");
+            try
+            {
+                ActionResolver resolver = (ActionResolver) serviceManager
+                        .lookup(role);
+                if (ext != null)
+                {
+                    extensionActionResolvers.put(ext, resolver);
+                }
+                if (param != null)
+                {
+                    parameterActionResolvers.put(param, resolver);
+                }
+            }
+            catch (Exception e)
+            {
+                getLogger().error("Specified resolver not exists", e);
+            }
         }
     }
 
@@ -77,23 +96,49 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
      */
     public void invoke(UIRuntime runtime) throws Exception
     {
-        for (Iterator i = actionParameters.iterator(); i.hasNext();)
+        String[] packageNames = moduleResolver.getModulePackages();
+        for (Iterator i = parameterActionResolvers.keySet().iterator(); i
+                .hasNext();)
         {
             String param = (String) i.next();
             String action = runtime.getRequestParameters().getString(param);
+            action += moduleCategory + '/' + action;
+            ActionResolver resolver = (ActionResolver) parameterActionResolvers
+                    .get(param);
             if (StringUtils.isNotEmpty(action))
             {
-                moduleResolver.resolve(runtime, moduleCategory + '/' + action);
+                for (int j = 0; j < packageNames.length; j++)
+                {
+                    String packageName = packageNames[j];
+                    if (resolver.exists(packageName, action))
+                    {
+                        resolver.resolve(packageName, action, runtime);
+                        break;
+                    }
+                }
             }
         }
-        for (Iterator i = actionExtensions.iterator(); i.hasNext();)
+        for (Iterator i = extensionActionResolvers.keySet().iterator(); i
+                .hasNext();)
         {
-            String suffix = '.' + (String) i.next();
+            String ext = (String) i.next();
+            ActionResolver resolver = (ActionResolver) extensionActionResolvers
+                    .get(ext);
+            String suffix = '.' + ext;
             for (Iterator j = runtime.getActions().iterator(); j.hasNext();)
             {
-                String action = (String) j.next();
+                String action = moduleCategory + '/' + (String) j.next();
                 if (action.endsWith(suffix))
                 {
+                    for (int k = 0; k < packageNames.length; k++)
+                    {
+                        String packageName = packageNames[k];
+                        if (resolver.exists(packageName, action))
+                        {
+                            resolver.resolve(packageName, action, runtime);
+                            break;
+                        }
+                    }
                     String module = StringUtils.chomp(action);
                     moduleResolver.resolve(runtime, moduleCategory + '/'
                             + module);
@@ -110,6 +155,7 @@ public class RunActionsValve extends Valve implements Serviceable, Configurable
      */
     public void service(ServiceManager manager) throws ServiceException
     {
+        serviceManager = manager;
         moduleResolver = (ModuleResolver) manager.lookup(ModuleResolver.ROLE);
     }
 }

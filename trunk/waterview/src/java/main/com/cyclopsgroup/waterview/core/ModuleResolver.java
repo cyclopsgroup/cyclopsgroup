@@ -16,31 +16,109 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.Iterator;
+import java.util.Vector;
+
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
- * interface to resolver action
+ * Default implementation of action resolver
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface ModuleResolver
+public class ModuleResolver extends AbstractLogEnabled implements Configurable,
+        Serviceable
 {
-    /** Role name of this component in container */
-    String ROLE = ModuleResolver.class.getName();
+    /** Role name in container */
+    public static final String ROLE = ModuleResolver.class.getName();
+
+    private ActionResolver actionResolver;
+
+    private String[] modulePackageNames;
+
+    private Vector modulePackages;
+
+    private ServiceManager serviceManager;
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        Configuration[] packages = conf.getChild("packages").getChildren(
+                "package");
+        modulePackages = new Vector(packages.length);
+        for (int i = 0; i < packages.length; i++)
+        {
+            Configuration packageCon = packages[i];
+            modulePackages.add(packageCon.getValue());
+        }
+
+        modulePackageNames = (String[]) modulePackages
+                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+
+        String actionResolverRole = conf.getChild("action-resolver")
+                .getAttribute("role");
+        try
+        {
+            actionResolver = (ActionResolver) serviceManager
+                    .lookup(actionResolverRole);
+        }
+        catch (Exception e)
+        {
+            getLogger().error("Can not get action resolver", e);
+        }
+    }
 
     /**
      * Get package names
      *
-     * @return Package names
+     * @return String array of package name
      */
-    String[] getModulePackages();
+    public String[] getModulePackages()
+    {
+        return modulePackageNames;
+    }
 
     /**
-     * Resolve module with given module name
+     * Resolve given action
      *
-     * @param runtime UIRuntime object
-     * @param module Module name
+     * @param runtime Runtime object
+     * @param path Module path
      * @throws Exception Throw it out
      */
-    void resolve(UIRuntime runtime, String module) throws Exception;
+    public void resolve(UIRuntime runtime, String path) throws Exception
+    {
+        for (Iterator i = modulePackages.iterator(); i.hasNext();)
+        {
+            String packageName = (String) i.next();
+            if (actionResolver.exists(packageName, path))
+            {
+                actionResolver.resolve(packageName, path, runtime);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager manager) throws ServiceException
+    {
+        serviceManager = manager;
+    }
 }

@@ -16,10 +16,10 @@
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.core.ModuleResolver</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleResolver</implementation>
+            <implementation>com.cyclopsgroup.waterview.core.ModuleResolver</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <cache-size>1000</cache-size>
+                <action-resolver role="cyclopsgroup.waterview.resolver.classres"/>
                 <packages>
                     <package>com.cyclopsgroup.waterview.ui</package>
                     <package>com.cyclopsgroup.otherprj.ui</package>
@@ -50,8 +50,8 @@
             <implementation>com.cyclopsgroup.waterview.core.RunActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <extension-action extension="do"/>
-                <parameter-action parameter="do"/>
+                <resolver extension="do" role="cyclopsgroup.waterview.resolver.classres"/>
+                <resolver parameter="do" role="cyclopsgroup.waterview.resolver.classres"/>
             </configuration>
         </component>
         <component>
@@ -78,6 +78,14 @@
             <role>cyclopsgroup.waterview.renderer.jelly</role>
             <implementation>com.cyclopsgroup.waterview.jelly.JellyPageRenderer</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>cyclopsgroup.waterview.resolver.classres</role>
+            <implementation>com.cyclopsgroup.waterview.core.ClassActionResolver</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <cache-size>100</cache-size>
+            </configuration>
         </component>
     </components>
     <!--
