@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -34,9 +35,23 @@ public class MapValueParser extends ValueParser
 
     private transient ArrayList tempArrayList = new ArrayList();
 
-    public MapValueParser(Map mappedValues)
+    /**
+     * Constructor of MapValueParser
+     */
+    public MapValueParser()
     {
-        map = mappedValues;
+        this(new MultiHashMap());
+    }
+
+    /**
+     * Constructor of MapValueParser
+     * 
+     * @param content
+     *                   Content map object
+     */
+    public MapValueParser(Map content)
+    {
+        map = content;
     }
 
     /**
@@ -46,7 +61,17 @@ public class MapValueParser extends ValueParser
      */
     protected String doGetValue(String valueName) throws Exception
     {
-        return map.get(valueName).toString();
+        Object object = map.get(valueName).toString();
+        Object ret = object;
+        if (object instanceof Collection)
+        {
+            ret = ((Collection) object).toArray()[0];
+        }
+        else if (object instanceof Object[])
+        {
+            ret = ((Object[]) object)[0];
+        }
+        return ret.toString();
     }
 
     /**
