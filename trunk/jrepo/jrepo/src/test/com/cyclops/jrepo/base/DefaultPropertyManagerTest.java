@@ -192,22 +192,16 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.jrepo;
+package com.cyclops.jrepo.base;
 
-/** Factory to create content
+import junit.framework.TestCase;
+
+/** Test case for DefaultPropertyManager
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 10:16:56 PM Mar 19, 2004
+ * Created at 1:41:22 AM Mar 20, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ContentFactory extends EngineReferenceable {
-    /** Empty Array */
-    ContentFactory[] EMPTY_ARRAY = new ContentFactory[0];
-    /** Method to create content
-     * @param contentType ContentType of object
-     * @param contentName Name of the content
-     * @return Instance of content
-     * @throws Exception Let the engine handle log
-     */
-    Content createInstance(ContentType contentType, String contentName) throws Exception;
+public class DefaultPropertyManagerTest extends TestCase {
+
 }

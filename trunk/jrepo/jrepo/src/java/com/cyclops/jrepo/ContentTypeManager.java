@@ -214,4 +214,8 @@ public interface ContentTypeManager extends EngineReferenceable {
      * @return Array of available content types
      */
     ContentType[] getContentTypes();
+    /** Method getContentFactories() in class ContentTypeManager
+     * @return Array of content factories
+     */
+    ContentFactory[] getContentFactories();
 }
