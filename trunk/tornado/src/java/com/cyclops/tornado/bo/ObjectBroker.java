@@ -56,7 +56,7 @@ public class ObjectBroker implements DBConnectable {
         return Class.forName(objectClass.getName() + "Peer");
     }
     /** Method query()
-     * @param objectClass
+     * @param objectClass Class of the requested object
      * @param crit Criteria object
      * @return List of query result
      * @throws Exception It doesn't handle any exception here

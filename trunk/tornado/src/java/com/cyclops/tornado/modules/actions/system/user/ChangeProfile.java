@@ -16,7 +16,6 @@ import com.cyclops.tornado.modules.Action;
  * @email g-cyclops@users.sourceforge.net
  */
 public class ChangeProfile extends Action {
-    
     /** Implementation of method doPerform() in this class
      * @see org.apache.turbine.modules.actions.TemplateAction#doPerform(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
      */

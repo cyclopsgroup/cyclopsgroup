@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<properties>
-		<title>Tornado Services</title>
-		<author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
-	</properties>
-	<body>
-		<section name="About Tornado Servcies">
-			<p>Since tornado project is based on Turbine and Fulcrum, it's easy to develop new features over Fulcrum Service framework.</p>
-		</section>
-	</body>
+    <properties>
+        <title>Tornado Services</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="About Tornado Servcies">
+            <p>Since tornado project is based on Turbine and Fulcrum, it's easy to develop new features over Fulcrum Service framework.</p>
+            <p>Almost all the services in Tornado is configured by another service called ConfigurationService. So we can configure those service with parameters stored in database instead of properties files. When the pages to set these values for each service are created, we can configure any service in tornado from web page, and even restart them.</p>
+        </section>
+    </body>
 </document>

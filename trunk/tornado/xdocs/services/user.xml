@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<properties>
-		<title>User Service</title>
-		<author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
-	</properties>
-	<body>
-		<section name="Goal">
-			<p>The goal of user service is to create a runtime user session framework for common application. The user service can work without servlet, even without Turbine, but Fulcrum is essential.</p>
-			<p>Once the user service is started, developers can add more listeners to add operation into Signin/Signout process. Also, these listeners are independent to Servlet and Turbine.</p>
-		</section>
-		<section name="Configuration">
-			<p>Open WEB-INF/conf/tornado.properties file, we can find this part of configuration.</p>
-			<source><![CDATA[
+    <properties>
+        <title>User Service</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Goal">
+            <p>The goal of user service is to create a runtime user session framework for common application. The user service can work without servlet, even without Turbine, but Fulcrum is essential.</p>
+            <p>Once the user service is started, developers can add more listeners to add operation into Signin/Signout process. Also, these listeners are independent to Servlet and Turbine.</p>
+        </section>
+        <section name="Configuration">
+            <p>These parameters are stored in database, we can access them through the page Administration/Service/User Service.</p>
+            <source><![CDATA[
 services.UserService.classname = com.cyclops.tornado.services.user.DefaultUserService
 services.UserService.user.earlyInit = true
 
@@ -21,7 +21,7 @@ services.UserService.user.implementation = com.cyclops.tornado.TornadoUser
 services.UserService.listener = com.cyclops.tornado.modules.PassportBuilder
 #services.UserService.listener = com.mycompany.myproject.modules.MyUserListener
 			]]></source>
-			<p>earlyInit is true since many other features are based on UserService.</p>
-		</section>
-	</body>
+            <p>earlyInit is true since many other features are based on UserService.</p>
+        </section>
+    </body>
 </document>

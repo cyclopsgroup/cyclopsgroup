@@ -25,15 +25,5 @@
             <item name="Database Connection" href="/database.html"/>
             <item name="Configuration" href="/configuration.html"/>
         </menu>
-        <menu name="Project Documentation">
-            <item name="About" href="/index.html"/>
-            <item name="Project Info" href="/project-info.html" collapse="true">
-                <item name="Mailing Lists" href="/mail-lists.html"/>
-                <item name="Project Team" href="/team-list.html"/>
-                <item name="Dependencies" href="/dependencies.html"/>
-                <item name="Source Repository" href="/cvs-usage.html"/>
-                <item name="Issue Tracking" href="/issue-tracking.html"/>
-            </item>
-        </menu>
     </body>
 </project>

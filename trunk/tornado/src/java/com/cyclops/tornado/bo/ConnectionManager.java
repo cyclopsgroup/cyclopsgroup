@@ -10,7 +10,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.torque.Torque;
-import org.apache.torque.TorqueException;
 /**
  * @author jiaqi guo
  * @email g-cyclops@users.sourceforge.net
@@ -20,18 +19,17 @@ public class ConnectionManager {
     private Hashtable cache = new Hashtable();
     /** Method getConnection()
      * @return Default database connection
-     * @throws TorqueException Thown when the connection is not existed
+     * @throws Exception Thown when the connection is not existed
      */
-    public Connection getConnection() throws TorqueException {
+    public Connection getConnection() throws Exception {
         return getConnection(ObjectBroker.DEFAULT_DATABASE_NAME);
     }
     /** Method getConnection()
      * @param databaseName Name of the database
      * @return Connection to the database
-     * @throws TorqueException When connection doesn't exist
+     * @throws Exception When connection doesn't exist
      */
-    public Connection getConnection(String databaseName)
-        throws TorqueException {
+    public Connection getConnection(String databaseName) throws Exception {
         if (connections.containsKey(databaseName)) {
             return (Connection) connections.get(databaseName);
         } else {
