@@ -65,9 +65,7 @@ public class DefaultNavigatorService
         throws Exception {
         ResourceFinder rf = new ResourceFinder(this);
         URL[] resources = rf.getResources(conf);
-        MenuItem root = new MenuItem();
         Digester digester = new Digester();
-        //digester.push(new MenuProject());
         digester.addObjectCreate("project", MenuProject.class);
         digester.addObjectCreate("project/menu", MenuRoot.class);
         digester.addSetNext("project/menu", "addMenu");

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>tornado</name>
@@ -84,7 +84,7 @@
         </dependency>
         <dependency>
             <id>commons-digester</id>
-            <version>1.2</version>
+            <version>1.5</version>
             <url>http://jakarta.apache.org/commons/digester</url>
             <properties>
                 <war.bundle>true</war.bundle>
