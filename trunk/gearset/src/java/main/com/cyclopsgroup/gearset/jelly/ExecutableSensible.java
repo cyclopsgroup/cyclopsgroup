@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.gearset.jelly;
 
-import com.cyclopsgroup.gearset.beans.Executable;
+import com.cyclopsgroup.gearset.runtime.Executable;
 
 /**
  * Tag which is sensible to executable

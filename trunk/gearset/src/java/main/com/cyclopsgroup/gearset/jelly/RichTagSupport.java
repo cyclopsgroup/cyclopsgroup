@@ -23,8 +23,8 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.cyclopsgroup.gearset.beans.LogEnabled;
-import com.cyclopsgroup.gearset.beans.MapValueParser;
+import com.cyclopsgroup.gearset.bean.LogEnabled;
+import com.cyclopsgroup.gearset.bean.MapValueParser;
 
 /**
  * Rich tag support
@@ -90,7 +90,7 @@ public abstract class RichTagSupport extends MapTagSupport implements
     /**
      * Override method getLogger in super class of RichTagSupport
      * 
-     * @see com.cyclopsgroup.gearset.beans.LogEnabled#getLogger()
+     * @see com.cyclopsgroup.gearset.bean.LogEnabled#getLogger()
      */
     public Log getLogger()
     {

@@ -14,13 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.bean;
 
 import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * Context with a parent
@@ -57,7 +59,7 @@ public class InheritableContext extends MapContext
     /**
      * Override method get in super class of InheritableContext
      * 
-     * @see com.cyclopsgroup.gearset.beans.Context#get(java.lang.String)
+     * @see com.cyclopsgroup.gearset.runtime.Context#get(java.lang.String)
      */
     public Object get(String name)
     {
@@ -72,7 +74,7 @@ public class InheritableContext extends MapContext
     /**
      * Override method getNames in super class of InheritableContext
      * 
-     * @see com.cyclopsgroup.gearset.beans.Context#getNames()
+     * @see com.cyclopsgroup.gearset.runtime.Context#getNames()
      */
     public String[] getNames()
     {

@@ -14,36 +14,34 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.bean;
+
+import java.util.HashMap;
+
+import com.cyclopsgroup.gearset.bean.MapValueParser;
+
+
+import junit.framework.TestCase;
 
 /**
- * Context interface
+ * Test case for MapValueParser
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Context
+public class MapValueParserTest extends TestCase
 {
-
     /**
-     * Get variable from context
-     * 
-     * @param name Name of variable
-     * @return Variable value
+     * Method testDoGetValue() in class MapValueParserTest
      */
-    Object get(String name);
-
-    /**
-     * Get name of variables avaible in this context
-     * 
-     * @return Array of string names
-     */
-    String[] getNames();
-
-    /**
-     * Put new value to context
-     * 
-     * @param name Name of variabe
-     * @param object Value of variable
-     */
-    void put(String name, Object object);
+    public void testDoGetValue()
+    {
+        HashMap map = new HashMap();
+        map.put("a", new Integer(10));
+        map.put("b", "abc");
+        MapValueParser parser = new MapValueParser(map);
+        assertEquals("10", parser.getString("a"));
+        assertEquals("abc", parser.getStrings("b")[0]);
+        assertEquals("", parser.getString("c"));
+        assertEquals("aaa", parser.getString("d", "aaa"));
+    }
 }

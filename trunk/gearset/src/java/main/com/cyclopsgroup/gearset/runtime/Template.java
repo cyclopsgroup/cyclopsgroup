@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.runtime;
 
 import java.io.PrintWriter;
 

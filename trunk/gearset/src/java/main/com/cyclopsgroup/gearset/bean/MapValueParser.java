@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.bean;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +54,7 @@ public class MapValueParser extends ValueParser
     /**
      * Override method doGetValue in super class of MapValueParser
      * 
-     * @see com.cyclopsgroup.gearset.beans.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.gearset.bean.ValueParser#doGetValue(java.lang.String)
      */
     protected String doGetValue(String valueName) throws Exception
     {
@@ -74,7 +74,7 @@ public class MapValueParser extends ValueParser
     /**
      * Override method doGetValues in super class of MapValueParser
      * 
-     * @see com.cyclopsgroup.gearset.beans.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.gearset.bean.ValueParser#doGetValues(java.lang.String)
      */
     protected String[] doGetValues(String valueName) throws Exception
     {

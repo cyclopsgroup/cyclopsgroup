@@ -14,44 +14,21 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package com.cyclopsgroup.gearset.runtime;
 
 /**
- * Simple commons logging enabled object
+ * Expression model
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class SimpleLogEnabled implements LogEnabled
+public interface Expression
 {
-    private Log logger;
-
     /**
-     * Getter method for property logger
+     * Evaluate this expression
      * 
-     * @return Returns the logger.
+     * @param context Runtime context
+     * @return Evaluation result
+     * @throws Exception Throw it out
      */
-    public Log getLogger()
-    {
-        synchronized (this)
-        {
-            if (logger == null)
-            {
-                logger = LogFactory.getLog(getClass());
-            }
-        }
-        return logger;
-    }
-
-    /**
-     * Setter method for property logger
-     * 
-     * @param commonsLogger The logger to set.
-     */
-    public void setLogger(Log commonsLogger)
-    {
-        logger = commonsLogger;
-    }
+    Object evaluate(Context context) throws Exception;
 }

@@ -1,4 +1,4 @@
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.runtime;
 
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community

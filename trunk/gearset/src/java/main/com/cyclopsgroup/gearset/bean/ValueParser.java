@@ -14,10 +14,12 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.bean;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+
+import com.cyclopsgroup.gearset.runtime.ConvertUtils;
 
 /**
  * Value parser object

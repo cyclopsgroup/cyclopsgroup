@@ -24,10 +24,10 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.gearset.beans.Context;
-import com.cyclopsgroup.gearset.beans.Executable;
 import com.cyclopsgroup.gearset.jelly.ExecutableSensible;
 import com.cyclopsgroup.gearset.jelly.SyntaxUtils;
+import com.cyclopsgroup.gearset.runtime.Context;
+import com.cyclopsgroup.gearset.runtime.Executable;
 
 /**
  * Sequence of executables
@@ -43,7 +43,7 @@ public class SequenceTag extends TagSupport implements ExecutableSensible,
     /**
      * Override method acceptExecutable in super class of SequenceTag
      * 
-     * @see com.cyclopsgroup.gearset.jelly.ExecutableSensible#acceptExecutable(com.cyclopsgroup.gearset.beans.Executable)
+     * @see com.cyclopsgroup.gearset.jelly.ExecutableSensible#acceptExecutable(com.cyclopsgroup.gearset.runtime.Executable)
      */
     public void acceptExecutable(Executable executable)
     {
@@ -65,7 +65,7 @@ public class SequenceTag extends TagSupport implements ExecutableSensible,
     /**
      * Override method execute in super class of SequenceTag
      * 
-     * @see com.cyclopsgroup.gearset.beans.Executable#execute(com.cyclopsgroup.gearset.beans.Context)
+     * @see com.cyclopsgroup.gearset.runtime.Executable#execute(com.cyclopsgroup.gearset.runtime.Context)
      */
     public Object execute(Context ctx) throws Exception
     {

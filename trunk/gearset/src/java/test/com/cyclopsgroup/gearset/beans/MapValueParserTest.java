@@ -18,6 +18,9 @@ package com.cyclopsgroup.gearset.beans;
 
 import java.util.HashMap;
 
+import com.cyclopsgroup.gearset.bean.MapValueParser;
+
+
 import junit.framework.TestCase;
 
 /**

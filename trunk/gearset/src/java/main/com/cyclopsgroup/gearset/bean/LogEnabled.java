@@ -14,21 +14,21 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.jelly;
+package com.cyclopsgroup.gearset.bean;
 
-import com.cyclopsgroup.gearset.runtime.Condition;
+import org.apache.commons.logging.Log;
 
 /**
- * Tag which is sensible to condition
+ * Loggable object
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface ConditionSensible
+public interface LogEnabled
 {
     /**
-     * Reflect to an incoming condition
+     * Get commons log object associated to this object
      * 
-     * @param condition Condition object
+     * @return Log object
      */
-    void acceptCondition(Condition condition);
+    Log getLogger();
 }

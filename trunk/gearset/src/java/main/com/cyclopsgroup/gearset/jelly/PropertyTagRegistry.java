@@ -25,7 +25,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.TagLibrary;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.gearset.beans.SimpleLogEnabled;
+import com.cyclopsgroup.gearset.bean.SimpleLogEnabled;
 
 /**
  * Base tag library registry class which takes a given properties file as registry

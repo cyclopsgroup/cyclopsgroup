@@ -25,7 +25,7 @@ import org.apache.commons.jelly.TagLibrary;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.cyclopsgroup.gearset.beans.LogEnabled;
+import com.cyclopsgroup.gearset.bean.LogEnabled;
 
 /**
  * Jelly tag library which find tag definitions from a given properties file
@@ -94,7 +94,7 @@ public abstract class PropertyTagLibrary extends TagLibrary implements
     /**
      * Override method getLogger in super class of PropertyTagLibrary
      * 
-     * @see com.cyclopsgroup.gearset.beans.LogEnabled#getLogger()
+     * @see com.cyclopsgroup.gearset.bean.LogEnabled#getLogger()
      */
     public Log getLogger()
     {

@@ -21,10 +21,10 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.gearset.beans.Condition;
-import com.cyclopsgroup.gearset.beans.Context;
 import com.cyclopsgroup.gearset.jelly.ConditionSensible;
 import com.cyclopsgroup.gearset.jelly.SyntaxUtils;
+import com.cyclopsgroup.gearset.runtime.Condition;
+import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * TODO Add javadoc for class
@@ -38,7 +38,7 @@ public class NotTag extends TagSupport implements ConditionSensible, Condition
     /**
      * Override method acceptCondition in super class of NotTag
      * 
-     * @see com.cyclopsgroup.gearset.jelly.ConditionSensible#acceptCondition(com.cyclopsgroup.gearset.beans.Condition)
+     * @see com.cyclopsgroup.gearset.jelly.ConditionSensible#acceptCondition(com.cyclopsgroup.gearset.runtime.Condition)
      */
     public void acceptCondition(Condition c)
     {
@@ -48,7 +48,7 @@ public class NotTag extends TagSupport implements ConditionSensible, Condition
     /**
      * Override method check in super class of NotTag
      * 
-     * @see com.cyclopsgroup.gearset.beans.Condition#check(com.cyclopsgroup.gearset.beans.Context)
+     * @see com.cyclopsgroup.gearset.runtime.Condition#check(com.cyclopsgroup.gearset.runtime.Context)
      */
     public boolean check(Context ctx) throws Exception
     {

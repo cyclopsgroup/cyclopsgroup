@@ -14,12 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
+package com.cyclopsgroup.gearset.bean;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.gearset.runtime.Context;
 
 /**
  * Map implemented context
@@ -52,7 +54,7 @@ public class MapContext implements Context
     /**
      * Override method get in super class of MapContext
      * 
-     * @see com.cyclopsgroup.gearset.beans.Context#get(java.lang.String)
+     * @see com.cyclopsgroup.gearset.runtime.Context#get(java.lang.String)
      */
     public Object get(String name)
     {
@@ -83,7 +85,7 @@ public class MapContext implements Context
     /**
      * Override method getNames in super class of MapContext
      * 
-     * @see com.cyclopsgroup.gearset.beans.Context#getNames()
+     * @see com.cyclopsgroup.gearset.runtime.Context#getNames()
      */
     public String[] getNames()
     {
@@ -101,7 +103,7 @@ public class MapContext implements Context
     /**
      * Override method put in super class of MapContext
      * 
-     * @see com.cyclopsgroup.gearset.beans.Context#put(java.lang.String, java.lang.Object)
+     * @see com.cyclopsgroup.gearset.runtime.Context#put(java.lang.String, java.lang.Object)
      */
     public void put(String name, Object object)
     {

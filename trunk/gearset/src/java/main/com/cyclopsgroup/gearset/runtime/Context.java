@@ -14,21 +14,36 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.gearset.beans;
-
-import org.apache.commons.logging.Log;
+package com.cyclopsgroup.gearset.runtime;
 
 /**
- * Loggable object
+ * Context interface
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface LogEnabled
+public interface Context
 {
+
     /**
-     * Get commons log object associated to this object
+     * Get variable from context
      * 
-     * @return Log object
+     * @param name Name of variable
+     * @return Variable value
      */
-    Log getLogger();
+    Object get(String name);
+
+    /**
+     * Get name of variables avaible in this context
+     * 
+     * @return Array of string names
+     */
+    String[] getNames();
+
+    /**
+     * Put new value to context
+     * 
+     * @param name Name of variabe
+     * @param object Value of variable
+     */
+    void put(String name, Object object);
 }
