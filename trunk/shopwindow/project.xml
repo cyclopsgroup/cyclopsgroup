@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
-    <name>cyclops-shopwindow</name>
+    <name>shopwindow</name>
     <id>shopwindow</id>
     <currentVersion>1.0-b1-SNAPSHOT</currentVersion>
     <organization>
@@ -17,11 +17,20 @@
     <url>http://cyclops-group.sourceforge.net</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs</siteDirectory>
+    <issueTrackingUrl>https://sourceforge.net/tracker/?group_id=91358</issueTrackingUrl>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:shopwindow</connection>
         <developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:shopwindow</developerConnection>
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/shopwindow</url>
     </repository>
+    <mailingLists>
+        <mailingList>
+            <name>Cyclops Group Member</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
+        </mailingList>
+    </mailingLists>
     <developers>
         <developer>
             <name>Joel Guo</name>

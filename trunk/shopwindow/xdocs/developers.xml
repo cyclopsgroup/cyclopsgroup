@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>For Developers</title>
+        <author email="g-cyclops@users.sourceforge.net">Joel Guo</author>
+    </properties>
+    <body>
+        <section name="MAVEN">
+            <p>All projects here is built by Apache <a href="http://maven.apache.org">Maven</a> project. Building these projects with Maven is essential to the development process. Please check <a href="http://maven.apache.org">http://maven.apache.org</a> to find out how to download and install Maven. Since we need additional jar resources other than what ibiblio.org provides, http://cyclops-group.sourceforge.net/maven-repo should be added to your maven.repo.remote entry in ${user.home}/build.properties.</p>
+            <source>maven.repo.remote=http://www.ibiblio.org/maven,http://cyclops-group.sourceforge.net/maven-repo</source>
+        </section>
+        <section name="JAVA IDE">
+            <p>Developers can use any Java IDE to develop these project, but adding dependencies into classpath one by one is very difficult. Fortunately Maven provided plugins for some popular Java IDEs like eclipse, idea intellij and jbuilder. Check <a href="http://maven.apache.org/reference/developers/ide">http://maven.apache.org/reference/developers/ide</a> for how to use these plugins.</p>
+        </section>
+    </body>
+</document>
