@@ -5,15 +5,6 @@
         <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
     </properties>
     <body>
-        <section name="Attentions">
-            <p>
-                <big>
-                    <font color="red">Important! The email address g-cyclops@users.sourceforge.net stopped receiving emails several days ago, around the end of January. Emails sent to this address could be delayed or lost. Please send me your emails again to <a href="mailto:chinajoeblack@hotmail.com">
-                            <b>chinajoeblack@hotmail.com</b>
-                        </a> if you have sent any emails to g-cyclops@users.sourceforge.net after end of January. Apologies for your inconvenience.</font>
-                </big>
-            </p>
-        </section>
         <section name="My Resume">
             <p>
                 <a href="resume.pdf">
@@ -50,6 +41,9 @@
                         <a href="#Job Experience">Job Experience</a>
                         <ol>
                             <li>
+                                <a href="#Systems People Inc.">Systems People Inc.</a>
+                            </li>
+                            <li>
                                 <a href="#vTradEx Information Technology">vTradEx Information Technoloty</a>
                             </li>
                             <li>
@@ -64,6 +58,9 @@
                         <a href="#Featured Projects">Featured Projects</a>
                         <ol>
                             <li>
+                                <a href="#In Systems People">In Systems People</a>
+                            </li>
+                            <li>
                                 <a href="#In vTradEx">In vTradEx</a>
                             </li>
                             <li>
@@ -76,9 +73,6 @@
                     </li>
                     <li>
                         <a href="#Training and Award">Training and Award</a>
-                    </li>
-                    <li>
-                        <a href="#Immigration Status">Immigration Status</a>
                     </li>
                     <li>
                         <a href="#References">References</a>
@@ -134,12 +128,22 @@
                 <ul>
                     <li>Experienced in project management of software projects.</li>
                     <li>Experienced in XML, XSLT, XPath, DTD, Schema and corresponding programming tools.</li>
-                    <li>Years of experience in Python, ASP, VC, CGI and ZOPE development.</li>
+                    <li>Experienced in development based on Python, ZOPE and PLONE.</li>
+                    <li>Experienced in ASP, VC, Perl and PHP development</li>
                     <li>Eight years of experience of C/C++ development.</li>
                 </ul>
             </subsection>
         </section>
         <section name="Job Experience">
+            <subsection name="Systems People Inc.">
+                <p>Location: Sterling, VA, USA. Time: 2/2004~the present. Position: Software Analyst</p>
+                <p>Responsibility:
+<ul>
+                        <li>Working as key developer</li>
+                        <li>Software system architect</li>
+                    </ul>
+                </p>
+            </subsection>
             <subsection name="vTradEx Information Technology">
                 <p>Location: Shanghai, China.  Time: 3/2001~7/2003. Position: Java System Architect</p>
                 <p>Responsibility:
@@ -169,6 +173,11 @@
             </subsection>
         </section>
         <section name="Featured Projects">
+            <subsection name="In Systems People">
+                <ul>
+                    <li>ZOPE, PLONE based content management system, 2/2004~Now. Roles: System Architect and Key Developer. The client of this system is Human Development department of World Band in Washington DC. Based on PLONE, this system reorganizes and centralizes mass of existed static content like web pages, documents, topics, news and discussions.</li>
+                </ul>
+            </subsection>
             <subsection name="In vTradEx">
                 <ul>
                     <li>Pharos, 3/2001~Now. Roles: SA, PM, QA and developer. Pharos is the base of all other vTradEx projects in JAVA, it has been adopted since vTradEx development team was founded, and still in service now. Depending on apache and werken open source projects, Pharos contains a lot of features like workflow, security, O-R mapping etc. which enrich and simplify java web development. The design is based on open source projects like Apache <a href="http://jakarta.apache.org/turbine">Turbine</a>, <a href="http://jakarta.apache.org/velocity">Velocity</a>, <a href="http://db.apache.org/torque">Torque</a>, <a href="http://maven.apache.org">Maven</a>, <a href="http://ant.apache.org">Ant</a>, <a href="http://jakarta.apache.org/poi">POI</a>, <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a>, and Werken <a href="http://drools.org">Drools</a>, <a href="http://werkflow.codehaus.org">Werkflow</a>.  Current version of pharos is 5.2.</li>
@@ -223,13 +232,6 @@
                     <b>MCSD</b>: Microsoft Certificated Professional Solution Developer.9/2001</li>
                 <li>Training for using Oracle9i JDeveloper. 7/2001</li>
                 <li>China Senior Programmer. 7/2000</li>
-            </ul>
-        </section>
-        <section name="Working Status">
-            <ul>
-                <li>I can start to work immediately as soon as I get the offer</li>
-                <li>F2 visa now, Need H1 sponsorship.</li>
-                <li>I am willing to relocate with my own fund.</li>
             </ul>
         </section>
         <section name="References">

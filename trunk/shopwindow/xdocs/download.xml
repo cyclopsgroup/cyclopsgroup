@@ -9,6 +9,10 @@
             <p>All released stuff in cyclops group are available to download at <a href="http://prdownloads.sourceforge.net/cyclops-group">http://prdownloads.sourceforge.net/cyclops-group</a>.</p>
             <p>
                 <a href="http://sourceforge.net/project/showfiles.php?group_id=91358">http://sourceforge.net/project/showfiles.php?group_id=91358</a> provides a list of released files.</p>
+            <p>Here is RSS feed of download news from SourceForge.net.</p>
+            <script language="javascript">
+                document.write(rsstransform("http://sourceforge.net/export/rss2_projfiles.php?group_id=91358", "rssbody.xsl"));
+            </script>
         </section>
     </body>
 </document>
