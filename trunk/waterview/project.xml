@@ -11,7 +11,7 @@
 		<logo>/images/cyclopsgroup_logo.gif</logo>
 	</organization>
 	<inceptionYear>2004</inceptionYear>
-	<shortDescription>Waterview is a highly componentized web application framework plugable page rendering tools</shortDescription>
+	<shortDescription>Waterview is a highly componentized web application framework with plugable page rendering tools</shortDescription>
 	<developers>
 		<developer>
 			<name>Jiaqi Guo</name>

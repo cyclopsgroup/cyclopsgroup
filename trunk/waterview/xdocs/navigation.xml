@@ -3,7 +3,7 @@
     <body>
         <links>
             <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
-            <item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
+            <item name="Turbine" href="http://jakarta.apache.org/turbine"/>
             <item name="Avalon" href="http://avalon.apache.org"/>
             <item name="Plexus" href="http://plexus.codehaus.org"/>
             <item name="Velocity" href="http://jakarta.apache.org/velocity"/>
