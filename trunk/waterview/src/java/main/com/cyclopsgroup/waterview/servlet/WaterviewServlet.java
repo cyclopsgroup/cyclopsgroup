@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.servlet;
 
 import java.io.IOException;
 
@@ -53,14 +53,16 @@ public class WaterviewServlet extends HttpServlet
         internallyProcess(request, response);
     }
 
-    protected void doProcess(HttpServletRequest request,
+    private void doProcess(HttpServletRequest request,
             HttpServletResponse response) throws Exception
     {
-        String uri = request.getRequestURI();
-        System.out.println(uri);
+        DefaultWebRuntime runtime = new DefaultWebRuntime(request, response);
+        runtime.getRenderContext().put("runtime", runtime);
+        runtime.getRenderContext().put("context", runtime.getRenderContext());
+        System.out.println(request.getPathInfo());
     }
 
-    protected void handleException(Throwable e)
+    private void handleException(Throwable e)
     {
         e.printStackTrace(System.err);
     }

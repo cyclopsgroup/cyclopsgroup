@@ -14,22 +14,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.gearset.beans;
 
 /**
- * A runnable module
+ * Context interface
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface WebProcessor
+public interface Context
 {
+
     /**
-     * Process given runtime object
+     * Get object from context
      * 
-     * @param runtime
-     *                   Runtime data object
-     * @throws Exception
-     *                    Throw it to container
+     * @param name
+     *                   Name of the variable
+     * @return Object in context
      */
-    void process(Runtime runtime) throws Exception;
+    Object get(String name);
+
+    /**
+     * Get array of names in this context
+     * 
+     * @return Name array
+     */
+    String[] getNames();
+
+    /**
+     * Put new value in context
+     * 
+     * @param name
+     *                   Name of the variable
+     * @param object
+     *                   Value of the variable
+     */
+    void put(String name, Object object);
 }

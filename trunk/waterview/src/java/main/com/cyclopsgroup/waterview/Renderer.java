@@ -16,35 +16,25 @@
  */
 package com.cyclopsgroup.waterview;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 /**
- * Runtime objects
+ * Web renderer
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Runtime
+public interface Renderer
 {
-    /**
-     * Get original servlet request object
-     * 
-     * @return HttpServletRequest object
-     */
-    HttpServletRequest getHttpServletRequest();
 
     /**
-     * Method getHttpServletResponse() in class Runtime
+     * Render a page
      * 
-     * @return HttpServletResponse object
+     * @param runtime
+     *                   Runtime data
+     * @param out
+     *                   Output writer
+     * @throws Exception
+     *                    Throw it out
      */
-    HttpServletResponse getHttpServletResponse();
-
-    /**
-     * Method getHttpSession() in class Runtime
-     * 
-     * @return HttpSession object
-     */
-    HttpSession getHttpSession();
+    void render(WebRuntime runtime, PrintWriter out) throws Exception;
 }
