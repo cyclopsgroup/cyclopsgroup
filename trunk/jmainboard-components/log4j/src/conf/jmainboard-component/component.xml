@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <id>org.apache.log4j</id>
+    <version>1.0</version>
+    <title>Log4j JMainboard Component</title>
+    <description><![CDATA[JMainboard adapter for <a href="http://jakarta.apache.org/log4j">Apache Jakarta Log4j</a>]]></description>
+    <implementation>com.cyclops.jmainboard.components.log4j.Log4jComponent</implementation>
+    <properties>
+        <property name="descriptor">log4j.properties</property>
+    </properties>
+    <dependencies/>
+</component>
