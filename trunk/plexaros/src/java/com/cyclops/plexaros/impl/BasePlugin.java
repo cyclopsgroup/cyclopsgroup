@@ -197,6 +197,7 @@ package com.cyclops.plexaros.impl;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.cyclops.plexaros.Engine;
@@ -253,6 +254,10 @@ public class BasePlugin extends BaseObjectContainer implements Plugin {
         descriptor = desc;
         setName(desc.getName());
         setDescription(desc.getDescription());
+        for (Iterator i = desc.getDependencies().iterator(); i.hasNext();) {
+            String dependencyName = (String) i.next();
+            addDependency(dependencyName);
+        }
     }
 
     /** Set plexaros engine for this plugin
