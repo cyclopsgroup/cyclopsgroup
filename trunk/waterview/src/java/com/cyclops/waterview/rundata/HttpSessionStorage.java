@@ -202,7 +202,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 
-/** TODO Add Javadoc for class
+/** Http Session attribute storage
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8

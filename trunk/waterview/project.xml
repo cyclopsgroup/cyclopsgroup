@@ -1,7 +1,5 @@
-<?xml version="1.0"?>
 <project>
     <pomVersion>3</pomVersion>
-    <id>waterview</id>
     <name>waterview</name>
     <currentVersion>1.0-b1-dev</currentVersion>
     <organization>
@@ -11,9 +9,6 @@
     </organization>
     <inceptionYear>2004</inceptionYear>
     <package>com.cyclops.waterview</package>
-    <logo>/images/${pom.id}_logo</logo>
-    <description/>
-    <shortDescription/>
     <url>${pom.organization.url}/projects/${pom.id}</url>
     <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=91358</issueTrackingUrl>
     <siteAddress>shell.sourceforge.net</siteAddress>
@@ -41,85 +36,111 @@
     </mailingLists>
     <developers>
         <developer>
-            <name>Jiaqi Guo</name>
             <id>jiaqi</id>
+            <name>Jiaqi Guo</name>
             <email>chinajoeblack@hotmail.com</email>
+            <timezone>-6</timezone>
             <roles>
                 <role>Java Developer</role>
             </roles>
-            <timezone>-6</timezone>
         </developer>
         <developer>
-            <name>Daisy Zhao</name>
             <id>daisy</id>
+            <name>Daisy Zhao</name>
             <email>xuying.zhao@student.utdallas.edu</email>
             <organization>U.T. Dallas</organization>
+            <timezone>-6</timezone>
             <roles>
                 <role>Observer</role>
             </roles>
-            <timezone>-6</timezone>
         </developer>
     </developers>
     <dependencies>
         <dependency>
-            <id>commons-collections</id>
-            <version>2.1</version>
-            <url>http://jakarta.apache.org/commons/collections</url>
-        </dependency>
-        <dependency>
-            <id>commons-configuration</id>
-            <version>20040130.152659</version>
-            <url>http://jakarta.apache.org/commons/configuration</url>
-        </dependency>
-        <dependency>
-            <id>commons-lang</id>
-            <version>2.0</version>
-            <url>http://jakarta.apache.org/commons/lang</url>
-        </dependency>
-        <dependency>
-            <id>commons-logging</id>
-            <version>1.0.3</version>
-            <url>http://jakarta.apache.org/commons/logging</url>
-        </dependency>
-        <dependency>
-            <id>plexus</id>
-            <version>SNAPSHOT</version>
-            <url>http://plexus.codehaus.org</url>
-        </dependency>
-        <dependency>
-            <id>servletapi</id>
-            <version>2.2</version>
-        </dependency>
-        <dependency>
-            <id>commons-lang</id>
-            <version>2.0</version>
-            <url>http://jakarta.apache.org/commons/lang</url>
-        </dependency>
-        <dependency>
-            <id>velocity</id>
-            <version>1.4-rc1</version>
-            <url>http://jakarta.apache.org/velocity</url>
-        </dependency>
-        <dependency>
-            <id>xstream</id>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <id>xpp3</id>
-            <version>1.1.3.3</version>
-        </dependency>
-        <!-- PlexusTestCase -->
-        <dependency>
-            <id>junit</id>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>3.8.1</version>
-            <url>http://junit.org</url>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\junit\jars\junit-3.8.1.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>2.1</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\commons-collections\jars\commons-collections-2.1.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>20040130.152659</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\commons-configuration\jars\commons-configuration-20040130.152659.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\commons-lang\jars\commons-lang-2.0.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.3</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\commons-logging\jars\commons-logging-1.0.3.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>plexus</groupId>
+            <artifactId>plexus</artifactId>
+            <version>SNAPSHOT</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\plexus\jars\plexus-SNAPSHOT.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>servletapi</groupId>
+            <artifactId>servletapi</artifactId>
+            <version>2.2</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\servletapi\jars\servletapi-2.2.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.4-rc1</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\velocity\jars\velocity-1.4-rc1.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\xstream\jars\xstream-1.0-SNAPSHOT.jar</jar>
+            <type>jar</type>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3</artifactId>
+            <version>1.1.3.3</version>
+            <jar>C:\Documents and Settings\joeblack\.maven\repository\xpp3\jars\xpp3-1.1.3.3.jar</jar>
+            <type>jar</type>
+            <properties/>
         </dependency>
     </dependencies>
     <build>
         <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
-        <sourceDirectory>src/java</sourceDirectory>
-        <aspectSourceDirectory>src/aspect</aspectSourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <sourceDirectory>src\java</sourceDirectory>
+        <unitTestSourceDirectory>src\test</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
@@ -128,6 +149,10 @@
         <resources>
             <resource>
                 <directory>src/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
             </resource>
         </resources>
     </build>
