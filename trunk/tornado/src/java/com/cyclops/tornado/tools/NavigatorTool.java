@@ -10,14 +10,13 @@ import org.apache.turbine.services.pull.ApplicationTool;
 
 import com.cyclops.tornado.services.navigator.Menu;
 import com.cyclops.tornado.services.navigator.MenuItem;
+import com.cyclops.tornado.services.navigator.MenuRoot;
 import com.cyclops.tornado.services.navigator.NavigatorService;
-import com.cyclops.tornado.services.user.User;
-import com.cyclops.tornado.services.user.UserListener;
 /**
  * @author joeblack
  * @since 2003-9-29 19:16:44
  */
-public class NavigatorTool implements ApplicationTool, UserListener {
+public class NavigatorTool implements ApplicationTool {
     /** Method getChildren() in Class NavigatorTool
      * @param menu Menu item
      * @return Array of MenuItem objects
@@ -35,7 +34,7 @@ public class NavigatorTool implements ApplicationTool, UserListener {
     /** Get roots
      * @return RootMenu object array
      */
-    public Menu[] getRootMenus() {
+    public MenuRoot[] getRootMenus() {
         return getNavigatorService().getRootMenus();
     }
     private NavigatorService getService() {
@@ -48,24 +47,10 @@ public class NavigatorTool implements ApplicationTool, UserListener {
     public void init(Object arg0) {
         // TODO Auto-generated method stub
     }
-    /** Method onSingIn()
-     * @see com.cyclops.tornado.services.user.UserListener#onSingIn(com.cyclops.tornado.services.user.User)
-     */
-    public void onSingIn(User user) {
-        // TODO Auto-generated method stub
-    }
-    /** Method onSingOut()
-     * @see com.cyclops.tornado.services.user.UserListener#onSingOut(com.cyclops.tornado.services.user.User)
-     */
-    public void onSingOut(User user) {
-        // TODO Auto-generated method stub
-    }
-
     /** Method refresh()
      * @see org.apache.turbine.services.pull.ApplicationTool#refresh()
      */
     public void refresh() {
         // TODO Auto-generated method stub
     }
-
 }

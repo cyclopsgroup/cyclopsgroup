@@ -4,7 +4,7 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package com.cyclops.tornado.modules.screens.administration.user;
+package com.cyclops.tornado.modules.screens.system.administration.user;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -44,7 +44,7 @@ public class BaseUser extends TemplateScreen {
     /** Method getUserOM() in Class BaseUser
      * @return User OM object
      */
-    protected User getUserOM() {
+    protected final User getUserOM() {
         return dbuser;
     }
 }

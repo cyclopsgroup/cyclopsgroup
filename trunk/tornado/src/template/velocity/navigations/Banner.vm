@@ -13,7 +13,7 @@
 	>
 	<input type="hidden" name="redirectto" value="$link.setPage("Index.vm")">
 	<tr>
-		<td>&nbsp;</td>
+		<td>#foreach($menuRoot in $navigator.rootMenus) <a href="$link.setPage($menuRoot.href)"><b><font color="white">$menuRoot.name</font></b></a> #end</td>
 		<td align="right">
 			#if($data.tornadoUser.isAnonymous())
     			<input type="text" name="user_name" size="8"/>

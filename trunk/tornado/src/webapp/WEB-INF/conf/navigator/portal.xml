@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu name="Home">
-	<item name="Index" value="/Index.vm"/>
-	<item name="About" value="/About.vm"/>
-</menu>
+<project>
+	<menu name="Home" isDefault="true" href="Index.vm">
+		<item name="Index" href="Index.vm"/>
+		<item name="My Account" href="system,user,Index.vm">
+			<item name="User Profile" href="system,user,UserProfile.vm"/>
+			<item name="Change Password" href="system,user,ChangePassword.vm"/>
+			<item name="Account Summary" href="system,user,Summary.vm"/>
+		</item>
+		<item name="About" href="About.vm"/>
+	</menu>
+	<menu name="Administration" href="system,administration,Index.vm">
+		<item name="User" href="system,administration,user,Index.vm">
+			<item name="Search User" href="system,administration,user,Search.vm"/>
+			<item name="User Profile" href="system,administration,user,UserProfile.vm"/>
+			<item name="Change Password" href="system,administration,user,ChangePassword.vm"/>
+			<item name="Groups" href="system,administration,user,Groups.vm"/>
+			<item name="Permission and Role" href="system,administration,user,Permissions.vm"/>
+			<item name="Create New User" href="system,administration,user,CreateNew.vm"/>
+		</item>
+		<item name="Group" href="system,administration,group,Index.vm">
+			<item name="Group Profile" href="system,administration,group,GroupProfile.vm"/>
+			<item name="Group Hierarchy" href="system,administration,group,GroupHierarchy.vm"/>
+			<item name="Permission and Role" href="system,admnistration,group,Permission.vm"/>
+			<item name="Create New Group" href="system,administration,group,CreateNew.vm"/>
+		</item>
+		<item name="Configuration" href="system,administration,configuration,Index.vm"/>
+	</menu>
+</project>

@@ -21,6 +21,12 @@ public class DefaultNavigatorService
     extends BaseService
     implements NavigatorService {
     private Hashtable menus = new Hashtable();
+    /** Method getRootMenus()
+     * @see com.cyclops.tornado.services.navigator.NavigatorService#getRootMenus()
+     */
+    public MenuRoot[] getRootMenus() {
+        return (MenuRoot[]) menus.values().toArray(MenuRoot.EMPTY_ARRAY);
+    }
     /** Method initialize()
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
@@ -29,8 +35,10 @@ public class DefaultNavigatorService
         URL[] resources = rf.getResources(conf);
         MenuItem root = new MenuItem();
         Digester digester = new Digester();
-        digester.addObjectCreate("menu", Menu.class);
-        digester.addSetProperties("menu");
+        digester.addObjectCreate("project", MenuProject.class);
+        digester.addObjectCreate("project/menu", MenuRoot.class);
+        digester.addSetNext("project/menu", "addMenu");
+        digester.addSetProperties("project/menu");
         digester.addObjectCreate("*/item", MenuItem.class);
         digester.addSetProperties("*/item");
         digester.addSetNext("*/item", "addChild");
@@ -38,17 +46,16 @@ public class DefaultNavigatorService
             URL resource = resources[i];
             try {
                 digester.clear();
-                Menu menu = (Menu) digester.parse(resource.openStream());
-                menus.put(menu.getName(), menu);
+                MenuProject project =
+                    (MenuProject) digester.parse(resource.openStream());
+                MenuRoot[] roots = project.getMenuRoots();
+                for (int j = 0; j < roots.length; j++) {
+                    MenuRoot menu = roots[j];
+                    menus.put(menu.getName(), menu);
+                }
             } catch (Exception e) {
                 logger.debug("Resource " + resource + " loading failed!", e);
             }
         }
-    }
-    /** Method getRootMenus()
-     * @see com.cyclops.tornado.services.navigator.NavigatorService#getRootMenus()
-     */
-    public Menu[] getRootMenus() {
-        return (Menu[]) menus.values().toArray(Menu.EMPTY_ARRAY);
     }
 }
