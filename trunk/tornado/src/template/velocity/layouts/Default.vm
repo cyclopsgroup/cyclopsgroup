@@ -9,12 +9,12 @@
 		<td width="17%">#spacer(1 1)</td>
 	</tr>
 	<tr>
-		<td colspan="3">$renderer.render("navigations", "Banner.vm")</td>
+		<td colspan="3" bgcolor="#003366">$renderer.render("navigations", "Banner.vm")</td>
 	</tr>
 	<tr valign="top">
 		<td>&nbsp;</td>
 		<td>$renderer.render("screens", $template)</td>
-		<td>#if($data.message) $data.message #end</td>
+		<td>$data.message</td>
 	</tr>
 	<tr>
 		<td colspan="3" align="center">&nbsp;</td>

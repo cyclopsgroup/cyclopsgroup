@@ -7,8 +7,10 @@
 package com.cyclops.tornado.services.user;
 import java.util.List;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.httpclient.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.apache.fulcrum.db.DatabaseService;
 import org.apache.torque.util.Criteria;
 
 import com.cyclops.tornado.om.UserPeer;
@@ -48,20 +50,12 @@ public class DefaultUserService extends AbstractUserService {
             return CHECK_RESULT_EXCEPTION;
         }
     }
-    /** Method loadUser()
-     * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean)
+    /** We need database access support
+     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
-    protected User loadUser(String userName, boolean isAnonymous)
-        throws Exception {
-        User user = super.loadUser(userName, isAnonymous);
-        Criteria crit = new Criteria();
-        crit.and(UserPeer.USER_NAME, userName);
-        List rs = UserPeer.doSelect(crit);
-        com.cyclops.tornado.om.User dbuser =
-            (com.cyclops.tornado.om.User) rs.get(0);
-        dbuser.copyTo(user);
-        user.setName(userName);
-        user.setAnonymous(isAnonymous);
-        return user;
+    protected void initialize(Configuration conf) throws Exception {
+        super.initialize(conf);
+        getServiceBroker().getService(DatabaseService.SERVICE_NAME);
     }
+
 }

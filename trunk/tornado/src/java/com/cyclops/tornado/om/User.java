@@ -60,9 +60,19 @@ public class User
     public void setPassword(String pass) {
         setEncryptedPassword(new String(Base64.encode(pass.getBytes())));
     }
+    /**
+     * @param user User object
+     * @throws TorqueException
+     */
     public void copyTo(Object user) throws TorqueException {
         if (user instanceof User) {
             super.copyInto((User) user);
         }
+    }
+    /**
+     * @return Fistname and last name
+     */
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
     }
 }

@@ -6,7 +6,6 @@
  */
 package com.cyclops.tornado.services.user;
 import org.apache.fulcrum.TurbineServices;
-import org.apache.fulcrum.db.DatabaseService;
 
 import com.cyclops.tornado.TurbineTestCase;
 /**
@@ -23,12 +22,5 @@ public class DefaultUserServiceTest extends TurbineTestCase {
         assertNotNull(userService.getAnonymousUser());
         assertTrue(userService.getAnonymousUser().isAnonymous());
         assertEquals("guest", userService.getAnonymousUser().getName());
-    }
-    /** Method setUp()
-     * @see junit.framework.TestCase#setUp()
-     */
-    protected void setUp() throws Exception {
-        super.setUp();
-        TurbineServices.getInstance().getService(DatabaseService.SERVICE_NAME);
     }
 }
