@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+    <title>Maven</title>
+    <body>
+        <links>
+            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
+            <item name="Maven" href="http://maven.apache.org/"/>
+        </links>
+    </body>
+</project>
