@@ -1,0 +1,36 @@
+body {
+    margin: 0px;
+}
+body, td, th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+}
+.a td {
+    background-color: white !important;
+}
+th {
+    font-weight: bold;
+    text-align: left;
+    text-indent: 5px;
+    background-color: #CCCCFF !important;
+    color: #336699 !important;
+}
+
+pre {
+    font-family: Courier New, Courier, mono;
+    font-size: 12px !important;
+    line-height: 13px;
+}
+
+a:link, a:visited {
+    color: #003366 !important;
+}
+a.subsection {
+    font-size: 13pt;
+    color: #336699;
+}
+a.section {
+    font-size: 15pt;
+    font-weight: bold;
+}
