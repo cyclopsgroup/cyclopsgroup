@@ -202,8 +202,8 @@ public interface CreatedTimeTrackable {
      * @return Object created time
      */
     long getCreatedTime();
-    /** Method setCreatedTime()
-     * @param value Object created time
+    /** TODO Set created time
+     * @param value Long value created time
      */
     void setCreatedTime(long value);
 }
