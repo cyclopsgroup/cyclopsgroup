@@ -46,9 +46,12 @@
             <properties/>
         </dependency>
         <dependency>
-        	<groupId>gearset</groupId>
-        	<artifactId>gearset-beans</artifactId>
-        	<version>SNAPSHOT</version>
+            <groupId>gearset</groupId>
+            <artifactId>gearset-beans</artifactId>
+            <version>SNAPSHOT</version>
+            <jar>gearset-beans-SNAPSHOT.jar</jar>
+            <type>jar</type>
+            <properties/>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
