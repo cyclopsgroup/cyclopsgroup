@@ -1,10 +1,19 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
         <title>Jiaqi's Resume</title>
-        <author email="g-cyclops@users.sourceforge.net">jiaqi guo</author>
+        <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
     </properties>
     <body>
+        <section name="Attentions">
+            <p>
+                <big>
+                    <font color="red">Important! The email address g-cyclops@users.sourceforge.net stopped receiving emails several days ago, around the end of January. Emails sent to this address could be delayed or lost. Please send me your emails again to <a href="mailto:chinajoeblack@hotmail.com">
+                            <b>chinajoeblack@hotmail.com</b>
+                        </a> if you have sent any emails to g-cyclops@users.sourceforge.net after end of January. Apologies for your inconvenience.</font>
+                </big>
+            </p>
+        </section>
         <section name="My Resume">
             <p>
                 <a href="resume.pdf">

@@ -2,11 +2,11 @@
 <document>
     <properties>
         <title>For Developers</title>
-        <author email="g-cyclops@users.sourceforge.net">jiaqi guo</author>
+        <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
     </properties>
     <body>
         <section name="Contact Me">
-            <p>To be part of cyclops group, just <a href="mailto:g-cyclops@users.sourceforge.net">send me a email</a>. Be sure to be a member of sourceforge.net, or you won't access the services provided by sourceforge.</p>
+            <p>To be part of cyclops group, just <a href="mailto:chinajoeblack@hotmail.com">send me a email</a>. Be sure to be a member of sourceforge.net, or you won't access the services provided by sourceforge.</p>
         </section>
         <section name="MAVEN">
             <p>All projects here is built by Apache <a href="http://maven.apache.org">Maven</a> project. Building these projects with Maven is essential to the development process. Please check <a href="http://maven.apache.org">http://maven.apache.org</a> to find out how to download and install Maven. Since we need additional jar resources other than what ibiblio.org provides, http://cyclops-group.sourceforge.net/maven-repo should be added to your maven.repo.remote entry in ${user.home}/build.properties.</p>
