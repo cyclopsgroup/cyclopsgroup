@@ -8,7 +8,6 @@
 package com.cyclopsgroup.cyclib.log4j;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -48,8 +47,8 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
     public void configure(Configuration configuration)
             throws ConfigurationException
     {
-        log4jConfiguration = configuration.getChild("log4j").getValue(
-                "log4j.properties");
+        log4jConfiguration = configuration.getChild("properties").getValue(
+                "com/cyclopsgroup/cyclib/log4j/log4j.properties");
     }
 
     /**
@@ -134,10 +133,10 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
                     log4jConfiguration);
             if (resource == null)
             {
-                throw new FileNotFoundException("File [" + log4jConfiguration
-                        + "] not found in either filesytem or classpath");
+                System.err.println("Can not find log4j properties file at ["
+                        + log4jConfiguration + "], default will be used");
+                resource = getClass().getResource("log4j.properties");
             }
-
         }
         props.load(resource.openStream());
         String basedir = (String) context.get("basedir");

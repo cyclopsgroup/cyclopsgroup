@@ -8,7 +8,6 @@
 package com.cyclopsgroup.cyclib.velocity;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.net.URL;
 
@@ -49,7 +48,7 @@ public class DefaultVelocityComponent extends VelocityComponent implements
     public void configure(Configuration conf) throws ConfigurationException
     {
         propertiesFile = conf.getChild("properties").getValue(
-                "velocity.properties");
+                "com/cyclopsgroup/cyclib/velocity/velocity.properties");
         logTag = conf.getChild("logtag").getValue("runtime");
     }
 
@@ -97,8 +96,9 @@ public class DefaultVelocityComponent extends VelocityComponent implements
                     propertiesFile);
             if (resource == null)
             {
-                throw new FileNotFoundException("File [" + propertiesFile
-                        + "] not found in either filesytem or classpath");
+                logger.error("Can not load velocity properties at ["
+                        + propertiesFile + "], default will be used");
+                resource = getClass().getResource("velocity.properties");
             }
             props.load(resource.openStream());
         }
