@@ -203,6 +203,7 @@ import junit.framework.TestCase;
  * Edited with eclipse 2.1.3
  */
 public class VersionComparatorTest extends TestCase {
+
     /** Method testCompareIntegers() in class VersionComparatorTest
      */
     public void testCompareIntegers() {
@@ -210,6 +211,7 @@ public class VersionComparatorTest extends TestCase {
         assertEquals(1, VersionComparator.compareIntegers("11", "2"));
         assertEquals(-1, VersionComparator.compareIntegers("5", "200"));
     }
+
     /** Method testCompareFloats() in class VersionComparatorTest
      */
     public void testCompareFloats() {
@@ -217,7 +219,9 @@ public class VersionComparatorTest extends TestCase {
         assertEquals(1, VersionComparator.compareFloats("1.4.6", "1.3.9.9.18"));
         assertEquals(1, VersionComparator.compareFloats("12.000.0", "9"));
         assertEquals(-1, VersionComparator.compareFloats("1.5.3", "2"));
+        assertEquals(1, VersionComparator.compareFloats("1.1.0", "1.1"));
     }
+
     /** Method testCompare() in class VersionComparatorTest
      */
     public void testCompare() {
