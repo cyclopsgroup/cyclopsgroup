@@ -19,6 +19,7 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.Velocity;
@@ -32,8 +33,7 @@ import org.apache.velocity.context.Context;
 public class DefaultVelocityComponent extends VelocityComponent implements
         Initializable, Configurable, Contextualizable
 {
-
-    private String basedir;
+    private org.apache.avalon.framework.context.Context context;
 
     private Log logger = LogFactory.getLog(getClass());
 
@@ -62,11 +62,7 @@ public class DefaultVelocityComponent extends VelocityComponent implements
             org.apache.avalon.framework.context.Context context)
             throws ContextException
     {
-        basedir = (String) context.get("basedir");
-        if (basedir == null)
-        {
-            basedir = new File("").getAbsolutePath();
-        }
+        this.context = context;
     }
 
     /**
@@ -88,11 +84,7 @@ public class DefaultVelocityComponent extends VelocityComponent implements
      */
     public void initialize() throws Exception
     {
-        File file = new File(basedir, propertiesFile);
-        if (!file.isFile())
-        {
-            file = new File(propertiesFile);
-        }
+        File file = new File(propertiesFile);
         ExtendedProperties props = null;
 
         if (file.isFile())
@@ -110,7 +102,11 @@ public class DefaultVelocityComponent extends VelocityComponent implements
             }
             props.load(resource.openStream());
         }
-        props.setProperty("basedir", basedir);
+        String basedir = (String) context.get("basedir");
+        if (StringUtils.isNotEmpty(basedir))
+        {
+            props.setProperty("basedir", basedir);
+        }
         setExtendedProperties(props);
         init();
         Velocity.setExtendedProperties(props);

@@ -19,6 +19,7 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
@@ -33,10 +34,9 @@ import org.codehaus.plexus.logging.Logger;
 public class Log4jLoggerManager extends AbstractLoggerManager implements
         Initializable, Configurable, Contextualizable
 {
-
-    private String basedir;
-
     private ThreadLocal cache = new ThreadLocal();
+
+    private Context context;
 
     private String log4jConfiguration;
 
@@ -59,11 +59,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
      */
     public void contextualize(Context context) throws ContextException
     {
-        basedir = (String) context.get("basedir");
-        if (basedir == null)
-        {
-            basedir = new File("").getAbsolutePath();
-        }
+        this.context = context;
     }
 
     /**
@@ -124,11 +120,7 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
      */
     public void initialize() throws Exception
     {
-        File file = new File(basedir, log4jConfiguration);
-        if (!file.isFile())
-        {
-            file = new File(log4jConfiguration);
-        }
+        File file = new File(log4jConfiguration);
         Properties props = new Properties();
 
         URL resource = null;
@@ -148,7 +140,11 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
 
         }
         props.load(resource.openStream());
-        props.setProperty("basedir", basedir);
+        String basedir = (String) context.get("basedir");
+        if (StringUtils.isNotEmpty(basedir))
+        {
+            props.setProperty("basedir", basedir);
+        }
         PropertyConfigurator.configure(resource);
 
     }
