@@ -75,6 +75,9 @@
             <artifactId>commons-jelly</artifactId>
             <version>20040601.171102</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
         </dependency>
         <dependency>
             <groupId>commons-jexl</groupId>

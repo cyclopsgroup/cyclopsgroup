@@ -119,6 +119,7 @@ public class WaterviewServlet extends HttpServlet
         {
             container = new WaterviewContainer();
             String basedir = config.getServletContext().getRealPath("");
+            System.out.println("Root directory is " + basedir);
             container.addContextValue("basedir", basedir);
             container.addContextValue("plexus.home", basedir);
             Enumeration i = config.getInitParameterNames();
