@@ -221,10 +221,6 @@ public class EngineTest extends TestCase {
      */
     public void testGetComponents() {
         Component[] components = engine.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Component component = components[i];
-            System.out.println(component);
-        }
         assertEquals(3, components.length);
     }
 
