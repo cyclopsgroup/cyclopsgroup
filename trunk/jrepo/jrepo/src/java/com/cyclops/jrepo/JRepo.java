@@ -209,7 +209,7 @@ public final class JRepo {
      * @return Instance of engine
      * @throws Exception Doesn't handle it here
      */
-    public static final RepositoryEngine getEngine(Properties p)
+    public static RepositoryEngine getEngine(Properties p)
         throws Exception {
         RepositoryEngineFactory ref = getEngineFactory(p);
         return ref.createRepositoryEngine();
@@ -219,7 +219,7 @@ public final class JRepo {
      * @return RespositoryEngineFactory instance
      * @throws Exception Doesn't handle exceptions here
      */
-    public static final RepositoryEngineFactory getEngineFactory(Properties p)
+    public static RepositoryEngineFactory getEngineFactory(Properties p)
         throws Exception {
         String factoryClassName =
             p.getProperty(

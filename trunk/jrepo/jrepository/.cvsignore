@@ -1,2 +1,4 @@
 Model Folder
 target
+.*
+*.log

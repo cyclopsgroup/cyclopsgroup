@@ -208,9 +208,11 @@ import com.cyclops.jrepo.PropertyManager;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class BaseContent implements Content, Serializable {
+
     private transient ContentType contentType;
-    private transient PropertyManager propertyManager =
-        new DefaultPropertyManager();
+
+    private transient PropertyManager propertyManager = new DefaultPropertyManager();
+
     /** Simple way to get a property
      * @param propertyName Name of property
      * @return Value of property
@@ -218,6 +220,7 @@ public class BaseContent implements Content, Serializable {
     public Object get(String propertyName) {
         return getPropertyManager().getProperty(propertyName);
     }
+
     /** Simple way to get a property
      * @param propertyName Name of property
      * @param defaultValue Default value of property
@@ -226,30 +229,35 @@ public class BaseContent implements Content, Serializable {
     public Object get(String propertyName, Object defaultValue) {
         return getPropertyManager().getProperty(propertyName, defaultValue);
     }
+
     /** Override method getContentType in the derived class
      * @see com.cyclops.jrepo.Content#getContentType()
      */
     public ContentType getContentType() {
         return contentType;
     }
+
     /** Override method getCreatedTime in the derived class
      * @see com.cyclops.jrepo.Content#getCreatedTime()
      */
     public Date getCreatedTime() {
         return (Date) get(CREATED_TIME_PROPERTY);
     }
+
     /** Override method getDescription in the derived class
      * @see com.cyclops.jrepo.Content#getDescription()
      */
     public String getDescription() {
         return (String) get(DESCRIPTION_PROPERTY);
     }
+
     /** Override method getLastModified in the derived class
      * @see com.cyclops.jrepo.Content#getLastModified()
      */
     public Date getLastModified() {
         return (Date) get(LAST_MODIFIED_PROPERTY);
     }
+
     /** Override method getName in the derived class
      * @see com.cyclops.jrepo.Content#getName()
      */
@@ -277,6 +285,7 @@ public class BaseContent implements Content, Serializable {
     public long getUniqueId() {
         return ((Long) get(UNIQUE_ID_PROPERTY, new Long(-1L))).longValue();
     }
+
     /** Method setContentType() in class BaseContent
      * @param type ContentType object
      */

@@ -193,12 +193,13 @@
  * any resulting litigation.
  */
 package com.cyclops.jrepo;
-
-/** Native file content
- * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
+/**
+ * Native file content
  *
- * Created at 10:55:12 AM Mar 22, 2004
- * Edited with IBM WebSphere Studio Application Developer 5.1
+ * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops </a>
+ *
+ * Created at 10:55:12 AM Mar 22, 2004 Edited with IBM WebSphere Studio
+ * Application Developer 5.1
  */
 public interface File extends Content {
 
