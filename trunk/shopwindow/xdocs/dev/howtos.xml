@@ -3,6 +3,7 @@
     <properties>
         <title>Developer Howtos</title>
         <properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
+        <banner>/images/banners/developer.jpg</banner>
     </properties>
     <body>
         <section name="Howtos">

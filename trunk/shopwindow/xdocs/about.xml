@@ -3,9 +3,10 @@
     <properties>
         <title>About Jiaqi Guo</title>
         <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
+        <banner>/images/banners/girl.jpg</banner>
     </properties>
     <body>
-        <section name="About Me">
+        <section name="About us">
             <p>Feel free to contact me at <a href="mailto:chinajoeblack@hotmail.com">chinajoeblack@hotmail.com</a>.</p>
         </section>
     </body>

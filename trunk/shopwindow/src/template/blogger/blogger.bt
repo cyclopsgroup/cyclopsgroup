@@ -1,42 +1,99 @@
-<div style="padding: 10px" id="bloggerArchiveLinks">
-    <p>
-          <BloggerArchives> <a href='<$BlogArchiveLink$>'><$BlogArchiveName$></a> | </BloggerArchives>
-          <!-- Link to the front page, from your archives -->
-          <script type="text/javascript">if (location.href.indexOf("archive")!=-1) document.write("<a href=\"<$BlogURL$>\">Current Posts</a>");</script> 
-    </p>
+<div class="section">
+    <div class="sectionTitle">Blog Index</div>
+    <div id="blogSidebar">
+        <ul>
+            <ArchivePage>
+                <li><a href="<$BlogURL$>">News Home</a></li>
+             </ArchivePage>
+            <li>Latest News
+                <ul>
+                    <BloggerPreviousItems>
+                        <li><a href="<$BlogItemPermalinkURL$>"><$BlogPreviousItemTitle$></a></li>
+                     </BloggerPreviousItems>
+                 </ul>
+             </li>
+             <MainOrArchivePage>
+                <li>News Archives
+                    <ul>
+                        <BloggerArchives>
+                            <li><a href="<$BlogArchiveURL$>"><$BlogArchiveName$></a></li>
+                        </BloggerArchives>
+                    </ul>
+                </li>
+            </MainOrArchivePage>
+        <ul>
+    </div>
 </div>
-<div id="bloggerBody">
-    <Blogger>
-         <div class="section">
-            <BlogDateHeader>
-            <a name="<$BlogDateHeaderDate$>"></a>
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td colspan="2"><img height="15" width="15" alt="" src="../../images/none.png"></img></td>
-                    </tr>
-                    <tr>
-                        <td width="62%"><div class="sectionTitle"><img alt="" src="../../images/right.gif" class="hidewhenprint"></img><$BlogDateHeaderDate$></div></td>
-                        <td width="38%" align="right"><a href="#top"><img border="0" class="hidewhenprint" alt="Goto Top of the Page" src="../../images/icon_sortup.gif"></img></a></td>
-                    </tr>
-                    <tr class="hidewhenprint">
-                        <td class="divisionCell" colspan="2"><img height="2" width="2" alt="" src="../../images/none.png"></img></td>
-                    </tr>
-                </table>
-            </BlogDateHeader>
-            <BlogItemTitle>
-                <div class="subsection">
-                    <a name="<$BlogItemTitle$>"></a>
-                    <a name="<$BlogItemNumber$>"></a>
-                    <div class="subsectionTitle"><$BlogItemTitle$></div>
-                </div>
-            </BlogItemTitle>
-            <p>
-                <$BlogItemBody$><br />
-                <small>
-                    posted by <$BlogItemAuthorNickname$>&nbsp;@&nbsp;
-                    <a href="<$BlogItemArchiveFileName$>#<$BlogItemNumber$>"><$BlogItemDateTime$></a>
-                </small>
-            </p>
+
+<div class="section">
+    <div class="sectionTitle">
+        <div id="blogHeader">
+            <ItemPage><a href="<$BlogURL$>"></ItemPage>
+                <$BlogTitle$>
+            <ItemPage></a></ItemPage>
         </div>
-    </Blogger>
+    </div>
+    
+    <div id="blogContent">
+        <Blogger>
+            <BlogDateHeader>
+                <div class="blogHeaderDate"><$BlogDateHeaderDate$></div>
+            </BlogDateHeader>
+            <div class="subsection">
+                <div class="blogPost">
+                    <a name="<$BlogItemNumber$>"></a>
+                    <div class="subsectionTitle">
+                        <BlogItemTitle>
+                            <div class="blogPostTitle">
+                    	    <BlogItemUrl><a href="<$BlogItemUrl$>" title="external link"></BlogItemUrl>
+                    	        <$BlogItemTitle$>
+                    	    <BlogItemUrl></a></BlogItemUrl>
+                            </div>
+                        </BlogItemTitle>
+                    </div>
+                    <div class="blogPostBody">
+                        <p><$BlogItemBody$></p>
+                    </div>
+                    <div class="blogPostFooter">
+                        <p>
+                            posted by <$BlogItemAuthorNickname$> at 
+                            <a href="<$BlogItemPermalinkUrl$>" title="permanent link"><$BlogItemDateTime$></a> 
+                            <MainOrArchivePage>
+                                <BlogItemCommentsEnabled> |
+                                    <a class="comment-link" href="<$BlogItemPermalinkURL$>#comments"><$BlogItemCommentCount$> comments</a>
+                                </BlogItemCommentsEnabled>
+                            </MainOrArchivePage>
+                            <$BlogItemControl$>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ItemPage>
+                <div class="blogComments">
+                    <BlogItemCommentsEnabled>
+                        <a name="comments"></a>
+                        <div class="blogCommentsTitle"><$BlogItemCommentCount$> Comments:</div>
+                        <ul>
+                            <BlogItemComments>
+                                <li id="c<$BlogCommentNumber$>"><a name="c<$BlogCommentNumber$>"></a>
+                                    <div class="blogCommentBody">
+                                        <p><$BlogCommentBody$></p>
+                                    </div>
+                                    <div class="blogCommentData">
+                                        <p>By <$BlogCommentAuthor$>, at <a href="#c<$BlogCommentNumber$>" title="comment permalink"><$BlogCommentDateTime$></a>
+                                        <$BlogCommentDeleteIcon$></p>
+                                    </div>
+                                </li>
+                            </BlogItemComments>
+                        </ul>
+    	            <div class="comment-data"><p>
+                            <$BlogItemCreate$>
+                            <br /><br /></p>
+                        </div>
+                    </BlogItemCommentsEnabled>
+                    <a href="<$BlogURL$>">&lt;&lt; Home</a>
+                </div>
+            </ItemPage>
+        </Blogger>
+    </div>
 </div>

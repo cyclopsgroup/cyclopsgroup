@@ -3,6 +3,7 @@
 	<properties>
 		<title>Cyclops Group Home</title>
 		<properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
+		<banner>/images/banners/candle.jpg</banner>
 	</properties>
 	<body>
 		<section name="Mission">
@@ -11,7 +12,7 @@
 			<p>A list of projects here is available at <a href="projects.xml">Projects</a>.</p>
 		</section>
 		<section name="Who is it?">
-			<p>Cyclops Group is a group of talented people tring to make their contribution to the java open source world.</p>
+			<p>Cyclops Group is a group of talented people trying to make their contribution to the java open source world.</p>
 		</section>
 	</body>
 </document>

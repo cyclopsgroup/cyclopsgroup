@@ -3,6 +3,7 @@
     <properties>
         <title>Joel's Weblog</title>
         <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
+        <banner>/images/banners/members.jpg</banner>
     </properties>
     <body>
         <div>@MAIN_SECTION@</div>
