@@ -27,9 +27,10 @@ import org.apache.commons.jelly.JellyContext;
  */
 public class MetaInfo
 {
-
+    /** Variable name of meta info object in context */
     public static final String META_INFO_KEY = "metaInfo";
 
+    /** Variable name of model object in context */
     public static final String MODEL_KEY = "mainModel";
 
     /**

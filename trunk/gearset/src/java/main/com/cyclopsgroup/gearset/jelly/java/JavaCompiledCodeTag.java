@@ -16,13 +16,18 @@
  */
 package com.cyclopsgroup.gearset.jelly.java;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.Method;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.TreeMap;
+
+import net.janino.ClassBodyEvaluator;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.gearset.runtime.Context;
 
@@ -33,9 +38,9 @@ import com.cyclopsgroup.gearset.runtime.Context;
  */
 public class JavaCompiledCodeTag extends AbstractJavaCodeTag
 {
-    private HashSet imports = new HashSet();
+    private Method dynExecuteMethod;
 
-    private String name;
+    private HashSet imports = new HashSet();
 
     private String sourceCode;
 
@@ -57,7 +62,7 @@ public class JavaCompiledCodeTag extends AbstractJavaCodeTag
      * @param variableName
      * @param variableType
      */
-    public void declareVariable(String variableName, Class variableType)
+    public void declareVariable(String variableName, String variableType)
     {
         variables.put(variableName, variableType);
     }
@@ -70,12 +75,58 @@ public class JavaCompiledCodeTag extends AbstractJavaCodeTag
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
-        if (StringUtils.isEmpty(getName()))
-        {
-            setName("DynaClass_" + hashCode());
-        }
+
         invokeBody(output);
         setResult();
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter out = new PrintWriter(stringWriter);
+        for (Iterator i = imports.iterator(); i.hasNext();)
+        {
+            String importExpression = (String) i.next();
+            out.println(importExpression);
+        }
+        out
+                .println("public static Object executeAction(com.cyclopsgroup.gearset.runtime.Context context");
+        for (Iterator i = variables.keySet().iterator(); i.hasNext();)
+        {
+            String variableName = (String) i.next();
+            String variableType = (String) variables.get(variableName);
+            out.println(", " + variableType + " " + variableName);
+        }
+        out.println(") {");
+
+        out.println(sourceCode);
+        out.println("}");
+        out.flush();
+        String code = stringWriter.toString();
+        System.out.println(code);
+        try
+        {
+            Class dynActionClass = new ClassBodyEvaluator(code).evaluate();
+            Method[] methods = dynActionClass.getMethods();
+            for (int i = 0; i < methods.length; i++)
+            {
+                Method method = methods[i];
+                Class[] paramTypes = method.getParameterTypes();
+                if (method.getName().equals("executeAction")
+                        && paramTypes.length == variables.size() + 1
+                        && paramTypes[0] == Context.class)
+                {
+                    dynExecuteMethod = method;
+                    break;
+                }
+            }
+            if (dynExecuteMethod == null)
+            {
+                throw new RuntimeException(
+                        "Failed to find entry method of dynamic class");
+            }
+        }
+        catch (Exception e)
+        {
+            throw new JellyTagException(e);
+        }
     }
 
     /**
@@ -85,28 +136,16 @@ public class JavaCompiledCodeTag extends AbstractJavaCodeTag
      */
     public Object execute(Context ctx) throws Exception
     {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * Getter method for property name
-     * 
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * Setter method for property name
-     * 
-     * @param className The name to set.
-     */
-    public void setName(String className)
-    {
-        name = className;
+        Object[] params = new Object[variables.size() + 1];
+        params[0] = ctx;
+        int index = 0;
+        for (Iterator i = variables.keySet().iterator(); i.hasNext();)
+        {
+            String variableName = (String) i.next();
+            index++;
+            params[index] = ctx.get(variableName);
+        }
+        return dynExecuteMethod.invoke(null, params);
     }
 
     /**

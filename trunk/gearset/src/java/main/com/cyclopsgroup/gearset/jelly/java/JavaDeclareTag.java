@@ -42,23 +42,19 @@ public class JavaDeclareTag extends TagSupport
             JellyTagException
     {
         SyntaxUtils.checkAttribute("name", getName());
+        if (StringUtils.equals("context", getName()))
+        {
+            throw new JellyTagException("Variable name can not be 'context'");
+        }
         String typeName = getBodyText();
         if (StringUtils.isEmpty(typeName))
         {
             throw new JellyTagException("Body of declare tag must not be empty");
         }
-        Class type = Object.class;
-        try
-        {
-            type = Class.forName(typeName);
-        }
-        catch (Exception e)
-        {
-            throw new JellyTagException(
-                    "Body of declare tag must be a valid java class name");
-        }
+
         SyntaxUtils.checkParent(this, JavaCompiledCodeTag.class);
-        ((JavaCompiledCodeTag) getParent()).declareVariable(getName(), type);
+        ((JavaCompiledCodeTag) getParent())
+                .declareVariable(getName(), typeName);
     }
 
     /**
