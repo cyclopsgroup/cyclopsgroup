@@ -43,10 +43,10 @@ public interface PersistenceManager
     /**
      * TODO Add javadoc for this method
      *
-     * @param entityClass
+     * @param entityType Type of entity class
      * @return New query object
      */
-    Query createQuery(Class entityClass);
+    Query createQuery(Class entityType);
 
     /**
      * TODO Add javadoc for this method

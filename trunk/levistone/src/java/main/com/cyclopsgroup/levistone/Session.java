@@ -26,6 +26,8 @@ import java.util.Map;
 
 public interface Session
 {
+    /** Default session name */
+    String DEFAULT_NAME = "default";
 
     /**
      * Empty array
@@ -56,13 +58,20 @@ public interface Session
     QueryResult executeQuery(Query query) throws QueryException;
 
     /**
-     * TODO Add javadoc for this method
+     * Execute sql string query
      *
-     * @param sqlQuery
-     * @return
+     * @param sqlQuery Sql string
+     * @return Query result
      * @throws QueryException
      */
     QueryResult executeQuery(String sqlQuery) throws QueryException;
+
+    /**
+     * Return session unique id
+     *
+     * @return Session id
+     */
+    String getId();
 
     /**
      * Get name of the persistence definition
@@ -70,6 +79,13 @@ public interface Session
      * @return Name of pm
      */
     String getName();
+
+    /**
+     * Get persistence manager hosting it
+     *
+     * @return PersistenceManager object
+     */
+    PersistenceManager getPersistenceManager();
 
     /**
      * If session is closed
@@ -90,8 +106,8 @@ public interface Session
     /**
      * Get type session with given entity type
      *
-     * @param entityClass Class of entity
+     * @param entityType Class of entity
      * @return Typed session object
      */
-    TypedSession type(Class entityClass);
+    TypedSession type(Class entityType);
 }

@@ -23,5 +23,28 @@ package com.cyclopsgroup.levistone;
  */
 public class NamedQuery extends Query
 {
+
     private String name;
+
+    /**
+     * Constructor for class NamedQuery
+     *
+     * @param entityType
+     * @param name
+     */
+    public NamedQuery(Class entityType, String name)
+    {
+        super(entityType);
+        this.name = name;
+    }
+
+    /**
+     * Get name of this query
+     *
+     * @return Name of this query
+     */
+    public String getName()
+    {
+        return name;
+    }
 }

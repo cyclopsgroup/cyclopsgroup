@@ -83,6 +83,27 @@ public interface TypedSession
     Object getId(Object entity);
 
     /**
+     * Get current persistence manager
+     *
+     * @return PersistenceManager object
+     */
+    PersistenceManager getPersistenceManager();
+
+    /**
+     * Get current session
+     *
+     * @return Current session
+     */
+    Session getSession();
+
+    /**
+     * Get entity type
+     *
+     * @return Entity type
+     */
+    Class getType();
+
+    /**
      * Lookup object with given id
      *
      * @param id Id of object

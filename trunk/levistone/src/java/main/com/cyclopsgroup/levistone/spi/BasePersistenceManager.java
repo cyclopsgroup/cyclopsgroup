@@ -14,34 +14,37 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.spi;
+
+import com.cyclopsgroup.levistone.PersistenceException;
+import com.cyclopsgroup.levistone.PersistenceManager;
+import com.cyclopsgroup.levistone.Query;
+import com.cyclopsgroup.levistone.Session;
 
 /**
- * Query model object
+ * Base implementation of persistence manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Query
+public abstract class BasePersistenceManager implements PersistenceManager
 {
-    private Class entityType;
-
     /**
-     * Constructor for class Query
+     * Override or implement method of parent class or interface
      *
-     * @param entityType Entity class
+     * @see com.cyclopsgroup.levistone.PersistenceManager#createQuery(java.lang.Class)
      */
-    public Query(Class entityType)
+    public Query createQuery(Class entityType)
     {
-        this.entityType = entityType;
+        return new Query(entityType);
     }
 
     /**
-     * Get current entity type
+     * Override or implement method of parent class or interface
      *
-     * @return Class of entity
+     * @see com.cyclopsgroup.levistone.PersistenceManager#openSession()
      */
-    public Class getEntityType()
+    public Session openSession() throws PersistenceException
     {
-        return entityType;
+        return openSession(Session.DEFAULT_NAME);
     }
 }

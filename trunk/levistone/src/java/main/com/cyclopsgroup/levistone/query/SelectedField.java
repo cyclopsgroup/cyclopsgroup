@@ -14,34 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.levistone;
+package com.cyclopsgroup.levistone.query;
 
 /**
- * Query model object
+ * Selected field query model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Query
+public class SelectedField
 {
-    private Class entityType;
 
-    /**
-     * Constructor for class Query
-     *
-     * @param entityType Entity class
-     */
-    public Query(Class entityType)
-    {
-        this.entityType = entityType;
-    }
-
-    /**
-     * Get current entity type
-     *
-     * @return Class of entity
-     */
-    public Class getEntityType()
-    {
-        return entityType;
-    }
 }
