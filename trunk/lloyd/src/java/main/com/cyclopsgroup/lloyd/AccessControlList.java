@@ -17,11 +17,30 @@
 package com.cyclopsgroup.lloyd;
 
 /**
- * TODO Add javadoc for class
+ * Access control list entity
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Criteria
+public interface AccessControlList
 {
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @return
+     */
+    Group[] getGroups();
 
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @return
+     */
+    Permission[] getPermissions();
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @return
+     */
+    Role[] getRoles();
 }

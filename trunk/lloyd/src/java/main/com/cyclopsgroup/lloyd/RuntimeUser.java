@@ -16,44 +16,43 @@
  */
 package com.cyclopsgroup.lloyd;
 
+import com.cyclopsgroup.cyclib.Context;
+
 /**
- * Query model
+ * Runtime user object
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Query
+public interface RuntimeUser
 {
-    private Criteria criteria = new Criteria();
 
-    private Class objectClass;
-
-    /**
-     * Constructor of Query
-     * 
-     * @param objectClass Object class of result
-     */
-    public Query(Class objectClass)
-    {
-        this.objectClass = objectClass;
-    }
+    AccessControlList getAccessControlList();
 
     /**
-     * Get criteria object
-     * 
-     * @return Criteria object
+     * Get context for this user
+     *
+     * @return Runtime user context
      */
-    public Criteria getCriteria()
-    {
-        return criteria;
-    }
+    Context getContext();
 
     /**
-     * Get class of result object
-     * 
-     * @return Class of result object
+     * Get runtime id of this user
+     *
+     * @return Runtime id
      */
-    public Class getObjectClass()
-    {
-        return objectClass;
-    }
+    String getId();
+
+    /**
+     * Get user model
+     *
+     * @return User model
+     */
+    User getUser();
+
+    /**
+     * If this user anonymous
+     *
+     * @return Anonymous?
+     */
+    boolean isAnonymous();
 }

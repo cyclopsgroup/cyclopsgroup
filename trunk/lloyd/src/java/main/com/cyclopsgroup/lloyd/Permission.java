@@ -16,55 +16,22 @@
  */
 package com.cyclopsgroup.lloyd;
 
-import java.util.Iterator;
-import java.util.List;
-
 /**
- * Query result
+ * Permission interface
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface QueryResult
+public interface Permission
 {
     /**
-     * Get limit of result
-     * 
-     * @return Max record count
+     * Empty permission array
      */
-    int getLimit();
+    Permission[] EMPTY_ARRAY = new Permission[0];
 
     /**
-     * Set max record number
-     * 
-     * @return Max record count
+     * String expression of this permission
+     *
+     * @return String expression
      */
-    int getOffset();
-
-    /**
-     * Get result iterator
-     * 
-     * @return Iterator object
-     */
-    Iterator iterator();
-
-    /**
-     * Get result as list
-     * 
-     * @return
-     */
-    List list();
-
-    /**
-     * Set max record count
-     * 
-     * @param limit Limit of a query
-     */
-    void setLimit(int limit);
-
-    /**
-     * Set offset
-     * 
-     * @param offset Offset value
-     */
-    void setOffset(int offset);
+    String getExpression();
 }
