@@ -6,6 +6,7 @@
  */
 package com.cyclops.tornado.services.user;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
@@ -13,6 +14,7 @@ import java.util.Vector;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.BaseService;
 /** Default implementation of UserService
  * @author joeblack
@@ -69,10 +71,6 @@ public abstract class AbstractUserService
     private Vector userListeners = new Vector();
     private Hashtable userRepo = new Hashtable();
     private long userTimeout;
-    /** Method checkUser()
-     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String)
-     */
-    public abstract int checkUser(String userName, String password);
     /** Method getActiveUser()
      * @see com.cyclops.tornado.services.user.UserService#getActiveUser(java.lang.String)
      */
@@ -105,35 +103,36 @@ public abstract class AbstractUserService
     /** Method initialize()
      * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
      */
-    protected void initialize(Configuration conf) throws Exception {
+    protected void initialize(Configuration conf, BrokerManager brokerManager)
+        throws Exception {
         String anonymousUserName = conf.getString("user.anonymous", "guest");
         userTimeout = conf.getLong("user.timeout", DEFAULT_USER_TIMEOUT);
-        anonymousUser = loadUser(anonymousUserName, true);
-        userRepo.put(anonymousUser.getName(), new UserEntry(anonymousUser));
-        checkingThread = new Thread(new CheckingThread());
-        checkingThread.setDaemon(true);
-        checkingThread.setPriority(Thread.MIN_PRIORITY);
-        checkingThread.start();
-        String[] listeners = conf.getStringArray("listener");
-        for (int i = 0; listeners != null && i < listeners.length; i++) {
-            String listenerName = listeners[i];
-            try {
-                UserListener ul =
-                    (UserListener) Class.forName(listenerName).newInstance();
-                userListeners.add(ul);
-            } catch (Exception e) {
-                logger.error("Load user listener error", e);
-            }
+        HashMap context = new HashMap();
+        try {
+            anonymousUser = loadUser(anonymousUserName, true, brokerManager);
+            userRepo.put(anonymousUser.getName(), new UserEntry(anonymousUser));
+            triggerSigninEvent(new UserEvent(anonymousUser, brokerManager));
+        } catch (Exception e) {
+            logger.error("Load guest error", e);
+        } finally {
+            checkingThread = new Thread(new CheckingThread());
+            checkingThread.setDaemon(true);
+            checkingThread.setPriority(Thread.MIN_PRIORITY);
+            checkingThread.start();
         }
     }
     /** In default implementation, it load user object from database.
      * New implementation of this class can override this method to make different authorization way.
      * @param userName Name of the user
      * @param isAnonymous If this user is anonymous user
+     * @param brokerManager BrokerManager object
      * @return User object, null if loading failed
      * @throws Exception DB exception
      */
-    protected User loadUser(String userName, boolean isAnonymous)
+    protected User loadUser(
+        String userName,
+        boolean isAnonymous,
+        BrokerManager brokerManager)
         throws Exception {
         String userClassName =
             configuration.getString(
@@ -150,10 +149,13 @@ public abstract class AbstractUserService
     public void shutdown() {
         checkingThread.stop();
     }
-    /** Method singin()
-     * @see com.cyclops.tornado.services.user.UserService#singin(java.lang.String, java.lang.String)
+    /** Implementation of method singin() in this class
+     * @see com.cyclops.tornado.services.user.UserService#singin(java.lang.String, java.lang.String, com.cyclops.tornado.BrokerManager)
      */
-    public void singin(String key, String userName) {
+    public void singin(
+        String key,
+        String userName,
+        BrokerManager brokerManager) {
         boolean existed = false;
         User user = null;
         for (Iterator i = userRepo.values().iterator(); i.hasNext();) {
@@ -168,7 +170,7 @@ public abstract class AbstractUserService
         }
         if (!existed) {
             try {
-                User userInstance = loadUser(userName, false);
+                User userInstance = loadUser(userName, false, brokerManager);
                 UserEntry entry = new UserEntry(userInstance);
                 userRepo.put(key, entry);
                 user = userInstance;
@@ -176,30 +178,36 @@ public abstract class AbstractUserService
                 logger.error("Loading User Error", e);
             }
         }
+        triggerSigninEvent(new UserEvent(user, brokerManager));
+    }
+    /** Implementation of method singout() in this class
+     * @see com.cyclops.tornado.services.user.UserService#singout(java.lang.String, com.cyclops.tornado.BrokerManager)
+     */
+    public void singout(String key, BrokerManager brokerManager) {
+        if (userRepo.containsKey(key)) {
+            UserEntry entry = (UserEntry) userRepo.get(key);
+            triggerSignoutEvent(new UserEvent(entry.user, brokerManager));
+            userRepo.remove(key);
+        }
+    }
+    private void triggerSigninEvent(UserEvent event) {
         for (Iterator i = userListeners.iterator(); i.hasNext();) {
-            UserListener ul = (UserListener) i.next();
+            UserListener listener = (UserListener) i.next();
             try {
-                ul.onSingIn(user);
+                listener.onSingIn(event);
             } catch (Exception e) {
-                logger.error("Trigger user signin error", e);
+                logger.error(e);
             }
         }
     }
-    /** Method singout()
-     * @see com.cyclops.tornado.services.user.UserService#singout(java.lang.String)
-     */
-    public void singout(String key) {
-        if (userRepo.containsKey(key)) {
-            UserEntry entry = (UserEntry) userRepo.get(key);
-            for (Iterator i = userListeners.iterator(); i.hasNext();) {
-                UserListener listener = (UserListener) i.next();
-                try {
-                    listener.onSingOut(entry.user);
-                } catch (Exception e) {
-                    logger.error("Trigger user signout error", e);
-                }
+    private void triggerSignoutEvent(UserEvent event) {
+        for (Iterator i = userListeners.iterator(); i.hasNext();) {
+            UserListener listener = (UserListener) i.next();
+            try {
+                listener.onSingOut(event);
+            } catch (Exception e) {
+                logger.error(e);
             }
-            userRepo.remove(key);
         }
     }
 }

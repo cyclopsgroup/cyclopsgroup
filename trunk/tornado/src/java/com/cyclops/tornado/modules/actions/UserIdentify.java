@@ -8,15 +8,15 @@ package com.cyclops.tornado.modules.actions;
 import org.apache.fulcrum.TurbineServices;
 import org.apache.turbine.ParameterParser;
 import org.apache.turbine.RunData;
-import org.apache.turbine.TemplateAction;
 import org.apache.turbine.TemplateContext;
 
+import com.cyclops.tornado.modules.Action;
 import com.cyclops.tornado.services.user.UserService;
 /**
  * @author joeblack
  * @since 2003-10-4 13:45:52
  */
-public class UserIdentify extends TemplateAction {
+public class UserIdentify extends Action {
     private UserService getUserService() {
         return (UserService) TurbineServices.getInstance().getService(
             UserService.SERVICE_NAME);
@@ -30,11 +30,17 @@ public class UserIdentify extends TemplateAction {
         ParameterParser params = data.getParameters();
         String userName = params.getString("user_name");
         int result =
-            getUserService().checkUser(userName, params.getString("password"));
+            getUserService().checkUser(
+                userName,
+                params.getString("password"),
+                getBrokerManager(data));
         String message = "Unknown error";
         switch (result) {
             case UserService.CHECK_RESULT_OK :
-                getUserService().singin(data.getSession().getId(), userName);
+                getUserService().singin(
+                    data.getSession().getId(),
+                    userName,
+                    getBrokerManager(data));
                 message = "Welcom, " + userName;
                 break;
             case UserService.CHECK_RESULT_INCORRECT_PASSWORD :
@@ -60,6 +66,8 @@ public class UserIdentify extends TemplateAction {
      * @throws Exception anything could happen
      */
     public void doSignout(RunData data, TemplateContext ctx) throws Exception {
-        getUserService().singout(data.getSession().getId());
+        getUserService().singout(
+            data.getSession().getId(),
+            getBrokerManager(data));
     }
 }

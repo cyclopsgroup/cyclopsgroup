@@ -5,7 +5,6 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado;
-
 import java.util.ArrayList;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -14,7 +13,6 @@ import org.apache.turbine.RunData;
 
 import com.cyclops.tornado.services.user.DefaultUser;
 import com.cyclops.tornado.services.user.UserService;
-
 /**
  * @author joeblack
  *
@@ -29,11 +27,17 @@ public class TornadoUser extends DefaultUser {
      * @return User instance
      */
     public static final TornadoUser getInstance(RunData data) {
+        return getInstance(data.getSession().getId());
+    }
+    /** Get current user instance
+     * @param key Key of user instance
+     * @return Instance of the user
+     */
+    public static final TornadoUser getInstance(String key) {
         UserService userService =
             (UserService) TurbineServices.getInstance().getService(
                 UserService.SERVICE_NAME);
-        return (TornadoUser) userService.getActiveUser(
-            data.getSession().getId());
+        return (TornadoUser) userService.getActiveUser(key);
     }
     /** Get all active users
      * @return Array of active users
@@ -45,5 +49,17 @@ public class TornadoUser extends DefaultUser {
         ArrayList temp = new ArrayList();
         CollectionUtils.addAll(temp, userService.getActiveUsers());
         return (TornadoUser[]) temp.toArray(EMPTY_ARRAY);
+    }
+    /** Method getPassport()
+     * @return Passport object
+     */
+    public Passport getPassport() {
+        return (Passport) getTempStorage().get(Passport.KEY_IN_USER);
+    }
+    /** Method setPassport()
+     * @param passport Passport object
+     */
+    public void setPassport(Passport passport) {
+        getTempStorage().put(Passport.KEY_IN_USER, passport);
     }
 }

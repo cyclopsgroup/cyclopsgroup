@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.fulcrum.ServiceException;
 import org.apache.turbine.RunData;
 import org.apache.turbine.services.rundata.TurbineRunDataService;
+
+import com.cyclops.tornado.BrokerManager;
 /**
  * @author joeblack
  * @since 2003-10-9 14:53:50
@@ -28,5 +30,17 @@ public class TornadoRunDataService extends TurbineRunDataService {
         ServletConfig config)
         throws ServiceException {
         return getRunData(TORNADO_CONFIG, request, response, config);
+    }
+    /** Implementation of method putRunData() in this class
+     * @see org.apache.turbine.services.rundata.RunDataService#putRunData(org.apache.turbine.RunData)
+     */
+    public boolean putRunData(RunData data) {
+        BrokerManager brokerManager =
+            (BrokerManager) data.getTemp(BrokerManager.KEY_IN_CONTEXT);
+        if (brokerManager != null) {
+            brokerManager.release();
+            data.setTemp(BrokerManager.KEY_IN_CONTEXT, null);
+        }
+        return super.putRunData(data);
     }
 }

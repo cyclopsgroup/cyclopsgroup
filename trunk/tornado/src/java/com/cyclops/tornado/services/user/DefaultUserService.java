@@ -5,43 +5,38 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services.user;
-import java.util.List;
-
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.httpclient.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.apache.fulcrum.db.DatabaseService;
-import org.apache.torque.util.Criteria;
 
-import com.cyclops.tornado.om.UserPeer;
+import com.cyclops.tornado.BrokerManager;
+import com.cyclops.tornado.bo.UserBroker;
 /** Default UserService implementation
  * @author joeblack
  * @since 2003-10-4 20:05:45
  */
 public class DefaultUserService extends AbstractUserService {
-    /** Method checkUser()
-     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String)
+    /** Implementation of method checkUser() in this class
+     * @see com.cyclops.tornado.services.user.UserService#checkUser(java.lang.String, java.lang.String, com.cyclops.tornado.BrokerManager)
      */
-    public int checkUser(String userName, String password) {
+    public int checkUser(
+        String userName,
+        String password,
+        BrokerManager brokerManager) {
         if (StringUtils.equals(userName, getAnonymousUser().getName())) {
             return CHECK_RESULT_DISABLED_USER;
         }
         try {
-            Criteria crit = new Criteria();
-            crit.and(UserPeer.USER_NAME, userName);
-            List rs = UserPeer.doSelect(crit);
-            if (rs.isEmpty()) {
+            UserBroker userb =
+                (UserBroker) brokerManager.getObjectBroker(UserBroker.class);
+            com.cyclops.tornado.om.User user = userb.retrieveByName(userName);
+            if (user == null) {
                 return CHECK_RESULT_INVALID_USER;
             }
-            com.cyclops.tornado.om.User user =
-                (com.cyclops.tornado.om.User) rs.get(0);
             if (user.getIsDisabled()) {
                 return CHECK_RESULT_DISABLED_USER;
             }
-            String pwd =
-                new String(
-                    Base64.decode(user.getEncryptedPassword().getBytes()));
-            if (!StringUtils.equals(password, pwd)) {
+            if (!StringUtils.equals(password, user.getPassword())) {
                 return CHECK_RESULT_INCORRECT_PASSWORD;
             }
             return CHECK_RESULT_OK;
@@ -50,24 +45,26 @@ public class DefaultUserService extends AbstractUserService {
             return CHECK_RESULT_EXCEPTION;
         }
     }
-    /** We need database access support
-     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
+    /** Implementation of method initialize() in this class
+     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
-    protected void initialize(Configuration conf) throws Exception {
-        getServiceBroker().getService(DatabaseService.SERVICE_NAME);
-        super.initialize(conf);
-    }
-    /**
-     * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean)
-     */
-    protected User loadUser(String userName, boolean isAnonymous)
+    protected void initialize(Configuration conf, BrokerManager brokerManager)
         throws Exception {
-        User user = super.loadUser(userName, isAnonymous);
-        Criteria crit = new Criteria();
-        crit.and(UserPeer.USER_NAME, userName);
-        List rs = UserPeer.doSelect(crit);
-        com.cyclops.tornado.om.User dbuser =
-            (com.cyclops.tornado.om.User) rs.get(0);
+        getServiceBroker().getService(DatabaseService.SERVICE_NAME);
+        super.initialize(conf, brokerManager);
+    }
+    /** Implementation of method loadUser() in this class
+     * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean, com.cyclops.tornado.BrokerManager)
+     */
+    protected User loadUser(
+        String userName,
+        boolean isAnonymous,
+        BrokerManager brokerManager)
+        throws Exception {
+        User user = super.loadUser(userName, isAnonymous, brokerManager);
+        UserBroker userb =
+            (UserBroker) brokerManager.getObjectBroker(UserBroker.class);
+        com.cyclops.tornado.om.User dbuser = userb.retrieveByName(userName);
         if (user instanceof com.cyclops.tornado.om.User) {
             dbuser.copyTo((com.cyclops.tornado.om.User) user);
         }

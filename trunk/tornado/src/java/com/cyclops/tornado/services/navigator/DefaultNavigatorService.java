@@ -12,6 +12,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclops.tornado.BrokerManager;
 import com.cyclops.tornado.services.BaseService;
 import com.cyclops.tornado.utils.ResourceFinder;
 /**
@@ -57,10 +58,11 @@ public class DefaultNavigatorService
     public MenuRoot[] getMenuRoots() {
         return (MenuRoot[]) menus.values().toArray(MenuRoot.EMPTY_ARRAY);
     }
-    /** Method initialize()
-     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration)
+    /** Implementation of method initialize() in this class
+     * @see com.cyclops.tornado.services.BaseService#initialize(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
-    protected void initialize(Configuration conf) throws Exception {
+    protected void initialize(Configuration conf, BrokerManager brokerManager)
+        throws Exception {
         ResourceFinder rf = new ResourceFinder(this);
         URL[] resources = rf.getResources(conf);
         MenuItem root = new MenuItem();

@@ -31,6 +31,10 @@ public interface User {
      * @return Full name of this user
      */
     String getFullName();
+    /** Method getId()
+     * @return Int value of id
+     */
+    int getId();
     /** Implementation of method getLastSigninDate() in this class
      * @return Last sign in date of this user
      */

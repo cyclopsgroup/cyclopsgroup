@@ -5,22 +5,19 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.modules.screens.system.administration.user;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-import org.apache.torque.util.Criteria;
 import org.apache.turbine.ParameterParser;
 import org.apache.turbine.RunData;
 import org.apache.turbine.TemplateContext;
-import org.apache.turbine.TemplateScreen;
 
+import com.cyclops.tornado.bo.UserBroker;
+import com.cyclops.tornado.modules.Screen;
 import com.cyclops.tornado.om.User;
-import com.cyclops.tornado.om.UserPeer;
 /**
  * @author joeblack
  * @since 2003-10-6 20:41:48
  */
-public class BaseUser extends TemplateScreen {
+public class BaseUser extends Screen {
     private User dbuser;
     /** Method doBuildTemplate()
      * @see org.apache.turbine.modules.Module#doBuildTemplate(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
@@ -33,13 +30,12 @@ public class BaseUser extends TemplateScreen {
         if (StringUtils.isEmpty(userName)) {
             data.setMessage("Please input user name");
         } else {
-            Criteria crit = new Criteria();
-            crit.and(UserPeer.USER_NAME, userName);
-            List users = UserPeer.doSelect(crit);
-            if (users.isEmpty()) {
+            UserBroker ub =
+                (UserBroker) getObjectBroker(UserBroker.class, data);
+            dbuser = ub.retrieveByName(userName);
+            if (dbuser == null) {
                 data.setMessage("User [" + userName + "] doesn't exist");
             } else {
-                dbuser = (User) users.get(0);
                 ctx.put("user", dbuser);
             }
         }

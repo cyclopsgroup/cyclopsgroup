@@ -6,6 +6,8 @@
  */
 package com.cyclops.tornado.services.user;
 import org.apache.fulcrum.Service;
+
+import com.cyclops.tornado.BrokerManager;
 /**
  * @author joeblack
  * @since 2003-9-29 17:00:26
@@ -41,16 +43,22 @@ public interface UserService extends Service {
     /** Method singinUser() in Class UserService
      * @param key Key of this user session
      * @param userName Name of the user
+     * @param brokerManager BrokerManager object
      */
-    void singin(String key, String userName);
+    void singin(String key, String userName, BrokerManager brokerManager);
     /** Method singout() in Class UserService
      * @param key Key of this user session
+     * @param brokerManager BrokerManager object
      */
-    void singout(String key);
+    void singout(String key, BrokerManager brokerManager);
     /** Method checkUser() in Class UserService
      * @param userName Name of user
      * @param password Password for signing
+     * @param brokerManager BrokerManager object
      * @return Sigin result, refer to the constants about it pls.
      */
-    int checkUser(String userName, String password);
+    int checkUser(
+        String userName,
+        String password,
+        BrokerManager brokerManager);
 }
