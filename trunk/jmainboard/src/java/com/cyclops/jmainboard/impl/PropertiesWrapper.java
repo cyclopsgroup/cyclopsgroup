@@ -194,126 +194,51 @@
  */
 package com.cyclops.jmainboard.impl;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.tools.generic.RenderTool;
-
-import com.cyclops.jmainboard.Component;
-import com.cyclops.jmainboard.model.ComponentModel;
-import com.cyclops.jmainboard.model.ModelParser;
-import com.cyclops.jmainboard.model.PropertyModel;
-import com.cyclops.jmainboard.utils.VelocityUtils;
-import com.cyclops.jmainboard.utils.VersionComparator;
-
-/** Tool to load all component instance
+/** Properties wrapper with a parent properties
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 13:47:28 2004-4-14
+ * Created at 23:02:16 2004-4-18
  * Edited with eclipse 2.1.3
  */
-public class ComponentLoader extends LoggableObject {
+public class PropertiesWrapper extends Properties {
 
-    private ClassLoader classLoader;
+    private Properties parent;
 
-    private Hashtable components = new Hashtable();
-
-    private ModelParser modelParser = new ModelParser();
-
-    private DefaultEngine engine;
-
-    /** Load components from Engine home
-     * @param e Engine instance
+    /** Method getParent() in class PropertiesWrapper
+     * @return Parent properties
      */
-    public void load(DefaultEngine e) {
-        engine = e;
-        File[] componentDirectories = engine.getComponentDirectories();
-        for (int i = 0; i < componentDirectories.length; i++) {
-            File componentDirectory = componentDirectories[i];
-            loadComponents(componentDirectory);
-        }
+    public Properties getParent() {
+        return parent;
     }
 
-    /** Load components without dependency objects and order
-     * @return List of component instances without dependencies
+    /** Override method getProperty in the derived class
+     * @see java.util.Properties#getProperty(java.lang.String)
      */
-    public Map getComponents() {
-        return Collections.unmodifiableMap(components);
-    }
-
-    private void loadComponents(File folder) {
-        if (folder == null || !folder.isDirectory()) {
-            return;
-        }
-        if (new File(folder, "component.xml").isFile()) {
-            loadComponent(folder);
+    public String getProperty(String key) {
+        if (containsKey(key)) {
+            return super.getProperty(key);
         } else {
-            getLog().debug(
-                "Load components from directory " + folder.getAbsolutePath());
-            File[] subfiles = folder.listFiles();
-            for (int i = 0; i < subfiles.length; i++) {
-                File subfile = subfiles[i];
-                loadComponents(subfile);
-            }
+            return parent.getProperty(key);
         }
     }
 
-    private void loadComponent(File folder) {
-        getLog().debug(
-            "Load component from folder " + folder.getAbsolutePath());
-        File descriptor = new File(folder, "component.xml");
-        try {
-            Velocity.init();
-            ComponentModel cm =
-                (ComponentModel) modelParser.parse(descriptor.toURL());
-            DefaultComponent dc =
-                (DefaultComponent) Class
-                    .forName(cm.getImplementation())
-                    .newInstance();
-            dc.setEngine(engine);
-            dc.setComponentHome(folder);
-            VelocityContext ctx =
-                VelocityUtils.createContext(engine.getProperties());
-            dc.setId(cm.getId());
-            dc.setVersion(cm.getVersion());
-            dc.setTitle(RenderTool.eval(ctx, cm.getTitle()));
-            dc.setDescription(RenderTool.eval(ctx, cm.getDescription()));
-            List props = cm.getProperties();
-            for (Iterator i = props.iterator(); i.hasNext();) {
-                PropertyModel prop = (PropertyModel) i.next();
-                dc.getProperties().setProperty(
-                    prop.getName(),
-                    RenderTool.eval(ctx, prop.getValue()));
-            }
-            dc.getProperties().setProperty(
-                Component.COMPONENT,
-                cm.getImplementation());
-            dc.getProperties().setProperty(
-                Component.COMPONENT_HOME,
-                folder.getAbsolutePath());
-            List deps = cm.getDependencies();
-            for (Iterator i = deps.iterator(); i.hasNext();) {
-                String dep = (String) i.next();
-                dc.addDependencyId(dep);
-            }
-            if (components.containsKey(dc.getId())) {
-                Component old = (Component) components.get(dc.getId());
-                if (VersionComparator
-                    .compare(dc.getVersion(), old.getVersion())
-                    > 0) {
-                    components.put(dc.getId(), dc);
-                }
-            } else {
-                components.put(dc.getId(), dc);
-            }
-        } catch (Exception e) {
-            getLog().error("Load component error", e);
+    /** Override method getProperty in the derived class
+     * @see java.util.Properties#getProperty(java.lang.String, java.lang.String)
+     */
+    public String getProperty(String key, String defaultValue) {
+        if (containsKey(key)) {
+            return super.getProperty(key, defaultValue);
+        } else {
+            return parent.getProperty(key, defaultValue);
         }
+    }
+
+    /** Method setParent() in class PropertiesWrapper
+     * @param p Parent properties
+     */
+    public void setParent(Properties p) {
+        parent = p;
     }
 }

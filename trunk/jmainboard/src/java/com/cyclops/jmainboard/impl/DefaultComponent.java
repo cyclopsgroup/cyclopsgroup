@@ -211,48 +211,6 @@ import com.cyclops.jmainboard.Engine;
  */
 public class DefaultComponent extends LoggableObject implements Component {
 
-    /** Properties wrapper */
-    private class PropertiesWrapper extends Properties {
-
-        private Properties parent;
-
-        /** Method getParent() in class PropertiesWrapper
-         * @return Parent properties
-         */
-        public Properties getParent() {
-            return parent;
-        }
-
-        /** Override method getProperty in the derived class
-         * @see java.util.Properties#getProperty(java.lang.String)
-         */
-        public String getProperty(String key) {
-            if (containsKey(key)) {
-                return super.getProperty(key);
-            } else {
-                return parent.getProperty(key);
-            }
-        }
-
-        /** Override method getProperty in the derived class
-         * @see java.util.Properties#getProperty(java.lang.String, java.lang.String)
-         */
-        public String getProperty(String key, String defaultValue) {
-            if (containsKey(key)) {
-                return super.getProperty(key, defaultValue);
-            } else {
-                return parent.getProperty(key, defaultValue);
-            }
-        }
-
-        /** Method setParent() in class PropertiesWrapper
-         * @param p Parent properties
-         */
-        public void setParent(Properties p) {
-            parent = p;
-        }
-    }
-
     private File componentHome;
 
     private Hashtable dependencies = new Hashtable();
@@ -298,7 +256,7 @@ public class DefaultComponent extends LoggableObject implements Component {
      */
     public Component[] getDependencies() {
         return (Component[]) dependencies.values().toArray(
-                Component.EMPTY_ARRAY);
+            Component.EMPTY_ARRAY);
     }
 
     /** Method getDependencyIds() in class DefaultComponent
@@ -346,8 +304,12 @@ public class DefaultComponent extends LoggableObject implements Component {
             ret = file.toURL();
         } catch (Exception e) {
             getLog().debug(
-                    "Resource [" + resourcePath + "] in component [" + getId()
-                            + "] not found!", e);
+                "Resource ["
+                    + resourcePath
+                    + "] in component ["
+                    + getId()
+                    + "] not found!",
+                e);
         }
         return ret;
     }

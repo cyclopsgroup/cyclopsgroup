@@ -195,6 +195,7 @@
 package com.cyclops.jmainboard.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -202,6 +203,7 @@ import java.util.Properties;
 import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.cyclops.jmainboard.Component;
 import com.cyclops.jmainboard.Engine;
@@ -270,14 +272,27 @@ public class DefaultEngine extends LoggableObject implements Engine {
     }
 
     private void loadComponentDirectories() {
-        componentDirectories.add(new File(getEngineHome(), "components"));
-        String passedDirectories = getProperties().getProperty(
-                COMPONENT_DIRECTORY, "");
-        if (StringUtils.isEmpty(passedDirectories)) { return; }
+        File defaultComponentDirectory =
+            new File(getEngineHome(), "components");
+        componentDirectories.add(defaultComponentDirectory);
+        getLog().debug(
+            "Add "
+                + defaultComponentDirectory.getAbsolutePath()
+                + " as component directory");
+        String passedDirectories =
+            getProperties().getProperty(COMPONENT_DIRECTORY, "");
+        if (StringUtils.isEmpty(passedDirectories)) {
+            return;
+        }
         String[] directories = StringUtils.split(passedDirectories, ";");
         for (int i = 0; i < directories.length; i++) {
             String directory = directories[i];
-            addComponentDirectory(new File(directory));
+            File componentDirectory = new File(directory);
+            addComponentDirectory(componentDirectory);
+            getLog().debug(
+                "Add "
+                    + componentDirectory.getAbsolutePath()
+                    + " as component directory");
         }
     }
 
@@ -292,9 +307,21 @@ public class DefaultEngine extends LoggableObject implements Engine {
      * Initalize the engine
      */
     protected void init() {
+        File log4jFile = new File(getEngineHome(), "conf/log4j.properties");
+        if (log4jFile.isFile()) {
+            try {
+                Properties p = new Properties();
+                p.putAll(getProperties());
+                p.load(new FileInputStream(log4jFile));
+                PropertyConfigurator.configure(p);
+            } catch (Exception e) {
+                getLog().warn("Log4j configuration loading error", e);
+            }
+        }
+        getLog().trace("Load component directories");
         loadComponentDirectories();
 
-        // preload components before really starting them
+        getLog().trace("Preload components from all component directories");
         HashMap rawComponents = new HashMap();
         ComponentLoader loader = new ComponentLoader();
         loader.load(this);
@@ -307,18 +334,19 @@ public class DefaultEngine extends LoggableObject implements Engine {
             for (int j = 0; j < dependencyIds.length; j++) {
                 String dependencyId = dependencyIds[j];
                 if (rawComponents.containsKey(dependencyId)) {
-                    Component dependency = (Component) rawComponents
-                            .get(dependencyId);
+                    Component dependency =
+                        (Component) rawComponents.get(dependencyId);
                     component.addDependency(dependency);
                 } else {
                     getLog().error(
-                            "Dependency [" + dependencyId
-                                    + "] is not found for component ["
-                                    + component.getId() + "]");
+                        "Dependency ["
+                            + dependencyId
+                            + "] is not found for component ["
+                            + component.getId()
+                            + "]");
                 }
             }
         }
-        //Sort components and put results into components vector
         ComponentSorter componentSorter = new ComponentSorter();
         for (Iterator i = rawComponents.values().iterator(); i.hasNext();) {
             Component component = (Component) i.next();
@@ -333,17 +361,22 @@ public class DefaultEngine extends LoggableObject implements Engine {
             Component component = componentArray[i];
             components.add(component);
         }
-        //Initialize components in order
+        getLog().trace("Initialize all loaded components in order");
         for (Iterator i = components.iterator(); i.hasNext();) {
             Component component = (Component) i.next();
             try {
                 component.initialize();
+                getLog().debug(
+                    "Component "
+                        + component.getId()
+                        + "-"
+                        + component.getVersion()
+                        + " is initialized");
             } catch (Exception e) {
-                getLog().warn("Can't initialize component [" + component + "]",
-                        e);
+                getLog().warn("Can't initialize component " + component, e);
             }
         }
-        //Register clients for each service in order
+        getLog().trace("Register client components for service components");
         HashMap services = new HashMap();
         for (Iterator i = components.iterator(); i.hasNext();) {
             Component component = (Component) i.next();
@@ -353,6 +386,11 @@ public class DefaultEngine extends LoggableObject implements Engine {
             for (Iterator j = services.values().iterator(); j.hasNext();) {
                 Service service = (Service) j.next();
                 service.register(component);
+                getLog().debug(
+                    "Component "
+                        + component.getId()
+                        + " is registered as a client of service "
+                        + service.getId());
             }
         }
     }
@@ -368,8 +406,9 @@ public class DefaultEngine extends LoggableObject implements Engine {
      * @see com.cyclops.jmainboard.Engine#shutdown()
      */
     public void shutdown() {
-        for (ListIterator i = components.listIterator(components.size()); i
-                .hasPrevious();) {
+        for (ListIterator i = components.listIterator(components.size());
+            i.hasPrevious();
+            ) {
             Component component = (Component) i.previous();
             try {
                 if (component instanceof DefaultService) {
@@ -377,10 +416,9 @@ public class DefaultEngine extends LoggableObject implements Engine {
                     ((DefaultService) component).setStarted(false);
                 }
             } catch (Exception e) {
-                getLog()
-                        .warn(
-                                "Can't shutdown service [" + component.getId()
-                                        + "]", e);
+                getLog().warn(
+                    "Can't shutdown service [" + component.getId() + "]",
+                    e);
             }
         }
     }
@@ -398,7 +436,8 @@ public class DefaultEngine extends LoggableObject implements Engine {
                 }
             } catch (Exception e) {
                 getLog().warn(
-                        "Can't startup service [" + component.getId() + "]", e);
+                    "Can't startup service [" + component.getId() + "]",
+                    e);
             }
         }
     }
