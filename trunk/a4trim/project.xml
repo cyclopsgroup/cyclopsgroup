@@ -3,7 +3,7 @@
     <pomVersion>3</pomVersion>
     <name>cyclops-a4trim</name>
     <id>a4trim</id>
-    <currentVersion>1.0-b1</currentVersion>
+    <currentVersion>1.0-b2-dev</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://cyclops-group.sourceforge.net</url>
