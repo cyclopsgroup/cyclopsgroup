@@ -40,7 +40,7 @@ import com.cyclopsgroup.levistone.spi.AbstractPersistenceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ToquePersistenceManager extends AbstractPersistenceManager
+public class TorquePersistenceManager extends AbstractPersistenceManager
         implements Serviceable, Configurable, Initializable
 {
 
@@ -49,7 +49,6 @@ public class ToquePersistenceManager extends AbstractPersistenceManager
      * @uml.property name="dataSourceManager" 
      */
     private DataSourceManager dataSourceManager;
-
 
     private Hashtable peerAdapters = new Hashtable();
 
@@ -73,9 +72,17 @@ public class ToquePersistenceManager extends AbstractPersistenceManager
     protected Session doOpenSession(String persistenceName, String sessionId)
             throws Exception
     {
-        DataSource dataSource = dataSourceManager
-                .getDataSource(persistenceName);
-        Connection dbcon = dataSource.getConnection();
+        Connection dbcon = null;
+        if (dataSourceManager != null)
+        {
+            DataSource dataSource = dataSourceManager
+                    .getDataSource(persistenceName);
+            dbcon = dataSource.getConnection();
+        }
+        else
+        {
+            dbcon = Torque.getConnection(persistenceName);
+        }
         TorqueSession session = new TorqueSession(this, persistenceName,
                 sessionId, dbcon);
         return session;
@@ -109,7 +116,10 @@ public class ToquePersistenceManager extends AbstractPersistenceManager
      */
     public void init(String props) throws TorqueException
     {
-        Torque.init(props);
+        if (!Torque.isInit())
+        {
+            Torque.init(props);
+        }
     }
 
     /**
@@ -140,7 +150,8 @@ public class ToquePersistenceManager extends AbstractPersistenceManager
      * 
      * @uml.property name="dataSourceManager"
      */
-    void setDataSourceManager(DataSourceManager dataSourceManager) {
+    void setDataSourceManager(DataSourceManager dataSourceManager)
+    {
         this.dataSourceManager = dataSourceManager;
     }
 

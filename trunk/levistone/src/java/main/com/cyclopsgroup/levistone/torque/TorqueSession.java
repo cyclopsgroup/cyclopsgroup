@@ -212,7 +212,7 @@ public class TorqueSession extends AbstractConnectionSession
 
     private TorquePeerAdapter getPeerAdapter(Class type) throws Exception
     {
-        ToquePersistenceManager tpm = (ToquePersistenceManager) getPersistenceManager();
+        TorquePersistenceManager tpm = (TorquePersistenceManager) getPersistenceManager();
         return tpm.getPeerAdapter(type);
     }
 
