@@ -1,33 +1,85 @@
 <?xml version="1.0"?>
 <!-- stylesheet to be used -->
-<jsl:stylesheet select="$doc" xmlns:define="jelly:define" xmlns:j="jelly:core" xmlns:jsl="jelly:jsl" xmlns:log="jelly:log" xmlns:util="jelly:util" xmlns:x="jelly:xml" xmlns:doc="doc" xmlns="dummy" trim="true">
+<jsl:stylesheet select="$doc" xmlns:define="jelly:define" xmlns:j="jelly:core" xmlns:jsl="jelly:jsl" xmlns:log="jelly:log" xmlns:util="jelly:util" xmlns:x="jelly:xml" xmlns:doc="doc" xmlns:maven="jelly:maven" xmlns="dummy" trim="true">
     <jsl:template match="document" trim="true">
         <j:useBean var="navbean" class="org.apache.maven.NavBean"/>
         <j:set var="location" value="${outFile.substring(destdir.length())}"/>
         <util:replace var="location" oldChar="\" newChar="/" value="${location}"/>
         <!-- Stores location for publish date / version -->
         <j:set var="date">${maven.xdoc.date}</j:set>
-        <j:set var="templateDir">${basedir}/src/template/jsl</j:set>
         <j:setProperties object="${navbean}" document="${doc}" location="${location}"/>
         <x:doctype name="html" publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
         <html>
             <head>
-                <title>
+                <j:set var="docTitle">
                     <x:expr select="./properties/title"/>
-                </title>
-                <link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops.css"/>
+                </j:set>
+                <x:if select="$nav/title">
+                    <title>
+                        <x:expr select="$nav/title"/> - ${docTitle}</title>
+                </x:if>
+                <x:if select="not($nav/title)">
+                    <title>${pom.name} - ${docTitle}</title>
+                </x:if>
+                <style type="text/css" media="all"><![CDATA[
+body {
+    margin: 0px;
+}
+body, td, select, input, li {
+	font-size: 11px;
+}
+img {
+    border-width: 0px;
+}
+th {
+    font-weight: bold;
+    text-align: left;
+    text-indent: 5px;
+}
+div.section table.bodyTable td {
+    padding: 3px;
+}
+div.section {
+    padding: 10px;
+}
+#navcolumn li {
+    list-style-image: url(${relativePath}/images/collapsed.gif);
+    line-height: 18px;
+}
+#navcolumn li.expanded {
+    list-style-image: url(${relativePath}/images/expanded.gif);
+}
+#navcolumn ul {
+    margin-left: 20px;
+}
+div.section div.sectionTitle {
+    font-size: 20px;
+}
+div.section div.subsectionTitle {
+    font-size: 18px;
+    text-indent: 20px;
+}
+                ]]></style>
                 <link rel="stylesheet" type="text/css" href="${relativePath}/style/print.css" media="print"/>
+                <link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops.css" media="all"/>
+                <util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
+                <j:if test="${projectCssFile.exists()}">
+                    <link rel="stylesheet" type="text/css" href="${relativePath}/style/project.css" media="all"/>
+                </j:if>
                 <meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
-                <meta http-equiv="Keyword" content="Cyclops Group Community, Java, Maven, Jiaqi Guo, g-cyclops@users.sourceforge.net, joeblack.guo, joeblack.guo@vtradex.com"/>
                 <x:forEach var="author" select="./properties/author">
                     <meta name="author" content="${author.text}"/>
                     <meta name="email" content="${author.attribute('email').value}"/>
                 </x:forEach>
                 <jsl:applyTemplates select="$doc/document/head/*"/>
-                <script language="javascript" src="${relativePath}/rsstransform.js"/>
             </head>
-            <body>
-                <jsl:applyTemplates select="$doc/document/body/@*"/>
+            <x:element name="body">
+                <j:whitespace trim="true">
+                    <x:attribute name="class">composite</x:attribute>
+                    <x:forEach var="attr" select="$doc/document/body/@*">
+                        <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+                    </x:forEach>
+                </j:whitespace>
                 <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DBE4">
                     <tr>
                         <td width="20%">
@@ -45,9 +97,26 @@
                             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#003366">
                                 <tr>
                                     <td rowspan="2">
-                                        <a href="${pom.organization.url}">
-                                            <img border="0" src="${relativePath}${pom.organization.logo}" height="60"/>
-                                        </a>
+                                        <!-- organization logo -->
+                                        <j:set var="logo" value="${pom.organization.logo}"/>
+                                        <j:if test="${!empty(logo)}">
+                                            <!-- set url to org or project url -->
+                                            <j:set var="url" value="${pom.organization.url}"/>
+                                            <j:if test="${!empty(url)}">
+                                                <j:set var="home" value="${pom.organization.url}"/>
+                                            </j:if>
+                                            <j:if test="${empty(url)}">
+                                                <j:set var="home" value="${pom.url}"/>
+                                            </j:if>
+                                            <!-- set image to relative or complete -->
+                                            <j:set var="image" value="${pom.organization.logo}"/>
+                                            <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
+                                                <j:set var="image" value="${relativePath}${image}"/>
+                                            </j:if>
+                                            <a href="${home}" id="organizationLogo">
+                                                <img src="${image}" alt="${pom.organization.name}"/>
+                                            </a>
+                                        </j:if>
                                     </td>
                                     <td colspan="2">
                                         <img src="${relativePath}/images/none.png" width="1" height="36"/>
@@ -66,7 +135,7 @@
                                         <td colspan="2" rowspan="2" nowrap="nowrap" bgcolor="#D1DBE4">
           Search in site:
             <input name="q" type="text" size="8"/>
-                                            <input name="btnG" value="go" type="image" src="${relativePath}/images/right.gif" width="15" height="15" border="0"/>
+                                            <input name="btnG" value="go" type="image" src="${relativePath}/images/right.gif" width="15" height="15" border="0" title="Google Search"/>
                                         </td>
                                     </form>
                                 </tr>
@@ -90,46 +159,76 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                         </td>
                     </tr>
                     <tr valign="top">
-                        <td bgcolor="#D1DBE4">
-                            <table cellspacing="0" cellpadding="3" width="100%">
-                                <x:if select="$nav">
-                                    <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search"/>
-                                </x:if>
-                                <jsl:applyTemplates select="$projectNav/body/menu"/>
-                            </table>
+                        <td bgcolor="#EFEFEF">
+                            <!-- left column start -->
+                            <div id="leftColumn">
+                                <div id="navcolumn">
+                                    <x:if select="$nav">
+                                        <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search"/>
+                                    </x:if>
+                                    <jsl:applyTemplates select="$projectNav/body/menu"/>
+                                    <!-- allows user to put menu items after standard reports -->
+                                    <x:if select="$nav">
+                                        <jsl:applyTemplates select="$nav/body/menu[@type='footer']"/>
+                                    </x:if>
+                                </div>
+                            </div>
+                            <!-- left column end -->
                         </td>
                         <td bgcolor="#FFFFFF">
-                            <jsl:applyTemplates select="$doc/document/body/*"/>
+                            <!-- body start -->
+                            <div id="bodyColumn">
+                                <div class="contentBox">
+                                    <!-- FIXME really shouldn't use $doc, but jelly loses it's context again -->
+                                    <jsl:applyTemplates select="$doc/document/body/*"/>
+                                </div>
+                            </div>
+                            <!-- body end -->
                         </td>
                         <td bgcolor="#FFFFFF">
                             <table border="0" cellspacing="3" width="100%">
                                 <tr>
                                     <td align="center">
-                                        <a href="${pom.url}">
-                                            <img border="0" src="${relativePath}${pom.logo}" alt="${pom.name} site"/>
-                                        </a>
+                                        <!-- project logo and link -->
+                                        <j:set var="logo" value="${pom.logo}"/>
+                                        <j:if test="${logo != null and logo != ''}">
+                                            <!-- set image to relative or complete -->
+                                            <j:set var="image" value="${pom.logo}"/>
+                                            <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
+                                                <j:set var="image" value="${relativePath}${image}"/>
+                                            </j:if>
+                                            <a href="${pom.url}" id="projectLogo">
+                                                <img src="${image}" alt="${pom.name}"/>
+                                            </a>
+                                        </j:if>
+                                        <j:if test="${logo == null or logo == ''}">
+                                            <a href="${pom.url}" id="projectLogo">
+                                                <span>${pom.name}</span>
+                                            </a>
+                                        </j:if>
                                     </td>
                                 </tr>
                             </table>
-                            <jsl:applyTemplates select="$nav/body/links"/>
+                            <!-- render links -->
+                            <x:if select="$nav/body/links">
+                                <jsl:applyTemplates select="$nav/body/links"/>
+                            </x:if>
                         </td>
                     </tr>
-                    <tr align="center">
-                        <td colspan="3" bgcolor="#000000">
-                            <table border="0">
-                                <tr>
-                                    <td>
-                                        <j:useBean var="now" class="java.util.Date"/>
-                                        <font color="white">Copyright 2003, 2004 Cyclops Group Community. All rights reserved. Last built at ${now}</font>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" border="0">
                     <tr>
-                        <td align="right">
+                        <td colspan="3" bgcolor="black" align="center">
+                            <div class="footer">
+                                <p style="padding: 3px">
+                                    <font color="white">
+                            All rights reserved, 2002 ~ 2004, Cyclops Group Community. <span id="lastPublished">Last published: ${build.date}</span>
+                                    </font>
+                                </p>
+                                <jsl:applyTemplates select="$nav/body/footer"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="right" bgcolor="white">
                             <table border="0">
                                 <tr>
                                     <td>
@@ -160,7 +259,7 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                         </td>
                     </tr>
                 </table>
-            </body>
+            </x:element>
         </html>
     </jsl:template>
     <!-- process the properties of the doc -->
@@ -169,16 +268,50 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     </jsl:template>
     <!-- Process a menu for the navigation bar -->
     <jsl:template match="menu" trim="true">
-        <tr>
-            <th>
-                <x:expr select="@name"/>
-            </th>
-        </tr>
-        <tr>
-            <td bgcolor="#EFEFEF">
-                <jsl:applyTemplates select="item"/>
-            </td>
-        </tr>
+        <j:set var="_menuName">
+            <x:expr select="@name"/>
+        </j:set>
+        <j:set var="_menuName">
+            <doc:escapeNameToken value="${_menuName}"/>
+        </j:set>
+        <j:choose>
+            <j:when test="${!empty(_menuName)}">
+                <div id="menu${_menuName}">
+                    <table width="100%" cellspacing="1" cellpadding="3">
+                        <tr>
+                            <th>
+                                <x:expr select="@name"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <jsl:applyTemplates select="item"/>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </j:when>
+            <j:otherwise>
+                <div>
+                    <table width="100%" cellspacing="1" cellpadding="3">
+                        <tr>
+                            <th>
+                                <x:expr select="@name"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <jsl:applyTemplates select="item"/>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </j:otherwise>
+        </j:choose>
     </jsl:template>
     <jsl:template match="item" trim="true">
         <x:set var="item" select="."/>
@@ -196,37 +329,25 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                 <j:set var="_state" value="collapsed"/>
             </j:if>
         </j:if>
-        <table cellspacing="0" cellpadding="0" border="0">
-            <tr>
-                <td>
-                    <img src="${relativePath}/images/none.png" width="8" height="16"/>
-                </td>
-                <td>
-                    <small>
-                        <j:if test="${navbean.isSelected(item.get(0))}">
-                            <b>
-                                <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
-                            </b>
-                        </j:if>
-                        <j:if test="${!navbean.isSelected(item.get(0))}">
-                            <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
-                        </j:if>
-                    </small>
-                </td>
-            </tr>
-            <j:if test="${!navbean.isCollapsed(item.get(0))}">
-                <tr>
-                    <td>&#32;</td>
-                    <td>
-                        <jsl:applyTemplates select="item"/>
-                    </td>
-                </tr>
+        <li class="${_state}">
+            <j:if test="${navbean.isSelected(item.get(0))}">
+                <strong>
+                    <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
+                </strong>
             </j:if>
-        </table>
+            <j:if test="${!navbean.isSelected(item.get(0))}">
+                <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
+            </j:if>
+            <j:if test="${!navbean.isCollapsed(item.get(0))}">
+                <ul>
+                    <jsl:applyTemplates select="item"/>
+                </ul>
+            </j:if>
+        </li>
     </jsl:template>
     <!-- Process the breadcrumb navbar -->
     <jsl:template match="links" trim="true">
-        <table width="100%" cellspacing="0" cellpadding="3">
+        <table width="100%" border="0" cellspacing="0" cellpadding="3">
             <tr>
                 <td colspan="2" bgcolor="#F7941C">
                     <b>
@@ -247,7 +368,9 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                         <j:set var="_link">
                             <x:expr select="@href"/>
                         </j:set>
-                        <doc:itemLink name="${_name}" link="${_link}"/>
+                        <j:whitespace trim="false">
+                            <doc:itemLink name="${_name}" link="${_link}"/>
+                        </j:whitespace>
                         <j:set var="linkCount" value="${1+linkCount}"/>
                     </td>
                 </tr>
@@ -259,21 +382,20 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         <!-- Search code: http://www.google.com/searchcode.html -->
         <!-- Google logos: http://www.google.com/stickers.html -->
         <!-- Terms: http://www.google.com./services/terms_free.html -->
-        <div>
-            <strong>Search ${pom.name}</strong>
+        <div id="search">
+            <h5>Search ${pom.name}</h5>
             <form method="get" action="http://www.google.com/search">
                 <a class="navlink" href="http://www.google.com">
-                    <img src="http://www.google.com/logos/Logo_25wht.gif" alt="Google" border="0"/>
+                    <img src="http://www.google.com/logos/Logo_25wht.gif" width="75" height="32" alt="Google"/>
                 </a>
-                <p/>
                 <j:set var="siteURL" value="${pom.url}"/>
                 <!-- google fails on urls that end with / -->
                 <j:if test="${siteURL.endsWith('/')}">
                     <j:set var="URLLength" value="${siteURL.length() - 1}"/>
                     <j:set var="siteURL" value="${siteURL.substring(0, URLLength.intValue())}"/>
                 </j:if>
-                <input type="text" size="15" name="q" maxlength="255" value=""/>
-                <input type="submit" value="Go" name="btnG"/>
+                <input type="text" id="q" size="15" name="q" maxlength="255" value=""/>
+                <input type="submit" id="btnG" value="Go" name="btnG"/>
                 <input type="hidden" name="domains" value="${siteURL}"/>
                 <input type="hidden" id="search" name="sitesearch" value="${siteURL}"/>
             </form>
@@ -281,92 +403,108 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
     </jsl:template>
     <!-- process a documentation section -->
     <jsl:template match="section" trim="true">
-        <table width="100%" border="0" cellspacing="10">
-            <tr>
-                <td>
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td colspan="2">
-                                <img src="${relativePath}/images/none.png" width="15" height="15"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="62%">
-                                <j:set var="_sectionName">
-                                    <x:expr select="@name"/>
-                                </j:set>
-                                <j:if test="${!empty(_sectionName)}">
-                                    <p>
-                                        <img src="${relativePath}/images/right.gif" align="absmiddle"/>
-                                        <a name="${_sectionName}" class="section">${_sectionName}</a>
-                                    </p>
-                                </j:if>
-                            </td>
-                            <td width="38%" align="right">
-                                <a href="#top">
-                                    <img src="${relativePath}/images/icon_sortup.gif" border="0" alt="Goto Top of the Page"/>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#003366" colspan="2">
-                                <img src="${relativePath}/images/none.png" width="2" height="2"/>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="section">
-                        <jsl:applyTemplates select="*"/>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </jsl:template>
-    <jsl:template match="subsection" trim="true">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: white">
-            <tr>
-                <td>
-                    <img src="${relativePath}/images/none.png" width="10" height="10"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="${relativePath}/images/none.png" width="20" height="15"/>
-                    <img src="${relativePath}/images/icon_sortright.gif" align="absmiddle"/>
-                    <j:set var="_sectionName">
-                        <x:expr select="@name"/>
-                    </j:set>
-                    <j:if test="${!empty(_sectionName)}">
-                        <a name="${_sectionName}" class="subsection">${_sectionName}</a>
-                    </j:if>
-                </td>
-            </tr>
-        </table>
-        <jsl:applyTemplates select="*"/>
-    </jsl:template>
-    <jsl:template match="source" trim="true">
-        <div id="source">
-            <table width="100%" border="1" cellspacing="0" style="background-color: white">
-                <tr>
-                    <td>
-                        <pre class="source">
-                            <x:expr select="."/>
-                        </pre>
-                    </td>
-                </tr>
-            </table>
+        <div class="section">
+            <j:set var="_sectionName">
+                <x:expr select="@name"/>
+            </j:set>
+            <!-- named anchors can't contain whitespaces -->
+            <j:set var="_anchorName">
+                <doc:escapeNameToken value="${_sectionName}"/>
+            </j:set>
+            <j:if test="${!empty(_sectionName)}">
+                <a name="${_anchorName}"/>
+                <table width="100%" border="0" cellspacing="10">
+                    <tr>
+                        <td>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <img src="${relativePath}/images/none.png" width="15" height="15"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="62%">
+                                        <div class="sectionTitle">
+                                            <img src="${relativePath}/images/right.gif" align="absmiddle"/>${_sectionName}</div>
+                                    </td>
+                                    <td width="38%" align="right">
+                                        <a href="#top">
+                                            <img src="${relativePath}/images/icon_sortup.gif" border="0" alt="Goto Top of the Page"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#003366" colspan="2">
+                                        <img src="${relativePath}/images/none.png" width="2" height="2"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="section">
+                                <jsl:applyTemplates select="*"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </j:if>
+            <jsl:applyTemplates select="*"/>
         </div>
     </jsl:template>
+    <jsl:template match="subsection" trim="true">
+        <div class="subsection">
+            <j:set var="_sectionName">
+                <x:expr select="@name"/>
+            </j:set>
+            <!-- named anchors can't contain whitespaces -->
+            <j:set var="_anchorName">
+                <doc:escapeNameToken value="${_sectionName}"/>
+            </j:set>
+            <j:if test="${!empty(_sectionName)}">
+                <a name="${_anchorName}"/>
+                <div class="subsectionTitle">${_sectionName}</div>
+            </j:if>
+            <jsl:applyTemplates select="*"/>
+        </div>
+    </jsl:template>
+    <jsl:template match="source" trim="false">
+        <div class="source">
+            <pre>
+                <jsl:applyTemplates/>
+            </pre>
+        </div>
+    </jsl:template>
+    <!-- preserve whitespace in the following elements -->
+    <jsl:template match="pre | script | style" trim="true">
+        <x:set var="nodename" select="name()"/>
+        <x:element name="${nodename}">
+            <x:forEach var="attr" select="@*">
+                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+            </x:forEach>
+            <j:whitespace trim="false">
+                <jsl:applyTemplates/>
+            </j:whitespace>
+        </x:element>
+    </jsl:template>
+    <!-- xhtml fixup: add missing alt attribute for images -->
+    <jsl:template match="img" trim="true">
+        <x:element name="img">
+            <x:forEach var="attr" select="@*">
+                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+            </x:forEach>
+            <x:set var="noalt" select="count(./@alt) = 0"/>
+            <j:if test="${noalt}">
+                <x:attribute name="alt"/>
+            </j:if>
+        </x:element>
+    </jsl:template>
     <jsl:template match="footer" trim="true">
-        <tr>
-            <td>
-                <jsl:applyTemplates select="*"/>
-            </td>
-        </tr>
+        <div class="xleft">
+            <jsl:applyTemplates select="*"/>
+        </div>
     </jsl:template>
     <jsl:template match="table" trim="true">
         <j:set var="rowcount" value="0"/>
-        <table width="100%" cellspacing="1">
-            <jsl:applyTemplates select="*|@*"/>
+        <table class="bodyTable" cellspacing="1">
+            <jsl:applyTemplates select="*"/>
         </table>
     </jsl:template>
     <jsl:template match="tr" trim="true">
@@ -378,27 +516,15 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
                 <j:set var="rowMode" value="a"/>
             </j:otherwise>
         </j:choose>
-        <!-- copy attributes FIXME: Shouldn't this only be colspan|rowspan? -->
-        <tr class="${rowMode}">
-            <x:forEach var="attr" select="@*">
-                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
-            </x:forEach>
-            <jsl:applyTemplates select="*"/>
-        </tr>
-    </jsl:template>
-    <!--************************-->
-    <!-- glossary documentation -->
-    <!--************************-->
-    <jsl:template match="glossary" trim="true">
-        <jsl:applyTemplates select="glossary-entries/glossary-entry"/>
-    </jsl:template>
-    <jsl:template match="glossary-entry" trim="true">
-        <strong>
-            <x:expr select="name"/>
-        </strong>
-        <br/>
-        <x:expr select="definition"/>
-        <p/>
+        <x:element name="tr">
+            <j:whitespace trim="true">
+                <x:attribute name="class">${rowMode}</x:attribute>
+                <x:forEach var="attr" select="@*">
+                    <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+                </x:forEach>
+                <jsl:applyTemplates select="*"/>
+            </j:whitespace>
+        </x:element>
     </jsl:template>
     <!--************************-->
     <!-- goals documentation    -->
@@ -407,67 +533,23 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         <!-- reset row alternation -->
         <j:set var="rowMode" value=""/>
         <div class="h3">
-            <h3>
-                <a name="Goals">Goals</a>
-            </h3>
-            <table>
-                <tr width="100%">
-                    <th>Goal</th>
-                    <th>Description</th>
-                </tr>
-                <jsl:applyTemplates select="goal"/>
+            <a name="Goals"/>
+            <h3>Goals</h3>
+            <table class="bodyTable">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <jsl:applyTemplates select="goal"/>
+                </tbody>
             </table>
         </div>
     </jsl:template>
     <!-- a goal -->
-    <!-- FIXME: this is copied from tr - there must be a way of
-             calling templates in jsl? -->
     <jsl:template match="goal" trim="true">
-        <j:choose>
-            <j:when test="${rowMode == 'a'}">
-                <j:set var="rowMode" value="b"/>
-            </j:when>
-            <j:otherwise>
-                <j:set var="rowMode" value="a"/>
-            </j:otherwise>
-        </j:choose>
-        <tr>
-            <j:whitespace trim="true">
-                <x:attribute name="class">${rowMode}</x:attribute>
-                <j:set var="_goalName">
-                    <x:expr select="./name"/>
-                </j:set>
-                <td width="20%">
-                    <a name="${_goalName}">${_goalName}</a>
-                </td>
-                <td width="80%">
-                    <jsl:applyTemplates select="description"/>
-                </td>
-            </j:whitespace>
-        </tr>
-    </jsl:template>
-    <jsl:template match="description">
-        <jsl:copy trim="true">
-            <jsl:applyTemplates trim="true"/>
-        </jsl:copy>
-    </jsl:template>
-    <!--************************-->
-    <!-- changelog documentation-->
-    <!--************************-->
-    <jsl:template match="changelog" trim="true">
-        <j:set var="rowMode" value=""/>
-        <table width="100%">
-            <tr>
-                <th>Date</th>
-                <th>Author</th>
-                <th>Files/Message</th>
-            </tr>
-            <jsl:applyTemplates select="changelog-entry"/>
-        </table>
-    </jsl:template>
-    <!-- transform a changelog entry -->
-    <!-- FIXME: tr code copied from above -->
-    <jsl:template match="changelog-entry" trim="true">
         <j:choose>
             <j:when test="${rowMode == 'a'}">
                 <j:set var="rowMode" value="b"/>
@@ -479,43 +561,54 @@ languageLink("${pom.url}${location}", "en", "Show original English version of th
         <x:element name="tr">
             <j:whitespace trim="true">
                 <x:attribute name="class">${rowMode}</x:attribute>
+                <j:set var="_goalName">
+                    <x:expr select="./name"/>
+                </j:set>
+                <td style="width:20%">
+                    <a name="${_goalName}"/>${_goalName}</td>
                 <td>
-                    <x:expr select="date"/>
-                    <x:expr select="time"/>
-                </td>
-                <td>
-                    <x:expr select="author"/>
-                </td>
-                <td>
-                    <jsl:applyTemplates select="*"/>
-                    <pre>
-                        <x:expr select="msg"/>
-                    </pre>
+                    <jsl:applyTemplates select="description"/>
                 </td>
             </j:whitespace>
         </x:element>
     </jsl:template>
-    <jsl:template match="file">
-        <j:set var="url">${pom.repository.url}<x:expr select="name"/>
-        </j:set>
-        <j:set var="revUrl">${url}?<x:expr select="revision"/>&amp;content-type=text/vnd.viewcvs-markup</j:set>
-        <a href="${url}">
-            <x:expr select="name"/>
-        </a> - 
-        <a href="${revUrl}">v<x:expr select="revision"/>
-        </a>
-        <br/>
+    <jsl:template match="description">
+        <jsl:applyTemplates trim="false"/>
     </jsl:template>
-    <!-- remove the space at the end of parsed "a" anchors -->
+    <!-- remove the space at the end of parsed "a" anchors and fix local hrefs -->
     <jsl:template match="a" trim="true">
-        <jsl:copy trim="true">
-            <jsl:applyTemplates trim="true"/>
-        </jsl:copy>
+        <j:set var="href">
+            <x:expr select="@href"/>
+        </j:set>
+        <j:choose>
+            <j:when test="${!empty(href) and href.startsWith('#')}">
+                <x:element name="a" trim="true">
+                    <x:forEach var="attr" select="@*">
+                        <j:choose>
+                            <j:when test="${attr.name == 'href'}">
+                                <x:attribute name="href">
+                                    <doc:escapeNameToken value="${attr.value}"/>
+                                </x:attribute>
+                            </j:when>
+                            <j:otherwise>
+                                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+                            </j:otherwise>
+                        </j:choose>
+                    </x:forEach>
+                    <jsl:applyTemplates/>
+                </x:element>
+            </j:when>
+            <j:otherwise>
+                <jsl:copy>
+                    <jsl:applyTemplates/>
+                </jsl:copy>
+            </j:otherwise>
+        </j:choose>
     </jsl:template>
     <!-- copy any other elements through -->
-    <jsl:template match="*" trim="true">
-        <jsl:copy trim="true">
-            <jsl:applyTemplates trim="true"/>
+    <jsl:template match="*" trim="false">
+        <jsl:copy trim="false">
+            <jsl:applyTemplates trim="false"/>
         </jsl:copy>
     </jsl:template>
     <!-- element values don't pass through as text -->
