@@ -192,56 +192,39 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview;
+package com.cyclops.waterview.pipeline;
 
-import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Vector;
 
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
+import com.cyclops.waterview.RunData;
 
-/** Core waterview component
+/** TODO Add Javadoc for class
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultWaterview implements Waterview, Serviceable {
+public class Pipeline {
 
-    private PipelineManager pipelineManager;
+    private Vector valves = new Vector();
 
-    private RunDataFactory runDataFactory;
-
-    private Hashtable storage = new Hashtable();
-
-    /** Override method getApplicationStorage() of parent class
-     * @see com.cyclops.waterview.Waterview#getApplicationStorage()
+    /** Method addValve in class Pipeline
+     * @param valve Valve instance to add
      */
-    public Map getApplicationStorage() {
-        return storage;
+    public void addValve(Valve valve) {
+        valves.add(valve);
     }
 
-    /** Override method getRunDataFactory() of parent class
-     * @see com.cyclops.waterview.Waterview#getRunDataFactory()
+    /** Invoke the valve
+     * @param rundata RunData object
+     * @param context Context object
+     * @throws Exception Doesn't handle it here
      */
-    public RunDataFactory getRunDataFactory() {
-        return runDataFactory;
-    }
-
-    /** Override method service() of parent class
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException {
-        runDataFactory = (RunDataFactory) serviceManager
-                .lookup(RunDataFactory.ROLE);
-        pipelineManager = (PipelineManager) serviceManager
-                .lookup(PipelineManager.ROLE);
-    }
-
-    /** Override method getPipelineManager() of parent class
-     * @see com.cyclops.waterview.Waterview#getPipelineManager()
-     */
-    public PipelineManager getPipelineManager() {
-        return pipelineManager;
+    public void invoke(RunData rundata, Map context) throws Exception {
+        for (Iterator i = valves.iterator(); i.hasNext();) {
+            Valve valve = (Valve) i.next();
+            valve.invoke(rundata, context);
+        }
     }
 }

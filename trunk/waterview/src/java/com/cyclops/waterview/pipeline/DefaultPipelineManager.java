@@ -192,56 +192,70 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview;
+package com.cyclops.waterview.pipeline;
 
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-/** Core waterview component
+import com.cyclops.waterview.PipelineManager;
+import com.cyclops.waterview.RunData;
+
+/** Default PipelineManager implementation
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultWaterview implements Waterview, Serviceable {
+public class DefaultPipelineManager extends AbstractLogEnabled implements
+        PipelineManager, Configurable, Serviceable, Initializable {
 
-    private PipelineManager pipelineManager;
+    private Configuration configuration;
 
-    private RunDataFactory runDataFactory;
+    private ServiceManager serviceManager;
 
-    private Hashtable storage = new Hashtable();
+    private Hashtable pipelines = new Hashtable();
 
-    /** Override method getApplicationStorage() of parent class
-     * @see com.cyclops.waterview.Waterview#getApplicationStorage()
+    /** Override method invodePipeline() of parent class
+     * @see com.cyclops.waterview.PipelineManager#invokePipeline(com.cyclops.waterview.RunData, java.util.Map, java.lang.String)
      */
-    public Map getApplicationStorage() {
-        return storage;
+    public void invokePipeline(RunData rundata, Map context, String pipelineName) {
+        Pipeline pipeline = (Pipeline) pipelines.get(pipelineName);
+        if (pipeline != null) {
+            try {
+                pipeline.invoke(rundata, context);
+            } catch (Exception e) {
+                getLogger().debug("Error when invokePipeline", e);
+            }
+        }
     }
 
-    /** Override method getRunDataFactory() of parent class
-     * @see com.cyclops.waterview.Waterview#getRunDataFactory()
+    /** Override method configure() of parent class
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public RunDataFactory getRunDataFactory() {
-        return runDataFactory;
+    public void configure(Configuration conf) throws ConfigurationException {
+        configuration = conf;
     }
 
     /** Override method service() of parent class
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException {
-        runDataFactory = (RunDataFactory) serviceManager
-                .lookup(RunDataFactory.ROLE);
-        pipelineManager = (PipelineManager) serviceManager
-                .lookup(PipelineManager.ROLE);
+    public void service(ServiceManager sm) throws ServiceException {
+        serviceManager = sm;
     }
 
-    /** Override method getPipelineManager() of parent class
-     * @see com.cyclops.waterview.Waterview#getPipelineManager()
+    /** Override method initialize() of parent class
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public PipelineManager getPipelineManager() {
-        return pipelineManager;
+    public void initialize() throws Exception {
+        // TODO Auto-generated method stub
+
     }
 }

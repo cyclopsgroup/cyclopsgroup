@@ -194,54 +194,22 @@
  */
 package com.cyclops.waterview;
 
-import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-
-/** Core waterview component
+/** Pipeline manager
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultWaterview implements Waterview, Serviceable {
+public interface PipelineManager {
 
-    private PipelineManager pipelineManager;
+    /** ROLE in plexus */
+    String ROLE = PipelineManager.class.getName();
 
-    private RunDataFactory runDataFactory;
-
-    private Hashtable storage = new Hashtable();
-
-    /** Override method getApplicationStorage() of parent class
-     * @see com.cyclops.waterview.Waterview#getApplicationStorage()
+    /** Method invodePipeline in class PipelineManager
+     * @param rundata RunData object
+     * @param context Context object
+     * @param pipelineName Extension of request resource
      */
-    public Map getApplicationStorage() {
-        return storage;
-    }
-
-    /** Override method getRunDataFactory() of parent class
-     * @see com.cyclops.waterview.Waterview#getRunDataFactory()
-     */
-    public RunDataFactory getRunDataFactory() {
-        return runDataFactory;
-    }
-
-    /** Override method service() of parent class
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException {
-        runDataFactory = (RunDataFactory) serviceManager
-                .lookup(RunDataFactory.ROLE);
-        pipelineManager = (PipelineManager) serviceManager
-                .lookup(PipelineManager.ROLE);
-    }
-
-    /** Override method getPipelineManager() of parent class
-     * @see com.cyclops.waterview.Waterview#getPipelineManager()
-     */
-    public PipelineManager getPipelineManager() {
-        return pipelineManager;
-    }
+    void invokePipeline(RunData rundata, Map context, String pipelineName);
 }

@@ -192,56 +192,23 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.waterview;
+package com.cyclops.waterview.pipeline;
 
-import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
+import com.cyclops.waterview.RunData;
 
-/** Core waterview component
+/** Valve in pipeline
  * @author <a href="mailto:chinajoeblack@hotmail.com">Jiaqi Guo</a>
  *
  * Edited by <a href="http://www.eclipse.org">eclipse</a> 3.0 M8
  */
-public class DefaultWaterview implements Waterview, Serviceable {
+public interface Valve {
 
-    private PipelineManager pipelineManager;
-
-    private RunDataFactory runDataFactory;
-
-    private Hashtable storage = new Hashtable();
-
-    /** Override method getApplicationStorage() of parent class
-     * @see com.cyclops.waterview.Waterview#getApplicationStorage()
+    /** Run this valve
+     * @param rundata RunData object
+     * @param context Valve context
+     * @throws Exception Doesn't handle exception here
      */
-    public Map getApplicationStorage() {
-        return storage;
-    }
-
-    /** Override method getRunDataFactory() of parent class
-     * @see com.cyclops.waterview.Waterview#getRunDataFactory()
-     */
-    public RunDataFactory getRunDataFactory() {
-        return runDataFactory;
-    }
-
-    /** Override method service() of parent class
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException {
-        runDataFactory = (RunDataFactory) serviceManager
-                .lookup(RunDataFactory.ROLE);
-        pipelineManager = (PipelineManager) serviceManager
-                .lookup(PipelineManager.ROLE);
-    }
-
-    /** Override method getPipelineManager() of parent class
-     * @see com.cyclops.waterview.Waterview#getPipelineManager()
-     */
-    public PipelineManager getPipelineManager() {
-        return pipelineManager;
-    }
+    void invoke(RunData rundata, Map context) throws Exception;
 }

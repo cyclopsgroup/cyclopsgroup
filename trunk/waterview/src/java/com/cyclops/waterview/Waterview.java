@@ -211,6 +211,11 @@ public interface Waterview {
      */
     Map getApplicationStorage();
 
+    /** Method getPipelineManager in class Waterview
+     * @return Pipeline manager instance
+     */
+    PipelineManager getPipelineManager();
+
     /** Method getRunDataFactory in class Waterview
      * @return RunDataFactory instance
      */
