@@ -18,7 +18,7 @@
   </description>
     <url>http://cyclops-groups.sourceforge.net/projects/tornado</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
-    <siteDirectory>/home/groups/c/cy/cyclops-groups/htdocs/projects/tornado</siteDirectory>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/tornado</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:tornado</connection>
         <developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:tornado</developerConnection>
