@@ -1,0 +1,40 @@
+<h2>User Service Configuration</h2>
+<table width="100%">
+	<form>
+	<tr>
+		<td>User Implementation:</td>
+		<td><input type="text" name="user.implementation" value="$!configuration.getString("user.implementation")" size="40" class="frame"/></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Default value is com.cyclops.tornado.services.user.DefaultUser</td>
+	</tr>
+	<tr>
+		<td>Backend User Timeout:</td>
+		<td>
+			<input type="text" name="user.timeout" value="$configuration.getLong("user.timeout", 1800000)" size="8" class="frame"/>
+			ms
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Default value is 1800,000. How long system will wait for a signed out user, unit is milisecond.</td>
+	</tr>
+	<tr>
+		<td>User Checking Interval:</td>
+		<td>
+			<input type="text" name="user.interval" value="$configuration.getLong("user.interval", 1000)" size="8" class="frame"/>
+			ms
+		</td>
+	</tr>
+	<tr>
+		<td>Reload User Service:</td>
+		<td><input type="checkbox" name="reload_service" value="true"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="bottom">
+			<input type="submit" class="button" value="Save Changes"/>
+		</td>
+	</tr>
+	</form>
+</table>

@@ -5,14 +5,15 @@
     GroupHierarchy*,
     UserGroup*,
     Acl*,
-    CTndRoles*)>
+    Role*,
+    Conf*)>
 <!ATTLIST dataset
     name CDATA #REQUIRED
 >
 
 <!ELEMENT User EMPTY>
 <!ATTLIST User
-    Id CDATA #REQUIRED
+    UserId CDATA #REQUIRED
     UserName CDATA #REQUIRED
     EncryptedPassword CDATA #REQUIRED
     Description CDATA #IMPLIED
@@ -30,7 +31,7 @@
 
 <!ELEMENT UserObject EMPTY>
 <!ATTLIST UserObject
-    Id CDATA #REQUIRED
+    ObjectId CDATA #REQUIRED
     UserId CDATA #REQUIRED
     ObjectKey CDATA #REQUIRED
     ObjectClassName CDATA #REQUIRED
@@ -39,7 +40,7 @@
 
 <!ELEMENT Group EMPTY>
 <!ATTLIST Group
-    Id CDATA #REQUIRED
+    GroupId CDATA #REQUIRED
     GroupName CDATA #REQUIRED
     Description CDATA #IMPLIED
     IsSystem CDATA #REQUIRED
@@ -48,7 +49,7 @@
 
 <!ELEMENT GroupHierarchy EMPTY>
 <!ATTLIST GroupHierarchy
-    Id CDATA #REQUIRED
+    HierarchyId CDATA #REQUIRED
     GroupId CDATA #REQUIRED
     ParentGroupId CDATA #REQUIRED
 >
@@ -62,17 +63,24 @@
 
 <!ELEMENT Acl EMPTY>
 <!ATTLIST Acl
-    Id CDATA #REQUIRED
+    AclId CDATA #REQUIRED
     OwnerName CDATA #REQUIRED
     OwnerType CDATA #REQUIRED
     IsRole CDATA #REQUIRED
     Permission CDATA #REQUIRED
 >
 
-<!ELEMENT CTndRoles EMPTY>
-<!ATTLIST CTndRoles
-    Id CDATA #REQUIRED
+<!ELEMENT Role EMPTY>
+<!ATTLIST Role
+    RoleId CDATA #REQUIRED
     RoleName CDATA #REQUIRED
     Description CDATA #IMPLIED
+>
+
+<!ELEMENT Conf EMPTY>
+<!ATTLIST Conf
+    ConfId CDATA #REQUIRED
+    ConfKey CDATA #REQUIRED
+    ConfValue CDATA #IMPLIED
 >
 

@@ -25,65 +25,55 @@ import org.apache.torque.util.Transaction;
 
 /**
  * You should not use this class directly.  It should not even be
- * extended all references should be to Group
+ * extended all references should be to Conf
  */
-public abstract class BaseGroup extends BaseObject
+public abstract class BaseConf extends BaseObject
 {
     /** The Peer class */
-    private static final GroupPeer peer =
-        new GroupPeer();
+    private static final ConfPeer peer =
+        new ConfPeer();
 
                   
         /**
-         * The value for the group_id field
+         * The value for the conf_id field
          */
-        private int group_id;
+        private int conf_id;
               
         /**
-         * The value for the group_name field
+         * The value for the conf_key field
          */
-        private String group_name;
+        private String conf_key;
               
         /**
-         * The value for the description field
+         * The value for the conf_value field
          */
-        private String description;
-                                                                                                              
-        /**
-         * The value for the is_system field
-         */
-        private boolean is_system = false;
-                                                                                                              
-        /**
-         * The value for the is_disabled field
-         */
-        private boolean is_disabled = false;
+        private String conf_value;
       
       
         /**
-         * Get the GroupId
+         * Get the ConfId
          *
          * @return int
          */
-        public int getGroupId()
+        public int getConfId()
         {
-            return group_id;
+            return conf_id;
         }
 
                 
         /**
-         * Set the value of GroupId
+         * Set the value of ConfId
          *
          * @param v new value
          */
-        public void setGroupId(int v) 
+        public void setConfId(int v) 
         {
           
 
 
-         if (this.group_id != v)
+         if (this.conf_id != v)
         {
-             this.group_id = v;
+             this.conf_id = v;
             setModified(true);
         }
 
@@ -91,29 +81,29 @@ public abstract class BaseGroup extends BaseObject
 
 
         /**
-         * Get the GroupName
+         * Get the ConfKey
          *
          * @return String
          */
-        public String getGroupName()
+        public String getConfKey()
         {
-            return group_name;
+            return conf_key;
         }
 
                 
         /**
-         * Set the value of GroupName
+         * Set the value of ConfKey
          *
          * @param v new value
          */
-        public void setGroupName(String v) 
+        public void setConfKey(String v) 
         {
           
 
 
-         if (!ObjectUtils.equals(this.group_name, v))
+         if (!ObjectUtils.equals(this.conf_key, v))
         {
-             this.group_name = v;
+             this.conf_key = v;
             setModified(true);
         }
 
@@ -121,89 +111,29 @@ public abstract class BaseGroup extends BaseObject
 
 
         /**
-         * Get the Description
+         * Get the ConfValue
          *
          * @return String
          */
-        public String getDescription()
+        public String getConfValue()
         {
-            return description;
+            return conf_value;
         }
 
                 
         /**
-         * Set the value of Description
+         * Set the value of ConfValue
          *
          * @param v new value
          */
-        public void setDescription(String v) 
+        public void setConfValue(String v) 
         {
           
 
 
-         if (!ObjectUtils.equals(this.description, v))
+         if (!ObjectUtils.equals(this.conf_value, v))
         {
-             this.description = v;
-            setModified(true);
-        }
-
-             }
-
-
-        /**
-         * Get the IsSystem
-         *
-         * @return boolean
-         */
-        public boolean getIsSystem()
-        {
-            return is_system;
-        }
-
-                
-        /**
-         * Set the value of IsSystem
-         *
-         * @param v new value
-         */
-        public void setIsSystem(boolean v) 
-        {
-          
-
-
-         if (this.is_system != v)
-        {
-             this.is_system = v;
-            setModified(true);
-        }
-
-             }
-
-
-        /**
-         * Get the IsDisabled
-         *
-         * @return boolean
-         */
-        public boolean getIsDisabled()
-        {
-            return is_disabled;
-        }
-
-                
-        /**
-         * Set the value of IsDisabled
-         *
-         * @param v new value
-         */
-        public void setIsDisabled(boolean v) 
-        {
-          
-
-
-         if (this.is_disabled != v)
-        {
-             this.is_disabled = v;
+             this.conf_value = v;
             setModified(true);
         }
 
@@ -227,12 +157,12 @@ public abstract class BaseGroup extends BaseObject
         {
             if (isNew())
             {
-                GroupPeer.doInsert((Group) this);
+                ConfPeer.doInsert((Conf) this);
                 setNew(false);
             }
             else
             {
-                GroupPeer.doUpdate((Group) this);
+                ConfPeer.doUpdate((Conf) this);
             }
         }
      }
@@ -254,14 +184,14 @@ public abstract class BaseGroup extends BaseObject
                 con = Torque.getConnection(dbName);
                 if (isNew())
                 {
-                    GroupPeer
-                        .doInsert((Group) this, con);
+                    ConfPeer
+                        .doInsert((Conf) this, con);
                     setNew(false);
                 }
                 else
                 {
-                    GroupPeer
-                        .doUpdate((Group) this, con);
+                    ConfPeer
+                        .doUpdate((Conf) this, con);
                 }
             }
             finally
@@ -290,12 +220,12 @@ public abstract class BaseGroup extends BaseObject
         {
             if (isNew())
             {
-                GroupPeer.doInsert((Group) this, con);
+                ConfPeer.doInsert((Conf) this, con);
                 setNew(false);
             }
             else
             {
-                GroupPeer.doUpdate((Group) this, con);
+                ConfPeer.doUpdate((Conf) this, con);
             }
         }
 
@@ -309,12 +239,12 @@ public abstract class BaseGroup extends BaseObject
         /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  group_id ObjectKey
+     * @param  conf_id ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setGroupId(((NumberKey) key).intValue());
+                    setConfId(((NumberKey) key).intValue());
             }
 
     /**
@@ -324,7 +254,7 @@ public abstract class BaseGroup extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setGroupId(Integer.parseInt(key));
+                    setConfId(Integer.parseInt(key));
             }
 
 
@@ -334,7 +264,7 @@ public abstract class BaseGroup extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getGroupId());
+        return SimpleKey.keyFor(getConfId());
     }
 
  
@@ -343,21 +273,19 @@ public abstract class BaseGroup extends BaseObject
      * Makes a copy of this object.
      * It creates a new object filling in the simple attributes.
      */
-    public Group copy() throws TorqueException
+    public Conf copy() throws TorqueException
     {
-        return copyInto(new Group());
+        return copyInto(new Conf());
     }
 
-    protected Group copyInto(Group copyObj) throws TorqueException
+    protected Conf copyInto(Conf copyObj) throws TorqueException
     {
-        copyObj.setGroupId(group_id);
-        copyObj.setGroupName(group_name);
-        copyObj.setDescription(description);
-        copyObj.setIsSystem(is_system);
-        copyObj.setIsDisabled(is_disabled);
+        copyObj.setConfId(conf_id);
+        copyObj.setConfKey(conf_key);
+        copyObj.setConfValue(conf_value);
 
-                      copyObj.setGroupId(0);
-                            
+                      copyObj.setConfId(0);
+                    
 
 
         return copyObj;
@@ -369,7 +297,7 @@ public abstract class BaseGroup extends BaseObject
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      */
-    public GroupPeer getPeer()
+    public ConfPeer getPeer()
     {
         return peer;
     }
@@ -377,21 +305,15 @@ public abstract class BaseGroup extends BaseObject
     public String toString()
     {
         StringBuffer str = new StringBuffer();
-        str.append("Group:\n");
-              str.append("GroupId = ")
-           .append(getGroupId())
+        str.append("Conf:\n");
+              str.append("ConfId = ")
+           .append(getConfId())
            .append("\n");
-              str.append("GroupName = ")
-           .append(getGroupName())
+              str.append("ConfKey = ")
+           .append(getConfKey())
            .append("\n");
-              str.append("Description = ")
-           .append(getDescription())
-           .append("\n");
-              str.append("IsSystem = ")
-           .append(getIsSystem())
-           .append("\n");
-              str.append("IsDisabled = ")
-           .append(getIsDisabled())
+              str.append("ConfValue = ")
+           .append(getConfValue())
            .append("\n");
               return(str.toString());
     }

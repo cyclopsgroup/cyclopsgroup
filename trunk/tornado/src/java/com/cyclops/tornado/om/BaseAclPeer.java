@@ -54,8 +54,8 @@ public abstract class BaseAclPeer
         return getMapBuilder(AclMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ID field */
-    public static final String ID;
+    /** the column name for the ACL_ID field */
+    public static final String ACL_ID;
     /** the column name for the OWNER_NAME field */
     public static final String OWNER_NAME;
     /** the column name for the OWNER_TYPE field */
@@ -67,7 +67,7 @@ public abstract class BaseAclPeer
 
     static
     {
-    ID = "c_tnd_acls.ID";
+    ACL_ID = "c_tnd_acls.ACL_ID";
     OWNER_NAME = "c_tnd_acls.OWNER_NAME";
     OWNER_TYPE = "c_tnd_acls.OWNER_TYPE";
     IS_ROLE = "c_tnd_acls.IS_ROLE";
@@ -231,7 +231,7 @@ public abstract class BaseAclPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(ACL_ID);
             criteria.addSelectColumn(OWNER_NAME);
             criteria.addSelectColumn(OWNER_TYPE);
             criteria.addSelectColumn(IS_ROLE);
@@ -287,7 +287,7 @@ public abstract class BaseAclPeer
     {
         try
         {
-                            obj.setId(row.getValue(offset + 0).asInt());
+                            obj.setAclId(row.getValue(offset + 0).asInt());
                                 obj.setOwnerName(row.getValue(offset + 1).asString());
                                 obj.setOwnerType(row.getValue(offset + 2).asString());
                                 obj.setIsRole(row.getValue(offset + 3).asBoolean());
@@ -448,7 +448,7 @@ public abstract class BaseAclPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ID, criteria.remove(ID));
+                                selectCriteria.put(ACL_ID, criteria.remove(ACL_ID));
                                                                                                           
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
@@ -640,7 +640,7 @@ public abstract class BaseAclPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(ID, pk);
+              criteria.add(ACL_ID, pk);
           return criteria;
      }
 
@@ -649,7 +649,7 @@ public abstract class BaseAclPeer
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(ID, obj.getId());
+                       criteria.add(ACL_ID, obj.getAclId());
                                 criteria.add(OWNER_NAME, obj.getOwnerName());
                                 criteria.add(OWNER_TYPE, obj.getOwnerType());
                                 criteria.add(IS_ROLE, obj.getIsRole());
@@ -773,7 +773,7 @@ public abstract class BaseAclPeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( ID, pks );
+              criteria.addIn( ACL_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;

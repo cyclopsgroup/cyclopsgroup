@@ -62,10 +62,10 @@ public class UserObjectMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_usrobjs.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_usrobjs.OBJECT_ID", new Integer(0));
                                                         tMap.addForeignKey(
                 "c_tnd_usrobjs.USER_ID", new Integer(0) , "c_tnd_users" ,
-                    "id");
+                    "user_id");
                                                         tMap.addColumn("c_tnd_usrobjs.OBJECT_KEY", new String());
                                                         tMap.addColumn("c_tnd_usrobjs.OBJECT_CLASS_NAME", new String());
                                                         tMap.addColumn("c_tnd_usrobjs.OBJECT_DATA", new String());

@@ -7,7 +7,6 @@
 package com.cyclops.tornado.services;
 import java.util.HashSet;
 
-import org.apache.fulcrum.InitializationException;
 import org.apache.fulcrum.InstantiationException;
 import org.apache.fulcrum.Service;
 import org.apache.fulcrum.TurbineServices;
@@ -37,7 +36,7 @@ public class SlowServiceManager extends TurbineServices {
     /** None of services is initialized here even its earlyInit is true
      * @see org.apache.fulcrum.BaseServiceBroker#init()
      */
-    public void init() throws InitializationException {
+    public void init() {
         if (isInit) {
             return;
         }

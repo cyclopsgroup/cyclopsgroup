@@ -24,7 +24,7 @@ public class UserBroker extends AbstractObjectBroker {
      * @see com.cyclops.tornado.bo.AbstractObjectBroker#getPrimaryKey()
      */
     protected String getPrimaryKey() {
-        return UserPeer.ID;
+        return UserPeer.USER_ID;
     }
     /** Method retrieveByName()
      * @param userName Account name of user

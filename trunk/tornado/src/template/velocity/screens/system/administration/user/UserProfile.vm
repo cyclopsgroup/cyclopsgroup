@@ -12,6 +12,9 @@
 	</tr>
 	</form>
 	#if($user)
+		<form method="post" action="$link.setAction("system.administration.UserAction").setPage("system,administration,user,UserProfile.vm")">
+		<input type="hidden" name="user_name" value="$user.userName"/>
+		<input type="hidden" name="user_id" value="$user.userId"/>
     	<tr>
     		<td>Name: </td>
     		<td>
@@ -26,15 +29,16 @@
     	</tr>
     	<tr>
     		<td>Description:</td>
-    		<td rowspan="2"><textarea name="description" cols="30" rows="2" class="frame">$!user.description</textarea></td>
+    		<td rowspan="2"><textarea name="description" cols="40" rows="4" class="frame">$!user.description</textarea></td>
     	</tr>
     	<tr>
     		<td>&nbsp;</td>
     	</tr>
     	<tr>
     		<td colspan="2" class="bottom">
-    			<input type="submit" class="button" value="Save Change" name="eventsubmit_doSave"/>
+    			<input type="submit" class="button" value="Save Change" name="eventsubmit_doSaveprof"/>
     		</td>
     	</tr>
+    	</form>
     #end
 </table>

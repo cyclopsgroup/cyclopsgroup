@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 <!DOCTYPE dataset SYSTEM "file://tornado-data.dtd">
 <dataset name="all">
-    <User Id="1" UserName="guest" EncryptedPassword="Z3Vlc3Q=" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
-    <User Id="2" UserName="administrator" EncryptedPassword="YWRtaW5pc3RyYXRvcg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
-    <User Id="21" UserName="jason" EncryptedPassword="amFzb24=" IsSystem="0" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
-    <User Id="22" UserName="john" EncryptedPassword="am9obg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
-    <User Id="23" UserName="joel" EncryptedPassword="am9lbA==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <User UserId="1" UserName="guest" EncryptedPassword="Z3Vlc3Q=" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <User UserId="2" UserName="administrator" EncryptedPassword="YWRtaW5pc3RyYXRvcg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <User UserId="21" UserName="jason" EncryptedPassword="amFzb24=" IsSystem="0" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <User UserId="22" UserName="john" EncryptedPassword="am9obg==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <User UserId="23" UserName="joel" EncryptedPassword="am9lbA==" IsSystem="1" IsDisabled="0" Email="test@cyclops.org" SigninCounter="0" FirstName="John" LastName="Clark"/>
+    <Conf ConfId="11" ConfKey="services.UserService.user.implementation" ConfValue="com.cyclops.tornado.TornadoUser"/>
+    <Conf ConfId="12" ConfKey="services.UserService.listener" ConfValue="com.cyclops.tornado.modules.PassportBuilder"/> 
+    <Conf ConfId="21" ConfKey="services.NavigatorService.path" ConfValue="WEB-INF/conf/navigator"/>
+    <Conf ConfId="22" ConfKey="services.NavigatorService.pattern" ConfValue="*.xml"/>
 </dataset>

@@ -2,7 +2,7 @@
 <!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database_3_1.dtd">
 <database name="default" defaultIdMethod="idbroker">
     <table name="c_tnd_users" javaName="User" description="User OM">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
+        <column name="user_id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
         <column name="user_name" required="true" type="CHAR" size="30" description="User Name"/>
         <column name="encrypted_password" required="true" type="VARCHAR" size="255" description="Encrypted Password"/>
         <column name="description" type="VARCHAR" size="255"/>
@@ -21,17 +21,17 @@
         </unique>
     </table>
     <table name="c_tnd_usrobjs" javaName="UserObject" description="Objects stored in user object">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
+        <column name="object_id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
         <column name="user_id" type="INTEGER" required="true" description="User Id"/>
         <column name="object_key" required="true" type="VARCHAR" size="255"/>
         <column name="object_class_name" required="true" type="VARCHAR" size="255"/>
         <column name="object_data" type="LONGVARCHAR"/>
         <foreign-key foreignTable="c_tnd_users">
-            <reference local="user_id" foreign="id"/>
+            <reference local="user_id" foreign="user_id"/>
         </foreign-key>
     </table>
     <table name="c_tnd_groups" javaName="Group" description="Group OM">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="Group Id"/>
+        <column name="group_id" required="true" primaryKey="true" type="INTEGER" description="Group Id"/>
         <column name="group_name" required="true" type="CHAR" size="30" description="Group Name"/>
         <column name="description" type="VARCHAR" size="255"/>
         <column name="is_system" type="BIT" required="true" default="0"/>
@@ -41,14 +41,14 @@
         </unique>
     </table>
     <table name="c_tnd_grphrch" javaName="GroupHierarchy">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="hierarchy_id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
         <column name="group_id" required="true" type="INTEGER"/>
         <column name="parent_group_id" required="true" type="INTEGER"/>
         <foreign-key foreignTable="c_tnd_groups">
-            <reference local="group_id" foreign="id"/>
+            <reference local="group_id" foreign="group_id"/>
         </foreign-key>
         <foreign-key foreignTable="c_tnd_groups">
-            <reference local="parent_group_id" foreign="id"/>
+            <reference local="parent_group_id" foreign="group_id"/>
         </foreign-key>
     </table>
     <table name="c_tnd_user_group" javaName="UserGroup" description="Link of user and group">
@@ -56,22 +56,27 @@
         <column name="user_id" required="true" primaryKey="true" type="INTEGER" description="User Id"/>
         <column name="group_id" required="true" primaryKey="true" type="INTEGER" description="Group Id"/>
         <foreign-key foreignTable="c_tnd_users">
-            <reference local="user_id" foreign="id"/>
+            <reference local="user_id" foreign="user_id"/>
         </foreign-key>
         <foreign-key foreignTable="c_tnd_groups">
-            <reference local="group_id" foreign="id"/>
+            <reference local="group_id" foreign="group_id"/>
         </foreign-key>
     </table>
     <table name="c_tnd_acls" javaName="Acl">
-        <column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="acl_id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
         <column name="owner_name" required="true" type="CHAR" size="30"/>
         <column name="owner_type" required="true" type="CHAR" size="1"/>
         <column name="is_role" type="BIT" default="0" required="true"/>
         <column name="permission" type="VARCHAR" size="255" required="true"/>
     </table>
     <table name="c_tnd_roles" javaName="Role">
-    	<column name="id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="role_id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
         <column name="role_name" required="true" type="CHAR" size="30"/>
         <column name="description" type="VARCHAR" size="255"/>
+    </table>
+    <table name="c_tnd_confs" javaName="Conf">
+        <column name="conf_id" required="true" primaryKey="true" type="INTEGER" description="Id"/>
+        <column name="conf_key" required="true" type="VARCHAR" size="255" description="Key of configuration"/>
+        <column name="conf_value" type="VARCHAR" size="255" description="Value of configuation"/>
     </table>
 </database>

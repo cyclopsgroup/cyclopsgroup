@@ -65,9 +65,9 @@ public class UserGroupMapBuilder implements MapBuilder
                                       tMap.addPrimaryKey("c_tnd_user_group.ID", new Integer(0));
                                                         tMap.addForeignPrimaryKey(
                 "c_tnd_user_group.USER_ID", new Integer(0) , "c_tnd_users" ,
-                    "id");
+                    "user_id");
                                                         tMap.addForeignPrimaryKey(
                 "c_tnd_user_group.GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                    "id");
+                    "group_id");
                               }
 }

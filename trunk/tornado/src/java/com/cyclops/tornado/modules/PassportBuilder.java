@@ -47,9 +47,11 @@ public class PassportBuilder implements UserListener {
         List rs = groupb.queryByUser(user.getId());
         while (!rs.isEmpty()) {
             Group group = (Group) rs.get(0);
-            if (!groups.containsKey(new Integer(group.getId()))) {
-                groups.put(new Integer(group.getId()), group.getGroupName());
-                List parents = groupb.queryParents(group.getId());
+            if (!groups.containsKey(new Integer(group.getGroupId()))) {
+                groups.put(
+                    new Integer(group.getGroupId()),
+                    group.getGroupName());
+                List parents = groupb.queryParents(group.getGroupId());
                 rs.addAll(parents);
             }
             rs.remove(group);

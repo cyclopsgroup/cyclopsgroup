@@ -47,6 +47,14 @@ public class ObjectBroker implements DBConnectable {
                 new Class[] { Criteria.class });
         return (List) doSelect.invoke(null, new Object[] { crit });
     }
+    /** Method queryAll()
+     * @param objectClass Object class
+     * @return All of them
+     * @throws Exception from torque
+     */
+    public List queryAll(Class objectClass) throws Exception {
+        return query(objectClass, new Criteria());
+    }
     /** Method retrieve()
      * @param objectClass Class of om object
      * @param crit Criteria object

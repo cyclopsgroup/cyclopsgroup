@@ -31,11 +31,9 @@ import com.workingdogs.village.Record;
 import com.cyclops.tornado.om.map.*;
 
 
-   
-   
 /**
  */
-public abstract class BaseGroupHierarchyPeer
+public abstract class BaseConfPeer
     extends BasePeer
 {
 
@@ -43,7 +41,7 @@ public abstract class BaseGroupHierarchyPeer
     public static final String DATABASE_NAME = "default";
 
      /** the table name for this class */
-    public static final String TABLE_NAME = "c_tnd_grphrch";
+    public static final String TABLE_NAME = "c_tnd_confs";
 
     /**
      * @return the map builder for this peer
@@ -53,21 +51,21 @@ public abstract class BaseGroupHierarchyPeer
     public static MapBuilder getMapBuilder()
         throws TorqueException
     {
-        return getMapBuilder(GroupHierarchyMapBuilder.CLASS_NAME);
+        return getMapBuilder(ConfMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the HIERARCHY_ID field */
-    public static final String HIERARCHY_ID;
-    /** the column name for the GROUP_ID field */
-    public static final String GROUP_ID;
-    /** the column name for the PARENT_GROUP_ID field */
-    public static final String PARENT_GROUP_ID;
+    /** the column name for the CONF_ID field */
+    public static final String CONF_ID;
+    /** the column name for the CONF_KEY field */
+    public static final String CONF_KEY;
+    /** the column name for the CONF_VALUE field */
+    public static final String CONF_VALUE;
 
     static
     {
-    HIERARCHY_ID = "c_tnd_grphrch.HIERARCHY_ID";
-    GROUP_ID = "c_tnd_grphrch.GROUP_ID";
-    PARENT_GROUP_ID = "c_tnd_grphrch.PARENT_GROUP_ID";
+    CONF_ID = "c_tnd_confs.CONF_ID";
+    CONF_KEY = "c_tnd_confs.CONF_KEY";
+    CONF_VALUE = "c_tnd_confs.CONF_VALUE";
 
         if (Torque.isInit())
         {
@@ -82,7 +80,7 @@ public abstract class BaseGroupHierarchyPeer
         }
         else
         {
-            Torque.registerMapBuilder(GroupHierarchyMapBuilder.CLASS_NAME);
+            Torque.registerMapBuilder(ConfMapBuilder.CLASS_NAME);
         }
     }
 
@@ -92,7 +90,7 @@ public abstract class BaseGroupHierarchyPeer
 
     /** A class that can be returned by this peer. */
     protected static final String CLASSNAME_DEFAULT =
-        "com.cyclops.tornado.om.GroupHierarchy";
+        "com.cyclops.tornado.om.Conf";
 
     /** A class that can be returned by this peer. */
     protected static final Class CLASS_DEFAULT = initClass(CLASSNAME_DEFAULT);
@@ -182,7 +180,7 @@ public abstract class BaseGroupHierarchyPeer
     public static ObjectKey doInsert(Criteria criteria)
         throws TorqueException
     {
-        return BaseGroupHierarchyPeer
+        return BaseConfPeer
             .doInsert(criteria, (Connection) null);
     }
 
@@ -227,9 +225,9 @@ public abstract class BaseGroupHierarchyPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(HIERARCHY_ID);
-            criteria.addSelectColumn(GROUP_ID);
-            criteria.addSelectColumn(PARENT_GROUP_ID);
+            criteria.addSelectColumn(CONF_ID);
+            criteria.addSelectColumn(CONF_KEY);
+            criteria.addSelectColumn(CONF_VALUE);
         }
 
     /**
@@ -241,15 +239,15 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static GroupHierarchy row2Object(Record row,
+    public static Conf row2Object(Record row,
                                              int offset,
                                              Class cls)
         throws TorqueException
     {
         try
         {
-            GroupHierarchy obj = (GroupHierarchy) cls.newInstance();
-            GroupHierarchyPeer.populateObject(row, offset, obj);
+            Conf obj = (Conf) cls.newInstance();
+            ConfPeer.populateObject(row, offset, obj);
                             obj.setModified(false);
                         obj.setNew(false);
 
@@ -276,14 +274,14 @@ public abstract class BaseGroupHierarchyPeer
      */
     public static void populateObject(Record row,
                                       int offset,
-                                      GroupHierarchy obj)
+                                      Conf obj)
         throws TorqueException
     {
         try
         {
-                            obj.setHierarchyId(row.getValue(offset + 0).asInt());
-                                obj.setGroupId(row.getValue(offset + 1).asInt());
-                                obj.setParentGroupId(row.getValue(offset + 2).asInt());
+                            obj.setConfId(row.getValue(offset + 0).asInt());
+                                obj.setConfKey(row.getValue(offset + 1).asString());
+                                obj.setConfValue(row.getValue(offset + 2).asString());
                             }
         catch (DataSetException e)
         {
@@ -332,7 +330,7 @@ public abstract class BaseGroupHierarchyPeer
     public static List doSelectVillageRecords(Criteria criteria)
         throws TorqueException
     {
-        return BaseGroupHierarchyPeer
+        return BaseConfPeer
             .doSelectVillageRecords(criteria, (Connection) null);
     }
 
@@ -389,8 +387,8 @@ public abstract class BaseGroupHierarchyPeer
         for (int i = 0; i < records.size(); i++)
         {
             Record row = (Record) records.get(i);
-            results.add(GroupHierarchyPeer.row2Object(row, 1,
-                GroupHierarchyPeer.getOMClass()));
+            results.add(ConfPeer.row2Object(row, 1,
+                ConfPeer.getOMClass()));
         }
         return results;
     }
@@ -421,7 +419,7 @@ public abstract class BaseGroupHierarchyPeer
      */
     public static void doUpdate(Criteria criteria) throws TorqueException
     {
-         BaseGroupHierarchyPeer
+         BaseConfPeer
             .doUpdate(criteria, (Connection) null);
     }
 
@@ -440,7 +438,7 @@ public abstract class BaseGroupHierarchyPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(HIERARCHY_ID, criteria.remove(HIERARCHY_ID));
+                                selectCriteria.put(CONF_ID, criteria.remove(CONF_ID));
                                                             
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
@@ -468,7 +466,7 @@ public abstract class BaseGroupHierarchyPeer
      */
      public static void doDelete(Criteria criteria) throws TorqueException
      {
-         BaseGroupHierarchyPeer
+         BaseConfPeer
             .doDelete(criteria, (Connection) null);
      }
 
@@ -509,7 +507,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static List doSelect(GroupHierarchy obj) throws TorqueException
+    public static List doSelect(Conf obj) throws TorqueException
     {
         return doSelect(buildCriteria(obj));
     }
@@ -520,7 +518,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(GroupHierarchy obj) throws TorqueException
+    public static void doInsert(Conf obj) throws TorqueException
     {
                 obj.setPrimaryKey(doInsert(buildCriteria(obj)));
                 obj.setNew(false);
@@ -532,7 +530,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(GroupHierarchy obj) throws TorqueException
+    public static void doUpdate(Conf obj) throws TorqueException
     {
         doUpdate(buildCriteria(obj));
         obj.setModified(false);
@@ -543,14 +541,14 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(GroupHierarchy obj) throws TorqueException
+    public static void doDelete(Conf obj) throws TorqueException
     {
         doDelete(buildCriteria(obj));
     }
 
     /**
      * Method to do inserts.  This method is to be used during a transaction,
-     * otherwise use the doInsert(GroupHierarchy) method.  It will take
+     * otherwise use the doInsert(Conf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to insert into the database.
@@ -558,7 +556,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doInsert(GroupHierarchy obj, Connection con)
+    public static void doInsert(Conf obj, Connection con)
         throws TorqueException
     {
                 obj.setPrimaryKey(doInsert(buildCriteria(obj), con));
@@ -568,7 +566,7 @@ public abstract class BaseGroupHierarchyPeer
 
     /**
      * Method to do update.  This method is to be used during a transaction,
-     * otherwise use the doUpdate(GroupHierarchy) method.  It will take
+     * otherwise use the doUpdate(Conf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to update in the database.
@@ -576,7 +574,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doUpdate(GroupHierarchy obj, Connection con)
+    public static void doUpdate(Conf obj, Connection con)
         throws TorqueException
     {
         doUpdate(buildCriteria(obj), con);
@@ -585,7 +583,7 @@ public abstract class BaseGroupHierarchyPeer
 
     /**
      * Method to delete.  This method is to be used during a transaction,
-     * otherwise use the doDelete(GroupHierarchy) method.  It will take
+     * otherwise use the doDelete(Conf) method.  It will take
      * care of the connection details internally.
      *
      * @param obj the data object to delete in the database.
@@ -593,7 +591,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws TorqueException Any exceptions caught during processing will be
      *         rethrown wrapped into a TorqueException.
      */
-    public static void doDelete(GroupHierarchy obj, Connection con)
+    public static void doDelete(Conf obj, Connection con)
         throws TorqueException
     {
         doDelete(buildCriteria(obj), con);
@@ -608,7 +606,7 @@ public abstract class BaseGroupHierarchyPeer
      */
     public static void doDelete(ObjectKey pk) throws TorqueException
     {
-        BaseGroupHierarchyPeer
+        BaseConfPeer
            .doDelete(pk, (Connection) null);
     }
 
@@ -632,18 +630,18 @@ public abstract class BaseGroupHierarchyPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(HIERARCHY_ID, pk);
+              criteria.add(CONF_ID, pk);
           return criteria;
      }
 
     /** Build a Criteria object from the data object for this peer */
-    public static Criteria buildCriteria( GroupHierarchy obj )
+    public static Criteria buildCriteria( Conf obj )
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(HIERARCHY_ID, obj.getHierarchyId());
-                                criteria.add(GROUP_ID, obj.getGroupId());
-                                criteria.add(PARENT_GROUP_ID, obj.getParentGroupId());
+                       criteria.add(CONF_ID, obj.getConfId());
+                                criteria.add(CONF_KEY, obj.getConfKey());
+                                criteria.add(CONF_VALUE, obj.getConfValue());
                 return criteria;
     }
 
@@ -659,7 +657,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static GroupHierarchy retrieveByPK(int pk)
+    public static Conf retrieveByPK(int pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         return retrieveByPK(SimpleKey.keyFor(pk));
@@ -674,11 +672,11 @@ public abstract class BaseGroupHierarchyPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static GroupHierarchy retrieveByPK(ObjectKey pk)
+    public static Conf retrieveByPK(ObjectKey pk)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Connection db = null;
-        GroupHierarchy retVal = null;
+        Conf retVal = null;
         try
         {
             db = Torque.getConnection(DATABASE_NAME);
@@ -701,7 +699,7 @@ public abstract class BaseGroupHierarchyPeer
      * @throws NoRowsException Primary key was not found in database.
      * @throws TooManyRowsException Primary key was not found in database.
      */
-    public static GroupHierarchy retrieveByPK(ObjectKey pk, Connection con)
+    public static Conf retrieveByPK(ObjectKey pk, Connection con)
         throws TorqueException, NoRowsException, TooManyRowsException
     {
         Criteria criteria = buildCriteria(pk);
@@ -716,7 +714,7 @@ public abstract class BaseGroupHierarchyPeer
         }
         else
         {
-            return (GroupHierarchy)v.get(0);
+            return (Conf)v.get(0);
         }
     }
 
@@ -763,7 +761,7 @@ public abstract class BaseGroupHierarchyPeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( HIERARCHY_ID, pks );
+              criteria.addIn( CONF_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;

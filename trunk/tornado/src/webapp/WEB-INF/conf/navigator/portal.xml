@@ -21,7 +21,10 @@
                 <item name="Permission and Role" href="system,admnistration,group,Permission.vm"/>
                 <item name="Create New Group" href="system,administration,group,CreateNew.vm"/>
             </item>
-            <item name="Configuration" href="system,administration,configuration,Index.vm"/>
+            <item name="Service" href="system,administration,service,Index.vm">
+            	<item name="User Service" href="system,administration,service,User.vm"/>
+            	<item name="Navigator Service" href="system,administration,service,Navigator.vm"/>
+            </item>
         </item>
         <item name="My Account" href="system,user,Index.vm">
             <item name="User Profile" href="system,user,UserProfile.vm"/>

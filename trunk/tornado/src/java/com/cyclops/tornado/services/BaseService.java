@@ -5,11 +5,13 @@
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package com.cyclops.tornado.services;
+import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.cyclops.tornado.BrokerManager;
+import com.cyclops.tornado.services.configuration.ConfigurationService;
 import com.cyclops.tornado.utils.PathTransformable;
 /**
  * @author joeblack
@@ -30,7 +32,16 @@ public abstract class BaseService
     public void init() {
         BrokerManager brokerManager = new BrokerManager();
         try {
-            setConfiguration(getConfiguration());
+            ConfigurationService cs =
+                (ConfigurationService) getServiceBroker().getService(
+                    ConfigurationService.SERVICE_NAME);
+            Configuration conf =
+                cs.getCustomizableConfiguration().subset(
+                    "services." + getName());
+            if (conf == null) {
+                conf = new BaseConfiguration();
+            }
+            setConfiguration(conf);
             logger.debug(
                 "Start initializing service implementation "
                     + getClass().getName());

@@ -15,18 +15,33 @@ import com.cyclops.tornado.BrokerManager;
  * Class
  */
 public interface UserService extends Service {
-    /** Check result code, check success */
-    int CHECK_RESULT_OK = 0;
+    /** Check result code, user is disabled */
+    int CHECK_RESULT_DISABLED_USER = -2;
+    /** Check result code, exception occurred */
+    int CHECK_RESULT_EXCEPTION = -1;
     /** Check result code, password error*/
     int CHECK_RESULT_INCORRECT_PASSWORD = 1;
     /** Check result code, invalid user name */
     int CHECK_RESULT_INVALID_USER = 2;
-    /** Check result code, user is disabled */
-    int CHECK_RESULT_DISABLED_USER = 3;
-    /** Check result code, exception occurred */
-    int CHECK_RESULT_EXCEPTION = 4;
+    /** Check result code, check success */
+    int CHECK_RESULT_OK = 0;
     /** Service name in fulcrum */
     String SERVICE_NAME = "UserService";
+    /** Method checkUser() in Class UserService
+     * @param userName Name of user
+     * @param password Password for signing
+     * @param brokerManager BrokerManager object
+     * @return Sigin result, refer to the constants about it pls.
+     */
+    int checkUser(
+        String userName,
+        String password,
+        BrokerManager brokerManager);
+    /** Get active user object by user name
+     * @param key Key referenced to this user
+     * @return User object, null if this user is not active to this key
+     */
+    User getActiveUser(String key);
     /** Method getActiveUsers() in Class UserService
      * @return Array of active users
      */
@@ -35,11 +50,6 @@ public interface UserService extends Service {
      * @return Anonymous user object
      */
     User getAnonymousUser();
-    /** Get active user object by user name
-     * @param key Key referenced to this user
-     * @return User object, null if this user is not active to this key
-     */
-    User getActiveUser(String key);
     /** Method singinUser() in Class UserService
      * @param key Key of this user session
      * @param userName Name of the user
@@ -51,14 +61,4 @@ public interface UserService extends Service {
      * @param brokerManager BrokerManager object
      */
     void singout(String key, BrokerManager brokerManager);
-    /** Method checkUser() in Class UserService
-     * @param userName Name of user
-     * @param password Password for signing
-     * @param brokerManager BrokerManager object
-     * @return Sigin result, refer to the constants about it pls.
-     */
-    int checkUser(
-        String userName,
-        String password,
-        BrokerManager brokerManager);
 }

@@ -55,8 +55,8 @@ public abstract class BaseUserObjectPeer
         return getMapBuilder(UserObjectMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ID field */
-    public static final String ID;
+    /** the column name for the OBJECT_ID field */
+    public static final String OBJECT_ID;
     /** the column name for the USER_ID field */
     public static final String USER_ID;
     /** the column name for the OBJECT_KEY field */
@@ -68,7 +68,7 @@ public abstract class BaseUserObjectPeer
 
     static
     {
-    ID = "c_tnd_usrobjs.ID";
+    OBJECT_ID = "c_tnd_usrobjs.OBJECT_ID";
     USER_ID = "c_tnd_usrobjs.USER_ID";
     OBJECT_KEY = "c_tnd_usrobjs.OBJECT_KEY";
     OBJECT_CLASS_NAME = "c_tnd_usrobjs.OBJECT_CLASS_NAME";
@@ -232,7 +232,7 @@ public abstract class BaseUserObjectPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(OBJECT_ID);
             criteria.addSelectColumn(USER_ID);
             criteria.addSelectColumn(OBJECT_KEY);
             criteria.addSelectColumn(OBJECT_CLASS_NAME);
@@ -288,7 +288,7 @@ public abstract class BaseUserObjectPeer
     {
         try
         {
-                            obj.setId(row.getValue(offset + 0).asInt());
+                            obj.setObjectId(row.getValue(offset + 0).asInt());
                                 obj.setUserId(row.getValue(offset + 1).asInt());
                                 obj.setObjectKey(row.getValue(offset + 2).asString());
                                 obj.setObjectClassName(row.getValue(offset + 3).asString());
@@ -449,7 +449,7 @@ public abstract class BaseUserObjectPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ID, criteria.remove(ID));
+                                selectCriteria.put(OBJECT_ID, criteria.remove(OBJECT_ID));
                                                                                                           
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
@@ -641,7 +641,7 @@ public abstract class BaseUserObjectPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(ID, pk);
+              criteria.add(OBJECT_ID, pk);
           return criteria;
      }
 
@@ -650,7 +650,7 @@ public abstract class BaseUserObjectPeer
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(ID, obj.getId());
+                       criteria.add(OBJECT_ID, obj.getObjectId());
                                 criteria.add(USER_ID, obj.getUserId());
                                 criteria.add(OBJECT_KEY, obj.getObjectKey());
                                 criteria.add(OBJECT_CLASS_NAME, obj.getObjectClassName());
@@ -774,7 +774,7 @@ public abstract class BaseUserObjectPeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( ID, pks );
+              criteria.addIn( OBJECT_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;

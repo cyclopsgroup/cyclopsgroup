@@ -54,8 +54,8 @@ public abstract class BaseGroupPeer
         return getMapBuilder(GroupMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ID field */
-    public static final String ID;
+    /** the column name for the GROUP_ID field */
+    public static final String GROUP_ID;
     /** the column name for the GROUP_NAME field */
     public static final String GROUP_NAME;
     /** the column name for the DESCRIPTION field */
@@ -67,7 +67,7 @@ public abstract class BaseGroupPeer
 
     static
     {
-    ID = "c_tnd_groups.ID";
+    GROUP_ID = "c_tnd_groups.GROUP_ID";
     GROUP_NAME = "c_tnd_groups.GROUP_NAME";
     DESCRIPTION = "c_tnd_groups.DESCRIPTION";
     IS_SYSTEM = "c_tnd_groups.IS_SYSTEM";
@@ -231,7 +231,7 @@ public abstract class BaseGroupPeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(GROUP_ID);
             criteria.addSelectColumn(GROUP_NAME);
             criteria.addSelectColumn(DESCRIPTION);
             criteria.addSelectColumn(IS_SYSTEM);
@@ -287,7 +287,7 @@ public abstract class BaseGroupPeer
     {
         try
         {
-                            obj.setId(row.getValue(offset + 0).asInt());
+                            obj.setGroupId(row.getValue(offset + 0).asInt());
                                 obj.setGroupName(row.getValue(offset + 1).asString());
                                 obj.setDescription(row.getValue(offset + 2).asString());
                                 obj.setIsSystem(row.getValue(offset + 3).asBoolean());
@@ -448,7 +448,7 @@ public abstract class BaseGroupPeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ID, criteria.remove(ID));
+                                selectCriteria.put(GROUP_ID, criteria.remove(GROUP_ID));
                                                                                                           
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
@@ -640,7 +640,7 @@ public abstract class BaseGroupPeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(ID, pk);
+              criteria.add(GROUP_ID, pk);
           return criteria;
      }
 
@@ -649,7 +649,7 @@ public abstract class BaseGroupPeer
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(ID, obj.getId());
+                       criteria.add(GROUP_ID, obj.getGroupId());
                                 criteria.add(GROUP_NAME, obj.getGroupName());
                                 criteria.add(DESCRIPTION, obj.getDescription());
                                 criteria.add(IS_SYSTEM, obj.getIsSystem());
@@ -773,7 +773,7 @@ public abstract class BaseGroupPeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( ID, pks );
+              criteria.addIn( GROUP_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;

@@ -35,9 +35,9 @@ public abstract class BaseAcl extends BaseObject
 
                   
         /**
-         * The value for the id field
+         * The value for the acl_id field
          */
-        private int id;
+        private int acl_id;
               
         /**
          * The value for the owner_name field
@@ -61,29 +61,29 @@ public abstract class BaseAcl extends BaseObject
       
       
         /**
-         * Get the Id
+         * Get the AclId
          *
          * @return int
          */
-        public int getId()
+        public int getAclId()
         {
-            return id;
+            return acl_id;
         }
 
                 
         /**
-         * Set the value of Id
+         * Set the value of AclId
          *
          * @param v new value
          */
-        public void setId(int v) 
+        public void setAclId(int v) 
         {
           
 
 
-         if (this.id != v)
+         if (this.acl_id != v)
         {
-             this.id = v;
+             this.acl_id = v;
             setModified(true);
         }
 
@@ -309,12 +309,12 @@ public abstract class BaseAcl extends BaseObject
         /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  id ObjectKey
+     * @param  acl_id ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setId(((NumberKey) key).intValue());
+                    setAclId(((NumberKey) key).intValue());
             }
 
     /**
@@ -324,7 +324,7 @@ public abstract class BaseAcl extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setId(Integer.parseInt(key));
+                    setAclId(Integer.parseInt(key));
             }
 
 
@@ -334,7 +334,7 @@ public abstract class BaseAcl extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getId());
+        return SimpleKey.keyFor(getAclId());
     }
 
  
@@ -350,13 +350,13 @@ public abstract class BaseAcl extends BaseObject
 
     protected Acl copyInto(Acl copyObj) throws TorqueException
     {
-        copyObj.setId(id);
+        copyObj.setAclId(acl_id);
         copyObj.setOwnerName(owner_name);
         copyObj.setOwnerType(owner_type);
         copyObj.setIsRole(is_role);
         copyObj.setPermission(permission);
 
-                      copyObj.setId(0);
+                      copyObj.setAclId(0);
                             
 
 
@@ -378,8 +378,8 @@ public abstract class BaseAcl extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("Acl:\n");
-              str.append("Id = ")
-           .append(getId())
+              str.append("AclId = ")
+           .append(getAclId())
            .append("\n");
               str.append("OwnerName = ")
            .append(getOwnerName())

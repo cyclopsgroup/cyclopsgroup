@@ -27,7 +27,7 @@ public class AclBroker extends AbstractObjectBroker {
      * @see com.cyclops.tornado.bo.AbstractObjectBroker#getPrimaryKey()
      */
     protected String getPrimaryKey() {
-        return AclPeer.ID;
+        return AclPeer.ACL_ID;
     }
     /** Method queryByOwner()
      * @param ownerName Owner name

@@ -28,7 +28,7 @@ public class GroupBroker extends AbstractObjectBroker {
      * @see com.cyclops.tornado.bo.AbstractObjectBroker#getPrimaryKey()
      */
     protected String getPrimaryKey() {
-        return GroupPeer.ID;
+        return GroupPeer.GROUP_ID;
     }
     /** Method queryByUser()
      * @param userId id of user
@@ -38,7 +38,7 @@ public class GroupBroker extends AbstractObjectBroker {
     public List queryByUser(int userId) throws Exception {
         Criteria crit = new Criteria();
         crit.and(UserGroupPeer.USER_ID, userId);
-        crit.addJoin(UserGroupPeer.GROUP_ID, GroupPeer.ID);
+        crit.addJoin(UserGroupPeer.GROUP_ID, GroupPeer.GROUP_ID);
         return query(crit);
     }
     /** Method queryParents()
@@ -49,7 +49,7 @@ public class GroupBroker extends AbstractObjectBroker {
     public List queryParents(int groupId) throws Exception {
         Criteria crit = new Criteria();
         crit.and(GroupHierarchyPeer.GROUP_ID, groupId);
-        crit.addJoin(GroupHierarchyPeer.PARENT_GROUP_ID, GroupPeer.ID);
+        crit.addJoin(GroupHierarchyPeer.PARENT_GROUP_ID, GroupPeer.GROUP_ID);
         return GroupPeer.doSelect(crit);
     }
 }

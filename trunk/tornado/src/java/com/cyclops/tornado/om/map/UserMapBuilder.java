@@ -62,7 +62,7 @@ public class UserMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_users.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_users.USER_ID", new Integer(0));
                                                         tMap.addColumn("c_tnd_users.USER_NAME", new String());
                                                         tMap.addColumn("c_tnd_users.ENCRYPTED_PASSWORD", new String());
                                                         tMap.addColumn("c_tnd_users.DESCRIPTION", new String());

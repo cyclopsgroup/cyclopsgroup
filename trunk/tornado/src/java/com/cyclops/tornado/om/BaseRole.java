@@ -35,9 +35,9 @@ public abstract class BaseRole extends BaseObject
 
                   
         /**
-         * The value for the id field
+         * The value for the role_id field
          */
-        private int id;
+        private int role_id;
               
         /**
          * The value for the role_name field
@@ -51,29 +51,29 @@ public abstract class BaseRole extends BaseObject
       
       
         /**
-         * Get the Id
+         * Get the RoleId
          *
          * @return int
          */
-        public int getId()
+        public int getRoleId()
         {
-            return id;
+            return role_id;
         }
 
                 
         /**
-         * Set the value of Id
+         * Set the value of RoleId
          *
          * @param v new value
          */
-        public void setId(int v) 
+        public void setRoleId(int v) 
         {
           
 
 
-         if (this.id != v)
+         if (this.role_id != v)
         {
-             this.id = v;
+             this.role_id = v;
             setModified(true);
         }
 
@@ -239,12 +239,12 @@ public abstract class BaseRole extends BaseObject
         /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  id ObjectKey
+     * @param  role_id ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setId(((NumberKey) key).intValue());
+                    setRoleId(((NumberKey) key).intValue());
             }
 
     /**
@@ -254,7 +254,7 @@ public abstract class BaseRole extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setId(Integer.parseInt(key));
+                    setRoleId(Integer.parseInt(key));
             }
 
 
@@ -264,7 +264,7 @@ public abstract class BaseRole extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getId());
+        return SimpleKey.keyFor(getRoleId());
     }
 
  
@@ -280,11 +280,11 @@ public abstract class BaseRole extends BaseObject
 
     protected Role copyInto(Role copyObj) throws TorqueException
     {
-        copyObj.setId(id);
+        copyObj.setRoleId(role_id);
         copyObj.setRoleName(role_name);
         copyObj.setDescription(description);
 
-                      copyObj.setId(0);
+                      copyObj.setRoleId(0);
                     
 
 
@@ -306,8 +306,8 @@ public abstract class BaseRole extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("Role:\n");
-              str.append("Id = ")
-           .append(getId())
+              str.append("RoleId = ")
+           .append(getRoleId())
            .append("\n");
               str.append("RoleName = ")
            .append(getRoleName())

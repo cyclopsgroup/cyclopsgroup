@@ -27,6 +27,17 @@ public abstract class AbstractObjectBroker extends ObjectBroker {
     public List query(Criteria crit) throws Exception {
         return super.query(getObjectClass(), crit);
     }
+    /** Method queryAll()
+     * @return All of records
+     * @throws Exception From torque
+     */
+    public List queryAll() throws Exception {
+        return query(
+            new Criteria().and(
+                getPrimaryKey(),
+                (Object) null,
+                Criteria.NOT_EQUAL));
+    }
     /** Implementation of method retrieve() in this class
      * @see com.cyclops.tornado.bo.ObjectBroker#retrieve(java.lang.Class, org.apache.torque.util.Criteria)
      */

@@ -31,16 +31,27 @@ public class TornadoRunDataService extends TurbineRunDataService {
         throws ServiceException {
         return getRunData(TORNADO_CONFIG, request, response, config);
     }
+    /** Implementation of method getRunData() in this class
+     * @see org.apache.turbine.services.rundata.RunDataService#getRunData(java.lang.String, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, javax.servlet.ServletConfig)
+     */
+    public RunData getRunData(
+        String key,
+        HttpServletRequest request,
+        HttpServletResponse response,
+        ServletConfig config)
+        throws ServiceException, IllegalArgumentException {
+        RunData data = super.getRunData(key, request, response, config);
+        data.setTemp(BrokerManager.KEY_IN_CONTEXT, new BrokerManager());
+        return data;
+    }
     /** Implementation of method putRunData() in this class
      * @see org.apache.turbine.services.rundata.RunDataService#putRunData(org.apache.turbine.RunData)
      */
     public boolean putRunData(RunData data) {
         BrokerManager brokerManager =
             (BrokerManager) data.getTemp(BrokerManager.KEY_IN_CONTEXT);
-        if (brokerManager != null) {
-            brokerManager.release();
-            data.setTemp(BrokerManager.KEY_IN_CONTEXT, null);
-        }
+        brokerManager.release();
+        data.setTemp(BrokerManager.KEY_IN_CONTEXT, null);
         return super.putRunData(data);
     }
 }

@@ -62,7 +62,7 @@ public class RoleMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_roles.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_roles.ROLE_ID", new Integer(0));
                                                         tMap.addColumn("c_tnd_roles.ROLE_NAME", new String());
                                                         tMap.addColumn("c_tnd_roles.DESCRIPTION", new String());
                               }

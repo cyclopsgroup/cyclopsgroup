@@ -62,7 +62,7 @@ public class GroupMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_groups.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_groups.GROUP_ID", new Integer(0));
                                                         tMap.addColumn("c_tnd_groups.GROUP_NAME", new String());
                                                         tMap.addColumn("c_tnd_groups.DESCRIPTION", new String());
                                                         tMap.addColumn("c_tnd_groups.IS_SYSTEM", new Boolean(true));

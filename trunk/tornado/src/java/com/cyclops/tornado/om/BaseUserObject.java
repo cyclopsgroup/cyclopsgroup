@@ -36,9 +36,9 @@ public abstract class BaseUserObject extends BaseObject
 
                   
         /**
-         * The value for the id field
+         * The value for the object_id field
          */
-        private int id;
+        private int object_id;
               
         /**
          * The value for the user_id field
@@ -62,29 +62,29 @@ public abstract class BaseUserObject extends BaseObject
       
       
         /**
-         * Get the Id
+         * Get the ObjectId
          *
          * @return int
          */
-        public int getId()
+        public int getObjectId()
         {
-            return id;
+            return object_id;
         }
 
                 
         /**
-         * Set the value of Id
+         * Set the value of ObjectId
          *
          * @param v new value
          */
-        public void setId(int v) 
+        public void setObjectId(int v) 
         {
           
 
 
-         if (this.id != v)
+         if (this.object_id != v)
         {
-             this.id = v;
+             this.object_id = v;
             setModified(true);
         }
 
@@ -310,12 +310,12 @@ public abstract class BaseUserObject extends BaseObject
         /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  id ObjectKey
+     * @param  object_id ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setId(((NumberKey) key).intValue());
+                    setObjectId(((NumberKey) key).intValue());
             }
 
     /**
@@ -325,7 +325,7 @@ public abstract class BaseUserObject extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setId(Integer.parseInt(key));
+                    setObjectId(Integer.parseInt(key));
             }
 
 
@@ -335,7 +335,7 @@ public abstract class BaseUserObject extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getId());
+        return SimpleKey.keyFor(getObjectId());
     }
 
  
@@ -351,13 +351,13 @@ public abstract class BaseUserObject extends BaseObject
 
     protected UserObject copyInto(UserObject copyObj) throws TorqueException
     {
-        copyObj.setId(id);
+        copyObj.setObjectId(object_id);
         copyObj.setUserId(user_id);
         copyObj.setObjectKey(object_key);
         copyObj.setObjectClassName(object_class_name);
         copyObj.setObjectData(object_data);
 
-                      copyObj.setId(0);
+                      copyObj.setObjectId(0);
                             
 
 
@@ -379,8 +379,8 @@ public abstract class BaseUserObject extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("UserObject:\n");
-              str.append("Id = ")
-           .append(getId())
+              str.append("ObjectId = ")
+           .append(getObjectId())
            .append("\n");
               str.append("UserId = ")
            .append(getUserId())

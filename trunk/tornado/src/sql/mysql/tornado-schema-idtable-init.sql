@@ -4,3 +4,4 @@ insert into ID_TABLE (id_table_id, table_name, next_id, quantity) VALUES (103, '
 insert into ID_TABLE (id_table_id, table_name, next_id, quantity) VALUES (104, 'c_tnd_grphrch', 1000, 10);
 insert into ID_TABLE (id_table_id, table_name, next_id, quantity) VALUES (105, 'c_tnd_user_group', 1000, 10);
 insert into ID_TABLE (id_table_id, table_name, next_id, quantity) VALUES (106, 'c_tnd_acls', 1000, 10);
+insert into ID_TABLE (id_table_id, table_name, next_id, quantity) VALUES (107, 'c_tnd_confs', 1000, 10);

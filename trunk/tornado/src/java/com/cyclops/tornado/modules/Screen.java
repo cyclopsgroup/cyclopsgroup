@@ -38,10 +38,6 @@ public class Screen extends TemplateScreen {
     public static BrokerManager getBrokerManager(RunData data) {
         BrokerManager brokerManager =
             (BrokerManager) data.getTemp(BrokerManager.KEY_IN_CONTEXT);
-        if (brokerManager == null) {
-            brokerManager = new BrokerManager();
-            data.setTemp(BrokerManager.KEY_IN_CONTEXT, brokerManager);
-        }
         return brokerManager;
     }
 }

@@ -54,8 +54,8 @@ public abstract class BaseRolePeer
         return getMapBuilder(RoleMapBuilder.CLASS_NAME);
     }
 
-    /** the column name for the ID field */
-    public static final String ID;
+    /** the column name for the ROLE_ID field */
+    public static final String ROLE_ID;
     /** the column name for the ROLE_NAME field */
     public static final String ROLE_NAME;
     /** the column name for the DESCRIPTION field */
@@ -63,7 +63,7 @@ public abstract class BaseRolePeer
 
     static
     {
-    ID = "c_tnd_roles.ID";
+    ROLE_ID = "c_tnd_roles.ROLE_ID";
     ROLE_NAME = "c_tnd_roles.ROLE_NAME";
     DESCRIPTION = "c_tnd_roles.DESCRIPTION";
 
@@ -225,7 +225,7 @@ public abstract class BaseRolePeer
     public static void addSelectColumns(Criteria criteria)
             throws TorqueException
     {
-            criteria.addSelectColumn(ID);
+            criteria.addSelectColumn(ROLE_ID);
             criteria.addSelectColumn(ROLE_NAME);
             criteria.addSelectColumn(DESCRIPTION);
         }
@@ -279,7 +279,7 @@ public abstract class BaseRolePeer
     {
         try
         {
-                            obj.setId(row.getValue(offset + 0).asInt());
+                            obj.setRoleId(row.getValue(offset + 0).asInt());
                                 obj.setRoleName(row.getValue(offset + 1).asString());
                                 obj.setDescription(row.getValue(offset + 2).asString());
                             }
@@ -438,7 +438,7 @@ public abstract class BaseRolePeer
         throws TorqueException
     {
         Criteria selectCriteria = new Criteria(DATABASE_NAME, 2);
-                                selectCriteria.put(ID, criteria.remove(ID));
+                                selectCriteria.put(ROLE_ID, criteria.remove(ROLE_ID));
                                                             
         // Set the correct dbName if it has not been overridden
         // criteria.getDbName will return the same object if not set to
@@ -630,7 +630,7 @@ public abstract class BaseRolePeer
     public static Criteria buildCriteria( ObjectKey pk )
     {
         Criteria criteria = new Criteria();
-              criteria.add(ID, pk);
+              criteria.add(ROLE_ID, pk);
           return criteria;
      }
 
@@ -639,7 +639,7 @@ public abstract class BaseRolePeer
     {
         Criteria criteria = new Criteria(DATABASE_NAME);
                             if (!obj.isNew())
-                       criteria.add(ID, obj.getId());
+                       criteria.add(ROLE_ID, obj.getRoleId());
                                 criteria.add(ROLE_NAME, obj.getRoleName());
                                 criteria.add(DESCRIPTION, obj.getDescription());
                 return criteria;
@@ -761,7 +761,7 @@ public abstract class BaseRolePeer
         else
         {
             Criteria criteria = new Criteria();
-              criteria.addIn( ID, pks );
+              criteria.addIn( ROLE_ID, pks );
           objs = doSelect(criteria, dbcon);
         }
         return objs;

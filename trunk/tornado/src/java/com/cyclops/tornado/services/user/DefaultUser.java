@@ -21,6 +21,12 @@ public class DefaultUser extends com.cyclops.tornado.om.User implements User {
     public Date getCreatedTimeDate() {
         return new Date(getCreatedTime());
     }
+    /** Implementation of method getId() in this class
+     * @see com.cyclops.tornado.services.user.User#getId()
+     */
+    public int getId() {
+        return getUserId();
+    }
     /**
      * @see com.cyclops.tornado.services.user.User#getLastSigninDate()
      */

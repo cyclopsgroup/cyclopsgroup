@@ -64,8 +64,10 @@ public abstract class AbstractUserService
                 && System.currentTimeMillis() - latestAccess > userTimeout;
         }
     }
-    private static final long DEFAULT_USER_INTEVAL = 1000L;
-    private static final long DEFAULT_USER_TIMEOUT = 1800000L;
+    /** Default user interval value */
+    public static final long DEFAULT_USER_INTEVAL = 1000L;
+    /** Default user timeout */
+    public static final long DEFAULT_USER_TIMEOUT = 1800000L;
     private User anonymousUser;
     private Thread checkingThread;
     private Vector userListeners = new Vector();

@@ -62,12 +62,12 @@ public class GroupHierarchyMapBuilder implements MapBuilder
         
                 tMap.setPrimaryKeyMethodInfo(tMap.getName());
         
-                                      tMap.addPrimaryKey("c_tnd_grphrch.ID", new Integer(0));
+                                      tMap.addPrimaryKey("c_tnd_grphrch.HIERARCHY_ID", new Integer(0));
                                                         tMap.addForeignKey(
                 "c_tnd_grphrch.GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                    "id");
+                    "group_id");
                                                         tMap.addForeignKey(
                 "c_tnd_grphrch.PARENT_GROUP_ID", new Integer(0) , "c_tnd_groups" ,
-                    "id");
+                    "group_id");
                               }
 }

@@ -37,9 +37,9 @@ public abstract class BaseGroupHierarchy extends BaseObject
 
                   
         /**
-         * The value for the id field
+         * The value for the hierarchy_id field
          */
-        private int id;
+        private int hierarchy_id;
               
         /**
          * The value for the group_id field
@@ -53,29 +53,29 @@ public abstract class BaseGroupHierarchy extends BaseObject
       
       
         /**
-         * Get the Id
+         * Get the HierarchyId
          *
          * @return int
          */
-        public int getId()
+        public int getHierarchyId()
         {
-            return id;
+            return hierarchy_id;
         }
 
                 
         /**
-         * Set the value of Id
+         * Set the value of HierarchyId
          *
          * @param v new value
          */
-        public void setId(int v) 
+        public void setHierarchyId(int v) 
         {
           
 
 
-         if (this.id != v)
+         if (this.hierarchy_id != v)
         {
-             this.id = v;
+             this.hierarchy_id = v;
             setModified(true);
         }
 
@@ -241,12 +241,12 @@ public abstract class BaseGroupHierarchy extends BaseObject
         /**
      * Set the PrimaryKey using ObjectKey.
      *
-     * @param  id ObjectKey
+     * @param  hierarchy_id ObjectKey
      */
     public void setPrimaryKey(ObjectKey key)
         
     {
-                    setId(((NumberKey) key).intValue());
+                    setHierarchyId(((NumberKey) key).intValue());
             }
 
     /**
@@ -256,7 +256,7 @@ public abstract class BaseGroupHierarchy extends BaseObject
      */
     public void setPrimaryKey(String key) 
     {
-                    setId(Integer.parseInt(key));
+                    setHierarchyId(Integer.parseInt(key));
             }
 
 
@@ -266,7 +266,7 @@ public abstract class BaseGroupHierarchy extends BaseObject
      */
     public ObjectKey getPrimaryKey()
     {
-        return SimpleKey.keyFor(getId());
+        return SimpleKey.keyFor(getHierarchyId());
     }
 
  
@@ -282,11 +282,11 @@ public abstract class BaseGroupHierarchy extends BaseObject
 
     protected GroupHierarchy copyInto(GroupHierarchy copyObj) throws TorqueException
     {
-        copyObj.setId(id);
+        copyObj.setHierarchyId(hierarchy_id);
         copyObj.setGroupId(group_id);
         copyObj.setParentGroupId(parent_group_id);
 
-                      copyObj.setId(0);
+                      copyObj.setHierarchyId(0);
                     
 
 
@@ -308,8 +308,8 @@ public abstract class BaseGroupHierarchy extends BaseObject
     {
         StringBuffer str = new StringBuffer();
         str.append("GroupHierarchy:\n");
-              str.append("Id = ")
-           .append(getId())
+              str.append("HierarchyId = ")
+           .append(getHierarchyId())
            .append("\n");
               str.append("GroupId = ")
            .append(getGroupId())
