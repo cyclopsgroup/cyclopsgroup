@@ -4,6 +4,7 @@
   <valves>
     <valve className="org.apache.turbine.pipeline.DetermineActionValve"/>
     <valve className="org.apache.turbine.pipeline.DetermineTargetValve"/>
+    <!--<valve className="com.cyclops.tornado.pipeline.DetermineTargetValve"/>-->
     <valve className="com.cyclops.tornado.pipeline.CheckScreenValve"/>
     <valve className="org.apache.turbine.pipeline.DefaultSessionTimeoutValve"/>
     <valve className="org.apache.turbine.pipeline.DefaultLoginValve"/>

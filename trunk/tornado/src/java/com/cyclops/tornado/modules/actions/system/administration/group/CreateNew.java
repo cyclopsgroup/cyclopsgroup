@@ -192,24 +192,36 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.services.configuration;
-import org.apache.commons.configuration.Configuration;
-import org.apache.fulcrum.Service;
+package com.cyclops.tornado.modules.actions.system.administration.group;
+import org.apache.turbine.ParameterParser;
+import org.apache.turbine.RunData;
+import org.apache.turbine.TemplateContext;
 
-import com.cyclops.tornado.BrokerManager;
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+import com.cyclops.tornado.bo.GroupBroker;
+import com.cyclops.tornado.modules.Action;
+import com.cyclops.tornado.om.Group;
+/** TODO Add javadoc for this class here
+ * @author joeblack
+ *
+ * The class is created at 2003-11-18 17:40:28
  */
-public interface ConfigurationService extends Service {
-    /** Service name in fulcrum */
-    String SERVICE_NAME = "ConfigurationService";
-    /** Get  root configuration
-     * @return Root configuration object
+public class CreateNew extends Action {
+    /** Override method doPerform() of super class
+     * @see org.apache.turbine.modules.actions.TemplateAction#doPerform(org.apache.turbine.RunData, org.apache.turbine.TemplateContext)
      */
-    Configuration getCustomizableConfiguration();
-    /** Reload configuration content from database
-     * @param brokerManager BrokerManager instance
-     */
-    void reload(BrokerManager brokerManager);
+    public void doPerform(RunData data, TemplateContext ctx) throws Exception {
+        ParameterParser params = data.getParameters();
+        String groupName = params.getString("group_name");
+        GroupBroker gb = (GroupBroker) getObjectBroker(GroupBroker.class, data);
+        Group old = gb.retrieveByName(groupName);
+        if (old != null) {
+            data.setMessage("Group [" + groupName + "] already exists");
+            return;
+        }
+        Group group = new Group();
+        group.setGroupName(groupName);
+        group.setDescription(params.getString("description"));
+        gb.save(group);
+        data.setMessage("Group [" + groupName + "] created");
+    }
 }

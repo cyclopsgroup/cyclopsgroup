@@ -192,24 +192,36 @@
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-package com.cyclops.tornado.services.configuration;
-import org.apache.commons.configuration.Configuration;
-import org.apache.fulcrum.Service;
+package com.cyclops.tornado.pipeline;
+import java.io.IOException;
 
-import com.cyclops.tornado.BrokerManager;
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+import org.apache.commons.lang.StringUtils;
+import org.apache.turbine.ParameterParser;
+import org.apache.turbine.RunData;
+import org.apache.turbine.TurbineConstants;
+import org.apache.turbine.TurbineException;
+import org.apache.turbine.ValveContext;
+/** Optional action determiniation
+ * @author joeblack
+ *
+ * The class is created at 2003-11-18 17:25:35
  */
-public interface ConfigurationService extends Service {
-    /** Service name in fulcrum */
-    String SERVICE_NAME = "ConfigurationService";
-    /** Get  root configuration
-     * @return Root configuration object
+public class DetermineActionValve
+    extends org.apache.turbine.pipeline.DetermineActionValve {
+    private static final String ACTION = "template_action";
+    /** Override method invoke() of super class
+     * @see org.apache.turbine.Valve#invoke(org.apache.turbine.RunData, org.apache.turbine.ValveContext)
      */
-    Configuration getCustomizableConfiguration();
-    /** Reload configuration content from database
-     * @param brokerManager BrokerManager instance
-     */
-    void reload(BrokerManager brokerManager);
+    public void invoke(RunData data, ValveContext ctx)
+        throws IOException, TurbineException {
+        ParameterParser params = data.getParameters();
+        String action = params.getString(TurbineConstants.ACTION);
+        if (StringUtils.isEmpty(action)) {
+            String templateAction = params.getString(ACTION);
+            data.setAction(templateAction);
+            ctx.invokeNext(data);
+        } else {
+            super.invoke(data, ctx);
+        }
+    }
 }

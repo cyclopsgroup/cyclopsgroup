@@ -1,4 +1,3 @@
-package com.cyclops.tornado.services.configuration;
 /**
  * Common Public License - v 1.0
  *
@@ -193,7 +192,7 @@ package com.cyclops.tornado.services.configuration;
  * after the cause of action arose. Each party waives its rights to a jury trial in
  * any resulting litigation.
  */
-
+package com.cyclops.tornado.services.configuration;
 import java.util.Iterator;
 import java.util.List;
 
