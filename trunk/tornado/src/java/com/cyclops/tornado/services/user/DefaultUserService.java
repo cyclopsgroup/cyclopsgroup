@@ -41,8 +41,7 @@ public class DefaultUserService extends BaseService implements UserService {
                 try {
                     ArrayList tobeRemoved = new ArrayList();
                     for (Iterator i = userRepo.keySet().iterator();
-                        i.hasNext();
-                        ) {
+                        i.hasNext();) {
                         String key = (String) i.next();
                         UserEntry entry = (UserEntry) userRepo.get(key);
                         if (entry.isExpired()) {
