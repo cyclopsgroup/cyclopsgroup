@@ -194,15 +194,16 @@
  */
 package com.cyclops.jrepo;
 
-/** Content which can be a container of other content
+/** TODO Add javadoc for this class
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:03:45 PM Mar 19, 2004
+ * Created at 10:51:22 AM Mar 22, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface ContentContainer extends Content {
-    /** Method getContents() in class ContentContainer
-     * @return Array of contents in this container
-     */
-    Content[] getContents();
+public interface FriendlyContent extends Content {
+    String TITLE_PROPERTY = "title";
+    String DESCRIPTION_PROPERTY = "description";
+    
+    String getTitle();
+    String getDescription();
 }

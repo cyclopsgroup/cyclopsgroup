@@ -204,10 +204,15 @@ public interface ContentFactory extends EngineReferenceable {
     /** Empty Array */
     ContentFactory[] EMPTY_ARRAY = new ContentFactory[0];
     /** Method to create content
+     * @param container Content Container
      * @param contentType ContentType of object
      * @param contentName Name of the content
      * @return Instance of content
      * @throws Exception Let the engine handle log
      */
-    Content createInstance(ContentType contentType, String contentName) throws Exception;
+    Content createInstance(
+        Container container,
+        ContentType contentType,
+        String contentName)
+        throws Exception;
 }

@@ -194,7 +194,8 @@
  */
 package com.cyclops.jrepo.base;
 
-import com.cyclops.jrepo.ContentContainer;
+import com.cyclops.jrepo.Content;
+import com.cyclops.jrepo.Container;
 import com.cyclops.jrepo.RepositoryEngine;
 
 /** Basic implementation of RepositoryEngine
@@ -204,17 +205,41 @@ import com.cyclops.jrepo.RepositoryEngine;
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
 public class BaseRepositoryEngine implements RepositoryEngine {
-    private ContentContainer rootContainer;
+    private Container rootContainer;
     /** Override method getRootContainer in the derived class
      * @see com.cyclops.jrepo.RepositoryEngine#getRootContainer()
      */
-    public ContentContainer getRootContainer() {
+    public Container getRootContainer() {
         return rootContainer;
     }
     /** Method setRootContainer() in class BaseRepositoryEngine
      * @param container Container instance
      */
-    public void setRootContainer(ContentContainer container) {
+    public void setRootContainer(Container container) {
         rootContainer = container;
     }
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(com.cyclops.jrepo.Container, java.lang.String)
+     */
+    public Content getContent(Container container, String contentName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(long)
+     */
+    public Content getContent(long uniqueId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** Override method getContent in the derived class
+     * @see com.cyclops.jrepo.RepositoryEngine#getContent(java.lang.String)
+     */
+    public Content getContent(String path) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

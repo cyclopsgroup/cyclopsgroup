@@ -194,6 +194,8 @@
  */
 package com.cyclops.jrepo.base;
 
+import java.util.Date;
+
 import com.cyclops.jrepo.Content;
 import com.cyclops.jrepo.ContentType;
 import com.cyclops.jrepo.PropertyManager;
@@ -253,5 +255,17 @@ public class BaseContent implements Content {
      */
     public long getUniqueId() {
         return ((Long) get(UNIQUE_ID_PROPERTY, new Long(-1L))).longValue();
+    }
+    /** Override method getCreatedTime in the derived class
+     * @see com.cyclops.jrepo.Content#getCreatedTime()
+     */
+    public Date getCreatedTime() {
+        return (Date) get(CREATED_TIME_PROPERTY);
+    }
+    /** Override method getLastModified in the derived class
+     * @see com.cyclops.jrepo.Content#getLastModified()
+     */
+    public Date getLastModified() {
+        return (Date) get(LAST_MODIFIED_PROPERTY);
     }
 }

@@ -194,27 +194,15 @@
  */
 package com.cyclops.jrepo;
 
-/** Core
+/** Content which can be a container of other content
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
- * Created at 9:14:09 PM Mar 19, 2004
+ * Created at 9:03:45 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface RepositoryEngine {
-    /** Method getRootContainer() in class RepositoryEngine
-     * @return Root container of this repository
+public interface Container extends Content {
+    /** Method getContents() in class ContentContainer
+     * @return Array of contents in this container
      */
-    Container getRootContainer();
-    /** Method getContent() in class RepositoryEngine
-     * @param uniqueId Unique Id of content
-     * @return Content instance
-     */
-    Content getContent(long uniqueId);
-    /** Method getContent() in class RepositoryEngine
-     * @param container Content container
-     * @param contentName Name of content
-     * @return Content instance
-     */
-    Content getContent(Container container, String contentName);
-    Content getContent(String path);
+    Content[] getContents();
 }

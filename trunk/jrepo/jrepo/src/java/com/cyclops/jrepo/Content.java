@@ -194,6 +194,8 @@
  */
 package com.cyclops.jrepo;
 
+import java.util.Date;
+
 /** Content interface which all contents should implements
  * @author <a href="mailto:g-cyclops@users.sourceforge.net">g-cyclops</a>
  *
@@ -205,6 +207,10 @@ public interface Content {
     String NAME_PROPERTY = "name";
     /** Name of unique id property */
     String UNIQUE_ID_PROPERTY = "uniqueid";
+    
+    String CREATED_TIME_PROPERTY = "createdtime";
+    String LAST_MODIFIED_PROPERTY = "lastmodified";
+    
     /**Empty content array*/
     Content[] EMPTY_ARRAY = new Content[0];
     /** Method getPropertyManager() in class Content
@@ -223,4 +229,7 @@ public interface Content {
      * @return Name of this object
      */
     String getName();
+    
+    Date getCreatedTime();
+    Date getLastModified();
 }

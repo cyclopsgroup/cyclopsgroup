@@ -200,6 +200,6 @@ package com.cyclops.jrepo;
  * Created at 9:04:07 PM Mar 19, 2004
  * Edited with IBM WebSphere Studio Application Developer 5.1
  */
-public interface Folder extends ContentContainer {
+public interface Folder extends Container, FriendlyContent {
 
 }
