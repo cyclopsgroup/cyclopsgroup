@@ -51,7 +51,16 @@ INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
     VALUES (32,'R','browse',0,'screen:Redirect.vm');
 
 INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (33,'R','browse',0,'screen:pub,*.vm');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
     VALUES (36,'R','browse',0,'action:UserIdentify|doSignin');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (41,'R','basic',0,'screen:system,Index.vm');
+
+INSERT INTO c_tnd_acls (acl_id,owner_type,owner_name,is_role,permission)
+    VALUES (42,'R','basic',0,'screen:system,user,*.vm');
 
 INSERT INTO c_tnd_roles (role_id,role_name)
     VALUES (1,'almighty');

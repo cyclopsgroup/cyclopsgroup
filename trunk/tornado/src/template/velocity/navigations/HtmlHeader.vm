@@ -1,4 +1,4 @@
-$navigator.refresh($template)
+$navigator.refresh($data)
 <http-equiv name="content-type" content="text/html"/>
 <link rel="stylesheet" text="text/css" href="$content.getURI("stylesheet.css")"/>
 <title>Tornado System</title>

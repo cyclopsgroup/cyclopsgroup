@@ -18,7 +18,11 @@
     <Acl AclId="22" OwnerType="R" OwnerName="almighty" IsRole="0" Permission="action:*|do*"/>
     <Acl AclId="31" OwnerType="R" OwnerName="browse" IsRole="0" Permission="screen:Index.vm"/>
     <Acl AclId="32" OwnerType="R" OwnerName="browse" IsRole="0" Permission="screen:Redirect.vm"/>
+    <Acl AclId="33" OwnerType="R" OwnerName="browse" IsRole="0" Permission="screen:pub,*.vm"/>
     <Acl AclId="36" OwnerType="R" OwnerName="browse" IsRole="0" Permission="action:UserIdentify|doSignin"/>
+    <Acl AclId="41" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:system,Index.vm"/>
+    <Acl AclId="42" OwnerType="R" OwnerName="basic" IsRole="0" Permission="screen:system,user,*.vm"/>
+    
     <Role RoleId="1" RoleName="almighty"/>
     <Role RoleId="2" RoleName="basic"/>
     <Role RoleId="3" RoleName="browse"/>

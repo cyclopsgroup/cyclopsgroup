@@ -2,8 +2,8 @@
 <!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by zulu1 (zulu1) -->
 <project>
     <menu name="Home" default="true" href="Index.vm">
-        <item name="Index" href="Home.vm"/>
-        <item name="About" href="About.vm"/>
+        <item name="Index" href="pub,Index.vm"/>
+        <item name="About" href="pub,About.vm"/>
     </menu>
     <menu name="System" href="system,Index.vm">
         <item name="Administration" href="system,administration,Index.vm">
