@@ -5,7 +5,6 @@ package com.cyclopsgroup.waterview.jelly;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -32,18 +31,6 @@ import com.cyclopsgroup.waterview.UIRuntime;
 public class JellyPageRenderer extends AbstractLogEnabled implements
         PageRenderer, Configurable, Initializable
 {
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.activity.Initializable#initialize()
-     */
-    public void initialize() throws Exception
-    {
-        initialJellyContext = new PropertyTagRegistry(
-                "META-INF/cyclopsgroup/waterview-tag-registry.properties")
-                .createContext();
-    }
 
     /**
      * This is a simple inner class that will be the element cahed in LRMMap. Script object and timestamp of script resource is stored here
@@ -178,21 +165,29 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        initialJellyContext = new PropertyTagRegistry(
+                "META-INF/cyclopsgroup/waterview-tag-registry.properties")
+                .createContext();
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String, java.lang.String)
      */
     public void render(UIRuntime runtime, String packageName, String module)
             throws Exception
     {
         Context uic = runtime.getUIContext();
-        JellyContext jc = (JellyContext) uic.get("jellyContext");
+        SmartJellyContext jc = (SmartJellyContext) uic.get("jellyContext");
         if (jc == null)
         {
-            jc = new JellyContext(initialJellyContext);
-            for (Iterator i = uic.keys(); i.hasNext();)
-            {
-                String name = (String) i.next();
-                jc.setVariable(name, uic.get(name));
-            }
+            jc = new SmartJellyContext(initialJellyContext);
+            jc.addAllVariables(uic);
             uic.put("jellyContext", jc);
         }
         XMLOutput output = (XMLOutput) uic.get("jellyOutput");
@@ -204,7 +199,18 @@ public class JellyPageRenderer extends AbstractLogEnabled implements
         }
         String scriptPath = getScriptPath(packageName, module);
         Script script = getScript(scriptPath);
-        script.run(jc, output);
-        output.flush();
+        try
+        {
+            script.run(jc, output);
+            output.flush();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            jc.clear();
+        }
     }
 }
