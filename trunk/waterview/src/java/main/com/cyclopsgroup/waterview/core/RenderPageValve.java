@@ -98,6 +98,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                     if (renderer.exists(packageName, path))
                     {
                         found = true;
+                        moduleResolver.resolve(runtime, path);
                         renderer.render(runtime, packageName, path);
                         break;
                     }
