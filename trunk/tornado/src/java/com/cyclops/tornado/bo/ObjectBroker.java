@@ -17,16 +17,22 @@ import org.apache.torque.util.Criteria;
  * @email g-cyclops@users.sourceforge.net
  */
 public class ObjectBroker implements DBConnectable {
+    private static final Class[] CRITERIA_AND_CONNECTION =
+        new Class[] { Criteria.class, Connection.class };
     /** Default database name */
     public static final String DEFAULT_DATABASE_NAME = "default";
     private transient Connection connection;
+    /** Delete records from database
+     * @param objectClass Class of object to be delete
+     * @param crit Criteria object
+     * @throws Exception TorqueException actually
+     */
     public void delete(Class objectClass, Criteria crit) throws Exception {
-        Class peerClass = Class.forName(objectClass.getName() + "Peer");
         Method doDelete =
             MethodUtils.getAccessibleMethod(
-                peerClass,
+                getPeerClass(objectClass),
                 "doDelete",
-                new Class[] { Criteria.class, Connection.class });
+                CRITERIA_AND_CONNECTION);
         doDelete.invoke(null, new Object[] { crit, connection });
     }
     /** Implementation of method getConnection() in this class
@@ -41,6 +47,14 @@ public class ObjectBroker implements DBConnectable {
     public String getDatabaseName() {
         return DEFAULT_DATABASE_NAME;
     }
+    /** Get peer class for object class
+     * @param objectClass Object class
+     * @return Peer class
+     * @throws Exception TorqueException
+     */
+    protected Class getPeerClass(Class objectClass) throws Exception {
+        return Class.forName(objectClass.getName() + "Peer");
+    }
     /** Method query()
      * @param objectClass
      * @param crit Criteria object
@@ -48,12 +62,11 @@ public class ObjectBroker implements DBConnectable {
      * @throws Exception It doesn't handle any exception here
      */
     public List query(Class objectClass, Criteria crit) throws Exception {
-        Class peerClass = Class.forName(objectClass.getName() + "Peer");
         Method doSelect =
             MethodUtils.getAccessibleMethod(
-                peerClass,
+                getPeerClass(objectClass),
                 "doSelect",
-                new Class[] { Criteria.class, Connection.class });
+                CRITERIA_AND_CONNECTION);
         return (List) doSelect.invoke(null, new Object[] { crit, connection });
     }
     /** Method queryAll()

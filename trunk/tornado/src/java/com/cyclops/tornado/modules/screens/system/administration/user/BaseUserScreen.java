@@ -43,7 +43,7 @@ public class BaseUserScreen extends Screen {
     /** Method getUserOM() in Class BaseUser
      * @return User OM object
      */
-    protected final User getUserOM() {
+    protected final User getUser() {
         return dbuser;
     }
 }

@@ -22,7 +22,7 @@ public class ConnectionManager {
      * @return Default database connection
      * @throws TorqueException Thown when the connection is not existed
      */
-    public Connection getConnection() throws Exception {
+    public Connection getConnection() throws TorqueException {
         return getConnection(ObjectBroker.DEFAULT_DATABASE_NAME);
     }
     /** Method getConnection()

@@ -17,6 +17,26 @@ import com.cyclops.tornado.om.User;
  * @email g-cyclops@users.sourceforge.net
  */
 public class UserAction extends Action {
+    /** Force to change password of a user
+     * @param data RunData object as input
+     * @param ctx TemplateContext object as output
+     * @throws Exception From brokers
+     */
+    public void doChangepwd(RunData data, TemplateContext ctx)
+        throws Exception {
+        ParameterParser params = data.getParameters();
+        String userName = params.getString("user_name");
+        UserBroker ub = (UserBroker) getObjectBroker(UserBroker.class, data);
+        User user = ub.retrieveByName(userName);
+        user.setPassword(params.getString("new_password"));
+        ub.save(user);
+        data.setMessage("Password for user " + userName + " is changed");
+    }
+    /** Save user profile
+     * @param data RunData object as input
+     * @param ctx TemplateContext as output
+     * @throws Exception From broker objects
+     */
     public void doSaveprof(RunData data, TemplateContext ctx)
         throws Exception {
         ParameterParser params = data.getParameters();

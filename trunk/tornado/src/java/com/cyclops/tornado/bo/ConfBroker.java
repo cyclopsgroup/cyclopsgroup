@@ -16,6 +16,10 @@ import com.cyclops.tornado.om.ConfPeer;
  * @email g-cyclops@users.sourceforge.net
  */
 public class ConfBroker extends AbstractObjectBroker {
+    /** Method deleteByKey()
+     * @param key Key of the configuration to be delete
+     * @throws Exception TorqueException
+     */
     public void deleteByKey(String key) throws Exception {
         Criteria crit = new Criteria();
         crit.and(ConfPeer.CONF_KEY, key);
@@ -33,15 +37,20 @@ public class ConfBroker extends AbstractObjectBroker {
     protected String getPrimaryKey() {
         return ConfPeer.CONF_ID;
     }
+    /** Method queryByKey()
+     * @param key Key of configurations to be queried
+     * @return List of result
+     * @throws Exception TorqueException
+     */
     public List queryByKey(String key) throws Exception {
         Criteria crit = new Criteria();
         crit.and(ConfPeer.CONF_KEY, key);
         return query(crit);
     }
     /** Method retrieveByKey()
-     * @param key
-     * @return
-     * @throws Exception
+     * @param key Key of configuration to be retrieved
+     * @return Configuration object, null if not found
+     * @throws Exception TorqueException
      */
     public Conf retrieveByKey(String key) throws Exception {
         Criteria crit = new Criteria();

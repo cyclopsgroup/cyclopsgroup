@@ -67,7 +67,7 @@ public class DefaultNavigatorService
         ResourceFinder rf = new ResourceFinder(this);
         URL[] resources = rf.getResources(conf);
         Digester digester = new Digester();
-        digester.addObjectCreate("project", MenuProject.class);
+        //digester.addObjectCreate("project", MenuProject.class);
         digester.addObjectCreate("project/menu", MenuRoot.class);
         digester.addSetNext("project/menu", "addMenu");
         digester.addSetProperties("project/menu");
@@ -78,6 +78,7 @@ public class DefaultNavigatorService
             URL resource = resources[i];
             try {
                 digester.clear();
+                digester.push(new MenuProject());
                 MenuProject project =
                     (MenuProject) digester.parse(resource.openStream());
                 MenuRoot[] roots = project.getMenuRoots();
