@@ -1,44 +1,84 @@
-body, td, select, input, li {
-    color: #666666;
+body, td, select, input, li
+{
+    color: black;
 }
-div.section table.bodyTable th {
-    background-color: #FF6600;
-    color: white;
-}
-div.section table.bodyTable {
-    background-color: #DDDDDD;
-}
-div.section table.bodyTable tr.a {
-    background-color: white;
-}
-div.section table.bodyTable tr.b {
-    background-color: #EEEEEE;
-}
-a:link, a:visited {
+
+a:link, a:visited
+{
     color: #3366CC;
 }
-div.sectionTitle {
-    border-color: #666666;
+
+div.section a:link, div.section a:visited
+{
+    color: #333333;
 }
-div.subsectionTitle {
-    border-color: #666666;
-}
-#frameBodyTable, #headerSearchCell, #headerLanguageBarCell {
-    background-color: #D1DBE4;
-}
-#frameHeaderCell {
-    background-color: #003366;
-}
-#frameLeftCell {
-    background-color: #EFEFEF;
-}
-#frameLeftCell th {
-    background-color: #3366CC;
+
+div.section table.bodyTable th
+{
+    background-color: #F7941C;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: red;
     color: white;
 }
-#frameBodyCell, #frameRightCell, #frameBottomCell {
+
+table.menu th
+{
+    background-color: #0044CC;
+    color: white;
+}
+
+div.section table.bodyTable
+{
+    background-color: #F6F6F6;
+}
+
+div.section table.bodyTable tr.a
+{
     background-color: white;
 }
-#frameFooterCell {
-    background-color: black;
+
+div.section table.bodyTable tr.b
+{
+    background-color: #EEEEEE;
+}
+
+div.section div.sectionTitle
+{
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    border-color: black;
+    text-indent: 28px;
+    background: url(../images/big_right.gif) left center no-repeat;
+}
+
+div.subsection div.subsectionTitle
+{
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: black;
+    text-indent: 20px;
+    background: url(../images/right.gif) left center no-repeat;
+}
+
+#bannerBlock
+{
+    border-color: #0044CC;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+}
+
+#navigatorBlock
+{
+    border-color: #0044CC;
+    border-width: 0px 1px 0px 0px;
+    border-style: solid;
+}
+
+#copyrightsBlock
+{
+    border-width: 1px 0px 0px 0px;
+    border-style: solid;
+    border-color: black;
+    margin-bottom: 20px;
 }
