@@ -153,7 +153,7 @@ languageLink("${pom.url}${location}", "es", "Translate this page into Spanish", 
 languageLink("${pom.url}${location}", "fr", "Translate this page into French", "${relativePath}");
 languageLink("${pom.url}${location}", "it", "Translate this page into Italian", "${relativePath}");
 languageLink("${pom.url}${location}", "ja", "Translate this page into Japanese", "${relativePath}");
-languageLink("${pom.url}${location}", "ka", "Translate this page into Korean", "${relativePath}");
+languageLink("${pom.url}${location}", "ko", "Translate this page into Korean", "${relativePath}");
 languageLink("${pom.url}${location}", "pt", "Translate this page into Portuguese", "${relativePath}");
 languageLink("${pom.url}${location}", "ru", "Translate this page into Russian", "${relativePath}");
 languageLink("${pom.url}${location}", "zh", "Translate this page into Simplified Chinese", "${relativePath}");
