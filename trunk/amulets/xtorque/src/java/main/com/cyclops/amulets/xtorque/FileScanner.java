@@ -193,71 +193,90 @@
  * any resulting litigation.
  */
 package com.cyclops.amulets.xtorque;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+
 /** Schema file scanner
  * @author joeblack
  *
  * The class is created at 2004-1-5 11:09:48
  */
-public class FileScanner {
+public class FileScanner
+{
     private String folder;
+
     private String suffix = "-schema.xml";
+
     /** Get folder
      * @return Folder of schemas
      */
-    public String getFolder() {
+    public String getFolder()
+    {
         return folder;
     }
+
     /** Get model names
      * @return List of schema model names
      */
-    public List getModelNames() {
+    public List getModelNames()
+    {
         List ret = new ArrayList();
         File[] files = getFiles();
-        for (int i = 0; i < files.length; i++) {
+        for (int i = 0; i < files.length; i++)
+        {
             File file = files[i];
             String name = StringUtils.replace(file.getName(), suffix, "");
             ret.add(name);
         }
         return ret;
     }
+
     /** Get schema files
      * @return Array of file objects
      */
-    public File[] getFiles() {
+    public File[] getFiles()
+    {
         File path = new File(folder);
-        if (path.isDirectory()) {
+        if (path.isDirectory())
+        {
             return path.listFiles(new SuffixFileFilter(suffix));
-        } else {
-            return new File[0];
         }
+        return new File[0];
     }
+
     /** Get schema suffix
      * @return Schema suffix
      */
-    public String getSuffix() {
+    public String getSuffix()
+    {
         return suffix;
     }
+
     /** Set schema folder
      * @param string Schema folder
      */
-    public void setFolder(String string) {
+    public void setFolder(String string)
+    {
         folder = string;
     }
+
     /** Set schema suffix
      * @param string Schema suffix
      */
-    public void setSuffix(String string) {
+    public void setSuffix(String string)
+    {
         suffix = string;
     }
+
     /** Override method toString() of super class
      * @see java.lang.Object#toString()
      */
-    public String toString() {
+    public String toString()
+    {
         return folder + "/*" + suffix;
     }
 }
