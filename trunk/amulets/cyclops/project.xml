@@ -23,6 +23,19 @@
 			<id>jiaqi</id>
 			<email>jiaqi.guo@gmail.com</email>
 			<organization>Evavi</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>-6</timezone>
+		</developer>
+		<developer>
+			<name>Zhao, Xuying</name>
+			<id>daisy</id>
+			<email>kxz024000@utdallas.edu</email>
+			<organization>U.T.D.</organization>
+			<roles>
+				<role>Observer</role>
+			</roles>
 			<timezone>-6</timezone>
 		</developer>
 	</developers>
