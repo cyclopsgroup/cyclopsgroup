@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class PropertyTagRegistry extends TagRegistry
+public class PropertyTagRegistry extends TagRegistry
 {
     private Log logger = LogFactory.getLog(getClass());
 
