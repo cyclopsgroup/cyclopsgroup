@@ -33,14 +33,13 @@
 				<item name="Get Involved" href="/dev/involved.html"/>
 				<item name="Developer Howtos" href="/dev/howtos.html"/>
 			</item>
-			<item name="Abount" href="/about.html"/>
+			<item name="About" href="/about.html"/>
 		</menu>
 		<links>
-			<item name="Discuss" href="http://cyclops-group.sourceforge.net/community/phpbb2"/>
 			<item name="Source Forge Summary" href="http://sourceforge.net/projects/cyclops-group"/>
 			<item name="Apache Jakarta" href="http://jakarta.apache.org"/>
 			<item name="Maven" href="http://maven.apache.org"/>
-			<item name="Code Haus" href="http://www.codehaus.org"/>
+			<item name="Codehaus" href="http://www.codehaus.org"/>
 		</links>
 		<search/>
 	</body>

@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-    <properties>
-        <title>Cyclops Group Home</title>
-        <properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
-    </properties>
-    <body>
-        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-            <tr>
-                <td valign="top">
-                    <section name="Mission">
-                        <p>At the beginning, we focus on solutions for some common questions like application framework, database tool or mathematics problems.</p>
-                        <p>You can find a list of projects hosted in <a href="projects.html">this page</a>.</p>
-                    </section>
-                </td>
-                <td align="right">
-                    <img src="images/lamp.gif"/>
-                </td>
-            </tr>
-        </table>
-        <section name="Who is it?">
-            <p>Cyclops Groups Community is made up of a group of talented Java gurus who are tring to make their contribution to open source. All the projects are powered by <a href="http://www.apache.org">Apache</a> and <a href="http://www.werken.com">werken</a> open source projects, built by <a href="http://maven.apache.org">maven</a> and hosted in <a href="http://sourceforge.net">SourceForge.net</a>.</p>
-        </section>
-        <section name="What we have">
-            <p>
-                <a href="projects.html">Hosted Projects</a> is a detail list of projects hosted here.</p>
-        </section>
-    </body>
+	<properties>
+		<title>Cyclops Group Home</title>
+		<properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
+	</properties>
+	<body>
+		<section name="Mission">
+			<p>Software is supposed to make things simple, not complicated. However, the fact is in many cases it doesn't, on purpose. Our goal is making software not profound and powerful, but simple, generic and easy to understand.</p>
+			<p>Initially, we focus on solutions for common questions like application frameworks, database tools and mathematics problems.</p>
+			<p>A list of projects here is available at <a href="projects.xml">Projects</a>.</p>
+		</section>
+		<section name="Who is it?">
+			<p>Cyclops Group is a group of talented people tring to make their contribution to the java open source world.</p>
+		</section>
+	</body>
 </document>
