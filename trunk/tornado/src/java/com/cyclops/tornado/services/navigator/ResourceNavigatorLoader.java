@@ -208,12 +208,22 @@ import com.cyclops.tornado.utils.ResourceFinder;
  */
 public class ResourceNavigatorLoader implements NavigatorLoader {
     private Log logger = LogFactory.getLog(getClass());
+    /** Derived classes can override this method to find resources by other means
+     * @param conf Configuration object
+     * @param brokerManager BrokerManager object
+     * @return Array of URLs
+     */
+    protected URL[] getResources(
+        Configuration conf,
+        BrokerManager brokerManager) {
+        String[] names = conf.getStringArray("name");
+        return ResourceFinder.getResources(getClass(), names);
+    }
     /** Override method load() of super class
      * @see com.cyclops.tornado.services.navigator.NavigatorLoader#load(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
      */
     public MenuProject load(Configuration conf, BrokerManager brokerManager) {
-        String[] names = conf.getStringArray("name");
-        URL[] urls = ResourceFinder.getResources(getClass(), names);
+        URL[] urls = getResources(conf, brokerManager);
         Digester digester = new Digester();
         digester.addObjectCreate("project/menu", MenuRoot.class);
         digester.addSetNext("project/menu", "addMenu");
@@ -222,11 +232,14 @@ public class ResourceNavigatorLoader implements NavigatorLoader {
         digester.addSetProperties("*/item");
         digester.addSetNext("*/item", "addChild");
         MenuProject ret = new MenuProject();
-        digester.push(ret);
         for (int i = 0; i < urls.length; i++) {
             URL url = urls[i];
             try {
+                digester.clear();
+                MenuProject project = new MenuProject();
+                digester.push(project);
                 digester.parse(url.openStream());
+                ret.addMenuRoots(project.getMenuRoots());
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("Parse resource [" + url + "] error", e);

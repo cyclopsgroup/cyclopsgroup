@@ -226,6 +226,9 @@ public class Menu {
      */
     public boolean equals(Object object) {
         if (object instanceof Menu) {
+            if (href == null || ((Menu) object).getHref() == null) {
+                return super.equals(object);
+            }
             return StringUtils.equals(href, ((Menu) object).getHref());
         } else {
             return false;
@@ -259,7 +262,7 @@ public class Menu {
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return href.hashCode();
+        return href == null ? super.hashCode() : href.hashCode();
     }
     /** Method setHref() in Class MenuItem
      * @param string New value of href

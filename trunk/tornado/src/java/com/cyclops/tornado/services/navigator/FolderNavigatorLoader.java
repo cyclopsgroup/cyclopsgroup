@@ -193,32 +193,69 @@
  * any resulting litigation.
  */
 package com.cyclops.tornado.services.navigator;
+import java.io.File;
+import java.io.FileFilter;
+import java.net.URL;
 import java.util.ArrayList;
-/**
- * @author jiaqi guo
- * @email g-cyclops@users.sourceforge.net
+
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.fulcrum.TurbineServices;
+import org.apache.regexp.RE;
+import org.apache.regexp.REUtil;
+
+import com.cyclops.tornado.BrokerManager;
+import com.cyclops.tornado.utils.ResourceFinder;
+/** TODO Add javadoc for this class here
+ * @author joeblack
+ *
+ * The class is created at 2003-12-30 2:16:00
  */
-public class MenuProject {
-    private ArrayList menuRoots = new ArrayList();
-    /** Method addMenu()
-     * @param root MenuRoot to add
-     */
-    public void addMenu(MenuRoot root) {
-        menuRoots.add(root);
-    }
-    /** Method getMenuRoots()
-     * @return Roots in project
-     */
-    public MenuRoot[] getMenuRoots() {
-        return (MenuRoot[]) menuRoots.toArray(MenuRoot.EMPTY_ARRAY);
-    }
-    /** Add a group of root
-     * @param roots Roots to add
-     */
-    public void addMenuRoots(MenuRoot[] roots) {
-        for (int i = 0; i < roots.length; i++) {
-            MenuRoot root = roots[i];
-            addMenu(root);
+public class FolderNavigatorLoader extends ResourceNavigatorLoader {
+    private class NameFilter implements FileFilter {
+        private RE regexp;
+        private NameFilter(String pattern) {
+            try {
+                regexp = REUtil.createRE("<" + pattern + ">");
+            } catch (Exception e) {
+                logger.error(e);
+            }
         }
+        /** Override method accept() of super class
+         * @see java.io.FileFilter#accept(java.io.File)
+         */
+        public boolean accept(File file) {
+            return regexp.match("<" + file.getName() + ">");
+        }
+    }
+    private Log logger = LogFactory.getLog(getClass());
+    /** Override method getResources() of super class
+     * @see com.cyclops.tornado.services.navigator.ResourceNavigatorLoader#getResources(org.apache.commons.configuration.Configuration, com.cyclops.tornado.BrokerManager)
+     */
+    protected URL[] getResources(
+        Configuration conf,
+        BrokerManager brokerManager) {
+        String[] folders = conf.getStringArray("folder");
+        String pattern = conf.getString("pattern", "*.xml");
+        ArrayList ret = new ArrayList();
+        for (int i = 0; i < folders.length; i++) {
+            String folder = folders[i];
+            String extFolder =
+                TurbineServices.getInstance().getRealPath(folder);
+            File f = new File(extFolder);
+            if (f.isDirectory()) {
+                File[] files = f.listFiles(new NameFilter(pattern));
+                for (int j = 0; j < files.length; j++) {
+                    File file = files[j];
+                    try {
+                        ret.add(file.toURL());
+                    } catch (Exception e) {
+                        logger.error(e);
+                    }
+                }
+            }
+        }
+        return (URL[]) ret.toArray(ResourceFinder.EMPTY_URL_ARRAY);
     }
 }
