@@ -7,8 +7,10 @@
 package com.cyclops.tornado.services.user;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.httpclient.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.apache.torque.util.BasePeer;
 import org.apache.torque.util.Criteria;
 
 import com.cyclops.tornado.om.UserPeer;
@@ -47,5 +49,19 @@ public class DefaultUserService extends AbstractUserService {
             logger.error("User identification exception", e);
             return CHECK_RESULT_EXCEPTION;
         }
+    }
+    /** Method loadUser()
+     * @see com.cyclops.tornado.services.user.AbstractUserService#loadUser(java.lang.String, boolean)
+     */
+    protected User loadUser(String userName, boolean isAnonymous)
+        throws Exception {
+        User user = super.loadUser(userName, isAnonymous);
+        Criteria crit = new Criteria();
+        crit.and(UserPeer.USER_NAME, userName);
+        List rs = BasePeer.doSelect(crit);
+        BeanUtils.copyProperties(rs.get(0), user);
+        user.setName(userName);
+        user.setAnonymous(isAnonymous);
+        return user;
     }
 }

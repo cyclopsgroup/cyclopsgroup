@@ -76,7 +76,7 @@ public abstract class AbstractUserService
             entry.latestAccess = System.currentTimeMillis();
             return entry.user;
         } else {
-            return null;
+            return getAnonymousUser();
         }
     }
     /** Method getActiveUsers()
@@ -122,8 +122,7 @@ public abstract class AbstractUserService
             configuration.getString(
                 "user.classname",
                 DefaultUser.class.getName());
-        DefaultUser du =
-            (DefaultUser) Class.forName(userClassName).newInstance();
+        User du = (User) Class.forName(userClassName).newInstance();
         du.setName(userName);
         du.setAnonymous(isAnonymous);
         return du;

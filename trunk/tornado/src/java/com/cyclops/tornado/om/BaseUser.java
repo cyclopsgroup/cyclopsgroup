@@ -48,6 +48,27 @@ public abstract class BaseUser extends BaseObject
                                                                 
     /** The value for the isSystem field */
     private boolean isSystem = false;
+                                          
+    /** The value for the accessCounter field */
+    private int accessCounter = 0;
+      
+    /** The value for the confirmed field */
+    private String confirmed;
+      
+    /** The value for the email field */
+    private String email;
+      
+    /** The value for the firstName field */
+    private String firstName;
+      
+    /** The value for the lastName field */
+    private String lastName;
+      
+    /** The value for the lastLoginTime field */
+    private long lastLoginTime;
+      
+    /** The value for the lastAccessTime field */
+    private long lastAccessTime;
       
     /** The value for the createdTime field */
     private long createdTime;
@@ -186,6 +207,195 @@ public abstract class BaseUser extends BaseObject
                   if (this.isSystem != v)
               {
             this.isSystem = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the AccessCounter
+     *
+     * @return int
+     */
+    public int getAccessCounter()
+    {
+        return accessCounter;
+    }
+
+        
+    /**
+     * Set the value of AccessCounter
+     *
+     * @param v new value
+     */
+    public void setAccessCounter(int v) 
+    {
+    
+                  if (this.accessCounter != v)
+              {
+            this.accessCounter = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the Confirmed
+     *
+     * @return String
+     */
+    public String getConfirmed()
+    {
+        return confirmed;
+    }
+
+        
+    /**
+     * Set the value of Confirmed
+     *
+     * @param v new value
+     */
+    public void setConfirmed(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.confirmed, v))
+              {
+            this.confirmed = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the Email
+     *
+     * @return String
+     */
+    public String getEmail()
+    {
+        return email;
+    }
+
+        
+    /**
+     * Set the value of Email
+     *
+     * @param v new value
+     */
+    public void setEmail(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.email, v))
+              {
+            this.email = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the FirstName
+     *
+     * @return String
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+        
+    /**
+     * Set the value of FirstName
+     *
+     * @param v new value
+     */
+    public void setFirstName(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.firstName, v))
+              {
+            this.firstName = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the LastName
+     *
+     * @return String
+     */
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+        
+    /**
+     * Set the value of LastName
+     *
+     * @param v new value
+     */
+    public void setLastName(String v) 
+    {
+    
+                  if (!ObjectUtils.equals(this.lastName, v))
+              {
+            this.lastName = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the LastLoginTime
+     *
+     * @return long
+     */
+    public long getLastLoginTime()
+    {
+        return lastLoginTime;
+    }
+
+        
+    /**
+     * Set the value of LastLoginTime
+     *
+     * @param v new value
+     */
+    public void setLastLoginTime(long v) 
+    {
+    
+                  if (this.lastLoginTime != v)
+              {
+            this.lastLoginTime = v;
+            setModified(true);
+        }
+    
+        }
+  
+    /**
+     * Get the LastAccessTime
+     *
+     * @return long
+     */
+    public long getLastAccessTime()
+    {
+        return lastAccessTime;
+    }
+
+        
+    /**
+     * Set the value of LastAccessTime
+     *
+     * @param v new value
+     */
+    public void setLastAccessTime(long v) 
+    {
+    
+                  if (this.lastAccessTime != v)
+              {
+            this.lastAccessTime = v;
             setModified(true);
         }
     
@@ -383,11 +593,18 @@ public abstract class BaseUser extends BaseObject
           copyObj.setEncryptedPassword(encryptedPassword);
           copyObj.setDescription(description);
           copyObj.setIsSystem(isSystem);
+          copyObj.setAccessCounter(accessCounter);
+          copyObj.setConfirmed(confirmed);
+          copyObj.setEmail(email);
+          copyObj.setFirstName(firstName);
+          copyObj.setLastName(lastName);
+          copyObj.setLastLoginTime(lastLoginTime);
+          copyObj.setLastAccessTime(lastAccessTime);
           copyObj.setCreatedTime(createdTime);
           copyObj.setIsDisabled(isDisabled);
   
                     copyObj.setId(0);
-                                                
+                                                                                          
   
         return copyObj;
     }
@@ -421,6 +638,27 @@ public abstract class BaseUser extends BaseObject
            .append("\n");
         str.append("IsSystem = ")
            .append(getIsSystem())
+           .append("\n");
+        str.append("AccessCounter = ")
+           .append(getAccessCounter())
+           .append("\n");
+        str.append("Confirmed = ")
+           .append(getConfirmed())
+           .append("\n");
+        str.append("Email = ")
+           .append(getEmail())
+           .append("\n");
+        str.append("FirstName = ")
+           .append(getFirstName())
+           .append("\n");
+        str.append("LastName = ")
+           .append(getLastName())
+           .append("\n");
+        str.append("LastLoginTime = ")
+           .append(getLastLoginTime())
+           .append("\n");
+        str.append("LastAccessTime = ")
+           .append(getLastAccessTime())
            .append("\n");
         str.append("CreatedTime = ")
            .append(getCreatedTime())
