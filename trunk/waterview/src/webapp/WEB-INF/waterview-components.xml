@@ -48,22 +48,22 @@
             <role>cyclopsgroup.waterview.valve.renderpage</role>
             <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
             <configuration>
-                <renderer extension="vm" role="cyclopsgroup.waterview.resolver.velocity"/>
-                <renderer extension="xml" role="com.cyclopsgroup.wateview.Resolver.Jelly"/>
+                <renderer extension="vm" role="cyclopsgroup.waterview.renderer.velocity"/>
+                <renderer extension="xml" role="cyclopsgroup.waterview.renderer.jelly"/>
             </configuration>
         </component>
         <!--
         *************** RESOLVERS ****************
         -->
         <component>
-            <role>cyclopsgroup.waterview.resolver.velocity</role>
+            <role>cyclopsgroup.waterview.renderer.velocity</role>
             <implementation>com.cyclopsgroup.waterview.velocity.VelocityPageRenderer</implementation>
             <configuration>
                 <cache-size>100</cache-size>
             </configuration>
         </component>
         <component>
-            <role>cyclopsgroup.waterview.resolver.jelly</role>
+            <role>cyclopsgroup.waterview.renderer.jelly</role>
             <implementation>com.cyclopsgroup.waterview.jelly.JellyPageRenderer</implementation>
         </component>
     </components>
