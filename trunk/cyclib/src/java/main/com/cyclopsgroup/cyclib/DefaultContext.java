@@ -97,7 +97,14 @@ public class DefaultContext implements Context
      */
     public void put(String name, Object variable)
     {
-        content.put(name, variable);
+        if (variable == null)
+        {
+            content.remove(name);
+        }
+        else
+        {
+            content.put(name, variable);
+        }
     }
 
     /**
