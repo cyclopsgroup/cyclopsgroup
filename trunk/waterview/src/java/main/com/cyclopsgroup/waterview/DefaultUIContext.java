@@ -89,7 +89,7 @@ public class DefaultUIContext implements UIContext
     /**
      * Method getContent() in class DefaultUIContext
      * 
-     * @return
+     * @return Get hash map content of context
      */
     public HashMap getContent()
     {

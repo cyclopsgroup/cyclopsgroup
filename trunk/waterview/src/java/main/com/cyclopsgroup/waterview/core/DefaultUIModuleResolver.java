@@ -69,11 +69,11 @@ public class DefaultUIModuleResolver extends AbstractLogEnabled implements
     }
 
     /**
-     * Override method resolve in super class of DefaultActionResolver
-     * 
-     * @see com.cyclopsgroup.waterview.Resolver#resolve(java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.UIModuleResolver#resolve(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
      */
-    public void resolve(String path, UIRuntime runtime) throws Exception
+    public void resolve(UIRuntime runtime, String path) throws Exception
     {
         String requestedPath = path;
         UIModule module = null;

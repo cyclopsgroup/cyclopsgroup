@@ -36,30 +36,29 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
         Serviceable
 {
 
-    private UIModuleResolver actionResolver;
+    private UIModuleResolver moduleResolver;
 
     /**
      * Override method process in super class of RunResolverValve
      * 
      * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public boolean process(UIRuntime runtime) throws Exception
+    public void process(UIRuntime runtime) throws Exception
     {
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String path = "action/" + (String) i.next();
             runModule(path, runtime);
         }
-        return true;
     }
 
     private void runModule(String path, UIRuntime runtime) throws Exception
     {
-        if (actionResolver == null)
+        if (moduleResolver == null)
         {
             return;
         }
-        actionResolver.resolve(path, runtime);
+        moduleResolver.resolve(runtime, path);
     }
 
     /**
@@ -69,7 +68,7 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager manager) throws ServiceException
     {
-        actionResolver = (UIModuleResolver) manager
+        moduleResolver = (UIModuleResolver) manager
                 .lookup(UIModuleResolver.ROLE);
     }
 }

@@ -15,7 +15,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Resolver;
+import com.cyclopsgroup.waterview.PageRenderer;
 import com.cyclopsgroup.waterview.UIRuntime;
 
 /**
@@ -23,8 +23,8 @@ import com.cyclopsgroup.waterview.UIRuntime;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class JellyPageRenderer extends AbstractLogEnabled implements Resolver,
-        Configurable
+public class JellyPageRenderer extends AbstractLogEnabled implements
+        PageRenderer, Configurable
 {
     /**
      * This is a simple inner class that will be the element cahed in LRMMap. Script object and timestamp of script resource is stored here
@@ -110,16 +110,35 @@ public class JellyPageRenderer extends AbstractLogEnabled implements Resolver,
     }
 
     /**
-     * Render the page and output the result into http response
-     * 
-     * @see com.cyclopsgroup.waterview.Resolver#resolve(java.lang.String, com.cyclopsgroup.waterview.UIRuntime)
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#pageExists(java.lang.String)
      */
-    public void resolve(String path, UIRuntime runtime) throws Exception
+    public boolean pageExists(String page)
+    {
+        try
+        {
+            Script script = getScript(page);
+            return script != null;
+        }
+        catch (Exception e)
+        {
+            getLogger().debug("Get script error", e);
+            return false;
+        }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRenderer#render(com.cyclopsgroup.waterview.UIRuntime, java.lang.String)
+     */
+    public void render(UIRuntime runtime, String page) throws Exception
     {
         JellyContext jellyContext = new JellyContext(initialJellyContext);
         XMLOutput output = XMLOutput.createXMLOutput(runtime
                 .getHttpServletResponse().getWriter());
-        Script script = getScript(path);
+        Script script = getScript(page);
         script.run(jellyContext, output);
     }
 }

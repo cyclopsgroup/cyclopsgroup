@@ -73,7 +73,7 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      * 
      * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public boolean process(UIRuntime runtime) throws Exception
+    public void process(UIRuntime runtime) throws Exception
     {
         String path = runtime.getHttpServletRequest().getPathInfo();
         if (StringUtils.isEmpty(path))
@@ -110,6 +110,5 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         {
             runtime.setPage(defaultPage);
         }
-        return true;
     }
 }

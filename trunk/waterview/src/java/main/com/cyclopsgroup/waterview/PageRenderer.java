@@ -17,18 +17,26 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * Resolver
+ * Interface of page renderer
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public interface Resolver
+public interface PageRenderer
 {
     /**
-     * Method resolve() in class Resolver
-     * 
-     * @param path
-     * @param runtime
-     * @throws Exception
+     * Test if the specified page is available
+     *
+     * @param page Page path
+     * @return Existing or not
      */
-    void resolve(String path, UIRuntime runtime) throws Exception;
+    boolean pageExists(String page);
+
+    /**
+     * Render page to runtime
+     *
+     * @param runtime UI Runtime object
+     * @param page Page path with extension to render
+     * @throws Exception Throw it out
+     */
+    void render(UIRuntime runtime, String page) throws Exception;
 }

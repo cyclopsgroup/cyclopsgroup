@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
 /**
- * TODO Add javadoc for class
+ * Simple adapter for service manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */

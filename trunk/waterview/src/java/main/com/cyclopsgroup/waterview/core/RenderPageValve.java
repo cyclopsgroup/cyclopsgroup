@@ -27,7 +27,9 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.Resolver;
+import com.cyclopsgroup.waterview.DelegatePageRenderer;
+import com.cyclopsgroup.waterview.PageRenderer;
+import com.cyclopsgroup.waterview.UIModuleResolver;
 import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Valve;
 
@@ -39,6 +41,9 @@ import com.cyclopsgroup.waterview.Valve;
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
         Configurable, Serviceable
 {
+    private String entry;
+
+    private UIModuleResolver moduleResolver;
 
     private Hashtable renderers;
 
@@ -60,8 +65,11 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             String role = renderConf.getAttribute("role");
             try
             {
-                Resolver renderer = (Resolver) serviceManager.lookup(role);
-                renderers.put(extension, renderer);
+                PageRenderer renderer = (PageRenderer) serviceManager
+                        .lookup(role);
+                DelegatePageRenderer delegate = new DelegatePageRenderer(
+                        renderer);
+                renderers.put(extension, delegate);
             }
             catch (Exception e)
             {
@@ -69,6 +77,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                         e);
             }
         }
+        entry = conf.getChild("entry").getValue("layout");
     }
 
     /**
@@ -76,19 +85,28 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      * 
      * @see com.cyclopsgroup.waterview.Valve#process(com.cyclopsgroup.waterview.UIRuntime)
      */
-    public boolean process(UIRuntime runtime) throws Exception
+    public void process(UIRuntime runtime) throws Exception
     {
         String page = runtime.getPage();
+        DelegatePageRenderer renderer = null;
+        String extension = null;
         for (Iterator i = renderers.keySet().iterator(); i.hasNext();)
         {
-            String extension = (String) i.next();
-            if (page.endsWith('.' + extension))
+            extension = (String) i.next();
+            String suffix = ',' + extension;
+            if (page.endsWith(suffix))
             {
-                Resolver renderer = (Resolver) renderers.get(extension);
-                renderer.resolve(page, runtime);
+                renderer = (DelegatePageRenderer) renderers.get(extension);
+                break;
             }
         }
-        return true;
+        if (renderer == null)
+        {
+            return;
+        }
+        runtime.getUIContext().put("delegateRenderer", renderer);
+        runtime.getUIContext().put("pageExtension", extension);
+        renderer.render(runtime, moduleResolver, entry, page);
     }
 
     /**
@@ -99,5 +117,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void service(ServiceManager manager) throws ServiceException
     {
         serviceManager = manager;
+        moduleResolver = (UIModuleResolver) manager
+                .lookup(UIModuleResolver.ROLE);
     }
 }

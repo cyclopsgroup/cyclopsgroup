@@ -31,7 +31,6 @@ public interface Valve
      * 
      * @param runtime
      * @throws Exception
-     * @return Should continue?
      */
-    boolean process(UIRuntime runtime) throws Exception;
+    void process(UIRuntime runtime) throws Exception;
 }

@@ -75,13 +75,6 @@ public interface UIRuntime
     String getPage();
 
     /**
-     * Get context for page rendering
-     * 
-     * @return Context interface
-     */
-    UIContext getUIContext();
-
-    /**
      * Get parameter parser for request parameters
      * 
      * @return Vaue parser interface
@@ -91,9 +84,16 @@ public interface UIRuntime
     /**
      * Method getComponentManager() in class UIRuntime
      * 
-     * @return
+     * @return Service manager instance
      */
     ServiceManager getServiceManager();
+
+    /**
+     * Get context for page rendering
+     * 
+     * @return Context interface
+     */
+    UIContext getUIContext();
 
     /**
      * Method setRenderTemplate() in class WebRuntime

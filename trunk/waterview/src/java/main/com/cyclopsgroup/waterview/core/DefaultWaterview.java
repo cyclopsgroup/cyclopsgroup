@@ -95,10 +95,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         for (Iterator i = valves.iterator(); i.hasNext();)
         {
             Valve valve = (Valve) i.next();
-            if (!valve.process(runtime))
-            {
-                break;
-            }
+            valve.process(runtime);
         }
     }
 

@@ -21,8 +21,17 @@ package com.cyclopsgroup.waterview;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface UIModuleResolver extends Resolver
+public interface UIModuleResolver
 {
     /** Role name of this component in container */
     String ROLE = UIModuleResolver.class.getName();
+
+    /**
+     * Resolve module with given module name
+     *
+     * @param runtime UIRuntime object
+     * @param module Module name
+     * @throws Exception Throw it out
+     */
+    void resolve(UIRuntime runtime, String module) throws Exception;
 }
