@@ -8,9 +8,6 @@
 		<reference referencedUin="jdt:e_class:src:com.cyclops.jmainboard.Engine">
 			<property name="bounds" value="343,190,172,146"/>
 		</reference>
-		<reference referencedUin="design:view:::V574ng9ds1cb4au551j9h">
-			<property name="bounds" value="209,10,129,69"/>
-		</reference>
 		<reference referencedUin="design:view:::V574ng9dt1yiong29c3in">
 			<property name="bounds" value="187,270,136,82"/>
 		</reference>

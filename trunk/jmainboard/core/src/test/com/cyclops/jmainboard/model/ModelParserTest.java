@@ -194,6 +194,7 @@
  */
 package com.cyclops.jmainboard.model;
 
+import java.io.File;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -211,14 +212,16 @@ public class ModelParserTest extends TestCase {
     public void testParse() throws Exception {
         ModelParser mp = new ModelParser();
         ComponentModel cm =
-            mp.parse(getClass().getResource("test-component.xml"));
+            mp.parse(
+                new File("src/rttest/home/components/com.cyclops.jmainboard.test1/component.xml")
+                    .toURL());
         assertNotNull(cm);
-        assertEquals("com.cyclops.jmainboard.test", cm.getId());
+        assertEquals("com.cyclops.jmainboard.test1", cm.getId());
         assertEquals("1.0", cm.getVersion());
         assertEquals("Test Component", cm.getTitle());
         assertEquals("Just for testing", cm.getDescription());
         assertEquals(
-            "com.cyclops.jmainboard.model.TestComponent",
+            "com.cyclops.jmainboard.TestComponent",
             cm.getImplementation());
         List properties = cm.getProperties();
         assertEquals(2, properties.size());
@@ -230,7 +233,7 @@ public class ModelParserTest extends TestCase {
         assertEquals("2", pm.getValue());
         List deps = cm.getDependencies();
         assertEquals(2, deps.size());
-        assertTrue(deps.contains("org.apache.turbine"));
-        assertTrue(deps.contains("org.apache.velocity"));
+        assertTrue(deps.contains("com.cyclops.jmainboard.test2"));
+        assertTrue(deps.contains("com.cyclops.jmainboard.test3"));
     }
 }
