@@ -1,0 +1,45 @@
+body {
+    margin: 0px;
+}
+body, td, th {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #003366;
+}
+.a td {
+    background-color: WHITE;
+}
+.b td {
+    background-color: #EFEFEF;
+}
+img.handle {
+    border: 0;
+    padding-right: 2px;
+}
+th {
+    font-weight: bold;
+    text-align: left;
+    text-indent: 5px;
+    background-color: #CCCCFF !important;
+    color: #336699 !important;
+}
+
+.source {
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+    font-size: 11px !important;
+}
+
+a:link, a:visited {
+    color: #003366 !important;
+}
+a.subsection {
+    font-size: 13pt;
+    color: #336699;
+}
+a.section {
+    font-size: 15pt;
+}
+
+.section table {
+    background-color: #DDDDDD;
+}

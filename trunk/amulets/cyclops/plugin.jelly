@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<project xmlns:j="jelly:core" xmlns:v="jelly:velocity">
+    <goal name="cyclops:xdoc" description="Generate cyclops group project document">
+        <copy todir="${maven.docs.dest}">
+            <fileset dir="${plugin.resources}/docs">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <copy todir="${maven.gen.docs}">
+            <fileset dir="${plugin.resources}/generated-xdocs">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <echo>${maven.cyclops.xdoc.jsl}</echo>
+        <j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
+        ${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', newSite)}
+        <attainGoal name="xdoc"/>
+    </goal>
+</project>
