@@ -145,7 +145,6 @@ public class Log4jLoggerManager extends AbstractLoggerManager implements
             props.setProperty("basedir", basedir);
         }
         PropertyConfigurator.configure(props);
-
     }
 
     /**
