@@ -209,6 +209,8 @@ public interface Engine {
     String ENGINE_HOME = "engine.home";
     /** Value for engine in context */
     String ENGINE_IMPL = "com.cyclops.jmainboard.impl.DefaultEngine";
+    /** Component directory, could be list of directories separated by commas */
+    String COMPONENT_DIRECTORY = "engine.component.directory";
     /** Get component by id
      * @param componentId Component Id
      * @return Component instance

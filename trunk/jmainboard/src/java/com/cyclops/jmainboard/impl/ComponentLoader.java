@@ -218,17 +218,27 @@ import com.cyclops.jmainboard.utils.VersionComparator;
  * Edited with eclipse 2.1.3
  */
 public class ComponentLoader extends LoggableObject {
+
     private ClassLoader classLoader;
+
     private Hashtable components = new Hashtable();
+
     private ModelParser modelParser = new ModelParser();
+
     private DefaultEngine engine;
+
     /** Load components from Engine home
      * @param e Engine instance
      */
     public void load(DefaultEngine e) {
         engine = e;
-        loadComponents(new File(e.getEngineHome(), "components"));
+        File[] componentDirectories = engine.getComponentDirectories();
+        for (int i = 0; i < componentDirectories.length; i++) {
+            File componentDirectory = componentDirectories[i];
+            loadComponents(componentDirectory);
+        }
     }
+
     /** Load components without dependency objects and order
      * @return List of component instances without dependencies
      */
@@ -237,9 +247,7 @@ public class ComponentLoader extends LoggableObject {
     }
 
     private void loadComponents(File folder) {
-        if (folder == null || !folder.isDirectory()) {
-            return;
-        }
+        if (folder == null || !folder.isDirectory()) { return; }
         if (new File(folder, "component.xml").isFile()) {
             loadComponent(folder);
         } else {
@@ -250,17 +258,16 @@ public class ComponentLoader extends LoggableObject {
             }
         }
     }
+
     private void loadComponent(File folder) {
         File descriptor = new File(folder, "component.xml");
         try {
-            ComponentModel cm =
-                (ComponentModel) modelParser.parse(descriptor.toURL());
-            DefaultComponent dc =
-                (DefaultComponent) Class
-                    .forName(cm.getImplementation())
-                    .newInstance();
-            VelocityContext ctx =
-                VelocityUtils.createContext(engine.getProperties());
+            ComponentModel cm = (ComponentModel) modelParser.parse(descriptor
+                    .toURL());
+            DefaultComponent dc = (DefaultComponent) Class.forName(
+                    cm.getImplementation()).newInstance();
+            VelocityContext ctx = VelocityUtils.createContext(engine
+                    .getProperties());
             dc.setId(cm.getId());
             dc.setVersion(cm.getVersion());
             dc.setTitle(RenderTool.eval(ctx, cm.getTitle()));
@@ -268,16 +275,13 @@ public class ComponentLoader extends LoggableObject {
             List props = cm.getProperties();
             for (Iterator i = props.iterator(); i.hasNext();) {
                 PropertyModel prop = (PropertyModel) i.next();
-                dc.getProperties().setProperty(
-                    prop.getName(),
-                    RenderTool.eval(ctx, prop.getValue()));
+                dc.getProperties().setProperty(prop.getName(),
+                        RenderTool.eval(ctx, prop.getValue()));
             }
-            dc.getProperties().setProperty(
-                Component.COMPONENT,
-                cm.getImplementation());
-            dc.getProperties().setProperty(
-                Component.COMPONENT_HOME,
-                folder.getAbsolutePath());
+            dc.getProperties().setProperty(Component.COMPONENT,
+                    cm.getImplementation());
+            dc.getProperties().setProperty(Component.COMPONENT_HOME,
+                    folder.getAbsolutePath());
             List deps = cm.getDependencies();
             for (Iterator i = deps.iterator(); i.hasNext();) {
                 String dep = (String) i.next();
@@ -286,8 +290,7 @@ public class ComponentLoader extends LoggableObject {
             if (components.containsKey(dc.getId())) {
                 Component old = (Component) components.get(dc.getId());
                 if (VersionComparator
-                    .compare(dc.getVersion(), old.getVersion())
-                    > 0) {
+                        .compare(dc.getVersion(), old.getVersion()) > 0) {
                     components.put(dc.getId(), dc);
                 }
             } else {

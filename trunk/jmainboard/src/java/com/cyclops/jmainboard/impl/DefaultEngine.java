@@ -216,11 +216,22 @@ import com.cyclops.jmainboard.utils.ComponentSorter;
  */
 public class DefaultEngine extends LoggableObject implements Engine {
 
+    private Vector componentDirectories = new Vector();
+
     private Vector components = new Vector();
 
     private File engineHome = new File("");
 
     private Properties properties = new Properties();
+
+    /** Method addComponentDirectory in class DefaultEngine
+     * @param componentDirectory File object to be added
+     */
+    public void addComponentDirectory(File componentDirectory) {
+        if (!componentDirectories.contains(componentDirectory)) {
+            componentDirectories.add(componentDirectory);
+        }
+    }
 
     /** Override method getComponent in the derived class
      * @see com.cyclops.jmainboard.Engine#getComponent(java.lang.String)
@@ -237,6 +248,13 @@ public class DefaultEngine extends LoggableObject implements Engine {
         return ret;
     }
 
+    /** Method getComponentDirectories in class DefaultEngine
+     * @return Array of component directory File objects
+     */
+    public File[] getComponentDirectories() {
+        return (File[]) componentDirectories.toArray(new File[0]);
+    }
+
     /** Get all components
      * @return Array of all components
      */
@@ -251,6 +269,18 @@ public class DefaultEngine extends LoggableObject implements Engine {
         return engineHome;
     }
 
+    private void loadComponentDirectories() {
+        componentDirectories.add(new File(getEngineHome(), "components"));
+        String passedDirectories = getProperties().getProperty(
+                COMPONENT_DIRECTORY, "");
+        if (StringUtils.isEmpty(passedDirectories)) { return; }
+        String[] directories = StringUtils.split(passedDirectories, ";");
+        for (int i = 0; i < directories.length; i++) {
+            String directory = directories[i];
+            addComponentDirectory(new File(directory));
+        }
+    }
+
     /** Override method getProperties in the derived class
      * @see com.cyclops.jmainboard.Engine#getProperties()
      */
@@ -262,6 +292,8 @@ public class DefaultEngine extends LoggableObject implements Engine {
      * Initalize the engine
      */
     protected void init() {
+        loadComponentDirectories();
+
         // preload components before really starting them
         HashMap rawComponents = new HashMap();
         ComponentLoader loader = new ComponentLoader();
@@ -370,5 +402,4 @@ public class DefaultEngine extends LoggableObject implements Engine {
             }
         }
     }
-
 }
