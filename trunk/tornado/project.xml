@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <pomVersion>3</pomVersion>
     <name>tornado</name>
@@ -13,9 +13,7 @@
     <inceptionYear>2003</inceptionYear>
     <package>com.cyclops.tornado</package>
     <shortDescription>A web application based on Jakarta Turbine</shortDescription>
-    <description>
---------To change this text, edit project.xml please--------
-  </description>
+    <description>--------To change this text, edit project.xml please--------</description>
     <url>http://cyclops-group.sourceforge.net/projects/tornado</url>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/tornado</siteDirectory>
@@ -254,9 +252,9 @@
             </properties>
         </dependency>
         <dependency>
-          <groupId>torque</groupId>
-          <artifactId>torque-gen</artifactId>
-          <version>3.1</version>
+            <groupId>torque</groupId>
+            <artifactId>torque-gen</artifactId>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <groupId>turbine</groupId>
