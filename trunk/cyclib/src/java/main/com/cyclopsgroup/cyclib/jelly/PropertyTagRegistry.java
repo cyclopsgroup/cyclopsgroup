@@ -57,7 +57,7 @@ public class PropertyTagRegistry extends TagRegistry
                 continue;
             }
             String url = props.getProperty(key);
-            String libraryName = StringUtils.chomp(url, ".url");
+            String libraryName = StringUtils.chomp(key, ".url");
             if (props.containsKey(libraryName + ".class"))
             {
                 String libraryClass = props.getProperty(libraryName + ".class");
