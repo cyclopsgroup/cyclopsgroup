@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Laputa Project</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="What is Laputa">
+            <p>Laputa is a community system based on <a href="http://www.cyclopsgroup.com/projects">waterview</a>, <a href="http://incubator.apache.org/jackrabbit">apache jackrabbit</a> and <a href="http://www.hibernate.org">hibernate</a>.</p>
+        </section>
+    </body>
+</document>

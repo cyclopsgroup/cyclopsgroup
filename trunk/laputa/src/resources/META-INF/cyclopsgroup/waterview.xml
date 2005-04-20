@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Waterview xmlns="com.cyclopsgroup.waterview.definition">
+    <Layout id="laputa.DefaultLayout" name="Default Laputa Layout" description="3 columns, similar to default waterview layout">
+        <JellyLayout script="LaputaDefaultLayout.jelly"/>
+    </Layout>
+</Waterview>
