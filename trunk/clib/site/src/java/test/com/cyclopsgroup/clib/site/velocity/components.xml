@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.clib.site.velocity.VelocityFactory</role>
+            <implementation>com.cyclopsgroup.clib.site.velocity.DefaultVelocityFactory</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+    </components>
+</component-set>

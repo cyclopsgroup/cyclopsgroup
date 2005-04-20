@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<!-- Generate cyclopsgroup style website instead of ugly maven default one -->
+	<preGoal name="xdoc:transform">
+		<attainGoal name="cyclops:pre-xdoc"/>
+	</preGoal>
+</project>
