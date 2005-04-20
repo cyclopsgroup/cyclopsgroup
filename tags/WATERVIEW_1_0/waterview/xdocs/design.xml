@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Design</title>
+		<author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+	</properties>
+	<body>
+		<section name="Overview">
+			<p>Being similar to turbine, waterview delivers an http request handling pipeline. Developer is able to configure a pipeline with given valves for waterview system. Each valve in pipeline is a component. Developer can configure each valve just like configuring any other component in plexus.</p>
+		</section>
+		<section name="Valve">
+			<p>Each valve is a normal component which extends <a href="apidocs/com/cyclopsgroup/waterview/Valve.html">com.cyclopsgroup.waterview.Valve</a>. By default, the following valves are provided in order.</p>
+			<table>
+				<tr>
+					<th>Class Name</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>com.cyclopsgroup.waterview.core.ParserURLValve</td>
+					<td>Parser URL to get necessary information like page name, action name, etc.</td>
+				</tr>
+				<tr>
+					<td>com.cyclopsgroup.waterview.core.HandleErrorValve</td>
+					<td>Redirect the page to the error page if there's anything wrong</td>
+				</tr>
+				<tr>
+					<td>com.cyclopsgroup.waterview.core.RunActionsValve</td>
+					<td>Valve that runs all the actions in this request</td>
+				</tr>
+				<tr>
+					<td>com.cyclopsgroup.waterview.core.RenderPageValve</td>
+					<td>Use the corresponding plugable page renderer to render the requested page</td>
+				</tr>
+			</table>
+		</section>
+		<section name="Page Renderer">
+			<p>Page renderer is components that extends PageRenderer. The following page renderers are provided by default.</p>
+			<table>
+				<tr>
+					<th>Class Name</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>com.cyclopsgroup.waterview.velocity.VelocityPageRenderer</td>
+					<td>Velocity page renderer</td>
+				</tr>
+			</table>
+		</section>
+		<section name="Action Resolver">
+			<p>Action resolver ...</p>
+		</section>
+	</body>
+</document>
