@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -28,40 +30,88 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.UIRuntime;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Waterview;
 
 /**
- * Default implementation of waterview
- *
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * Default waterview implementation
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
-Configurable, Serviceable, Initializable
+        Configurable, Initializable, Serviceable
 {
+    private String defaultPipelinePattern = ".*\\.jelly";
 
-    private Valve firstValve;
+    private transient Map pipelineRoles = ListOrderedMap
+            .decorate(new HashMap());
 
-    private ServiceManager serviceManager;
+    private Map pipelines = ListOrderedMap.decorate(new Hashtable());
 
-    private List valveRoles;
+    private transient ServiceManager serviceManager;
 
     /**
-     * Override method configure in super class of DefaultWaterview
+     * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        Configuration[] valveConfs = conf.getChild("pipeline").getChildren("valve");
-        valveRoles = new ArrayList(valveConfs.length);
-        for (int i = 0; i < valveConfs.length; i++)
+        Configuration[] confs = conf.getChild("pipelines").getChildren(
+                "pipeline");
+        for (int i = 0; i < confs.length; i++)
         {
-            String valveRole = valveConfs[i].getAttribute("role");
-            valveRoles.add(valveRole);
+            Configuration c = confs[i];
+            String pattern = c.getAttribute("pattern");
+            String role = c.getAttribute("role");
+            pipelineRoles.put(pattern, role);
         }
+    }
+
+    /**
+     * Getter method for defaultPipeline
+     *
+     * @return Returns the defaultPipeline.
+     */
+    public String getDefaultPipelinePattern()
+    {
+        return defaultPipelinePattern;
+    }
+
+    /**
+     * Get registered pipeline
+     *
+     * @param pattern String
+     * @return Pipeline object
+     */
+    public Pipeline getPipeline(String pattern)
+    {
+        return (Pipeline) pipelines.get(pattern);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.PageRuntime)
+     */
+    public void handleRuntime(PageRuntime runtime) throws Exception
+    {
+        Pipeline pipeline = getPipeline(defaultPipelinePattern);
+        for (Iterator i = pipelines.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            if (Pattern.matches('^' + pattern + '$', runtime.getRequestPath()))
+            {
+                pipeline = getPipeline(pattern);
+            }
+        }
+        if (pipeline == null)
+        {
+            throw new UnknownPageException(runtime.getRequestPath());
+        }
+        pipeline.handleRuntime(runtime);
     }
 
     /**
@@ -71,45 +121,45 @@ Configurable, Serviceable, Initializable
      */
     public void initialize() throws Exception
     {
-        boolean start = true;
-        Valve previous = null;
-        for (Iterator i = valveRoles.iterator(); i.hasNext();)
+        for (Iterator i = pipelineRoles.keySet().iterator(); i.hasNext();)
         {
-            String valveRole = (String) i.next();
-            Valve valve = (Valve) serviceManager.lookup(valveRole);
-            if (start)
-            {
-                start = false;
-                firstValve = valve;
-            }
-            else
-            {
-                previous.setNext(valve);
-            }
-            previous = valve;
+            String pattern = (String) i.next();
+            String role = (String) pipelineRoles.get(pattern);
+            Pipeline pipeline = (Pipeline) serviceManager.lookup(role);
+            registerPipeline(pattern, pipeline);
         }
+        pipelineRoles.clear();
+        serviceManager = null;
     }
 
     /**
-     * Override method process in super class of DefaultWaterview
+     * Register pipeline with given pattern
      *
-     * @see com.cyclopsgroup.waterview.Waterview#process(com.cyclopsgroup.waterview.UIRuntime)
+     * @param pattern Path pattern
+     * @param pipeline Pipeline object
      */
-    public void process(UIRuntime runtime) throws Exception
+    public void registerPipeline(String pattern, Pipeline pipeline)
     {
-        if (firstValve != null)
-        {
-            firstValve.invoke(runtime);
-        }
+        pipelines.put(pattern, pipeline);
     }
 
     /**
-     * Override method service in super class of DefaultWaterview
+     * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager sm) throws ServiceException
+    public void service(ServiceManager serviceManager) throws ServiceException
     {
-        serviceManager = sm;
+        this.serviceManager = serviceManager;
+    }
+
+    /**
+     * Set default pipeline pattern
+     *
+     * @param pattern Default pattern
+     */
+    public void setDefaultPipelinePattern(String pattern)
+    {
+        defaultPipelinePattern = pattern;
     }
 }

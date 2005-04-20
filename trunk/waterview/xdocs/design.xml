@@ -6,7 +6,7 @@
 	</properties>
 	<body>
 		<section name="Overview">
-			<p>Being similar to turbine, waterview delivers an http request handling pipeline. Developer is able to configure a pipeline with given valves for waterview system. Each valve in pipeline is a component. Developer can configure each valve just like configuring any other component in plexus.</p>
+			<p>In waterview world, a page rendering process is split into Page, Layout, Panel(s) and View(s) under each Panel, plus optional Action(s). Each one of them(Page, Layout, Panel, View and Action) has it's module ( An executable interface ) which is going to execute before the part is actually renderered.</p>
 		</section>
 		<section name="Valve">
 			<p>Each valve is a normal component which extends <a href="apidocs/com/cyclopsgroup/waterview/Valve.html">com.cyclopsgroup.waterview.Valve</a>. By default, the following valves are provided in order.</p>

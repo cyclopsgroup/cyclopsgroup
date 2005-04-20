@@ -18,14 +18,14 @@ package com.cyclopsgroup.waterview.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.cyclopsgroup.cyclib.ValueParser;
+import com.cyclopsgroup.waterview.RequestValueParser;
 
 /**
  * Servet request implemented value parser
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-class RequestValueParserAdapter extends ValueParser
+class RequestValueParserAdapter extends RequestValueParser
 {
     private HttpServletRequest httpServletRequest;
 
@@ -42,7 +42,7 @@ class RequestValueParserAdapter extends ValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.cyclib.ValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.RequestValueParser#add(java.lang.String, java.lang.String)
      */
     public void add(String name, String value)
     {
@@ -52,7 +52,7 @@ class RequestValueParserAdapter extends ValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.cyclib.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValue(java.lang.String)
      */
     protected String doGetValue(String name) throws Exception
     {
@@ -62,7 +62,7 @@ class RequestValueParserAdapter extends ValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.cyclib.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValues(java.lang.String)
      */
     protected String[] doGetValues(String name) throws Exception
     {
@@ -72,7 +72,7 @@ class RequestValueParserAdapter extends ValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.cyclib.ValueParser#remove(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RequestValueParser#remove(java.lang.String)
      */
     public void remove(String name)
     {

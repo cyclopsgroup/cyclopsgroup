@@ -16,85 +16,24 @@
  */
 package com.cyclopsgroup.waterview;
 
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Valve for pipeline
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public abstract class Valve extends AbstractLogEnabled
+public interface Valve
 {
-
     /**
      * Empty valve array
-     * 
-     * @uml.property name="eMPTY_ARRAY"
-     * @uml.associationEnd multiplicity="(0 -1)"
      */
     Valve[] EMPTY_ARRAY = new Valve[0];
 
     /**
-     * Logger object
-     * 
-     * @uml.property name="logger"
-     * @uml.associationEnd multiplicity="(1 1)"
-     */
-    protected Log logger = LogFactory.getLog(getClass());
-
-    /**
-     * 
-     * @uml.property name="next"
-     * @uml.associationEnd multiplicity="(0 1)"
-     */
-    private Valve next;
-
-    /**
-     * Getter method for next
-     * 
-     * @return Returns the next.
-     * 
-     * @uml.property name="next"
-     */
-    public Valve getNext() {
-        return next;
-    }
-
-
-    /**
-     * Invoke this valve.
-     * Make sure to invokeNext valve
-     * 
-     * @param runtime Runtime context
-     * @throws Exception Throw it out
-     */
-    public abstract void invoke(UIRuntime runtime) throws Exception;
-
-    /**
-     * Invoke next valve
+     * Invoke the valve
      *
-     * @param runtime Runtime object
+     * @param runtime Page runtime object
+     * @param context Pipeline context
      * @throws Exception Throw it out
      */
-    protected final void invokeNext(UIRuntime runtime) throws Exception
-    {
-        if (getNext() != null)
-        {
-            getNext().invoke(runtime);
-        }
-    }
-
-    /**
-     * Setter method for next
-     * 
-     * @param next The next to set.
-     * 
-     * @uml.property name="next"
-     */
-    public void setNext(Valve next) {
-        this.next = next;
-    }
-
+    void invoke(PageRuntime runtime, PipelineContext context) throws Exception;
 }

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:View xmlns:w="com.cyclopsgroup.waterview.ui" xmlns="com.cyclopsgroup.waterview.html">
+    <h2>Hello World</h2>
+    <p>Page is ${page}</p>
+</w:View>

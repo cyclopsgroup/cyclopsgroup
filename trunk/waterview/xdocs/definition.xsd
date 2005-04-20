@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="com.cyclopsgroup.waterview.definition" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <element name="Waterview">
+        <complexType>
+            <sequence>
+                <element name="TagLibrary" minOccurs="0" maxOccurs="unbounded">
+                    <complexType>
+                        <choice maxOccurs="unbounded">
+                            <element name="TagPackage">
+                                <complexType>
+                                    <attribute name="className" use="required"/>
+                                </complexType>
+                            </element>
+                            <element name="Tag">
+                                <complexType>
+                                    <attribute name="name" use="required"/>
+                                    <attribute name="className" use="required"/>
+                                </complexType>
+                            </element>
+                        </choice>
+                        <attribute name="uri" use="required"/>
+                    </complexType>
+                </element>
+                <element name="Layout" minOccurs="0" maxOccurs="unbounded">
+                    <complexType>
+                        <choice>
+                            <element name="JellyLayout">
+                                <complexType>
+                                    <attribute name="script" use="required"/>
+                                </complexType>
+                            </element>
+                        </choice>
+                        <attribute name="id" use="required"/>
+                        <attribute name="name"/>
+                        <attribute name="description"/>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

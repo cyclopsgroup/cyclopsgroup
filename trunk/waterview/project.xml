@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by jiaqi (Ru-Board) -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-    <extend>${maven.repo.local}/cyclib/poms/cyclopsgroup.pom</extend>
+    <extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>1.0</currentVersion>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
         <logo>/images/cyclopsgroup_logo.gif</logo>
     </organization>
     <inceptionYear>2004</inceptionYear>
-    <shortDescription>Waterview is a highly componentized web application framework with plugable page rendering tools</shortDescription>
+    <shortDescription>Waterview is a highly componentized portal framework</shortDescription>
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>WATERVIEW_1_0</tag>
+        </version>
+    </versions>
     <developers>
         <developer>
-            <name>Guo, Jiaqi</name>
+            <name>Jiaqi Guo</name>
             <id>jiaqi</id>
             <email>jiaqi.guo@gmail.com</email>
             <organization>Evavi</organization>
             <roles>
                 <role>Developer</role>
             </roles>
-            <url>http://cyclops-group.sourceforge.net</url>
+            <url>http://www.cyclopsgroup.com</url>
             <timezone>-6</timezone>
         </developer>
     </developers>
@@ -36,10 +44,36 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-framework</artifactId>
+            <version>4.1.4</version>
+            <url>http://avalon.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>classworlds</groupId>
             <artifactId>classworlds</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1-alpha-1</version>
             <url>http://classworlds.codehaus.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>clib</groupId>
+            <artifactId>clib-lang</artifactId>
+            <version>SNAPSHOT</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>clib</groupId>
+            <artifactId>clib-site</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://www.cyclopsgroup.com/projects/clib/site</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -65,7 +99,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>20040601.171102</version>
+            <version>1.0-beta-4</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -99,15 +133,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>cyclib</groupId>
-            <artifactId>cyclib</artifactId>
-            <version>SNAPSHOT</version>
-            <url>http://cyclops-group.sourceforge.net/projects/cyclib</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5-beta-2</version>
@@ -132,14 +157,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>logkit</groupId>
-            <artifactId>logkit</artifactId>
-            <version>1.0.1</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>plexus</groupId>
             <artifactId>plexus</artifactId>
             <version>0.17</version>
@@ -149,9 +166,25 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>plexus</groupId>
+            <artifactId>plexus-avalon-personality</artifactId>
+            <version>0.12</version>
+            <url>http://plexus.codehaus.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>servlet</groupId>
             <artifactId>servlet</artifactId>
             <version>2.3</version>
+            <url>http://java.sun.com/j2ee</url>
+        </dependency>
+        <dependency>
+            <groupId>tomcat</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.1.30</version>
+            <url>http://jakarta.apache.org/tomcat</url>
         </dependency>
         <dependency>
             <groupId>velocity</groupId>
@@ -174,39 +207,11 @@
         <dependency>
             <groupId>xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>20040809</version>
             <url>http://xstream.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>4.1.4</version>
-            <url>http://avalon.apache.org</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>jmx</groupId>
-            <artifactId>jmxri</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>plexus</groupId>
-            <artifactId>plexus-avalon-personality</artifactId>
-            <version>0.12</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>tomcat</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>4.1.30</version>
-            <url>http://jakarta.apache.org/tomcat</url>
         </dependency>
     </dependencies>
     <build>
@@ -217,6 +222,15 @@
             <includes>
                 <include>**/*Test.java</include>
             </includes>
+            <resources>
+                <resource>
+                    <directory>${pom.build.unitTestSourceDirectory}</directory>
+                    <excludes>
+                        <exclude>**/*.java</exclude>
+                    </excludes>
+                    <filtering>false</filtering>
+                </resource>
+            </resources>
         </unitTest>
         <resources>
             <resource>
@@ -239,4 +253,3 @@
         </resources>
     </build>
 </project>
-

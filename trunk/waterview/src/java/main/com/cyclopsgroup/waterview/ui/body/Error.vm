@@ -1,2 +1,0 @@
-<h2>Got error $exception.class.name</h2>
-<pre>$stackTrace</pre>

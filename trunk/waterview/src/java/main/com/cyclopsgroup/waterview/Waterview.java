@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,24 @@
  */
 package com.cyclopsgroup.waterview;
 
-
 /**
- * Waterview component
+ * Waterview interface
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface Waterview
 {
-    /** Role name of this component in container */
+    /** Initialization variable map name in context */
+    String INIT_PROPERTIES = Waterview.class.getName() + ".initProperties";
+
+    /** Role name of waterview component */
     String ROLE = Waterview.class.getName();
 
     /**
-     * Process request
-     * 
-     * @param runtime Runtime info
-     * @throws Exception Thro`w it out
+     * Handle page runtime object
+     *
+     * @param runtime Runtime page runtime object
+     * @throws Exception Throw it to caller
      */
-    void process(UIRuntime runtime) throws Exception;
+    void handleRuntime(PageRuntime runtime) throws Exception;
 }

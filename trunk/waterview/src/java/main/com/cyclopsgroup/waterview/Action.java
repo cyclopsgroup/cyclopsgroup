@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,11 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * A runnable module
+ * TODO Add javadoc for this class
  * 
- * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Action
+public interface Action extends Module
 {
 
-    /**
-     * Process given runtime object
-     * 
-     * @param runtime Runtime data object
-     * @throws Exception Throw it to container
-     */
-    void execute(UIRuntime runtime) throws Exception;
 }

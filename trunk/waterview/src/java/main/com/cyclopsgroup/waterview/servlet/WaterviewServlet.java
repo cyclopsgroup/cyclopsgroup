@@ -18,6 +18,8 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -25,14 +27,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
+import com.cyclopsgroup.clib.site.plexus.ClibPlexusContainer;
+import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.ServiceManagerAdapter;
-import com.cyclopsgroup.waterview.UIRuntime;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.WaterviewContainer;
 
 /**
  * Main waterview servlet
@@ -50,7 +53,7 @@ public class WaterviewServlet extends HttpServlet
 
     private Log logger = LogFactory.getLog(getClass());
 
-    private Waterview waterview;
+    private ServiceManager serviceManager;
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -61,7 +64,6 @@ public class WaterviewServlet extends HttpServlet
     {
         try
         {
-            container.release(waterview);
             container.dispose();
         }
         catch (Exception e)
@@ -92,24 +94,14 @@ public class WaterviewServlet extends HttpServlet
         internallyProcess(request, response);
     }
 
-    /**
-     * Get plexus container
-     * 
-     * @return Plexus container object
-     */
-    public PlexusContainer getContainer()
-    {
-        return container;
-    }
-
-    private void handleException(Throwable e, UIRuntime runtime)
+    private void handleException(Throwable e, PageRuntime runtime)
             throws ServletException, IOException
     {
-        runtime.setContentType("text/html");
-        runtime.getOutput().print("<html><body><pre>");
+        runtime.setOutputContentType("text/html");
+        runtime.getOutput().print(
+                "<html><body><h2>Internal error occurs</h2><p><pre>");
         e.printStackTrace(runtime.getOutput());
-        runtime.getOutput().print("</pre></body></html>");
-        runtime.getOutput().flush();
+        runtime.getOutput().print("</pre></p></body></html>");
     }
 
     /**
@@ -119,46 +111,49 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
+        String basedir = config.getServletContext().getRealPath("");
+        Properties initProperties = new Properties();
+        initProperties.setProperty("basedir", basedir);
+        initProperties.setProperty("plexus.home", basedir);
+        Enumeration i = config.getInitParameterNames();
+        while (i.hasMoreElements())
+        {
+            String key = (String) i.nextElement();
+            String value = config.getInitParameter(key);
+            initProperties.setProperty(key, value);
+        }
         try
         {
-            container = new WaterviewContainer();
-            String basedir = config.getServletContext().getRealPath("");
-            container.addContextValue("basedir", basedir);
-            container.addContextValue("plexus.home", basedir);
-            Enumeration i = config.getInitParameterNames();
-            while (i.hasMoreElements())
+            container = new ClibPlexusContainer();
+            serviceManager = new ServiceManagerAdapter(container);
+            for (Iterator j = initProperties.keySet().iterator(); j.hasNext();)
             {
-                String key = (String) i.nextElement();
-                String value = config.getInitParameter(key);
-                container.addContextValue(key, value);
+                String initPropertyName = (String) j.next();
+                container.addContextValue(initPropertyName, initProperties
+                        .get(initPropertyName));
             }
-            try
-            {
-                container.initialize();
-                container.start();
-                waterview = (Waterview) container.lookup(Waterview.ROLE);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                throw new ServletException("Init plexus container error", e);
-            }
+
+            container
+                    .addContextValue(Waterview.INIT_PROPERTIES, initProperties);
+            container.initialize();
+            container.start();
         }
-        catch (Throwable e)
+        catch (Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO remove it from the production version soon
+            throw new ServletException("Init plexus container error", e);
         }
     }
 
     private void internallyProcess(HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException
     {
-        ServletUIRuntime runtime = null;
+        ServletPageRuntime runtime = null;
         try
         {
-            runtime = new ServletUIRuntime(request, response,
-                    new ServiceManagerAdapter(container));
-            waterview.process(runtime);
+            runtime = new ServletPageRuntime(request, response, serviceManager);
+            Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
+            waterview.handleRuntime(runtime);
         }
         catch (Throwable e)
         {

@@ -6,7 +6,8 @@
 	</properties>
 	<body>
 		<section name="Overview">
-			<p>Waterview is positioned as a highly componentized web application framework, which is an <a href="http://avalon.apache.org">avalon</a> standard and <a href="http://plexus.codehaus.org">plexus</a> container based, <a href="http://jakarta.apache.org/turbine">turbine</a> like servlet . Being similar to <a href="http://jakarta.apache.org/turbine">turbine</a>, presentation logic is abstracted with action/page and http requests are handled with a componentized and pluggable pipeline in waterview. Page could be interpreted with componentized and plugable renderer. Currently waterview is using <a href="http://jakarta.apache.org/velocity">velocity</a> and <a href="http://jakarta.apache.org/commons/jelly">jelly</a> as default page renderer. Componentized design allows developers to come up with their page renderers in an extremely simple way.</p>
+			<p>Yet another portal system? No, even worse. It's not even JSP-168 compliant.</p>
+			<p>Waterview is another java web application framework with a portal-system-like design. In waterview, a visible page under a given URL is split into the following conceptions: Page, Layout, Panel(s) and View(s). Once the environment is built, developers can focus on only the View part.</p>
 			<p>Waterview is under active development now. Any suggestion is welcom. Please feel free to <a href="mailto:jiaqi.guo@gmail.com">shoot me email</a> with your idea.</p>
 		</section>
 		<section name="Waterview vs. Turbine">
