@@ -35,11 +35,11 @@ import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * Default implementation of waterview
- * 
+ *
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
-        Configurable, Serviceable, Initializable
+Configurable, Serviceable, Initializable
 {
 
     private Valve firstValve;
@@ -50,13 +50,12 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     /**
      * Override method configure in super class of DefaultWaterview
-     * 
+     *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        Configuration[] valveConfs = conf.getChild("pipeline").getChildren(
-                "valve");
+        Configuration[] valveConfs = conf.getChild("pipeline").getChildren("valve");
         valveRoles = new ArrayList(valveConfs.length);
         for (int i = 0; i < valveConfs.length; i++)
         {
@@ -93,7 +92,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     /**
      * Override method process in super class of DefaultWaterview
-     * 
+     *
      * @see com.cyclopsgroup.waterview.Waterview#process(com.cyclopsgroup.waterview.UIRuntime)
      */
     public void process(UIRuntime runtime) throws Exception
@@ -106,7 +105,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     /**
      * Override method service in super class of DefaultWaterview
-     * 
+     *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
     public void service(ServiceManager sm) throws ServiceException

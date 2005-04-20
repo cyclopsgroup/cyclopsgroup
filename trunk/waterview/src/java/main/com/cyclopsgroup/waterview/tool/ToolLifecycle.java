@@ -42,6 +42,11 @@ public class ToolLifecycle extends Enum
     public static final ToolLifecycle SESSION = new ToolLifecycle("session");
 
     /**
+     * User level tool
+     */
+    public static final ToolLifecycle USER = new ToolLifecycle("user");
+
+    /**
      * Value of method with string name
      *
      * @param name String name

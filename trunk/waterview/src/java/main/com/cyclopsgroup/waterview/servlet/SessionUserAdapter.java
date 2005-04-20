@@ -14,30 +14,48 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.tool;
+package com.cyclopsgroup.waterview.servlet;
 
-import com.cyclopsgroup.waterview.UIRuntime;
+import javax.servlet.http.HttpSession;
+
+import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.waterview.UIRuntimeUser;
 
 /**
- * Listener to listen each request
+ * Adapter user class
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface RequestListener
+public class SessionUserAdapter implements UIRuntimeUser
 {
-    /**
-     * Called after the request
-     *
-     * @param runtime
-     * @throws Exception
-     */
-    void disposeForRequest(UIRuntime runtime) throws Exception;
+
+    private Context context;
+
+    private HttpSession session;
+
+    SessionUserAdapter(Context context, HttpSession session)
+    {
+        this.context = context;
+        this.session = session;
+    }
 
     /**
-     * Called before the request
+     * Override or implement method of parent class or interface
      *
-     * @param runtime
-     * @throws Exception
+     * @see com.cyclopsgroup.waterview.UIRuntimeUser#getContext()
      */
-    void prepareForRequest(UIRuntime runtime) throws Exception;
+    public Context getContext()
+    {
+        return context;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.UIRuntimeUser#getId()
+     */
+    public String getId()
+    {
+        return session.getId();
+    }
 }

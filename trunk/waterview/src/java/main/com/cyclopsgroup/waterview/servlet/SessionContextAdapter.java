@@ -29,7 +29,7 @@ import com.cyclopsgroup.cyclib.Context;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SessionContextAdapter implements Context
+class SessionContextAdapter implements Context
 {
 
     private HttpSession httpSession;
@@ -39,7 +39,7 @@ public class SessionContextAdapter implements Context
      * 
      * @param session
      */
-    public SessionContextAdapter(HttpSession session)
+    SessionContextAdapter(HttpSession session)
     {
         this.httpSession = session;
     }

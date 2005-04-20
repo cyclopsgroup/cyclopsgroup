@@ -157,6 +157,13 @@ public interface UIRuntime
     TimeZone getTimeZone();
 
     /**
+     * Get current user
+     *
+     * @return User interface
+     */
+    UIRuntimeUser getUser();
+
+    /**
      * Set content type for response
      * 
      * @param contentType Content type
@@ -173,5 +180,4 @@ public interface UIRuntime
      * @uml.property name="page"
      */
     void setPage(String template);
-
 }

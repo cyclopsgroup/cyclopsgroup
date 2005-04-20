@@ -31,6 +31,7 @@ import com.cyclopsgroup.cyclib.Context;
 import com.cyclopsgroup.cyclib.DefaultContext;
 import com.cyclopsgroup.cyclib.ValueParser;
 import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.waterview.UIRuntimeUser;
 
 /**
  * Default implementation of WebRuntime
@@ -62,6 +63,8 @@ public class ServletUIRuntime implements UIRuntime
 
     private Context sessionContext;
 
+    private UIRuntimeUser user;
+
     /**
      * Default constructor of default web runtime
      * 
@@ -78,6 +81,7 @@ public class ServletUIRuntime implements UIRuntime
         output = new PrintWriter(response.getOutputStream());
         requestValueParser = new RequestValueParserAdapter(request);
         sessionContext = new SessionContextAdapter(request.getSession());
+        user = new SessionUserAdapter(sessionContext, request.getSession());
         serviceManager = services;
 
         StringBuffer sb = new StringBuffer(request.getScheme());
@@ -229,6 +233,16 @@ public class ServletUIRuntime implements UIRuntime
     public TimeZone getTimeZone()
     {
         return TimeZone.getDefault();
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.UIRuntime#getUser()
+     */
+    public UIRuntimeUser getUser()
+    {
+        return user;
     }
 
     /**

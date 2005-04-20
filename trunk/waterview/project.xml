@@ -4,10 +4,10 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>SNAPSHOT</currentVersion>
+    <currentVersion>1.0</currentVersion>
     <organization>
         <name>Cyclops Group</name>
-        <url>http://cyclops-group.sourceforge.net</url>
+        <url>http://www.cyclopsgroup.com</url>
         <logo>/images/cyclopsgroup_logo.gif</logo>
     </organization>
     <inceptionYear>2004</inceptionYear>

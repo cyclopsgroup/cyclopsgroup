@@ -14,30 +14,29 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.tool;
+package com.cyclopsgroup.waterview;
 
-import com.cyclopsgroup.waterview.UIRuntime;
+import com.cyclopsgroup.cyclib.Context;
 
 /**
- * Listener to listen each request
+ * Waterview runtime user
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface RequestListener
+public interface UIRuntimeUser
 {
-    /**
-     * Called after the request
-     *
-     * @param runtime
-     * @throws Exception
-     */
-    void disposeForRequest(UIRuntime runtime) throws Exception;
 
     /**
-     * Called before the request
+     * Get context
      *
-     * @param runtime
-     * @throws Exception
+     * @return User context
      */
-    void prepareForRequest(UIRuntime runtime) throws Exception;
+    Context getContext();
+
+    /**
+     * Get identity
+     *
+     * @return Identity of this runtime user
+     */
+    String getId();
 }
