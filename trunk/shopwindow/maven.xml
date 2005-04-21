@@ -4,4 +4,9 @@
 	<preGoal name="xdoc:transform">
 		<attainGoal name="cyclops:pre-xdoc"/>
 	</preGoal>
+	
+	<goal name="deploy-pom" description="Copy cyclopsgroup.pom into local repository">
+        <mkdir dir="${maven.repo.local}/clib/poms"/>
+        <copy file="${basedir}/xdocs/cyclopsgroup.pom" todir="${maven.repo.local}/clib/poms/"/>
+	</goal>
 </project>
