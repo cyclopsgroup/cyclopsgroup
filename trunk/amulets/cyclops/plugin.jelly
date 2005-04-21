@@ -1,73 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:d="jelly:define" xmlns:j="jelly:core" xmlns:u="jelly:util" xmlns:v="jelly:velocity">
-	<!--
+<project xmlns:d="jelly:define" xmlns:j="jelly:core" xmlns:u="jelly:util" xmlns:c="cyclops">
+    <!--
 	XDOC with cyclops jsl
 	-->
-	<goal description="Generate cyclops group project document"
-		name="cyclops:xdoc" prereqs="xdoc:init, cyclops:generate-gallery">
-		<copy todir="${maven.docs.dest}" preservelastmodified="true">
-			<fileset dir="${plugin.resources}/docs">
-				<include name="**/*.*"/>
-			</fileset>
-		</copy>
-		<copy todir="${maven.gen.docs}" preservelastmodified="true">
-			<fileset dir="${plugin.resources}/generated-xdocs">
-				<include name="**/*.*"/>
-			</fileset>
-		</copy>
-		<j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
-		<j:set var="tempSite">${maven.cyclops.xdoc.tempjsl}</j:set>
-		<copy file="${newSite}" tofile="${basedir}/${tempSite}"/>
-		${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl',
-		tempSite)} <attainGoal name="xdoc"/>
-		<delete file="${basedir}/${tempSite}"/>
-	</goal>
-	<!--
+    <goal description="Generate cyclops group project document" name="cyclops:xdoc" prereqs="xdoc:init, cyclops:generate-gallery">
+        <attainGoal name="cyclops:pre-xdoc"/>
+        <attainGoal name="xdoc"/>
+        <attainGola name="cyclops:post-xdoc"/>
+    </goal>
+    <goal name="cyclops:pre-xdoc">
+        <copy todir="${maven.docs.dest}" preservelastmodified="true">
+            <fileset dir="${plugin.resources}/docs">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <copy todir="${maven.gen.docs}" preservelastmodified="true">
+            <fileset dir="${plugin.resources}/generated-xdocs">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <j:set var="newSite">${maven.cyclops.xdoc.jsl}</j:set>
+        <j:set var="tempSite">${maven.cyclops.xdoc.tempjsl}</j:set>
+        <copy file="${newSite}" tofile="${basedir}/${tempSite}"/>
+        <j:expr value="${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', tempSite)}"/>
+    </goal>
+    <goal name="cyclops:post-xdoc">
+        <delete file="${maven.cyclops.xdoc.tempjsl}"/>
+    </goal>
+    <!--
 	Site with cyclops jsl
 	-->
-	<goal description="Generate the whole site for cyclops group projects" name="cyclops:site">
-		<attainGoal name="site"/>
-		<attainGoal name="cyclops:xdoc"/>
-	</goal>
-	<!--
+    <goal description="Generate the whole site for cyclops group projects" name="cyclops:site">
+        <attainGoal name="site"/>
+        <attainGoal name="cyclops:xdoc"/>
+    </goal>
+    <!--
 	Generate photo gallery index and thumbnails
 	-->
-	<goal name="cyclops:generate-gallery">
-		<fileScanner var="indices">
-			<fileset dir="${maven.docs.src}">
-				<patternset>
-					<include name="${maven.cyclops.gallery.indexprops}"/>
-				</patternset>
-			</fileset>
-		</fileScanner>
-		<j:set var="docsSrc">${maven.docs.src}</j:set>
-		<j:useBean class="com.cyclopsgroup.amulets.cyclops.FileUtils" var="fileUtils"/>
-		<j:forEach items="${indices.iterator()}" var="propFile">
-			<j:set value="${propFile.parent}" var="folder"/>
-			<j:set var="folderTarget">${fileUtils.getRelativePath(folder, docsSrc)}</j:set>
-			<fileScanner var="pictureFiles">
-				<fileset dir="${folder}">
-					<patternset>
-						<include name="${maven.cyclops.gallery.imagefile}"/>
-					</patternset>
-				</fileset>
-			</fileScanner>
-			<j:useBean class="java.util.ArrayList" var="pictures"/>
-			<j:forEach items="${pictureFiles.iterator()}" var="pictureFile">
-				<j:useBean class="com.cyclopsgroup.amulets.cyclops.Picture"
-					dir="${maven.docs.src}" file="${pictureFile}" var="picture"/>
-				<j:set var="thumbnailFile">${maven.docs.dest}${folderTarget}/${maven.cyclops.gallery.tnfolder}/${picture.fileName}</j:set>
-				<j:expr value="${picture.generateThumbnail(thumbnailFile, 120, 100)}"/>
-				<echo>Thumbnail ${thumbnailFile} is generated</echo>
-				<j:expr value="${pictures.add(picture)}"/>
-			</j:forEach>
-			<u:properties file="${propFile}" var="descriptor"/>
-			<mkdir dir="${maven.gen.docs}${folderTarget}"/>
-			<j:file
-				name="${maven.gen.docs}${folderTarget}/${maven.cyclops.gallery.indexfile}"
-				outputMode="xml" prettyPrint="true">
-				<j:import file="${plugin.resources}/galleryindex.jelly" inherit="true"/>
-			</j:file>
-		</j:forEach>
-	</goal>
+    <goal name="cyclops:generate-gallery">
+        <fileScanner var="indices">
+            <fileset dir="${maven.docs.src}">
+                <patternset>
+                    <include name="${maven.cyclops.gallery.indexprops}"/>
+                </patternset>
+            </fileset>
+        </fileScanner>
+        <j:set var="docsSrc">${maven.docs.src}</j:set>
+        <j:useBean class="com.cyclopsgroup.amulets.cyclops.FileUtils" var="fileUtils"/>
+        <j:forEach items="${indices.iterator()}" var="propFile">
+            <j:set value="${propFile.parent}" var="folder"/>
+            <j:set var="folderTarget">${fileUtils.getRelativePath(folder, docsSrc)}</j:set>
+            <fileScanner var="pictureFiles">
+                <fileset dir="${folder}">
+                    <patternset>
+                        <include name="${maven.cyclops.gallery.imagefile}"/>
+                    </patternset>
+                </fileset>
+            </fileScanner>
+            <j:useBean class="java.util.ArrayList" var="pictures"/>
+            <j:forEach items="${pictureFiles.iterator()}" var="pictureFile">
+                <j:useBean class="com.cyclopsgroup.amulets.cyclops.Picture" dir="${maven.docs.src}" file="${pictureFile}" var="picture"/>
+                <j:set var="thumbnailFile">${maven.docs.dest}${folderTarget}/${maven.cyclops.gallery.tnfolder}/${picture.fileName}</j:set>
+                <j:expr value="${picture.generateThumbnail(thumbnailFile, 120, 100)}"/>
+                <echo>Thumbnail ${thumbnailFile} is generated</echo>
+                <j:expr value="${pictures.add(picture)}"/>
+            </j:forEach>
+            <u:properties file="${propFile}" var="descriptor"/>
+            <mkdir dir="${maven.gen.docs}${folderTarget}"/>
+            <j:file name="${maven.gen.docs}${folderTarget}/${maven.cyclops.gallery.indexfile}" outputMode="xml" prettyPrint="true">
+                <j:import file="${plugin.resources}/galleryindex.jelly" inherit="true"/>
+            </j:file>
+        </j:forEach>
+    </goal>
+    <!--
+        Download and redownload base pom file
+    -->
+    <goal name="cyclops:download-base-pom">
+        <d:taglib uri="cyclops">
+            <d:tag name="download">
+                <j:useBean var="downloader" class="com.cyclopsgroup.amulets.cyclops.DownloadTag" url="${url}" file="${file}"/>
+                <j:expr value="{downloader.execute()}"/>
+            </d:tag>
+        </d:taglib>
+        <c:download url="${maven.cyclops.pom.url}" file="${maven.cyclops.pom.localfile}"/>
+    </goal>
+    <goal name="cyclops:redownload-base-pom">
+        <delete file="${maven.cyclops.pom.localfile}"/>
+        <attainGoal name="cyclops:download-base-pom"/>
+    </goal>
 </project>

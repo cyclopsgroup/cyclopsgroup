@@ -46,5 +46,19 @@
 			<timezone>-6</timezone>
 		</developer>
 	</developers>
+	<dependencies>
+        <dependency>
+            <id>commons-io</id>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <id>commons-lang</id>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <id>junit</id>
+            <version>3.8.1</version>
+        </dependency>
+	</dependencies>
 	<build/>
 </project>

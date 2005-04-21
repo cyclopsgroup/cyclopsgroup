@@ -30,6 +30,9 @@
 					<link rel="stylesheet" type="text/css" href="${relativePath}/style/project.css" media="all"/>
 				</j:if>
 				<meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
+				<meta name="keywords" content="cyclops, cyclopsgroup, cyclops group, java, open source, jiaqi, jiaqi guo, xuying, xuying zhao, ${pom.artifactId}, ${pom.name}, ${pom.organization.name}, ${pom.shortDescription}"/>
+				<meta name="description" content="${pom.shortDescription}"/>
+				<meta name="copyright" content="${pom.organization.name}"/>
 				<x:forEach var="author" select="./properties/author">
 					<meta name="author" content="${author.text}"/>
 					<meta name="email" content="${author.attribute('email').value}"/>

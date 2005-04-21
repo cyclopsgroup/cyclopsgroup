@@ -17,8 +17,8 @@
 	<developers/>
 	<dependencies/>
 	<build>
-		<sourceDirectory>src/java</sourceDirectory>
-		<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+		<sourceDirectory>src/java/main</sourceDirectory>
+		<unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
 		<unitTest>
 			<includes>
 				<include>**/*Test.java</include>

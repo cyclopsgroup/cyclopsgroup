@@ -68,11 +68,11 @@ public class FileUtils
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Get relative path of given paths
      *
      * @param filePath
      * @param folderPath
-     * @return
+     * @return Relative path of a given string
      * @throws IOException
      */
     public static String getRelativePath(String filePath, String folderPath)
