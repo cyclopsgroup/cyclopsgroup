@@ -219,8 +219,8 @@
 		</j:if>
 		<table cellspacing="0" cellpadding="0" border="0">
 			<tr>
-				<td>
-					<img src="${relativePath}/images/li_${_state}.gif" alt="${_name}"/>
+				<td style="padding: 2px">
+					<img src="${relativePath}/images/icons/${_state}.png" alt="${_name}"/>
 				</td>
 				<td>
 					<j:if test="${navbean.isSelected(item.get(0))}">

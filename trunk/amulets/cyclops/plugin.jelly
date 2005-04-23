@@ -9,12 +9,12 @@
         <attainGola name="cyclops:post-xdoc"/>
     </goal>
     <goal name="cyclops:pre-xdoc">
-        <copy todir="${maven.docs.dest}" preservelastmodified="true">
+        <copy todir="${maven.docs.dest}">
             <fileset dir="${plugin.resources}/docs">
                 <include name="**/*.*"/>
             </fileset>
         </copy>
-        <copy todir="${maven.gen.docs}" preservelastmodified="true">
+        <copy todir="${maven.gen.docs}">
             <fileset dir="${plugin.resources}/generated-xdocs">
                 <include name="**/*.*"/>
             </fileset>
@@ -25,6 +25,12 @@
         <j:expr value="${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', tempSite)}"/>
     </goal>
     <goal name="cyclops:post-xdoc">
+        <copy todir="${maven.docs.dest}">
+            <fileset dir="${maven.docs.src}">
+                <exclude name="**/*.xml"/>
+                <exclude name="**/CVS"/>
+            </fileset>
+        </copy>
         <delete file="${maven.cyclops.xdoc.tempjsl}"/>
     </goal>
     <!--
