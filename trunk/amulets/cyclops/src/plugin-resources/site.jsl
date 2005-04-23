@@ -1,448 +1,443 @@
 <?xml version="1.0"?>
 <!-- stylesheet to be used -->
 <jsl:stylesheet select="$doc" xmlns:define="jelly:define" xmlns:j="jelly:core" xmlns:jsl="jelly:jsl" xmlns:log="jelly:log" xmlns:util="jelly:util" xmlns:x="jelly:xml" xmlns:doc="doc" xmlns:maven="jelly:maven" xmlns="dummy" trim="true">
-	<jsl:template match="document" trim="true">
-		<j:useBean var="navbean" class="org.apache.maven.NavBean"/>
-		<j:set var="location" value="${outFile.substring(destdir.length())}"/>
-		<util:replace var="location" oldChar="\" newChar="/" value="${location}"/>
-		<!-- Stores location for publish date / version -->
-		<j:set var="date">${maven.xdoc.date}</j:set>
-		<j:setProperties object="${navbean}" document="${doc}" location="${location}"/>
-		<x:doctype name="html" publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
-		<html>
-			<head>
-				<j:set var="docTitle">
-					<x:expr select="./properties/title"/>
-				</j:set>
-				<x:if select="$nav/title">
-					<title>
-						<x:expr select="$nav/title"/> - ${docTitle}</title>
-				</x:if>
-				<x:if select="not($nav/title)">
-					<title>${pom.name} - ${docTitle}</title>
-				</x:if>
-				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-print.css" media="print"/>
-				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-base.css" media="all"/>
-				<link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-style.css" media="all"/>
-				<link rel="shortcut icon" href="${relativePath}/favicon.ico" type="image/x-icon"/>
-				<util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
-				<j:if test="${projectCssFile.exists()}">
-					<link rel="stylesheet" type="text/css" href="${relativePath}/style/project.css" media="all"/>
-				</j:if>
-				<meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
-				<meta name="keywords" content="cyclops, cyclopsgroup, cyclops group, java, open source, jiaqi, jiaqi guo, xuying, xuying zhao, ${pom.artifactId}, ${pom.name}, ${pom.organization.name}, ${pom.shortDescription}"/>
-				<meta name="description" content="${pom.shortDescription}"/>
-				<meta name="copyright" content="${pom.organization.name}"/>
-				<x:forEach var="author" select="./properties/author">
-					<meta name="author" content="${author.text}"/>
-					<meta name="email" content="${author.attribute('email').value}"/>
-				</x:forEach>
-				<jsl:applyTemplates select="$doc/document/head/*"/>
-			</head>
-			<body>
-				<table width="100%" cellpadding="0" cellspacing="0" border="0" id="bodyTable">
-					<tr>
-						<td align="center" class="hidewhenprint">
-							<table width="720" cellpadding="0" cellspacing="0" border="0">
-								<tr>
-									<td rowspan="2" height="60" align="left">
-										<a href="${pom.organization.url}">
-											<img src="${relativePath}${pom.organization.logo}" alt="${pom.organization.name}" border="0"/>
-										</a>
-									</td>
-									<td align="right">
-										<form method="get" action="http://www.google.com/search">
-											<input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
-											<input type="hidden" name="domains" value="${pom.organization.url}"/>
+    <jsl:template match="document" trim="true">
+        <j:useBean var="navbean" class="org.apache.maven.NavBean"/>
+        <j:set var="location" value="${outFile.substring(destdir.length())}"/>
+        <util:replace var="location" oldChar="\" newChar="/" value="${location}"/>
+        <!-- Stores location for publish date / version -->
+        <j:set var="date">${maven.xdoc.date}</j:set>
+        <j:setProperties object="${navbean}" document="${doc}" location="${location}"/>
+        <x:doctype name="html" publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
+        <html>
+            <head>
+                <j:set var="docTitle">
+                    <x:expr select="./properties/title"/>
+                </j:set>
+                <x:if select="$nav/title">
+                    <title>
+                        <x:expr select="$nav/title"/> - ${docTitle}</title>
+                </x:if>
+                <x:if select="not($nav/title)">
+                    <title>${pom.name} - ${docTitle}</title>
+                </x:if>
+                <link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-print.css" media="print"/>
+                <link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-base.css" media="all"/>
+                <link rel="stylesheet" type="text/css" href="${relativePath}/style/cyclops-style.css" media="all"/>
+                <link rel="shortcut icon" href="${relativePath}/favicon.ico" type="image/x-icon"/>
+                <util:file var="projectCssFile" name="${maven.docs.src}/style/project.css"/>
+                <j:if test="${projectCssFile.exists()}">
+                    <link rel="stylesheet" type="text/css" href="${relativePath}/style/project.css" media="all"/>
+                </j:if>
+                <meta http-equiv="Content-Type" content="text/html; charset=${outputencoding}"/>
+                <meta name="keywords" content="cyclops, cyclopsgroup, cyclops group, java, open source, jiaqi, jiaqi guo, xuying, xuying zhao, ${pom.artifactId}, ${pom.name}, ${pom.organization.name}, ${pom.shortDescription}"/>
+                <meta name="description" content="${pom.shortDescription}"/>
+                <meta name="copyright" content="${pom.organization.name}"/>
+                <x:forEach var="author" select="./properties/author">
+                    <meta name="author" content="${author.text}"/>
+                    <meta name="email" content="${author.attribute('email').value}"/>
+                </x:forEach>
+                <jsl:applyTemplates select="$doc/document/head/*"/>
+            </head>
+            <body>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" id="bodyTable">
+                    <tr>
+                        <td align="center" class="hidewhenprint">
+                            <table width="720" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td rowspan="2" height="60" align="left">
+                                        <a href="${pom.organization.url}">
+                                            <img src="${relativePath}${pom.organization.logo}" alt="${pom.organization.name}" border="0"/>
+                                        </a>
+                                    </td>
+                                    <td align="right">
+                                        <form method="get" action="http://www.google.com/search">
+                                            <input type="hidden" name="sitesearch" value="${pom.organization.url}"/>
+                                            <input type="hidden" name="domains" value="${pom.organization.url}"/>
 											Search in site
 											<input type="text" id="q" size="20" name="q" maxlength="255" value=""/>
-											<input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search" align="middle"/>
-										</form>
-									</td>
-								</tr>
-								<tr>
-									<td align="right" valign="bottom" id="languageBarBlock">
-										<script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
-										<script language="javascript" type="text/javascript"><![CDATA[
+                                            <input type="image" name="btnG" value="go" src="${relativePath}/images/right.gif" title="Google Search" align="middle"/>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" valign="bottom" id="languageBarBlock">
+                                        <script language="javascript" src="${relativePath}/language.js" type="text/javascript"/>
+                                        <script language="javascript" type="text/javascript"><![CDATA[
 											languageLinks("${pom.url}${location}", "${relativePath}");
 										]]></script>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td height="4" bgcolor="#CCCCCC" class="hidewhenprint"/>
-					</tr>
-					<tr>
-						<td height="2" class="hidewhenprint"/>
-					</tr>
-					<tr>
-						<td align="center" class="banner">
-							<table width="720" cellpadding="0" cellspacing="0" border="0">
-								<tr>
-									<td>
-										<j:set var="bannerImage">/images/banners/default.jpg</j:set>
-										<x:if select="$doc/document/properties/banner">
-											<j:set var="bannerImage">
-												<x:expr select="$doc/document/properties/banner"/>
-											</j:set>
-										</x:if>
-										<img src="${relativePath}${bannerImage}" alt="${pom.shortDescription}" border="0"/>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td height="3" class="banner"/>
-					</tr>
-					<tr>
-						<td align="center">
-							<table width="720" cellpadding="0" cellspacing="0" border="0">
-								<tr>
-									<td width="25%" valign="top" id="navigatorBlock" align="left" class="hidewhenprint">
-										<x:if select="$nav">
-											<jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header']"/>
-										</x:if>
-										<jsl:applyTemplates select="$projectNav/body/menu"/>
-										<x:if select="$nav/body/links">
-											<jsl:applyTemplates select="$nav/body/links"/>
-										</x:if>
-										<p>
-											<img src="${relativePath}/images/none.png" width="1" height="100" alt=""/>
-										</p>
-									</td>
-									<td width="75%" align="left" valign="top" id="bodyBlock">
-										<jsl:applyTemplates select="$doc/document/body/*"/>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" align="center" id="copyrightsBlock">
-										<p style="padding: 3px">All rights reserved, 2002 ~ 2004, Cyclops Group.</p>
-										<p>
-											<span id="lastPublished">Last published: ${build.date}</span>
-										</p>
-										<jsl:applyTemplates select="$nav/body/footer"/>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" align="center" id="poweredbyBlock" class="hidewhenprint">
-										<table border="0" cellpadding="0" cellspacing="1">
-											<tr>
-												<td>
-													<img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" alt=""/>
-												</td>
-												<td>
-													<a href="http://validator.w3.org/check?uri=${pom.url}${location}">
-														<img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" width="88" height="31"/>
-													</a>
-												</td>
-												<td>
-													<a href="http://www.blogger.com" title="www.blogger.com">
-														<img src="http://buttons.blogger.com/bloggerbutton1.gif" width="88" height="31" border="0" alt="http://www.blogger.com"/>
-													</a>
-												</td>
-												<td>
-													<a href="http://sourceforge.net" title="sourceforge.net">
-														<img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0" alt="SourceForge Foundation"/>
-													</a>
-												</td>
-												<td>
-													<a href="http://maven.apache.org" title="maven.apache.org">
-														<img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0" alt="Powered by Maven"/>
-													</a>
-												</td>
-												<td>
-													<a href="http://sourceforge.net/donate/index.php?group_id=91358">
-														<img src="http://images.sourceforge.net/images/project-support.jpg" alt="Donate to Cyclops Group" border="0"/>
-													</a>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</body>
-		</html>
-	</jsl:template>
-	<!-- process the properties of the doc -->
-	<jsl:template match="properties" trim="true">
-		<!-- stick head block here later -->
-	</jsl:template>
-	<!-- Process a menu for the navigation bar -->
-	<jsl:template match="menu" trim="true">
-		<j:set var="_menuName">
-			<x:expr select="@name"/>
-		</j:set>
-		<j:set var="_menuName">
-			<doc:escapeNameToken value="${_menuName}"/>
-		</j:set>
-		<table width="100%" cellspacing="0" border="0" class="menu">
-			<tr>
-				<th>
-					<j:choose>
-						<j:when test="${!empty(_menuName)}">
-							<x:expr select="@name"/>
-						</j:when>
-						<j:otherwise>
-							<x:expr select="@name"/>
-						</j:otherwise>
-					</j:choose>
-				</th>
-			</tr>
-			<tr>
-				<td>
-					<jsl:applyTemplates select="item"/>
-				</td>
-			</tr>
-		</table>
-	</jsl:template>
-	<jsl:template match="item" trim="true">
-		<x:set var="item" select="."/>
-		<x:set var="_name" select="string(@name)"/>
-		<x:set var="_link" select="string(@href)"/>
-		<x:set var="_img" select="string(@img)"/>
-		<x:set var="_childCount" select="count(./item)"/>
-		<j:set var="_isCollapsed" value="${navbean.isCollapsed(item.get(0))}"/>
-		<j:set var="_state" value="document"/>
-		<j:if test="${_childCount.intValue() gt 0}">
-			<j:if test="${!_isCollapsed}">
-				<j:set var="_state" value="expanded"/>
-			</j:if>
-			<j:if test="${_isCollapsed}">
-				<j:set var="_state" value="collapsed"/>
-			</j:if>
-		</j:if>
-		<table cellspacing="0" cellpadding="0" border="0">
-			<tr>
-				<td style="padding: 2px">
-					<img src="${relativePath}/images/icons/${_state}.png" alt="${_name}"/>
-				</td>
-				<td>
-					<j:if test="${navbean.isSelected(item.get(0))}">
-						<strong>
-							<doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
-						</strong>
-					</j:if>
-					<j:if test="${!navbean.isSelected(item.get(0))}">
-						<doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
-					</j:if>
-				</td>
-			</tr>
-			<j:if test="${!navbean.isCollapsed(item.get(0))}">
-				<x:set var="_childCount" select="count(./item)"/>
-				<j:if test="${_childCount.intValue() gt 0}">
-					<tr>
-						<td/>
-						<td>
-							<jsl:applyTemplates select="item"/>
-						</td>
-					</tr>
-				</j:if>
-			</j:if>
-		</table>
-	</jsl:template>
-	<!-- Process the breadcrumb navbar -->
-	<jsl:template match="links" trim="true">
-		<table width="100%" cellspacing="0" border="0" class="menu">
-			<tr>
-				<th>Links</th>
-			</tr>
-			<tr>
-				<td>
-					<jsl:applyTemplates select="item"/>
-				</td>
-			</tr>
-		</table>
-	</jsl:template>
-	<!-- process a documentation section -->
-	<jsl:template match="section" trim="true">
-		<div class="section">
-			<j:set var="_sectionName">
-				<x:expr select="@name"/>
-			</j:set>
-			<!-- named anchors can't contain whitespaces -->
-			<j:set var="_anchorName">
-				<doc:escapeNameToken value="${_sectionName}"/>
-			</j:set>
-			<j:if test="${!empty(_sectionName)}">
-				<a name="${_anchorName}"/>
-				<div class="sectionTitle">${_sectionName}</div>
-				<jsl:applyTemplates select="*"/>
-			</j:if>
-			<jsl:applyTemplates select="*"/>
-		</div>
-	</jsl:template>
-	<jsl:template match="subsection" trim="true">
-		<div class="subsection">
-			<j:set var="_sectionName">
-				<x:expr select="@name"/>
-			</j:set>
-			<!-- named anchors can't contain whitespaces -->
-			<j:set var="_anchorName">
-				<doc:escapeNameToken value="${_sectionName}"/>
-			</j:set>
-			<j:if test="${!empty(_sectionName)}">
-				<a name="${_anchorName}"/>
-				<div class="subsectionTitle">${_sectionName}</div>
-			</j:if>
-			<jsl:applyTemplates select="*"/>
-		</div>
-	</jsl:template>
-	<jsl:template match="source" trim="false">
-		<div class="source">
-			<pre>
-				<jsl:applyTemplates/>
-			</pre>
-		</div>
-	</jsl:template>
-	<!-- preserve whitespace in the following elements -->
-	<jsl:template match="pre | script | style" trim="true">
-		<x:set var="nodename" select="name()"/>
-		<x:element name="${nodename}">
-			<x:forEach var="attr" select="@*">
-				<x:attribute name="${attr.name}">${attr.value}</x:attribute>
-			</x:forEach>
-			<j:whitespace trim="false">
-				<jsl:applyTemplates/>
-			</j:whitespace>
-		</x:element>
-	</jsl:template>
-	<!-- xhtml fixup: add missing alt attribute for images -->
-	<jsl:template match="img" trim="true">
-		<x:element name="img">
-			<x:forEach var="attr" select="@*">
-				<x:attribute name="${attr.name}">${attr.value}</x:attribute>
-			</x:forEach>
-			<x:set var="noalt" select="count(./@alt) = 0"/>
-			<j:if test="${noalt}">
-				<x:attribute name="alt"/>
-			</j:if>
-		</x:element>
-	</jsl:template>
-	<jsl:template match="footer" trim="true">
-		<div class="xleft">
-			<jsl:applyTemplates select="*"/>
-		</div>
-	</jsl:template>
-	<jsl:template match="table" trim="true">
-		<j:set var="rowcount" value="0"/>
-		<table class="bodyTable" cellspacing="1">
-			<jsl:applyTemplates select="*"/>
-		</table>
-	</jsl:template>
-	<jsl:template match="tr" trim="true">
-		<j:choose>
-			<j:when test="${rowMode == 'a'}">
-				<j:set var="rowMode" value="b"/>
-			</j:when>
-			<j:otherwise>
-				<j:set var="rowMode" value="a"/>
-			</j:otherwise>
-		</j:choose>
-		<x:element name="tr">
-			<j:whitespace trim="true">
-				<x:attribute name="class">${rowMode}</x:attribute>
-				<x:forEach var="attr" select="@*">
-					<x:attribute name="${attr.name}">${attr.value}</x:attribute>
-				</x:forEach>
-				<jsl:applyTemplates select="*"/>
-			</j:whitespace>
-		</x:element>
-	</jsl:template>
-	<!--************************-->
-	<!-- goals documentation    -->
-	<!--************************-->
-	<jsl:template match="goals" trim="true">
-		<!-- reset row alternation -->
-		<j:set var="rowMode" value=""/>
-		<div class="h3">
-			<a name="Goals"/>
-			<h3>Goals</h3>
-			<table class="bodyTable">
-				<thead>
-					<tr>
-						<th>Goal</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<jsl:applyTemplates select="goal"/>
-				</tbody>
-			</table>
-		</div>
-	</jsl:template>
-	<!-- a goal -->
-	<jsl:template match="goal" trim="true">
-		<j:choose>
-			<j:when test="${rowMode == 'a'}">
-				<j:set var="rowMode" value="b"/>
-			</j:when>
-			<j:otherwise>
-				<j:set var="rowMode" value="a"/>
-			</j:otherwise>
-		</j:choose>
-		<x:element name="tr">
-			<j:whitespace trim="true">
-				<x:attribute name="class">${rowMode}</x:attribute>
-				<j:set var="_goalName">
-					<x:expr select="./name"/>
-				</j:set>
-				<td style="width:20%">
-					<a name="${_goalName}"/>${_goalName}</td>
-				<td>
-					<jsl:applyTemplates select="description"/>
-				</td>
-			</j:whitespace>
-		</x:element>
-	</jsl:template>
-	<jsl:template match="description">
-		<jsl:applyTemplates trim="false"/>
-	</jsl:template>
-	<!-- remove the space at the end of parsed "a" anchors and fix local hrefs -->
-	<jsl:template match="a" trim="true">
-		<j:set var="href">
-			<x:expr select="@href"/>
-		</j:set>
-		<j:choose>
-			<j:when test="${!empty(href) and href.startsWith('#')}">
-				<x:element name="a" trim="true">
-					<x:forEach var="attr" select="@*">
-						<j:choose>
-							<j:when test="${attr.name == 'href'}">
-								<x:attribute name="href">
-									<doc:escapeNameToken value="${attr.value}"/>
-								</x:attribute>
-							</j:when>
-							<j:otherwise>
-								<x:attribute name="${attr.name}">${attr.value}</x:attribute>
-							</j:otherwise>
-						</j:choose>
-					</x:forEach>
-					<jsl:applyTemplates/>
-				</x:element>
-			</j:when>
-			<j:otherwise>
-				<jsl:copy>
-					<jsl:applyTemplates/>
-				</jsl:copy>
-			</j:otherwise>
-		</j:choose>
-	</jsl:template>
-	<!-- copy any other elements through -->
-	<jsl:template match="*" trim="false">
-		<jsl:copy trim="false">
-			<jsl:applyTemplates trim="false"/>
-		</jsl:copy>
-	</jsl:template>
-	<!-- element values don't pass through as text -->
-	<jsl:template match="@*"/>
-	<!-- CDATA and text nodes pass-thru -->
-	<jsl:template match="text()">
-		<x:expr select="."/>
-	</jsl:template>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="4" bgcolor="#CCCCCC" class="hidewhenprint"/>
+                    </tr>
+                    <tr>
+                        <td height="2" class="hidewhenprint"/>
+                    </tr>
+                    <tr>
+                        <td align="center" class="banner">
+                            <table width="720" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <j:set var="bannerImage">/images/banners/default.jpg</j:set>
+                                        <x:if select="$doc/document/properties/banner">
+                                            <j:set var="bannerImage">
+                                                <x:expr select="$doc/document/properties/banner"/>
+                                            </j:set>
+                                        </x:if>
+                                        <img src="${relativePath}${bannerImage}" alt="${pom.shortDescription}" border="0"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="3" class="banner"/>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table width="720" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td width="25%" valign="top" id="navigatorBlock" align="left" class="hidewhenprint">
+                                        <x:if select="$nav">
+                                            <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header']"/>
+                                        </x:if>
+                                        <jsl:applyTemplates select="$projectNav/body/menu"/>
+                                        <x:if select="$nav/body/links">
+                                            <jsl:applyTemplates select="$nav/body/links"/>
+                                        </x:if>
+                                        <p>
+                                            <img src="${relativePath}/images/none.png" width="1" height="100" alt=""/>
+                                        </p>
+                                    </td>
+                                    <td width="75%" align="left" valign="top" id="bodyBlock">
+                                        <jsl:applyTemplates select="$doc/document/body/*"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center" id="copyrightsBlock">
+                                        <p style="padding: 3px">All rights reserved, 2002 ~ 2004, Cyclops Group.</p>
+                                        <p>
+                                            <span id="lastPublished">Last published: ${build.date}</span>
+                                        </p>
+                                        <jsl:applyTemplates select="$nav/body/footer"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center" id="poweredbyBlock" class="hidewhenprint">
+                                        <table border="0" cellpadding="0" cellspacing="1">
+                                            <tr>
+                                                <td>
+                                                    <img src="http://bar.freelogs.com/counter/index.php?u=cyclops&amp;s=bluepl" alt=""/>
+                                                </td>
+                                                <td>
+                                                    <a href="http://validator.w3.org/check?uri=${pom.url}${location}">
+                                                        <img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" width="88" height="31"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://sourceforge.net" title="sourceforge.net">
+                                                        <img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" border="0" alt="SourceForge Foundation"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://maven.apache.org" title="maven.apache.org">
+                                                        <img src="${relativePath}/images/logos/maven-button-1.png" width="90" height="30" border="0" alt="Powered by Maven"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://sourceforge.net/donate/index.php?group_id=91358">
+                                                        <img src="http://images.sourceforge.net/images/project-support.jpg" alt="Donate to Cyclops Group" border="0"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>
+    </jsl:template>
+    <!-- process the properties of the doc -->
+    <jsl:template match="properties" trim="true">
+        <!-- stick head block here later -->
+    </jsl:template>
+    <!-- Process a menu for the navigation bar -->
+    <jsl:template match="menu" trim="true">
+        <j:set var="_menuName">
+            <x:expr select="@name"/>
+        </j:set>
+        <j:set var="_menuName">
+            <doc:escapeNameToken value="${_menuName}"/>
+        </j:set>
+        <table width="100%" cellspacing="0" border="0" class="menu">
+            <tr>
+                <th>
+                    <j:choose>
+                        <j:when test="${!empty(_menuName)}">
+                            <x:expr select="@name"/>
+                        </j:when>
+                        <j:otherwise>
+                            <x:expr select="@name"/>
+                        </j:otherwise>
+                    </j:choose>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <jsl:applyTemplates select="item"/>
+                </td>
+            </tr>
+        </table>
+    </jsl:template>
+    <jsl:template match="item" trim="true">
+        <x:set var="item" select="."/>
+        <x:set var="_name" select="string(@name)"/>
+        <x:set var="_link" select="string(@href)"/>
+        <x:set var="_img" select="string(@img)"/>
+        <x:set var="_childCount" select="count(./item)"/>
+        <j:set var="_isCollapsed" value="${navbean.isCollapsed(item.get(0))}"/>
+        <j:set var="_state" value="document"/>
+        <j:if test="${_childCount.intValue() gt 0}">
+            <j:if test="${!_isCollapsed}">
+                <j:set var="_state" value="expanded"/>
+            </j:if>
+            <j:if test="${_isCollapsed}">
+                <j:set var="_state" value="collapsed"/>
+            </j:if>
+        </j:if>
+        <table cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td style="padding: 2px">
+                    <img src="${relativePath}/images/icons/${_state}.png" alt="${_name}"/>
+                </td>
+                <td>
+                    <j:if test="${navbean.isSelected(item.get(0))}">
+                        <strong>
+                            <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
+                        </strong>
+                    </j:if>
+                    <j:if test="${!navbean.isSelected(item.get(0))}">
+                        <doc:itemLink name="${_name}" link="${_link}" img="${_img}" state="${_state}"/>
+                    </j:if>
+                </td>
+            </tr>
+            <j:if test="${!navbean.isCollapsed(item.get(0))}">
+                <x:set var="_childCount" select="count(./item)"/>
+                <j:if test="${_childCount.intValue() gt 0}">
+                    <tr>
+                        <td/>
+                        <td>
+                            <jsl:applyTemplates select="item"/>
+                        </td>
+                    </tr>
+                </j:if>
+            </j:if>
+        </table>
+    </jsl:template>
+    <!-- Process the breadcrumb navbar -->
+    <jsl:template match="links" trim="true">
+        <table width="100%" cellspacing="0" border="0" class="menu">
+            <tr>
+                <th>Links</th>
+            </tr>
+            <tr>
+                <td>
+                    <jsl:applyTemplates select="item"/>
+                </td>
+            </tr>
+        </table>
+    </jsl:template>
+    <!-- process a documentation section -->
+    <jsl:template match="section" trim="true">
+        <div class="section">
+            <j:set var="_sectionName">
+                <x:expr select="@name"/>
+            </j:set>
+            <!-- named anchors can't contain whitespaces -->
+            <j:set var="_anchorName">
+                <doc:escapeNameToken value="${_sectionName}"/>
+            </j:set>
+            <j:if test="${!empty(_sectionName)}">
+                <a name="${_anchorName}"/>
+                <div class="sectionTitle">${_sectionName}</div>
+                <jsl:applyTemplates select="*"/>
+            </j:if>
+            <jsl:applyTemplates select="*"/>
+        </div>
+    </jsl:template>
+    <jsl:template match="subsection" trim="true">
+        <div class="subsection">
+            <j:set var="_sectionName">
+                <x:expr select="@name"/>
+            </j:set>
+            <!-- named anchors can't contain whitespaces -->
+            <j:set var="_anchorName">
+                <doc:escapeNameToken value="${_sectionName}"/>
+            </j:set>
+            <j:if test="${!empty(_sectionName)}">
+                <a name="${_anchorName}"/>
+                <div class="subsectionTitle">${_sectionName}</div>
+            </j:if>
+            <jsl:applyTemplates select="*"/>
+        </div>
+    </jsl:template>
+    <jsl:template match="source" trim="false">
+        <div class="source">
+            <pre>
+                <jsl:applyTemplates/>
+            </pre>
+        </div>
+    </jsl:template>
+    <!-- preserve whitespace in the following elements -->
+    <jsl:template match="pre | script | style" trim="true">
+        <x:set var="nodename" select="name()"/>
+        <x:element name="${nodename}">
+            <x:forEach var="attr" select="@*">
+                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+            </x:forEach>
+            <j:whitespace trim="false">
+                <jsl:applyTemplates/>
+            </j:whitespace>
+        </x:element>
+    </jsl:template>
+    <!-- xhtml fixup: add missing alt attribute for images -->
+    <jsl:template match="img" trim="true">
+        <x:element name="img">
+            <x:forEach var="attr" select="@*">
+                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+            </x:forEach>
+            <x:set var="noalt" select="count(./@alt) = 0"/>
+            <j:if test="${noalt}">
+                <x:attribute name="alt"/>
+            </j:if>
+        </x:element>
+    </jsl:template>
+    <jsl:template match="footer" trim="true">
+        <div class="xleft">
+            <jsl:applyTemplates select="*"/>
+        </div>
+    </jsl:template>
+    <jsl:template match="table" trim="true">
+        <j:set var="rowcount" value="0"/>
+        <table class="bodyTable" cellspacing="1">
+            <jsl:applyTemplates select="*"/>
+        </table>
+    </jsl:template>
+    <jsl:template match="tr" trim="true">
+        <j:choose>
+            <j:when test="${rowMode == 'a'}">
+                <j:set var="rowMode" value="b"/>
+            </j:when>
+            <j:otherwise>
+                <j:set var="rowMode" value="a"/>
+            </j:otherwise>
+        </j:choose>
+        <x:element name="tr">
+            <j:whitespace trim="true">
+                <x:attribute name="class">${rowMode}</x:attribute>
+                <x:forEach var="attr" select="@*">
+                    <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+                </x:forEach>
+                <jsl:applyTemplates select="*"/>
+            </j:whitespace>
+        </x:element>
+    </jsl:template>
+    <!--************************-->
+    <!-- goals documentation    -->
+    <!--************************-->
+    <jsl:template match="goals" trim="true">
+        <!-- reset row alternation -->
+        <j:set var="rowMode" value=""/>
+        <div class="h3">
+            <a name="Goals"/>
+            <h3>Goals</h3>
+            <table class="bodyTable">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <jsl:applyTemplates select="goal"/>
+                </tbody>
+            </table>
+        </div>
+    </jsl:template>
+    <!-- a goal -->
+    <jsl:template match="goal" trim="true">
+        <j:choose>
+            <j:when test="${rowMode == 'a'}">
+                <j:set var="rowMode" value="b"/>
+            </j:when>
+            <j:otherwise>
+                <j:set var="rowMode" value="a"/>
+            </j:otherwise>
+        </j:choose>
+        <x:element name="tr">
+            <j:whitespace trim="true">
+                <x:attribute name="class">${rowMode}</x:attribute>
+                <j:set var="_goalName">
+                    <x:expr select="./name"/>
+                </j:set>
+                <td style="width:20%">
+                    <a name="${_goalName}"/>${_goalName}</td>
+                <td>
+                    <jsl:applyTemplates select="description"/>
+                </td>
+            </j:whitespace>
+        </x:element>
+    </jsl:template>
+    <jsl:template match="description">
+        <jsl:applyTemplates trim="false"/>
+    </jsl:template>
+    <!-- remove the space at the end of parsed "a" anchors and fix local hrefs -->
+    <jsl:template match="a" trim="true">
+        <j:set var="href">
+            <x:expr select="@href"/>
+        </j:set>
+        <j:choose>
+            <j:when test="${!empty(href) and href.startsWith('#')}">
+                <x:element name="a" trim="true">
+                    <x:forEach var="attr" select="@*">
+                        <j:choose>
+                            <j:when test="${attr.name == 'href'}">
+                                <x:attribute name="href">
+                                    <doc:escapeNameToken value="${attr.value}"/>
+                                </x:attribute>
+                            </j:when>
+                            <j:otherwise>
+                                <x:attribute name="${attr.name}">${attr.value}</x:attribute>
+                            </j:otherwise>
+                        </j:choose>
+                    </x:forEach>
+                    <jsl:applyTemplates/>
+                </x:element>
+            </j:when>
+            <j:otherwise>
+                <jsl:copy>
+                    <jsl:applyTemplates/>
+                </jsl:copy>
+            </j:otherwise>
+        </j:choose>
+    </jsl:template>
+    <!-- copy any other elements through -->
+    <jsl:template match="*" trim="false">
+        <jsl:copy trim="false">
+            <jsl:applyTemplates trim="false"/>
+        </jsl:copy>
+    </jsl:template>
+    <!-- element values don't pass through as text -->
+    <jsl:template match="@*"/>
+    <!-- CDATA and text nodes pass-thru -->
+    <jsl:template match="text()">
+        <x:expr select="."/>
+    </jsl:template>
 </jsl:stylesheet>
