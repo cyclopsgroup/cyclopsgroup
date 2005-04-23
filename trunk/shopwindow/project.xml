@@ -35,10 +35,6 @@
 			<timezone>-6</timezone>
 		</developer>
 	</developers>
-	<reports>
-		<report>maven-changelog-plugin</report>
-		<report>maven-file-activity-plugin</report>
-		<report>maven-developer-activity-plugin</report>
-		<report>maven-license-plugin</report>
-	</reports>
+	<build/>
+	<reports/>
 </project>

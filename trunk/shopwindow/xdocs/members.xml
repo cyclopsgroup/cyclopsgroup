@@ -3,7 +3,6 @@
 	<properties>
 		<title>Members</title>
 		<author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
-		<banner>/images/banners/members.jpg</banner>
 	</properties>
 	<body>
 		<section name="Members Introduction">
@@ -17,7 +16,7 @@
 					<th>Description</th>
 				</tr>
 				<tr>
-					<td>jiaqi</td>
+					<td><a href="http://www.cyclopsgroup.com/kb/display/jiaqi/Home">jiaqi</a></td>
 					<td>Guo, Jiaqi</td>
 					<td>jiaqi.guo@gmail.com</td>
 					<td>Founder of Cyclops Group</td>

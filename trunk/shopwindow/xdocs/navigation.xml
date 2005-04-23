@@ -6,32 +6,7 @@
 			<item name="Home" href="/index.html"/>
 			<item name="News and Articles" href="/weblogs/news/blog.html"/>
 			<item name="Projects" href="/projects.html"/>
-			<item name="Members" href="/members/index.html" collapse="true">
-				<item name="Jiaqi Guo" href="/members/jiaqi/index.html" collapse="true">
-					<item name="Resume" href="/members/jiaqi/resume.html"/>
-					<item name="Blog" href="/weblogs/jiaqi/blog.html"/>
-					<item name="Contact" href="/members/jiaqi/contact.html"/>
-				</item>
-				<item name="Xuying Zhao" href="/members/xuying/index.html" collapse="true">
-					<item name="CV" href="/members/xuying/cv.html"/>
-					<item name="Blog" href="/members/xuying/blog/blog.html"/>
-				</item>
-				<item name="Member Gallery" href="/members/gallery/index.html" collapse="true">
-					<item name="2004" href="/members/gallery/2004/index.html" collapse="true">
-						<item name="January" href="/members/gallery/2004/1/index.html"/>
-						<item name="February" href="/members/gallery/2004/2/index.html"/>
-						<item name="April" href="/members/gallery/2004/4/index.html"/>
-						<item name="May" href="/members/gallery/2004/5/index.html"/>
-						<item name="June" href="/members/gallery/2004/6/index.html"/>
-						<item name="July" href="/members/gallery/2004/7/index.html"/>
-						<item name="September" href="/members/gallery/2004/9/index.html"/>
-						<item name="October" href="/members/gallery/2004/10/index.html"/>
-						<item name="November" href="/members/gallery/2004/11/index.html"/>
-						<item name="December" href="/members/gallery/2004/12/index.html"/>
-						<item name="Merry Christmas" href="/members/gallery/2004/christmas.html"/>
-					</item>
-				</item>
-			</item>
+			<item name="Members" href="/members.html"/>
 			<item name="For Developers" href="/dev/index.html" collapse="true">
 				<item name="Get Involved" href="/dev/involved.html"/>
 				<item name="Developer Howtos" href="/dev/howtos.html"/>
