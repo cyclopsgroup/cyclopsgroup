@@ -1,6 +1,6 @@
 body, input, select, textarea
 {
-	font-family: Verdana, Arial, Helvetica, sans-serif
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #666666;
 }
@@ -70,7 +70,6 @@ div.subsection div.subsectionTitle
     font-size: 14px;
     line-height: 24px;
 }
-
 
 div.source pre
 {

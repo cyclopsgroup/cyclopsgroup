@@ -25,7 +25,7 @@
         <j:expr value="${pom.getPluginContext('maven-xdoc-plugin').setVariable('maven.xdoc.jsl', tempSite)}"/>
     </goal>
     <goal name="cyclops:post-xdoc">
-        <copy todir="${maven.docs.dest}">
+        <copy todir="${maven.docs.dest}" overwrite="true">
             <fileset dir="${maven.docs.src}">
                 <exclude name="**/*.xml"/>
                 <exclude name="**/CVS"/>
