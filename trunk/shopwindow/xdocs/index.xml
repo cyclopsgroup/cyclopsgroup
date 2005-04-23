@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<properties>
-		<title>Cyclops Group Home</title>
-		<properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
-		<banner>/images/banners/candle.jpg</banner>
-	</properties>
-	<body>
-		<section name="Mission">
-			<p>Software is supposed to make things simple, not complicated. However, the fact is in many cases it doesn't, on purpose. Our goal is making software not profound and powerful, but simple, generic and easy to understand.</p>
-			<p>Initially, we focus on solutions for common questions like application frameworks, database tools and mathematics problems.</p>
-			<p>A list of projects here is available at <a href="projects.xml">Projects</a>.</p>
-		</section>
-		<section name="Who is it?">
-			<p>Cyclops Group is a group of talented people trying to make their contribution to the java open source world.</p>
-		</section>
-	</body>
+    <properties>
+        <title>Cyclops Group Home</title>
+        <properties email="g-cyclops@user.sourceforge.net">Jiaqi Guo</properties>
+    </properties>
+    <body>
+        <section name="Mission">
+            <p>Software is supposed to make things simple, not complicated. However, the fact is in many cases it doesn't, on purpose. Our goal is making software not profound and powerful, but simple, generic and easy to understand.</p>
+            <p>Initially, we focus on solutions for common questions like application frameworks, database tools and mathematics problems.</p>
+            <p>A list of projects here is available at <a href="projects.xml">Projects</a>.</p>
+        </section>
+        <section name="Who is it?">
+            <p>Cyclops Group is a group of talented people trying to make their contribution to the java open source world. Member list is available at <a href="members.html">here</a>.</p>
+        </section>
+        <section name="Projects">
+            <p> In the <a href="projects.html">full project list</a>, you may find a list of all projects in Cyclops Group. The following projects are under active development now.</p>
+            <table>
+                <tr>
+                    <td>
+                        <a href="projects/waterview">waterview</a>
+                    </td>
+                    <td>Waterview is positioned as a highly componentized web application framework, which is an avalon standard and plexus container based, turbine like servlet</td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/waterview">CVS</a>
+                    </td>
+                    <td>
+                        <a href="issues/browse/waterview">Issues</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="projects/clib">clib</a>
+                    </td>
+                    <td>Common library that other projects are based on</td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/clib">CVS</a>
+                    </td>
+                    <td>
+                        <a href="issues/browse/clib">Issues</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="projects/laputa">laputa</a>
+                    </td>
+                    <td>Laputa is (will be) a BBS system</td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/laputa">CVS</a>
+                    </td>
+                    <td>
+                        <a href="issues/browse/laputa">Issues</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="projects/amulets">amulets</a>
+                    </td>
+                    <td>Amulets is a set of maven plugins</td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/amulets">CVS</a>
+                    </td>
+                    <td>
+                        <a href="issues/browse/amulets">Issues</a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </body>
 </document>

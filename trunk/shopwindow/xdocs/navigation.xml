@@ -3,22 +3,20 @@
 	<title>Cyclops Group</title>
 	<body>
 		<menu name="Overview">
-			<item name="Home" href="/index.html"/>
-			<item name="News and Articles" href="/weblogs/news/blog.html"/>
-			<item name="Projects" href="/projects.html"/>
+			<item name="What is it" href="/index.html"/>
+			<item name="Projects list" href="/projects.html"/>
 			<item name="Members" href="/members.html"/>
-			<item name="For Developers" href="/dev/index.html" collapse="true">
-				<item name="Get Involved" href="/dev/involved.html"/>
-				<item name="Developer Howtos" href="/dev/howtos.html"/>
+			<item name="For developer" href="/dev/index.html" collapse="true">
+				<item name="Get involved" href="/dev/involved.html"/>
+				<item name="Howtos" href="/dev/howtos.html"/>
 			</item>
 			<item name="About Us" href="/about.html"/>
 		</menu>
 		<links>
-			<item name="Browse CVS" href="http://cvs.sourceforge.net/viewcvs.py/cyclops-group/"/>
+			<item name="Browse CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/"/>
+			<item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues"/>
+			<item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb"/>
 			<item name="Source Forge Summary" href="http://sourceforge.net/projects/cyclops-group"/>
-			<item name="Apache Jakarta" href="http://jakarta.apache.org"/>
-			<item name="Maven" href="http://maven.apache.org"/>
-			<item name="Codehaus" href="http://www.codehaus.org"/>
 		</links>
 		<search/>
 	</body>

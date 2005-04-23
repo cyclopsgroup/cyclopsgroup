@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
 	<pomVersion>3</pomVersion>
 	<id>unknow</id>
@@ -18,7 +18,7 @@
 	<shortDescription>Sample proect</shortDescription>
 	<url>${pom.organization.url}/projects/${pom.artifactId}</url>
 	<issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
-	<siteAddress>shell.sourceforge.net</siteAddress>
+	<siteAddress>www.cyclopsgroup.com</siteAddress>
 	<siteDirectory>/var/www/www.cyclopsgroup.com/htdocs/projects/${pom.artifactId}</siteDirectory>
 	<repository>
 		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
