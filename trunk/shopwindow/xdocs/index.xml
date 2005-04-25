@@ -8,10 +8,7 @@
         <section name="Mission">
             <p>Software is supposed to make things simple, not complicated. However, the fact is in many cases it doesn't, on purpose. Our goal is making software not profound and powerful, but simple, generic and easy to understand.</p>
             <p>Initially, we focus on solutions for common questions like application frameworks, database tools and mathematics problems.</p>
-            <p>A list of projects here is available at <a href="projects.xml">Projects</a>.</p>
-        </section>
-        <section name="Who is it?">
-            <p>Cyclops Group is a group of talented people trying to make their contribution to the java open source world. Member list is available at <a href="members.html">here</a>.</p>
+            <p>A list of projects here is available at <a href="projects.html">Projects</a>.</p>
         </section>
         <section name="Projects">
             <p> In the <a href="projects.html">full project list</a>, you may find a list of all projects in Cyclops Group. The following projects are under active development now.</p>
@@ -65,6 +62,17 @@
                     </td>
                 </tr>
             </table>
+        </section>
+        <section name="In this site">
+            <p>This website (www.cyclopsgroup.com) is made up of several parts.
+                <ul>
+                    <li><a href="http://www.cyclopsgroup.com">Home</a>: Maven generated static web site</li>
+                    <li><a href="http://www.cyclopsgroup.com/kb">Knowledge Base</a>: Atlassian Confluence based knowledge base system</li>
+                    <li><a href="http://www.cyclopsgroup.com/issues">Issue Tracker</a>: Atlassian JIRA based issue tracking system.</li>
+                    <li><a href="http://cvs.cyclopsgroup.com">Web CVS</a>: Cenqua Fisheye based web cvs view system.</li>
+                    <li><a href="http://www.cyclopsgroup.com/lib/">Maven Repository</a>: Maven Proxy based online maven repository at http://www.cyclopsgroup.com/lib.</li>
+                </ul>
+            </p>
         </section>
     </body>
 </document>

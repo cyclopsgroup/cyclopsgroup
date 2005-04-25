@@ -16,8 +16,8 @@
 					<td>
 						<a href="projects/waterview">waterview</a>
 					</td>
-					<td>Componentized web application framework</td>
-					<td>Ready to use</td>
+					<td>Componentized web application framework based on Plexus, commons-jelly and Velocity.</td>
+					<td>2.0 release is scheduled</td>
 				</tr>
 				<tr>
 					<td>
@@ -58,7 +58,7 @@
 					<td>
 						<a href="projects/jlone">jlone</a>
 					</td>
-					<td>Jlone will be a portal system based on JSR-168</td>
+					<td>Jlone will be a CMS based web application similar to ZOPE. It will try to work with JSR 170.</td>
 					<td>Nothing but an idea</td>
 				</tr>
 				<tr>

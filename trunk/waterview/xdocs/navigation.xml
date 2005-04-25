@@ -2,11 +2,11 @@
 <project>
     <body>
         <links>
-            <item name="Turbine" href="http://jakarta.apache.org/turbine"/>
-            <item name="Avalon" href="http://avalon.apache.org"/>
-            <item name="Plexus" href="http://plexus.codehaus.org"/>
-            <item name="Velocity" href="http://jakarta.apache.org/velocity"/>
-            <item name="Commons Jelly" href="http://jakarta.apache.org/commons/jelly"/>
+            <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues/browse/waterview"/>
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/waterview"/>
+            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/waterview"/>
+            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclopsgroup/waterview"/>
+            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclopsgroup/waterview"/>
         </links>
         <menu name="Overview">
             <item name="Home" href="/index.html"/>
@@ -14,6 +14,5 @@
             <item name="Design" href="/design.html"/>
             <item name="About" href="/about.html"/>
         </menu>
-        <search/>
     </body>
 </project>

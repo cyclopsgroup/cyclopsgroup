@@ -4,4 +4,7 @@
 	<preGoal name="xdoc:transform">
 		<attainGoal name="cyclops:pre-xdoc"/>
 	</preGoal>
+	<postGoal name="xdoc:transform">
+        <attainGoal name="cyclops:post-xdoc"/>
+	</postGoal>
 </project>
