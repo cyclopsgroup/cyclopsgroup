@@ -27,6 +27,18 @@
                 </tr>
                 <tr>
                     <td>
+                        <a href="projects/levistone">levistone</a>
+                    </td>
+                    <td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/levistone">CVS</a>
+                    </td>
+                    <td>
+                        <a href="issues/browse/levistone">Issues</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <a href="projects/clib">clib</a>
                     </td>
                     <td>Common library that other projects are based on</td>

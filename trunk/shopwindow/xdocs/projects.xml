@@ -21,10 +21,10 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="projects/tornado">tornado</a>
+						<a href="projects/levistone">levistone</a>
 					</td>
-					<td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
-					<td>First version is released</td>
+					<td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
+					<td>I think it is dead. JDO could be a much better solution that it.</td>
 				</tr>
 				<tr>
 					<td>
@@ -35,16 +35,30 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="projects/cyclib">cyclib</a>
+						<a href="projects/clib">clib</a>
 					</td>
 					<td>Common library</td>
 					<td>Under active development</td>
 				</tr>
 				<tr>
 					<td>
+						<a href="projects/tornado">tornado</a>
+					</td>
+					<td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
+					<td>First version is released</td>
+				</tr>
+                <tr>
+					<td>
+						<a href="projects/laputa">laputa</a>
+					</td>
+					<td>Laputa is expected to be a collaboration platform</td>
+					<td>Just started</td>
+                </tr>
+				<tr>
+					<td>
 						<a href="projects/jmainboard">jmainboard</a>
 					</td>
-					<td>A light weight plugable components framework. Additional module can be easily developed and plug into this framework.</td>
+					<td>A light weight plugable components framework. Additional module can be easily developed and plug into this framework. <font color="red">This project is deprecated.</font></td>
 					<td>It is able to work now but not released yet.</td>
 				</tr>
 				<tr>
@@ -63,17 +77,10 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="http://cyclops-group.sourceforge.net">shopwindow</a>
+						<a href="http://www.cyclopsgroup.com">shopwindow</a>
 					</td>
 					<td>The project is this website itself.</td>
 					<td>Stable</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="http://projects/levistone">levistone</a>
-					</td>
-					<td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
-					<td>I think it is dead. JDO could be a much better solution that it.</td>
 				</tr>
 				<tr>
 					<td>
