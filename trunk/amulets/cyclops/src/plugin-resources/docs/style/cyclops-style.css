@@ -37,8 +37,8 @@ div.section div.sectionTitle
     border-width: 0px 0px 2px 0px;
     border-style: solid;
     border-color: #CACACA;
-    text-indent: 28px;
-    background: url(../images/big_right.gif) left center no-repeat;
+    text-indent: 72px;
+    background: url(../images/icons/big_paragraph.png) left top no-repeat;
 }
 
 div.subsection div.subsectionTitle
@@ -47,7 +47,7 @@ div.subsection div.subsectionTitle
     border-style: solid;
     border-color: #CACACA;
     text-indent: 28px;
-    background: url(../images/right.gif) left center no-repeat;
+    background: url(../images/icons/rightarrow.png) left center no-repeat;
     color: #666666;
 }
 
