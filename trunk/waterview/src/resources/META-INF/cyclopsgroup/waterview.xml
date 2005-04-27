@@ -4,10 +4,13 @@
         <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.UITagPackage"/>
         <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage"/>
     </TagLibrary>
-    <Layout id="waterview.3ColumnLayout"  name="Waterview 3-column layout" description="3 columns layout provided by waterview">
+    <Layout id="waterview.3ColumnLayout" description="3 columns layout provided by waterview">
         <JellyLayout script="Waterview3ColumnLayout.jelly"/>
     </Layout>
-    <Layout id="waterview.DefaultLayout" name="Waterview simple layout" description="Body only">
+    <Layout id="waterview.DefaultLayout" description="Body only">
         <JellyLayout script="WaterviewDefaultLayout.jelly"/>
     </Layout>
+    <Frame id="waterview.DefaultDisplayFrame" description="Default jelly frame">
+        <JellyFrame script="WaterviewDisplayFrame.jelly"/>
+    </Frame>
 </Waterview>

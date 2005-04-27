@@ -19,8 +19,8 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Layout;
-import com.cyclopsgroup.waterview.jelly.ScriptLayoutProxy;
+import com.cyclopsgroup.waterview.Frame;
+import com.cyclopsgroup.waterview.jelly.ScriptFrameProxy;
 import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
 
 /**
@@ -28,7 +28,7 @@ import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayoutTag extends WaterviewTagSupport
+public class JellyFrameTag extends WaterviewTagSupport
 {
     private String script;
 
@@ -41,10 +41,10 @@ public class JellyLayoutTag extends WaterviewTagSupport
             throws Exception
     {
         requireAttribute("script");
-        requireParent(LayoutTag.class);
-        Layout layout = new ScriptLayoutProxy(getScript());
-        LayoutTag layoutTag = (LayoutTag) getParent();
-        layoutTag.setLayout(layout);
+        requireParent(FrameTag.class);
+        Frame frame = new ScriptFrameProxy(getScript());
+        FrameTag frameTag = (FrameTag) getParent();
+        frameTag.setFrame(frame);
     }
 
     /**

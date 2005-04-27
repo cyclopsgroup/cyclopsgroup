@@ -21,23 +21,23 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
 
 /**
- * Layout tag
+ * Frame definition tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LayoutTag extends WaterviewTagSupport
+public class FrameTag extends WaterviewTagSupport
 {
 
     private String description;
 
-    private String id;
+    private Frame frame;
 
-    private Layout layout;
+    private String id;
 
     /**
      * Override or implement method of parent class or interface
@@ -53,14 +53,14 @@ public class LayoutTag extends WaterviewTagSupport
             setDescription("Layout [" + getId() + "]");
         }
         invokeBody(output);
-        if (getLayout() == null)
+        if (getFrame() == null)
         {
             throw new JellyTagException(
-                    "There must be a layout defined in layout tag");
+                    "There must be a frame defined in layout tag");
         }
         ModuleManager moduleManager = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        moduleManager.registerLayout(getId(), getLayout());
+        moduleManager.registerFrame(getId(), getFrame());
     }
 
     /**
@@ -74,6 +74,16 @@ public class LayoutTag extends WaterviewTagSupport
     }
 
     /**
+     * Getter method for frame
+     *
+     * @return Returns the frame.
+     */
+    public Frame getFrame()
+    {
+        return frame;
+    }
+
+    /**
      * Getter method for id
      *
      * @return Returns the id.
@@ -81,16 +91,6 @@ public class LayoutTag extends WaterviewTagSupport
     public String getId()
     {
         return id;
-    }
-
-    /**
-     * Getter method for layout
-     *
-     * @return Returns the layout.
-     */
-    public Layout getLayout()
-    {
-        return layout;
     }
 
     /**
@@ -104,6 +104,16 @@ public class LayoutTag extends WaterviewTagSupport
     }
 
     /**
+     * Setter method for frame
+     *
+     * @param frame The frame to set.
+     */
+    public void setFrame(Frame frame)
+    {
+        this.frame = frame;
+    }
+
+    /**
      * Setter method for id
      *
      * @param id The id to set.
@@ -111,15 +121,5 @@ public class LayoutTag extends WaterviewTagSupport
     public void setId(String id)
     {
         this.id = id;
-    }
-
-    /**
-     * Setter method for layout
-     *
-     * @param layout The layout to set.
-     */
-    public void setLayout(Layout layout)
-    {
-        this.layout = layout;
     }
 }

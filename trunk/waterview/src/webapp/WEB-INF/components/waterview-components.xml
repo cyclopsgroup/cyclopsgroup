@@ -10,7 +10,6 @@
                     <pipeline pattern=".*\.jelly" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
                     <pipeline pattern=".*\.vm" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
                 </pipelines>
-                <default-layout>waterview.3ColumnLayout</default-layout>
             </configuration>
         </component>
         <component>
@@ -21,6 +20,8 @@
                 <packages>
                     <package>com.cyclopsgroup.waterview.ui</package>
                 </packages>
+                <default-layout>waterview.3ColumnLayout</default-layout>
+                <default-frame>waterview.DefaultDisplayFrame</default-frame>
             </configuration>
         </component>
         <component>

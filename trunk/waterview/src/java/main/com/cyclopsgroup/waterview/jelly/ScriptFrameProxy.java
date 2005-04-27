@@ -17,48 +17,47 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Script layout which doesn't initial script object initially
+ * Proxy of script frame
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ShellScriptLayout extends BaseModule implements Layout
+public class ScriptFrameProxy extends BaseModule implements Frame
 {
-    private ScriptLayout layout;
+    private ScriptFrame frame;
 
-    private String layoutScript;
+    private String framePath;
 
     /**
-     * Constructor for class ShellScriptLayout
+     * Constructor for class ScriptFrameProxy
      *
-     * @param layoutScript Layout script path
+     * @param framePath Path of frame
      */
-    public ShellScriptLayout(String layoutScript)
+    public ScriptFrameProxy(String framePath)
     {
-        this.layoutScript = layoutScript;
+        this.framePath = framePath;
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.Page)
+     * @see com.cyclopsgroup.waterview.Frame#display(com.cyclopsgroup.waterview.Page, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public void render(PageRuntime runtime, Page page) throws Exception
+    public void display(Page page, PageRuntime runtime) throws Exception
     {
         synchronized (this)
         {
-            if (layout == null)
+            if (frame == null)
             {
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
-                layout = new ScriptLayout(je
-                        .getScript("layout/" + layoutScript));
+                frame = new ScriptFrame(je.getScript("frame/" + framePath));
             }
         }
-        layout.render(runtime, page);
+        frame.display(page, runtime);
     }
 }

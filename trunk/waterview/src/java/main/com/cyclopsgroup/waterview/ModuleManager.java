@@ -34,9 +34,9 @@ public interface ModuleManager
     Frame getDefaultFrame();
 
     /**
-     * TODO Add javadoc for this method
+     * Get default frame id
      *
-     * @return
+     * @return Frame id
      */
     String getDefaultFrameId();
 
@@ -55,13 +55,18 @@ public interface ModuleManager
     String getDefaultLayoutId();
 
     /**
-     * TODO Add javadoc for this method
+     * Get registered frame
      *
      * @param frameId
-     * @return
+     * @return Frame object
      */
     Frame getFrame(String frameId);
 
+    /**
+     * Get id array of registered frames
+     *
+     * @return Frame id array
+     */
     String[] getFrameIds();
 
     /**
@@ -73,9 +78,9 @@ public interface ModuleManager
     Layout getLayout(String layoutId);
 
     /**
-     * TODO Add javadoc for this method
+     * Get id array of registered layouts
      *
-     * @return
+     * @return All available layout ids
      */
     String[] getLayoutIds();
 
@@ -87,10 +92,10 @@ public interface ModuleManager
     String[] getPackageNames();
 
     /**
-     * TODO Add javadoc for this method
+     * Register frame object
      *
-     * @param frameId
-     * @param frame
+     * @param frameId Frame ID
+     * @param frame Frame object
      */
     void registerFrame(String frameId, Frame frame);
 
@@ -103,9 +108,9 @@ public interface ModuleManager
     void registerLayout(String layoutId, Layout layout);
 
     /**
-     * TODO Add javadoc for this method
+     * Set default frame id
      *
-     * @param frameId
+     * @param frameId Frame id
      */
     void setDefaultFrameId(String frameId);
 

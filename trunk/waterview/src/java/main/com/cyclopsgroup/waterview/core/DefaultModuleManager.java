@@ -85,6 +85,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         {
             setDefaultLayoutId(layoutId);
         }
+        String frameId = conf.getChild("default-frame").getValue(null);
+        if (frameId != null)
+        {
+            setDefaultFrameId(frameId);
+        }
     }
 
     /**
