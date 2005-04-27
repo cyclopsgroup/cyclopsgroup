@@ -77,3 +77,11 @@ div.subsection div.subsectionTitle
 {
     background-color: #FEC83C;
 }
+
+#navigatorBlock table.menu th
+{
+    background-color: #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white #AAAAAA #AAAAAA white;
+}
