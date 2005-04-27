@@ -155,7 +155,6 @@
     </component-composer-manager>
     <!-- Internal components -->
     <components>
-        <!--
         <component>
             <role>org.codehaus.plexus.logging.LoggerManager</role>
             <implementation>org.codehaus.plexus.logging.console.ConsoleLoggerManager</implementation>
@@ -164,7 +163,6 @@
                 <threshold>info</threshold>
             </configuration>
         </component>
-        -->
         <!-- Component configurator -->
         <component>
             <role>org.codehaus.plexus.component.configurator.ComponentConfigurator</role>
