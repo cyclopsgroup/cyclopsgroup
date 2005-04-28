@@ -76,14 +76,29 @@
             </table>
         </section>
         <section name="In this site">
-            <p>This website (www.cyclopsgroup.com) is made up of several parts.
-                <ul>
-                    <li><a href="http://www.cyclopsgroup.com">Home</a>: Maven generated static web site</li>
-                    <li><a href="http://www.cyclopsgroup.com/kb">Knowledge Base</a>: Atlassian Confluence based knowledge base system</li>
-                    <li><a href="http://www.cyclopsgroup.com/issues">Issue Tracker</a>: Atlassian JIRA based issue tracking system.</li>
-                    <li><a href="http://cvs.cyclopsgroup.com">Web CVS</a>: Cenqua Fisheye based web cvs view system.</li>
-                    <li><a href="http://www.cyclopsgroup.com/lib/">Maven Repository</a>: Maven Proxy based online maven repository at http://www.cyclopsgroup.com/lib.</li>
-                </ul>
+            <p>This website (www.cyclopsgroup.com) is made up of several parts.</p>
+            <ul>
+                <li>
+                    <a href="http://www.cyclopsgroup.com">Home</a>: Maven generated static web site</li>
+                <li>
+                    <a href="http://www.cyclopsgroup.com/kb">Knowledge Base</a>: Atlassian Confluence based knowledge base system</li>
+                <li>
+                    <a href="http://www.cyclopsgroup.com/issues">Issue Tracker</a>: Atlassian JIRA based issue tracking system.</li>
+                <li>
+                    <a href="http://cvs.cyclopsgroup.com">Web CVS</a>: Cenqua Fisheye based web cvs view system.</li>
+                <li>
+                    <a href="http://www.cyclopsgroup.com/lib/">Maven Repository</a>: Maven Proxy based online maven repository at http://www.cyclopsgroup.com/lib.</li>
+            </ul>
+        </section>
+        <section name="NO Microsoft Internet Explorer">
+            <p>Because of the poor support of PNG image in Microsoft Internet Explorer, this website gives up being IE compliant. If you are using IE, please convert to Firefox, Mozilla, Opera or other web browser to properly browse this site. <font color="red">
+                    <b>This website DOESN'T support Microsft Internet Explorer anymore</b>
+                </font>.</p>
+            <p>
+                <a href="http://www.cyclopsgroup.com/kb/display/pkb/NO+IE">More...</a>
+            </p>
+            <p>
+                <img src="http://www.cyclopsgroup.com/kb/download/attachments/35/noie.gif"/>
             </p>
         </section>
     </body>
