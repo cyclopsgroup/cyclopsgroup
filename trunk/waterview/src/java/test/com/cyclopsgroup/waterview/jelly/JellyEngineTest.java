@@ -59,12 +59,16 @@ public class JellyEngineTest extends PlexusTestCase
         Script script = je.getScript("layout/Waterview3ColumnLayout.jelly");
         assertNotSame(script, JellyEngine.DUMMY_SCRIPT);
         JellyContext jc = new JellyContext(je.getGlobalContext());
+
         jc.setVariable(JellyEngine.RENDERING, Boolean.TRUE);
         jc.setVariable(Page.NAME, new Page());
         StringWriter sw = new StringWriter();
-        jc.setVariable(PageRuntime.NAME, new FakePageRuntime(
-                new PrintWriter(sw)));
-        script.run(jc, XMLOutput.createXMLOutput(sw));
+        FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(sw));
+        XMLOutput output = XMLOutput.createXMLOutput(sw);
+        runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
+        runtime.getPageContext().put(JellyEngine.JELLY_OUTPUT, output);
+        jc.setVariable(PageRuntime.NAME, runtime);
+        script.run(jc, output);
         assertTrue(StringUtils.isNotEmpty(sw.toString()));
     }
 }
