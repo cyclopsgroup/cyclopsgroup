@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Waterview xmlns="com.cyclopsgroup.waterview.definition">
-    <TagLibrary uri="com.cyclopsgroup.waterview.ui">
+<Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
         <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.UITagPackage"/>
         <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage"/>
     </TagLibrary>

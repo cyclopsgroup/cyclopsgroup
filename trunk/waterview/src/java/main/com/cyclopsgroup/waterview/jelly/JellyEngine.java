@@ -55,6 +55,9 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     /** Class name of definition tag package */
     private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
 
+    /** Definition taglib url */
+    public static final String DEFINITION_TAGLIB_URL = "http://waterview.cyclopsgroup.com/definition";
+
     /** Stupid dummy script */
     public static final Script DUMMY_SCRIPT = new Script()
     {
@@ -242,8 +245,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         ClibTagLibrary deftaglib = new ClibTagLibrary();
         deftaglib.registerPackage((TagPackage) Class.forName(
                 DEFINITION_TAG_PACKAGE).newInstance());
-        jc.registerTagLibrary("com.cyclopsgroup.waterview.definition",
-                deftaglib);
+        jc.registerTagLibrary(DEFINITION_TAGLIB_URL, deftaglib);
 
         Enumeration e = getClass().getClassLoader().getResources(
                 "META-INF/cyclopsgroup/waterview.xml");

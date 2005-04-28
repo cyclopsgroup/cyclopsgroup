@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<w:Frame xmlns="com.cyclopsgroup.waterview.html" xmlns:w="com.cyclopsgroup.waterview.ui">
+<w:Frame xmlns="http://waterview.cyclopsgroup.com/html" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
