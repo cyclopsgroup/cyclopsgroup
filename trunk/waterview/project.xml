@@ -35,8 +35,7 @@
     </developers>
     <dependencies>
         <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm</artifactId>
+            <id>asm</id>
             <version>1.3.4</version>
             <url>http://asm.objectweb.org</url>
             <properties>
@@ -53,8 +52,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>classworlds</groupId>
-            <artifactId>classworlds</artifactId>
+            <id>classworlds</id>
             <version>1.1-alpha-1</version>
             <url>http://classworlds.codehaus.org</url>
             <properties>
@@ -79,8 +77,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
+            <id>commons-beanutils</id>
             <version>1.7.0</version>
             <url>http://jakarta.apache.org/commons/beanutils</url>
             <properties>
@@ -88,8 +85,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
+            <id>commons-collections</id>
             <version>3.0</version>
             <url>http://jakarta.apache.org/commons/collections</url>
             <properties>
@@ -97,8 +93,15 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly</artifactId>
+            <id>commons-io</id>
+            <version>1.0</version>
+            <url>http://jakarta.apache.org/commons/io</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <id>commons-jelly</id>
             <version>1.0-beta-4</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
@@ -106,8 +109,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-jexl</groupId>
-            <artifactId>commons-jexl</artifactId>
+            <id>commons-jexl</id>
             <version>1.0-beta-2</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
@@ -115,8 +117,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
+            <id>commons-lang</id>
             <version>2.0</version>
             <url>http://jakarta.apache.org/commons/lang</url>
             <properties>
@@ -124,8 +125,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
+            <id>commons-logging</id>
             <version>1.0.3</version>
             <url>http://jakarta.apache.org/commons/loggings</url>
             <properties>
@@ -133,8 +133,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
+            <id>dom4j</id>
             <version>1.5-beta-2</version>
             <url>http://www.dom4j.org</url>
             <properties>
@@ -142,14 +141,12 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <id>junit</id>
             <version>3.8.1</version>
             <url>http://junit.org</url>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <id>log4j</id>
             <version>1.2.8</version>
             <url>http://logging.apache.org/log4j</url>
             <properties>
@@ -157,8 +154,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>plexus</groupId>
-            <artifactId>plexus</artifactId>
+            <id>plexus</id>
             <version>0.17</version>
             <url>http://plexus.codehaus.org</url>
             <properties>
@@ -175,8 +171,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>servlet</groupId>
-            <artifactId>servlet</artifactId>
+            <id>servletapi</id>
             <version>2.3</version>
             <url>http://java.sun.com/j2ee</url>
         </dependency>
@@ -187,8 +182,7 @@
             <url>http://jakarta.apache.org/tomcat</url>
         </dependency>
         <dependency>
-            <groupId>velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <id>velocity</id>
             <version>1.4-rc1</version>
             <url>http://jakarta.apache.org/velocity</url>
             <properties>
@@ -196,8 +190,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>xpp3</groupId>
-            <artifactId>xpp3</artifactId>
+            <id>xpp3</id>
             <version>1.1.3.3</version>
             <url>http://www.xmlpull.org</url>
             <properties>
@@ -205,8 +198,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>xstream</groupId>
-            <artifactId>xstream</artifactId>
+            <id>xstream</id>
             <version>20040809</version>
             <url>http://xstream.codehaus.org</url>
             <properties>
