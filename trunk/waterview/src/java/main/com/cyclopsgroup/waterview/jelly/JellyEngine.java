@@ -39,7 +39,10 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
+import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.utils.PageRequest;
 
@@ -49,7 +52,7 @@ import com.cyclopsgroup.waterview.utils.PageRequest;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyEngine extends AbstractLogEnabled implements Initializable,
-        Contextualizable, Serviceable
+        Contextualizable, Serviceable, DynaViewFactory
 {
 
     /** Class name of definition tag package */
@@ -126,6 +129,27 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         {
             getLogger().warn("Can not add init properties");
         }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     */
+    public View createView(String viewPath, PageRuntime runtime)
+            throws Exception
+    {
+        String path = viewPath;
+        if (viewPath.charAt(0) == '/')
+        {
+            path = "view" + viewPath;
+        }
+        else
+        {
+            path = "view/" + viewPath;
+        }
+        Script script = getScript(path);
+        return new ScriptView(script);
     }
 
     /**

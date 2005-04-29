@@ -14,28 +14,25 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
-
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+package com.cyclopsgroup.waterview;
 
 /**
- * Frame tag
+ * Dynamic view factory
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public interface DynaViewFactory
 {
+    /** Name of this component */
+    String NAME = DynaViewFactory.class.getName();
+
     /**
-     * Override or implement method of parent class or interface
+     * Dynamically create View with view path
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @param viewPath Path of the view
+     * @param runtime Current runtime
+     * @return View object
+     * @throws Exception Throw it out
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
-    {
-        invokeBody(output);
-    }
+    View createView(String viewPath, PageRuntime runtime) throws Exception;
 }

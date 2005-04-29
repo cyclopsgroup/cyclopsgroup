@@ -14,32 +14,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core;
 
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import org.apache.commons.lang.enum.Enum;
 
 /**
- * Package of UI tags
+ * Resource type enumeration
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class UITagPackage extends TagPackage
+public class ResourceType extends Enum
 {
+    /** File resource type */
+    public static final ResourceType FILE = new ResourceType("file");
+
+    /** Classpath resource type */
+    public static final ResourceType RESOURCE = new ResourceType("resource");
+
+    /** URL resource type */
+    public static final ResourceType URL = new ResourceType("url");
+
     /**
-     * Constructor for class UITagPackage
+     * Get object
      *
+     * @param value Value of enum
+     * @return resource type object
      */
-    public UITagPackage()
+    public static ResourceType valueOf(String value)
     {
-        addTag("Frame", FrameTag.class);
-        addTag("Layout", LayoutTag.class);
-        addTag("Page", PageTag.class);
-        addTag("Panel", PanelTag.class);
-        addTag("JellyLayout", JellyLayoutTag.class);
-        addTag("SystemLayout", SystemLayoutTag.class);
-        addTag("PanelContent", PanelContentTag.class);
-        addTag("JellyView", JellyViewTag.class);
-        addTag("SimpleView", SimpleViewTag.class);
-        addTag("RenderLayout", RenderLayoutTag.class);
+        return (ResourceType) getEnum(ResourceType.class, value);
+    }
+
+    private ResourceType(String value)
+    {
+        super(value);
     }
 }

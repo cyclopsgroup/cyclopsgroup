@@ -14,24 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.core.StaticView;
 import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
-import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.jelly.ScriptView;
 
 /**
- * Jelly view tag
+ * View to directly show html
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyViewTag extends AbstractViewTag
+public class HtmlViewTag extends AbstractViewTag
 {
 
-    private String script;
+    private boolean escape = false;
 
     /**
      * Override or implement method of parent class or interface
@@ -40,29 +39,26 @@ public class JellyViewTag extends AbstractViewTag
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {
-        requireAttribute("script");
-        JellyEngine jellyEngine = (JellyEngine) serviceManager
-                .lookup(JellyEngine.ROLE);
-        return new ScriptView(jellyEngine.getScript("view/" + getScript()));
+        return new StaticView(getBodyText(isEscape()));
     }
 
     /**
-     * Getter method for script
+     * Getter method for excape
      *
-     * @return Returns the script.
+     * @return Returns the excape.
      */
-    public String getScript()
+    public boolean isEscape()
     {
-        return script;
+        return escape;
     }
 
     /**
-     * Setter method for script
+     * Setter method for excape
      *
-     * @param script The script to set.
+     * @param excape The excape to set.
      */
-    public void setScript(String script)
+    public void setEscape(boolean excape)
     {
-        this.script = script;
+        this.escape = excape;
     }
 }

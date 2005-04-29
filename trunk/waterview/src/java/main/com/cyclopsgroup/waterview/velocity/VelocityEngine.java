@@ -24,7 +24,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
+import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
+import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.utils.PageRequest;
 
 /**
@@ -32,7 +35,8 @@ import com.cyclopsgroup.waterview.utils.PageRequest;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityEngine extends AbstractLogEnabled implements Serviceable
+public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
+        DynaViewFactory
 {
 
     /** Role name of this component */
@@ -41,6 +45,27 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable
     private String[] packageNames;
 
     private VelocityFactory velocityFactory;
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     */
+    public View createView(String viewPath, PageRuntime runtime)
+            throws Exception
+    {
+        String path = viewPath;
+        if (viewPath.charAt(0) == '/')
+        {
+            path = "view" + viewPath;
+        }
+        else
+        {
+            path = "view/" + viewPath;
+        }
+        Template template = getTemplate(path);
+        return new VelocityView(template);
+    }
 
     /**
      * Get velocity template

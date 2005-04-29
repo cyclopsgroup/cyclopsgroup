@@ -7,8 +7,8 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipelines>
-                    <pipeline pattern=".*\.jelly" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
-                    <pipeline pattern=".*\.vm" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
+                    <pipeline pattern=".*\.jelly" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                    <pipeline pattern=".*\.vm" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
                 </pipelines>
             </configuration>
         </component>

@@ -32,6 +32,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Waterview;
 
@@ -50,7 +51,11 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
 
     private Map pipelines = ListOrderedMap.decorate(new Hashtable());
 
-    private transient ServiceManager serviceManager;
+    private ServiceManager serviceManager;
+
+    private Map viewFactories = new Hashtable();
+
+    private transient Map viewFactoryRoles = new HashMap();
 
     /**
      * Override or implement method of parent class or interface
@@ -66,6 +71,11 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
             Configuration c = confs[i];
             String pattern = c.getAttribute("pattern");
             String role = c.getAttribute("role");
+            String viewFactoryRole = c.getAttribute("viewfactory", null);
+            if (viewFactoryRole != null)
+            {
+                viewFactoryRoles.put(pattern, viewFactoryRole);
+            }
             pipelineRoles.put(pattern, role);
         }
     }
@@ -92,6 +102,17 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
+     * TODO Add javadoc for this method
+     *
+     * @param pattern Path pattern
+     * @return View factory object
+     */
+    public DynaViewFactory getViewFactory(String pattern)
+    {
+        return (DynaViewFactory) viewFactories.get(pattern);
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.PageRuntime)
@@ -99,17 +120,23 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     public void handleRuntime(PageRuntime runtime) throws Exception
     {
         Pipeline pipeline = getPipeline(defaultPipelinePattern);
+        DynaViewFactory viewFactory = getViewFactory(defaultPipelinePattern);
         for (Iterator i = pipelines.keySet().iterator(); i.hasNext();)
         {
             String pattern = (String) i.next();
             if (Pattern.matches('^' + pattern + '$', runtime.getRequestPath()))
             {
                 pipeline = getPipeline(pattern);
+                viewFactory = getViewFactory(pattern);
             }
         }
         if (pipeline == null)
         {
             throw new UnknownPageException(runtime.getRequestPath());
+        }
+        if (viewFactory != null)
+        {
+            runtime.getPageContext().put(DynaViewFactory.NAME, viewFactory);
         }
         pipeline.handleRuntime(runtime);
     }
@@ -124,12 +151,21 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
         for (Iterator i = pipelineRoles.keySet().iterator(); i.hasNext();)
         {
             String pattern = (String) i.next();
+
             String role = (String) pipelineRoles.get(pattern);
             Pipeline pipeline = (Pipeline) serviceManager.lookup(role);
             registerPipeline(pattern, pipeline);
+
+            role = (String) viewFactoryRoles.get(pattern);
+            if (role != null)
+            {
+                DynaViewFactory viewFactory = (DynaViewFactory) serviceManager
+                        .lookup(role);
+                registerViewFactory(pattern, viewFactory);
+            }
         }
         pipelineRoles.clear();
-        serviceManager = null;
+        viewFactoryRoles.clear();
     }
 
     /**
@@ -141,6 +177,17 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     public void registerPipeline(String pattern, Pipeline pipeline)
     {
         pipelines.put(pattern, pipeline);
+    }
+
+    /**
+     * Register view factory with given pattern
+     *
+     * @param pattern Path pattern
+     * @param viewFactory View factory object
+     */
+    public void registerViewFactory(String pattern, DynaViewFactory viewFactory)
+    {
+        viewFactories.put(pattern, viewFactory);
     }
 
     /**

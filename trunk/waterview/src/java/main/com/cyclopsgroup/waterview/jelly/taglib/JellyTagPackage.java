@@ -16,26 +16,30 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.clib.lang.xml.TagPackage;
 
 /**
- * Frame tag
+ * Package of UI tags
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public class JellyTagPackage extends TagPackage
 {
     /**
-     * Override or implement method of parent class or interface
+     * Constructor for class UITagPackage
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public JellyTagPackage()
     {
-        invokeBody(output);
+        addTag("Frame", FrameTag.class);
+        addTag("Layout", LayoutTag.class);
+        addTag("Page", PageTag.class);
+        addTag("Panel", PanelTag.class);
+        addTag("JellyLayout", JellyLayoutTag.class);
+        addTag("SystemLayout", SystemLayoutTag.class);
+        addTag("PanelContent", PanelContentTag.class);
+        addTag("JellyView", JellyViewTag.class);
+        addTag("SimpleView", SimpleViewTag.class);
+        addTag("RenderLayout", RenderLayoutTag.class);
     }
 }

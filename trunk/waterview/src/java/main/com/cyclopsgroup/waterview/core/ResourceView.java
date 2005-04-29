@@ -14,28 +14,44 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core;
 
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
+import java.net.URL;
 
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import org.apache.commons.io.CopyUtils;
+
+import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.View;
 
 /**
- * Frame tag
+ * Just display a given resource
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public class ResourceView extends BaseModule implements View
 {
+    private URL resource;
+
+    /**
+     * Constructor for class ResourceView
+     *
+     * @param resource Resource object
+     */
+    public ResourceView(URL resource)
+    {
+        this.resource = resource;
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
+    public void render(PageRuntime runtime, Context viewContext)
             throws Exception
     {
-        invokeBody(output);
+        CopyUtils.copy(resource.openStream(), runtime.getOutput());
     }
 }

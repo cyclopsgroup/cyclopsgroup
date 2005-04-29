@@ -14,24 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
+
+import java.io.File;
+import java.net.URL;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.core.ResourceType;
+import com.cyclopsgroup.waterview.core.ResourceView;
 import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
 
 /**
- * Simple view tag
+ * View to show an existing resource
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SimpleViewTag extends AbstractViewTag
+public class ResourceViewTag extends AbstractViewTag
 {
-
     private String path;
+
+    private String type;
 
     /**
      * Override or implement method of parent class or interface
@@ -40,18 +44,36 @@ public class SimpleViewTag extends AbstractViewTag
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {
-        DynaViewFactory viewFactory = (DynaViewFactory) getContext()
-                .getVariable(DynaViewFactory.NAME);
-
-        if (viewFactory == null)
+        requireAttribute("path");
+        ResourceType resourceType = ResourceType.valueOf(getType());
+        if (resourceType == null)
         {
-            return null;
+            resourceType = ResourceType.RESOURCE;
         }
-        if (StringUtils.isEmpty(getPath()))
+        URL resource = null;
+        if (resourceType == ResourceType.FILE)
         {
-            setPath("Index.jelly");
+            resource = new File(getPath()).toURL();
         }
-        return viewFactory.createView(getPath(), getRuntime());
+        else if (resourceType == ResourceType.RESOURCE)
+        {
+            resource = getClass().getClassLoader().getResource(getPath());
+        }
+        else if (resourceType == ResourceType.URL)
+        {
+            resource = new URL(getPath());
+        }
+        else
+        {
+            throw new IllegalArgumentException("Resource type " + getType()
+                    + " is unknown");
+        }
+        if (resource == null)
+        {
+            throw new IllegalArgumentException("Resource " + path
+                    + " doesn't exist");
+        }
+        return new ResourceView(resource);
     }
 
     /**
@@ -65,6 +87,16 @@ public class SimpleViewTag extends AbstractViewTag
     }
 
     /**
+     * Getter method for type
+     *
+     * @return Returns the type.
+     */
+    public String getType()
+    {
+        return type;
+    }
+
+    /**
      * Setter method for path
      *
      * @param path The path to set.
@@ -72,5 +104,15 @@ public class SimpleViewTag extends AbstractViewTag
     public void setPath(String path)
     {
         this.path = path;
+    }
+
+    /**
+     * Setter method for type
+     *
+     * @param type The type to set.
+     */
+    public void setType(String type)
+    {
+        this.type = type;
     }
 }

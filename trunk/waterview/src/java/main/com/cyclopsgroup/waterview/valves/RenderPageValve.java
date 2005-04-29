@@ -39,6 +39,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
+        runtime.setOutputContentType("text/html");
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
         Page page = (Page) runtime.getPageContext().get(Page.NAME);

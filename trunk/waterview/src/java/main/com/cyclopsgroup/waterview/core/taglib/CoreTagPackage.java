@@ -14,28 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.clib.lang.xml.TagPackage;
 
 /**
- * Frame tag
+ * Core tag package
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public class CoreTagPackage extends TagPackage
 {
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * Constructor for class CoreTagPackage
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public CoreTagPackage()
     {
-        invokeBody(output);
+        addTag("HtmlView", HtmlViewTag.class);
+        addTag("ResourceView", ResourceViewTag.class);
     }
 }

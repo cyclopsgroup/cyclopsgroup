@@ -14,28 +14,40 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core;
 
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.View;
 
 /**
- * Frame tag
+ * Simple static view implementation
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public class StaticView extends BaseModule implements View
 {
+    private String content;
+
+    /**
+     * Constructor for class StaticView
+     *
+     * @param content String content
+     */
+    public StaticView(String content)
+    {
+        this.content = content;
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
+    public void render(PageRuntime runtime, Context viewContext)
             throws Exception
     {
-        invokeBody(output);
+        runtime.getOutput().print(content);
     }
 }

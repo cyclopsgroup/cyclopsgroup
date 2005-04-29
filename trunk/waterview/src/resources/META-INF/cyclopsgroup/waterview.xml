@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
     <TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
-        <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.UITagPackage"/>
+        <TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage"/>
+        <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage"/>
         <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage"/>
     </TagLibrary>
     <Layout id="waterview.3ColumnLayout" description="3 columns layout provided by waterview">
