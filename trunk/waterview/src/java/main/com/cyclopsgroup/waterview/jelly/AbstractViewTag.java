@@ -29,7 +29,7 @@ import com.cyclopsgroup.waterview.jelly.taglib.PanelContentTag;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractViewTag extends WaterviewTagSupport
+public abstract class AbstractViewTag extends AbstractTag
 {
 
     /**
@@ -45,7 +45,7 @@ public abstract class AbstractViewTag extends WaterviewTagSupport
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

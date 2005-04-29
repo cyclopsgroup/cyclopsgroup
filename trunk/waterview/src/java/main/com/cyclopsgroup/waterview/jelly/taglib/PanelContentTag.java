@@ -21,14 +21,14 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PanelContent;
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
  * Panel content tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PanelContentTag extends WaterviewTagSupport
+public class PanelContentTag extends AbstractTag
 {
 
     private boolean append;
@@ -40,7 +40,7 @@ public class PanelContentTag extends WaterviewTagSupport
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

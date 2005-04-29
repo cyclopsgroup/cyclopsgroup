@@ -23,19 +23,19 @@ import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
  * Render layout tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderLayoutTag extends WaterviewTagSupport
+public class RenderLayoutTag extends AbstractTag
 {
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

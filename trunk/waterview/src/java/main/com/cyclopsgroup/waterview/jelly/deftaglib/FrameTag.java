@@ -23,14 +23,14 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.jelly.WaterviewTagSupport;
+import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
  * Frame definition tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FrameTag extends WaterviewTagSupport
+public class FrameTag extends AbstractTag
 {
 
     private String description;
@@ -42,7 +42,7 @@ public class FrameTag extends WaterviewTagSupport
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.WaterviewTagSupport#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
