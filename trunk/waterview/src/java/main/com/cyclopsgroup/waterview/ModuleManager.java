@@ -85,6 +85,23 @@ public interface ModuleManager
     String[] getLayoutIds();
 
     /**
+     * Get module of a given path
+     *
+     * @param modulePath Path of module
+     * @return Module object
+     */
+    Module getModule(String modulePath);
+
+    /**
+     * TODO Add javadoc for this method
+     *
+     * @param modulePath
+     * @param packageName
+     * @return
+     */
+    Module getModule(String modulePath, String packageName);
+
+    /**
      * Get package name array
      *
      * @return Package name array

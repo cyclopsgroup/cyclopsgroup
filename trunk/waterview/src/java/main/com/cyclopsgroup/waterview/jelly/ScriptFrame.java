@@ -24,6 +24,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Frame;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -39,11 +40,13 @@ public class ScriptFrame extends BaseModule implements Frame
     /**
      * Constructor for class ScriptFrame
      *
-     * @param script
+     * @param script Script object
+     * @param module Module object
      */
-    public ScriptFrame(Script script)
+    public ScriptFrame(Script script, Module module)
     {
         this.script = script;
+        setModule(module);
     }
 
     /**

@@ -21,10 +21,11 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
+import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.ScriptLayout;
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
  * Jelly layout tag
@@ -51,8 +52,11 @@ public class JellyLayoutTag extends AbstractTag
         }
         JellyEngine jellyEngine = (JellyEngine) serviceManager
                 .lookup(JellyEngine.ROLE);
-        Layout layout = new ScriptLayout(jellyEngine.getScript("layout/"
-                + getScript()));
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        String path = "layout/" + getScript();
+        Layout layout = new ScriptLayout(jellyEngine.getScript(path), mm
+                .getModule(path));
         page.setLayout(layout);
     }
 

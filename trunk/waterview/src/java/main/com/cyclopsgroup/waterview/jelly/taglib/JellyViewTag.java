@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
@@ -43,7 +44,10 @@ public class JellyViewTag extends AbstractViewTag
         requireAttribute("script");
         JellyEngine jellyEngine = (JellyEngine) serviceManager
                 .lookup(JellyEngine.ROLE);
-        return new ScriptView(jellyEngine.getScript("view/" + getScript()));
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        String path = "view/" + getScript();
+        return new ScriptView(jellyEngine.getScript(path), mm.getModule(path));
     }
 
     /**

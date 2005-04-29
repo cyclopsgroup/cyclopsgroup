@@ -46,8 +46,7 @@ public class RunActionsValve extends AbstractLogEnabled implements Valve
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
-            //TODO not implemented yet
-            Module actionModule = null;
+            Module actionModule = mm.getModule("action/" + actionName);
             if (actionModule != null)
             {
                 actionModule.execute(runtime, runtime.getPageContext());

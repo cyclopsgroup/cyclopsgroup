@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview.core;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -26,10 +27,16 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
+import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.utils.MapUtils;
+import com.cyclopsgroup.waterview.utils.PageRequest;
 
 /**
  * Default implementation of module manager
@@ -39,6 +46,16 @@ import com.cyclopsgroup.waterview.ModuleManager;
 public class DefaultModuleManager extends AbstractLogEnabled implements
         Configurable, ModuleManager
 {
+    private static final Module DUMMY_MODULE = new Module()
+    {
+
+        public void execute(PageRuntime pageRuntime, Context context)
+                throws Exception
+        {
+            //do nothing
+        }
+    };
+
     private String defaultFrameId;
 
     private String defaultLayoutId = "waterview.DefaultLayout";
@@ -46,6 +63,8 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private Hashtable frames = new Hashtable();
 
     private Hashtable layouts = new Hashtable();
+
+    private Map moduleCache = new Hashtable();
 
     private String[] packageArray = ArrayUtils.EMPTY_STRING_ARRAY;
 
@@ -90,6 +109,9 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         {
             setDefaultFrameId(frameId);
         }
+        int moduleCacheSize = conf.getChild("module-cache-size")
+                .getValueAsInteger(-1);
+        moduleCache = MapUtils.createCache(moduleCacheSize);
     }
 
     /**
@@ -172,6 +194,57 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         return (String[]) layouts.keySet().toArray(
                 ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.ModuleManager#getModule(java.lang.String)
+     */
+    public synchronized Module getModule(String modulePath)
+    {
+        if (moduleCache.containsKey(modulePath))
+        {
+            return (Module) moduleCache.get(modulePath);
+        }
+        Module ret = DUMMY_MODULE;
+        String[] packages = getPackageNames();
+        for (int i = 0; i < packages.length; i++)
+        {
+            String packageName = packages[i];
+            Module module = getModule(modulePath, packageName);
+            if (module != null)
+            {
+                ret = module;
+                break;
+            }
+        }
+        moduleCache.put(modulePath, ret);
+        return ret;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.ModuleManager#getModule(java.lang.String, java.lang.String)
+     */
+    public Module getModule(String modulePath, String packageName)
+    {
+        PageRequest pr = PageRequest.parsePageRequest(modulePath);
+        String className = pr.getParentPath().replace('/', '.')
+                + pr.getShortName();
+        if (StringUtils.isNotEmpty(packageName))
+        {
+            className = packageName + '.' + className;
+        }
+        try
+        {
+            return (Module) Class.forName(className).newInstance();
+        }
+        catch (Exception ignored)
+        {
+            return null;
+        }
     }
 
     /**

@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Frame;
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -55,7 +56,10 @@ public class ScriptFrameProxy extends BaseModule implements Frame
             {
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
-                frame = new ScriptFrame(je.getScript("frame/" + framePath));
+                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                        .lookup(ModuleManager.ROLE);
+                String path = "frame/" + framePath;
+                frame = new ScriptFrame(je.getScript(path), mm.getModule(path));
             }
         }
         frame.display(page, runtime);

@@ -95,12 +95,15 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 ModuleManager.ROLE);
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
+        ModuleChain moduleChain = new ModuleChain();
+        String fullPath = "page/" + pagePath;
+        moduleChain.addModule(mm.getModule(fullPath));
         String[] pkgs = mm.getPackageNames();
 
         for (int i = 0; i < pkgs.length; i++)
         {
             String pkg = pkgs[i];
-            Script pageScript = je.getScript("page/" + pagePath, pkg, null);
+            Script pageScript = je.getScript(fullPath, pkg, null);
             if (pageScript != null)
             {
                 page = loadPage(pageScript, je);
@@ -113,10 +116,12 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 String[] newParts = new String[j + 1];
                 System.arraycopy(parts, 0, newParts, 0, j + 1);
                 String defaultPath = StringUtils.join(newParts, '/');
-                pageScript = je.getScript("page/" + defaultPath, pkg, null);
+                fullPath = "page/" + defaultPath;
+                pageScript = je.getScript(fullPath, pkg, null);
                 if (pageScript != null)
                 {
                     page = loadPage(pageScript, je);
+                    moduleChain.addModule(mm.getModule(fullPath, pkg));
                     break;
                 }
             }
@@ -129,8 +134,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         {
             page = EMPTY_PAGE;
         }
-        //Module module = mm.getModule("page/" + pagePath);
-        //page.setModule(module);
+        page.setModule(moduleChain);
         pageCache.put(pagePath, page);
         runtime.getPageContext().put(Page.NAME, page);
         context.invokeNextValve(runtime);

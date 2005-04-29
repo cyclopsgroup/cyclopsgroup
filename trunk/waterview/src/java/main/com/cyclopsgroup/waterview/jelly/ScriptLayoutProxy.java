@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -55,8 +56,11 @@ public class ScriptLayoutProxy extends BaseModule implements Layout
             {
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
-                layout = new ScriptLayout(je
-                        .getScript("layout/" + layoutScript));
+                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                        .lookup(ModuleManager.ROLE);
+                String path = "layout/" + layoutScript;
+                layout = new ScriptLayout(je.getScript(path), mm
+                        .getModule(path));
             }
         }
         layout.render(runtime, page);

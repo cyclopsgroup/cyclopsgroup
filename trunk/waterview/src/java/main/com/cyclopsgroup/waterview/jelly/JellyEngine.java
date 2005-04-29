@@ -139,17 +139,11 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public View createView(String viewPath, PageRuntime runtime)
             throws Exception
     {
-        String path = viewPath;
-        if (viewPath.charAt(0) == '/')
-        {
-            path = "view" + viewPath;
-        }
-        else
-        {
-            path = "view/" + viewPath;
-        }
+        String path = "view/" + viewPath;
         Script script = getScript(path);
-        return new ScriptView(script);
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        return new ScriptView(script, mm.getModule(path));
     }
 
     /**

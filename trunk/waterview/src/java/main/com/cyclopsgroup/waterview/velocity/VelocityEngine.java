@@ -54,15 +54,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     public View createView(String viewPath, PageRuntime runtime)
             throws Exception
     {
-        String path = viewPath;
-        if (viewPath.charAt(0) == '/')
-        {
-            path = "view" + viewPath;
-        }
-        else
-        {
-            path = "view/" + viewPath;
-        }
+        String path = "view/" + viewPath;
         Template template = getTemplate(path);
         return new VelocityView(template);
     }

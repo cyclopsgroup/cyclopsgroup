@@ -22,6 +22,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.View;
 
@@ -38,15 +39,17 @@ public class ScriptView extends BaseModule implements View
     /**
      * Constructor for class ScriptView
      *
-     * @param script
+     * @param script Script object
+     * @param module Module to run
      */
-    public ScriptView(Script script)
+    public ScriptView(Script script, Module module)
     {
         if (script == null)
         {
             throw new NullPointerException("Script can not be null");
         }
         this.script = script;
+        setModule(module);
     }
 
     /**

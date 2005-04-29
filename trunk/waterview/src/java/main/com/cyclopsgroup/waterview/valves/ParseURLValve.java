@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.valves;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.PageRuntime;
@@ -42,9 +43,25 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
         ctx.put("runtime", runtime);
         ctx.put("context", ctx);
         ctx.put("params", runtime.getRequestParameters());
-        ctx.put("applicationBase", runtime.getActions());
+        ctx.put("applicationBase", runtime.getApplicationBaseUrl());
         ctx.put("pageBase", runtime.getPageBaseUrl());
         String path = runtime.getRequestPath();
+        if (path.indexOf('|') != -1)
+        {
+            String[] parts = StringUtils.split(path, '|');
+            for (int i = 0; i < parts.length; i++)
+            {
+                String part = parts[i];
+                if (i == parts.length - 1)
+                {
+                    path = part;
+                }
+                else
+                {
+                    runtime.getActions().add(part);
+                }
+            }
+        }
         runtime.setPage(path);
         ctx.put("page", path);
         context.invokeNextValve(runtime);

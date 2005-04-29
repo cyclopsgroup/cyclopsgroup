@@ -20,8 +20,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Page;
-import com.cyclopsgroup.waterview.jelly.ScriptLayout;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.ScriptLayout;
 
 /**
  * Tag for layout
@@ -45,7 +45,7 @@ public class LayoutTag extends AbstractTag
         }
         else
         {
-            ScriptLayout layout = new ScriptLayout(getBody());
+            ScriptLayout layout = new ScriptLayout(getBody(), null);
             page.setLayout(layout);
         }
     }

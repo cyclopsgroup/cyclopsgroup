@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview;
 
 /**
- * TODO Add javadoc for this class
+ * Action module
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */

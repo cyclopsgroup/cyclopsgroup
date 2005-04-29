@@ -22,6 +22,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Layout;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -38,14 +39,16 @@ public class ScriptLayout extends BaseModule implements Layout
      * Constructor for class JellyScriptLayout
      *
      * @param script Jelly script object
+     * @param module Module to run
      */
-    public ScriptLayout(Script script)
+    public ScriptLayout(Script script, Module module)
     {
         this.script = script;
         if (script == null)
         {
             throw new NullPointerException("Script can not be null");
         }
+        setModule(module);
     }
 
     /**
