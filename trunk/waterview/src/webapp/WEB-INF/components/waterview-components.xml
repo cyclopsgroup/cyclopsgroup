@@ -22,6 +22,7 @@
                 </packages>
                 <default-layout>waterview.3ColumnLayout</default-layout>
                 <default-frame>waterview.DefaultDisplayFrame</default-frame>
+                <module-cache>0</module-cache>
             </configuration>
         </component>
         <component>
@@ -46,6 +47,9 @@
             <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
             <implementation>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <page-cache>0</page-cache>
+            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.valves.RunActionsValve</role>

@@ -16,9 +16,12 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import java.util.HashMap;
+
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PanelContent;
 import com.cyclopsgroup.waterview.View;
@@ -60,7 +63,10 @@ public abstract class AbstractViewTag extends AbstractTag
             }
             else
             {
-                view.render(runtime, runtime.getPageContext());
+                DefaultContext viewContext = new DefaultContext(new HashMap(),
+                        runtime.getPageContext());
+                view.execute(runtime, viewContext);
+                view.render(runtime, viewContext);
             }
         }
         else if (view != null)

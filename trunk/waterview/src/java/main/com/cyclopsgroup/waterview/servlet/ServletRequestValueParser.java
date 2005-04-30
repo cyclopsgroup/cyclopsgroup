@@ -18,6 +18,8 @@ package com.cyclopsgroup.waterview.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileItem;
+
 import com.cyclopsgroup.waterview.RequestValueParser;
 
 /**
@@ -25,7 +27,7 @@ import com.cyclopsgroup.waterview.RequestValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-class RequestValueParserAdapter extends RequestValueParser
+public class ServletRequestValueParser extends RequestValueParser
 {
     private HttpServletRequest httpServletRequest;
 
@@ -34,7 +36,7 @@ class RequestValueParserAdapter extends RequestValueParser
      * 
      * @param request Servlet request
      */
-    RequestValueParserAdapter(HttpServletRequest request)
+    public ServletRequestValueParser(HttpServletRequest request)
     {
         httpServletRequest = request;
     }
@@ -67,6 +69,26 @@ class RequestValueParserAdapter extends RequestValueParser
     protected String[] doGetValues(String name) throws Exception
     {
         return httpServletRequest.getParameterValues(name);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
+     */
+    public FileItem getFileItem(String name)
+    {
+        return null;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
+     */
+    public FileItem[] getFileItems(String name)
+    {
+        return EMPTY_FILEITEM_ARRAY;
     }
 
     /**

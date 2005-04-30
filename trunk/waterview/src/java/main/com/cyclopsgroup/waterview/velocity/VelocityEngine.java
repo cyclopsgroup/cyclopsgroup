@@ -25,6 +25,7 @@ import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
 import com.cyclopsgroup.waterview.DynaViewFactory;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.View;
@@ -42,7 +43,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     /** Role name of this component */
     public static final String ROLE = VelocityEngine.class.getName();
 
-    private String[] packageNames;
+    private ModuleManager moduleManager;
 
     private VelocityFactory velocityFactory;
 
@@ -56,7 +57,18 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     {
         String path = "view/" + viewPath;
         Template template = getTemplate(path);
-        return new VelocityView(template);
+        Module module = getModuleManager().getModule(path);
+        return new VelocityView(template, module);
+    }
+
+    /**
+     * Getter method for moduleManager
+     *
+     * @return Returns the moduleManager.
+     */
+    public ModuleManager getModuleManager()
+    {
+        return moduleManager;
     }
 
     /**
@@ -68,6 +80,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      */
     public Template getTemplate(String templatePath) throws Exception
     {
+        String[] packageNames = getModuleManager().getPackageNames();
         for (int i = 0; i < packageNames.length; i++)
         {
             String packageName = packageNames[i];
@@ -127,9 +140,18 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     {
         setVelocityFactory((VelocityFactory) serviceManager
                 .lookup(VelocityFactory.ROLE));
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        packageNames = mm.getPackageNames();
+        setModuleManager((ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE));
+    }
+
+    /**
+     * Setter method for moduleManager
+     *
+     * @param moduleManager The moduleManager to set.
+     */
+    public void setModuleManager(ModuleManager moduleManager)
+    {
+        this.moduleManager = moduleManager;
     }
 
     /**

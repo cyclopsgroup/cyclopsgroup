@@ -17,12 +17,10 @@
 package com.cyclopsgroup.waterview.velocity.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PanelContent;
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
-import com.cyclopsgroup.waterview.jelly.taglib.PanelContentTag;
+import com.cyclopsgroup.waterview.ModuleManager;
+import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
 import com.cyclopsgroup.waterview.velocity.VelocityEngine;
 import com.cyclopsgroup.waterview.velocity.VelocityView;
 
@@ -31,35 +29,24 @@ import com.cyclopsgroup.waterview.velocity.VelocityView;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityViewTag extends AbstractTag
+public class VelocityViewTag extends AbstractViewTag
 {
     private String template;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected View doCreateView(ServiceManager serviceManager) throws Exception
     {
         requireAttribute("template");
         VelocityEngine ve = (VelocityEngine) serviceManager
                 .lookup(VelocityEngine.ROLE);
-        VelocityView view = new VelocityView(ve.getTemplate("view/"
-                + getTemplate()));
-        if (isRendering())
-        {
-            PageRuntime runtime = getRuntime();
-            view.render(runtime, runtime.getPageContext());
-        }
-        else
-        {
-            requireParent(PanelContentTag.class);
-            PanelContent panelContent = ((PanelContentTag) getParent())
-                    .getPanelContent();
-            panelContent.addView(view);
-        }
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        String path = "view/" + getTemplate();
+        return new VelocityView(ve.getTemplate(path), mm.getModule(path));
     }
 
     /**

@@ -20,6 +20,7 @@ import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.View;
 
@@ -36,10 +37,12 @@ public class VelocityView extends BaseModule implements View
      * Constructor for class VelocityView
      *
      * @param template
+     * @param module
      */
-    public VelocityView(Template template)
+    public VelocityView(Template template, Module module)
     {
         this.template = template;
+        setModule(module);
     }
 
     /**

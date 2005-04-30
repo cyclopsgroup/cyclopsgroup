@@ -26,7 +26,7 @@ import com.cyclopsgroup.clib.lang.Context;
 public interface View extends Module
 {
     /** Empty array */
-    public static final View[] EMPTY_ARRAY = new View[0];
+    View[] EMPTY_ARRAY = new View[0];
 
     /**
      * Render the window with runtime information

@@ -45,6 +45,8 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
         Page page = (Page) runtime.getPageContext().get(Page.NAME);
         if (page != null)
         {
+            page.execute(runtime, runtime.getPageContext());
+            mm.getDefaultFrame().execute(runtime, runtime.getPageContext());
             mm.getDefaultFrame().display(page, runtime);
         }
         context.invokeNextValve(runtime);

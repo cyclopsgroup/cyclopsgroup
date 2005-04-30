@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.Context;
@@ -55,7 +56,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
     private String requestPath;
 
-    private RequestValueParserAdapter requestValueParser;
+    private RequestValueParser requestValueParser;
 
     private ServiceManager serviceManager;
 
@@ -64,12 +65,13 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      * 
      * @param request Http request object
      * @param response Http response object
+     * @param fileUpload File upload component
      * @param services ServiceManager object
      * @throws Exception Throw it out
      */
     ServletPageRuntime(HttpServletRequest request,
-            HttpServletResponse response, ServiceManager services)
-            throws Exception
+            HttpServletResponse response, FileUpload fileUpload,
+            ServiceManager services) throws Exception
     {
         httpServletRequest = request;
         httpServletResponse = response;
@@ -81,11 +83,19 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         }
         else if (requestPath.charAt(0) == '/')
         {
-            requestPath = requestPath.substring(0);
+            requestPath = requestPath.substring(1);
         }
 
         output = new PrintWriter(response.getOutputStream());
-        requestValueParser = new RequestValueParserAdapter(request);
+        if (FileUpload.isMultipartContent(request))
+        {
+            requestValueParser = new MultipartServletRequestValueParser(
+                    request, fileUpload);
+        }
+        else
+        {
+            requestValueParser = new ServletRequestValueParser(request);
+        }
         serviceManager = services;
 
         StringBuffer sb = new StringBuffer(request.getScheme());

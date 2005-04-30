@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
@@ -54,6 +55,8 @@ public class WaterviewServlet extends HttpServlet
     private Log logger = LogFactory.getLog(getClass());
 
     private ServiceManager serviceManager;
+
+    private FileUpload fileUpload = new FileUpload();
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -151,7 +154,8 @@ public class WaterviewServlet extends HttpServlet
         ServletPageRuntime runtime = null;
         try
         {
-            runtime = new ServletPageRuntime(request, response, serviceManager);
+            runtime = new ServletPageRuntime(request, response, fileUpload,
+                    serviceManager);
             Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
             waterview.handleRuntime(runtime);
         }

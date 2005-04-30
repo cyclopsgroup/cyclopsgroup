@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
@@ -27,7 +27,7 @@ import com.cyclopsgroup.waterview.PageRuntime;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptLayoutProxy extends BaseModule implements Layout
+public class ScriptLayoutProxy implements Layout
 {
     private ScriptLayout layout;
 
@@ -46,23 +46,35 @@ public class ScriptLayoutProxy extends BaseModule implements Layout
     /**
      * Override or implement method of parent class or interface
      *
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     */
+    public void execute(PageRuntime pageRuntime, Context context)
+            throws Exception
+    {
+        getLayout(pageRuntime).execute(pageRuntime, context);
+    }
+
+    private synchronized Layout getLayout(PageRuntime runtime) throws Exception
+    {
+        if (layout == null)
+        {
+            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                    JellyEngine.ROLE);
+            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                    .lookup(ModuleManager.ROLE);
+            String path = "layout/" + layoutScript;
+            layout = new ScriptLayout(je.getScript(path), mm.getModule(path));
+        }
+        return layout;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.Page)
      */
     public void render(PageRuntime runtime, Page page) throws Exception
     {
-        synchronized (this)
-        {
-            if (layout == null)
-            {
-                JellyEngine je = (JellyEngine) runtime.getServiceManager()
-                        .lookup(JellyEngine.ROLE);
-                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                        .lookup(ModuleManager.ROLE);
-                String path = "layout/" + layoutScript;
-                layout = new ScriptLayout(je.getScript(path), mm
-                        .getModule(path));
-            }
-        }
-        layout.render(runtime, page);
+        getLayout(runtime).render(runtime, page);
     }
 }

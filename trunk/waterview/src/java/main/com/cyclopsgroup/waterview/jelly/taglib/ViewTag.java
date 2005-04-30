@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,37 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.commons.fileupload.FileItem;
+import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.clib.lang.ValueParser;
+import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
+import com.cyclopsgroup.waterview.jelly.ScriptView;
 
 /**
- * Typed value parser
+ * View tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class RequestValueParser extends ValueParser
+public class ViewTag extends AbstractViewTag
 {
     /**
-     * Comment for <code>EMPTY_FILEITEM_ARRAY</code>
-     */
-    public static final FileItem[] EMPTY_FILEITEM_ARRAY = new FileItem[0];
-
-    /**
-     * Get file item object
+     * Override or implement method of parent class or interface
      *
-     * @param name Name of field
-     * @return FileItem object
+     * @see com.cyclopsgroup.waterview.jelly.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
      */
-    public abstract FileItem getFileItem(String name);
-
-    /**
-     * TODO Add javadoc for this method
-     *
-     * @param name
-     * @return File item array
-     */
-    public abstract FileItem[] getFileItems(String name);
+    protected View doCreateView(ServiceManager serviceManager) throws Exception
+    {
+        return new ScriptView(getBody(), null);
+    }
 }

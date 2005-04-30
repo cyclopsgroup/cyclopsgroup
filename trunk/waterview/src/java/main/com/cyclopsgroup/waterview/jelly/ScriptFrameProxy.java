@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.waterview.BaseModule;
+import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
@@ -27,8 +27,9 @@ import com.cyclopsgroup.waterview.PageRuntime;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptFrameProxy extends BaseModule implements Frame
+public class ScriptFrameProxy implements Frame
 {
+
     private ScriptFrame frame;
 
     private String framePath;
@@ -50,18 +51,31 @@ public class ScriptFrameProxy extends BaseModule implements Frame
      */
     public void display(Page page, PageRuntime runtime) throws Exception
     {
-        synchronized (this)
+        getFrame(runtime).display(page, runtime);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     */
+    public void execute(PageRuntime pageRuntime, Context context)
+            throws Exception
+    {
+        getFrame(pageRuntime).execute(pageRuntime, context);
+    }
+
+    private synchronized Frame getFrame(PageRuntime runtime) throws Exception
+    {
+        if (frame == null)
         {
-            if (frame == null)
-            {
-                JellyEngine je = (JellyEngine) runtime.getServiceManager()
-                        .lookup(JellyEngine.ROLE);
-                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                        .lookup(ModuleManager.ROLE);
-                String path = "frame/" + framePath;
-                frame = new ScriptFrame(je.getScript(path), mm.getModule(path));
-            }
+            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                    JellyEngine.ROLE);
+            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                    .lookup(ModuleManager.ROLE);
+            String path = "frame/" + framePath;
+            frame = new ScriptFrame(je.getScript(path), mm.getModule(path));
         }
-        frame.display(page, runtime);
+        return frame;
     }
 }

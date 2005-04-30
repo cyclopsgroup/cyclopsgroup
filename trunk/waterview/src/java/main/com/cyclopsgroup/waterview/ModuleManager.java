@@ -93,11 +93,11 @@ public interface ModuleManager
     Module getModule(String modulePath);
 
     /**
-     * TODO Add javadoc for this method
+     * Get module with specified package
      *
      * @param modulePath
      * @param packageName
-     * @return
+     * @return Module object
      */
     Module getModule(String modulePath, String packageName);
 

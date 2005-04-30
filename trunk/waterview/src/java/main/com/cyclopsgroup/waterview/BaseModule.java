@@ -25,7 +25,7 @@ import com.cyclopsgroup.clib.lang.Context;
  */
 public class BaseModule implements Module
 {
-    private transient Module module;
+    private transient Module module = EMPTY_MODULE;
 
     /**
      * Override or implement method of parent class or interface

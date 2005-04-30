@@ -14,20 +14,57 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.servlet;
 
-import java.util.Properties;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadBase;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.waterview.RequestValueParser;
 
 /**
- * HashMap based request value parser
+ * Multipart servlet request value parser
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MapRequestValueParser extends RequestValueParser
+public class MultipartServletRequestValueParser extends RequestValueParser
 {
-    private Properties content = new Properties();
+    private MultiHashMap content = new MultiHashMap();
+
+    private MultiHashMap fileItems = new MultiHashMap();
+
+    /**
+     * Constructor for class MultipartServletRequestValueParser
+     *
+     * @param request Http request object
+     * @param fileUpload File upload object
+     * @throws FileUploadException Throw it out
+     */
+    public MultipartServletRequestValueParser(HttpServletRequest request,
+            FileUploadBase fileUpload) throws FileUploadException
+    {
+        List files = fileUpload.parseRequest(request);
+        for (Iterator i = files.iterator(); i.hasNext();)
+        {
+            FileItem fileItem = (FileItem) i.next();
+            if (fileItem.isFormField())
+            {
+                add(fileItem.getFieldName(), fileItem.getString());
+            }
+            else
+            {
+                fileItems.put(fileItem.getFieldName(), fileItem);
+            }
+        }
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -36,7 +73,7 @@ public class MapRequestValueParser extends RequestValueParser
      */
     public void add(String name, String value)
     {
-        content.setProperty(name, value);
+        content.put(name, value);
     }
 
     /**
@@ -46,7 +83,8 @@ public class MapRequestValueParser extends RequestValueParser
      */
     protected String doGetValue(String name) throws Exception
     {
-        return content.getProperty(name);
+        String[] values = doGetValues(name);
+        return values.length == 0 ? null : values[0];
     }
 
     /**
@@ -56,7 +94,9 @@ public class MapRequestValueParser extends RequestValueParser
      */
     protected String[] doGetValues(String name) throws Exception
     {
-        return new String[] { doGetValue(name) };
+        Collection values = (Collection) content.get(name);
+        return values == null ? ArrayUtils.EMPTY_STRING_ARRAY
+                : (String[]) values.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -66,7 +106,8 @@ public class MapRequestValueParser extends RequestValueParser
      */
     public FileItem getFileItem(String name)
     {
-        return null;
+        FileItem[] items = getFileItems(name);
+        return items.length == 0 ? null : items[0];
     }
 
     /**
@@ -76,7 +117,9 @@ public class MapRequestValueParser extends RequestValueParser
      */
     public FileItem[] getFileItems(String name)
     {
-        return EMPTY_FILEITEM_ARRAY;
+        Collection items = (Collection) fileItems.get(name);
+        return items == null ? EMPTY_FILEITEM_ARRAY : (FileItem[]) items
+                .toArray(EMPTY_FILEITEM_ARRAY);
     }
 
     /**
@@ -87,5 +130,6 @@ public class MapRequestValueParser extends RequestValueParser
     public void remove(String name)
     {
         content.remove(name);
+        fileItems.remove(name);
     }
 }
