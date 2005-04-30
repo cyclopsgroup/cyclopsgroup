@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.clib.lang.DefaultContext;
@@ -52,6 +53,8 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
     private Context pageContext;
 
+    private String requestPath;
+
     private RequestValueParserAdapter requestValueParser;
 
     private ServiceManager serviceManager;
@@ -70,6 +73,17 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     {
         httpServletRequest = request;
         httpServletResponse = response;
+
+        requestPath = request.getPathInfo();
+        if (StringUtils.isEmpty(requestPath) || requestPath.equals("/"))
+        {
+            requestPath = "Index.jelly";
+        }
+        else if (requestPath.charAt(0) == '/')
+        {
+            requestPath = requestPath.substring(0);
+        }
+
         output = new PrintWriter(response.getOutputStream());
         requestValueParser = new RequestValueParserAdapter(request);
         serviceManager = services;
@@ -168,7 +182,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      */
     public String getRequestPath()
     {
-        return httpServletRequest.getPathInfo();
+        return requestPath;
     }
 
     /**
