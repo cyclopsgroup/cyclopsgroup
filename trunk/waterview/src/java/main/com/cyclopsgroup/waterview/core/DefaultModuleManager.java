@@ -56,7 +56,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         }
     };
 
-    private String defaultFrameId;
+    private String defaultFrameId = "waterview.DefaultDisplayFrame";
 
     private String defaultLayoutId = "waterview.DefaultLayout";
 
