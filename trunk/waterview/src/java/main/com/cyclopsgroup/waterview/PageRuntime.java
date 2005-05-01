@@ -114,6 +114,13 @@ public interface PageRuntime
     ServiceManager getServiceManager();
 
     /**
+     * Get session scope context
+     *
+     * @return Session scope context
+     */
+    Context getSessionContext();
+
+    /**
      * Get time zone for current request
      * 
      * @return Time zone

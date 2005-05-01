@@ -43,6 +43,8 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
 
     private FakeServiceManager serviceManager = new FakeServiceManager();
 
+    private Context sessionContext = new DefaultContext(new HashMap());
+
     /**
      * Constructor for class FakePageRuntime
      *
@@ -151,6 +153,16 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
     public ServiceManager getServiceManager()
     {
         return serviceManager;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionContext()
+     */
+    public Context getSessionContext()
+    {
+        return sessionContext;
     }
 
     /**

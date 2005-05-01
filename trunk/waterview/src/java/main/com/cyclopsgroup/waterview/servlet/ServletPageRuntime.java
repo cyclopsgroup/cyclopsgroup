@@ -60,6 +60,8 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
     private ServiceManager serviceManager;
 
+    private Context sessionContext;
+
     /**
      * Default constructor of default web runtime
      * 
@@ -75,6 +77,8 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     {
         httpServletRequest = request;
         httpServletResponse = response;
+
+        sessionContext = new HttpSessionContext(request.getSession());
 
         requestPath = request.getPathInfo();
         if (StringUtils.isEmpty(requestPath) || requestPath.equals("/"))
@@ -203,6 +207,16 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     public ServiceManager getServiceManager()
     {
         return serviceManager;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionContext()
+     */
+    public Context getSessionContext()
+    {
+        return sessionContext;
     }
 
     /**
