@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import org.apache.commons.collections.IteratorUtils;
 
-import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.clib.lang.Context;
 
 /**
  * TODO Add javadoc for this class

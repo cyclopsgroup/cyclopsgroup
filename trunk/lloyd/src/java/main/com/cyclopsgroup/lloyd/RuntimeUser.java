@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.lloyd;
 
-import com.cyclopsgroup.cyclib.Context;
+import com.cyclopsgroup.clib.lang.Context;
 
 /**
  * Runtime user object

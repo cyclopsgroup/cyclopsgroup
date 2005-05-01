@@ -16,8 +16,10 @@
  */
 package com.cyclopsgroup.lloyd.spi;
 
-import com.cyclopsgroup.cyclib.Context;
-import com.cyclopsgroup.cyclib.DefaultContext;
+import java.util.HashMap;
+
+import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.lloyd.AccessControlList;
 import com.cyclopsgroup.lloyd.RuntimeUser;
 import com.cyclopsgroup.lloyd.User;
@@ -58,8 +60,8 @@ public class DefaultRuntimeUser implements RuntimeUser
         this.user = user;
         this.id = id;
         this.globalContext = globalContext;
-        this.dummyContext = new DummyContext(globalContext);
-        this.context = new DefaultContext(globalContext);
+        this.dummyContext = new DefaultContext(new HashMap(), globalContext);
+        this.context = new DefaultContext(new HashMap(), globalContext);
         this.accessControlList = accessControlList;
     }
 
