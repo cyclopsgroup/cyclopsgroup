@@ -49,10 +49,10 @@ public class TreeRuntime
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Create new runtime node
      *
      * @param node
-     * @return
+     * @return Runtime tree node
      */
     public TreeRuntimeNode createRuntimeNode(TreeNode node)
     {
