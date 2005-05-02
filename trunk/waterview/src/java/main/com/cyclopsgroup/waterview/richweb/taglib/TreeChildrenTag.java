@@ -23,6 +23,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.richweb.TreeNode;
+import com.cyclopsgroup.waterview.richweb.TreeRuntime;
 
 /**
  * Tag to render children
@@ -39,7 +40,7 @@ public class TreeChildrenTag extends AbstractTag
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        TreeScriptTag treeScriptTag = (TreeScriptTag) findAncestorWithClass(TreeTag.class);
+        TreeScriptTag treeScriptTag = (TreeScriptTag) findAncestorWithClass(TreeScriptTag.class);
         String var = treeScriptTag.getVar();
         if (treeScriptTag == null)
         {
@@ -48,11 +49,14 @@ public class TreeChildrenTag extends AbstractTag
         }
         TreeNode node = (TreeNode) getContext().getVariable(var);
         TreeNode[] children = node.getChildren();
+
+        TreeRuntime treeRuntime = (TreeRuntime) getContext().getVariable(
+                TreeRuntime.NAME);
         for (int i = 0; i < children.length; i++)
         {
             TreeNode child = children[i];
             JellyContext jc = new JellyContext(getContext());
-            jc.setVariable(var, child);
+            jc.setVariable(var, treeRuntime.createRuntimeNode(child));
             treeScriptTag.getBody().run(jc, output);
         }
     }

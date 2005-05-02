@@ -34,4 +34,11 @@ public interface TreeNode
      * @return Children nodes
      */
     TreeNode[] getChildren();
+
+    /**
+     * If this node is expandable or not
+     *
+     * @return True if this node is expandable
+     */
+    boolean isExpandable();
 }

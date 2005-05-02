@@ -24,6 +24,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.richweb.Tree;
+import com.cyclopsgroup.waterview.richweb.TreeRuntime;
 
 /**
  * Tag to show a tree object
@@ -54,8 +55,21 @@ public class TreeTag extends AbstractTag
             throw new JellyTagException(
                     "A TreeScript tag must be defined in Tree tag");
         }
+
+        String treeRuntimeName = "cyclopsgropu.waterview.tree_"
+                + getBody().hashCode();
+        TreeRuntime treeRuntime = (TreeRuntime) getRuntime()
+                .getSessionContext().get(treeRuntimeName);
+        if (treeRuntime == null)
+        {
+            treeRuntime = new TreeRuntime();
+            getRuntime().getSessionContext().put(treeRuntimeName, treeRuntime);
+        }
+
         JellyContext jc = new JellyContext(getContext());
-        jc.setVariable(nodeVar, tree.getRootNode());
+        jc.setVariable(TreeRuntime.NAME, treeRuntime);
+        jc.setVariable(nodeVar, treeRuntime.createRuntimeNode(tree
+                .getRootNode()));
         treeScript.run(jc, output);
     }
 
