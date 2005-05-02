@@ -4,6 +4,7 @@
         <TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage"/>
         <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage"/>
         <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage"/>
+        <TagPackage className="com.cyclopsgroup.waterview.richweb.taglib.RichWebTagPackage"/>
     </TagLibrary>
     <Layout id="waterview.3ColumnLayout" description="3 columns layout provided by waterview">
         <JellyLayout script="Waterview3ColumnLayout.jelly"/>
