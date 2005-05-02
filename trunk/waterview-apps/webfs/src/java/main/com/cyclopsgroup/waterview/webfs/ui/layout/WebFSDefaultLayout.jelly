@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:Layout xmlns="http://waterview.cyclopsgroup.com/html" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td colspan="2">
+                <h2>Web File System</h2>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><w:JellyView script="WebFSNavigator.jelly"/></td>
+            <td valign="top"><w:SimpleView path="${page}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">Copyrights</td>
+        </tr>
+    </table>
+</w:Layout>
