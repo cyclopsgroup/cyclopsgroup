@@ -102,10 +102,10 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     }
 
     /**
-     * TODO Add javadoc for this method
+     * Get view factory attached to a pattern
      *
-     * @param pattern Path pattern
-     * @return View factory object
+     * @param pattern Path pattern Pattern of page
+     * @return View factory object ViewFactory object
      */
     public DynaViewFactory getViewFactory(String pattern)
     {

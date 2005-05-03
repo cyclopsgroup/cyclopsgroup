@@ -24,29 +24,19 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.FakePageRuntime;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.WaterviewTestCaseBase;
 
 /**
  * Test case for jelly waterview
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyEngineTest extends PlexusTestCase
+public class JellyEngineTest extends WaterviewTestCaseBase
 {
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.codehaus.plexus.PlexusTestCase#getConfiguration()
-     */
-    protected InputStream getConfiguration() throws Exception
-    {
-        return getClass().getResourceAsStream("components.xml");
-    }
-
     /**
      * Test case to test init tag library method
      *
