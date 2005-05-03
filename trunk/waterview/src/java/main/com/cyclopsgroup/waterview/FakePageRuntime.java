@@ -34,12 +34,17 @@ import com.cyclopsgroup.clib.site.avalon.FakeServiceManager;
  */
 public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
 {
+    private String applicationBaseUrl = "http://localhost:8080/waterview";
 
     private PrintWriter output;
+
+    private String pageBaseUrl = "http://localhost:8080/waterview/servlet/waterview";
 
     private Context pageContext = new DefaultContext(new HashMap());
 
     private RequestValueParser parameters = new MapRequestValueParser();
+
+    private String requestPath = "/index.html";
 
     private FakeServiceManager serviceManager = new FakeServiceManager();
 
@@ -62,7 +67,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      */
     public String getApplicationBaseUrl()
     {
-        return "http://localhost:8080/waterview";
+        return applicationBaseUrl;
     }
 
     /**
@@ -112,7 +117,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      */
     public String getPageBaseUrl()
     {
-        return "http://localhost:8080/waterview/servlet/waterview";
+        return pageBaseUrl;
     }
 
     /**
@@ -142,7 +147,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      */
     public String getRequestPath()
     {
-        return "/index.html";
+        return requestPath;
     }
 
     /**
@@ -182,5 +187,35 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      */
     public void setOutputContentType(String contentType)
     {
+    }
+
+    /**
+     * Setter method for pageBaseUrl
+     *
+     * @param pageBaseUrl The pageBaseUrl to set.
+     */
+    public void setPageBaseUrl(String pageBaseUrl)
+    {
+        this.pageBaseUrl = pageBaseUrl;
+    }
+
+    /**
+     * Setter method for pageContext
+     *
+     * @param pageContext The pageContext to set.
+     */
+    public void setPageContext(Context pageContext)
+    {
+        this.pageContext = pageContext;
+    }
+
+    /**
+     * Setter method for requestPath
+     *
+     * @param requestPath The requestPath to set.
+     */
+    public void setRequestPath(String requestPath)
+    {
+        this.requestPath = requestPath;
     }
 }

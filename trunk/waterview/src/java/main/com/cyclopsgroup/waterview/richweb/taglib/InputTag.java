@@ -22,7 +22,7 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
- * TODO Add javadoc for this class
+ * Input Tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
