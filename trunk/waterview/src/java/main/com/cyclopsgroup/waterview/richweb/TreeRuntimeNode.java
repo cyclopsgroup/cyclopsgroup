@@ -55,6 +55,16 @@ public class TreeRuntimeNode implements TreeNode
     }
 
     /**
+     * Get node object
+     *
+     * @return Node object
+     */
+    public TreeNode getNode()
+    {
+        return treeNode;
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.richweb.TreeNode#isExpandable()
