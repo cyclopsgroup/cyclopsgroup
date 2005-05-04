@@ -18,8 +18,6 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +30,6 @@ import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.RequestValueParser;
 
 /**
  * Default implementation of WebRuntime
@@ -42,25 +39,10 @@ import com.cyclopsgroup.waterview.RequestValueParser;
 public class ServletPageRuntime extends AbstractPageRuntime implements
         PageRuntime
 {
-    private String applicationBaseUrl;
 
-    private HttpServletRequest httpServletRequest;
+    private HttpServletRequest request;
 
-    private HttpServletResponse httpServletResponse;
-
-    private PrintWriter output;
-
-    private String pageBaseUrl;
-
-    private Context pageContext;
-
-    private String requestPath;
-
-    private RequestValueParser requestValueParser;
-
-    private ServiceManager serviceManager;
-
-    private Context sessionContext;
+    private HttpServletResponse response;
 
     /**
      * Default constructor of default web runtime
@@ -75,12 +57,11 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
             HttpServletResponse response, FileUpload fileUpload,
             ServiceManager services) throws Exception
     {
-        httpServletRequest = request;
-        httpServletResponse = response;
+        this.response = response;
+        this.request = request;
+        setSessionContext(new HttpSessionContext(request.getSession()));
 
-        sessionContext = new HttpSessionContext(request.getSession());
-
-        requestPath = request.getPathInfo();
+        String requestPath = request.getPathInfo();
         if (StringUtils.isEmpty(requestPath) || requestPath.equals("/"))
         {
             requestPath = "Index.jelly";
@@ -89,18 +70,19 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         {
             requestPath = requestPath.substring(1);
         }
+        setRequestPath(requestPath);
 
-        output = new PrintWriter(response.getOutputStream());
+        setOutput(new PrintWriter(response.getOutputStream()));
         if (FileUpload.isMultipartContent(request))
         {
-            requestValueParser = new MultipartServletRequestValueParser(
-                    request, fileUpload);
+            setRequestParameters(new MultipartServletRequestValueParser(
+                    request, fileUpload));
         }
         else
         {
-            requestValueParser = new ServletRequestValueParser(request);
+            setRequestParameters(new ServletRequestValueParser(request));
         }
-        serviceManager = services;
+        setServiceManager(services);
 
         StringBuffer sb = new StringBuffer(request.getScheme());
         sb.append("://").append(request.getServerName());
@@ -109,124 +91,35 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
             sb.append(':').append(request.getServerPort());
         }
         sb.append(request.getContextPath());
-        applicationBaseUrl = sb.toString();
+        setApplicationBaseUrl(sb.toString());
 
         sb.append(request.getServletPath());
-        pageBaseUrl = sb.toString();
+        setPageBaseUrl(sb.toString());
 
-        pageContext = new DefaultContext(new HashMap());
+        Context pageContext = new DefaultContext(new HashMap());
         pageContext.put("request", request);
         pageContext.put("response", response);
+        setPageContext(pageContext);
     }
 
     /**
-     * Override method getBaseUrl in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getApplicationBaseUrl()
-     */
-    public String getApplicationBaseUrl()
-    {
-        return applicationBaseUrl;
-    }
-
-    /**
-     * Override method getContentType in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getInputContentType()
-     */
-    public String getInputContentType()
-    {
-        return httpServletRequest.getContentType();
-    }
-
-    /**
-     * Override method getLocale in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getLocale()
-     */
-    public Locale getLocale()
-    {
-        return httpServletRequest.getLocale();
-    }
-
-    /**
-     * Override method getOutput in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getOutput()
-     */
-    public PrintWriter getOutput()
-    {
-        return output;
-    }
-
-    /**
-     * Override method getPageBaseUrl in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getPageBaseUrl()
-     */
-    public String getPageBaseUrl()
-    {
-        return pageBaseUrl;
-    }
-
-    /**
-     * Override method getUIContext in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getPageContext()
-     */
-    public Context getPageContext()
-    {
-        return pageContext;
-    }
-
-    /**
-     * Override method getRequestParameters in super class of DefaultWebRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getRequestParameters()
-     */
-    public RequestValueParser getRequestParameters()
-    {
-        return requestValueParser;
-    }
-
-    /**
-     * Override method getRequestPath in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getRequestPath()
-     */
-    public String getRequestPath()
-    {
-        return requestPath;
-    }
-
-    /**
-     * Override method getServiceManager in super class of ServletUIRuntime
-     * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#getServiceManager()
-     */
-    public ServiceManager getServiceManager()
-    {
-        return serviceManager;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
+     * Getter method for request
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionContext()
+     * @return Returns the request.
      */
-    public Context getSessionContext()
+    public HttpServletRequest getRequest()
     {
-        return sessionContext;
+        return request;
     }
 
     /**
-     * Override or implement method of parent class or interface
+     * Getter method for response
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getTimeZone()
+     * @return Returns the response.
      */
-    public TimeZone getTimeZone()
+    public HttpServletResponse getResponse()
     {
-        return TimeZone.getDefault();
+        return response;
     }
 
     /**
@@ -236,6 +129,6 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      */
     public void setOutputContentType(String contentType)
     {
-        httpServletResponse.setContentType(contentType);
+        getResponse().setContentType(contentType);
     }
 }

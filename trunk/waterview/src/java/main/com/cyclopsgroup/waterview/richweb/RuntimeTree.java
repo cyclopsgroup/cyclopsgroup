@@ -23,12 +23,12 @@ import java.util.HashSet;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TreeRuntime
+public class RuntimeTree
 {
     /**
      * Name of this object
      */
-    public static final String NAME = TreeRuntime.class.getName();
+    public static final String NAME = RuntimeTree.class.getName();
 
     private HashSet expandedNodes = new HashSet();
 
@@ -54,11 +54,11 @@ public class TreeRuntime
      * @param node
      * @return Runtime tree node
      */
-    public TreeRuntimeNode createRuntimeNode(TreeNode node)
+    public RuntimeTreeNode createRuntimeNode(TreeNode node)
     {
         boolean expanded = isExpanded(node);
         boolean selected = node == getSelected();
-        return new TreeRuntimeNode(node, expanded, selected);
+        return new RuntimeTreeNode(node, expanded, selected);
     }
 
     /**

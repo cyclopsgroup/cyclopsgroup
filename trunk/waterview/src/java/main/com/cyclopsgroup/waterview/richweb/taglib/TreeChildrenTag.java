@@ -23,7 +23,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.richweb.TreeNode;
-import com.cyclopsgroup.waterview.richweb.TreeRuntime;
+import com.cyclopsgroup.waterview.richweb.RuntimeTree;
 
 /**
  * Tag to render children
@@ -50,8 +50,8 @@ public class TreeChildrenTag extends AbstractTag
         TreeNode node = (TreeNode) getContext().getVariable(var);
         TreeNode[] children = node.getChildren();
 
-        TreeRuntime treeRuntime = (TreeRuntime) getContext().getVariable(
-                TreeRuntime.NAME);
+        RuntimeTree treeRuntime = (RuntimeTree) getContext().getVariable(
+                RuntimeTree.NAME);
         for (int i = 0; i < children.length; i++)
         {
             TreeNode child = children[i];

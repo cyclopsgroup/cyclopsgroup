@@ -55,6 +55,16 @@ public class DirectoryTree implements Tree
     /**
      * Override or implement method of parent class or interface
      *
+     * @see com.cyclopsgroup.waterview.richweb.Tree#getId()
+     */
+    public String getId()
+    {
+        return root.getFile().getAbsolutePath();
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.richweb.Tree#getRootNode()
      */
     public TreeNode getRootNode()

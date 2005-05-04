@@ -30,6 +30,7 @@ import com.cyclopsgroup.waterview.richweb.TreeNode;
  */
 public class FileTreeNode implements TreeNode
 {
+
     private List children;
 
     private File file;
@@ -84,6 +85,16 @@ public class FileTreeNode implements TreeNode
     public File getFile()
     {
         return file;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.richweb.TreeNode#getId()
+     */
+    public String getId()
+    {
+        return file.getAbsolutePath();
     }
 
     /**

@@ -21,25 +21,25 @@ package com.cyclopsgroup.waterview.richweb;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TreeRuntimeNode implements TreeNode
+public class RuntimeTreeNode implements TreeNode
 {
 
     private boolean expanded;
 
-    private boolean selected;
+    private TreeNode node;
 
-    private TreeNode treeNode;
+    private boolean selected;
 
     /**
      * Constructor for class TreeRuntimeNode
      *
-     * @param treeNode
+     * @param node
      * @param expanded
      * @param selected
      */
-    public TreeRuntimeNode(TreeNode treeNode, boolean expanded, boolean selected)
+    public RuntimeTreeNode(TreeNode node, boolean expanded, boolean selected)
     {
-        this.treeNode = treeNode;
+        this.node = node;
         this.expanded = expanded;
         this.selected = selected;
     }
@@ -51,7 +51,17 @@ public class TreeRuntimeNode implements TreeNode
      */
     public TreeNode[] getChildren()
     {
-        return treeNode.getChildren();
+        return getNode().getChildren();
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.richweb.TreeNode#getId()
+     */
+    public String getId()
+    {
+        return getNode().getId();
     }
 
     /**
@@ -61,7 +71,7 @@ public class TreeRuntimeNode implements TreeNode
      */
     public TreeNode getNode()
     {
-        return treeNode;
+        return node;
     }
 
     /**
@@ -71,7 +81,7 @@ public class TreeRuntimeNode implements TreeNode
      */
     public boolean isExpandable()
     {
-        return treeNode.isExpandable();
+        return getNode().isExpandable();
     }
 
     /**

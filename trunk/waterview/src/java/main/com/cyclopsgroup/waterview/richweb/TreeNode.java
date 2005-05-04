@@ -36,6 +36,13 @@ public interface TreeNode
     TreeNode[] getChildren();
 
     /**
+     * Get unique id of this node
+     *
+     * @return Unique id of this node
+     */
+    String getId();
+
+    /**
      * If this node is expandable or not
      *
      * @return True if this node is expandable

@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.richweb.fs;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
@@ -27,6 +26,7 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.FakePageRuntime;
 import com.cyclopsgroup.waterview.WaterviewTestCaseBase;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
+import com.cyclopsgroup.waterview.richweb.RuntimeTree;
 
 /**
  * Test case base
@@ -47,12 +47,9 @@ public class TreeTagTest extends WaterviewTestCaseBase
         JellyContext jc = new JellyContext(je.getGlobalContext());
         File root = new File("src/java/test/com/cyclopsgroup/waterview/richweb");
         jc.setVariable("tree", new DirectoryTree(root));
+        jc.setVariable("treeInstance", new RuntimeTree());
         jc.setVariable(FakePageRuntime.NAME, new FakePageRuntime(
                 new PrintWriter(System.out)));
-        StringWriter out = new StringWriter();
-        script.run(jc, XMLOutput.createXMLOutput(out));
-        String expected = "<p>richweb<p><p>fs<p><p>DirectoryTreeTest.java<p></p>"
-                + "</p><p>TreeTagTest.java<p></p></p>" + "</p></p></p></p>";
-        assertTrue(out.toString().indexOf(expected) != -1);
+        script.run(jc, XMLOutput.createXMLOutput(System.out));
     }
 }
