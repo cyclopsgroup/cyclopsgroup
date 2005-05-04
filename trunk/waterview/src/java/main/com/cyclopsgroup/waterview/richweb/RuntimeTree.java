@@ -18,6 +18,8 @@ package com.cyclopsgroup.waterview.richweb;
 
 import java.util.HashSet;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Runtime tree information
  * 
@@ -32,20 +34,16 @@ public class RuntimeTree
 
     private HashSet expandedNodes = new HashSet();
 
-    private TreeNode selectedNode = null;
+    private String selectedNodeId = null;
 
     /**
      * Collapse a given node
      *
-     * @param node Node object
+     * @param nodeId Node object
      */
-    public void collapse(TreeNode node)
+    public void collapse(String nodeId)
     {
-        if (!node.isExpandable())
-        {
-            return;
-        }
-        expandedNodes.remove(node);
+        expandedNodes.remove(nodeId);
     }
 
     /**
@@ -56,23 +54,19 @@ public class RuntimeTree
      */
     public RuntimeTreeNode createRuntimeNode(TreeNode node)
     {
-        boolean expanded = isExpanded(node);
-        boolean selected = node == getSelected();
+        boolean expanded = isExpanded(node.getId());
+        boolean selected = StringUtils.equals(node.getId(), getSelected());
         return new RuntimeTreeNode(node, expanded, selected);
     }
 
     /**
      * Expand a given node
      *
-     * @param node Node object
+     * @param nodeId Node object id
      */
-    public void expand(TreeNode node)
+    public void expand(String nodeId)
     {
-        if (!node.isExpandable())
-        {
-            return;
-        }
-        expandedNodes.add(node);
+        expandedNodes.add(nodeId);
     }
 
     /**
@@ -80,29 +74,29 @@ public class RuntimeTree
      *
      * @return Returns the selectedNode.
      */
-    public TreeNode getSelected()
+    public String getSelected()
     {
-        return selectedNode;
+        return selectedNodeId;
     }
 
     /**
      * Is the given node expanded
      *
-     * @param node Node object
+     * @param nodeId Node object
      * @return If it's expanded
      */
-    public boolean isExpanded(TreeNode node)
+    public boolean isExpanded(String nodeId)
     {
-        return expandedNodes.contains(node);
+        return expandedNodes.contains(nodeId);
     }
 
     /**
      * Setter method for selectedNode
      *
-     * @param selectedNode The selectedNode to set.
+     * @param selectedNodeId The selectedNode to set.
      */
-    public void setSelected(TreeNode selectedNode)
+    public void setSelected(String selectedNodeId)
     {
-        this.selectedNode = selectedNode;
+        this.selectedNodeId = selectedNodeId;
     }
 }
