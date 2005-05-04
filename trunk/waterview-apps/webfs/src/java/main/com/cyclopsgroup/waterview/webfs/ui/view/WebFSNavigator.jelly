@@ -15,7 +15,7 @@
         </select>
     </div>
     <j:if test="${fsRoot != null}">
-        <w:FileTree rootDirectory="${fsRoot.getFile()}">
+        <w:Tree rootDirectory="${fsRoot.getFile()}">
             <w:TreeScript var="file">
                 <table cellspacing="0" cellpadding="0" border="0">
                     <j:if test="${file.isDirectory()}">
@@ -27,14 +27,16 @@
                                 <a href="${pageBase}/WebFSContent.jelly?path=${file.getPath()}"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <w:PlaceHolder/>
-                            </td>
-                            <td>
-                                <w:TreeChildren/>
-                            </td>
-                        </tr>
+                        <j:if test="${file.getChildren().length gt 0}">
+                            <tr>
+                                <td>
+                                    <w:PlaceHolder/>
+                                </td>
+                                <td>
+                                    <w:TreeChildren/>
+                                </td>
+                            </tr>
+                        </j:if>
                     </j:if>
                     <j:if test="${!file.isDirectory()}">
                         <tr>
@@ -46,6 +48,6 @@
                     </j:if>
                 </table>
             </w:TreeScript>
-        </w:FileTree>
+        </w:Tree>
     </j:if>
 </w:View>

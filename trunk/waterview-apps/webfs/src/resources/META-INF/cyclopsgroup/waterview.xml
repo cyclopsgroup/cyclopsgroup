@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <Layout id="waterview.webfs.DefaultLayout" description="Default WebFS Layout">
+        <JellyLayout script="WebFSDefaultLayout.jelly"/>
+    </Layout>
+</Waterview>

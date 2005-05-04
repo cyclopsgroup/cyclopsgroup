@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <pipelines>
+                    <pipeline pattern=".*\.jelly" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                    <pipeline pattern=".*\.vm" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
+                </pipelines>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.ModuleManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <packages>
+                    <package>com.cyclopsgroup.waterview.ui</package>
+                    <package>com.cyclopsgroup.waterview.webfs.ui</package>
+                </packages>
+                <default-layout>waterview.webfs.DefaultLayout</default-layout>
+                <default-frame>waterview.DefaultDisplayFrame</default-frame>
+                <module-cache>0</module-cache>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.pipeline.RenderPage</role>
+            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <valves>
+                    <valve role="com.cyclopsgroup.waterview.valves.ParseURLValve"/>
+                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
+                    <valve role="com.cyclopsgroup.waterview.valves.RunActionsValve"/>
+                    <valve role="com.cyclopsgroup.waterview.valves.RenderPageValve"/>
+                </valves>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.valves.ParseURLValve</role>
+            <implementation>com.cyclopsgroup.waterview.valves.ParseURLValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <page-cache>0</page-cache>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.valves.RunActionsValve</role>
+            <implementation>com.cyclopsgroup.waterview.valves.RunActionsValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.valves.RenderPageValve</role>
+            <implementation>com.cyclopsgroup.waterview.valves.RenderPageValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.clib.site.velocity.VelocityFactory</role>
+            <implementation>com.cyclopsgroup.clib.site.velocity.DefaultVelocityFactory</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+    </components>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+        </component>
+    </load-on-start>
+</plexus>
