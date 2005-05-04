@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import java.util.Iterator;
-
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
@@ -59,15 +57,10 @@ public class ScriptFrame extends BaseModule implements Frame
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
         JellyContext jc = new JellyContext(je.getGlobalContext());
+        JellyEngine.passVariables(runtime.getPageContext(), jc);
+        runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
         jc.setVariable(Page.NAME, page);
         jc.setVariable(PageRuntime.NAME, runtime);
-        for (Iterator i = runtime.getPageContext().keys(); i.hasNext();)
-        {
-            String variableName = (String) i.next();
-            jc.setVariable(variableName, runtime.getPageContext().get(
-                    variableName));
-        }
-        runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
         XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
         runtime.getPageContext().put(JellyEngine.JELLY_OUTPUT, output);
         script.run(jc, output);

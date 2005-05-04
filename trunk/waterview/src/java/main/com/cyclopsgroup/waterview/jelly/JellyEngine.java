@@ -39,6 +39,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
@@ -52,7 +53,7 @@ import com.cyclopsgroup.waterview.utils.PageRequest;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyEngine extends AbstractLogEnabled implements Initializable,
-        Contextualizable, Serviceable, DynaViewFactory
+        Contextualizable, Serviceable, DynaViewFactory, ActionResolver
 {
 
     /** Class name of definition tag package */
@@ -100,6 +101,43 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /** Name of service manager */
     public static final String SERVICE_MANAGER = ServiceManager.class.getName();
+
+    /**
+     * Pass all variables into jelly context from context
+     *
+     * @param context Clib context
+     * @param jc Jelly context
+     */
+    public static final void passVariables(
+            com.cyclopsgroup.clib.lang.Context context, JellyContext jc)
+    {
+        for (Iterator i = context.keys(); i.hasNext();)
+        {
+            String name = (String) i.next();
+            jc.setVariable(name, context.get(name));
+        }
+        jc.setVariable("context", context);
+    }
+
+    /**
+     * Pass all variables from jelly context to clib context
+     *
+     * @param jc Jelly context
+     * @param context Clib context
+     */
+    public static final void passVariables(JellyContext jc,
+            com.cyclopsgroup.clib.lang.Context context)
+    {
+        for (Iterator i = jc.getVariableNames(); i.hasNext();)
+        {
+            String name = (String) i.next();
+            if (StringUtils.equals("context", name))
+            {
+                continue;
+            }
+            context.put(name, jc.getVariable(name));
+        }
+    }
 
     private JellyContext globalContext;
 
@@ -311,6 +349,24 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
             tagLibraries.put(uri, ctl);
         }
         ctl.registerPackage(tagPackage);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     */
+    public void resolveAction(String action, PageRuntime runtime) throws Exception
+    {
+        Script script = getScript("action/" + action);
+        if (script == null)
+        {
+            return;
+        }
+        JellyContext jc = new JellyContext(getGlobalContext());
+        passVariables(runtime.getPageContext(), jc);
+        script.run(jc, XMLOutput.createDummyXMLOutput());
+        passVariables(jc, runtime.getPageContext());
     }
 
     /**

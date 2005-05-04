@@ -11,5 +11,10 @@
             <implementation>com.cyclopsgroup.waterview.velocity.VelocityEngine</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.core.ModuleActionResolver</role>
+            <implementation>com.cyclopsgroup.waterview.core.ModuleActionResolver</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
     </components>
 </plexus>

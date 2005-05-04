@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
+import java.io.StringWriter;
+
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -24,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
+import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
@@ -37,7 +40,7 @@ import com.cyclopsgroup.waterview.utils.PageRequest;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
-        DynaViewFactory
+        DynaViewFactory, ActionResolver
 {
 
     /** Role name of this component */
@@ -129,6 +132,23 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     public VelocityFactory getVelocityFactory()
     {
         return velocityFactory;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     */
+    public void resolveAction(String action, PageRuntime runtime)
+            throws Exception
+    {
+        Template template = getTemplate("action/" + action);
+        if (template != null)
+        {
+            VelocityContextAdapter vc = new VelocityContextAdapter(runtime
+                    .getPageContext());
+            template.merge(vc, new StringWriter());
+        }
     }
 
     /**
