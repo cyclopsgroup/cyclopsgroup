@@ -45,7 +45,7 @@ import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.utils.PageRequest;
+import com.cyclopsgroup.waterview.utils.Path;
 
 /**
  * Jelly engine for jelly processing
@@ -271,7 +271,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     {
         if (!scriptPath.endsWith(".jelly"))
         {
-            PageRequest pr = PageRequest.parsePageRequest(scriptPath);
+            Path pr = Path.parse(scriptPath);
             scriptPath = pr.getParentPath() + pr.getShortName() + ".jelly";
         }
         String fullPath = scriptPath;

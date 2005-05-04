@@ -32,7 +32,7 @@ import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.utils.PageRequest;
+import com.cyclopsgroup.waterview.utils.Path;
 
 /**
  * Velocity engine object
@@ -109,7 +109,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     {
         if (!templatePath.endsWith(".vm"))
         {
-            PageRequest pr = PageRequest.parsePageRequest(templatePath);
+            Path pr = Path.parse(templatePath);
             templatePath = pr.getParentPath() + pr.getShortName() + ".vm";
         }
         String path = templatePath;

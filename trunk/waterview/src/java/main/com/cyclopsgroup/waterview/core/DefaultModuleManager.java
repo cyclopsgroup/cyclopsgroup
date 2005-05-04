@@ -34,7 +34,7 @@ import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.utils.MapUtils;
-import com.cyclopsgroup.waterview.utils.PageRequest;
+import com.cyclopsgroup.waterview.utils.Path;
 
 /**
  * Default implementation of module manager
@@ -218,7 +218,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      */
     public Module getModule(String modulePath, String packageName)
     {
-        PageRequest pr = PageRequest.parsePageRequest(modulePath);
+        Path pr = Path.parse(modulePath);
         String className = pr.getParentPath().replace('/', '.')
                 + pr.getShortName();
         if (StringUtils.isNotEmpty(packageName))

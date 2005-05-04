@@ -31,7 +31,7 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RunActionsValve extends AbstractLogEnabled implements Valve
+public class ResolveActionsValve extends AbstractLogEnabled implements Valve
 {
     /**
      * Override or implement method of parent class or interface

@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public final class PageRequest
+public final class Path
 {
     private static Hashtable pageRequestCache = new Hashtable();
 
@@ -19,11 +19,11 @@ public final class PageRequest
      * @param fullPath Path of request page
      * @return PageRequest object
      */
-    public static synchronized PageRequest parsePageRequest(String fullPath)
+    public static synchronized Path parse(String fullPath)
     {
         if (pageRequestCache.containsKey(fullPath))
         {
-            return (PageRequest) pageRequestCache.get(fullPath);
+            return (Path) pageRequestCache.get(fullPath);
         }
         int lastSeparatorPosition = fullPath.lastIndexOf('/');
         int dotPosition = fullPath.lastIndexOf('.');
@@ -48,7 +48,7 @@ public final class PageRequest
         {
             parent = parent.substring(1, parent.length());
         }
-        PageRequest result = new PageRequest(parent, shortName, extension);
+        Path result = new Path(parent, shortName, extension);
         pageRequestCache.put(fullPath, result);
         return result;
     }
@@ -68,7 +68,7 @@ public final class PageRequest
      * @param parentPath Parent path
      * @param shortName Short name of module
      */
-    public PageRequest(String parentPath, String shortName, String extension)
+    public Path(String parentPath, String shortName, String extension)
     {
         this.extension = extension;
         this.parentPath = parentPath;

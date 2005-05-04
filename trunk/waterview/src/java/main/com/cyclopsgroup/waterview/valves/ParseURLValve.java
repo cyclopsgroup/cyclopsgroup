@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.valves;
 
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
 
@@ -29,8 +32,26 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValve extends AbstractLogEnabled implements Valve
+public class ParseURLValve extends AbstractLogEnabled implements Valve,
+        Configurable
 {
+
+    private String defaultPage = "Index.jelly";
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        String page = conf.getChild("default-page").getValue(null);
+        if (page != null)
+        {
+            defaultPage = page;
+        }
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -61,6 +82,10 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
                     runtime.getActions().add(part);
                 }
             }
+        }
+        if (StringUtils.isEmpty(path))
+        {
+            path = defaultPage;
         }
         runtime.setPage(path);
         ctx.put("page", path);

@@ -16,8 +16,23 @@
  */
 package com.cyclopsgroup.waterview.valves;
 
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.regex.Pattern;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.collections.map.ListOrderedMap;
+
+import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
@@ -29,8 +44,51 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve extends AbstractLogEnabled implements Valve
+public class RenderPageValve extends AbstractLogEnabled implements Valve,
+        Configurable, Initializable, Serviceable
 {
+    private ServiceManager serviceManager;
+
+    private Map viewFactories = ListOrderedMap.decorate(new Hashtable());
+
+    private transient Map viewFactoryRoles = ListOrderedMap
+            .decorate(new HashMap());
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        Configuration[] children = conf.getChild("view-factories").getChildren(
+                "view-factory");
+        for (int i = 0; i < children.length; i++)
+        {
+            Configuration c = children[i];
+            String pattern = c.getAttribute("pattern");
+            String role = c.getAttribute("role");
+            viewFactoryRoles.put(pattern, role);
+        }
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        for (Iterator i = viewFactoryRoles.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            String role = (String) viewFactoryRoles.get(pattern);
+            DynaViewFactory viewFactory = (DynaViewFactory) serviceManager
+                    .lookup(role);
+            registerViewFactory(role, viewFactory);
+        }
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -39,6 +97,20 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
+        DynaViewFactory viewFactory = null;
+        for (Iterator i = viewFactories.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            if (Pattern.matches('^' + pattern + '$', runtime.getPage()))
+            {
+                viewFactory = (DynaViewFactory) viewFactories.get(pattern);
+            }
+        }
+        if (viewFactory != null)
+        {
+            runtime.getPageContext().put(DynaViewFactory.NAME, viewFactory);
+        }
+
         runtime.setOutputContentType("text/html");
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
@@ -51,5 +123,26 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
         }
         context.invokeNextValve(runtime);
         runtime.getOutput().flush();
+    }
+
+    /**
+     * Register a view factory
+     *
+     * @param pattern Pattern of page
+     * @param viewFactory View factory object
+     */
+    public void registerViewFactory(String pattern, DynaViewFactory viewFactory)
+    {
+        viewFactories.put(pattern, viewFactory);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        this.serviceManager = serviceManager;
     }
 }

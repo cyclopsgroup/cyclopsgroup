@@ -7,8 +7,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipelines>
-                    <pipeline pattern=".*\.jelly" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
-                    <pipeline pattern=".*\.vm" role="com.cyclopsgroup.waterview.pipeline.RenderPage" viewfactory="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
+                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
                 </pipelines>
             </configuration>
         </component>
@@ -33,7 +32,7 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.valves.ParseURLValve"/>
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
-                    <valve role="com.cyclopsgroup.waterview.valves.RunActionsValve"/>
+                    <valve role="com.cyclopsgroup.waterview.valves.ResolveActionsValve"/>
                     <valve role="com.cyclopsgroup.waterview.valves.RenderPageValve"/>
                 </valves>
             </configuration>
@@ -42,6 +41,9 @@
             <role>com.cyclopsgroup.waterview.valves.ParseURLValve</role>
             <implementation>com.cyclopsgroup.waterview.valves.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-page>Index.jelly</default-page>
+            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
@@ -52,14 +54,29 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.valves.RunActionsValve</role>
-            <implementation>com.cyclopsgroup.waterview.valves.RunActionsValve</implementation>
+            <role>com.cyclopsgroup.waterview.valves.ResolveActionsValve</role>
+            <implementation>com.cyclopsgroup.waterview.valves.ResolveActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <resolvers>
+                    <resolver pattern=".*\.do" role="com.cyclopsgroup.waterview.core.ModuleActionResolver"/>
+                    <resolver pattern=".*\.jsa" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                    <resolver pattern=".*\.va" role="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
+                    <reoslver pattern=".*" role="com.cyclopsgroup.waterview.core.ModuleActionResolver"/>
+                </resolvers>
+            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.valves.RenderPageValve</role>
             <implementation>com.cyclopsgroup.waterview.valves.RenderPageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <view-factories>
+                    <view-factory pattern=".*\.jelly" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                    <view-factory pattern=".*\.vm" role="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
+                    <view-factory pattern=".*" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                </view-factories>
+            </configuration>
         </component>
     </components>
     <load-on-start>

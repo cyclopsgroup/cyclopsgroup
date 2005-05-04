@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.utils;
 
 import junit.framework.TestCase;
 
-import com.cyclopsgroup.waterview.utils.PageRequest;
+import com.cyclopsgroup.waterview.utils.Path;
 
 /**
  * Test case for container
@@ -34,7 +34,7 @@ public class PageRequestTest extends TestCase
      */
     public void testParsePageRequest() throws Exception
     {
-        PageRequest pr = PageRequest.parsePageRequest("/Abc.vm");
+        Path pr = Path.parse("/Abc.vm");
         assertEquals("vm", pr.getExtension());
         assertEquals("", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
@@ -47,7 +47,7 @@ public class PageRequestTest extends TestCase
      */
     public void testParsePageRequest2() throws Exception
     {
-        PageRequest pr = PageRequest.parsePageRequest("/aaa/bbb/ccc/Abc.vm");
+        Path pr = Path.parse("/aaa/bbb/ccc/Abc.vm");
         assertEquals("vm", pr.getExtension());
         assertEquals("aaa/bbb/ccc/", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
@@ -60,7 +60,7 @@ public class PageRequestTest extends TestCase
      */
     public void testParsePageRequest3() throws Exception
     {
-        PageRequest pr = PageRequest.parsePageRequest("/Abc");
+        Path pr = Path.parse("/Abc");
         assertEquals("", pr.getExtension());
         assertEquals("", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
