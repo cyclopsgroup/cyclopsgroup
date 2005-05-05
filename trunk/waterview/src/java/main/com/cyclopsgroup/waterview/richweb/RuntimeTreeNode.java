@@ -21,7 +21,7 @@ package com.cyclopsgroup.waterview.richweb;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RuntimeTreeNode implements TreeNode
+public final class RuntimeTreeNode implements TreeNode
 {
 
     private boolean expanded;

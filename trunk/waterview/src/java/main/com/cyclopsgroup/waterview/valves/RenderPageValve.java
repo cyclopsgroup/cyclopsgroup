@@ -85,7 +85,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             String role = (String) viewFactoryRoles.get(pattern);
             DynaViewFactory viewFactory = (DynaViewFactory) serviceManager
                     .lookup(role);
-            registerViewFactory(role, viewFactory);
+            registerViewFactory(pattern, viewFactory);
         }
     }
 
@@ -104,6 +104,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             if (Pattern.matches('^' + pattern + '$', runtime.getPage()))
             {
                 viewFactory = (DynaViewFactory) viewFactories.get(pattern);
+                break;
             }
         }
         if (viewFactory != null)

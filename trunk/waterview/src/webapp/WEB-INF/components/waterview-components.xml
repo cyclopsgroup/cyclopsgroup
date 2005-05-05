@@ -60,8 +60,8 @@
             <configuration>
                 <resolvers>
                     <resolver pattern=".*\.do" role="com.cyclopsgroup.waterview.core.ModuleActionResolver"/>
-                    <resolver pattern=".*\.jsa" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
-                    <resolver pattern=".*\.va" role="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
+                    <resolver pattern=".*\.j" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
+                    <resolver pattern=".*\.v" role="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
                     <reoslver pattern=".*" role="com.cyclopsgroup.waterview.core.ModuleActionResolver"/>
                 </resolvers>
             </configuration>

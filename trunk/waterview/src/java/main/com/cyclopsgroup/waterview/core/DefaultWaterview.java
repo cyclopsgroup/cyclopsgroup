@@ -93,6 +93,7 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
             if (Pattern.matches('^' + pattern + '$', runtime.getRequestPath()))
             {
                 pipeline = getPipeline(pattern);
+                break;
             }
         }
         if (pipeline == null)
