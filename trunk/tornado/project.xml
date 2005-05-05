@@ -1,325 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by jiaqi (Ru-Board) -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+    <extend>${maven.repo.local}/cyclib/poms/cyclopsgroup.pom</extend>
     <pomVersion>3</pomVersion>
-    <name>tornado</name>
     <id>tornado</id>
-    <currentVersion>1.0-a1-SNAPSHOT</currentVersion>
+    <name>tornado</name>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://cyclops-group.sourceforge.net</url>
-        <logo>/images/cyclops_logo.gif</logo>
+        <logo>/images/cyclopsgroup_logo.gif</logo>
     </organization>
-    <logo>/images/tornado_logo.gif</logo>
-    <inceptionYear>2003</inceptionYear>
-    <package>com.cyclops.tornado</package>
-    <shortDescription>A web application based on Jakarta Turbine</shortDescription>
-    <description>--------To change this text, edit project.xml please--------</description>
-    <url>http://cyclops-group.sourceforge.net/projects/tornado</url>
-    <siteAddress>shell.sourceforge.net</siteAddress>
-    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/tornado</siteDirectory>
-    <repository>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:tornado</connection>
-        <developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:tornado</developerConnection>
-        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/cyclops-group/tornado</url>
-    </repository>
-    <mailingLists>
-        <mailingList>
-            <name>Cyclops Group Member</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
-        </mailingList>
-        <mailingList>
-            <name>Cyclops Group Develop</name>
-            <subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</subscribe>
-            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop</archive>
-        </mailingList>
-    </mailingLists>
+    <inceptionYear>2002</inceptionYear>
+    <shortDescription>A waterview based simple web application</shortDescription>
     <developers>
         <developer>
-            <name>Jiaqi Guo</name>
+            <name>Guo, Jiaqi</name>
             <id>jiaqi</id>
-            <email>chinajoeblack@hotmail.com</email>
+            <email>jiaqi.guo@gmail.com</email>
+            <organization>Evavi</organization>
             <roles>
-                <role>Architect</role>
-                <role>Java Developer</role>
+                <role>Developer</role>
             </roles>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>Daisy Zhao</name>
-            <id>daisy</id>
-            <email>xuying.zhao@student.utdallas.edu</email>
-            <organization>U.T. Dallas</organization>
-            <roles>
-                <role>Observer</role>
-            </roles>
+            <url>http://cyclops-group.sourceforge.net</url>
             <timezone>-6</timezone>
         </developer>
     </developers>
     <dependencies>
         <dependency>
-            <id>avalon-framework</id>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.3.4</version>
+            <url>http://asm.objectweb.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>avalon-framework</groupId>
+            <artifactId>avalon-framework</artifactId>
             <version>4.1.4</version>
-            <url>http://jakarta.apache.org/avalon</url>
+            <url>http://avalon.apache.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-beanutils</id>
-            <version>1.6.1</version>
+            <groupId>classworlds</groupId>
+            <artifactId>classworlds</artifactId>
+            <version>1.1-alpha-1</version>
+            <url>http://classworlds.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-collections</id>
-            <version>2.1</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+            <url>http://jakarta.apache.org/commons/beanutils</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-configuration</id>
-            <version>20030706.202021</version>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.0</version>
+            <url>http://jakarta.apache.org/commons/collections</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-dbcp</id>
-            <version>20030825.184428</version>
-            <url>http://jakarta.apache.org/commons/</url>
+            <groupId>commons-jelly</groupId>
+            <artifactId>commons-jelly</artifactId>
+            <version>20040601.171102</version>
+            <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-digester</id>
-            <version>1.5</version>
-            <url>http://jakarta.apache.org/commons/digester</url>
+            <groupId>commons-jexl</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>1.0-beta-2</version>
+            <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-io</id>
-            <version>20030203.000550</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+            <url>http://jakarta.apache.org/commons/lang</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-pool</id>
-            <version>20030825.183949</version>
-            <url>http://jakarta.apache.org/commons/pool/</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-xo</id>
-            <version>0.8</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-lang</id>
-            <version>20030203.000129</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-logging</id>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
             <version>1.0.3</version>
+            <url>http://jakarta.apache.org/commons/loggings</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-http</id>
-            <version>1.1</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-fileupload</id>
-            <version>1.0-dev</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>dom4j</id>
-            <version>1.3</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>fulcrum</id>
-            <version>20021029.113748</version>
-            <url>http://jakarta.apache.org/turbine/fulcrum/</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>commons-httpclient</id>
-            <version>1.0</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>httpunit</id>
-            <version>1.3</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>jaf:activation</id>
-            <version>1.0.2</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>jmainboard</id>
+            <groupId>clib</groupId>
+            <artifactId>clib-site</artifactId>
             <version>SNAPSHOT</version>
-            <url>http://cyclops-group.sourceforge.net/projects/jmainboard</url>
-        </dependency>
-        <dependency>
-            <id>jmainboard:jmainboard-log4j</id>
-            <version>SNAPSHOT</version>
-            <url>http://cyclops-group.sourceforge.net/projects/jmainboard/components/log4j</url>
-        </dependency>
-        <dependency>
-            <id>jmainboard:jmainboard-turbine</id>
-            <version>SNAPSHOT</version>
-            <url>http://cyclops-group.sourceforge.net/projects/jmainboard/components/turbine</url>
-        </dependency>
-        <dependency>
-            <id>jtidy</id>
-            <version>4aug2000r7-dev</version>
+            <url>http://www.cyclopsgroup.com/projects/clib</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>junit</id>
+            <groupId>clib</groupId>
+            <artifactId>clib-lang</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://www.cyclopsgroup.com/projects/clib</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.5-beta-2</version>
+            <url>http://www.dom4j.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>3.8.1</version>
+            <url>http://junit.org</url>
         </dependency>
         <dependency>
-            <id>log4j</id>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
             <version>1.2.8</version>
+            <url>http://logging.apache.org/log4j</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>mm.mysql</id>
-            <version>2.0.7</version>
+            <groupId>logkit</groupId>
+            <artifactId>logkit</artifactId>
+            <version>1.0.1</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>regexp</id>
-            <version>1.3-dev</version>
+            <groupId>plexus</groupId>
+            <artifactId>plexus</artifactId>
+            <version>0.17</version>
+            <url>http://plexus.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>servletapi</id>
+            <groupId>servlet</groupId>
+            <artifactId>servlet</artifactId>
             <version>2.3</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
         </dependency>
         <dependency>
-            <id>stratum</id>
-            <version>1.0-b3</version>
-            <url>http://jakata.apache.org/turbine/stratum</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
+            <groupId>tomcat</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.1.30</version>
+            <url>http://jakarta.apache.org/tomcat</url>
         </dependency>
         <dependency>
-            <id>torque</id>
-            <version>3.1</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>torque</groupId>
-            <artifactId>torque-gen</artifactId>
-            <version>3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>turbine</groupId>
-            <artifactId>turbine</artifactId>
-            <url>http://jakarta.apache.org/turbine/turbine-3</url>
-            <version>20030929.215136</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>village</id>
-            <version>1.5.3</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>velocity</id>
-            <version>1.3.1</version>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.4-rc1</version>
             <url>http://jakarta.apache.org/velocity</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>velocity-dvsl</id>
-            <version>0.43</version>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3</artifactId>
+            <version>1.1.3.3</version>
+            <url>http://www.xmlpull.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>xerces</id>
-            <version>2.0.0</version>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <!-- Packaged EntityResolver conflicts with the one in Xerces 1.4.4 -->
-        <dependency>
-            <id>xml-apis</id>
-            <version>2.0.2</version>
+            <groupId>xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>20040809</version>
+            <url>http://xstream.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>commons-jxpath</id>
-            <version>0.1-dev</version>
+            <groupId>jmx</groupId>
+            <artifactId>jmxri</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>plexus</groupId>
+            <artifactId>plexus-avalon-personality</artifactId>
+            <version>0.12</version>
+            <url>http://plexus.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <id>jgen</id>
-            <version>1.4-dev</version>
+            <groupId>waterview</groupId>
+            <artifactId>waterview</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://www.cyclopsgroup.com/projects/waterview</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -327,57 +231,31 @@
     </dependencies>
     <build>
         <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
-        <sourceDirectory>src/java</sourceDirectory>
-        <aspectSourceDirectory/>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
             </includes>
         </unitTest>
-        <integrationUnitTestSourceDirectory>src/rttest</integrationUnitTestSourceDirectory>
-        <integrationUnitTest>
-            <includes>
-                <include>**/*Test.java</include>
-            </includes>
-        </integrationUnitTest>
         <resources>
             <resource>
-                <directory>src/webapp/WEB-INF</directory>
+                <directory>${pom.build.sourceDirectory}</directory>
                 <includes>
-                    <include>conf/**/*</include>
+                    <include>**/*.*</include>
                 </includes>
-            </resource>
-            <resource>
-                <directory>src/template/velocity</directory>
-                <includes>
-                    <include>**/*.vm</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
-        <jars/>
     </build>
-    <reports>
-        <report>maven-jdepend-plugin</report>
-        <report>maven-checkstyle-plugin</report>
-        <report>maven-changes-plugin</report>
-        <report>maven-changelog-plugin</report>
-        <report>maven-file-activity-plugin</report>
-        <report>maven-developer-activity-plugin</report>
-        <report>maven-javadoc-plugin</report>
-        <report>maven-jxr-plugin</report>
-        <report>maven-junit-report-plugin</report>
-        <report>maven-tasklist-plugin</report>
-        <report>maven-pmd-plugin</report>
-        <report>maven-simian-plugin</report>
-        <report>maven-clover-plugin</report>
-        <report>maven-jcoverage-plugin</report>
-        <report>maven-license-plugin</report>
-    </reports>
 </project>
