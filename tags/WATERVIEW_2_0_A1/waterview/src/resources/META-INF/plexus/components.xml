@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.jelly.JellyEngine</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.JellyEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.velocity.VelocityEngine</role>
+            <implementation>com.cyclopsgroup.waterview.velocity.VelocityEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.core.ModuleActionResolver</role>
+            <implementation>com.cyclopsgroup.waterview.core.ModuleActionResolver</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+    </components>
+</plexus>

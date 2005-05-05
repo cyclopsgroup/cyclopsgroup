@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:w="com.cyclopsgroup.waterview.ui" targetNamespace="com.cyclopsgroup.waterview.ui" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <element name="Page">
+        <complexType>
+            <sequence>
+                <choice minOccurs="0">
+                    <element ref="w:LayoutRef"/>
+                </choice>
+                <element name="PanelContent" maxOccurs="unbounded">
+                    <complexType>
+                        <choice minOccurs="0" maxOccurs="unbounded">
+                            <element ref="w:ViewRef"/>
+                        </choice>
+                        <attribute name="name" use="required"/>
+                        <attribute name="append" default="false" type="boolean"/>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="LayoutRef" abstract="true"/>
+    <element name="Layout" substitutionGroup="w:LayoutRef">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <any/>
+            </choice>
+        </complexType>
+    </element>
+    <element name="JellyLayout" substitutionGroup="w:LayoutRef">
+        <complexType>
+            <attribute name="script" use="required"/>
+        </complexType>
+    </element>
+    <element name="SystemLayout" substitutionGroup="w:LayoutRef">
+        <complexType>
+            <attribute name="id" use="required"/>
+        </complexType>
+    </element>
+    <element name="DefaultLayout" substitutionGroup="w:LayoutRef"/>
+    <element name="Panel">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <any/>
+            </choice>
+            <attribute name="name" use="required"/>
+        </complexType>
+    </element>
+    <element name="ViewRef" abstract="true"/>
+    <element name="View" substitutionGroup="w:ViewRef">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <any/>
+            </choice>
+            <attribute name="name" use="required"/>
+        </complexType>
+    </element>
+    <element name="JellyView" substitutionGroup="w:ViewRef">
+        <complexType>
+            <attribute name="script" use="required"/>
+        </complexType>
+    </element>
+    <element name="VelocityView" substitutionGroup="w:ViewRef">
+        <complexType>
+            <attribute name="template" use="required"/>
+        </complexType>
+    </element>
+    <element name="SimpleView" substitutionGroup="w:ViewRef">
+        <complexType>
+            <attribute name="path" use="required"/>
+        </complexType>
+    </element>
+</schema>

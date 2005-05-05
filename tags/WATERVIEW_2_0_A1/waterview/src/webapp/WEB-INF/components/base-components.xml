@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+    <components>
+        <!--
+        <component>
+            <role>org.codehaus.plexus.logging.LoggerManager</role>
+            <implementation>com.cyclopsgroup.cyclib.log4j.Log4jLoggerManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <properties>${basedir}/WEB-INF/log4j.properties</properties>
+            </configuration>
+        </component>
+        -->
+        <component>
+            <role>com.cyclopsgroup.clib.site.velocity.VelocityFactory</role>
+            <implementation>com.cyclopsgroup.clib.site.velocity.DefaultVelocityFactory</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+    </components>
+</component-set>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <body>
+        <links>
+            <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues/browse/waterview"/>
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/waterview"/>
+            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/waterview"/>
+            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclopsgroup/waterview"/>
+            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclopsgroup/waterview"/>
+        </links>
+        <menu name="Overview">
+            <item name="Home" href="/index.html"/>
+            <item name="Roadmap" href="/roadmap.html"/>
+            <item name="Design" href="/design.html"/>
+            <item name="About" href="/about.html"/>
+        </menu>
+    </body>
+</project>
