@@ -54,9 +54,8 @@ public class ScriptFrame extends BaseModule implements Frame
      */
     public void display(Page page, PageRuntime runtime) throws Exception
     {
-        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        JellyContext jc = new JellyContext(je.getGlobalContext());
+        JellyContext jc = (JellyContext) runtime.getPageContext().get(
+                JellyEngine.JELLY_CONTEXT);
         JellyEngine.passVariables(runtime.getPageContext(), jc);
         runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
         jc.setVariable(Page.NAME, page);

@@ -356,17 +356,17 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public void resolveAction(String action, PageRuntime runtime) throws Exception
+    public void resolveAction(String action, PageRuntime runtime)
+            throws Exception
     {
         Script script = getScript("action/" + action);
         if (script == null)
         {
             return;
         }
-        JellyContext jc = new JellyContext(getGlobalContext());
-        passVariables(runtime.getPageContext(), jc);
+        JellyContext jc = (JellyContext) runtime.getPageContext().get(
+                JellyEngine.JELLY_CONTEXT);
         script.run(jc, XMLOutput.createDummyXMLOutput());
-        passVariables(jc, runtime.getPageContext());
     }
 
     /**

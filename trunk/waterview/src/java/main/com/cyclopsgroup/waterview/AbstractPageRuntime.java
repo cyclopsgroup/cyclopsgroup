@@ -250,9 +250,9 @@ public abstract class AbstractPageRuntime implements PageRuntime
     }
 
     /**
-     * Setter method for pageContext
+     * Override or implement method of parent class or interface
      *
-     * @param pageContext The pageContext to set.
+     * @see com.cyclopsgroup.waterview.PageRuntime#setPageContext(com.cyclopsgroup.clib.lang.Context)
      */
     public void setPageContext(Context pageContext)
     {

@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.servlet;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -95,11 +92,6 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
         sb.append(request.getServletPath());
         setPageBaseUrl(sb.toString());
-
-        Context pageContext = new DefaultContext(new HashMap());
-        pageContext.put("request", request);
-        pageContext.put("response", response);
-        setPageContext(pageContext);
     }
 
     /**

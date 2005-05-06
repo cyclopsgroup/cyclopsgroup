@@ -38,6 +38,8 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
 
     private String defaultPage = "Index.jelly";
 
+    private String separator = "|";
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -48,8 +50,33 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         String page = conf.getChild("default-page").getValue(null);
         if (page != null)
         {
-            defaultPage = page;
+            setDefaultPage(page);
         }
+        String sep = conf.getChild("separator").getValue(null);
+        if (sep != null)
+        {
+            setSeparator(sep);
+        }
+    }
+
+    /**
+     * Getter method for defaultPage
+     *
+     * @return Returns the defaultPage.
+     */
+    public String getDefaultPage()
+    {
+        return defaultPage;
+    }
+
+    /**
+     * Getter method for separator
+     *
+     * @return Returns the separator.
+     */
+    public String getSeparator()
+    {
+        return separator;
     }
 
     /**
@@ -90,5 +117,25 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         runtime.setPage(path);
         ctx.put("page", path);
         context.invokeNextValve(runtime);
+    }
+
+    /**
+     * Setter method for defaultPage
+     *
+     * @param defaultPage The defaultPage to set.
+     */
+    public void setDefaultPage(String defaultPage)
+    {
+        this.defaultPage = defaultPage;
+    }
+
+    /**
+     * Setter method for separator
+     *
+     * @param separator The separator to set.
+     */
+    public void setSeparator(String separator)
+    {
+        this.separator = separator;
     }
 }

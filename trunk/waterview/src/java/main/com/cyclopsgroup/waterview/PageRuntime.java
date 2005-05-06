@@ -140,4 +140,11 @@ public interface PageRuntime
      * @param template
      */
     void setPage(String template);
+
+    /**
+     * Set the page context
+     *
+     * @param context Page context
+     */
+    void setPageContext(Context context);
 }
