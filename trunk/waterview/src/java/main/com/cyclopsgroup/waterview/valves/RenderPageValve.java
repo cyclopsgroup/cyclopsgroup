@@ -38,6 +38,8 @@ import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.utils.MapUtils;
 
 /**
  * Valve to render page
@@ -47,7 +49,37 @@ import com.cyclopsgroup.waterview.Valve;
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
         Configurable, Initializable, Serviceable
 {
+    private class CachedViewFactory implements DynaViewFactory
+    {
+        private DynaViewFactory proxy;
+
+        private CachedViewFactory(DynaViewFactory proxy)
+        {
+            this.proxy = proxy;
+        }
+
+        /**
+         * Override or implement method of parent class or interface
+         *
+         * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+         */
+        public synchronized View createView(String viewPath, PageRuntime runtime)
+                throws Exception
+        {
+            String key = proxy.hashCode() + '/' + viewPath;
+            if (viewCache.containsKey(key))
+            {
+                return (View) viewCache.get(key);
+            }
+            View view = proxy.createView(viewPath, runtime);
+            viewCache.put(key, view);
+            return view;
+        }
+    }
+
     private ServiceManager serviceManager;
+
+    private Map viewCache = new Hashtable();
 
     private Map viewFactories = ListOrderedMap.decorate(new Hashtable());
 
@@ -70,6 +102,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             String role = c.getAttribute("role");
             viewFactoryRoles.put(pattern, role);
         }
+
+        int viewCacheSize = conf.getChild("view-cache").getValueAsInteger(-1);
+        viewCache = MapUtils.createCache(viewCacheSize);
     }
 
     /**
@@ -134,7 +169,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      */
     public void registerViewFactory(String pattern, DynaViewFactory viewFactory)
     {
-        viewFactories.put(pattern, viewFactory);
+        viewFactories.put(pattern, new CachedViewFactory(viewFactory));
     }
 
     /**

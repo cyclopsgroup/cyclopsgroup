@@ -102,43 +102,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     /** Name of service manager */
     public static final String SERVICE_MANAGER = ServiceManager.class.getName();
 
-    /**
-     * Pass all variables into jelly context from context
-     *
-     * @param context Clib context
-     * @param jc Jelly context
-     */
-    public static final void passVariables(
-            com.cyclopsgroup.clib.lang.Context context, JellyContext jc)
-    {
-        for (Iterator i = context.keys(); i.hasNext();)
-        {
-            String name = (String) i.next();
-            jc.setVariable(name, context.get(name));
-        }
-        jc.setVariable("context", context);
-    }
-
-    /**
-     * Pass all variables from jelly context to clib context
-     *
-     * @param jc Jelly context
-     * @param context Clib context
-     */
-    public static final void passVariables(JellyContext jc,
-            com.cyclopsgroup.clib.lang.Context context)
-    {
-        for (Iterator i = jc.getVariableNames(); i.hasNext();)
-        {
-            String name = (String) i.next();
-            if (StringUtils.equals("context", name))
-            {
-                continue;
-            }
-            context.put(name, jc.getVariable(name));
-        }
-    }
-
     private JellyContext globalContext;
 
     private Properties initProperties = new Properties();

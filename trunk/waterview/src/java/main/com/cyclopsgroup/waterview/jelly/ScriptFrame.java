@@ -56,7 +56,6 @@ public class ScriptFrame extends BaseModule implements Frame
     {
         JellyContext jc = (JellyContext) runtime.getPageContext().get(
                 JellyEngine.JELLY_CONTEXT);
-        JellyEngine.passVariables(runtime.getPageContext(), jc);
         runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
         jc.setVariable(Page.NAME, page);
         jc.setVariable(PageRuntime.NAME, runtime);
