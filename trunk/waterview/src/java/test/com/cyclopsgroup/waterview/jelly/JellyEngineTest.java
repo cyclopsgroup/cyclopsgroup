@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
