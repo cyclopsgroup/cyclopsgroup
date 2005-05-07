@@ -20,6 +20,9 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.Context;
@@ -33,10 +36,12 @@ import com.cyclopsgroup.waterview.Valve;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ParseURLValve extends AbstractLogEnabled implements Valve,
-        Configurable
+        Configurable, Serviceable
 {
 
     private String defaultPage = "Index.jelly";
+
+    private RenderPageValve pageRender;
 
     private String separator = "|";
 
@@ -93,30 +98,56 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         ctx.put("params", runtime.getRequestParameters());
         ctx.put("applicationBase", runtime.getApplicationBaseUrl());
         ctx.put("pageBase", runtime.getPageBaseUrl());
-        String path = runtime.getRequestPath();
-        if (path.indexOf('|') != -1)
+        String requestPath = runtime.getRequestPath();
+        if (requestPath.charAt(0) == '/')
         {
-            String[] parts = StringUtils.split(path, '|');
-            for (int i = 0; i < parts.length; i++)
+            requestPath = requestPath.substring(1);
+        }
+        String[] parts = null;
+        if (requestPath.indexOf(getSeparator()) == -1)
+        {
+            parts = new String[] { requestPath };
+        }
+        else
+        {
+            parts = StringUtils.split(requestPath, getSeparator());
+        }
+        String pagePath = null;
+        for (int i = 0; i < parts.length; i++)
+        {
+            String part = parts[i];
+            if (isPagePath(part))
             {
-                String part = parts[i];
-                if (i == parts.length - 1)
-                {
-                    path = part;
-                }
-                else
-                {
-                    runtime.getActions().add(part);
-                }
+                pagePath = part;
+            }
+            else
+            {
+                runtime.getActions().add(part);
             }
         }
-        if (StringUtils.isEmpty(path))
+        if (StringUtils.isEmpty(pagePath))
         {
-            path = defaultPage;
+            pagePath = getDefaultPage();
         }
-        runtime.setPage(path);
-        ctx.put("page", path);
+        runtime.setPage(pagePath);
+        ctx.put("page", pagePath);
         context.invokeNextValve(runtime);
+    }
+
+    protected boolean isPagePath(String path)
+    {
+        return pageRender.isPage(path);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        pageRender = (RenderPageValve) serviceManager
+                .lookup(RenderPageValve.ROLE);
     }
 
     /**

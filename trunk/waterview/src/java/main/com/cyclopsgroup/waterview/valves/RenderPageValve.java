@@ -49,6 +49,7 @@ import com.cyclopsgroup.waterview.utils.MapUtils;
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
         Configurable, Initializable, Serviceable
 {
+
     private class CachedViewFactory implements DynaViewFactory
     {
         private DynaViewFactory proxy;
@@ -76,6 +77,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             return view;
         }
     }
+
+    /** Role name of this valve*/
+    public static final String ROLE = RenderPageValve.class.getName();
 
     private ServiceManager serviceManager;
 
@@ -159,6 +163,25 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         }
         context.invokeNextValve(runtime);
         runtime.getOutput().flush();
+    }
+
+    /**
+     * Is a given path a page?
+     *
+     * @param name Given page path
+     * @return True if it's a handleable page
+     */
+    public boolean isPage(String name)
+    {
+        for (Iterator i = viewFactories.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            if (Pattern.matches('^' + pattern + '$', name))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
