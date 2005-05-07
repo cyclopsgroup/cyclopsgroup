@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.webfs;
 
+import java.io.FileFilter;
+
 /**
  * Web file system facade component
  * 
@@ -45,7 +47,14 @@ public interface WebFileSystem
      *
      * @param root FSRoot object
      */
-    void addRoot(FSRoot root);
+    void addRoot(FileTreeRoot root);
+
+    /**
+     * Get file filter
+     *
+     * @return File filter for file displaying
+     */
+    FileFilter getFileFilter();
 
     /**
      * get FSRoot object
@@ -53,12 +62,12 @@ public interface WebFileSystem
      * @param rootId Root id
      * @return FSRoot object
      */
-    FSRoot getRoot(String rootId);
+    FileTreeRoot getRoot(String rootId);
 
     /**
      * Get roots
      *
      * @return FSRoot array
      */
-    FSRoot[] getRoots();
+    FileTreeRoot[] getRoots();
 }

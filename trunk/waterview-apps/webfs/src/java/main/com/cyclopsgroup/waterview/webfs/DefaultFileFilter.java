@@ -14,40 +14,34 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.webfs.ui.view;
+package com.cyclopsgroup.waterview.webfs;
 
 import java.io.File;
-
-import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.webfs.FileTreeRoot;
-import com.cyclopsgroup.waterview.webfs.WebFileSystem;
+import java.io.FileFilter;
 
 /**
- * Navigator bar
+ * Default file filter
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class WebFSNavigator implements Module
+public class DefaultFileFilter implements FileFilter
 {
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see java.io.FileFilter#accept(java.io.File)
      */
-    public void execute(PageRuntime runtime, Context context) throws Exception
+    public boolean accept(File file)
     {
-        WebFileSystem webfs = (WebFileSystem) runtime.getServiceManager()
-                .lookup(WebFileSystem.ROLE);
-        FileTreeRoot[] roots = webfs.getRoots();
-        context.put("fsRoots", roots);
-
-        File file = (File) context.get("currentFile");
-        if (file != null && file.isDirectory())
+        if (file.isHidden())
         {
-            File[] files = file.listFiles(webfs.getFileFilter());
-            context.put("files", files);
+            return false;
         }
+        if (file.getName().charAt(0) == '.')
+        {
+            return false;
+        }
+        return true;
     }
 }

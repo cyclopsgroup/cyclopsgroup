@@ -2,52 +2,28 @@
 <w:View xmlns="http://waterview.cyclopsgroup.com/html" xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <div>
         <span>Current Root</span>:
-        <select name="root_id">
+        <select name="root_id" onchange="location.href='${pageBase}/' + this.options[this.selectedIndex].value">
             <j:forEach var="root" items="${fsRoots}">
-                <j:set var="isSelected" value="${fsRoot != null and root.getId().equals(fsRoot.getId())}"/>
+                <j:set var="isSelected" value="${currentRoot != null and currentRoot.getId().equals(root.getId())}"/>
                 <j:if test="${isSelected}">
-                    <option value="${root.getId()}" selected="selected">${root.getTitle()}</option>
+                    <option value="${root.getId()}" selected="selected">${root.id} </option>
                 </j:if>
                 <j:if test="${!isSelected}">
-                    <option value="${root.getId()}" selected="selected">${root.getTitle()}</option>
+                    <option value="${root.getId()}">${root.id}</option>
                 </j:if>
             </j:forEach>
         </select>
     </div>
-    <j:if test="${fsRoot != null}">
-        <w:Tree rootDirectory="${fsRoot.getFile()}">
-            <w:TreeScript var="file">
-                <table cellspacing="0" cellpadding="0" border="0">
-                    <j:if test="${file.isDirectory()}">
-                        <tr>
-                            <td>
-                                <img src="${applicationBase}/images/icons/folder.png"/>
-                            </td>
-                            <td>
-                                <a href="${pageBase}/WebFSContent.jelly?path=${file.getPath()}"/>
-                            </td>
-                        </tr>
-                        <j:if test="${file.getChildren().length gt 0}">
-                            <tr>
-                                <td>
-                                    <w:PlaceHolder/>
-                                </td>
-                                <td>
-                                    <w:TreeChildren/>
-                                </td>
-                            </tr>
-                        </j:if>
-                    </j:if>
-                    <j:if test="${!file.isDirectory()}">
-                        <tr>
-                            <td>
-                                <img src="${applicationBase}/images/icons/file.png"/>
-                            </td>
-                            <td>${file.getName()}</td>
-                        </tr>
-                    </j:if>
-                </table>
-            </w:TreeScript>
-        </w:Tree>
+    <p>Current Path: //${currentRoot.id}/${currentPath}</p>
+    <j:if test="${currentFile.isDirectory() and files != null}">
+        <div>
+            <ul>
+                <j:forEach var="file" items="${files}">
+                    <li>
+                        <a href="${pageBase}/${pathAction}/${file.name}">${file.name}</a>
+                    </li>
+                </j:forEach>
+            </ul>
+        </div>
     </j:if>
 </w:View>

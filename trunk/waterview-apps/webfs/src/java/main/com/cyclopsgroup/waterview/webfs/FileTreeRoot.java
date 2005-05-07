@@ -17,22 +17,28 @@
 package com.cyclopsgroup.waterview.webfs;
 
 import java.io.File;
+import java.io.FileFilter;
+
+import com.cyclopsgroup.waterview.richweb.Tree;
+import com.cyclopsgroup.waterview.richweb.TreeNode;
 
 /**
  * File system root
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FSRoot
+public class FileTreeRoot implements Tree
 {
     /**
      * Empty array
      */
-    public static final FSRoot[] EMPTY_ARRAY = new FSRoot[0];
+    public static final FileTreeRoot[] EMPTY_ARRAY = new FileTreeRoot[0];
 
     private File file;
 
     private String id;
+
+    private FileTreeNode rootNode;
 
     private String title;
 
@@ -41,11 +47,13 @@ public class FSRoot
      *
      * @param id
      * @param file
+     * @param fileFilter
      */
-    public FSRoot(String id, File file)
+    public FileTreeRoot(String id, File file, FileFilter fileFilter)
     {
         this.id = id;
         this.file = file;
+        this.rootNode = new FileTreeNode(id, file, fileFilter);
     }
 
     /**
@@ -66,6 +74,16 @@ public class FSRoot
     public String getId()
     {
         return id;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.richweb.Tree#getRootNode()
+     */
+    public TreeNode getRootNode()
+    {
+        return rootNode;
     }
 
     /**

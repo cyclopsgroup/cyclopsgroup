@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.webfs.WebFileSystem</role>
+            <implementation>com.cyclopsgroup.waterview.webfs.DefaultWebFileSystem</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <fileroots>
+                    <root id="java" path="c:/java"/>
+                    <root id="workshop" path="c:/workshop"/>
+                    <root id="temp" path="c:/temp"/>
+                </fileroots>
+            </configuration>
+        </component>
+    </components>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.waterview.webfs.WebFileSystem</role>
+        </component>
+    </load-on-start>
+</plexus>

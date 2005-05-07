@@ -7,8 +7,15 @@
             </td>
         </tr>
         <tr>
-            <td valign="top"><w:JellyView script="WebFSNavigator.jelly"/></td>
-            <td valign="top"><w:SimpleView path="${page}"/></td>
+            <td coslpan="2" bgcolor="#DDDDDD">
+                BROWSE |
+                ADMIN |
+                SEARCH
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" width="20%"><w:JellyView script="WebFSNavigator.jelly"/></td>
+            <td valign="top" width="80%"><w:SimpleView path="${page}"/></td>
         </tr>
         <tr>
             <td colspan="2">Copyrights</td>
