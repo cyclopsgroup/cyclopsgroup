@@ -23,7 +23,6 @@ package com.cyclopsgroup.waterview.richweb;
  */
 public interface Tree
 {
-
     /**
      * Get unique ID of this tree
      *
