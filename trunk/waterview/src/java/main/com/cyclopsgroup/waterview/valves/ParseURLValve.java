@@ -28,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
+import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.Valve;
 
 /**
@@ -104,11 +105,13 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
             throws Exception
     {
         Context ctx = runtime.getPageContext();
-        ctx.put("runtime", runtime);
-        ctx.put("context", ctx);
-        ctx.put("params", runtime.getRequestParameters());
-        ctx.put("applicationBase", runtime.getApplicationBaseUrl());
-        ctx.put("pageBase", runtime.getPageBaseUrl());
+        ctx.put(PageRuntime.CONTEXT_RUNTIME_NAME, runtime);
+        ctx.put(PageRuntime.CONTEXT_PAGE_CONTEXT_NAME, ctx);
+        RequestValueParser params = runtime.getRequestParameters();
+        ctx.put(PageRuntime.CONTEXT_PARAMS_NAME, params);
+        ctx.put(PageRuntime.CONTEXT_APPLICATION_BASE_NAME, runtime
+                .getApplicationBaseUrl());
+        ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
         String requestPath = runtime.getRequestPath();
         if (requestPath.charAt(0) == '/')
         {

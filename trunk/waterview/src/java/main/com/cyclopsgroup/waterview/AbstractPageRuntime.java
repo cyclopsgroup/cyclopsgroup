@@ -237,6 +237,10 @@ public abstract class AbstractPageRuntime implements PageRuntime
     public void setPage(String page)
     {
         this.page = page;
+        if (getPageContext() != null)
+        {
+            getPageContext().put(CONTEXT_PAGE_NAME, page);
+        }
     }
 
     /**

@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,6 +38,8 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         PageRuntime
 {
 
+    private ServletContext context;
+
     private HttpServletRequest request;
 
     private HttpServletResponse response;
@@ -46,16 +49,18 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      * 
      * @param request Http request object
      * @param response Http response object
+     * @param context Http servlet context
      * @param fileUpload File upload component
      * @param services ServiceManager object
      * @throws Exception Throw it out
      */
     ServletPageRuntime(HttpServletRequest request,
-            HttpServletResponse response, FileUpload fileUpload,
-            ServiceManager services) throws Exception
+            HttpServletResponse response, ServletContext context,
+            FileUpload fileUpload, ServiceManager services) throws Exception
     {
         this.response = response;
         this.request = request;
+        this.context = context;
         setSessionContext(new HttpSessionContext(request.getSession()));
 
         String requestPath = request.getPathInfo();
@@ -92,6 +97,16 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
         sb.append(request.getServletPath());
         setPageBaseUrl(sb.toString());
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
+     */
+    public String getMimeType(String fileName)
+    {
+        return context.getMimeType(fileName);
     }
 
     /**

@@ -52,11 +52,11 @@ public class WaterviewServlet extends HttpServlet
 
     private PlexusContainer container;
 
+    private FileUpload fileUpload = new FileUpload();
+
     private Log logger = LogFactory.getLog(getClass());
 
     private ServiceManager serviceManager;
-
-    private FileUpload fileUpload = new FileUpload();
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -97,7 +97,7 @@ public class WaterviewServlet extends HttpServlet
         internallyProcess(request, response);
     }
 
-    private void handleException(Throwable e, PageRuntime runtime)
+    private void handleRuntimeException(Throwable e, PageRuntime runtime)
             throws ServletException, IOException
     {
         runtime.setOutputContentType("text/html");
@@ -143,8 +143,7 @@ public class WaterviewServlet extends HttpServlet
         }
         catch (Exception e)
         {
-            e.printStackTrace(); //TODO remove it from the production version soon
-            throw new ServletException("Init plexus container error", e);
+            container.getLogger().fatalError("Can not start container", e);
         }
     }
 
@@ -154,14 +153,14 @@ public class WaterviewServlet extends HttpServlet
         ServletPageRuntime runtime = null;
         try
         {
-            runtime = new ServletPageRuntime(request, response, fileUpload,
-                    serviceManager);
+            runtime = new ServletPageRuntime(request, response,
+                    getServletContext(), fileUpload, serviceManager);
             Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
             waterview.handleRuntime(runtime);
         }
         catch (Throwable e)
         {
-            handleException(e, runtime);
+            handleRuntimeException(e, runtime);
         }
         finally
         {

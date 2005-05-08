@@ -33,6 +33,25 @@ import com.cyclopsgroup.clib.lang.Context;
 
 public interface PageRuntime
 {
+
+    /** Name of applicationBase url in context */
+    String CONTEXT_APPLICATION_BASE_NAME = "applicationBase";
+
+    /** Name of pageBase url in context */
+    String CONTEXT_PAGE_BASE_NAME = "pageBase";
+
+    /** Name of pageContext in context */
+    String CONTEXT_PAGE_CONTEXT_NAME = "pageContext";
+
+    /** Name of page in context */
+    String CONTEXT_PAGE_NAME = "page";
+
+    /** Name of parameters in context */
+    String CONTEXT_PARAMS_NAME = "params";
+
+    /** Name of runtime in context */
+    String CONTEXT_RUNTIME_NAME = "runtime";
+
     /** Name of this object in context */
     String NAME = PageRuntime.class.getName();
 
@@ -63,6 +82,14 @@ public interface PageRuntime
      * @return Current local object
      */
     Locale getLocale();
+
+    /**
+     * Get mime type of given path
+     *
+     * @param fileName Name of file
+     * @return Mimetype
+     */
+    String getMimeType(String fileName);
 
     /**
      * Get output print writer

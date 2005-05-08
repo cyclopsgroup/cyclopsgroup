@@ -49,6 +49,16 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
+     * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
+     */
+    public String getMimeType(String fileName)
+    {
+        return "text/html";
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType(String contentType)
