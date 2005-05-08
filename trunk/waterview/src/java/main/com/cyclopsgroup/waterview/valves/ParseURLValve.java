@@ -75,6 +75,17 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
     }
 
     /**
+     * Get default page for no specified page
+     *
+     * @param runtime Runtime object
+     * @return Page path
+     */
+    protected String getDefaultPage(PageRuntime runtime)
+    {
+        return getDefaultPage();
+    }
+
+    /**
      * Getter method for separator
      *
      * @return Returns the separator.
@@ -127,13 +138,19 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
         }
         if (StringUtils.isEmpty(pagePath))
         {
-            pagePath = getDefaultPage();
+            pagePath = getDefaultPage(runtime);
         }
         runtime.setPage(pagePath);
         ctx.put("page", pagePath);
         context.invokeNextValve(runtime);
     }
 
+    /**
+     * If path is for page
+     *
+     * @param path Page path
+     * @return True if view factory for path is defined
+     */
     protected boolean isPagePath(String path)
     {
         return pageRender.isPage(path);
