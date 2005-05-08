@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.webfs;
+package com.cyclopsgroup.waterview.apps.webfs;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -42,7 +42,7 @@ public class DefaultWebFileSystem extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.webfs.WebFileSystem#addRoot(com.cyclopsgroup.waterview.webfs.FileTreeRoot)
+     * @see com.cyclopsgroup.waterview.apps.webfs.WebFileSystem#addRoot(com.cyclopsgroup.waterview.apps.webfs.FileTreeRoot)
      */
     public void addRoot(FileTreeRoot root)
     {
@@ -72,7 +72,7 @@ public class DefaultWebFileSystem extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.webfs.WebFileSystem#getFileFilter()
+     * @see com.cyclopsgroup.waterview.apps.webfs.WebFileSystem#getFileFilter()
      */
     public FileFilter getFileFilter()
     {
@@ -82,7 +82,7 @@ public class DefaultWebFileSystem extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.webfs.WebFileSystem#getRoot(java.lang.String)
+     * @see com.cyclopsgroup.waterview.apps.webfs.WebFileSystem#getRoot(java.lang.String)
      */
     public FileTreeRoot getRoot(String rootId)
     {
@@ -92,7 +92,7 @@ public class DefaultWebFileSystem extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.webfs.WebFileSystem#getRoots()
+     * @see com.cyclopsgroup.waterview.apps.webfs.WebFileSystem#getRoots()
      */
     public FileTreeRoot[] getRoots()
     {

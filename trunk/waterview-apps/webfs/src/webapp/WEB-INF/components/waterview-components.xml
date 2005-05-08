@@ -17,7 +17,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <packages>
-                    <package>com.cyclopsgroup.waterview.webfs.ui</package>
+                    <package>com.cyclopsgroup.waterview.apps.webfs.ui</package>
                     <package>com.cyclopsgroup.waterview.ui</package>
                 </packages>
                 <default-layout>waterview.webfs.DefaultLayout</default-layout>
@@ -67,14 +67,13 @@
             <configuration>
                 <resolvers>
                     <resolver pattern=".*\.do" role="com.cyclopsgroup.waterview.core.ModuleActionResolver"/>
-                    <resolver pattern=".*\.j" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
-                    <resolver pattern=".*" role="com.cyclopsgroup.waterview.webfs.PathActionResolver"/>
+                    <resolver pattern=".*" role="com.cyclopsgroup.waterview.apps.webfs.PathActionResolver"/>
                 </resolvers>
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.webfs.PathActionResolver</role>
-            <implementation>com.cyclopsgroup.waterview.webfs.PathActionResolver</implementation>
+            <role>com.cyclopsgroup.waterview.apps.webfs.PathActionResolver</role>
+            <implementation>com.cyclopsgroup.waterview.apps.webfs.PathActionResolver</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>

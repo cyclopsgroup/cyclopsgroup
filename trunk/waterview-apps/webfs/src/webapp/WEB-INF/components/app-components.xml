@@ -2,8 +2,8 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.waterview.webfs.WebFileSystem</role>
-            <implementation>com.cyclopsgroup.waterview.webfs.DefaultWebFileSystem</implementation>
+            <role>com.cyclopsgroup.waterview.apps.webfs.WebFileSystem</role>
+            <implementation>com.cyclopsgroup.waterview.apps.webfs.DefaultWebFileSystem</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <fileroots>

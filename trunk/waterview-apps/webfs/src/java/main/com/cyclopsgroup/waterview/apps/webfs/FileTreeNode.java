@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.webfs;
+package com.cyclopsgroup.waterview.apps.webfs;
 
 import java.io.File;
 import java.io.FileFilter;

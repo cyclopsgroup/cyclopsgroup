@@ -14,15 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.webfs.ui.view;
+package com.cyclopsgroup.waterview.apps.webfs.ui.view;
 
 import java.io.File;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.webfs.FileTreeRoot;
-import com.cyclopsgroup.waterview.webfs.WebFileSystem;
+import com.cyclopsgroup.waterview.apps.webfs.FileTreeRoot;
+import com.cyclopsgroup.waterview.apps.webfs.WebFileSystem;
 
 /**
  * Navigator bar

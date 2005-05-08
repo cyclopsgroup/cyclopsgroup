@@ -3,14 +3,14 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
             <td colspan="2">
-                <h2>Web File System</h2>
-            </td>
-        </tr>
-        <tr>
-            <td coslpan="2" bgcolor="#DDDDDD">
-                BROWSE |
-                ADMIN |
-                SEARCH
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td><h2>Web File System</h2></td>
+                        <td align="right">
+                            Browse | Search | Admin
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
