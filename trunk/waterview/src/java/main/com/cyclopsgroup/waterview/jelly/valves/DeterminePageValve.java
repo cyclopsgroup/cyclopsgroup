@@ -48,8 +48,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
 
     private static final Page EMPTY_PAGE = new Page();
 
-    private String defaultPage = "Index.jelly";
-
     private Map pageCache = new Hashtable();
 
     /**
@@ -61,8 +59,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     {
         int cacheSize = conf.getChild("page-cache").getValueAsInteger(-1);
         pageCache = MapUtils.createCache(cacheSize);
-
-        defaultPage = conf.getChild("default-page").getValue(defaultPage);
     }
 
     /**
@@ -82,7 +78,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         String pagePath = runtime.getPage();
         if (StringUtils.isEmpty(pagePath))
         {
-            pagePath = defaultPage;
+            throw new IllegalStateException("Page is not set yet");
         }
         page = (Page) pageCache.get(pagePath);
         if (page != null)
