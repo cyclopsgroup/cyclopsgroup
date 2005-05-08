@@ -19,7 +19,6 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
 import com.cyclopsgroup.waterview.jelly.ScriptView;
 
 /**
@@ -32,7 +31,7 @@ public class ViewTag extends AbstractViewTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {

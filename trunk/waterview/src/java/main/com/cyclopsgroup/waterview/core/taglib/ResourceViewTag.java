@@ -24,7 +24,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.core.ResourceType;
 import com.cyclopsgroup.waterview.core.ResourceView;
-import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
+import com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag;
 
 /**
  * View to show an existing resource
@@ -40,7 +40,7 @@ public class ResourceViewTag extends AbstractViewTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {

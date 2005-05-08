@@ -21,7 +21,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.jelly.AbstractViewTag;
 
 /**
  * Simple view tag
@@ -36,7 +35,7 @@ public class SimpleViewTag extends AbstractViewTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {

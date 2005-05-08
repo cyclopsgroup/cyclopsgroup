@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly;
+package com.cyclopsgroup.waterview.jelly.taglib;
 
 import java.util.HashMap;
 
@@ -25,7 +25,7 @@ import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PanelContent;
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.jelly.taglib.PanelContentTag;
+import com.cyclopsgroup.waterview.jelly.AbstractTag;
 
 /**
  * View tag
