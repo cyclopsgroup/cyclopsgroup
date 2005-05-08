@@ -34,6 +34,7 @@ public class CoreTagPackage extends TagPackage
         addTag("ResourceView", ResourceViewTag.class);
         addTag("LocalizedText", LocalizedTextTag.class);
         addTag("LocalizedParagraph", LocalizedParagraphTag.class);
+        addTag("GetComponent", GetComponentTag.class);
         addTag("t", LocalizedTextTag.class);
         addTag("p", LocalizedParagraphTag.class);
     }
