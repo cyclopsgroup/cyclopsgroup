@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.apps.webfs.ui.view;
 
 import java.io.File;
+import java.io.FileFilter;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Module;
@@ -31,6 +32,27 @@ import com.cyclopsgroup.waterview.apps.webfs.WebFileSystem;
  */
 public class WebFSNavigator implements Module
 {
+    private class DirectoryFilter implements FileFilter
+    {
+
+        private FileFilter defaultFilter;
+
+        private DirectoryFilter(FileFilter filter)
+        {
+            defaultFilter = filter;
+        }
+
+        /**
+         * Override or implement method of parent class or interface
+         *
+         * @see java.io.FileFilter#accept(java.io.File)
+         */
+        public boolean accept(File file)
+        {
+            return file.isDirectory() && defaultFilter.accept(file);
+        }
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -43,11 +65,9 @@ public class WebFSNavigator implements Module
         FileTreeRoot[] roots = webfs.getRoots();
         context.put("fsRoots", roots);
 
-        File file = (File) context.get("currentFile");
-        if (file != null && file.isDirectory())
-        {
-            File[] files = file.listFiles(webfs.getFileFilter());
-            context.put("files", files);
-        }
+        File file = (File) context.get(WebFileSystem.CURRENT_DIRECTORY);
+        File[] files = file
+                .listFiles(new DirectoryFilter(webfs.getFileFilter()));
+        context.put("files", files);
     }
 }

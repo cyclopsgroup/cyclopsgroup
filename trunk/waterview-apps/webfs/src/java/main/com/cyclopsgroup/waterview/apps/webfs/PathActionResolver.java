@@ -42,7 +42,7 @@ public class PathActionResolver extends AbstractLogEnabled implements
     public void resolveAction(String actionName, PageRuntime runtime)
             throws Exception
     {
-        runtime.getPageContext().put("pathAction", actionName);
+        runtime.getPageContext().put(WebFileSystem.PATH_ACTION, actionName);
         WebFileSystem webfs = (WebFileSystem) runtime.getServiceManager()
                 .lookup(WebFileSystem.ROLE);
         String rootId = actionName;
@@ -58,8 +58,8 @@ public class PathActionResolver extends AbstractLogEnabled implements
         {
             throw new UnknownRootException(actionName);
         }
-        runtime.getPageContext().put("currentRoot", root);
-        runtime.getPageContext().put("currentPath", path);
+        runtime.getPageContext().put(WebFileSystem.CURRENT_ROOT, root);
+        runtime.getPageContext().put(WebFileSystem.CURRENT_PATH, path);
 
         File file = new File(root.getFile(), path);
         if (!file.exists())
@@ -67,6 +67,15 @@ public class PathActionResolver extends AbstractLogEnabled implements
             throw new FileNotFoundException(path
                     + " doesn't exist in filesystem");
         }
-        runtime.getPageContext().put("currentFile", file);
+        runtime.getPageContext().put(WebFileSystem.CURRENT_FILE, file);
+        runtime.getPageContext().put(WebFileSystem.CURRENT_DIRECTORY,
+                file.isDirectory() ? file : file.getParentFile());
+        if (StringUtils.equals("DummyPage.jelly", runtime.getPage()))
+        {
+            if (file.isDirectory())
+            {
+                runtime.setPage("webfs/FolderIndex.jelly");
+            }
+        }
     }
 }

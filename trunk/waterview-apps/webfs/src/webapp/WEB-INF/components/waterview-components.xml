@@ -33,8 +33,8 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve"/>
                     <valve role="com.cyclopsgroup.waterview.valves.ParseURLValve"/>
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
                     <valve role="com.cyclopsgroup.waterview.valves.ResolveActionsValve"/>
+                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
                     <valve role="com.cyclopsgroup.waterview.valves.RenderPageValve"/>
                 </valves>
             </configuration>
@@ -49,7 +49,7 @@
             <implementation>com.cyclopsgroup.waterview.valves.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <default-page>Index.jelly</default-page>
+                <default-page>DummyPage.jelly</default-page>
             </configuration>
         </component>
         <component>

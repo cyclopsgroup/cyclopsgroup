@@ -25,16 +25,20 @@ import java.io.FileFilter;
  */
 public interface WebFileSystem
 {
+    /** Current directory name in context */
+    String CURRENT_DIRECTORY = "currentDirectory";
 
-    /**
-     * Comment for <code>CURRENT_PATH</code>
-     */
-    String CURRENT_PATH = "cyclopsgroup.waterview.webfs.path";
+    /** Current file name in context */
+    String CURRENT_FILE = "currentFile";
 
-    /**
-     * Comment for <code>CURRENT_ROOT</code>
-     */
-    String CURRENT_ROOT = "cyclosgroup.waterview.webfs.root";
+    /** Current path name in context */
+    String CURRENT_PATH = "currentPath";
+
+    /** Current root name in context */
+    String CURRENT_ROOT = "currentRoot";
+
+    /** Path action name in context */
+    String PATH_ACTION = "pathAction";
 
     /**
      * <code>ROLE</code>
