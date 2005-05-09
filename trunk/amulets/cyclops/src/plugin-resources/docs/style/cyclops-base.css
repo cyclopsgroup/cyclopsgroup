@@ -1,7 +1,7 @@
 body, input, select, textarea
 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
+	font-size: 12px;
 	color: #666666;
 }
 
@@ -13,13 +13,14 @@ body
 img
 {
     border-width: 0px;
+    behavior: url(pngbehavior.htc);
 }
 
 th
 {
     font-weight: bold;
     text-align: left;
-    padding: 3px;
+    padding-left: 5px;
 }
 
 form
@@ -72,5 +73,10 @@ div.subsection div.subsectionTitle
 div.source pre
 {
     font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 12px;
+    border-width: 1px;
+    border-style: dashed;
+    padding: 5px;
+    background-color: #FFF791;
+    color: #333333;
 }
