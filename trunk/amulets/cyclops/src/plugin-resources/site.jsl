@@ -47,7 +47,7 @@
                                 <tr>
                                     <td rowspan="2" height="60" align="left">
                                         <a href="${pom.organization.url}">
-                                            <img src="${relativePath}${pom.organization.logo}" alt="${pom.organization.name}" border="0"/>
+                                            <img src="${relativePath}${pom.organization.logo}" alt="${pom.organization.name}" width="${maven.cyclops.logo.width}" height="${maven.cyclops.logo.height}" border="0"/>
                                         </a>
                                     </td>
                                     <td align="right">
@@ -56,7 +56,7 @@
                                             <input type="hidden" name="domains" value="${pom.organization.url}"/>
 											Search in site
 											<input type="text" id="q" size="20" name="q" maxlength="255" value=""/>
-                                            <input type="image" name="btnG" value="go" src="${relativePath}/images/icons/search.png" title="Google Search" align="middle"/>
+                                            <input type="image" name="btnG" value="go" src="${relativePath}/images/icons/16x16/search.png" width="16" height="16" title="Google Search" align="middle"/>
                                         </form>
                                     </td>
                                 </tr>
@@ -219,7 +219,7 @@
         <table cellspacing="0" cellpadding="0" border="0">
             <tr>
                 <td style="padding: 2px">
-                    <img src="${relativePath}/images/icons/${_icon}.png" alt="${_name}"/>
+                    <img src="${relativePath}/images/icons/16x16/${_icon}.png" width="16" height="16" alt="${_name}"/>
                 </td>
                 <td>
                     <j:if test="${navbean.isSelected(item.get(0))}">

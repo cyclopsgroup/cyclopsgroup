@@ -38,7 +38,14 @@ div.section div.sectionTitle
     border-style: solid;
     border-color: #CACACA;
     text-indent: 72px;
-    background: url(../images/icons/big_paragraph.png) left top no-repeat;
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-image: url('../images/icons/64x64/folder.gif');
+}
+
+*> div.section div.sectionTitle
+{
+    background-image: url('../images/icons/64x64/folder.png');
 }
 
 div.subsection div.subsectionTitle
@@ -47,8 +54,15 @@ div.subsection div.subsectionTitle
     border-style: solid;
     border-color: #CACACA;
     text-indent: 28px;
-    background: url(../images/icons/rightarrow.png) left center no-repeat;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-image: url('../images/icons/16x16/rightarrow.gif');
     color: #666666;
+}
+
+*> div.subsection div.subsectionTitle
+{
+    background-image: url('../images/icons/16x16/rightarrow.png');
 }
 
 #navigatorBlock table.menu th
