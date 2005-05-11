@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Properties;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,8 @@ public class WaterviewServlet extends HttpServlet
     private Log logger = LogFactory.getLog(getClass());
 
     private ServiceManager serviceManager;
+
+    private ServletContext servletContext;
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -114,6 +117,7 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
+        servletContext = config.getServletContext();
         String basedir = config.getServletContext().getRealPath("");
         Properties initProperties = new Properties();
         initProperties.setProperty("basedir", basedir);
@@ -153,13 +157,14 @@ public class WaterviewServlet extends HttpServlet
         ServletPageRuntime runtime = null;
         try
         {
-            runtime = new ServletPageRuntime(request, response,
-                    getServletContext(), fileUpload, serviceManager);
+            runtime = new ServletPageRuntime(request, response, servletContext,
+                    fileUpload, serviceManager);
             Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
             waterview.handleRuntime(runtime);
         }
         catch (Throwable e)
         {
+            e.printStackTrace();
             handleRuntimeException(e, runtime);
         }
         finally

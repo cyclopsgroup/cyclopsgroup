@@ -47,9 +47,6 @@
             <role>com.cyclopsgroup.waterview.valves.ParseURLValve</role>
             <implementation>com.cyclopsgroup.waterview.valves.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <default-page>Index.jelly</default-page>
-            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>

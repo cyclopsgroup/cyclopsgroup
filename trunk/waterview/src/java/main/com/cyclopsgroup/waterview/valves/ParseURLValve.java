@@ -39,10 +39,7 @@ import com.cyclopsgroup.waterview.Valve;
 public class ParseURLValve extends AbstractLogEnabled implements Valve,
         Configurable, Serviceable
 {
-
-    private String defaultPage = "Index.jelly";
-
-    private RenderPageValve pageRender;
+    private RenderPageValve renderPageValve;
 
     private String separator = "|";
 
@@ -53,37 +50,11 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        String page = conf.getChild("default-page").getValue(null);
-        if (page != null)
-        {
-            setDefaultPage(page);
-        }
         String sep = conf.getChild("separator").getValue(null);
         if (sep != null)
         {
             setSeparator(sep);
         }
-    }
-
-    /**
-     * Getter method for defaultPage
-     *
-     * @return Returns the defaultPage.
-     */
-    public String getDefaultPage()
-    {
-        return defaultPage;
-    }
-
-    /**
-     * Get default page for no specified page
-     *
-     * @param runtime Runtime object
-     * @return Page path
-     */
-    protected String getDefaultPage(PageRuntime runtime)
-    {
-        return getDefaultPage();
     }
 
     /**
@@ -113,7 +84,7 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
                 .getApplicationBaseUrl());
         ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
         String requestPath = runtime.getRequestPath();
-        if (requestPath.charAt(0) == '/')
+        if (requestPath.startsWith("/"))
         {
             requestPath = requestPath.substring(1);
         }
@@ -139,12 +110,10 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
                 runtime.getActions().add(part);
             }
         }
-        if (StringUtils.isEmpty(pagePath))
+        if (StringUtils.isNotEmpty(pagePath))
         {
-            pagePath = getDefaultPage(runtime);
+            runtime.setPage(pagePath);
         }
-        runtime.setPage(pagePath);
-        ctx.put("page", pagePath);
         context.invokeNextValve(runtime);
     }
 
@@ -156,7 +125,7 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      */
     protected boolean isPagePath(String path)
     {
-        return pageRender.isPage(path);
+        return renderPageValve.isPage(path);
     }
 
     /**
@@ -166,18 +135,8 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        pageRender = (RenderPageValve) serviceManager
+        renderPageValve = (RenderPageValve) serviceManager
                 .lookup(RenderPageValve.ROLE);
-    }
-
-    /**
-     * Setter method for defaultPage
-     *
-     * @param defaultPage The defaultPage to set.
-     */
-    public void setDefaultPage(String defaultPage)
-    {
-        this.defaultPage = defaultPage;
     }
 
     /**

@@ -48,6 +48,8 @@ public class DeterminePageValve extends AbstractLogEnabled implements
 
     private static final Page EMPTY_PAGE = new Page();
 
+    private String defaultPage = "index.jelly";
+
     private Map pageCache = new Hashtable();
 
     /**
@@ -59,6 +61,22 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     {
         int cacheSize = conf.getChild("page-cache").getValueAsInteger(-1);
         pageCache = MapUtils.createCache(cacheSize);
+
+        String page = conf.getChild("default-page").getValue(null);
+        if (page != null)
+        {
+            setDefaultPage(page);
+        }
+    }
+
+    /**
+     * Getter method for defaultPage
+     *
+     * @return Returns the defaultPage.
+     */
+    public String getDefaultPage()
+    {
+        return defaultPage;
     }
 
     /**
@@ -78,7 +96,8 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         String pagePath = runtime.getPage();
         if (StringUtils.isEmpty(pagePath))
         {
-            throw new IllegalStateException("Page is not set yet");
+            runtime.setPage(getDefaultPage());
+            pagePath = getDefaultPage();
         }
         page = (Page) pageCache.get(pagePath);
         if (page != null)
@@ -142,5 +161,15 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         JellyContext jc = new JellyContext(jellyEngine.getGlobalContext());
         script.run(jc, XMLOutput.createDummyXMLOutput());
         return (Page) jc.getVariable(Page.NAME);
+    }
+
+    /**
+     * Setter method for defaultPage
+     *
+     * @param defaultPage The defaultPage to set.
+     */
+    public void setDefaultPage(String defaultPage)
+    {
+        this.defaultPage = defaultPage;
     }
 }

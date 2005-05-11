@@ -61,20 +61,18 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         this.response = response;
         this.request = request;
         this.context = context;
+
+        //Session Context
         setSessionContext(new HttpSessionContext(request.getSession()));
 
+        //Request path
         String requestPath = request.getPathInfo();
-        if (StringUtils.isEmpty(requestPath) || requestPath.equals("/"))
-        {
-            requestPath = "Index.jelly";
-        }
-        else if (requestPath.charAt(0) == '/')
-        {
-            requestPath = requestPath.substring(1);
-        }
-        setRequestPath(requestPath);
+        setRequestPath(requestPath == null ? StringUtils.EMPTY : requestPath);
 
+        //Output
         setOutput(new PrintWriter(response.getOutputStream()));
+
+        //Request value parser
         if (FileUpload.isMultipartContent(request))
         {
             setRequestParameters(new MultipartServletRequestValueParser(
@@ -84,8 +82,11 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         {
             setRequestParameters(new ServletRequestValueParser(request));
         }
+
+        //Service manager
         setServiceManager(services);
 
+        //Application base url
         StringBuffer sb = new StringBuffer(request.getScheme());
         sb.append("://").append(request.getServerName());
         if (request.getServerPort() != 80)
@@ -95,6 +96,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         sb.append(request.getContextPath());
         setApplicationBaseUrl(sb.toString());
 
+        //Page base url
         sb.append(request.getServletPath());
         setPageBaseUrl(sb.toString());
     }
