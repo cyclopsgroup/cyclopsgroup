@@ -29,9 +29,6 @@ import com.cyclopsgroup.waterview.PageRuntime;
  */
 public class ScriptFrameProxy implements Frame
 {
-
-    private ScriptFrame frame;
-
     private String framePath;
 
     /**
@@ -65,17 +62,13 @@ public class ScriptFrameProxy implements Frame
         getFrame(pageRuntime).execute(pageRuntime, context);
     }
 
-    private synchronized Frame getFrame(PageRuntime runtime) throws Exception
+    private ScriptFrame getFrame(PageRuntime runtime) throws Exception
     {
-        if (frame == null)
-        {
-            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                    .lookup(ModuleManager.ROLE);
-            String path = "frame/" + framePath;
-            frame = new ScriptFrame(je.getScript(path), mm.getModule(path));
-        }
-        return frame;
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+                ModuleManager.ROLE);
+        String path = "frame/" + framePath;
+        return new ScriptFrame(je.getScript(path), mm.getModule(path));
     }
 }

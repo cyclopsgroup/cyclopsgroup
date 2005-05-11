@@ -29,8 +29,6 @@ import com.cyclopsgroup.waterview.PageRuntime;
  */
 public class ScriptLayoutProxy implements Layout
 {
-    private ScriptLayout layout;
-
     private String layoutScript;
 
     /**
@@ -43,6 +41,16 @@ public class ScriptLayoutProxy implements Layout
         this.layoutScript = layoutScript;
     }
 
+    private ScriptLayout getLayout(PageRuntime runtime) throws Exception
+    {
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+                ModuleManager.ROLE);
+        String path = "layout/" + layoutScript;
+        return new ScriptLayout(je.getScript(path), mm.getModule(path));
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -52,20 +60,6 @@ public class ScriptLayoutProxy implements Layout
             throws Exception
     {
         getLayout(pageRuntime).execute(pageRuntime, context);
-    }
-
-    private synchronized Layout getLayout(PageRuntime runtime) throws Exception
-    {
-        if (layout == null)
-        {
-            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                    .lookup(ModuleManager.ROLE);
-            String path = "layout/" + layoutScript;
-            layout = new ScriptLayout(je.getScript(path), mm.getModule(path));
-        }
-        return layout;
     }
 
     /**
