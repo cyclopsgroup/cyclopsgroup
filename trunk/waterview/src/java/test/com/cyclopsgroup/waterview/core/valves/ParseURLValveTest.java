@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 import com.cyclopsgroup.waterview.FakePageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.core.valves.ParseURLValve;
 
 /**
  * Test case for ParseURLValve
@@ -43,7 +42,19 @@ public class ParseURLValveTest extends TestCase
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
                 System.out));
         runtime.setRequestPath("/aaa|bbb|ccc|ddd.jelly");
-        ParseURLValve v = new ParseURLValve();
+        ParseURLValve v = new ParseURLValve()
+        {
+            /**
+             * If path is for page
+             *
+             * @param path Page path
+             * @return True if view factory for path is defined
+             */
+            protected boolean isPagePath(String path)
+            {
+                return path.endsWith(".jelly");
+            }
+        };
         v.invoke(runtime, new PipelineContext()
         {
 
@@ -54,7 +65,7 @@ public class ParseURLValveTest extends TestCase
         });
         assertEquals("ddd.jelly", runtime.getPage());
         assertEquals(3, runtime.getActions().size());
-        assertEquals("/aaa", runtime.getActions().get(0));
+        assertEquals("aaa", runtime.getActions().get(0));
         assertEquals("bbb", runtime.getActions().get(1));
         assertEquals("ccc", runtime.getActions().get(2));
     }
