@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.valves;
+package com.cyclopsgroup.waterview.core.valves;
 
 import java.io.PrintWriter;
 
@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 import com.cyclopsgroup.waterview.FakePageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
+import com.cyclopsgroup.waterview.core.valves.ParseURLValve;
 
 /**
  * Test case for ParseURLValve

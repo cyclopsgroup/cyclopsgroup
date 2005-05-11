@@ -36,7 +36,7 @@ import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.utils.Path;
+import com.cyclopsgroup.waterview.Path;
 
 /**
  * Default implementation of module manager

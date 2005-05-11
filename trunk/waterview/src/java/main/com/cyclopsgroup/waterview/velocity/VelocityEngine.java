@@ -31,8 +31,8 @@ import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.utils.Path;
 
 /**
  * Velocity engine object

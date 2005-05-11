@@ -30,10 +30,10 @@
             <configuration>
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve"/>
-                    <valve role="com.cyclopsgroup.waterview.valves.ParseURLValve"/>
+                    <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve"/>
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
-                    <valve role="com.cyclopsgroup.waterview.valves.ResolveActionsValve"/>
-                    <valve role="com.cyclopsgroup.waterview.valves.RenderPageValve"/>
+                    <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve"/>
+                    <valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve"/>
                 </valves>
             </configuration>
         </component>
@@ -43,8 +43,8 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.valves.ParseURLValve</role>
-            <implementation>com.cyclopsgroup.waterview.valves.ParseURLValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.valves.ParseURLValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
@@ -53,8 +53,8 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.valves.ResolveActionsValve</role>
-            <implementation>com.cyclopsgroup.waterview.valves.ResolveActionsValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <resolvers>
@@ -66,8 +66,8 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.valves.RenderPageValve</role>
-            <implementation>com.cyclopsgroup.waterview.valves.RenderPageValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.valves.RenderPageValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.RenderPageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <view-factories>

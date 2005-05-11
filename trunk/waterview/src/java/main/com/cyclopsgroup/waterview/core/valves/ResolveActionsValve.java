@@ -14,8 +14,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.valves;
+package com.cyclopsgroup.waterview.core.valves;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -23,25 +30,27 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.Valve;
 
 /**
- * Valve to prepare information contained by URL
+ * Valve to run modules
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValve extends AbstractLogEnabled implements Valve,
-        Configurable, Serviceable
+public class ResolveActionsValve extends AbstractLogEnabled implements Valve,
+        Serviceable, Configurable, Initializable
 {
-    private RenderPageValve renderPageValve;
 
-    private String separator = "|";
+    private Map actionResolverRoles = ListOrderedMap.decorate(new HashMap());
+
+    private Map actionResolvers = ListOrderedMap.decorate(new Hashtable());
+
+    private ServiceManager serviceManager;
 
     /**
      * Override or implement method of parent class or interface
@@ -50,21 +59,32 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        String sep = conf.getChild("separator").getValue(null);
-        if (sep != null)
+        Configuration[] confs = conf.getChild("resolvers").getChildren(
+                "resolver");
+        for (int i = 0; i < confs.length; i++)
         {
-            setSeparator(sep);
+            Configuration c = confs[i];
+            String pattern = c.getAttribute("pattern");
+            String role = c.getAttribute("role");
+            actionResolverRoles.put(pattern, role);
         }
     }
 
     /**
-     * Getter method for separator
+     * Override or implement method of parent class or interface
      *
-     * @return Returns the separator.
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public String getSeparator()
+    public void initialize() throws Exception
     {
-        return separator;
+        for (Iterator i = actionResolverRoles.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            String role = (String) actionResolverRoles.get(pattern);
+            ActionResolver resolver = (ActionResolver) serviceManager
+                    .lookup(role);
+            registerActionResolver(pattern, resolver);
+        }
     }
 
     /**
@@ -75,57 +95,33 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
-        Context ctx = runtime.getPageContext();
-        ctx.put(PageRuntime.CONTEXT_RUNTIME_NAME, runtime);
-        ctx.put(PageRuntime.CONTEXT_PAGE_CONTEXT_NAME, ctx);
-        RequestValueParser params = runtime.getRequestParameters();
-        ctx.put(PageRuntime.CONTEXT_PARAMS_NAME, params);
-        ctx.put(PageRuntime.CONTEXT_APPLICATION_BASE_NAME, runtime
-                .getApplicationBaseUrl());
-        ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
-        String requestPath = runtime.getRequestPath();
-        if (requestPath.startsWith("/"))
+        for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
-            requestPath = requestPath.substring(1);
-        }
-        String[] parts = null;
-        if (requestPath.indexOf(getSeparator()) == -1)
-        {
-            parts = new String[] { requestPath };
-        }
-        else
-        {
-            parts = StringUtils.split(requestPath, getSeparator());
-        }
-        String pagePath = null;
-        for (int i = 0; i < parts.length; i++)
-        {
-            String part = parts[i];
-            if (isPagePath(part))
+            String actionName = (String) i.next();
+            for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
             {
-                pagePath = part;
+                String pattern = (String) j.next();
+                if (Pattern.matches('^' + pattern + '$', actionName))
+                {
+                    ActionResolver resolver = (ActionResolver) actionResolvers
+                            .get(pattern);
+                    resolver.resolveAction(actionName, runtime);
+                    break;
+                }
             }
-            else
-            {
-                runtime.getActions().add(part);
-            }
-        }
-        if (StringUtils.isNotEmpty(pagePath))
-        {
-            runtime.setPage(pagePath);
         }
         context.invokeNextValve(runtime);
     }
 
     /**
-     * If path is for page
+     * Register an action resolver
      *
-     * @param path Page path
-     * @return True if view factory for path is defined
+     * @param pattern Action pattern
+     * @param resolver Resolver object
      */
-    protected boolean isPagePath(String path)
+    public void registerActionResolver(String pattern, ActionResolver resolver)
     {
-        return renderPageValve.isPage(path);
+        actionResolvers.put(pattern, resolver);
     }
 
     /**
@@ -135,17 +131,6 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        renderPageValve = (RenderPageValve) serviceManager
-                .lookup(RenderPageValve.ROLE);
-    }
-
-    /**
-     * Setter method for separator
-     *
-     * @param separator The separator to set.
-     */
-    public void setSeparator(String separator)
-    {
-        this.separator = separator;
+        this.serviceManager = serviceManager;
     }
 }

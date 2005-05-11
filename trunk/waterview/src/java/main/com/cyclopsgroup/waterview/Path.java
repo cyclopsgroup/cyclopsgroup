@@ -1,4 +1,4 @@
-package com.cyclopsgroup.waterview.utils;
+package com.cyclopsgroup.waterview;
 
 import java.util.Hashtable;
 

@@ -14,18 +14,18 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.utils;
+package com.cyclopsgroup.waterview;
 
 import junit.framework.TestCase;
 
-import com.cyclopsgroup.waterview.utils.Path;
+import com.cyclopsgroup.waterview.Path;
 
 /**
  * Test case for container
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PageRequestTest extends TestCase
+public class PathTest extends TestCase
 {
     /**
      * Test parsePageRequest() method
