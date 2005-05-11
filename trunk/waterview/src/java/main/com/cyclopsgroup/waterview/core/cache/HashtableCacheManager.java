@@ -14,40 +14,30 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core;
+package com.cyclopsgroup.waterview.core.cache;
 
-import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.View;
+import java.util.Hashtable;
+import java.util.Map;
+
+import com.cyclopsgroup.waterview.CacheManager;
 
 /**
- * Simple static view implementation
+ * Hashtable implemented cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class StaticView extends BaseModule implements View
+public class HashtableCacheManager extends AbstractMapCacheManager implements
+        CacheManager
 {
-    private String content;
-
-    /**
-     * Constructor for class StaticView
-     *
-     * @param content String content
-     */
-    public StaticView(String content)
-    {
-        this.content = content;
-    }
+    private Hashtable content = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.core.cache.AbstractMapCacheManager#getContent()
      */
-    public void render(PageRuntime runtime, Context viewContext)
-            throws Exception
+    protected Map getContent()
     {
-        runtime.getOutput().print(content);
+        return content;
     }
 }

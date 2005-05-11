@@ -16,26 +16,26 @@
  */
 package com.cyclopsgroup.waterview.jelly.valves;
 
-import java.util.Hashtable;
-import java.util.Map;
-
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.CacheManager;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.Valve;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.utils.MapUtils;
 
 /**
  * Valve to find page object
@@ -43,14 +43,34 @@ import com.cyclopsgroup.waterview.utils.MapUtils;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DeterminePageValve extends AbstractLogEnabled implements
-        Configurable, Valve
+        Configurable, Valve, Serviceable
 {
+
+    /**
+     * Getter method for cacheManager
+     *
+     * @return Returns the cacheManager.
+     */
+    public CacheManager getCacheManager()
+    {
+        return cacheManager;
+    }
+
+    /**
+     * Setter method for cacheManager
+     *
+     * @param cacheManager The cacheManager to set.
+     */
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        this.cacheManager = cacheManager;
+    }
 
     private static final Page EMPTY_PAGE = new Page();
 
     private String defaultPage = "index.jelly";
 
-    private Map pageCache = new Hashtable();
+    private CacheManager cacheManager;
 
     /**
      * Override or implement method of parent class or interface
@@ -59,9 +79,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        int cacheSize = conf.getChild("page-cache").getValueAsInteger(-1);
-        pageCache = MapUtils.createCache(cacheSize);
-
         String page = conf.getChild("default-page").getValue(null);
         if (page != null)
         {
@@ -84,7 +101,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
      */
-    public synchronized void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
         Page page = (Page) runtime.getPageContext().get(Page.NAME);
@@ -99,58 +116,58 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             runtime.setPage(getDefaultPage());
             pagePath = getDefaultPage();
         }
-        page = (Page) pageCache.get(pagePath);
-        if (page != null)
+        synchronized (this)
         {
-            runtime.getPageContext().put(Page.NAME, page);
-            context.invokeNextValve(runtime);
-            return;
-        }
-        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
-                ModuleManager.ROLE);
-        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        ModuleChain moduleChain = new ModuleChain();
-        String fullPath = "page/" + pagePath;
-        moduleChain.addModule(mm.getModule(fullPath));
-        String[] pkgs = mm.getPackageNames();
+            page = (Page) getCacheManager().get(this, pagePath);
+            if (page == null)
+            {
+                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                        .lookup(ModuleManager.ROLE);
+                JellyEngine je = (JellyEngine) runtime.getServiceManager()
+                        .lookup(JellyEngine.ROLE);
+                ModuleChain moduleChain = new ModuleChain();
+                String fullPath = "page/" + pagePath;
+                moduleChain.addModule(mm.getModule(fullPath));
+                String[] pkgs = mm.getPackageNames();
 
-        for (int i = 0; i < pkgs.length; i++)
-        {
-            String pkg = pkgs[i];
-            Script pageScript = je.getScript(fullPath, pkg, null);
-            if (pageScript != null)
-            {
-                page = loadPage(pageScript, je);
-                break;
-            }
-            String[] parts = StringUtils.split(pagePath, '/');
-            for (int j = parts.length - 1; j >= 0; j--)
-            {
-                parts[j] = "Default";
-                String[] newParts = new String[j + 1];
-                System.arraycopy(parts, 0, newParts, 0, j + 1);
-                String defaultPath = StringUtils.join(newParts, '/');
-                fullPath = "page/" + defaultPath;
-                pageScript = je.getScript(fullPath, pkg, null);
-                if (pageScript != null)
+                for (int i = 0; i < pkgs.length; i++)
                 {
-                    page = loadPage(pageScript, je);
-                    moduleChain.addModule(mm.getModule(fullPath, pkg));
-                    break;
+                    String pkg = pkgs[i];
+                    Script pageScript = je.getScript(fullPath, pkg, null);
+                    if (pageScript != null)
+                    {
+                        page = loadPage(pageScript, je);
+                        break;
+                    }
+                    String[] parts = StringUtils.split(pagePath, '/');
+                    for (int j = parts.length - 1; j >= 0; j--)
+                    {
+                        parts[j] = "Default";
+                        String[] newParts = new String[j + 1];
+                        System.arraycopy(parts, 0, newParts, 0, j + 1);
+                        String defaultPath = StringUtils.join(newParts, '/');
+                        fullPath = "page/" + defaultPath;
+                        pageScript = je.getScript(fullPath, pkg, null);
+                        if (pageScript != null)
+                        {
+                            page = loadPage(pageScript, je);
+                            moduleChain.addModule(mm.getModule(fullPath, pkg));
+                            break;
+                        }
+                    }
+                    if (page != null)
+                    {
+                        break;
+                    }
                 }
-            }
-            if (page != null)
-            {
-                break;
+                if (page == null)
+                {
+                    page = EMPTY_PAGE;
+                }
+                page.setModule(moduleChain);
+                getCacheManager().put(this, pagePath, page);
             }
         }
-        if (page == null)
-        {
-            page = EMPTY_PAGE;
-        }
-        page.setModule(moduleChain);
-        pageCache.put(pagePath, page);
         runtime.getPageContext().put(Page.NAME, page);
         context.invokeNextValve(runtime);
     }
@@ -171,5 +188,17 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     public void setDefaultPage(String defaultPage)
     {
         this.defaultPage = defaultPage;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        CacheManager cm = (CacheManager) serviceManager
+                .lookup(CacheManager.ROLE);
+        setCacheManager(cm);
     }
 }

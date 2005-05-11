@@ -19,21 +19,23 @@ package com.cyclopsgroup.waterview.core;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.CacheManager;
 import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.utils.MapUtils;
 import com.cyclopsgroup.waterview.utils.Path;
 
 /**
@@ -42,8 +44,11 @@ import com.cyclopsgroup.waterview.utils.Path;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultModuleManager extends AbstractLogEnabled implements
-        Configurable, ModuleManager
+        Configurable, ModuleManager, Serviceable
 {
+
+    private CacheManager cacheManager;
+
     private String defaultFrameId = "waterview.DefaultDisplayFrame";
 
     private String defaultLayoutId = "waterview.DefaultLayout";
@@ -51,8 +56,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private Hashtable frames = new Hashtable();
 
     private Hashtable layouts = new Hashtable();
-
-    private Map moduleCache = new Hashtable();
 
     private String[] packageArray = ArrayUtils.EMPTY_STRING_ARRAY;
 
@@ -97,9 +100,16 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         {
             setDefaultFrameId(frameId);
         }
-        int moduleCacheSize = conf.getChild("module-cache").getValueAsInteger(
-                -1);
-        moduleCache = MapUtils.createCache(moduleCacheSize);
+    }
+
+    /**
+     * Getter method for cacheManager
+     *
+     * @return Returns the cacheManager.
+     */
+    public CacheManager getCacheManager()
+    {
+        return cacheManager;
     }
 
     /**
@@ -191,9 +201,9 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      */
     public synchronized Module getModule(String modulePath)
     {
-        if (moduleCache.containsKey(modulePath))
+        if (getCacheManager().contains(this, modulePath))
         {
-            return (Module) moduleCache.get(modulePath);
+            return (Module) getCacheManager().get(this, modulePath);
         }
         Module ret = Module.EMPTY_MODULE;
         String[] packages = getPackageNames();
@@ -207,7 +217,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
                 break;
             }
         }
-        moduleCache.put(modulePath, ret);
+        getCacheManager().put(this, modulePath, ret);
         return ret;
     }
 
@@ -263,6 +273,28 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void registerLayout(String layoutId, Layout layout)
     {
         layouts.put(layoutId, layout);
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        CacheManager cm = (CacheManager) serviceManager
+                .lookup(CacheManager.ROLE);
+        setCacheManager(cm);
+    }
+
+    /**
+     * Setter method for cacheManager
+     *
+     * @param cacheManager The cacheManager to set.
+     */
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        this.cacheManager = cacheManager;
     }
 
     /**

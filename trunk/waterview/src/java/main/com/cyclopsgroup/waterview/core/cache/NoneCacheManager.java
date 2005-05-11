@@ -14,51 +14,46 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
+package com.cyclopsgroup.waterview.core.cache;
 
-import org.apache.avalon.framework.service.ServiceManager;
-
-import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.core.StaticView;
-import com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag;
+import com.cyclopsgroup.waterview.CacheManager;
 
 /**
- * View to directly show html
+ * Always load new cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HtmlViewTag extends AbstractViewTag
+public class NoneCacheManager implements CacheManager
 {
-
-    private boolean escape = false;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.CacheManager#contains(java.lang.Object, java.lang.String)
      */
-    protected View doCreateView(ServiceManager serviceManager) throws Exception
+    public boolean contains(Object host, String key)
     {
-        return new StaticView(getBodyText(isEscape()));
+        return false;
     }
 
     /**
-     * Getter method for excape
+     * Override or implement method of parent class or interface
      *
-     * @return Returns the excape.
+     * @see com.cyclopsgroup.waterview.CacheManager#get(java.lang.Object, java.lang.String)
      */
-    public boolean isEscape()
+    public Object get(Object host, String key)
     {
-        return escape;
+        return null;
     }
 
     /**
-     * Setter method for excape
+     * Override or implement method of parent class or interface
      *
-     * @param excape The excape to set.
+     * @see com.cyclopsgroup.waterview.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
-    public void setEscape(boolean excape)
+    public void put(Object host, String key, Object value)
     {
-        this.escape = excape;
+        //do nothing
     }
+
 }

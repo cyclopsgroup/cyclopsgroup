@@ -40,6 +40,7 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
 import com.cyclopsgroup.waterview.ActionResolver;
+import com.cyclopsgroup.waterview.CacheManager;
 import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
@@ -56,14 +57,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         Contextualizable, Serviceable, DynaViewFactory, ActionResolver
 {
 
-    /** Class name of definition tag package */
-    private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
-
-    /** Definition taglib url */
-    public static final String DEFINITION_TAGLIB_URL = "http://waterview.cyclopsgroup.com/definition";
-
-    /** Stupid dummy script */
-    public static final Script DUMMY_SCRIPT = new Script()
+    private static class DummyScript implements Script
     {
         /**
          * Override or implement method of parent class or interface
@@ -85,13 +79,24 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         {
             //doing nothing
         }
-    };
+    }
+
+    /** Class name of definition tag package */
+    private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
+
+    /** Definition taglib url */
+    public static final String DEFINITION_TAGLIB_URL = "http://waterview.cyclopsgroup.com/definition";
+
+    /** Stupid dummy script */
+    public static final Script DUMMY_SCRIPT = new DummyScript();
 
     /** Name constant of jelly context */
     public static final String JELLY_CONTEXT = JellyContext.class.getName();
 
     /** Name constant of jelly output */
     public static final String JELLY_OUTPUT = XMLOutput.class.getName();
+
+    private static final Script NONE_SCRIPT = new DummyScript();
 
     /** Rendering for switch */
     public static final String RENDERING = "rendering";
@@ -101,6 +106,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /** Name of service manager */
     public static final String SERVICE_MANAGER = ServiceManager.class.getName();
+
+    private CacheManager cacheManager;
 
     private JellyContext globalContext;
 
@@ -145,6 +152,16 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
         return new ScriptView(script, mm.getModule(path));
+    }
+
+    /**
+     * Getter method for cacheManager
+     *
+     * @return Returns the cacheManager.
+     */
+    public CacheManager getCacheManager()
+    {
+        return cacheManager;
     }
 
     /**
@@ -232,23 +249,47 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public Script getScript(String scriptPath, String packageName,
             Script defaultScript) throws JellyException
     {
-        if (!scriptPath.endsWith(".jelly"))
-        {
-            Path pr = Path.parse(scriptPath);
-            scriptPath = pr.getParentPath() + pr.getShortName() + ".jelly";
-        }
-        String fullPath = scriptPath;
+        String scriptKey = scriptPath;
         if (StringUtils.isNotEmpty(packageName))
         {
-            fullPath = packageName.replace('.', '/') + '/' + scriptPath;
+            scriptKey = packageName + '/' + scriptPath;
         }
-        URL resource = getClass().getClassLoader().getResource(fullPath);
-        if (resource == null)
+        Script script = null;
+        synchronized (this)
         {
-            return defaultScript;
+            if (getCacheManager().contains(this, scriptKey))
+            {
+                script = (Script) getCacheManager().get(this, scriptKey);
+            }
+            else
+            {
+                if (!scriptPath.endsWith(".jelly"))
+                {
+                    Path pr = Path.parse(scriptPath);
+                    scriptPath = pr.getParentPath() + pr.getShortName()
+                            + ".jelly";
+                }
+                String fullPath = scriptPath;
+                if (StringUtils.isNotEmpty(packageName))
+                {
+                    fullPath = packageName.replace('.', '/') + '/' + scriptPath;
+                }
+                URL resource = getClass().getClassLoader()
+                        .getResource(fullPath);
+
+                if (resource == null)
+                {
+                    script = NONE_SCRIPT;
+                }
+                else
+                {
+                    JellyContext jc = new JellyContext(getGlobalContext());
+                    script = jc.compileScript(resource);
+                }
+                getCacheManager().put(this, scriptKey, script);
+            }
         }
-        JellyContext jc = new JellyContext(getGlobalContext());
-        return jc.compileScript(resource);
+        return script == NONE_SCRIPT ? defaultScript : script;
     }
 
     /**
@@ -340,5 +381,18 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         this.serviceManager = serviceManager;
+        CacheManager cm = (CacheManager) serviceManager
+                .lookup(CacheManager.ROLE);
+        setCacheManager(cm);
+    }
+
+    /**
+     * Setter method for cacheManager
+     *
+     * @param cacheManager The cacheManager to set.
+     */
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        this.cacheManager = cacheManager;
     }
 }

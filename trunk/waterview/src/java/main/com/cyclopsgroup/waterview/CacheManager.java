@@ -14,26 +14,42 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
-
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+package com.cyclopsgroup.waterview;
 
 /**
- * Core tag package
+ * Interface to handle all cache
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class CoreTagPackage extends TagPackage
+public interface CacheManager
 {
+    /** Role name of CacheManager */
+    String ROLE = CacheManager.class.getName();
+
     /**
-     * Constructor for class CoreTagPackage
+     * Check if an object exists in the cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @return True if it exist
      */
-    public CoreTagPackage()
-    {
-        addTag("LocalizedText", LocalizedTextTag.class);
-        addTag("LocalizedParagraph", LocalizedParagraphTag.class);
-        addTag("GetComponent", GetComponentTag.class);
-        addTag("t", LocalizedTextTag.class);
-        addTag("p", LocalizedParagraphTag.class);
-    }
+    boolean contains(Object host, String key);
+
+    /**
+     * Get object from cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @return Object, null if it doesn't exist
+     */
+    Object get(Object host, String key);
+
+    /**
+     * Put object into cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @param value Object value
+     */
+    void put(Object host, String key, Object value);
 }

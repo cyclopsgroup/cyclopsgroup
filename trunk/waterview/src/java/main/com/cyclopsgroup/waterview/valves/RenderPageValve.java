@@ -32,6 +32,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.waterview.CacheManager;
 import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Page;
@@ -39,7 +40,6 @@ import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.Valve;
 import com.cyclopsgroup.waterview.View;
-import com.cyclopsgroup.waterview.utils.MapUtils;
 
 /**
  * Valve to render page
@@ -68,12 +68,12 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                 throws Exception
         {
             String key = proxy.hashCode() + '/' + viewPath;
-            if (viewCache.containsKey(key))
+            if (getCacheManager().contains(this, key))
             {
-                return (View) viewCache.get(key);
+                return (View) getCacheManager().get(this, key);
             }
             View view = proxy.createView(viewPath, runtime);
-            viewCache.put(key, view);
+            getCacheManager().put(this, key, view);
             return view;
         }
     }
@@ -81,9 +81,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     /** Role name of this valve*/
     public static final String ROLE = RenderPageValve.class.getName();
 
-    private ServiceManager serviceManager;
+    private CacheManager cacheManager;
 
-    private Map viewCache = new Hashtable();
+    private ServiceManager serviceManager;
 
     private Map viewFactories = ListOrderedMap.decorate(new Hashtable());
 
@@ -106,9 +106,16 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
             String role = c.getAttribute("role");
             viewFactoryRoles.put(pattern, role);
         }
+    }
 
-        int viewCacheSize = conf.getChild("view-cache").getValueAsInteger(-1);
-        viewCache = MapUtils.createCache(viewCacheSize);
+    /**
+     * Getter method for cacheManager
+     *
+     * @return Returns the cacheManager.
+     */
+    public CacheManager getCacheManager()
+    {
+        return cacheManager;
     }
 
     /**
@@ -203,5 +210,18 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         this.serviceManager = serviceManager;
+        CacheManager cm = (CacheManager) serviceManager
+                .lookup(CacheManager.ROLE);
+        setCacheManager(cm);
+    }
+
+    /**
+     * Setter method for cacheManager
+     *
+     * @param cacheManager The cacheManager to set.
+     */
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        this.cacheManager = cacheManager;
     }
 }
