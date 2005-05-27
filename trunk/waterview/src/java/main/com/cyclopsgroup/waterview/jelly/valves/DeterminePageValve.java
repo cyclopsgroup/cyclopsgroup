@@ -68,7 +68,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
 
     private static final Page EMPTY_PAGE = new Page();
 
-    private String defaultPage = "index.jelly";
+    private String defaultPage = "Index.jelly";
 
     private CacheManager cacheManager;
 
