@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by jiaqi (Ru-Board) -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-    <extend>${maven.repo.local}/cyclib/poms/cyclopsgroup.pom</extend>
+    <extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
     <pomVersion>3</pomVersion>
     <id>tornado</id>
     <name>tornado</name>
@@ -168,8 +168,8 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>servlet</groupId>
-            <artifactId>servlet</artifactId>
+            <groupId>servletapi</groupId>
+            <artifactId>servletapi</artifactId>
             <version>2.3</version>
         </dependency>
         <dependency>
@@ -205,11 +205,13 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+		<!--
         <dependency>
             <groupId>jmx</groupId>
             <artifactId>jmxri</artifactId>
             <version>1.2.1</version>
         </dependency>
+		-->
         <dependency>
             <groupId>plexus</groupId>
             <artifactId>plexus-avalon-personality</artifactId>
