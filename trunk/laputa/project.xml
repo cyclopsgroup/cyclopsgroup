@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by jiaqi (Ru-Board) -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-    <extend>${maven.repo.local}/cyclib/poms/cyclopsgroup.pom</extend>
+    <extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
     <pomVersion>3</pomVersion>
     <id>laputa</id>
     <name>laputa</name>
@@ -130,7 +130,7 @@
         </dependency>
         <dependency>
             <id>hibernate</id>
-            <version>3.0rc1</version>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <id>jta</id>
@@ -171,7 +171,7 @@
             </properties>
         </dependency>
         <dependency>
-            <id>servlet</id>
+            <id>servletapi</id>
             <version>2.3</version>
             <url>http://java.sun.com/j2ee</url>
         </dependency>
