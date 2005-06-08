@@ -14,17 +14,18 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado;
+package com.cyclopsgroup.tornado.security;
 
 /**
- * Tornado core component
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Basic interface of all other entities
  */
-public interface Tornado
+interface SecurityEntity
 {
-    /**
-     * Comment for <code>ROLE</code>
-     */
-    String ROLE = Tornado.class.getName();
+    long getId();
+    
+    String getName();
+    
+    String getDescription();
 }
