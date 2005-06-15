@@ -64,6 +64,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 
         //Session Context
         setSessionContext(new HttpSessionContext(request.getSession()));
+        setSessionId(request.getSession().getId());
 
         //Request path
         String requestPath = request.getPathInfo();
@@ -106,8 +107,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
      */
-    public String getMimeType(String fileName)
-    {
+    public String getMimeType(String fileName) {
         return context.getMimeType(fileName);
     }
 
@@ -116,8 +116,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      *
      * @return Returns the request.
      */
-    public HttpServletRequest getRequest()
-    {
+    public HttpServletRequest getRequest() {
         return request;
     }
 
@@ -126,8 +125,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      *
      * @return Returns the response.
      */
-    public HttpServletResponse getResponse()
-    {
+    public HttpServletResponse getResponse() {
         return response;
     }
 
@@ -136,8 +134,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      * 
      * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType(String contentType)
-    {
+    public void setOutputContentType(String contentType) {
         getResponse().setContentType(contentType);
     }
 }

@@ -51,9 +51,15 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
      */
-    public String getMimeType(String fileName)
-    {
+    public String getMimeType(String fileName) {
         return "text/html";
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionId()
+     */
+    public String getSessionId() {
+        return "";
     }
 
     /**
@@ -61,7 +67,6 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType(String contentType)
-    {
+    public void setOutputContentType(String contentType) {
     }
 }

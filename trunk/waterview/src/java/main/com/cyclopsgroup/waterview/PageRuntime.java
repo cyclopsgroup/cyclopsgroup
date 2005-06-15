@@ -148,6 +148,11 @@ public interface PageRuntime
     Context getSessionContext();
 
     /**
+     * Get unique ID of session
+     */
+    String getSessionId();
+
+    /**
      * Get time zone for current request
      * 
      * @return Time zone
