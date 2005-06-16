@@ -25,7 +25,12 @@ import org.apache.commons.lang.enum.Enum;
  */
 public class ResourceType extends Enum
 {
-    /** File resource type */
+    /**
+	 * Generated serial version ID
+	 */
+	private static final long serialVersionUID = -8545161308309826489L;
+
+	/** File resource type */
     public static final ResourceType FILE = new ResourceType("file");
 
     /** Classpath resource type */

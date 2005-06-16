@@ -24,6 +24,11 @@ package com.cyclopsgroup.waterview.core;
 public class EmptyPipelineException extends Exception
 {
     /**
+	 * Generated serial version id
+	 */
+	private static final long serialVersionUID = 3240402151720254887L;
+
+	/**
      * Constructor for class EmptyPipelineException
      */
     public EmptyPipelineException()

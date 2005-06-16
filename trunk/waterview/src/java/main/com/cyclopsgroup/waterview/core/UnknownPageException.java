@@ -24,6 +24,11 @@ package com.cyclopsgroup.waterview.core;
 public class UnknownPageException extends Exception
 {
     /**
+	 * Generated serial version ID
+	 */
+	private static final long serialVersionUID = -5423368295651233390L;
+
+	/**
      * Constructor for class UnknownPageException
      *
      * @param page Page path
