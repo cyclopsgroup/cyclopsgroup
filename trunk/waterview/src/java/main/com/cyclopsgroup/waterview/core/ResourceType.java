@@ -25,16 +25,16 @@ import org.apache.commons.lang.enum.Enum;
  */
 public class ResourceType extends Enum
 {
-    /**
-	 * Generated serial version ID
-	 */
-	private static final long serialVersionUID = -8545161308309826489L;
-
 	/** File resource type */
     public static final ResourceType FILE = new ResourceType("file");
 
     /** Classpath resource type */
     public static final ResourceType RESOURCE = new ResourceType("resource");
+
+    /**
+     * Generated version id
+     */
+    private static final long serialVersionUID = -8545161308309826489L;
 
     /** URL resource type */
     public static final ResourceType URL = new ResourceType("url");
@@ -45,8 +45,7 @@ public class ResourceType extends Enum
      * @param value Value of enum
      * @return resource type object
      */
-    public static ResourceType valueOf(String value)
-    {
+    public static ResourceType valueOf(String value) {
         return (ResourceType) getEnum(ResourceType.class, value);
     }
 

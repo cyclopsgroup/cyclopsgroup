@@ -28,7 +28,7 @@ import com.cyclopsgroup.waterview.jelly.AbstractTag;
  */
 public class FormTag extends AbstractTag
 {
-    private String action;
+    //private String action;
 
     /**
      * Override or implement method of parent class or interface
@@ -36,8 +36,7 @@ public class FormTag extends AbstractTag
      * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
-    {
+            throws Exception {
         // TODO Auto-generated method stub
 
     }

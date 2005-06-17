@@ -30,7 +30,7 @@ import com.cyclopsgroup.waterview.View;
  */
 public class ScriptPanel extends BaseModule implements Panel
 {
-    private Script script;
+    //private Script script;
 
     /**
      * Constructor for class ScriptPanel
@@ -39,7 +39,7 @@ public class ScriptPanel extends BaseModule implements Panel
      */
     public ScriptPanel(Script script)
     {
-        this.script = script;
+        //this.script = script;
     }
 
     /**
@@ -47,8 +47,7 @@ public class ScriptPanel extends BaseModule implements Panel
      *
      * @see com.cyclopsgroup.waterview.Panel#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.View[])
      */
-    public void render(PageRuntime runtime, View[] views) throws Exception
-    {
+    public void render(PageRuntime runtime, View[] views) throws Exception {
         // TODO Auto-generated method stub
 
     }
