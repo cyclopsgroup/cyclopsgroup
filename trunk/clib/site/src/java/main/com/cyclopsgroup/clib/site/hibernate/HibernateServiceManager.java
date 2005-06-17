@@ -16,39 +16,21 @@
  */
 package com.cyclopsgroup.clib.site.hibernate;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import java.net.URL;
 
-/**
- * Hibernate component
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public interface HibernateFactory
+public interface HibernateServiceManager
 {
-    /** Role name of this component */
-    String ROLE = HibernateFactory.class.getName();
+    /**
+     * Register hibernate entity by serving entity class
+     * 
+     * @param entityClass Entity class
+     */
+    void registerHibernateEntity(Class entityClass);
 
     /**
-     * Close session if there is a session attached to current thread
+     * Register hibernate entity(s) by serving a mapping file resource
      *
-     * @throws Exception Throw it out
+     * @param mappingFile HBM mapping file resource 
      */
-    void closeCurrentSession() throws Exception;
-
-    /**
-     * Get hibernate session attached to current thread
-     *
-     * @return Session object. It's always returned
-     * @throws Exception Throw it out
-     */
-    Session getCurrentSession() throws Exception;
-
-    /**
-     * Get session factory
-     *
-     * @return Hibernate session factory
-     * @throws Exception Throw it out
-     */
-    SessionFactory getSessionFactory() throws Exception;
+    void registerHibernateEntity(URL mappingFile);
 }

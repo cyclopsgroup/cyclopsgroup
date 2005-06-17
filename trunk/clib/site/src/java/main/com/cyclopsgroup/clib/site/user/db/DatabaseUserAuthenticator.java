@@ -47,7 +47,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
 
     private String dataSourceProviderRole;
 
-    private String passwordField;
+    //private String passwordField;
 
     private ServiceManager serviceManager;
 
@@ -61,8 +61,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#authenticate(java.lang.String, java.lang.String)
      */
     public boolean authenticate(String userName, String password)
-            throws Exception
-    {
+            throws Exception {
         // TODO Auto-generated method stub
         return false;
     }
@@ -72,8 +71,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
-    {
+    public void configure(Configuration conf) throws ConfigurationException {
         dataSourceProviderRole = conf.getChild("datasource-provider")
                 .getAttribute("role", DataSourceFactory.ROLE);
         tableName = conf.getChild("tablename").getValue();
@@ -85,8 +83,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      *
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#exsit(java.lang.String)
      */
-    public boolean exsit(String userName) throws Exception
-    {
+    public boolean exsit(String userName) throws Exception {
         String sql = "SELECT " + userNameField + " FROM " + tableName
                 + " WHERE " + userNameField + " = '" + userName + "'";
         Connection dbcon = getDataSource().getConnection();
@@ -114,14 +111,12 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      *
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#fetch(java.lang.String)
      */
-    public User fetch(String userName) throws Exception
-    {
+    public User fetch(String userName) throws Exception {
         // TODO Auto-generated method stub
         return null;
     }
 
-    private DataSource getDataSource()
-    {
+    private DataSource getDataSource() {
         return dataSourceProvider.getDataSource();
     }
 
@@ -130,8 +125,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
-    {
+    public void initialize() throws Exception {
         dataSourceProvider = (DataSourceFactory) serviceManager
                 .lookup(dataSourceProviderRole);
     }
@@ -141,8 +135,7 @@ public class DatabaseUserAuthenticator implements UserAuthenticator,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
-    {
+    public void service(ServiceManager serviceManager) throws ServiceException {
         this.serviceManager = serviceManager;
     }
 }
