@@ -14,14 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.clib.site.hibernate;
+package com.cyclopsgroup.clib.site.hibernate.jelly;
 
-public interface HibernateServiceable
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
+
+import com.cyclopsgroup.clib.lang.xml.ClibTagSupport;
+
+public class ClibHibernateTag extends ClibTagSupport
 {
     /**
-     * Register entity information to a hibernate service manager
-     * 
-     * @param serviceManager Hibernate service manager
+     * Overwrite or implement method doTag()
+     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
-    void serviceHibernate(HibernateServiceManager serviceManager);
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException
+    {
+        invokeBody(output);
+    }
 }

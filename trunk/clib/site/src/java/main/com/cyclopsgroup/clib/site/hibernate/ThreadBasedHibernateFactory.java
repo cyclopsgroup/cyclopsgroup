@@ -26,9 +26,7 @@ import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -42,7 +40,7 @@ import com.cyclopsgroup.clib.site.db.DataSourceFactory;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ThreadBasedHibernateFactory implements HibernateFactory,
-        Disposable, Configurable, Serviceable, HibernateServiceManager
+        Disposable, Configurable
 {
     private String dataSourceRole;
 
@@ -65,7 +63,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      *
      * @see com.cyclopsgroup.clib.site.hibernate.HibernateFactory#closeCurrentSession()
      */
-    public void closeCurrentSession() throws Exception {
+    public void closeCurrentSession() throws Exception
+    {
         Session session = (Session) localSession.get();
         if (session != null)
         {
@@ -87,7 +86,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      */
     public void configure(
             org.apache.avalon.framework.configuration.Configuration conf)
-            throws ConfigurationException {
+            throws ConfigurationException
+    {
         Configuration[] props = conf.getChild("properties").getChildren(
                 "property");
         for (int i = 0; i < props.length; i++)
@@ -106,7 +106,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      *
      * @see org.apache.avalon.framework.activity.Disposable#dispose()
      */
-    public synchronized void dispose() {
+    public synchronized void dispose()
+    {
         if (sessionFactory != null)
         {
             sessionFactory.close();
@@ -119,7 +120,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      *
      * @see com.cyclopsgroup.clib.site.hibernate.HibernateFactory#getCurrentSession()
      */
-    public synchronized Session getCurrentSession() throws Exception {
+    public synchronized Session getCurrentSession() throws Exception
+    {
         Session session = (Session) localSession.get();
         if (session != null && !session.isOpen())
         {
@@ -147,7 +149,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      *
      * @return Hibernate properties
      */
-    public Properties getProperties() {
+    public Properties getProperties()
+    {
         return properties;
     }
 
@@ -157,7 +160,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      * @see com.cyclopsgroup.clib.site.hibernate.HibernateFactory#getSessionFactory()
      */
     public synchronized SessionFactory getSessionFactory()
-            throws HibernateException {
+            throws HibernateException
+    {
         if (sessionFactory == null)
         {
             initSessionFactory();
@@ -170,7 +174,8 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
      *
      * @throws HibernateException Throw it out
      */
-    public void initSessionFactory() throws HibernateException {
+    public void initSessionFactory() throws HibernateException
+    {
         if (sessionFactory != null)
         {
             throw new HibernateException(
@@ -194,22 +199,10 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
     /**
      * Overwrite or implement method registerHibernateEntity()
      * 
-     * @see com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager#registerHibernateEntity(java.lang.Class)
-     */
-    public void registerHibernateEntity(Class persistentEntity) {
-        if (sessionFactory != null)
-        {
-            throw new IllegalStateException("It's too late to register a class");
-        }
-        persistentClasses.add(persistentEntity);
-    }
-
-    /**
-     * Overwrite or implement method registerHibernateEntity()
-     * 
      * @see com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager#registerHibernateEntity(java.net.URL)
      */
-    public void registerHibernateEntity(URL hbmResource) {
+    public void registerHibernateEntity(URL hbmResource)
+    {
         if (sessionFactory != null)
         {
             throw new IllegalStateException(
@@ -219,21 +212,13 @@ public class ThreadBasedHibernateFactory implements HibernateFactory,
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException {
-        this.serviceManager = serviceManager;
-    }
-
-    /**
      * Set hibernate property
      *
      * @param propertyName Name of property
      * @param propertyValue Property value
      */
-    public void setProperty(String propertyName, String propertyValue) {
+    public void setProperty(String propertyName, String propertyValue)
+    {
         properties.setProperty(propertyName, propertyValue);
     }
 }

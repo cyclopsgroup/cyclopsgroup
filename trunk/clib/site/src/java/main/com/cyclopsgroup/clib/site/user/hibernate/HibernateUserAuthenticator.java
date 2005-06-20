@@ -24,8 +24,6 @@ import org.hibernate.Session;
 
 import com.cyclopsgroup.clib.site.avalon.LoadOnStart;
 import com.cyclopsgroup.clib.site.hibernate.HibernateFactory;
-import com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager;
-import com.cyclopsgroup.clib.site.hibernate.HibernateServiceable;
 import com.cyclopsgroup.clib.site.user.User;
 import com.cyclopsgroup.clib.site.user.UserAuthenticator;
 
@@ -35,7 +33,7 @@ import com.cyclopsgroup.clib.site.user.UserAuthenticator;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class HibernateUserAuthenticator implements UserAuthenticator,
-        Serviceable, LoadOnStart, HibernateServiceable
+        Serviceable, LoadOnStart
 {
 
     private HibernateFactory hibernateProvider;
@@ -46,7 +44,8 @@ public class HibernateUserAuthenticator implements UserAuthenticator,
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#authenticate(java.lang.String, java.lang.String)
      */
     public boolean authenticate(String userName, String password)
-            throws Exception {
+            throws Exception
+    {
         UserEntity user = (UserEntity) getCurrentHibernateSession().get(
                 UserEntity.class, userName);
         if (user == null)
@@ -61,7 +60,8 @@ public class HibernateUserAuthenticator implements UserAuthenticator,
      *
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#exsit(java.lang.String)
      */
-    public boolean exsit(String userName) throws Exception {
+    public boolean exsit(String userName) throws Exception
+    {
         UserEntity user = (UserEntity) getCurrentHibernateSession().get(
                 UserEntity.class, userName);
         return user != null;
@@ -72,12 +72,14 @@ public class HibernateUserAuthenticator implements UserAuthenticator,
      *
      * @see com.cyclopsgroup.clib.site.user.UserAuthenticator#fetch(java.lang.String)
      */
-    public User fetch(String userName) throws Exception {
+    public User fetch(String userName) throws Exception
+    {
         return (UserEntity) getCurrentHibernateSession().load(UserEntity.class,
                 userName);
     }
 
-    private Session getCurrentHibernateSession() throws Exception {
+    private Session getCurrentHibernateSession() throws Exception
+    {
         return hibernateProvider.getCurrentSession();
     }
 
@@ -86,16 +88,9 @@ public class HibernateUserAuthenticator implements UserAuthenticator,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException {
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
         hibernateProvider = (HibernateFactory) serviceManager
                 .lookup(HibernateFactory.ROLE);
-    }
-
-    /**
-     * Overwrite or implement method serviceHibernate()
-     * @see com.cyclopsgroup.clib.site.hibernate.HibernateServiceable#serviceHibernate(com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager)
-     */
-    public void serviceHibernate(HibernateServiceManager serviceManager) {
-        serviceManager.registerHibernateEntity(UserEntity.class);
     }
 }
