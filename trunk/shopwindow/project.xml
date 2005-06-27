@@ -12,8 +12,8 @@
 	</organization>
 	<inceptionYear>2003</inceptionYear>
 	<shortDescription>Software makes things simple, not complicated</shortDescription>
-	<url>http://www.cyclopsgroup.com</url>
-	<siteDirectory>/var/www/www.cyclopsgroup.com/htdocs/</siteDirectory>
+	<url>www.cyclopsgroup.com</url>
+	<siteDirectory>/var/www/www.cyclopsgroup.com/htdocs</siteDirectory>
 	<developers>
 		<developer>
 			<name>Guo, Jiaqi</name>

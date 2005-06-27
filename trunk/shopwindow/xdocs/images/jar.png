@@ -1,0 +1,2 @@
+DatabaseDataTarget dataTarget = (DatabaseDataTarget) dataConnector.getDataTarget("dbtarget");
+                        	System.out.println(dataTarget.getSqlQuery("insert", context));
