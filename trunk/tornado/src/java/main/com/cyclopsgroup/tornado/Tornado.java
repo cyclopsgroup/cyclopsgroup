@@ -14,28 +14,9 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado;
 
-import com.cyclopsgroup.clib.lang.Context;
-
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Runtime user model
- */
-public interface RuntimeUser
+public interface Tornado
 {
-    /**
-     * @return User model
-     */
-    User getUser();
-    
-    /**
-     * @return Access control list bind to this user
-     */
-    AccessControlList getACL();
-    
-    Context getPersistentContext();
-    
-    Context getTransientContext();
+    String ROLE = Tornado.class.getName();
 }

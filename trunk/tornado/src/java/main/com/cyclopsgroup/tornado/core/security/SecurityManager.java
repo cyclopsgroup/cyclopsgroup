@@ -14,29 +14,19 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.navigator;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * Node of navigator
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Security manager
  */
-public interface Node
+public interface SecurityManager
 {
-    /** Empty node array */
-    Node[] EMPTY_ARRAY = new Node[0];
-
     /**
-     * Get name of the node
-     *
-     * @return Name of the node
+     * Role of this component
      */
-    String getName();
-
-    /**
-     * Get link
-     *
-     * @return Page path
-     */
-    String getPage();
+    String ROLE = SecurityManager.class.getName();
+    
+    RuntimeUser getRuntimeUser(String sessionId);
 }

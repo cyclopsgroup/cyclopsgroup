@@ -14,20 +14,23 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.components.security.entity;
 
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Group entity
- */
-public interface Group extends SecurityEntity
+public class TornadoUser extends BaseSecurityEntity
 {
-    Group[] EMPTY_ARRAY = new Group[0];
+    private String password;
 
-    Permission[] getAuthorizedPermissions();
+    /**
+     * @return Returns the password.
+     */
+    public String getPassword() {
+        return password;
+    }
 
-    Role[] getAuthorizedRoles();
-
-    Group[] getParentGroups();
+    /**
+     * @param password The password to set.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

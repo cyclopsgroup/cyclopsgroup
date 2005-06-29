@@ -14,18 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.components.security.impl;
+
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+
+import com.cyclopsgroup.tornado.core.security.RuntimeUser;
+import com.cyclopsgroup.tornado.core.security.SecurityManager;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Role model
+ * Default implementation of security manager
  */
-public interface Role extends SecurityEntity
+public class DefaultSecurityManager extends AbstractLogEnabled implements
+        SecurityManager
 {
-    Role[] EMPTY_ARRAY = new Role[0];
+
     /**
-     * @return
+     * Overwrite or implement method getRuntimeUser()
+     * @see com.cyclopsgroup.tornado.core.security.SecurityManager#getRuntimeUser(java.lang.String)
      */
-    Permission[] getPermissions();
+    public RuntimeUser getRuntimeUser(String sessionId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -14,18 +14,20 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.table;
-
-import java.util.Iterator;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Iterator of row
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * 
+ * Access control list interface
  */
-public interface RowIterator extends Iterator {
-    /**
-     * @return Row object
-     */
-    Row nextRow();
+public interface AccessControlList
+{
+    boolean isAuthorized(Asset asset);
+
+    Group[] getGroups();
+
+    Permission[] getPermissions();
+
+    Role[] getRoles();
 }

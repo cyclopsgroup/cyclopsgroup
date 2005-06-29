@@ -14,18 +14,38 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.security;
-
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-
-import com.cyclopsgroup.tornado.security.SecurityManager;
+package com.cyclopsgroup.tornado.core.tree;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Default implementation of security manager
+ * Tree node interface
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultSecurityManager extends AbstractLogEnabled implements SecurityManager
+public interface TreeNode
 {
+    /**
+     * Empty array
+     */
+    TreeNode[] EMPTY_ARRAY = new TreeNode[0];
 
+    /**
+     * Get children nodes
+     *
+     * @return Children nodes
+     */
+    TreeNode[] getChildren();
+
+    /**
+     * Get unique id of this node
+     *
+     * @return Unique id of this node
+     */
+    String getId();
+
+    /**
+     * If this node is expandable or not
+     *
+     * @return True if this node is expandable
+     */
+    boolean isExpandable();
 }

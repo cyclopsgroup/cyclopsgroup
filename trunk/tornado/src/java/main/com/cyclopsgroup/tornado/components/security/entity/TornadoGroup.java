@@ -18,9 +18,9 @@ package com.cyclopsgroup.tornado.components.security.entity;
 
 import java.util.Set;
 
-import com.cyclopsgroup.tornado.security.Group;
-import com.cyclopsgroup.tornado.security.Permission;
-import com.cyclopsgroup.tornado.security.Role;
+import com.cyclopsgroup.tornado.core.security.Group;
+import com.cyclopsgroup.tornado.core.security.Permission;
+import com.cyclopsgroup.tornado.core.security.Role;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -36,7 +36,7 @@ public class TornadoGroup extends BaseSecurityEntity implements Group
     private Set parentGroups;
 
     /**
-     * @see com.cyclopsgroup.tornado.security.Group#getAuthorizedPermissions()
+     * @see com.cyclopsgroup.tornado.core.security.Group#getAuthorizedPermissions()
      */
     public Permission[] getAuthorizedPermissions() {
         return (Permission[]) authorizedPermissions
@@ -44,14 +44,14 @@ public class TornadoGroup extends BaseSecurityEntity implements Group
     }
 
     /**
-     * @see com.cyclopsgroup.tornado.security.Group#getAuthorizedRoles()
+     * @see com.cyclopsgroup.tornado.core.security.Group#getAuthorizedRoles()
      */
     public Role[] getAuthorizedRoles() {
         return (Role[]) authorizedRoles.toArray(Role.EMPTY_ARRAY);
     }
 
     /**
-     * @see com.cyclopsgroup.tornado.security.Group#getParentGroups()
+     * @see com.cyclopsgroup.tornado.core.security.Group#getParentGroups()
      */
     public Group[] getParentGroups() {
         return (Group[]) parentGroups.toArray(Group.EMPTY_ARRAY);

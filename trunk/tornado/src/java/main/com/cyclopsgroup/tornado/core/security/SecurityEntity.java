@@ -14,33 +14,18 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.navigator;
-
-import com.cyclopsgroup.tornado.core.tree.DefaultTreeNode;
-import com.cyclopsgroup.tornado.core.tree.Tree;
-import com.cyclopsgroup.tornado.core.tree.TreeNode;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * A tree of node standing for a navigator
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Basic interface of all other entities
  */
-public class Navigator extends DefaultTreeNode implements Tree
+interface SecurityEntity
 {
-    /**
-     * @param name
-     */
-    public Navigator(String name)
-    {
-        super(name);
-    }
-
-    /**
-     * Overwrite or implement method getRootNode()
-     * @see com.cyclopsgroup.tornado.core.tree.Tree#getRootNode()
-     */
-    public TreeNode getRootNode()
-    {
-        return this;
-    }
+    long getId();
+    
+    String getName();
+    
+    String getDescription();
 }

@@ -24,6 +24,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.tornado.Tornado;
 import com.cyclopsgroup.tornado.components.tornado.taglib.TornadoDefinitionTagLibrary;
 
 /**
@@ -31,7 +32,7 @@ import com.cyclopsgroup.tornado.components.tornado.taglib.TornadoDefinitionTagLi
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultTornado extends AbstractLogEnabled implements Initializable
+public class DefaultTornado extends AbstractLogEnabled implements Tornado, Initializable
 {
     /**
      * Override or implement method of parent class or interface

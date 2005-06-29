@@ -41,10 +41,10 @@ public interface NavigatorManager
     /**
      * Get navigator with given name
      *
-     * @param name
+     * @param id
      * @return Navigator object
      */
-    Navigator getNavigator(String name);
+    Navigator getNavigator(String id);
 
     /**
      * Get name of selected navigator
@@ -63,15 +63,14 @@ public interface NavigatorManager
     /**
      * Add navigator object
      *
-     * @param name
      * @param navigator
      */
-    void registerNavigator(String name, Navigator navigator);
+    void registerNavigator(Navigator navigator);
 
     /**
      * Set selected navigator name
      *
      * @param name Name of the navigator
      */
-    void setNavigatorName(String name);
+    void setNavigatorId(String name);
 }

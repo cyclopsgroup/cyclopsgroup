@@ -14,14 +14,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.core.tree;
 
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * TODO Add javadoc
- */
-public interface Asset
+public class DefaultTree implements Tree
 {
+    private String id;
 
+    private TreeNode rootNode;
+
+    /**
+     * @param id
+     * @param node
+     */
+    public DefaultTree(String id, TreeNode node)
+    {
+        this.id = id;
+        rootNode = node;
+    }
+
+    /**
+     * Overwrite or implement method getId()
+     * @see com.cyclopsgroup.tornado.core.tree.Tree#getId()
+     */
+    public String getId()
+    {
+        return id;
+    }
+
+    /**
+     * Overwrite or implement method getRootNode()
+     * @see com.cyclopsgroup.tornado.core.tree.Tree#getRootNode()
+     */
+    public TreeNode getRootNode()
+    {
+        return rootNode;
+    }
 }

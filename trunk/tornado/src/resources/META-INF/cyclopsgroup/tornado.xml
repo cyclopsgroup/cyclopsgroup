@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Tornado>
+<Tornado xmlns="http://tornado.cyclopsgroup.com/definition">
     <Navigator>
         <Root id="tornado.root" mount="/" page="Index.jelly">
             <Folder name="home" page="Index.jelly">

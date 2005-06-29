@@ -14,18 +14,18 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.jelly.deftaglib;
 
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Basic interface of all other entities
- */
-interface SecurityEntity
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.TagSupport;
+import org.apache.commons.jelly.XMLOutput;
+
+public class TornadoTag extends TagSupport
 {
-    long getId();
-    
-    String getName();
-    
-    String getDescription();
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException
+    {
+        invokeBody(output);
+    }
 }

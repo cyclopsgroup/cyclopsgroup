@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:Layout xmlns="http://waterview.cyclopsgroup.com/html" xmlns:w="http://waterview.cyclopsgroup.com/portal">
+	<div id="bodyLayout">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tr id="banner">
+				<td>
+					<img src="${applicationBase}/images/tornado_logo.png"/>
+				</td>
+				<td>
+					<p><h2>Tornado System</h2></p>
+					<p>Bla bla bla junk system</p>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" id="navigator" width="18%">
+					<w:Panel name="navigator">
+	                    <w:JellyView script="LeftNavigatorView.jelly"/>
+	                </w:Panel>
+				</td>
+				<td valign="top" id="content" width="82%">
+					<div width="20%" align="right" div="context">
+						<w:Panel name="context">
+							<w:JellyView script="PageContextView.jelly"/>
+						</w:Panel>
+					</div>
+					<w:Panel name="body">
+	                    <w:SimpleView path="${page}"/>
+	                </w:Panel>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" id="footer">
+				</td>
+			</tr>
+		</table>
+	</div>
+</w:Layout>

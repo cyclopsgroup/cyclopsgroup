@@ -14,14 +14,35 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.core.security;
+
+import com.cyclopsgroup.clib.lang.Context;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Security permission element
+ * Runtime user model
  */
-public interface Permission
+public interface RuntimeUser
 {
-    Permission[] EMPTY_ARRAY = new Permission[0];
+    /**
+     * Get ACL attached to current user
+     * 
+     * @return Access control list bind to this user
+     */
+    AccessControlList getACL();
+    
+    Context getPersistentContext();
+    
+    Context getTransientContext();
+    
+    /**
+     * @return User model
+     */
+    User getUser();
+    
+    /**
+     * @return True if the runtime user is anonymous
+     */
+    boolean isAnonymous();
 }

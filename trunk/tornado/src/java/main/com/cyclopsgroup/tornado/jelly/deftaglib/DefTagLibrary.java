@@ -14,26 +14,17 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.tree;
+package com.cyclopsgroup.tornado.jelly.deftaglib;
 
-/**
- * Tree object
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public interface Tree
+import org.apache.commons.jelly.TagLibrary;
+
+public class DefTagLibrary extends TagLibrary
 {
     /**
-     * Get unique ID of this tree
-     *
-     * @return Unique ID
+     * Constructor of definition tag library
      */
-    String getId();
-
-    /**
-     * Get root node
-     *
-     * @return Tree node
-     */
-    TreeNode getRootNode();
+    public DefTagLibrary()
+    {
+        registerTag("Tornado", TornadoTag.class);
+    }
 }

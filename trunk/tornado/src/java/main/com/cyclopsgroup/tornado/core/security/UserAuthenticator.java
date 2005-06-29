@@ -14,20 +14,34 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- * 
- * Access control list interface
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Component to authenticate user
  */
-public interface AccessControlList
+public interface UserAuthenticator
 {
-    boolean isAuthorized(Asset asset);
+    int RESULT_DISABLED_USER = 3;
 
-    Group[] getGroups();
+    int RESULT_EXCEPTION = -1;
 
-    Permission[] getPermissions();
+    int RESULT_NOT_FOUND = 2;
 
-    Role[] getRoles();
+    int RESULT_SUCCESS = 0;
+
+    int RESULT_WRONG_PASSWORD = 1;
+
+    /**
+     * Role name of this component
+     */
+    String ROLE = UserAuthenticator.class.getName();
+
+    /**
+     * @param userName User name
+     * @param password Password
+     * @return Check result
+     */
+    int checkUser(String userName, String password);
 }

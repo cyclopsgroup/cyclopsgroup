@@ -14,18 +14,20 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.core.table;
+
+import java.io.PrintWriter;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * User model
+ * A row of data in table
  */
-public interface User extends SecurityEntity
-{
-    Group[] getJoinedGroups();
-    
-    Role[] getAuthorizedRoles();
-    
-    Permission[] getAuthorizedPermissions();
+public interface Row {
+    /**
+     * @param fieldName
+     * @param output
+     * @throws Exception
+     */
+    void displayCell(String fieldName, PrintWriter output) throws Exception;
 }

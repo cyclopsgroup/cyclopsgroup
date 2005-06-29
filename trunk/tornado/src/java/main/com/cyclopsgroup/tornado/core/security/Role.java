@@ -14,19 +14,18 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.navigator;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * Container of nodes
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Role model
  */
-public interface Folder extends Node
+public interface Role extends SecurityEntity
 {
+    Role[] EMPTY_ARRAY = new Role[0];
     /**
-     * Get child nodes
-     *
-     * @return Children nodes
+     * @return
      */
-    Node[] getChildren();
+    Permission[] getPermissions();
 }

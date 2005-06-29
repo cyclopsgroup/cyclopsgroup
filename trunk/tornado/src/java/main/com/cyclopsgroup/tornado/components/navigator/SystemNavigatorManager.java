@@ -26,11 +26,11 @@ import org.apache.commons.lang.ArrayUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultNavigatorManager extends AbstractLogEnabled implements
+public class SystemNavigatorManager extends AbstractLogEnabled implements
         NavigatorManager
 {
 
-    private String navigatorName = DEFAULT_NAVIGATOR;
+    private String navigatorId = DEFAULT_NAVIGATOR;
 
     private Hashtable navigators = new Hashtable();
 
@@ -61,7 +61,7 @@ public class DefaultNavigatorManager extends AbstractLogEnabled implements
      */
     public String getNavigatorName()
     {
-        return navigatorName;
+        return navigatorId;
     }
 
     /**
@@ -80,18 +80,18 @@ public class DefaultNavigatorManager extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#registerNavigator(java.lang.String, com.cyclopsgroup.tornado.component.navigator.Navigator)
      */
-    public void registerNavigator(String name, Navigator navigator)
+    public void registerNavigator(Navigator navigator)
     {
-        navigators.put(name, navigator);
+        navigators.put(navigator.getId(), navigator);
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#setNavigatorName(java.lang.String)
+     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#setNavigatorId(java.lang.String)
      */
-    public void setNavigatorName(String name)
+    public void setNavigatorId(String id)
     {
-        navigatorName = name;
+        navigatorId = id;
     }
 }

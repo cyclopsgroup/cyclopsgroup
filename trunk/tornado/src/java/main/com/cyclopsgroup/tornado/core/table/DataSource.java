@@ -14,14 +14,13 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.navigator;
+package com.cyclopsgroup.tornado.core.table;
 
 /**
- * Item provider
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author jiaqi
+ *
+ * Data source for table
  */
-public interface NodeProvider extends Node
-{
-
+public interface DataSource {
+    
 }

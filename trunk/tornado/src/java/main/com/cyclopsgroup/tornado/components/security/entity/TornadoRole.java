@@ -18,8 +18,8 @@ package com.cyclopsgroup.tornado.components.security.entity;
 
 import java.util.Set;
 
-import com.cyclopsgroup.tornado.security.Permission;
-import com.cyclopsgroup.tornado.security.Role;
+import com.cyclopsgroup.tornado.core.security.Permission;
+import com.cyclopsgroup.tornado.core.security.Role;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -31,7 +31,7 @@ public class TornadoRole extends BaseSecurityEntity implements Role
     private Set permissions;
 
     /**
-     * @see com.cyclopsgroup.tornado.security.Role#getPermissions()
+     * @see com.cyclopsgroup.tornado.core.security.Role#getPermissions()
      */
     public Permission[] getPermissions() {
         return (Permission[]) permissions.toArray(Permission.EMPTY_ARRAY);

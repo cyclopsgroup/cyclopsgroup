@@ -14,17 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Security manager
+ * TODO Add javadoc
  */
-public interface SecurityManager
+public interface Asset
 {
-    /**
-     * Role of this component
-     */
-    String ROLE = SecurityManager.class.getName();
+
 }

@@ -14,13 +14,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.table;
+package com.cyclopsgroup.tornado.core.security;
 
 /**
- * @author jiaqi
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Data source for table
+ * Security permission element
  */
-public interface DataSource {
-    
+public interface Permission
+{
+    Permission[] EMPTY_ARRAY = new Permission[0];
 }
