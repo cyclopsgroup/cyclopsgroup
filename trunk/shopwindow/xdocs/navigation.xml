@@ -5,7 +5,10 @@
 		<menu name="Overview">
 			<item name="What is it" href="/index.html"/>
 			<item name="Projects list" href="/projects.html"/>
-			<item name="Members" href="/members.html"/>
+			<item name="Members" href="/members.html" collapse="true">
+				<item name="Xuying Zhao" href="/members/xuying/index.html"/>
+				<item name="Jiaqi Guo" href="/members/jiaqi/index.html"/>
+			</item>
 			<item name="For developer" href="/dev/index.html" collapse="true">
 				<item name="Get involved" href="/dev/involved.html"/>
 				<item name="Howtos" href="/dev/howtos.html"/>
