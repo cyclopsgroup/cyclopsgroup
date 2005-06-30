@@ -2,12 +2,14 @@
 <document>
     <properties>
         <title>About Jiaqi Guo</title>
-        <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
+        <author email="jiaqi.guo@gmail.com">jiaqi guo</author>
     </properties>
     <body>
         <section name="Who is it?">
-            <p>Cyclops Group is a group of talented people trying to make their contribution to the java open source world. Member list is available at <a href="members.html">here</a>.</p>
-            <p>Mailing list is coming soon. Today if you want to share ideas, feel free to send email to <a href="mailto:cyclopsgroup@gmail.com">cyclopsgroup@gmail.com</a>.</p>
+            <p>Cyclops Group is a group of talented people trying to make their
+                contribution to the java open source world.</p>
+            <p>Mailing list is coming soon. Today if you want to share ideas,
+                feel free to send email to <a href="mailto:cyclopsgroup@gmail.com">cyclopsgroup@gmail.com</a>.</p>
         </section>
     </body>
 </document>

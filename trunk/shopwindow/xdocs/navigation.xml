@@ -5,9 +5,15 @@
 		<menu name="Overview">
 			<item name="What is it" href="/index.html"/>
 			<item name="Projects list" href="/projects.html"/>
-			<item name="Members" href="/members.html" collapse="true">
-				<item name="Xuying Zhao" href="/members/xuying/index.html"/>
-				<item name="Jiaqi Guo" href="/members/jiaqi/index.html"/>
+			<item name="Members" href="/members/index.html" collapse="true">
+				<item name="Xuying Zhao" href="/members/xuying/index.html" collapse="true">
+				    <item name="Introduction" href="/members/xuying/index.html"/>
+				    <item name="CV" href="/members/xuying/cv.html"/>
+				</item>
+				<item name="Jiaqi Guo" href="/members/jiaqi/index.html" collapse="true">
+				    <item name="Introduction" href="/members/jiaqi/index.html"/>
+				    <item name="Resume" href="/members/jiaqi/resume.html"/>
+				</item>
 			</item>
 			<item name="For developer" href="/dev/index.html" collapse="true">
 				<item name="Get involved" href="/dev/involved.html"/>
