@@ -8,10 +8,10 @@
         <section name="My Resume">
             <p>
                 <a href="resume.pdf">
-                    <img src="images/pdf_icon.gif" alt="download PDF format resume" border="0" align="right"/>
+                    <img src="../../images/pdf_icon.png" alt="download PDF format resume" align="right"/>
                 </a>
                 <a href="resume.doc">
-                    <img src="images/word_icon.gif" alt="download WORD format resume" border="0" align="right"/>
+                    <img src="../../images/word_icon.png" alt="download WORD format resume" align="right"/>
                 </a>
                 <ol>
                     <li>
