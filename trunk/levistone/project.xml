@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
 	<extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
 	<pomVersion>3</pomVersion>
@@ -9,7 +9,7 @@
 	<organization>
 		<name>Cyclops Group</name>
 		<url>http://www.cyclopsgroup.com</url>
-		<logo>/images/cyclopsgroup_logo.gif</logo>
+		<logo>/images/cyclopsgroup_logo.png</logo>
 	</organization>
 	<inceptionYear>2004</inceptionYear>
 	<package>com.cyclopsgroup.levistone</package>
