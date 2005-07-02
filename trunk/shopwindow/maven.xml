@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-	<!-- Generate cyclopsgroup style website instead of ugly maven default one -->
-	<preGoal name="xdoc:transform">
-		<attainGoal name="cyclops:pre-xdoc"/>
-	</preGoal>
-	<postGoal name="xdoc:transform">
+    <!-- Generate cyclopsgroup style website instead of ugly maven default one -->
+    <preGoal name="xdoc:transform">
+        <attainGoal name="cyclops:pre-xdoc"/>
+    </preGoal>
+    <postGoal name="xdoc:transform">
         <attainGoal name="cyclops:post-xdoc"/>
-	</postGoal>
-	<goal name="deploy-pom" description="Copy cyclopsgroup.pom into local repository">
+    </postGoal>
+    <goal name="deploy-pom" description="Copy cyclopsgroup.pom into local repository">
         <mkdir dir="${maven.repo.local}/clib/poms"/>
         <copy file="${basedir}/xdocs/cyclopsgroup.pom" todir="${maven.repo.local}/clib/poms/"/>
-	</goal>
+    </goal>
 </project>

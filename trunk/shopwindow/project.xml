@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-	<extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
-	<pomVersion>3</pomVersion>
-	<id>shopwindow</id>
-	<name>Cyclops Group</name>
-	<currentVersion>1.0-b2</currentVersion>
-	<organization>
-		<name>Cyclops Group</name>
-		<url>http://www.cyclopsgroup.com</url>
-		<logo>/images/cyclopsgroup_logo.png</logo>
-	</organization>
-	<inceptionYear>2003</inceptionYear>
-	<shortDescription>Software makes things simple, not complicated</shortDescription>
-	<url>www.cyclopsgroup.com</url>
-	<siteDirectory>/var/www/www.cyclopsgroup.com/htdocs</siteDirectory>
-	<developers>
-		<developer>
-			<name>Guo, Jiaqi</name>
-			<id>jiaqi</id>
-			<email>jiaqi.guo@gmail.com</email>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-		<developer>
-			<name>Zhao, Xuying</name>
-			<id>daisy</id>
-			<email>kxz024000@utdallas.edu</email>
-			<organization>U.T. Dallas</organization>
-			<roles>
-				<role>Observer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-	</developers>
-	<build/>
+    <extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
+    <pomVersion>3</pomVersion>
+    <id>shopwindow</id>
+    <name>Cyclops Group</name>
+    <currentVersion>1.0-b2</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.com</url>
+        <logo>/images/cyclopsgroup_logo.png</logo>
+    </organization>
+    <inceptionYear>2003</inceptionYear>
+    <shortDescription>Software makes things simple, not complicated</shortDescription>
+    <url>www.cyclopsgroup.com</url>
+    <siteDirectory>/var/www/www.cyclopsgroup.com/htdocs</siteDirectory>
+    <developers>
+        <developer>
+            <name>Guo, Jiaqi</name>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Zhao, Xuying</name>
+            <id>daisy</id>
+            <email>kxz024000@utdallas.edu</email>
+            <organization>U.T. Dallas</organization>
+            <roles>
+                <role>Observer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+    <build/>
 </project>
