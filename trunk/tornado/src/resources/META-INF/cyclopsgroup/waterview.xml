@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
+        <TagPackage className="com.cyclopsgroup.tornado."/>
+    </TagLibrary>
 </Waterview>

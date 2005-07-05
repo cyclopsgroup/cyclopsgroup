@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.form.taglib;
+package com.cyclopsgroup.tornado.jelly.taglib;
 
 import com.cyclopsgroup.tornado.core.form.Form;
 
