@@ -38,7 +38,7 @@ public class FormTag extends AbstractTag
         requireParent(FormContainer.class);
         String formName = "DynaForm_" + getBody().hashCode();
         FormManager fm = (FormManager) serviceManager.lookup(FormManager.ROLE);
-        FormDefinition fd = fm.getFormDefinition(formName);
+        FormDefinition fd = fm.getNamedFormDefinition(formName);
         if (fd == null)
         {
             fd = new FormDefinition(formName);

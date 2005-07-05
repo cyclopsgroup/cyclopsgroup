@@ -27,6 +27,8 @@ import com.cyclopsgroup.tornado.core.form.FormDefinition;
 
 public class FieldTag extends ClibTagSupport
 {
+    private FieldDefinition field;
+
     private String name;
 
     private boolean required;
@@ -44,9 +46,15 @@ public class FieldTag extends ClibTagSupport
         }
         requireAttribute("name");
         PropertyType propType = PropertyType.valueOf(getType());
-        FieldDefinition field = new FieldDefinition(getName(), propType);
+        field = new FieldDefinition(getName(), propType);
         field.setRequired(isRequired());
         fd.addField(field);
+        invokeBody(output);
+    }
+
+    public FieldDefinition getField()
+    {
+        return field;
     }
 
     /**

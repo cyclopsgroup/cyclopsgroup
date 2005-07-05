@@ -14,17 +14,9 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.form;
+package com.cyclopsgroup.tornado.core.form;
 
-import com.cyclopsgroup.tornado.core.form.Form;
-import com.cyclopsgroup.tornado.core.form.FormDefinition;
-import com.cyclopsgroup.waterview.PageRuntime;
-
-public interface FormManager
+public interface FieldValidator
 {
-    String ROLE = FormManager.class.getName();
-
-    Form getForm(FormDefinition defintion, String formId, PageRuntime runtime);
-
-    FormDefinition getNamedFormDefinition(String formName);
+    FieldValidationResult validate(Field field);
 }

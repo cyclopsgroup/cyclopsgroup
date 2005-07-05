@@ -65,11 +65,16 @@ public class DefaultFormManager implements FormManager
 
     /**
      * Overwrite or implement method getFormDefinition()
-     * @see com.cyclopsgroup.tornado.components.form.FormManager#getFormDefinition(java.lang.String)
+     * @see com.cyclopsgroup.tornado.components.form.FormManager#getNamedFormDefinition(java.lang.String)
      */
-    public FormDefinition getFormDefinition(String formName)
+    public FormDefinition getNamedFormDefinition(String formName)
     {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public void validateForm(Form form)
+    {
+
     }
 }

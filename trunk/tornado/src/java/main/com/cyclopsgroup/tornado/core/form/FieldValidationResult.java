@@ -16,8 +16,7 @@
  */
 package com.cyclopsgroup.tornado.core.form;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 import org.apache.commons.lang.ArrayUtils;
 
@@ -25,7 +24,7 @@ public class FieldValidationResult
 {
     private FieldDefinition definition;
 
-    private List errorMessages = new ArrayList();
+    private HashSet errorMessages = new HashSet();
 
     private boolean failed;
 

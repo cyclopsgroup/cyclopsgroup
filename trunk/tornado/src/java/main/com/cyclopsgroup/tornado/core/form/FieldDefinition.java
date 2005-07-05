@@ -30,6 +30,8 @@ public class FieldDefinition
 
     private PropertyType type;
 
+    private FieldValidator validator;
+
     public FieldDefinition(String name)
     {
         this(name, PropertyType.STRING);
@@ -58,6 +60,14 @@ public class FieldDefinition
     }
 
     /**
+     * @return Returns the validator.
+     */
+    public FieldValidator getValidator()
+    {
+        return validator;
+    }
+
+    /**
      * @return Returns the required.
      */
     public boolean isRequired()
@@ -71,5 +81,13 @@ public class FieldDefinition
     public void setRequired(boolean required)
     {
         this.required = required;
+    }
+
+    /**
+     * @param validator The validator to set.
+     */
+    public void setValidator(FieldValidator validator)
+    {
+        this.validator = validator;
     }
 }
