@@ -118,7 +118,7 @@
         </dependency>
         <dependency>
             <id>commons-jexl</id>
-            <version>1.0-beta-2</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <war.bundle>true</war.bundle>
