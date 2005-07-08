@@ -46,10 +46,7 @@ public final class PropertyUtils
         {
             //do nothing
         }
-        finally
-        {
-            return null;
-        }
+        return null;
     }
 
     public static Object convert(Property prop)
