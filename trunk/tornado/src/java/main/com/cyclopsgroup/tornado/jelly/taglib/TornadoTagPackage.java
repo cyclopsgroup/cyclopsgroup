@@ -14,39 +14,11 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.core.tree;
+package com.cyclopsgroup.tornado.jelly.taglib;
 
+import com.cyclopsgroup.clib.lang.xml.TagPackage;
 
-/**
- * Tree node interface
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public interface TreeNode
+public class TornadoTagPackage extends TagPackage
 {
-    /**
-     * Empty array
-     */
-    TreeNode[] EMPTY_ARRAY = new TreeNode[0];
 
-    /**
-     * Get children nodes
-     *
-     * @return Children nodes
-     */
-    TreeNode[] getChildren();
-
-    /**
-     * Get unique id of this node
-     *
-     * @return Unique id of this node
-     */
-    String getId();
-
-    /**
-     * If this node is expandable or not
-     *
-     * @return True if this node is expandable
-     */
-    boolean isExpandable();
 }

@@ -14,39 +14,22 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.core.tree;
+package com.cyclopsgroup.tornado.jelly.deftaglib;
 
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
 
-/**
- * Tree node interface
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public interface TreeNode
+import com.cyclopsgroup.clib.lang.xml.ClibTagSupport;
+
+public class FolderTag extends ClibTagSupport
 {
-    /**
-     * Empty array
-     */
-    TreeNode[] EMPTY_ARRAY = new TreeNode[0];
 
-    /**
-     * Get children nodes
-     *
-     * @return Children nodes
-     */
-    TreeNode[] getChildren();
+    public void doTag(XMLOutput arg0) throws MissingAttributeException,
+            JellyTagException
+    {
+        // TODO Auto-generated method stub
 
-    /**
-     * Get unique id of this node
-     *
-     * @return Unique id of this node
-     */
-    String getId();
+    }
 
-    /**
-     * If this node is expandable or not
-     *
-     * @return True if this node is expandable
-     */
-    boolean isExpandable();
 }

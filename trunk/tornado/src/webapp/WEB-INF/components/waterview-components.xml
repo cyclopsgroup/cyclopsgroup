@@ -19,7 +19,7 @@
                 <packages>
                     <package>com.cyclopsgroup.waterview.ui</package>
                 </packages>
-                <default-layout>waterview.3ColumnLayout</default-layout>
+                <default-layout>tornado.DefaultLayout</default-layout>
                 <default-frame>waterview.DefaultDisplayFrame</default-frame>
                 <module-cache>0</module-cache>
             </configuration>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tornado xmlns="http://tornado.cyclopsgroup.com/definition">
     <Navigator>
-        <Root id="tornado.root" mount="/" page="Index.jelly">
+        <Root id="tornado.root">
             <Folder name="home" page="Index.jelly">
                 <NodeProvider name="my" class="com.cyclopsgroup.tornado.richweb.MyPortalNavigator"/>
                 <Folder name="user" page="system/user/Index.jelly">

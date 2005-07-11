@@ -22,7 +22,7 @@ import com.cyclopsgroup.tornado.components.navigator.NavigatorManager;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.PageRuntime;
 
-public class DefaultWaterviewLayout implements Module
+public class DefaultTornadoLayout implements Module
 {
     /**
      * Overwrite or implement method execute()
