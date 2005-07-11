@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import org.apache.commons.lang.enum.Enum;
+import org.apache.commons.lang.enums.Enum;
 
 /**
  * Resource type enumeration
@@ -25,7 +25,7 @@ import org.apache.commons.lang.enum.Enum;
  */
 public class ResourceType extends Enum
 {
-	/** File resource type */
+    /** File resource type */
     public static final ResourceType FILE = new ResourceType("file");
 
     /** Classpath resource type */
@@ -45,7 +45,8 @@ public class ResourceType extends Enum
      * @param value Value of enum
      * @return resource type object
      */
-    public static ResourceType valueOf(String value) {
+    public static ResourceType valueOf(String value)
+    {
         return (ResourceType) getEnum(ResourceType.class, value);
     }
 
