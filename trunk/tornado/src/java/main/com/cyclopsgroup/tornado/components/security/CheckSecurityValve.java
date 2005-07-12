@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.tornado.components.security;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -61,7 +63,10 @@ public class CheckSecurityValve implements Valve, Configurable
             AppendablePageRedirector redirector = new AppendablePageRedirector(
                     loginPage);
             //TODO get current requested URL
-            redirector.addQueryData("redirect_to", "");
+            HttpServletRequest request = (HttpServletRequest) runtime
+                    .getPageContext().get("request");
+            String url = request.getRequestURL().toString();
+            redirector.addQueryData("redirect_to", url);
             runtime.setRedirector(redirector);
         }
     }

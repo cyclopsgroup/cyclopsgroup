@@ -16,6 +16,10 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.net.URLEncoder;
+
+import org.apache.commons.lang.StringUtils;
+
 public class AppendablePageRedirector extends PageRedirector
 {
     private String page;
@@ -43,7 +47,21 @@ public class AppendablePageRedirector extends PageRedirector
         {
             queryString.append('&');
         }
-        queryString.append(name).append('=').append(object);
+        String value = StringUtils.EMPTY;
+        if (object != null)
+        {
+            value = object.toString();
+        }
+        try
+        {
+            value = URLEncoder.encode(value, "UTF-8");
+        }
+        catch (Exception e)
+        {
+            //Can not happen
+        }
+
+        queryString.append(name).append('=').append(value);
         return this;
     }
 
