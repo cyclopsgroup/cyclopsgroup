@@ -14,41 +14,19 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.core.security;
+package com.cyclopsgroup.tornado.ui.page;
 
 import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.PageRuntime;
 
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Runtime user model
- */
-public interface RuntimeUser
+public class Index implements Module
 {
-    /**
-     * Get ACL attached to current user
-     * 
-     * @return Access control list bind to this user
-     */
-    AccessControlList getACL();
 
-    /**
-     * @return
-     */
-    Context getPersistentContext();
+    public void execute(PageRuntime pageRuntime, Context context)
+            throws Exception
+    {
+        // TODO Auto-generated method stub
 
-    /**
-     * @return
-     */
-    Context getTransientContext();
-
-    /**
-     * @return User model
-     */
-    User getUser();
-
-    /**
-     * @return True if the runtime user is anonymous
-     */
-    boolean isAnonymous();
+    }
 }

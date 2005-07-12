@@ -22,6 +22,11 @@ public class AppendablePageRedirector extends PageRedirector
 
     private StringBuffer queryString = new StringBuffer();
 
+    public AppendablePageRedirector(String page)
+    {
+        this.page = page;
+    }
+
     public AppendablePageRedirector addQueryData(String name, int number)
     {
         return addQueryData(name, String.valueOf(number));

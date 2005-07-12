@@ -18,13 +18,10 @@ package com.cyclopsgroup.tornado.components.security.impl;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
-import com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager;
-import com.cyclopsgroup.clib.site.hibernate.HibernateServiceable;
-import com.cyclopsgroup.tornado.components.security.entity.TornadoUser;
 import com.cyclopsgroup.tornado.core.security.UserAuthenticator;
 
 public class DefaultUserAuthenticator extends AbstractLogEnabled implements
-        UserAuthenticator, HibernateServiceable
+        UserAuthenticator
 {
     //private HibernateFactory hibernate;
 
@@ -36,14 +33,5 @@ public class DefaultUserAuthenticator extends AbstractLogEnabled implements
     {
         // TODO Auto-generated method stub
         return 0;
-    }
-
-    /**
-     * Overwrite or implement method serviceHibernate()
-     * @see com.cyclopsgroup.clib.site.hibernate.HibernateServiceable#serviceHibernate(com.cyclopsgroup.clib.site.hibernate.HibernateServiceManager)
-     */
-    public void serviceHibernate(HibernateServiceManager serviceManager)
-    {
-        serviceManager.registerHibernateEntity(TornadoUser.class);
     }
 }

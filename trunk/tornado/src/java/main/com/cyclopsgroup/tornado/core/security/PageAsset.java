@@ -16,39 +16,17 @@
  */
 package com.cyclopsgroup.tornado.core.security;
 
-import com.cyclopsgroup.clib.lang.Context;
-
-/**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Runtime user model
- */
-public interface RuntimeUser
+public class PageAsset implements Asset
 {
-    /**
-     * Get ACL attached to current user
-     * 
-     * @return Access control list bind to this user
-     */
-    AccessControlList getACL();
+    private String page;
 
-    /**
-     * @return
-     */
-    Context getPersistentContext();
+    public PageAsset(String page)
+    {
+        this.page = page;
+    }
 
-    /**
-     * @return
-     */
-    Context getTransientContext();
-
-    /**
-     * @return User model
-     */
-    User getUser();
-
-    /**
-     * @return True if the runtime user is anonymous
-     */
-    boolean isAnonymous();
+    String getPage()
+    {
+        return page;
+    }
 }
