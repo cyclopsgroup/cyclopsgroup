@@ -36,6 +36,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.cyclopsgroup.clib.site.db.DataSourceFactory;
+import com.cyclopsgroup.tornado.core.HibernateFactory;
 
 /**
  * Default implementation of session provider
@@ -155,7 +156,7 @@ public class ThreadBasedHibernateFactory extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method getSessionFactory()
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateFactory#getSessionFactory()
+     * @see com.cyclopsgroup.tornado.core.HibernateFactory#getSessionFactory()
      */
     public SessionFactory getSessionFactory() throws Exception
     {
@@ -164,7 +165,7 @@ public class ThreadBasedHibernateFactory extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method hasCurrentSession()
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateFactory#hasCurrentSession()
+     * @see com.cyclopsgroup.tornado.core.HibernateFactory#hasCurrentSession()
      */
     public boolean hasCurrentSession()
     {

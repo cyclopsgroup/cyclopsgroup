@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.hibernate;
+package com.cyclopsgroup.tornado.core;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
