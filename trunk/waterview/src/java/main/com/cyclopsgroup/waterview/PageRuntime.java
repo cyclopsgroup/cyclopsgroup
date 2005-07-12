@@ -119,6 +119,8 @@ public interface PageRuntime
      */
     Context getPageContext();
 
+    Redirector getRedirector();
+
     /**
      * Get parameter parser for request parameters
      * 
@@ -171,7 +173,7 @@ public interface PageRuntime
      * 
      * @param template
      */
-    void setPage(String template);
+    void setPage(String page);
 
     /**
      * Set the page context
@@ -179,4 +181,6 @@ public interface PageRuntime
      * @param context Page context
      */
     void setPageContext(Context context);
+
+    void setRedirector(Redirector redirector);
 }

@@ -49,6 +49,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
 
     private Context pageContext;
 
+    private Redirector redirector;
+
     private RequestValueParser requestParameters;
 
     private String requestPath;
@@ -66,7 +68,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getActions()
      */
-    public List getActions() {
+    public List getActions()
+    {
         return actions;
     }
 
@@ -75,16 +78,20 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getApplicationBaseUrl()
      */
-    public String getApplicationBaseUrl() {
+    public String getApplicationBaseUrl()
+    {
         return applicationBaseUrl;
     }
+
+    //  TODO Auto-generated method stub
 
     /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getInputContentType()
      */
-    public String getInputContentType() {
+    public String getInputContentType()
+    {
         return inputContentType;
     }
 
@@ -93,7 +100,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getLocale()
      */
-    public Locale getLocale() {
+    public Locale getLocale()
+    {
         return locale;
     }
 
@@ -102,7 +110,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getOutput()
      */
-    public PrintWriter getOutput() {
+    public PrintWriter getOutput()
+    {
         return output;
     }
 
@@ -111,7 +120,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getPage()
      */
-    public String getPage() {
+    public String getPage()
+    {
         return page;
     }
 
@@ -120,7 +130,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getPageBaseUrl()
      */
-    public String getPageBaseUrl() {
+    public String getPageBaseUrl()
+    {
         return pageBaseUrl;
     }
 
@@ -129,8 +140,18 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getPageContext()
      */
-    public Context getPageContext() {
+    public Context getPageContext()
+    {
         return pageContext;
+    }
+
+    /**
+     * Overwrite or implement method getRedirector()
+     * @see com.cyclopsgroup.waterview.PageRuntime#getRedirector()
+     */
+    public Redirector getRedirector()
+    {
+        return redirector;
     }
 
     /**
@@ -138,7 +159,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getRequestParameters()
      */
-    public RequestValueParser getRequestParameters() {
+    public RequestValueParser getRequestParameters()
+    {
         return requestParameters;
     }
 
@@ -147,7 +169,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getRequestPath()
      */
-    public String getRequestPath() {
+    public String getRequestPath()
+    {
         return requestPath;
     }
 
@@ -156,7 +179,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getServiceManager()
      */
-    public ServiceManager getServiceManager() {
+    public ServiceManager getServiceManager()
+    {
         return serviceManager;
     }
 
@@ -165,7 +189,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getSessionContext()
      */
-    public Context getSessionContext() {
+    public Context getSessionContext()
+    {
         return sessionContext;
     }
 
@@ -173,7 +198,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      * Overwrite or implement method getSessionId()
      * @see com.cyclopsgroup.waterview.PageRuntime#getSessionId()
      */
-    public String getSessionId() {
+    public String getSessionId()
+    {
         return sessionId;
     }
 
@@ -182,7 +208,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#getTimeZone()
      */
-    public TimeZone getTimeZone() {
+    public TimeZone getTimeZone()
+    {
         return timeZone;
     }
 
@@ -191,7 +218,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param applicationBaseUrl The applicationBaseUrl to set.
      */
-    public void setApplicationBaseUrl(String applicationBaseUrl) {
+    public void setApplicationBaseUrl(String applicationBaseUrl)
+    {
         this.applicationBaseUrl = applicationBaseUrl;
     }
 
@@ -200,7 +228,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param inputContentType The inputContentType to set.
      */
-    public void setInputContentType(String inputContentType) {
+    public void setInputContentType(String inputContentType)
+    {
         this.inputContentType = inputContentType;
     }
 
@@ -209,7 +238,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param locale The locale to set.
      */
-    public void setLocale(Locale locale) {
+    public void setLocale(Locale locale)
+    {
         this.locale = locale;
     }
 
@@ -218,7 +248,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param output The output to set.
      */
-    public void setOutput(PrintWriter output) {
+    public void setOutput(PrintWriter output)
+    {
         this.output = output;
     }
 
@@ -227,7 +258,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#setPage(java.lang.String)
      */
-    public void setPage(String page) {
+    public void setPage(String page)
+    {
         this.page = page;
         if (getPageContext() != null)
         {
@@ -240,7 +272,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param pageBaseUrl The pageBaseUrl to set.
      */
-    public void setPageBaseUrl(String pageBaseUrl) {
+    public void setPageBaseUrl(String pageBaseUrl)
+    {
         this.pageBaseUrl = pageBaseUrl;
     }
 
@@ -249,8 +282,18 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @see com.cyclopsgroup.waterview.PageRuntime#setPageContext(com.cyclopsgroup.clib.lang.Context)
      */
-    public void setPageContext(Context pageContext) {
+    public void setPageContext(Context pageContext)
+    {
         this.pageContext = pageContext;
+    }
+
+    /**
+     * Overwrite or implement method setRedirector()
+     * @see com.cyclopsgroup.waterview.PageRuntime#setRedirector(com.cyclopsgroup.waterview.Redirector)
+     */
+    public void setRedirector(Redirector redirector)
+    {
+        this.redirector = redirector;
     }
 
     /**
@@ -258,7 +301,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param requestParameters The requestParameters to set.
      */
-    public void setRequestParameters(RequestValueParser requestParameters) {
+    public void setRequestParameters(RequestValueParser requestParameters)
+    {
         this.requestParameters = requestParameters;
     }
 
@@ -267,7 +311,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param requestPath The requestPath to set.
      */
-    public void setRequestPath(String requestPath) {
+    public void setRequestPath(String requestPath)
+    {
         this.requestPath = requestPath;
     }
 
@@ -276,7 +321,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param serviceManager The serviceManager to set.
      */
-    public void setServiceManager(ServiceManager serviceManager) {
+    public void setServiceManager(ServiceManager serviceManager)
+    {
         this.serviceManager = serviceManager;
     }
 
@@ -285,7 +331,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param sessionContext The sessionContext to set.
      */
-    public void setSessionContext(Context sessionContext) {
+    public void setSessionContext(Context sessionContext)
+    {
         this.sessionContext = sessionContext;
     }
 
@@ -293,7 +340,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      * Set session ID
      * @param sessionId
      */
-    public void setSessionId(String sessionId) {
+    public void setSessionId(String sessionId)
+    {
         this.sessionId = sessionId;
     }
 
@@ -302,7 +350,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
      *
      * @param timeZone The timeZone to set.
      */
-    public void setTimeZone(TimeZone timeZone) {
+    public void setTimeZone(TimeZone timeZone)
+    {
         this.timeZone = timeZone;
     }
 }
