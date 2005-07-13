@@ -6,102 +6,222 @@
     </properties>
     <body>
         <section name="What is it">
-            <p>The goal of Cyclops Group is making simple software. The Cyclops
-                Group is an open source project foundation focusing on common,
-                abstract, simple and high quality java software that solve real
-                complex problems.</p>
-            <p>In a spontaneously evolved software world, open source is the
-                power of evolution. We believe that the most innovative solution
-                for real business problem can only be created in the free open
-                source envrionment.</p>
+            <p>
+                The goal of Cyclops Group is making simple software. The
+                Cyclops Group is an open source project foundation
+                focusing on common, abstract, simple and high quality
+                java software that solve real complex problems.
+            </p>
+            <p>
+                In a spontaneously evolved software world, open source
+                is the power of evolution. We believe that the most
+                innovative solution for real business problem can only
+                be created in the free open source envrionment.
+            </p>
         </section>
-        <section name="Stuffs"/>
+        <section name="Stuffs">
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            <a href="projects.html">
+                                <b>Projects</b>
+                            </a>
+                        </p>
+                        <p>All projects are currently Java based.</p>
+                    </td>
+                    <td>
+                        <a href="projects.html">
+                            <img src="images/projects_icon.png"
+                                width="48" height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <a href="issues">
+                                <b>Issue Tracker</b>
+                            </a>
+                        </p>
+                        <p>
+                            <a
+                                href="http://www.atlassian.com/software/jira">
+                                Atlassian JIRA
+                            </a>
+                            based system, featrues and tasks are
+                            maintained here.
+                        </p>
+                    </td>
+                    <td>
+                        <a href="issues">
+                            <img src="images/issues_icon.png" width="48"
+                                height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap">
+                        <p>
+                            <a href="kb">
+                                <b>Knowledge Base</b>
+                            </a>
+                        </p>
+                        <p>
+                            This knownledge base collects the
+                            documentation related to Cyclops Group
+                            projects.
+                        </p>
+                    </td>
+                    <td>
+                        <a href="kb">
+                            <img src="images/kb_icon.png" width="48"
+                                height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap">
+                        <p>
+                            <a href="http://cvs.cyclopsgroup.com">
+                                <b>Source Repository</b>
+                            </a>
+                        </p>
+                        <p>
+                            Web based CVS monitor system based on
+                            <a href="http://www.cenqua.com/fisheye">
+                                cenque fisheye
+                            </a>
+                            .
+                        </p>
+                    </td>
+                    <td>
+                        <a href="http://cvs.cyclopsgroup.com">
+                            <img src="images/cvs_icon.png" width="48"
+                                height="48" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
         <section name="Powered By">
-            <p>There are a lot of items that can be called &quot;Powered
-                By&quot;. For example, my old Pentium MMX 200 desktop, my
-                tiny shabby apartment and my favourite chinese restaurant. Of
-                course I'm most powered by <a
-                href="members/xuying/index.html">Xuying</a>, my beautiful and
-                smart wife. </p>
-            <p>Here's a partial list of technologies supporting Cyclops Group
-                foundation. The actual list could go on and on.<table>
+            <p>
+                There are a lot of items that can be called
+                &quot;Powered By&quot;. For example, my old Pentium MMX
+                200 desktop, my tiny shabby apartment and my favourite
+                chinese restaurant. Of course I'm most powered by
+                <a href="members/xuying/index.html">Xuying</a>
+                , my beautiful and smart wife.
+            </p>
+            <p>
+                Here's a partial list of technologies supporting Cyclops
+                Group foundation. The actual list could go on and on.
+                <table>
                     <tr>
                         <td>SourceForge.net</td>
                         <td>
-                            <a href="http://sourceforge.net">http://sourceforge.net</a>
+                            <a href="http://sourceforge.net">
+                                http://sourceforge.net
+                            </a>
                         </td>
                         <td>
-                            <img src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1"/>
+                            <img
+                                src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" />
                         </td>
                     </tr>
                     <tr>
                         <td>Apache Maven</td>
                         <td>
-                            <a href="http://maven.apache.org">http://maven.apache.org</a>
+                            <a href="http://maven.apache.org">
+                                http://maven.apache.org
+                            </a>
                         </td>
                         <td>
-                            <img src="http://maven.apache.org/images/logos/maven-propaganda.png"/>
+                            <img
+                                src="http://maven.apache.org/images/logos/maven-propaganda.png" />
                         </td>
                     </tr>
                     <tr>
                         <td>Eclipse</td>
                         <td>
-                            <a href="http://eclipse.org">http://eclipse.org</a>
+                            <a href="http://eclipse.org">
+                                http://eclipse.org
+                            </a>
                         </td>
                         <td>
-                            <img src="http://www.eclipse.org/images/EclipseBannerPic.jpg"/>
+                            <img
+                                src="http://www.eclipse.org/images/EclipseBannerPic.jpg" />
                         </td>
                     </tr>
                     <tr>
                         <td>Atlassian JIRA</td>
                         <td>
-                            <a href="http://www.atlassian.com/software/jira">http://www.atlassian.com/software/jira</a>
+                            <a
+                                href="http://www.atlassian.com/software/jira">
+                                http://www.atlassian.com/software/jira
+                            </a>
                         </td>
                         <td>
-                            <img src="http://jira.atlassian.com/images/jira_logo_small.gif"/>
+                            <img
+                                src="http://jira.atlassian.com/images/jira_logo_small.gif" />
                         </td>
                     </tr>
                     <tr>
                         <td>Atlassian Confluence</td>
                         <td>
-                            <a href="http://www.atlassian.com/software/confluence">http://www.atlassian.com/software/confluence</a>
+                            <a
+                                href="http://www.atlassian.com/software/confluence">
+                                http://www.atlassian.com/software/confluence
+                            </a>
                         </td>
                         <td>
-                            <img src="http://confluence.atlassian.com/download/attachments/120183/confluence_logo.gif"/>
+                            <img
+                                src="http://confluence.atlassian.com/download/attachments/120183/confluence_logo.gif" />
                         </td>
                     </tr>
                     <tr>
                         <td>Cenqua Clover</td>
                         <td>
-                            <a href="http://www.cenqua.com/clover">http://www.cenqua.com/clover</a>
+                            <a href="http://www.cenqua.com/clover">
+                                http://www.cenqua.com/clover
+                            </a>
                         </td>
                         <td>
-                            <img src="http://www.cenqua.com/images/clover_logo_small.gif"/>
+                            <img
+                                src="http://www.cenqua.com/images/clover_logo_small.gif" />
                         </td>
                     </tr>
                     <tr>
                         <td>Cenqua Fisheye</td>
                         <td>
-                            <a href="http://www.cenqua.com/fisheye">http://www.cenqua.com/fisheye</a>
+                            <a href="http://www.cenqua.com/fisheye">
+                                http://www.cenqua.com/fisheye
+                            </a>
                         </td>
                         <td>
-                            <img src="http://www.cenqua.com/images/fisheye_logo_small.gif"/>
+                            <img
+                                src="http://www.cenqua.com/images/fisheye_logo_small.gif" />
                         </td>
                     </tr>
                     <tr>
                         <td>Codehaus Maven Proxy</td>
                         <td>
-                            <a href="http://maven-proxy.codehaus.org">http://maven-proxy.codehaus.org</a>
+                            <a href="http://maven-proxy.codehaus.org">
+                                http://maven-proxy.codehaus.org
+                            </a>
                         </td>
                         <td>I don&apos; have a logo yet...</td>
                     </tr>
                     <tr>
                         <td>Codehaus MevenIDE</td>
                         <td>
-                            <a href="http://mevenide.codehaus.org">http://mevenide.codehaus.org</a>
+                            <a href="http://mevenide.codehaus.org">
+                                http://mevenide.codehaus.org
+                            </a>
                         </td>
                         <td>
-                            <img src="http://mevenide.codehaus.org/images/mevenide-simple-125x37.png"/>
+                            <img
+                                src="http://mevenide.codehaus.org/images/mevenide-simple-125x37.png" />
                         </td>
                     </tr>
                 </table>
