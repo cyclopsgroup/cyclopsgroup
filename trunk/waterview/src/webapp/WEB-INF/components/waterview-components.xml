@@ -77,7 +77,6 @@
                     <view-factory pattern=".*\.jelly" role="com.cyclopsgroup.waterview.jelly.JellyEngine"/>
                     <view-factory pattern=".*\.vm" role="com.cyclopsgroup.waterview.velocity.VelocityEngine"/>
                 </view-factories>
-                <view-cache>0</view-cache>
             </configuration>
         </component>
         <component>
