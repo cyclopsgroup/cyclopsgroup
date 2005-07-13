@@ -5,8 +5,15 @@
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <body>
-        <section name="Jiaqi is...">
-            <p>1-800-WHO-CARE</p>
+        <section name="Wiki Space">
+            <p>
+                Please go to
+                <a
+                    href="http://www.cyclopsgroup.com/kb/display/jiaqi/Home">
+                    http://www.cyclopsgroup.com/kb/display/jiaqi/Home
+                </a>
+                to find out more information about Jiaqi Guo.
+            </p>
         </section>
     </body>
 </document>
