@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:d="jelly:define" xmlns:j="jelly:core" xmlns:u="jelly:util" xmlns:c="cyclops">
-    <!--
-	XDOC with cyclops jsl
-	-->
     <goal description="Generate cyclops group project document" name="cyclops:xdoc" prereqs="xdoc:init">
         <attainGoal name="cyclops:pre-xdoc"/>
         <attainGoal name="xdoc"/>

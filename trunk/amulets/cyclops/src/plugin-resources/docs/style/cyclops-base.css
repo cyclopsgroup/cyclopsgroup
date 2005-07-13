@@ -13,7 +13,7 @@ body
 img
 {
     border-width: 0px;
-    behavior: url(pngbehavior.htc);
+    behavior: url('http://www.cyclopsgroup.com/style/pngbehavior.htc');
 }
 
 th
