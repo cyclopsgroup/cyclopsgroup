@@ -78,6 +78,21 @@
                 </view-factories>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.components.security.CheckSecurityValve</role>
+            <implementation>com.cyclopsgroup.tornado.components.security.CheckSecurityValve</implementation>
+            <configuration>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.components.hibernate.HibernateTransactionValve</role>
+            <implementation>com.cyclopsgroup.tornado.components.hibernate.HibernateTransactionValve</implementation>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.CacheManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
     </components>
     <load-on-start>
         <component>

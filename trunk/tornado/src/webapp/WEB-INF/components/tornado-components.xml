@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plexus>
 	<components>
-
+        <component>
+            <role>com.cyclopsgroup.tornado.core.HibernateFactory</role>
+            <implementation>com.cyclopsgroup.tornado.components.hibernate.ThreadBasedHibernateFactory</implementation>
+            <configuration>
+                <properies>
+                    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+                    <property name="hibernate.connection.url">jdbc:mysql://localhost/evaviworkflow</property>
+                    <property name="hibernate.connection.username">root</property>
+                    <property name="hibernate.connection.password"/>
+                    <property name="hibernate.connection.pool_size">5</property>
+                    <property name="hibernate.dialect">net.sf.hibernate.dialect.MySQLDialect</property>
+                    <property name="hibernate.jdbc.batch_size">20</property>
+                </properies>
+            </configuration>
+        </component>
 	</components>
 </plexus>
