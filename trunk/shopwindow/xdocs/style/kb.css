@@ -1,3 +1,8 @@
+img
+{
+	behavior: url('http://www.cyclopsgroup.com/style/pngbehavior.htc');
+}
+
 #banner
 {
     background-color: #0D3B9D;
