@@ -180,10 +180,6 @@
                                 http://sourceforge.net
                             </a>
                         </td>
-                        <td>
-                            <img
-                                src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" />
-                        </td>
                     </tr>
                     <tr>
                         <td>Apache Maven</td>
@@ -192,10 +188,6 @@
                                 http://maven.apache.org
                             </a>
                         </td>
-                        <td>
-                            <img
-                                src="http://maven.apache.org/images/logos/maven-propaganda.png" />
-                        </td>
                     </tr>
                     <tr>
                         <td>Eclipse</td>
@@ -203,10 +195,6 @@
                             <a href="http://eclipse.org">
                                 http://eclipse.org
                             </a>
-                        </td>
-                        <td>
-                            <img
-                                src="http://www.eclipse.org/images/EclipseBannerPic.jpg" />
                         </td>
                     </tr>
                     <tr>
@@ -217,10 +205,6 @@
                                 http://www.atlassian.com/software/jira
                             </a>
                         </td>
-                        <td>
-                            <img
-                                src="http://jira.atlassian.com/images/jira_logo_small.gif" />
-                        </td>
                     </tr>
                     <tr>
                         <td>Atlassian Confluence</td>
@@ -230,10 +214,6 @@
                                 http://www.atlassian.com/software/confluence
                             </a>
                         </td>
-                        <td>
-                            <img
-                                src="http://confluence.atlassian.com/download/attachments/120183/confluence_logo.gif" />
-                        </td>
                     </tr>
                     <tr>
                         <td>Cenqua Clover</td>
@@ -241,10 +221,6 @@
                             <a href="http://www.cenqua.com/clover">
                                 http://www.cenqua.com/clover
                             </a>
-                        </td>
-                        <td>
-                            <img
-                                src="http://www.cenqua.com/images/clover_logo_small.gif" />
                         </td>
                     </tr>
                     <tr>
@@ -254,10 +230,6 @@
                                 http://www.cenqua.com/fisheye
                             </a>
                         </td>
-                        <td>
-                            <img
-                                src="http://www.cenqua.com/images/fisheye_logo_small.gif" />
-                        </td>
                     </tr>
                     <tr>
                         <td>Codehaus Maven Proxy</td>
@@ -266,7 +238,6 @@
                                 http://maven-proxy.codehaus.org
                             </a>
                         </td>
-                        <td>I don&apos; have a logo yet...</td>
                     </tr>
                     <tr>
                         <td>Codehaus MevenIDE</td>
@@ -274,10 +245,6 @@
                             <a href="http://mevenide.codehaus.org">
                                 http://mevenide.codehaus.org
                             </a>
-                        </td>
-                        <td>
-                            <img
-                                src="http://mevenide.codehaus.org/images/mevenide-simple-125x37.png" />
                         </td>
                     </tr>
                 </table>
