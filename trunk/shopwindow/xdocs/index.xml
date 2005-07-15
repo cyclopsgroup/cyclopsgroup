@@ -91,7 +91,7 @@
                 <tr>
                     <td nowrap="nowrap">
                         <p>
-                            <a href="kb">
+                            <a href="kb/display/pkb">
                                 <b>Knowledge Base</b>
                             </a>
                         </p>
@@ -137,12 +137,17 @@
                         <p>
                             <a
                                 href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup">
-                                cyclopsgroup
+                                View CVS
                             </a>
                             ,
                             <a
-                                href="http://cvs.cyclopsgroup.com/viewrep/jasperreports">
-                                sample jasperreports
+                                href="http://cvs.cyclopsgroup.com/changelog/cyclopsgroup">
+                                CVS Change Log
+                            </a>
+                            ,
+                            <a
+                                href="http://cvs.cyclopsgroup.com/search/cyclopsgroup">
+                                Search CVS
                             </a>
                         </p>
                     </td>

@@ -15,20 +15,13 @@
                     <item name="Resume" href="/members/jiaqi/resume.html"/>
                 </item>
             </item>
-            <item name="For developer" href="/dev/index.html" collapse="true">
-                <item name="Get involved" href="/dev/involved.html"/>
-                <item name="Howtos" href="/dev/howtos.html"/>
-            </item>
             <item name="About Us" href="/about.html"/>
         </menu>
         <links>
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/pkb"/>
             <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues"/>
-            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb"/>
             <item name="Browse CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup"/>
-            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclopsgroup"/>
-            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclopsgroup"/>
             <item name="Source Forge Summary" href="http://sourceforge.net/projects/cyclops-group"/>
         </links>
-        <search/>
     </body>
 </project>
