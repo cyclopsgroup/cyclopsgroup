@@ -12,6 +12,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th/>
                 </tr>
                 <tr>
                     <td>
@@ -19,6 +20,9 @@
                     </td>
                     <td>Guo, Jiaqi</td>
                     <td>jiaqi.guo@gmail.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/jiaqi">Wiki Space</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -26,6 +30,7 @@
                     </td>
                     <td>Zhao, Xuying</td>
                     <td>xuyingzhao@gmail.com</td>
+                    <td/>
                 </tr>
             </table>
         </section>
