@@ -1,74 +1,97 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-	<pomVersion>3</pomVersion>
-	<id>unknow</id>
-	<name>unknow</name>
-	<groupId>${pom.artifactId}</groupId>
-	<currentVersion>SNAPSHOT</currentVersion>
-	<organization>
-		<name>Cyclops Group</name>
-		<url>http://www.cyclopsgroup.com</url>
-		<logo>/images/cyclopsgroup_logo.gif</logo>
-	</organization>
-	<inceptionYear>2004</inceptionYear>
-	<package>com.cyclopsgroup.${pom.artifactId}</package>
-	<logo>/images/${pom.artifactId}_logo.gif</logo>
-	<gumpRepositoryId>cyclopsgroup-${pom.artifactId}</gumpRepositoryId>
-	<description>Sample project</description>
-	<shortDescription>Sample proect</shortDescription>
-	<url>${pom.organization.url}/projects/${pom.artifactId}</url>
-	<issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
-	<siteAddress>www.cyclopsgroup.com</siteAddress>
-	<siteDirectory>/var/www/www.cyclopsgroup.com/htdocs/projects/${pom.artifactId}</siteDirectory>
-	<repository>
-		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
-		<developerConnection>scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</developerConnection>
-		<url>http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/${pom.artifactId}</url>
-	</repository>
-	<mailingLists>
-		<mailingList>
-			<name>Cyclops Group Member</name>
-			<subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</subscribe>
-			<unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-member</unsubscribe>
-			<archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member</archive>
-		</mailingList>
-		<mailingList>
-			<name>Cyclops Group Develop</name>
-			<subscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</subscribe>
-			<unsubscribe>http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop</unsubscribe>
-			<archive>http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop</archive>
-		</mailingList>
-	</mailingLists>
-	<developers>
-		<developer>
-			<name>Jiaqi Guo</name>
-			<id>jiaqi</id>
-			<email>jiaqi.guo@gmail.com</email>
-			<timezone>-6</timezone>
-		</developer>
-		<developer>
-			<name>Daisy Zhao</name>
-			<id>daisy</id>
-			<email>kxz024000@utdallas.edu</email>
-			<organization>U.T. Dallas</organization>
-			<timezone>-6</timezone>
-		</developer>
-	</developers>
-	<contributors/>
-	<licenses/>
-	<dependencies/>
-	<build/>
-	<reports>
-		<report>maven-jdepend-plugin</report>
-		<report>maven-checkstyle-plugin</report>
-		<report>maven-javadoc-plugin</report>
-		<report>maven-jxr-plugin</report>
-		<report>maven-junit-report-plugin</report>
-		<report>maven-tasklist-plugin</report>
-		<report>maven-pmd-plugin</report>
-		<report>maven-simian-plugin</report>
-		<report>maven-clover-plugin</report>
-		<report>maven-license-plugin</report>
-	</reports>
-	<properties/>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+    <pomVersion>3</pomVersion>
+    <id>unknow</id>
+    <name>unknow</name>
+    <groupId>${pom.artifactId}</groupId>
+    <currentVersion>SNAPSHOT</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.com</url>
+        <logo>/images/cyclopsgroup_logo.gif</logo>
+    </organization>
+    <inceptionYear>2004</inceptionYear>
+    <package>com.cyclopsgroup.${pom.artifactId}</package>
+    <logo>/images/${pom.artifactId}_logo.gif</logo>
+    <gumpRepositoryId>cyclopsgroup-${pom.artifactId}</gumpRepositoryId>
+    <description>Sample project</description>
+    <shortDescription>Sample proect</shortDescription>
+    <url>${pom.organization.url}/projects/${pom.artifactId}</url>
+    <issueTrackingUrl>
+        http://www.cyclopsgroup.com/issues
+    </issueTrackingUrl>
+    <siteAddress>www.cyclopsgroup.com</siteAddress>
+    <siteDirectory>
+        /var/www/www.cyclopsgroup.com/htdocs/projects/${pom.artifactId}
+    </siteDirectory>
+    <repository>
+        <connection>
+            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
+        </connection>
+        <developerConnection>
+            scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
+        </developerConnection>
+        <url>
+            http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/${pom.artifactId}
+        </url>
+    </repository>
+    <mailingLists>
+        <mailingList>
+            <name>Cyclops Group Member</name>
+            <subscribe>
+                http://lists.sourceforge.net/lists/listinfo/cyclops-group-member
+            </subscribe>
+            <unsubscribe>
+                http://lists.sourceforge.net/lists/listinfo/cyclops-group-member
+            </unsubscribe>
+            <archive>
+                http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member
+            </archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Develop</name>
+            <subscribe>
+                http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop
+            </subscribe>
+            <unsubscribe>
+                http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop
+            </unsubscribe>
+            <archive>
+                http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop
+            </archive>
+        </mailingList>
+    </mailingLists>
+    <developers>
+        <developer>
+            <name>Jiaqi Guo</name>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Daisy Zhao</name>
+            <id>daisy</id>
+            <email>kxz024000@utdallas.edu</email>
+            <organization>U.T. Dallas</organization>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+    <contributors />
+    <licenses />
+    <dependencies />
+    <build />
+    <reports>
+        <report>maven-jdepend-plugin</report>
+        <report>maven-checkstyle-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-jxr-plugin</report>
+        <report>maven-junit-report-plugin</report>
+        <report>maven-tasklist-plugin</report>
+        <report>maven-pmd-plugin</report>
+        <report>maven-simian-plugin</report>
+        <report>maven-clover-plugin</report>
+        <report>maven-license-plugin</report>
+    </reports>
+    <properties />
 </project>
