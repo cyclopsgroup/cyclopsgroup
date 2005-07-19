@@ -16,49 +16,40 @@
  */
 package com.cyclopsgroup.tornado.components.navigator;
 
-import java.util.Hashtable;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
-import org.apache.commons.lang.ArrayUtils;
-
-/**
- * Default implementation of navigator manager
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public class SystemNavigatorManager extends NavigatorManagerBase implements
+public abstract class NavigatorManagerBase extends AbstractLogEnabled implements
         NavigatorManager
 {
-
-    private Hashtable navigators = new Hashtable();
+    private String navigatorId = DEFAULT_NAVIGATOR;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigator(java.lang.String)
+     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigator()
      */
-    public Navigator getNavigator(String name)
+    public Navigator getNavigator()
     {
-        return (Navigator) navigators.get(name);
+        return getNavigator(getNavigatorName());
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigatorNames()
+     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigatorName()
      */
-    public String[] getNavigatorNames()
+    public String getNavigatorName()
     {
-        return (String[]) navigators.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return navigatorId;
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#registerNavigator(java.lang.String, com.cyclopsgroup.tornado.component.navigator.Navigator)
+     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#setNavigatorId(java.lang.String)
      */
-    public void registerNavigator(Navigator navigator)
+    public void setNavigatorId(String id)
     {
-        navigators.put(navigator.getId(), navigator);
+        navigatorId = id;
     }
 }

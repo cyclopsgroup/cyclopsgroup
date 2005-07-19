@@ -16,49 +16,37 @@
  */
 package com.cyclopsgroup.tornado.components.navigator;
 
-import java.util.Hashtable;
-
-import org.apache.commons.lang.ArrayUtils;
-
-/**
- * Default implementation of navigator manager
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public class SystemNavigatorManager extends NavigatorManagerBase implements
+public class FileSystemNavigatorManager extends NavigatorManagerBase implements
         NavigatorManager
 {
-
-    private Hashtable navigators = new Hashtable();
-
     /**
-     * Override or implement method of parent class or interface
-     *
+     * Overwrite or implement method getNavigator()
      * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigator(java.lang.String)
      */
-    public Navigator getNavigator(String name)
+    public Navigator getNavigator(String id)
     {
-        return (Navigator) navigators.get(name);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
+     * Overwrite or implement method getNavigatorNames()
      * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#getNavigatorNames()
      */
     public String[] getNavigatorNames()
     {
-        return (String[]) navigators.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#registerNavigator(java.lang.String, com.cyclopsgroup.tornado.component.navigator.Navigator)
+     * Overwrite or implement method registerNavigator()
+     * @see com.cyclopsgroup.tornado.components.navigator.NavigatorManager#registerNavigator(com.cyclopsgroup.tornado.components.navigator.Navigator)
      */
     public void registerNavigator(Navigator navigator)
     {
-        navigators.put(navigator.getId(), navigator);
+        // TODO Auto-generated method stub
+
     }
+
 }
