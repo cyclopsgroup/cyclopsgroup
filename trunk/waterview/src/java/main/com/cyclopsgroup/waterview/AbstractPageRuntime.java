@@ -43,6 +43,8 @@ public abstract class AbstractPageRuntime implements PageRuntime
 
     private PrintWriter output;
 
+    private String packageName;
+
     private String page;
 
     private String pageBaseUrl;
@@ -83,8 +85,6 @@ public abstract class AbstractPageRuntime implements PageRuntime
         return applicationBaseUrl;
     }
 
-    //  TODO Auto-generated method stub
-
     /**
      * Override or implement method of parent class or interface
      *
@@ -113,6 +113,11 @@ public abstract class AbstractPageRuntime implements PageRuntime
     public PrintWriter getOutput()
     {
         return output;
+    }
+
+    public String getPackage()
+    {
+        return packageName;
     }
 
     /**
@@ -251,6 +256,11 @@ public abstract class AbstractPageRuntime implements PageRuntime
     public void setOutput(PrintWriter output)
     {
         this.output = output;
+    }
+
+    public void setPackage(String packageName)
+    {
+        this.packageName = packageName;
     }
 
     /**

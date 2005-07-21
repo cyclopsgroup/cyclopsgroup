@@ -16,13 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.Context;
@@ -36,36 +30,11 @@ import com.cyclopsgroup.waterview.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValve extends AbstractLogEnabled implements Valve,
-        Configurable, Serviceable
+public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
-    private RenderPageValve renderPageValve;
+    private static final String ACTION_PREFIX = "a:";
 
-    private String separator = "|";
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
-     */
-    public void configure(Configuration conf) throws ConfigurationException
-    {
-        String sep = conf.getChild("separator").getValue(null);
-        if (sep != null)
-        {
-            setSeparator(sep);
-        }
-    }
-
-    /**
-     * Getter method for separator
-     *
-     * @return Returns the separator.
-     */
-    public String getSeparator()
-    {
-        return separator;
-    }
+    public static final char SEPARATOR = '|';
 
     /**
      * Override or implement method of parent class or interface
@@ -89,25 +58,26 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
             requestPath = requestPath.substring(1);
         }
         String[] parts = null;
-        if (requestPath.indexOf(getSeparator()) == -1)
+        if (requestPath.indexOf(SEPARATOR) == -1)
         {
             parts = new String[] { requestPath };
         }
         else
         {
-            parts = StringUtils.split(requestPath, getSeparator());
+            parts = StringUtils.split(requestPath, SEPARATOR);
         }
         String pagePath = null;
         for (int i = 0; i < parts.length; i++)
         {
             String part = parts[i];
-            if (isPagePath(part))
+            if (part.startsWith(ACTION_PREFIX))
             {
-                pagePath = part;
+                String action = part.substring(ACTION_PREFIX.length());
+                runtime.getActions().add(action);
             }
             else
             {
-                runtime.getActions().add(part);
+                pagePath = part;
             }
         }
         if (StringUtils.isNotEmpty(pagePath))
@@ -115,37 +85,5 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve,
             runtime.setPage(pagePath);
         }
         context.invokeNextValve(runtime);
-    }
-
-    /**
-     * If path is for page
-     *
-     * @param path Page path
-     * @return True if view factory for path is defined
-     */
-    protected boolean isPagePath(String path)
-    {
-        return renderPageValve.isPage(path);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException
-    {
-        renderPageValve = (RenderPageValve) serviceManager
-                .lookup(RenderPageValve.ROLE);
-    }
-
-    /**
-     * Setter method for separator
-     *
-     * @param separator The separator to set.
-     */
-    public void setSeparator(String separator)
-    {
-        this.separator = separator;
     }
 }

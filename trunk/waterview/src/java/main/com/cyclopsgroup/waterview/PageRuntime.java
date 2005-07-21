@@ -98,6 +98,8 @@ public interface PageRuntime
      */
     PrintWriter getOutput();
 
+    String getPackage();
+
     /**
      * Method getRenderTemplate() in class WebRuntime
      * 
@@ -119,6 +121,11 @@ public interface PageRuntime
      */
     Context getPageContext();
 
+    /**
+     * Redirector
+     *
+     * @return Redirector object
+     */
     Redirector getRedirector();
 
     /**
