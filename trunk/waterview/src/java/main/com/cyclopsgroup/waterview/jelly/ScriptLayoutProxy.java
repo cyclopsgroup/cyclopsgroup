@@ -29,6 +29,8 @@ import com.cyclopsgroup.waterview.PageRuntime;
  */
 public class ScriptLayoutProxy implements Layout
 {
+    private String packageName;
+
     private String layoutScript;
 
     /**
@@ -36,8 +38,9 @@ public class ScriptLayoutProxy implements Layout
      *
      * @param layoutScript Layout script path
      */
-    public ScriptLayoutProxy(String layoutScript)
+    public ScriptLayoutProxy(String packageName, String layoutScript)
     {
+        this.packageName = packageName;
         this.layoutScript = layoutScript;
     }
 
@@ -48,7 +51,8 @@ public class ScriptLayoutProxy implements Layout
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
         String path = "layout/" + layoutScript;
-        return new ScriptLayout(je.getScript(path), mm.getModule(path));
+        return new ScriptLayout(je.getScript(packageName, path), mm
+                .getModule(path));
     }
 
     /**

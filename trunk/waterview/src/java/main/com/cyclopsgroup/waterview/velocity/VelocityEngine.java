@@ -51,15 +51,14 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     private VelocityFactory velocityFactory;
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * Overwrite or implement method createView()
+     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public View createView(String viewPath, PageRuntime runtime)
-            throws Exception
+    public View createView(String packageName, String viewPath,
+            PageRuntime runtime) throws Exception
     {
         String path = "view/" + viewPath;
-        Template template = getTemplate(path);
+        Template template = getTemplate(packageName, path);
         Module module = getModuleManager().getModule(path);
         return new VelocityView(template, module);
     }
@@ -72,28 +71,6 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     public ModuleManager getModuleManager()
     {
         return moduleManager;
-    }
-
-    /**
-     * Get velocity template
-     *
-     * @param templatePath Template path
-     * @return Template object
-     * @throws Exception Throw it out
-     */
-    public Template getTemplate(String templatePath) throws Exception
-    {
-        String[] packageNames = getModuleManager().getPackageNames();
-        for (int i = 0; i < packageNames.length; i++)
-        {
-            String packageName = packageNames[i];
-            Template t = getTemplate(templatePath, packageName);
-            if (t != null)
-            {
-                return t;
-            }
-        }
-        return null;
     }
 
     /**
@@ -139,10 +116,10 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      *
      * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public void resolveAction(String action, PageRuntime runtime)
-            throws Exception
+    public void resolveAction(String packageName, String action,
+            PageRuntime runtime) throws Exception
     {
-        Template template = getTemplate("action/" + action);
+        Template template = getTemplate(packageName, "action/" + action);
         if (template != null)
         {
             VelocityContextAdapter vc = new VelocityContextAdapter(runtime

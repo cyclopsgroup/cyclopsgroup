@@ -20,8 +20,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Frame;
-import com.cyclopsgroup.waterview.jelly.ScriptFrameProxy;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.ScriptFrameProxy;
 
 /**
  * Jelly layout definition tag
@@ -30,6 +30,8 @@ import com.cyclopsgroup.waterview.jelly.AbstractTag;
  */
 public class JellyFrameTag extends AbstractTag
 {
+    private String packageName;
+
     private String script;
 
     /**
@@ -41,10 +43,19 @@ public class JellyFrameTag extends AbstractTag
             throws Exception
     {
         requireAttribute("script");
+        requireAttribute("package");
         requireParent(FrameTag.class);
-        Frame frame = new ScriptFrameProxy(getScript());
+        Frame frame = new ScriptFrameProxy(getPackage(), getScript());
         FrameTag frameTag = (FrameTag) getParent();
         frameTag.setFrame(frame);
+    }
+
+    /**
+     * @return Returns the packageName.
+     */
+    public String getPackage()
+    {
+        return packageName;
     }
 
     /**
@@ -55,6 +66,14 @@ public class JellyFrameTag extends AbstractTag
     public String getScript()
     {
         return script;
+    }
+
+    /**
+     * @param packageName The packageName to set.
+     */
+    public void setPackage(String packageName)
+    {
+        this.packageName = packageName;
     }
 
     /**

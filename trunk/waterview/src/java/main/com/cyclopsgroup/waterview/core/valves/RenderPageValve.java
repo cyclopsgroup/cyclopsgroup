@@ -60,19 +60,18 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         }
 
         /**
-         * Override or implement method of parent class or interface
-         *
-         * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+         * Overwrite or implement method createView()
+         * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
          */
-        public synchronized View createView(String viewPath, PageRuntime runtime)
-                throws Exception
+        public synchronized View createView(String packageName,
+                String viewPath, PageRuntime runtime) throws Exception
         {
-            String key = proxy.hashCode() + '/' + viewPath;
+            String key = proxy.hashCode() + '/' + packageName + '/' + viewPath;
             if (getCacheManager().contains(this, key))
             {
                 return (View) getCacheManager().get(this, key);
             }
-            View view = proxy.createView(viewPath, runtime);
+            View view = proxy.createView(packageName, viewPath, runtime);
             getCacheManager().put(this, key, view);
             return view;
         }

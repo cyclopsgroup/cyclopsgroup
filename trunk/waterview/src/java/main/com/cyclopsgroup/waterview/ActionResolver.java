@@ -26,9 +26,11 @@ public interface ActionResolver
     /**
      * Resove action
      *
+     * @param packageName packageName
      * @param runtime Page runtime object
      * @param action Action path
      * @throws Exception Throw it out
      */
-    void resolveAction(String action, PageRuntime runtime) throws Exception;
+    void resolveAction(String packageName, String action, PageRuntime runtime)
+            throws Exception;
 }

@@ -30,6 +30,8 @@ import com.cyclopsgroup.waterview.View;
 public class SimpleViewTag extends AbstractViewTag
 {
 
+    private String packageName;
+
     private String path;
 
     /**
@@ -50,7 +52,19 @@ public class SimpleViewTag extends AbstractViewTag
         {
             setPath("Index.jelly");
         }
-        return viewFactory.createView(getPath(), getRuntime());
+        if (StringUtils.isEmpty(getPackage()))
+        {
+            setPackage(getRuntime().getPackage());
+        }
+        return viewFactory.createView(getPackage(), getPath(), getRuntime());
+    }
+
+    /**
+     * @return Returns the packageName.
+     */
+    public String getPackage()
+    {
+        return packageName;
     }
 
     /**
@@ -61,6 +75,14 @@ public class SimpleViewTag extends AbstractViewTag
     public String getPath()
     {
         return path;
+    }
+
+    /**
+     * @param packageName The packageName to set.
+     */
+    public void setPackage(String packageName)
+    {
+        this.packageName = packageName;
     }
 
     /**

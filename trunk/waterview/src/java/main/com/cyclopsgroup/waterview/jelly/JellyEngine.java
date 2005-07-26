@@ -140,15 +140,14 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * Overwrite or implement method createView()
+     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public View createView(String viewPath, PageRuntime runtime)
-            throws Exception
+    public View createView(String packageName, String viewPath,
+            PageRuntime runtime) throws Exception
     {
         String path = "view/" + viewPath;
-        Script script = getScript(path);
+        Script script = getScript(packageName, path);
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
         return new ScriptView(script, mm.getModule(path));
@@ -182,45 +181,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public Properties getInitProperties()
     {
         return initProperties;
-    }
-
-    /**
-     * Get script with script path
-     *
-     * @param scriptPath Path of the script
-     * @return Script object or DUMMY_SCRIPT
-     * @throws Exception Throw it out
-     */
-    public Script getScript(String scriptPath) throws Exception
-    {
-        return getScript(scriptPath, DUMMY_SCRIPT);
-    }
-
-    /**
-     * Get script with given path
-     *
-     * @param scriptPath Path of script
-     * @param defaultScript Script in case it's not found
-     * @return Script object
-     * @throws Exception Throw it out
-     */
-    public Script getScript(String scriptPath, Script defaultScript)
-            throws Exception
-    {
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        String[] packageNames = mm.getPackageNames();
-        Script script = defaultScript;
-        for (int i = 0; i < packageNames.length; i++)
-        {
-            Script s = getScript(scriptPath, packageNames[i], null);
-            if (s != null)
-            {
-                script = s;
-                break;
-            }
-        }
-        return script;
     }
 
     /**
@@ -356,14 +316,13 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * Overwrite or implement method resolveAction()
+     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public void resolveAction(String action, PageRuntime runtime)
-            throws Exception
+    public void resolveAction(String packageName, String action,
+            PageRuntime runtime) throws Exception
     {
-        Script script = getScript("action/" + action);
+        Script script = getScript(packageName, "action/" + action);
         if (script == null)
         {
             return;

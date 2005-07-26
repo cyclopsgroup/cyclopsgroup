@@ -29,10 +29,12 @@ public interface DynaViewFactory
     /**
      * Dynamically create View with view path
      *
+     * @param packageName package of ui module
      * @param viewPath Path of the view
      * @param runtime Current runtime
      * @return View object
      * @throws Exception Throw it out
      */
-    View createView(String viewPath, PageRuntime runtime) throws Exception;
+    View createView(String packageName, String viewPath, PageRuntime runtime)
+            throws Exception;
 }

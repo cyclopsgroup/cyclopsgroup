@@ -102,13 +102,6 @@ public interface ModuleManager
     Module getModule(String modulePath, String packageName);
 
     /**
-     * Get package name array
-     *
-     * @return Package name array
-     */
-    String[] getPackageNames();
-
-    /**
      * Register frame object
      *
      * @param frameId Frame ID

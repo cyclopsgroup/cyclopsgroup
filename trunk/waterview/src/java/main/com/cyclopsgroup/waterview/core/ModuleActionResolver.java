@@ -37,11 +37,11 @@ public class ModuleActionResolver extends AbstractLogEnabled implements
     private ModuleManager moduleManager;
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * Overwrite or implement method resolveAction()
+     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
-    public void resolveAction(String action, PageRuntime runtime) throws Exception
+    public void resolveAction(String packageName, String action,
+            PageRuntime runtime) throws Exception
     {
         Module module = moduleManager.getModule("action/" + action);
         if (module != null)

@@ -16,6 +16,11 @@
  */
 package com.cyclopsgroup.waterview;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Give user change to redirect response to another URL
+ */
 public abstract class Redirector
 {
 

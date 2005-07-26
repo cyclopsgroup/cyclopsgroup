@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.ModuleManager;
@@ -34,6 +35,8 @@ import com.cyclopsgroup.waterview.jelly.ScriptLayout;
  */
 public class JellyLayoutTag extends AbstractTag
 {
+    private String packageName;
+
     private String script;
 
     /**
@@ -50,14 +53,26 @@ public class JellyLayoutTag extends AbstractTag
         {
             throw new JellyTagException("JellyLayout must be in a page");
         }
+        if (StringUtils.isEmpty(getPackage()))
+        {
+            setPackage(getRuntime().getPackage());
+        }
         JellyEngine jellyEngine = (JellyEngine) serviceManager
                 .lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
         String path = "layout/" + getScript();
-        Layout layout = new ScriptLayout(jellyEngine.getScript(path), mm
-                .getModule(path));
+        Layout layout = new ScriptLayout(jellyEngine.getScript(getPackage(),
+                path), mm.getModule(path));
         page.setLayout(layout);
+    }
+
+    /**
+     * @return Returns the packageName.
+     */
+    public String getPackage()
+    {
+        return packageName;
     }
 
     /**
@@ -68,6 +83,14 @@ public class JellyLayoutTag extends AbstractTag
     public String getScript()
     {
         return script;
+    }
+
+    /**
+     * @param packageName The packageName to set.
+     */
+    public void setPackage(String packageName)
+    {
+        this.packageName = packageName;
     }
 
     /**

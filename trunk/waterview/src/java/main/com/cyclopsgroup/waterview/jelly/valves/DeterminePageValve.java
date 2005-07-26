@@ -46,31 +46,13 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         Configurable, Valve, Serviceable
 {
 
-    /**
-     * Getter method for cacheManager
-     *
-     * @return Returns the cacheManager.
-     */
-    public CacheManager getCacheManager()
-    {
-        return cacheManager;
-    }
-
-    /**
-     * Setter method for cacheManager
-     *
-     * @param cacheManager The cacheManager to set.
-     */
-    public void setCacheManager(CacheManager cacheManager)
-    {
-        this.cacheManager = cacheManager;
-    }
-
     private static final Page EMPTY_PAGE = new Page();
 
-    private String defaultPage = "Index.jelly";
-
     private CacheManager cacheManager;
+
+    private String defaultPackage = "com.cyclopsgroup.waterview.ui";
+
+    private String defaultPage = "Index.jelly";
 
     /**
      * Override or implement method of parent class or interface
@@ -84,6 +66,29 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         {
             setDefaultPage(page);
         }
+        String pkg = conf.getChild("default-package").getValue(null);
+        if (pkg != null)
+        {
+            setDefaultPackage(pkg);
+        }
+    }
+
+    /**
+     * Getter method for cacheManager
+     *
+     * @return Returns the cacheManager.
+     */
+    public CacheManager getCacheManager()
+    {
+        return cacheManager;
+    }
+
+    /**
+     * @return Returns the defaultPackage.
+     */
+    public String getDefaultPackage()
+    {
+        return defaultPackage;
     }
 
     /**
@@ -116,6 +121,12 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             runtime.setPage(getDefaultPage());
             pagePath = getDefaultPage();
         }
+
+        String packageName = runtime.getPackage();
+        if (StringUtils.isEmpty(packageName))
+        {
+            packageName = getDefaultPackage();
+        }
         synchronized (this)
         {
             page = (Page) getCacheManager().get(this, pagePath);
@@ -128,35 +139,26 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 ModuleChain moduleChain = new ModuleChain();
                 String fullPath = "page/" + pagePath;
                 moduleChain.addModule(mm.getModule(fullPath));
-                String[] pkgs = mm.getPackageNames();
 
-                for (int i = 0; i < pkgs.length; i++)
+                Script pageScript = je.getScript(fullPath, packageName, null);
+                if (pageScript != null)
                 {
-                    String pkg = pkgs[i];
-                    Script pageScript = je.getScript(fullPath, pkg, null);
+                    page = loadPage(pageScript, je);
+                }
+                String[] parts = StringUtils.split(pagePath, '/');
+                for (int j = parts.length - 1; j >= 0; j--)
+                {
+                    parts[j] = "Default";
+                    String[] newParts = new String[j + 1];
+                    System.arraycopy(parts, 0, newParts, 0, j + 1);
+                    String defaultPath = StringUtils.join(newParts, '/');
+                    fullPath = "page/" + defaultPath;
+                    pageScript = je.getScript(fullPath, packageName, null);
                     if (pageScript != null)
                     {
                         page = loadPage(pageScript, je);
-                        break;
-                    }
-                    String[] parts = StringUtils.split(pagePath, '/');
-                    for (int j = parts.length - 1; j >= 0; j--)
-                    {
-                        parts[j] = "Default";
-                        String[] newParts = new String[j + 1];
-                        System.arraycopy(parts, 0, newParts, 0, j + 1);
-                        String defaultPath = StringUtils.join(newParts, '/');
-                        fullPath = "page/" + defaultPath;
-                        pageScript = je.getScript(fullPath, pkg, null);
-                        if (pageScript != null)
-                        {
-                            page = loadPage(pageScript, je);
-                            moduleChain.addModule(mm.getModule(fullPath, pkg));
-                            break;
-                        }
-                    }
-                    if (page != null)
-                    {
+                        moduleChain.addModule(mm.getModule(fullPath,
+                                packageName));
                         break;
                     }
                 }
@@ -181,16 +183,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     }
 
     /**
-     * Setter method for defaultPage
-     *
-     * @param defaultPage The defaultPage to set.
-     */
-    public void setDefaultPage(String defaultPage)
-    {
-        this.defaultPage = defaultPage;
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
@@ -200,5 +192,33 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         CacheManager cm = (CacheManager) serviceManager
                 .lookup(CacheManager.ROLE);
         setCacheManager(cm);
+    }
+
+    /**
+     * Setter method for cacheManager
+     *
+     * @param cacheManager The cacheManager to set.
+     */
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        this.cacheManager = cacheManager;
+    }
+
+    /**
+     * @param defaultPackage The defaultPackage to set.
+     */
+    public void setDefaultPackage(String defaultPackage)
+    {
+        this.defaultPackage = defaultPackage;
+    }
+
+    /**
+     * Setter method for defaultPage
+     *
+     * @param defaultPage The defaultPage to set.
+     */
+    public void setDefaultPage(String defaultPage)
+    {
+        this.defaultPage = defaultPage;
     }
 }

@@ -45,7 +45,8 @@ public class JellyEngineTest extends WaterviewTestCaseBase
     {
         JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
         assertNotNull(je);
-        Script script = je.getScript("layout/Waterview3ColumnLayout.jelly");
+        Script script = je.getScript("com.cyclopsgroup.waterview.ui",
+                "layout/Waterview3ColumnLayout.jelly");
         assertNotSame(script, JellyEngine.DUMMY_SCRIPT);
         JellyContext jc = new JellyContext(je.getGlobalContext());
 

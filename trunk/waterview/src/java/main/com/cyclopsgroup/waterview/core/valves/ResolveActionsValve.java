@@ -31,6 +31,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.PageRuntime;
@@ -98,6 +99,13 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve,
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
+            String packageName = runtime.getPackage();
+            if (actionName.indexOf(':') >= 0)
+            {
+                String[] parts = StringUtils.split(actionName, ':');
+                actionName = parts[1];
+                packageName = parts[0];
+            }
             for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
             {
                 String pattern = (String) j.next();
@@ -105,7 +113,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve,
                 {
                     ActionResolver resolver = (ActionResolver) actionResolvers
                             .get(pattern);
-                    resolver.resolveAction(actionName, runtime);
+                    resolver.resolveAction(packageName, actionName, runtime);
                     break;
                 }
             }

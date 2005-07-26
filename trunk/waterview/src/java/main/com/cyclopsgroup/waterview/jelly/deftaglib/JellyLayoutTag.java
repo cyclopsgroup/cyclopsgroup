@@ -20,8 +20,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Layout;
-import com.cyclopsgroup.waterview.jelly.ScriptLayoutProxy;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.ScriptLayoutProxy;
 
 /**
  * Jelly layout definition tag
@@ -30,6 +30,8 @@ import com.cyclopsgroup.waterview.jelly.AbstractTag;
  */
 public class JellyLayoutTag extends AbstractTag
 {
+    private String packageName;
+
     private String script;
 
     /**
@@ -41,10 +43,19 @@ public class JellyLayoutTag extends AbstractTag
             throws Exception
     {
         requireAttribute("script");
+        requireAttribute("package");
         requireParent(LayoutTag.class);
-        Layout layout = new ScriptLayoutProxy(getScript());
+        Layout layout = new ScriptLayoutProxy(getPackage(), getScript());
         LayoutTag layoutTag = (LayoutTag) getParent();
         layoutTag.setLayout(layout);
+    }
+
+    /**
+     * @return Returns the packageName.
+     */
+    public String getPackage()
+    {
+        return packageName;
     }
 
     /**
@@ -55,6 +66,14 @@ public class JellyLayoutTag extends AbstractTag
     public String getScript()
     {
         return script;
+    }
+
+    /**
+     * @param packageName The packageName to set.
+     */
+    public void setPackage(String packageName)
+    {
+        this.packageName = packageName;
     }
 
     /**
