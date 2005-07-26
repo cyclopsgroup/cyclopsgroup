@@ -25,8 +25,10 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.core.valves.ParseURLValve;
 
-public class PageLinkTool
+public class PageLink
 {
+    public static final String NAME = "link";
+
     private List actions = new ArrayList();
 
     private String page;
@@ -40,19 +42,19 @@ public class PageLinkTool
      * 
      * @param runtime
      */
-    public PageLinkTool(PageRuntime runtime)
+    public PageLink(PageRuntime runtime)
     {
         this.runtime = runtime;
         init();
     }
 
-    public PageLinkTool addAction(String action)
+    public PageLink addAction(String action)
     {
         actions.add(action);
         return this;
     }
 
-    public PageLinkTool addAction(String packageName, String action)
+    public PageLink addAction(String packageName, String action)
     {
         actions.add(packageName + ":" + action);
         return this;
@@ -65,6 +67,17 @@ public class PageLinkTool
         page = null;
     }
 
+    public PageLink setPage(String page)
+    {
+        this.page = page;
+        return this;
+    }
+
+    public PageLink setPage(String packageName, String page)
+    {
+        return setPage(packageName + ':' + page);
+    }
+
     public String toString()
     {
         StringBuffer sb = new StringBuffer(runtime.getPageBaseUrl());
@@ -72,7 +85,7 @@ public class PageLinkTool
         for (Iterator i = actions.iterator(); i.hasNext();)
         {
             String action = (String) i.next();
-            parts.add("a:" + action);
+            parts.add(ParseURLValve.ACTION_PREFIX + action);
         }
         if (page != null)
         {

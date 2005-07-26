@@ -20,9 +20,6 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
@@ -43,12 +40,10 @@ import com.cyclopsgroup.waterview.jelly.JellyEngine;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DeterminePageValve extends AbstractLogEnabled implements
-        Configurable, Valve, Serviceable
+        Configurable, Valve
 {
 
     private static final Page EMPTY_PAGE = new Page();
-
-    private CacheManager cacheManager;
 
     private String defaultPackage = "com.cyclopsgroup.waterview.ui";
 
@@ -71,16 +66,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         {
             setDefaultPackage(pkg);
         }
-    }
-
-    /**
-     * Getter method for cacheManager
-     *
-     * @return Returns the cacheManager.
-     */
-    public CacheManager getCacheManager()
-    {
-        return cacheManager;
     }
 
     /**
@@ -129,7 +114,9 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         }
         synchronized (this)
         {
-            page = (Page) getCacheManager().get(this, pagePath);
+            CacheManager cacheManager = (CacheManager) runtime
+                    .getServiceManager().lookup(CacheManager.ROLE);
+            page = (Page) cacheManager.get(this, pagePath);
             if (page == null)
             {
                 ModuleManager mm = (ModuleManager) runtime.getServiceManager()
@@ -167,7 +154,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     page = EMPTY_PAGE;
                 }
                 page.setModule(moduleChain);
-                getCacheManager().put(this, pagePath, page);
+                cacheManager.put(this, pagePath, page);
             }
         }
         runtime.getPageContext().put(Page.NAME, page);
@@ -180,28 +167,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         JellyContext jc = new JellyContext(jellyEngine.getGlobalContext());
         script.run(jc, XMLOutput.createDummyXMLOutput());
         return (Page) jc.getVariable(Page.NAME);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException
-    {
-        CacheManager cm = (CacheManager) serviceManager
-                .lookup(CacheManager.ROLE);
-        setCacheManager(cm);
-    }
-
-    /**
-     * Setter method for cacheManager
-     *
-     * @param cacheManager The cacheManager to set.
-     */
-    public void setCacheManager(CacheManager cacheManager)
-    {
-        this.cacheManager = cacheManager;
     }
 
     /**

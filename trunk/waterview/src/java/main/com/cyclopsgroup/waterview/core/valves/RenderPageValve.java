@@ -16,16 +16,11 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -47,7 +42,7 @@ import com.cyclopsgroup.waterview.View;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class RenderPageValve extends AbstractLogEnabled implements Valve,
-        Configurable, Initializable, Serviceable
+        Serviceable
 {
 
     private class CachedViewFactory implements DynaViewFactory
@@ -82,30 +77,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
 
     private CacheManager cacheManager;
 
-    private ServiceManager serviceManager;
-
     private Map viewFactories = ListOrderedMap.decorate(new Hashtable());
-
-    private transient Map viewFactoryRoles = ListOrderedMap
-            .decorate(new HashMap());
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
-     */
-    public void configure(Configuration conf) throws ConfigurationException
-    {
-        Configuration[] children = conf.getChild("view-factories").getChildren(
-                "view-factory");
-        for (int i = 0; i < children.length; i++)
-        {
-            Configuration c = children[i];
-            String pattern = c.getAttribute("pattern");
-            String role = c.getAttribute("role");
-            viewFactoryRoles.put(pattern, role);
-        }
-    }
 
     /**
      * Getter method for cacheManager
@@ -115,23 +87,6 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public CacheManager getCacheManager()
     {
         return cacheManager;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.activity.Initializable#initialize()
-     */
-    public void initialize() throws Exception
-    {
-        for (Iterator i = viewFactoryRoles.keySet().iterator(); i.hasNext();)
-        {
-            String pattern = (String) i.next();
-            String role = (String) viewFactoryRoles.get(pattern);
-            DynaViewFactory viewFactory = (DynaViewFactory) serviceManager
-                    .lookup(role);
-            registerViewFactory(pattern, viewFactory);
-        }
     }
 
     /**
@@ -172,25 +127,6 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     }
 
     /**
-     * Is a given path a page?
-     *
-     * @param name Given page path
-     * @return True if it's a handleable page
-     */
-    public boolean isPage(String name)
-    {
-        for (Iterator i = viewFactories.keySet().iterator(); i.hasNext();)
-        {
-            String pattern = (String) i.next();
-            if (Pattern.matches('^' + pattern + '$', name))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Register a view factory
      *
      * @param pattern Pattern of page
@@ -208,7 +144,6 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        this.serviceManager = serviceManager;
         CacheManager cm = (CacheManager) serviceManager
                 .lookup(CacheManager.ROLE);
         setCacheManager(cm);

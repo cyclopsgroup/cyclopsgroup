@@ -1,45 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plexus>
-    <components>
-        <component>
-            <role>com.cyclopsgroup.waterview.Waterview</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <pipelines>
-                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.pipeline.RenderPage"/>
-                </pipelines>
-            </configuration>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.ModuleManager</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <default-layout>waterview.3ColumnLayout</default-layout>
-                <default-frame>waterview.DefaultDisplayFrame</default-frame>
-            </configuration>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.pipeline.RenderPage</role>
-            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <valves>
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve"/>
-                    <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve"/>
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve"/>
-                    <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve"/>
-                    <valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve"/>
-                </valves>
-            </configuration>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.CacheManager</role>
-            <implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-        </component>
-    </components>
     <load-on-start>
         <component>
             <role>com.cyclopsgroup.waterview.Waterview</role>

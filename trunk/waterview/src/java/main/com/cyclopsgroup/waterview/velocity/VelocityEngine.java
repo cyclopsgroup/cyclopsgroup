@@ -33,6 +33,8 @@ import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
+import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 
 /**
  * Velocity engine object
@@ -81,7 +83,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      * @return Velocity template object
      * @throws Exception Throw it out
      */
-    public Template getTemplate(String templatePath, String packageName)
+    public Template getTemplate(String packageName, String templatePath)
             throws Exception
     {
         if (!templatePath.endsWith(".vm"))
@@ -139,6 +141,16 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
                 .lookup(VelocityFactory.ROLE));
         setModuleManager((ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE));
+
+        String pattern = ".+\\.vm";
+
+        ResolveActionsValve resolveActionsValve = (ResolveActionsValve) serviceManager
+                .lookup(ResolveActionsValve.ROLE);
+        resolveActionsValve.registerActionResolver(pattern, this);
+
+        RenderPageValve renderPageValve = (RenderPageValve) serviceManager
+                .lookup(RenderPageValve.ROLE);
+        renderPageValve.registerViewFactory(pattern, this);
     }
 
     /**

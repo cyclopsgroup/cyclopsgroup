@@ -23,7 +23,9 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
+import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.core.PageLink;
 
 /**
  * Create empty page context for runtime
@@ -41,6 +43,15 @@ public class CreatePageContextValve extends AbstractLogEnabled implements Valve
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
-        runtime.setPageContext(new DefaultContext(new HashMap()));
+        HashMap ctx = new HashMap();
+        ctx.put(PageRuntime.CONTEXT_RUNTIME_NAME, runtime);
+        ctx.put(PageRuntime.CONTEXT_PAGE_CONTEXT_NAME, ctx);
+        RequestValueParser params = runtime.getRequestParameters();
+        ctx.put(PageRuntime.CONTEXT_PARAMS_NAME, params);
+        ctx.put(PageRuntime.CONTEXT_APPLICATION_BASE_NAME, runtime
+                .getApplicationBaseUrl());
+        ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
+        ctx.put(PageLink.NAME, new PageLink(runtime));
+        runtime.setPageContext(new DefaultContext(ctx));
     }
 }

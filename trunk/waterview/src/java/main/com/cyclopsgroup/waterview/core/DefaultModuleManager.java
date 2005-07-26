@@ -226,7 +226,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.ModuleManager#getModule(java.lang.String, java.lang.String)
      */
-    public Module getModule(String modulePath, String packageName)
+    public Module getModule(String packageName, String modulePath)
     {
         Path pr = Path.parse(modulePath);
         String className = pr.getParentPath().replace('/', '.')

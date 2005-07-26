@@ -41,20 +41,8 @@ public class ParseURLValveTest extends TestCase
     {
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
                 System.out));
-        runtime.setRequestPath("/aaa|bbb|ccc|ddd.jelly");
-        ParseURLValve v = new ParseURLValve()
-        {
-            /**
-             * If path is for page
-             *
-             * @param path Page path
-             * @return True if view factory for path is defined
-             */
-            protected boolean isPagePath(String path)
-            {
-                return path.endsWith(".jelly");
-            }
-        };
+        runtime.setRequestPath("/a:aaa|a:bbb|a:ccc|a:ddd.jelly");
+        ParseURLValve v = new ParseURLValve();
         v.invoke(runtime, new PipelineContext()
         {
 

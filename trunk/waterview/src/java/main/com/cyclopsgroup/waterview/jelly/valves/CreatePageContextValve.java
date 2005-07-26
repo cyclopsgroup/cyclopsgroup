@@ -21,7 +21,9 @@ import org.apache.commons.jelly.JellyContext;
 
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
+import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.core.PageLink;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 
 /**
@@ -44,6 +46,14 @@ public class CreatePageContextValve extends AbstractLogEnabled implements Valve
         JellyContext jc = new JellyContext(je.getGlobalContext());
         JellyContextAdapter ctx = new JellyContextAdapter(jc);
         ctx.put(JellyEngine.JELLY_CONTEXT, jc);
+        ctx.put(PageRuntime.CONTEXT_RUNTIME_NAME, runtime);
+        ctx.put(PageRuntime.CONTEXT_PAGE_CONTEXT_NAME, ctx);
+        RequestValueParser params = runtime.getRequestParameters();
+        ctx.put(PageRuntime.CONTEXT_PARAMS_NAME, params);
+        ctx.put(PageRuntime.CONTEXT_APPLICATION_BASE_NAME, runtime
+                .getApplicationBaseUrl());
+        ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
+        ctx.put(PageLink.NAME, new PageLink(runtime));
         runtime.setPageContext(ctx);
         context.invokeNextValve(runtime);
     }

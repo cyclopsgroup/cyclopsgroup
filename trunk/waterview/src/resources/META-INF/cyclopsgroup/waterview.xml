@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
     <TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
-        <TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage"/>
-        <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage"/>
-        <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage"/>
+        <TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage" />
+        <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage" />
+        <TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage" />
     </TagLibrary>
     <Layout id="waterview.3ColumnLayout" description="3 columns layout provided by waterview">
-        <JellyLayout script="Waterview3ColumnLayout.jelly"/>
+        <JellyLayout package="com.cyclopsgroup.waterview.ui" script="Waterview3ColumnLayout.jelly" />
     </Layout>
     <Layout id="waterview.DefaultLayout" description="Body only">
-        <JellyLayout script="WaterviewDefaultLayout.jelly"/>
+        <JellyLayout package="com.cyclopsgroup.waterview.ui" script="WaterviewDefaultLayout.jelly"/>
     </Layout>
     <Frame id="waterview.DefaultDisplayFrame" description="Default jelly frame">
-        <JellyFrame script="WaterviewDisplayFrame.jelly"/>
+        <JellyFrame package="com.cyclopsgroup.waterview.ui" script="WaterviewDisplayFrame.jelly"/>
     </Frame>
 </Waterview>

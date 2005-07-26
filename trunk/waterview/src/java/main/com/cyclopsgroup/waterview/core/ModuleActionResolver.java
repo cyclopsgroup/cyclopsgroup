@@ -25,6 +25,7 @@ import com.cyclopsgroup.waterview.ActionResolver;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 
 /**
  * Module based action resolver
@@ -59,5 +60,8 @@ public class ModuleActionResolver extends AbstractLogEnabled implements
     {
         moduleManager = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
+        ResolveActionsValve resolveActionsValve = (ResolveActionsValve) serviceManager
+                .lookup(ResolveActionsValve.ROLE);
+        resolveActionsValve.registerActionResolver(".+\\.do", this);
     }
 }

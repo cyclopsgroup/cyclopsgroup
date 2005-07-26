@@ -99,7 +99,7 @@ public interface ModuleManager
      * @param packageName
      * @return Module object
      */
-    Module getModule(String modulePath, String packageName);
+    Module getModule(String packageName, String modulePath);
 
     /**
      * Register frame object

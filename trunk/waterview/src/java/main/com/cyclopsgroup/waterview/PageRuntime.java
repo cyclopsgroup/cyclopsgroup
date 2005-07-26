@@ -37,6 +37,9 @@ public interface PageRuntime
     /** Name of applicationBase url in context */
     String CONTEXT_APPLICATION_BASE_NAME = "applicationBase";
 
+    /** Name of package in context */
+    String CONTEXT_PACKAGE_NAME = "package";
+
     /** Name of pageBase url in context */
     String CONTEXT_PAGE_BASE_NAME = "pageBase";
 

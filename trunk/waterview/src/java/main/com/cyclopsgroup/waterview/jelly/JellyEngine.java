@@ -47,6 +47,8 @@ import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
+import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 
 /**
  * Jelly engine for jelly processing
@@ -191,10 +193,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String scriptPath, String packageName)
+    public Script getScript(String packageName, String scriptPath)
             throws JellyException
     {
-        return getScript(scriptPath, packageName, DUMMY_SCRIPT);
+        return getScript(packageName, scriptPath, DUMMY_SCRIPT);
     }
 
     /**
@@ -206,7 +208,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String scriptPath, String packageName,
+    public Script getScript(String packageName, String scriptPath,
             Script defaultScript) throws JellyException
     {
         String scriptKey = scriptPath;
@@ -343,6 +345,16 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         CacheManager cm = (CacheManager) serviceManager
                 .lookup(CacheManager.ROLE);
         setCacheManager(cm);
+
+        String pattern = ".+\\.jelly";
+
+        ResolveActionsValve resolveActionsValve = (ResolveActionsValve) serviceManager
+                .lookup(ResolveActionsValve.ROLE);
+        resolveActionsValve.registerActionResolver(pattern, this);
+
+        RenderPageValve renderPageValve = (RenderPageValve) serviceManager
+                .lookup(RenderPageValve.ROLE);
+        renderPageValve.registerViewFactory(pattern, this);
     }
 
     /**
