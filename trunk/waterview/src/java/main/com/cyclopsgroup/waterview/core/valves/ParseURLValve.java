@@ -30,7 +30,7 @@ import com.cyclopsgroup.waterview.Valve;
  */
 public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
-    public static final String ACTION_PREFIX = "a:";
+    public static final String ACTION_PREFIX = "do:";
 
     public static final char SEPARATOR = '|';
 

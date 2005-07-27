@@ -37,5 +37,6 @@ public class DefinitionTagPackage extends TagPackage
         addTag("JellyLayout", JellyLayoutTag.class);
         addTag("Frame", FrameTag.class);
         addTag("JellyFrame", JellyFrameTag.class);
+        addTag("ModulePackage", ModulePackageTag.class);
     }
 }

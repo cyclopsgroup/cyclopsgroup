@@ -46,7 +46,6 @@ import com.cyclopsgroup.waterview.Path;
 public class DefaultModuleManager extends AbstractLogEnabled implements
         Configurable, ModuleManager, Serviceable
 {
-
     private CacheManager cacheManager;
 
     private String defaultFrameId = "waterview.DefaultDisplayFrame";
@@ -58,6 +57,8 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private Hashtable layouts = new Hashtable();
 
     private String[] packageArray = ArrayUtils.EMPTY_STRING_ARRAY;
+
+    private Hashtable packageNames = new Hashtable();
 
     /**
      * Add given package
@@ -246,6 +247,19 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
+     * Overwrite or implement method getPackageName()
+     * @see com.cyclopsgroup.waterview.ModuleManager#getPackageName(java.lang.String)
+     */
+    public String getPackageName(String aliasOrPackage)
+    {
+        if (packageNames.contains(aliasOrPackage))
+        {
+            return (String) packageNames.get(aliasOrPackage);
+        }
+        return aliasOrPackage;
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.ModuleManager#getPackageNames()
@@ -273,6 +287,15 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void registerLayout(String layoutId, Layout layout)
     {
         layouts.put(layoutId, layout);
+    }
+
+    /**
+     * Overwrite or implement method registerPackageAlias()
+     * @see com.cyclopsgroup.waterview.ModuleManager#registerPackageAlias(java.lang.String, java.lang.String)
+     */
+    public void registerPackageAlias(String alias, String packageName)
+    {
+        packageNames.put(alias, packageName);
     }
 
     /**

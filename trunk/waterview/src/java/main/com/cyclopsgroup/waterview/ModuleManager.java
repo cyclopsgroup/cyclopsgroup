@@ -101,6 +101,8 @@ public interface ModuleManager
      */
     Module getModule(String packageName, String modulePath);
 
+    String getPackageName(String aliasOrPackage);
+
     /**
      * Register frame object
      *
@@ -116,6 +118,8 @@ public interface ModuleManager
      * @param layout Layout object
      */
     void registerLayout(String layoutId, Layout layout);
+
+    void registerPackageAlias(String alias, String packageName);
 
     /**
      * Set default frame id

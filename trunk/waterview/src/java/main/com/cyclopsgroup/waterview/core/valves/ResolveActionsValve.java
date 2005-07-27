@@ -26,6 +26,7 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.ActionResolver;
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.Valve;
@@ -52,6 +53,8 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
+        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+                ModuleManager.ROLE);
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
@@ -61,6 +64,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
                 String[] parts = StringUtils.split(actionName, ':');
                 actionName = parts[1];
                 packageName = parts[0];
+                packageName = mm.getPackageName(packageName);
             }
             for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
             {

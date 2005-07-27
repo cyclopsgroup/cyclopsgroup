@@ -73,8 +73,8 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve" />
                     <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve" />
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />
                     <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve" />
+                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />
                     <valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve" />
                 </valves>
             </configuration>

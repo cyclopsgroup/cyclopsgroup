@@ -121,6 +121,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             {
                 ModuleManager mm = (ModuleManager) runtime.getServiceManager()
                         .lookup(ModuleManager.ROLE);
+                packageName = mm.getPackageName(packageName);
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
                 ModuleChain moduleChain = new ModuleChain();
