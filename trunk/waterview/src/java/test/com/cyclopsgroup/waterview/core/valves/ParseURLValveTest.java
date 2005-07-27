@@ -41,7 +41,7 @@ public class ParseURLValveTest extends TestCase
     {
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
                 System.out));
-        runtime.setRequestPath("/a:aaa|a:bbb|a:ccc|a:ddd.jelly");
+        runtime.setRequestPath("/do:aaa|do:bbb|do:ccc|ddd.jelly");
         ParseURLValve v = new ParseURLValve();
         v.invoke(runtime, new PipelineContext()
         {
