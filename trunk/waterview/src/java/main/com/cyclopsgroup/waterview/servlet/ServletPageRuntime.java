@@ -16,8 +16,6 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
-import java.io.PrintWriter;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +24,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -71,7 +70,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         setRequestPath(requestPath == null ? StringUtils.EMPTY : requestPath);
 
         //Output
-        setOutput(new PrintWriter(response.getOutputStream()));
+        setOutput(response.getWriter());
 
         //Request value parser
         if (FileUpload.isMultipartContent(request))
@@ -140,5 +139,16 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     public void setOutputContentType(String contentType)
     {
         getResponse().setContentType(contentType);
+    }
+
+    /**
+     * Overwrite or implement method setPageContext()
+     * @see com.cyclopsgroup.waterview.AbstractPageRuntime#setPageContext(com.cyclopsgroup.clib.lang.Context)
+     */
+    public void setPageContext(Context pageContext)
+    {
+        super.setPageContext(pageContext);
+        pageContext.put("request", getRequest());
+        pageContext.put("response", getResponse());
     }
 }

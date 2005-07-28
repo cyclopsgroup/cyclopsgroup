@@ -39,7 +39,7 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
     public View createView(String packageName, String viewPath,
             PageRuntime runtime) throws Exception
     {
-        String path = "view/ " + viewPath;
+        String path = "view/" + viewPath;
         if (StringUtils.isNotEmpty(packageName))
         {
             path = StringUtils.replace(packageName, ".", "/") + "/" + path;

@@ -178,6 +178,8 @@ public interface PageRuntime
      */
     void setOutputContentType(String contentType);
 
+    void setPackage(String packageName);
+
     /**
      * Method setRenderTemplate() in class WebRuntime
      * 

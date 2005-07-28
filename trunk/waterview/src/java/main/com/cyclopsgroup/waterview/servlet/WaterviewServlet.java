@@ -158,12 +158,15 @@ public class WaterviewServlet extends HttpServlet
             HttpServletResponse response) throws IOException, ServletException
     {
         ServletPageRuntime runtime = null;
-        request.setAttribute("servletContext", servletContext);
+
         try
         {
             runtime = new ServletPageRuntime(request, response, servletContext,
                     fileUpload, serviceManager);
             request.setAttribute(PageRuntime.NAME, runtime);
+            request
+                    .setAttribute(ServletContext.class.getName(),
+                            servletContext);
             Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
             waterview.handleRuntime(runtime);
 
@@ -198,8 +201,8 @@ public class WaterviewServlet extends HttpServlet
         finally
         {
             runtime.getOutput().flush();
-            response.getOutputStream().flush();
-            response.getOutputStream().close();
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 }

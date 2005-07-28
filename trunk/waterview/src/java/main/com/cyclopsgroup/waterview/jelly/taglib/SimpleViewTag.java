@@ -20,6 +20,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.DynaViewFactory;
+import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.View;
 
 /**
@@ -56,7 +57,11 @@ public class SimpleViewTag extends AbstractViewTag
         {
             setPackage(getRuntime().getPackage());
         }
-        return viewFactory.createView(getPackage(), getPath(), getRuntime());
+
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        return viewFactory.createView(mm.getPackageName(getPackage()),
+                getPath(), getRuntime());
     }
 
     /**

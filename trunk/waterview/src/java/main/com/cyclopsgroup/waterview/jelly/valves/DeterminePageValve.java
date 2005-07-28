@@ -112,6 +112,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         {
             packageName = getDefaultPackage();
         }
+        runtime.setPackage(packageName);
         synchronized (this)
         {
             CacheManager cacheManager = (CacheManager) runtime

@@ -4,5 +4,11 @@
         <component>
             <role>com.cyclopsgroup.waterview.Waterview</role>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.velocity.VelocityEngine</role>
+        </component>
     </load-on-start>
 </plexus>
