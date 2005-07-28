@@ -252,7 +252,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      */
     public String getPackageName(String aliasOrPackage)
     {
-        if (packageNames.contains(aliasOrPackage))
+        if (packageNames.containsKey(aliasOrPackage))
         {
             return (String) packageNames.get(aliasOrPackage);
         }
