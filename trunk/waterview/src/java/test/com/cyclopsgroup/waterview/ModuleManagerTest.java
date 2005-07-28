@@ -1,0 +1,23 @@
+package com.cyclopsgroup.waterview;
+
+import org.codehaus.plexus.PlexusTestCase;
+
+import com.cyclopsgroup.waterview.jelly.JellyEngine;
+
+/**
+ * @author jiaqi
+ *
+ */
+public class ModuleManagerTest extends PlexusTestCase {
+    
+    /**
+     * @throws Exception
+     */
+    public void testGetPackage() throws Exception
+    {
+    	lookup(JellyEngine.ROLE);
+    	ModuleManager mm = (ModuleManager) lookup(ModuleManager.ROLE);
+    	assertEquals("com.cyclopsgroup.waterview.ui", mm.getPackageName("waterview"));
+    	assertEquals("abc", mm.getPackageName("abc"));
+    }
+}
