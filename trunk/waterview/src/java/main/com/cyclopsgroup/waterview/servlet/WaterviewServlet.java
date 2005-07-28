@@ -36,11 +36,11 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
 import com.cyclopsgroup.clib.site.plexus.ClibPlexusContainer;
+import com.cyclopsgroup.waterview.PageRedirector;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.ServiceManagerAdapter;
 import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.PageRedirector;
 
 /**
  * Main waterview servlet
@@ -89,7 +89,7 @@ public class WaterviewServlet extends HttpServlet
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
-        internallyProcess(request, response);
+        doProcess(request, response);
     }
 
     /**
@@ -100,7 +100,7 @@ public class WaterviewServlet extends HttpServlet
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
-        internallyProcess(request, response);
+        doProcess(request, response);
     }
 
     private void handleRuntimeException(Throwable e, PageRuntime runtime)
@@ -154,14 +154,16 @@ public class WaterviewServlet extends HttpServlet
         }
     }
 
-    private void internallyProcess(HttpServletRequest request,
+    private void doProcess(HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException
     {
         ServletPageRuntime runtime = null;
+        request.setAttribute("servletContext", servletContext);
         try
         {
             runtime = new ServletPageRuntime(request, response, servletContext,
                     fileUpload, serviceManager);
+            request.setAttribute(PageRuntime.NAME, runtime);
             Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
             waterview.handleRuntime(runtime);
 

@@ -17,6 +17,11 @@
             <implementation>com.cyclopsgroup.waterview.velocity.VelocityEngine</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
+            <implementation>com.cyclopsgroup.waterview.jsp.JspEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
         <!-- Action resolver  -->
         <component>
             <role>com.cyclopsgroup.waterview.core.ModuleActionResolver</role>
