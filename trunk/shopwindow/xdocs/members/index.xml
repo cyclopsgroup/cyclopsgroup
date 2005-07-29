@@ -5,14 +5,44 @@
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <body>
-        <section name="Members Introduction"/>
+        <section name="Members Introduction" />
         <section name="Member List">
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th/>
+                    <th />
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xxu">xxu</a>
+                    </td>
+                    <td>Xu, Xiaofang</td>
+                    <td>xiaofang@evavi.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xxu">Wiki Space</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/pzhai">pzhai</a>
+                    </td>
+                    <td>Zhai, Peng</td>
+                    <td>peng.zhai@evavi.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/pzhai">Wiki Space</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="xuying/index.html">xuying</a>
+                    </td>
+                    <td>Zhao, Xuying</td>
+                    <td>xuyingzhao@gmail.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xuying">Wiki Space</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -23,14 +53,6 @@
                     <td>
                         <a href="http://www.cyclopsgroup.com/kb/display/jiaqi">Wiki Space</a>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="xuying/index.html">xuying</a>
-                    </td>
-                    <td>Zhao, Xuying</td>
-                    <td>xuyingzhao@gmail.com</td>
-                    <td/>
                 </tr>
             </table>
         </section>
