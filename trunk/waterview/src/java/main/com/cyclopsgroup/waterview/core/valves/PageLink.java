@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core;
+package com.cyclopsgroup.waterview.core.valves;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,7 +23,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.core.valves.ParseURLValve;
 
 public class PageLink
 {
@@ -85,14 +84,13 @@ public class PageLink
         for (Iterator i = actions.iterator(); i.hasNext();)
         {
             String action = (String) i.next();
-            parts.add(ParseURLValve.ACTION_PREFIX + action);
+            parts.add(ParseURLValve.ACTION_INSTRUCTOR + '/' + action);
         }
         if (page != null)
         {
             parts.add(page);
         }
-        String url = StringUtils
-                .join(parts.iterator(), ParseURLValve.SEPARATOR);
+        String url = StringUtils.join(parts.iterator(), '/');
         if (!parts.isEmpty())
         {
             sb.append("/").append(url);

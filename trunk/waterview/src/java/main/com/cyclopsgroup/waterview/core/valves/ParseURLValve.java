@@ -16,6 +16,11 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
 
@@ -30,9 +35,25 @@ import com.cyclopsgroup.waterview.Valve;
  */
 public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
-    public static final String ACTION_PREFIX = "do:";
+    public static final String ACTION_INSTRUCTOR = "!do!";
 
-    public static final char SEPARATOR = '|';
+    public static final String PAGE_INSTRUCTOR = "!show!";
+
+    private static HashSet instructors;
+
+    /**
+     * @return
+     */
+    private static HashSet getInstructors()
+    {
+        if (instructors == null)
+        {
+            instructors = new HashSet();
+            instructors.add(ACTION_INSTRUCTOR);
+            instructors.add(PAGE_INSTRUCTOR);
+        }
+        return instructors;
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -42,38 +63,41 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception
     {
-        String requestPath = runtime.getRequestPath();
-        if (requestPath.startsWith("/"))
+        List behaviors = parseRequestPath(runtime.getRequestPath());
+        for (Iterator i = behaviors.iterator(); i.hasNext();)
         {
-            requestPath = requestPath.substring(1);
+            String behavior = (String) i.next();
+            if (behavior.startsWith('/' + ACTION_INSTRUCTOR))
+            {
+                String action = behavior
+                        .substring(ACTION_INSTRUCTOR.length() + 2);
+                runtime.getActions().add(action);
+            }
+            else if (behavior.startsWith('/' + PAGE_INSTRUCTOR))
+            {
+                String page = behavior.substring(PAGE_INSTRUCTOR.length() + 2);
+                runtime.setPage(page);
+            }
         }
-        String[] parts = null;
-        if (requestPath.indexOf(SEPARATOR) == -1)
-        {
-            parts = new String[] { requestPath };
-        }
-        else
-        {
-            parts = StringUtils.split(requestPath, SEPARATOR);
-        }
-        String pagePath = null;
+        context.invokeNextValve(runtime);
+    }
+
+    static List parseRequestPath(String requestPath)
+    {
+        List ret = new ArrayList();
+        String[] parts = StringUtils.split(requestPath, '/');
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < parts.length; i++)
         {
             String part = parts[i];
-            if (part.startsWith(ACTION_PREFIX))
+            if (getInstructors().contains(part) && sb.length() != 0)
             {
-                String action = part.substring(ACTION_PREFIX.length());
-                runtime.getActions().add(action);
+                ret.add(sb.toString());
+                sb = new StringBuffer();
             }
-            else
-            {
-                pagePath = part;
-            }
+            sb.append('/').append(part);
         }
-        if (StringUtils.isNotEmpty(pagePath))
-        {
-            runtime.setPage(pagePath);
-        }
-        context.invokeNextValve(runtime);
+        ret.add(sb.toString());
+        return ret;
     }
 }

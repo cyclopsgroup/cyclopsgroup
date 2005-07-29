@@ -23,7 +23,6 @@ import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.Valve;
-import com.cyclopsgroup.waterview.core.PageLink;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 
 /**
@@ -53,7 +52,6 @@ public class CreatePageContextValve extends AbstractLogEnabled implements Valve
         ctx.put(PageRuntime.CONTEXT_APPLICATION_BASE_NAME, runtime
                 .getApplicationBaseUrl());
         ctx.put(PageRuntime.CONTEXT_PAGE_BASE_NAME, runtime.getPageBaseUrl());
-        ctx.put(PageLink.NAME, new PageLink(runtime));
         runtime.setPageContext(ctx);
         context.invokeNextValve(runtime);
     }
