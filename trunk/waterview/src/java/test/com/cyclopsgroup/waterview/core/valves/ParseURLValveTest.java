@@ -17,19 +17,20 @@
 package com.cyclopsgroup.waterview.core.valves;
 
 import java.io.PrintWriter;
+import java.util.List;
 
-import junit.framework.TestCase;
+import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.FakePageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
 
 /**
  * Test case for ParseURLValve
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValveTest extends TestCase
+public class ParseURLValveTest extends PlexusTestCase
 {
 
     /**
@@ -41,8 +42,9 @@ public class ParseURLValveTest extends TestCase
     {
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
                 System.out));
-        runtime.setRequestPath("/do:aaa|do:bbb|do:ccc|ddd.jelly");
-        ParseURLValve v = new ParseURLValve();
+        runtime
+                .setRequestPath("/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly");
+        ParseURLValve v = (ParseURLValve) lookup(ParseURLValve.ROLE);
         v.invoke(runtime, new PipelineContext()
         {
 
@@ -51,10 +53,24 @@ public class ParseURLValveTest extends TestCase
                 //do nothing
             }
         });
-        assertEquals("ddd.jelly", runtime.getPage());
+        assertEquals("/ddd.jelly", runtime.getPage());
         assertEquals(3, runtime.getActions().size());
-        assertEquals("aaa", runtime.getActions().get(0));
-        assertEquals("bbb", runtime.getActions().get(1));
-        assertEquals("ccc", runtime.getActions().get(2));
+        assertEquals("/aaa", runtime.getActions().get(0));
+        assertEquals("/bbb/BAction", runtime.getActions().get(1));
+        assertEquals("/ccc", runtime.getActions().get(2));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public void testParseRequestPath() throws Exception
+    {
+        String path = "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly";
+        List parts = ParseURLValve.parseRequestPath(path);
+        assertEquals(4, parts.size());
+        assertEquals("/!do!/aaa", parts.get(0));
+        assertEquals("/!do!/bbb/BAction", parts.get(1));
+        assertEquals("/!do!/ccc", parts.get(2));
+        assertEquals("/!do!/ddd.jelly", parts.get(3));
     }
 }

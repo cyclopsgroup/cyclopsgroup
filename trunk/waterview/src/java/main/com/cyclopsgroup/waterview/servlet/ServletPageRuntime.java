@@ -24,7 +24,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
 import com.cyclopsgroup.waterview.PageRuntime;
 
@@ -38,8 +37,6 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
 {
 
     private ServletContext context;
-
-    private HttpServletRequest request;
 
     private HttpServletResponse response;
 
@@ -58,12 +55,13 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
             FileUpload fileUpload, ServiceManager services) throws Exception
     {
         this.response = response;
-        this.request = request;
         this.context = context;
 
         //Session Context
         setSessionContext(new HttpSessionContext(request.getSession()));
         setSessionId(request.getSession().getId());
+
+        setPageContext(new ServletRequestContext(request));
 
         //Request path
         String requestPath = request.getPathInfo();
@@ -112,43 +110,12 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     }
 
     /**
-     * Getter method for request
-     *
-     * @return Returns the request.
-     */
-    public HttpServletRequest getRequest()
-    {
-        return request;
-    }
-
-    /**
-     * Getter method for response
-     *
-     * @return Returns the response.
-     */
-    public HttpServletResponse getResponse()
-    {
-        return response;
-    }
-
-    /**
      * Override method setContentType in super class of ServletUIRuntime
      * 
      * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType(String contentType)
     {
-        getResponse().setContentType(contentType);
-    }
-
-    /**
-     * Overwrite or implement method setPageContext()
-     * @see com.cyclopsgroup.waterview.AbstractPageRuntime#setPageContext(com.cyclopsgroup.clib.lang.Context)
-     */
-    public void setPageContext(Context pageContext)
-    {
-        super.setPageContext(pageContext);
-        pageContext.put("request", getRequest());
-        pageContext.put("response", getResponse());
+        response.setContentType(contentType);
     }
 }

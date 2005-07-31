@@ -14,23 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Resolve given action
+ * Model to display full html page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface ActionResolver
+public interface Frame extends Module
 {
+    /** Name in context */
+    String NAME = Frame.class.getName();
+
     /**
-     * Resove action
+     * Display full page
      *
-     * @param packageName packageName
-     * @param runtime Page runtime object
-     * @param action Action path
+     * @param page Page object
+     * @param runtime Runtime object
      * @throws Exception Throw it out
      */
-    void resolveAction(String packageName, String action, PageRuntime runtime)
-            throws Exception;
+    void display(Page page, PageRuntime runtime) throws Exception;
 }

@@ -17,10 +17,10 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.Frame;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.spi.Frame;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Proxy of script frame
@@ -48,7 +48,7 @@ public class ScriptFrameProxy implements Frame
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Frame#display(com.cyclopsgroup.waterview.Page, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.PageRuntime)
      */
     public void display(Page page, PageRuntime runtime) throws Exception
     {

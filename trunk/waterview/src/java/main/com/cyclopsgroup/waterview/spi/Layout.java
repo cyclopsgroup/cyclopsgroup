@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2005 Cyclops Group Community
+ * Copyright 2002-2004 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,42 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Interface to handle all cache
+ * Layout interface
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface CacheManager
+public interface Layout extends Module
 {
-    /** Role name of CacheManager */
-    String ROLE = CacheManager.class.getName();
+    /** Name of this model */
+    public static final String NAME = Layout.class.getName();
 
     /**
-     * Check if an object exists in the cache
+     * Render given runtime and page model
      *
-     * @param host Host
-     * @param key Object key
-     * @return True if it exist
+     * @param runtime Runtime object
+     * @param page Page model
+     * @throws Exception Throw it out
      */
-    boolean contains(Object host, String key);
-
-    /**
-     * Get object from cache
-     *
-     * @param host Host
-     * @param key Object key
-     * @return Object, null if it doesn't exist
-     */
-    Object get(Object host, String key);
-
-    /**
-     * Put object into cache
-     *
-     * @param host Host
-     * @param key Object key
-     * @param value Object value
-     */
-    void put(Object host, String key, Object value);
+    void render(PageRuntime runtime, Page page) throws Exception;
 }

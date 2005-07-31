@@ -17,10 +17,10 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.Layout;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Script layout which doesn't initial script object initially
@@ -69,7 +69,7 @@ public class ScriptLayoutProxy implements Layout
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.Page)
      */
     public void render(PageRuntime runtime, Page page) throws Exception
     {

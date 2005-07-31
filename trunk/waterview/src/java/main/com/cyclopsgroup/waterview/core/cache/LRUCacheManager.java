@@ -23,7 +23,7 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.commons.collections.map.LRUMap;
 
-import com.cyclopsgroup.waterview.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheManager;
 
 /**
  * LRU implemented cache manager

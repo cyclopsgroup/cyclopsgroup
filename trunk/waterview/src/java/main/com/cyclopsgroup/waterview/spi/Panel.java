@@ -14,20 +14,27 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Runtime pipeline context
+ * Panel model
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface PipelineContext
+public interface Panel extends Module
 {
+    /** Empty panel array */
+    Panel[] EMPTY_ARRAY = new Panel[0];
+
     /**
-     * Invoke next valve of pipeline
+     * Render given runtime with views
      *
-     * @param runtime Page Runtime object
-     * @throws Exception Just throw it out
+     * @param runtime Runtime object
+     * @param views View array
+     * @throws Exception Throw it out
      */
-    void invokeNextValve(PageRuntime runtime) throws Exception;
+    void render(PageRuntime runtime, View[] views) throws Exception;
 }

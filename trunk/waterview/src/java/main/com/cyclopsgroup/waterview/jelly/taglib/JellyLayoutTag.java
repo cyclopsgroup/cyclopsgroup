@@ -21,12 +21,12 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Layout;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.ScriptLayout;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Jelly layout tag

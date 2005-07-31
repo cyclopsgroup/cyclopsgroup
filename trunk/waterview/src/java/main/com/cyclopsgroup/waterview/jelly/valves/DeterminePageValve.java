@@ -26,13 +26,13 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.CacheManager;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
+import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to find page object
@@ -89,7 +89,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception

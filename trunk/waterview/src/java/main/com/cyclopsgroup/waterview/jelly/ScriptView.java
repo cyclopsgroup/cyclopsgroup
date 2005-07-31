@@ -24,7 +24,7 @@ import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Script view
@@ -55,7 +55,7 @@ public class ScriptView extends BaseModule implements View
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
      */
     public void render(PageRuntime runtime, Context viewContext)
             throws Exception
@@ -64,19 +64,23 @@ public class ScriptView extends BaseModule implements View
         {
             getModule().execute(runtime, runtime.getPageContext());
         }
-        JellyContext jellyContext = (JellyContext) runtime.getPageContext()
-                .get(JellyEngine.JELLY_CONTEXT);
-        XMLOutput output = (XMLOutput) runtime.getPageContext().get(
-                JellyEngine.JELLY_OUTPUT);
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        JellyContext jellyContext = je.createJellyContext(viewContext);
+        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
         try
         {
             script.run(jellyContext, output);
         }
         catch (Exception e)
         {
-            runtime.getOutput().print("<pre>");
+            runtime.getOutput().print("<div>");
             e.printStackTrace(runtime.getOutput());
-            runtime.getOutput().println("</pre>");
+            runtime.getOutput().println("</div>");
+        }
+        finally
+        {
+            output.flush();
         }
     }
 }

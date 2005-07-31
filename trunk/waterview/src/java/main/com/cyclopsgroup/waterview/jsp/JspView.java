@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.spi.View;
 
 public class JspView extends BaseModule implements View
 {
@@ -41,7 +41,7 @@ public class JspView extends BaseModule implements View
 
     /**
      * Overwrite or implement method render()
-     * @see com.cyclopsgroup.waterview.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
      */
     public void render(PageRuntime runtime, Context viewContext)
             throws Exception

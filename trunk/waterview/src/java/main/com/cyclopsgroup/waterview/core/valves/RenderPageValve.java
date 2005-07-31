@@ -27,14 +27,14 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.CacheManager;
-import com.cyclopsgroup.waterview.DynaViewFactory;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
-import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Valve to render page
@@ -56,7 +56,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
 
         /**
          * Overwrite or implement method createView()
-         * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+         * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
          */
         public synchronized View createView(String packageName,
                 String viewPath, PageRuntime runtime) throws Exception
@@ -92,7 +92,7 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception

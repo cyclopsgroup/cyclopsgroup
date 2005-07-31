@@ -19,9 +19,9 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Page;
-import com.cyclopsgroup.waterview.PanelContent;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.PanelContent;
 
 /**
  * Panel content tag

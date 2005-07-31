@@ -19,8 +19,8 @@ package com.cyclopsgroup.waterview.core;
 import java.util.List;
 
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Default implementation of pipeline context
@@ -56,7 +56,7 @@ public class DefaultPipelineContext implements PipelineContext
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.PageRuntime)
      */
     public void invokeNextValve(PageRuntime runtime) throws Exception
     {

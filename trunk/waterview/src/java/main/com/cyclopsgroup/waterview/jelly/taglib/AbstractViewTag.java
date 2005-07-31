@@ -23,9 +23,9 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PanelContent;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.spi.PanelContent;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * View tag

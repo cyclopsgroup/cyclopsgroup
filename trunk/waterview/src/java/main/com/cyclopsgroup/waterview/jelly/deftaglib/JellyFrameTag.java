@@ -19,9 +19,9 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.jelly.ScriptFrameProxy;
+import com.cyclopsgroup.waterview.spi.Frame;
 
 /**
  * Jelly layout definition tag

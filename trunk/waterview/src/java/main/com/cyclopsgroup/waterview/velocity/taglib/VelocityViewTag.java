@@ -18,9 +18,9 @@ package com.cyclopsgroup.waterview.velocity.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.velocity.VelocityEngine;
 import com.cyclopsgroup.waterview.velocity.VelocityView;
 

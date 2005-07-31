@@ -14,24 +14,29 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Model to display full html page
+ * Dynamic view factory
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Frame extends Module
+public interface DynaViewFactory
 {
-    /** Name in context */
-    String NAME = Frame.class.getName();
+    /** Name of this component */
+    String NAME = DynaViewFactory.class.getName();
 
     /**
-     * Display full page
+     * Dynamically create View with view path
      *
-     * @param page Page object
-     * @param runtime Runtime object
+     * @param packageName package of ui module
+     * @param viewPath Path of the view
+     * @param runtime Current runtime
+     * @return View object
      * @throws Exception Throw it out
      */
-    void display(Page page, PageRuntime runtime) throws Exception;
+    View createView(String packageName, String viewPath, PageRuntime runtime)
+            throws Exception;
 }

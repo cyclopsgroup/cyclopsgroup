@@ -14,27 +14,42 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
 
 /**
- * Dynamic view factory
+ * Interface to handle all cache
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface DynaViewFactory
+public interface CacheManager
 {
-    /** Name of this component */
-    String NAME = DynaViewFactory.class.getName();
+    /** Role name of CacheManager */
+    String ROLE = CacheManager.class.getName();
 
     /**
-     * Dynamically create View with view path
+     * Check if an object exists in the cache
      *
-     * @param packageName package of ui module
-     * @param viewPath Path of the view
-     * @param runtime Current runtime
-     * @return View object
-     * @throws Exception Throw it out
+     * @param host Host
+     * @param key Object key
+     * @return True if it exist
      */
-    View createView(String packageName, String viewPath, PageRuntime runtime)
-            throws Exception;
+    boolean contains(Object host, String key);
+
+    /**
+     * Get object from cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @return Object, null if it doesn't exist
+     */
+    Object get(Object host, String key);
+
+    /**
+     * Put object into cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @param value Object value
+     */
+    void put(Object host, String key, Object value);
 }

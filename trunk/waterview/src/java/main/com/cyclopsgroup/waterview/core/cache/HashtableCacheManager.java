@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.core.cache;
 import java.util.Hashtable;
 import java.util.Map;
 
-import com.cyclopsgroup.waterview.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheManager;
 
 /**
  * Hashtable implemented cache manager

@@ -31,12 +31,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.CacheManager;
-import com.cyclopsgroup.waterview.Frame;
-import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.Frame;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 
 /**
  * Default implementation of module manager
@@ -116,7 +116,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getDefaultFrame()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultFrame()
      */
     public Frame getDefaultFrame()
     {
@@ -126,7 +126,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getDefaultFrameId()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultFrameId()
      */
     public String getDefaultFrameId()
     {
@@ -136,7 +136,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getDefaultLayout()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayout()
      */
     public Layout getDefaultLayout()
     {
@@ -146,7 +146,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getDefaultLayoutId()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayoutId()
      */
     public String getDefaultLayoutId()
     {
@@ -156,7 +156,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getFrame(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getFrame(java.lang.String)
      */
     public Frame getFrame(String frameId)
     {
@@ -166,7 +166,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getFrameIds()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getFrameIds()
      */
     public String[] getFrameIds()
     {
@@ -177,7 +177,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getLayout(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getLayout(java.lang.String)
      */
     public Layout getLayout(String layoutId)
     {
@@ -187,7 +187,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getLayoutIds()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getLayoutIds()
      */
     public String[] getLayoutIds()
     {
@@ -198,7 +198,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getModule(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getModule(java.lang.String)
      */
     public synchronized Module getModule(String modulePath)
     {
@@ -225,7 +225,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getModule(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getModule(java.lang.String, java.lang.String)
      */
     public Module getModule(String packageName, String modulePath)
     {
@@ -248,7 +248,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method getPackageName()
-     * @see com.cyclopsgroup.waterview.ModuleManager#getPackageName(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageName(java.lang.String)
      */
     public String getPackageName(String aliasOrPackage)
     {
@@ -262,7 +262,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#getPackageNames()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageNames()
      */
     public String[] getPackageNames()
     {
@@ -272,7 +272,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#registerFrame(java.lang.String, com.cyclopsgroup.waterview.Frame)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerFrame(java.lang.String, com.cyclopsgroup.waterview.spi.Frame)
      */
     public void registerFrame(String frameId, Frame frame)
     {
@@ -282,7 +282,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#registerLayout(java.lang.String, com.cyclopsgroup.waterview.Layout)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerLayout(java.lang.String, com.cyclopsgroup.waterview.spi.Layout)
      */
     public void registerLayout(String layoutId, Layout layout)
     {
@@ -291,7 +291,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method registerPackageAlias()
-     * @see com.cyclopsgroup.waterview.ModuleManager#registerPackageAlias(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerPackageAlias(java.lang.String, java.lang.String)
      */
     public void registerPackageAlias(String alias, String packageName)
     {
@@ -323,7 +323,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#setDefaultFrameId(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#setDefaultFrameId(java.lang.String)
      */
     public void setDefaultFrameId(String frameId)
     {
@@ -333,7 +333,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ModuleManager#setDefaultLayoutId(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#setDefaultLayoutId(java.lang.String)
      */
     public void setDefaultLayoutId(String layoutId)
     {

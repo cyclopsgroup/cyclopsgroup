@@ -14,24 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
+import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Layout interface
+ * Window is the reusable small area in page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Layout extends Module
+public interface View extends Module
 {
-    /** Name of this model */
-    public static final String NAME = Layout.class.getName();
+    /** Empty array */
+    View[] EMPTY_ARRAY = new View[0];
 
     /**
-     * Render given runtime and page model
+     * Render the window with runtime information
      *
-     * @param runtime Runtime object
-     * @param page Page model
+     * @param runtime UIRuntime object
+     * @param viewContext Context for this window
      * @throws Exception Throw it out
      */
-    void render(PageRuntime runtime, Page page) throws Exception;
+    void render(PageRuntime runtime, Context viewContext) throws Exception;
 }

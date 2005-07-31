@@ -21,10 +21,10 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Frame;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.spi.Frame;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Jelly script frame implementation
@@ -50,7 +50,7 @@ public class ScriptFrame extends BaseModule implements Frame
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Frame#display(com.cyclopsgroup.waterview.Page, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.PageRuntime)
      */
     public void display(Page page, PageRuntime runtime) throws Exception
     {

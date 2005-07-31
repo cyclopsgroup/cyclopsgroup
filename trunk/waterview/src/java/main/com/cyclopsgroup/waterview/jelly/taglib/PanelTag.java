@@ -24,11 +24,11 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.clib.lang.DefaultContext;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PanelContent;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.PanelContent;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Tag for panel definition in layout

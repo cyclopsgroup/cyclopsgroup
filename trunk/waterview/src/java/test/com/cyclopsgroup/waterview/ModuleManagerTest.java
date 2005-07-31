@@ -3,6 +3,7 @@ package com.cyclopsgroup.waterview;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 
 /**
  * @author jiaqi

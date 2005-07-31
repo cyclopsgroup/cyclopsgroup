@@ -25,8 +25,8 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to prepare information contained by URL
@@ -37,9 +37,11 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
     public static final String ACTION_INSTRUCTOR = "!do!";
 
+    private static HashSet instructors;
+
     public static final String PAGE_INSTRUCTOR = "!show!";
 
-    private static HashSet instructors;
+    public static final String ROLE = ParseURLValve.class.getName();
 
     /**
      * @return
@@ -53,33 +55,6 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
             instructors.add(PAGE_INSTRUCTOR);
         }
         return instructors;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
-     */
-    public void invoke(PageRuntime runtime, PipelineContext context)
-            throws Exception
-    {
-        List behaviors = parseRequestPath(runtime.getRequestPath());
-        for (Iterator i = behaviors.iterator(); i.hasNext();)
-        {
-            String behavior = (String) i.next();
-            if (behavior.startsWith('/' + ACTION_INSTRUCTOR))
-            {
-                String action = behavior
-                        .substring(ACTION_INSTRUCTOR.length() + 2);
-                runtime.getActions().add(action);
-            }
-            else if (behavior.startsWith('/' + PAGE_INSTRUCTOR))
-            {
-                String page = behavior.substring(PAGE_INSTRUCTOR.length() + 2);
-                runtime.setPage(page);
-            }
-        }
-        context.invokeNextValve(runtime);
     }
 
     static List parseRequestPath(String requestPath)
@@ -99,5 +74,32 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
         }
         ret.add(sb.toString());
         return ret;
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
+     */
+    public void invoke(PageRuntime runtime, PipelineContext context)
+            throws Exception
+    {
+        List behaviors = parseRequestPath(runtime.getRequestPath());
+        for (Iterator i = behaviors.iterator(); i.hasNext();)
+        {
+            String behavior = (String) i.next();
+            if (behavior.startsWith('/' + ACTION_INSTRUCTOR))
+            {
+                String action = behavior
+                        .substring(ACTION_INSTRUCTOR.length() + 1);
+                runtime.getActions().add(action);
+            }
+            else if (behavior.startsWith('/' + PAGE_INSTRUCTOR))
+            {
+                String page = behavior.substring(PAGE_INSTRUCTOR.length() + 1);
+                runtime.setPage(page);
+            }
+        }
+        context.invokeNextValve(runtime);
     }
 }

@@ -19,10 +19,10 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.ScriptView;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Jelly view tag

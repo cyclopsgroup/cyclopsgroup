@@ -22,9 +22,9 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
 import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
 import com.cyclopsgroup.waterview.RequestValueParser;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Create empty page context for runtime
@@ -37,7 +37,7 @@ public class CreatePageContextValve extends AbstractLogEnabled implements Valve
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception

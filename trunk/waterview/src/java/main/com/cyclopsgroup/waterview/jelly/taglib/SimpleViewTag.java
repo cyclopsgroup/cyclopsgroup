@@ -19,9 +19,9 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.DynaViewFactory;
-import com.cyclopsgroup.waterview.ModuleManager;
-import com.cyclopsgroup.waterview.View;
+import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Simple view tag

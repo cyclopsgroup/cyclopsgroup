@@ -26,15 +26,15 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
-import com.cyclopsgroup.waterview.ActionResolver;
-import com.cyclopsgroup.waterview.DynaViewFactory;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
+import com.cyclopsgroup.waterview.spi.ActionResolver;
+import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Velocity engine object
@@ -54,7 +54,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
     public View createView(String packageName, String viewPath,
             PageRuntime runtime) throws Exception
@@ -116,7 +116,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
     public void resolveAction(String packageName, String action,
             PageRuntime runtime) throws Exception

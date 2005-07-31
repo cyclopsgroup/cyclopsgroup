@@ -21,10 +21,10 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Layout;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Layout with a script support
@@ -54,7 +54,7 @@ public class ScriptLayout extends BaseModule implements Layout
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.Page)
      */
     public synchronized void render(PageRuntime runtime, Page page)
             throws Exception

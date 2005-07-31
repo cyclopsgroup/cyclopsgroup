@@ -25,11 +25,11 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.ActionResolver;
-import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.spi.ActionResolver;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to run modules
@@ -48,7 +48,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
     public void invoke(PageRuntime runtime, PipelineContext context)
             throws Exception

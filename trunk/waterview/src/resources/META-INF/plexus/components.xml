@@ -2,7 +2,7 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.waterview.ModuleManager</role>
+            <role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
@@ -30,11 +30,6 @@
         </component>
         <!--  A bunch of valves -->
         <component>
-            <role>com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve</role>
-            <implementation>com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-        </component>
-        <component>
             <role>com.cyclopsgroup.waterview.core.valves.ParseURLValve</role>
             <implementation>com.cyclopsgroup.waterview.core.valves.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -55,7 +50,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.CacheManager</role>
+            <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
             <implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
@@ -76,7 +71,6 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <valves>
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.CreatePageContextValve" />
                     <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve" />
                     <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve" />
                     <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />

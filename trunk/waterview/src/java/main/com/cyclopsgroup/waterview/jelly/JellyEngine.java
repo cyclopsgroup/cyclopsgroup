@@ -39,16 +39,16 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
-import com.cyclopsgroup.waterview.ActionResolver;
-import com.cyclopsgroup.waterview.CacheManager;
-import com.cyclopsgroup.waterview.DynaViewFactory;
-import com.cyclopsgroup.waterview.ModuleManager;
 import com.cyclopsgroup.waterview.PageRuntime;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
+import com.cyclopsgroup.waterview.spi.ActionResolver;
+import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Jelly engine for jelly processing
@@ -115,6 +115,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     private Properties initProperties = new Properties();
 
+    private ModuleManager moduleManager;
+
     private ServiceManager serviceManager;
 
     private Hashtable tagLibraries = new Hashtable();
@@ -142,17 +144,34 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
+     * Create new Jelly context with all variables in given context
+     * 
+     * @param context Given clib context
+     * @return JellyContext object
+     */
+    public JellyContext createJellyContext(
+            com.cyclopsgroup.clib.lang.Context context)
+    {
+        JellyContext jc = new JellyContext(getGlobalContext());
+        for (Iterator i = context.keys(); i.hasNext();)
+        {
+            String name = (String) i.next();
+            Object value = context.get(name);
+            jc.setVariable(name, value);
+        }
+        return jc;
+    }
+
+    /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
     public View createView(String packageName, String viewPath,
             PageRuntime runtime) throws Exception
     {
         String path = "view/" + viewPath;
         Script script = getScript(packageName, path);
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        return new ScriptView(script, mm.getModule(path));
+        return new ScriptView(script, moduleManager.getModule(path));
     }
 
     /**
@@ -259,7 +278,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @throws Exception Throw it out
      */
-    public void initGlobalContext() throws Exception
+    private void initGlobalContext() throws Exception
     {
         JellyContext jc = new JellyContext();
         jc.setVariable(SERVICE_MANAGER, serviceManager);
@@ -319,7 +338,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method resolveAction()
-     * @see com.cyclopsgroup.waterview.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
      */
     public void resolveAction(String packageName, String action,
             PageRuntime runtime) throws Exception
@@ -342,9 +361,9 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         this.serviceManager = serviceManager;
-        CacheManager cm = (CacheManager) serviceManager
-                .lookup(CacheManager.ROLE);
-        setCacheManager(cm);
+        cacheManager = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
+        moduleManager = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.jelly";
 
@@ -355,15 +374,5 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         RenderPageValve renderPageValve = (RenderPageValve) serviceManager
                 .lookup(RenderPageValve.ROLE);
         renderPageValve.registerViewFactory(pattern, this);
-    }
-
-    /**
-     * Setter method for cacheManager
-     *
-     * @param cacheManager The cacheManager to set.
-     */
-    public void setCacheManager(CacheManager cacheManager)
-    {
-        this.cacheManager = cacheManager;
     }
 }

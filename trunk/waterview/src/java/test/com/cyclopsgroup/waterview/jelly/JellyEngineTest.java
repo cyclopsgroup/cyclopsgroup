@@ -26,8 +26,8 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.FakePageRuntime;
-import com.cyclopsgroup.waterview.Page;
 import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Test case for jelly waterview

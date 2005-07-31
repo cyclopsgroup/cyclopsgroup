@@ -14,9 +14,11 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
+
+import com.cyclopsgroup.waterview.BaseModule;
 
 /**
  * Page model is the model mapped to a particular URI

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.Properties;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +34,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
+import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.clib.site.plexus.ClibPlexusContainer;
 import com.cyclopsgroup.waterview.PageRedirector;
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.ServiceManagerAdapter;
 import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;
 
@@ -61,8 +59,6 @@ public class WaterviewServlet extends HttpServlet
     private Log logger = LogFactory.getLog(getClass());
 
     private ServiceManager serviceManager;
-
-    private ServletContext servletContext;
 
     /**
      * Override method destroy in super class of WaterviewServlet
@@ -89,7 +85,67 @@ public class WaterviewServlet extends HttpServlet
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
-        doProcess(request, response);
+        handleRequest(request, response);
+    }
+
+    protected void doHandleException(HttpServletRequest request,
+            HttpServletResponse response, Throwable e) throws IOException,
+            ServletException
+    {
+        response.setContentType("text/html");
+        response.getWriter().print(
+                "<html><body><h2>Internal error occurs</h2><p><pre>");
+        e.printStackTrace(response.getWriter());
+        response.getWriter().print("</pre></p></body></html>");
+    }
+
+    /**
+     * Handle request and response
+     * 
+     * @param request Http servlet request
+     * @param response Http servlet response
+     * @throws Exception
+     */
+    protected void doHandleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception
+    {
+        ServletPageRuntime runtime = null;
+        runtime = new ServletPageRuntime(request, response, getServletConfig()
+                .getServletContext(), fileUpload, serviceManager);
+        Context ctx = runtime.getPageContext();
+        ctx.put("request", request);
+        ctx.put("response", response);
+        ctx.put("runtime", runtime);
+        ctx.put("requestContext", runtime.getPageContext());
+        ctx.put("parameters", runtime.getRequestParameters());
+        ctx.put("applicationBase", runtime.getApplicationBaseUrl());
+        ctx.put("pageBase", runtime.getPageBaseUrl());
+        ctx.put("serviceManager", serviceManager);
+
+        Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
+        waterview.handleRuntime(runtime);
+
+        if (runtime.getRedirector() != null)
+        {
+            String url = null;
+            if (runtime.getRedirector() instanceof URLRedirector)
+            {
+                url = ((URLRedirector) runtime.getRedirector()).getUrl();
+            }
+            else if (runtime.getRedirector() instanceof PageRedirector)
+            {
+                PageRedirector spr = (PageRedirector) runtime.getRedirector();
+                url = runtime.getPageBaseUrl() + spr.getPage();
+                if (StringUtils.isNotEmpty(spr.getQueryString()))
+                {
+                    url += "?" + spr.getQueryString();
+                }
+            }
+            if (url != null)
+            {
+                response.sendRedirect(url);
+            }
+        }
     }
 
     /**
@@ -100,17 +156,25 @@ public class WaterviewServlet extends HttpServlet
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException
     {
-        doProcess(request, response);
+        handleRequest(request, response);
     }
 
-    private void handleRuntimeException(Throwable e, PageRuntime runtime)
-            throws ServletException, IOException
+    private void handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws IOException, ServletException
     {
-        runtime.setOutputContentType("text/html");
-        runtime.getOutput().print(
-                "<html><body><h2>Internal error occurs</h2><p><pre>");
-        e.printStackTrace(runtime.getOutput());
-        runtime.getOutput().print("</pre></p></body></html>");
+        try
+        {
+            doHandleRequest(request, response);
+        }
+        catch (Exception e)
+        {
+            doHandleException(request, response, e);
+        }
+        finally
+        {
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
     }
 
     /**
@@ -120,7 +184,6 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
-        servletContext = config.getServletContext();
         String basedir = config.getServletContext().getRealPath("");
         Properties initProperties = new Properties();
         initProperties.setProperty("basedir", basedir);
@@ -151,58 +214,6 @@ public class WaterviewServlet extends HttpServlet
         catch (Exception e)
         {
             container.getLogger().fatalError("Can not start container", e);
-        }
-    }
-
-    private void doProcess(HttpServletRequest request,
-            HttpServletResponse response) throws IOException, ServletException
-    {
-        ServletPageRuntime runtime = null;
-
-        try
-        {
-            runtime = new ServletPageRuntime(request, response, servletContext,
-                    fileUpload, serviceManager);
-            request.setAttribute(PageRuntime.NAME, runtime);
-            request
-                    .setAttribute(ServletContext.class.getName(),
-                            servletContext);
-            Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
-            waterview.handleRuntime(runtime);
-
-            if (runtime.getRedirector() != null)
-            {
-                String url = null;
-                if (runtime.getRedirector() instanceof URLRedirector)
-                {
-                    url = ((URLRedirector) runtime.getRedirector()).getUrl();
-                }
-                else if (runtime.getRedirector() instanceof PageRedirector)
-                {
-                    PageRedirector spr = (PageRedirector) runtime
-                            .getRedirector();
-                    url = runtime.getPageBaseUrl() + spr.getPage();
-                    if (StringUtils.isNotEmpty(spr.getQueryString()))
-                    {
-                        url += "?" + spr.getQueryString();
-                    }
-                }
-                if (url != null)
-                {
-                    response.sendRedirect(url);
-                }
-            }
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-            handleRuntimeException(e, runtime);
-        }
-        finally
-        {
-            runtime.getOutput().flush();
-            response.getWriter().flush();
-            response.getWriter().close();
         }
     }
 }

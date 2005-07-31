@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core.cache;
 
-import com.cyclopsgroup.waterview.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheManager;
 
 /**
  * Always load new cache manager
@@ -29,7 +29,7 @@ public class NoneCacheManager implements CacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.CacheManager#contains(java.lang.Object, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.CacheManager#contains(java.lang.Object, java.lang.String)
      */
     public boolean contains(Object host, String key)
     {
@@ -39,7 +39,7 @@ public class NoneCacheManager implements CacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.CacheManager#get(java.lang.Object, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.CacheManager#get(java.lang.Object, java.lang.String)
      */
     public Object get(Object host, String key)
     {
@@ -49,7 +49,7 @@ public class NoneCacheManager implements CacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
+     * @see com.cyclopsgroup.waterview.spi.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
     public void put(Object host, String key, Object value)
     {

@@ -18,8 +18,8 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.waterview.View;
 import com.cyclopsgroup.waterview.jelly.ScriptView;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * View tag

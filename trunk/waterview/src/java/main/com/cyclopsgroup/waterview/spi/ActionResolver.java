@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,25 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.PageRuntime;
 
 /**
- * Window is the reusable small area in page
+ * Resolve given action
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface View extends Module
+public interface ActionResolver
 {
-    /** Empty array */
-    View[] EMPTY_ARRAY = new View[0];
-
     /**
-     * Render the window with runtime information
+     * Resove action
      *
-     * @param runtime UIRuntime object
-     * @param viewContext Context for this window
+     * @param packageName packageName
+     * @param runtime Page runtime object
+     * @param action Action path
      * @throws Exception Throw it out
      */
-    void render(PageRuntime runtime, Context viewContext) throws Exception;
+    void resolveAction(String packageName, String action, PageRuntime runtime)
+            throws Exception;
 }
