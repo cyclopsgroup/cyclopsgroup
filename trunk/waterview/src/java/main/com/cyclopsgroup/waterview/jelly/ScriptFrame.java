@@ -22,7 +22,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Page;
 
@@ -50,17 +50,18 @@ public class ScriptFrame extends BaseModule implements Frame
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void display(Page page, PageRuntime runtime) throws Exception
+    public void display(Page page, RuntimeData runtime) throws Exception
     {
-        JellyContext jc = (JellyContext) runtime.getPageContext().get(
-                JellyEngine.JELLY_CONTEXT);
-        runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
+        runtime.getPageContext().put(Page.NAME, page);
+        runtime.getPageContext().put(RuntimeData.NAME, runtime);
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        JellyContext jc = je.createJellyContext(runtime.getPageContext());
         jc.setVariable(Page.NAME, page);
-        jc.setVariable(PageRuntime.NAME, runtime);
+        jc.setVariable(RuntimeData.NAME, runtime);
         XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
-        runtime.getPageContext().put(JellyEngine.JELLY_OUTPUT, output);
         script.run(jc, output);
         output.flush();
     }

@@ -21,7 +21,7 @@ import org.apache.velocity.Template;
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -48,9 +48,9 @@ public class VelocityView extends BaseModule implements View
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
      */
-    public void render(PageRuntime runtime, Context viewContext)
+    public void render(RuntimeData runtime, Context viewContext)
             throws Exception
     {
         if (template == null)

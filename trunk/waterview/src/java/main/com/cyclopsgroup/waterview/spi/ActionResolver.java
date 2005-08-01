@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Resolve given action
@@ -33,6 +33,6 @@ public interface ActionResolver
      * @param action Action path
      * @throws Exception Throw it out
      */
-    void resolveAction(String packageName, String action, PageRuntime runtime)
+    void resolveAction(String packageName, String action, RuntimeData runtime)
             throws Exception;
 }

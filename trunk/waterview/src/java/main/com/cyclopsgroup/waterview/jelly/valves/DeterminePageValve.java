@@ -26,7 +26,7 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -89,9 +89,9 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         Page page = (Page) runtime.getPageContext().get(Page.NAME);
@@ -107,12 +107,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             pagePath = getDefaultPage();
         }
 
-        String packageName = runtime.getPackage();
-        if (StringUtils.isEmpty(packageName))
-        {
-            packageName = getDefaultPackage();
-        }
-        runtime.setPackage(packageName);
         synchronized (this)
         {
             CacheManager cacheManager = (CacheManager) runtime
@@ -122,14 +116,15 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             {
                 ModuleManager mm = (ModuleManager) runtime.getServiceManager()
                         .lookup(ModuleManager.ROLE);
-                packageName = mm.getPackageName(packageName);
+                ModuleManager.PathModel model = mm.parsePath(pagePath);
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
                 ModuleChain moduleChain = new ModuleChain();
                 String fullPath = "page/" + pagePath;
                 moduleChain.addModule(mm.getModule(fullPath));
 
-                Script pageScript = je.getScript(fullPath, packageName, null);
+                Script pageScript = je.getScript(model.getPackage(), fullPath,
+                        null);
                 if (pageScript != null)
                 {
                     page = loadPage(pageScript, je);
@@ -142,12 +137,12 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     System.arraycopy(parts, 0, newParts, 0, j + 1);
                     String defaultPath = StringUtils.join(newParts, '/');
                     fullPath = "page/" + defaultPath;
-                    pageScript = je.getScript(fullPath, packageName, null);
+                    pageScript = je.getScript(model.getPath(), fullPath, null);
                     if (pageScript != null)
                     {
                         page = loadPage(pageScript, je);
-                        moduleChain.addModule(mm.getModule(fullPath,
-                                packageName));
+                        moduleChain.addModule(mm.getModule(model.getPackage(),
+                                fullPath));
                         break;
                     }
                 }

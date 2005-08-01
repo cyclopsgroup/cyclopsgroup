@@ -16,9 +16,8 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
+import java.util.Iterator;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -27,7 +26,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -48,33 +46,32 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 {
     private CacheManager cacheManager;
 
-    private String defaultFrameId = "waterview.DefaultDisplayFrame";
+    private String defaultFrameId = "waterview.DefaultDisplayFrame",
+            defaultLayoutId = "waterview.DefaultLayout",
+            defaultPackageName = "com.cyclopsgroup.waterview.ui";
 
-    private String defaultLayoutId = "waterview.DefaultLayout";
+    private Hashtable frames = new Hashtable(), layouts = new Hashtable(),
+            packageNames = new Hashtable();
 
-    private Hashtable frames = new Hashtable();
-
-    private Hashtable layouts = new Hashtable();
-
-    private String[] packageArray = ArrayUtils.EMPTY_STRING_ARRAY;
-
-    private Hashtable packageNames = new Hashtable();
-
-    /**
-     * Add given package
-     *
-     * @param packageName
-     */
-    public synchronized void addPackage(String packageName)
+    private class DefaultPathModel implements PathModel
     {
-        List pkgs = new ArrayList();
-        CollectionUtils.addAll(pkgs, packageArray);
-        if (pkgs.contains(packageName))
+        private String packageName, path;
+
+        private DefaultPathModel(String packageName, String path)
         {
-            return;
+            this.packageName = packageName;
+            this.path = path;
         }
-        pkgs.add(packageName);
-        packageArray = (String[]) pkgs.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+
+        public String getPackage()
+        {
+            return packageName;
+        }
+
+        public String getPath()
+        {
+            return path;
+        }
     }
 
     /**
@@ -84,13 +81,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        Configuration[] pkgs = conf.getChild("packages").getChildren("package");
-        for (int i = 0; i < pkgs.length; i++)
-        {
-            Configuration c = pkgs[i];
-            addPackage(c.getValue());
-        }
-        addPackage("");
         String layoutId = conf.getChild("default-layout").getValue(null);
         if (layoutId != null)
         {
@@ -100,6 +90,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         if (frameId != null)
         {
             setDefaultFrameId(frameId);
+        }
+        String defaultPackage = conf.getChild("default-package").getValue(null);
+        if (defaultPackage != null)
+        {
+            setDefaultPackageName(defaultPackage);
         }
     }
 
@@ -207,16 +202,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
             return (Module) getCacheManager().get(this, modulePath);
         }
         Module ret = Module.EMPTY_MODULE;
-        String[] packages = getPackageNames();
-        for (int i = 0; i < packages.length; i++)
+
+        PathModel model = parsePath(modulePath);
+        if (StringUtils.isNotEmpty(model.getPath()))
         {
-            String packageName = packages[i];
-            Module module = getModule(modulePath, packageName);
-            if (module != null)
-            {
-                ret = module;
-                break;
-            }
+            ret = getModule(model.getPackage(), model.getPath());
         }
         getCacheManager().put(this, modulePath, ret);
         return ret;
@@ -262,16 +252,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageNames()
-     */
-    public String[] getPackageNames()
-    {
-        return packageArray;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerFrame(java.lang.String, com.cyclopsgroup.waterview.spi.Frame)
      */
     public void registerFrame(String frameId, Frame frame)
@@ -291,9 +271,9 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method registerPackageAlias()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerPackageAlias(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerPackage(java.lang.String, java.lang.String)
      */
-    public void registerPackageAlias(String alias, String packageName)
+    public void registerPackage(String alias, String packageName)
     {
         packageNames.put(alias, packageName);
     }
@@ -338,5 +318,50 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void setDefaultLayoutId(String layoutId)
     {
         defaultLayoutId = layoutId;
+    }
+
+    /**
+     * Overwrite or implement method parsePage()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
+     */
+    public PathModel parsePath(String page)
+    {
+        if (StringUtils.isEmpty(page))
+        {
+            return new DefaultPathModel(getDefaultPackageName(),
+                    StringUtils.EMPTY);
+        }
+        String pagePackage = getDefaultPackageName();
+        String path = page;
+        String[] parts = StringUtils.split(page, '/');
+        for (Iterator i = packageNames.keySet().iterator(); i.hasNext();)
+        {
+            String packageAlias = (String) i.next();
+            String packageName = (String) packageNames.get(packageAlias);
+            if (StringUtils.equals(parts[0], packageAlias)
+                    || StringUtils.equals(parts[0], packageName))
+            {
+                pagePackage = packageName;
+                path = page.substring(parts[0].length() + 1);
+                break;
+            }
+        }
+        return new DefaultPathModel(pagePackage, path);
+    }
+
+    /**
+     * @return Returns the defaultPackageName.
+     */
+    public String getDefaultPackageName()
+    {
+        return defaultPackageName;
+    }
+
+    /**
+     * @param defaultPackageName The defaultPackageName to set.
+     */
+    public void setDefaultPackageName(String defaultPackageName)
+    {
+        this.defaultPackageName = defaultPackageName;
     }
 }

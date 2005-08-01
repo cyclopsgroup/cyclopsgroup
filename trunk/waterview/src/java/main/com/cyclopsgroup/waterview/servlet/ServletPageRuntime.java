@@ -25,7 +25,7 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Default implementation of WebRuntime
@@ -33,7 +33,7 @@ import com.cyclopsgroup.waterview.PageRuntime;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class ServletPageRuntime extends AbstractPageRuntime implements
-        PageRuntime
+        RuntimeData
 {
 
     private ServletContext context;
@@ -102,7 +102,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
      */
     public String getMimeType(String fileName)
     {
@@ -112,7 +112,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     /**
      * Override method setContentType in super class of ServletUIRuntime
      * 
-     * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType(String contentType)
     {

@@ -25,6 +25,13 @@ import com.cyclopsgroup.waterview.Module;
  */
 public interface ModuleManager
 {
+    interface PathModel
+    {
+        String getPackage();
+
+        String getPath();
+    }
+
     /** Role name of the component */
     String ROLE = ModuleManager.class.getName();
 
@@ -103,7 +110,7 @@ public interface ModuleManager
      */
     Module getModule(String packageName, String modulePath);
 
-    String getPackageName(String aliasOrPackage);
+    PathModel parsePath(String page);
 
     /**
      * Register frame object
@@ -121,7 +128,7 @@ public interface ModuleManager
      */
     void registerLayout(String layoutId, Layout layout);
 
-    void registerPackageAlias(String alias, String packageName);
+    void registerPackage(String alias, String packageName);
 
     /**
      * Set default frame id

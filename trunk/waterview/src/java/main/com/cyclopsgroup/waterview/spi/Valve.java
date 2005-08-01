@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Valve for pipeline
@@ -37,5 +37,5 @@ public interface Valve
      * @param context Pipeline context
      * @throws Exception Throw it out
      */
-    void invoke(PageRuntime runtime, PipelineContext context) throws Exception;
+    void invoke(RuntimeData runtime, PipelineContext context) throws Exception;
 }

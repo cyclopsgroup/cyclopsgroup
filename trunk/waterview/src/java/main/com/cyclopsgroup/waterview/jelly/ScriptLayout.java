@@ -22,7 +22,7 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
 
@@ -54,25 +54,27 @@ public class ScriptLayout extends BaseModule implements Layout
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public synchronized void render(PageRuntime runtime, Page page)
+    public synchronized void render(RuntimeData runtime, Page page)
             throws Exception
     {
         if (getModule() != null)
         {
             getModule().execute(runtime, runtime.getPageContext());
         }
-        JellyContext jellyContext = (JellyContext) runtime.getPageContext()
-                .get(JellyEngine.JELLY_CONTEXT);
-        XMLOutput output = (XMLOutput) runtime.getPageContext().get(
-                JellyEngine.JELLY_OUTPUT);
-        jellyContext.setVariable(Page.NAME, page);
-        jellyContext.setVariable(NAME, this);
-        jellyContext.setVariable(JellyEngine.RENDERING, Boolean.TRUE);
+        runtime.getPageContext().put(Page.NAME, page);
+        runtime.getPageContext().put(NAME, this);
+        runtime.getPageContext().put(JellyEngine.RENDERING, Boolean.TRUE);
+
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        JellyContext jellyContext = je.createJellyContext(runtime
+                .getPageContext());
+        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
         script.run(jellyContext, output);
-        jellyContext.setVariable(Page.NAME, null);
-        jellyContext.setVariable(NAME, null);
-        jellyContext.setVariable(JellyEngine.RENDERING, null);
+        runtime.getPageContext().put(Page.NAME, null);
+        runtime.getPageContext().put(NAME, null);
+        runtime.getPageContext().put(JellyEngine.RENDERING, null);
     }
 }

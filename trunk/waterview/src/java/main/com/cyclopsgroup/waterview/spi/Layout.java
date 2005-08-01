@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Layout interface
@@ -36,5 +36,5 @@ public interface Layout extends Module
      * @param page Page model
      * @throws Exception Throw it out
      */
-    void render(PageRuntime runtime, Page page) throws Exception;
+    void render(RuntimeData runtime, Page page) throws Exception;
 }

@@ -67,7 +67,7 @@
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.pipeline.DefaultWaterviewPipeline</role>
-            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
+            <implementation>com.cyclopsgroup.waterview.pipeline.Pipeline</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <valves>

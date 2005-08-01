@@ -32,7 +32,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.pipeline.Pipeline;
 
@@ -83,9 +83,9 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void handleRuntime(PageRuntime runtime) throws Exception
+    public void handleRuntime(RuntimeData runtime) throws Exception
     {
         Pipeline pipeline = null;
         for (Iterator i = pipelines.keySet().iterator(); i.hasNext();)

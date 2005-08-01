@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Model to display full html page
@@ -36,5 +36,5 @@ public interface Frame extends Module
      * @param runtime Runtime object
      * @throws Exception Throw it out
      */
-    void display(Page page, PageRuntime runtime) throws Exception;
+    void display(Page page, RuntimeData runtime) throws Exception;
 }

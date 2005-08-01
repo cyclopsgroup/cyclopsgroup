@@ -30,9 +30,9 @@ public class BaseModule implements Module
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
      */
-    public void execute(PageRuntime pageRuntime, Context context)
+    public void execute(RuntimeData pageRuntime, Context context)
             throws Exception
     {
         if (module != null)

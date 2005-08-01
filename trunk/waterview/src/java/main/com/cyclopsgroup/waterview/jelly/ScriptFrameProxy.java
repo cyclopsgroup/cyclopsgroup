@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -48,9 +48,9 @@ public class ScriptFrameProxy implements Frame
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void display(Page page, PageRuntime runtime) throws Exception
+    public void display(Page page, RuntimeData runtime) throws Exception
     {
         getFrame(runtime).display(page, runtime);
     }
@@ -58,15 +58,15 @@ public class ScriptFrameProxy implements Frame
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
      */
-    public void execute(PageRuntime pageRuntime, Context context)
+    public void execute(RuntimeData pageRuntime, Context context)
             throws Exception
     {
         getFrame(pageRuntime).execute(pageRuntime, context);
     }
 
-    private ScriptFrame getFrame(PageRuntime runtime) throws Exception
+    private ScriptFrame getFrame(RuntimeData runtime) throws Exception
     {
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);

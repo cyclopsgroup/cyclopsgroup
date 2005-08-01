@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Dynamic view factory
@@ -37,6 +37,6 @@ public interface DynaViewFactory
      * @return View object
      * @throws Exception Throw it out
      */
-    View createView(String packageName, String viewPath, PageRuntime runtime)
+    View createView(String packageName, String viewPath, RuntimeData runtime)
             throws Exception;
 }

@@ -31,32 +31,10 @@ import com.cyclopsgroup.clib.lang.Context;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 
-public interface PageRuntime
+public interface RuntimeData
 {
-
-    /** Name of applicationBase url in context */
-    String CONTEXT_APPLICATION_BASE_NAME = "applicationBase";
-
-    /** Name of package in context */
-    String CONTEXT_PACKAGE_NAME = "package";
-
-    /** Name of pageBase url in context */
-    String CONTEXT_PAGE_BASE_NAME = "pageBase";
-
-    /** Name of pageContext in context */
-    String CONTEXT_PAGE_CONTEXT_NAME = "pageContext";
-
-    /** Name of page in context */
-    String CONTEXT_PAGE_NAME = "page";
-
-    /** Name of parameters in context */
-    String CONTEXT_PARAMS_NAME = "params";
-
-    /** Name of runtime in context */
-    String CONTEXT_RUNTIME_NAME = "runtime";
-
     /** Name of this object in context */
-    String NAME = PageRuntime.class.getName();
+    String NAME = RuntimeData.class.getName();
 
     /**
      * Get modifiable processor list
@@ -100,8 +78,6 @@ public interface PageRuntime
      * @return PrintWriter object for http response
      */
     PrintWriter getOutput();
-
-    String getPackage();
 
     /**
      * Method getRenderTemplate() in class WebRuntime
@@ -177,8 +153,6 @@ public interface PageRuntime
      * @param contentType Content type
      */
     void setOutputContentType(String contentType);
-
-    void setPackage(String packageName);
 
     /**
      * Method setRenderTemplate() in class WebRuntime

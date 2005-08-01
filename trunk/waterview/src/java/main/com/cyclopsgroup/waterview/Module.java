@@ -28,7 +28,7 @@ public interface Module
     /** Empty module instance */
     Module EMPTY_MODULE = new Module()
     {
-        public void execute(PageRuntime pageRuntime, Context context)
+        public void execute(RuntimeData pageRuntime, Context context)
                 throws Exception
         {
             //do nothing
@@ -42,5 +42,5 @@ public interface Module
      * @param context Given context
      * @throws Exception Throw it out to handler
      */
-    void execute(PageRuntime pageRuntime, Context context) throws Exception;
+    void execute(RuntimeData pageRuntime, Context context) throws Exception;
 }

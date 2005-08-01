@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.jelly.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.ScriptView;
@@ -31,9 +30,6 @@ import com.cyclopsgroup.waterview.spi.View;
  */
 public class JellyViewTag extends AbstractViewTag
 {
-
-    private String packageName;
-
     private String script;
 
     /**
@@ -44,25 +40,14 @@ public class JellyViewTag extends AbstractViewTag
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {
         requireAttribute("script");
-        if (StringUtils.isNotEmpty(getPackage()))
-        {
-            setPackage(getRuntime().getPackage());
-        }
         JellyEngine jellyEngine = (JellyEngine) serviceManager
                 .lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        String path = "view/" + getScript();
-        return new ScriptView(jellyEngine.getScript(getPackage(), path), mm
-                .getModule(path));
-    }
-
-    /**
-     * @return Returns the packageName.
-     */
-    public String getPackage()
-    {
-        return packageName;
+        ModuleManager.PathModel model = mm.parsePath(getScript());
+        String path = "view/" + model.getPath();
+        return new ScriptView(jellyEngine.getScript(model.getPackage(), path),
+                mm.getModule(path));
     }
 
     /**
@@ -73,14 +58,6 @@ public class JellyViewTag extends AbstractViewTag
     public String getScript()
     {
         return script;
-    }
-
-    /**
-     * @param packageName The packageName to set.
-     */
-    public void setPackage(String packageName)
-    {
-        this.packageName = packageName;
     }
 
     /**

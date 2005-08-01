@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 public class PageLink
 {
@@ -34,14 +34,14 @@ public class PageLink
 
     private List parameters = new ArrayList();
 
-    private PageRuntime runtime;
+    private RuntimeData runtime;
 
     /**
      * Constructor with a page runtime
      * 
      * @param runtime
      */
-    public PageLink(PageRuntime runtime)
+    public PageLink(RuntimeData runtime)
     {
         this.runtime = runtime;
         init();

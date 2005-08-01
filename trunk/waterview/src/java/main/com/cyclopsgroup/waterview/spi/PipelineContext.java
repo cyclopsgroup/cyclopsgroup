@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Runtime pipeline context
@@ -31,5 +31,5 @@ public interface PipelineContext
      * @param runtime Page Runtime object
      * @throws Exception Just throw it out
      */
-    void invokeNextValve(PageRuntime runtime) throws Exception;
+    void invokeNextValve(RuntimeData runtime) throws Exception;
 }

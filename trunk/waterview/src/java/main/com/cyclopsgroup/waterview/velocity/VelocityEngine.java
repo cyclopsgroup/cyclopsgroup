@@ -27,7 +27,7 @@ import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
@@ -54,10 +54,10 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
      */
     public View createView(String packageName, String viewPath,
-            PageRuntime runtime) throws Exception
+            RuntimeData runtime) throws Exception
     {
         String path = "view/" + viewPath;
         Template template = getTemplate(packageName, path);
@@ -116,10 +116,10 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
      */
     public void resolveAction(String packageName, String action,
-            PageRuntime runtime) throws Exception
+            RuntimeData runtime) throws Exception
     {
         Template template = getTemplate(packageName, "action/" + action);
         if (template != null)

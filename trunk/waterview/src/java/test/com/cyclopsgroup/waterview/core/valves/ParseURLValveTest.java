@@ -22,7 +22,7 @@ import java.util.List;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.FakePageRuntime;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 
 /**
@@ -48,7 +48,7 @@ public class ParseURLValveTest extends PlexusTestCase
         v.invoke(runtime, new PipelineContext()
         {
 
-            public void invokeNextValve(PageRuntime runtime) throws Exception
+            public void invokeNextValve(RuntimeData runtime) throws Exception
             {
                 //do nothing
             }

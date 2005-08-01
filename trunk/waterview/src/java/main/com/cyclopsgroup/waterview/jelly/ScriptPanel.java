@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly;
 import org.apache.commons.jelly.Script;
 
 import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -45,9 +45,9 @@ public class ScriptPanel extends BaseModule implements Panel
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.View[])
+     * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.View[])
      */
-    public void render(PageRuntime runtime, View[] views) throws Exception {
+    public void render(RuntimeData runtime, View[] views) throws Exception {
         // TODO Auto-generated method stub
 
     }

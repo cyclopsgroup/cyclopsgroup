@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -40,7 +40,7 @@ public class RenderLayoutTag extends AbstractTag
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        PageRuntime runtime = getRuntime();
+        RuntimeData runtime = getRuntime();
         Page page = (Page) getContext().getVariable(Page.NAME);
         Layout layout = page.getLayout();
         if (layout == null)

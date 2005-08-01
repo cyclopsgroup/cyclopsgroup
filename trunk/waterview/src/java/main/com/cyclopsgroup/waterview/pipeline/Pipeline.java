@@ -30,7 +30,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.core.DefaultPipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -80,7 +80,7 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void handleRuntime(PageRuntime runtime) throws Exception
+    public void handleRuntime(RuntimeData runtime) throws Exception
     {
         DefaultPipelineContext dpc = new DefaultPipelineContext(valves);
         dpc.invokeValve(runtime);

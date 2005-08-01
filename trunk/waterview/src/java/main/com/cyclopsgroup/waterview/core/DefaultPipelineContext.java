@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.List;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -56,9 +56,9 @@ public class DefaultPipelineContext implements PipelineContext
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void invokeNextValve(PageRuntime runtime) throws Exception
+    public void invokeNextValve(RuntimeData runtime) throws Exception
     {
         position++;
         if (position >= valves.size())
@@ -74,7 +74,7 @@ public class DefaultPipelineContext implements PipelineContext
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void invokeValve(PageRuntime runtime) throws Exception
+    public void invokeValve(RuntimeData runtime) throws Exception
     {
         Valve valve = (Valve) valves.get(position);
         valve.invoke(runtime, this);

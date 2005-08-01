@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Panel model
@@ -36,5 +36,5 @@ public interface Panel extends Module
      * @param views View array
      * @throws Exception Throw it out
      */
-    void render(PageRuntime runtime, View[] views) throws Exception;
+    void render(RuntimeData runtime, View[] views) throws Exception;
 }

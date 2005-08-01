@@ -39,7 +39,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
@@ -164,10 +164,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
      */
     public View createView(String packageName, String viewPath,
-            PageRuntime runtime) throws Exception
+            RuntimeData runtime) throws Exception
     {
         String path = "view/" + viewPath;
         Script script = getScript(packageName, path);
@@ -338,10 +338,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method resolveAction()
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
      */
     public void resolveAction(String packageName, String action,
-            PageRuntime runtime) throws Exception
+            RuntimeData runtime) throws Exception
     {
         Script script = getScript(packageName, "action/" + action);
         if (script == null)

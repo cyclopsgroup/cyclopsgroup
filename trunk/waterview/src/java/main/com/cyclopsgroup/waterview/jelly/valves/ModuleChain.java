@@ -22,7 +22,7 @@ import java.util.List;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Module chain module
@@ -49,9 +49,9 @@ class ModuleChain implements Module
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
      */
-    public void execute(PageRuntime pageRuntime, Context context)
+    public void execute(RuntimeData pageRuntime, Context context)
             throws Exception
     {
         for (Iterator i = modules.iterator(); i.hasNext();)

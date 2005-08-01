@@ -26,7 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.FakePageRuntime;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Page;
 
 /**
@@ -57,7 +57,7 @@ public class JellyEngineTest extends PlexusTestCase
         XMLOutput output = XMLOutput.createXMLOutput(sw);
         runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
         runtime.getPageContext().put(JellyEngine.JELLY_OUTPUT, output);
-        jc.setVariable(PageRuntime.NAME, runtime);
+        jc.setVariable(RuntimeData.NAME, runtime);
         script.run(jc, output);
         assertTrue(StringUtils.isNotEmpty(sw.toString()));
     }

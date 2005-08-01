@@ -40,7 +40,7 @@ public class ModulePackageTag extends AbstractTag
 
         ModuleManager moduleManager = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        moduleManager.registerPackageAlias(getAlias(), getName());
+        moduleManager.registerPackage(getAlias(), getName());
     }
 
     /**

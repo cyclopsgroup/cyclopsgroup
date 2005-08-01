@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Window is the reusable small area in page
@@ -37,5 +37,5 @@ public interface View extends Module
      * @param viewContext Context for this window
      * @throws Exception Throw it out
      */
-    void render(PageRuntime runtime, Context viewContext) throws Exception;
+    void render(RuntimeData runtime, Context viewContext) throws Exception;
 }

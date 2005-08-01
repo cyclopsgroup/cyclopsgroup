@@ -22,7 +22,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.DefaultContext;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.AbstractTag;
 import com.cyclopsgroup.waterview.spi.PanelContent;
 import com.cyclopsgroup.waterview.spi.View;
@@ -56,7 +56,7 @@ public abstract class AbstractViewTag extends AbstractTag
         View view = doCreateView(serviceManager);
         if (isRendering())
         {
-            PageRuntime runtime = getRuntime();
+            RuntimeData runtime = getRuntime();
             if (view == null)
             {
                 runtime.getOutput().println("<p>View is not created!</p>");

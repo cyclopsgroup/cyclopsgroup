@@ -25,7 +25,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
@@ -48,9 +48,9 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
@@ -58,13 +58,10 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
-            String packageName = runtime.getPackage();
-            if (actionName.indexOf(':') >= 0)
+            ModuleManager.PathModel model = mm.parsePath(actionName);
+            if (StringUtils.isEmpty(model.getPath()))
             {
-                String[] parts = StringUtils.split(actionName, ':');
-                actionName = parts[1];
-                packageName = parts[0];
-                packageName = mm.getPackageName(packageName);
+                continue;
             }
             for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
             {
@@ -73,7 +70,9 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
                 {
                     ActionResolver resolver = (ActionResolver) actionResolvers
                             .get(pattern);
-                    resolver.resolveAction(packageName, actionName, runtime);
+
+                    resolver.resolveAction(model.getPackage(), model.getPath(),
+                            runtime);
                     break;
                 }
             }

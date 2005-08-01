@@ -27,7 +27,7 @@ import com.cyclopsgroup.clib.site.avalon.FakeServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
+public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
 {
     /**
      * Constructor for class FakePageRuntime
@@ -49,14 +49,14 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getMimeType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
      */
     public String getMimeType(String fileName) {
         return "text/html";
     }
 
     /**
-     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionId()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
      */
     public String getSessionId() {
         return "";
@@ -65,7 +65,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#setOutputContentType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType(String contentType) {
     }

@@ -31,7 +31,7 @@ import com.cyclopsgroup.clib.lang.Context;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractPageRuntime implements PageRuntime
+public abstract class AbstractPageRuntime implements RuntimeData
 {
     private List actions = new LinkedList();
 
@@ -42,8 +42,6 @@ public abstract class AbstractPageRuntime implements PageRuntime
     private Locale locale = Locale.getDefault();
 
     private PrintWriter output;
-
-    private String packageName;
 
     private String page;
 
@@ -68,7 +66,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getActions()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getActions()
      */
     public List getActions()
     {
@@ -78,7 +76,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getApplicationBaseUrl()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getApplicationBaseUrl()
      */
     public String getApplicationBaseUrl()
     {
@@ -88,7 +86,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getInputContentType()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getInputContentType()
      */
     public String getInputContentType()
     {
@@ -98,7 +96,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getLocale()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getLocale()
      */
     public Locale getLocale()
     {
@@ -108,22 +106,17 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getOutput()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getOutput()
      */
     public PrintWriter getOutput()
     {
         return output;
     }
 
-    public String getPackage()
-    {
-        return packageName;
-    }
-
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getPage()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getPage()
      */
     public String getPage()
     {
@@ -133,7 +126,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getPageBaseUrl()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getPageBaseUrl()
      */
     public String getPageBaseUrl()
     {
@@ -143,7 +136,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getPageContext()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getPageContext()
      */
     public Context getPageContext()
     {
@@ -152,7 +145,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
 
     /**
      * Overwrite or implement method getRedirector()
-     * @see com.cyclopsgroup.waterview.PageRuntime#getRedirector()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getRedirector()
      */
     public Redirector getRedirector()
     {
@@ -162,7 +155,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getRequestParameters()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getRequestParameters()
      */
     public RequestValueParser getRequestParameters()
     {
@@ -172,7 +165,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getRequestPath()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getRequestPath()
      */
     public String getRequestPath()
     {
@@ -182,7 +175,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getServiceManager()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getServiceManager()
      */
     public ServiceManager getServiceManager()
     {
@@ -192,7 +185,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionContext()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionContext()
      */
     public Context getSessionContext()
     {
@@ -201,7 +194,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
 
     /**
      * Overwrite or implement method getSessionId()
-     * @see com.cyclopsgroup.waterview.PageRuntime#getSessionId()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
      */
     public String getSessionId()
     {
@@ -211,7 +204,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#getTimeZone()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getTimeZone()
      */
     public TimeZone getTimeZone()
     {
@@ -258,22 +251,17 @@ public abstract class AbstractPageRuntime implements PageRuntime
         this.output = output;
     }
 
-    public void setPackage(String packageName)
-    {
-        this.packageName = packageName;
-    }
-
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#setPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
      */
     public void setPage(String page)
     {
         this.page = page;
         if (getPageContext() != null)
         {
-            getPageContext().put(CONTEXT_PAGE_NAME, page);
+            getPageContext().put("page", page);
         }
     }
 
@@ -290,7 +278,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.PageRuntime#setPageContext(com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setPageContext(com.cyclopsgroup.clib.lang.Context)
      */
     public void setPageContext(Context pageContext)
     {
@@ -299,7 +287,7 @@ public abstract class AbstractPageRuntime implements PageRuntime
 
     /**
      * Overwrite or implement method setRedirector()
-     * @see com.cyclopsgroup.waterview.PageRuntime#setRedirector(com.cyclopsgroup.waterview.Redirector)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setRedirector(com.cyclopsgroup.waterview.Redirector)
      */
     public void setRedirector(Redirector redirector)
     {

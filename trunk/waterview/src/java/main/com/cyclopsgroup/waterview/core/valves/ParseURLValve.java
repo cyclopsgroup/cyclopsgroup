@@ -24,7 +24,7 @@ import java.util.List;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -79,9 +79,9 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         List behaviors = parseRequestPath(runtime.getRequestPath());

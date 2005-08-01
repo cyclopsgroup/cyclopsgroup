@@ -22,7 +22,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagSupport;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Base jelly tag
@@ -75,9 +75,9 @@ public abstract class AbstractTag extends ClibTagSupport
      *
      * @return PageRuntime object
      */
-    protected PageRuntime getRuntime()
+    protected RuntimeData getRuntime()
     {
-        return (PageRuntime) getContext().getVariable(PageRuntime.NAME);
+        return (RuntimeData) getContext().getVariable(RuntimeData.NAME);
     }
 
     /**

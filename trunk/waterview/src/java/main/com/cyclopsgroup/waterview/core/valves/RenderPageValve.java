@@ -27,7 +27,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -56,10 +56,10 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
 
         /**
          * Overwrite or implement method createView()
-         * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.PageRuntime)
+         * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
          */
         public synchronized View createView(String packageName,
-                String viewPath, PageRuntime runtime) throws Exception
+                String viewPath, RuntimeData runtime) throws Exception
         {
             String key = proxy.hashCode() + '/' + packageName + '/' + viewPath;
             if (getCacheManager().contains(this, key))
@@ -92,9 +92,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         DynaViewFactory viewFactory = null;

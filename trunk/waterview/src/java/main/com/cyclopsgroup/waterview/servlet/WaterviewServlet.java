@@ -60,6 +60,8 @@ public class WaterviewServlet extends HttpServlet
 
     private ServiceManager serviceManager;
 
+    private ServletConfig servletConfig;
+
     /**
      * Override method destroy in super class of WaterviewServlet
      * 
@@ -110,9 +112,11 @@ public class WaterviewServlet extends HttpServlet
             HttpServletResponse response) throws Exception
     {
         ServletPageRuntime runtime = null;
-        runtime = new ServletPageRuntime(request, response, getServletConfig()
+        runtime = new ServletPageRuntime(request, response, servletConfig
                 .getServletContext(), fileUpload, serviceManager);
         Context ctx = runtime.getPageContext();
+        ctx.put("servletConfig", servletConfig);
+        ctx.put("servletContext", servletConfig.getServletContext());
         ctx.put("request", request);
         ctx.put("response", response);
         ctx.put("runtime", runtime);
@@ -184,6 +188,7 @@ public class WaterviewServlet extends HttpServlet
      */
     public void init(ServletConfig config) throws ServletException
     {
+        servletConfig = config;
         String basedir = config.getServletContext().getRealPath("");
         Properties initProperties = new Properties();
         initProperties.setProperty("basedir", basedir);
