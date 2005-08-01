@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
@@ -25,7 +24,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface View extends Module
+public interface View
 {
     /** Empty array */
     View[] EMPTY_ARRAY = new View[0];

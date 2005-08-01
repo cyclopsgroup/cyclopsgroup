@@ -35,6 +35,6 @@ public class ViewTag extends AbstractViewTag
      */
     protected View doCreateView(ServiceManager serviceManager) throws Exception
     {
-        return new ScriptView(getBody(), null);
+        return new ScriptView(getBody());
     }
 }

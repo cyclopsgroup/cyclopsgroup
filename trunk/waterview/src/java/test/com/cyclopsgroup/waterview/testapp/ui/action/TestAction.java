@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.testapp.ui.action;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
@@ -25,13 +24,9 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TestAction implements Module
+public class TestAction
 {
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
-     */
+
     public void execute(RuntimeData pageRuntime, Context context)
             throws Exception
     {

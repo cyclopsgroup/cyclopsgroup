@@ -57,7 +57,7 @@ public class JellyLayoutTag extends AbstractTag
         ModuleManager.PathModel model = mm.parsePath(getScript());
         String path = "layout/" + model.getPath();
         Layout layout = new ScriptLayout(jellyEngine.getScript(model
-                .getPackage(), path), mm.getModule(path));
+                .getPackage(), path));
         page.setLayout(layout);
     }
 

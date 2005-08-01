@@ -20,8 +20,6 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -31,7 +29,7 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptFrame extends BaseModule implements Frame
+public class ScriptFrame implements Frame
 {
     private Script script;
 
@@ -39,12 +37,10 @@ public class ScriptFrame extends BaseModule implements Frame
      * Constructor for class ScriptFrame
      *
      * @param script Script object
-     * @param module Module object
      */
-    public ScriptFrame(Script script, Module module)
+    public ScriptFrame(Script script)
     {
         this.script = script;
-        setModule(module);
     }
 
     /**

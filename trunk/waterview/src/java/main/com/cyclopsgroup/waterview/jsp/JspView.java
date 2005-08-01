@@ -22,11 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
 
-public class JspView extends BaseModule implements View
+public class JspView implements View
 {
     private String path;
 

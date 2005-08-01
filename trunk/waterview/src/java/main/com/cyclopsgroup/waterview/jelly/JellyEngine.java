@@ -47,7 +47,6 @@ import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -115,7 +114,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     private Properties initProperties = new Properties();
 
-    private ModuleManager moduleManager;
+    //private ModuleManager moduleManager;
 
     private ServiceManager serviceManager;
 
@@ -171,7 +170,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     {
         String path = "/view" + viewPath;
         Script script = getScript(packageName, path);
-        return new ScriptView(script, moduleManager.getModule(path));
+        return new ScriptView(script);
     }
 
     /**
@@ -365,8 +364,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     {
         this.serviceManager = serviceManager;
         cacheManager = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        moduleManager = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
+        //moduleManager = (ModuleManager) serviceManager.lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.jelly";
 

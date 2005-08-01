@@ -46,8 +46,7 @@ public class JellyViewTag extends AbstractViewTag
                 .lookup(ModuleManager.ROLE);
         ModuleManager.PathModel model = mm.parsePath(getScript());
         String path = "/view" + model.getPath();
-        return new ScriptView(jellyEngine.getScript(model.getPackage(), path),
-                mm.getModule(path));
+        return new ScriptView(jellyEngine.getScript(model.getPackage(), path));
     }
 
     /**

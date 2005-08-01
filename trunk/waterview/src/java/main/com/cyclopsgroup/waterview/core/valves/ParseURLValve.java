@@ -43,9 +43,6 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
 
     public static final String ROLE = ParseURLValve.class.getName();
 
-    /**
-     * @return
-     */
     private static HashSet getInstructors()
     {
         if (instructors == null)

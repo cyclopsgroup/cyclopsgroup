@@ -75,7 +75,7 @@ public class PanelTag extends AbstractTag
                         .getRequestContext());
                 try
                 {
-                    view.execute(runtime, viewContext);
+                    //view.execute(runtime, viewContext);
                     view.render(runtime, viewContext);
                 }
                 catch (Exception e)

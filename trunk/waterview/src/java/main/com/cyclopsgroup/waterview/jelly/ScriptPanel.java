@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.jelly;
 
 import org.apache.commons.jelly.Script;
 
-import com.cyclopsgroup.waterview.BaseModule;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.View;
@@ -28,7 +27,7 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptPanel extends BaseModule implements Panel
+public class ScriptPanel implements Panel
 {
     //private Script script;
 
@@ -47,7 +46,8 @@ public class ScriptPanel extends BaseModule implements Panel
      *
      * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.View[])
      */
-    public void render(RuntimeData runtime, View[] views) throws Exception {
+    public void render(RuntimeData runtime, View[] views) throws Exception
+    {
         // TODO Auto-generated method stub
 
     }

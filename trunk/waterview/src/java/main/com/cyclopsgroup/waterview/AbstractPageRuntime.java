@@ -47,9 +47,9 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private String pageBaseUrl;
 
-    private Context requestContext;
-
     private Redirector redirector;
+
+    private Context requestContext;
 
     private RequestValueParser requestParameters;
 
@@ -134,22 +134,21 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getPageContext()
-     */
-    public Context getRequestContext()
-    {
-        return requestContext;
-    }
-
-    /**
      * Overwrite or implement method getRedirector()
      * @see com.cyclopsgroup.waterview.RuntimeData#getRedirector()
      */
     public Redirector getRedirector()
     {
         return redirector;
+    }
+
+    /**
+     * Overwrite or implement method getRequestContext()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getRequestContext()
+     */
+    public Context getRequestContext()
+    {
+        return requestContext;
     }
 
     /**
@@ -284,22 +283,21 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setPageContext(com.cyclopsgroup.clib.lang.Context)
-     */
-    public void setRequestContext(Context pageContext)
-    {
-        this.requestContext = pageContext;
-    }
-
-    /**
      * Overwrite or implement method setRedirector()
      * @see com.cyclopsgroup.waterview.RuntimeData#setRedirector(com.cyclopsgroup.waterview.Redirector)
      */
     public void setRedirector(Redirector redirector)
     {
         this.redirector = redirector;
+    }
+
+    /**
+     * Set request context
+     * @param pageContext Context object
+     */
+    public void setRequestContext(Context pageContext)
+    {
+        this.requestContext = pageContext;
     }
 
     /**

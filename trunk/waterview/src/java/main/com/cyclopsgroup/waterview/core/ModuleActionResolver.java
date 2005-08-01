@@ -21,7 +21,6 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -44,11 +43,7 @@ public class ModuleActionResolver extends AbstractLogEnabled implements
     public void resolveAction(String packageName, String action,
             RuntimeData runtime) throws Exception
     {
-        Module module = moduleManager.getModule("/action" + action);
-        if (module != null)
-        {
-            module.execute(runtime, runtime.getRequestContext());
-        }
+        System.out.println("Run action " + action + " with " + moduleManager);
     }
 
     /**

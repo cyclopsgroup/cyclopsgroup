@@ -65,7 +65,7 @@ public abstract class AbstractViewTag extends AbstractTag
             {
                 DefaultContext viewContext = new DefaultContext(new HashMap(),
                         runtime.getRequestContext());
-                view.execute(runtime, viewContext);
+                //view.execute(runtime, viewContext);
                 view.render(runtime, viewContext);
             }
         }

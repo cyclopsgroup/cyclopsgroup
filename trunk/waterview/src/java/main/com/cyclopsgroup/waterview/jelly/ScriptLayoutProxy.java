@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -49,19 +48,7 @@ public class ScriptLayoutProxy implements Layout
                 ModuleManager.ROLE);
         ModuleManager.PathModel model = mm.parsePath(layoutScript);
         String path = "/layout" + model.getPath();
-        return new ScriptLayout(je.getScript(model.getPackage(), path), mm
-                .getModule(path));
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
-     */
-    public void execute(RuntimeData pageRuntime, Context context)
-            throws Exception
-    {
-        getLayout(pageRuntime).execute(pageRuntime, context);
+        return new ScriptLayout(je.getScript(model.getPackage(), path));
     }
 
     /**

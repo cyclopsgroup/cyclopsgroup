@@ -155,9 +155,9 @@ public interface RuntimeData
     void setOutputContentType(String contentType);
 
     /**
-     * Method setRenderTemplate() in class WebRuntime
+     * Set page to render
      * 
-     * @param template
+     * @param page Page path
      */
     void setPage(String page);
 

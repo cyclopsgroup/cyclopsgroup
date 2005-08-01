@@ -104,9 +104,9 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 ModuleManager.PathModel model = mm.parsePath(pagePath);
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
-                ModuleChain moduleChain = new ModuleChain();
+                //ModuleChain moduleChain = new ModuleChain();
                 String fullPath = "/page" + model.getPath();
-                moduleChain.addModule(mm.getModule(fullPath));
+                //moduleChain.addModule(mm.getModule(fullPath));
 
                 Script pageScript = je.getScript(model.getPackage(), fullPath,
                         null);
@@ -126,8 +126,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     if (pageScript != null)
                     {
                         page = loadPage(pageScript, je);
-                        moduleChain.addModule(mm.getModule(model.getPackage(),
-                                fullPath));
+                        //moduleChain.addModule(mm.getModule(model.getPackage(), fullPath));
                         break;
                     }
                 }
@@ -135,7 +134,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 {
                     page = EMPTY_PAGE;
                 }
-                page.setModule(moduleChain);
+                //page.setModule(moduleChain);
                 cacheManager.put(this, pagePath, page);
             }
         }

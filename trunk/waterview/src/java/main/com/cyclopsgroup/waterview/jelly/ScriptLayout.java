@@ -20,8 +20,6 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -31,7 +29,7 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptLayout extends BaseModule implements Layout
+public class ScriptLayout implements Layout
 {
     private Script script;
 
@@ -39,16 +37,14 @@ public class ScriptLayout extends BaseModule implements Layout
      * Constructor for class JellyScriptLayout
      *
      * @param script Jelly script object
-     * @param module Module to run
      */
-    public ScriptLayout(Script script, Module module)
+    public ScriptLayout(Script script)
     {
         this.script = script;
         if (script == null)
         {
             throw new NullPointerException("Script can not be null");
         }
-        setModule(module);
     }
 
     /**
@@ -59,10 +55,6 @@ public class ScriptLayout extends BaseModule implements Layout
     public synchronized void render(RuntimeData runtime, Page page)
             throws Exception
     {
-        if (getModule() != null)
-        {
-            getModule().execute(runtime, runtime.getRequestContext());
-        }
         runtime.getRequestContext().put(Page.NAME, page);
         runtime.getRequestContext().put(NAME, this);
         runtime.getRequestContext().put(JellyEngine.RENDERING, Boolean.TRUE);

@@ -29,8 +29,6 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Layout;
@@ -213,65 +211,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         return (String[]) layouts.keySet().toArray(
                 ArrayUtils.EMPTY_STRING_ARRAY);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getModule(java.lang.String)
-     */
-    public synchronized Module getModule(String modulePath)
-    {
-        if (getCacheManager().contains(this, modulePath))
-        {
-            return (Module) getCacheManager().get(this, modulePath);
-        }
-        Module ret = Module.EMPTY_MODULE;
-
-        PathModel model = parsePath(modulePath);
-        if (StringUtils.isNotEmpty(model.getPath()))
-        {
-            ret = getModule(model.getPackage(), model.getPath());
-        }
-        getCacheManager().put(this, modulePath, ret);
-        return ret;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getModule(java.lang.String, java.lang.String)
-     */
-    public Module getModule(String packageName, String modulePath)
-    {
-        Path pr = Path.parse(modulePath);
-        String className = pr.getParentPath().replace('/', '.')
-                + pr.getShortName();
-        if (StringUtils.isNotEmpty(packageName))
-        {
-            className = packageName + '.' + className;
-        }
-        try
-        {
-            return (Module) Class.forName(className).newInstance();
-        }
-        catch (Exception ignored)
-        {
-            return null;
-        }
-    }
-
-    /**
-     * Overwrite or implement method getPackageName()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageName(java.lang.String)
-     */
-    public String getPackageName(String aliasOrPackage)
-    {
-        if (packageNames.containsKey(aliasOrPackage))
-        {
-            return (String) packageNames.get(aliasOrPackage);
-        }
-        return aliasOrPackage;
     }
 
     /**

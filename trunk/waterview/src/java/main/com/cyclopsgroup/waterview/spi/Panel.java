@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
@@ -24,7 +23,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Panel extends Module
+public interface Panel
 {
     /** Empty panel array */
     Panel[] EMPTY_ARRAY = new Panel[0];

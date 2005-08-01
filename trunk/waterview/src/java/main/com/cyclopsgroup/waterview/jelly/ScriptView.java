@@ -21,8 +21,6 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.Context;
-import com.cyclopsgroup.waterview.BaseModule;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -31,7 +29,7 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptView extends BaseModule implements View
+public class ScriptView implements View
 {
 
     private Script script;
@@ -40,16 +38,14 @@ public class ScriptView extends BaseModule implements View
      * Constructor for class ScriptView
      *
      * @param script Script object
-     * @param module Module to run
      */
-    public ScriptView(Script script, Module module)
+    public ScriptView(Script script)
     {
         if (script == null)
         {
             throw new NullPointerException("Script can not be null");
         }
         this.script = script;
-        setModule(module);
     }
 
     /**
@@ -60,10 +56,6 @@ public class ScriptView extends BaseModule implements View
     public void render(RuntimeData runtime, Context viewContext)
             throws Exception
     {
-        if (getModule() != null)
-        {
-            getModule().execute(runtime, runtime.getRequestContext());
-        }
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
         JellyContext jellyContext = je.createJellyContext(viewContext);

@@ -18,15 +18,13 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
 
-import com.cyclopsgroup.waterview.BaseModule;
-
 /**
  * Page model is the model mapped to a particular URI
  * If a page is not found for given URI, default page will be applied
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Page extends BaseModule
+public class Page
 {
     /** Name of this model */
     public static final String NAME = Page.class.getName();

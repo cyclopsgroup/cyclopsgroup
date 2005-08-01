@@ -45,7 +45,7 @@ public class LayoutTag extends AbstractTag
         }
         else
         {
-            ScriptLayout layout = new ScriptLayout(getBody(), null);
+            ScriptLayout layout = new ScriptLayout(getBody());
             page.setLayout(layout);
         }
     }

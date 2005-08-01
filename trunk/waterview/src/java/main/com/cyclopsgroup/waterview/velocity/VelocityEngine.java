@@ -26,7 +26,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
@@ -61,8 +60,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     {
         String path = "/view" + viewPath;
         Template template = getTemplate(packageName, path);
-        Module module = getModuleManager().getModule(path);
-        return new VelocityView(template, module);
+        return new VelocityView(template);
     }
 
     /**
@@ -115,9 +113,8 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     * Overwrite or implement method resolveAction()
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
      */
     public void resolveAction(String packageName, String action,
             RuntimeData runtime) throws Exception

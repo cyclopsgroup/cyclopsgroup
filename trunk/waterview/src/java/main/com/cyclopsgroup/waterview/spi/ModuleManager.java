@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.Module;
 
 /**
  * Module manager
@@ -92,23 +91,6 @@ public interface ModuleManager
      * @return All available layout ids
      */
     String[] getLayoutIds();
-
-    /**
-     * Get module of a given path
-     *
-     * @param modulePath Path of module
-     * @return Module object
-     */
-    Module getModule(String modulePath);
-
-    /**
-     * Get module with specified package
-     *
-     * @param modulePath
-     * @param packageName
-     * @return Module object
-     */
-    Module getModule(String packageName, String modulePath);
 
     PathModel parsePath(String page);
 

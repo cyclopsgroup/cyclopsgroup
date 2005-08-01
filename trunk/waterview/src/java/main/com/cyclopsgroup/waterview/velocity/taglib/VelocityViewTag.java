@@ -31,8 +31,6 @@ import com.cyclopsgroup.waterview.velocity.VelocityView;
  */
 public class VelocityViewTag extends AbstractViewTag
 {
-    private String packageName;
-
     private String template;
 
     /**
@@ -45,19 +43,12 @@ public class VelocityViewTag extends AbstractViewTag
         requireAttribute("template");
         VelocityEngine ve = (VelocityEngine) serviceManager
                 .lookup(VelocityEngine.ROLE);
+
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        String path = "view/" + getTemplate();
-        return new VelocityView(ve.getTemplate(getPackage(), path), mm
-                .getModule(path));
-    }
-
-    /**
-     * @return Returns the packageName.
-     */
-    public String getPackage()
-    {
-        return packageName;
+        ModuleManager.PathModel model = mm.parsePath(getTemplate());
+        String path = "/view" + model.getPath();
+        return new VelocityView(ve.getTemplate(model.getPackage(), path));
     }
 
     /**
@@ -68,14 +59,6 @@ public class VelocityViewTag extends AbstractViewTag
     public String getTemplate()
     {
         return template;
-    }
-
-    /**
-     * @param packageName The packageName to set.
-     */
-    public void setPackage(String packageName)
-    {
-        this.packageName = packageName;
     }
 
     /**
