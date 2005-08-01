@@ -27,8 +27,8 @@ import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -125,7 +125,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
         if (template != null)
         {
             VelocityContextAdapter vc = new VelocityContextAdapter(runtime
-                    .getPageContext());
+                    .getRequestContext());
             template.merge(vc, new StringWriter());
         }
     }

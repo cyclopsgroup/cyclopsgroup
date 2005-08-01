@@ -49,7 +49,7 @@ public class RenderLayoutTag extends AbstractTag
                     .lookup(ModuleManager.ROLE);
             layout = mm.getDefaultLayout();
         }
-        layout.execute(runtime, runtime.getPageContext());
+        layout.execute(runtime, runtime.getRequestContext());
         layout.render(runtime, page);
     }
 }

@@ -62,7 +62,7 @@ public class ScriptView extends BaseModule implements View
     {
         if (getModule() != null)
         {
-            getModule().execute(runtime, runtime.getPageContext());
+            getModule().execute(runtime, runtime.getRequestContext());
         }
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);

@@ -94,18 +94,18 @@ public interface RuntimeData
     String getPageBaseUrl();
 
     /**
-     * Get context for page rendering
-     * 
-     * @return Context interface
-     */
-    Context getPageContext();
-
-    /**
      * Redirector
      *
      * @return Redirector object
      */
     Redirector getRedirector();
+
+    /**
+     * Get context for page rendering
+     * 
+     * @return Context interface
+     */
+    Context getRequestContext();
 
     /**
      * Get parameter parser for request parameters
@@ -160,13 +160,6 @@ public interface RuntimeData
      * @param template
      */
     void setPage(String page);
-
-    /**
-     * Set the page context
-     *
-     * @param context Page context
-     */
-    void setPageContext(Context context);
 
     void setRedirector(Redirector redirector);
 }

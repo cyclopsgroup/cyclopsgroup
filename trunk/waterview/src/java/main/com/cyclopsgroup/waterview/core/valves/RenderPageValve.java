@@ -94,14 +94,14 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData runtime, PipelineContext context)
+    public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
         DynaViewFactory viewFactory = null;
         for (Iterator i = viewFactories.keySet().iterator(); i.hasNext();)
         {
             String pattern = (String) i.next();
-            if (Pattern.matches('^' + pattern + '$', runtime.getPage()))
+            if (Pattern.matches('^' + pattern + '$', data.getPage()))
             {
                 viewFactory = (DynaViewFactory) viewFactories.get(pattern);
                 break;
@@ -109,21 +109,21 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         }
         if (viewFactory != null)
         {
-            runtime.getPageContext().put(DynaViewFactory.NAME, viewFactory);
+            data.getRequestContext().put(DynaViewFactory.NAME, viewFactory);
         }
 
-        runtime.setOutputContentType("text/html");
-        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+        data.setOutputContentType("text/html");
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Page page = (Page) runtime.getPageContext().get(Page.NAME);
+        Page page = (Page) data.getRequestContext().get(Page.NAME);
         if (page != null)
         {
-            page.execute(runtime, runtime.getPageContext());
-            mm.getDefaultFrame().execute(runtime, runtime.getPageContext());
-            mm.getDefaultFrame().display(page, runtime);
+            page.execute(data, data.getRequestContext());
+            mm.getDefaultFrame().execute(data, data.getRequestContext());
+            mm.getDefaultFrame().display(page, data);
         }
-        context.invokeNextValve(runtime);
-        runtime.getOutput().flush();
+        context.invokeNextValve(data);
+        data.getOutput().flush();
     }
 
     /**

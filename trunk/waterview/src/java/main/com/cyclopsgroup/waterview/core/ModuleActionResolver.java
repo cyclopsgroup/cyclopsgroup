@@ -47,7 +47,7 @@ public class ModuleActionResolver extends AbstractLogEnabled implements
         Module module = moduleManager.getModule("action/" + action);
         if (module != null)
         {
-            module.execute(runtime, runtime.getPageContext());
+            module.execute(runtime, runtime.getRequestContext());
         }
     }
 

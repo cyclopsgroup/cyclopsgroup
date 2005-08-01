@@ -94,7 +94,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
     public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
-        Page page = (Page) runtime.getPageContext().get(Page.NAME);
+        Page page = (Page) runtime.getRequestContext().get(Page.NAME);
         if (page != null)
         {
             context.invokeNextValve(runtime);
@@ -154,7 +154,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 cacheManager.put(this, pagePath, page);
             }
         }
-        runtime.getPageContext().put(Page.NAME, page);
+        runtime.getRequestContext().put(Page.NAME, page);
         context.invokeNextValve(runtime);
     }
 

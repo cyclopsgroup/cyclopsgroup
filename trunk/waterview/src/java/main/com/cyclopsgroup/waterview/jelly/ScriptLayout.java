@@ -61,20 +61,20 @@ public class ScriptLayout extends BaseModule implements Layout
     {
         if (getModule() != null)
         {
-            getModule().execute(runtime, runtime.getPageContext());
+            getModule().execute(runtime, runtime.getRequestContext());
         }
-        runtime.getPageContext().put(Page.NAME, page);
-        runtime.getPageContext().put(NAME, this);
-        runtime.getPageContext().put(JellyEngine.RENDERING, Boolean.TRUE);
+        runtime.getRequestContext().put(Page.NAME, page);
+        runtime.getRequestContext().put(NAME, this);
+        runtime.getRequestContext().put(JellyEngine.RENDERING, Boolean.TRUE);
 
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
         JellyContext jellyContext = je.createJellyContext(runtime
-                .getPageContext());
+                .getRequestContext());
         XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
         script.run(jellyContext, output);
-        runtime.getPageContext().put(Page.NAME, null);
-        runtime.getPageContext().put(NAME, null);
-        runtime.getPageContext().put(JellyEngine.RENDERING, null);
+        runtime.getRequestContext().put(Page.NAME, null);
+        runtime.getRequestContext().put(NAME, null);
+        runtime.getRequestContext().put(JellyEngine.RENDERING, null);
     }
 }

@@ -52,7 +52,7 @@ public class PipelineTest extends TestCase
         public void invoke(RuntimeData runtime, PipelineContext context)
                 throws Exception
         {
-            List contents = (List) runtime.getPageContext().get("contents");
+            List contents = (List) runtime.getRequestContext().get("contents");
             contents.add(value);
             context.invokeNextValve(runtime);
         }
@@ -69,7 +69,7 @@ public class PipelineTest extends TestCase
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
                 System.out));
         List contents = new ArrayList();
-        runtime.getPageContext().put("contents", contents);
+        runtime.getRequestContext().put("contents", contents);
         pipeline.addValve(new TestValve("aaa"));
         pipeline.addValve(new TestValve("bbb"));
         pipeline.addValve(new TestValve("ccc"));

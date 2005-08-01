@@ -54,11 +54,11 @@ public class ScriptFrame extends BaseModule implements Frame
      */
     public void display(Page page, RuntimeData runtime) throws Exception
     {
-        runtime.getPageContext().put(Page.NAME, page);
-        runtime.getPageContext().put(RuntimeData.NAME, runtime);
+        runtime.getRequestContext().put(Page.NAME, page);
+        runtime.getRequestContext().put(RuntimeData.NAME, runtime);
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jc = je.createJellyContext(runtime.getPageContext());
+        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
         jc.setVariable(Page.NAME, page);
         jc.setVariable(RuntimeData.NAME, runtime);
         XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());

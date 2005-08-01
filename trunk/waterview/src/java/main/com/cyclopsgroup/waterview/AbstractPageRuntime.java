@@ -47,7 +47,7 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private String pageBaseUrl;
 
-    private Context pageContext;
+    private Context requestContext;
 
     private Redirector redirector;
 
@@ -138,9 +138,9 @@ public abstract class AbstractPageRuntime implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getPageContext()
      */
-    public Context getPageContext()
+    public Context getRequestContext()
     {
-        return pageContext;
+        return requestContext;
     }
 
     /**
@@ -219,6 +219,10 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setApplicationBaseUrl(String applicationBaseUrl)
     {
         this.applicationBaseUrl = applicationBaseUrl;
+        if (getRequestContext() != null)
+        {
+            getRequestContext().put("applicationBase", applicationBaseUrl);
+        }
     }
 
     /**
@@ -259,9 +263,9 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setPage(String page)
     {
         this.page = page;
-        if (getPageContext() != null)
+        if (getRequestContext() != null)
         {
-            getPageContext().put("page", page);
+            getRequestContext().put("page", page);
         }
     }
 
@@ -273,6 +277,10 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setPageBaseUrl(String pageBaseUrl)
     {
         this.pageBaseUrl = pageBaseUrl;
+        if (getRequestContext() != null)
+        {
+            getRequestContext().put("pageBase", pageBaseUrl);
+        }
     }
 
     /**
@@ -280,9 +288,9 @@ public abstract class AbstractPageRuntime implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setPageContext(com.cyclopsgroup.clib.lang.Context)
      */
-    public void setPageContext(Context pageContext)
+    public void setRequestContext(Context pageContext)
     {
-        this.pageContext = pageContext;
+        this.requestContext = pageContext;
     }
 
     /**

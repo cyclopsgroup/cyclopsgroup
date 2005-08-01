@@ -39,8 +39,8 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
@@ -348,8 +348,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         {
             return;
         }
-        JellyContext jc = (JellyContext) runtime.getPageContext().get(
-                JellyEngine.JELLY_CONTEXT);
+        JellyContext jc = createJellyContext(runtime.getRequestContext());
         script.run(jc, XMLOutput.createDummyXMLOutput());
     }
 

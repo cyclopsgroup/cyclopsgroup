@@ -44,15 +44,6 @@ import com.cyclopsgroup.waterview.spi.ModuleManager;
 public class DefaultModuleManager extends AbstractLogEnabled implements
         Configurable, ModuleManager, Serviceable
 {
-    private CacheManager cacheManager;
-
-    private String defaultFrameId = "waterview.DefaultDisplayFrame",
-            defaultLayoutId = "waterview.DefaultLayout",
-            defaultPackageName = "com.cyclopsgroup.waterview.ui";
-
-    private Hashtable frames = new Hashtable(), layouts = new Hashtable(),
-            packageNames = new Hashtable();
-
     private class DefaultPathModel implements PathModel
     {
         private String packageName, path;
@@ -63,16 +54,42 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
             this.path = path;
         }
 
+        /**
+         * Overwrite or implement method getPackage()
+         * @see com.cyclopsgroup.waterview.spi.ModuleManager.PathModel#getPackage()
+         */
         public String getPackage()
         {
             return packageName;
         }
 
+        /**
+         * Overwrite or implement method getPath()
+         * @see com.cyclopsgroup.waterview.spi.ModuleManager.PathModel#getPath()
+         */
         public String getPath()
         {
             return path;
         }
+
+        /**
+         * Overwrite or implement method toString()
+         * @see java.lang.Object#toString()
+         */
+        public String toString()
+        {
+            return getPackage() + "|" + getPath();
+        }
     }
+
+    private CacheManager cacheManager;
+
+    private String defaultFrameId = "waterview.DefaultDisplayFrame",
+            defaultLayoutId = "waterview.DefaultLayout",
+            defaultPackageName = "com.cyclopsgroup.waterview.ui";
+
+    private Hashtable frames = new Hashtable(), layouts = new Hashtable(),
+            packageNames = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
@@ -146,6 +163,14 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public String getDefaultLayoutId()
     {
         return defaultLayoutId;
+    }
+
+    /**
+     * @return Returns the defaultPackageName.
+     */
+    public String getDefaultPackageName()
+    {
+        return defaultPackageName;
     }
 
     /**
@@ -250,6 +275,35 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
+     * Overwrite or implement method parsePage()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
+     */
+    public PathModel parsePath(String page)
+    {
+        if (StringUtils.isEmpty(page))
+        {
+            return new DefaultPathModel(getDefaultPackageName(),
+                    StringUtils.EMPTY);
+        }
+        String pagePackage = getDefaultPackageName();
+        String path = page;
+        String[] parts = StringUtils.split(page, '/');
+        for (Iterator i = packageNames.keySet().iterator(); i.hasNext();)
+        {
+            String packageAlias = (String) i.next();
+            String packageName = (String) packageNames.get(packageAlias);
+            if (StringUtils.equals(parts[0], packageAlias)
+                    || StringUtils.equals(parts[0], packageName))
+            {
+                pagePackage = packageName;
+                path = page.substring(parts[0].length() + 1);
+                break;
+            }
+        }
+        return new DefaultPathModel(pagePackage, path);
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerFrame(java.lang.String, com.cyclopsgroup.waterview.spi.Frame)
@@ -318,43 +372,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void setDefaultLayoutId(String layoutId)
     {
         defaultLayoutId = layoutId;
-    }
-
-    /**
-     * Overwrite or implement method parsePage()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
-     */
-    public PathModel parsePath(String page)
-    {
-        if (StringUtils.isEmpty(page))
-        {
-            return new DefaultPathModel(getDefaultPackageName(),
-                    StringUtils.EMPTY);
-        }
-        String pagePackage = getDefaultPackageName();
-        String path = page;
-        String[] parts = StringUtils.split(page, '/');
-        for (Iterator i = packageNames.keySet().iterator(); i.hasNext();)
-        {
-            String packageAlias = (String) i.next();
-            String packageName = (String) packageNames.get(packageAlias);
-            if (StringUtils.equals(parts[0], packageAlias)
-                    || StringUtils.equals(parts[0], packageName))
-            {
-                pagePackage = packageName;
-                path = page.substring(parts[0].length() + 1);
-                break;
-            }
-        }
-        return new DefaultPathModel(pagePackage, path);
-    }
-
-    /**
-     * @return Returns the defaultPackageName.
-     */
-    public String getDefaultPackageName()
-    {
-        return defaultPackageName;
     }
 
     /**

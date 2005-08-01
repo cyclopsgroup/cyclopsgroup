@@ -72,7 +72,7 @@ public class PanelTag extends AbstractTag
                 View view = views[i];
                 RuntimeData runtime = getRuntime();
                 Context viewContext = new DefaultContext(new HashMap(), runtime
-                        .getPageContext());
+                        .getRequestContext());
                 try
                 {
                     view.execute(runtime, viewContext);

@@ -44,7 +44,6 @@ public class JellyEngineTest extends PlexusTestCase
     public void testInit() throws Exception
     {
         JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
-        assertNotNull(je);
         Script script = je.getScript("com.cyclopsgroup.waterview.ui",
                 "layout/Waterview3ColumnLayout.jelly");
         assertNotSame(script, JellyEngine.DUMMY_SCRIPT);
@@ -55,8 +54,8 @@ public class JellyEngineTest extends PlexusTestCase
         StringWriter sw = new StringWriter();
         FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(sw));
         XMLOutput output = XMLOutput.createXMLOutput(sw);
-        runtime.getPageContext().put(JellyEngine.JELLY_CONTEXT, jc);
-        runtime.getPageContext().put(JellyEngine.JELLY_OUTPUT, output);
+        runtime.getRequestContext().put(JellyEngine.JELLY_CONTEXT, jc);
+        runtime.getRequestContext().put(JellyEngine.JELLY_OUTPUT, output);
         jc.setVariable(RuntimeData.NAME, runtime);
         script.run(jc, output);
         assertTrue(StringUtils.isNotEmpty(sw.toString()));

@@ -61,7 +61,7 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
         setSessionContext(new HttpSessionContext(request.getSession()));
         setSessionId(request.getSession().getId());
 
-        setPageContext(new ServletRequestContext(request));
+        setRequestContext(new ServletRequestContext(request));
 
         //Request path
         String requestPath = request.getPathInfo();

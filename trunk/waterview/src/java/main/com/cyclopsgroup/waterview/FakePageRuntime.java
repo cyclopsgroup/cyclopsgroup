@@ -39,7 +39,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
         setOutput(output);
         setApplicationBaseUrl("http://localhost:8080/waterview");
         setPageBaseUrl("http://localhost:8080/waterview/servlet/waterview");
-        setPageContext(new DefaultContext(new HashMap()));
+        setRequestContext(new DefaultContext(new HashMap()));
         setRequestParameters(new MapRequestValueParser());
         setRequestPath("/index.html");
         setServiceManager(new FakeServiceManager());
@@ -51,14 +51,16 @@ public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
      */
-    public String getMimeType(String fileName) {
+    public String getMimeType(String fileName)
+    {
         return "text/html";
     }
 
     /**
      * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
      */
-    public String getSessionId() {
+    public String getSessionId()
+    {
         return "";
     }
 
@@ -67,6 +69,7 @@ public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType(String contentType) {
+    public void setOutputContentType(String contentType)
+    {
     }
 }

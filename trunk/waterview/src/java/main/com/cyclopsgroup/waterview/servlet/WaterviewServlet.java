@@ -114,16 +114,14 @@ public class WaterviewServlet extends HttpServlet
         ServletPageRuntime runtime = null;
         runtime = new ServletPageRuntime(request, response, servletConfig
                 .getServletContext(), fileUpload, serviceManager);
-        Context ctx = runtime.getPageContext();
+        Context ctx = runtime.getRequestContext();
         ctx.put("servletConfig", servletConfig);
         ctx.put("servletContext", servletConfig.getServletContext());
         ctx.put("request", request);
         ctx.put("response", response);
         ctx.put("runtime", runtime);
-        ctx.put("requestContext", runtime.getPageContext());
+        ctx.put("requestContext", runtime.getRequestContext());
         ctx.put("parameters", runtime.getRequestParameters());
-        ctx.put("applicationBase", runtime.getApplicationBaseUrl());
-        ctx.put("pageBase", runtime.getPageBaseUrl());
         ctx.put("serviceManager", serviceManager);
 
         Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
