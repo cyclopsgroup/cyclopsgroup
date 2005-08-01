@@ -71,6 +71,6 @@ public class ParseURLValveTest extends PlexusTestCase
         assertEquals("/!do!/aaa", parts.get(0));
         assertEquals("/!do!/bbb/BAction", parts.get(1));
         assertEquals("/!do!/ccc", parts.get(2));
-        assertEquals("/!do!/ddd.jelly", parts.get(3));
+        assertEquals("/!show!/ddd.jelly", parts.get(3));
     }
 }

@@ -16,18 +16,8 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.PlexusTestCase;
-
-import com.cyclopsgroup.waterview.FakePageRuntime;
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.Page;
 
 /**
  * Test case for jelly waterview
@@ -36,31 +26,6 @@ import com.cyclopsgroup.waterview.spi.Page;
  */
 public class JellyEngineTest extends PlexusTestCase
 {
-    /**
-     * Test case to test init tag library method
-     *
-     * @throws Exception Throw it out
-     */
-    public void testInit() throws Exception
-    {
-        JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
-        Script script = je.getScript("com.cyclopsgroup.waterview.ui",
-                "/layout/Waterview3ColumnLayout.jelly");
-        assertNotSame(script, JellyEngine.DUMMY_SCRIPT);
-        JellyContext jc = new JellyContext(je.getGlobalContext());
-
-        jc.setVariable(JellyEngine.RENDERING, Boolean.TRUE);
-        jc.setVariable(Page.NAME, new Page());
-        StringWriter sw = new StringWriter();
-        FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(sw));
-        XMLOutput output = XMLOutput.createXMLOutput(sw);
-        runtime.getRequestContext().put(JellyEngine.JELLY_CONTEXT, jc);
-        runtime.getRequestContext().put(JellyEngine.JELLY_OUTPUT, output);
-        jc.setVariable(RuntimeData.NAME, runtime);
-        script.run(jc, output);
-        assertTrue(StringUtils.isNotEmpty(sw.toString()));
-    }
-
     public void testGetScript() throws Exception
     {
         JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
