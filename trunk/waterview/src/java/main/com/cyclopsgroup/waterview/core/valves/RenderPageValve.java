@@ -61,7 +61,12 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         public synchronized View createView(String packageName,
                 String viewPath, RuntimeData runtime) throws Exception
         {
-            String key = proxy.hashCode() + '/' + packageName + '/' + viewPath;
+            if (viewPath.charAt(0) != '/')
+            {
+                throw new IllegalArgumentException(
+                        "View path must start with /");
+            }
+            String key = proxy.hashCode() + '/' + packageName + viewPath;
             if (getCacheManager().contains(this, key))
             {
                 return (View) getCacheManager().get(this, key);

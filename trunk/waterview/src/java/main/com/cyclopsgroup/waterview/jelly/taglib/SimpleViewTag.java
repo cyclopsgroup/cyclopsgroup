@@ -48,7 +48,7 @@ public class SimpleViewTag extends AbstractViewTag
         }
         if (StringUtils.isEmpty(getPath()))
         {
-            setPath("Index.jelly");
+            setPath("/Index.jelly");
         }
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);

@@ -50,9 +50,8 @@ public class JspView extends BaseModule implements View
                 .get("request");
         HttpServletResponse response = (HttpServletResponse) viewContext
                 .get("response");
-        ServletContext servletContext = request == null ? null
-                : (ServletContext) request.getAttribute(ServletContext.class
-                        .getName());
+        ServletContext servletContext = (ServletContext) viewContext
+                .get("servletContext");
         if (request == null || response == null || servletContext == null)
         {
             runtime.getOutput().println(
@@ -60,12 +59,13 @@ public class JspView extends BaseModule implements View
                             + request + ", response " + response + ", context "
                             + servletContext);
         }
-        String p = path;
-        if (!p.startsWith("/"))
-        {
-            p = "/" + p;
-        }
-        RequestDispatcher dispatcher = servletContext.getRequestDispatcher(p);
+        //String p = path;
+        //if (!p.startsWith("/"))
+        //{
+        //    p = "/" + p;
+        //}
+        RequestDispatcher dispatcher = servletContext
+                .getRequestDispatcher(path);
         dispatcher.include(request, response);
     }
 }

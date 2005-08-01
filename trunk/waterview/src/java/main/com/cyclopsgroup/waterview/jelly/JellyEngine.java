@@ -169,7 +169,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public View createView(String packageName, String viewPath,
             RuntimeData runtime) throws Exception
     {
-        String path = "view/" + viewPath;
+        String path = "/view" + viewPath;
         Script script = getScript(packageName, path);
         return new ScriptView(script, moduleManager.getModule(path));
     }
@@ -230,10 +230,14 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public Script getScript(String packageName, String scriptPath,
             Script defaultScript) throws JellyException
     {
+        if (scriptPath.charAt(0) != '/')
+        {
+            throw new IllegalArgumentException("Script path must starts with /");
+        }
         String scriptKey = scriptPath;
         if (StringUtils.isNotEmpty(packageName))
         {
-            scriptKey = packageName + '/' + scriptPath;
+            scriptKey = packageName + scriptPath;
         }
         Script script = null;
         synchronized (this)
@@ -253,10 +257,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
                 String fullPath = scriptPath;
                 if (StringUtils.isNotEmpty(packageName))
                 {
-                    fullPath = packageName.replace('.', '/') + '/' + scriptPath;
+                    fullPath = '/' + packageName.replace('.', '/') + scriptPath;
                 }
-                URL resource = getClass().getClassLoader()
-                        .getResource(fullPath);
+                URL resource = getClass().getClassLoader().getResource(
+                        fullPath.substring(1));
 
                 if (resource == null)
                 {

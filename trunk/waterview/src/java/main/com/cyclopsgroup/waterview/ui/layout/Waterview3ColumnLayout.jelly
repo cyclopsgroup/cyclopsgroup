@@ -11,7 +11,7 @@
         <tr>
             <td width="18%" valign="top" id="leftArea">
                 <w:Panel name="navigator">
-                    <w:JellyView script="WaterviewNavigator.jelly"/>
+                    <w:JellyView script="/waterview/WaterviewNavigator.jelly"/>
                 </w:Panel>
             </td>
             <td width="65%" valign="top" id="bodyArea">
@@ -21,13 +21,13 @@
             </td>
             <td width="17%" valign="top" id="rightArea">
                 <w:Panel name="right">
-                    <w:JellyView script="WaterviewRightBar.jelly"/>
+                    <w:JellyView script="/waterview/WaterviewRightBar.jelly"/>
                 </w:Panel>
             </td>
         </tr>
         <tr>
             <td colspan="3" align="center" id="footerArea">
-                <w:JellyView script="WaterviewFooter.jelly"/>
+                <w:JellyView script="/waterview/WaterviewFooter.jelly"/>
             </td>
         </tr>
     </table>

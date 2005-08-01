@@ -59,7 +59,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     public View createView(String packageName, String viewPath,
             RuntimeData runtime) throws Exception
     {
-        String path = "view/" + viewPath;
+        String path = "/view" + viewPath;
         Template template = getTemplate(packageName, path);
         Module module = getModuleManager().getModule(path);
         return new VelocityView(template, module);
@@ -94,8 +94,9 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
         String path = templatePath;
         if (StringUtils.isNotEmpty(packageName))
         {
-            path = packageName.replace('.', '/') + '/' + templatePath;
+            path = '/' + packageName.replace('.', '/') + templatePath;
         }
+        path = path.substring(1);
         if (getVelocityFactory().getVelocityEngine().templateExists(path))
         {
             return getVelocityFactory().getVelocityEngine().getTemplate(path);

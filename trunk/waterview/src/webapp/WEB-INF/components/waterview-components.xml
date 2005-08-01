@@ -5,6 +5,9 @@
             <role>com.cyclopsgroup.waterview.Waterview</role>
         </component>
         <component>
+            <role>com.cyclopsgroup.waterview.jelly.JellyEngine</role>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
         </component>
         <component>

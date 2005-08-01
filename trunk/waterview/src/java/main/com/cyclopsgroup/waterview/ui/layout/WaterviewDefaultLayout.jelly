@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://waterview.cyclopsgroup.com/ui">
-	<h2>Waterview Systems &lt;${package}:${page}&gt;</h2>
+	<h2>Waterview Systems &lt;${page}&gt;</h2>
 	<hr/>
     <Panel name="body">
         <SimpleView path="${page}"/>

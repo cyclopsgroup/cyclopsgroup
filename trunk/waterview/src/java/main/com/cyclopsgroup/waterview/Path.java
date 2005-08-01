@@ -44,9 +44,9 @@ public final class Path
         String shortName = fullPath.substring(lastSeparatorPosition + 1,
                 dotPosition);
         String parent = fullPath.substring(0, lastSeparatorPosition + 1);
-        while (parent.length() > 0 && parent.charAt(0) == '/')
+        if (StringUtils.isEmpty(parent))
         {
-            parent = parent.substring(1, parent.length());
+            parent = "/";
         }
         Path result = new Path(parent, shortName, extension);
         pageRequestCache.put(fullPath, result);

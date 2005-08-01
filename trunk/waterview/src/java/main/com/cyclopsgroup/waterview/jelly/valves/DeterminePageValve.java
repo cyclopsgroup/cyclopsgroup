@@ -45,9 +45,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
 
     private static final Page EMPTY_PAGE = new Page();
 
-    private String defaultPackage = "com.cyclopsgroup.waterview.ui";
-
-    private String defaultPage = "Index.jelly";
+    private String defaultPage = "/waterview/Index.jelly";
 
     /**
      * Override or implement method of parent class or interface
@@ -61,19 +59,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         {
             setDefaultPage(page);
         }
-        String pkg = conf.getChild("default-package").getValue(null);
-        if (pkg != null)
-        {
-            setDefaultPackage(pkg);
-        }
-    }
-
-    /**
-     * @return Returns the defaultPackage.
-     */
-    public String getDefaultPackage()
-    {
-        return defaultPackage;
     }
 
     /**
@@ -120,7 +105,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
                 ModuleChain moduleChain = new ModuleChain();
-                String fullPath = "page/" + pagePath;
+                String fullPath = "/page" + model.getPath();
                 moduleChain.addModule(mm.getModule(fullPath));
 
                 Script pageScript = je.getScript(model.getPackage(), fullPath,
@@ -129,14 +114,14 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                 {
                     page = loadPage(pageScript, je);
                 }
-                String[] parts = StringUtils.split(pagePath, '/');
+                String[] parts = StringUtils.split(model.getPath(), '/');
                 for (int j = parts.length - 1; j >= 0; j--)
                 {
                     parts[j] = "Default";
                     String[] newParts = new String[j + 1];
                     System.arraycopy(parts, 0, newParts, 0, j + 1);
                     String defaultPath = StringUtils.join(newParts, '/');
-                    fullPath = "page/" + defaultPath;
+                    fullPath = "/page/" + defaultPath;
                     pageScript = je.getScript(model.getPath(), fullPath, null);
                     if (pageScript != null)
                     {
@@ -164,14 +149,6 @@ public class DeterminePageValve extends AbstractLogEnabled implements
         JellyContext jc = new JellyContext(jellyEngine.getGlobalContext());
         script.run(jc, XMLOutput.createDummyXMLOutput());
         return (Page) jc.getVariable(Page.NAME);
-    }
-
-    /**
-     * @param defaultPackage The defaultPackage to set.
-     */
-    public void setDefaultPackage(String defaultPackage)
-    {
-        this.defaultPackage = defaultPackage;
     }
 
     /**

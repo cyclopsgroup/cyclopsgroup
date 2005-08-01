@@ -30,8 +30,6 @@ import com.cyclopsgroup.waterview.spi.Layout;
  */
 public class JellyLayoutTag extends AbstractTag
 {
-    private String packageName;
-
     private String script;
 
     /**
@@ -43,19 +41,10 @@ public class JellyLayoutTag extends AbstractTag
             throws Exception
     {
         requireAttribute("script");
-        requireAttribute("package");
         requireParent(LayoutTag.class);
-        Layout layout = new ScriptLayoutProxy(getPackage(), getScript());
+        Layout layout = new ScriptLayoutProxy(getScript());
         LayoutTag layoutTag = (LayoutTag) getParent();
         layoutTag.setLayout(layout);
-    }
-
-    /**
-     * @return Returns the packageName.
-     */
-    public String getPackage()
-    {
-        return packageName;
     }
 
     /**
@@ -66,14 +55,6 @@ public class JellyLayoutTag extends AbstractTag
     public String getScript()
     {
         return script;
-    }
-
-    /**
-     * @param packageName The packageName to set.
-     */
-    public void setPackage(String packageName)
-    {
-        this.packageName = packageName;
     }
 
     /**

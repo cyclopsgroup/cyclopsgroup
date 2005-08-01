@@ -36,7 +36,7 @@ public class PathTest extends TestCase
     {
         Path pr = Path.parse("/Abc.vm");
         assertEquals("vm", pr.getExtension());
-        assertEquals("", pr.getParentPath());
+        assertEquals("/", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
     }
 
@@ -49,7 +49,7 @@ public class PathTest extends TestCase
     {
         Path pr = Path.parse("/aaa/bbb/ccc/Abc.vm");
         assertEquals("vm", pr.getExtension());
-        assertEquals("aaa/bbb/ccc/", pr.getParentPath());
+        assertEquals("/aaa/bbb/ccc/", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
     }
 
@@ -62,7 +62,7 @@ public class PathTest extends TestCase
     {
         Path pr = Path.parse("/Abc");
         assertEquals("", pr.getExtension());
-        assertEquals("", pr.getParentPath());
+        assertEquals("/", pr.getParentPath());
         assertEquals("Abc", pr.getShortName());
     }
 }

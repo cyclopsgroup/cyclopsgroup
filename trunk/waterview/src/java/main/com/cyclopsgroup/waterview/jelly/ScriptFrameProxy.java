@@ -31,17 +31,14 @@ public class ScriptFrameProxy implements Frame
 {
     private String framePath;
 
-    private String packageName;
-
     /**
      * Constructor for class ScriptFrameProxy
      *
      * @param packageName Package of ui module
      * @param framePath Path of frame
      */
-    public ScriptFrameProxy(String packageName, String framePath)
+    public ScriptFrameProxy(String framePath)
     {
-        this.packageName = packageName;
         this.framePath = framePath;
     }
 
@@ -72,8 +69,9 @@ public class ScriptFrameProxy implements Frame
                 JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        String path = "frame/" + framePath;
-        return new ScriptFrame(je.getScript(packageName, path), mm
+        ModuleManager.PathModel model = mm.parsePath(framePath);
+        String path = "/frame" + model.getPath();
+        return new ScriptFrame(je.getScript(model.getPackage(), path), mm
                 .getModule(path));
     }
 }

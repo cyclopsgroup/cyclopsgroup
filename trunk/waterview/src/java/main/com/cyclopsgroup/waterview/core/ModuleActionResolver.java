@@ -44,7 +44,7 @@ public class ModuleActionResolver extends AbstractLogEnabled implements
     public void resolveAction(String packageName, String action,
             RuntimeData runtime) throws Exception
     {
-        Module module = moduleManager.getModule("action/" + action);
+        Module module = moduleManager.getModule("/action" + action);
         if (module != null)
         {
             module.execute(runtime, runtime.getRequestContext());

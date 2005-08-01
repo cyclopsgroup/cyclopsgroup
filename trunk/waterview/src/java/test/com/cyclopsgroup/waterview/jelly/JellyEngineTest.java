@@ -45,7 +45,7 @@ public class JellyEngineTest extends PlexusTestCase
     {
         JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
         Script script = je.getScript("com.cyclopsgroup.waterview.ui",
-                "layout/Waterview3ColumnLayout.jelly");
+                "/layout/Waterview3ColumnLayout.jelly");
         assertNotSame(script, JellyEngine.DUMMY_SCRIPT);
         JellyContext jc = new JellyContext(je.getGlobalContext());
 
@@ -59,5 +59,13 @@ public class JellyEngineTest extends PlexusTestCase
         jc.setVariable(RuntimeData.NAME, runtime);
         script.run(jc, output);
         assertTrue(StringUtils.isNotEmpty(sw.toString()));
+    }
+
+    public void testGetScript() throws Exception
+    {
+        JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
+        Script s = je.getScript("com.cyclopsgroup.waterview.ui",
+                "/view/Index.jelly", null);
+        assertNotNull(s);
     }
 }
