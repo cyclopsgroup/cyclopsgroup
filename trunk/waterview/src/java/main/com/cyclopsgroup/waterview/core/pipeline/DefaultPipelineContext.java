@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core;
+package com.cyclopsgroup.waterview.core.pipeline;
 
 import java.util.List;
 

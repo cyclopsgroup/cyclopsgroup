@@ -138,7 +138,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         }
         catch (Exception e)
         {
-            getLogger().warn("Can not add init properties");
+            getLogger().warn("Can not add init properties", e);
         }
     }
 

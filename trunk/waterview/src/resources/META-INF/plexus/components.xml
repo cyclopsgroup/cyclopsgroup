@@ -61,13 +61,13 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipelines>
-                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.pipeline.DefaultWaterviewPipeline" />
+                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline" />
                 </pipelines>
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.pipeline.DefaultWaterviewPipeline</role>
-            <implementation>com.cyclopsgroup.waterview.pipeline.Pipeline</implementation>
+            <role>com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline</role>
+            <implementation>com.cyclopsgroup.waterview.core.pipeline.Pipeline</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <valves>

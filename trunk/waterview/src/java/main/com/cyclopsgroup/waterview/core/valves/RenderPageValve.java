@@ -112,21 +112,25 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
                 break;
             }
         }
-        if (viewFactory != null)
+        if (viewFactory == null)
+        {
+            data.getOutput().println("Unknown page path " + data.getPage());
+            context.invokeNextValve(data);
+        }
+        else
         {
             data.getRequestContext().put(DynaViewFactory.NAME, viewFactory);
         }
 
+        Page page = (Page) data.getRequestContext().get(Page.NAME);
+        if (page == null)
+        {
+            page = Page.DEFAULT;
+        }
         data.setOutputContentType("text/html");
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Page page = (Page) data.getRequestContext().get(Page.NAME);
-        if (page != null)
-        {
-            //page.execute(data, data.getRequestContext());
-            //mm.getDefaultFrame().execute(data, data.getRequestContext());
-            mm.getDefaultFrame().display(page, data);
-        }
+        mm.getDefaultFrame().display(page, data);
         context.invokeNextValve(data);
         data.getOutput().flush();
     }

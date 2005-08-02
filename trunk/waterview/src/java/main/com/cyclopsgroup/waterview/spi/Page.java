@@ -26,6 +26,8 @@ import java.util.Hashtable;
  */
 public class Page
 {
+    public static final Page DEFAULT = new Page();
+
     /** Name of this model */
     public static final String NAME = Page.class.getName();
 

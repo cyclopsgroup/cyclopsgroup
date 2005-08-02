@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.pipeline;
+package com.cyclopsgroup.waterview.core.pipeline;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,7 +31,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.core.DefaultPipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
