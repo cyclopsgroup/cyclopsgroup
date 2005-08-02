@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.util.HashMap;
+
+import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
@@ -25,6 +28,20 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface Panel
 {
+    Panel DUMMY = new Panel()
+    {
+        public void render(RuntimeData runtime, View[] views) throws Exception
+        {
+            for (int i = 0; i < views.length; i++)
+            {
+                View view = views[i];
+                DefaultContext ctx = new DefaultContext(new HashMap(), runtime
+                        .getRequestContext());
+                view.render(runtime, ctx);
+            }
+        }
+    };
+
     /** Empty panel array */
     Panel[] EMPTY_ARRAY = new Panel[0];
 

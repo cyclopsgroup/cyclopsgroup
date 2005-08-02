@@ -16,7 +16,9 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Panel;
@@ -29,7 +31,9 @@ import com.cyclopsgroup.waterview.spi.View;
  */
 public class ScriptPanel implements Panel
 {
-    //private Script script;
+    private static final String VIEWS_NAME = "views";
+
+    private Script script;
 
     /**
      * Constructor for class ScriptPanel
@@ -38,7 +42,7 @@ public class ScriptPanel implements Panel
      */
     public ScriptPanel(Script script)
     {
-        //this.script = script;
+        this.script = script;
     }
 
     /**
@@ -48,7 +52,26 @@ public class ScriptPanel implements Panel
      */
     public void render(RuntimeData runtime, View[] views) throws Exception
     {
-        // TODO Auto-generated method stub
+        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                JellyEngine.ROLE);
+        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
+        jc.setVariable(VIEWS_NAME, views);
 
+        try
+        {
+            XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+            script.run(jc, output);
+            output.flush();
+        }
+        catch (Exception e)
+        {
+            runtime.getOutput().println("<pre>");
+            e.printStackTrace(runtime.getOutput());
+            runtime.getOutput().println("</pre>");
+        }
+        finally
+        {
+            runtime.getOutput().flush();
+        }
     }
 }

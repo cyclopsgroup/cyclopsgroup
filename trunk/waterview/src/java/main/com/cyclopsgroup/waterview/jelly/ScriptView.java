@@ -41,10 +41,6 @@ public class ScriptView implements View
      */
     public ScriptView(Script script)
     {
-        if (script == null)
-        {
-            throw new NullPointerException("Script can not be null");
-        }
         this.script = script;
     }
 

@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -40,15 +41,24 @@ public class ScriptLayoutProxy implements Layout
         this.layoutScript = layoutScript;
     }
 
-    private ScriptLayout getLayout(RuntimeData runtime) throws Exception
+    private synchronized ScriptLayout getLayout(RuntimeData runtime)
+            throws Exception
     {
-        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
-                ModuleManager.ROLE);
-        ModuleManager.PathModel model = mm.parsePath(layoutScript);
-        String path = "/layout" + model.getPath();
-        return new ScriptLayout(je.getScript(model.getPackage(), path));
+        CacheManager cm = (CacheManager) runtime.getServiceManager().lookup(
+                CacheManager.ROLE);
+        ScriptLayout layout = (ScriptLayout) cm.get(this, layoutScript);
+        if (layout == null)
+        {
+            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+                    JellyEngine.ROLE);
+            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
+                    .lookup(ModuleManager.ROLE);
+            ModuleManager.PathModel model = mm.parsePath(layoutScript);
+            String path = "/layout" + model.getPath();
+            layout = new ScriptLayout(je.getScript(model.getPackage(), path));
+            cm.put(this, layoutScript, layout);
+        }
+        return layout;
     }
 
     /**

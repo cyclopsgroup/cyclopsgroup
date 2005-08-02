@@ -16,29 +16,32 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
 
 /**
  * Simple view tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SimpleViewTag extends AbstractViewTag
+public class SimpleViewTag extends BaseViewTag
 {
     private String path;
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.jelly.taglib.AbstractViewTag#doCreateView(org.apache.avalon.framework.service.ServiceManager)
+     * Overwrite or implement method createView()
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
      */
-    protected View doCreateView(ServiceManager serviceManager) throws Exception
+    protected View createView(JellyContext context, RuntimeData data)
+            throws Exception
     {
+        requireAttribute("path");
         DynaViewFactory viewFactory = (DynaViewFactory) getContext()
                 .getVariable(DynaViewFactory.NAME);
 
@@ -50,8 +53,8 @@ public class SimpleViewTag extends AbstractViewTag
         {
             setPath("/Index.jelly");
         }
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
+                ModuleManager.ROLE);
         ModuleManager.PathModel model = mm.parsePath(getPath());
         return viewFactory.createView(model.getPackage(), model.getPath(),
                 getRuntime());
