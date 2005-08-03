@@ -57,7 +57,6 @@ public class ScriptLayout implements Layout
     {
         runtime.getRequestContext().put(Page.NAME, page);
         runtime.getRequestContext().put(NAME, this);
-        runtime.getRequestContext().put(JellyEngine.RENDERING, Boolean.TRUE);
 
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
@@ -67,6 +66,5 @@ public class ScriptLayout implements Layout
         script.run(jellyContext, output);
         runtime.getRequestContext().put(Page.NAME, null);
         runtime.getRequestContext().put(NAME, null);
-        runtime.getRequestContext().put(JellyEngine.RENDERING, null);
     }
 }

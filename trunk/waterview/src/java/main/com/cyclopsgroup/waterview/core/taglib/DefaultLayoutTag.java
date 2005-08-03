@@ -14,39 +14,38 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.BaseTag;
-import com.cyclopsgroup.waterview.jelly.ScriptLayout;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
- * Tag for layout
+ * Default layout definition tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LayoutTag extends BaseTag
+public class DefaultLayoutTag extends BaseTag
 {
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        Page page = (Page) getContext().getVariable(Page.NAME);
-        if (isRendering())
+        Page page = (Page) context.getVariable(Page.NAME);
+        if (page == null)
         {
-            invokeBody(output);
+            throw new JellyTagException("JellyLayout must be in a page");
         }
-        else
-        {
-            ScriptLayout layout = new ScriptLayout(getBody());
-            page.setLayout(layout);
-        }
+        ModuleManager mm = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        page.setLayout(mm.getDefaultLayout());
     }
 }

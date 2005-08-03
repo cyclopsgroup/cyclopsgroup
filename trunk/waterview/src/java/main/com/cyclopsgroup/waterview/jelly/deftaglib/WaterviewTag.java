@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
  * Root waterview tag in definition
@@ -31,7 +31,7 @@ public class WaterviewTag extends BaseTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

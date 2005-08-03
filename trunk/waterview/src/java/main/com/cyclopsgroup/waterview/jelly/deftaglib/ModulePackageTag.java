@@ -19,8 +19,8 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.BaseTag;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 public class ModulePackageTag extends BaseTag
 {
@@ -30,7 +30,7 @@ public class ModulePackageTag extends BaseTag
 
     /**
      * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

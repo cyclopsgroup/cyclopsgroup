@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.lang.StringUtils;

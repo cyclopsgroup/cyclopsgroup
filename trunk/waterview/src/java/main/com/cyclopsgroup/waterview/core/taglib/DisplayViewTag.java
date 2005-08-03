@@ -16,49 +16,46 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
+import java.util.HashMap;
+
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.clib.lang.DefaultContext;
+import com.cyclopsgroup.waterview.core.JellyContextAdapter;
+import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
-/**
- * Localized text
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
- */
-public class LocalizedTextTag extends BaseTag
+public class DisplayViewTag extends BaseTag
 {
-    private boolean escape;
+    private View view;
 
     /**
-     * Override or implement method of parent class or interface
-     *
+     * Overwrite or implement method doTag()
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        String content = getBodyText(escape);
-        output.write(content);
+        requireAttribute("view");
+        JellyContextAdapter adapter = new JellyContextAdapter(getContext());
+        DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
+        getView().render(getRuntime(), ctx);
     }
 
     /**
-     * Getter method for escape
-     *
-     * @return Returns the escape.
+     * @return Returns the view.
      */
-    public boolean isEscape()
+    public View getView()
     {
-        return escape;
+        return view;
     }
 
     /**
-     * Setter method for escape
-     *
-     * @param escape The escape to set.
+     * @param view The view to set.
      */
-    public void setEscape(boolean escape)
+    public void setView(View view)
     {
-        this.escape = escape;
+        this.view = view;
     }
 }

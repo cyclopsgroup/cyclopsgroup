@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly;
+package com.cyclopsgroup.waterview.spi.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
@@ -65,11 +65,6 @@ public abstract class BaseTag extends ClibTagSupport
         }
     }
 
-    protected JellyEngine getJellyEngine()
-    {
-        return (JellyEngine) getContext().getVariable(JellyEngine.ROLE);
-    }
-
     /**
      * Convenient method to get PageRuntime
      *
@@ -78,16 +73,5 @@ public abstract class BaseTag extends ClibTagSupport
     protected RuntimeData getRuntime()
     {
         return (RuntimeData) getContext().getVariable(RuntimeData.NAME);
-    }
-
-    /**
-     * If the tag is in the middle of rendering
-     *
-     * @return If the tag is in the middle of rendering
-     */
-    protected boolean isRendering()
-    {
-        Boolean b = (Boolean) getContext().getVariable(JellyEngine.RENDERING);
-        return b != null && b.booleanValue();
     }
 }

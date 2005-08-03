@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.jelly.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
  * Tag for tag package definition
@@ -41,7 +41,7 @@ public class TagPackageTag extends BaseTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

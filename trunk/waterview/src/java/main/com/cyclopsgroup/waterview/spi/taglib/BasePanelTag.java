@@ -10,7 +10,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.BaseTag;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.PanelContent;

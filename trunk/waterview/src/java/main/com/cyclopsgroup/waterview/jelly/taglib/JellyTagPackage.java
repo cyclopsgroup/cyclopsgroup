@@ -31,16 +31,9 @@ public class JellyTagPackage extends TagPackage
      */
     public JellyTagPackage()
     {
-        addTag("Frame", FrameTag.class);
-        addTag("Layout", LayoutTag.class);
-        addTag("Page", PageTag.class);
-        addTag("Panel", PanelTag.class);
+        addTag("JellyPanel", JellyPanelTag.class);
         addTag("JellyLayout", JellyLayoutTag.class);
-        addTag("SystemLayout", SystemLayoutTag.class);
-        addTag("PanelContent", PanelContentTag.class);
         addTag("JellyView", JellyViewTag.class);
-        addTag("SimpleView", SimpleViewTag.class);
-        addTag("RenderLayout", RenderLayoutTag.class);
         addTag("View", ViewTag.class);
     }
 }

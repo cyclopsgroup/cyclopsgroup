@@ -14,31 +14,35 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.BaseTag;
+import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
- * Default layout definition tag
+ * System predefined layout tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultLayoutTag extends BaseTag
+public class SystemLayoutTag extends BaseTag
 {
+    private String id;
+
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
+        requireAttribute("id");
         Page page = (Page) context.getVariable(Page.NAME);
         if (page == null)
         {
@@ -46,6 +50,32 @@ public class DefaultLayoutTag extends BaseTag
         }
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        page.setLayout(mm.getDefaultLayout());
+        Layout layout = mm.getLayout(getId());
+        if (layout == null)
+        {
+            throw new NullPointerException("Layout [" + getId()
+                    + "] doesn't exist");
+        }
+        page.setLayout(layout);
+    }
+
+    /**
+     * Getter method for id
+     *
+     * @return Returns the id.
+     */
+    public String getId()
+    {
+        return id;
+    }
+
+    /**
+     * Setter method for id
+     *
+     * @param id The id to set.
+     */
+    public void setId(String id)
+    {
+        this.id = id;
     }
 }

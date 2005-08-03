@@ -14,42 +14,32 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.BaseTag;
-import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.jelly.ScriptLayout;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
- * Render layout tag
+ * Tag for layout
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderLayoutTag extends BaseTag
+public class LayoutTag extends BaseTag
 {
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        RuntimeData runtime = getRuntime();
         Page page = (Page) getContext().getVariable(Page.NAME);
-        Layout layout = page.getLayout();
-        if (layout == null)
-        {
-            ModuleManager mm = (ModuleManager) serviceManager
-                    .lookup(ModuleManager.ROLE);
-            layout = mm.getDefaultLayout();
-        }
-        //layout.execute(runtime, runtime.getRequestContext());
-        layout.render(runtime, page);
+        ScriptLayout layout = new ScriptLayout(getBody());
+        page.setLayout(layout);
     }
 }

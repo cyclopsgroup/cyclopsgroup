@@ -57,8 +57,14 @@ import com.cyclopsgroup.waterview.spi.View;
 public class JellyEngine extends AbstractLogEnabled implements Initializable,
         Contextualizable, Serviceable, DynaViewFactory, ActionResolver
 {
+    /** Class name of definition tag package */
+    private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
 
-    private static class DummyScript implements Script
+    /** Definition taglib url */
+    public static final String DEFINITION_TAGLIB_URL = "http://waterview.cyclopsgroup.com/definition";
+
+    /** Stupid dummy script */
+    public static final Script DUMMY_SCRIPT = new Script()
     {
         /**
          * Override or implement method of parent class or interface
@@ -80,27 +86,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         {
             //doing nothing
         }
-    }
-
-    /** Class name of definition tag package */
-    private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
-
-    /** Definition taglib url */
-    public static final String DEFINITION_TAGLIB_URL = "http://waterview.cyclopsgroup.com/definition";
-
-    /** Stupid dummy script */
-    public static final Script DUMMY_SCRIPT = new DummyScript();
-
-    /** Name constant of jelly context */
-    public static final String JELLY_CONTEXT = JellyContext.class.getName();
-
-    /** Name constant of jelly output */
-    public static final String JELLY_OUTPUT = XMLOutput.class.getName();
-
-    private static final Script NONE_SCRIPT = new DummyScript();
-
-    /** Rendering for switch */
-    public static final String RENDERING = "rendering";
+    };
 
     /** Role name of this class */
     public static final String ROLE = JellyEngine.class.getName();
@@ -263,7 +249,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
                 if (resource == null)
                 {
-                    script = NONE_SCRIPT;
+                    script = DUMMY_SCRIPT;
                 }
                 else
                 {
@@ -273,7 +259,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
                 getCacheManager().put(this, scriptKey, script);
             }
         }
-        return script == NONE_SCRIPT ? defaultScript : script;
+        return script == DUMMY_SCRIPT ? defaultScript : script;
     }
 
     /**
