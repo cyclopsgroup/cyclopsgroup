@@ -21,21 +21,21 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.BaseTag;
 
 /**
  * Tag for tag library
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TagLibraryTag extends AbstractTag
+public class TagLibraryTag extends BaseTag
 {
     private String uri;
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws MissingAttributeException, JellyTagException

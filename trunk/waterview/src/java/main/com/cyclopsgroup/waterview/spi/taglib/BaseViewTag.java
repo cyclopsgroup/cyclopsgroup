@@ -8,11 +8,11 @@ import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.BaseTag;
 import com.cyclopsgroup.waterview.jelly.valves.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
 
-public abstract class BaseViewTag extends AbstractTag
+public abstract class BaseViewTag extends BaseTag
 {
     /**
      * Overwrite this method to create component
@@ -27,7 +27,7 @@ public abstract class BaseViewTag extends AbstractTag
 
     /**
      * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception

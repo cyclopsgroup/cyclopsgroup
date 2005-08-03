@@ -29,7 +29,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractTag extends ClibTagSupport
+public abstract class BaseTag extends ClibTagSupport
 {
     /**
      * Do the logic of this tag

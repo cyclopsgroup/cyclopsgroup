@@ -10,13 +10,13 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.BaseTag;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.PanelContent;
 import com.cyclopsgroup.waterview.spi.View;
 
-public abstract class BasePanelTag extends AbstractTag implements ViewAware
+public abstract class BasePanelTag extends BaseTag implements ViewAware
 {
     private String name;
 

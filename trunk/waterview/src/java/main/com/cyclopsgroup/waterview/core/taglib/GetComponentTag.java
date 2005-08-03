@@ -19,14 +19,14 @@ package com.cyclopsgroup.waterview.core.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.AbstractTag;
+import com.cyclopsgroup.waterview.jelly.BaseTag;
 
 /**
  * Tag to lookup component
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class GetComponentTag extends AbstractTag
+public class GetComponentTag extends BaseTag
 {
     private String role;
 
@@ -35,7 +35,7 @@ public class GetComponentTag extends AbstractTag
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.jelly.AbstractTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.jelly.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
