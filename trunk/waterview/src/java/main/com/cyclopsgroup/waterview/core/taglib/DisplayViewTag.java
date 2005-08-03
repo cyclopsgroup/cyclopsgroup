@@ -22,7 +22,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.clib.lang.DefaultContext;
-import com.cyclopsgroup.waterview.core.JellyContextAdapter;
+import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 

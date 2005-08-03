@@ -30,7 +30,6 @@ public class CoreTagPackage extends TagPackage
      */
     public CoreTagPackage()
     {
-        addTag("Layout", LayoutTag.class);
         addTag("Page", PageTag.class);
         addTag("SystemLayout", SystemLayoutTag.class);
         addTag("PanelContent", PanelContentTag.class);

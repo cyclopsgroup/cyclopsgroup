@@ -35,5 +35,6 @@ public class JellyTagPackage extends TagPackage
         addTag("JellyLayout", JellyLayoutTag.class);
         addTag("JellyView", JellyViewTag.class);
         addTag("View", ViewTag.class);
+        addTag("Layout", LayoutTag.class);
     }
 }
