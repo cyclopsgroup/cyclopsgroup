@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" xmlns:j="jelly:core">
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://www.w3.org/1999/xhtml" xmlns:j="jelly:core">
     <table width="100" border="0" cellpadding="0" cellspacing="0">
         <j:forEach var="view" items="${views}">
             <tr>

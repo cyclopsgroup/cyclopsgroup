@@ -10,19 +10,19 @@
         </tr>
         <tr>
             <td width="18%" valign="top" id="leftArea">
-                <w:Panel name="navigator">
+                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="navigator">
                     <w:JellyView script="/waterview/WaterviewNavigator.jelly"/>
-                </w:Panel>
+                </w:JellyPanel>
             </td>
             <td width="65%" valign="top" id="bodyArea">
-                <w:Panel name="body">
+                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
                     <w:SimpleView path="${page}"/>
-                </w:Panel>
+                </w:JellyPanel>
             </td>
             <td width="17%" valign="top" id="rightArea">
-                <w:Panel name="right">
+                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="right">
                     <w:JellyView script="/waterview/WaterviewRightBar.jelly"/>
-                </w:Panel>
+                </w:JellyPanel>
             </td>
         </tr>
         <tr>
