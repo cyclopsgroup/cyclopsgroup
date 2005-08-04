@@ -16,11 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jsp;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
@@ -49,28 +44,8 @@ public class JspView implements View
      */
     public void render(RuntimeData data, Context viewContext) throws Exception
     {
-        HttpServletRequest request = (HttpServletRequest) viewContext
-                .get("request");
-        HttpServletResponse response = (HttpServletResponse) viewContext
-                .get("response");
-        ServletContext servletContext = (ServletContext) viewContext
-                .get("servletContext");
-        if (request == null || response == null || servletContext == null)
-        {
-            data.getOutput().println(
-                    "Jsp " + path + " is not rendered correctly with request "
-                            + request + ", response " + response + ", context "
-                            + servletContext);
-        }
-        RequestDispatcher dispatcher = servletContext
-                .getRequestDispatcher(path);
-        if (dispatcher == null)
-        {
-            data.getOutput().println("Jsp " + path + " doesn't exist");
-        }
-        else
-        {
-            dispatcher.include(request, response);
-        }
+        JspEngine je = (JspEngine) data.getServiceManager().lookup(
+                JspEngine.ROLE);
+        je.renderJsp(path, data, viewContext);
     }
 }

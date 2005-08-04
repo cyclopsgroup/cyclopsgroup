@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import com.cyclopsgroup.clib.site.avalon.FakeServiceManager;
+import com.cyclopsgroup.waterview.util.FakeServiceManager;
 
 /**
  * Fake page runtime object

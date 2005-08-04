@@ -32,7 +32,6 @@ import com.cyclopsgroup.waterview.spi.PipelineContext;
  */
 public class ParseURLValveTest extends PlexusTestCase
 {
-
     /**
      * Test invocation
      *

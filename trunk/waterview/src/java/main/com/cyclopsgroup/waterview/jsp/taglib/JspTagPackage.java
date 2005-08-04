@@ -25,5 +25,12 @@ import com.cyclopsgroup.waterview.util.TagPackage;
  */
 public class JspTagPackage extends TagPackage
 {
-
+    /**
+     * Constructor 
+     */
+    public JspTagPackage()
+    {
+        addTag("JspView", JspViewTag.class);
+        addTag("JspScript", JspScriptTag.class);
+    }
 }

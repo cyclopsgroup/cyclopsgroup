@@ -17,16 +17,23 @@
 package com.cyclopsgroup.waterview.velocity;
 
 import java.io.StringWriter;
+import java.util.Iterator;
+import java.util.Properties;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.context.Context;
+import org.apache.avalon.framework.context.ContextException;
+import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
-import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -38,15 +45,25 @@ import com.cyclopsgroup.waterview.spi.View;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
-        DynaViewFactory, ActionResolver
+        DynaViewFactory, ActionResolver, Initializable, Contextualizable
 {
-
     /** Role name of this component */
     public static final String ROLE = VelocityEngine.class.getName();
 
+    private org.apache.velocity.app.VelocityEngine engine;
+
+    private Properties initProperties;
+
     private ModuleManager moduleManager;
 
-    private VelocityFactory velocityFactory;
+    /**
+     * Overwrite or implement method contextualize()
+     * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
+     */
+    public void contextualize(Context context) throws ContextException
+    {
+        initProperties = (Properties) context.get(Waterview.INIT_PROPERTIES);
+    }
 
     /**
      * Overwrite or implement method createView()
@@ -77,21 +94,33 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
             path = '/' + packageName.replace('.', '/') + templatePath;
         }
         path = path.substring(1);
-        if (getVelocityFactory().getVelocityEngine().templateExists(path))
+        if (engine.templateExists(path))
         {
-            return getVelocityFactory().getVelocityEngine().getTemplate(path);
+            return engine.getTemplate(path);
         }
         return null;
     }
 
     /**
-     * Getter method for velocityFactory
-     *
-     * @return Returns the velocityFactory.
+     * Overwrite or implement method initialize()
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public VelocityFactory getVelocityFactory()
+    public void initialize() throws Exception
     {
-        return velocityFactory;
+        ExtendedProperties props = new ExtendedProperties();
+        if (initProperties != null)
+        {
+            for (Iterator i = initProperties.keySet().iterator(); i.hasNext();)
+            {
+                String name = (String) i.next();
+                props.addProperty(name, initProperties.getProperty(name));
+            }
+        }
+        props.load(getClass().getResourceAsStream("basevelocity.properties"));
+
+        engine = new org.apache.velocity.app.VelocityEngine();
+        engine.setExtendedProperties(props);
+        engine.init();
     }
 
     /**
@@ -117,25 +146,11 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        setVelocityFactory((VelocityFactory) serviceManager
-                .lookup(VelocityFactory.ROLE));
         moduleManager = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.vm";
-
         moduleManager.registerActionResolver(pattern, this);
-
         moduleManager.registerDynaViewFactory(pattern, this);
-    }
-
-    /**
-     * Setter method for velocityFactory
-     *
-     * @param velocityFactory The velocityFactory to set.
-     */
-    public void setVelocityFactory(VelocityFactory velocityFactory)
-    {
-        this.velocityFactory = velocityFactory;
     }
 }

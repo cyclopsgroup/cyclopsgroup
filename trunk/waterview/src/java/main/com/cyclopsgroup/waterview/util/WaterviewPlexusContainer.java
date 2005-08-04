@@ -21,7 +21,6 @@ import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.DefaultPlexusContainer;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.configuration.PlexusConfiguration;
@@ -29,8 +28,6 @@ import org.codehaus.plexus.configuration.PlexusConfigurationException;
 import org.codehaus.plexus.configuration.PlexusConfigurationMerger;
 import org.codehaus.plexus.configuration.xml.xstream.PlexusTools;
 import org.codehaus.plexus.util.FileUtils;
-
-import com.cyclopsgroup.clib.site.avalon.LoadOnStart;
 
 /**
  * This plexus container patchs the official plexus container.
@@ -63,39 +60,21 @@ public class WaterviewPlexusContainer extends DefaultPlexusContainer
             ComponentLookupException
     {
         super.loadComponentsOnStart();
-        PlexusConfiguration[] allComponents = configuration.getChild(
-                "components").getChildren("component");
-        for (int i = 0; i < allComponents.length; i++)
-        {
-            PlexusConfiguration componentConfiguration = allComponents[i];
-            String role = componentConfiguration.getChild("role").getValue();
-            String roleHint = componentConfiguration.getChild("role-hint")
-                    .getValue(null);
-            String implementation = componentConfiguration.getChild(
-                    "implementation").getValue();
-            boolean loadComponent = false;
-            try
-            {
-                Class implementationClass = Class.forName(implementation);
-                loadComponent = LoadOnStart.class
-                        .isAssignableFrom(implementationClass);
-            }
-            catch (Exception e)
-            {
-                getLogger().warn("Weird exception", e);
-            }
-            if (loadComponent)
-            {
-                if (StringUtils.isEmpty(roleHint))
-                {
-                    lookup(role);
-                }
-                else
-                {
-                    lookup(role, roleHint);
-                }
-            }
-        }
+
+        /*
+         PlexusConfiguration[] allComponents = configuration.getChild(
+         "components").getChildren("component");
+         for (int i = 0; i < allComponents.length; i++)
+         {
+         PlexusConfiguration componentConfiguration = allComponents[i];
+         String role = componentConfiguration.getChild("role").getValue();
+         String roleHint = componentConfiguration.getChild("role-hint")
+         .getValue(null);
+         String implementation = componentConfiguration.getChild(
+         "implementation").getValue();
+         boolean loadComponent = false;
+         }
+         */
     }
 
     /**

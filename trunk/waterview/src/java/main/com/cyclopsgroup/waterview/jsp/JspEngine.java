@@ -16,12 +16,19 @@
  */
 package com.cyclopsgroup.waterview.jsp;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
@@ -49,7 +56,44 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
         {
             path = '/' + StringUtils.replace(packageName, ".", "/") + path;
         }
+        path = "/templates" + path;
         return new JspView(path);
+    }
+
+    /**
+     * @param path Absolute JSP path
+     * @param data Runtime data
+     * @param viewContext View context
+     * @throws Exception Throw it out
+     */
+    public void renderJsp(String path, RuntimeData data, Context viewContext)
+            throws Exception
+    {
+        HttpServletRequest request = (HttpServletRequest) data
+                .getRequestContext().get("request");
+        HttpServletResponse response = (HttpServletResponse) data
+                .getRequestContext().get("response");
+        ServletContext servletContext = (ServletContext) data
+                .getRequestContext().get("servletContext");
+        if (request == null || response == null || servletContext == null)
+        {
+            data.getOutput().println(
+                    "Jsp " + path + " is not rendered correctly with request "
+                            + request + ", response " + response + ", context "
+                            + servletContext);
+        }
+        request.setAttribute("viewContext", viewContext);
+        RequestDispatcher dispatcher = servletContext
+                .getRequestDispatcher(path);
+        if (dispatcher == null)
+        {
+            data.getOutput().println("Jsp " + path + " doesn't exist");
+        }
+        else
+        {
+            dispatcher.include(request, response);
+        }
+        request.removeAttribute("viewContext");
     }
 
     /**
