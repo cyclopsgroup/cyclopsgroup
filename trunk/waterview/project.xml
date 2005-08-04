@@ -59,15 +59,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>clib</groupId>
-            <artifactId>clib-site</artifactId>
-            <version>SNAPSHOT</version>
-            <url>http://www.cyclopsgroup.com/projects/clib/site</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.7.0</version>
