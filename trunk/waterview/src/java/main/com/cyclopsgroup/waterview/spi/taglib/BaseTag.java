@@ -70,7 +70,7 @@ public abstract class BaseTag extends ClibTagSupport
      *
      * @return PageRuntime object
      */
-    protected RuntimeData getRuntime()
+    protected RuntimeData getRuntimeData()
     {
         return (RuntimeData) getContext().getVariable(RuntimeData.NAME);
     }

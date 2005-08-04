@@ -31,7 +31,7 @@ public abstract class BaseViewTag extends BaseTag
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        RuntimeData data = getRuntime();
+        RuntimeData data = getRuntimeData();
         View view = createView(context, data);
 
         if (view == null)

@@ -59,7 +59,7 @@ public abstract class BasePanelTag extends BaseTag implements ViewAware
             }
         }
 
-        RuntimeData data = getRuntime();
+        RuntimeData data = getRuntimeData();
         Panel panel = createPanel(context, data);
         if (panel == null)
         {

@@ -40,7 +40,7 @@ public class RenderLayoutTag extends BaseTag
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        RuntimeData runtime = getRuntime();
+        RuntimeData runtime = getRuntimeData();
         Page page = (Page) getContext().getVariable(Page.NAME);
         Layout layout = page.getLayout();
         if (layout == null)

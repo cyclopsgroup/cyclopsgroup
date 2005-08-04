@@ -40,7 +40,7 @@ public class DisplayViewTag extends BaseTag
         requireAttribute("view");
         JellyContextAdapter adapter = new JellyContextAdapter(getContext());
         DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
-        getView().render(getRuntime(), ctx);
+        getView().render(getRuntimeData(), ctx);
     }
 
     /**
