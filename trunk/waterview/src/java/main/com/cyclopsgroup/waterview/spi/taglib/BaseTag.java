@@ -21,8 +21,8 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.clib.lang.xml.ClibTagSupport;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.util.ClibTagSupport;
 
 /**
  * Base jelly tag

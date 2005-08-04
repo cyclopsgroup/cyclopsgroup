@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.velocity;
 
 import org.apache.velocity.Template;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
 

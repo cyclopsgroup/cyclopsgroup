@@ -6,7 +6,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.clib.lang.DefaultContext;
+import com.cyclopsgroup.waterview.DefaultContext;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;

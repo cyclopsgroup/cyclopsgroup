@@ -14,27 +14,40 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.util;
+
+import org.apache.commons.jelly.TagLibrary;
 
 /**
- * Exception for no valve defined senario
+ * Clib tag library
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NoValveException extends Exception
+public class ClibTagLibrary extends TagLibrary
 {
     /**
-     * Comment for <code>serialVersionUID</code>
+     * Register a package of tags
+     *
+     * @param pkg Tag package
      */
-    private static final long serialVersionUID = 1L;
-    private static final String MESSAGE = "No valve is defined in waterview system! Check the component configuration please";
+    public void registerPackage(TagPackage pkg)
+    {
+        String[] tagNames = pkg.getTagNames();
+        for (int i = 0; i < tagNames.length; i++)
+        {
+            String tagName = tagNames[i];
+            Class tagClass = pkg.getTagClass(tagName);
+            registerTag(tagName, tagClass);
+        }
+    }
 
     /**
-     * Constructor for class NoValveException
+     * Override or implement method of parent class or interface
      *
+     * @see org.apache.commons.jelly.TagLibrary#registerTag(java.lang.String, java.lang.Class)
      */
-    public NoValveException()
+    public void registerTag(String name, Class type)
     {
-        super(MESSAGE);
+        super.registerTag(name, type);
     }
 }

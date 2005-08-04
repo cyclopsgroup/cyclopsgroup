@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.util.TagPackage;
 
 /**
  * Core tag package

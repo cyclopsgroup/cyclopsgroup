@@ -24,8 +24,6 @@ import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.clib.lang.Context;
-
 /**
  * Abstract base runtime class
  * 

@@ -19,7 +19,6 @@ package com.cyclopsgroup.waterview;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import com.cyclopsgroup.clib.lang.DefaultContext;
 import com.cyclopsgroup.clib.site.avalon.FakeServiceManager;
 
 /**

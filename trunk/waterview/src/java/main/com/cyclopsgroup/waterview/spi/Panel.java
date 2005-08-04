@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.HashMap;
 
-import com.cyclopsgroup.clib.lang.DefaultContext;
+import com.cyclopsgroup.waterview.DefaultContext;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**

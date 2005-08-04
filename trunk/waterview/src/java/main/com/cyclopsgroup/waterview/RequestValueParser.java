@@ -18,8 +18,6 @@ package com.cyclopsgroup.waterview;
 
 import org.apache.commons.fileupload.FileItem;
 
-import com.cyclopsgroup.clib.lang.ValueParser;
-
 /**
  * Typed value parser
  * 

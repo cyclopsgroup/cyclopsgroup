@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Context;
 
 /**
  * Adapter for velocity context

@@ -34,8 +34,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
-import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.clib.site.plexus.ClibPlexusContainer;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.PageRedirector;
 import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;

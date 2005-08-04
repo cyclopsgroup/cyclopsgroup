@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jsp.taglib;
 
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.util.TagPackage;
 
 public class JspTagPackage extends TagPackage
 {

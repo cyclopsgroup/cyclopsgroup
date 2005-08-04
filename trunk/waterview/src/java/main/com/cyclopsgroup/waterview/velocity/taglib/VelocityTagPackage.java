@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.velocity.taglib;
 
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.util.TagPackage;
 
 /**
  * Velocity tag package

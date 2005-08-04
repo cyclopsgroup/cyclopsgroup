@@ -23,8 +23,6 @@ import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.clib.lang.Context;
-
 /**
  * Runtime objects
  * 
@@ -137,6 +135,8 @@ public interface RuntimeData
 
     /**
      * Get unique ID of session
+     * 
+     * @return Session ID
      */
     String getSessionId();
 
@@ -161,5 +161,8 @@ public interface RuntimeData
      */
     void setPage(String page);
 
+    /**
+     * @param redirector
+     */
     void setRedirector(Redirector redirector);
 }

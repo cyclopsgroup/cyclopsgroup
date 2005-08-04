@@ -46,6 +46,6 @@ public class DefaultLayoutTag extends BaseTag
         }
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        page.setLayout(mm.getDefaultLayout());
+        page.setLayout(mm.getLayout(mm.getDefaultLayoutId()));
     }
 }

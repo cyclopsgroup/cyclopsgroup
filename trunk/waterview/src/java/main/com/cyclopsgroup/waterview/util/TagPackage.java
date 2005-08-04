@@ -14,28 +14,54 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.util;
 
+import java.util.Hashtable;
+
+import org.apache.commons.lang.ArrayUtils;
 
 /**
- * Waterview configuration error
+ * A package of tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class InvalidConfigurationException extends Exception
+public class TagPackage
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = 3256446897664439606L;
+    /** Empty array */
+    public static final TagPackage[] EMPTY_ARRAY = new TagPackage[0];
+
+    private Hashtable tagClasses = new Hashtable();
 
     /**
-     * Constructor for class InvalidConfigurationException
+     * Add a tag class into repository
      *
-     * @param msg
+     * @param name Tag name
+     * @param tagClass Tag class
      */
-    public InvalidConfigurationException(String msg)
+    public void addTag(String name, Class tagClass)
     {
-        super(msg);
+        tagClasses.put(name, tagClass);
+    }
+
+    /**
+     * Get tag classes
+     *
+     * @param name Tag name
+     * @return Tag class
+     */
+    public Class getTagClass(String name)
+    {
+        return (Class) tagClasses.get(name);
+    }
+
+    /**
+     * Get name of tags
+     *
+     * @return Tag name array
+     */
+    public String[] getTagNames()
+    {
+        return (String[]) tagClasses.keySet().toArray(
+                ArrayUtils.EMPTY_STRING_ARRAY);
     }
 }

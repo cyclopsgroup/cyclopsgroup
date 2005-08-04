@@ -37,8 +37,6 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -46,6 +44,8 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.util.ClibTagLibrary;
+import com.cyclopsgroup.waterview.util.TagPackage;
 
 /**
  * Jelly engine for jelly processing
@@ -133,7 +133,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return JellyContext object
      */
     public JellyContext createJellyContext(
-            com.cyclopsgroup.clib.lang.Context context)
+            com.cyclopsgroup.waterview.Context context)
     {
         JellyContext jc = new JellyContext(getGlobalContext());
         for (Iterator i = context.keys(); i.hasNext();)

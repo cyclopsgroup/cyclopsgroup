@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.iterators.EnumerationIterator;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Context;
 
 /**
  * Session context

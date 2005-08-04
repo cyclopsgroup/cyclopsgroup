@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import com.cyclopsgroup.clib.lang.xml.TagPackage;
+import com.cyclopsgroup.waterview.util.TagPackage;
 
 /**
  * Tag library for waterview definition

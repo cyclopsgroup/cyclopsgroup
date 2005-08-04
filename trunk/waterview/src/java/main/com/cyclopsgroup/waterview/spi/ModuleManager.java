@@ -52,13 +52,6 @@ public interface ModuleManager
     String getDefaultFrameId();
 
     /**
-     * Get default layout object
-     *
-     * @return Layout object
-     */
-    Layout getDefaultLayout();
-
-    /**
      * Get default layout id
      *
      * @return Default layout id

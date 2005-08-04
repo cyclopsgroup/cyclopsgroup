@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import org.apache.commons.jelly.JellyContext;
 
-import com.cyclopsgroup.clib.lang.Context;
+import com.cyclopsgroup.waterview.Context;
 
 /**
  * Clib context adapter for Jelly context

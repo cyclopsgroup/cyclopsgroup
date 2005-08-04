@@ -47,7 +47,7 @@ public class RenderLayoutTag extends BaseTag
         {
             ModuleManager mm = (ModuleManager) serviceManager
                     .lookup(ModuleManager.ROLE);
-            layout = mm.getDefaultLayout();
+            layout = mm.getLayout(mm.getDefaultLayoutId());
         }
         //layout.execute(runtime, runtime.getRequestContext());
         layout.render(runtime, page);

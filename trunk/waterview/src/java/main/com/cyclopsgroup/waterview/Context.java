@@ -16,46 +16,42 @@
  */
 package com.cyclopsgroup.waterview;
 
-import org.apache.commons.lang.exception.NestableException;
+import java.util.Iterator;
 
 /**
- * Exception to show that page is not found
+ * Runtime context interface
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class PageNotFoundException extends NestableException
+public interface Context
 {
     /**
-     * Comment for <code>serialVersionUID</code>
+     * Get variable from context
+     *
+     * @param name Variable name
+     * @return Object or null
      */
-    private static final long serialVersionUID = 3256999947650939193L;
+    Object get(String name);
 
     /**
-     * 
-     * @uml.property name="page" 
+     * Get available variable names in this context
+     *
+     * @return Iterator of variable names
      */
-    private String page;
+    Iterator keys();
 
     /**
-     * Constructor of PageNotFoundException
-     * 
-     * @param page Page string
+     * Put vriable into context
+     *
+     * @param name Variable name
+     * @param variable Variable value
      */
-    public PageNotFoundException(String page)
-    {
-        super("Page [" + page + "] is not found");
-        this.page = page;
-    }
+    void put(String name, Object variable);
 
     /**
-     * Method getPage() in class PageNotFoundException
-     * 
-     * @return Page path
-     * 
-     * @uml.property name="page"
+     * Remove a variable
+     *
+     * @param name Variable name
      */
-    public String getPage()
-    {
-        return page;
-    }
+    void remove(String name);
 }

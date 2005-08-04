@@ -130,16 +130,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayout()
-     */
-    public Layout getDefaultLayout()
-    {
-        return getLayout(getDefaultLayoutId());
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayoutId()
      */
     public String getDefaultLayoutId()
