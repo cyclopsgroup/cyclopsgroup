@@ -20,26 +20,27 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
- * Script view
+ * Script based panel
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptView implements View
+public class JellyPanel implements Panel
 {
+    private static final String VIEWS_NAME = "views";
 
     private Script script;
 
     /**
-     * Constructor for class ScriptView
+     * Constructor for class ScriptPanel
      *
-     * @param script Script object
+     * @param script Jelly script object
      */
-    public ScriptView(Script script)
+    public JellyPanel(Script script)
     {
         this.script = script;
     }
@@ -47,28 +48,30 @@ public class ScriptView implements View
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.View[])
      */
-    public void render(RuntimeData runtime, Context viewContext)
-            throws Exception
+    public void render(RuntimeData runtime, View[] views) throws Exception
     {
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jellyContext = je.createJellyContext(viewContext);
-        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
+        jc.setVariable(VIEWS_NAME, views);
+
         try
         {
-            script.run(jellyContext, output);
+            XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+            script.run(jc, output);
+            output.flush();
         }
         catch (Exception e)
         {
-            runtime.getOutput().print("<div>");
+            runtime.getOutput().println("<pre>");
             e.printStackTrace(runtime.getOutput());
-            runtime.getOutput().println("</div>");
+            runtime.getOutput().println("</pre>");
         }
         finally
         {
-            output.flush();
+            runtime.getOutput().flush();
         }
     }
 }

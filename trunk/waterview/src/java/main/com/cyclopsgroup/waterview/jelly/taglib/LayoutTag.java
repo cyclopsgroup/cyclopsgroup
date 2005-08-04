@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.ScriptLayout;
+import com.cyclopsgroup.waterview.jelly.JellyLayout;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
@@ -39,7 +39,7 @@ public class LayoutTag extends BaseTag
             throws Exception
     {
         Page page = (Page) getContext().getVariable(Page.NAME);
-        ScriptLayout layout = new ScriptLayout(getBody());
+        JellyLayout layout = new JellyLayout(getBody());
         page.setLayout(layout);
     }
 }

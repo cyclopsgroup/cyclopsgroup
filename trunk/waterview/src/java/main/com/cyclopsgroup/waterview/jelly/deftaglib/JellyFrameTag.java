@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.ScriptFrameProxy;
+import com.cyclopsgroup.waterview.jelly.JellyFrameProxy;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
@@ -42,7 +42,7 @@ public class JellyFrameTag extends BaseTag
     {
         requireAttribute("script");
         requireParent(FrameTag.class);
-        Frame frame = new ScriptFrameProxy(getScript());
+        Frame frame = new JellyFrameProxy(getScript());
         FrameTag frameTag = (FrameTag) getParent();
         frameTag.setFrame(frame);
     }

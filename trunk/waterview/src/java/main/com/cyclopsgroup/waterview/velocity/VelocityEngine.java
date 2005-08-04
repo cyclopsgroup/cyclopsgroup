@@ -26,10 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.clib.site.velocity.VelocityFactory;
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
-import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -53,24 +50,14 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
      */
-    public View createView(String packageName, String viewPath,
-            RuntimeData runtime) throws Exception
+    public View createView(String packageName, String viewPath)
+            throws Exception
     {
         String path = "/view" + viewPath;
         Template template = getTemplate(packageName, path);
         return new VelocityView(template);
-    }
-
-    /**
-     * Getter method for moduleManager
-     *
-     * @return Returns the moduleManager.
-     */
-    public ModuleManager getModuleManager()
-    {
-        return moduleManager;
     }
 
     /**
@@ -84,11 +71,6 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     public Template getTemplate(String packageName, String templatePath)
             throws Exception
     {
-        if (!templatePath.endsWith(".vm"))
-        {
-            Path pr = Path.parse(templatePath);
-            templatePath = pr.getParentPath() + pr.getShortName() + ".vm";
-        }
         String path = templatePath;
         if (StringUtils.isNotEmpty(packageName))
         {
@@ -137,28 +119,14 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     {
         setVelocityFactory((VelocityFactory) serviceManager
                 .lookup(VelocityFactory.ROLE));
-        setModuleManager((ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE));
+        moduleManager = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.vm";
 
-        ResolveActionsValve resolveActionsValve = (ResolveActionsValve) serviceManager
-                .lookup(ResolveActionsValve.ROLE);
-        resolveActionsValve.registerActionResolver(pattern, this);
+        moduleManager.registerActionResolver(pattern, this);
 
-        RenderPageValve renderPageValve = (RenderPageValve) serviceManager
-                .lookup(RenderPageValve.ROLE);
-        renderPageValve.registerViewFactory(pattern, this);
-    }
-
-    /**
-     * Setter method for moduleManager
-     *
-     * @param moduleManager The moduleManager to set.
-     */
-    public void setModuleManager(ModuleManager moduleManager)
-    {
-        this.moduleManager = moduleManager;
+        moduleManager.registerDynaViewFactory(pattern, this);
     }
 
     /**

@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Dynamic view factory
@@ -25,18 +24,13 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface DynaViewFactory
 {
-    /** Name of this component */
-    String NAME = DynaViewFactory.class.getName();
-
     /**
      * Dynamically create View with view path
      *
      * @param packageName package of ui module
      * @param viewPath Path of the view
-     * @param runtime Current runtime
      * @return View object
      * @throws Exception Throw it out
      */
-    View createView(String packageName, String viewPath, RuntimeData runtime)
-            throws Exception;
+    View createView(String packageName, String viewPath) throws Exception;
 }

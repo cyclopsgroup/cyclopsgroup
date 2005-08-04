@@ -16,84 +16,21 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.CacheManager;
-import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
-import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Valve to render page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve extends AbstractLogEnabled implements Valve,
-        Serviceable
+public class RenderPageValve extends AbstractLogEnabled implements Valve
 {
-
-    private class CachedViewFactory implements DynaViewFactory
-    {
-        private DynaViewFactory proxy;
-
-        private CachedViewFactory(DynaViewFactory proxy)
-        {
-            this.proxy = proxy;
-        }
-
-        /**
-         * Overwrite or implement method createView()
-         * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
-         */
-        public synchronized View createView(String packageName,
-                String viewPath, RuntimeData runtime) throws Exception
-        {
-            if (viewPath.charAt(0) != '/')
-            {
-                throw new IllegalArgumentException(
-                        "View path must start with /");
-            }
-            String key = proxy.hashCode() + '/' + packageName + viewPath;
-            if (getCacheManager().contains(this, key))
-            {
-                return (View) getCacheManager().get(this, key);
-            }
-            View view = proxy.createView(packageName, viewPath, runtime);
-            getCacheManager().put(this, key, view);
-            return view;
-        }
-    }
-
-    /** Role name of this valve*/
-    public static final String ROLE = RenderPageValve.class.getName();
-
-    private CacheManager cacheManager;
-
-    private Map viewFactories = ListOrderedMap.decorate(new Hashtable());
-
-    /**
-     * Getter method for cacheManager
-     *
-     * @return Returns the cacheManager.
-     */
-    public CacheManager getCacheManager()
-    {
-        return cacheManager;
-    }
-
     /**
      * Override or implement method of parent class or interface
      *
@@ -102,26 +39,6 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
     public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
-        DynaViewFactory viewFactory = null;
-        for (Iterator i = viewFactories.keySet().iterator(); i.hasNext();)
-        {
-            String pattern = (String) i.next();
-            if (Pattern.matches('^' + pattern + '$', data.getPage()))
-            {
-                viewFactory = (DynaViewFactory) viewFactories.get(pattern);
-                break;
-            }
-        }
-        if (viewFactory == null)
-        {
-            data.getOutput().println("Unknown page path " + data.getPage());
-            context.invokeNextValve(data);
-        }
-        else
-        {
-            data.getRequestContext().put(DynaViewFactory.NAME, viewFactory);
-        }
-
         Page page = (Page) data.getRequestContext().get(Page.NAME);
         if (page == null)
         {
@@ -133,38 +50,5 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
         mm.getDefaultFrame().display(page, data);
         context.invokeNextValve(data);
         data.getOutput().flush();
-    }
-
-    /**
-     * Register a view factory
-     *
-     * @param pattern Pattern of page
-     * @param viewFactory View factory object
-     */
-    public void registerViewFactory(String pattern, DynaViewFactory viewFactory)
-    {
-        viewFactories.put(pattern, new CachedViewFactory(viewFactory));
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service(ServiceManager serviceManager) throws ServiceException
-    {
-        CacheManager cm = (CacheManager) serviceManager
-                .lookup(CacheManager.ROLE);
-        setCacheManager(cm);
-    }
-
-    /**
-     * Setter method for cacheManager
-     *
-     * @param cacheManager The cacheManager to set.
-     */
-    public void setCacheManager(CacheManager cacheManager)
-    {
-        this.cacheManager = cacheManager;
     }
 }

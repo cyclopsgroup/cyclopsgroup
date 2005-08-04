@@ -21,7 +21,7 @@ import org.apache.commons.jelly.Script;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.jelly.ScriptPanel;
+import com.cyclopsgroup.waterview.jelly.JellyPanel;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Panel;
@@ -41,17 +41,17 @@ public class JellyPanelTag extends BasePanelTag
         requireAttribute("script");
         CacheManager cache = (CacheManager) data.getServiceManager().lookup(
                 CacheManager.ROLE);
-        ScriptPanel panel = (ScriptPanel) cache.get(getClass(), getScript());
+        JellyPanel panel = (JellyPanel) cache.get(getClass(), getScript());
         if (panel == null)
         {
             ModuleManager module = (ModuleManager) data.getServiceManager()
                     .lookup(ModuleManager.ROLE);
-            ModuleManager.PathModel model = module.parsePath(getScript());
+            ModuleManager.Path model = module.parsePath(getScript());
             JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                     JellyEngine.ROLE);
             Script script = je.getScript(model.getPackage(), "/panel"
                     + model.getPath());
-            panel = new ScriptPanel(script);
+            panel = new JellyPanel(script);
             cache.put(getClass(), getScript(), panel);
         }
         return panel;

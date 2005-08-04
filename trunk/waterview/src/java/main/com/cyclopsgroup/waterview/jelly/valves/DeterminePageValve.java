@@ -101,7 +101,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             {
                 ModuleManager mm = (ModuleManager) runtime.getServiceManager()
                         .lookup(ModuleManager.ROLE);
-                ModuleManager.PathModel model = mm.parsePath(pagePath);
+                ModuleManager.Path model = mm.parsePath(pagePath);
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
                 //ModuleChain moduleChain = new ModuleChain();

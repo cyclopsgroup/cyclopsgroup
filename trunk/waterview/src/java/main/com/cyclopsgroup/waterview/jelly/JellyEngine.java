@@ -39,14 +39,12 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.clib.lang.xml.ClibTagLibrary;
 import com.cyclopsgroup.clib.lang.xml.TagPackage;
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
-import com.cyclopsgroup.waterview.core.valves.ResolveActionsValve;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -149,14 +147,14 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
      */
-    public View createView(String packageName, String viewPath,
-            RuntimeData runtime) throws Exception
+    public View createView(String packageName, String viewPath)
+            throws Exception
     {
         String path = "/view" + viewPath;
         Script script = getScript(packageName, path);
-        return new ScriptView(script);
+        return new JellyView(script);
     }
 
     /**
@@ -233,12 +231,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
             }
             else
             {
-                if (!scriptPath.endsWith(".jelly"))
-                {
-                    Path pr = Path.parse(scriptPath);
-                    scriptPath = pr.getParentPath() + pr.getShortName()
-                            + ".jelly";
-                }
                 String fullPath = scriptPath;
                 if (StringUtils.isNotEmpty(packageName))
                 {
@@ -350,16 +342,13 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     {
         this.serviceManager = serviceManager;
         cacheManager = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        //moduleManager = (ModuleManager) serviceManager.lookup(ModuleManager.ROLE);
+        ModuleManager moduleManager = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.jelly";
 
-        ResolveActionsValve resolveActionsValve = (ResolveActionsValve) serviceManager
-                .lookup(ResolveActionsValve.ROLE);
-        resolveActionsValve.registerActionResolver(pattern, this);
+        moduleManager.registerActionResolver(pattern, this);
 
-        RenderPageValve renderPageValve = (RenderPageValve) serviceManager
-                .lookup(RenderPageValve.ROLE);
-        renderPageValve.registerViewFactory(pattern, this);
+        moduleManager.registerDynaViewFactory(pattern, this);
     }
 }

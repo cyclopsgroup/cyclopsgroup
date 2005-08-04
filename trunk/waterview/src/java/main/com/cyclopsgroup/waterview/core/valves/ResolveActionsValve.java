@@ -58,7 +58,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
-            ModuleManager.PathModel model = mm.parsePath(actionName);
+            ModuleManager.Path model = mm.parsePath(actionName);
             if (StringUtils.isEmpty(model.getPath()))
             {
                 continue;

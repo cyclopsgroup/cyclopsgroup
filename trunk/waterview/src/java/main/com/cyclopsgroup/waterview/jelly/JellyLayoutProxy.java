@@ -27,7 +27,7 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptLayoutProxy implements Layout
+public class JellyLayoutProxy implements Layout
 {
     private String layoutScript;
 
@@ -36,26 +36,26 @@ public class ScriptLayoutProxy implements Layout
      *
      * @param layoutScript Layout script path
      */
-    public ScriptLayoutProxy(String layoutScript)
+    public JellyLayoutProxy(String layoutScript)
     {
         this.layoutScript = layoutScript;
     }
 
-    private synchronized ScriptLayout getLayout(RuntimeData runtime)
+    private synchronized JellyLayout getLayout(RuntimeData runtime)
             throws Exception
     {
         CacheManager cm = (CacheManager) runtime.getServiceManager().lookup(
                 CacheManager.ROLE);
-        ScriptLayout layout = (ScriptLayout) cm.get(this, layoutScript);
+        JellyLayout layout = (JellyLayout) cm.get(this, layoutScript);
         if (layout == null)
         {
             JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                     JellyEngine.ROLE);
             ModuleManager mm = (ModuleManager) runtime.getServiceManager()
                     .lookup(ModuleManager.ROLE);
-            ModuleManager.PathModel model = mm.parsePath(layoutScript);
+            ModuleManager.Path model = mm.parsePath(layoutScript);
             String path = "/layout" + model.getPath();
-            layout = new ScriptLayout(je.getScript(model.getPackage(), path));
+            layout = new JellyLayout(je.getScript(model.getPackage(), path));
             cm.put(this, layoutScript, layout);
         }
         return layout;

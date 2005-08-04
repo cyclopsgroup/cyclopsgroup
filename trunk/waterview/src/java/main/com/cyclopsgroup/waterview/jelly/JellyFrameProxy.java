@@ -16,31 +16,28 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 
 /**
- * Jelly script frame implementation
+ * Proxy of script frame
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptFrame implements Frame
+public class JellyFrameProxy implements Frame
 {
-    private Script script;
+    private String framePath;
 
     /**
-     * Constructor for class ScriptFrame
+     * Constructor for class ScriptFrameProxy
      *
-     * @param script Script object
+     * @param framePath Path of frame
      */
-    public ScriptFrame(Script script)
+    public JellyFrameProxy(String framePath)
     {
-        this.script = script;
+        this.framePath = framePath;
     }
 
     /**
@@ -50,15 +47,17 @@ public class ScriptFrame implements Frame
      */
     public void display(Page page, RuntimeData runtime) throws Exception
     {
-        runtime.getRequestContext().put(Page.NAME, page);
-        runtime.getRequestContext().put(RuntimeData.NAME, runtime);
+        getFrame(runtime).display(page, runtime);
+    }
+
+    private JellyFrame getFrame(RuntimeData runtime) throws Exception
+    {
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
-        jc.setVariable(Page.NAME, page);
-        jc.setVariable(RuntimeData.NAME, runtime);
-        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
-        script.run(jc, output);
-        output.flush();
+        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+                ModuleManager.ROLE);
+        ModuleManager.Path model = mm.parsePath(framePath);
+        String path = "/frame" + model.getPath();
+        return new JellyFrame(je.getScript(model.getPackage(), path));
     }
 }

@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Module manager
@@ -24,7 +25,7 @@ package com.cyclopsgroup.waterview.spi;
  */
 public interface ModuleManager
 {
-    interface PathModel
+    interface Path
     {
         String getPackage();
 
@@ -33,6 +34,8 @@ public interface ModuleManager
 
     /** Role name of the component */
     String ROLE = ModuleManager.class.getName();
+
+    View createDynaView(String packageName, String path) throws Exception;
 
     /**
      * Get default frame
@@ -92,7 +95,11 @@ public interface ModuleManager
      */
     String[] getLayoutIds();
 
-    PathModel parsePath(String page);
+    Path parsePath(String page);
+
+    void registerActionResolver(String pattern, ActionResolver actionResolver);
+
+    void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
 
     /**
      * Register frame object
@@ -111,6 +118,9 @@ public interface ModuleManager
     void registerLayout(String layoutId, Layout layout);
 
     void registerPackage(String alias, String packageName);
+
+    void resolveAction(String packageName, String path, RuntimeData data)
+            throws Exception;
 
     /**
      * Set default frame id

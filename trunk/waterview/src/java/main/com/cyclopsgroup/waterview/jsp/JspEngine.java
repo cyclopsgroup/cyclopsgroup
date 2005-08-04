@@ -22,9 +22,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.core.valves.RenderPageValve;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
 public class JspEngine extends AbstractLogEnabled implements Serviceable,
@@ -34,10 +33,10 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
      */
-    public View createView(String packageName, String viewPath,
-            RuntimeData runtime) throws Exception
+    public View createView(String packageName, String viewPath)
+            throws Exception
     {
         String path = "/view" + viewPath;
         if (StringUtils.isNotEmpty(packageName))
@@ -53,8 +52,8 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        RenderPageValve renderPageValve = (RenderPageValve) serviceManager
-                .lookup(RenderPageValve.ROLE);
-        renderPageValve.registerViewFactory(".+\\.jsp", this);
+        ModuleManager moduleManager = (ModuleManager) serviceManager
+                .lookup(ModuleManager.ROLE);
+        moduleManager.registerDynaViewFactory(".+\\.jsp", this);
     }
 }

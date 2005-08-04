@@ -26,6 +26,19 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface View
 {
+    View DUMMY = new View()
+    {
+        /**
+         * Overwrite or implement method render()
+         * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
+         */
+        public void render(RuntimeData runtime, Context viewContext)
+                throws Exception
+        {
+            //do nothing
+        }
+    };
+
     /** Empty array */
     View[] EMPTY_ARRAY = new View[0];
 

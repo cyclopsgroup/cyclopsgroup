@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.commons.jelly.JellyContext;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.ScriptView;
+import com.cyclopsgroup.waterview.jelly.JellyView;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
 
@@ -37,6 +37,6 @@ public class ViewTag extends BaseViewTag
     protected View createView(JellyContext context, RuntimeData data)
             throws Exception
     {
-        return new ScriptView(getBody());
+        return new JellyView(getBody());
     }
 }

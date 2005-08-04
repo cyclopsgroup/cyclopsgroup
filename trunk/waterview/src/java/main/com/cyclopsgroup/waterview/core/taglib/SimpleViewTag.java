@@ -20,7 +20,6 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
@@ -42,22 +41,15 @@ public class SimpleViewTag extends BaseViewTag
             throws Exception
     {
         requireAttribute("path");
-        DynaViewFactory viewFactory = (DynaViewFactory) getContext()
-                .getVariable(DynaViewFactory.NAME);
 
-        if (viewFactory == null)
-        {
-            return null;
-        }
         if (StringUtils.isEmpty(getPath()))
         {
             setPath("/Index.jelly");
         }
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        ModuleManager.PathModel model = mm.parsePath(getPath());
-        return viewFactory.createView(model.getPackage(), model.getPath(),
-                getRuntime());
+        ModuleManager.Path model = mm.parsePath(getPath());
+        return mm.createDynaView(model.getPackage(), model.getPath());
     }
 
     /**

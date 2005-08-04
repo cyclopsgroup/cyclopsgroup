@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -29,10 +30,14 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Default implementation of module manager
@@ -42,52 +47,16 @@ import com.cyclopsgroup.waterview.spi.ModuleManager;
 public class DefaultModuleManager extends AbstractLogEnabled implements
         Configurable, ModuleManager, Serviceable
 {
-    private class DefaultPathModel implements PathModel
-    {
-        private String packageName, path;
-
-        private DefaultPathModel(String packageName, String path)
-        {
-            this.packageName = packageName;
-            this.path = path;
-        }
-
-        /**
-         * Overwrite or implement method getPackage()
-         * @see com.cyclopsgroup.waterview.spi.ModuleManager.PathModel#getPackage()
-         */
-        public String getPackage()
-        {
-            return packageName;
-        }
-
-        /**
-         * Overwrite or implement method getPath()
-         * @see com.cyclopsgroup.waterview.spi.ModuleManager.PathModel#getPath()
-         */
-        public String getPath()
-        {
-            return path;
-        }
-
-        /**
-         * Overwrite or implement method toString()
-         * @see java.lang.Object#toString()
-         */
-        public String toString()
-        {
-            return getPackage() + "|" + getPath();
-        }
-    }
-
-    private CacheManager cacheManager;
+    private CacheManager cache;
 
     private String defaultFrameId = "waterview.DefaultDisplayFrame",
             defaultLayoutId = "waterview.DefaultLayout",
             defaultPackageName = "com.cyclopsgroup.waterview.ui";
 
     private Hashtable frames = new Hashtable(), layouts = new Hashtable(),
-            packageNames = new Hashtable();
+            packageNames = new Hashtable(),
+            dynaViewFactories = new Hashtable(),
+            actionResolvers = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
@@ -114,13 +83,28 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
-     * Getter method for cacheManager
-     *
-     * @return Returns the cacheManager.
+     * Overwrite or implement method createDynaView()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#createDynaView(java.lang.String, java.lang.String)
      */
-    public CacheManager getCacheManager()
+    public View createDynaView(String packageName, String path)
+            throws Exception
     {
-        return cacheManager;
+        DynaViewFactory viewFactory = null;
+        for (Iterator i = dynaViewFactories.keySet().iterator(); i.hasNext();)
+        {
+            String pattern = (String) i.next();
+            if (Pattern.matches('^' + pattern + '$', path))
+            {
+                viewFactory = (DynaViewFactory) dynaViewFactories.get(pattern);
+                break;
+            }
+        }
+        if (viewFactory == null)
+        {
+            return View.DUMMY;
+        }
+        View view = viewFactory.createView(packageName, path);
+        return view == null ? View.DUMMY : view;
     }
 
     /**
@@ -217,12 +201,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      * Overwrite or implement method parsePage()
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
      */
-    public PathModel parsePath(String page)
+    public Path parsePath(String page)
     {
         if (StringUtils.isEmpty(page))
         {
-            return new DefaultPathModel(getDefaultPackageName(),
-                    StringUtils.EMPTY);
+            return new DefaultPath(getDefaultPackageName(), StringUtils.EMPTY);
         }
         String pagePackage = getDefaultPackageName();
         String path = page;
@@ -239,7 +222,28 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
                 break;
             }
         }
-        return new DefaultPathModel(pagePackage, path);
+        return new DefaultPath(pagePackage, path);
+    }
+
+    /**
+     * Overwrite or implement method registerActionResolver()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerActionResolver(java.lang.String, com.cyclopsgroup.waterview.spi.ActionResolver)
+     */
+    public void registerActionResolver(String pattern,
+            ActionResolver actionResolver)
+    {
+        actionResolvers.put(pattern, actionResolver);
+    }
+
+    /**
+     * Overwrite or implement method registerDynaViewFactory()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerDynaViewFactory(java.lang.String, com.cyclopsgroup.waterview.spi.DynaViewFactory)
+     */
+    public void registerDynaViewFactory(String pattern,
+            DynaViewFactory viewFactory)
+    {
+        dynaViewFactories.put(pattern,
+                new CachedViewFactory(viewFactory, cache));
     }
 
     /**
@@ -272,25 +276,34 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
+     * Overwrite or implement method resolveAction()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public void resolveAction(String packageName, String action,
+            RuntimeData data) throws Exception
+    {
+        for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
+        {
+            String pattern = (String) j.next();
+            if (Pattern.matches('^' + pattern + '$', action))
+            {
+                ActionResolver resolver = (ActionResolver) actionResolvers
+                        .get(pattern);
+
+                resolver.resolveAction(packageName, "/action" + action, data);
+                break;
+            }
+        }
+    }
+
+    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
     public void service(ServiceManager serviceManager) throws ServiceException
     {
-        CacheManager cm = (CacheManager) serviceManager
-                .lookup(CacheManager.ROLE);
-        setCacheManager(cm);
-    }
-
-    /**
-     * Setter method for cacheManager
-     *
-     * @param cacheManager The cacheManager to set.
-     */
-    public void setCacheManager(CacheManager cacheManager)
-    {
-        this.cacheManager = cacheManager;
+        cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
     }
 
     /**

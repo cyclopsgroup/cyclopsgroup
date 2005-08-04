@@ -21,57 +21,50 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.Panel;
-import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.Page;
 
 /**
- * Script based panel
+ * Layout with a script support
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptPanel implements Panel
+public class JellyLayout implements Layout
 {
-    private static final String VIEWS_NAME = "views";
-
     private Script script;
 
     /**
-     * Constructor for class ScriptPanel
+     * Constructor for class JellyScriptLayout
      *
      * @param script Jelly script object
      */
-    public ScriptPanel(Script script)
+    public JellyLayout(Script script)
     {
         this.script = script;
+        if (script == null)
+        {
+            throw new NullPointerException("Script can not be null");
+        }
     }
 
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.View[])
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render(RuntimeData runtime, View[] views) throws Exception
+    public synchronized void render(RuntimeData runtime, Page page)
+            throws Exception
     {
+        runtime.getRequestContext().put(Page.NAME, page);
+        runtime.getRequestContext().put(NAME, this);
+
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
-        jc.setVariable(VIEWS_NAME, views);
-
-        try
-        {
-            XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
-            script.run(jc, output);
-            output.flush();
-        }
-        catch (Exception e)
-        {
-            runtime.getOutput().println("<pre>");
-            e.printStackTrace(runtime.getOutput());
-            runtime.getOutput().println("</pre>");
-        }
-        finally
-        {
-            runtime.getOutput().flush();
-        }
+        JellyContext jellyContext = je.createJellyContext(runtime
+                .getRequestContext());
+        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+        script.run(jellyContext, output);
+        runtime.getRequestContext().put(Page.NAME, null);
+        runtime.getRequestContext().put(NAME, null);
     }
 }

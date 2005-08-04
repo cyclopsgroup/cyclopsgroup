@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.ScriptLayoutProxy;
+import com.cyclopsgroup.waterview.jelly.JellyLayoutProxy;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
@@ -42,7 +42,7 @@ public class JellyLayoutTag extends BaseTag
     {
         requireAttribute("script");
         requireParent(LayoutTag.class);
-        Layout layout = new ScriptLayoutProxy(getScript());
+        Layout layout = new JellyLayoutProxy(getScript());
         LayoutTag layoutTag = (LayoutTag) getParent();
         layoutTag.setLayout(layout);
     }

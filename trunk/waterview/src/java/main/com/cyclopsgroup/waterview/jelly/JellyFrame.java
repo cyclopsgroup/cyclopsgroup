@@ -16,28 +16,31 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.XMLOutput;
+
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 
 /**
- * Proxy of script frame
+ * Jelly script frame implementation
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ScriptFrameProxy implements Frame
+public class JellyFrame implements Frame
 {
-    private String framePath;
+    private Script script;
 
     /**
-     * Constructor for class ScriptFrameProxy
+     * Constructor for class ScriptFrame
      *
-     * @param framePath Path of frame
+     * @param script Script object
      */
-    public ScriptFrameProxy(String framePath)
+    public JellyFrame(Script script)
     {
-        this.framePath = framePath;
+        this.script = script;
     }
 
     /**
@@ -47,17 +50,15 @@ public class ScriptFrameProxy implements Frame
      */
     public void display(Page page, RuntimeData runtime) throws Exception
     {
-        getFrame(runtime).display(page, runtime);
-    }
-
-    private ScriptFrame getFrame(RuntimeData runtime) throws Exception
-    {
+        runtime.getRequestContext().put(Page.NAME, page);
+        runtime.getRequestContext().put(RuntimeData.NAME, runtime);
         JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
-                ModuleManager.ROLE);
-        ModuleManager.PathModel model = mm.parsePath(framePath);
-        String path = "/frame" + model.getPath();
-        return new ScriptFrame(je.getScript(model.getPackage(), path));
+        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
+        jc.setVariable(Page.NAME, page);
+        jc.setVariable(RuntimeData.NAME, runtime);
+        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+        script.run(jc, output);
+        output.flush();
     }
 }
