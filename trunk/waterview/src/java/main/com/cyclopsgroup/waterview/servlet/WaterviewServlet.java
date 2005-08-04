@@ -34,11 +34,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
-import com.cyclopsgroup.clib.site.plexus.ClibPlexusContainer;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.PageRedirector;
 import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.util.WaterviewPlexusContainer;
 
 /**
  * Main waterview servlet
@@ -208,7 +208,7 @@ public class WaterviewServlet extends HttpServlet
         }
         try
         {
-            container = new ClibPlexusContainer();
+            container = new WaterviewPlexusContainer();
             serviceManager = new ServiceManagerAdapter(container);
             for (Iterator j = initProperties.keySet().iterator(); j.hasNext();)
             {
