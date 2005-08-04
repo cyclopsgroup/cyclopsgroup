@@ -26,6 +26,9 @@ import org.codehaus.plexus.PlexusTestCase;
  */
 public class JellyEngineTest extends PlexusTestCase
 {
+    /**
+     * @throws Exception
+     */
     public void testGetScript() throws Exception
     {
         JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);

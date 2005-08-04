@@ -27,6 +27,11 @@ import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.taglib.BasePanelTag;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Tag to show a script based panel
+ */
 public class JellyPanelTag extends BasePanelTag
 {
     private String script;

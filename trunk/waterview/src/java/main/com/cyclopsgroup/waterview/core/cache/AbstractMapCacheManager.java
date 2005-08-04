@@ -60,6 +60,9 @@ public abstract class AbstractMapCacheManager implements CacheManager
         return getContent().get(name);
     }
 
+    /**
+     * @return Cache map
+     */
     protected abstract Map getContent();
 
     /**

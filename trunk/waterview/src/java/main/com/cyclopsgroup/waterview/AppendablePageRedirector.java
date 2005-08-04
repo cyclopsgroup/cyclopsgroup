@@ -20,27 +20,51 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Redirect to a page
+ */
 public class AppendablePageRedirector extends PageRedirector
 {
     private String page;
 
     private StringBuffer queryString = new StringBuffer();
 
+    /**
+     * Page path
+     * @param page page
+     */
     public AppendablePageRedirector(String page)
     {
         this.page = page;
     }
 
+    /**
+     * @param name
+     * @param number
+     * @return Itself
+     */
     public AppendablePageRedirector addQueryData(String name, int number)
     {
         return addQueryData(name, String.valueOf(number));
     }
 
+    /**
+     * @param name
+     * @param number
+     * @return Itself
+     */
     public AppendablePageRedirector addQueryData(String name, long number)
     {
         return addQueryData(name, String.valueOf(number));
     }
 
+    /**
+     * @param name
+     * @param object
+     * @return Itself
+     */
     public AppendablePageRedirector addQueryData(String name, Object object)
     {
         if (queryString.length() > 0)

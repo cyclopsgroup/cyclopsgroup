@@ -11,6 +11,11 @@ import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Base view tag
+ */
 public abstract class BaseViewTag extends BaseTag
 {
     /**

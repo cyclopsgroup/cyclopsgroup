@@ -39,6 +39,9 @@ public class PipelineTest extends TestCase
     {
         private String value;
 
+        /**
+         * @param value Value
+         */
         private TestValve(String value)
         {
             this.value = value;

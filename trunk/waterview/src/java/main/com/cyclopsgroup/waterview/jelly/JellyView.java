@@ -45,9 +45,8 @@ public class JellyView implements View
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
+     * Overwrite or implement method render()
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
     public void render(RuntimeData runtime, Context viewContext)
             throws Exception

@@ -27,7 +27,7 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class ClibTagSupport extends TagSupport
+public abstract class BaseTagSupport extends TagSupport
 {
 
     /**

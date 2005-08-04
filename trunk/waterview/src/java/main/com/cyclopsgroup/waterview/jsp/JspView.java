@@ -25,6 +25,11 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.View;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * JSP implemented view
+ */
 public class JspView implements View
 {
     private String path;
@@ -40,10 +45,9 @@ public class JspView implements View
 
     /**
      * Overwrite or implement method render()
-     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void render(RuntimeData runtime, Context viewContext)
-            throws Exception
+    public void render(RuntimeData data, Context viewContext) throws Exception
     {
         HttpServletRequest request = (HttpServletRequest) viewContext
                 .get("request");
@@ -53,18 +57,20 @@ public class JspView implements View
                 .get("servletContext");
         if (request == null || response == null || servletContext == null)
         {
-            runtime.getOutput().println(
+            data.getOutput().println(
                     "Jsp " + path + " is not rendered correctly with request "
                             + request + ", response " + response + ", context "
                             + servletContext);
         }
-        //String p = path;
-        //if (!p.startsWith("/"))
-        //{
-        //    p = "/" + p;
-        //}
         RequestDispatcher dispatcher = servletContext
                 .getRequestDispatcher(path);
-        dispatcher.include(request, response);
+        if (dispatcher == null)
+        {
+            data.getOutput().println("Jsp " + path + " doesn't exist");
+        }
+        else
+        {
+            dispatcher.include(request, response);
+        }
     }
 }

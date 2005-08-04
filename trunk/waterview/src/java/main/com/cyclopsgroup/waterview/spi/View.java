@@ -26,11 +26,12 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface View
 {
+    /** Dummy view */
     View DUMMY = new View()
     {
         /**
          * Overwrite or implement method render()
-         * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.clib.lang.Context)
+         * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
          */
         public void render(RuntimeData runtime, Context viewContext)
                 throws Exception

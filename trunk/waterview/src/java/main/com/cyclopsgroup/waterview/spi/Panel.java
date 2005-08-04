@@ -28,6 +28,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface Panel
 {
+    /** Dummy panel */
     Panel DUMMY = new Panel()
     {
         public void render(RuntimeData runtime, View[] views) throws Exception

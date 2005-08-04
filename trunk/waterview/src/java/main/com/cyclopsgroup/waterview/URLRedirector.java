@@ -16,15 +16,30 @@
  */
 package com.cyclopsgroup.waterview;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Redirect to given URL
+ */
 public class URLRedirector extends Redirector
 {
     private String url;
 
+    /**
+     * Constructor
+     * 
+     * @param url Url
+     */
     public URLRedirector(String url)
     {
         this.url = url;
     }
 
+    /**
+     * Get full url of it
+     * 
+     * @return URL
+     */
     public String getUrl()
     {
         return url;

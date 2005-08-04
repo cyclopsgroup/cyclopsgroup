@@ -18,10 +18,21 @@ package com.cyclopsgroup.waterview.core;
 
 import com.cyclopsgroup.waterview.spi.ModuleManager.Path;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Internal implementation of path
+ */
 class DefaultPath implements Path
 {
     private String packageName, path;
 
+    /**
+     * Constructor
+     * 
+     * @param packageName
+     * @param path
+     */
     DefaultPath(String packageName, String path)
     {
         this.packageName = packageName;

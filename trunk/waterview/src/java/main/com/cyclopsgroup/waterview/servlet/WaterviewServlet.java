@@ -90,6 +90,14 @@ public class WaterviewServlet extends HttpServlet
         handleRequest(request, response);
     }
 
+    /**
+     * Do handle exception
+     * @param request Http request
+     * @param response Http response
+     * @param e Throwable
+     * @throws IOException Throw it out
+     * @throws ServletException Throw it out
+     */
     protected void doHandleException(HttpServletRequest request,
             HttpServletResponse response, Throwable e) throws IOException,
             ServletException

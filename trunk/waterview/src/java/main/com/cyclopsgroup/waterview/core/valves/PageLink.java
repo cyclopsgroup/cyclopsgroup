@@ -24,8 +24,14 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Link tool
+ */
 public class PageLink
 {
+    /** Name of this tool */
     public static final String NAME = "link";
 
     private List actions = new ArrayList();
@@ -47,12 +53,21 @@ public class PageLink
         init();
     }
 
+    /**
+     * @param action
+     * @return Itself
+     */
     public PageLink addAction(String action)
     {
         actions.add(action);
         return this;
     }
 
+    /**
+     * @param packageName
+     * @param action
+     * @return Itself
+     */
     public PageLink addAction(String packageName, String action)
     {
         actions.add(packageName + ":" + action);
@@ -66,17 +81,30 @@ public class PageLink
         page = null;
     }
 
+    /**
+     * @param page
+     * @return Itself
+     */
     public PageLink setPage(String page)
     {
         this.page = page;
         return this;
     }
 
+    /**
+     * @param packageName
+     * @param page
+     * @return Itself
+     */
     public PageLink setPage(String packageName, String page)
     {
         return setPage(packageName + ':' + page);
     }
 
+    /**
+     * Overwrite or implement method toString()
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         StringBuffer sb = new StringBuffer(runtime.getPageBaseUrl());

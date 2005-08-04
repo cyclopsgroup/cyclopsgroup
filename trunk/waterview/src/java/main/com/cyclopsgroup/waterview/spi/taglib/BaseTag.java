@@ -22,14 +22,14 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.util.ClibTagSupport;
+import com.cyclopsgroup.waterview.util.BaseTagSupport;
 
 /**
  * Base jelly tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseTag extends ClibTagSupport
+public abstract class BaseTag extends BaseTagSupport
 {
     /**
      * Do the logic of this tag

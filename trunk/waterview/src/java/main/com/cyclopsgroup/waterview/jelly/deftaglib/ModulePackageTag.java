@@ -22,6 +22,11 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Tag to instroduce a tag package
+ */
 public class ModulePackageTag extends BaseTag
 {
     private String alias;

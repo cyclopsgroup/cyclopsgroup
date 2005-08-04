@@ -35,13 +35,13 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
+    /** Do action instruction */
     public static final String ACTION_INSTRUCTOR = "!do!";
 
     private static HashSet instructors;
 
+    /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
-
-    public static final String ROLE = ParseURLValve.class.getName();
 
     private static HashSet getInstructors()
     {
@@ -54,6 +54,10 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
         return instructors;
     }
 
+    /**
+     * @param requestPath
+     * @return list of parts
+     */
     static List parseRequestPath(String requestPath)
     {
         List ret = new ArrayList();

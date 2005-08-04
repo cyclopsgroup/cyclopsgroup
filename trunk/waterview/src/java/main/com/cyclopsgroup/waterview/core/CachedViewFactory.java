@@ -20,12 +20,21 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.View;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Internal cached view factory
+ */
 class CachedViewFactory implements DynaViewFactory
 {
-    private DynaViewFactory proxy;
-
     private CacheManager cache;
 
+    private DynaViewFactory proxy;
+
+    /**
+     * @param proxy
+     * @param cache
+     */
     CachedViewFactory(DynaViewFactory proxy, CacheManager cache)
     {
         this.proxy = proxy;

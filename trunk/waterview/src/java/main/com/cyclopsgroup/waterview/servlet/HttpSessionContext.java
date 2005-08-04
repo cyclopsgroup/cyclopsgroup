@@ -44,9 +44,8 @@ public class HttpSessionContext implements Context
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.clib.lang.Context#get(java.lang.String)
+     * Overwrite or implement method get()
+     * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
     public Object get(String name)
     {
@@ -54,29 +53,27 @@ public class HttpSessionContext implements Context
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.clib.lang.Context#keys()
+     * Overwrite or implement method keys()
+     * @see com.cyclopsgroup.waterview.Context#keys()
      */
     public Iterator keys()
     {
         return new EnumerationIterator(httpSession.getAttributeNames());
     }
 
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.clib.lang.Context#put(java.lang.String, java.lang.Object)
+     /**
+     * Overwrite or implement method put()
+     * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
     public void put(String name, Object value)
     {
         httpSession.setAttribute(name, value);
     }
 
+
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.clib.lang.Context#remove(java.lang.String)
+     * Overwrite or implement method remove()
+     * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
     public void remove(String name)
     {

@@ -26,6 +26,11 @@ import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Tag to display given view
+ */
 public class DisplayViewTag extends BaseTag
 {
     private View view;

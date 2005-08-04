@@ -44,7 +44,7 @@ public class ParseURLValveTest extends PlexusTestCase
                 System.out));
         runtime
                 .setRequestPath("/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly");
-        ParseURLValve v = (ParseURLValve) lookup(ParseURLValve.ROLE);
+        ParseURLValve v = (ParseURLValve) lookup(ParseURLValve.class.getName());
         v.invoke(runtime, new PipelineContext()
         {
 

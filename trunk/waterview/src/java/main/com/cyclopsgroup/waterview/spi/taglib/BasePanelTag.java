@@ -15,6 +15,11 @@ import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.PanelContent;
 import com.cyclopsgroup.waterview.spi.View;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Base panel tag
+ */
 public abstract class BasePanelTag extends BaseTag implements ViewAware
 {
     private String name;
@@ -37,14 +42,12 @@ public abstract class BasePanelTag extends BaseTag implements ViewAware
      * @param output
      * @throws Exception
      */
-
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
         invokeBody(output);
 
-        List vs = new ArrayList();
-        CollectionUtils.addAll(vs, getViews());
+        List vs = new ArrayList(views);
         Page page = (Page) context.getVariable(Page.NAME);
         if (page != null && StringUtils.isNotEmpty(getName()))
         {
@@ -96,11 +99,6 @@ public abstract class BasePanelTag extends BaseTag implements ViewAware
     public String getName()
     {
         return name;
-    }
-
-    protected View[] getViews()
-    {
-        return (View[]) views.toArray(View.EMPTY_ARRAY);
     }
 
     /**

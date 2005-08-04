@@ -23,7 +23,7 @@ import org.apache.commons.jelly.TagLibrary;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ClibTagLibrary extends TagLibrary
+public class BaseTagLibrary extends TagLibrary
 {
     /**
      * Register a package of tags

@@ -26,9 +26,15 @@ import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * JSP engine
+ */
 public class JspEngine extends AbstractLogEnabled implements Serviceable,
         DynaViewFactory
 {
+    /** Role name of this component */
     public static final String ROLE = JspEngine.class.getName();
 
     /**

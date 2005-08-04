@@ -25,16 +25,33 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface ModuleManager
 {
+    /**
+     * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+     *
+     * Path model
+     */
     interface Path
     {
+        /**
+         * @return Package of path
+         */
         String getPackage();
 
+        /**
+         * @return Path
+         */
         String getPath();
     }
 
     /** Role name of the component */
     String ROLE = ModuleManager.class.getName();
 
+    /**
+     * @param packageName
+     * @param path
+     * @return View object
+     * @throws Exception
+     */
     View createDynaView(String packageName, String path) throws Exception;
 
     /**
@@ -88,10 +105,22 @@ public interface ModuleManager
      */
     String[] getLayoutIds();
 
+    /**
+     * @param page
+     * @return Path model
+     */
     Path parsePath(String page);
 
+    /**
+     * @param pattern
+     * @param actionResolver
+     */
     void registerActionResolver(String pattern, ActionResolver actionResolver);
 
+    /**
+     * @param pattern
+     * @param viewFactory
+     */
     void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
 
     /**
@@ -110,8 +139,18 @@ public interface ModuleManager
      */
     void registerLayout(String layoutId, Layout layout);
 
+    /**
+     * @param alias
+     * @param packageName
+     */
     void registerPackage(String alias, String packageName);
 
+    /**
+     * @param packageName
+     * @param path
+     * @param data
+     * @throws Exception
+     */
     void resolveAction(String packageName, String path, RuntimeData data)
             throws Exception;
 

@@ -18,6 +18,11 @@ package com.cyclopsgroup.waterview.jsp.taglib;
 
 import com.cyclopsgroup.waterview.util.TagPackage;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Jsp tag package
+ */
 public class JspTagPackage extends TagPackage
 {
 

@@ -16,9 +16,22 @@
  */
 package com.cyclopsgroup.waterview;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Redirect to a page
+ */
 public abstract class PageRedirector extends Redirector
 {
+    /**
+     * Page path
+     * @return Page path
+     */
     public abstract String getPage();
 
+    /**
+     * Query string
+     * @return Query string
+     */
     public abstract String getQueryString();
 }

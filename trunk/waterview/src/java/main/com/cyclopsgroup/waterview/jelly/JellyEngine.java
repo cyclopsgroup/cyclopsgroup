@@ -44,7 +44,7 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.util.ClibTagLibrary;
+import com.cyclopsgroup.waterview.util.BaseTagLibrary;
 import com.cyclopsgroup.waterview.util.TagPackage;
 
 /**
@@ -264,7 +264,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         JellyContext jc = new JellyContext();
         jc.setVariable(SERVICE_MANAGER, serviceManager);
         jc.setVariable(ROLE, this);
-        ClibTagLibrary deftaglib = new ClibTagLibrary();
+        BaseTagLibrary deftaglib = new BaseTagLibrary();
         deftaglib.registerPackage((TagPackage) Class.forName(
                 DEFINITION_TAG_PACKAGE).newInstance());
         jc.registerTagLibrary(DEFINITION_TAGLIB_URL, deftaglib);
@@ -282,7 +282,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         for (Iterator i = tagLibraries.keySet().iterator(); i.hasNext();)
         {
             String uri = (String) i.next();
-            ClibTagLibrary taglib = (ClibTagLibrary) tagLibraries.get(uri);
+            BaseTagLibrary taglib = (BaseTagLibrary) tagLibraries.get(uri);
             globalContext.registerTagLibrary(uri, taglib);
         }
         globalContext.setVariable(SERVICE_MANAGER, serviceManager);
@@ -308,10 +308,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public synchronized void registerTagPackage(String uri,
             TagPackage tagPackage)
     {
-        ClibTagLibrary ctl = (ClibTagLibrary) tagLibraries.get(uri);
+        BaseTagLibrary ctl = (BaseTagLibrary) tagLibraries.get(uri);
         if (ctl == null)
         {
-            ctl = new ClibTagLibrary();
+            ctl = new BaseTagLibrary();
             tagLibraries.put(uri, ctl);
         }
         ctl.registerPackage(tagPackage);
