@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.AbstractPageRuntime;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 
 /**
  * Default implementation of WebRuntime
@@ -117,5 +118,17 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
     public void setOutputContentType(String contentType)
     {
         response.setContentType(contentType);
+    }
+
+    /**
+     * Overwrite or implement method setPage()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
+     */
+    public void setPage(String page) throws Exception
+    {
+        ModuleManager modules = (ModuleManager) getServiceManager().lookup(
+                ModuleManager.ROLE);
+        setPage(modules.parsePath(page));
     }
 }

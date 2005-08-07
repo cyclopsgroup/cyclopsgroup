@@ -41,7 +41,7 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private PrintWriter output;
 
-    private String page;
+    private Path page;
 
     private String pageBaseUrl;
 
@@ -116,7 +116,7 @@ public abstract class AbstractPageRuntime implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getPage()
      */
-    public String getPage()
+    public Path getPage()
     {
         return page;
     }
@@ -253,17 +253,13 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method setPage()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(com.cyclopsgroup.waterview.Path)
      */
-    public void setPage(String page)
+    public void setPage(Path page)
     {
         this.page = page;
-        if (getRequestContext() != null)
-        {
-            getRequestContext().put("page", page);
-        }
     }
 
     /**

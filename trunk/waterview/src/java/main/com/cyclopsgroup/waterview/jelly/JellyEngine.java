@@ -115,14 +115,11 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         {
             Properties waterviewProperties = (Properties) context
                     .get(Waterview.INIT_PROPERTIES);
-            if (waterviewProperties != null)
-            {
-                initProperties.putAll(waterviewProperties);
-            }
+            initProperties.putAll(waterviewProperties);
         }
         catch (Exception e)
         {
-            getLogger().warn("Can not add init properties", e);
+            getLogger().debug("Can not add init properties", e);
         }
     }
 

@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.velocity.taglib;
 
 import org.apache.commons.jelly.JellyContext;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
@@ -47,7 +48,7 @@ public class VelocityViewTag extends BaseViewTag
 
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        ModuleManager.Path model = mm.parsePath(getTemplate());
+        Path model = mm.parsePath(getTemplate());
         String path = "/view" + model.getPath();
         return new VelocityView(ve.getTemplate(model.getPackage(), path));
     }

@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 
 import org.apache.commons.jelly.JellyContext;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.JellyView;
@@ -46,7 +47,7 @@ public class JellyViewTag extends BaseViewTag
                 .lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        ModuleManager.Path model = mm.parsePath(getScript());
+        Path model = mm.parsePath(getScript());
         String path = "/view" + model.getPath();
         return new JellyView(jellyEngine.getScript(model.getPackage(), path));
     }

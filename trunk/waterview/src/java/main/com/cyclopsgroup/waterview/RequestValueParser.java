@@ -30,6 +30,9 @@ public abstract class RequestValueParser extends ValueParser
      */
     public static final FileItem[] EMPTY_FILEITEM_ARRAY = new FileItem[0];
 
+    /** Name of it in context */
+    public static String NAME = "parameters";
+
     /**
      * Get file item object
      *
@@ -39,10 +42,10 @@ public abstract class RequestValueParser extends ValueParser
     public abstract FileItem getFileItem(String name);
 
     /**
-     * TODO Add javadoc for this method
+     * Get array of file items
      *
-     * @param name
-     * @return File item array
+     * @param name Name of variable
+     * @return File item array FileItem array
      */
     public abstract FileItem[] getFileItems(String name);
 }

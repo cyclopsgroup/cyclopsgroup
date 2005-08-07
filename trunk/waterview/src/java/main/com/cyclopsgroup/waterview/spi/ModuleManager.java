@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
@@ -25,24 +26,6 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public interface ModuleManager
 {
-    /**
-     * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
-     *
-     * Path model
-     */
-    interface Path
-    {
-        /**
-         * @return Package of path
-         */
-        String getPackage();
-
-        /**
-         * @return Path
-         */
-        String getPath();
-    }
-
     /** Role name of the component */
     String ROLE = ModuleManager.class.getName();
 

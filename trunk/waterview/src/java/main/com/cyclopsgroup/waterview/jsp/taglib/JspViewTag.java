@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jsp.taglib;
 
 import org.apache.commons.jelly.JellyContext;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jsp.JspEngine;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -43,7 +44,7 @@ public class JspViewTag extends BaseViewTag
         requireAttribute("path");
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        ModuleManager.Path p = mm.parsePath(getPath());
+        Path p = mm.parsePath(getPath());
         JspEngine je = (JspEngine) data.getServiceManager().lookup(
                 JspEngine.ROLE);
         return je.createView(p.getPackage(), p.getPath());

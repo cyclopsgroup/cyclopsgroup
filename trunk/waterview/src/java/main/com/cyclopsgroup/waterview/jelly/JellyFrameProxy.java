@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -56,7 +57,7 @@ public class JellyFrameProxy implements Frame
                 JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        ModuleManager.Path model = mm.parsePath(framePath);
+        Path model = mm.parsePath(framePath);
         String path = "/frame" + model.getPath();
         return new JellyFrame(je.getScript(model.getPackage(), path));
     }

@@ -4,7 +4,7 @@
         <tr>
             <td colspan="3" id="bannerArea">
                 <w:HtmlView>
-                    <h2>Waterview System: Page ${page}</h2>
+                    <h2>Waterview System: Page ${data.page}</h2>
                 </w:HtmlView>
             </td>
         </tr>
@@ -16,7 +16,7 @@
             </td>
             <td width="65%" valign="top" id="bodyArea">
                 <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
-                    <w:SimpleView path="${page}"/>
+                    <w:SimpleView path="${data.page}"/>
                 </w:JellyPanel>
             </td>
             <td width="17%" valign="top" id="rightArea">

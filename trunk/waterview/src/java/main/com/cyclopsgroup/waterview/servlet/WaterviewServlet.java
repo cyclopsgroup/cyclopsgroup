@@ -36,6 +36,8 @@ import org.codehaus.plexus.PlexusContainer;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.PageRedirector;
+import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.util.WaterviewPlexusContainer;
@@ -119,33 +121,34 @@ public class WaterviewServlet extends HttpServlet
     protected void doHandleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception
     {
-        ServletPageRuntime runtime = null;
-        runtime = new ServletPageRuntime(request, response, servletConfig
+        ServletPageRuntime data = null;
+        data = new ServletPageRuntime(request, response, servletConfig
                 .getServletContext(), fileUpload, serviceManager);
-        Context ctx = runtime.getRequestContext();
+        Context ctx = data.getRequestContext();
+        ctx.put(RuntimeData.NAME, data);
+        ctx.put(RequestValueParser.NAME, data.getRequestParameters());
+        ctx.put(RuntimeData.SERVICE_MANAGER_NAME, serviceManager);
+
         ctx.put("servletConfig", servletConfig);
         ctx.put("servletContext", servletConfig.getServletContext());
         ctx.put("request", request);
         ctx.put("response", response);
-        ctx.put("runtime", runtime);
-        ctx.put("requestContext", runtime.getRequestContext());
-        ctx.put("parameters", runtime.getRequestParameters());
-        ctx.put("serviceManager", serviceManager);
+        ctx.put("requestContext", data.getRequestContext());
 
         Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
-        waterview.handleRuntime(runtime);
+        waterview.handleRuntime(data);
 
-        if (runtime.getRedirector() != null)
+        if (data.getRedirector() != null)
         {
             String url = null;
-            if (runtime.getRedirector() instanceof URLRedirector)
+            if (data.getRedirector() instanceof URLRedirector)
             {
-                url = ((URLRedirector) runtime.getRedirector()).getUrl();
+                url = ((URLRedirector) data.getRedirector()).getUrl();
             }
-            else if (runtime.getRedirector() instanceof PageRedirector)
+            else if (data.getRedirector() instanceof PageRedirector)
             {
-                PageRedirector spr = (PageRedirector) runtime.getRedirector();
-                url = runtime.getPageBaseUrl() + spr.getPage();
+                PageRedirector spr = (PageRedirector) data.getRedirector();
+                url = data.getPageBaseUrl() + spr.getPage();
                 if (StringUtils.isNotEmpty(spr.getQueryString()))
                 {
                     url += "?" + spr.getQueryString();

@@ -20,6 +20,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.JellyLayout;
 import com.cyclopsgroup.waterview.spi.Layout;
@@ -54,7 +55,7 @@ public class JellyLayoutTag extends BaseTag
                 .lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
-        ModuleManager.Path model = mm.parsePath(getScript());
+        Path model = mm.parsePath(getScript());
         String path = "layout/" + model.getPath();
         Layout layout = new JellyLayout(jellyEngine.getScript(model
                 .getPackage(), path));

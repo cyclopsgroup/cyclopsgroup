@@ -100,6 +100,10 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
                 String page = behavior.substring(PAGE_INSTRUCTOR.length() + 1);
                 runtime.setPage(page);
             }
+            else
+            {
+                runtime.setPage(behavior);
+            }
         }
         context.invokeNextValve(runtime);
     }

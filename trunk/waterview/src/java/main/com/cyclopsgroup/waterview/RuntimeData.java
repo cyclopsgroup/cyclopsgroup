@@ -31,8 +31,11 @@ import org.apache.avalon.framework.service.ServiceManager;
 
 public interface RuntimeData
 {
-    /** Name of this object in context */
-    String NAME = RuntimeData.class.getName();
+    /** Name of it in context */
+    String NAME = "data";
+
+    /** Name of service manager in context */
+    String SERVICE_MANAGER_NAME = "serviceManager";
 
     /**
      * Get modifiable processor list
@@ -82,7 +85,7 @@ public interface RuntimeData
      * 
      * @return Render template
      */
-    String getPage();
+    Path getPage();
 
     /**
      * Base url for page
@@ -155,11 +158,19 @@ public interface RuntimeData
     void setOutputContentType(String contentType);
 
     /**
+     * Set page with Page model
+     *
+     * @param page Page path
+     */
+    void setPage(Path page);
+
+    /**
      * Set page to render
      * 
      * @param page Page path
+     * @throws Exception Throw it out
      */
-    void setPage(String page);
+    void setPage(String page) throws Exception;
 
     /**
      * @param redirector

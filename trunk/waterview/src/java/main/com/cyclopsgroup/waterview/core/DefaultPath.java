@@ -16,7 +16,9 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import com.cyclopsgroup.waterview.spi.ModuleManager.Path;
+import org.apache.commons.lang.StringUtils;
+
+import com.cyclopsgroup.waterview.Path;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -25,23 +27,69 @@ import com.cyclopsgroup.waterview.spi.ModuleManager.Path;
  */
 class DefaultPath implements Path
 {
-    private String packageName, path;
+    private String extension = StringUtils.EMPTY;
+
+    private String fullPath;
+
+    private String packageAlias;
+
+    private String packageName;
+
+    private String path;
+
+    private String pathWithoutExtension;
 
     /**
      * Constructor
      * 
-     * @param packageName
-     * @param path
+     * @param packageName Package name
+     * @param packageAlias Package alias
+     * @param path Relative path without package alias
      */
-    DefaultPath(String packageName, String path)
+    DefaultPath(String packageName, String packageAlias, String path)
     {
+        if (path.indexOf(0) == '/')
+        {
+            path = '/' + path;
+        }
         this.packageName = packageName;
+        this.packageAlias = packageAlias;
         this.path = path;
+
+        pathWithoutExtension = path;
+        int lastDot = StringUtils.lastIndexOf(path, '.');
+        if (lastDot > -1)
+        {
+            pathWithoutExtension = path.substring(1, lastDot);
+            extension = path.substring(lastDot);
+        }
+
+        fullPath = '/' + packageAlias + path;
+    }
+
+    /**
+     * Overwrite or implement method getExtension()
+     *
+     * @see com.cyclopsgroup.waterview.Path#getExtension()
+     */
+    public String getExtension()
+    {
+        return extension;
+    }
+
+    /**
+     * Overwrite or implement method getFullPath()
+     *
+     * @see com.cyclopsgroup.waterview.Path#getFullPath()
+     */
+    public String getFullPath()
+    {
+        return fullPath;
     }
 
     /**
      * Overwrite or implement method getPackage()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager.Path#getPackage()
+     * @see com.cyclopsgroup.waterview.Path#getPackage()
      */
     public String getPackage()
     {
@@ -49,12 +97,32 @@ class DefaultPath implements Path
     }
 
     /**
+     * Overwrite or implement method getPackageAlias()
+     *
+     * @see com.cyclopsgroup.waterview.Path#getPackageAlias()
+     */
+    public String getPackageAlias()
+    {
+        return packageAlias;
+    }
+
+    /**
      * Overwrite or implement method getPath()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager.Path#getPath()
+     * @see com.cyclopsgroup.waterview.Path#getPath()
      */
     public String getPath()
     {
         return path;
+    }
+
+    /**
+     * Overwrite or implement method getPathWithoutExtension()
+     *
+     * @see com.cyclopsgroup.waterview.Path#getPathWithoutExtension()
+     */
+    public String getPathWithoutExtension()
+    {
+        return pathWithoutExtension;
     }
 
     /**
@@ -63,6 +131,7 @@ class DefaultPath implements Path
      */
     public String toString()
     {
-        return getPackage() + "|" + getPath();
+        return getFullPath();
     }
+
 }

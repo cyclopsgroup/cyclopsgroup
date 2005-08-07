@@ -25,6 +25,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -58,7 +59,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
         for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
-            ModuleManager.Path model = mm.parsePath(actionName);
+            Path model = mm.parsePath(actionName);
             if (StringUtils.isEmpty(model.getPath()))
             {
                 continue;

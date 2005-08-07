@@ -26,10 +26,10 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.CacheManager;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -85,36 +85,31 @@ public class DeterminePageValve extends AbstractLogEnabled implements
             context.invokeNextValve(runtime);
             return;
         }
-        String pagePath = runtime.getPage();
-        if (StringUtils.isEmpty(pagePath))
+        Path pagePath = runtime.getPage();
+        if (pagePath == null)
         {
-            runtime.setPage(getDefaultPage());
-            pagePath = getDefaultPage();
+            throw new NullPointerException("Path is not ready yet");
         }
-
         synchronized (this)
         {
             CacheManager cacheManager = (CacheManager) runtime
                     .getServiceManager().lookup(CacheManager.ROLE);
-            page = (Page) cacheManager.get(this, pagePath);
+            page = (Page) cacheManager.get(this, pagePath.getFullPath());
             if (page == null)
             {
-                ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                        .lookup(ModuleManager.ROLE);
-                ModuleManager.Path model = mm.parsePath(pagePath);
                 JellyEngine je = (JellyEngine) runtime.getServiceManager()
                         .lookup(JellyEngine.ROLE);
                 //ModuleChain moduleChain = new ModuleChain();
-                String fullPath = "/page" + model.getPath();
+                String fullPath = "/page" + pagePath.getPath();
                 //moduleChain.addModule(mm.getModule(fullPath));
 
-                Script pageScript = je.getScript(model.getPackage(), fullPath,
-                        null);
+                Script pageScript = je.getScript(pagePath.getPackage(),
+                        fullPath, null);
                 if (pageScript != null)
                 {
                     page = loadPage(pageScript, je);
                 }
-                String[] parts = StringUtils.split(model.getPath(), '/');
+                String[] parts = StringUtils.split(pagePath.getPath(), '/');
                 for (int j = parts.length - 1; j >= 0; j--)
                 {
                     parts[j] = "Default";
@@ -122,7 +117,8 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     System.arraycopy(parts, 0, newParts, 0, j + 1);
                     String defaultPath = StringUtils.join(newParts, '/');
                     fullPath = "/page/" + defaultPath;
-                    pageScript = je.getScript(model.getPath(), fullPath, null);
+                    pageScript = je.getScript(pagePath.getPath(), fullPath,
+                            null);
                     if (pageScript != null)
                     {
                         page = loadPage(pageScript, je);
@@ -135,7 +131,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     page = EMPTY_PAGE;
                 }
                 //page.setModule(moduleChain);
-                cacheManager.put(this, pagePath, page);
+                cacheManager.put(this, pagePath.getFullPath(), page);
             }
         }
         runtime.getRequestContext().put(Page.NAME, page);

@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.Layout;
@@ -53,7 +54,7 @@ public class JellyLayoutProxy implements Layout
                     JellyEngine.ROLE);
             ModuleManager mm = (ModuleManager) runtime.getServiceManager()
                     .lookup(ModuleManager.ROLE);
-            ModuleManager.Path model = mm.parsePath(layoutScript);
+            Path model = mm.parsePath(layoutScript);
             String path = "/layout" + model.getPath();
             layout = new JellyLayout(je.getScript(model.getPackage(), path));
             cm.put(this, layoutScript, layout);

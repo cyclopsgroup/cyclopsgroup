@@ -71,4 +71,14 @@ public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
     public void setOutputContentType(String contentType)
     {
     }
+
+    /**
+     * Overwrite or implement method setPage()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
+     */
+    public void setPage(String page)
+    {
+        throw new UnsupportedOperationException();
+    }
 }

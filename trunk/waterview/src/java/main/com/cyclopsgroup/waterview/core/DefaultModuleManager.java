@@ -30,6 +30,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
@@ -47,16 +48,23 @@ import com.cyclopsgroup.waterview.spi.View;
 public class DefaultModuleManager extends AbstractLogEnabled implements
         Configurable, ModuleManager, Serviceable
 {
+    private Hashtable actionResolvers = new Hashtable();
+
     private CacheManager cache;
 
-    private String defaultFrameId = "waterview.DefaultDisplayFrame",
-            defaultLayoutId = "waterview.DefaultLayout",
-            defaultPackageName = "com.cyclopsgroup.waterview.ui";
+    private String defaultFrameId = "waterview.DefaultDisplayFrame";
 
-    private Hashtable frames = new Hashtable(), layouts = new Hashtable(),
-            packageNames = new Hashtable(),
-            dynaViewFactories = new Hashtable(),
-            actionResolvers = new Hashtable();
+    private String defaultLayoutId = "waterview.DefaultLayout";
+
+    private String defaultPackageAlias = "waterview";
+
+    private Hashtable dynaViewFactories = new Hashtable();
+
+    private Hashtable frames = new Hashtable();
+
+    private Hashtable layouts = new Hashtable();
+
+    private Hashtable packageNames = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
@@ -78,7 +86,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         String defaultPackage = conf.getChild("default-package").getValue(null);
         if (defaultPackage != null)
         {
-            setDefaultPackageName(defaultPackage);
+            defaultPackageAlias = defaultPackage;
         }
     }
 
@@ -138,14 +146,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
-     * @return Returns the defaultPackageName.
-     */
-    public String getDefaultPackageName()
-    {
-        return defaultPackageName;
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#getFrame(java.lang.String)
@@ -191,28 +191,30 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      * Overwrite or implement method parsePage()
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
      */
-    public Path parsePath(String page)
+    public Path parsePath(String modulePath)
     {
-        if (StringUtils.isEmpty(page))
+        String packageAlias = defaultPackageAlias;
+        String packageName = (String) packageNames.get(packageAlias);
+        if (StringUtils.isEmpty(modulePath))
         {
-            return new DefaultPath(getDefaultPackageName(), StringUtils.EMPTY);
+            return new DefaultPath(packageName, packageAlias, "/Index.jelly");
         }
-        String pagePackage = getDefaultPackageName();
-        String path = page;
-        String[] parts = StringUtils.split(page, '/');
+        String path = modulePath;
+        String[] parts = StringUtils.split(modulePath, '/');
         for (Iterator i = packageNames.keySet().iterator(); i.hasNext();)
         {
-            String packageAlias = (String) i.next();
-            String packageName = (String) packageNames.get(packageAlias);
-            if (StringUtils.equals(parts[0], packageAlias)
-                    || StringUtils.equals(parts[0], packageName))
+            String alias = (String) i.next();
+            String name = (String) packageNames.get(packageAlias);
+            if (StringUtils.equals(parts[0], alias)
+                    || StringUtils.equals(parts[0], name))
             {
-                pagePackage = packageName;
-                path = page.substring(parts[0].length() + 1);
+                packageName = name;
+                packageAlias = alias;
+                path = modulePath.substring(parts[0].length() + 1);
                 break;
             }
         }
-        return new DefaultPath(pagePackage, path);
+        return new DefaultPath(packageName, packageAlias, path);
     }
 
     /**
@@ -314,13 +316,5 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void setDefaultLayoutId(String layoutId)
     {
         defaultLayoutId = layoutId;
-    }
-
-    /**
-     * @param defaultPackageName The defaultPackageName to set.
-     */
-    public void setDefaultPackageName(String defaultPackageName)
-    {
-        this.defaultPackageName = defaultPackageName;
     }
 }
