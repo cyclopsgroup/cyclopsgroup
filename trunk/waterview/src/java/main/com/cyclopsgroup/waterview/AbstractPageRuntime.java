@@ -259,6 +259,7 @@ public abstract class AbstractPageRuntime implements RuntimeData
      */
     public void setPage(Path page)
     {
+        getRequestContext().put(PAGE_NAME, page);
         this.page = page;
     }
 

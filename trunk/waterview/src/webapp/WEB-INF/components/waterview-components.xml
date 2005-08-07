@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plexus>
-    <load-on-start>
-        <component>
-            <role>com.cyclopsgroup.waterview.Waterview</role>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.jelly.JellyEngine</role>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.velocity.VelocityEngine</role>
-        </component>
-    </load-on-start>
+	<load-on-start>
+		<component>
+			<role>com.cyclopsgroup.waterview.WaterviewComponents</role>
+		</component>
+	</load-on-start>
 </plexus>

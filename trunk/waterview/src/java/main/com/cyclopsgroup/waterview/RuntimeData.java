@@ -34,6 +34,9 @@ public interface RuntimeData
     /** Name of it in context */
     String NAME = "data";
 
+    /** Page name in context */
+    String PAGE_NAME = "page";
+
     /** Name of service manager in context */
     String SERVICE_MANAGER_NAME = "serviceManager";
 
