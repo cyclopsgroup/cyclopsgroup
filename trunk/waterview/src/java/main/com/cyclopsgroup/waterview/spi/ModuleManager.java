@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 
@@ -130,12 +131,23 @@ public interface ModuleManager
     void registerPackage(String alias, String packageName);
 
     /**
-     * @param packageName
-     * @param path
+     * Run action
+     *
+     * @param action
      * @param data
      * @throws Exception
      */
-    void resolveAction(String packageName, String path, RuntimeData data)
+    void runAction(String action, RuntimeData data) throws Exception;
+
+    /**
+     * Run module
+     *
+     * @param modulePath
+     * @param data
+     * @param context
+     * @throws Exception
+     */
+    void runModule(String modulePath, RuntimeData data, Context context)
             throws Exception;
 
     /**

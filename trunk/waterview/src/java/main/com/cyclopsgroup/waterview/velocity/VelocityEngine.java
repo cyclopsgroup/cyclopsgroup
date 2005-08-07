@@ -146,12 +146,12 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method resolveAction()
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void resolveAction(String packageName, String action,
-            RuntimeData runtime) throws Exception
+    public void resolveAction(Path path, RuntimeData runtime) throws Exception
     {
-        Template template = getTemplate(packageName, "action/" + action);
+        Template template = getTemplate(path.getPackage(), path.getPath());
         if (template != null)
         {
             VelocityContextAdapter vc = new VelocityContextAdapter(runtime

@@ -16,22 +16,50 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
- * Resolve given action
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Base module runnable
  */
-public interface ActionResolver
+public abstract class BaseModuleRunnable
 {
+    private String modulePath;
+
     /**
-     * Run action with given environment
+     * Constructor for class BaseModuleRunnable
      *
-     * @param path Path object
-     * @param data Runtime data
-     * @throws Exception Throw it out
+     * @param modulePath Path for module
      */
-    void resolveAction(Path path, RuntimeData data) throws Exception;
+    protected BaseModuleRunnable(String modulePath)
+    {
+        this.modulePath = modulePath;
+    }
+
+    /**
+     * Get module path
+     *
+     * @return Module path
+     */
+    public String getModulePath()
+    {
+        return modulePath;
+    }
+
+    /**
+     * Run attached module
+     *
+     * @param data Runtime data
+     * @param context Context
+     * @throws Exception Simply throw it out
+     */
+    protected void runModule(RuntimeData data, Context context)
+            throws Exception
+    {
+        ModuleManager moduleManager = (ModuleManager) data.getServiceManager()
+                .lookup(ModuleManager.ROLE);
+
+    }
 }

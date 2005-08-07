@@ -19,11 +19,9 @@ package com.cyclopsgroup.waterview.core.valves;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.map.ListOrderedMap;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -51,34 +49,18 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData runtime, PipelineContext context)
+    public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
-        ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        for (Iterator i = runtime.getActions().iterator(); i.hasNext();)
+        for (Iterator i = data.getActions().iterator(); i.hasNext();)
         {
             String actionName = (String) i.next();
-            Path model = mm.parsePath(actionName);
-            if (StringUtils.isEmpty(model.getPath()))
-            {
-                continue;
-            }
-            for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
-            {
-                String pattern = (String) j.next();
-                if (Pattern.matches('^' + pattern + '$', actionName))
-                {
-                    ActionResolver resolver = (ActionResolver) actionResolvers
-                            .get(pattern);
-
-                    resolver.resolveAction(model.getPackage(), model.getPath(),
-                            runtime);
-                    break;
-                }
-            }
+            Path path = mm.parsePath(actionName);
+            mm.runAction(path.getFullPath(), data);
         }
-        context.invokeNextValve(runtime);
+        context.invokeNextValve(data);
     }
 
     /**

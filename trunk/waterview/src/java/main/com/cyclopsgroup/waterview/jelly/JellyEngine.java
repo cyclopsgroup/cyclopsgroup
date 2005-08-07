@@ -312,12 +312,12 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method resolveAction()
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void resolveAction(String packageName, String action,
-            RuntimeData runtime) throws Exception
+    public void resolveAction(Path path, RuntimeData runtime) throws Exception
     {
-        Script script = getScript(packageName, "action/" + action);
+        Script script = getScript(path.getPackage(), path.getPath());
         if (script == null)
         {
             return;

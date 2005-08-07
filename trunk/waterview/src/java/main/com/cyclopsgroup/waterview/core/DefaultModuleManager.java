@@ -30,6 +30,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -46,7 +47,7 @@ import com.cyclopsgroup.waterview.spi.View;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultModuleManager extends AbstractLogEnabled implements
-        Configurable, ModuleManager, Serviceable
+        Configurable, ModuleManager, Serviceable, ActionResolver
 {
     private Hashtable actionResolvers = new Hashtable();
 
@@ -270,10 +271,20 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method resolveAction()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#resolveAction(java.lang.String, java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void resolveAction(String packageName, String action,
-            RuntimeData data) throws Exception
+    public void resolveAction(Path path, RuntimeData data) throws Exception
+    {
+        runModule(path, data, data.getRequestContext());
+    }
+
+    /**
+     * Overwrite or implement method runAction()
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#runAction(java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public void runAction(String action, RuntimeData data) throws Exception
     {
         for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
         {
@@ -282,11 +293,27 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
             {
                 ActionResolver resolver = (ActionResolver) actionResolvers
                         .get(pattern);
-
-                resolver.resolveAction(packageName, "/action" + action, data);
+                Path actionPath = parsePath(action);
+                actionPath = parsePath('/' + actionPath.getPackageAlias()
+                        + "/action" + actionPath.getPathWithoutExtension());
+                resolver.resolveAction(actionPath, data);
                 break;
             }
         }
+    }
+
+    private void runModule(Path modulePath, RuntimeData data, Context context)
+            throws Exception
+    {
+
+    }
+
+    public void runModule(String modulePath, RuntimeData data, Context context)
+            throws Exception
+    {
+        Path path = parsePath(modulePath);
+        runModule(path, data, context);
+
     }
 
     /**
@@ -297,6 +324,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
+        this.registerActionResolver(".+\\.action", this);
     }
 
     /**
