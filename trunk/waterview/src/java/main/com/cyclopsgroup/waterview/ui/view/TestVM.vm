@@ -3,3 +3,7 @@ This is a velocity template
 $runtime
 $parameters
 $servletConfig
+
+#foreach($i in [1..5])
+<p>line $i</p>
+#end

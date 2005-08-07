@@ -14,51 +14,67 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jsp.taglib;
+package com.cyclopsgroup.waterview.velocity.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.velocity.Template;
 
-import com.cyclopsgroup.waterview.jsp.JspEngine;
-import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.velocity.VelocityEngine;
+import com.cyclopsgroup.waterview.velocity.VelocityJellyContextAdapter;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Jsp script tag
+ * 
+ * Directly show a given velocity template
  */
-public class JspScriptTag extends BaseTag
+public class VelocityTemplateTag extends BaseTag
 {
-    private String path;
+
+    private String template;
 
     /**
      * Overwrite or implement method doTag()
+     *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        requireAttribute("path");
-        JspEngine je = (JspEngine) serviceManager.lookup(JspEngine.ROLE);
-        je.renderJsp(getPath(), getRuntimeData(), new JellyContextAdapter(
-                getContext()));
+        requireAttribute("template");
+        VelocityEngine ve = (VelocityEngine) getRuntimeData()
+                .getServiceManager().lookup(VelocityEngine.ROLE);
+        Template t = ve.getTemplate(getTemplate());
+        if (t == null)
+        {
+            getRuntimeData().getOutput().println(
+                    "Velocity template " + getTemplate() + " is not found");
+        }
+        VelocityJellyContextAdapter adapter = new VelocityJellyContextAdapter(
+                getContext());
+        t.merge(adapter, getRuntimeData().getOutput());
         getRuntimeData().getOutput().flush();
     }
 
     /**
-     * @return Returns the path.
+     * Getter method for field template
+     *
+     * @return Returns the template.
      */
-    public String getPath()
+    public String getTemplate()
     {
-        return path;
+        return template;
     }
 
     /**
-     * @param path The path to set.
+     * Setter method for field template
+     *
+     * @param template The template to set.
      */
-    public void setPath(String path)
+    public void setTemplate(String template)
     {
-        this.path = path;
+        this.template = template;
     }
+
 }

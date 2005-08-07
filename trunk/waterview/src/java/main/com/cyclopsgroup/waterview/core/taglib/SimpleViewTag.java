@@ -17,9 +17,7 @@
 package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
@@ -42,15 +40,9 @@ public class SimpleViewTag extends BaseViewTag
             throws Exception
     {
         requireAttribute("path");
-
-        if (StringUtils.isEmpty(getPath()))
-        {
-            setPath("/Index.jelly");
-        }
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Path model = mm.parsePath(getPath());
-        return mm.createDynaView(model.getPackage(), model.getPath());
+        return mm.createDynaView(getPath());
     }
 
     /**

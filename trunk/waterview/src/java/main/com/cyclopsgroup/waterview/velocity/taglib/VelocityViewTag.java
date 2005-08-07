@@ -48,9 +48,9 @@ public class VelocityViewTag extends BaseViewTag
 
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Path model = mm.parsePath(getTemplate());
-        String path = "/view" + model.getPath();
-        return new VelocityView(ve.getTemplate(model.getPackage(), path));
+        Path path = mm.parsePath(getTemplate());
+        return new VelocityView(ve.getTemplate(path.getPackage(), path
+                .getPath()));
     }
 
     /**

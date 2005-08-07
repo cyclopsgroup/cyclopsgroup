@@ -20,6 +20,6 @@ public class ModuleManagerTest extends PlexusTestCase
         lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) lookup(ModuleManager.ROLE);
         Path path = mm.parsePath("/waterview/x/Xyz.jelly");
-        System.out.println(path);
+        System.out.println(path.getPackage());
     }
 }

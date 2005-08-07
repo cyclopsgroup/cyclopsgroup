@@ -28,6 +28,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -46,18 +47,18 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
+     *
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(String packageName, String viewPath)
-            throws Exception
+    public View createView(Path path) throws Exception
     {
-        String path = "/view" + viewPath;
-        if (StringUtils.isNotEmpty(packageName))
+        String p = path.getPath();
+        if (StringUtils.isNotEmpty(path.getPackage()))
         {
-            path = '/' + StringUtils.replace(packageName, ".", "/") + path;
+            p = '/' + StringUtils.replace(path.getPackage(), ".", "/") + p;
         }
-        path = "/templates" + path;
-        return new JspView(path);
+        p = "/templates" + p;
+        return new JspView(p);
     }
 
     /**
@@ -92,6 +93,7 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
         else
         {
             dispatcher.include(request, response);
+            response.getWriter().flush();
         }
         request.removeAttribute("viewContext");
     }

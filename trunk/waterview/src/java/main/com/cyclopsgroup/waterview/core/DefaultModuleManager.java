@@ -92,16 +92,16 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     /**
      * Overwrite or implement method createDynaView()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#createDynaView(java.lang.String, java.lang.String)
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#createDynaView(java.lang.String)
      */
-    public View createDynaView(String packageName, String path)
-            throws Exception
+    public View createDynaView(String viewPath) throws Exception
     {
         DynaViewFactory viewFactory = null;
         for (Iterator i = dynaViewFactories.keySet().iterator(); i.hasNext();)
         {
             String pattern = (String) i.next();
-            if (Pattern.matches('^' + pattern + '$', path))
+            if (Pattern.matches('^' + pattern + '$', viewPath))
             {
                 viewFactory = (DynaViewFactory) dynaViewFactories.get(pattern);
                 break;
@@ -111,7 +111,8 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         {
             return View.DUMMY;
         }
-        View view = viewFactory.createView(packageName, path);
+        Path path = parsePath(viewPath);
+        View view = viewFactory.createView(path);
         return view == null ? View.DUMMY : view;
     }
 

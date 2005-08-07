@@ -47,9 +47,9 @@ public class JellyViewTag extends BaseViewTag
                 .lookup(JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Path model = mm.parsePath(getScript());
-        String path = "/view" + model.getPath();
-        return new JellyView(jellyEngine.getScript(model.getPackage(), path));
+        Path path = mm.parsePath(getScript());
+        return new JellyView(jellyEngine.getScript(path.getPackage(), path
+                .getPath()));
     }
 
     /**

@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.View;
@@ -43,21 +44,17 @@ class CachedViewFactory implements DynaViewFactory
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
+     *
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public synchronized View createView(String packageName, String viewPath)
-            throws Exception
+    public synchronized View createView(Path path) throws Exception
     {
-        if (viewPath.charAt(0) != '/')
-        {
-            throw new IllegalArgumentException("View path must start with /");
-        }
-        String key = proxy.hashCode() + '/' + packageName + viewPath;
+        String key = proxy.hashCode() + '/' + path.getFullPath();
         if (cache.contains(this, key))
         {
             return (View) cache.get(this, key);
         }
-        View view = proxy.createView(packageName, viewPath);
+        View view = proxy.createView(path);
         cache.put(this, key, view);
         return view;
     }

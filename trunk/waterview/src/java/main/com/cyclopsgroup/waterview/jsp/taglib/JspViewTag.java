@@ -47,7 +47,7 @@ public class JspViewTag extends BaseViewTag
         Path p = mm.parsePath(getPath());
         JspEngine je = (JspEngine) data.getServiceManager().lookup(
                 JspEngine.ROLE);
-        return je.createView(p.getPackage(), p.getPath());
+        return je.createView(p);
     }
 
     /**

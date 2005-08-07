@@ -14,10 +14,10 @@
 	</TagLibrary>
 	<Layout id="waterview.DefaultLayout"
 		description="Default Main Layout">
-		<JellyLayout script="/waterview/DefaultLayout.jelly" />
+		<JellyLayout script="/waterview/layout/DefaultLayout.jelly" />
 	</Layout>
 	<Frame id="waterview.DefaultDisplayFrame"
 		description="Default jelly frame">
-		<JellyFrame script="/waterview/DisplayFrame.jelly" />
+		<JellyFrame script="/waterview/frame/DisplayFrame.jelly" />
 	</Frame>
 </Waterview>

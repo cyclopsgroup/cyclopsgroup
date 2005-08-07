@@ -37,6 +37,7 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -144,13 +145,12 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
+     *
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(String packageName, String viewPath)
-            throws Exception
+    public View createView(Path path) throws Exception
     {
-        String path = "/view" + viewPath;
-        Script script = getScript(packageName, path);
+        Script script = getScript(path.getPackage(), path.getPath());
         return new JellyView(script);
     }
 
@@ -210,10 +210,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public Script getScript(String packageName, String scriptPath,
             Script defaultScript) throws JellyException
     {
-        if (scriptPath.charAt(0) != '/')
-        {
-            throw new IllegalArgumentException("Script path must starts with /");
-        }
         String scriptKey = scriptPath;
         if (StringUtils.isNotEmpty(packageName))
         {

@@ -42,21 +42,21 @@ public class JellyLayoutProxy implements Layout
         this.layoutScript = layoutScript;
     }
 
-    private synchronized JellyLayout getLayout(RuntimeData runtime)
+    private synchronized JellyLayout getLayout(RuntimeData data)
             throws Exception
     {
-        CacheManager cm = (CacheManager) runtime.getServiceManager().lookup(
+        CacheManager cm = (CacheManager) data.getServiceManager().lookup(
                 CacheManager.ROLE);
         JellyLayout layout = (JellyLayout) cm.get(this, layoutScript);
         if (layout == null)
         {
-            JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+            JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                     JellyEngine.ROLE);
-            ModuleManager mm = (ModuleManager) runtime.getServiceManager()
-                    .lookup(ModuleManager.ROLE);
-            Path model = mm.parsePath(layoutScript);
-            String path = "/layout" + model.getPath();
-            layout = new JellyLayout(je.getScript(model.getPackage(), path));
+            ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
+                    ModuleManager.ROLE);
+            Path path = mm.parsePath(layoutScript);
+            layout = new JellyLayout(je.getScript(path.getPackage(), path
+                    .getPath()));
             cm.put(this, layoutScript, layout);
         }
         return layout;

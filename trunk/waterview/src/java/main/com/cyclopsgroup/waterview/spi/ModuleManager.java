@@ -30,12 +30,13 @@ public interface ModuleManager
     String ROLE = ModuleManager.class.getName();
 
     /**
-     * @param packageName
-     * @param path
+     * Create view dynamically
+     *
+     * @param viewPath String view path
      * @return View object
-     * @throws Exception
+     * @throws Exception Throw it out
      */
-    View createDynaView(String packageName, String path) throws Exception;
+    View createDynaView(String viewPath) throws Exception;
 
     /**
      * Get default frame

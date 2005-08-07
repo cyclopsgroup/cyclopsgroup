@@ -31,5 +31,6 @@ public class VelocityTagPackage extends TagPackage
     public VelocityTagPackage()
     {
         addTag("VelocityView", VelocityViewTag.class);
+        addTag("VelocityTemplate", VelocityTemplateTag.class);
     }
 }

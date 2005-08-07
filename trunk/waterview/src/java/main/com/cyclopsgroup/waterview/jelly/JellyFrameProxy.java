@@ -46,9 +46,9 @@ public class JellyFrameProxy implements Frame
      *
      * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void display(Page page, RuntimeData runtime) throws Exception
+    public void display(Page page, RuntimeData data) throws Exception
     {
-        getFrame(runtime).display(page, runtime);
+        getFrame(data).display(page, data);
     }
 
     private JellyFrame getFrame(RuntimeData runtime) throws Exception
@@ -57,8 +57,7 @@ public class JellyFrameProxy implements Frame
                 JellyEngine.ROLE);
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        Path model = mm.parsePath(framePath);
-        String path = "/frame" + model.getPath();
-        return new JellyFrame(je.getScript(model.getPackage(), path));
+        Path path = mm.parsePath(framePath);
+        return new JellyFrame(je.getScript(path.getPackage(), path.getPath()));
     }
 }

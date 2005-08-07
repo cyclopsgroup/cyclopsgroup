@@ -1,34 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://www.w3.org/1999/xhtml">
-    <table width="100%" cellspacing="0" cellpadding="0" border="0" id="bodyArea">
-        <tr>
-            <td colspan="3" id="bannerArea">
-                <w:HtmlView>
-                    <h2>Waterview System: Page ${data.page}</h2>
-                </w:HtmlView>
-            </td>
-        </tr>
-        <tr>
-            <td width="18%" valign="top" id="leftArea">
-                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="navigator">
-                    <w:JellyView script="/waterview/WaterviewNavigator.jelly"/>
-                </w:JellyPanel>
-            </td>
-            <td width="65%" valign="top" id="bodyArea">
-                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
-                    <w:SimpleView path="${data.page}"/>
-                </w:JellyPanel>
-            </td>
-            <td width="17%" valign="top" id="rightArea">
-                <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="right">
-                    <w:JellyView script="/waterview/WaterviewRightBar.jelly"/>
-                </w:JellyPanel>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="center" id="footerArea">
-                <w:JellyView script="/waterview/WaterviewFooter.jelly"/>
-            </td>
-        </tr>
-    </table>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui"
+	xmlns="http://www.w3.org/1999/xhtml">
+	<table width="100%" cellspacing="0" border="0">
+		<tr>
+			<td colspan="3" id="bannerArea">
+				<w:HtmlView>
+					<h2>Waterview System: Page ${data.page}</h2>
+				</w:HtmlView>
+			</td>
+		</tr>
+		<tr>
+			<td width="18%" valign="top">
+				<w:JellyPanel
+					script="/waterview/panel/DefaultVerticalPanel.jelly" name="left">
+					<w:View>
+						<ul>
+							<li>aaaaaa aa aaa</li>
+							<li>bbb b bbbbbbb bb b b</li>
+							<li>ccccc ccccc cc c</li>
+							<li>dd dddd dd d</li>
+						</ul>
+					</w:View>
+				</w:JellyPanel>
+			</td>
+			<td width="65%" valign="top">
+				<w:JellyPanel
+					script="/waterview/panel/DefaultVerticalPanel.jelly" name="body">
+					<w:SimpleView
+						path="/${data.page.packageAlias}/view${data.page.path}" />
+					<w:View>/${data.page.packageAlias}/view${data.page.path}</w:View>
+				</w:JellyPanel>
+			</td>
+			<td width="17%" valign="top">
+				<w:JellyPanel
+					script="/waterview/panel/DefaultVerticalPanel.jelly"
+					name="right">
+					<w:View>
+						<p>Some help links</p>
+					</w:View>
+					<w:View>
+						<p>Some reference links</p>
+					</w:View>
+				</w:JellyPanel>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<table width="100%" border="0">
+					<tr>
+						<td>Copyrights reserved Cyclops Group 2005</td>
+						<td align="right">
+							Powered By Cyclops Group Waterview
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </div>

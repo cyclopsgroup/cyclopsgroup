@@ -16,21 +16,37 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
- * Dynamic view factory
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * View to show a message only
  */
-public interface DynaViewFactory
+public class MessageView implements View
 {
+    private String message;
+
     /**
-     * Dynamically create View with view path
+     * Constructor for class MessageView
      *
-     * @param path Requested path
-     * @return View object
-     * @throws Exception Throw it out
+     * @param message Message to show
      */
-    View createView(Path path) throws Exception;
+    public MessageView(String message)
+    {
+        this.message = message;
+    }
+
+    /**
+     * Overwrite or implement method render()
+     *
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     */
+    public void render(RuntimeData runtime, Context viewContext)
+            throws Exception
+    {
+        runtime.getOutput().println(message);
+    }
+
 }

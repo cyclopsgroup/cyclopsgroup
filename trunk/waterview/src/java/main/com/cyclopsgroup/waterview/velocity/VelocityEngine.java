@@ -32,10 +32,12 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.MessageView;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -67,14 +69,38 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(java.lang.String, java.lang.String)
+     *
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(String packageName, String viewPath)
-            throws Exception
+    public View createView(Path path) throws Exception
     {
-        String path = "/view" + viewPath;
-        Template template = getTemplate(packageName, path);
-        return new VelocityView(template);
+        Template template = getTemplate(path.getPackage(), path.getPath());
+        if (template != null)
+        {
+            return new VelocityView(template);
+        }
+        return new MessageView("Velocity template for " + path
+                + " doesn't exist");
+    }
+
+    /**
+     * Get template with given full template path
+     *
+     * @param templatePath Full template path
+     * @return Template object or null
+     * @throws Exception Throw it out
+     */
+    public Template getTemplate(String templatePath) throws Exception
+    {
+        if (templatePath.charAt(0) == '/')
+        {
+            templatePath = templatePath.substring(1);
+        }
+        if (engine.templateExists(templatePath))
+        {
+            return engine.getTemplate(templatePath);
+        }
+        return null;
     }
 
     /**
@@ -91,14 +117,9 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
         String path = templatePath;
         if (StringUtils.isNotEmpty(packageName))
         {
-            path = '/' + packageName.replace('.', '/') + templatePath;
+            path = packageName.replace('.', '/') + templatePath;
         }
-        path = path.substring(1);
-        if (engine.templateExists(path))
-        {
-            return engine.getTemplate(path);
-        }
-        return null;
+        return getTemplate(path);
     }
 
     /**

@@ -52,11 +52,10 @@ public class JellyPanelTag extends BasePanelTag
         {
             ModuleManager module = (ModuleManager) data.getServiceManager()
                     .lookup(ModuleManager.ROLE);
-            Path model = module.parsePath(getScript());
+            Path path = module.parsePath(getScript());
             JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                     JellyEngine.ROLE);
-            Script script = je.getScript(model.getPackage(), "/panel"
-                    + model.getPath());
+            Script script = je.getScript(path.getPackage(), path.getPath());
             panel = new JellyPanel(script);
             cache.put(getClass(), getScript(), panel);
         }
