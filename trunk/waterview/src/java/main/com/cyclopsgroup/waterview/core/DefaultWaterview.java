@@ -97,11 +97,14 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
                 break;
             }
         }
-        if (pipeline == null)
+        if (pipeline != null)
         {
-            throw new UnknownPageException(runtime.getRequestPath());
+            pipeline.handleRuntime(runtime);
         }
-        pipeline.handleRuntime(runtime);
+        else
+        {
+            //TODO do something here
+        }
     }
 
     /**

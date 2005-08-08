@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.jsp;
 
+import java.io.File;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +88,8 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
         request.setAttribute("viewContext", viewContext);
         RequestDispatcher dispatcher = servletContext
                 .getRequestDispatcher(path);
-        if (dispatcher == null)
+        File jspFile = new File(servletContext.getRealPath(path));
+        if (dispatcher == null || !jspFile.isFile())
         {
             data.getOutput().println("Jsp " + path + " doesn't exist");
         }

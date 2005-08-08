@@ -323,6 +323,10 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         }
     }
 
+    /**
+     * Overwrite or implement method runModule()
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#runModule(java.lang.String, com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     */
     public void runModule(String modulePath, RuntimeData data, Context context)
             throws Exception
     {
