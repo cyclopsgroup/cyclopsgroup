@@ -79,6 +79,6 @@ public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
      */
     public void setPage(String page)
     {
-        throw new UnsupportedOperationException();
+        //do nothing
     }
 }

@@ -16,8 +16,12 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.configuration.Configurable;
@@ -31,6 +35,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.I18N;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -67,6 +72,23 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private Hashtable layouts = new Hashtable();
 
     private Hashtable packageNames = new Hashtable();
+
+    private void addBundleToList(List resourceBundles, String base,
+            Locale locale)
+    {
+        try
+        {
+            ResourceBundle rb = ResourceBundle.getBundle(base, locale);
+            if (rb != null)
+            {
+                resourceBundles.add(rb);
+            }
+        }
+        catch (Exception ignored)
+        {
+            //do nothing
+        }
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -167,6 +189,31 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         return (String[]) frames.keySet()
                 .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    synchronized I18N getInternationalization(Path path, Locale locale)
+    {
+
+        String key = "internationalization/" + locale.getCountry() + "/"
+                + locale.getLanguage() + "/" + path.getFullPath();
+        I18N loc = null;
+        if (cache.contains(this, key))
+        {
+            loc = (I18N) cache.get(this, key);
+        }
+        else
+        {
+            List resourceBundles = new ArrayList();
+            //TODO addBundleToList(resourceBundles, externalBundle, locale);
+            addBundleToList(resourceBundles, path.getPackage()
+                    + path.getPathWithoutExtension() + "_ResourceBundle",
+                    locale);
+            addBundleToList(resourceBundles, path.getPackage()
+                    + "/ResourceBundle", locale);
+            loc = new DefaultI18N(locale, resourceBundles, this);
+            cache.put(this, key, loc);
+        }
+        return loc;
     }
 
     /**
@@ -306,6 +353,8 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private void runModule(Path modulePath, RuntimeData data, Context context)
             throws Exception
     {
+        I18N i18n = getInternationalization(modulePath, data.getLocale());
+        context.put(I18N.NAME, i18n);
         String className = modulePath.getPackage()
                 + modulePath.getPathWithoutExtension().replace('/', '.');
         Module module = null;

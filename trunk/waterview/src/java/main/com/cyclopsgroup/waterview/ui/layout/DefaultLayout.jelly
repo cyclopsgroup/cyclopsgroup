@@ -4,32 +4,19 @@
 		<div style="max-width: 960px;">
 			<table width="100%" cellspacing="0" border="0">
 				<tr>
-					<td colspan="3" id="bannerArea">
+					<td colspan="2" id="bannerArea">
 						<w:HtmlView>
 							<h2>Waterview System: Page ${page}</h2>
 						</w:HtmlView>
 					</td>
 				</tr>
 				<tr>
-					<td width="20%" valign="top">
-						<w:JellyPanel script="/waterview/panel/DefaultVerticalPanel.jelly" name="left">
-							<w:View>
-								<ul>
-									<li>aaaaaa aa aaa</li>
-									<li>bbb b bbbbbbb bb b b</li>
-									<li>ccccc ccccc cc c</li>
-									<li>dd dddd dd d</li>
-								</ul>
-							</w:View>
-						</w:JellyPanel>
-					</td>
-					<td width="65%" valign="top">
+					<td width="75%" valign="top">
 						<w:JellyPanel script="/waterview/panel/DefaultVerticalPanel.jelly" name="body">
 							<w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
-							<w:View>/${page.packageAlias}/view${page.path}</w:View>
 						</w:JellyPanel>
 					</td>
-					<td width="15%" valign="top">
+					<td width="25%" valign="top">
 						<w:JellyPanel script="/waterview/panel/DefaultVerticalPanel.jelly" name="right">
 							<w:View>
 								<p>Some help links</p>
@@ -37,11 +24,12 @@
 							<w:View>
 								<p>Some reference links</p>
 							</w:View>
+							<w:JspView path="/waterview/view/HelloWorld.jsp"/>
 						</w:JellyPanel>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="2">
 						<table width="100%" border="0">
 							<tr>
 								<td>Copyrights reserved Cyclops Group 2005</td>

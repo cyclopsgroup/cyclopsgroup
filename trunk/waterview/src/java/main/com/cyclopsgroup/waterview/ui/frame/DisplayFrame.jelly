@@ -4,9 +4,9 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         <meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview"/>
         <title>Waterview System: ${page}</title>
-        <link rel="stylesheet" type="text/css" media="all" href="${applicationBase}/style/waterviewbase.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="${applicationBase}/style/waterviewstyle.css"/>
-        <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterviewprint.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="${applicationBase}/style/waterview-base.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="${applicationBase}/style/waterview-style.css"/>
+        <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterview-print.css"/>
         <w:Panel name="head"/>
     </head>
     <body>

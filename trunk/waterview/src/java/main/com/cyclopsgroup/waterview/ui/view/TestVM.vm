@@ -9,3 +9,4 @@ $servletConfig
 #end
 
 <p>$testVariable</p>
+<p>$i18n.sometext</p>

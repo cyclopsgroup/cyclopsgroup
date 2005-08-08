@@ -8,7 +8,7 @@
 					<table width="100%" cellspacing="1" cellpadding="2"
 						border="0" bgcolor="#EFEFEF">
 						<tr>
-							<td>%Title%</td>
+							<td>${i18n.getInstance(view.modulePath).getText('view_title', 'Unknown View')}</td>
 						</tr>
 						<tr>
 							<td bgcolor="white">
