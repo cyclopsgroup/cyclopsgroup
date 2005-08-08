@@ -16,9 +16,8 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -31,100 +30,142 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public class PageLink
 {
+    /** Do action instruction */
+    public static final String ACTION_INSTRUCTOR = "!do!";
+
+    /** Encoding for parameters */
+    public static final String ENCODING = "UTF-8";
+
     /** Name of this tool */
     public static final String NAME = "link";
 
-    private List actions = new ArrayList();
+    /** Show page instruction */
+    public static final String PAGE_INSTRUCTOR = "!show!";
 
-    private String page;
+    private RuntimeData data;
 
-    private List parameters = new ArrayList();
+    private boolean external = false;
 
-    private RuntimeData runtime;
+    private boolean pageSet = false;
+
+    private StringBuffer queryString;
+
+    private StringBuffer requestPath = new StringBuffer();
 
     /**
-     * Constructor with a page runtime
-     * 
-     * @param runtime
+     * Constructor for type LinkTool
+     *
+     * @param data Runtime data
      */
-    public PageLink(RuntimeData runtime)
+    public PageLink(RuntimeData data)
     {
-        this.runtime = runtime;
-        init();
+        this.data = data;
     }
 
     /**
-     * @param action
-     * @return Itself
+     * Add action for current link
+     * 
+     * @param action Action path
+     * @return Link itself
      */
     public PageLink addAction(String action)
     {
-        actions.add(action);
+        external = false;
+        requestPath.append('/').append(ACTION_INSTRUCTOR).append(action);
         return this;
     }
 
     /**
-     * @param packageName
-     * @param action
-     * @return Itself
+     * Add query parameter
+     * 
+     * @param name Name of parameter
+     * @param value Value of parameter
+     * @return Link itself
+     * @throws UnsupportedEncodingException Throw it out
      */
-    public PageLink addAction(String packageName, String action)
+    public PageLink addQueryData(String name, Object value)
+            throws UnsupportedEncodingException
     {
-        actions.add(packageName + ":" + action);
+        if (queryString == null)
+        {
+            queryString = new StringBuffer();
+        }
+        else
+        {
+            queryString.append('&');
+        }
+        String v = value == null ? StringUtils.EMPTY : value.toString();
+        queryString.append(name).append('=').append(
+                URLEncoder.encode(v, ENCODING));
         return this;
     }
 
-    private void init()
-    {
-        actions.clear();
-        parameters.clear();
-        page = null;
-    }
-
     /**
-     * @param page
-     * @return Itself
+     * Set page
+     *
+     * @param path
+     * @return Link tool itself
      */
-    public PageLink setPage(String page)
+    public PageLink setPage(String path)
     {
-        this.page = page;
+        if (pageSet)
+        {
+            return this;
+        }
+        requestPath.append('/').append(PAGE_INSTRUCTOR).append(path);
+        pageSet = true;
+        external = false;
         return this;
     }
 
     /**
-     * @param packageName
-     * @param page
-     * @return Itself
+     * Set resource path
+     *
+     * @param path Path of resource
+     * @return It self
      */
-    public PageLink setPage(String packageName, String page)
+    public PageLink setResource(String path)
     {
-        return setPage(packageName + ':' + page);
+        requestPath = new StringBuffer(path);
+        external = true;
+        return this;
     }
 
     /**
-     * Overwrite or implement method toString()
+     * Override method LinkTool in supper class
+     *
      * @see java.lang.Object#toString()
      */
     public String toString()
     {
-        StringBuffer sb = new StringBuffer(runtime.getPageBaseUrl());
-        List parts = new ArrayList();
-        for (Iterator i = actions.iterator(); i.hasNext();)
+        StringBuffer url = new StringBuffer();
+        if (external)
         {
-            String action = (String) i.next();
-            parts.add(ParseURLValve.ACTION_INSTRUCTOR + '/' + action);
+            url.append(data.getApplicationBaseUrl());
         }
-        if (page != null)
+        else
         {
-            parts.add(page);
+            url.append(data.getPageBaseUrl());
         }
-        String url = StringUtils.join(parts.iterator(), '/');
-        if (!parts.isEmpty())
+        if (requestPath.length() == 0 && !external)
         {
-            sb.append("/").append(url);
+            url.append(data.getRequestPath());
         }
-        url = sb.toString();
-        init();
-        return url;
+        else
+        {
+            url.append(requestPath);
+        }
+
+        if (queryString != null)
+        {
+            url.append('?').append(queryString);
+        }
+        String fullUrl = url.toString();
+
+        queryString = null;
+        pageSet = false;
+        requestPath = new StringBuffer();
+        external = false;
+        return fullUrl;
     }
 }

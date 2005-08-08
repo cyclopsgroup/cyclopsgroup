@@ -35,21 +35,16 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class ParseURLValve extends AbstractLogEnabled implements Valve
 {
-    /** Do action instruction */
-    public static final String ACTION_INSTRUCTOR = "!do!";
 
     private static HashSet instructors;
-
-    /** Show page instruction */
-    public static final String PAGE_INSTRUCTOR = "!show!";
 
     private static HashSet getInstructors()
     {
         if (instructors == null)
         {
             instructors = new HashSet();
-            instructors.add(ACTION_INSTRUCTOR);
-            instructors.add(PAGE_INSTRUCTOR);
+            instructors.add(PageLink.ACTION_INSTRUCTOR);
+            instructors.add(PageLink.PAGE_INSTRUCTOR);
         }
         return instructors;
     }
@@ -82,29 +77,31 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData runtime, PipelineContext context)
+    public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
-        List behaviors = parseRequestPath(runtime.getRequestPath());
+        List behaviors = parseRequestPath(data.getRequestPath());
         for (Iterator i = behaviors.iterator(); i.hasNext();)
         {
             String behavior = (String) i.next();
-            if (behavior.startsWith('/' + ACTION_INSTRUCTOR))
+            if (behavior.startsWith('/' + PageLink.ACTION_INSTRUCTOR))
             {
-                String action = behavior
-                        .substring(ACTION_INSTRUCTOR.length() + 1);
-                runtime.getActions().add(action);
+                String action = behavior.substring(PageLink.ACTION_INSTRUCTOR
+                        .length() + 1);
+                data.getActions().add(action);
             }
-            else if (behavior.startsWith('/' + PAGE_INSTRUCTOR))
+            else if (behavior.startsWith('/' + PageLink.PAGE_INSTRUCTOR))
             {
-                String page = behavior.substring(PAGE_INSTRUCTOR.length() + 1);
-                runtime.setPage(page);
+                String page = behavior.substring(PageLink.PAGE_INSTRUCTOR
+                        .length() + 1);
+                data.setPage(page);
             }
             else
             {
-                runtime.setPage(behavior);
+                data.setPage(behavior);
             }
         }
-        context.invokeNextValve(runtime);
+        data.getRequestContext().put(PageLink.NAME, new PageLink(data));
+        context.invokeNextValve(data);
     }
 }
