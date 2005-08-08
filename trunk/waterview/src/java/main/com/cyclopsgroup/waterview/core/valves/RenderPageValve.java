@@ -47,6 +47,10 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
         data.setOutputContentType("text/html");
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
+
+        mm.runModule('/' + data.getPage().getPackageAlias() + "/page"
+                + data.getPage().getPath(), data, data.getRequestContext());
+
         mm.getDefaultFrame().display(page, data);
         context.invokeNextValve(data);
         data.getOutput().flush();

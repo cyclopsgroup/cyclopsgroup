@@ -14,29 +14,21 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
-
-import org.apache.commons.jelly.JellyContext;
-
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.JellyView;
-import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
+package com.cyclopsgroup.waterview;
 
 /**
- * View tag
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Module will be attached to view/frame/layout/panel...
  */
-public class ViewTag extends BaseViewTag
+public interface Module
 {
     /**
-     * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
+     * Run this module
+     *
+     * @param data Runtime data
+     * @param context Environment context
+     * @throws Exception Throw it out
      */
-    protected View createView(JellyContext context, RuntimeData data)
-            throws Exception
-    {
-        return new JellyView(getBody(), null);
-    }
+    void execute(RuntimeData data, Context context) throws Exception;
 }

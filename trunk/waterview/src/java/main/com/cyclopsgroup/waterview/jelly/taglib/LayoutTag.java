@@ -39,7 +39,7 @@ public class LayoutTag extends BaseTag
             throws Exception
     {
         Page page = (Page) getContext().getVariable(Page.NAME);
-        JellyLayout layout = new JellyLayout(getBody());
+        JellyLayout layout = new JellyLayout(getBody(), null);
         page.setLayout(layout);
     }
 }

@@ -21,6 +21,7 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
 
@@ -29,7 +30,7 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayout implements Layout
+public class JellyLayout extends BaseModuleRunnable implements Layout
 {
     private Script script;
 
@@ -37,9 +38,11 @@ public class JellyLayout implements Layout
      * Constructor for class JellyScriptLayout
      *
      * @param script Jelly script object
+     * @param modulePath Path of module
      */
-    public JellyLayout(Script script)
+    public JellyLayout(Script script, String modulePath)
     {
+        super(modulePath);
         this.script = script;
         if (script == null)
         {
@@ -52,19 +55,21 @@ public class JellyLayout implements Layout
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public synchronized void render(RuntimeData runtime, Page page)
+    public synchronized void render(RuntimeData data, Page page)
             throws Exception
     {
-        runtime.getRequestContext().put(Page.NAME, page);
-        runtime.getRequestContext().put(NAME, this);
+        data.getRequestContext().put(Page.NAME, page);
+        data.getRequestContext().put(NAME, this);
 
-        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+        runModule(data, data.getRequestContext());
+
+        JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jellyContext = je.createJellyContext(runtime
+        JellyContext jellyContext = je.createJellyContext(data
                 .getRequestContext());
-        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+        XMLOutput output = XMLOutput.createXMLOutput(data.getOutput());
         script.run(jellyContext, output);
-        runtime.getRequestContext().put(Page.NAME, null);
-        runtime.getRequestContext().put(NAME, null);
+        data.getRequestContext().put(Page.NAME, null);
+        data.getRequestContext().put(NAME, null);
     }
 }

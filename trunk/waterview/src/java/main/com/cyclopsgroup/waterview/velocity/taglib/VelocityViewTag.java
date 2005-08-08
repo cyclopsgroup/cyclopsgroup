@@ -50,7 +50,7 @@ public class VelocityViewTag extends BaseViewTag
                 ModuleManager.ROLE);
         Path path = mm.parsePath(getTemplate());
         return new VelocityView(ve.getTemplate(path.getPackage(), path
-                .getPath()));
+                .getPath()), getTemplate());
     }
 
     /**

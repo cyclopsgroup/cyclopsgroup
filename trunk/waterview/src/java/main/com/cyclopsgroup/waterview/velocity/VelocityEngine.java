@@ -77,7 +77,7 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
         Template template = getTemplate(path.getPackage(), path.getPath());
         if (template != null)
         {
-            return new VelocityView(template);
+            return new VelocityView(template, path.getFullPath());
         }
         return new MessageView("Velocity template for " + path
                 + " doesn't exist");

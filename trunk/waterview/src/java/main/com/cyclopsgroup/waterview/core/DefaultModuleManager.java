@@ -31,6 +31,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
@@ -305,7 +306,21 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     private void runModule(Path modulePath, RuntimeData data, Context context)
             throws Exception
     {
-
+        String className = modulePath.getPackage()
+                + modulePath.getPathWithoutExtension().replace('/', '.');
+        Module module = null;
+        try
+        {
+            module = (Module) Class.forName(className).newInstance();
+        }
+        catch (Exception ignored)
+        {
+            //do nothing
+        }
+        if (module != null)
+        {
+            module.execute(data, context);
+        }
     }
 
     public void runModule(String modulePath, RuntimeData data, Context context)

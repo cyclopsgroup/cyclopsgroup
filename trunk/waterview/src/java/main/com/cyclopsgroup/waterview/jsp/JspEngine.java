@@ -58,7 +58,7 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
             p = '/' + StringUtils.replace(path.getPackage(), ".", "/") + p;
         }
         p = "/templates" + p;
-        return new JspView(p);
+        return new JspView(p, path.getFullPath());
     }
 
     /**

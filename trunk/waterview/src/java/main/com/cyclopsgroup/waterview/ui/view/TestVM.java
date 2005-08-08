@@ -14,27 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly;
+package com.cyclopsgroup.waterview.ui.view;
+
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
- * Exception for jelly script not found senario
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Module for test vm
  */
-public class ScriptNotFoundException extends Exception
+public class TestVM implements Module
 {
     /**
-     * Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = 3905236810560188467L;
-
-    /**
-     * Constructor for class ScriptNotFoundException
+     * Overwrite or implement method execute()
      *
-     * @param script
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public ScriptNotFoundException(String script)
+    public void execute(RuntimeData data, Context context) throws Exception
     {
-        super("Jelly script " + script + " is not found in waterview system");
+        context.put("testVariable", "Only for testing");
+        System.out.println("I'm running!!!!");
     }
+
 }

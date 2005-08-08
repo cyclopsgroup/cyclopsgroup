@@ -55,8 +55,9 @@ public class JellyPanelTag extends BasePanelTag
             Path path = module.parsePath(getScript());
             JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                     JellyEngine.ROLE);
-            Script script = je.getScript(path.getPackage(), path.getPath());
-            panel = new JellyPanel(script);
+            Script jellyScript = je
+                    .getScript(path.getPackage(), path.getPath());
+            panel = new JellyPanel(jellyScript, getScript());
             cache.put(getClass(), getScript(), panel);
         }
         return panel;

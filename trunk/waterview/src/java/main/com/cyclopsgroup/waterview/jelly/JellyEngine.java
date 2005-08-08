@@ -151,7 +151,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public View createView(Path path) throws Exception
     {
         Script script = getScript(path.getPackage(), path.getPath());
-        return new JellyView(script);
+        return new JellyView(script, path.getFullPath());
     }
 
     /**

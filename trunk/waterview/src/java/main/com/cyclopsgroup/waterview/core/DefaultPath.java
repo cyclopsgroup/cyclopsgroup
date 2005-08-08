@@ -60,7 +60,7 @@ class DefaultPath implements Path
         int lastDot = StringUtils.lastIndexOf(path, '.');
         if (lastDot > -1)
         {
-            pathWithoutExtension = path.substring(1, lastDot);
+            pathWithoutExtension = path.substring(0, lastDot);
             extension = path.substring(lastDot);
         }
 

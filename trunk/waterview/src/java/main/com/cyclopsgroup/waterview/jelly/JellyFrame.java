@@ -21,6 +21,7 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Page;
 
@@ -29,7 +30,7 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyFrame implements Frame
+public class JellyFrame extends BaseModuleRunnable implements Frame
 {
     private Script script;
 
@@ -37,9 +38,11 @@ public class JellyFrame implements Frame
      * Constructor for class ScriptFrame
      *
      * @param script Script object
+     * @param modulePath Module path of this frame
      */
-    public JellyFrame(Script script)
+    public JellyFrame(Script script, String modulePath)
     {
+        super(modulePath);
         this.script = script;
     }
 
@@ -48,13 +51,14 @@ public class JellyFrame implements Frame
      *
      * @see com.cyclopsgroup.waterview.spi.Frame#display(com.cyclopsgroup.waterview.spi.Page, com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void display(Page page, RuntimeData runtime) throws Exception
+    public void display(Page page, RuntimeData data) throws Exception
     {
-        runtime.getRequestContext().put(Page.NAME, page);
-        JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup(
+        runModule(data, data.getRequestContext());
+        data.getRequestContext().put(Page.NAME, page);
+        JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
                 JellyEngine.ROLE);
-        JellyContext jc = je.createJellyContext(runtime.getRequestContext());
-        XMLOutput output = XMLOutput.createXMLOutput(runtime.getOutput());
+        JellyContext jc = je.createJellyContext(data.getRequestContext());
+        XMLOutput output = XMLOutput.createXMLOutput(data.getOutput());
         script.run(jc, output);
         output.flush();
     }

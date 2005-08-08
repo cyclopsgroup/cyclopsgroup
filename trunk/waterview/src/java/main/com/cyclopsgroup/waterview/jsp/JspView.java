@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.jsp;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -25,16 +26,18 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * JSP implemented view
  */
-public class JspView implements View
+public class JspView extends BaseModuleRunnable implements View
 {
     private String path;
 
     /**
      * Constructor of JspView with a given path
-     * @param path
+     * @param path Absolute path of jsp
+     * @param modulePath Module path
      */
-    public JspView(String path)
+    public JspView(String path, String modulePath)
     {
+        super(modulePath);
         this.path = path;
     }
 
@@ -44,6 +47,7 @@ public class JspView implements View
      */
     public void render(RuntimeData data, Context viewContext) throws Exception
     {
+        runModule(data, viewContext);
         JspEngine je = (JspEngine) data.getServiceManager().lookup(
                 JspEngine.ROLE);
         je.renderJsp(path, data, viewContext);

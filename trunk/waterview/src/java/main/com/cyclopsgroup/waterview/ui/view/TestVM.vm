@@ -7,3 +7,5 @@ $servletConfig
 #foreach($i in [1..5])
 <p>line $i</p>
 #end
+
+<p>$testVariable</p>

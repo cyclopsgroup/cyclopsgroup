@@ -49,7 +49,7 @@ public class JellyViewTag extends BaseViewTag
                 ModuleManager.ROLE);
         Path path = mm.parsePath(getScript());
         return new JellyView(jellyEngine.getScript(path.getPackage(), path
-                .getPath()));
+                .getPath()), getScript());
     }
 
     /**

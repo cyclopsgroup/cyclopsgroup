@@ -58,6 +58,7 @@ public class JellyFrameProxy implements Frame
         ModuleManager mm = (ModuleManager) runtime.getServiceManager().lookup(
                 ModuleManager.ROLE);
         Path path = mm.parsePath(framePath);
-        return new JellyFrame(je.getScript(path.getPackage(), path.getPath()));
+        return new JellyFrame(je.getScript(path.getPackage(), path.getPath()),
+                framePath);
     }
 }

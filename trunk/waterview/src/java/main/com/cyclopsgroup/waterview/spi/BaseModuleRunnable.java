@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 
@@ -58,8 +60,11 @@ public abstract class BaseModuleRunnable
     protected void runModule(RuntimeData data, Context context)
             throws Exception
     {
-        ModuleManager moduleManager = (ModuleManager) data.getServiceManager()
-                .lookup(ModuleManager.ROLE);
-
+        if (StringUtils.isNotEmpty(getModulePath()))
+        {
+            ModuleManager moduleManager = (ModuleManager) data
+                    .getServiceManager().lookup(ModuleManager.ROLE);
+            moduleManager.runModule(modulePath, data, context);
+        }
     }
 }

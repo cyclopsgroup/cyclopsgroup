@@ -20,6 +20,7 @@ import org.apache.velocity.Template;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -27,17 +28,19 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityView implements View
+public class VelocityView extends BaseModuleRunnable implements View
 {
     private Template template;
 
     /**
      * Constructor for class VelocityView
      *
-     * @param template
+     * @param template Velocity template
+     * @param modulePath Module path
      */
-    public VelocityView(Template template)
+    public VelocityView(Template template, String modulePath)
     {
+        super(modulePath);
         this.template = template;
     }
 
@@ -48,6 +51,7 @@ public class VelocityView implements View
     public void render(RuntimeData runtime, Context viewContext)
             throws Exception
     {
+        runModule(runtime, viewContext);
         if (template == null)
         {
             return;

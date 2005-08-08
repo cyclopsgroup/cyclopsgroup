@@ -57,7 +57,7 @@ public class JellyLayoutTag extends BaseTag
                 .lookup(ModuleManager.ROLE);
         Path path = mm.parsePath(getScript());
         Layout layout = new JellyLayout(jellyEngine.getScript(
-                path.getPackage(), path.getPath()));
+                path.getPackage(), path.getPath()), getScript());
         page.setLayout(layout);
     }
 

@@ -56,7 +56,7 @@ public class JellyLayoutProxy implements Layout
                     ModuleManager.ROLE);
             Path path = mm.parsePath(layoutScript);
             layout = new JellyLayout(je.getScript(path.getPackage(), path
-                    .getPath()));
+                    .getPath()), layoutScript);
             cm.put(this, layoutScript, layout);
         }
         return layout;
