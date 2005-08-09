@@ -191,9 +191,15 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
                 .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
+    /**
+     * Get i18n instance
+     *
+     * @param path Module path
+     * @param locale Locale
+     * @return I18N instance
+     */
     synchronized I18N getInternationalization(Path path, Locale locale)
     {
-
         String key = "internationalization/" + locale.getCountry() + "/"
                 + locale.getLanguage() + "/" + path.getFullPath();
         I18N loc = null;

@@ -27,6 +27,11 @@ import com.cyclopsgroup.waterview.I18N;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.spi.BaseI18N;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Default implementation of i18n
+ */
 class DefaultI18N extends BaseI18N
 {
     private DefaultModuleManager modules;
