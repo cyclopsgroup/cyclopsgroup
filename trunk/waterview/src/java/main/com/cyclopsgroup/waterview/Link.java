@@ -27,7 +27,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * Link tool
  */
-public class PageLink
+public class Link
 {
     /** Do action instruction */
     public static final String ACTION_INSTRUCTOR = "!do!";
@@ -56,7 +56,7 @@ public class PageLink
      *
      * @param data Runtime data
      */
-    public PageLink(RuntimeData data)
+    public Link(RuntimeData data)
     {
         this.data = data;
     }
@@ -67,7 +67,7 @@ public class PageLink
      * @param action Action path
      * @return Link itself
      */
-    public PageLink addAction(String action)
+    public Link addAction(String action)
     {
         external = false;
         requestPath.append('/').append(ACTION_INSTRUCTOR).append(action);
@@ -82,7 +82,7 @@ public class PageLink
      * @return Link itself
      * @throws UnsupportedEncodingException Throw it out
      */
-    public PageLink addQueryData(String name, Object value)
+    public Link addQueryData(String name, Object value)
             throws UnsupportedEncodingException
     {
         if (queryString == null)
@@ -105,7 +105,7 @@ public class PageLink
      * @param path
      * @return Link tool itself
      */
-    public PageLink setPage(String path)
+    public Link setPage(String path)
     {
         if (pageSet)
         {
@@ -123,7 +123,7 @@ public class PageLink
      * @param path Path of resource
      * @return It self
      */
-    public PageLink setResource(String path)
+    public Link setResource(String path)
     {
         requestPath = new StringBuffer(path);
         external = true;
