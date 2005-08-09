@@ -24,7 +24,7 @@ import java.util.List;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.PageLink;
+import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -44,8 +44,8 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
         if (instructors == null)
         {
             instructors = new HashSet();
-            instructors.add(PageLink.ACTION_INSTRUCTOR);
-            instructors.add(PageLink.PAGE_INSTRUCTOR);
+            instructors.add(Link.ACTION_INSTRUCTOR);
+            instructors.add(Link.PAGE_INSTRUCTOR);
         }
         return instructors;
     }
@@ -85,15 +85,15 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
         for (Iterator i = behaviors.iterator(); i.hasNext();)
         {
             String behavior = (String) i.next();
-            if (behavior.startsWith('/' + PageLink.ACTION_INSTRUCTOR))
+            if (behavior.startsWith('/' + Link.ACTION_INSTRUCTOR))
             {
-                String action = behavior.substring(PageLink.ACTION_INSTRUCTOR
+                String action = behavior.substring(Link.ACTION_INSTRUCTOR
                         .length() + 1);
                 data.getActions().add(action);
             }
-            else if (behavior.startsWith('/' + PageLink.PAGE_INSTRUCTOR))
+            else if (behavior.startsWith('/' + Link.PAGE_INSTRUCTOR))
             {
-                String page = behavior.substring(PageLink.PAGE_INSTRUCTOR
+                String page = behavior.substring(Link.PAGE_INSTRUCTOR
                         .length() + 1);
                 data.setPage(page);
             }
@@ -102,7 +102,7 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
                 data.setPage(behavior);
             }
         }
-        data.getRequestContext().put(PageLink.NAME, new PageLink(data));
+        data.getRequestContext().put(Link.NAME, new Link(data));
         context.invokeNextValve(data);
     }
 }
