@@ -387,7 +387,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         Path path = parsePath(modulePath);
         runModule(path, data, context);
-
     }
 
     /**
@@ -398,7 +397,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        this.registerActionResolver(".+\\.action", this);
+        registerActionResolver(".+\\.action", this);
     }
 
     /**
