@@ -12,12 +12,12 @@
 				</tr>
 				<tr>
 					<td width="75%" valign="top">
-						<w:JellyPanel script="/waterview/panel/DefaultVerticalPanel.jelly" name="body">
+						<w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
 							<w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
 						</w:JellyPanel>
 					</td>
 					<td width="25%" valign="top">
-						<w:JellyPanel script="/waterview/panel/DefaultVerticalPanel.jelly" name="right">
+						<w:JellyPanel script="/waterview//DefaultVerticalPanel.jelly" name="right">
 							<w:View>
 								<p>Some help links</p>
 							</w:View>
