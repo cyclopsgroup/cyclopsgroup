@@ -36,6 +36,13 @@ public interface Column
     String getBody(Object row) throws Exception;
 
     /**
+     * Get display policy
+     *
+     * @return Display policy
+     */
+    ColumnDisplayPolicy getDisplayPolicy();
+
+    /**
      * Get header
      *
      * @return Header content
@@ -49,20 +56,6 @@ public interface Column
      * @return Unique name of column
      */
     String getName();
-
-    /**
-     * If the column is hidden by default
-     *
-     * @return True if it's hidden
-     */
-    boolean isHidden();
-
-    /**
-     * If the column is forced to be displayed
-     *
-     * @return True if the column is forced to be displayed
-     */
-    boolean isRequired();
 
     /**
      * Is column sortable

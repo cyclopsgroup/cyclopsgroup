@@ -14,26 +14,31 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.web;
+package com.cyclopsgroup.waterview.web.taglib;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
 
-import org.apache.commons.collections.map.ListOrderedMap;
+import com.cyclopsgroup.waterview.util.BaseTagSupport;
 
-public class SortingOptions
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Column body tag
+ */
+public class ColumnBodyTag extends BaseTagSupport
 {
-    private Map columnNames = ListOrderedMap.decorate(new HashMap());
 
-    public void addAscedingColumn(String columnName)
+    /**
+     * Overwrite or implement method doTag()
+     *
+     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void doTag(XMLOutput arg0) throws MissingAttributeException,
+            JellyTagException
     {
-        columnNames.remove(columnName);
-        columnNames.put(columnName, Boolean.FALSE);
-    }
-
-    public void addDescendingColumn(String columnName)
-    {
-        columnNames.remove(columnName);
-        columnNames.put(columnName, Boolean.TRUE);
+        requireParent(ColumnTag.class);
+        ((ColumnTag) getParent()).setBodyScript(getBody());
     }
 }

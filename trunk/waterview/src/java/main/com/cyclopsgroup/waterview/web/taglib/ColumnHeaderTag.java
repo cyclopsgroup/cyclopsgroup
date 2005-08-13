@@ -14,34 +14,29 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.web.taglib;
+
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.jelly.XMLOutput;
+
+import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Redirect to given URL
+ * 
+ * ColumnHeader tag
  */
-public class URLRedirector extends Redirector
+public class ColumnHeaderTag extends BaseTag
 {
-    private String url;
-
     /**
-     * Constructor
-     * 
-     * @param url Url
+     * Overwrite or implement method doTag()
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
-    public URLRedirector(String url)
+    protected void doTag(ServiceManager serviceManager, XMLOutput output)
+            throws Exception
     {
-        this.url = url;
-    }
-
-    /**
-     * Get full url of it
-     * 
-     * @return URL
-     */
-    public String getUrl()
-    {
-        return url;
+        requireParent(ColumnTag.class);
+        ((ColumnTag) getParent()).setHeaderScript(getBody());
     }
 }

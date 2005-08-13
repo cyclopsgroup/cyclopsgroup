@@ -45,7 +45,7 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private String pageBaseUrl;
 
-    private Redirector redirector;
+    private String redirectUrl;
 
     private Context requestContext;
 
@@ -58,6 +58,8 @@ public abstract class AbstractPageRuntime implements RuntimeData
     private Context sessionContext;
 
     private String sessionId;
+
+    private boolean stopped;
 
     private TimeZone timeZone = TimeZone.getDefault();
 
@@ -132,12 +134,13 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
-     * Overwrite or implement method getRedirector()
-     * @see com.cyclopsgroup.waterview.RuntimeData#getRedirector()
+     * Overwrite or implement method getRedirectUrl()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#getRedirectUrl()
      */
-    public Redirector getRedirector()
+    public String getRedirectUrl()
     {
-        return redirector;
+        return redirectUrl;
     }
 
     /**
@@ -206,6 +209,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public TimeZone getTimeZone()
     {
         return timeZone;
+    }
+
+    /**
+     * Overwrite or implement method isStopped()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#isStopped()
+     */
+    public boolean isStopped()
+    {
+        return stopped;
     }
 
     /**
@@ -278,12 +291,13 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
-     * Overwrite or implement method setRedirector()
-     * @see com.cyclopsgroup.waterview.RuntimeData#setRedirector(com.cyclopsgroup.waterview.Redirector)
+     * Overwrite or implement method setRedirectUrl()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#setRedirectUrl(java.lang.String)
      */
-    public void setRedirector(Redirector redirector)
+    public void setRedirectUrl(String url)
     {
-        this.redirector = redirector;
+        redirectUrl = url;
     }
 
     /**
@@ -352,5 +366,15 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setTimeZone(TimeZone timeZone)
     {
         this.timeZone = timeZone;
+    }
+
+    /**
+     * Overwrite or implement method stop()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#stop()
+     */
+    public void stop()
+    {
+        stopped = true;
     }
 }

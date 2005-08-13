@@ -14,54 +14,48 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.web;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.enums.Enum;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Page redirector which accepts a given page and an optional query string
+ * 
+ * Display policy for column
  */
-public class SimplePageRedirector extends PageRedirector
+public final class ColumnDisplayPolicy extends Enum
 {
-    private String page;
-
-    private String queryString;
+    /**
+     * Forced to display
+     */
+    public static ColumnDisplayPolicy FORCED = new ColumnDisplayPolicy("forced");
 
     /**
-     * @param page
+     * Optionally displayed
      */
-    public SimplePageRedirector(String page)
+    public static ColumnDisplayPolicy HIDDEN = new ColumnDisplayPolicy("hidden");
+
+    /**
+     * Optional hidden
+     */
+    public static ColumnDisplayPolicy OPTIONAL = new ColumnDisplayPolicy(
+            "optional");
+
+    private static final long serialVersionUID = 508885945429329982L;
+
+    /**
+     * Get instance from a string
+     *
+     * @param value String value
+     * @return Instance or null
+     */
+    public static ColumnDisplayPolicy valueOf(String value)
     {
-        this(page, StringUtils.EMPTY);
+        return (ColumnDisplayPolicy) getEnum(ColumnDisplayPolicy.class, value);
     }
 
-    /**
-     * @param page
-     * @param string
-     */
-    public SimplePageRedirector(String page, String string)
+    private ColumnDisplayPolicy(String value)
     {
-        this.page = page;
-        queryString = string;
-    }
-
-    /**
-     * Overwrite or implement method getPage()
-     * @see com.cyclopsgroup.waterview.PageRedirector#getPage()
-     */
-    public String getPage()
-    {
-        return page;
-    }
-
-    /**
-     * Overwrite or implement method getQueryString()
-     * @see com.cyclopsgroup.waterview.PageRedirector#getQueryString()
-     */
-    public String getQueryString()
-    {
-        return queryString;
+        super(value);
     }
 }

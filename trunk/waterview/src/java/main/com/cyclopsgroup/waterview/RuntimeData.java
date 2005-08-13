@@ -98,11 +98,11 @@ public interface RuntimeData
     String getPageBaseUrl();
 
     /**
-     * Redirector
+     * Get URL to redirect
      *
-     * @return Redirector object
+     * @return Redirect URL
      */
-    Redirector getRedirector();
+    String getRedirectUrl();
 
     /**
      * Get context for page rendering
@@ -154,6 +154,13 @@ public interface RuntimeData
     TimeZone getTimeZone();
 
     /**
+     * Is the pipeline stopped
+     *
+     * @return True if pipeline is stopped
+     */
+    boolean isStopped();
+
+    /**
      * Set content type for response
      * 
      * @param contentType Content type
@@ -176,7 +183,12 @@ public interface RuntimeData
     void setPage(String page) throws Exception;
 
     /**
-     * @param redirector
+     * @param url URL to redirect
      */
-    void setRedirector(Redirector redirector);
+    void setRedirectUrl(String url);
+
+    /**
+     * Stop the pipeline
+     */
+    void stop();
 }

@@ -29,16 +29,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.PageRedirector;
 import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.URLRedirector;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.util.WaterviewPlexusContainer;
 
@@ -138,26 +135,9 @@ public class WaterviewServlet extends HttpServlet
         Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
         waterview.handleRuntime(data);
 
-        if (data.getRedirector() != null)
+        if (data.getRedirectUrl() != null)
         {
-            String url = null;
-            if (data.getRedirector() instanceof URLRedirector)
-            {
-                url = ((URLRedirector) data.getRedirector()).getUrl();
-            }
-            else if (data.getRedirector() instanceof PageRedirector)
-            {
-                PageRedirector spr = (PageRedirector) data.getRedirector();
-                url = data.getPageBaseUrl() + spr.getPage();
-                if (StringUtils.isNotEmpty(spr.getQueryString()))
-                {
-                    url += "?" + spr.getQueryString();
-                }
-            }
-            if (url != null)
-            {
-                response.sendRedirect(url);
-            }
+            response.sendRedirect(data.getRedirectUrl());
         }
     }
 

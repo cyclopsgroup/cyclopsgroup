@@ -58,26 +58,30 @@ public class DefaultPipelineContext implements PipelineContext
      *
      * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void invokeNextValve(RuntimeData runtime) throws Exception
+    public void invokeNextValve(RuntimeData data) throws Exception
     {
         position++;
         if (position >= valves.size())
         {
             return;
         }
-        invokeValve(runtime);
+        invokeValve(data);
     }
 
     /**
      * Invoke current valve
      *
-     * @param runtime Page runtime object
+     * @param data Page runtime object
      * @throws Exception Throw it out
      */
-    public void invokeValve(RuntimeData runtime) throws Exception
+    public void invokeValve(RuntimeData data) throws Exception
     {
+        if (data.isStopped())
+        {
+            return;
+        }
         Valve valve = (Valve) valves.get(position);
-        valve.invoke(runtime, this);
+        valve.invoke(data, this);
     }
 
     /**

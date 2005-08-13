@@ -17,52 +17,78 @@
 package com.cyclopsgroup.waterview.jelly.taglib;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.jelly.JellyEngine;
+import com.cyclopsgroup.waterview.spi.ModuleManager;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tag to run a given script
  */
-public class JellyScriptTag extends BaseTag
+public class JellyScriptTag extends BaseJellyScriptTag
 {
-    private boolean fileSystem = false;
-
     private String path;
 
+    private String type = "system";
+
     /**
-     * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * Overwrite or implement method createScript()
+     *
+     * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyScriptTag#createScript(org.apache.commons.jelly.JellyContext, org.apache.avalon.framework.service.ServiceManager)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected Script createScript(JellyContext context,
+            ServiceManager serviceManager) throws Exception
     {
+        requireAttribute("type");
         requireAttribute("path");
-        URL resource = null;
-        if (isFileSystem())
+        Script script = null;
+        if (StringUtils.equals(getType(), "system"))
+        {
+            JellyEngine je = (JellyEngine) serviceManager
+                    .lookup(JellyEngine.ROLE);
+            ModuleManager ui = (ModuleManager) serviceManager
+                    .lookup(ModuleManager.ROLE);
+            Path p = ui.parsePath(getPath());
+            script = je.getScript(p.getPackage(), p.getPath());
+        }
+        else if (StringUtils.equals(getType(), "classpath"))
+        {
+            URL resource = getClass().getClassLoader().getResource(getPath());
+            if (resource != null)
+            {
+                script = context.compileScript(resource);
+            }
+
+        }
+        else if (StringUtils.equals(getType(), "file"))
         {
             File file = new File(getPath());
-            if (file.isFile())
+            if (file.exists())
             {
-                resource = file.toURL();
+                script = context.compileScript(file.toURL());
             }
         }
         else
         {
-            resource = getClass().getClassLoader().getResource(getPath());
+            throw new JellyTagException(
+                    "Type must be system|classpath|file, default value is system");
         }
-        if (resource == null)
+        if (script == null)
         {
-            output.writeCDATA("Resource " + getPath() + " can not be found in "
-                    + (isFileSystem() ? "file system" : "classpath"));
-            return;
+            throw new FileNotFoundException("Resource " + getPath()
+                    + " is not found in " + getType());
         }
-        getContext().runScript(resource, output);
+        return script;
     }
 
     /**
@@ -74,19 +100,11 @@ public class JellyScriptTag extends BaseTag
     }
 
     /**
-     * @return Returns the fileSystem.
+     * @return Returns the type.
      */
-    public boolean isFileSystem()
+    public String getType()
     {
-        return fileSystem;
-    }
-
-    /**
-     * @param fileSystem The fileSystem to set.
-     */
-    public void setFileSystem(boolean fileSystem)
-    {
-        this.fileSystem = fileSystem;
+        return type;
     }
 
     /**
@@ -97,4 +115,11 @@ public class JellyScriptTag extends BaseTag
         this.path = path;
     }
 
+    /**
+     * @param type The type to set.
+     */
+    public void setType(String type)
+    {
+        this.type = type;
+    }
 }
