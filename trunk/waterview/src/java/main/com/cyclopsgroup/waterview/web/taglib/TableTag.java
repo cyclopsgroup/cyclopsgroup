@@ -58,6 +58,8 @@ public class TableTag extends BaseTag implements LocationAware
             }
             data.getSessionContext().put(tableId, table);
         }
+        invokeBody(output);
+        requireAttribute("data");
         ((TableAware) getParent()).handleTable(table);
     }
 

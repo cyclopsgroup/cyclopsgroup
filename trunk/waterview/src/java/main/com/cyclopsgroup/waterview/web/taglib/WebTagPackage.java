@@ -35,5 +35,6 @@ public class WebTagPackage extends TagPackage
         addTag("Column", ColumnTag.class);
         addTag("ColumnHeader", ColumnHeaderTag.class);
         addTag("ColumnBody", ColumnBodyTag.class);
+        addTag("CollectionTableData", CollectionTableDataTag.class);
     }
 }

@@ -3,7 +3,7 @@
     <table width="100%" border="0">
         <thead>
             <j:forEach var="column" items="${table.columns}">
-                <th align="left">${column.renderHeader()}</th>
+                <th align="left">${column.header}</th>
             </j:forEach>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                 </j:if>
                 <tr class="${rowClass}">
                     <j:forEach var="column" items="${table.columns}">
-                        <td>${column.renderBody(row)}</td>
+                        <td>${column.getBody(row)}</td>
                     </j:forEach>
                 </tr>
             </j:forEach>

@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
-	<ModulePackage alias="waterview"
-		name="com.cyclopsgroup.waterview.ui" />
+	<ModulePackage alias="waterview" name="com.cyclopsgroup.waterview.ui" />
 	<TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
-		<TagPackage
-			className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage" />
-		<TagPackage
-			className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage" />
-		<TagPackage
-			className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage" />
-		<TagPackage
-			className="com.cyclopsgroup.waterview.jsp.taglib.JspTagPackage" />
+		<TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage" />
+		<TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage" />
+		<TagPackage className="com.cyclopsgroup.waterview.velocity.taglib.VelocityTagPackage" />
+		<TagPackage className="com.cyclopsgroup.waterview.jsp.taglib.JspTagPackage" />
+		<TagPackage className="com.cyclopsgroup.waterview.web.taglib.WebTagPackage" />
 	</TagLibrary>
-	<Layout id="waterview.DefaultLayout"
-		description="Default Main Layout">
+	<Layout id="waterview.DefaultLayout" description="Default Main Layout">
 		<JellyLayout script="/waterview/DefaultLayout.jelly" />
 	</Layout>
-	<Frame id="waterview.DefaultDisplayFrame"
-		description="Default jelly frame">
+	<Frame id="waterview.DefaultDisplayFrame" description="Default jelly frame">
 		<JellyFrame script="/waterview/DisplayFrame.jelly" />
 	</Frame>
 </Waterview>
