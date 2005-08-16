@@ -33,47 +33,28 @@
             scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
         </developerConnection>
         <url>
-            http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/${pom.artifactId}
+            http://fisheye.cenqua.com/viewrep/cyclops-group/${pom.artifactId}
         </url>
     </repository>
     <mailingLists>
         <mailingList>
-            <name>Cyclops Group Member</name>
+            <name>Cyclops Group Mailing List</name>
             <subscribe>
-                http://lists.sourceforge.net/lists/listinfo/cyclops-group-member
+                http://groups-beta.google.com/group/cyclopsgroup
             </subscribe>
             <unsubscribe>
-                http://lists.sourceforge.net/lists/listinfo/cyclops-group-member
+                http://groups-beta.google.com/group/cyclopsgroup
             </unsubscribe>
             <archive>
-                http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-member
+                http://groups-beta.google.com/group/cyclopsgroup
             </archive>
         </mailingList>
-        <mailingList>
-            <name>Cyclops Group Develop</name>
-            <subscribe>
-                http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop
-            </subscribe>
-            <unsubscribe>
-                http://lists.sourceforge.net/lists/listinfo/cyclops-group-develop
-            </unsubscribe>
-            <archive>
-                http://sourceforge.net/mailarchive/forum.php?forum=cyclops-group-develop
-            </archive>
-        </mailingList>
-    </mailingLists>
+     </mailingLists>
     <developers>
         <developer>
             <name>Jiaqi Guo</name>
             <id>jiaqi</id>
             <email>jiaqi.guo@gmail.com</email>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>Daisy Zhao</name>
-            <id>daisy</id>
-            <email>kxz024000@utdallas.edu</email>
-            <organization>U.T. Dallas</organization>
             <timezone>-6</timezone>
         </developer>
     </developers>
