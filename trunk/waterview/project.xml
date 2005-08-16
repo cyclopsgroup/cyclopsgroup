@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-    <extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
+    <extend>${maven.repo.local}/clib/poms/cyclopsgroup-1.0.pom</extend>
     <pomVersion>3</pomVersion>
     <artifactId>waterview</artifactId>
     <name>waterview</name>

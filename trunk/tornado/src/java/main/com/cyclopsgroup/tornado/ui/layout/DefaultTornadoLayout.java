@@ -16,11 +16,11 @@
  */
 package com.cyclopsgroup.tornado.ui.layout;
 
-import com.cyclopsgroup.clib.lang.Context;
 import com.cyclopsgroup.tornado.components.navigator.Navigator;
 import com.cyclopsgroup.tornado.components.navigator.NavigatorManager;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.PageRuntime;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 public class DefaultTornadoLayout implements Module
 {
@@ -28,11 +28,12 @@ public class DefaultTornadoLayout implements Module
      * Overwrite or implement method execute()
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.PageRuntime, com.cyclopsgroup.clib.lang.Context)
      */
-    public void execute(PageRuntime run, Context ctx) throws Exception
+    public void execute(RuntimeData run, Context ctx) throws Exception
     {
         NavigatorManager nm = (NavigatorManager) run.getServiceManager()
                 .lookup(NavigatorManager.ROLE);
         Navigator navigator = nm.getNavigator();
         ctx.put("navigator", navigator);
     }
+
 }

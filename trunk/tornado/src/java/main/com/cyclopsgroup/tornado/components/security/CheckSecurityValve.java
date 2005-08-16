@@ -26,9 +26,9 @@ import com.cyclopsgroup.tornado.core.security.PageAsset;
 import com.cyclopsgroup.tornado.core.security.RuntimeUser;
 import com.cyclopsgroup.tornado.core.security.SecurityManager;
 import com.cyclopsgroup.waterview.AppendablePageRedirector;
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 public class CheckSecurityValve implements Valve, Configurable
 {
@@ -45,7 +45,7 @@ public class CheckSecurityValve implements Valve, Configurable
         loginPage = conf.getChild("login-page").getValue(DEFAULT_LOGIN_PAGE);
     }
 
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         SecurityManager securityManager = (SecurityManager) runtime

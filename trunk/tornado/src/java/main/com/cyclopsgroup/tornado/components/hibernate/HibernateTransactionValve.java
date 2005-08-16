@@ -19,13 +19,13 @@ package com.cyclopsgroup.tornado.components.hibernate;
 import org.hibernate.Transaction;
 
 import com.cyclopsgroup.tornado.core.HibernateFactory;
-import com.cyclopsgroup.waterview.PageRuntime;
-import com.cyclopsgroup.waterview.PipelineContext;
-import com.cyclopsgroup.waterview.Valve;
+import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Valve;
 
 public class HibernateTransactionValve implements Valve
 {
-    public void invoke(PageRuntime runtime, PipelineContext context)
+    public void invoke(RuntimeData runtime, PipelineContext context)
             throws Exception
     {
         HibernateFactory hf = (HibernateFactory) runtime.getServiceManager()
