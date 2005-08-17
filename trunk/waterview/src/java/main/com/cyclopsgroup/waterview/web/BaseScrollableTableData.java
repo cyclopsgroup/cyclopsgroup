@@ -36,6 +36,10 @@ public abstract class BaseScrollableTableData implements TableData, Scrollable
         }
     }
 
+    /**
+     * Overwrite or implement method getPageIndex()
+     * @see com.cyclopsgroup.waterview.web.Scrollable#getPageIndex()
+     */
     public int getPageIndex()
     {
         return pageIndex;
