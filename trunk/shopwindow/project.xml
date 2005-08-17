@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
     <extend>cyclopsgroup-1.0.pom</extend>
     <pomVersion>3</pomVersion>
     <id>shopwindow</id>
@@ -11,7 +12,7 @@
         <logo>/images/cyclopsgroup_logo.png</logo>
     </organization>
     <inceptionYear>2003</inceptionYear>
-    <shortDescription>Software makes things simple, not complicated</shortDescription>
+    <shortDescription>Simple software for real human</shortDescription>
     <url>www.cyclopsgroup.com</url>
     <siteDirectory>/var/www/www.cyclopsgroup.com/htdocs</siteDirectory>
     <developers>
@@ -24,16 +25,6 @@
             </roles>
             <timezone>-6</timezone>
         </developer>
-        <developer>
-            <name>Zhao, Xuying</name>
-            <id>daisy</id>
-            <email>kxz024000@utdallas.edu</email>
-            <organization>U.T. Dallas</organization>
-            <roles>
-                <role>Observer</role>
-            </roles>
-            <timezone>-6</timezone>
-        </developer>
     </developers>
-    <build/>
+    <build />
 </project>
