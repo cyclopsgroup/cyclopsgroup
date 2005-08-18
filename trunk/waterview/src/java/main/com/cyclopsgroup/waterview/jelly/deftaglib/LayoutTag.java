@@ -19,10 +19,8 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
@@ -33,11 +31,9 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 public class LayoutTag extends BaseTag
 {
 
-    private String description;
-
-    private String id;
-
     private Layout layout;
+
+    private String name;
 
     /**
      * Override or implement method of parent class or interface
@@ -47,40 +43,15 @@ public class LayoutTag extends BaseTag
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        requireAttribute("id");
-        if (StringUtils.isEmpty(getDescription()))
-        {
-            setDescription("Layout [" + getId() + "]");
-        }
+        requireAttribute("name");
+        requireParent(ThemeTag.class);
         invokeBody(output);
         if (getLayout() == null)
         {
             throw new JellyTagException(
                     "There must be a layout defined in layout tag");
         }
-        ModuleManager moduleManager = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        moduleManager.registerLayout(getId(), getLayout());
-    }
-
-    /**
-     * Getter method for description
-     *
-     * @return Returns the description.
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * Getter method for id
-     *
-     * @return Returns the id.
-     */
-    public String getId()
-    {
-        return id;
+        ((ThemeTag) getParent()).getTheme().setLayout(getName(), getLayout());
     }
 
     /**
@@ -94,23 +65,13 @@ public class LayoutTag extends BaseTag
     }
 
     /**
-     * Setter method for description
+     * Getter method for field name
      *
-     * @param description The description to set.
+     * @return Returns the name.
      */
-    public void setDescription(String description)
+    public String getName()
     {
-        this.description = description;
-    }
-
-    /**
-     * Setter method for id
-     *
-     * @param id The id to set.
-     */
-    public void setId(String id)
-    {
-        this.id = id;
+        return name;
     }
 
     /**
@@ -121,5 +82,15 @@ public class LayoutTag extends BaseTag
     public void setLayout(Layout layout)
     {
         this.layout = layout;
+    }
+
+    /**
+     * Setter method for field name
+     *
+     * @param name The name to set.
+     */
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }

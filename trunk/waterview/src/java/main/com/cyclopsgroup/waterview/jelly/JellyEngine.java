@@ -35,6 +35,7 @@ import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
@@ -44,6 +45,9 @@ import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.ThemeManager;
+import com.cyclopsgroup.waterview.spi.ThemeProvider;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.util.BaseTagLibrary;
 import com.cyclopsgroup.waterview.util.TagPackage;
@@ -54,7 +58,8 @@ import com.cyclopsgroup.waterview.util.TagPackage;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyEngine extends AbstractLogEnabled implements Initializable,
-        Contextualizable, Serviceable, DynaViewFactory, ActionResolver
+        Contextualizable, Serviceable, DynaViewFactory, ActionResolver,
+        ThemeProvider
 {
     /** Class name of definition tag package */
     private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
@@ -104,6 +109,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     private ServiceManager serviceManager;
 
     private Hashtable tagLibraries = new Hashtable();
+
+    private Hashtable themes = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
@@ -248,6 +255,27 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
+     * Overwrite or implement method getTheme()
+     *
+     * @see com.cyclopsgroup.waterview.spi.ThemeProvider#getTheme(java.lang.String)
+     */
+    public Theme getTheme(String themeName)
+    {
+        return (Theme) themes.get(themeName);
+    }
+
+    /**
+     * Overwrite or implement method getThemeNames()
+     *
+     * @see com.cyclopsgroup.waterview.spi.ThemeProvider#getThemeNames()
+     */
+    public String[] getThemeNames()
+    {
+        return (String[]) themes.keySet()
+                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
      * Init global context
      *
      * @throws Exception Throw it out
@@ -311,6 +339,16 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
+     * Register a theme
+     *
+     * @param theme Theme object
+     */
+    public void registerTheme(Theme theme)
+    {
+        themes.put(theme.getName(), theme);
+    }
+
+    /**
      * Overwrite or implement method resolveAction()
      *
      * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
@@ -343,5 +381,9 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         moduleManager.registerActionResolver(pattern, this);
 
         moduleManager.registerDynaViewFactory(pattern, this);
+
+        ThemeManager tm = (ThemeManager) serviceManager
+                .lookup(ThemeManager.ROLE);
+        tm.registerThemeProvider(this);
     }
 }
