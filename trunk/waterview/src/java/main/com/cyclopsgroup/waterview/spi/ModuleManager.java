@@ -40,40 +40,11 @@ public interface ModuleManager
     View createDynaView(String viewPath) throws Exception;
 
     /**
-     * Get default frame
-     *
-     * @return Frame object
-     */
-    Frame getDefaultFrame();
-
-    /**
-     * Get default frame id
-     *
-     * @return Frame id
-     */
-    String getDefaultFrameId();
-
-    /**
      * Get default layout id
      *
      * @return Default layout id
      */
     String getDefaultLayoutId();
-
-    /**
-     * Get registered frame
-     *
-     * @param frameId
-     * @return Frame object
-     */
-    Frame getFrame(String frameId);
-
-    /**
-     * Get id array of registered frames
-     *
-     * @return Frame id array
-     */
-    String[] getFrameIds();
 
     /**
      * Get layout by its id
@@ -109,14 +80,6 @@ public interface ModuleManager
     void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
 
     /**
-     * Register frame object
-     *
-     * @param frameId Frame ID
-     * @param frame Frame object
-     */
-    void registerFrame(String frameId, Frame frame);
-
-    /**
      * Register layout object into waterview system
      *
      * @param layoutId Layout id
@@ -149,13 +112,6 @@ public interface ModuleManager
      */
     void runModule(String modulePath, RuntimeData data, Context context)
             throws Exception;
-
-    /**
-     * Set default frame id
-     *
-     * @param frameId Frame id
-     */
-    void setDefaultFrameId(String frameId);
 
     /**
      * Set default layout id

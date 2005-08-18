@@ -14,57 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.deftaglib;
+package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.jelly.JellyFrameProxy;
-import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
- * Jelly layout definition tag
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Simply invoke the body
  */
-public class JellyFrameTag extends BaseTag
+public class DummyTag extends BaseTag
 {
-    private String script;
-
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method doTag()
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
+    protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        requireAttribute("script");
-        requireParent(FrameTag.class);
-        Frame frame = new JellyFrameProxy(getScript());
-        FrameTag frameTag = (FrameTag) getParent();
-        frameTag.setFrame(frame);
+        invokeBody(output);
     }
-
-    /**
-     * Getter method for script
-     *
-     * @return Returns the script.
-     */
-    public String getScript()
-    {
-        return script;
-    }
-
-    /**
-     * Setter method for script
-     *
-     * @param script The script to set.
-     */
-    public void setScript(String script)
-    {
-        this.script = script;
-    }
-
 }

@@ -11,7 +11,4 @@
 	<Layout id="waterview.DefaultLayout" description="Default Main Layout">
 		<JellyLayout script="/waterview/DefaultLayout.jelly" />
 	</Layout>
-	<Frame id="waterview.DefaultDisplayFrame" description="Default jelly frame">
-		<JellyFrame script="/waterview/DisplayFrame.jelly" />
-	</Frame>
 </Waterview>

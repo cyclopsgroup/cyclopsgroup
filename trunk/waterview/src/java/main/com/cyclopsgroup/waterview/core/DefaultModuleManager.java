@@ -42,7 +42,6 @@ import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.Frame;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
@@ -59,15 +58,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     private CacheManager cache;
 
-    private String defaultFrameId = "waterview.DefaultDisplayFrame";
-
     private String defaultLayoutId = "waterview.DefaultLayout";
 
     private String defaultPackageAlias = "waterview";
 
     private Hashtable dynaViewFactories = new Hashtable();
-
-    private Hashtable frames = new Hashtable();
 
     private Hashtable layouts = new Hashtable();
 
@@ -101,11 +96,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         if (layoutId != null)
         {
             setDefaultLayoutId(layoutId);
-        }
-        String frameId = conf.getChild("default-frame").getValue(null);
-        if (frameId != null)
-        {
-            setDefaultFrameId(frameId);
         }
         String defaultPackage = conf.getChild("default-package").getValue(null);
         if (defaultPackage != null)
@@ -143,52 +133,11 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultFrame()
-     */
-    public Frame getDefaultFrame()
-    {
-        return getFrame(getDefaultFrameId());
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultFrameId()
-     */
-    public String getDefaultFrameId()
-    {
-        return defaultFrameId;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayoutId()
      */
     public String getDefaultLayoutId()
     {
         return defaultLayoutId;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getFrame(java.lang.String)
-     */
-    public Frame getFrame(String frameId)
-    {
-        return (Frame) frames.get(frameId);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getFrameIds()
-     */
-    public String[] getFrameIds()
-    {
-        return (String[]) frames.keySet()
-                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -297,16 +246,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerFrame(java.lang.String, com.cyclopsgroup.waterview.spi.Frame)
-     */
-    public void registerFrame(String frameId, Frame frame)
-    {
-        frames.put(frameId, frame);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerLayout(java.lang.String, com.cyclopsgroup.waterview.spi.Layout)
      */
     public void registerLayout(String layoutId, Layout layout)
@@ -398,16 +337,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
         registerActionResolver(".+\\.action", this);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#setDefaultFrameId(java.lang.String)
-     */
-    public void setDefaultFrameId(String frameId)
-    {
-        defaultFrameId = frameId;
     }
 
     /**

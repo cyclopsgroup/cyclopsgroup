@@ -72,6 +72,12 @@
 				</valves>
 			</configuration>
 		</component>
+		<!-- Theme related components -->
+		<component>
+			<role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
+			<implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
+			<lifecycle-handler>avalon</lifecycle-handler>
+		</component>
 		<component>
 			<role>com.cyclopsgroup.waterview.WaterviewComponents</role>
 			<implementation>com.cyclopsgroup.waterview.util.ComponentGroup</implementation>

@@ -61,6 +61,8 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private boolean stopped;
 
+    private String themeName;
+
     private TimeZone timeZone = TimeZone.getDefault();
 
     /**
@@ -199,6 +201,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public String getSessionId()
     {
         return sessionId;
+    }
+
+    /**
+     * Overwrite or implement method getThemeName()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#getThemeName()
+     */
+    public String getThemeName()
+    {
+        return themeName;
     }
 
     /**
@@ -356,6 +368,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setSessionId(String sessionId)
     {
         this.sessionId = sessionId;
+    }
+
+    /**
+     * Setter method for field themeName
+     *
+     * @param themeName The themeName to set.
+     */
+    public void setThemeName(String themeName)
+    {
+        this.themeName = themeName;
     }
 
     /**

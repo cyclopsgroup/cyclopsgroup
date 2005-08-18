@@ -17,11 +17,15 @@
 package com.cyclopsgroup.waterview.core.valves;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -39,19 +43,47 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
     public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
-        Page page = (Page) data.getRequestContext().get(Page.NAME);
-        if (page == null)
-        {
-            page = Page.DEFAULT;
-        }
-        data.setOutputContentType("text/html");
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
 
         mm.runModule('/' + data.getPage().getPackageAlias() + "/page"
                 + data.getPage().getPath(), data, data.getRequestContext());
 
-        mm.getDefaultFrame().display(page, data);
+        if (data.isStopped())
+        {
+            return;
+        }
+
+        Page page = (Page) data.getRequestContext().get(Page.NAME);
+        if (page == null)
+        {
+            page = Page.DEFAULT;
+        }
+        data.setOutputContentType("text/html");
+        Layout layout = page.getLayout();
+        if (layout == null)
+        {
+            Theme theme = null;
+            ThemeManager themes = (ThemeManager) data.getServiceManager()
+                    .lookup(ThemeManager.ROLE);
+            if (StringUtils.isNotEmpty(data.getThemeName()))
+            {
+
+                theme = themes.getTheme(data.getThemeName());
+            }
+            if (theme == null)
+            {
+                theme = themes.getTheme(ThemeManager.DEFAULT_THEME);
+            }
+            if (theme == null)
+            {
+                throw new NullPointerException(
+                        "Theme is not property configured");
+            }
+            layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
+        }
+
+        layout.render(data, page);
         context.invokeNextValve(data);
         data.getOutput().flush();
     }

@@ -147,6 +147,13 @@ public interface RuntimeData
     String getSessionId();
 
     /**
+     * Get theme name
+     *
+     * @return Theme name
+     */
+    String getThemeName();
+
+    /**
      * Get time zone for current request
      * 
      * @return Time zone

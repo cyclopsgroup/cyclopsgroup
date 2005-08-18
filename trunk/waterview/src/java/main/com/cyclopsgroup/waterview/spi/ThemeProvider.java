@@ -16,24 +16,25 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RuntimeData;
-
 /**
- * Model to display full html page
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Provider of themes
  */
-public interface Frame
+public interface ThemeProvider
 {
-    /** Name in context */
-    String NAME = Frame.class.getName();
+    /**
+     * Get theme object
+     *
+     * @param themeName Theme name
+     * @return Theme object or null
+     */
+    Theme getTheme(String themeName);
 
     /**
-     * Display full page
+     * Get theme name array
      *
-     * @param page Page object
-     * @param runtime Runtime object
-     * @throws Exception Throw it out
+     * @return Theme name array
      */
-    void display(Page page, RuntimeData runtime) throws Exception;
+    String[] getThemeNames();
 }
