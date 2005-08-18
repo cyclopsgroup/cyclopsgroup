@@ -19,10 +19,12 @@ package com.cyclopsgroup.waterview.core.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
@@ -32,7 +34,7 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
  */
 public class SystemLayoutTag extends BaseTag
 {
-    private String id;
+    private String name;
 
     /**
      * Override or implement method of parent class or interface
@@ -42,40 +44,46 @@ public class SystemLayoutTag extends BaseTag
     public void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
-        requireAttribute("id");
+        requireAttribute("name");
         Page page = (Page) context.getVariable(Page.NAME);
         if (page == null)
         {
             throw new JellyTagException("JellyLayout must be in a page");
         }
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        Layout layout = mm.getLayout(getId());
+        ThemeManager tm = (ThemeManager) serviceManager
+                .lookup(ThemeManager.ROLE);
+        String themeName = getRuntimeData().getThemeName();
+        if (StringUtils.isEmpty(themeName))
+        {
+            themeName = ThemeManager.DEFAULT_THEME;
+        }
+        Theme theme = tm.getTheme(themeName);
+        Layout layout = theme.getLayout(getName());
         if (layout == null)
         {
-            throw new NullPointerException("Layout [" + getId()
+            throw new NullPointerException("Layout [" + getName()
                     + "] doesn't exist");
         }
         page.setLayout(layout);
     }
 
     /**
-     * Getter method for id
+     * Getter method for property name
      *
-     * @return Returns the id.
+     * @return Returns the name.
      */
-    public String getId()
+    public String getName()
     {
-        return id;
+        return name;
     }
 
     /**
-     * Setter method for id
+     * Setter method for property name
      *
-     * @param id The id to set.
+     * @param name The name to set.
      */
-    public void setId(String id)
+    public void setName(String name)
     {
-        this.id = id;
+        this.name = name;
     }
 }

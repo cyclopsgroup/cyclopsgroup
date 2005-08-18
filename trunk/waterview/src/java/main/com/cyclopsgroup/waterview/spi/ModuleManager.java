@@ -40,28 +40,6 @@ public interface ModuleManager
     View createDynaView(String viewPath) throws Exception;
 
     /**
-     * Get default layout id
-     *
-     * @return Default layout id
-     */
-    String getDefaultLayoutId();
-
-    /**
-     * Get layout by its id
-     *
-     * @param layoutId Layout id
-     * @return Layout object
-     */
-    Layout getLayout(String layoutId);
-
-    /**
-     * Get id array of registered layouts
-     *
-     * @return All available layout ids
-     */
-    String[] getLayoutIds();
-
-    /**
      * @param page
      * @return Path model
      */
@@ -78,14 +56,6 @@ public interface ModuleManager
      * @param viewFactory
      */
     void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
-
-    /**
-     * Register layout object into waterview system
-     *
-     * @param layoutId Layout id
-     * @param layout Layout object
-     */
-    void registerLayout(String layoutId, Layout layout);
 
     /**
      * @param alias
@@ -112,11 +82,4 @@ public interface ModuleManager
      */
     void runModule(String modulePath, RuntimeData data, Context context)
             throws Exception;
-
-    /**
-     * Set default layout id
-     *
-     * @param layoutId Layout id
-     */
-    void setDefaultLayoutId(String layoutId);
 }

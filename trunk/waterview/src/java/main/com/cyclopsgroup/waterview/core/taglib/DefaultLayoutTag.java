@@ -19,9 +19,11 @@ package com.cyclopsgroup.waterview.core.taglib;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 
 /**
@@ -44,8 +46,14 @@ public class DefaultLayoutTag extends BaseTag
         {
             throw new JellyTagException("JellyLayout must be in a page");
         }
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        page.setLayout(mm.getLayout(mm.getDefaultLayoutId()));
+        ThemeManager tm = (ThemeManager) serviceManager
+                .lookup(ThemeManager.ROLE);
+        String themeName = getRuntimeData().getThemeName();
+        if (StringUtils.isEmpty(themeName))
+        {
+            themeName = ThemeManager.DEFAULT_THEME;
+        }
+        Theme theme = tm.getTheme(themeName);
+        page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
     }
 }

@@ -42,6 +42,11 @@ public class DefaultTheme implements Theme
         setDescription("Theme [" + name + "]");
     }
 
+    /**
+     * Overwrite or implement method getDescription()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getDescription()
+     */
     public String getDescription()
     {
         return description;
@@ -57,6 +62,11 @@ public class DefaultTheme implements Theme
         return (Layout) layouts.get(layoutName);
     }
 
+    /**
+     * Overwrite or implement method getName()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getName()
+     */
     public String getName()
     {
         return name;

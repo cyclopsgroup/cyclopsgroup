@@ -36,5 +36,6 @@ public class DefinitionTagPackage extends TagPackage
         addTag("Layout", LayoutTag.class);
         addTag("JellyLayout", JellyLayoutTag.class);
         addTag("ModulePackage", ModulePackageTag.class);
+        addTag("Theme", ThemeTag.class);
     }
 }

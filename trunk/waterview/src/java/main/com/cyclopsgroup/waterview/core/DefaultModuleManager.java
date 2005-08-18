@@ -31,7 +31,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
@@ -42,7 +41,6 @@ import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -58,13 +56,9 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
 
     private CacheManager cache;
 
-    private String defaultLayoutId = "waterview.DefaultLayout";
-
     private String defaultPackageAlias = "waterview";
 
     private Hashtable dynaViewFactories = new Hashtable();
-
-    private Hashtable layouts = new Hashtable();
 
     private Hashtable packageNames = new Hashtable();
 
@@ -92,11 +86,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
-        String layoutId = conf.getChild("default-layout").getValue(null);
-        if (layoutId != null)
-        {
-            setDefaultLayoutId(layoutId);
-        }
         String defaultPackage = conf.getChild("default-package").getValue(null);
         if (defaultPackage != null)
         {
@@ -131,16 +120,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getDefaultLayoutId()
-     */
-    public String getDefaultLayoutId()
-    {
-        return defaultLayoutId;
-    }
-
-    /**
      * Get i18n instance
      *
      * @param path Module path
@@ -169,27 +148,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
             cache.put(this, key, loc);
         }
         return loc;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getLayout(java.lang.String)
-     */
-    public Layout getLayout(String layoutId)
-    {
-        return (Layout) layouts.get(layoutId);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getLayoutIds()
-     */
-    public String[] getLayoutIds()
-    {
-        return (String[]) layouts.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -241,16 +199,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         dynaViewFactories.put(pattern,
                 new CachedViewFactory(viewFactory, cache));
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerLayout(java.lang.String, com.cyclopsgroup.waterview.spi.Layout)
-     */
-    public void registerLayout(String layoutId, Layout layout)
-    {
-        layouts.put(layoutId, layout);
     }
 
     /**
@@ -337,15 +285,5 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     {
         cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
         registerActionResolver(".+\\.action", this);
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#setDefaultLayoutId(java.lang.String)
-     */
-    public void setDefaultLayoutId(String layoutId)
-    {
-        defaultLayoutId = layoutId;
     }
 }

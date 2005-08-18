@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<w:Dummy>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-	<meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview" />
-	<title>Waterview System: ${page}</title>
-	<link rel="stylesheet" type="text/css" media="all" href="${applicationBase}/style/waterview-base.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="${applicationBase}/style/waterview-style.css" />
-	<link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterview-print.css" />
-	<script language="javascript">
-		<![CDATA[
+<w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview" />
+    <title>Waterview System: ${page}</title>
+    <link rel="stylesheet" type="text/css" media="all" href="${applicationBase}/style/waterview-base.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${applicationBase}/style/waterview-style.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterview-print.css" />
+    <script language="javascript">
+        <![CDATA[
                 var blankGif="${applicationBase}/images/blank.gif";
             ]]>
-	</script>
-	<style type="text/css">
-		<![CDATA[
+    </script>
+    <style type="text/css">
+        <![CDATA[
             img {
                 behavior: url('${applicationBase}/style/pngbehavior.htc');
             }
         ]]>
-	</style>
+    </style>
 </w:Dummy>
