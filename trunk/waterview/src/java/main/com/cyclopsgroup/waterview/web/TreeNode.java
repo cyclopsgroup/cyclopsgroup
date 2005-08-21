@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import com.cyclopsgroup.waterview.ValueParser;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -25,6 +27,13 @@ public interface TreeNode
 {
     /** Empty array */
     TreeNode[] EMPTY_ARRAY = new TreeNode[0];
+
+    /**
+     * Get attributes of it
+     *
+     * @return Attributes object
+     */
+    ValueParser getAttributes();
 
     /**
      * Get children nodes

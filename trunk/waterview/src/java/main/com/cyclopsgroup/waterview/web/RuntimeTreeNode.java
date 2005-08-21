@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -30,7 +31,8 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public class RuntimeTreeNode implements TreeNode
 {
-    //public static final RuntimeTreeNode
+    /** Empty array */
+    public static final RuntimeTreeNode[] EMPTY_ARRAY = new RuntimeTreeNode[0];
 
     private Map children = ListOrderedMap.decorate(new HashMap());
 
@@ -65,6 +67,18 @@ public class RuntimeTreeNode implements TreeNode
     }
 
     /**
+     * Filter child nodes
+     *
+     * @param nodes
+     * @return Array of result
+     * @throws Exception
+     */
+    protected TreeNode[] doFilter(TreeNode[] nodes) throws Exception
+    {
+        return nodes;
+    }
+
+    /**
      * Expande this node
      * 
      * @param data RuntimeData
@@ -76,12 +90,31 @@ public class RuntimeTreeNode implements TreeNode
         {
             return;
         }
-
+        TreeNode[] childNodes = doFilter(node.getChildrenNodes());
+        for (int i = 0; i < childNodes.length; i++)
+        {
+            TreeNode node = childNodes[i];
+            RuntimeTreeNode n = new RuntimeTreeNode(this, node);
+            children.put(n.getNodeId(), n);
+        }
         expanded = true;
     }
 
-    //protected RuntimeTreeNode
+    /**
+     * Overwrite or implement method in RuntimeTreeNode
+     *
+     * @see com.cyclopsgroup.waterview.web.TreeNode#getAttributes()
+     */
+    public ValueParser getAttributes()
+    {
+        return node.getAttributes();
+    }
 
+    /**
+     * Overwrite or implement method in RuntimeTreeNode
+     *
+     * @see com.cyclopsgroup.waterview.web.TreeNode#getChildrenNodes()
+     */
     public TreeNode[] getChildrenNodes()
     {
         return (TreeNode[]) children.values().toArray(TreeNode.EMPTY_ARRAY);

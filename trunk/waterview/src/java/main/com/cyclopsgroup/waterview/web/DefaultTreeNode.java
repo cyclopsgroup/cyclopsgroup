@@ -21,6 +21,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.waterview.ValueParser;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -28,6 +30,8 @@ import org.apache.commons.collections.map.ListOrderedMap;
  */
 public class DefaultTreeNode implements TreeNode
 {
+    private ValueParser attributes;
+
     private Map children = ListOrderedMap.decorate(new HashMap());
 
     private String nodeId;
@@ -54,6 +58,16 @@ public class DefaultTreeNode implements TreeNode
     public void addChildNode(TreeNode child)
     {
         children.put(child.getNodeId(), child);
+    }
+
+    /**
+     * Overwrite or implement method in DefaultTreeNode
+     *
+     * @see com.cyclopsgroup.waterview.web.TreeNode#getAttributes()
+     */
+    public ValueParser getAttributes()
+    {
+        return attributes;
     }
 
     /**

@@ -16,10 +16,14 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashSet;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+
+import com.cyclopsgroup.waterview.util.TypeUtils;
 
 /**
  * Typed value parser
@@ -154,6 +158,73 @@ public abstract class ValueParser
         {
             return defaultValue;
         }
+    }
+
+    /**
+     * Get date value
+     *
+     * @param name Attribute name
+     * @return Date or null
+     */
+    public Date getDate(String name)
+    {
+        return getDate(name, (Date) null);
+    }
+
+    /**
+     * Get date with default value
+     *
+     * @param name Attribute name
+     * @param defaultValue Default date value
+     * @return Date object
+     */
+    public Date getDate(String name, Date defaultValue)
+    {
+        try
+        {
+            Date date = (Date) TypeUtils.convert(doGetValue(name), Date.class);
+            if (date == null)
+            {
+                date = defaultValue;
+            }
+            return date;
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Get date value with DateFormat
+     *
+     * @param name Attribute name
+     * @param defaultValue Default date value
+     * @param format DateFormat
+     * @return Date object
+     */
+    public Date getDate(String name, Date defaultValue, DateFormat format)
+    {
+        try
+        {
+            return format.parse(doGetValue(name));
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Get date value with DateFormat
+     *
+     * @param name Attribute name
+     * @param format Date format
+     * @return Date object
+     */
+    public Date getDate(String name, DateFormat format)
+    {
+        return getDate(name, null, format);
     }
 
     /**
