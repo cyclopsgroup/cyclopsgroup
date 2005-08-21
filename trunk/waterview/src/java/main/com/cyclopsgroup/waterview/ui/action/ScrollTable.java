@@ -7,8 +7,6 @@
  */
 package com.cyclopsgroup.waterview.ui.action;
 
-import javax.swing.Scrollable;
-
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;

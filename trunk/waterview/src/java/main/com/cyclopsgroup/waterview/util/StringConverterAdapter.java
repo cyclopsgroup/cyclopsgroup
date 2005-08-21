@@ -12,6 +12,11 @@ import java.util.Date;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.StringConverter;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Adapter to do backward conversion in commons-beanutils converter
+ */
 class StringConverterAdapter implements Converter
 {
     private StringConverter converter = new StringConverter();

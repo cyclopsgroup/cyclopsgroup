@@ -16,10 +16,17 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Tree utils
+ */
 public final class TreeUtils
 {
-    public static class NodeRow {
-        private TreeNode node;
+    public static class NodeRow
+    {
         private int depth;
+
+        private TreeNode node;
     }
 }

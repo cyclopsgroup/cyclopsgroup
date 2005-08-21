@@ -18,15 +18,41 @@ package com.cyclopsgroup.waterview.web;
 
 import org.apache.commons.lang.enums.Enum;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Column sorting status
+ */
 public final class ColumnSort extends Enum
 {
-   public static ColumnSort DISABLED = new ColumnSort("disabled");
-   
-   public static ColumnSort DESC = new ColumnSort("desc");
-   
-   public static ColumnSort ASC = new ColumnSort("asc");
-   
-   public static ColumnSort UNSORTED = new ColumnSort("unsorted");
+    /** Ascendingly sorted */
+    public static ColumnSort ASC = new ColumnSort("asc");
+
+    /** Descendingly sorted */
+    public static ColumnSort DESC = new ColumnSort("desc");
+
+    /** Sorting is disabled */
+    public static ColumnSort DISABLED = new ColumnSort("disabled");
+
+    /** Sortable but not sorted */
+    public static ColumnSort UNSORTED = new ColumnSort("unsorted");
+
+    /**
+     * Value of a given string
+     *
+     * @param value String value
+     * @return ColumnSort object
+     */
+    public static ColumnSort valueOf(String value)
+    {
+        ColumnSort sort = (ColumnSort) getEnum(ColumnSort.class, value);
+        if (sort == null)
+        {
+            throw new IllegalArgumentException(value
+                    + " is not a legal column sort option");
+        }
+        return sort;
+    }
 
     /**
      * Constructor for class ColumnSort
@@ -37,20 +63,14 @@ public final class ColumnSort extends Enum
     {
         super(name);
     }
-    
-    public static ColumnSort valueOf(String value)
-    {
-        ColumnSort sort= (ColumnSort) getEnum(ColumnSort.class, value);
-        if(sort == null)
-        {
-            throw new IllegalArgumentException(value + " is not a legal column sort option");
-        }
-        return sort;
-    }
-    
+
+    /**
+     * Overwrite or implement method toString()
+     *
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return getName();
     }
-
 }

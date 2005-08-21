@@ -25,16 +25,16 @@ public class Column
 {
     /** Empty column array */
     public static final Column[] EMPTY_ARRAY = new Column[0];
-    
-    private String name;
-    
-    private String value;
-    
+
     private ColumnDisplay display = ColumnDisplay.OPTIONAL;
-    
+
+    private String name;
+
     private ColumnSort sort = ColumnSort.DISABLED;
-    
+
     private Class type;
+
+    private String value;
 
     /**
      * Constructor for class Column
@@ -48,43 +48,83 @@ public class Column
         this.type = type;
     }
 
+    /**
+     * Get display option of this column
+     *
+     * @return Dispaly option of column
+     */
     public ColumnDisplay getDisplay()
     {
         return display;
     }
 
-    public void setDisplay(ColumnDisplay display)
-    {
-        this.display = display;
-    }
-
-    public ColumnSort getSort()
-    {
-        return sort;
-    }
-
-    public void setSort(ColumnSort sort)
-    {
-        this.sort = sort;
-    }
-
-    public String getValue()
-    {
-        return value;
-    }
-
-    public void setValue(String value)
-    {
-        this.value = value;
-    }
-
+    /**
+     * Get column name
+     *
+     * @return Name of the column
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Get sort option
+     *
+     * @return Sort option
+     */
+    public ColumnSort getSort()
+    {
+        return sort;
+    }
+
+    /**
+     * Get column type
+     *
+     * @return Type of column
+     */
     public Class getType()
     {
         return type;
+    }
+
+    /**
+     * Get value
+     *
+     * @return String value
+     */
+    public String getValue()
+    {
+        return value;
+    }
+
+    /**
+     * Set display option of column
+     *
+     * @param display Dispaly option to set
+     */
+    public void setDisplay(ColumnDisplay display)
+    {
+        this.display = display;
+    }
+
+    /**
+     * Set sort option
+     *
+     * @param sort Sort option
+     */
+    public void setSort(ColumnSort sort)
+    {
+        this.sort = sort;
+    }
+
+    /**
+     * Set value
+     *
+     * @param value Value to set
+     */
+    public void setValue(String value)
+    {
+        this.value = value;
     }
 }

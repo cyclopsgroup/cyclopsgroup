@@ -13,10 +13,15 @@ import java.util.Date;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Date commons beanutils converter
+ */
 class DateConverter implements Converter
 {
-    static final SimpleDateFormat FORMAT = new SimpleDateFormat(
-            "MM/dd/yyyy");
+    /** Date format to format date type */
+    static final SimpleDateFormat FORMAT = new SimpleDateFormat("MM/dd/yyyy");
 
     /**
      * Override method DateConverter in supper class
