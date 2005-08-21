@@ -135,31 +135,61 @@ public class ColumnTag extends BaseTag
         this.sort = sort;
     }
 
+    /**
+     * Get title of the column
+     *
+     * @return Title of the column
+     */
     public String getTitle()
     {
         return title;
     }
 
+    /**
+     * Set title of column
+     *
+     * @param title Title of the column
+     */
     public void setTitle(String title)
     {
         this.title = title;
     }
 
+    /**
+     * Get value of the column
+     *
+     * @return Value of the column
+     */
     public String getValue()
     {
         return value;
     }
 
+    /**
+     * Set value of the column
+     *
+     * @param value Value of the column
+     */
     public void setValue(String value)
     {
         this.value = value;
     }
 
+    /**
+     * TODO Add java doc
+     *
+     * @return Type of column
+     */
     public String getType()
     {
         return type;
     }
 
+    /**
+     * TODO Add java doc
+     *
+     * @param type Type of the column
+     */
     public void setType(String type)
     {
         this.type = type;
