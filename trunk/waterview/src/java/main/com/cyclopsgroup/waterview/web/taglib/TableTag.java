@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import java.util.HashMap;
+
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.XMLOutput;
@@ -23,8 +25,6 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
 import com.cyclopsgroup.waterview.web.Table;
-import com.cyclopsgroup.waterview.web.TableAware;
-import com.cyclopsgroup.waterview.web.TableData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,42 +33,72 @@ import com.cyclopsgroup.waterview.web.TableData;
  */
 public class TableTag extends BaseTag implements LocationAware
 {
-    private TableData data;
-
     private Table table;
 
     private String var;
 
+    private boolean tableNew = false;
+
+    private HashMap columnTags;
+
+    /**
+     * Overwrite or implement method in TableTag
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     */
     protected void doTag(ServiceManager serviceManager, XMLOutput output)
             throws Exception
     {
         requireAttribute("var");
         requireAttribute("name");
-        requireParent(TableAware.class);
-        String tableId = "wt_" + getUniqueTagId();
+        requireParent(TableControlTag.class);
+        String tableId = "table/" + getUniqueTagId() + "/" + getName();
         RuntimeData data = getRuntimeData();
         table = (Table) data.getSessionContext().get(tableId);
+        tableNew = table == null;
         if (table == null)
         {
             table = new Table(tableId);
-            invokeBody(output);
-            if (getData() != null)
-            {
-                table.setData(getData());
-            }
             data.getSessionContext().put(tableId, table);
         }
+        columnTags = new HashMap();
         invokeBody(output);
-        requireAttribute("data");
-        ((TableAware) getParent()).handleTable(table);
+        ((TableControlTag) getParent()).setTableTag(this);
     }
 
     /**
-     * @return Returns the data.
+     * Add column tag
+     *
+     * @param columnTag Column tag
      */
-    public TableData getData()
+    public void addColumnTag(ColumnTag columnTag)
     {
-        return data;
+        columnTags.put(columnTag.getName(), columnTag);
+        if (tableNew)
+        {
+            getTable().addColumn(columnTag.getColumn());
+        }
+    }
+
+    /**
+     * Get column tag
+     *
+     * @param columnName Name of the column
+     * @return ColumnTag object
+     */
+    public ColumnTag getColumnTag(String columnName)
+    {
+        return (ColumnTag) columnTags.get(columnName);
+    }
+
+    /**
+     * Is the table new created
+     *
+     * @return True if table is new
+     */
+    public boolean isTableNew()
+    {
+        return tableNew;
     }
 
     /**
@@ -98,14 +128,6 @@ public class TableTag extends BaseTag implements LocationAware
     }
 
     /**
-     * @param data The data to set.
-     */
-    public void setData(TableData data)
-    {
-        this.data = data;
-    }
-
-    /**
      * Setter method for field name
      *
      * @param name The name to set.
@@ -113,14 +135,6 @@ public class TableTag extends BaseTag implements LocationAware
     public void setName(String name)
     {
         setTagId(name);
-    }
-
-    /**
-     * @param table The table to set.
-     */
-    public void setTable(Table table)
-    {
-        this.table = table;
     }
 
     /**

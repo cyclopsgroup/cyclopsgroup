@@ -14,13 +14,28 @@ import java.util.Iterator;
  *
  * Table data 
  */
-public interface TableData
+public interface TabularData
 {
     /**
      * Open iterator of rows
      *
+     * @param table Table to show this data
      * @return Iterator of rows
      * @throws Exception Just throw it out
      */
-    Iterator openIterator() throws Exception;
+    Iterator openIterator(Table table) throws Exception;
+    
+    /**
+     * If the data is countable
+     * 
+     * @return True if it's countable
+     */
+    boolean isCountable();
+    
+    /**
+     * Get size of the whole data
+     *
+     * @return Size of data or -1 if data is not countable
+     */
+    int getSize();
 }

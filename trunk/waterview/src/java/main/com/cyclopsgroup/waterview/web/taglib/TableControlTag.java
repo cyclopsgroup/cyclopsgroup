@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2005 Cyclops Group Community
+ * Copyright 2002-2004 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.web;
+package com.cyclopsgroup.waterview.web.taglib;
+
+import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Interface which is aware of Table object
+ *
+ * Tag that can contain a table and data
  */
-public interface TableAware
+public interface TableControlTag
 {
     /**
-     * Handle table object
+     * Set table tag
      *
-     * @param table Table object
-     * @throws Exception Throw it out
+     * @param tableTag TableTag to set
      */
-    void handleTable(Table table) throws Exception;
+    void setTableTag(TableTag tableTag);
+
+    /**
+     * Set tabular data
+     *
+     * @param tabularData Tabular data to set
+     */
+    void setTabularData(TabularData tabularData);
 }

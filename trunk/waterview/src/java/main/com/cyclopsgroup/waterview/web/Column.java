@@ -21,46 +21,70 @@ package com.cyclopsgroup.waterview.web;
  * 
  * Column model
  */
-public interface Column
+public class Column
 {
     /** Empty column array */
-    Column[] EMPTY_ARRAY = new Column[0];
+    public static final Column[] EMPTY_ARRAY = new Column[0];
+    
+    private String name;
+    
+    private String value;
+    
+    private ColumnDisplay display = ColumnDisplay.OPTIONAL;
+    
+    private ColumnSort sort = ColumnSort.DISABLED;
+    
+    private Class type;
 
     /**
-     * Get cell body
+     * Constructor for class Column
      *
-     * @param row Row object
-     * @return Body content string
-     * @throws Exception Throw it out
+     * @param name
+     * @param type
      */
-    String getBody(Object row) throws Exception;
+    public Column(String name, Class type)
+    {
+        this.name = name;
+        this.type = type;
+    }
 
-    /**
-     * Get display policy
-     *
-     * @return Display policy
-     */
-    ColumnDisplayPolicy getDisplayPolicy();
+    public ColumnDisplay getDisplay()
+    {
+        return display;
+    }
 
-    /**
-     * Get header
-     *
-     * @return Header content
-     * @throws Exception
-     */
-    String getHeader() throws Exception;
+    public void setDisplay(ColumnDisplay display)
+    {
+        this.display = display;
+    }
 
-    /**
-     * Get unique name of column
-     *
-     * @return Unique name of column
-     */
-    String getName();
+    public ColumnSort getSort()
+    {
+        return sort;
+    }
 
-    /**
-     * Is column sortable
-     *
-     * @return True if column is sortable
-     */
-    boolean isSortable();
+    public void setSort(ColumnSort sort)
+    {
+        this.sort = sort;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public Class getType()
+    {
+        return type;
+    }
 }

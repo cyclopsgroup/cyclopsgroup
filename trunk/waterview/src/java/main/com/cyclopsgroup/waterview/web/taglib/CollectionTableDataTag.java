@@ -16,25 +16,23 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.collections.iterators.ArrayIterator;
-import org.apache.commons.collections.iterators.EnumerationIterator;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
-import com.cyclopsgroup.waterview.web.TableData;
+import com.cyclopsgroup.waterview.util.TypeUtils;
+import com.cyclopsgroup.waterview.web.CollectionTabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Table data tag accepting a collection, iterator, enumeration or array
  */
-public class CollectionTableDataTag extends BaseTag implements TableData
+public class CollectionTableDataTag extends BaseTag
 {
     private Object items;
 
@@ -47,9 +45,11 @@ public class CollectionTableDataTag extends BaseTag implements TableData
             throws Exception
     {
         requireAttribute("items");
-        requireParent(TableTag.class);
+        requireParent(TableControlTag.class);
 
-        ((TableTag) getParent()).setData(this);
+        List list = new ArrayList();
+        CollectionUtils.addAll(list, TypeUtils.iterate(getItems()));
+        ((TableControlTag) getParent()).setTabularData(new CollectionTabularData(list));
     }
 
     /**
@@ -63,35 +63,6 @@ public class CollectionTableDataTag extends BaseTag implements TableData
     }
 
     /**
-     * Overwrite or implement method openIterator()
-     *
-     * @see com.cyclopsgroup.waterview.web.TableData#openIterator()
-     */
-    public Iterator openIterator() throws Exception
-    {
-        if (getItems() instanceof Collection)
-        {
-            return ((Collection) getItems()).iterator();
-        }
-        else if (getItems() instanceof Iterator)
-        {
-            return (Iterator) getItems();
-        }
-        else if (getItems() instanceof Enumeration)
-        {
-            return new EnumerationIterator((Enumeration) getItems());
-        }
-        else if (getItems() instanceof Object[])
-        {
-            return new ArrayIterator((Object[]) getItems());
-        }
-        else
-        {
-            return Collections.EMPTY_LIST.iterator();
-        }
-    }
-
-    /**
      * Setter method for field items
      *
      * @param items The items to set.
@@ -100,5 +71,4 @@ public class CollectionTableDataTag extends BaseTag implements TableData
     {
         this.items = items;
     }
-
 }

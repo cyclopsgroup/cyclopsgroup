@@ -7,10 +7,11 @@
  */
 package com.cyclopsgroup.waterview.ui.action;
 
+import javax.swing.Scrollable;
+
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.web.Scrollable;
 import com.cyclopsgroup.waterview.web.Table;
 
 /**
@@ -35,15 +36,15 @@ public class ScrollTable implements Module
             throw new IllegalArgumentException("table_id is missing");
         }
         Table table = (Table) data.getSessionContext().get(tableId);
-        if (table == null)
+        if (table != null)
         {
-            return;
-        }
-        int pageIndex = data.getRequestParameters().getInt("page_index", -1);
-        if (pageIndex != -1)
-        {
-            Scrollable s = (Scrollable) table.getData();
-            s.setPageIndex(pageIndex);
+
+            int pageIndex = data.getRequestParameters()
+                    .getInt("page_index", -1);
+            if (pageIndex != -1)
+            {
+                table.setPageIndex(pageIndex);
+            }
         }
         String url = data.getRequestParameters().getString("url", null);
         if (url == null)

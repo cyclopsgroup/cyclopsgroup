@@ -31,9 +31,29 @@ public class Table
 {
     private Map columns = ListOrderedMap.decorate(new HashMap());
 
-    private TableData data;
-
     private String id;
+    
+    private int pageIndex = 0;
+
+    /**
+     * Get page index
+     *
+     * @return Page index
+     */
+    public int getPageIndex()
+    {
+        return pageIndex;
+    }
+
+    /**
+     * Set page index
+     *
+     * @param pageIndex Page index
+     */
+    public void setPageIndex(int pageIndex)
+    {
+        this.pageIndex = pageIndex;
+    }
 
     /**
      * Constructor for class Table
@@ -88,36 +108,10 @@ public class Table
     }
 
     /**
-     * @return Returns the data.
-     */
-    public TableData getData()
-    {
-        return data;
-    }
-
-    /**
      * @return Returns the id.
      */
     public String getId()
     {
         return id;
-    }
-
-    /**
-     * If the data source is scrollable
-     *
-     * @return Scrollable or not
-     */
-    public boolean isScrollable()
-    {
-        return (getData() instanceof Scrollable);
-    }
-
-    /**
-     * @param data The data to set.
-     */
-    public void setData(TableData data)
-    {
-        this.data = data;
     }
 }

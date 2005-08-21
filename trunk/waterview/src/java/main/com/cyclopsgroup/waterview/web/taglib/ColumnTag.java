@@ -16,35 +16,46 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import java.io.StringWriter;
-
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.util.TypeUtils;
 import com.cyclopsgroup.waterview.web.Column;
-import com.cyclopsgroup.waterview.web.ColumnDisplayPolicy;
+import com.cyclopsgroup.waterview.web.ColumnDisplay;
+import com.cyclopsgroup.waterview.web.ColumnSort;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Column tag
  */
-public class ColumnTag extends BaseTag implements Column
+public class ColumnTag extends BaseTag
 {
-    private Script bodyScript;
+    private String display = ColumnDisplay.OPTIONAL.getName();
 
-    private String display = ColumnDisplayPolicy.OPTIONAL.getName();
-
-    private Script headerScript;
+    private String sort = ColumnSort.DISABLED.getName();
 
     private String name;
 
-    private boolean sortable;
+    private String type = "string";
+
+    private String value = StringUtils.EMPTY;
+
+    private String title = StringUtils.EMPTY;
+
+    private Column column;
+
+    /**
+     * Get column object
+     *
+     * @return Column object
+     */
+    public Column getColumn()
+    {
+        return column;
+    }
 
     /**
      * Overwrite or implement method doTag()
@@ -57,31 +68,15 @@ public class ColumnTag extends BaseTag implements Column
         requireAttribute("name");
         requireAttribute("display");
         requireParent(TableTag.class);
-
-        invokeBody(output);
-
-        ((TableTag) getParent()).getTable().addColumn(this);
-    }
-
-    /**
-     * Overwrite or implement method getBody()
-     *
-     * @see com.cyclopsgroup.waterview.web.Column#getBody(java.lang.Object)
-     */
-    public String getBody(Object row) throws Exception
-    {
-        String rowName = ((TableTag) getParent()).getVar();
-        JellyContext jc = new JellyContext(getContext());
-        jc.setVariable(rowName, row);
-        return runScript(getBodyScript(), jc);
-    }
-
-    /**
-     * @return Returns the bodyScript.
-     */
-    public Script getBodyScript()
-    {
-        return bodyScript;
+        if (((TableTag) getParent()).isTableNew())
+        {
+            Class columnType = TypeUtils.getType(getType());
+            column = new Column(getName(), columnType);
+            column.setDisplay(ColumnDisplay.valueOf(getDisplay()));
+            column.setSort(ColumnSort.valueOf(getSort()));
+            column.setValue(getValue());
+        }
+        ((TableTag) getParent()).addColumnTag(this);
     }
 
     /**
@@ -95,72 +90,11 @@ public class ColumnTag extends BaseTag implements Column
     }
 
     /**
-     * Overwrite or implement method getDisplayPolicy()
-     *
-     * @see com.cyclopsgroup.waterview.web.Column#getDisplayPolicy()
-     */
-    public ColumnDisplayPolicy getDisplayPolicy()
-    {
-        ColumnDisplayPolicy policy = ColumnDisplayPolicy.valueOf(getDisplay());
-        if (policy == null)
-        {
-            policy = ColumnDisplayPolicy.OPTIONAL;
-        }
-        return policy;
-    }
-
-    /**
-     * Overwrite or implement method getHeader()
-     *
-     * @see com.cyclopsgroup.waterview.web.Column#getHeader()
-     */
-    public String getHeader() throws JellyTagException
-    {
-        return runScript(getHeaderScript(), getContext());
-    }
-
-    /**
-     * @return Returns the titleScript.
-     */
-    public Script getHeaderScript()
-    {
-        return headerScript;
-    }
-
-    /**
      * @return Returns the name.
      */
     public String getName()
     {
         return name;
-    }
-
-    /**
-     * @return Returns the sortable.
-     */
-    public boolean isSortable()
-    {
-        return sortable;
-    }
-
-    private String runScript(Script script, JellyContext ctx)
-            throws JellyTagException
-    {
-        if (script == null)
-        {
-            return StringUtils.EMPTY;
-        }
-        StringWriter sw = new StringWriter();
-        script.run(ctx, XMLOutput.createXMLOutput(sw));
-        return sw.toString();
-    }
-
-    /**
-     * @param bodyScript The bodyScript to set.
-     */
-    public void setBodyScript(Script bodyScript)
-    {
-        this.bodyScript = bodyScript;
     }
 
     /**
@@ -174,14 +108,6 @@ public class ColumnTag extends BaseTag implements Column
     }
 
     /**
-     * @param titleScript The titleScript to set.
-     */
-    public void setHeaderScript(Script titleScript)
-    {
-        this.headerScript = titleScript;
-    }
-
-    /**
      * @param name The name to set.
      */
     public void setName(String name)
@@ -190,10 +116,52 @@ public class ColumnTag extends BaseTag implements Column
     }
 
     /**
-     * @param sortable The sortable to set.
+     * Get sort option
+     *
+     * @return Sort option
      */
-    public void setSortable(boolean sortable)
+    public String getSort()
     {
-        this.sortable = sortable;
+        return sort;
+    }
+
+    /**
+     * Set sort option
+     *
+     * @param sort Sort option to set
+     */
+    public void setSort(String sort)
+    {
+        this.sort = sort;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
     }
 }

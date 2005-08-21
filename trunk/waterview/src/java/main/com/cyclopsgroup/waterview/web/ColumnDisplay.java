@@ -23,25 +23,23 @@ import org.apache.commons.lang.enums.Enum;
  * 
  * Display policy for column
  */
-public final class ColumnDisplayPolicy extends Enum
+public final class ColumnDisplay extends Enum
 {
     /**
      * Forced to display
      */
-    public static ColumnDisplayPolicy FORCED = new ColumnDisplayPolicy("forced");
+    public static ColumnDisplay FORCED = new ColumnDisplay("forced");
 
     /**
      * Optionally displayed
      */
-    public static ColumnDisplayPolicy HIDDEN = new ColumnDisplayPolicy("hidden");
+    public static ColumnDisplay HIDDEN = new ColumnDisplay("hidden");
 
     /**
      * Optional hidden
      */
-    public static ColumnDisplayPolicy OPTIONAL = new ColumnDisplayPolicy(
+    public static ColumnDisplay OPTIONAL = new ColumnDisplay(
             "optional");
-
-    private static final long serialVersionUID = 508885945429329982L;
 
     /**
      * Get instance from a string
@@ -49,13 +47,23 @@ public final class ColumnDisplayPolicy extends Enum
      * @param value String value
      * @return Instance or null
      */
-    public static ColumnDisplayPolicy valueOf(String value)
+    public static ColumnDisplay valueOf(String value)
     {
-        return (ColumnDisplayPolicy) getEnum(ColumnDisplayPolicy.class, value);
+        ColumnDisplay ret= (ColumnDisplay) getEnum(ColumnDisplay.class, value);
+        if(ret == null)
+        {
+            throw new IllegalArgumentException(value + " is not a legal display option");
+        }
+        return ret;
     }
 
-    private ColumnDisplayPolicy(String value)
+    private ColumnDisplay(String value)
     {
         super(value);
+    }
+    
+    public String toString()
+    {
+        return getName();
     }
 }

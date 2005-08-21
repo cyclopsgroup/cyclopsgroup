@@ -33,8 +33,6 @@ public class WebTagPackage extends TagPackage
         addTag("JellyTableControl", JellyTableControlTag.class);
         addTag("Table", TableTag.class);
         addTag("Column", ColumnTag.class);
-        addTag("ColumnHeader", ColumnHeaderTag.class);
-        addTag("ColumnBody", ColumnBodyTag.class);
         addTag("CollectionTableData", CollectionTableDataTag.class);
     }
 }
