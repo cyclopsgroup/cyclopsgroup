@@ -38,8 +38,7 @@ public final class ColumnDisplay extends Enum
     /**
      * Optional hidden
      */
-    public static ColumnDisplay OPTIONAL = new ColumnDisplay(
-            "optional");
+    public static ColumnDisplay OPTIONAL = new ColumnDisplay("optional");
 
     /**
      * Get instance from a string
@@ -49,10 +48,11 @@ public final class ColumnDisplay extends Enum
      */
     public static ColumnDisplay valueOf(String value)
     {
-        ColumnDisplay ret= (ColumnDisplay) getEnum(ColumnDisplay.class, value);
-        if(ret == null)
+        ColumnDisplay ret = (ColumnDisplay) getEnum(ColumnDisplay.class, value);
+        if (ret == null)
         {
-            throw new IllegalArgumentException(value + " is not a legal display option");
+            throw new IllegalArgumentException(value
+                    + " is not a legal display option");
         }
         return ret;
     }
@@ -61,7 +61,12 @@ public final class ColumnDisplay extends Enum
     {
         super(value);
     }
-    
+
+    /**
+     * Overwrite or implement method toString()
+     *
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return getName();
