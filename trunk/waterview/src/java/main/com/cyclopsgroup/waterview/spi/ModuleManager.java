@@ -47,12 +47,6 @@ public interface ModuleManager
 
     /**
      * @param pattern
-     * @param actionResolver
-     */
-    void registerActionResolver(String pattern, ActionResolver actionResolver);
-
-    /**
-     * @param pattern
      * @param viewFactory
      */
     void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
@@ -62,15 +56,6 @@ public interface ModuleManager
      * @param packageName
      */
     void registerPackage(String alias, String packageName);
-
-    /**
-     * Run action
-     *
-     * @param action
-     * @param data
-     * @throws Exception
-     */
-    void runAction(String action, RuntimeData data) throws Exception;
 
     /**
      * Run module

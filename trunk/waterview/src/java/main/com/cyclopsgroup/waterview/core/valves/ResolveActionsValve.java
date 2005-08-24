@@ -16,16 +16,15 @@
  */
 package com.cyclopsgroup.waterview.core.valves;
 
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -38,13 +37,6 @@ import com.cyclopsgroup.waterview.spi.Valve;
 public class ResolveActionsValve extends AbstractLogEnabled implements Valve
 {
     /**
-     * Role of this component
-     */
-    public static final String ROLE = ResolveActionsValve.class.getName();
-
-    private Map actionResolvers = ListOrderedMap.decorate(new Hashtable());
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
@@ -52,25 +44,57 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
     public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
+        List actions = data.getActions();
+        if (actions == null || actions.isEmpty())
+        {
+            context.invokeNextValve(data);
+            return;
+        }
+
+        DefaultActionContext actionContext = new DefaultActionContext(data);
+
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
                 ModuleManager.ROLE);
-        for (Iterator i = data.getActions().iterator(); i.hasNext();)
+        try
         {
-            String actionName = (String) i.next();
-            Path path = mm.parsePath(actionName);
-            mm.runAction(path.getFullPath(), data);
+            for (Iterator i = actions.iterator(); i.hasNext();)
+            {
+                String actionName = (String) i.next();
+                Path path = mm.parsePath(actionName);
+                String className = path.getPackage()
+                        + path.getPathWithoutExtension().replace('/', '.');
+                Action action = null;
+                try
+                {
+                    action = (Action) Class.forName(className).newInstance();
+                }
+                catch (Exception ignored)
+                {
+                    //do nothing
+                }
+                if (action != null)
+                {
+                    action.execute(data, actionContext);
+                }
+            }
         }
-        context.invokeNextValve(data);
-    }
+        catch (Exception e)
+        {
+            actionContext.fail("Action error", e);
+        }
 
-    /**
-     * Register an action resolver
-     *
-     * @param pattern Action pattern
-     * @param resolver Resolver object
-     */
-    public void registerActionResolver(String pattern, ActionResolver resolver)
-    {
-        actionResolvers.put(pattern, resolver);
+        if (actionContext.isFailed())
+        {
+            data.getRequestContext().put(ActionContext.FAIL_MESSAGE,
+                    actionContext.getFailMessage());
+            data.getRequestContext().put(ActionContext.FAIL_CAUSE,
+                    actionContext.getFailCause());
+            data.setPage("/Error.jelly");
+            context.invokeNextValve(data);
+        }
+        else
+        {
+            data.setRedirectUrl(actionContext.getTargetUrl());
+        }
     }
 }

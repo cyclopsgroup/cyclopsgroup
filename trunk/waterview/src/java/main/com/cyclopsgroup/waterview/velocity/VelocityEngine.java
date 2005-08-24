@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.velocity;
 
-import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.Properties;
 
@@ -33,9 +32,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.MessageView;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -47,7 +44,7 @@ import com.cyclopsgroup.waterview.spi.View;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
-        DynaViewFactory, ActionResolver, Initializable, Contextualizable
+        DynaViewFactory, Initializable, Contextualizable
 {
     /** Role name of this component */
     public static final String ROLE = VelocityEngine.class.getName();
@@ -145,22 +142,6 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
     }
 
     /**
-     * Overwrite or implement method resolveAction()
-     *
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public void resolveAction(Path path, RuntimeData runtime) throws Exception
-    {
-        Template template = getTemplate(path.getPackage(), path.getPath());
-        if (template != null)
-        {
-            VelocityContextAdapter vc = new VelocityContextAdapter(runtime
-                    .getRequestContext());
-            template.merge(vc, new StringWriter());
-        }
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
@@ -171,7 +152,6 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
                 .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.vm";
-        moduleManager.registerActionResolver(pattern, this);
         moduleManager.registerDynaViewFactory(pattern, this);
     }
 }

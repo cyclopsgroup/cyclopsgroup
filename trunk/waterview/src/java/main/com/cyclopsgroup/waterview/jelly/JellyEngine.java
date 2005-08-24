@@ -39,9 +39,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -58,8 +56,7 @@ import com.cyclopsgroup.waterview.util.TagPackage;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyEngine extends AbstractLogEnabled implements Initializable,
-        Contextualizable, Serviceable, DynaViewFactory, ActionResolver,
-        ThemeProvider
+        Contextualizable, Serviceable, DynaViewFactory, ThemeProvider
 {
     /** Class name of definition tag package */
     private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
@@ -349,22 +346,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
-     * Overwrite or implement method resolveAction()
-     *
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public void resolveAction(Path path, RuntimeData runtime) throws Exception
-    {
-        Script script = getScript(path.getPackage(), path.getPath());
-        if (script == null)
-        {
-            return;
-        }
-        JellyContext jc = createJellyContext(runtime.getRequestContext());
-        script.run(jc, XMLOutput.createDummyXMLOutput());
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
@@ -377,9 +358,6 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
                 .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.jelly";
-
-        moduleManager.registerActionResolver(pattern, this);
-
         moduleManager.registerDynaViewFactory(pattern, this);
 
         ThemeManager tm = (ThemeManager) serviceManager

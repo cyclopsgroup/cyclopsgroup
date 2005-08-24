@@ -38,7 +38,6 @@ import com.cyclopsgroup.waterview.I18N;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.ActionResolver;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
@@ -50,10 +49,8 @@ import com.cyclopsgroup.waterview.spi.View;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultModuleManager extends AbstractLogEnabled implements
-        Configurable, ModuleManager, Serviceable, ActionResolver
+        Configurable, ModuleManager, Serviceable
 {
-    private Hashtable actionResolvers = new Hashtable();
-
     private CacheManager cache;
 
     private String defaultPackageAlias = "waterview";
@@ -181,16 +178,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
-     * Overwrite or implement method registerActionResolver()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerActionResolver(java.lang.String, com.cyclopsgroup.waterview.spi.ActionResolver)
-     */
-    public void registerActionResolver(String pattern,
-            ActionResolver actionResolver)
-    {
-        actionResolvers.put(pattern, actionResolver);
-    }
-
-    /**
      * Overwrite or implement method registerDynaViewFactory()
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerDynaViewFactory(java.lang.String, com.cyclopsgroup.waterview.spi.DynaViewFactory)
      */
@@ -208,39 +195,6 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void registerPackage(String alias, String packageName)
     {
         packageNames.put(alias, packageName);
-    }
-
-    /**
-     * Overwrite or implement method resolveAction()
-     *
-     * @see com.cyclopsgroup.waterview.spi.ActionResolver#resolveAction(com.cyclopsgroup.waterview.Path, com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public void resolveAction(Path path, RuntimeData data) throws Exception
-    {
-        runModule(path, data, data.getRequestContext());
-    }
-
-    /**
-     * Overwrite or implement method runAction()
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#runAction(java.lang.String, com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public void runAction(String action, RuntimeData data) throws Exception
-    {
-        for (Iterator j = actionResolvers.keySet().iterator(); j.hasNext();)
-        {
-            String pattern = (String) j.next();
-            if (Pattern.matches('^' + pattern + '$', action))
-            {
-                ActionResolver resolver = (ActionResolver) actionResolvers
-                        .get(pattern);
-                Path actionPath = parsePath(action);
-                actionPath = parsePath('/' + actionPath.getPackageAlias()
-                        + "/action" + actionPath.getPathWithoutExtension());
-                resolver.resolveAction(actionPath, data);
-                break;
-            }
-        }
     }
 
     private void runModule(Path modulePath, RuntimeData data, Context context)
@@ -284,6 +238,5 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     public void service(ServiceManager serviceManager) throws ServiceException
     {
         cache = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        registerActionResolver(".+\\.action", this);
     }
 }

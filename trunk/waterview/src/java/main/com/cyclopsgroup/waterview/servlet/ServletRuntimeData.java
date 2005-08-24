@@ -24,7 +24,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.AbstractPageRuntime;
+import com.cyclopsgroup.waterview.AbstractRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 
@@ -33,7 +33,7 @@ import com.cyclopsgroup.waterview.spi.ModuleManager;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletPageRuntime extends AbstractPageRuntime implements
+public class ServletRuntimeData extends AbstractRuntimeData implements
         RuntimeData
 {
 
@@ -51,12 +51,15 @@ public class ServletPageRuntime extends AbstractPageRuntime implements
      * @param services ServiceManager object
      * @throws Exception Throw it out
      */
-    ServletPageRuntime(HttpServletRequest request,
+    ServletRuntimeData(HttpServletRequest request,
             HttpServletResponse response, ServletContext context,
             FileUpload fileUpload, ServiceManager services) throws Exception
     {
         this.response = response;
         this.context = context;
+
+        setQueryString(request.getQueryString());
+        setRefererUrl(request.getHeader("referer"));
 
         //Session Context
         setSessionContext(new HttpSessionContext(request.getSession()));

@@ -98,11 +98,25 @@ public interface RuntimeData
     String getPageBaseUrl();
 
     /**
+     * Get query string
+     *
+     * @return Query string
+     */
+    String getQueryString();
+
+    /**
      * Get URL to redirect
      *
      * @return Redirect URL
      */
     String getRedirectUrl();
+
+    /**
+     * Get url of referer
+     *
+     * @return Referer url
+     */
+    String getRefererUrl();
 
     /**
      * Get context for page rendering

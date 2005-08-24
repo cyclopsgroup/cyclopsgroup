@@ -14,24 +14,21 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.spi;
-
-import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
+package com.cyclopsgroup.waterview;
 
 /**
- * Resolve given action
- * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * An action to run
  */
-public interface ActionResolver
+public interface Action
 {
     /**
-     * Run action with given environment
+     * Run action
      *
-     * @param path Path object
      * @param data Runtime data
+     * @param context Action context interface
      * @throws Exception Throw it out
      */
-    void resolveAction(Path path, RuntimeData data) throws Exception;
+    void execute(RuntimeData data, ActionContext context) throws Exception;
 }

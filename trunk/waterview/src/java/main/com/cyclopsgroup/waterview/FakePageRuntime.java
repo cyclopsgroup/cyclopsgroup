@@ -26,7 +26,7 @@ import com.cyclopsgroup.waterview.util.FakeServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FakePageRuntime extends AbstractPageRuntime implements RuntimeData
+public class FakePageRuntime extends AbstractRuntimeData implements RuntimeData
 {
     /**
      * Constructor for class FakePageRuntime

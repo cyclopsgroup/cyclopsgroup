@@ -21,7 +21,6 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang.StringUtils;
 
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
@@ -100,6 +99,41 @@ public class Link
     }
 
     /**
+     * Add whole query string
+     *
+     * @param string Whole query string
+     * @return Query string
+     */
+    public Link addQueryString(String string)
+    {
+        if (StringUtils.isEmpty(string))
+        {
+            return this;
+        }
+        if (queryString == null)
+        {
+            queryString = new StringBuffer(string);
+        }
+        else
+        {
+            queryString.append('&').append(string);
+        }
+        return this;
+    }
+
+    /**
+     * Set page with given page path
+     *
+     * @param path Path object
+     * @return It self
+     */
+    public Link setPage(Path path)
+    {
+        setPage(path.getFullPath());
+        return this;
+    }
+
+    /**
      * Set page
      *
      * @param path
@@ -115,6 +149,21 @@ public class Link
         pageSet = true;
         external = false;
         return this;
+    }
+
+    /**
+     * Set query data, remove it if it already exists
+     *
+     * @param name Data name
+     * @param value Data value
+     * @return Link itself
+     * @throws UnsupportedEncodingException Just throw it out
+     */
+    public Link setQueryData(String name, Object value)
+            throws UnsupportedEncodingException
+    {
+        //TODO do the real work here
+        return addQueryData(name, value);
     }
 
     /**

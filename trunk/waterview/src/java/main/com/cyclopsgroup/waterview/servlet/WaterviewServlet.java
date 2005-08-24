@@ -118,8 +118,8 @@ public class WaterviewServlet extends HttpServlet
     protected void doHandleRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception
     {
-        ServletPageRuntime data = null;
-        data = new ServletPageRuntime(request, response, servletConfig
+        ServletRuntimeData data = null;
+        data = new ServletRuntimeData(request, response, servletConfig
                 .getServletContext(), fileUpload, serviceManager);
         Context ctx = data.getRequestContext();
         ctx.put(RuntimeData.NAME, data);

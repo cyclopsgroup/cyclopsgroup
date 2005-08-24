@@ -29,7 +29,7 @@ import org.apache.avalon.framework.service.ServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractPageRuntime implements RuntimeData
+public abstract class AbstractRuntimeData implements RuntimeData
 {
     private List actions = new LinkedList();
 
@@ -45,7 +45,11 @@ public abstract class AbstractPageRuntime implements RuntimeData
 
     private String pageBaseUrl;
 
+    private String queryString;
+
     private String redirectUrl;
+
+    private String refererUrl;
 
     private Context requestContext;
 
@@ -136,6 +140,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
+     * Getter method for property queryString
+     *
+     * @return Returns the queryString.
+     */
+    public String getQueryString()
+    {
+        return queryString;
+    }
+
+    /**
      * Overwrite or implement method getRedirectUrl()
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getRedirectUrl()
@@ -143,6 +157,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public String getRedirectUrl()
     {
         return redirectUrl;
+    }
+
+    /**
+     * Getter method for property refererUrl
+     *
+     * @return Returns the refererUrl.
+     */
+    public String getRefererUrl()
+    {
+        return refererUrl;
     }
 
     /**
@@ -303,6 +327,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     }
 
     /**
+     * Setter method for property queryString
+     *
+     * @param queryString The queryString to set.
+     */
+    public void setQueryString(String queryString)
+    {
+        this.queryString = queryString;
+    }
+
+    /**
      * Overwrite or implement method setRedirectUrl()
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setRedirectUrl(java.lang.String)
@@ -310,6 +344,16 @@ public abstract class AbstractPageRuntime implements RuntimeData
     public void setRedirectUrl(String url)
     {
         redirectUrl = url;
+    }
+
+    /**
+     * Setter method for property refererUrl
+     *
+     * @param refererUrl The refererUrl to set.
+     */
+    public void setRefererUrl(String refererUrl)
+    {
+        this.refererUrl = refererUrl;
     }
 
     /**

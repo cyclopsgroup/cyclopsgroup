@@ -7,8 +7,8 @@
  */
 package com.cyclopsgroup.waterview.ui.action;
 
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.Module;
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.web.Table;
 
@@ -17,15 +17,15 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Scroll the table
  */
-public class ScrollTable implements Module
+public class ScrollTable implements Action
 {
-
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute(RuntimeData data, ActionContext context)
+            throws Exception
     {
         String tableId = data.getRequestParameters()
                 .getString("table_id", null);
@@ -36,7 +36,6 @@ public class ScrollTable implements Module
         Table table = (Table) data.getSessionContext().get(tableId);
         if (table != null)
         {
-
             int pageIndex = data.getRequestParameters()
                     .getInt("page_index", -1);
             if (pageIndex != -1)
@@ -44,12 +43,5 @@ public class ScrollTable implements Module
                 table.setPageIndex(pageIndex);
             }
         }
-        String url = data.getRequestParameters().getString("url", null);
-        if (url == null)
-        {
-            throw new IllegalArgumentException("url is missing");
-        }
-        data.setRedirectUrl(url);
-        data.stop();
     }
 }
