@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>Sample Table</h2>
+    <j:new var="list" class="java.utils.ArrayList" />
+    ${list.add('aaaaaa')} ${list.add('bbbbb')} ${list.add('cccsdd')} ${list.add('dwee')} ${list.add('yyyyyyyyy')}
+    <w:TableControl>
+        <w:CollectionTabularData items="${list}" />
+        <w:Table var="row">
+            <w:Column name="select" title="Select">
+                <input type="checkbox" value="${row}" />
+            </w:Column>
+            <w:Column name="value" title="Value">${row}</w:Column>
+            <w:Column name="length" title="Length">${row.length()}</w:Column>
+            <w:Column name="something" title="Something Else">${row}/${row}</w:Column>
+        </w:Table>
+    </w:TableControl>
+</div>

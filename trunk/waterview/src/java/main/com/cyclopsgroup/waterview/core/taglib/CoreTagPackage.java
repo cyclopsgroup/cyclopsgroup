@@ -41,5 +41,6 @@ public class CoreTagPackage extends TagPackage
         addTag("t", LocalizedTextTag.class);
         addTag("p", LocalizedParagraphTag.class);
         addTag("Dummy", DummyTag.class);
+        addTag("RunScript", RunScriptTag.class);
     }
 }

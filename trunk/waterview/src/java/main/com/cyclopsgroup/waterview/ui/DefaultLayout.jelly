@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<w:JellyScript path="/waterview/HtmlHeaders.jelly" />
-	</head>
-	<body>
-		<div align="center">
-			<div style="max-width: 960px;">
-				<table width="100%" cellspacing="0" border="0">
-					<tr>
-						<td colspan="2" id="bannerArea">
-							<w:HtmlView>
-								<h2>Waterview System: Page ${page}</h2>
-							</w:HtmlView>
-						</td>
-					</tr>
-					<tr>
-						<td width="75%" valign="top">
-							<w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
-								<w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
-							</w:JellyPanel>
-						</td>
-						<td width="25%" valign="top">
-							<w:JellyPanel script="/waterview//DefaultVerticalPanel.jelly" name="right">
-								<w:View>
-									<p>Some help links</p>
-								</w:View>
-								<w:View>
-									<p>Some reference links</p>
-								</w:View>
-								<w:JspView path="/waterview/view/HelloWorld.jsp" />
-							</w:JellyPanel>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<table width="100%" border="0">
-								<tr>
-									<td>Copyrights reserved Cyclops Group 2005</td>
-									<td align="right">Powered By Cyclops Group Waterview</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</body>
+    <head>
+        <w:JellyScript path="/waterview/HtmlHeaders.jelly" />
+    </head>
+    <body>
+        <div align="center">
+            <div style="max-width: 960px;">
+                <table width="100%" cellspacing="0" border="0">
+                    <tr>
+                        <td colspan="2" id="bannerArea">
+                            <w:HtmlView>
+                                <h2>Waterview System: Page ${page}</h2>
+                            </w:HtmlView>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="75%" valign="top">
+                            <w:JellyPanel script="/waterview/DefaultVerticalPanel.jelly" name="body">
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
+                            </w:JellyPanel>
+                        </td>
+                        <td width="25%" valign="top">
+                            <w:JellyPanel script="/waterview//DefaultVerticalPanel.jelly" name="right">
+                                <w:View>
+                                    <p>Some help links</p>
+                                </w:View>
+                                <w:View>
+                                    <p>Some reference links</p>
+                                </w:View>
+                                <w:JspView path="/waterview/view/HelloWorld.jsp" />
+                            </w:JellyPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td>Copyrights reserved Cyclops Group 2005</td>
+                                    <td align="right">Powered By Cyclops Group Waterview</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
 </html>

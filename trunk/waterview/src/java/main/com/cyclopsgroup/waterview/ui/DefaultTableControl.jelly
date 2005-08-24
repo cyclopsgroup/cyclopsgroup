@@ -1,71 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:j="jelly:core">
+<div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <table width="100%" border="0">
-        <thead>
+        <j:set var="columnCount" value="0" />
+        <j:forEach var="column" items="${table.columns}">
+            <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
+            <j:set var="columnCount" value="${columnCount + 1}" />
+            <th align="left">${columnTag.title}</th>
+        </j:forEach>
+        <tr>
             <j:forEach var="column" items="${table.columns}">
-                <th align="left">${column.header}</th>
+                <td height="1" bgcolor="#336699" />
             </j:forEach>
-        </thead>
-        <tbody>
+        </tr>
+        <j:set var="rowIndex" value="0" />
+        <j:forEach var="row" items="${table.data.openIterator()}">
+            <j:set var="rowIndex" value="${(rowIndex + 1) % 2}" />
+            <j:set var="rowClass" value="a" />
+            <j:if test="${rowIndex == 0}">
+                <j:set var="rowClass" value="b" />
+            </j:if>
+            <tr class="${rowClass}">
+                <j:forEach var="column" items="${table.columns}">
+                    <td>
+                        <w:RunScript script="${column.body}" />
+                    </td>
+                </j:forEach>
+            </tr>
+        </j:forEach>
+        <j:if test="${table.scrollable}">
             <tr>
                 <j:forEach var="column" items="${table.columns}">
                     <td height="1" bgcolor="#336699" />
                 </j:forEach>
             </tr>
-            <j:set var="rowIndex" value="0" />
-            <j:forEach var="row" items="${table.data.openIterator()}">
-                <j:set var="rowIndex" value="${(rowIndex + 1) % 2}" />
-                <j:set var="rowClass" value="a" />
-                <j:if test="${rowIndex == 0}">
-                    <j:set var="rowClass" value="b" />
-                </j:if>
-                <tr class="${rowClass}">
-                    <j:forEach var="column" items="${table.columns}">
-                        <td>${column.getBody(row)}</td>
-                    </j:forEach>
-                </tr>
-            </j:forEach>
-            <j:if test="${table.scrollable}">
-                <tr>
-                    <j:forEach var="column" items="${table.columns}">
-                        <td height="1" bgcolor="#336699" />
-                    </j:forEach>
-                </tr>
-                <tr>
-                    <td colspan="${table.columns.length}">
-                        <j:set var="url">${link.setPage(page)}</j:set>
-                        <j:if test="${data.queryString != null}">
-                            <j:set var="url">${url}?${data.queryString}</j:set>
-                        </j:if>
-                        <j:if test="${table.data.pageIndex gt 0}">
-                            <a
-                                href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', 0)}">
-                                &lt;&lt;
-                            </a>
-                            <j:set var="previousPageIndex" value="${table.data.pageIndex - 1}" />
-                            <a
-                                href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', previousPageIndex)}">
-                                &lt;
-                            </a>
-                        </j:if>
-                        <j:if test="${table.data.pageIndex eq 0}">&lt;&lt;&lt;</j:if>
-                        <j:set var="currentPage" value="${table.data.pageIndex + 1}" />
-                        Page ${currentPage} of ${table.data.totalPages}
-                        <j:set var="lastPageIndex" value="${table.data.totalPages - 1}" />
-                        <j:if test="${table.data.pageIndex lt lastPageIndex}">
-                            <a
-                                href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', currentPage)}">
-                                &gt;
-                            </a>
-                            <a
-                                href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', lastPageIndex)}">
-                                &gt;&gt;
-                            </a>
-                        </j:if>
-                        <j:if test="${table.data.pageIndex eq lastPageIndex}">&gt;&gt;&gt;</j:if>
-                    </td>
-                </tr>
-            </j:if>
-        </tbody>
+            <tr>
+                <td colspan="${columnCount}">
+                    <j:set var="url">${link.setPage(page)}</j:set>
+                    <j:if test="${data.queryString != null}">
+                        <j:set var="url">${url}?${data.queryString}</j:set>
+                    </j:if>
+                    <j:if test="${table.data.pageIndex gt 0}">
+                        <a
+                            href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', 0)}">
+                            &lt;&lt;
+                        </a>
+                        <j:set var="previousPageIndex" value="${table.data.pageIndex - 1}" />
+                        <a
+                            href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', previousPageIndex)}">
+                            &lt;
+                        </a>
+                    </j:if>
+                    <j:if test="${table.data.pageIndex eq 0}">&lt;&lt;&lt;</j:if>
+                    <j:set var="currentPage" value="${table.data.pageIndex + 1}" />
+                    Page ${currentPage} of ${table.data.totalPages}
+                    <j:set var="lastPageIndex" value="${table.data.totalPages - 1}" />
+                    <j:if test="${table.data.pageIndex lt lastPageIndex}">
+                        <a
+                            href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', currentPage)}">
+                            &gt;
+                        </a>
+                        <a
+                            href="${link.addAction('/fabric/ScrollTable.action').addQueryData('url',url).addQueryData('form_keep_all', true).addQueryData('table_id',table.id).addQueryData('page_index', lastPageIndex)}">
+                            &gt;&gt;
+                        </a>
+                    </j:if>
+                    <j:if test="${table.data.pageIndex eq lastPageIndex}">&gt;&gt;&gt;</j:if>
+                </td>
+            </tr>
+        </j:if>
     </table>
 </div>
