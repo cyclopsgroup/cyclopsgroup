@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <table width="100%" border="0">
+        <j:set var="columnCount" value="0" />
+        <tr>
+            <j:forEach var="column" items="${table.columns}">
+                <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
+                <j:set var="columnCount" value="${columnCount + 1}" />
+                <th>${columnTag.title}</th>
+            </j:forEach>
+        </tr>
+        <tr>
+            <j:forEach var="column" items="${table.columns}">
+                <td height="1" bgcolor="#336699" />
+            </j:forEach>
+        </tr>
+        <j:set var="rowIndex" value="0" />
+        <j:forEach var="${tableTag.var}" items="${tabularData.openIterator(table)}">
+            <j:set var="rowIndex" value="${(rowIndex + 1) % 2}" />
+            <j:set var="rowClass" value="a" />
+            <j:if test="${rowIndex == 0}">
+                <j:set var="rowClass" value="b" />
+            </j:if>
+            <tr class="${rowClass}">
+                <j:forEach var="column" items="${table.columns}">
+                    <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
+                    <td>
+                        <w:RunScript script="${columnTag.body}" />
+                    </td>
+                </j:forEach>
+            </tr>
+        </j:forEach>
+        <tr>
+            <j:forEach var="column" items="${table.columns}">
+                <td height="1" bgcolor="#336699" />
+            </j:forEach>
+        </tr>
+        <tr>
+            <td colspan="${columnCount}">
+                
+            </td>
+        </tr>
+    </table>
+</div>

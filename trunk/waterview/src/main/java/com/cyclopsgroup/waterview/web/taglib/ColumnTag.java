@@ -33,29 +33,19 @@ import com.cyclopsgroup.waterview.web.ColumnSort;
  */
 public class ColumnTag extends BaseTag
 {
+    private Column column;
+
     private String display = ColumnDisplay.OPTIONAL.getName();
+
+    private String name;
 
     private String sort = ColumnSort.DISABLED.getName();
 
-    private String name;
+    private String title = StringUtils.EMPTY;
 
     private String type = "string";
 
     private String value = StringUtils.EMPTY;
-
-    private String title = StringUtils.EMPTY;
-
-    private Column column;
-
-    /**
-     * Get column object
-     *
-     * @return Column object
-     */
-    public Column getColumn()
-    {
-        return column;
-    }
 
     /**
      * Overwrite or implement method doTag()
@@ -75,8 +65,19 @@ public class ColumnTag extends BaseTag
             column.setDisplay(ColumnDisplay.valueOf(getDisplay()));
             column.setSort(ColumnSort.valueOf(getSort()));
             column.setValue(getValue());
+            ((TableTag) getParent()).getTable().addColumn(column);
         }
         ((TableTag) getParent()).addColumnTag(this);
+    }
+
+    /**
+     * Get column object
+     *
+     * @return Column object
+     */
+    public Column getColumn()
+    {
+        return column;
     }
 
     /**
@@ -98,6 +99,46 @@ public class ColumnTag extends BaseTag
     }
 
     /**
+     * Get sort option
+     *
+     * @return Sort option
+     */
+    public String getSort()
+    {
+        return sort;
+    }
+
+    /**
+     * Get title of the column
+     *
+     * @return Title of the column
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * TODO Add java doc
+     *
+     * @return Type of column
+     */
+    public String getType()
+    {
+        return type;
+    }
+
+    /**
+     * Get value of the column
+     *
+     * @return Value of the column
+     */
+    public String getValue()
+    {
+        return value;
+    }
+
+    /**
      * Setter method for field display
      *
      * @param display The display to set.
@@ -116,16 +157,6 @@ public class ColumnTag extends BaseTag
     }
 
     /**
-     * Get sort option
-     *
-     * @return Sort option
-     */
-    public String getSort()
-    {
-        return sort;
-    }
-
-    /**
      * Set sort option
      *
      * @param sort Sort option to set
@@ -133,16 +164,6 @@ public class ColumnTag extends BaseTag
     public void setSort(String sort)
     {
         this.sort = sort;
-    }
-
-    /**
-     * Get title of the column
-     *
-     * @return Title of the column
-     */
-    public String getTitle()
-    {
-        return title;
     }
 
     /**
@@ -156,13 +177,13 @@ public class ColumnTag extends BaseTag
     }
 
     /**
-     * Get value of the column
+     * TODO Add java doc
      *
-     * @return Value of the column
+     * @param type Type of the column
      */
-    public String getValue()
+    public void setType(String type)
     {
-        return value;
+        this.type = type;
     }
 
     /**
@@ -173,25 +194,5 @@ public class ColumnTag extends BaseTag
     public void setValue(String value)
     {
         this.value = value;
-    }
-
-    /**
-     * TODO Add java doc
-     *
-     * @return Type of column
-     */
-    public String getType()
-    {
-        return type;
-    }
-
-    /**
-     * TODO Add java doc
-     *
-     * @param type Type of the column
-     */
-    public void setType(String type)
-    {
-        this.type = type;
     }
 }

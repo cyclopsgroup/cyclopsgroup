@@ -56,7 +56,7 @@ public class TableTag extends BaseTag implements LocationAware
         RuntimeData data = getRuntimeData();
         table = (Table) data.getSessionContext().get(tableId);
         tableNew = table == null;
-        if (table == null)
+        if (tableNew)
         {
             table = new Table(tableId);
             data.getSessionContext().put(tableId, table);

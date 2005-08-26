@@ -31,8 +31,9 @@ public class WebTagPackage extends TagPackage
     public WebTagPackage()
     {
         addTag("JellyTableControl", JellyTableControlTag.class);
+        addTag("TableControl", DefaultTableControlTag.class);
         addTag("Table", TableTag.class);
         addTag("Column", ColumnTag.class);
-        addTag("CollectionTableData", CollectionTableDataTag.class);
+        addTag("CollectionTabularData", CollectionTabularDataTag.class);
     }
 }

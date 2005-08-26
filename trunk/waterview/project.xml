@@ -230,8 +230,8 @@
     </dependencies>
     <build>
         <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
-        <sourceDirectory>src/java/main</sourceDirectory>
-        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>
@@ -239,9 +239,10 @@
             <resources>
                 <resource>
                     <directory>${pom.build.unitTestSourceDirectory}</directory>
-                    <excludes>
-                        <exclude>**/*.java</exclude>
-                    </excludes>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/test/resources</directory>
                     <filtering>false</filtering>
                 </resource>
             </resources>
@@ -249,19 +250,13 @@
         <resources>
             <resource>
                 <directory>${pom.build.sourceDirectory}</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
                 <filtering>false</filtering>
             </resource>
             <resource>
-                <directory>src/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
+                <directory>src/main/resources</directory>
                 <filtering>false</filtering>
             </resource>
         </resources>

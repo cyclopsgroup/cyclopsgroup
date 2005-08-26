@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:f="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <j:useBean var="list" class="java.util.ArrayList" />
+    <j:mute>
+        <j:expr value="${list.add('a')}" />
+        <j:expr value="${list.add('bb')}" />
+        <j:expr value="${list.add('ccc')}" />
+        <j:expr value="${list.add('ddddd')}" />
+    </j:mute>
+    <f:TableControl script="/waterview/DefaultTableControl.jelly">
+        <f:CollectionTabularData items="${list}" />
+        <f:Table var="stringRow" name="a">
+            <f:Column name="id" title="ID">
+                <font color="red">${stringRow}</font>
+            </f:Column>
+            <f:Column name="name" title="Length">${stringRow.length()}</f:Column>
+            <f:Column name="description" title="Description">${stringRow}/${stringRow}</f:Column>
+        </f:Table>
+    </f:TableControl>
+</div>

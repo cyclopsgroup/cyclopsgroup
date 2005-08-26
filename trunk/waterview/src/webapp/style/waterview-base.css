@@ -1,9 +1,8 @@
-body
-{
+body,p,td,th,input,select,textarea {
 	font-family: Sans, Verdana;
+	font-size: 8pt;
 }
 
-body, p, td
-{
-	font-size: 9pt;
+th {
+	text-align: left;
 }

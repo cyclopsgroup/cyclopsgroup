@@ -32,7 +32,7 @@ import com.cyclopsgroup.waterview.web.CollectionTabularData;
  * 
  * Table data tag accepting a collection, iterator, enumeration or array
  */
-public class CollectionTableDataTag extends BaseTag
+public class CollectionTabularDataTag extends BaseTag
 {
     private Object items;
 
