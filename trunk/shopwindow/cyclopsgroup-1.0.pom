@@ -2,8 +2,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
     <pomVersion>3</pomVersion>
-    <id>${pom.artifactId}</id>
-    <name>${pom.artifactId}</name>
+    <id>unknow</id>
+    <name>unknow</name>
     <groupId>com.cyclopsgroup</groupId>
     <currentVersion>SNAPSHOT</currentVersion>
     <organization>
@@ -18,38 +18,24 @@
     <description>Sample project</description>
     <shortDescription>Sample proect</shortDescription>
     <url>${pom.organization.url}/projects/${pom.artifactId}</url>
-    <issueTrackingUrl>
-        http://www.cyclopsgroup.com/issues
-    </issueTrackingUrl>
+    <issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
     <siteAddress>www.cyclopsgroup.com</siteAddress>
-    <siteDirectory>
-        /var/www/www.cyclopsgroup.com/htdocs/projects/${pom.artifactId}
-    </siteDirectory>
+    <siteDirectory>/var/www/www.cyclopsgroup.com/htdocs/projects/${pom.artifactId}</siteDirectory>
     <repository>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
-        </connection>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
         <developerConnection>
             scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
         </developerConnection>
-        <url>
-            http://fisheye.cenqua.com/viewrep/cyclops-group/${pom.artifactId}
-        </url>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/${pom.artifactId}</url>
     </repository>
     <mailingLists>
         <mailingList>
             <name>Cyclops Group Mailing List</name>
-            <subscribe>
-                http://groups-beta.google.com/group/cyclopsgroup
-            </subscribe>
-            <unsubscribe>
-                http://groups-beta.google.com/group/cyclopsgroup
-            </unsubscribe>
-            <archive>
-                http://groups-beta.google.com/group/cyclopsgroup
-            </archive>
+            <subscribe>http://groups-beta.google.com/group/cyclopsgroup</subscribe>
+            <unsubscribe>http://groups-beta.google.com/group/cyclopsgroup</unsubscribe>
+            <archive>http://groups-beta.google.com/group/cyclopsgroup</archive>
         </mailingList>
-     </mailingLists>
+    </mailingLists>
     <developers>
         <developer>
             <name>Jiaqi Guo</name>
