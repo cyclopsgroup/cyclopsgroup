@@ -22,6 +22,8 @@ import java.util.Iterator;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 
+import com.cyclopsgroup.waterview.RuntimeData;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -30,7 +32,7 @@ import org.apache.commons.lang.ArrayUtils;
 public final class ThemeManager
 {
     /** Default theme name */
-    public static final String DEFAULT_THEME = "default";
+    public static final String DEFAULT_THEME = RuntimeData.DEFAULT_THEME;
 
     /** Role of this component*/
     public static final String ROLE = ThemeManager.class.getName();

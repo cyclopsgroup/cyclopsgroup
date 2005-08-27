@@ -31,6 +31,9 @@ import org.apache.avalon.framework.service.ServiceManager;
 
 public interface RuntimeData
 {
+    /**Default theme name*/
+    String DEFAULT_THEME = "default";
+
     /** Name of it in context */
     String NAME = "data";
 
@@ -207,6 +210,13 @@ public interface RuntimeData
      * @param url URL to redirect
      */
     void setRedirectUrl(String url);
+
+    /**
+     * Set theme
+     *
+     * @param themeName Name of theme to set
+     */
+    void setThemeName(String themeName);
 
     /**
      * Stop the pipeline

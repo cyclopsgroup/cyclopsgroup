@@ -6,3 +6,9 @@ body,p,td,th,input,select,textarea {
 th {
 	text-align: left;
 }
+
+.lineBreak {
+	height: 2px;
+	background-color: #EFEFEF;
+	padding: 0px;
+}

@@ -4,7 +4,8 @@
     <meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview" />
     <title>Waterview System: ${page}</title>
     <link rel="stylesheet" type="text/css" media="all" href="${applicationBase}/style/waterview-base.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="${applicationBase}/style/waterview-default-style.css" />
+    <link rel="stylesheet" type="text/css" media="screen"
+        href="${applicationBase}/themes/${data.themeName}/style.css" />
     <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterview-print.css" />
     <script language="javascript">
         <![CDATA[

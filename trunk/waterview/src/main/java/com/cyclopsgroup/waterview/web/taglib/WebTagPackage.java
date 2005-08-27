@@ -35,5 +35,7 @@ public class WebTagPackage extends TagPackage
         addTag("Table", TableTag.class);
         addTag("Column", ColumnTag.class);
         addTag("CollectionTabularData", CollectionTabularDataTag.class);
+
+        addTag("BlankImage", BlankImageTag.class);
     }
 }

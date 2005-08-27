@@ -80,7 +80,7 @@
 		</component>
 		<component>
 			<role>com.cyclopsgroup.waterview.WaterviewComponents</role>
-			<implementation>com.cyclopsgroup.waterview.util.ComponentGroup</implementation>
+			<implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
 			<configuration>
 				<component role="com.cyclopsgroup.waterview.Waterview" />
 				<component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
