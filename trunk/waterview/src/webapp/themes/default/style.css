@@ -1,5 +1,6 @@
 body {
-	background-color: #80A2FF;
+	background-color: #BFE4FF;
+	color: #0066B3;
 }
 
 #bodyWrapper {
@@ -7,16 +8,32 @@ body {
 }
 
 table.waterviewTable th {
-	background-color: #6079BF;
+	background-color: #6096BF;
 	color: white;
 	border-width: 1px;
 	border-style: outset;
 }
 
 table.waterviewTable tr.b {
-	background-color: #E6ECFF;
+	background-color: #E6F4FF;
 }
 
 .lineBreak {
-	background-color: #6079BF;
+	background-color: #6096BF;
+}
+
+.waterviewViewWrapper {
+	background-color: #E6F4FF;
+}
+
+.waterviewViewBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewViewWrapper {
+	background-color: #80C9FF;
+}
+
+#bodyPanel .waterviewViewWrapper .waterviewViewTitle {
+	color: white;
 }
