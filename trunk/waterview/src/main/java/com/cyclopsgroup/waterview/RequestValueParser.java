@@ -31,7 +31,7 @@ public abstract class RequestValueParser extends ValueParser
     public static final FileItem[] EMPTY_FILEITEM_ARRAY = new FileItem[0];
 
     /** Name of it in context */
-    public static String NAME = "parameters";
+    public static String NAME = "params";
 
     /**
      * Get file item object

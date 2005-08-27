@@ -42,9 +42,7 @@ public class Link
 
     private RuntimeData data;
 
-    private boolean external = false;
-
-    private boolean pageSet = false;
+    private boolean disposed = false;
 
     private StringBuffer queryString;
 
@@ -68,8 +66,9 @@ public class Link
      */
     public Link addAction(String action)
     {
-        external = false;
-        requestPath.append('/').append(ACTION_INSTRUCTOR).append(action);
+        checkDisposed();
+        requestPath.append('/').append(ACTION_INSTRUCTOR).append(
+                getPath(action));
         return this;
     }
 
@@ -121,6 +120,35 @@ public class Link
         return this;
     }
 
+    private void checkDisposed()
+    {
+        if (disposed)
+        {
+            queryString = null;
+            requestPath = new StringBuffer();
+            disposed = false;
+        }
+    }
+
+    private String getPath(String path)
+    {
+        if (StringUtils.isEmpty(path))
+        {
+            return null;
+        }
+        if (path.charAt(0) == '/')
+        {
+            return path;
+        }
+        String currentPage = data.getPage().getFullPath();
+        int lastSlash = currentPage.lastIndexOf('/');
+        if (lastSlash == -1)
+        {
+            return '/' + path;
+        }
+        return currentPage.substring(0, lastSlash + 1) + path;
+    }
+
     /**
      * Set page with given page path
      *
@@ -141,41 +169,8 @@ public class Link
      */
     public Link setPage(String path)
     {
-        if (pageSet)
-        {
-            return this;
-        }
-        requestPath.append('/').append(PAGE_INSTRUCTOR).append(path);
-        pageSet = true;
-        external = false;
-        return this;
-    }
-
-    /**
-     * Set query data, remove it if it already exists
-     *
-     * @param name Data name
-     * @param value Data value
-     * @return Link itself
-     * @throws UnsupportedEncodingException Just throw it out
-     */
-    public Link setQueryData(String name, Object value)
-            throws UnsupportedEncodingException
-    {
-        //TODO do the real work here
-        return addQueryData(name, value);
-    }
-
-    /**
-     * Set resource path
-     *
-     * @param path Path of resource
-     * @return It self
-     */
-    public Link setResource(String path)
-    {
-        requestPath = new StringBuffer(path);
-        external = true;
+        checkDisposed();
+        requestPath.append('/').append(PAGE_INSTRUCTOR).append(getPath(path));
         return this;
     }
 
@@ -186,34 +181,13 @@ public class Link
      */
     public String toString()
     {
-        StringBuffer url = new StringBuffer();
-        if (external)
-        {
-            url.append(data.getApplicationBaseUrl());
-        }
-        else
-        {
-            url.append(data.getPageBaseUrl());
-        }
-        if (requestPath.length() == 0 && !external)
-        {
-            url.append(data.getRequestPath());
-        }
-        else
-        {
-            url.append(requestPath);
-        }
-
+        StringBuffer url = new StringBuffer(data.getPageBaseUrl())
+                .append(requestPath);
         if (queryString != null)
         {
             url.append('?').append(queryString);
         }
-        String fullUrl = url.toString();
-
-        queryString = null;
-        pageSet = false;
-        requestPath = new StringBuffer();
-        external = false;
-        return fullUrl;
+        disposed = true;
+        return url.toString();
     }
 }

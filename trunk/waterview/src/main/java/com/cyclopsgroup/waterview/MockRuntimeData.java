@@ -26,14 +26,14 @@ import com.cyclopsgroup.waterview.utils.FakeServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FakePageRuntime extends AbstractRuntimeData implements RuntimeData
+public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
 {
     /**
      * Constructor for class FakePageRuntime
      *
      * @param output Output
      */
-    public FakePageRuntime(PrintWriter output)
+    public MockRuntimeData(PrintWriter output)
     {
         setOutput(output);
         setApplicationBaseUrl("http://localhost:8080/waterview");

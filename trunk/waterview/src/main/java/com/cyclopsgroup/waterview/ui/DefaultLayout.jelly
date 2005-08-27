@@ -14,7 +14,11 @@
                                     <td rowspan="2">
                                         <h2>Waterview ${page}</h2>
                                     </td>
-                                    <td align="right" valign="top">bla bla bla</td>
+                                    <td align="right" valign="top" trim="false">
+                                        <a href="${link.setPage('/Index.jelly')}">Home</a>
+                                        <a href="${link.setPage('/waterview/About.jelly')}">About</a>
+                                        <a href="${link.setPage('/waterview/Contact.jelly')}">Contact</a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2" align="right">

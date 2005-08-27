@@ -9,6 +9,8 @@ body {
 table.waterviewTable th {
 	background-color: #6079BF;
 	color: white;
+	border-width: 1px;
+	border-style: outset;
 }
 
 table.waterviewTable tr.b {

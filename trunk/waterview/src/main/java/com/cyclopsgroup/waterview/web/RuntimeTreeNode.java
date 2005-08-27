@@ -69,11 +69,13 @@ public class RuntimeTreeNode implements TreeNode
     /**
      * Filter child nodes
      *
-     * @param nodes
+     * @param nodes All child nodes
+     * @param data Runtime data
      * @return Array of result
      * @throws Exception
      */
-    protected TreeNode[] doFilter(TreeNode[] nodes) throws Exception
+    protected TreeNode[] doFilter(TreeNode[] nodes, RuntimeData data)
+            throws Exception
     {
         return nodes;
     }
@@ -90,7 +92,7 @@ public class RuntimeTreeNode implements TreeNode
         {
             return;
         }
-        TreeNode[] childNodes = doFilter(node.getChildrenNodes());
+        TreeNode[] childNodes = doFilter(node.getChildrenNodes(), data);
         for (int i = 0; i < childNodes.length; i++)
         {
             TreeNode node = childNodes[i];

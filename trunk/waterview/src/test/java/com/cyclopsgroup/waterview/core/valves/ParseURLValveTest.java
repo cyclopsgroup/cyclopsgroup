@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.codehaus.plexus.PlexusTestCase;
 
-import com.cyclopsgroup.waterview.FakePageRuntime;
+import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 
@@ -39,7 +39,7 @@ public class ParseURLValveTest extends PlexusTestCase
      */
     public void testInvoke() throws Exception
     {
-        FakePageRuntime runtime = new FakePageRuntime(new PrintWriter(
+        MockRuntimeData runtime = new MockRuntimeData(new PrintWriter(
                 System.out));
         runtime
                 .setRequestPath("/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly");
