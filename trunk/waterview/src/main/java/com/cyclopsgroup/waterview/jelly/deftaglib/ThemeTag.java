@@ -23,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.DefaultTheme;
-import com.cyclopsgroup.waterview.util.BaseTagSupport;
+import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

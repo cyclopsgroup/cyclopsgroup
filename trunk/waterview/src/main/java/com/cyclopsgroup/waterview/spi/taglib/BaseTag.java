@@ -22,7 +22,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.util.BaseTagSupport;
+import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 
 /**
  * Base jelly tag

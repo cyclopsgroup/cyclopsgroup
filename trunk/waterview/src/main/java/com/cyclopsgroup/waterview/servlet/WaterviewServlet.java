@@ -37,7 +37,7 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.util.WaterviewPlexusContainer;
+import com.cyclopsgroup.waterview.utils.WaterviewPlexusContainer;
 
 /**
  * Main waterview servlet

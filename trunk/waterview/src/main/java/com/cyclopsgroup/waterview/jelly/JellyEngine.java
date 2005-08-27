@@ -47,8 +47,8 @@ import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.ThemeProvider;
 import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.util.BaseTagLibrary;
-import com.cyclopsgroup.waterview.util.TagPackage;
+import com.cyclopsgroup.waterview.utils.BaseTagLibrary;
+import com.cyclopsgroup.waterview.utils.TagPackage;
 
 /**
  * Jelly engine for jelly processing

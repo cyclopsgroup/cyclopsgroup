@@ -24,7 +24,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
-import com.cyclopsgroup.waterview.util.TypeUtils;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.CollectionTabularData;
 
 /**

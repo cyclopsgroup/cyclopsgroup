@@ -23,7 +23,7 @@ import java.util.HashSet;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.util.TypeUtils;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * Typed value parser

@@ -21,7 +21,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
-import com.cyclopsgroup.waterview.util.TypeUtils;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnDisplay;
 import com.cyclopsgroup.waterview.web.ColumnSort;

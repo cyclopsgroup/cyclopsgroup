@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.util;
+package com.cyclopsgroup.waterview.utils;
 
 import java.util.Hashtable;
 

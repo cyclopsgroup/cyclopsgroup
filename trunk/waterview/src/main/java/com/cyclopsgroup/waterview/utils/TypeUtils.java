@@ -5,7 +5,7 @@
  * Use is subject to license terms. License Agreement available at
  * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
  */
-package com.cyclopsgroup.waterview.util;
+package com.cyclopsgroup.waterview.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
