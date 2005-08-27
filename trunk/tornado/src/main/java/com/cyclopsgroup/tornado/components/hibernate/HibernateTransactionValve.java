@@ -16,34 +16,40 @@
  */
 package com.cyclopsgroup.tornado.components.hibernate;
 
-import org.hibernate.Transaction;
-
-import com.cyclopsgroup.tornado.core.HibernateFactory;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Valve to deal with hibernate sessions
+ */
 public class HibernateTransactionValve implements Valve
 {
-    public void invoke(RuntimeData runtime, PipelineContext context)
+    /**
+     * Overwrite or implement method invoke()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
+     */
+    public void invoke(RuntimeData data, PipelineContext context)
             throws Exception
     {
-        HibernateFactory hf = (HibernateFactory) runtime.getServiceManager()
-                .lookup(HibernateFactory.ROLE);
-        Transaction transaction = hf.getCurrentSession().beginTransaction();
+        HibernateHome hibernate = (HibernateHome) data.getServiceManager()
+                .lookup(HibernateHome.ROLE);
         try
         {
-            context.invokeNextValve(runtime);
-            transaction.commit();
+            context.invokeNextValve(data);
+            hibernate.commitTransactions();
         }
         catch (Exception e)
         {
-            transaction.commit();
+            hibernate.rollbackTransactions();
             throw e;
         }
         finally
         {
-            hf.closeCurrentSession();
+            hibernate.closeSessions();
         }
     }
 }

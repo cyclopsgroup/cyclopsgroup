@@ -14,28 +14,24 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.security.impl;
+package com.cyclopsgroup.tornado.components.sql;
 
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-
-import com.cyclopsgroup.tornado.core.security.RuntimeUser;
-import com.cyclopsgroup.tornado.core.security.SecurityManager;
+import javax.sql.DataSource;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
  *
- * Default implementation of security manager
+ * Data source factory interface
  */
-public class DefaultSecurityManager extends AbstractLogEnabled implements
-        SecurityManager
+public interface DataSourceHome
 {
+    /** Empty data source array */
+    DataSource[] EMPTY_DATASOURCE_ARRAY = new DataSource[0];
 
     /**
-     * Overwrite or implement method getRuntimeUser()
-     * @see com.cyclopsgroup.tornado.core.security.SecurityManager#getRuntimeUser(java.lang.String)
+     * Get data source 
+     *
+     * @return Data source object
      */
-    public RuntimeUser getRuntimeUser(String sessionId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    DataSource getDataSource();
 }

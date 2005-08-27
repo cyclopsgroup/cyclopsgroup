@@ -14,14 +14,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.core.security;
+package com.cyclopsgroup.tornado.utils;
+
+import java.util.Comparator;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
  *
- * Security permission element
+ * Comparator for class object
  */
-public interface Permission
+public class ClassComparator implements Comparator
 {
-    Permission[] EMPTY_ARRAY = new Permission[0];
+    /**
+     * Overwrite or implement method compare()
+     *
+     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+     */
+    public int compare(Object o1, Object o2)
+    {
+        Class c1 = (Class) o1;
+        Class c2 = (Class) o2;
+        return c1.getName().compareTo(c2.getName());
+    }
 }
