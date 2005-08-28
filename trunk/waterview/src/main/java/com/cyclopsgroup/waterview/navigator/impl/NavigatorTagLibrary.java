@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2005 Cyclops Group Community
+ * Copyright 2002-2004 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,22 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.navigator;
+package com.cyclopsgroup.waterview.navigator.impl;
+
+import org.apache.commons.jelly.TagLibrary;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Home of the navigator
+ *
+ * Tag library for navigation
  */
-public interface NavigatorHome
+public class NavigatorTagLibrary extends TagLibrary
 {
-    /** Role name of component */
-    String ROLE = NavigatorHome.class.getName();
-
     /**
-     * Get root node
-     *
-     * @return Root node
+     * Constructor for class NavigatorTagLibrary
      */
-    NavigatorNode getRootNode();
+    public NavigatorTagLibrary()
+    {
+        registerTag("Navigation", NavigationTag.class);
+    }
 }

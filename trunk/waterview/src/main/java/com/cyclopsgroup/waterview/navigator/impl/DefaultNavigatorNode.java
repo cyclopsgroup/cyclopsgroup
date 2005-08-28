@@ -50,7 +50,14 @@ class DefaultNavigatorNode implements NavigatorNode
     DefaultNavigatorNode(DefaultNavigatorHome nav, String name,
             String parentPath)
     {
-        this.path = parentPath + '/' + name;
+        if (parentPath != null)
+        {
+            this.path = parentPath + '/' + name;
+        }
+        else
+        {
+            this.path = name;
+        }
         this.parentPath = parentPath;
         this.navigatorHome = nav;
     }
@@ -124,6 +131,26 @@ class DefaultNavigatorNode implements NavigatorNode
     public TreeNode getParentNode()
     {
         return getParentNavigatorNode();
+    }
+
+    /**
+     * Get parent path
+     *
+     * @return Parent path
+     */
+    public String getParentPath()
+    {
+        return parentPath;
+    }
+
+    /**
+     * Get current path
+     *
+     * @return Current path
+     */
+    public String getPath()
+    {
+        return path;
     }
 
     public String getTitle()

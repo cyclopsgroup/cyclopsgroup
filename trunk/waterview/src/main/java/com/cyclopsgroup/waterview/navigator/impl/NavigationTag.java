@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.navigator.taglib;
+package com.cyclopsgroup.waterview.navigator.impl;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
@@ -25,65 +25,32 @@ import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Tree tag
+ * Navigation tag in navigation.xml
  */
-public class TreeTag extends BaseTagSupport
+public class NavigationTag extends BaseTagSupport
 {
-    private String name;
-
-    private String position;
+    private DefaultNavigatorHome navigator;
 
     /**
-     * Overwrite or implement method in TreeTag
+     * Overwrite or implement method in NavigationTag
      *
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
-        requireAttribute("name");
-        requireAttribute("position");
+        navigator = (DefaultNavigatorHome) getContext().getVariable(
+                DefaultNavigatorHome.class.getName());
         invokeBody(output);
     }
 
     /**
-     * Get name of tree
+     * Navigation home
      *
-     * @return Name of tree
+     * @return Default navigation home
      */
-    public String getName()
+    public DefaultNavigatorHome getNavigator()
     {
-        return name;
+        return navigator;
     }
-
-    /**
-     * Get position
-     *
-     * @return Positon path
-     */
-    public String getPosition()
-    {
-        return position;
-    }
-
-    /**
-     * Set name of tree
-     *
-     * @param name Name of tree
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    /**
-     * Set position of parent
-     *
-     * @param position Parent position path
-     */
-    public void setPosition(String position)
-    {
-        this.position = position;
-    }
-
 }

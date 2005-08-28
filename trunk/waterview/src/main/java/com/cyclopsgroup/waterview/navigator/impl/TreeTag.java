@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.navigator.taglib;
+package com.cyclopsgroup.waterview.navigator.impl;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
@@ -25,19 +25,65 @@ import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Navigation tag in navigation.xml
+ * Tree tag
  */
-public class NavigationTag extends BaseTagSupport
+public class TreeTag extends BaseTagSupport
 {
+    private String name;
+
+    private String position;
+
     /**
-     * Overwrite or implement method in NavigationTag
+     * Overwrite or implement method in TreeTag
      *
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
+        requireAttribute("name");
+        requireAttribute("position");
         invokeBody(output);
+    }
+
+    /**
+     * Get name of tree
+     *
+     * @return Name of tree
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Get position
+     *
+     * @return Positon path
+     */
+    public String getPosition()
+    {
+        return position;
+    }
+
+    /**
+     * Set name of tree
+     *
+     * @param name Name of tree
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * Set position of parent
+     *
+     * @param position Parent position path
+     */
+    public void setPosition(String position)
+    {
+        this.position = position;
     }
 
 }
