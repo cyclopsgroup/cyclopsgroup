@@ -49,7 +49,6 @@
                                 <w:View>
                                     <p>Some reference links</p>
                                 </w:View>
-                                <w:JspView path="/waterview/view/HelloWorld.jsp" />
                             </w:JellyPanel>
                         </td>
                     </tr>

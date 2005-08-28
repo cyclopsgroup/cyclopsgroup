@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.cyclopsgroup.waterview.MapValueParser;
 import com.cyclopsgroup.waterview.ValueParser;
 
 /**
@@ -30,7 +31,7 @@ import com.cyclopsgroup.waterview.ValueParser;
  */
 public class DefaultTreeNode implements TreeNode
 {
-    private ValueParser attributes;
+    private ValueParser attributes = new MapValueParser(new HashMap());
 
     private Map children = ListOrderedMap.decorate(new HashMap());
 

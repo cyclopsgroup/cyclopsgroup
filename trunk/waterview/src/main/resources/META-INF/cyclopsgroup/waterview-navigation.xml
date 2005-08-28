@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation>
-    <Tree name="waterview.root" parent="/">
+    <Tree name="waterview.root" position="/">
         <Node name="top" title="Nonesense Title" hidden="true">
             <Item page="/Index.jelly" title="Home" description="Home Page" />
         </Node>

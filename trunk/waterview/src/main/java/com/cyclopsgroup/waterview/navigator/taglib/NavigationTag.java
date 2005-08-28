@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2005 Cyclops Group Community
+ * Copyright 2002-2004 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,45 +14,30 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.navigator;
+package com.cyclopsgroup.waterview.navigator.taglib;
 
-import com.cyclopsgroup.waterview.web.TreeNode;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
+
+import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Navigator node
+ *
+ * Navigation tag in navigation.xml
  */
-public interface NavigatorNode extends TreeNode
+public class NavigationTag extends BaseTagSupport
 {
-    /** Empty nodes */
-    NavigatorNode[] EMPTY_ARRAY = new NavigatorNode[0];
-
     /**
-     * Get description of node
+     * Overwrite or implement method in NavigationTag
      *
-     * @return Description of node
+     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
-    String getDescription();
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException
+    {
+        invokeBody(output);
+    }
 
-    /**
-     * Get linked page of node
-     *
-     * @return Linked page of node
-     */
-    String getPage();
-
-    /**
-     * Get parent node
-     *
-     * @return Parent node
-     */
-    NavigatorNode getParentNavigatorNode();
-
-    /**
-     * Get title of node
-     *
-     * @return Title of node
-     */
-    String getTitle();
 }
