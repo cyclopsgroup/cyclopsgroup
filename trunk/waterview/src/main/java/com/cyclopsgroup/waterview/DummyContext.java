@@ -14,79 +14,58 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.spi;
+package com.cyclopsgroup.waterview;
 
+import java.util.Collections;
 import java.util.Iterator;
 
-import org.apache.commons.jelly.JellyContext;
-
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.DummyContext;
-
 /**
- * Clib context adapter for Jelly context
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Dummy fake context
  */
-public class JellyContextAdapter implements Context
+public class DummyContext implements Context
 {
-    private JellyContext jellyContext;
-
-    /**
-     * Constructor for class JellyContextAdapter
-     *
-     * @param jellyContext Core jelly context
-     */
-    public JellyContextAdapter(JellyContext jellyContext)
-    {
-        this.jellyContext = jellyContext;
-    }
+    /** static instance */
+    public static final DummyContext INSTANCE = new DummyContext();
 
     /**
      * Overwrite or implement method get()
+     *
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
     public Object get(String name)
     {
-        return jellyContext.getVariable(name);
-    }
-
-    private Context getNestedContext()
-    {
-        Context context = (Context) jellyContext.getVariable(Context.NAME);
-        if (context == null)
-        {
-            context = DummyContext.INSTANCE;
-        }
-        return context;
+        return null;
     }
 
     /**
      * Overwrite or implement method keys()
+     *
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
     public Iterator keys()
     {
-        return jellyContext.getVariableNames();
+        return Collections.EMPTY_LIST.iterator();
     }
 
     /**
      * Overwrite or implement method put()
+     *
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object value)
+    public void put(String name, Object variable)
     {
-        jellyContext.setVariable(name, value);
-        getNestedContext().put(name, value);
+        //do nothing
     }
 
     /**
      * Overwrite or implement method remove()
+     *
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
     public void remove(String name)
     {
-        jellyContext.removeVariable(name);
-        getNestedContext().remove(name);
+        //do nothing
     }
 }

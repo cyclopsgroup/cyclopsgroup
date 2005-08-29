@@ -25,6 +25,9 @@ import java.util.Iterator;
  */
 public interface Context
 {
+    /** object name */
+    String NAME = Context.class.getName();
+
     /**
      * Get variable from context
      *

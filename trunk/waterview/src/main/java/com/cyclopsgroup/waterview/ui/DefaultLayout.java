@@ -20,7 +20,7 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
-import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -38,8 +38,7 @@ public class DefaultLayout implements Module
     {
         NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
                 .lookup(NavigatorHome.ROLE);
-        NavigatorNode rootNode = navigator.getRootNode();
-        context.put("rootNode", rootNode);
-        System.out.println("aaa");
+        RuntimeTreeNode node = navigator.getRuntimeRootNode(data);
+        context.put("rootNode", node);
     }
 }

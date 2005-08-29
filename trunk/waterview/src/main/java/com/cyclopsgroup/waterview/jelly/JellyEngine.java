@@ -144,6 +144,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
             Object value = context.get(name);
             jc.setVariable(name, value);
         }
+        jc.setVariable(com.cyclopsgroup.waterview.Context.NAME, context);
         return jc;
     }
 
@@ -292,6 +293,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
         while (e.hasMoreElements())
         {
             URL resource = (URL) e.nextElement();
+            getLogger().info("Load definition from " + resource);
             jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
 

@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.navigator.impl;
 
-import java.io.StringWriter;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,8 +29,10 @@ import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -46,6 +47,10 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     private Map nodes;
 
     private DefaultNavigatorNode rootNode;
+
+    private static final String NODE_NAME = DefaultNavigatorHome.class
+            .getName()
+            + "/RuntimeTreeNode";
 
     /**
      * Add node
@@ -99,17 +104,35 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         jc.setVariable(getClass().getName(), this);
         jc.registerTagLibrary("http://waterview.cyclopsgroup.com/navigator",
                 new NavigatorTagLibrary());
-        StringWriter sw = new StringWriter();
-        XMLOutput output = XMLOutput.createXMLOutput(sw);
         for (Enumeration en = getClass().getClassLoader().getResources(
                 "META-INF/cyclopsgroup/waterview-navigation.xml"); en
                 .hasMoreElements();)
         {
             URL resource = (URL) en.nextElement();
             getLogger().info("Reading navigation from " + resource);
-            jc.runScript(resource, output);
-            output.flush();
+            jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
-        getLogger().info(sw.toString());
+    }
+
+    /**
+     * Overwrite or implement method getRuntimeRootNode()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getRuntimeRootNode(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public RuntimeTreeNode getRuntimeRootNode(RuntimeData data)
+            throws Exception
+    {
+        RuntimeTreeNode node = null;
+        synchronized (data)
+        {
+            node = (RuntimeTreeNode) data.getSessionContext().get(NODE_NAME);
+            if (node == null)
+            {
+                node = new RuntimeTreeNode(null, getRootNode());
+                node.expand(data);
+                data.getSessionContext().put(NODE_NAME, node);
+            }
+        }
+        return node;
     }
 }

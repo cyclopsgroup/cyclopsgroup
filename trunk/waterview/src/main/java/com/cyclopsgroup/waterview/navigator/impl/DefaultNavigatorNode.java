@@ -52,7 +52,14 @@ class DefaultNavigatorNode implements NavigatorNode
     {
         if (parentPath != null)
         {
-            this.path = parentPath + '/' + name;
+            if (parentPath.equals("/"))
+            {
+                this.path = "/" + name;
+            }
+            else
+            {
+                this.path = parentPath + '/' + name;
+            }
         }
         else
         {
@@ -79,7 +86,7 @@ class DefaultNavigatorNode implements NavigatorNode
      */
     public TreeNode[] getChildrenNodes()
     {
-        Collection nodes = navigatorHome.getChildren(parentPath);
+        Collection nodes = navigatorHome.getChildren(path);
         return (TreeNode[]) nodes.toArray(TreeNode.EMPTY_ARRAY);
     }
 

@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
+import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -32,4 +35,13 @@ public interface NavigatorHome
      * @return Root node
      */
     NavigatorNode getRootNode();
+
+    /**
+     * Get runtime node of root
+     *
+     * @param data Runtime data
+     * @return Runtime tree node
+     * @throws Exception Throw it out
+     */
+    RuntimeTreeNode getRuntimeRootNode(RuntimeData data) throws Exception;
 }
