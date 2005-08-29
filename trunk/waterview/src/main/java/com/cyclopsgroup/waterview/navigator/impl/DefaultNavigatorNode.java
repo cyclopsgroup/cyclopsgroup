@@ -165,6 +165,11 @@ class DefaultNavigatorNode implements NavigatorNode
         return path;
     }
 
+    /**
+     * Overwrite or implement method getTitle()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#getTitle()
+     */
     public String getTitle()
     {
         return getAttributes().getString(TITLE_NAME);

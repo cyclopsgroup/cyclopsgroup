@@ -14,7 +14,8 @@
     <inceptionYear>2003</inceptionYear>
     <shortDescription>Simple software for real human</shortDescription>
     <url>www.cyclopsgroup.com</url>
-    <siteDirectory>/var/www/www.cyclopsgroup.com/htdocs</siteDirectory>
+    <siteAddress>shell.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs</siteDirectory>
     <developers>
         <developer>
             <name>Guo, Jiaqi</name>
