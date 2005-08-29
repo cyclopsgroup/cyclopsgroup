@@ -29,55 +29,17 @@ import com.cyclopsgroup.waterview.utils.BaseTagSupport;
  */
 public class NodeTag extends BaseTagSupport
 {
+    private String description;
+
+    private boolean hidden = false;
+
     private String name;
 
     private String page;
 
-    private String title;
-
-    private String description;
-
     private String parentPath;
 
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getPage()
-    {
-        return page;
-    }
-
-    public void setPage(String page)
-    {
-        this.page = page;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
+    private String title;
 
     /**
      * Overwrite or implement method in NodeTag
@@ -87,7 +49,6 @@ public class NodeTag extends BaseTagSupport
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException
     {
-        requireAttribute("name");
         requireAttribute("title");
 
         if (getParent() instanceof TreeTag)
@@ -105,11 +66,122 @@ public class NodeTag extends BaseTagSupport
         NavigationTag nt = (NavigationTag) findAncestorWithClass(NavigationTag.class);
         DefaultNavigatorNode node = new DefaultNavigatorNode(nt.getNavigator(),
                 getName(), parentPath);
+        node.getAttributes().set(DefaultNavigatorNode.PAGE_NAME, getPage());
+        node.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, getTitle());
+        node.getAttributes().set(DefaultNavigatorNode.DESCRIPTION_NAME,
+                getDescription());
+        nt.getNavigator().addNode(node);
         invokeBody(output);
     }
 
+    /**
+     * Getter method for field description
+     *
+     * @return Returns the description.
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * Getter method for field name
+     *
+     * @return Returns the name.
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Getter method for field page
+     *
+     * @return Returns the page.
+     */
+    public String getPage()
+    {
+        return page;
+    }
+
+    /**
+     * Getter method for field parentPath
+     *
+     * @return Returns the parentPath.
+     */
     public String getParentPath()
     {
         return parentPath;
     }
+
+    /**
+     * Getter method for field title
+     *
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * Getter method for field hidden
+     *
+     * @return Returns the hidden.
+     */
+    public boolean isHidden()
+    {
+        return hidden;
+    }
+
+    /**
+     * Setter method for field description
+     *
+     * @param description The description to set.
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    /**
+     * Setter method for field hidden
+     *
+     * @param hidden The hidden to set.
+     */
+    public void setHidden(boolean hidden)
+    {
+        this.hidden = hidden;
+    }
+
+    /**
+     * Setter method for field name
+     *
+     * @param name The name to set.
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * Setter method for field page
+     *
+     * @param page The page to set.
+     */
+    public void setPage(String page)
+    {
+        this.page = page;
+    }
+
+    /**
+     * Setter method for field title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
 }

@@ -31,5 +31,7 @@ public class NavigatorTagLibrary extends TagLibrary
     public NavigatorTagLibrary()
     {
         registerTag("Navigation", NavigationTag.class);
+        registerTag("Tree", TreeTag.class);
+        registerTag("Node", NodeTag.class);
     }
 }

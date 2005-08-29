@@ -1,92 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plexus>
-	<components>
-		<component>
-			<role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
-			<implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<!-- Render engines -->
-		<component>
-			<role>com.cyclopsgroup.waterview.jelly.JellyEngine</role>
-			<implementation>com.cyclopsgroup.waterview.jelly.JellyEngine</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.velocity.VelocityEngine</role>
-			<implementation>com.cyclopsgroup.waterview.velocity.VelocityEngine</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
-			<implementation>com.cyclopsgroup.waterview.jsp.JspEngine</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<!--  A bunch of valves -->
-		<component>
-			<role>com.cyclopsgroup.waterview.core.valves.ParseURLValve</role>
-			<implementation>com.cyclopsgroup.waterview.core.valves.ParseURLValve</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
-			<implementation>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</role>
-			<implementation>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.core.valves.RenderPageValve</role>
-			<implementation>com.cyclopsgroup.waterview.core.valves.RenderPageValve</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.spi.CacheManager</role>
-			<implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<!--  Default Waterview Configurations -->
-		<component>
-			<role>com.cyclopsgroup.waterview.Waterview</role>
-			<implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-			<configuration>
-				<pipelines>
-					<pipeline pattern=".*" role="com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline" />
-				</pipelines>
-			</configuration>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline</role>
-			<implementation>com.cyclopsgroup.waterview.core.pipeline.Pipeline</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-			<configuration>
-				<valves>
-					<valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve" />
-					<valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve" />
-					<valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />
-					<valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve" />
-				</valves>
-			</configuration>
-		</component>
-		<!-- Theme related components -->
-		<component>
-			<role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
-			<implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
-			<lifecycle-handler>avalon</lifecycle-handler>
-		</component>
-		<component>
-			<role>com.cyclopsgroup.waterview.WaterviewComponents</role>
-			<implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
-			<configuration>
-				<component role="com.cyclopsgroup.waterview.Waterview" />
-				<component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
-				<component role="com.cyclopsgroup.waterview.jsp.JspEngine" />
-				<component role="com.cyclopsgroup.waterview.velocity.VelocityEngine" />
-			</configuration>
-		</component>
-	</components>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <!-- Render engines -->
+        <component>
+            <role>com.cyclopsgroup.waterview.jelly.JellyEngine</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.JellyEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.velocity.VelocityEngine</role>
+            <implementation>com.cyclopsgroup.waterview.velocity.VelocityEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.jsp.JspEngine</role>
+            <implementation>com.cyclopsgroup.waterview.jsp.JspEngine</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <!--  A bunch of valves -->
+        <component>
+            <role>com.cyclopsgroup.waterview.core.valves.ParseURLValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.ParseURLValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.core.valves.RenderPageValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.valves.RenderPageValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <!--  Default Waterview Configurations -->
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <pipelines>
+                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline" />
+                </pipelines>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline</role>
+            <implementation>com.cyclopsgroup.waterview.core.pipeline.Pipeline</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <valves>
+                    <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve" />
+                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve" />
+                </valves>
+            </configuration>
+        </component>
+        <!-- Theme related components -->
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
+            <implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.navigator.NavigatorHome</role>
+            <implementation>com.cyclopsgroup.waterview.navigator.impl.DefaultNavigatorHome</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
+            <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
+            <configuration>
+                <component role="com.cyclopsgroup.waterview.Waterview" />
+                <component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
+                <component role="com.cyclopsgroup.waterview.jsp.JspEngine" />
+                <component role="com.cyclopsgroup.waterview.velocity.VelocityEngine" />
+                <component role="com.cyclopsgroup.waterview.navigator.NavigatorHome" />
+            </configuration>
+        </component>
+    </components>
 </plexus>

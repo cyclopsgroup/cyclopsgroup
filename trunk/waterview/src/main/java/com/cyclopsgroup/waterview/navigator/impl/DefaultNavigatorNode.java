@@ -157,4 +157,14 @@ class DefaultNavigatorNode implements NavigatorNode
     {
         return getAttributes().getString(TITLE_NAME);
     }
+
+    /**
+     * Getter method for field end
+     *
+     * @return Returns the end.
+     */
+    public boolean isEnd()
+    {
+        return getChildrenNodes().length == 0;
+    }
 }

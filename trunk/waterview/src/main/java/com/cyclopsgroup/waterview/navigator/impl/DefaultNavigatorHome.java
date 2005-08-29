@@ -28,9 +28,7 @@ import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.jelly.parser.XMLParser;
 
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
@@ -99,10 +97,8 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
 
         JellyContext jc = new JellyContext();
         jc.setVariable(getClass().getName(), this);
-        jc.registerTagLibrary("default", new NavigatorTagLibrary());
-
-        XMLParser parser = new XMLParser();
-        parser.setDefaultNamespaceURI("");
+        jc.registerTagLibrary("http://waterview.cyclopsgroup.com/navigator",
+                new NavigatorTagLibrary());
         StringWriter sw = new StringWriter();
         XMLOutput output = XMLOutput.createXMLOutput(sw);
         for (Enumeration en = getClass().getClassLoader().getResources(
@@ -111,8 +107,7 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         {
             URL resource = (URL) en.nextElement();
             getLogger().info("Reading navigation from " + resource);
-            Script script = parser.parse(resource);
-            script.run(jc, output);
+            jc.runScript(resource, output);
             output.flush();
         }
         getLogger().info(sw.toString());

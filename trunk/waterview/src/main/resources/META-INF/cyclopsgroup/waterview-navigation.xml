@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Navigation>
+<Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="waterview.root" position="/">
         <Node name="top" title="Nonesense Title" hidden="true">
-            <Item page="/Index.jelly" title="Home" description="Home Page" />
+            <Node page="/Index.jelly" title="Home" description="Home Page" />
         </Node>
         <Node name="portal" title="Home" page="/Index.jelly">
-            <Item page="/Intro.jelly" title="Introduction" />
+            <Node page="/Intro.jelly" title="Introduction" />
         </Node>
         <Node name="system" title="System" page="/system/Index.jelly">
             <Node name="status" title="Status" page="/system/status/Index.jelly">
-                <Item page="/system/status/SessionDump.jelly" title="Session Dump" />
-                <Item page="/system/status/GlobalVariables.jelly" title="System Variables" />
+                <Node page="/system/status/SessionDump.jelly" title="Session Dump" />
+                <Node page="/system/status/GlobalVariables.jelly" title="System Variables" />
             </Node>
         </Node>
     </Tree>

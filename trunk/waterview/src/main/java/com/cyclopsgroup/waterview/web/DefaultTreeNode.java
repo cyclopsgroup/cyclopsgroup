@@ -35,6 +35,8 @@ public class DefaultTreeNode implements TreeNode
 
     private Map children = ListOrderedMap.decorate(new HashMap());
 
+    private boolean end;
+
     private String nodeId;
 
     private TreeNode parentNode;
@@ -99,5 +101,25 @@ public class DefaultTreeNode implements TreeNode
     public TreeNode getParentNode()
     {
         return parentNode;
+    }
+
+    /**
+     * Getter method for field end
+     *
+     * @return Returns the end.
+     */
+    public boolean isEnd()
+    {
+        return end;
+    }
+
+    /**
+     * Setter method for field end
+     *
+     * @param end The end to set.
+     */
+    public void setEnd(boolean end)
+    {
+        this.end = end;
     }
 }

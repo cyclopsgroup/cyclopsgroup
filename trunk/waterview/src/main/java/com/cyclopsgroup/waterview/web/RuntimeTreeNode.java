@@ -142,4 +142,14 @@ public class RuntimeTreeNode implements TreeNode
         return parentNode;
     }
 
+    /**
+     * Overwrite or implement method isEnd()
+     *
+     * @see com.cyclopsgroup.waterview.web.TreeNode#isEnd()
+     */
+    public boolean isEnd()
+    {
+        return node.isEnd();
+    }
+
 }

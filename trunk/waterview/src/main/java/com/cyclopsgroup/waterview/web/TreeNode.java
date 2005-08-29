@@ -55,4 +55,11 @@ public interface TreeNode
      * @return Parent node
      */
     TreeNode getParentNode();
+
+    /**
+     * Is end node
+     *
+     * @return True if the node is end
+     */
+    boolean isEnd();
 }
