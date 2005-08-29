@@ -24,28 +24,28 @@
         </component>
         <!--  A bunch of valves -->
         <component>
-            <role>com.cyclopsgroup.waterview.core.valves.ParseURLValve</role>
-            <implementation>com.cyclopsgroup.waterview.core.valves.ParseURLValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.ParseURLValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.ParseURLValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</role>
-            <implementation>com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve</implementation>
+            <role>com.cyclopsgroup.waterview.jelly.DeterminePageValve</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.DeterminePageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</role>
-            <implementation>com.cyclopsgroup.waterview.core.valves.ResolveActionsValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.ResolveActionsValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.ResolveActionsValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.core.valves.RenderPageValve</role>
-            <implementation>com.cyclopsgroup.waterview.core.valves.RenderPageValve</implementation>
+            <role>com.cyclopsgroup.waterview.core.RenderPageValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
-            <implementation>com.cyclopsgroup.waterview.core.cache.NoneCacheManager</implementation>
+            <implementation>com.cyclopsgroup.waterview.core.NoneCacheManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <!--  Default Waterview Configurations -->
@@ -55,20 +55,20 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipelines>
-                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline" />
+                    <pipeline pattern=".*" role="com.cyclopsgroup.waterview.DefaultWaterviewPipeline" />
                 </pipelines>
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.core.pipeline.DefaultWaterviewPipeline</role>
-            <implementation>com.cyclopsgroup.waterview.core.pipeline.Pipeline</implementation>
+            <role>com.cyclopsgroup.waterview.DefaultWaterviewPipeline</role>
+            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <valves>
-                    <valve role="com.cyclopsgroup.waterview.core.valves.ParseURLValve" />
-                    <valve role="com.cyclopsgroup.waterview.core.valves.ResolveActionsValve" />
-                    <valve role="com.cyclopsgroup.waterview.jelly.valves.DeterminePageValve" />
-                    <valve role="com.cyclopsgroup.waterview.core.valves.RenderPageValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
+                    <valve role="com.cyclopsgroup.waterview.jelly.DeterminePageValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.RenderPageValve" />
                 </valves>
             </configuration>
         </component>

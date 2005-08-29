@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.core.pipeline.Pipeline;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 

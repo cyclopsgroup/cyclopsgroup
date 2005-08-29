@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.cache;
+package com.cyclopsgroup.waterview.core;
 
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class LRUCacheManager extends AbstractMapCacheManager implements
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.core.cache.AbstractMapCacheManager#getContent()
+     * @see com.cyclopsgroup.waterview.core.AbstractMapCacheManager#getContent()
      */
     protected Map getContent()
     {

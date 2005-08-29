@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.valves;
+package com.cyclopsgroup.waterview.core;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,6 +23,7 @@ import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.core.ParseURLValve;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 
 /**

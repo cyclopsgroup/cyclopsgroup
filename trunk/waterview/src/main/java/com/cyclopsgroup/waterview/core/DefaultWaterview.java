@@ -34,7 +34,6 @@ import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.core.pipeline.Pipeline;
 
 /**
  * Default waterview implementation

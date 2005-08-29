@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.valves;
+package com.cyclopsgroup.waterview.jelly;
 
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -28,7 +28,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.CacheManager;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;

@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.valves;
+package com.cyclopsgroup.waterview.core;
 
 import java.util.ArrayList;
 import java.util.HashSet;
