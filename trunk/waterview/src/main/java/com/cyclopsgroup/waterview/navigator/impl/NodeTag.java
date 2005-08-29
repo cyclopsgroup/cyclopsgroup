@@ -39,6 +39,8 @@ public class NodeTag extends BaseTagSupport
 
     private String parentPath;
 
+    private String path;
+
     private String title;
 
     /**
@@ -57,7 +59,8 @@ public class NodeTag extends BaseTagSupport
         }
         else if (getParent() instanceof NodeTag)
         {
-            parentPath = ((NodeTag) getParent()).getParentPath();
+            ((NodeTag) getParent()).requireAttribute("name");
+            parentPath = ((NodeTag) getParent()).getPath();
         }
         else
         {
@@ -66,12 +69,24 @@ public class NodeTag extends BaseTagSupport
         NavigationTag nt = (NavigationTag) findAncestorWithClass(NavigationTag.class);
         DefaultNavigatorNode node = new DefaultNavigatorNode(nt.getNavigator(),
                 getName(), parentPath);
+        path = node.getPath();
         node.getAttributes().set(DefaultNavigatorNode.PAGE_NAME, getPage());
         node.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, getTitle());
         node.getAttributes().set(DefaultNavigatorNode.DESCRIPTION_NAME,
                 getDescription());
+
         nt.getNavigator().addNode(node);
         invokeBody(output);
+    }
+
+    /**
+     * Get full path of node
+     *
+     * @return Path of node
+     */
+    public String getPath()
+    {
+        return path;
     }
 
     /**

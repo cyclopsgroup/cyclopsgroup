@@ -28,6 +28,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
@@ -42,15 +43,15 @@ import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 public class DefaultNavigatorHome extends AbstractLogEnabled implements
         NavigatorHome, Initializable
 {
+    private static final String NODE_NAME = DefaultNavigatorHome.class
+            .getName()
+            + "/RuntimeTreeNode";
+
     private Map children;
 
     private Map nodes;
 
     private DefaultNavigatorNode rootNode;
-
-    private static final String NODE_NAME = DefaultNavigatorHome.class
-            .getName()
-            + "/RuntimeTreeNode";
 
     /**
      * Add node
@@ -59,7 +60,10 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
      */
     public void addNode(DefaultNavigatorNode node)
     {
-        nodes.put(node.getPath(), node);
+        if (StringUtils.isNotEmpty(node.getPath()))
+        {
+            nodes.put(node.getPath(), node);
+        }
         if (node.getParentPath() != null)
         {
             children.put(node.getParentPath(), node);
@@ -88,6 +92,28 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     }
 
     /**
+     * Overwrite or implement method getRuntimeRootNode()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getRuntimeRootNode(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public RuntimeTreeNode getRuntimeRootNode(RuntimeData data)
+            throws Exception
+    {
+        RuntimeTreeNode node = null;
+        synchronized (data)
+        {
+            node = (RuntimeTreeNode) data.getSessionContext().get(NODE_NAME);
+            if (node == null)
+            {
+                node = new RuntimeTreeNode(null, getRootNode());
+                node.expand(data);
+                data.getSessionContext().put(NODE_NAME, node);
+            }
+        }
+        return node;
+    }
+
+    /**
      * Overwrite or implement method in DefaultNavigatorHome
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
@@ -112,27 +138,5 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
             getLogger().info("Reading navigation from " + resource);
             jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
-    }
-
-    /**
-     * Overwrite or implement method getRuntimeRootNode()
-     *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getRuntimeRootNode(com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public RuntimeTreeNode getRuntimeRootNode(RuntimeData data)
-            throws Exception
-    {
-        RuntimeTreeNode node = null;
-        synchronized (data)
-        {
-            node = (RuntimeTreeNode) data.getSessionContext().get(NODE_NAME);
-            if (node == null)
-            {
-                node = new RuntimeTreeNode(null, getRootNode());
-                node.expand(data);
-                data.getSessionContext().put(NODE_NAME, node);
-            }
-        }
-        return node;
     }
 }

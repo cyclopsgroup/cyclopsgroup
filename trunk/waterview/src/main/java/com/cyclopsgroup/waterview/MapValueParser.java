@@ -16,9 +16,14 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -37,16 +42,6 @@ public class MapValueParser extends ValueParser
     public MapValueParser(Map map)
     {
         this.map = map;
-    }
-
-    /**
-     * Get map object
-     *
-     * @return Map object
-     */
-    public Map getMap()
-    {
-        return map;
     }
 
     /**
@@ -71,6 +66,15 @@ public class MapValueParser extends ValueParser
         {
             return null;
         }
+        if (!TypeUtils.isIteratable(object))
+        {
+            return TypeUtils.toString(object);
+        }
+        Iterator it = TypeUtils.iterate(object);
+        if (it.hasNext())
+        {
+            return TypeUtils.toString(it.next());
+        }
         return null;
     }
 
@@ -86,7 +90,25 @@ public class MapValueParser extends ValueParser
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        return null;
+        ArrayList values = new ArrayList();
+        CollectionUtils.addAll(values, TypeUtils.iterate(object));
+        String[] ret = new String[values.size()];
+        for (int i = 0; i < ret.length; i++)
+        {
+            Object value = values.get(i);
+            ret[i] = TypeUtils.toString(value);
+        }
+        return ret;
+    }
+
+    /**
+     * Get map object
+     *
+     * @return Map object
+     */
+    public Map getMap()
+    {
+        return map;
     }
 
     /**

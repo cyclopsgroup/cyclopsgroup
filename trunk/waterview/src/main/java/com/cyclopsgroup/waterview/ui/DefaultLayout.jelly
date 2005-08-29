@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>
                                         <j:forEach var="node" items="${rootNode.childrenNodes}">
-                                            ${node.attributes.getString('name')}
+                                            ${node.attributes.getString('title')}
                                         </j:forEach>
                                     </td>
                                 </tr>

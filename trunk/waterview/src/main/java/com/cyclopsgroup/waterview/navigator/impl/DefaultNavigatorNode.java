@@ -19,6 +19,8 @@ package com.cyclopsgroup.waterview.navigator.impl;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclopsgroup.waterview.MapValueParser;
 import com.cyclopsgroup.waterview.ValueParser;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
@@ -50,20 +52,23 @@ class DefaultNavigatorNode implements NavigatorNode
     DefaultNavigatorNode(DefaultNavigatorHome nav, String name,
             String parentPath)
     {
-        if (parentPath != null)
+        if (StringUtils.isNotEmpty(name))
         {
-            if (parentPath.equals("/"))
+            if (parentPath != null)
             {
-                this.path = "/" + name;
+                if (parentPath.equals("/"))
+                {
+                    this.path = "/" + name;
+                }
+                else
+                {
+                    this.path = parentPath + '/' + name;
+                }
             }
             else
             {
-                this.path = parentPath + '/' + name;
+                this.path = name;
             }
-        }
-        else
-        {
-            this.path = name;
         }
         this.parentPath = parentPath;
         this.navigatorHome = nav;
