@@ -43,12 +43,12 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
 {
     private ServiceManager serviceManager;
 
-    private transient List valveRoles = new ArrayList();
+    private transient List valveRoles;
 
     private Vector valves = new Vector();
 
     /**
-     * Add valve into pipeline
+     * Add valve
      *
      * @param valve Valve to add
      */
@@ -64,6 +64,7 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      */
     public void configure(Configuration conf) throws ConfigurationException
     {
+        valveRoles = new ArrayList();
         Configuration[] confs = conf.getChild("valves").getChildren("valve");
         for (int i = 0; i < confs.length; i++)
         {
@@ -92,11 +93,12 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      */
     public void initialize() throws Exception
     {
+        valves = new Vector();
         for (Iterator i = valveRoles.iterator(); i.hasNext();)
         {
             String valveRole = (String) i.next();
             Valve valve = (Valve) serviceManager.lookup(valveRole);
-            addValve(valve);
+            valves.add(valve);
         }
     }
 
