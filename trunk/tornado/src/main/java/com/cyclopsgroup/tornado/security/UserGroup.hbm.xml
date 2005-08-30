@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security">
+    <class name="UserGroup" table="c_t_user_group">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.UserGroupBase</meta>
+        <id name="id" length="128" type="string" column="user_group_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="userId" type="string" column="user_id" not-null="true" />
+        <many-to-one name="user" class="com.cyclopsgroup.tornado.security.User" column="user_id" insert="false"
+            update="false" />
+        <property name="groupId" type="string" column="group_id" not-null="true" />
+        <many-to-one name="group" class="com.cyclopsgroup.tornado.security.Group" column="group_id" insert="false"
+            update="false" />
+    </class>
+</hibernate-mapping>

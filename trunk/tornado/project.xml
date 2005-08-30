@@ -29,6 +29,15 @@
     </developers>
     <dependencies>
         <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>2.7.5</version>
+            <url>http://antlr.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
             <version>2.0</version>
@@ -42,6 +51,14 @@
             <artifactId>avalon-framework</artifactId>
             <version>4.1.4</version>
             <url>http://avalon.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.0.2</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -137,6 +154,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>1.1</version>
+            <url>http://ehcache.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>hibernate</groupId>
             <artifactId>hibernate</artifactId>
             <version>3.0.5</version>
@@ -164,6 +190,15 @@
             <groupId>logkit</groupId>
             <artifactId>logkit</artifactId>
             <version>1.0.1</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>mysql-connector-java</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>3.0.14</version>
+            <url>http://www.mysql.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
