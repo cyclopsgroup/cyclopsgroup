@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.sql;
+package com.cyclopsgroup.tornado.sql;
 
 import java.util.HashMap;
 import java.util.Hashtable;

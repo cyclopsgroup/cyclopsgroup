@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.hibernate;
+package com.cyclopsgroup.tornado.hibernate;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;

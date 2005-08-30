@@ -14,12 +14,12 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.hibernate;
+package com.cyclopsgroup.tornado.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.cyclopsgroup.tornado.components.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.sql.DataSourceManager;
 
 /**
  * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>

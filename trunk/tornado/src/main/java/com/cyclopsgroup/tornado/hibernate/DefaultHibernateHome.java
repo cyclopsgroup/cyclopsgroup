@@ -5,7 +5,7 @@
  * Use is subject to license terms. License Agreement available at
  * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
  */
-package com.cyclopsgroup.tornado.components.hibernate;
+package com.cyclopsgroup.tornado.hibernate;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -35,7 +35,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.cyclopsgroup.tornado.components.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.sql.DataSourceManager;
 import com.cyclopsgroup.tornado.utils.ClassComparator;
 import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
@@ -60,7 +60,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method closeSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#closeSession()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSession()
      */
     public void closeSession()
     {
@@ -70,7 +70,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method closeSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#closeSession(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSession(java.lang.String)
      */
     public void closeSession(String dataSourceName)
     {
@@ -102,7 +102,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method closeSessions()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#closeSessions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSessions()
      */
     public void closeSessions()
     {
@@ -121,7 +121,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method commitTransaction()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#commitTransaction()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction()
      */
     public void commitTransaction() throws Exception
     {
@@ -131,7 +131,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method commitTransaction()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#commitTransaction(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction(java.lang.String)
      */
     public void commitTransaction(String dataSourceName) throws Exception
     {
@@ -156,7 +156,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method commitTransactions()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#commitTransactions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransactions()
      */
     public void commitTransactions() throws Exception
     {
@@ -215,7 +215,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getEntityClasses()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getEntityClasses()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getEntityClasses()
      */
     public Class[] getEntityClasses()
     {
@@ -225,7 +225,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getSession()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession()
      */
     public Session getSession() throws Exception
     {
@@ -235,7 +235,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getSession(boolean)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(boolean)
      */
     public synchronized Session getSession(boolean withTransaction)
             throws Exception
@@ -246,7 +246,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getSession(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String)
      */
     public Session getSession(String dataSourceName) throws Exception
     {
@@ -256,7 +256,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getSession(java.lang.String, boolean)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String, boolean)
      */
     public Session getSession(String dataSourceName, boolean withTransaction)
             throws Exception
@@ -304,7 +304,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getSessionFactory()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#getSessionFactory(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSessionFactory(java.lang.String)
      */
     public SessionFactory getSessionFactory(String dataSourceName)
             throws Exception
@@ -365,7 +365,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method rollbackTransaction()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#rollbackTransaction()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction()
      */
     public void rollbackTransaction() throws Exception
     {
@@ -375,7 +375,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method rollbackTransaction()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#rollbackTransaction(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction(java.lang.String)
      */
     public void rollbackTransaction(String dataSourceName) throws Exception
     {
@@ -395,7 +395,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method rollbackTransactions()
      *
-     * @see com.cyclopsgroup.tornado.components.hibernate.HibernateHome#rollbackTransactions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransactions()
      */
     public void rollbackTransactions() throws Exception
     {

@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.components.sql;
+package com.cyclopsgroup.tornado.sql;
 
 import java.util.Properties;
 
@@ -55,7 +55,7 @@ public class DBCPDataSourceHome extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getDataSource()
      *
-     * @see com.cyclopsgroup.tornado.components.sql.DataSourceHome#getDataSource()
+     * @see com.cyclopsgroup.tornado.sql.DataSourceHome#getDataSource()
      */
     public DataSource getDataSource()
     {

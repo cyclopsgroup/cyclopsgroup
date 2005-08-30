@@ -5,7 +5,7 @@
  * Use is subject to license terms. License Agreement available at
  * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
  */
-package com.cyclopsgroup.tornado.components.hibernate;
+package com.cyclopsgroup.tornado.hibernate;
 
 import java.sql.Connection;
 import java.util.HashMap;

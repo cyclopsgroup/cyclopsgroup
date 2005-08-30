@@ -14,18 +14,24 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.jelly.deftaglib;
+package com.cyclopsgroup.tornado.sql;
 
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
-import org.apache.commons.jelly.TagSupport;
-import org.apache.commons.jelly.XMLOutput;
+import javax.sql.DataSource;
 
-public class TornadoTag extends TagSupport
+/**
+ * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
+ *
+ * Data source factory interface
+ */
+public interface DataSourceHome
 {
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
-    {
-        invokeBody(output);
-    }
+    /** Empty data source array */
+    DataSource[] EMPTY_DATASOURCE_ARRAY = new DataSource[0];
+
+    /**
+     * Get data source 
+     *
+     * @return Data source object
+     */
+    DataSource getDataSource();
 }
