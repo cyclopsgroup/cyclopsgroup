@@ -225,7 +225,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>waterview</groupId>
+            <groupId>com.cyclopsgroup</groupId>
             <artifactId>waterview</artifactId>
             <version>SNAPSHOT</version>
             <url>http://www.cyclopsgroup.com/projects/waterview</url>
