@@ -28,6 +28,10 @@ import com.cyclopsgroup.waterview.utils.FakeServiceManager;
  */
 public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
 {
+    private String page;
+
+    private Path pageObject;
+
     /**
      * Constructor for class FakePageRuntime
      *
@@ -56,6 +60,16 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     }
 
     /**
+     * Overwrite or implement method getPage()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#getPage()
+     */
+    public Path getPage()
+    {
+        return pageObject;
+    }
+
+    /**
      * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
      */
     public String getSessionId()
@@ -79,6 +93,69 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
      */
     public void setPage(String page)
     {
-        //do nothing
+        this.page = page;
+        this.pageObject = new Path()
+        {
+            /**
+             * Overwrite or implement method getExtension()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getExtension()
+             */
+            public String getExtension()
+            {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            /**
+             * Overwrite or implement method getFullPath()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getFullPath()
+             */
+            public String getFullPath()
+            {
+                return getPath();
+            }
+
+            /**
+             * Overwrite or implement method getPackage()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getPackage()
+             */
+            public String getPackage()
+            {
+                return "";
+            }
+
+            /**
+             * Overwrite or implement method getPackageAlias()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getPackageAlias()
+             */
+            public String getPackageAlias()
+            {
+                return "";
+            }
+
+            /**
+             * Overwrite or implement method getPath()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getPath()
+             */
+            public String getPath()
+            {
+                return MockRuntimeData.this.page;
+            }
+
+            /**
+             * Overwrite or implement method getPathWithoutExtension()
+             *
+             * @see com.cyclopsgroup.waterview.Path#getPathWithoutExtension()
+             */
+            public String getPathWithoutExtension()
+            {
+                return getPath();
+            }
+        };
     }
 }

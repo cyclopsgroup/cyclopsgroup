@@ -17,10 +17,13 @@
 package com.cyclopsgroup.waterview.navigator.impl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -46,6 +49,10 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     private static final String NODE_NAME = DefaultNavigatorHome.class
             .getName()
             + "/RuntimeTreeNode";
+
+    private static final String NODE_PATH_NAME = DefaultNavigatorHome.class
+            .getName()
+            + "/NodePath";
 
     private Map children;
 
@@ -76,9 +83,61 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         return c == null ? Collections.EMPTY_SET : c;
     }
 
-    DefaultNavigatorNode getNode(String path)
+    /**
+     * Get node based on path
+     *
+     * @param path Path for node
+     * @return Node object or null if not found
+     */
+    public NavigatorNode getNode(String path)
     {
-        return (DefaultNavigatorNode) nodes.get(path);
+        if (StringUtils.isEmpty(path))
+        {
+            return null;
+        }
+        return (NavigatorNode) nodes.get(path);
+    }
+
+    /**
+     * Overwrite or implement method getPath()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getPath(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public synchronized NavigatorNode[] getPath(RuntimeData data)
+    {
+        List path = (List) data.getRequestContext().get(NODE_PATH_NAME);
+        if (path == null)
+        {
+            NavigatorNode node = null;
+            for (Iterator i = children.values().iterator(); i.hasNext();)
+            {
+                NavigatorNode n = (NavigatorNode) i.next();
+                if (StringUtils.equals(n.getPage(), data.getPage()
+                        .getFullPath()))
+                {
+                    node = n;
+                    break;
+                }
+            }
+            if (node == null)
+            {
+                path = (List) data.getSessionContext().get(NODE_PATH_NAME);
+            }
+            else
+            {
+                List list = new ArrayList();
+                NavigatorNode n = node;
+                while (n != null)
+                {
+                    list.add(0, n);
+                    n = n.getParentNavigatorNode();
+                }
+                path = list;
+            }
+            data.getRequestContext().put(NODE_PATH_NAME, path);
+        }
+        data.getSessionContext().put(NODE_PATH_NAME, path);
+        return (NavigatorNode[]) path.toArray(NavigatorNode.EMPTY_ARRAY);
     }
 
     /**
@@ -138,5 +197,24 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
             getLogger().info("Reading navigation from " + resource);
             jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
+    }
+
+    /**
+     * Overwrite or implement method isCurrent()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#isCurrent(com.cyclopsgroup.waterview.navigator.NavigatorNode, com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public boolean isCurrent(NavigatorNode node, RuntimeData data)
+    {
+        NavigatorNode[] path = getPath(data);
+        for (int i = 0; i < path.length; i++)
+        {
+            NavigatorNode n = path[i];
+            if (n.getNodeId().equals(node.getNodeId()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

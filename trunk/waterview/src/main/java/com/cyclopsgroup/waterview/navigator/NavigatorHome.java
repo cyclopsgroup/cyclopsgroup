@@ -30,6 +30,14 @@ public interface NavigatorHome
     String ROLE = NavigatorHome.class.getName();
 
     /**
+     * Get node path to current page
+     *
+     * @param data Runtime data
+     * @return Path list
+     */
+    NavigatorNode[] getPath(RuntimeData data);
+
+    /**
      * Get root node
      *
      * @return Root node
@@ -44,4 +52,13 @@ public interface NavigatorHome
      * @throws Exception Throw it out
      */
     RuntimeTreeNode getRuntimeRootNode(RuntimeData data) throws Exception;
+
+    /**
+     * If given node is currently opened
+     *
+     * @param node Node object
+     * @param data Runtime data object
+     * @return True if node is opened
+     */
+    boolean isCurrent(NavigatorNode node, RuntimeData data);
 }
