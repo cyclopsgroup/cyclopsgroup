@@ -16,3 +16,7 @@ th {
 .waterviewViewTitle {
 	font-weight: bold;
 }
+
+a.r {
+	color: white !important;
+}

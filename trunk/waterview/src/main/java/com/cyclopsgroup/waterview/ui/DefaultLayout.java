@@ -40,5 +40,6 @@ public class DefaultLayout implements Module
                 .lookup(NavigatorHome.ROLE);
         RuntimeTreeNode node = navigator.getRuntimeRootNode(data);
         context.put("rootNode", node);
+        context.put("navigator", navigator);
     }
 }

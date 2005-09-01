@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
+import com.cyclopsgroup.waterview.web.TreeNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -56,6 +56,8 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
 
     private Map children;
 
+    private Map pageIndex;
+
     private Map nodes;
 
     private DefaultNavigatorNode rootNode;
@@ -74,6 +76,10 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         if (node.getParentPath() != null)
         {
             children.put(node.getParentPath(), node);
+        }
+        if (StringUtils.isNotEmpty(node.getPage()))
+        {
+            pageIndex.put(node.getPage(), node);
         }
     }
 
@@ -108,17 +114,8 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         List path = (List) data.getRequestContext().get(NODE_PATH_NAME);
         if (path == null)
         {
-            NavigatorNode node = null;
-            for (Iterator i = children.values().iterator(); i.hasNext();)
-            {
-                NavigatorNode n = (NavigatorNode) i.next();
-                if (StringUtils.equals(n.getPage(), data.getPage()
-                        .getFullPath()))
-                {
-                    node = n;
-                    break;
-                }
-            }
+            NavigatorNode node = (NavigatorNode) pageIndex.get(data.getPage()
+                    .getFullPath());
             if (node == null)
             {
                 path = (List) data.getSessionContext().get(NODE_PATH_NAME);
@@ -131,6 +128,17 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
                 {
                     list.add(0, n);
                     n = n.getParentNavigatorNode();
+                }
+                path = list;
+            }
+            if (path == null)
+            {
+                List list = new ArrayList();
+                list.add(rootNode);
+                TreeNode[] childNodes = rootNode.getChildrenNodes();
+                if (childNodes.length > 0)
+                {
+                    list.add(childNodes[0]);
                 }
                 path = list;
             }
@@ -181,6 +189,7 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     {
         nodes = new Hashtable();
         children = new MultiHashMap();
+        pageIndex = new Hashtable();
 
         rootNode = new DefaultNavigatorNode(this, "/", null);
         addNode(rootNode);

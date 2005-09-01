@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="waterview.root" position="/">
-        <Node name="top" title="Nonesense Title" hidden="true">
-            <Node page="/Index.jelly" title="Home" description="Home Page" />
+        <Node name="home" title="Home" page="/Index.jelly">
+            <Node page="/Login.jelly" title="User Login" />
         </Node>
-        <Node name="portal" title="Home" page="/Index.jelly">
-            <Node page="/Intro.jelly" title="Introduction" />
+        <Node name="system" title="System" page="/waterview/system/Index.jelly">
+            <Node name="status" title="Status" page="/waterview/system/status/Index.jelly">
+                <Node page="/waterview/system/status/SessionDump.jelly" title="Session Dump" />
+                <Node page="/waterview/system/status/GlobalVariables.jelly" title="System Variables" />
+            </Node>
         </Node>
-        <Node name="system" title="System" page="/system/Index.jelly">
-            <Node name="status" title="Status" page="/system/status/Index.jelly">
-                <Node page="/system/status/SessionDump.jelly" title="Session Dump" />
-                <Node page="/system/status/GlobalVariables.jelly" title="System Variables" />
+        <Node name="help" title="Help" page="/waterview/help/Index.jelly">
+            <Node title="Help Content" page="/waterview/help/Content.jelly" />
+            <Node name="abouts" title="About" page="/waterview/help/about/Index.jelly">
+                <Node title="About Waterviwe" page="/waterview/help/about/About.helly" />
             </Node>
         </Node>
     </Tree>

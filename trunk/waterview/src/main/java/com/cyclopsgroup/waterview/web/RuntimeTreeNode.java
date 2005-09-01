@@ -123,6 +123,16 @@ public class RuntimeTreeNode implements TreeNode
     }
 
     /**
+     * Get static node it contains
+     *
+     * @return Node it contains
+     */
+    public TreeNode getContent()
+    {
+        return node;
+    }
+
+    /**
      * Overwrite or implement method getNodeId()
      *
      * @see com.cyclopsgroup.waterview.web.TreeNode#getNodeId()
@@ -151,5 +161,4 @@ public class RuntimeTreeNode implements TreeNode
     {
         return node.isEnd();
     }
-
 }
