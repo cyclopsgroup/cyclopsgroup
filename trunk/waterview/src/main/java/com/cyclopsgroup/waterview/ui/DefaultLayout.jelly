@@ -31,9 +31,10 @@
                                         <table border="0" cellspacing="0" cellpadding="5">
                                             <tr>
                                                 <td />
-                                                <j:forEach var="runtimeNode" items="${rootNode.childrenNodes}">
+                                                <j:forEach var="runtimeNode" items="${tabNodes}">
                                                     <j:set var="node" value="${runtimeNode.content}" />
-                                                    <j:set var="isCurrent" value="${navigator.isCurrent(node, data)}" />
+                                                    <j:set var="isCurrent"
+                                                        value="${node.isParent(data.page.fullPath) or node.page eq data.page.fullPath}" />
                                                     <j:if test="${isCurrent}">
                                                         <td class="waterviewSelectedTab">
                                                             <a href="${link.setPage(node.page)}" class="r">

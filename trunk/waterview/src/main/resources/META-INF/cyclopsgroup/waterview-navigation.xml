@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="waterview.root" position="/">
-        <Node name="home" title="Home" page="/Index.jelly">
-            <Node page="/Login.jelly" title="User Login" />
+        <Node name="home" title="Home" page="/waterview/Index.jelly">
+            <Node page="/waterview/Login.jelly" title="User Login" />
         </Node>
         <Node name="system" title="System" page="/waterview/system/Index.jelly">
             <Node name="status" title="Status" page="/waterview/system/status/Index.jelly">

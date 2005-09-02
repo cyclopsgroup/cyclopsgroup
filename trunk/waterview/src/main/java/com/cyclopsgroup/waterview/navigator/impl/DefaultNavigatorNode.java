@@ -16,13 +16,17 @@
  */
 package com.cyclopsgroup.waterview.navigator.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.MapValueParser;
 import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.navigator.BaseNavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.web.TreeNode;
 
@@ -31,7 +35,7 @@ import com.cyclopsgroup.waterview.web.TreeNode;
  *
  * Default implementation of navigator node
  */
-class DefaultNavigatorNode implements NavigatorNode
+class DefaultNavigatorNode extends BaseNavigatorNode
 {
     static final String DESCRIPTION_NAME = "description";
 
@@ -44,6 +48,8 @@ class DefaultNavigatorNode implements NavigatorNode
     private ValueParser attributes = new MapValueParser(new HashMap());
 
     private DefaultNavigatorHome navigatorHome;
+
+    private NavigatorNode[] parentNodes;
 
     private String parentPath;
 
@@ -128,21 +134,33 @@ class DefaultNavigatorNode implements NavigatorNode
     /**
      * Overwrite or implement method in DefaultNavigatorNode
      *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#getParentNavigatorNode()
-     */
-    public NavigatorNode getParentNavigatorNode()
-    {
-        return navigatorHome.getNode(parentPath);
-    }
-
-    /**
-     * Overwrite or implement method in DefaultNavigatorNode
-     *
      * @see com.cyclopsgroup.waterview.web.TreeNode#getParentNode()
      */
     public TreeNode getParentNode()
     {
-        return getParentNavigatorNode();
+        return navigatorHome.getNodeByPath(parentPath);
+    }
+
+    /**
+     * Overwrite or implement method getParentNodes()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#getParentNodes()
+     */
+    public synchronized NavigatorNode[] getParentNodes()
+    {
+        if (parentNodes == null)
+        {
+            List parents = new ArrayList();
+            NavigatorNode parent = (NavigatorNode) getParentNode();
+            if (parent != null)
+            {
+                CollectionUtils.addAll(parents, parent.getParentNodes());
+                parents.add(parent);
+            }
+            parentNodes = (NavigatorNode[]) parents
+                    .toArray(NavigatorNode.EMPTY_ARRAY);
+        }
+        return parentNodes;
     }
 
     /**
@@ -173,15 +191,5 @@ class DefaultNavigatorNode implements NavigatorNode
     public String getTitle()
     {
         return getAttributes().getString(TITLE_NAME);
-    }
-
-    /**
-     * Getter method for field end
-     *
-     * @return Returns the end.
-     */
-    public boolean isEnd()
-    {
-        return getChildrenNodes().length == 0;
     }
 }

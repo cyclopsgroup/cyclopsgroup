@@ -67,6 +67,17 @@ public class RuntimeTreeNode implements TreeNode
     }
 
     /**
+     * Create child
+     *
+     * @param node Nested node
+     * @return Created runtime node
+     */
+    protected RuntimeTreeNode doCreateChild(TreeNode node)
+    {
+        return new RuntimeTreeNode(this, node);
+    }
+
+    /**
      * Filter child nodes
      *
      * @param nodes All child nodes
@@ -96,7 +107,7 @@ public class RuntimeTreeNode implements TreeNode
         for (int i = 0; i < childNodes.length; i++)
         {
             TreeNode node = childNodes[i];
-            RuntimeTreeNode n = new RuntimeTreeNode(this, node);
+            RuntimeTreeNode n = doCreateChild(node);
             children.put(n.getNodeId(), n);
         }
         expanded = true;

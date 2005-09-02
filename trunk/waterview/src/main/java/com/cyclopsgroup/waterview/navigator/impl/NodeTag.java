@@ -52,6 +52,7 @@ public class NodeTag extends BaseTagSupport
             JellyTagException
     {
         requireAttribute("title");
+        requireAttribute("page");
 
         if (getParent() instanceof TreeTag)
         {

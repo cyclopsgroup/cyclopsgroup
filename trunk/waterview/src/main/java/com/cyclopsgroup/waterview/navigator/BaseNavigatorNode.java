@@ -16,51 +16,39 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
-import com.cyclopsgroup.waterview.web.TreeNode;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * Navigator node
+ * Base abstract implementation of navigator node
  */
-public interface NavigatorNode extends TreeNode
+public abstract class BaseNavigatorNode implements NavigatorNode
 {
-    /** Empty nodes */
-    NavigatorNode[] EMPTY_ARRAY = new NavigatorNode[0];
+    /**
+     * Getter method for field end
+     *
+     * @return Returns the end.
+     */
+    public boolean isEnd()
+    {
+        return getChildrenNodes().length == 0;
+    }
 
     /**
-     * Get description of node
+     * Overwrite or implement method isParent()
      *
-     * @return Description of node
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#isParent(java.lang.String)
      */
-    String getDescription();
-
-    /**
-     * Get linked page of node
-     *
-     * @return Linked page of node
-     */
-    String getPage();
-
-    /**
-     * Get array of parent nodes
-     *
-     * @return Array of parent nodes
-     */
-    NavigatorNode[] getParentNodes();
-
-    /**
-     * Get title of node
-     *
-     * @return Title of node
-     */
-    String getTitle();
-
-    /**
-     * Check if given page is parent of this node
-     *
-     * @param page Page path
-     * @return True if it is
-     */
-    boolean isParent(String page);
+    public boolean isParent(String page)
+    {
+        NavigatorNode[] parents = getParentNodes();
+        for (int i = 0; i < parents.length; i++)
+        {
+            NavigatorNode parent = parents[i];
+            if (parent.getPage().equals(page))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

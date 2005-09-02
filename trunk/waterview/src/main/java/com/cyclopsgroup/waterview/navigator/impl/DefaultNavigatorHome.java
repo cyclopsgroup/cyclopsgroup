@@ -17,25 +17,22 @@
 package com.cyclopsgroup.waterview.navigator.impl;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.MultiHashMap;
+import org.apache.commons.collections.MultiMap;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
-import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 import com.cyclopsgroup.waterview.web.TreeNode;
 
 /**
@@ -46,19 +43,12 @@ import com.cyclopsgroup.waterview.web.TreeNode;
 public class DefaultNavigatorHome extends AbstractLogEnabled implements
         NavigatorHome, Initializable
 {
-    private static final String NODE_NAME = DefaultNavigatorHome.class
-            .getName()
-            + "/RuntimeTreeNode";
-
-    private static final String NODE_PATH_NAME = DefaultNavigatorHome.class
-            .getName()
-            + "/NodePath";
-
-    private Map children;
 
     private Map pageIndex;
 
-    private Map nodes;
+    private MultiMap parentPathIndex;
+
+    private Map pathIndex;
 
     private DefaultNavigatorNode rootNode;
 
@@ -71,22 +61,29 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     {
         if (StringUtils.isNotEmpty(node.getPath()))
         {
-            nodes.put(node.getPath(), node);
+            pathIndex.put(node.getPath(), node);
         }
         if (node.getParentPath() != null)
         {
-            children.put(node.getParentPath(), node);
+            parentPathIndex.put(node.getParentPath(), node);
         }
-        if (StringUtils.isNotEmpty(node.getPage()))
-        {
-            pageIndex.put(node.getPage(), node);
-        }
+        pageIndex.put(node.getPage(), node);
     }
 
     Collection getChildren(String path)
     {
-        Collection c = (Collection) children.get(path);
+        Collection c = (Collection) parentPathIndex.get(path);
         return c == null ? Collections.EMPTY_SET : c;
+    }
+
+    /**
+     * Overwrite or implement method getNodeByPage()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getNodeByPage(java.lang.String)
+     */
+    public NavigatorNode getNodeByPage(String page)
+    {
+        return (NavigatorNode) pageIndex.get(page);
     }
 
     /**
@@ -95,57 +92,13 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
      * @param path Path for node
      * @return Node object or null if not found
      */
-    public NavigatorNode getNode(String path)
+    NavigatorNode getNodeByPath(String path)
     {
         if (StringUtils.isEmpty(path))
         {
             return null;
         }
-        return (NavigatorNode) nodes.get(path);
-    }
-
-    /**
-     * Overwrite or implement method getPath()
-     *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getPath(com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public synchronized NavigatorNode[] getPath(RuntimeData data)
-    {
-        List path = (List) data.getRequestContext().get(NODE_PATH_NAME);
-        if (path == null)
-        {
-            NavigatorNode node = (NavigatorNode) pageIndex.get(data.getPage()
-                    .getFullPath());
-            if (node == null)
-            {
-                path = (List) data.getSessionContext().get(NODE_PATH_NAME);
-            }
-            else
-            {
-                List list = new ArrayList();
-                NavigatorNode n = node;
-                while (n != null)
-                {
-                    list.add(0, n);
-                    n = n.getParentNavigatorNode();
-                }
-                path = list;
-            }
-            if (path == null)
-            {
-                List list = new ArrayList();
-                list.add(rootNode);
-                TreeNode[] childNodes = rootNode.getChildrenNodes();
-                if (childNodes.length > 0)
-                {
-                    list.add(childNodes[0]);
-                }
-                path = list;
-            }
-            data.getRequestContext().put(NODE_PATH_NAME, path);
-        }
-        data.getSessionContext().put(NODE_PATH_NAME, path);
-        return (NavigatorNode[]) path.toArray(NavigatorNode.EMPTY_ARRAY);
+        return (NavigatorNode) pathIndex.get(path);
     }
 
     /**
@@ -159,36 +112,14 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
     }
 
     /**
-     * Overwrite or implement method getRuntimeRootNode()
-     *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getRuntimeRootNode(com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public RuntimeTreeNode getRuntimeRootNode(RuntimeData data)
-            throws Exception
-    {
-        RuntimeTreeNode node = null;
-        synchronized (data)
-        {
-            node = (RuntimeTreeNode) data.getSessionContext().get(NODE_NAME);
-            if (node == null)
-            {
-                node = new RuntimeTreeNode(null, getRootNode());
-                node.expand(data);
-                data.getSessionContext().put(NODE_NAME, node);
-            }
-        }
-        return node;
-    }
-
-    /**
      * Overwrite or implement method in DefaultNavigatorHome
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception
     {
-        nodes = new Hashtable();
-        children = new MultiHashMap();
+        pathIndex = new Hashtable();
+        parentPathIndex = new MultiHashMap();
         pageIndex = new Hashtable();
 
         rootNode = new DefaultNavigatorNode(this, "/", null);
@@ -206,24 +137,17 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
             getLogger().info("Reading navigation from " + resource);
             jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
+        populateNode(rootNode);
     }
 
-    /**
-     * Overwrite or implement method isCurrent()
-     *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#isCurrent(com.cyclopsgroup.waterview.navigator.NavigatorNode, com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public boolean isCurrent(NavigatorNode node, RuntimeData data)
+    private void populateNode(NavigatorNode node)
     {
-        NavigatorNode[] path = getPath(data);
-        for (int i = 0; i < path.length; i++)
+        node.getParentNodes();
+        TreeNode[] nodes = node.getChildrenNodes();
+        for (int i = 0; i < nodes.length; i++)
         {
-            NavigatorNode n = path[i];
-            if (n.getNodeId().equals(node.getNodeId()))
-            {
-                return true;
-            }
+            NavigatorNode child = (NavigatorNode) nodes[i];
+            populateNode(child);
         }
-        return false;
     }
 }

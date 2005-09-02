@@ -16,9 +16,6 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -30,12 +27,12 @@ public interface NavigatorHome
     String ROLE = NavigatorHome.class.getName();
 
     /**
-     * Get node path to current page
+     * Get node by page
      *
-     * @param data Runtime data
-     * @return Path list
+     * @param page Page path
+     * @return Navigator node or null if not found
      */
-    NavigatorNode[] getPath(RuntimeData data);
+    NavigatorNode getNodeByPage(String page);
 
     /**
      * Get root node
@@ -43,22 +40,4 @@ public interface NavigatorHome
      * @return Root node
      */
     NavigatorNode getRootNode();
-
-    /**
-     * Get runtime node of root
-     *
-     * @param data Runtime data
-     * @return Runtime tree node
-     * @throws Exception Throw it out
-     */
-    RuntimeTreeNode getRuntimeRootNode(RuntimeData data) throws Exception;
-
-    /**
-     * If given node is currently opened
-     *
-     * @param node Node object
-     * @param data Runtime data object
-     * @return True if node is opened
-     */
-    boolean isCurrent(NavigatorNode node, RuntimeData data);
 }

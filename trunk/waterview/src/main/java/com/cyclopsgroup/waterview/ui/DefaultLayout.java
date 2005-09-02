@@ -19,8 +19,7 @@ package com.cyclopsgroup.waterview.ui;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.navigator.NavigatorHome;
-import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
+import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -36,10 +35,7 @@ public class DefaultLayout implements Module
      */
     public void execute(RuntimeData data, Context context) throws Exception
     {
-        NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
-                .lookup(NavigatorHome.ROLE);
-        RuntimeTreeNode node = navigator.getRuntimeRootNode(data);
-        context.put("rootNode", node);
-        context.put("navigator", navigator);
+        RuntimeNavigatorNode root = RuntimeNavigatorNode.getRoot(data);
+        context.put("tabNodes", root.getChildrenNodes());
     }
 }

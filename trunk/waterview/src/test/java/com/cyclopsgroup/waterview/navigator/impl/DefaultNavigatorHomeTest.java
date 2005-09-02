@@ -16,11 +16,8 @@
  */
 package com.cyclopsgroup.waterview.navigator.impl;
 
-import java.io.PrintWriter;
-
 import org.codehaus.plexus.PlexusTestCase;
 
-import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 
@@ -39,14 +36,9 @@ public class DefaultNavigatorHomeTest extends PlexusTestCase
     public void testGetPath() throws Exception
     {
         NavigatorHome nav = (NavigatorHome) lookup(NavigatorHome.ROLE);
-        MockRuntimeData data = new MockRuntimeData(new PrintWriter(System.out));
-        data.setPage("/system/status/SessionDump.jelly");
-        NavigatorNode[] path = nav.getPath(data);
-        assertEquals(4, path.length);
-        for (int i = 0; i < path.length; i++)
-        {
-            NavigatorNode node = path[i];
-            System.out.println(node.getPage());
-        }
+        NavigatorNode node = nav
+                .getNodeByPage("/waterview/system/status/SessionDump.jelly");
+        NavigatorNode[] path = node.getParentNodes();
+        assertEquals(3, path.length);
     }
 }
