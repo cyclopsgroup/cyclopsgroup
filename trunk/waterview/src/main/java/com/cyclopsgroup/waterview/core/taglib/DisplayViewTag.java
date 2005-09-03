@@ -18,35 +18,21 @@ package com.cyclopsgroup.waterview.core.taglib;
 
 import java.util.HashMap;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.DefaultContext;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tag to display given view
  */
-public class DisplayViewTag extends BaseTag
+public class DisplayViewTag extends TagSupport
 {
     private View view;
-
-    /**
-     * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
-     */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
-    {
-        requireAttribute("view");
-        JellyContextAdapter adapter = new JellyContextAdapter(getContext());
-        DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
-        getView().render(getRuntimeData(), ctx);
-    }
 
     /**
      * @return Returns the view.
@@ -54,6 +40,19 @@ public class DisplayViewTag extends BaseTag
     public View getView()
     {
         return view;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("view");
+        JellyContextAdapter adapter = new JellyContextAdapter(getContext());
+        DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
+        getView().render(getRuntimeData(), ctx);
     }
 
     /**

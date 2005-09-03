@@ -7,7 +7,6 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.Script;
@@ -16,7 +15,7 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
@@ -24,7 +23,7 @@ import com.cyclopsgroup.waterview.web.TabularData;
  * 
  * Jelly table control tag
  */
-public class JellyTableControlTag extends BaseTag implements TableControlTag
+public class JellyTableControlTag extends TagSupport implements TableControlTag
 {
     private String script;
 
@@ -89,21 +88,21 @@ public class JellyTableControlTag extends BaseTag implements TableControlTag
     }
 
     /**
-     * Overwrite or implement method in JellyTableControlTag
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("script");
 
         invokeBody(XMLOutput.createDummyXMLOutput());
 
-        ModuleManager ui = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
+        ModuleManager ui = (ModuleManager) getServiceManager().lookup(
+                ModuleManager.ROLE);
         Path path = ui.parsePath(getScript());
-        JellyEngine je = (JellyEngine) serviceManager.lookup(JellyEngine.ROLE);
+        JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                JellyEngine.ROLE);
         Script s = je.getScript(path.getPackage(), path.getPath());
 
         if (tableTag == null)
@@ -115,7 +114,7 @@ public class JellyTableControlTag extends BaseTag implements TableControlTag
         {
             throw new JellyException("Tabular data must be included");
         }
-        
+
         JellyContext jc = new JellyContext(getContext());
         jc.setVariable("tableTag", tableTag);
         jc.setVariable("table", tableTag.getTable());

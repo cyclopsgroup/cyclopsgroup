@@ -18,12 +18,13 @@ package com.cyclopsgroup.waterview.utils;
 
 import java.security.MessageDigest;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
+import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -31,7 +32,7 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class BaseTagSupport extends TagSupport
+public abstract class TagSupportBase extends TagSupport
 {
     private static final String DIGEST_ALGORITHM = "MD5";
 
@@ -41,11 +42,33 @@ public abstract class BaseTagSupport extends TagSupport
 
     private String fileName;
 
-    private String tagId;
-
     private int lineNumber;
 
+    private String tagId;
+
     private String uniqueTagId;
+
+    /**
+     * Overwrite or implement method doTag()
+     *
+     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException
+    {
+        try
+        {
+            processTag(output);
+        }
+        catch (JellyTagException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new JellyTagException(e);
+        }
+    }
 
     /**
      * Override method BaseTagSupport in supper class
@@ -81,14 +104,6 @@ public abstract class BaseTagSupport extends TagSupport
     }
 
     /**
-     * @return Returns the id.
-     */
-    public final String getTagId()
-    {
-        return tagId;
-    }
-
-    /**
      * Override method BaseTagSupport in supper class
      *
      * @see org.apache.commons.jelly.LocationAware#getLineNumber()
@@ -97,6 +112,25 @@ public abstract class BaseTagSupport extends TagSupport
     public final int getLineNumber()
     {
         return lineNumber;
+    }
+
+    /**
+     * Get service manager
+     *
+     * @return Service manager object
+     */
+    protected ServiceManager getServiceManager()
+    {
+        return (ServiceManager) getContext().getVariable(
+                ServiceManager.class.getName());
+    }
+
+    /**
+     * @return Returns the id.
+     */
+    public final String getTagId()
+    {
+        return tagId;
     }
 
     /**
@@ -131,28 +165,12 @@ public abstract class BaseTagSupport extends TagSupport
     }
 
     /**
-     * Throw MissingAttributeException if an attribute is missing
+     * process the tag
      *
-     * @param name Attribute name
-     * @throws JellyTagException Throw it out
+     * @param output Output
+     * @throws Exception Throw it out
      */
-    protected final void requireAttribute(String name) throws JellyTagException
-    {
-        Object value = null;
-        try
-        {
-            value = PropertyUtils.getProperty(this, name);
-        }
-        catch (Exception e)
-        {
-            throw new JellyTagException("Attribute [" + name
-                    + "] is not defined in tag");
-        }
-        if (value == null)
-        {
-            throw new MissingAttributeException(name);
-        }
-    }
+    protected abstract void processTag(XMLOutput output) throws Exception;
 
     /**
      * Require body of a tag
@@ -217,14 +235,6 @@ public abstract class BaseTagSupport extends TagSupport
     }
 
     /**
-     * @param id The id to set.
-     */
-    public final void setTagId(String id)
-    {
-        this.tagId = id;
-    }
-
-    /**
      * Override method BaseTagSupport in supper class
      *
      * @see org.apache.commons.jelly.LocationAware#setLineNumber(int)
@@ -233,5 +243,13 @@ public abstract class BaseTagSupport extends TagSupport
     public final void setLineNumber(int lineNumber)
     {
         this.lineNumber = lineNumber;
+    }
+
+    /**
+     * @param id The id to set.
+     */
+    public final void setTagId(String id)
+    {
+        this.tagId = id;
     }
 }

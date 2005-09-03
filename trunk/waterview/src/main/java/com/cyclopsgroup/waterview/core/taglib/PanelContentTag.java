@@ -16,19 +16,18 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PanelContent;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Panel content tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PanelContentTag extends BaseTag
+public class PanelContentTag extends TagSupport
 {
 
     private boolean append;
@@ -38,12 +37,11 @@ public class PanelContentTag extends BaseTag
     private PanelContent panelContent;
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("name");
         requireParent(PageTag.class);

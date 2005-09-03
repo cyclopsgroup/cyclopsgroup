@@ -16,27 +16,25 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Localized text
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LocalizedTextTag extends BaseTag
+public class LocalizedTextTag extends TagSupport
 {
     private boolean escape;
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         String content = getBodyText(escape);
         output.write(content);

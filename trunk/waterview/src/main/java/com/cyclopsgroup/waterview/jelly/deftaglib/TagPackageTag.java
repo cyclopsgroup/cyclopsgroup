@@ -16,14 +16,13 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.utils.TagPackage;
 
 /**
@@ -31,7 +30,7 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TagPackageTag extends BaseTag
+public class TagPackageTag extends TagSupport
 {
 
     private String className;
@@ -39,12 +38,11 @@ public class TagPackageTag extends BaseTag
     private Log logger = LogFactory.getLog(getClass());
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("className");
         requireParent(TagLibraryTag.class);

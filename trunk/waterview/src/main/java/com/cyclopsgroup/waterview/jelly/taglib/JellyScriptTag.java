@@ -20,44 +20,44 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tag to run a given script
  */
-public class JellyScriptTag extends BaseJellyScriptTag
+public class JellyScriptTag extends TagSupport
 {
     private String path;
 
     private String type = "system";
 
     /**
-     * Overwrite or implement method createScript()
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyScriptTag#createScript(org.apache.commons.jelly.JellyContext, org.apache.avalon.framework.service.ServiceManager)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected Script createScript(JellyContext context,
-            ServiceManager serviceManager) throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("type");
         requireAttribute("path");
         Script script = null;
         if (StringUtils.equals(getType(), "system"))
         {
-            JellyEngine je = (JellyEngine) serviceManager
-                    .lookup(JellyEngine.ROLE);
-            ModuleManager ui = (ModuleManager) serviceManager
-                    .lookup(ModuleManager.ROLE);
+            JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                    JellyEngine.ROLE);
+            ModuleManager ui = (ModuleManager) getServiceManager().lookup(
+                    ModuleManager.ROLE);
             Path p = ui.parsePath(getPath());
             script = je.getScript(p.getPackage(), p.getPath());
         }
@@ -88,7 +88,12 @@ public class JellyScriptTag extends BaseJellyScriptTag
             throw new FileNotFoundException("Resource " + getPath()
                     + " is not found in " + getType());
         }
-        return script;
+        JellyContext jc = new JellyContext(getContext());
+        if (script != null)
+        {
+            script.run(jc, output);
+            output.flush();
+        }
     }
 
     /**

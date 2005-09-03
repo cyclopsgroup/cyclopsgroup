@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
@@ -24,30 +23,29 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.ThemeManager;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Default layout definition tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultLayoutTag extends BaseTag
+public class DefaultLayoutTag extends TagSupport
 {
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
         Page page = (Page) context.getVariable(Page.NAME);
         if (page == null)
         {
             throw new JellyTagException("JellyLayout must be in a page");
         }
-        ThemeManager tm = (ThemeManager) serviceManager
-                .lookup(ThemeManager.ROLE);
+        ThemeManager tm = (ThemeManager) getServiceManager().lookup(
+                ThemeManager.ROLE);
         String themeName = getRuntimeData().getThemeName();
         Theme theme = tm.getDefaultTheme();
         if (StringUtils.isNotEmpty(themeName))

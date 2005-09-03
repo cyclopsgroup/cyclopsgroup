@@ -18,12 +18,11 @@ package com.cyclopsgroup.waterview.web.taglib;
 
 import java.util.HashMap;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.Table;
 
 /**
@@ -31,7 +30,7 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Tag for table
  */
-public class TableTag extends BaseTag implements LocationAware
+public class TableTag extends TagSupport implements LocationAware
 {
     private Table table;
 
@@ -42,12 +41,11 @@ public class TableTag extends BaseTag implements LocationAware
     private HashMap columnTags;
 
     /**
-     * Overwrite or implement method in TableTag
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("var");
         requireAttribute("name");

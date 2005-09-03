@@ -14,53 +14,51 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
+package com.cyclopsgroup.waterview.web;
 
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
- * Tag to run script
+ * 
+ * Field validation result
  */
-public class RunScriptTag extends TagSupport
+public final class ValidationResult
 {
-    private Script script;
+    /** Empty array */
+    public static final ValidationResult SUCCESS = new ValidationResult(true,
+            StringUtils.EMPTY);
+
+    private String errorMessage;
+
+    private boolean success;
 
     /**
-     * Overwrite or implement method processTag()
+     * Constructor for class ValidationResult
      *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     * @param success Success or not
+     * @param message Error message
      */
-    protected void processTag(XMLOutput output) throws Exception
+    public ValidationResult(boolean success, String message)
     {
-        if (getScript() == null)
-        {
-            return;
-        }
-        getScript().run(getContext(), output);
+        this.success = success;
+        errorMessage = message;
     }
 
     /**
-     * Getter method for property script
-     *
-     * @return Returns the script.
+     * @return Returns the errorMessage.
      */
-    public Script getScript()
+    public String getErrorMessage()
     {
-        return script;
+        return errorMessage;
     }
 
     /**
-     * Setter method for property script
-     *
-     * @param script The script to set.
+     * @return Returns the success.
      */
-    public void setScript(Script script)
+    public boolean isSuccess()
     {
-        this.script = script;
+        return success;
     }
+
 }

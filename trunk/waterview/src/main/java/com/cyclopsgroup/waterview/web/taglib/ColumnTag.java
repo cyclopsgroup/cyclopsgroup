@@ -16,11 +16,10 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnDisplay;
@@ -31,7 +30,7 @@ import com.cyclopsgroup.waterview.web.ColumnSort;
  * 
  * Column tag
  */
-public class ColumnTag extends BaseTag
+public class ColumnTag extends TagSupport
 {
     private Column column;
 
@@ -48,12 +47,11 @@ public class ColumnTag extends BaseTag
     private String value = StringUtils.EMPTY;
 
     /**
-     * Overwrite or implement method doTag()
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("name");
         requireAttribute("display");

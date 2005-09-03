@@ -16,27 +16,25 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.JellyLayout;
 import com.cyclopsgroup.waterview.spi.Page;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Tag for layout
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LayoutTag extends BaseTag
+public class LayoutTag extends TagSupport
 {
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
         Page page = (Page) getContext().getVariable(Page.NAME);
         JellyLayout layout = new JellyLayout(getBody(), null);

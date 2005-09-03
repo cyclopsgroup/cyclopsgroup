@@ -19,11 +19,10 @@ package com.cyclopsgroup.waterview.web.taglib;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.CollectionTabularData;
 
@@ -32,24 +31,24 @@ import com.cyclopsgroup.waterview.web.CollectionTabularData;
  * 
  * Table data tag accepting a collection, iterator, enumeration or array
  */
-public class CollectionTabularDataTag extends BaseTag
+public class CollectionTabularDataTag extends TagSupport
 {
     private Object items;
 
     /**
-     * Overwrite or implement method doTag()
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("items");
         requireParent(TableControlTag.class);
 
         List list = new ArrayList();
         CollectionUtils.addAll(list, TypeUtils.iterate(getItems()));
-        ((TableControlTag) getParent()).setTabularData(new CollectionTabularData(list));
+        ((TableControlTag) getParent())
+                .setTabularData(new CollectionTabularData(list));
     }
 
     /**

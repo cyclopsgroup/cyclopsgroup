@@ -17,17 +17,16 @@
 package com.cyclopsgroup.waterview.navigator.impl;
 
 import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.utils.BaseTagSupport;
+import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Node tag
  */
-public class NodeTag extends BaseTagSupport
+public class NodeTag extends TagSupport
 {
     private String description;
 
@@ -42,53 +41,6 @@ public class NodeTag extends BaseTagSupport
     private String path;
 
     private String title;
-
-    /**
-     * Overwrite or implement method in NodeTag
-     *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
-     */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
-    {
-        requireAttribute("title");
-        requireAttribute("page");
-
-        if (getParent() instanceof TreeTag)
-        {
-            parentPath = ((TreeTag) getParent()).getPosition();
-        }
-        else if (getParent() instanceof NodeTag)
-        {
-            ((NodeTag) getParent()).requireAttribute("name");
-            parentPath = ((NodeTag) getParent()).getPath();
-        }
-        else
-        {
-            throw new JellyTagException("Parent tag must be tree or node");
-        }
-        NavigationTag nt = (NavigationTag) findAncestorWithClass(NavigationTag.class);
-        DefaultNavigatorNode node = new DefaultNavigatorNode(nt.getNavigator(),
-                getName(), parentPath);
-        path = node.getPath();
-        node.getAttributes().set(DefaultNavigatorNode.PAGE_NAME, getPage());
-        node.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, getTitle());
-        node.getAttributes().set(DefaultNavigatorNode.DESCRIPTION_NAME,
-                getDescription());
-
-        nt.getNavigator().addNode(node);
-        invokeBody(output);
-    }
-
-    /**
-     * Get full path of node
-     *
-     * @return Path of node
-     */
-    public String getPath()
-    {
-        return path;
-    }
 
     /**
      * Getter method for field description
@@ -131,6 +83,16 @@ public class NodeTag extends BaseTagSupport
     }
 
     /**
+     * Get full path of node
+     *
+     * @return Path of node
+     */
+    public String getPath()
+    {
+        return path;
+    }
+
+    /**
      * Getter method for field title
      *
      * @return Returns the title.
@@ -148,6 +110,42 @@ public class NodeTag extends BaseTagSupport
     public boolean isHidden()
     {
         return hidden;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("title");
+        requireAttribute("page");
+
+        if (getParent() instanceof TreeTag)
+        {
+            parentPath = ((TreeTag) getParent()).getPosition();
+        }
+        else if (getParent() instanceof NodeTag)
+        {
+            ((NodeTag) getParent()).requireAttribute("name");
+            parentPath = ((NodeTag) getParent()).getPath();
+        }
+        else
+        {
+            throw new JellyTagException("Parent tag must be tree or node");
+        }
+        NavigationTag nt = (NavigationTag) findAncestorWithClass(NavigationTag.class);
+        DefaultNavigatorNode node = new DefaultNavigatorNode(nt.getNavigator(),
+                getName(), parentPath);
+        path = node.getPath();
+        node.getAttributes().set(DefaultNavigatorNode.PAGE_NAME, getPage());
+        node.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, getTitle());
+        node.getAttributes().set(DefaultNavigatorNode.DESCRIPTION_NAME,
+                getDescription());
+
+        nt.getNavigator().addNode(node);
+        invokeBody(output);
     }
 
     /**

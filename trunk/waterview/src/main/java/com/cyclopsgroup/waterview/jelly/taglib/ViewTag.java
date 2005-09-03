@@ -16,9 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.commons.jelly.JellyContext;
-
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyView;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
@@ -32,10 +29,10 @@ public class ViewTag extends BaseViewTag
 {
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView(JellyContext context, RuntimeData data)
-            throws Exception
+    protected View createView() throws Exception
     {
         return new JellyView(getBody(), null);
     }

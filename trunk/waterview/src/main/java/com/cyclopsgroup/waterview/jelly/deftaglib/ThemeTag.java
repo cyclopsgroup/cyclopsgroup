@@ -16,21 +16,19 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.DefaultTheme;
-import com.cyclopsgroup.waterview.utils.BaseTagSupport;
+import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Theme tag
  */
-public class ThemeTag extends BaseTagSupport
+public class ThemeTag extends TagSupport
 {
     private String description;
 
@@ -39,12 +37,11 @@ public class ThemeTag extends BaseTagSupport
     private DefaultTheme theme;
 
     /**
-     * Overwrite or implement method doTag()
+     * Overwrite or implement method processTag()
      *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    public void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("name");
         theme = new DefaultTheme(name);

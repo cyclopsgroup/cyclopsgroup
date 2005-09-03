@@ -16,10 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jsp.taglib;
 
-import org.apache.commons.jelly.JellyContext;
-
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jsp.JspEngine;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
@@ -36,17 +33,16 @@ public class JspViewTag extends BaseViewTag
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView(JellyContext context, RuntimeData data)
-            throws Exception
+    protected View createView() throws Exception
     {
         requireAttribute("path");
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
                 ModuleManager.ROLE);
         Path p = mm.parsePath(getPath());
-        JspEngine je = (JspEngine) data.getServiceManager().lookup(
-                JspEngine.ROLE);
+        JspEngine je = (JspEngine) getServiceManager().lookup(JspEngine.ROLE);
         return je.createView(p);
     }
 

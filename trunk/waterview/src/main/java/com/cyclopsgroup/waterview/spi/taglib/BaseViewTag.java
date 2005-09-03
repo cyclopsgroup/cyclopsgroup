@@ -2,8 +2,6 @@ package com.cyclopsgroup.waterview.spi.taglib;
 
 import java.util.HashMap;
 
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.DefaultContext;
@@ -16,28 +14,25 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * Base view tag
  */
-public abstract class BaseViewTag extends BaseTag
+public abstract class BaseViewTag extends TagSupport
 {
     /**
      * Overwrite this method to create component
      *
-     * @param context Jelly context
-     * @param data Runtime data
      * @return Create view, null is ok
      * @throws Exception Throw it out
      */
-    protected abstract View createView(JellyContext context, RuntimeData data)
-            throws Exception;
+    protected abstract View createView() throws Exception;
 
     /**
-     * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         RuntimeData data = getRuntimeData();
-        View view = createView(context, data);
+        View view = createView();
 
         if (view == null)
         {

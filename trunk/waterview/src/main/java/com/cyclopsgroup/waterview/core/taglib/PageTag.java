@@ -16,28 +16,26 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.Page;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Page tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PageTag extends BaseTag
+public class PageTag extends TagSupport
 {
     private Page page;
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
         page = new Page();
         getContext().setVariable(Page.NAME, page);

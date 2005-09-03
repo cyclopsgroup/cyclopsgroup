@@ -14,28 +14,40 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
+package com.cyclopsgroup.waterview.utils;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
-import org.apache.commons.jelly.TagSupport;
-import org.apache.commons.jelly.XMLOutput;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * Base jelly tag
  * 
- * Simply invoke the body
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DummyTag extends TagSupport
+public abstract class TagSupport extends TagSupportBase
 {
     /**
-     * Overwrite or implement method doTag()
+     * Throw MissingAttributeException if an attribute is missing
      *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     * @param name Attribute name
+     * @throws JellyTagException Throw it out
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    protected final void requireAttribute(String name) throws JellyTagException
     {
-        invokeBody(output);
+        Object value = null;
+        try
+        {
+            value = PropertyUtils.getProperty(this, name);
+        }
+        catch (Exception e)
+        {
+            throw new JellyTagException("Attribute [" + name
+                    + "] is not defined in tag");
+        }
+        if (value == null)
+        {
+            throw new MissingAttributeException(name);
+        }
     }
 }

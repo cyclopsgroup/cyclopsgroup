@@ -16,11 +16,9 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.JellyPanel;
 import com.cyclopsgroup.waterview.spi.CacheManager;
@@ -39,21 +37,21 @@ public class JellyPanelTag extends BasePanelTag
 
     /**
      * Overwrite or implement method createPanel()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BasePanelTag#createPanel(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BasePanelTag#createPanel()
      */
-    protected synchronized Panel createPanel(JellyContext context,
-            RuntimeData data) throws Exception
+    protected synchronized Panel createPanel() throws Exception
     {
         requireAttribute("script");
-        CacheManager cache = (CacheManager) data.getServiceManager().lookup(
+        CacheManager cache = (CacheManager) getServiceManager().lookup(
                 CacheManager.ROLE);
         JellyPanel panel = (JellyPanel) cache.get(getClass(), getScript());
         if (panel == null)
         {
-            ModuleManager module = (ModuleManager) data.getServiceManager()
-                    .lookup(ModuleManager.ROLE);
+            ModuleManager module = (ModuleManager) getServiceManager().lookup(
+                    ModuleManager.ROLE);
             Path path = module.parsePath(getScript());
-            JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
+            JellyEngine je = (JellyEngine) getServiceManager().lookup(
                     JellyEngine.ROLE);
             Script jellyScript = je
                     .getScript(path.getPackage(), path.getPath());

@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -26,40 +25,16 @@ import com.cyclopsgroup.waterview.jelly.JellyLayout;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Jelly layout tag
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayoutTag extends BaseTag
+public class JellyLayoutTag extends TagSupport
 {
     private String script;
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
-     */
-    public void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
-    {
-        requireAttribute("script");
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
-        {
-            throw new JellyTagException("JellyLayout must be in a page");
-        }
-        JellyEngine jellyEngine = (JellyEngine) serviceManager
-                .lookup(JellyEngine.ROLE);
-        ModuleManager mm = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        Path path = mm.parsePath(getScript());
-        Layout layout = new JellyLayout(jellyEngine.getScript(
-                path.getPackage(), path.getPath()), getScript());
-        page.setLayout(layout);
-    }
 
     /**
      * Getter method for script
@@ -69,6 +44,29 @@ public class JellyLayoutTag extends BaseTag
     public String getScript()
     {
         return script;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("script");
+        Page page = (Page) context.getVariable(Page.NAME);
+        if (page == null)
+        {
+            throw new JellyTagException("JellyLayout must be in a page");
+        }
+        JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup(
+                JellyEngine.ROLE);
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
+                ModuleManager.ROLE);
+        Path path = mm.parsePath(getScript());
+        Layout layout = new JellyLayout(jellyEngine.getScript(
+                path.getPackage(), path.getPath()), getScript());
+        page.setLayout(layout);
     }
 
     /**

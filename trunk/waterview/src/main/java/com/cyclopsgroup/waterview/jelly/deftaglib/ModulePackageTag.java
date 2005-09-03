@@ -16,34 +16,33 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.ModuleManager;
-import com.cyclopsgroup.waterview.spi.taglib.BaseTag;
+import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tag to instroduce a tag package
  */
-public class ModulePackageTag extends BaseTag
+public class ModulePackageTag extends TagSupport
 {
     private String alias;
 
     private String name;
 
     /**
-     * Overwrite or implement method doTag()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseTag#doTag(org.apache.avalon.framework.service.ServiceManager, org.apache.commons.jelly.XMLOutput)
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         requireAttribute("alias");
         requireAttribute("name");
 
-        ModuleManager moduleManager = (ModuleManager) serviceManager
+        ModuleManager moduleManager = (ModuleManager) getServiceManager()
                 .lookup(ModuleManager.ROLE);
         moduleManager.registerPackage(getAlias(), getName());
     }

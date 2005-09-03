@@ -16,35 +16,20 @@
  */
 package com.cyclopsgroup.waterview.navigator.impl;
 
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.utils.BaseTagSupport;
+import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tree tag
  */
-public class TreeTag extends BaseTagSupport
+public class TreeTag extends TagSupport
 {
     private String name;
 
     private String position;
-
-    /**
-     * Overwrite or implement method in TreeTag
-     *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
-     */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
-    {
-        requireAttribute("name");
-        requireAttribute("position");
-        invokeBody(output);
-    }
 
     /**
      * Get name of tree
@@ -64,6 +49,18 @@ public class TreeTag extends BaseTagSupport
     public String getPosition()
     {
         return position;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("name");
+        requireAttribute("position");
+        invokeBody(output);
     }
 
     /**

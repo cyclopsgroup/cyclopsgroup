@@ -16,14 +16,12 @@
  */
 package com.cyclopsgroup.waterview.utils;
 
-import org.apache.commons.jelly.TagLibrary;
-
 /**
  * Clib tag library
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class BaseTagLibrary extends TagLibrary
+public class TagLibrary extends org.apache.commons.jelly.TagLibrary
 {
     /**
      * Register a package of tags

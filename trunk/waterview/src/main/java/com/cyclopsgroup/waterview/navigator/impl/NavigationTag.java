@@ -18,16 +18,15 @@ package com.cyclopsgroup.waterview.navigator.impl;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.utils.BaseTagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Navigation tag in navigation.xml
  */
-public class NavigationTag extends BaseTagSupport
+public class NavigationTag extends TagSupport
 {
     private DefaultNavigatorHome navigator;
 

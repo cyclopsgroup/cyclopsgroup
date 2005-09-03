@@ -16,10 +16,7 @@
  */
 package com.cyclopsgroup.waterview.velocity.taglib;
 
-import org.apache.commons.jelly.JellyContext;
-
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
@@ -37,16 +34,16 @@ public class VelocityViewTag extends BaseViewTag
 
     /**
      * Overwrite or implement method createView()
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView(org.apache.commons.jelly.JellyContext, com.cyclopsgroup.waterview.RuntimeData)
+     *
+     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView(JellyContext context, RuntimeData data)
-            throws Exception
+    protected View createView() throws Exception
     {
         requireAttribute("template");
-        VelocityEngine ve = (VelocityEngine) data.getServiceManager().lookup(
+        VelocityEngine ve = (VelocityEngine) getServiceManager().lookup(
                 VelocityEngine.ROLE);
 
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
                 ModuleManager.ROLE);
         Path path = mm.parsePath(getTemplate());
         return new VelocityView(ve.getTemplate(path.getPackage(), path

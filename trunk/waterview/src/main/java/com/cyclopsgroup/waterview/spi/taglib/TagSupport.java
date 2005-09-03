@@ -14,28 +14,25 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
+package com.cyclopsgroup.waterview.spi.taglib;
 
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
-import org.apache.commons.jelly.TagSupport;
-import org.apache.commons.jelly.XMLOutput;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * Base jelly tag
  * 
- * Simply invoke the body
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DummyTag extends TagSupport
+public abstract class TagSupport extends
+        com.cyclopsgroup.waterview.utils.TagSupport
 {
     /**
-     * Overwrite or implement method doTag()
+     * Convenient method to get PageRuntime
      *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     * @return PageRuntime object
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    protected RuntimeData getRuntimeData()
     {
-        invokeBody(output);
+        return (RuntimeData) getContext().getVariable(RuntimeData.NAME);
     }
 }

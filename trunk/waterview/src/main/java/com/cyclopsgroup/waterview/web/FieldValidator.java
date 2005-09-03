@@ -14,28 +14,20 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
-
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.MissingAttributeException;
-import org.apache.commons.jelly.TagSupport;
-import org.apache.commons.jelly.XMLOutput;
+package com.cyclopsgroup.waterview.web;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * Simply invoke the body
+ * Form field validator
  */
-public class DummyTag extends TagSupport
+public interface FieldValidator
 {
     /**
-     * Overwrite or implement method doTag()
+     * Validate field
      *
-     * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
+     * @param field Field to validate
+     * @return Validation result
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
-    {
-        invokeBody(output);
-    }
+    ValidationResult validate(Field field);
 }

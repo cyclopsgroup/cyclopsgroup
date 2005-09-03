@@ -3,9 +3,7 @@ package com.cyclopsgroup.waterview.spi.taglib;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
@@ -20,7 +18,7 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * Base panel tag
  */
-public abstract class BasePanelTag extends BaseTag implements ViewAware
+public abstract class BasePanelTag extends TagSupport implements ViewAware
 {
     private String name;
 
@@ -29,26 +27,22 @@ public abstract class BasePanelTag extends BaseTag implements ViewAware
     /**
      * Implement this method to provide panel
      *
-     * @param context Jelly context
-     * @param data Runtime data
      * @return Panel object. Null is allowed
      * @throws Exception Throw it out
      */
-    protected abstract Panel createPanel(JellyContext context, RuntimeData data)
-            throws Exception;
+    protected abstract Panel createPanel() throws Exception;
 
     /**
-     * @param serviceManager
-     * @param output
-     * @throws Exception
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void doTag(ServiceManager serviceManager, XMLOutput output)
-            throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
         invokeBody(output);
 
         List vs = new ArrayList(views);
-        Page page = (Page) context.getVariable(Page.NAME);
+        Page page = (Page) getContext().getVariable(Page.NAME);
         if (page != null && StringUtils.isNotEmpty(getName()))
         {
             PanelContent content = page.getPanelContent(getName());
@@ -63,7 +57,7 @@ public abstract class BasePanelTag extends BaseTag implements ViewAware
         }
 
         RuntimeData data = getRuntimeData();
-        Panel panel = createPanel(context, data);
+        Panel panel = createPanel();
         if (panel == null)
         {
             panel = Panel.DUMMY;
