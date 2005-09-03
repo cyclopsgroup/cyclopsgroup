@@ -101,7 +101,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
 
     private Properties initProperties = new Properties();
 
-    //private ModuleManager moduleManager;
+    private ModuleManager moduleManager;
 
     private ServiceManager serviceManager;
 
@@ -215,27 +215,23 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     public Script getScript(String packageName, String scriptPath,
             Script defaultScript) throws JellyException
     {
-        String scriptKey = scriptPath;
-        if (StringUtils.isNotEmpty(packageName))
+        String fullPath = scriptPath;
+        String pkg = moduleManager.getPackageName(packageName);
+        if (StringUtils.isNotEmpty(pkg))
         {
-            scriptKey = packageName + scriptPath;
+            fullPath = pkg.replace('.', '/') + scriptPath;
         }
         Script script = null;
         synchronized (this)
         {
-            if (getCacheManager().contains(this, scriptKey))
+            if (getCacheManager().contains(this, fullPath))
             {
-                script = (Script) getCacheManager().get(this, scriptKey);
+                script = (Script) getCacheManager().get(this, fullPath);
             }
             else
             {
-                String fullPath = scriptPath;
-                if (StringUtils.isNotEmpty(packageName))
-                {
-                    fullPath = '/' + packageName.replace('.', '/') + scriptPath;
-                }
-                URL resource = getClass().getClassLoader().getResource(
-                        fullPath.substring(1));
+                URL resource = getClass().getClassLoader()
+                        .getResource(fullPath);
 
                 if (resource == null)
                 {
@@ -246,7 +242,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
                     JellyContext jc = new JellyContext(getGlobalContext());
                     script = jc.compileScript(resource);
                 }
-                getCacheManager().put(this, scriptKey, script);
+                getCacheManager().put(this, fullPath, script);
             }
         }
         return script == DUMMY_SCRIPT ? defaultScript : script;
@@ -356,7 +352,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     {
         this.serviceManager = serviceManager;
         cacheManager = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        ModuleManager moduleManager = (ModuleManager) serviceManager
+        moduleManager = (ModuleManager) serviceManager
                 .lookup(ModuleManager.ROLE);
 
         String pattern = ".+\\.jelly";

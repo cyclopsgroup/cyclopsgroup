@@ -82,7 +82,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
             }
             layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
         }
-
+        String themeBaseUrl = data.getApplicationBaseUrl() + "/themes/"
+                + data.getThemeName();
+        data.getRequestContext().put("themeBase", themeBaseUrl);
         layout.render(data, page);
         context.invokeNextValve(data);
         data.getOutput().flush();

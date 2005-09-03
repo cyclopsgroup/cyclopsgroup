@@ -40,6 +40,14 @@ public interface ModuleManager
     View createDynaView(String viewPath) throws Exception;
 
     /**
+     * Get full package name
+     *
+     * @param aliasOrPackage Package alias or package name
+     * @return Full package name
+     */
+    String getPackageName(String aliasOrPackage);
+
+    /**
      * @param page
      * @return Path model
      */

@@ -172,4 +172,14 @@ public class RuntimeTreeNode implements TreeNode
     {
         return node.isEnd();
     }
+
+    /**
+     * Check if the node is expanded
+     *
+     * @return True if node is expanded
+     */
+    public boolean isExpanded()
+    {
+        return expanded;
+    }
 }

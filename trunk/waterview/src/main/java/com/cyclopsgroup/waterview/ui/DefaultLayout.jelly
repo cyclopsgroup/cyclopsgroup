@@ -63,11 +63,30 @@
                         <td width="25%" valign="top" id="rightPanel">
                             <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="navigation">
                                 <w:View>
-                                    <table>
+                                    <table celllspacing="0" border="0" cellpadding="0">
                                         <j:forEach var="row" items="${navigatorRows}">
                                             <j:set var="node" value="${row.node.content}" />
                                             <tr>
                                                 <td colspan="${row.depth}" />
+                                                <td>
+                                                    <w:BlankImage width="6" height="16" />
+                                                </td>
+                                                <td colspan="2">
+                                                    <j:choose>
+                                                        <j:when test="${node.end}">
+                                                            <img src="${themeBase}/16x16/screen.png" width="16"
+                                                                height="16" alt="Goto ${node.page}" />
+                                                        </j:when>
+                                                        <j:when test="${row.node.expanded}">
+                                                            <img src="${themeBase}/16x16/folder_opened.png" width="16"
+                                                                height="16" alt="Click to collapse" />
+                                                        </j:when>
+                                                        <j:otherwise>
+                                                            <img src="${themeBase}/16x16/folder.png" width="16"
+                                                                height="16" alt="Click to expand" />
+                                                        </j:otherwise>
+                                                    </j:choose>
+                                                </td>
                                                 <td colspan="${10 - row.depth}">
                                                     <a href="${link.setPage(node.page)}" title="${node.description}">
                                                         ${node.title}

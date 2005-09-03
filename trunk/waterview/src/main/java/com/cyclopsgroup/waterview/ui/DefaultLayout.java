@@ -55,13 +55,12 @@ public class DefaultLayout implements Module
             if (!StringUtils.equals(node.getPage(), data.getPage()
                     .getFullPath()))
             {
-                continue;
-            }
-            NavigatorNode n = navigator.getNodeByPage(data.getPage()
-                    .getFullPath());
-            if (n != null && !n.isParent(node.getPage()))
-            {
-                continue;
+                NavigatorNode n = navigator.getNodeByPage(data.getPage()
+                        .getFullPath());
+                if (n != null && !n.isParent(node.getPage()))
+                {
+                    continue;
+                }
             }
             selectedNode = runtimeNode;
             context.put("selectedNode", selectedNode);

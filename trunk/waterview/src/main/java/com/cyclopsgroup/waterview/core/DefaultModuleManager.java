@@ -148,6 +148,20 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
     }
 
     /**
+     * Overwrite or implement method getPackageName()
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageName(java.lang.String)
+     */
+    public String getPackageName(String aliasOrPackage)
+    {
+        if (packageNames.containsKey(aliasOrPackage))
+        {
+            return (String) packageNames.get(aliasOrPackage);
+        }
+        return aliasOrPackage;
+    }
+
+    /**
      * Overwrite or implement method parsePage()
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
      */

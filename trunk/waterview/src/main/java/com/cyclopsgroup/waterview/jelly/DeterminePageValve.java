@@ -116,8 +116,8 @@ public class DeterminePageValve extends AbstractLogEnabled implements
                     System.arraycopy(parts, 0, newParts, 0, j + 1);
                     String defaultPath = StringUtils.join(newParts, '/');
                     fullPath = "/page/" + defaultPath;
-                    pageScript = je.getScript(pagePath.getPath(), fullPath,
-                            null);
+                    pageScript = je.getScript(pagePath.getPackageAlias(),
+                            fullPath, null);
                     if (pageScript != null)
                     {
                         page = loadPage(pageScript, je);
