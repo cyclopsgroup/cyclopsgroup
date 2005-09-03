@@ -178,7 +178,7 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         for (Iterator i = packageNames.keySet().iterator(); i.hasNext();)
         {
             String alias = (String) i.next();
-            String name = (String) packageNames.get(packageAlias);
+            String name = (String) packageNames.get(alias);
             if (StringUtils.equals(parts[0], alias)
                     || StringUtils.equals(parts[0], name))
             {
