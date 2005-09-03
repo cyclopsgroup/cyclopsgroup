@@ -66,14 +66,14 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve
             Theme theme = null;
             ThemeManager themes = (ThemeManager) data.getServiceManager()
                     .lookup(ThemeManager.ROLE);
-            if (StringUtils.isNotEmpty(data.getThemeName()))
+            if (StringUtils.isEmpty(data.getThemeName()))
             {
-
-                theme = themes.getTheme(data.getThemeName());
+                data.setThemeName(themes.getDefaultThemeName());
             }
+            theme = themes.getTheme(data.getThemeName());
             if (theme == null)
             {
-                theme = themes.getTheme(ThemeManager.DEFAULT_THEME);
+                theme = themes.getDefaultTheme();
             }
             if (theme == null)
             {

@@ -49,11 +49,11 @@ public class DefaultLayoutTag extends BaseTag
         ThemeManager tm = (ThemeManager) serviceManager
                 .lookup(ThemeManager.ROLE);
         String themeName = getRuntimeData().getThemeName();
-        if (StringUtils.isEmpty(themeName))
+        Theme theme = tm.getDefaultTheme();
+        if (StringUtils.isNotEmpty(themeName))
         {
-            themeName = ThemeManager.DEFAULT_THEME;
+            theme = tm.getTheme(themeName);
         }
-        Theme theme = tm.getTheme(themeName);
         page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
     }
 }

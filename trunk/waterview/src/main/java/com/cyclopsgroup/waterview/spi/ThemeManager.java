@@ -19,25 +19,55 @@ package com.cyclopsgroup.waterview.spi;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
-
-import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Theme manager
  */
-public final class ThemeManager
+public class ThemeManager implements Configurable
 {
-    /** Default theme name */
-    public static final String DEFAULT_THEME = RuntimeData.DEFAULT_THEME;
-
     /** Role of this component*/
     public static final String ROLE = ThemeManager.class.getName();
 
+    private String defaultThemeName;
+
     private HashSet themeProviders = new HashSet();
+
+    /**
+     * Overwrite or implement method configure()
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        defaultThemeName = conf.getChild("default-theme").getValue("default");
+    }
+
+    /**
+     * Get default theme
+     *
+     * @return Default theme
+     */
+    public Theme getDefaultTheme()
+    {
+        return getTheme(defaultThemeName);
+    }
+
+    /**
+     * Default theme name
+     *
+     * @return Default themeName
+     */
+    public String getDefaultThemeName()
+    {
+        return defaultThemeName;
+    }
 
     /**
      * Get theme

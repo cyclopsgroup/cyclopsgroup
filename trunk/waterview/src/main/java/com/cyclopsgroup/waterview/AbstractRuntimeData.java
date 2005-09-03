@@ -65,7 +65,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
 
     private boolean stopped;
 
-    private String themeName = DEFAULT_THEME;
+    private String themeName;
 
     private TimeZone timeZone = TimeZone.getDefault();
 
