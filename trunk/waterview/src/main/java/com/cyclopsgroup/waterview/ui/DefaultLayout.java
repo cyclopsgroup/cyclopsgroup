@@ -47,6 +47,9 @@ public class DefaultLayout implements Module
 
         NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
                 .lookup(NavigatorHome.ROLE);
+        context.put("currentNavigatorNode", navigator.getNodeByPage(data
+                .getPage().getFullPath()));
+
         RuntimeNavigatorNode selectedNode = null;
         for (int i = 0; i < tabNodes.length; i++)
         {

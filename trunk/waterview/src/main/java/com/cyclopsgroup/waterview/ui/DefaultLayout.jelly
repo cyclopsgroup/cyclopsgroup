@@ -22,8 +22,8 @@
                                 </tr>
                                 <tr>
                                     <td rowspan="2" align="right">
-                                        <img src="${applicationBase}/themes/${data.themeName}/48x48/logo.png"
-                                            alt="Waterview System" width="48" height="48" />
+                                        <img src="${themeBase}/48x48/logo.png" alt="Waterview System" width="48"
+                                            height="48" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,6 +58,14 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="lineBreak" />
+                    </tr>
+                    <tr>
+                        <td>
+                            <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
+                                ${parent.title}
+                            </j:forEach>
+                            ${currentNavigatorNode.title}
+                        </td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" id="rightPanel">

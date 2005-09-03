@@ -12,7 +12,7 @@
                                     <tr>
                                         <td>
                                             <img width="16" height="16" alt="View Actions"
-                                                src="${applicationBase}/themes/${data.themeName}/16x16/view_actions.png" />
+                                                src="${themeBase}/16x16/view_actions.png" />
                                         </td>
                                         <td>
                                             <span class="waterviewViewTitle">${viewTitle}</span>
@@ -25,15 +25,15 @@
                                     <tr>
                                         <td>
                                             <img width="16" height="16" alt="Maximize View"
-                                                src="${applicationBase}/themes/${data.themeName}/16x16/view_max.png" />
+                                                src="${themeBase}/16x16/view_max.png" />
                                         </td>
                                         <td>
                                             <img width="16" height="16" alt="Configure"
-                                                src="${applicationBase}/themes/${data.themeName}/16x16/edit.png" />
+                                                src="${themeBase}/16x16/edit.png" />
                                         </td>
                                         <td>
                                             <img width="16" height="16" alt="Help"
-                                                src="${applicationBase}/themes/${data.themeName}/16x16/help.png" />
+                                                src="${themeBase}/16x16/help.png" />
                                         </td>
                                     </tr>
                                 </table>
