@@ -123,6 +123,9 @@ public class DefaultNavigatorHome extends AbstractLogEnabled implements
         pageIndex = new Hashtable();
 
         rootNode = new DefaultNavigatorNode(this, "/", null);
+        rootNode.getAttributes().set(DefaultNavigatorNode.PAGE_NAME,
+                "/Index.jelly");
+        rootNode.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, "Start");
         addNode(rootNode);
 
         JellyContext jc = new JellyContext();

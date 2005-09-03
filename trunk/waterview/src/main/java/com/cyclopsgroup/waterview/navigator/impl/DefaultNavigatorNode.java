@@ -118,6 +118,10 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public String getNodeId()
     {
+        if (StringUtils.isEmpty(path))
+        {
+            return parentPath + getPage();
+        }
         return path;
     }
 

@@ -11,9 +11,9 @@
             </Node>
         </Node>
         <Node name="help" title="Help" page="/waterview/help/Index.jelly">
-            <Node title="Help Content" page="/waterview/help/Content.jelly" />
+            <Node page="/waterview/help/Content.jelly" title="Help Content" />
             <Node name="abouts" title="About" page="/waterview/help/about/Index.jelly">
-                <Node title="About Waterviwe" page="/waterview/help/about/About.helly" />
+                <Node page="/waterview/help/about/About.helly" title="About Waterview" />
             </Node>
         </Node>
     </Tree>

@@ -5,7 +5,7 @@
     </head>
     <body>
         <div align="center">
-            <div style="max-width: 960px;" id="bodyWrapper">
+            <div style="max-width: 860px;" id="bodyWrapper">
                 <table width="100%" cellspacing="0" border="0" cellpadding="0">
                     <tr>
                         <td colspan="2" id="bannerPanel">
@@ -60,14 +60,6 @@
                         <td colspan="2" class="lineBreak" />
                     </tr>
                     <tr>
-                        <td>
-                            <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
-                                ${parent.title}
-                            </j:forEach>
-                            ${currentNavigatorNode.title}
-                        </td>
-                    </tr>
-                    <tr>
                         <td width="25%" valign="top" id="rightPanel">
                             <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="navigation">
                                 <w:View>
@@ -86,12 +78,18 @@
                                                                 height="16" alt="Goto ${node.page}" />
                                                         </j:when>
                                                         <j:when test="${row.node.expanded}">
-                                                            <img src="${themeBase}/16x16/folder_opened.png" width="16"
-                                                                height="16" alt="Click to collapse" />
+                                                            <a
+                                                                href="${link.addAction('/waterview/NavigatorCollapseNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                                                <img src="${themeBase}/16x16/folder_opened.png"
+                                                                    width="16" height="16" alt="Click to collapse" />
+                                                            </a>
                                                         </j:when>
                                                         <j:otherwise>
-                                                            <img src="${themeBase}/16x16/folder.png" width="16"
-                                                                height="16" alt="Click to expand" />
+                                                            <a
+                                                                href="${link.addAction('/waterview/NavigatorExpandNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                                                <img src="${themeBase}/16x16/folder.png" width="16"
+                                                                    height="16" alt="Click to expand" />
+                                                            </a>
                                                         </j:otherwise>
                                                     </j:choose>
                                                 </td>
@@ -113,6 +111,17 @@
                             </w:JellyPanel>
                         </td>
                         <td width="75%" valign="top" id="bodyPanel">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
+                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                            &gt;&gt;
+                                        </j:forEach>
+                                        ${currentNavigatorNode.title}
+                                    </td>
+                                </tr>
+                            </table>
                             <w:JellyPanel script="/waterview/DefaultVerticalBodyPanel.jelly" name="body">
                                 <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
                             </w:JellyPanel>

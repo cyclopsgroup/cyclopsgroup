@@ -17,9 +17,11 @@
 package com.cyclopsgroup.waterview.web;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.ValueParser;
@@ -57,13 +59,14 @@ public class RuntimeTreeNode implements TreeNode
     /**
      * Collapse this node
      */
-    public void collapse()
+    public synchronized void collapse()
     {
         if (!expanded)
         {
             return;
         }
         children.clear();
+        expanded = false;
     }
 
     /**
@@ -141,6 +144,28 @@ public class RuntimeTreeNode implements TreeNode
     public TreeNode getContent()
     {
         return node;
+    }
+
+    /**
+     * Get node or child node by id
+     *
+     * @param nodeId Node id
+     * @return Node or null if not found
+     */
+    public RuntimeTreeNode getNodeById(String nodeId)
+    {
+        LinkedList buffer = new LinkedList();
+        buffer.addLast(this);
+        while (!buffer.isEmpty())
+        {
+            RuntimeTreeNode node = (RuntimeTreeNode) buffer.removeFirst();
+            if (StringUtils.equals(nodeId, node.getNodeId()))
+            {
+                return node;
+            }
+            buffer.addAll(node.children.values());
+        }
+        return null;
     }
 
     /**

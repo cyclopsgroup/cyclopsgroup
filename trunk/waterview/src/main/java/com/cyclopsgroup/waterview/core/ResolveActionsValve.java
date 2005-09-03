@@ -61,7 +61,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
             {
                 String actionName = (String) i.next();
                 Path path = mm.parsePath(actionName);
-                String className = path.getPackage()
+                String className = path.getPackage() + ".action"
                         + path.getPathWithoutExtension().replace('/', '.');
                 Action action = null;
                 try
