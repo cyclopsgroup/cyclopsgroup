@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
@@ -67,6 +68,11 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
                 try
                 {
                     action = (Action) Class.forName(className).newInstance();
+                    if (action instanceof Serviceable)
+                    {
+                        ((Serviceable) action)
+                                .service(data.getServiceManager());
+                    }
                 }
                 catch (Exception ignored)
                 {

@@ -222,6 +222,10 @@ public class DefaultModuleManager extends AbstractLogEnabled implements
         try
         {
             module = (Module) Class.forName(className).newInstance();
+            if (module instanceof Serviceable)
+            {
+                ((Serviceable) module).service(data.getServiceManager());
+            }
         }
         catch (Exception ignored)
         {

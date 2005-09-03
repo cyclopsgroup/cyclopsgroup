@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.ui;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -32,7 +33,7 @@ import com.cyclopsgroup.waterview.web.TreeUtils;
  * 
  * Module for default layout
  */
-public class DefaultLayout implements Module
+public class DefaultLayout extends BaseServiceable implements Module
 {
     /**
      * Overwrite or implement method execute()
@@ -45,8 +46,7 @@ public class DefaultLayout implements Module
         TreeNode[] tabNodes = root.getChildrenNodes();
         context.put("tabNodes", tabNodes);
 
-        NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
-                .lookup(NavigatorHome.ROLE);
+        NavigatorHome navigator = (NavigatorHome) lookupComponent(NavigatorHome.ROLE);
         context.put("currentNavigatorNode", navigator.getNodeByPage(data
                 .getPage().getFullPath()));
 
