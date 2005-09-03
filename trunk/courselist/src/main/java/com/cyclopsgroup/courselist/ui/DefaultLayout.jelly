@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <head>
+        <w:JellyScript path="/waterview/HtmlHeaders.jelly" />
+    </head>
+    <body>
+        <div align="center">
+            <div style="max-width: 720px;" id="bodyWrapper">
+                <table width="100%" cellspacing="0" border="0" cellpadding="0">
+                    <tr>
+                        <td id="bannerPanel">
+                            <h2>Course List</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lineBreak" />
+                    </tr>
+                    <tr>
+                        <td>
+                            <w:JellyPanel script="/waterview/SimpleVerticalPanel.jelly" name="body">
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
+                            </w:JellyPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lineBreak" />
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" id="footerPanel">
+                                <tr>
+                                    <td>Copyrights reserved Cyclops Group 2005</td>
+                                    <td align="right">Powered By Cyclops Group Waterview</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

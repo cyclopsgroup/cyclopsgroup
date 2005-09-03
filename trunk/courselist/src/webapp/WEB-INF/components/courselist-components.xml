@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
+            <implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-theme>courselist</default-theme>
+            </configuration>
+        </component>
+    </components>
     <load-on-start>
         <component>
             <role>com.cyclopsgroup.courselist.CourseListComponents</role>

@@ -1,0 +1,26 @@
+body,p,td,th,input,select,textarea {
+	font-family: Sans, Verdana;
+	font-size: 8pt;
+}
+
+th {
+	text-align: left;
+}
+
+.lineBreak {
+	height: 2px;
+	background-color: #EFEFEF;
+	padding: 0px;
+}
+
+.waterviewViewTitle {
+	font-weight: bold;
+}
+
+a.r {
+	color: white !important;
+}
+
+a img {
+	border-width: 0px;
+}
