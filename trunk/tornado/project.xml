@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by jiaqi (Ru-Board) -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
     <extend>${maven.repo.local}/com.cyclopsgroup/poms/cyclopsgroup-1.0.pom</extend>
@@ -9,7 +8,7 @@
     <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
-        <url>http://cyclops-group.sourceforge.net</url>
+        <url>http://www.cyclopsgroup.com</url>
         <logo>/images/cyclopsgroup_logo.png</logo>
     </organization>
     <inceptionYear>2002</inceptionYear>
@@ -23,7 +22,7 @@
             <roles>
                 <role>Developer</role>
             </roles>
-            <url>http://cyclops-group.sourceforge.net</url>
+            <url>http://www.cyclopsgroup.com</url>
             <timezone>-6</timezone>
         </developer>
     </developers>

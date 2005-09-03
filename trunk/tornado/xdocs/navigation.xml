@@ -3,30 +3,10 @@
     <title>Maven</title>
     <body>
         <links>
-            <item name="Cyclops Group" href="http://cyclops-group.sourceforge.net"/>
-            <item name="Turbine 3" href="http://jakarta.apache.org/turbine/turbine-3"/>
-            <item name="Fulcrum" href="http://jakarta.apache.org/turbine/fulcrum"/>
-            <item name="Maven" href="http://maven.apache.org/"/>
+            <item name="Documentation" href="http://www.cyclopsgroup.com/kb/display/tornado" />
+            <item name="Waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
+            <item name="Hibernate" href="http://www.hibernate.org" />
+            <item name="Maven" href="http://maven.apache.org/" />
         </links>
-        <menu name="Overview">
-            <item name="Home" href="/index.html"/>
-            <item name="Powered by" href="/poweredby.html"/>
-            <item name="Download and Install" href="/install.html"/>
-            <item name="Integration" href="/integration.html"/>
-            <item name="Road Map" href="/roadmap.html"/>
-        </menu>
-        <menu name="For Developers">
-            <item name="Extended Services" href="/services/index.html" collapse="true">
-                <item name="User Service" href="/services/user.html"/>
-                <item name="Navigator Service" href="/services/navigator.html"/>
-            </item>
-            <item name="Business Logic" href="/bizlogic.html"/>
-            <item name="Presentation Layer" href="/presentation.html"/>
-            <item name="Database" href="/database.html" collapse="true">
-                <item name="Id Table Schema" href="/torque/id-table-schema.html"/>
-                <item name="Tornado Schema" href="/torque/tornado-schema.html"/>
-            </item>
-            <item name="Configuration" href="/configuration.html"/>
-        </menu>
     </body>
 </project>
