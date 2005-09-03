@@ -4,9 +4,9 @@
         <links>
             <item name="Documentation" href="http://www.cyclopsgroup.com/kb/display/waterview"/>
             <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues/browse/waterview"/>
-            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclopsgroup/waterview"/>
-            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclopsgroup/waterview"/>
-            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclopsgroup/waterview"/>
+            <item name="View CVS" href="http://fisheye.cenqua.com/viewrep/cyclops-group/waterview"/>
+            <item name="Change Log" href="http://fisheye.cenqua.com/changelog/cyclops-group/waterview"/>
+            <item name="Search Source" href="http://fisheye.cenqua.com/search/cyclops-group/waterview"/>
         </links>
     </body>
 </project>

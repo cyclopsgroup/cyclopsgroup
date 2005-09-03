@@ -33,20 +33,21 @@
                                                 <td />
                                                 <j:forEach var="runtimeNode" items="${tabNodes}">
                                                     <j:set var="node" value="${runtimeNode.content}" />
-                                                    <j:set var="isCurrent"
-                                                        value="${node.isParent(data.page.fullPath) or node.page eq data.page.fullPath}" />
-                                                    <j:if test="${isCurrent}">
-                                                        <td class="waterviewSelectedTab">
-                                                            <a href="${link.setPage(node.page)}" class="r">
-                                                                ${node.title}
-                                                            </a>
-                                                        </td>
-                                                    </j:if>
-                                                    <j:if test="${!isCurrent}">
-                                                        <td class="waterviewUnselectedTab">
-                                                            <a href="${link.setPage(node.page)}">${node.title}</a>
-                                                        </td>
-                                                    </j:if>
+                                                    <j:choose>
+                                                        <j:when test="${runtimeNode eq selectedNode}">
+                                                            <j:set var="currentTabNode" value="${node}" />
+                                                            <td class="waterviewSelectedTab">
+                                                                <a href="${link.setPage(node.page)}" class="r">
+                                                                    ${node.title}
+                                                                </a>
+                                                            </td>
+                                                        </j:when>
+                                                        <j:otherwise>
+                                                            <td class="waterviewUnselectedTab">
+                                                                <a href="${link.setPage(node.page)}">${node.title}</a>
+                                                            </td>
+                                                        </j:otherwise>
+                                                    </j:choose>
                                                 </j:forEach>
                                             </tr>
                                         </table>
@@ -59,19 +60,34 @@
                         <td colspan="2" class="lineBreak" />
                     </tr>
                     <tr>
-                        <td width="75%" valign="top" id="bodyPanel">
-                            <w:JellyPanel script="/waterview/DefaultVerticalBodyPanel.jelly" name="body">
-                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
-                            </w:JellyPanel>
-                        </td>
                         <td width="25%" valign="top" id="rightPanel">
-                            <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="right">
+                            <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="navigation">
+                                <w:View>
+                                    <table>
+                                        <j:forEach var="row" items="${navigatorRows}">
+                                            <j:set var="node" value="${row.node.content}" />
+                                            <tr>
+                                                <td colspan="${row.depth}" />
+                                                <td colspan="${10 - row.depth}">
+                                                    <a href="${link.setPage(node.page)}" title="${node.description}">
+                                                        ${node.title}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </j:forEach>
+                                    </table>
+                                </w:View>
                                 <w:View>
                                     <p>Some help links</p>
                                 </w:View>
                                 <w:View>
                                     <p>Some reference links</p>
                                 </w:View>
+                            </w:JellyPanel>
+                        </td>
+                        <td width="75%" valign="top" id="bodyPanel">
+                            <w:JellyPanel script="/waterview/DefaultVerticalBodyPanel.jelly" name="body">
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
                             </w:JellyPanel>
                         </td>
                     </tr>

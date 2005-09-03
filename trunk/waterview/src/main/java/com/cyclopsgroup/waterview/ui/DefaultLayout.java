@@ -16,10 +16,16 @@
  */
 package com.cyclopsgroup.waterview.ui;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.navigator.NavigatorHome;
+import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
+import com.cyclopsgroup.waterview.web.TreeNode;
+import com.cyclopsgroup.waterview.web.TreeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -36,6 +42,34 @@ public class DefaultLayout implements Module
     public void execute(RuntimeData data, Context context) throws Exception
     {
         RuntimeNavigatorNode root = RuntimeNavigatorNode.getRoot(data);
-        context.put("tabNodes", root.getChildrenNodes());
+        TreeNode[] tabNodes = root.getChildrenNodes();
+        context.put("tabNodes", tabNodes);
+
+        NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
+                .lookup(NavigatorHome.ROLE);
+        RuntimeNavigatorNode selectedNode = null;
+        for (int i = 0; i < tabNodes.length; i++)
+        {
+            RuntimeNavigatorNode runtimeNode = (RuntimeNavigatorNode) tabNodes[i];
+            NavigatorNode node = (NavigatorNode) runtimeNode.getContent();
+            if (!StringUtils.equals(node.getPage(), data.getPage()
+                    .getFullPath()))
+            {
+                continue;
+            }
+            NavigatorNode n = navigator.getNodeByPage(data.getPage()
+                    .getFullPath());
+            if (n != null && !n.isParent(node.getPage()))
+            {
+                continue;
+            }
+            selectedNode = runtimeNode;
+            context.put("selectedNode", selectedNode);
+            break;
+        }
+        if (selectedNode != null)
+        {
+            context.put("navigatorRows", TreeUtils.flattenTree(selectedNode));
+        }
     }
 }

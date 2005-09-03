@@ -29,10 +29,10 @@ public final class TreeUtils
     /**
      * A row of node
      */
-    public static class NodeRow
+    public static class Row
     {
         /** Empty row array */
-        public static NodeRow[] EMPTY_ARRAY = new NodeRow[0];
+        public static Row[] EMPTY_ARRAY = new Row[0];
 
         private int depth;
 
@@ -46,7 +46,7 @@ public final class TreeUtils
          * @param node TreeNode object
          * @param depth Depth of it
          */
-        public NodeRow(TreeNode node, int depth)
+        public Row(TreeNode node, int depth)
         {
             this.node = node;
             this.depth = depth;
@@ -99,16 +99,16 @@ public final class TreeUtils
      * @param node
      * @return Flattened node rows
      */
-    public static NodeRow[] flattenTree(TreeNode node)
+    public static Row[] flattenTree(TreeNode node)
     {
         List ret = new ArrayList();
         flattenTree(node, ret, 1);
-        return (NodeRow[]) ret.toArray(NodeRow.EMPTY_ARRAY);
+        return (Row[]) ret.toArray(Row.EMPTY_ARRAY);
     }
 
     private static void flattenTree(TreeNode node, List result, int depth)
     {
-        NodeRow row = new NodeRow(node, depth);
+        Row row = new Row(node, depth);
         result.add(row);
         TreeNode[] children = node.getChildrenNodes();
         if (children != null && children.length > 0)
