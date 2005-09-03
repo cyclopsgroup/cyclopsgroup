@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.courselist.CourseListComponents</role>
+            <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
+            <configuration>
+                <component role="com.cyclopsgroup.waterview.Waterview" />
+                <component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
+            </configuration>
+        </component>
+    </components>
+</plexus>

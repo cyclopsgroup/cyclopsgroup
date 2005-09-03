@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.courselist.CourseListComponents</role>
+        </component>
+    </load-on-start>
+</plexus>
