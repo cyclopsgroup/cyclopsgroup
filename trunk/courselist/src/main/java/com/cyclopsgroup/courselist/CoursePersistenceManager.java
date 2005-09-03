@@ -57,6 +57,13 @@ public interface CoursePersistenceManager
     Course findByNumber(String number);
 
     /**
+     * List all courses
+     *
+     * @return All sources
+     */
+    Course[] list();
+
+    /**
      * Save course chagne
      *
      * @param course Course object

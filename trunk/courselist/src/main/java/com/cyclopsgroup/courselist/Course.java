@@ -16,12 +16,14 @@
  */
 package com.cyclopsgroup.courselist;
 
+import java.io.Serializable;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Course entity
  */
-public class Course
+public class Course implements Serializable
 {
     /** Empty array */
     public static final Course[] EMPTY_ARRAY = new Course[0];
