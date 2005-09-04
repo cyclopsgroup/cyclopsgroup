@@ -474,7 +474,7 @@ public abstract class ValueParser
      */
     public String[] getStrings(String name)
     {
-        return getStrings(defaultStringValue);
+        return getStrings(name, defaultStringValue);
     }
 
     /**
