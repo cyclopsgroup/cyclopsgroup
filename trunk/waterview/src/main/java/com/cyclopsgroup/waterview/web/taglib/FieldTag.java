@@ -39,54 +39,13 @@ public class FieldTag extends TagSupport
 
     private boolean required;
 
+    private int size = -1;
+
     private String title;
 
     private String type = "string";
 
     private String value = StringUtils.EMPTY;
-
-    /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    protected void processTag(XMLOutput output) throws Exception
-    {
-        requireAttribute("name");
-        FormTag formTag = (FormTag) findAncestorWithClass(FormTag.class);
-        if (formTag == null)
-        {
-            throw new JellyTagException("Field must be inside a Form");
-        }
-        formTag.addFieldTag(this);
-        if (formTag.isFormNew())
-        {
-            field = new Field(getName(), TypeUtils.getType(getType()));
-            field.setRequired(isRequired());
-            field.setValue((String) getValue());
-            formTag.getForm().addField(field);
-        }
-        else
-        {
-            field = formTag.getForm().getField(getName());
-        }
-
-        invokeBody(output);
-
-        if (getBodyScript() == null)
-        {
-            JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            setBodyScript(je.getScript("/waterview/FormField.jelly"));
-        }
-
-        JellyContext jc = new JellyContext(context);
-        jc.setVariable("field", field);
-        jc.setVariable("fieldTag", this);
-        jc.setVariable("form", formTag.getForm());
-        jc.setVariable("formTag", formTag);
-        getBodyScript().run(jc, output);
-    }
 
     /**
      * @return Returns the bodyScript.
@@ -110,6 +69,28 @@ public class FieldTag extends TagSupport
     public String getName()
     {
         return name;
+    }
+
+    /**
+     * Getter method for field size
+     *
+     * @return Returns the size.
+     */
+    public int getSize()
+    {
+        if (size > 0)
+        {
+            return size;
+        }
+        else if (isNumberType())
+        {
+            return 8;
+        }
+        else if (isDateType())
+        {
+            return 12;
+        }
+        return 20;
     }
 
     /**
@@ -193,6 +174,49 @@ public class FieldTag extends TagSupport
     }
 
     /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("name");
+        FormTag formTag = (FormTag) findAncestorWithClass(FormTag.class);
+        if (formTag == null)
+        {
+            throw new JellyTagException("Field must be inside a Form");
+        }
+        formTag.addFieldTag(this);
+        if (formTag.isFormNew())
+        {
+            field = new Field(getName(), TypeUtils.getType(getType()));
+            field.setRequired(isRequired());
+            field.setValue((String) getValue());
+            formTag.getForm().addField(field);
+        }
+        else
+        {
+            field = formTag.getForm().getField(getName());
+        }
+
+        invokeBody(output);
+
+        if (getBodyScript() == null)
+        {
+            JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                    JellyEngine.ROLE);
+            setBodyScript(je.getScript("/waterview/FormField.jelly"));
+        }
+
+        JellyContext jc = new JellyContext(context);
+        jc.setVariable("field", field);
+        jc.setVariable("fieldTag", this);
+        jc.setVariable("form", formTag.getForm());
+        jc.setVariable("formTag", formTag);
+        getBodyScript().run(jc, output);
+    }
+
+    /**
      * @param bodyScript The bodyScript to set.
      */
     public void setBodyScript(Script bodyScript)
@@ -230,6 +254,16 @@ public class FieldTag extends TagSupport
     public void setRequired(boolean required)
     {
         this.required = required;
+    }
+
+    /**
+     * Setter method for field size
+     *
+     * @param size The size to set.
+     */
+    public void setSize(int size)
+    {
+        this.size = size;
     }
 
     /**

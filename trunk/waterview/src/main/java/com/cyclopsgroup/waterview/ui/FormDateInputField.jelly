@@ -2,7 +2,7 @@
 <table cellspacing="0" cellpadding="0" border="0" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <tr>
         <td>
-            <input type="text" name="${field.name}" value="${field.value}" size="12" maxlength="10"
+            <input type="text" name="${field.name}" value="${field.value}" size="${fieldTag.getSize()}" maxlength="10"
                 class="waterviewFormInput" />
         </td>
         <td>

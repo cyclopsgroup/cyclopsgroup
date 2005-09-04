@@ -4,6 +4,7 @@
     <j:if test="${fieldTag.password}">
         <j:set var="fieldType" value="password" />
     </j:if>
-    <input type="${fieldType}" name="${field.name}" value="${field.value}" size="20" class="waterviewFormInput" />
+    <input type="${fieldType}" name="${field.name}" value="${field.value}" size="${fieldTag.getSize()}"
+        class="waterviewFormInput" />
     <w:JellyScript path="/waterview/FormInputFieldSuffix.jelly" />
 </span>
