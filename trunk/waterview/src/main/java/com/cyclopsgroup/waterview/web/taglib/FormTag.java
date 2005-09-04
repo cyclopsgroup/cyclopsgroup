@@ -168,7 +168,7 @@ public class FormTag extends TagSupport implements LocationAware
         form = (Form) data.getSessionContext().get(formId);
         formNew = false;
         if (form == null
-                || !data.getRequestParameters().getBoolean("keep_form"))
+                || !data.getParams().getBoolean("keep_form"))
         {
             formNew = true;
             form = new Form(formId);

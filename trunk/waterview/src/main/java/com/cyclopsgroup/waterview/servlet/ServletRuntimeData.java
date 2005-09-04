@@ -77,12 +77,12 @@ public class ServletRuntimeData extends AbstractRuntimeData implements
         //Request value parser
         if (FileUpload.isMultipartContent(request))
         {
-            setRequestParameters(new MultipartServletRequestValueParser(
+            setParams(new MultipartServletRequestValueParser(
                     request, fileUpload));
         }
         else
         {
-            setRequestParameters(new ServletRequestValueParser(request));
+            setParams(new ServletRequestValueParser(request));
         }
 
         //Service manager

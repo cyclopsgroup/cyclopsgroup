@@ -130,7 +130,7 @@ public interface RuntimeData
      * 
      * @return Vaue parser interface
      */
-    RequestValueParser getRequestParameters();
+    RequestValueParser getParams();
 
     /**
      * Get path in request

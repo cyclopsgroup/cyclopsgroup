@@ -94,7 +94,7 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
             data.getRequestContext().put("formInvalid", Boolean.TRUE);
             data.getRequestContext().put("formErrors",
                     actionContext.getInputErrorMessages());
-            if (data.getRequestParameters().getBoolean("forced_validation"))
+            if (data.getParams().getBoolean("forced_validation"))
             {
                 return;
             }

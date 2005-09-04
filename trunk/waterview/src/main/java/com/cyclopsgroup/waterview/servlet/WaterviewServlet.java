@@ -123,7 +123,7 @@ public class WaterviewServlet extends HttpServlet
                 .getServletContext(), fileUpload, serviceManager);
         Context ctx = data.getRequestContext();
         ctx.put(RuntimeData.NAME, data);
-        ctx.put(RequestValueParser.NAME, data.getRequestParameters());
+        ctx.put(RequestValueParser.NAME, data.getParams());
         ctx.put(RuntimeData.SERVICE_MANAGER_NAME, serviceManager);
 
         ctx.put("servletConfig", servletConfig);

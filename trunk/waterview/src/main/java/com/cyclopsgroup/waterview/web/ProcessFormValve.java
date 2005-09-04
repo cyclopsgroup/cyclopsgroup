@@ -48,7 +48,7 @@ public class ProcessFormValve implements Valve
      */
     public void invoke(RuntimeData data, PipelineContext pc) throws Exception
     {
-        RequestValueParser params = data.getRequestParameters();
+        RequestValueParser params = data.getParams();
         String formId = params.getString("form_id");
         Form form = null;
         if (StringUtils.isNotEmpty(formId))

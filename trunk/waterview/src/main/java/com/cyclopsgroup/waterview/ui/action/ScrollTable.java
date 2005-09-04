@@ -27,7 +27,7 @@ public class ScrollTable implements Action
     public void execute(RuntimeData data, ActionContext context)
             throws Exception
     {
-        String tableId = data.getRequestParameters()
+        String tableId = data.getParams()
                 .getString("table_id", null);
         if (tableId == null)
         {
@@ -36,7 +36,7 @@ public class ScrollTable implements Action
         Table table = (Table) data.getSessionContext().get(tableId);
         if (table != null)
         {
-            int pageIndex = data.getRequestParameters()
+            int pageIndex = data.getParams()
                     .getInt("page_index", -1);
             if (pageIndex != -1)
             {

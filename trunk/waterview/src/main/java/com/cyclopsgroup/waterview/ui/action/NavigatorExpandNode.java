@@ -37,7 +37,7 @@ public class NavigatorExpandNode implements Action
             throws Exception
     {
         RuntimeNavigatorNode nav = RuntimeNavigatorNode.getRoot(data);
-        String nodeId = data.getRequestParameters().getString(
+        String nodeId = data.getParams().getString(
                 "navigator_node_id");
         RuntimeNavigatorNode node = (RuntimeNavigatorNode) nav
                 .getNodeById(nodeId);
