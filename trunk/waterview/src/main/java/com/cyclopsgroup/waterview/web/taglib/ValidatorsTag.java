@@ -7,17 +7,23 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+
+import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.web.Field;
 import com.cyclopsgroup.waterview.web.FieldValidator;
 import com.cyclopsgroup.waterview.web.ValidationResult;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Validator group tag
+ */
 public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
 {
-    private List validators = new ArrayList();
+    private HashSet validators;
 
     /**
      * Add validator
@@ -27,6 +33,17 @@ public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
     public void addValidator(FieldValidator validator)
     {
         validators.add(validator);
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        validators = new HashSet();
+        super.processTag(output);
     }
 
     /**

@@ -23,12 +23,12 @@ table.waterviewTable tr.b {
 }
 
 .waterviewSelectedTab {
-	padding: 4 16 4 16;
+	padding: 2 16 2 16;
 	background-color: #6096BF;
 }
 
 .waterviewUnselectedTab {
-	padding: 4 16 4 16;
+	padding: 2 16 2 16;
 }
 
 .waterviewViewWrapper {

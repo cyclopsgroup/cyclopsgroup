@@ -13,9 +13,20 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.FieldValidator;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Base validator tag
+ */
 public abstract class BaseValidatorTag extends TagSupport
 {
 
+    /**
+     * Create validator
+     *
+     * @return Validator instance
+     * @throws Exception Throw it out
+     */
     protected abstract FieldValidator createValidator() throws Exception;
 
     /**
@@ -40,5 +51,4 @@ public abstract class BaseValidatorTag extends TagSupport
                     "Parent tag must be Field or Validators");
         }
     }
-
 }

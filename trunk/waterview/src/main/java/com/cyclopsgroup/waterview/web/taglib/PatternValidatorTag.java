@@ -1,9 +1,18 @@
-/*
- * Copyright (c) 1999-2004 Evavi, Inc. All Rights Reserved.
+/* ==========================================================================
+ * Copyright 2002-2005 Cyclops Group Community
+ * 
+ * Licensed under the Open Software License, Version 2.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This software is the proprietary information of Evavi, Inc.
- * Use is subject to license terms. License Agreement available at
- * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
+ *      http://opensource.org/licenses/osl-2.1.php
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * =========================================================================
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
@@ -13,6 +22,11 @@ import com.cyclopsgroup.waterview.web.Field;
 import com.cyclopsgroup.waterview.web.FieldValidator;
 import com.cyclopsgroup.waterview.web.ValidationResult;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Pattern validator tag
+ */
 public class PatternValidatorTag extends BaseValidatorTag implements
         FieldValidator
 {
@@ -46,9 +60,9 @@ public class PatternValidatorTag extends BaseValidatorTag implements
     }
 
     /**
-     * Override method PatternValidator in supper class
+     * Overwrite or implement method validate()
      *
-     * @see com.evavi.fabric.ui.form.FieldValidator#validate(com.evavi.fabric.ui.form.Field)
+     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
      */
     public ValidationResult validate(Field field)
     {

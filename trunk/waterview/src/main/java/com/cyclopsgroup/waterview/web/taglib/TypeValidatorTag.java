@@ -10,9 +10,13 @@ package com.cyclopsgroup.waterview.web.taglib;
 import com.cyclopsgroup.waterview.web.FieldValidator;
 import com.cyclopsgroup.waterview.web.TypeFieldValidator;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Type validator tag
+ */
 public class TypeValidatorTag extends BaseValidatorTag
 {
-
     /**
      * Overwrite or implement method createValidator()
      *

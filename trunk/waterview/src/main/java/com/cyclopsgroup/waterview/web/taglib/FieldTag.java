@@ -20,6 +20,11 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.Field;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Field tag
+ */
 public class FieldTag extends TagSupport
 {
     private Script bodyScript;
@@ -141,16 +146,31 @@ public class FieldTag extends TagSupport
         return value;
     }
 
+    /**
+     * Is field boolean
+     *
+     * @return True if field is boolean
+     */
     public boolean isBooleanType()
     {
         return fieldType == Boolean.class;
     }
 
+    /**
+     * If the field is date
+     *
+     * @return True if type is date
+     */
     public boolean isDateType()
     {
         return Date.class.isAssignableFrom(fieldType);
     }
 
+    /**
+     * If type is number
+     *
+     * @return True if type is number
+     */
     public boolean isNumberType()
     {
         return Number.class.isAssignableFrom(fieldType);
@@ -172,6 +192,11 @@ public class FieldTag extends TagSupport
         return required;
     }
 
+    /**
+     * If the type is text
+     *
+     * @return True if type is text
+     */
     public boolean isTextType()
     {
         return fieldType == String.class;
@@ -235,6 +260,8 @@ public class FieldTag extends TagSupport
 
     /**
      * @param type The type to set.
+     * 
+     * @throws ClassNotFoundException 
      */
     public void setType(String type) throws ClassNotFoundException
     {

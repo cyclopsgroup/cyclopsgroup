@@ -7,15 +7,12 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.Tag;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -33,8 +30,6 @@ public class FormTag extends TagSupport implements LocationAware
 
     private Script bodyScript;
 
-    private List submitTags = new ArrayList();
-
     private Map fieldTags = ListOrderedMap.decorate(new Hashtable());
 
     private Form form;
@@ -45,14 +40,11 @@ public class FormTag extends TagSupport implements LocationAware
 
     private String method = "get";
 
-    public void addSubmitTag(Tag tag)
-    {
-        if (!submitTags.contains(tag))
-        {
-            submitTags.add(tag);
-        }
-    }
-
+    /**
+     * Add field tag
+     *
+     * @param tag Field tag
+     */
     public void addFieldTag(FieldTag tag)
     {
         fieldTags.put(tag.getName(), tag);
@@ -102,11 +94,12 @@ public class FormTag extends TagSupport implements LocationAware
         return bodyScript;
     }
 
-    public List getSubmitTags()
-    {
-        return submitTags;
-    }
-
+    /**
+     * Get field tag
+     *
+     * @param fieldName Field name
+     * @return Field tag object or null
+     */
     public FieldTag getFieldTag(String fieldName)
     {
         return (FieldTag) fieldTags.get(fieldName);
@@ -128,6 +121,11 @@ public class FormTag extends TagSupport implements LocationAware
         return method;
     }
 
+    /**
+     * If the for is new created
+     *
+     * @return True if form is new
+     */
     public boolean isFormNew()
     {
         return formNew;
