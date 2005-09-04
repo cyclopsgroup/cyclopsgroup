@@ -33,8 +33,6 @@ public class FieldTag extends TagSupport
 
     private Class fieldType = String.class;
 
-    private Script headerScript;
-
     private String name;
 
     private boolean password;
@@ -79,7 +77,7 @@ public class FieldTag extends TagSupport
         {
             JellyEngine je = (JellyEngine) getServiceManager().lookup(
                     JellyEngine.ROLE);
-            setBodyScript(je.getScript("fabric", "/widget/FormField.jelly"));
+            setBodyScript(je.getScript("/waterview/FormField.jelly"));
         }
 
         JellyContext jc = new JellyContext(context);
@@ -104,14 +102,6 @@ public class FieldTag extends TagSupport
     public Field getField()
     {
         return field;
-    }
-
-    /**
-     * @return Returns the headerScript.
-     */
-    public Script getHeaderScript()
-    {
-        return headerScript;
     }
 
     /**
@@ -216,14 +206,6 @@ public class FieldTag extends TagSupport
     public void setField(Field field)
     {
         this.field = field;
-    }
-
-    /**
-     * @param headerScript The headerScript to set.
-     */
-    public void setHeaderScript(Script headerScript)
-    {
-        this.headerScript = headerScript;
     }
 
     /**

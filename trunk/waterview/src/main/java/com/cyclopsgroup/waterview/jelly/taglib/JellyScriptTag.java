@@ -26,9 +26,7 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -56,10 +54,7 @@ public class JellyScriptTag extends TagSupport
         {
             JellyEngine je = (JellyEngine) getServiceManager().lookup(
                     JellyEngine.ROLE);
-            ModuleManager ui = (ModuleManager) getServiceManager().lookup(
-                    ModuleManager.ROLE);
-            Path p = ui.parsePath(getPath());
-            script = je.getScript(p.getPackage(), p.getPath());
+            script = je.getScript(getPath());
         }
         else if (StringUtils.equals(getType(), "classpath"))
         {
@@ -68,7 +63,6 @@ public class JellyScriptTag extends TagSupport
             {
                 script = context.compileScript(resource);
             }
-
         }
         else if (StringUtils.equals(getType(), "file"))
         {

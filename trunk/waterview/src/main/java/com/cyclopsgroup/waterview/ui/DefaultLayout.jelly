@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <head>
-        <w:JellyScript path="/waterview/HtmlHeaders.jelly" />
+        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
     </head>
     <body>
         <div align="center">

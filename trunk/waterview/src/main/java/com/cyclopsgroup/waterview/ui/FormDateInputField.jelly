@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table cellspacing="0" cellpadding="0" border="0" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <tr>
+        <td>
+            <input type="text" name="${field.name}" value="${field.value}" size="12" maxlength="10"
+                class="waterviewFormInput" />
+        </td>
+        <td>
+            <w:BlankImage width="5" height="16" />
+        </td>
+        <td>
+            <img src="${themeBase}/16x16/date.png" width="16" height="16" alt="Pick a date" />
+        </td>
+        <td>
+            <w:BlankImage width="5" height="16" />
+        </td>
+        <td>
+            <w:JellyScript path="/waterview/FormInputFieldSuffix.jelly" />
+        </td>
+    </tr>
+</table>

@@ -14,28 +14,29 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.jelly.JellyLayout;
-import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
- * Jelly layout tag
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
+ * Jelly form control tag
  */
-public class JellyLayoutTag extends TagSupport
+public class JellyFormControlTag extends TagSupport implements FormControlTag
 {
     private String script;
 
+    private FormTag formTag;
+
     /**
-     * Getter method for script
+     * Getter method for field script
      *
      * @return Returns the script.
      */
@@ -45,32 +46,47 @@ public class JellyLayoutTag extends TagSupport
     }
 
     /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    public void processTag(XMLOutput output) throws Exception
-    {
-        requireAttribute("script");
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
-        {
-            throw new JellyTagException("JellyLayout must be in a page");
-        }
-        JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        Layout layout = new JellyLayout(jellyEngine.getScript(getScript()),
-                getScript());
-        page.setLayout(layout);
-    }
-
-    /**
-     * Setter method for script
+     * Setter method for field script
      *
      * @param script The script to set.
      */
     public void setScript(String script)
     {
         this.script = script;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("script");
+        invokeBody(XMLOutput.createDummyXMLOutput());
+
+        if (formTag == null)
+        {
+            throw new JellyTagException("Form tag must be defined");
+        }
+        JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                JellyEngine.ROLE);
+        Script script = je.getScript(getScript());
+
+        JellyContext jc = new JellyContext(getContext());
+        jc.setVariable("formTag", formTag);
+        jc.setVariable("form", formTag.getForm());
+
+        script.run(jc, output);
+    }
+
+    /**
+     * Overwrite or implement method setFormTag()
+     *
+     * @see com.cyclopsgroup.waterview.web.taglib.FormControlTag#setFormTag(com.cyclopsgroup.waterview.web.taglib.FormTag)
+     */
+    public void setFormTag(FormTag formTag) throws Exception
+    {
+        this.formTag = formTag;
     }
 }

@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
@@ -24,32 +25,18 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * Empty image tag
+ * Form image tag
  */
-public class BlankImageTag extends TagSupport
+public class FormImageTag extends TagSupport
 {
-    private int width;
+    private int height = 16;
 
-    private int height;
+    private String url;
 
-    /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    protected void processTag(XMLOutput output) throws Exception
-    {
-        requireAttribute("width");
-        requireAttribute("height");
-
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        getContext().setVariable("tag", this);
-        je.getScript("/waterview/BlankImage.jelly").run(getContext(), output);
-    }
+    private int width = 16;
 
     /**
-     * Getter method for field height
+     * Getter method for property height
      *
      * @return Returns the height.
      */
@@ -59,17 +46,17 @@ public class BlankImageTag extends TagSupport
     }
 
     /**
-     * Setter method for field height
+     * Getter method for property url
      *
-     * @param height The height to set.
+     * @return Returns the url.
      */
-    public void setHeight(int height)
+    public String getUrl()
     {
-        this.height = height;
+        return url;
     }
 
     /**
-     * Getter method for field width
+     * Getter method for property width
      *
      * @return Returns the width.
      */
@@ -79,7 +66,43 @@ public class BlankImageTag extends TagSupport
     }
 
     /**
-     * Setter method for field width
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireParent(SubmitTag.class);
+        requireAttribute("url");
+        JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                JellyEngine.ROLE);
+        Script script = je.getScript("fabric", "/widget/FormImage.jelly");
+        getContext().setVariable("image", this);
+        script.run(getContext(), output);
+    }
+
+    /**
+     * Setter method for property height
+     *
+     * @param height The height to set.
+     */
+    public void setHeight(int height)
+    {
+        this.height = height;
+    }
+
+    /**
+     * Setter method for property url
+     *
+     * @param url The url to set.
+     */
+    public void setUrl(String url)
+    {
+        this.url = url;
+    }
+
+    /**
+     * Setter method for property width
      *
      * @param width The width to set.
      */
@@ -87,5 +110,4 @@ public class BlankImageTag extends TagSupport
     {
         this.width = width;
     }
-
 }

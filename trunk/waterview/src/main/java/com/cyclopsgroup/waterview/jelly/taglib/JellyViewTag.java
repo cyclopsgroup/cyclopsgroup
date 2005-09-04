@@ -16,10 +16,8 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.JellyView;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
 
@@ -42,11 +40,8 @@ public class JellyViewTag extends BaseViewTag
         requireAttribute("script");
         JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup(
                 JellyEngine.ROLE);
-        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
-                ModuleManager.ROLE);
-        Path path = mm.parsePath(getScript());
-        return new JellyView(jellyEngine.getScript(path.getPackage(), path
-                .getPath()), getScript());
+
+        return new JellyView(jellyEngine.getScript(getScript()), getScript());
     }
 
     /**

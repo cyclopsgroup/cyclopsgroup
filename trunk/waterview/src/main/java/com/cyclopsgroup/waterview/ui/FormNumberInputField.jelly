@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<span xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <input type="text" name="${field.name}" value="${field.value}" size="8" class="waterviewFormInput" />
+    <w:JellyScript path="/waterview/FormInputFieldSuffix.jelly" />
+</span>

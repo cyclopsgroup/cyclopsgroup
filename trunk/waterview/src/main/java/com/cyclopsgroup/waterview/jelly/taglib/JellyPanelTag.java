@@ -18,11 +18,9 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 
 import org.apache.commons.jelly.Script;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.jelly.JellyPanel;
 import com.cyclopsgroup.waterview.spi.CacheManager;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Panel;
 import com.cyclopsgroup.waterview.spi.taglib.BasePanelTag;
 
@@ -48,13 +46,9 @@ public class JellyPanelTag extends BasePanelTag
         JellyPanel panel = (JellyPanel) cache.get(getClass(), getScript());
         if (panel == null)
         {
-            ModuleManager module = (ModuleManager) getServiceManager().lookup(
-                    ModuleManager.ROLE);
-            Path path = module.parsePath(getScript());
             JellyEngine je = (JellyEngine) getServiceManager().lookup(
                     JellyEngine.ROLE);
-            Script jellyScript = je
-                    .getScript(path.getPackage(), path.getPath());
+            Script jellyScript = je.getScript(getScript());
             panel = new JellyPanel(jellyScript, getScript());
             cache.put(getClass(), getScript(), panel);
         }

@@ -12,9 +12,7 @@ import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.TabularData;
 
@@ -97,13 +95,9 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
         requireAttribute("script");
 
         invokeBody(XMLOutput.createDummyXMLOutput());
-
-        ModuleManager ui = (ModuleManager) getServiceManager().lookup(
-                ModuleManager.ROLE);
-        Path path = ui.parsePath(getScript());
         JellyEngine je = (JellyEngine) getServiceManager().lookup(
                 JellyEngine.ROLE);
-        Script s = je.getScript(path.getPackage(), path.getPath());
+        Script s = je.getScript(getScript());
 
         if (tableTag == null)
         {

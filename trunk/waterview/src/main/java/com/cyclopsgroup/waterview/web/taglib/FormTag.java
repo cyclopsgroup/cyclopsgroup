@@ -1,13 +1,24 @@
-/*
- * Copyright (c) 1999-2004 Evavi, Inc. All Rights Reserved.
+/* ==========================================================================
+ * Copyright 2002-2005 Cyclops Group Community
+ * 
+ * Licensed under the Open Software License, Version 2.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This software is the proprietary information of Evavi, Inc.
- * Use is subject to license terms. License Agreement available at
- * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
+ *      http://opensource.org/licenses/osl-2.1.php
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * =========================================================================
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
@@ -30,15 +41,15 @@ public class FormTag extends TagSupport implements LocationAware
 
     private Script bodyScript;
 
-    private Map fieldTags = ListOrderedMap.decorate(new Hashtable());
+    private Map fieldTags;
 
     private Form form;
 
     private boolean formNew;
 
-    private boolean manual = false;
-
     private String method = "get";
+
+    private List submitTags;
 
     /**
      * Add field tag
@@ -51,27 +62,16 @@ public class FormTag extends TagSupport implements LocationAware
     }
 
     /**
-     * Overwrite or implement method processTag()
+     * Add submit tag
      *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     * @param tag Submit tag
      */
-    protected void processTag(XMLOutput output) throws Exception
+    public void addSubmitTag(SubmitTag tag)
     {
-        requireAttribute("id");
-        requireAttribute("method");
-        requireParent(FormTagAware.class);
-        String formId = "form/" + getTagId();
-        RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
-        form = (Form) data.getSessionContext().get(formId);
-        formNew = false;
-        if (form == null || data.getRequestParameters().getBoolean("keep_form"))
+        if (!submitTags.contains(tag))
         {
-            formNew = true;
-            form = new Form(formId);
-            data.getSessionContext().put(formId, form);
+            submitTags.add(tag);
         }
-        invokeBody(XMLOutput.createDummyXMLOutput());
-        ((FormTagAware) getParent()).handleFormTag(this);
     }
 
     /**
@@ -122,6 +122,26 @@ public class FormTag extends TagSupport implements LocationAware
     }
 
     /**
+     * Set name
+     *
+     * @return Name to set
+     */
+    public String getName()
+    {
+        return getTagId();
+    }
+
+    /**
+     * Get submit tags
+     *
+     * @return Submit tags
+     */
+    public List getSubmitTags()
+    {
+        return submitTags;
+    }
+
+    /**
      * If the for is new created
      *
      * @return True if form is new
@@ -132,13 +152,29 @@ public class FormTag extends TagSupport implements LocationAware
     }
 
     /**
-     * Getter method for property manual
+     * Overwrite or implement method processTag()
      *
-     * @return Returns the manual.
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public boolean isManual()
+    protected void processTag(XMLOutput output) throws Exception
     {
-        return manual;
+        requireAttribute("name");
+        requireAttribute("method");
+        requireParent(FormControlTag.class);
+        fieldTags = ListOrderedMap.decorate(new Hashtable());
+        submitTags = new ArrayList();
+        String formId = "form/" + getUniqueTagId() + "/" + getName();
+        RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
+        form = (Form) data.getSessionContext().get(formId);
+        formNew = false;
+        if (form == null || data.getRequestParameters().getBoolean("keep_form"))
+        {
+            formNew = true;
+            form = new Form(formId);
+            data.getSessionContext().put(formId, form);
+        }
+        invokeBody(XMLOutput.createDummyXMLOutput());
+        ((FormControlTag) getParent()).setFormTag(this);
     }
 
     /**
@@ -162,20 +198,20 @@ public class FormTag extends TagSupport implements LocationAware
     }
 
     /**
-     * Setter method for property manual
-     *
-     * @param manual The manual to set.
-     */
-    public void setManual(boolean manual)
-    {
-        this.manual = manual;
-    }
-
-    /**
      * @param method The method to set.
      */
     public void setMethod(String method)
     {
         this.method = method;
+    }
+
+    /**
+     * Set name
+     *
+     * @param name Name
+     */
+    public void setName(String name)
+    {
+        setTagId(name);
     }
 }

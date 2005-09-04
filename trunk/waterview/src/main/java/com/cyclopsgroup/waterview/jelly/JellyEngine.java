@@ -190,6 +190,34 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
     }
 
     /**
+     * Get script with given path
+     *
+     * @param path Path
+     * @return Script object
+     * @throws JellyException Throw it out
+     */
+    public Script getScript(String path) throws JellyException
+    {
+        Path p = moduleManager.parsePath(path);
+        return getScript(p.getPackage(), p.getPath());
+    }
+
+    /**
+     * Get script with given path and default script
+     *
+     * @param path Script path
+     * @param defaultScript Default script
+     * @return Script object
+     * @throws JellyException Throw it out
+     */
+    public Script getScript(String path, Script defaultScript)
+            throws JellyException
+    {
+        Path p = moduleManager.parsePath(path);
+        return getScript(p.getPackage(), p.getPath(), defaultScript);
+    }
+
+    /**
      * Get script with give path and package name
      *
      * @param scriptPath Script path

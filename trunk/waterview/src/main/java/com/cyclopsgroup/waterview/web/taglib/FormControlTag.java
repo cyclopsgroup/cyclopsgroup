@@ -12,7 +12,7 @@ package com.cyclopsgroup.waterview.web.taglib;
  * 
  * Container of form tag
  */
-public interface FormTagAware
+public interface FormControlTag
 {
     /**
      * Handle form tag
@@ -20,5 +20,5 @@ public interface FormTagAware
      * @param formTag Form tag object
      * @throws Exception Throw it out
      */
-    void handleFormTag(FormTag formTag) throws Exception;
+    void setFormTag(FormTag formTag) throws Exception;
 }
