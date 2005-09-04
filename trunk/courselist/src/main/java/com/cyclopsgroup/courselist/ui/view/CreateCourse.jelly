@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>Create Course</h2>
+    <table width="100%">
+        <w:FormControl>
+            <w:Form name="createcourse" method="post">
+                <tr>
+                    <td>Prefix:</td>
+                    <td>
+                        <w:Field name="prefix" required="true" value="CS" />
+                    </td>
+                    <td>Course Number:</td>
+                    <td>
+                        <w:Field name="course_number" required="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td colspan="3">
+                        <w:Field name="course_title" required="true" size="60" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pre-requisite:</td>
+                    <td colspan="3">
+                        <w:Field name="pre_requisite" size="60" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td colspan="3">
+                        <w:Field name="description" size="60" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Co-requisite:</td>
+                    <td>
+                        <w:Field name="co_requisite" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="lineBreak" />
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <w:Submit
+                            action="${link.addAction('/courselist/CreateCourseAction').setPage('/courselist/CourseList.jelly')}"
+                            forceValidation="true">
+                            <w:FormButton>Create Course</w:FormButton>
+                        </w:Submit>
+                    </td>
+                </tr>
+            </w:Form>
+        </w:FormControl>
+    </table>
+</div>

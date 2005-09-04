@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <head>
-        <w:JellyScript path="/waterview/HtmlHeaders.jelly" />
+        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
     </head>
     <body>
         <div align="center">
@@ -13,10 +13,14 @@
                                 <tr>
                                     <td>Course List</td>
                                     <td align="right">
-                                        <img src="${applicationBase}/images/notepaper.png" width="64" height="64"
-                                            alt="Course List" />
-                                        <img src="${applicationBase}/images/ark.png" width="64" height="64"
-                                            alt="New Course" />
+                                        <a href="${link.setPage('/courselist/CourseList.jelly')}">
+                                            <img src="${applicationBase}/images/notepaper.png" width="64" height="64"
+                                                alt="Course List" />
+                                        </a>
+                                        <a href="${link.setPage('/courselist/CreateCourse.jelly')}">
+                                            <img src="${applicationBase}/images/ark.png" width="64" height="64"
+                                                alt="New Course" />
+                                        </a>
                                     </td>
                                 </tr>
                             </table>

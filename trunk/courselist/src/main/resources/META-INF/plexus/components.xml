@@ -2,11 +2,18 @@
 <plexus>
     <components>
         <component>
+            <role>com.cyclopsgroup.courselist.CoursePersistenceManager</role>
+            <implementation>com.cyclopsgroup.courselist.persist.DefaultCoursePersistenceManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.courselist.CourseListComponents</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <component role="com.cyclopsgroup.waterview.Waterview" />
                 <component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
+                <component role="com.cyclopsgroup.courselist.CoursePersistenceManager" />
             </configuration>
         </component>
     </components>
