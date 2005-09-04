@@ -6,15 +6,15 @@
             <item name="What is it" href="/index.html"/>
             <item name="Projects list" href="/projects.html"/>
             <item name="Members" href="/members/index.html" collapse="true">
+                <item name="Jiaqi Guo" href="/members/jiaqi/index.html" collapse="true">
+                    <item name="Introduction" href="/members/jiaqi/index.html"/>
+                    <item name="Resume" href="/members/jiaqi/resume.html"/>
+                </item>
             	<item name="Xiaofang Xu" href="/kb/display/xxu"/>
             	<item name="Peng Zhai" href="/kb/display/pzhai"/>
                 <item name="Xuying Zhao" href="/members/xuying/index.html" collapse="true">
                     <item name="Introduction" href="/members/xuying/index.html"/>
                     <item name="CV" href="/members/xuying/cv.html"/>
-                </item>
-                <item name="Jiaqi Guo" href="/members/jiaqi/index.html" collapse="true">
-                    <item name="Introduction" href="/members/jiaqi/index.html"/>
-                    <item name="Resume" href="/members/jiaqi/resume.html"/>
                 </item>
             </item>
             <item name="About Us" href="/about.html"/>
