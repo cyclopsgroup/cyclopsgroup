@@ -89,6 +89,17 @@ public class ResolveActionsValve extends AbstractLogEnabled implements Valve
             actionContext.fail("Action error", e);
         }
 
+        if (!actionContext.getInputErrorMessages().isEmpty())
+        {
+            data.getRequestContext().put("formInvalid", Boolean.TRUE);
+            data.getRequestContext().put("formErrors",
+                    actionContext.getInputErrorMessages());
+            if (data.getRequestParameters().getBoolean("forced_validation"))
+            {
+                return;
+            }
+        }
+
         if (actionContext.isFailed())
         {
             data.getRequestContext().put(ActionContext.FAIL_MESSAGE,

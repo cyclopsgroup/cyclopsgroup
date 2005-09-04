@@ -28,8 +28,8 @@ public interface PipelineContext
     /**
      * Invoke next valve of pipeline
      *
-     * @param runtime Page Runtime object
+     * @param data Page Runtime object
      * @throws Exception Just throw it out
      */
-    void invokeNextValve(RuntimeData runtime) throws Exception;
+    void invokeNextValve(RuntimeData data) throws Exception;
 }

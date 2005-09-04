@@ -16,9 +16,7 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.Map;
-
-import org.apache.commons.collections.MultiHashMap;
+import java.util.Properties;
 
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.Link;
@@ -31,13 +29,13 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 final class DefaultActionContext implements ActionContext
 {
-    private Map errorInputMessages = new MultiHashMap();
-
     private Throwable failCause;
 
     private boolean failed = false;
 
     private String failMessage;
+
+    private Properties inputErrorMessages = new Properties();
 
     private Link link;
 
@@ -63,7 +61,7 @@ final class DefaultActionContext implements ActionContext
      */
     public void error(String inputName, String errorMessage)
     {
-        errorInputMessages.put(inputName, errorMessage);
+        inputErrorMessages.put(inputName, errorMessage);
     }
 
     /**
@@ -126,6 +124,11 @@ final class DefaultActionContext implements ActionContext
     public String getFailMessage()
     {
         return failMessage;
+    }
+
+    Properties getInputErrorMessages()
+    {
+        return inputErrorMessages;
     }
 
     /**

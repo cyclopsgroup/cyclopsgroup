@@ -39,6 +39,11 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.waterview.web.ProcessFormValve</role>
+            <implementation>com.cyclopsgroup.waterview.web.ProcessFormValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.core.RenderPageValve</role>
             <implementation>com.cyclopsgroup.waterview.core.RenderPageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -66,6 +71,7 @@
             <configuration>
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
+                    <valve role="com.cyclopsgroup.waterview.web.ProcessFormValve" />
                     <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
                     <valve role="com.cyclopsgroup.waterview.jelly.DeterminePageValve" />
                     <valve role="com.cyclopsgroup.waterview.core.RenderPageValve" />

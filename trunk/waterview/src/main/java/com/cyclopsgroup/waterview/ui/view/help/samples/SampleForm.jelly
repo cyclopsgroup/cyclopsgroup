@@ -3,15 +3,15 @@
     <h2>Sample Form</h2>
     <table width="100%">
         <w:FormControl>
-            <w:Form name="aform">
+            <w:Form name="aform" method="post">
                 <tr>
                     <td>Id</td>
                     <td>
-                        <w:Field name="product_id" />
+                        <w:Field name="product_id" required="true" />
                     </td>
                     <td>Amount</td>
                     <td>
-                        <w:Field name="product_amount" type="int" />
+                        <w:Field name="product_amount" required="true" type="int" />
                     </td>
                 </tr>
                 <tr>

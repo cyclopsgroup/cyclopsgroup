@@ -2,7 +2,7 @@
 <span xmlns:j="jelly:core">
     <j:if test="${field.invalid}">
         <j:set var="errorMessage">${field.errorMessage}</j:set>
-        <img src="${themeBase}/16x16/important.png" width="16" height="16" border="0" alt="${errorMessage}"
+        <img src="${themeBase}/16x16/error.png" width="16" height="16" border="0" alt="${errorMessage}"
             title="${errorMessage}" />
     </j:if>
 </span>
