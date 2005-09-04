@@ -16,16 +16,29 @@
  */
 package com.cyclopsgroup.courselist.persist;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.context.Context;
+import org.apache.avalon.framework.context.ContextException;
+import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
 import com.cyclopsgroup.courselist.Course;
 import com.cyclopsgroup.courselist.CourseFilter;
 import com.cyclopsgroup.courselist.CoursePersistenceManager;
+import com.cyclopsgroup.waterview.Waterview;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,16 +46,39 @@ import com.cyclopsgroup.courselist.CoursePersistenceManager;
  * Default implementation of course persistence manager
  */
 public class DefaultCoursePersistenceManager extends AbstractLogEnabled
-        implements CoursePersistenceManager
+        implements CoursePersistenceManager, Initializable, Contextualizable
 {
     private Hashtable courses = new Hashtable();
+
+    private String dataFile;
 
     /**
      * Save changes
      */
     protected void commitChanges()
     {
+        try
+        {
+            XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(
+                    new FileOutputStream(dataFile)));
+            encoder.writeObject(courses);
+            encoder.close();
+        }
+        catch (Exception e)
+        {
+            getLogger().error("Can not commit change", e);
+        }
+    }
 
+    /**
+     * Overwrite or implement method contextualize()
+     *
+     * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
+     */
+    public void contextualize(Context context) throws ContextException
+    {
+        Properties props = (Properties) context.get(Waterview.INIT_PROPERTIES);
+        dataFile = props.getProperty("basedir") + "/data.xml";
     }
 
     /**
@@ -104,6 +140,32 @@ public class DefaultCoursePersistenceManager extends AbstractLogEnabled
     public Course findByNumber(String number)
     {
         return (Course) courses.get(number);
+    }
+
+    /**
+     * Overwrite or implement method initialize()
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize() throws Exception
+    {
+        File data = new File(dataFile);
+        if (!data.getParentFile().isDirectory())
+        {
+            data.getParentFile().mkdirs();
+        }
+
+        if (data.exists())
+        {
+            XMLDecoder d = new XMLDecoder(new BufferedInputStream(
+                    new FileInputStream(data)));
+            courses = (Hashtable) d.readObject();
+            d.close();
+        }
+        else
+        {
+            courses = new Hashtable();
+        }
     }
 
     /**
