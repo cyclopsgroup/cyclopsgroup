@@ -30,10 +30,22 @@
     </repository>
     <mailingLists>
         <mailingList>
-            <name>Cyclops Group Mailing List</name>
-            <subscribe>http://groups-beta.google.com/group/cyclopsgroup</subscribe>
-            <unsubscribe>http://groups-beta.google.com/group/cyclopsgroup</unsubscribe>
-            <archive>http://groups-beta.google.com/group/cyclopsgroup</archive>
+            <name>Cyclops Group News</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-news</archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Support</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-support</archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Discussion</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-discussion</archive>
         </mailingList>
     </mailingLists>
     <developers>
@@ -45,9 +57,51 @@
         </developer>
     </developers>
     <contributors />
-    <licenses />
+    <licenses>
+        <license>
+            <name>CDDL</name>
+            <url>http://www.opensource.org/licenses/cddl1.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <dependencies />
-    <build />
+    <build>
+        <nagEmailAddress>cyclopsgroup-changelog@googlegroups.com</nagEmailAddress>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <resources>
+                <resource>
+                    <directory>src/test/java</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/test/resources</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/webapp/WEB-INF/classes</directory>
+                    <filtering>false</filtering>
+                </resource>
+            </resources>
+        </unitTest>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
     <reports>
         <report>maven-jdepend-plugin</report>
         <report>maven-checkstyle-plugin</report>
