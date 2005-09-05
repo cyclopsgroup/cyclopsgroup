@@ -23,17 +23,27 @@
             <timezone>-6</timezone>
         </developer>
         <developer>
-            <name>Jiaqi Guo</name>
-            <id>jiaqi</id>
-            <email>jiaqi.guo@gmail.com</email>
-            <organization>Evavi</organization>
-            <url>http://www.cyclopsgroup.com</url>
+            <name>Chris Menken</name>
+            <id>chrismenken</id>
+            <email>cpm022000@utdallas.edu</email>
             <timezone>-6</timezone>
         </developer>
         <developer>
-            <name>Chris Menken</name>
-            <id>chrismenken</id>
-            <email></email>
+            <name>Jarvis Cline</name>
+            <id>jarviscline</id>
+            <email>jrc032000@utdallas.edu</email>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>John Christin</name>
+            <id>jchristin</id>
+            <email>jchristin@gmail.com</email>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Josh Allen</name>
+            <id>joshallen</id>
+            <email>HoopsJosh@gmail.com</email>
             <timezone>-6</timezone>
         </developer>
     </developers>
