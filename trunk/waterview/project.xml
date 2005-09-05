@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>2.0-b1</currentVersion>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
@@ -243,6 +243,10 @@
                 </resource>
                 <resource>
                     <directory>src/test/resources</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/webapp/WEB-INF/classes</directory>
                     <filtering>false</filtering>
                 </resource>
             </resources>
