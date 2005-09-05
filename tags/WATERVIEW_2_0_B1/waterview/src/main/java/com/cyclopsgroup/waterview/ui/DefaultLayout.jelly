@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <head>
+        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
+    </head>
+    <body>
+        <div align="center">
+            <div style="max-width: 860px;" id="bodyWrapper">
+                <table width="100%" cellspacing="0" border="0" cellpadding="0">
+                    <tr>
+                        <td colspan="2" id="bannerPanel">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td rowspan="2">
+                                        <h2>Waterview ${page}</h2>
+                                    </td>
+                                    <td align="right" valign="top" trim="false">
+                                        <a href="${link.setPage('/Index.jelly')}">Home</a>
+                                        <a href="${link.setPage('/waterview/About.jelly')}">About</a>
+                                        <a href="${link.setPage('/waterview/Contact.jelly')}">Contact</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" align="right">
+                                        <img src="${themeBase}/48x48/logo.png" alt="Waterview System" width="48"
+                                            height="48" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="0" cellspacing="0" cellpadding="5">
+                                            <tr>
+                                                <td />
+                                                <j:forEach var="runtimeNode" items="${tabNodes}">
+                                                    <j:set var="node" value="${runtimeNode.content}" />
+                                                    <j:choose>
+                                                        <j:when test="${runtimeNode eq selectedNode}">
+                                                            <j:set var="currentTabNode" value="${node}" />
+                                                            <td class="waterviewSelectedTab">
+                                                                <a href="${link.setPage(node.page)}" class="r">
+                                                                    ${node.title}
+                                                                </a>
+                                                            </td>
+                                                        </j:when>
+                                                        <j:otherwise>
+                                                            <td class="waterviewUnselectedTab">
+                                                                <a href="${link.setPage(node.page)}">${node.title}</a>
+                                                            </td>
+                                                        </j:otherwise>
+                                                    </j:choose>
+                                                </j:forEach>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="lineBreak" />
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" id="rightPanel">
+                            <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="navigation">
+                                <w:View>
+                                    <table celllspacing="0" border="0" cellpadding="0">
+                                        <j:forEach var="row" items="${navigatorRows}">
+                                            <j:set var="node" value="${row.node.content}" />
+                                            <tr>
+                                                <td colspan="${row.depth}" />
+                                                <td>
+                                                    <w:BlankImage width="6" height="16" />
+                                                </td>
+                                                <td colspan="2">
+                                                    <j:choose>
+                                                        <j:when test="${node.end}">
+                                                            <img src="${themeBase}/16x16/screen.png" width="16"
+                                                                height="16" alt="Goto ${node.page}" />
+                                                        </j:when>
+                                                        <j:when test="${row.node.expanded}">
+                                                            <a
+                                                                href="${link.addAction('/waterview/NavigatorCollapseNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                                                <img src="${themeBase}/16x16/folder_opened.png"
+                                                                    width="16" height="16" alt="Click to collapse" />
+                                                            </a>
+                                                        </j:when>
+                                                        <j:otherwise>
+                                                            <a
+                                                                href="${link.addAction('/waterview/NavigatorExpandNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                                                <img src="${themeBase}/16x16/folder.png" width="16"
+                                                                    height="16" alt="Click to expand" />
+                                                            </a>
+                                                        </j:otherwise>
+                                                    </j:choose>
+                                                </td>
+                                                <td colspan="${10 - row.depth}">
+                                                    <a href="${link.setPage(node.page)}" title="${node.description}">
+                                                        ${node.title}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </j:forEach>
+                                    </table>
+                                </w:View>
+                                <w:View>
+                                    <p>Some help links</p>
+                                </w:View>
+                                <w:View>
+                                    <p>Some reference links</p>
+                                </w:View>
+                            </w:JellyPanel>
+                        </td>
+                        <td width="75%" valign="top" id="bodyPanel">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
+                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                            &gt;&gt;
+                                        </j:forEach>
+                                        ${currentNavigatorNode.title}
+                                    </td>
+                                </tr>
+                            </table>
+                            <w:JellyPanel script="/waterview/DefaultVerticalBodyPanel.jelly" name="body">
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
+                            </w:JellyPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="lineBreak" />
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%" border="0" id="footerPanel">
+                                <tr>
+                                    <td>Copyrights reserved Cyclops Group 2005</td>
+                                    <td align="right">Powered By Cyclops Group Waterview</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<span xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <j:choose>
+        <j:when test="${fieldTag.booleanType}">
+            <j:choose>
+                <j:when test="${formTag.search}">
+                    <w:JellyScript path="/waterview/FormBooleanSearchField.jelly" />
+                </j:when>
+                <j:otherwise>
+                    <w:JellyScript path="/waterview/FormBooleanInputField.jelly" />
+                </j:otherwise>
+            </j:choose>
+        </j:when>
+        <j:when test="${fieldTag.numberType}">
+            <j:choose>
+                <j:when test="${formTag.search}">
+                    <w:JellyScript path="/waterview/FormNumberInputField.jelly" />
+                </j:when>
+                <j:otherwise>
+                    <w:JellyScript path="/waterview/FormNumberInputField.jelly" />
+                </j:otherwise>
+            </j:choose>
+        </j:when>
+        <j:when test="${fieldTag.dateType}">
+            <j:choose>
+                <j:when test="${formTag.search}">
+                    <w:JellyScript path="/waterview/FormDateInputField.jelly" />
+                </j:when>
+                <j:otherwise>
+                    <w:JellyScript path="/waterview/FormDateInputField.jelly" />
+                </j:otherwise>
+            </j:choose>
+        </j:when>
+        <j:otherwise>
+            <w:JellyScript path="/waterview/FormTextInputField.jelly" />
+        </j:otherwise>
+    </j:choose>
+</span>

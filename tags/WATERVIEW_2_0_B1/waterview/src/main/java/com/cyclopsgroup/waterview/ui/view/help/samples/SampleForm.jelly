@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>Sample Form</h2>
+    <table width="100%">
+        <w:FormControl>
+            <w:Form name="aform" method="post">
+                <tr>
+                    <td>Id</td>
+                    <td>
+                        <w:Field name="product_id" required="true" />
+                    </td>
+                    <td>Amount</td>
+                    <td>
+                        <w:Field name="product_amount" required="true" type="int" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <w:Submit action="dddddd" forceValidation="true">
+                            <w:FormButton>Push Me</w:FormButton>
+                        </w:Submit>
+                    </td>
+                </tr>
+            </w:Form>
+        </w:FormControl>
+    </table>
+</div>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:c="http://www.evavi.com/fabric/core" xmlns:j="jelly:core" xmlns:f="http://www.evavi.com/fabric/ui">
+    <table width="100%" border="0" class="fabricFormTable">
+        <form method="${formTag.method}" name="${form.id}" action="${formTag.action}">
+            <f:JellyWidget path="/fabric/FormHiddenFields.jelly" />
+            <c:InvokeScript script="${formTag.bodyScript}" />
+            <j:new var="groupUtils" className="com.evavi.fabric.utils.GroupUtils" />
+            <j:choose>
+                <j:when test="${formWidgetTag.vertical}">
+                    <j:set var="groups" value="${groupUtils.createVerticalGroup(form.fields, formWidgetTag.columns)}" />
+                </j:when>
+                <j:otherwise>
+                    <j:set var="groups" value="${groupUtils.createGroup(form.fields, formWidgetTag.columns)}" />
+                </j:otherwise>
+            </j:choose>
+
+            <j:forEach var="group" items="${groups}">
+                <tr>
+                    <j:forEach var="field" items="${group}">
+                        <j:set var="fieldTag" value="${formTag.getFieldTag(field.name)}" />
+                        <td>
+                            <j:choose>
+                                <j:when test="${fieldTag.headerScript != null}">
+                                    <c:InvokeScript script="${fieldTag.headerScript}" />
+                                </j:when>
+                                <j:when test="${fieldTag.title != null}">${fieldTag.title}</j:when>
+                                <j:otherwise>${field.name}</j:otherwise>
+                            </j:choose>
+                        </td>
+                        <td>
+                            <c:RenderTag tag="${fieldTag}" />
+                        </td>
+                    </j:forEach>
+                </tr>
+            </j:forEach>
+            <j:set var="columns" value="${formWidgetTag.columns * 2}" />
+            <tr>
+                <td colspan="${columns}" class="fabricLineBreak" />
+            </tr>
+            <tr>
+                <td colspan="${columns}">
+                    <j:forEach var="submitTag" items="${formTag.submitTags}">
+                        <c:RenderTag tag="${submitTag}" />
+                    </j:forEach>
+                </td>
+            </tr>
+        </form>
+    </table>
+</div>

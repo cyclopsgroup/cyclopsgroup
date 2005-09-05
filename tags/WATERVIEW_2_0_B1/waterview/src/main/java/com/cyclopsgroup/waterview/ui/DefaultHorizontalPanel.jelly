@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="portalHorizontalPanel" xmlns:w="http://waterview.cyclopsgroup.com/ui"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:j="jelly:core">
+    <table width="100" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <j:forEach var="view" items="${views}">
+                <td valign="top" class="portalPanelCell">
+                    <w:DisplayView view="${view}"/>
+                </td>
+            </j:forEach>
+        </tr>
+    </table>
+</div>
