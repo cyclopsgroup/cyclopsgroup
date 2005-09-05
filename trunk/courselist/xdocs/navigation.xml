@@ -8,6 +8,7 @@
             <item name="Install and run" href="/install.html" />
         </menu>
         <links>
+            <item name="Live Demo" href="http://www.cyclopsgroup.com/courselist" />
             <item name="View CVS" href="http://fisheye.cenqua.com/viewrep/cyclops-group/courselist" />
             <item name="Change Log" href="http://fisheye.cenqua.com/changelog/cyclops-group/courselist" />
             <item name="Search Source" href="http://fisheye.cenqua.com/search/cyclops-group/courselist" />
