@@ -217,6 +217,16 @@
             <version>1.4</version>
         </dependency>
         <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.4-rc1</version>
+            <type>jar</type>
+            <url>http://jakarta.apache.org/velocity</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>waterview</artifactId>
             <version>SNAPSHOT</version>
