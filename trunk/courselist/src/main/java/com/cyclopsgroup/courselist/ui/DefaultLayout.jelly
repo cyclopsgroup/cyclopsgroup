@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <head>
+        <title>Course List</title>
         <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
     </head>
     <body>
@@ -11,14 +12,27 @@
                         <td id="bannerPanel">
                             <table width="100%" border="0" id="footerPanel">
                                 <tr>
-                                    <td>Course List</td>
+                                    <td>
+                                        <h1>
+                                            <font color="white">Course List</font>
+                                        </h1>
+                                    </td>
                                     <td align="right">
-                                        <a href="${link.setPage('/courselist/CourseList.jelly')}">
-                                            <img src="${applicationBase}/images/notepaper.png" width="64" height="64"
+                                        <a href="${pageBase}" title="Home page">
+                                            <img src="${applicationBase}/images/home.png" width="48" height="48"
+                                                alt="Home page" />
+                                        </a>
+                                        <a href="${applicationBase}/data.xml" title="Download data file">
+                                            <img src="${applicationBase}/images/folder_tar.png" width="48" height="48"
+                                                alt="Download data file" />
+                                        </a>
+                                        <a href="${link.setPage('/courselist/CourseList.jelly')}" title="Course list">
+                                            <img src="${applicationBase}/images/notepaper.png" width="48" height="48"
                                                 alt="Course List" />
                                         </a>
-                                        <a href="${link.setPage('/courselist/CreateCourse.jelly')}">
-                                            <img src="${applicationBase}/images/ark.png" width="64" height="64"
+                                        <a href="${link.setPage('/courselist/CreateCourse.jelly')}"
+                                            title="Create new course">
+                                            <img src="${applicationBase}/images/ark.png" width="48" height="48"
                                                 alt="New Course" />
                                         </a>
                                     </td>
@@ -44,7 +58,10 @@
                             <table width="100%" border="0" id="footerPanel">
                                 <tr>
                                     <td>Copyrights reserved Cyclops Group 2005</td>
-                                    <td align="right">Powered By Cyclops Group Waterview</td>
+                                    <td align="right">
+                                        Powered By
+                                        <a href="http://www.cyclopsgroup.com/projects/waterview">Waterview</a>
+                                    </td>
                                 </tr>
                             </table>
                         </td>

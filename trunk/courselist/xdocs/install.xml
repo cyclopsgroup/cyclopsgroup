@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Install and run</title>
+    </properties>
+    <body>
+        <section name="How to create package">
+            <p>
+                Until course list project release a war version package, users need to check out code from cvs and build
+                war file with maven.
+            </p>
+            <p></p>
+        </section>
+        <section name="Run it with Tomcat">
+            <p>
+                The war file is completely container neutralized. This means technically it can run on any Java servlet
+                container such as tomcat, weblogic or even jetty. To run it in tomcat, following the instruction.
+            </p>
+        </section>
+    </body>
+</document>

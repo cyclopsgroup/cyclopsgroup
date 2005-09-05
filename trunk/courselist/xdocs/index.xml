@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Course List Overview</title>
+    </properties>
+    <body>
+        <section name="What is it">
+            <p>Course List is a simple small application to manage the information of a bunch of courses.</p>
+            <p>User can browse, add, edit and delete courses.</p>
+        </section>
+        <section name="What it does not do">
+            <p>
+                Course list is just a simple demo application. It does not have security control. This means anybody can
+                view, create, change and delete all information.
+            </p>
+        </section>
+    </body>
+</document>

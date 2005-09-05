@@ -27,9 +27,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="lineBreak" />
-                </tr>
-                <tr>
                     <td>
                         <w:Submit action="${link.addAction('/courselist/DeleteCourseAction').setPage(page)}">
                             <w:FormButton>Delete Selected</w:FormButton>

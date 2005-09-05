@@ -9,6 +9,14 @@
                 <default-theme>courselist</default-theme>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-package>courselist</default-package>
+            </configuration>
+        </component>
     </components>
     <load-on-start>
         <component>

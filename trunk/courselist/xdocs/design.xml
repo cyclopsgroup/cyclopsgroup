@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Install and run</title>
+    </properties>
+    <body>
+        <section name="No database, only XML">
+            <p>
+                The data is not stored in the database. Instead, source list simply serialize all course entities into
+                an XML file.
+            </p>
+            <p></p>
+        </section>
+        <section name="Waterview based">
+            <p>Course list application is built based on Waterview project.</p>
+        </section>
+    </body>
+</document>

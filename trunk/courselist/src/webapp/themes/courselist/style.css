@@ -1,0 +1,50 @@
+body {
+	background-color: #BFE4FF;
+	color: #0066B3;
+}
+
+#bodyWrapper {
+	background-color: white;
+}
+
+#bannerPanel {
+	background-color: #80C9FF;
+}
+
+table.waterviewTable th {
+	background-color: #6096BF;
+	color: white;
+	border-width: 1px;
+	border-style: outset;
+}
+
+table.waterviewTable tr.b {
+	background-color: #E6F4FF;
+}
+
+.lineBreak {
+	background-color: #6096BF;
+}
+
+.waterviewViewWrapper {
+	background-color: #E6F4FF;
+}
+
+.waterviewViewBody {
+	background-color: white;
+}
+
+input.waterviewFormInput {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #80C9FF;
+}
+
+input.waterviewFormButton {
+	background-color: #80C9FF;
+	font-weight: bold;
+	color: white;
+	border-color: #80C9FF; border-style : outset;
+	border-width: 2px;;
+	border-style: outset;
+}
