@@ -12,15 +12,17 @@
                                 <w:Column name="select" title="Select">
                                     <input type="checkbox" name="course_number" value="${course.number}" />
                                 </w:Column>
-                                <w:Column name="number" title="Course Number">
+                                <w:Column name="number" title="Course Number" sort="asc">
                                     <a
                                         href="${link.setPage('/courselist/EditCourse.jelly').addQueryData('course_number', course.number)}">
                                         ${course.number}
                                     </a>
                                 </w:Column>
-                                <w:Column name="course_title" title="Title">${course.title}</w:Column>
+                                <w:Column name="title" title="Title" sort="unsorted">${course.title}</w:Column>
                                 <w:Column name="prequisite" title="Pre-requisite">${course.prerequisite}</w:Column>
-                                <w:Column name="corequisite" title="Co-requisite">${course.coRequisite}</w:Column>
+                                <w:Column name="coRequisite" title="Co-requisite" sort="unsorted">
+                                    ${course.coRequisite}
+                                </w:Column>
                                 <w:Column name="description" title="Description">${course.description}</w:Column>
                             </w:Table>
                         </w:TableControl>
