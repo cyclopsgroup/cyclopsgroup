@@ -24,6 +24,7 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnDisplay;
 import com.cyclopsgroup.waterview.web.ColumnSort;
+import com.cyclopsgroup.waterview.web.Table;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -45,28 +46,6 @@ public class ColumnTag extends TagSupport
     private String type = "string";
 
     private String value = StringUtils.EMPTY;
-
-    /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    protected void processTag(XMLOutput output) throws Exception
-    {
-        requireAttribute("name");
-        requireAttribute("display");
-        requireParent(TableTag.class);
-        if (((TableTag) getParent()).isTableNew())
-        {
-            Class columnType = TypeUtils.getType(getType());
-            column = new Column(getName(), columnType);
-            column.setDisplay(ColumnDisplay.valueOf(getDisplay()));
-            column.setSort(ColumnSort.valueOf(getSort()));
-            column.setValue(getValue());
-            ((TableTag) getParent()).getTable().addColumn(column);
-        }
-        ((TableTag) getParent()).addColumnTag(this);
-    }
 
     /**
      * Get column object
@@ -117,7 +96,7 @@ public class ColumnTag extends TagSupport
     }
 
     /**
-     * TODO Add java doc
+     * Get string type of column
      *
      * @return Type of column
      */
@@ -134,6 +113,34 @@ public class ColumnTag extends TagSupport
     public String getValue()
     {
         return value;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("name");
+        requireAttribute("display");
+        requireParent(TableTag.class);
+        if (((TableTag) getParent()).isTableNew())
+        {
+            Class columnType = TypeUtils.getType(getType());
+            Table table = ((TableTag) getParent()).getTable();
+            column = new Column(getName(), columnType);
+            table.addColumn(column);
+            column.setDisplay(ColumnDisplay.valueOf(getDisplay()));
+            ColumnSort sort = ColumnSort.valueOf(getSort());
+            column.setSort(sort);
+            if (sort == ColumnSort.ASC || sort == ColumnSort.DESC)
+            {
+                table.sortOn(getName());
+            }
+            column.setValue(getValue());
+        }
+        ((TableTag) getParent()).addColumnTag(this);
     }
 
     /**
@@ -175,7 +182,7 @@ public class ColumnTag extends TagSupport
     }
 
     /**
-     * TODO Add java doc
+     * Set string type of column
      *
      * @param type Type of the column
      */

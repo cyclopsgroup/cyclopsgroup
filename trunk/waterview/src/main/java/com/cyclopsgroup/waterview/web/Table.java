@@ -17,9 +17,12 @@
 package com.cyclopsgroup.waterview.web;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -32,28 +35,10 @@ public class Table
     private Map columns = ListOrderedMap.decorate(new HashMap());
 
     private String id;
-    
+
     private int pageIndex = 0;
 
-    /**
-     * Get page index
-     *
-     * @return Page index
-     */
-    public int getPageIndex()
-    {
-        return pageIndex;
-    }
-
-    /**
-     * Set page index
-     *
-     * @param pageIndex Page index
-     */
-    public void setPageIndex(int pageIndex)
-    {
-        this.pageIndex = pageIndex;
-    }
+    private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
 
     /**
      * Constructor for class Table
@@ -113,5 +98,55 @@ public class Table
     public String getId()
     {
         return id;
+    }
+
+    /**
+     * Get page index
+     *
+     * @return Page index
+     */
+    public int getPageIndex()
+    {
+        return pageIndex;
+    }
+
+    /**
+     * Get sorted column names
+     *
+     * @return Array of column names
+     */
+    public String[] getSortedColumns()
+    {
+        return (String[]) sortedColumns.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * Set page index
+     *
+     * @param pageIndex Page index
+     */
+    public void setPageIndex(int pageIndex)
+    {
+        this.pageIndex = pageIndex;
+    }
+
+    /**
+     * Sort on column
+     *
+     * @param columnName Column name
+     */
+    public void sortOn(String columnName)
+    {
+        sortedColumns.add(columnName);
+    }
+
+    /**
+     * Unsort on column
+     *
+     * @param columnName Name of column
+     */
+    public void unsortOn(String columnName)
+    {
+        sortedColumns.remove(columnName);
     }
 }
