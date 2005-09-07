@@ -3,10 +3,10 @@
     <f:TableControl script="/waterview/DefaultTableControl.jelly">
         <f:CollectionTabularData items="${rows}" />
         <f:Table var="row" name="a">
-            <f:Column name="id" title="ID">
+            <f:Column name="id" title="ID" sort="unsorted">
                 <font color="red">${row.id}</font>
             </f:Column>
-            <f:Column name="name" title="Name">${row.name}</f:Column>
+            <f:Column name="name" title="Name" sort="unsorted">${row.name}</f:Column>
             <f:Column name="totalAmount" title="Total Amount" sort="asc">${row.totalAmount}</f:Column>
             <f:Column name="description" title="Description">${row.description}</f:Column>
         </f:Table>

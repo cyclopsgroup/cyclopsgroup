@@ -7,7 +7,8 @@
                 <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
                 <j:set var="columnCount" value="${columnCount + 1}" />
                 <th>
-                    <j:if test="${!column.sort.name eq 'disabled'}">
+                    <j:set var="columnSort">${column.sort.name}</j:set>
+                    <j:if test="${!columnSort.equals('disabled')}">
                         <a
                             href="${link.addAction('/waterview/SortTable').setPage(page).addQueryData('table_id', table.id).addQueryData('table_column_name', column.name)}">
                             <j:switch on="${column.sort.name}">
