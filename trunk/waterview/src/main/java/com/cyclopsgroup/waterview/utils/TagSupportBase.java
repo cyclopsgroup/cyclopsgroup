@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview.utils;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.Tag;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
@@ -117,8 +118,9 @@ public abstract class TagSupportBase extends TagSupport
      *
      * @param parentTagClass Parent class
      * @throws JellyTagException Throw it out if not matched
+     * @return Parent tag
      */
-    protected final void requireParent(Class parentTagClass)
+    protected final Tag requireParent(Class parentTagClass)
             throws JellyTagException
     {
         if (!parentTagClass.isAssignableFrom(getParent().getClass()))
@@ -126,6 +128,26 @@ public abstract class TagSupportBase extends TagSupport
             throw new JellyTagException("Tag's parent must be "
                     + parentTagClass.getName());
         }
+        return getParent();
+    }
+
+    /**
+     * Require this tag to be inside given tag class
+     * 
+     * @param parentTagClass Given tag class
+     * @return Parent tag
+     * @throws JellyTagException Throw it if requirement is not met
+     */
+    protected final Tag requireInside(Class parentTagClass)
+            throws JellyTagException
+    {
+        Tag parent = findAncestorWithClass(parentTagClass);
+        if (parent == null)
+        {
+            throw new JellyTagException("Tag must be inside "
+                    + parentTagClass.getName());
+        }
+        return parent;
     }
 
     /**
