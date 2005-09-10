@@ -11,23 +11,16 @@
                         <td colspan="2" id="bannerPanel">
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td rowspan="2">
+                                    <td>
                                         <h2>Waterview ${page}</h2>
                                     </td>
-                                    <td align="right" valign="top" trim="false">
-                                        <a href="${link.setPage('/Index.jelly')}">Home</a>
-                                        <a href="${link.setPage('/waterview/About.jelly')}">About</a>
-                                        <a href="${link.setPage('/waterview/Contact.jelly')}">Contact</a>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td rowspan="2" align="right">
                                         <img src="${themeBase}/48x48/logo.png" alt="Waterview System" width="48"
                                             height="48" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td valign="bottom">
                                         <table border="0" cellspacing="0" cellpadding="5">
                                             <tr>
                                                 <td />
