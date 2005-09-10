@@ -25,24 +25,24 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * Valve to deal with hibernate sessions
  */
-public class HibernateTransactionValve implements Valve
+public class HibernateTransactionValve
+    implements Valve
 {
     /**
      * Overwrite or implement method invoke()
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
-        HibernateHome hibernate = (HibernateHome) data.getServiceManager()
-                .lookup(HibernateHome.ROLE);
+        HibernateHome hibernate = (HibernateHome) data.getServiceManager().lookup( HibernateHome.ROLE );
         try
         {
-            context.invokeNextValve(data);
+            context.invokeNextValve( data );
             hibernate.commitTransactions();
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             hibernate.rollbackTransactions();
             throw e;

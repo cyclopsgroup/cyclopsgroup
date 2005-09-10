@@ -6,22 +6,29 @@
         <id name="id" type="string" length="128" column="user_id">
             <generator class="uuid.hex" />
         </id>
-        <property name="name" type="string" column="user_name" not-null="true">
+        <property name="name" type="string" column="user_name" not-null="true" length="30">
             <meta attribute="field-description">User name of this user</meta>
         </property>
-        <property name="password" type="string" column="password" />
-        <property name="firstName" type="string" column="first_name" />
-        <property name="middleName" type="string" column="middle_name" />
-        <property name="lastName" type="string" column="last_name" />
+        <property name="password" type="string" column="password" not-null="true" length="60" />
+        <property name="firstName" type="string" column="first_name" length="60" />
+        <property name="middleName" type="string" column="middle_name" length="20" />
+        <property name="lastName" type="string" column="last_name" length="60" />
         <property name="gender" type="string">
             <column name="gender" length="1" />
         </property>
-        <property name="email" type="string" not-null="true" />
+        <property name="email" type="string" not-null="true" length="60" />
+        <property name="country" type="string" length="10" />
+        <property name="language" type="string" length="10" />
+        <property name="birthday" type="date" />
         <property name="isDisabled" column="is_disabled" type="boolean">
             <meta attribute="property-type">boolean</meta>
         </property>
         <property name="isSystem" column="is_system" type="boolean">
             <meta attribute="property-type">boolean</meta>
         </property>
+        <set name="groups" table="c_t_user_groupp">
+            <key column="user_id" />
+            <many-to-many column="group_id" class="com.evavi.fabric.security.Group" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -18,13 +18,12 @@ package com.cyclopsgroup.tornado.hibernate;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.sql.DataSource;
 
@@ -38,6 +37,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
@@ -45,7 +45,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.cyclopsgroup.tornado.sql.DataSourceManager;
-import com.cyclopsgroup.tornado.utils.ClassComparator;
 import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
 /**
@@ -58,7 +57,9 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
 {
     private DataSourceManager dataSourceManager;
 
-    private Set entityClasses;
+    private MultiHashMap entityClasses = new MultiHashMap();
+
+    private Hashtable hibernateConfigurations = new Hashtable();
 
     private HashMap hibernateProperties = new HashMap();
 
@@ -222,13 +223,15 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     }
 
     /**
-     * Overwrite or implement method getEntityClasses()
+     * Override method getEntityClasses in class DefaultHibernateHome
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getEntityClasses()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getEntityClasses(java.lang.String)
      */
-    public Class[] getEntityClasses()
+    public Class[] getEntityClasses(String dataSourceName)
     {
-        return (Class[]) entityClasses.toArray(ArrayUtils.EMPTY_CLASS_ARRAY);
+        Collection classes = (Collection) entityClasses.get(dataSourceName);
+        return classes == null ? ArrayUtils.EMPTY_CLASS_ARRAY
+                : (Class[]) classes.toArray(ArrayUtils.EMPTY_CLASS_ARRAY);
     }
 
     /**
@@ -263,11 +266,11 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     }
 
     /**
-     * Overwrite or implement method getSession()
+     * Override method getConnection in class DefaultHibernateHome
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String, boolean)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getConnection(java.lang.String)
      */
-    public Session getSession(String dataSourceName, boolean withTransaction)
+    public synchronized Connection getConnection(String dataSourceName)
             throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
@@ -281,25 +284,26 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
         {
             DataSource dataSource = dataSourceManager
                     .getDataSource(dataSourceName);
-            if (dataSource == null)
-            {
-                return null;
-            }
             dbcon = dataSource.getConnection();
-            if (dbcon == null)
-            {
-                return null;
-            }
             wrapper.setConnection(dataSourceName, dbcon);
         }
+        return dbcon;
+    }
+
+    /**
+     * Overwrite or implement method getSession()
+     *
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String, boolean)
+     */
+    public synchronized Session getSession(String dataSourceName,
+            boolean withTransaction) throws Exception
+    {
+        Connection dbcon = getConnection(dataSourceName);
+        SessionWrapper wrapper = (SessionWrapper) localSession.get();
         Session session = wrapper.getSession(dataSourceName);
         if (session == null)
         {
             SessionFactory sf = getSessionFactory(dataSourceName);
-            if (sf == null)
-            {
-                return null;
-            }
             session = sf.openSession(dbcon);
             wrapper.setSession(dataSourceName, session);
         }
@@ -316,9 +320,15 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSessionFactory(java.lang.String)
      */
     public SessionFactory getSessionFactory(String dataSourceName)
-            throws Exception
+            throws NoSuchHibernateConfiguredException
     {
-        return (SessionFactory) sessionFactories.get(dataSourceName);
+        SessionFactory sf = (SessionFactory) sessionFactories
+                .get(dataSourceName);
+        if (sf == null)
+        {
+            throw new NoSuchHibernateConfiguredException(dataSourceName);
+        }
+        return sf;
     }
 
     /**
@@ -336,8 +346,6 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
             URL resource = (URL) enu.nextElement();
             props.load(resource.openStream());
         }
-
-        entityClasses = new TreeSet(new ClassComparator());
 
         for (Iterator i = hibernateProperties.keySet().iterator(); i.hasNext();)
         {
@@ -357,7 +365,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
                     {
                         Class entityClass = Class.forName(key);
                         c.addClass(entityClass);
-                        entityClasses.add(entityClass);
+                        entityClasses.put(value, entityClass);
                     }
                     catch (Exception e)
                     {
@@ -365,7 +373,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
                     }
                 }
             }
-
+            hibernateConfigurations.put(name, c);
             SessionFactory sessionFactory = c.buildSessionFactory();
             sessionFactories.put(name, sessionFactory);
         }
@@ -435,5 +443,17 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     {
         dataSourceManager = (DataSourceManager) serviceManager
                 .lookup(DataSourceManager.ROLE);
+    }
+
+    /**
+     * Override method getHibernateConfiguration in class DefaultHibernateHome
+     *
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getHibernateConfiguration(java.lang.String)
+     */
+    public org.hibernate.cfg.Configuration getHibernateConfiguration(
+            String dataSourceName)
+    {
+        return (org.hibernate.cfg.Configuration) hibernateConfigurations
+                .get(dataSourceName);
     }
 }

@@ -74,8 +74,9 @@ public class DataSourceManager extends AbstractLogEnabled implements
      * Get default data source
      *
      * @return Data source instance
+     * @throws NoSuchDataSourceException If default data source is not defined
      */
-    public DataSource getDataSource()
+    public DataSource getDataSource() throws NoSuchDataSourceException
     {
         return getDataSource(DEFAULT_DATA_SOURCE);
     }
@@ -85,13 +86,15 @@ public class DataSourceManager extends AbstractLogEnabled implements
      *
      * @param name Data source name
      * @return Data source instance or null
+     * @throws NoSuchDataSourceException If data source is not defined
      */
     public DataSource getDataSource(String name)
+            throws NoSuchDataSourceException
     {
         DataSourceHome dsf = getDataSourceHome(name);
         if (dsf == null)
         {
-            return null;
+            throw new NoSuchDataSourceException(name);
         }
         return dsf.getDataSource();
     }

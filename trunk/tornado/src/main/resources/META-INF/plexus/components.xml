@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceHome.default</role>
+            <implementation>com.cyclopsgroup.tornado.sql.DBCPDataSourceHome</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <property name="driverClassName">com.mysql.jdbc.Driver</property>
+                <property name="url">jdbc:mysql://localhost/tornado</property>
+                <property name="username">dev</property>
+                <property name="password">dev</property>
+                <property name="maxActive">5</property>
+                <property name="defaultAutoCommit">false</property>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceManager</role>
+            <implementation>com.cyclopsgroup.tornado.sql.DataSourceManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <data-source name="default" role="com.cyclopsgroup.tornado.sql.DataSourceHome.default" />
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.hibernate.HibernateHome</role>
+            <implementation>com.cyclopsgroup.tornado.hibernate.DefaultHibernateHome</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <data-source name="default">
+                    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+                </data-source>
+            </configuration>
+        </component>
+    </components>
+</plexus>

@@ -16,8 +16,11 @@
  */
 package com.cyclopsgroup.tornado.hibernate;
 
+import java.sql.Connection;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import com.cyclopsgroup.tornado.sql.DataSourceManager;
 
@@ -76,9 +79,18 @@ public interface HibernateHome
     /**
      * Get all entity classes
      *
+     * @param dataSourceName Data source name
      * @return Entity classes
      */
-    Class[] getEntityClasses();
+    Class[] getEntityClasses(String dataSourceName);
+
+    /**
+     * Get hibernate configuration
+     * 
+     * @param dataSourceName Data source name
+     * @return Configuraton object
+     */
+    Configuration getHibernateConfiguration(String dataSourceName);
 
     /**
      * Get current session with transaction support
@@ -107,6 +119,13 @@ public interface HibernateHome
     Session getSession(String dataSourceName) throws Exception;
 
     /**
+     * @param dataSourceName Data source name
+     * @return SQL Connection
+     * @throws Exception Throw it out
+     */
+    Connection getConnection(String dataSourceName) throws Exception;
+
+    /**
      * Get session with transaction or not
      *
      * @param dataSourceName Data source name
@@ -122,9 +141,10 @@ public interface HibernateHome
      *
      * @param dataSourceName Data source name
      * @return Hibernate session factory
-     * @throws Exception Throw it out
+     * @throws NoSuchHibernateConfiguredException Throw it out
      */
-    SessionFactory getSessionFactory(String dataSourceName) throws Exception;
+    SessionFactory getSessionFactory(String dataSourceName)
+            throws NoSuchHibernateConfiguredException;
 
     /**
      * Roll back current transaction
