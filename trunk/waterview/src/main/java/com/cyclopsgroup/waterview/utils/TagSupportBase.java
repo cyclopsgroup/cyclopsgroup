@@ -16,12 +16,8 @@
  */
 package com.cyclopsgroup.waterview.utils;
 
-import java.security.MessageDigest;
-
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
@@ -34,19 +30,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class TagSupportBase extends TagSupport
 {
-    private static final String DIGEST_ALGORITHM = "MD5";
-
-    private int columnNumber;
-
-    private String elementName;
-
-    private String fileName;
-
-    private int lineNumber;
-
     private String tagId;
-
-    private String uniqueTagId;
 
     /**
      * Overwrite or implement method doTag()
@@ -68,50 +52,6 @@ public abstract class TagSupportBase extends TagSupport
         {
             throw new JellyTagException(e);
         }
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#getColumnNumber()
-     * @return column number
-     */
-    public final int getColumnNumber()
-    {
-        return columnNumber;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#getElementName()
-     * @return element name
-     */
-    public final String getElementName()
-    {
-        return elementName;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#getFileName()
-     * @return current file name
-     */
-    public final String getFileName()
-    {
-        return fileName;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#getLineNumber()
-     * @return line number
-     */
-    public final int getLineNumber()
-    {
-        return lineNumber;
     }
 
     /**
@@ -139,29 +79,16 @@ public abstract class TagSupportBase extends TagSupport
      * @return Tag id
      * @throws Exception
      */
-    public final synchronized String getUniqueTagId() throws Exception
+    public String getUniqueTagId() throws Exception
     {
-        if (uniqueTagId == null)
+        if (StringUtils.isEmpty(getTagId()))
         {
-            if (!(this instanceof LocationAware))
-            {
-                throw new UnsupportedOperationException(this
-                        + " tag is not location aware, can't get tag id");
-            }
-            if (StringUtils.isEmpty(getTagId()))
-            {
-                throw new IllegalArgumentException(
-                        "Id attribute is required for " + this
-                                + "to get tag ID");
-            }
-            StringBuffer sb = new StringBuffer(getFileName());
-            sb.append(':').append(getElementName());
-            sb.append(':').append(getTagId());
-            byte[] digest = MessageDigest.getInstance(DIGEST_ALGORITHM).digest(
-                    sb.toString().getBytes());
-            uniqueTagId = new String(Hex.encodeHex(digest));
+            throw new IllegalArgumentException(
+                    "tagId attribute is required for " + this
+                            + " to get unique ID");
         }
-        return uniqueTagId;
+        return new StringBuffer(getParent().getBody().hashCode()).append(':')
+                .append(getTagId()).toString();
     }
 
     /**
@@ -199,50 +126,6 @@ public abstract class TagSupportBase extends TagSupport
             throw new JellyTagException("Tag's parent must be "
                     + parentTagClass.getName());
         }
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#setColumnNumber(int)
-     * @param columnNumber Column number
-     */
-    public final void setColumnNumber(int columnNumber)
-    {
-        this.columnNumber = columnNumber;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#setElementName(java.lang.String)
-     * @param elementName Name of the element
-     */
-    public final void setElementName(String elementName)
-    {
-        this.elementName = elementName;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#setFileName(java.lang.String)
-     * @param fileName Name of the script file
-     */
-    public final void setFileName(String fileName)
-    {
-        this.fileName = fileName;
-    }
-
-    /**
-     * Override method BaseTagSupport in supper class
-     *
-     * @see org.apache.commons.jelly.LocationAware#setLineNumber(int)
-     * @param lineNumber number of line
-     */
-    public final void setLineNumber(int lineNumber)
-    {
-        this.lineNumber = lineNumber;
     }
 
     /**

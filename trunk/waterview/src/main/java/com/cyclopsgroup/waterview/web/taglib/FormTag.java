@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
-import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -35,7 +34,7 @@ import com.cyclopsgroup.waterview.web.Form;
  * 
  * Form tag
  */
-public class FormTag extends TagSupport implements LocationAware
+public class FormTag extends TagSupport
 {
     private String action;
 
@@ -167,8 +166,7 @@ public class FormTag extends TagSupport implements LocationAware
         RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
         form = (Form) data.getSessionContext().get(formId);
         formNew = false;
-        if (form == null
-                || !data.getParams().getBoolean("keep_form"))
+        if (form == null || !data.getParams().getBoolean("keep_form"))
         {
             formNew = true;
             form = new Form(formId);

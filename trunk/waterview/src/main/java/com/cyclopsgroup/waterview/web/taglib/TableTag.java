@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.web.taglib;
 
 import java.util.HashMap;
 
-import org.apache.commons.jelly.LocationAware;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -30,7 +29,7 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Tag for table
  */
-public class TableTag extends TagSupport implements LocationAware
+public class TableTag extends TagSupport
 {
     private Table table;
 
