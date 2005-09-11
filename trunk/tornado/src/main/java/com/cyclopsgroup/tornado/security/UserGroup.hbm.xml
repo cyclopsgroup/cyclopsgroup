@@ -7,10 +7,6 @@
             <generator class="uuid.hex" />
         </id>
         <property name="userId" type="string" column="user_id" not-null="true" length="128" />
-        <many-to-one name="user" class="com.cyclopsgroup.tornado.security.User" column="user_id" insert="false"
-            update="false" />
         <property name="groupId" type="string" column="group_id" not-null="true" length="128" />
-        <many-to-one name="group" class="com.cyclopsgroup.tornado.security.Group" column="group_id" insert="false"
-            update="false" />
     </class>
 </hibernate-mapping>
