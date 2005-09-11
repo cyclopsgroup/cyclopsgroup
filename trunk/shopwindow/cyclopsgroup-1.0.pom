@@ -20,7 +20,7 @@
     <url>${pom.organization.url}/projects/${pom.artifactId}</url>
     <issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
     <siteAddress>${maven.cyclopsgroup.site.address}</siteAddress>
-    <siteDirectory>{maven.cyclopsgroup.site.directory}/projects/${pom.artifactId}</siteDirectory>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/${pom.artifactId}</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
         <developerConnection>
