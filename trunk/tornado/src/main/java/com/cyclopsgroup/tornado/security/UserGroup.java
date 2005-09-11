@@ -22,6 +22,7 @@ package com.cyclopsgroup.tornado.security;
  * Link between user and group
  */
 public class UserGroup
+    extends UserGroupBase
 {
 
 }

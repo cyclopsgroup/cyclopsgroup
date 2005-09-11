@@ -26,9 +26,9 @@
         <property name="isSystem" column="is_system" type="boolean">
             <meta attribute="property-type">boolean</meta>
         </property>
-        <set name="groups" table="c_t_user_groupp">
+        <set name="groups" table="c_t_user_group">
             <key column="user_id" />
-            <many-to-many column="group_id" class="com.evavi.fabric.security.Group" />
+            <many-to-many column="group_id" class="com.cyclopsgroup.tornado.security.Group" />
         </set>
     </class>
 </hibernate-mapping>

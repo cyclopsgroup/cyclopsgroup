@@ -19,11 +19,15 @@ abstract public class GroupBase implements Serializable {
     /** nullable persistent field */
     private boolean isDisabled;
 
+    /** nullable persistent field */
+    private boolean isSystem;
+
     /** full constructor */
-    public GroupBase(String name, String description, boolean isDisabled) {
+    public GroupBase(String name, String description, boolean isDisabled, boolean isSystem) {
         this.name = name;
         this.description = description;
         this.isDisabled = isDisabled;
+        this.isSystem = isSystem;
     }
 
     /** default constructor */
@@ -65,6 +69,14 @@ abstract public class GroupBase implements Serializable {
 
     public void setIsDisabled(boolean isDisabled) {
         this.isDisabled = isDisabled;
+    }
+
+    public boolean getIsSystem() {
+        return this.isSystem;
+    }
+
+    public void setIsSystem(boolean isSystem) {
+        this.isSystem = isSystem;
     }
 
     public String toString() {

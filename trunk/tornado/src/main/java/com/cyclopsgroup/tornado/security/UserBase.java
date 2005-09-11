@@ -1,6 +1,8 @@
 package com.cyclopsgroup.tornado.security;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 
@@ -13,7 +15,7 @@ abstract public class UserBase implements Serializable {
     /** persistent field */
     private String name;
 
-    /** nullable persistent field */
+    /** persistent field */
     private String password;
 
     /** nullable persistent field */
@@ -32,13 +34,25 @@ abstract public class UserBase implements Serializable {
     private String email;
 
     /** nullable persistent field */
+    private String country;
+
+    /** nullable persistent field */
+    private String language;
+
+    /** nullable persistent field */
+    private Date birthday;
+
+    /** nullable persistent field */
     private boolean isDisabled;
 
     /** nullable persistent field */
     private boolean isSystem;
 
+    /** persistent field */
+    private Set groups;
+
     /** full constructor */
-    public UserBase(String name, String password, String firstName, String middleName, String lastName, String gender, String email, boolean isDisabled, boolean isSystem) {
+    public UserBase(String name, String password, String firstName, String middleName, String lastName, String gender, String email, String country, String language, Date birthday, boolean isDisabled, boolean isSystem, Set groups) {
         this.name = name;
         this.password = password;
         this.firstName = firstName;
@@ -46,8 +60,12 @@ abstract public class UserBase implements Serializable {
         this.lastName = lastName;
         this.gender = gender;
         this.email = email;
+        this.country = country;
+        this.language = language;
+        this.birthday = birthday;
         this.isDisabled = isDisabled;
         this.isSystem = isSystem;
+        this.groups = groups;
     }
 
     /** default constructor */
@@ -55,9 +73,11 @@ abstract public class UserBase implements Serializable {
     }
 
     /** minimal constructor */
-    public UserBase(String name, String email) {
+    public UserBase(String name, String password, String email, Set groups) {
         this.name = name;
+        this.password = password;
         this.email = email;
+        this.groups = groups;
     }
 
     public String getId() {
@@ -127,6 +147,30 @@ abstract public class UserBase implements Serializable {
         this.email = email;
     }
 
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Date getBirthday() {
+        return this.birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public boolean getIsDisabled() {
         return this.isDisabled;
     }
@@ -141,6 +185,14 @@ abstract public class UserBase implements Serializable {
 
     public void setIsSystem(boolean isSystem) {
         this.isSystem = isSystem;
+    }
+
+    public Set getGroups() {
+        return this.groups;
+    }
+
+    public void setGroups(Set groups) {
+        this.groups = groups;
     }
 
     public String toString() {

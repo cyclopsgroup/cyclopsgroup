@@ -52,8 +52,9 @@ import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
  *
  * Default implementation of hibernate factory
  */
-public class DefaultHibernateHome extends AbstractLogEnabled implements
-        HibernateHome, Configurable, Disposable, Initializable, Serviceable
+public class DefaultHibernateHome
+    extends AbstractLogEnabled
+    implements HibernateHome, Configurable, Disposable, Initializable, Serviceable
 {
     private DataSourceManager dataSourceManager;
 
@@ -74,7 +75,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      */
     public void closeSession()
     {
-        closeSession(DEFAULT_DATASOURCE);
+        closeSession( DEFAULT_DATASOURCE );
     }
 
     /**
@@ -82,29 +83,29 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSession(java.lang.String)
      */
-    public void closeSession(String dataSourceName)
+    public void closeSession( String dataSourceName )
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
             try
             {
-                Session session = wrapper.getSession(dataSourceName);
-                if (session != null)
+                Session session = wrapper.getSession( dataSourceName );
+                if ( session != null )
                 {
                     session.flush();
                     session.close();
                 }
-                Connection dbcon = wrapper.getConnection(dataSourceName);
-                if (dbcon != null)
+                Connection dbcon = wrapper.getConnection( dataSourceName );
+                if ( dbcon != null )
                 {
                     dbcon.close();
                 }
-                wrapper.remove(dataSourceName);
+                wrapper.remove( dataSourceName );
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                getLogger().warn("Can not close hibernate session", e);
+                getLogger().warn( "Can not close hibernate session", e );
             }
         }
     }
@@ -117,15 +118,15 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
     public void closeSessions()
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
             String[] names = wrapper.getDataSourceNames();
-            for (int i = 0; i < names.length; i++)
+            for ( int i = 0; i < names.length; i++ )
             {
-                closeSession(names[i]);
+                closeSession( names[i] );
             }
         }
-        localSession.set(null);
+        localSession.set( null );
     }
 
     /**
@@ -133,9 +134,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction()
      */
-    public void commitTransaction() throws Exception
+    public void commitTransaction()
+        throws Exception
     {
-        commitTransaction(DEFAULT_DATASOURCE);
+        commitTransaction( DEFAULT_DATASOURCE );
     }
 
     /**
@@ -143,22 +145,23 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction(java.lang.String)
      */
-    public void commitTransaction(String dataSourceName) throws Exception
+    public void commitTransaction( String dataSourceName )
+        throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
-            Session session = wrapper.getSession(dataSourceName);
-            if (session != null)
+            Session session = wrapper.getSession( dataSourceName );
+            if ( session != null )
             {
                 session.flush();
             }
-            Transaction transaction = wrapper.getTransaction(dataSourceName);
-            if (transaction != null)
+            Transaction transaction = wrapper.getTransaction( dataSourceName );
+            if ( transaction != null )
             {
                 transaction.commit();
             }
-            Connection dbcon = wrapper.getConnection(dataSourceName);
+            Connection dbcon = wrapper.getConnection( dataSourceName );
             dbcon.commit();
         }
     }
@@ -168,21 +171,22 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransactions()
      */
-    public void commitTransactions() throws Exception
+    public void commitTransactions()
+        throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
             String[] names = wrapper.getDataSourceNames();
-            for (int i = 0; i < names.length; i++)
+            for ( int i = 0; i < names.length; i++ )
             {
                 try
                 {
-                    commitTransaction(names[i]);
+                    commitTransaction( names[i] );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
-                    getLogger().warn("Can not close hibernate session", e);
+                    getLogger().warn( "Can not close hibernate session", e );
                 }
             }
         }
@@ -193,17 +197,16 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(
-            org.apache.avalon.framework.configuration.Configuration conf)
-            throws ConfigurationException
+    public void configure( org.apache.avalon.framework.configuration.Configuration conf )
+        throws ConfigurationException
     {
-        Configuration[] props = conf.getChildren("data-source");
-        for (int i = 0; i < props.length; i++)
+        Configuration[] props = conf.getChildren( "data-source" );
+        for ( int i = 0; i < props.length; i++ )
         {
             Configuration prop = props[i];
-            String name = prop.getAttribute("name");
-            Properties p = ConfigurationUtils.getProperties(prop);
-            hibernateProperties.put(name, p);
+            String name = prop.getAttribute( "name" );
+            Properties p = ConfigurationUtils.getProperties( prop );
+            hibernateProperties.put( name, p );
         }
     }
 
@@ -214,7 +217,7 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      */
     public synchronized void dispose()
     {
-        for (Iterator i = sessionFactories.values().iterator(); i.hasNext();)
+        for ( Iterator i = sessionFactories.values().iterator(); i.hasNext(); )
         {
             SessionFactory sf = (SessionFactory) i.next();
             sf.close();
@@ -227,11 +230,11 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getEntityClasses(java.lang.String)
      */
-    public Class[] getEntityClasses(String dataSourceName)
+    public Class[] getEntityClasses( String dataSourceName )
     {
-        Collection classes = (Collection) entityClasses.get(dataSourceName);
-        return classes == null ? ArrayUtils.EMPTY_CLASS_ARRAY
-                : (Class[]) classes.toArray(ArrayUtils.EMPTY_CLASS_ARRAY);
+        Collection classes = (Collection) entityClasses.get( dataSourceName );
+        return classes == null ? ArrayUtils.EMPTY_CLASS_ARRAY : (Class[]) classes
+            .toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
     }
 
     /**
@@ -239,9 +242,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession()
      */
-    public Session getSession() throws Exception
+    public Session getSession()
+        throws Exception
     {
-        return getSession(DEFAULT_DATASOURCE);
+        return getSession( DEFAULT_DATASOURCE );
     }
 
     /**
@@ -249,10 +253,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(boolean)
      */
-    public synchronized Session getSession(boolean withTransaction)
-            throws Exception
+    public synchronized Session getSession( boolean withTransaction )
+        throws Exception
     {
-        return getSession(DEFAULT_DATASOURCE, withTransaction);
+        return getSession( DEFAULT_DATASOURCE, withTransaction );
     }
 
     /**
@@ -260,9 +264,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String)
      */
-    public Session getSession(String dataSourceName) throws Exception
+    public Session getSession( String dataSourceName )
+        throws Exception
     {
-        return getSession(dataSourceName, true);
+        return getSession( dataSourceName, true );
     }
 
     /**
@@ -270,22 +275,21 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getConnection(java.lang.String)
      */
-    public synchronized Connection getConnection(String dataSourceName)
-            throws Exception
+    public synchronized Connection getConnection( String dataSourceName )
+        throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper == null)
+        if ( wrapper == null )
         {
             wrapper = new SessionWrapper();
-            localSession.set(wrapper);
+            localSession.set( wrapper );
         }
-        Connection dbcon = wrapper.getConnection(dataSourceName);
-        if (dbcon == null)
+        Connection dbcon = wrapper.getConnection( dataSourceName );
+        if ( dbcon == null )
         {
-            DataSource dataSource = dataSourceManager
-                    .getDataSource(dataSourceName);
+            DataSource dataSource = dataSourceManager.getDataSource( dataSourceName );
             dbcon = dataSource.getConnection();
-            wrapper.setConnection(dataSourceName, dbcon);
+            wrapper.setConnection( dataSourceName, dbcon );
         }
         return dbcon;
     }
@@ -295,21 +299,21 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String, boolean)
      */
-    public synchronized Session getSession(String dataSourceName,
-            boolean withTransaction) throws Exception
+    public synchronized Session getSession( String dataSourceName, boolean withTransaction )
+        throws Exception
     {
-        Connection dbcon = getConnection(dataSourceName);
+        Connection dbcon = getConnection( dataSourceName );
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        Session session = wrapper.getSession(dataSourceName);
-        if (session == null)
+        Session session = wrapper.getSession( dataSourceName );
+        if ( session == null )
         {
-            SessionFactory sf = getSessionFactory(dataSourceName);
-            session = sf.openSession(dbcon);
-            wrapper.setSession(dataSourceName, session);
+            SessionFactory sf = getSessionFactory( dataSourceName );
+            session = sf.openSession( dbcon );
+            wrapper.setSession( dataSourceName, session );
         }
-        if (withTransaction)
+        if ( withTransaction )
         {
-            wrapper.enableTransaction(dataSourceName);
+            wrapper.enableTransaction( dataSourceName );
         }
         return session;
     }
@@ -319,14 +323,13 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSessionFactory(java.lang.String)
      */
-    public SessionFactory getSessionFactory(String dataSourceName)
-            throws NoSuchHibernateConfiguredException
+    public SessionFactory getSessionFactory( String dataSourceName )
+        throws NoSuchHibernateConfiguredException
     {
-        SessionFactory sf = (SessionFactory) sessionFactories
-                .get(dataSourceName);
-        if (sf == null)
+        SessionFactory sf = (SessionFactory) sessionFactories.get( dataSourceName );
+        if ( sf == null )
         {
-            throw new NoSuchHibernateConfiguredException(dataSourceName);
+            throw new NoSuchHibernateConfiguredException( dataSourceName );
         }
         return sf;
     }
@@ -336,46 +339,47 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
-        Enumeration enu = getClass().getClassLoader().getResources(
-                "META-INF/evavi/hibernate-entities.properties");
+        Enumeration enu = getClass().getClassLoader()
+            .getResources( "META-INF/cyclopsgroup/hibernate-entities.properties" );
         ExtendedProperties props = new ExtendedProperties();
-        while (enu.hasMoreElements())
+        while ( enu.hasMoreElements() )
         {
             URL resource = (URL) enu.nextElement();
-            props.load(resource.openStream());
+            props.load( resource.openStream() );
         }
 
-        for (Iterator i = hibernateProperties.keySet().iterator(); i.hasNext();)
+        for ( Iterator i = hibernateProperties.keySet().iterator(); i.hasNext(); )
         {
             String name = (String) i.next();
 
             org.hibernate.cfg.Configuration c = new org.hibernate.cfg.Configuration();
-            Properties p = (Properties) hibernateProperties.get(name);
-            c.setProperties(p);
-            for (Iterator j = props.getKeys(); j.hasNext();)
+            Properties p = (Properties) hibernateProperties.get( name );
+            c.setProperties( p );
+            for ( Iterator j = props.getKeys(); j.hasNext(); )
             {
                 String key = (String) j.next();
-                String value = (String) props.getString(key);
+                String value = (String) props.getString( key );
 
-                if (StringUtils.equals(value, name))
+                if ( StringUtils.equals( value, name ) )
                 {
                     try
                     {
-                        Class entityClass = Class.forName(key);
-                        c.addClass(entityClass);
-                        entityClasses.put(value, entityClass);
+                        Class entityClass = Class.forName( key );
+                        c.addClass( entityClass );
+                        entityClasses.put( value, entityClass );
                     }
-                    catch (Exception e)
+                    catch ( Exception e )
                     {
-                        getLogger().warn("Entity " + key + " is not loaded", e);
+                        getLogger().warn( "Entity " + key + " is not loaded", e );
                     }
                 }
             }
-            hibernateConfigurations.put(name, c);
+            hibernateConfigurations.put( name, c );
             SessionFactory sessionFactory = c.buildSessionFactory();
-            sessionFactories.put(name, sessionFactory);
+            sessionFactories.put( name, sessionFactory );
         }
     }
 
@@ -384,9 +388,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction()
      */
-    public void rollbackTransaction() throws Exception
+    public void rollbackTransaction()
+        throws Exception
     {
-        rollbackTransaction(DEFAULT_DATASOURCE);
+        rollbackTransaction( DEFAULT_DATASOURCE );
     }
 
     /**
@@ -394,17 +399,18 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction(java.lang.String)
      */
-    public void rollbackTransaction(String dataSourceName) throws Exception
+    public void rollbackTransaction( String dataSourceName )
+        throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
-            Transaction transaction = wrapper.getTransaction(dataSourceName);
-            if (transaction != null)
+            Transaction transaction = wrapper.getTransaction( dataSourceName );
+            if ( transaction != null )
             {
                 transaction.rollback();
             }
-            Connection dbcon = wrapper.getConnection(dataSourceName);
+            Connection dbcon = wrapper.getConnection( dataSourceName );
             dbcon.rollback();
         }
     }
@@ -414,21 +420,22 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransactions()
      */
-    public void rollbackTransactions() throws Exception
+    public void rollbackTransactions()
+        throws Exception
     {
         SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if (wrapper != null)
+        if ( wrapper != null )
         {
             String[] names = wrapper.getDataSourceNames();
-            for (int i = 0; i < names.length; i++)
+            for ( int i = 0; i < names.length; i++ )
             {
                 try
                 {
-                    rollbackTransaction(names[i]);
+                    rollbackTransaction( names[i] );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
-                    getLogger().warn("Can not close hibernate session", e);
+                    getLogger().warn( "Can not close hibernate session", e );
                 }
             }
         }
@@ -439,10 +446,10 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        dataSourceManager = (DataSourceManager) serviceManager
-                .lookup(DataSourceManager.ROLE);
+        dataSourceManager = (DataSourceManager) serviceManager.lookup( DataSourceManager.ROLE );
     }
 
     /**
@@ -450,10 +457,8 @@ public class DefaultHibernateHome extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getHibernateConfiguration(java.lang.String)
      */
-    public org.hibernate.cfg.Configuration getHibernateConfiguration(
-            String dataSourceName)
+    public org.hibernate.cfg.Configuration getHibernateConfiguration( String dataSourceName )
     {
-        return (org.hibernate.cfg.Configuration) hibernateConfigurations
-                .get(dataSourceName);
+        return (org.hibernate.cfg.Configuration) hibernateConfigurations.get( dataSourceName );
     }
 }

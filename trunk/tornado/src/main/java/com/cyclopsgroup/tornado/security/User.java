@@ -21,7 +21,8 @@ package com.cyclopsgroup.tornado.security;
  *
  * User entity bean
  */
-public class User extends UserBase
+public class User
+    extends UserBase
 {
 
 }

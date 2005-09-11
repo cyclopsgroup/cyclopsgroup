@@ -21,7 +21,8 @@ package com.cyclopsgroup.tornado.security;
  *
  * Group entity bean
  */
-public class Group extends GroupBase
+public class Group
+    extends GroupBase
 {
 
 }
