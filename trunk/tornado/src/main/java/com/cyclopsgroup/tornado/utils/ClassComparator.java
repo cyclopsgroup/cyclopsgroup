@@ -14,17 +14,18 @@ import java.util.Comparator;
  *
  * Comparator for class object
  */
-public class ClassComparator implements Comparator
+public class ClassComparator
+    implements Comparator
 {
     /**
      * Overwrite or implement method compare()
      *
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
      */
-    public int compare(Object o1, Object o2)
+    public int compare( Object o1, Object o2 )
     {
         Class c1 = (Class) o1;
         Class c2 = (Class) o2;
-        return c1.getName().compareTo(c2.getName());
+        return c1.getName().compareTo( c2.getName() );
     }
 }

@@ -47,7 +47,7 @@ public interface HibernateService
      *
      * @param dataSourceName Data source name
      */
-    void closeSession(String dataSourceName);
+    void closeSession( String dataSourceName );
 
     /**
      * Close sessions attached to current thread
@@ -59,7 +59,8 @@ public interface HibernateService
      *
      * @throws Exception Throw it out
      */
-    void commitTransaction() throws Exception;
+    void commitTransaction()
+        throws Exception;
 
     /**
      * Close given transaction
@@ -67,14 +68,16 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @throws Exception Throw it out
      */
-    void commitTransaction(String dataSourceName) throws Exception;
+    void commitTransaction( String dataSourceName )
+        throws Exception;
 
     /**
      * Commit all transactions
      *
      * @throws Exception Throw it out
      */
-    void commitTransactions() throws Exception;
+    void commitTransactions()
+        throws Exception;
 
     /**
      * Get all entity classes
@@ -82,7 +85,7 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @return Entity classes
      */
-    Class[] getEntityClasses(String dataSourceName);
+    Class[] getEntityClasses( String dataSourceName );
 
     /**
      * Get hibernate configuration
@@ -90,7 +93,7 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @return Configuraton object
      */
-    Configuration getHibernateConfiguration(String dataSourceName);
+    Configuration getHibernateConfiguration( String dataSourceName );
 
     /**
      * Get current session with transaction support
@@ -98,7 +101,8 @@ public interface HibernateService
      * @return Session object
      * @throws Exception Throw it out if can not open session
      */
-    Session getSession() throws Exception;
+    Session getSession()
+        throws Exception;
 
     /**
      * Get hibernate session attached to current thread
@@ -107,7 +111,8 @@ public interface HibernateService
      * @return Session object. It's always returned
      * @throws Exception Throw it out
      */
-    Session getSession(boolean withTransaction) throws Exception;
+    Session getSession( boolean withTransaction )
+        throws Exception;
 
     /**
      * Get given session
@@ -116,14 +121,16 @@ public interface HibernateService
      * @return Hibernate session object
      * @throws Exception Throw it out
      */
-    Session getSession(String dataSourceName) throws Exception;
+    Session getSession( String dataSourceName )
+        throws Exception;
 
     /**
      * @param dataSourceName Data source name
      * @return SQL Connection
      * @throws Exception Throw it out
      */
-    Connection getConnection(String dataSourceName) throws Exception;
+    Connection getConnection( String dataSourceName )
+        throws Exception;
 
     /**
      * Get session with transaction or not
@@ -133,8 +140,8 @@ public interface HibernateService
      * @return Hibernate session object
      * @throws Exception Throw it out
      */
-    Session getSession(String dataSourceName, boolean withTransaction)
-            throws Exception;
+    Session getSession( String dataSourceName, boolean withTransaction )
+        throws Exception;
 
     /**
      * Get session factory
@@ -143,15 +150,16 @@ public interface HibernateService
      * @return Hibernate session factory
      * @throws NoSuchHibernateConfiguredException Throw it out
      */
-    SessionFactory getSessionFactory(String dataSourceName)
-            throws NoSuchHibernateConfiguredException;
+    SessionFactory getSessionFactory( String dataSourceName )
+        throws NoSuchHibernateConfiguredException;
 
     /**
      * Roll back current transaction
      *
      * @throws Exception Throw it out
      */
-    void rollbackTransaction() throws Exception;
+    void rollbackTransaction()
+        throws Exception;
 
     /**
      * Roll back given transaction
@@ -159,12 +167,14 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @throws Exception Throw it out
      */
-    void rollbackTransaction(String dataSourceName) throws Exception;
+    void rollbackTransaction( String dataSourceName )
+        throws Exception;
 
     /**
      * Rollback all transactions
      *
      * @throws Exception Throw itout
      */
-    void rollbackTransactions() throws Exception;
+    void rollbackTransactions()
+        throws Exception;
 }

@@ -26,6 +26,21 @@ public interface SecurityService
     /** Role name of component */
     String ROLE = SecurityService.class.getName();
 
+    /** Guest user */
+    String USER_GUEST = "guest";
+
+    /** Admin user */
+    String USER_ADMIN = "admin";
+
+    /** Guest role */
+    String ROLE_GUEST = "guest";
+
+    /** User role */
+    String ROLE_USER = "user";
+
+    /** Admin role */
+    String ROLE_ADMIN = "admin";
+
     /**
      * @param sessionId Session id
      * @return Runtiem user instance
@@ -40,5 +55,44 @@ public interface SecurityService
      * @throws Exception Throw it out
      */
     RuntimeUserAPI getUser( String userName )
+        throws Exception;
+
+    /**
+     * @param userName User name
+     * @param sessionId Session id
+     * @param timeout Session time out
+     * @return Logged in user
+     * @throws Exception System error
+     */
+    RuntimeUserAPI login( String userName, String sessionId, long timeout )
+        throws Exception;
+
+    /**
+     * @param sessionId Session id
+     */
+    void logout( String sessionId );
+
+    /**
+     * @param listener Listener to add
+     */
+    void addListener( SecurityListener listener );
+
+    /**
+     * Refresh content of a user
+     * 
+     * @param userName User name
+     */
+    void refreshUser( String userName );
+
+    /**
+     * @param event Event to handle
+     */
+    void handleEvent( Object event );
+
+    /**
+     * @return Get guest user
+     * @throws Exception System error
+     */
+    RuntimeUserAPI getGuestUser()
         throws Exception;
 }

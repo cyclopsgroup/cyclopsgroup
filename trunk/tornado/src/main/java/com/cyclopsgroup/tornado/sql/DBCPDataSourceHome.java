@@ -35,8 +35,9 @@ import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
  *
  * DBCP implemented data source factory
  */
-public class DBCPDataSourceHome extends AbstractLogEnabled implements
-        DataSourceHome, Configurable, Initializable
+public class DBCPDataSourceHome
+    extends AbstractLogEnabled
+    implements DataSourceHome, Configurable, Initializable
 {
     private DataSource dataSource;
 
@@ -47,9 +48,10 @@ public class DBCPDataSourceHome extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        properties = ConfigurationUtils.getProperties(conf);
+        properties = ConfigurationUtils.getProperties( conf );
     }
 
     /**
@@ -67,10 +69,11 @@ public class DBCPDataSourceHome extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
         BasicDataSource bds = new BasicDataSource();
-        BeanUtils.populate(bds, properties);
+        BeanUtils.populate( bds, properties );
         dataSource = bds;
     }
 }

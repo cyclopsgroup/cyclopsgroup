@@ -27,19 +27,19 @@ public final class ConfigurationUtils
      * @return Properties object
      * @throws ConfigurationException Illegal format of configuration
      */
-    public static Properties getProperties(Configuration root)
-            throws ConfigurationException
+    public static Properties getProperties( Configuration root )
+        throws ConfigurationException
     {
         Properties p = new Properties();
-        Configuration[] confs = root.getChildren("property");
-        for (int i = 0; i < confs.length; i++)
+        Configuration[] confs = root.getChildren( "property" );
+        for ( int i = 0; i < confs.length; i++ )
         {
             Configuration conf = confs[i];
-            String name = conf.getAttribute("name");
-            String value = conf.getValue(StringUtils.EMPTY);
-            if (StringUtils.isNotEmpty(name))
+            String name = conf.getAttribute( "name" );
+            String value = conf.getValue( StringUtils.EMPTY );
+            if ( StringUtils.isNotEmpty( name ) )
             {
-                p.setProperty(name, value);
+                p.setProperty( name, value );
             }
         }
         return p;

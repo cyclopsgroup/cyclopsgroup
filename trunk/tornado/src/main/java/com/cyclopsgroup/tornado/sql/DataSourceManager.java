@@ -37,8 +37,9 @@ import org.apache.avalon.framework.service.Serviceable;
  *
  * Manager of data sources
  */
-public class DataSourceManager extends AbstractLogEnabled implements
-        Configurable, Initializable, Serviceable
+public class DataSourceManager
+    extends AbstractLogEnabled
+    implements Configurable, Initializable, Serviceable
 {
     /** Default name of data source */
     public static final String DEFAULT_DATA_SOURCE = "default";
@@ -57,16 +58,17 @@ public class DataSourceManager extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
         dataSourceRoles = new HashMap();
-        Configuration[] confs = conf.getChildren("data-source");
-        for (int i = 0; i < confs.length; i++)
+        Configuration[] confs = conf.getChildren( "data-source" );
+        for ( int i = 0; i < confs.length; i++ )
         {
             Configuration dsconf = confs[i];
-            String name = dsconf.getAttribute("name");
-            String role = dsconf.getAttribute("role");
-            dataSourceRoles.put(name, role);
+            String name = dsconf.getAttribute( "name" );
+            String role = dsconf.getAttribute( "role" );
+            dataSourceRoles.put( name, role );
         }
     }
 
@@ -76,9 +78,10 @@ public class DataSourceManager extends AbstractLogEnabled implements
      * @return Data source instance
      * @throws NoSuchDataSourceException If default data source is not defined
      */
-    public DataSource getDataSource() throws NoSuchDataSourceException
+    public DataSource getDataSource()
+        throws NoSuchDataSourceException
     {
-        return getDataSource(DEFAULT_DATA_SOURCE);
+        return getDataSource( DEFAULT_DATA_SOURCE );
     }
 
     /**
@@ -88,13 +91,13 @@ public class DataSourceManager extends AbstractLogEnabled implements
      * @return Data source instance or null
      * @throws NoSuchDataSourceException If data source is not defined
      */
-    public DataSource getDataSource(String name)
-            throws NoSuchDataSourceException
+    public DataSource getDataSource( String name )
+        throws NoSuchDataSourceException
     {
-        DataSourceHome dsf = getDataSourceHome(name);
-        if (dsf == null)
+        DataSourceHome dsf = getDataSourceHome( name );
+        if ( dsf == null )
         {
-            throw new NoSuchDataSourceException(name);
+            throw new NoSuchDataSourceException( name );
         }
         return dsf.getDataSource();
     }
@@ -105,9 +108,9 @@ public class DataSourceManager extends AbstractLogEnabled implements
      * @param name Data source name
      * @return Data source factory instance or null
      */
-    public DataSourceHome getDataSourceHome(String name)
+    public DataSourceHome getDataSourceHome( String name )
     {
-        return (DataSourceHome) dataSourceFactories.get(name);
+        return (DataSourceHome) dataSourceFactories.get( name );
     }
 
     /**
@@ -115,15 +118,16 @@ public class DataSourceManager extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
         dataSourceFactories = new Hashtable();
-        for (Iterator i = dataSourceRoles.keySet().iterator(); i.hasNext();)
+        for ( Iterator i = dataSourceRoles.keySet().iterator(); i.hasNext(); )
         {
             String name = (String) i.next();
-            String role = (String) dataSourceRoles.get(name);
-            DataSourceHome dsf = (DataSourceHome) serviceManager.lookup(role);
-            dataSourceFactories.put(name, dsf);
+            String role = (String) dataSourceRoles.get( name );
+            DataSourceHome dsf = (DataSourceHome) serviceManager.lookup( role );
+            dataSourceFactories.put( name, dsf );
         }
     }
 
@@ -132,7 +136,8 @@ public class DataSourceManager extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
     }

@@ -21,15 +21,16 @@ package com.cyclopsgroup.tornado.hibernate;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class NoSuchHibernateConfiguredException extends Exception
+public class NoSuchHibernateConfiguredException
+    extends Exception
 {
     /**
      * Constructor for class NoSuchHibernateConfiguredException
      *
      * @param name Hibernate name
      */
-    public NoSuchHibernateConfiguredException(String name)
+    public NoSuchHibernateConfiguredException( String name )
     {
-        super("name=" + name);
+        super( "name=" + name );
     }
 }

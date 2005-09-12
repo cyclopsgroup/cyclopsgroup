@@ -21,15 +21,16 @@ package com.cyclopsgroup.tornado.sql;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class NoSuchDataSourceException extends Exception
+public class NoSuchDataSourceException
+    extends Exception
 {
     /**
      * Constructor for class NoSuchDataSourceException
      *
      * @param dataSourceName Data source name
      */
-    public NoSuchDataSourceException(String dataSourceName)
+    public NoSuchDataSourceException( String dataSourceName )
     {
-        super("name=" + dataSourceName);
+        super( "name=" + dataSourceName );
     }
 }
