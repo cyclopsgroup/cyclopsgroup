@@ -23,7 +23,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateHome;
+import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
@@ -34,9 +34,9 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
 public class HibernateTag
     extends TagSupport
 {
-    private String name = HibernateHome.DEFAULT_DATASOURCE;
+    private String name = HibernateService.DEFAULT_DATASOURCE;
 
-    private HibernateHome hibernate;
+    private HibernateService hibernate;
 
     private boolean transaction;
 
@@ -69,7 +69,7 @@ public class HibernateTag
         throws Exception
     {
         requireAttribute( "name" );
-        hibernate = (HibernateHome) getServiceManager().lookup( HibernateHome.ROLE );
+        hibernate = (HibernateService) getServiceManager().lookup( HibernateService.ROLE );
         invokeBody( output );
     }
 

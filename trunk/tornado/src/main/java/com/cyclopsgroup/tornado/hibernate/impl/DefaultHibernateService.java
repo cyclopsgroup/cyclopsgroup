@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.hibernate;
+package com.cyclopsgroup.tornado.hibernate.impl;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -44,6 +44,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.hibernate.NoSuchHibernateConfiguredException;
 import com.cyclopsgroup.tornado.sql.DataSourceManager;
 import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
@@ -52,9 +54,9 @@ import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
  *
  * Default implementation of hibernate factory
  */
-public class DefaultHibernateHome
+public class DefaultHibernateService
     extends AbstractLogEnabled
-    implements HibernateHome, Configurable, Disposable, Initializable, Serviceable
+    implements HibernateService, Configurable, Disposable, Initializable, Serviceable
 {
     private DataSourceManager dataSourceManager;
 
@@ -71,7 +73,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method closeSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSession()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSession()
      */
     public void closeSession()
     {
@@ -81,7 +83,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method closeSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSession(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSession(java.lang.String)
      */
     public void closeSession( String dataSourceName )
     {
@@ -113,7 +115,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method closeSessions()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#closeSessions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSessions()
      */
     public void closeSessions()
     {
@@ -132,7 +134,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method commitTransaction()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransaction()
      */
     public void commitTransaction()
         throws Exception
@@ -143,7 +145,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method commitTransaction()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransaction(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransaction(java.lang.String)
      */
     public void commitTransaction( String dataSourceName )
         throws Exception
@@ -169,7 +171,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method commitTransactions()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#commitTransactions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransactions()
      */
     public void commitTransactions()
         throws Exception
@@ -228,7 +230,7 @@ public class DefaultHibernateHome
     /**
      * Override method getEntityClasses in class DefaultHibernateHome
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getEntityClasses(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getEntityClasses(java.lang.String)
      */
     public Class[] getEntityClasses( String dataSourceName )
     {
@@ -240,7 +242,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession()
      */
     public Session getSession()
         throws Exception
@@ -251,7 +253,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(boolean)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(boolean)
      */
     public synchronized Session getSession( boolean withTransaction )
         throws Exception
@@ -262,7 +264,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(java.lang.String)
      */
     public Session getSession( String dataSourceName )
         throws Exception
@@ -273,7 +275,7 @@ public class DefaultHibernateHome
     /**
      * Override method getConnection in class DefaultHibernateHome
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getConnection(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getConnection(java.lang.String)
      */
     public synchronized Connection getConnection( String dataSourceName )
         throws Exception
@@ -297,7 +299,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method getSession()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSession(java.lang.String, boolean)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(java.lang.String, boolean)
      */
     public synchronized Session getSession( String dataSourceName, boolean withTransaction )
         throws Exception
@@ -321,7 +323,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method getSessionFactory()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getSessionFactory(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSessionFactory(java.lang.String)
      */
     public SessionFactory getSessionFactory( String dataSourceName )
         throws NoSuchHibernateConfiguredException
@@ -386,7 +388,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method rollbackTransaction()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransaction()
      */
     public void rollbackTransaction()
         throws Exception
@@ -397,7 +399,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method rollbackTransaction()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransaction(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransaction(java.lang.String)
      */
     public void rollbackTransaction( String dataSourceName )
         throws Exception
@@ -418,7 +420,7 @@ public class DefaultHibernateHome
     /**
      * Overwrite or implement method rollbackTransactions()
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#rollbackTransactions()
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransactions()
      */
     public void rollbackTransactions()
         throws Exception
@@ -455,7 +457,7 @@ public class DefaultHibernateHome
     /**
      * Override method getHibernateConfiguration in class DefaultHibernateHome
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateHome#getHibernateConfiguration(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getHibernateConfiguration(java.lang.String)
      */
     public org.hibernate.cfg.Configuration getHibernateConfiguration( String dataSourceName )
     {

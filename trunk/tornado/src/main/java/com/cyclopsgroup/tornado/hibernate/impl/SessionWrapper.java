@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.hibernate;
+package com.cyclopsgroup.tornado.hibernate.impl;
 
 import java.sql.Connection;
 import java.util.HashMap;

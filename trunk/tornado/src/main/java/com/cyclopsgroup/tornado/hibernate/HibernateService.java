@@ -29,13 +29,13 @@ import com.cyclopsgroup.tornado.sql.DataSourceManager;
  *
  * Hibernate facade
  */
-public interface HibernateHome
+public interface HibernateService
 {
     /** Default data source name */
     String DEFAULT_DATASOURCE = DataSourceManager.DEFAULT_DATA_SOURCE;
 
     /** Role name of this component */
-    String ROLE = HibernateHome.class.getName();
+    String ROLE = HibernateService.class.getName();
 
     /**
      * Close default session

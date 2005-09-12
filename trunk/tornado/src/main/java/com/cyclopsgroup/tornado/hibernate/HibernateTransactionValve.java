@@ -36,7 +36,7 @@ public class HibernateTransactionValve
     public void invoke( RuntimeData data, PipelineContext context )
         throws Exception
     {
-        HibernateHome hibernate = (HibernateHome) data.getServiceManager().lookup( HibernateHome.ROLE );
+        HibernateService hibernate = (HibernateService) data.getServiceManager().lookup( HibernateService.ROLE );
         try
         {
             context.invokeNextValve( data );

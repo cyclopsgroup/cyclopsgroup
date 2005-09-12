@@ -23,8 +23,8 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.tornado.hibernate.HibernateHome</role>
-            <implementation>com.cyclopsgroup.tornado.hibernate.DefaultHibernateHome</implementation>
+            <role>com.cyclopsgroup.tornado.hibernate.HibernateService</role>
+            <implementation>com.cyclopsgroup.tornado.hibernate.impl.DefaultHibernateService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <data-source name="default">
