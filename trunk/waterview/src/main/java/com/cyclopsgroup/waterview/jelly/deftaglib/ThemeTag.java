@@ -28,7 +28,8 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  * 
  * Theme tag
  */
-public class ThemeTag extends TagSupport
+public class ThemeTag
+    extends TagSupport
 {
     private String description;
 
@@ -41,18 +42,18 @@ public class ThemeTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        theme = new DefaultTheme(name);
-        if (StringUtils.isNotEmpty(getDescription()))
+        requireAttribute( "name" );
+        theme = new DefaultTheme( name );
+        if ( StringUtils.isNotEmpty( getDescription() ) )
         {
-            theme.setDescription(getDescription());
+            theme.setDescription( getDescription() );
         }
-        invokeBody(output);
-        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable(
-                JellyEngine.ROLE);
-        jellyEngine.registerTheme(theme);
+        invokeBody( output );
+        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable( JellyEngine.ROLE );
+        jellyEngine.registerTheme( theme );
     }
 
     /**
@@ -90,7 +91,7 @@ public class ThemeTag extends TagSupport
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -100,7 +101,7 @@ public class ThemeTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

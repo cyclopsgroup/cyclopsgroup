@@ -26,7 +26,9 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * JSP implemented view
  */
-public class JspView extends BaseModuleRunnable implements View
+public class JspView
+    extends BaseModuleRunnable
+    implements View
 {
     private String path;
 
@@ -35,9 +37,9 @@ public class JspView extends BaseModuleRunnable implements View
      * @param path Absolute path of jsp
      * @param modulePath Module path
      */
-    public JspView(String path, String modulePath)
+    public JspView( String path, String modulePath )
     {
-        super(modulePath);
+        super( modulePath );
         this.path = path;
     }
 
@@ -45,11 +47,11 @@ public class JspView extends BaseModuleRunnable implements View
      * Overwrite or implement method render()
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void render(RuntimeData data, Context viewContext) throws Exception
+    public void render( RuntimeData data, Context viewContext )
+        throws Exception
     {
-        runModule(data, viewContext);
-        JspEngine je = (JspEngine) data.getServiceManager().lookup(
-                JspEngine.ROLE);
-        je.renderJsp(path, data, viewContext);
+        runModule( data, viewContext );
+        JspEngine je = (JspEngine) data.getServiceManager().lookup( JspEngine.ROLE );
+        je.renderJsp( path, data, viewContext );
     }
 }

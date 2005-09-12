@@ -24,16 +24,17 @@ import org.codehaus.plexus.PlexusTestCase;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyEngineTest extends PlexusTestCase
+public class JellyEngineTest
+    extends PlexusTestCase
 {
     /**
      * @throws Exception
      */
-    public void testGetScript() throws Exception
+    public void testGetScript()
+        throws Exception
     {
-        JellyEngine je = (JellyEngine) lookup(JellyEngine.ROLE);
-        Script s = je.getScript("com.cyclopsgroup.waterview.ui",
-                "/view/Index.jelly", null);
-        assertNotNull(s);
+        JellyEngine je = (JellyEngine) lookup( JellyEngine.ROLE );
+        Script s = je.getScript( "com.cyclopsgroup.waterview.ui", "/view/Index.jelly", null );
+        assertNotNull( s );
     }
 }

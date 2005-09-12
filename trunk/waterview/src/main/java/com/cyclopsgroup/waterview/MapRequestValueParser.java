@@ -25,7 +25,8 @@ import org.apache.commons.fileupload.FileItem;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-class MapRequestValueParser extends RequestValueParser
+class MapRequestValueParser
+    extends RequestValueParser
 {
     private Properties content = new Properties();
 
@@ -33,27 +34,29 @@ class MapRequestValueParser extends RequestValueParser
      * Overwrite or implement method add()
      * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add(String name, String value)
+    public void add( String name, String value )
     {
-        content.setProperty(name, value);
+        content.setProperty( name, value );
     }
 
     /**
      * Overwrite or implement method doGetValue()
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue(String name) throws Exception
+    protected String doGetValue( String name )
+        throws Exception
     {
-        return content.getProperty(name);
+        return content.getProperty( name );
     }
 
     /**
      * Overwrite or implement method doGetValues()
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues(String name) throws Exception
+    protected String[] doGetValues( String name )
+        throws Exception
     {
-        return new String[] { doGetValue(name) };
+        return new String[] { doGetValue( name ) };
     }
 
     /**
@@ -61,7 +64,7 @@ class MapRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
      */
-    public FileItem getFileItem(String name)
+    public FileItem getFileItem( String name )
     {
         return null;
     }
@@ -71,7 +74,7 @@ class MapRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
      */
-    public FileItem[] getFileItems(String name)
+    public FileItem[] getFileItems( String name )
     {
         return EMPTY_FILEITEM_ARRAY;
     }
@@ -80,8 +83,8 @@ class MapRequestValueParser extends RequestValueParser
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        content.remove(name);
+        content.remove( name );
     }
 }

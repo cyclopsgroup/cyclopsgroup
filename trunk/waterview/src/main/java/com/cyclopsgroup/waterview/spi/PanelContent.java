@@ -36,7 +36,7 @@ public class PanelContent
      *
      * @param name
      */
-    public PanelContent(String name)
+    public PanelContent( String name )
     {
         this.name = name;
     }
@@ -46,9 +46,9 @@ public class PanelContent
      *
      * @param view Window model
      */
-    public void addView(View view)
+    public void addView( View view )
     {
-        views.add(view);
+        views.add( view );
     }
 
     /**
@@ -68,7 +68,7 @@ public class PanelContent
      */
     public View[] getViews()
     {
-        return (View[]) views.toArray(View.EMPTY_ARRAY);
+        return (View[]) views.toArray( View.EMPTY_ARRAY );
     }
 
     /**
@@ -86,7 +86,7 @@ public class PanelContent
      *
      * @param append The append to set.
      */
-    public void setAppend(boolean append)
+    public void setAppend( boolean append )
     {
         this.append = append;
     }

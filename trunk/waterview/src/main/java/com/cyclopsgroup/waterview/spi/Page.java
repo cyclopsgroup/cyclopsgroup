@@ -41,9 +41,9 @@ public class Page
      *
      * @param panelContent Panel content object
      */
-    public void addPanelContent(PanelContent panelContent)
+    public void addPanelContent( PanelContent panelContent )
     {
-        panelContents.put(panelContent.getName(), panelContent);
+        panelContents.put( panelContent.getName(), panelContent );
     }
 
     /**
@@ -62,9 +62,9 @@ public class Page
      * @param panelName Name of panel
      * @return PanelContent object or null
      */
-    public PanelContent getPanelContent(String panelName)
+    public PanelContent getPanelContent( String panelName )
     {
-        return (PanelContent) panelContents.get(panelName);
+        return (PanelContent) panelContents.get( panelName );
     }
 
     /**
@@ -72,7 +72,7 @@ public class Page
      *
      * @param layout The layout to set.
      */
-    public void setLayout(Layout layout)
+    public void setLayout( Layout layout )
     {
         this.layout = layout;
     }

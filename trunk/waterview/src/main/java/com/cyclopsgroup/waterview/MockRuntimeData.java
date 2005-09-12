@@ -26,7 +26,9 @@ import com.cyclopsgroup.waterview.utils.FakeServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
+public class MockRuntimeData
+    extends AbstractRuntimeData
+    implements RuntimeData
 {
     private String page;
 
@@ -37,16 +39,16 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
      *
      * @param output Output
      */
-    public MockRuntimeData(PrintWriter output)
+    public MockRuntimeData( PrintWriter output )
     {
-        setOutput(output);
-        setApplicationBaseUrl("http://localhost:8080/waterview");
-        setPageBaseUrl("http://localhost:8080/waterview/servlet/waterview");
-        setRequestContext(new DefaultContext(new HashMap()));
-        setParams(new MapRequestValueParser());
-        setRequestPath("/index.html");
-        setServiceManager(new FakeServiceManager());
-        setSessionContext(new DefaultContext(new HashMap()));
+        setOutput( output );
+        setApplicationBaseUrl( "http://localhost:8080/waterview" );
+        setPageBaseUrl( "http://localhost:8080/waterview/servlet/waterview" );
+        setRequestContext( new DefaultContext( new HashMap() ) );
+        setParams( new MapRequestValueParser() );
+        setRequestPath( "/index.html" );
+        setServiceManager( new FakeServiceManager() );
+        setSessionContext( new DefaultContext( new HashMap() ) );
     }
 
     /**
@@ -54,7 +56,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
      */
-    public String getMimeType(String fileName)
+    public String getMimeType( String fileName )
     {
         return "text/html";
     }
@@ -82,7 +84,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType(String contentType)
+    public void setOutputContentType( String contentType )
     {
     }
 
@@ -91,7 +93,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
      */
-    public void setPage(String page)
+    public void setPage( String page )
     {
         this.page = page;
         this.pageObject = new Path()

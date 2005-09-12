@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Tree tag
  */
-public class TreeTag extends TagSupport
+public class TreeTag
+    extends TagSupport
 {
     private String name;
 
@@ -56,11 +57,12 @@ public class TreeTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireAttribute("position");
-        invokeBody(output);
+        requireAttribute( "name" );
+        requireAttribute( "position" );
+        invokeBody( output );
     }
 
     /**
@@ -68,7 +70,7 @@ public class TreeTag extends TagSupport
      *
      * @param name Name of tree
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
@@ -78,7 +80,7 @@ public class TreeTag extends TagSupport
      *
      * @param position Parent position path
      */
-    public void setPosition(String position)
+    public void setPosition( String position )
     {
         this.position = position;
     }

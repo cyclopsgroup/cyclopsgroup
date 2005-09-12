@@ -32,5 +32,6 @@ public interface DynaViewFactory
      * @return View object
      * @throws Exception Throw it out
      */
-    View createView(Path path) throws Exception;
+    View createView( Path path )
+        throws Exception;
 }

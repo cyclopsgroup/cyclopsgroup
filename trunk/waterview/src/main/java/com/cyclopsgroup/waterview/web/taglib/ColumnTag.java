@@ -31,7 +31,8 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Column tag
  */
-public class ColumnTag extends TagSupport
+public class ColumnTag
+    extends TagSupport
 {
     private Column column;
 
@@ -120,27 +121,28 @@ public class ColumnTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireAttribute("display");
-        requireParent(TableTag.class);
-        if (((TableTag) getParent()).isTableNew())
+        requireAttribute( "name" );
+        requireAttribute( "display" );
+        requireParent( TableTag.class );
+        if ( ( (TableTag) getParent() ).isTableNew() )
         {
-            Class columnType = TypeUtils.getType(getType());
-            Table table = ((TableTag) getParent()).getTable();
-            column = new Column(getName(), columnType);
-            table.addColumn(column);
-            column.setDisplay(ColumnDisplay.valueOf(getDisplay()));
-            ColumnSort sort = ColumnSort.valueOf(getSort());
-            column.setSort(sort);
-            if (sort == ColumnSort.ASC || sort == ColumnSort.DESC)
+            Class columnType = TypeUtils.getType( getType() );
+            Table table = ( (TableTag) getParent() ).getTable();
+            column = new Column( getName(), columnType );
+            table.addColumn( column );
+            column.setDisplay( ColumnDisplay.valueOf( getDisplay() ) );
+            ColumnSort sort = ColumnSort.valueOf( getSort() );
+            column.setSort( sort );
+            if ( sort == ColumnSort.ASC || sort == ColumnSort.DESC )
             {
-                table.sortOn(getName());
+                table.sortOn( getName() );
             }
-            column.setValue(getValue());
+            column.setValue( getValue() );
         }
-        ((TableTag) getParent()).addColumnTag(this);
+        ( (TableTag) getParent() ).addColumnTag( this );
     }
 
     /**
@@ -148,7 +150,7 @@ public class ColumnTag extends TagSupport
      *
      * @param display The display to set.
      */
-    public void setDisplay(String display)
+    public void setDisplay( String display )
     {
         this.display = display;
     }
@@ -156,7 +158,7 @@ public class ColumnTag extends TagSupport
     /**
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
@@ -166,7 +168,7 @@ public class ColumnTag extends TagSupport
      *
      * @param sort Sort option to set
      */
-    public void setSort(String sort)
+    public void setSort( String sort )
     {
         this.sort = sort;
     }
@@ -176,7 +178,7 @@ public class ColumnTag extends TagSupport
      *
      * @param title Title of the column
      */
-    public void setTitle(String title)
+    public void setTitle( String title )
     {
         this.title = title;
     }
@@ -186,7 +188,7 @@ public class ColumnTag extends TagSupport
      *
      * @param type Type of the column
      */
-    public void setType(String type)
+    public void setType( String type )
     {
         this.type = type;
     }
@@ -196,7 +198,7 @@ public class ColumnTag extends TagSupport
      *
      * @param value Value of the column
      */
-    public void setValue(String value)
+    public void setValue( String value )
     {
         this.value = value;
     }

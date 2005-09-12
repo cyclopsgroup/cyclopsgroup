@@ -25,17 +25,19 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * Module for test vm
  */
-public class TestVM implements Module
+public class TestVM
+    implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
-        context.put("testVariable", "Only for testing");
-        System.out.println("I'm running!!!!");
+        context.put( "testVariable", "Only for testing" );
+        System.out.println( "I'm running!!!!" );
     }
 
 }

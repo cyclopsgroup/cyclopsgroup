@@ -23,15 +23,16 @@ public interface TabularData
      * @return Iterator of rows
      * @throws Exception Just throw it out
      */
-    Iterator openIterator(Table table) throws Exception;
-    
+    Iterator openIterator( Table table )
+        throws Exception;
+
     /**
      * If the data is countable
      * 
      * @return True if it's countable
      */
     boolean isCountable();
-    
+
     /**
      * Get size of the whole data
      *

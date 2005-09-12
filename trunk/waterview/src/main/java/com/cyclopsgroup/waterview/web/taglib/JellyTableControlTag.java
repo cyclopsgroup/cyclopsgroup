@@ -21,7 +21,9 @@ import com.cyclopsgroup.waterview.web.TabularData;
  * 
  * Jelly table control tag
  */
-public class JellyTableControlTag extends TagSupport implements TableControlTag
+public class JellyTableControlTag
+    extends TagSupport
+    implements TableControlTag
 {
     private String script;
 
@@ -44,7 +46,7 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
      *
      * @param data Tabular data to set
      */
-    public void setData(TabularData data)
+    public void setData( TabularData data )
     {
         this.data = data;
     }
@@ -60,7 +62,7 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
     /**
      * @param script The script to set.
      */
-    public void setScript(String script)
+    public void setScript( String script )
     {
         this.script = script;
     }
@@ -70,7 +72,7 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTableTag(com.cyclopsgroup.waterview.web.taglib.TableTag)
      */
-    public void setTableTag(TableTag tableTag)
+    public void setTableTag( TableTag tableTag )
     {
         this.tableTag = tableTag;
     }
@@ -80,9 +82,9 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTabularData(com.cyclopsgroup.waterview.web.TabularData)
      */
-    public void setTabularData(TabularData tabularData)
+    public void setTabularData( TabularData tabularData )
     {
-        setData(tabularData);
+        setData( tabularData );
     }
 
     /**
@@ -90,29 +92,29 @@ public class JellyTableControlTag extends TagSupport implements TableControlTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("script");
+        requireAttribute( "script" );
 
-        invokeBody(XMLOutput.createDummyXMLOutput());
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        Script s = je.getScript(getScript());
+        invokeBody( XMLOutput.createDummyXMLOutput() );
+        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+        Script s = je.getScript( getScript() );
 
-        if (tableTag == null)
+        if ( tableTag == null )
         {
-            throw new JellyException("One table must be defined");
+            throw new JellyException( "One table must be defined" );
         }
 
-        if (data == null)
+        if ( data == null )
         {
-            throw new JellyException("Tabular data must be included");
+            throw new JellyException( "Tabular data must be included" );
         }
 
-        JellyContext jc = new JellyContext(getContext());
-        jc.setVariable("tableTag", tableTag);
-        jc.setVariable("table", tableTag.getTable());
-        jc.setVariable("tabularData", getData());
-        s.run(jc, output);
+        JellyContext jc = new JellyContext( getContext() );
+        jc.setVariable( "tableTag", tableTag );
+        jc.setVariable( "table", tableTag.getTable() );
+        jc.setVariable( "tabularData", getData() );
+        s.run( jc, output );
     }
 }

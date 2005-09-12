@@ -34,18 +34,20 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValve extends AbstractLogEnabled implements Valve
+public class ParseURLValve
+    extends AbstractLogEnabled
+    implements Valve
 {
 
     private static HashSet instructors;
 
     private static HashSet getInstructors()
     {
-        if (instructors == null)
+        if ( instructors == null )
         {
             instructors = new HashSet();
-            instructors.add(Link.ACTION_INSTRUCTOR);
-            instructors.add(Link.PAGE_INSTRUCTOR);
+            instructors.add( Link.ACTION_INSTRUCTOR );
+            instructors.add( Link.PAGE_INSTRUCTOR );
         }
         return instructors;
     }
@@ -54,22 +56,22 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
      * @param requestPath
      * @return list of parts
      */
-    static List parseRequestPath(String requestPath)
+    static List parseRequestPath( String requestPath )
     {
         List ret = new ArrayList();
-        String[] parts = StringUtils.split(requestPath, '/');
+        String[] parts = StringUtils.split( requestPath, '/' );
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < parts.length; i++)
+        for ( int i = 0; i < parts.length; i++ )
         {
             String part = parts[i];
-            if (getInstructors().contains(part) && sb.length() != 0)
+            if ( getInstructors().contains( part ) && sb.length() != 0 )
             {
-                ret.add(sb.toString());
+                ret.add( sb.toString() );
                 sb = new StringBuffer();
             }
-            sb.append('/').append(part);
+            sb.append( '/' ).append( part );
         }
-        ret.add(sb.toString());
+        ret.add( sb.toString() );
         return ret;
     }
 
@@ -78,31 +80,29 @@ public class ParseURLValve extends AbstractLogEnabled implements Valve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
-        List behaviors = parseRequestPath(data.getRequestPath());
-        for (Iterator i = behaviors.iterator(); i.hasNext();)
+        List behaviors = parseRequestPath( data.getRequestPath() );
+        for ( Iterator i = behaviors.iterator(); i.hasNext(); )
         {
             String behavior = (String) i.next();
-            if (behavior.startsWith('/' + Link.ACTION_INSTRUCTOR))
+            if ( behavior.startsWith( '/' + Link.ACTION_INSTRUCTOR ) )
             {
-                String action = behavior.substring(Link.ACTION_INSTRUCTOR
-                        .length() + 1);
-                data.getActions().add(action);
+                String action = behavior.substring( Link.ACTION_INSTRUCTOR.length() + 1 );
+                data.getActions().add( action );
             }
-            else if (behavior.startsWith('/' + Link.PAGE_INSTRUCTOR))
+            else if ( behavior.startsWith( '/' + Link.PAGE_INSTRUCTOR ) )
             {
-                String page = behavior.substring(Link.PAGE_INSTRUCTOR
-                        .length() + 1);
-                data.setPage(page);
+                String page = behavior.substring( Link.PAGE_INSTRUCTOR.length() + 1 );
+                data.setPage( page );
             }
             else
             {
-                data.setPage(behavior);
+                data.setPage( behavior );
             }
         }
-        data.getRequestContext().put(Link.NAME, new Link(data));
-        context.invokeNextValve(data);
+        data.getRequestContext().put( Link.NAME, new Link( data ) );
+        context.invokeNextValve( data );
     }
 }

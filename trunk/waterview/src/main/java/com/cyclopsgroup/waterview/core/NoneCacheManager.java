@@ -23,7 +23,8 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NoneCacheManager implements CacheManager
+public class NoneCacheManager
+    implements CacheManager
 {
 
     /**
@@ -31,7 +32,7 @@ public class NoneCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#contains(java.lang.Object, java.lang.String)
      */
-    public boolean contains(Object host, String key)
+    public boolean contains( Object host, String key )
     {
         return false;
     }
@@ -41,7 +42,7 @@ public class NoneCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#get(java.lang.Object, java.lang.String)
      */
-    public Object get(Object host, String key)
+    public Object get( Object host, String key )
     {
         return null;
     }
@@ -51,7 +52,7 @@ public class NoneCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
-    public void put(Object host, String key, Object value)
+    public void put( Object host, String key, Object value )
     {
         //do nothing
     }

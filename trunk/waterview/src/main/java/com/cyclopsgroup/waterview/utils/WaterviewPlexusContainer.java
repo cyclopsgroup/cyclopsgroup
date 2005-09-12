@@ -37,7 +37,8 @@ import org.codehaus.plexus.util.FileUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class WaterviewPlexusContainer extends DefaultPlexusContainer
+public class WaterviewPlexusContainer
+    extends DefaultPlexusContainer
 {
 
     /**
@@ -45,7 +46,8 @@ public class WaterviewPlexusContainer extends DefaultPlexusContainer
      *
      * @see org.codehaus.plexus.DefaultPlexusContainer#initializeConfiguration()
      */
-    protected void initializeConfiguration() throws Exception
+    protected void initializeConfiguration()
+        throws Exception
     {
         super.initializeConfiguration();
         processConfigurationsDirectory();
@@ -56,8 +58,8 @@ public class WaterviewPlexusContainer extends DefaultPlexusContainer
      *
      * @see org.codehaus.plexus.DefaultPlexusContainer#loadComponentsOnStart()
      */
-    protected void loadComponentsOnStart() throws PlexusConfigurationException,
-            ComponentLookupException
+    protected void loadComponentsOnStart()
+        throws PlexusConfigurationException, ComponentLookupException
     {
         super.loadComponentsOnStart();
 
@@ -86,31 +88,27 @@ public class WaterviewPlexusContainer extends DefaultPlexusContainer
      * 
      * @throws Exception Throw it out
      */
-    private void processConfigurationsDirectory() throws Exception
+    private void processConfigurationsDirectory()
+        throws Exception
     {
-        String s = configuration.getChild("configurations-directory").getValue(
-                null);
+        String s = configuration.getChild( "configurations-directory" ).getValue( null );
 
-        if (s != null)
+        if ( s != null )
         {
-            File configurationsDirectory = new File(s);
+            File configurationsDirectory = new File( s );
 
-            if (configurationsDirectory.exists()
-                    && configurationsDirectory.isDirectory())
+            if ( configurationsDirectory.exists() && configurationsDirectory.isDirectory() )
             {
-                List componentConfigurationFiles = FileUtils.getFiles(
-                        configurationsDirectory, "**/*.xml", "");
+                List componentConfigurationFiles = FileUtils.getFiles( configurationsDirectory, "**/*.xml", "" );
 
-                for (Iterator i = componentConfigurationFiles.iterator(); i
-                        .hasNext();)
+                for ( Iterator i = componentConfigurationFiles.iterator(); i.hasNext(); )
                 {
                     File componentConfigurationFile = (File) i.next();
 
                     PlexusConfiguration componentConfiguration = PlexusTools
-                            .buildConfiguration(getInterpolationConfigurationReader(new FileReader(
-                                    componentConfigurationFile)));
-                    configuration = PlexusConfigurationMerger.merge(
-                            componentConfiguration, configuration);
+                        .buildConfiguration( getInterpolationConfigurationReader( new FileReader(
+                                                                                                  componentConfigurationFile ) ) );
+                    configuration = PlexusConfigurationMerger.merge( componentConfiguration, configuration );
                 }
             }
         }

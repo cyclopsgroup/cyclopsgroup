@@ -28,7 +28,8 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * Module for sample table
  */
-public class SampleTable implements Module
+public class SampleTable
+    implements Module
 {
     /** Row class */
     public class Row
@@ -86,7 +87,7 @@ public class SampleTable implements Module
          *
          * @param description The description to set.
          */
-        public void setDescription(String description)
+        public void setDescription( String description )
         {
             this.description = description;
         }
@@ -96,7 +97,7 @@ public class SampleTable implements Module
          *
          * @param id The id to set.
          */
-        public void setId(String id)
+        public void setId( String id )
         {
             this.id = id;
         }
@@ -106,7 +107,7 @@ public class SampleTable implements Module
          *
          * @param name The name to set.
          */
-        public void setName(String name)
+        public void setName( String name )
         {
             this.name = name;
         }
@@ -116,32 +117,32 @@ public class SampleTable implements Module
          *
          * @param totalAmount The totalAmount to set.
          */
-        public void setTotalAmount(int totalAmount)
+        public void setTotalAmount( int totalAmount )
         {
             this.totalAmount = totalAmount;
         }
     }
 
-    private static String[] NAMES = new String[] { "hello", "yeeha", "ubuntu",
-            "pie", "chicken" };
+    private static String[] NAMES = new String[] { "hello", "yeeha", "ubuntu", "pie", "chicken" };
 
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
         List ret = new ArrayList();
-        for (int i = 0; i < 20; i++)
+        for ( int i = 0; i < 20; i++ )
         {
             Row row = new Row();
-            row.setId("" + i);
-            row.setName(NAMES[i % 5]);
-            row.setTotalAmount(i * 23 % 17);
-            row.setDescription("aaaaaaa");
-            ret.add(row);
+            row.setId( "" + i );
+            row.setName( NAMES[i % 5] );
+            row.setTotalAmount( i * 23 % 17 );
+            row.setDescription( "aaaaaaa" );
+            ret.add( row );
         }
-        context.put("rows", ret);
+        context.put( "rows", ret );
     }
 }

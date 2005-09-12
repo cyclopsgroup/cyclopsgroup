@@ -30,28 +30,29 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultLayoutTag extends TagSupport
+public class DefaultLayoutTag
+    extends TagSupport
 {
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
+        Page page = (Page) context.getVariable( Page.NAME );
+        if ( page == null )
         {
-            throw new JellyTagException("JellyLayout must be in a page");
+            throw new JellyTagException( "JellyLayout must be in a page" );
         }
-        ThemeManager tm = (ThemeManager) getServiceManager().lookup(
-                ThemeManager.ROLE);
+        ThemeManager tm = (ThemeManager) getServiceManager().lookup( ThemeManager.ROLE );
         String themeName = getRuntimeData().getThemeName();
         Theme theme = tm.getDefaultTheme();
-        if (StringUtils.isNotEmpty(themeName))
+        if ( StringUtils.isNotEmpty( themeName ) )
         {
-            theme = tm.getTheme(themeName);
+            theme = tm.getTheme( themeName );
         }
-        page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
+        page.setLayout( theme.getLayout( Theme.LAYOUT_FOR_DEFAULT ) );
     }
 }

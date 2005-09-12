@@ -35,7 +35,7 @@ public interface ActionContext
      * @param inputName Name of input
      * @param errorMessage Error message
      */
-    void error(String inputName, String errorMessage);
+    void error( String inputName, String errorMessage );
 
     /**
      * Mark this action to be failed
@@ -47,7 +47,7 @@ public interface ActionContext
      *
      * @param errorMessage Error message
      */
-    void fail(String errorMessage);
+    void fail( String errorMessage );
 
     /**
      * Fail because given message and throwable
@@ -55,14 +55,14 @@ public interface ActionContext
      * @param errorMessage Error message
      * @param throwable Throwable object
      */
-    void fail(String errorMessage, Throwable throwable);
+    void fail( String errorMessage, Throwable throwable );
 
     /**
      * Fail because of an exception
      *
      * @param throwable Throwable object
      */
-    void fail(Throwable throwable);
+    void fail( Throwable throwable );
 
     /**
      * Get link which lead it to the target
@@ -76,5 +76,5 @@ public interface ActionContext
      *
      * @param url Target url
      */
-    void setTargetUrl(String url);
+    void setTargetUrl( String url );
 }

@@ -42,7 +42,7 @@ public class Column
      * @param name
      * @param type
      */
-    public Column(String name, Class type)
+    public Column( String name, Class type )
     {
         this.name = name;
         this.type = type;
@@ -103,7 +103,7 @@ public class Column
      *
      * @param display Dispaly option to set
      */
-    public void setDisplay(ColumnDisplay display)
+    public void setDisplay( ColumnDisplay display )
     {
         this.display = display;
     }
@@ -113,7 +113,7 @@ public class Column
      *
      * @param sort Sort option
      */
-    public void setSort(ColumnSort sort)
+    public void setSort( ColumnSort sort )
     {
         this.sort = sort;
     }
@@ -123,7 +123,7 @@ public class Column
      *
      * @param value Value to set
      */
-    public void setValue(String value)
+    public void setValue( String value )
     {
         this.value = value;
     }

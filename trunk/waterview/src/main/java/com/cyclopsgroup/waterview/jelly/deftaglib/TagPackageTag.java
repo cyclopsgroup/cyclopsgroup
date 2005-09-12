@@ -30,35 +30,35 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TagPackageTag extends TagSupport
+public class TagPackageTag
+    extends TagSupport
 {
 
     private String className;
 
-    private Log logger = LogFactory.getLog(getClass());
+    private Log logger = LogFactory.getLog( getClass() );
 
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("className");
-        requireParent(TagLibraryTag.class);
+        requireAttribute( "className" );
+        requireParent( TagLibraryTag.class );
         try
         {
-            TagPackage pkg = (TagPackage) Class.forName(getClassName())
-                    .newInstance();
+            TagPackage pkg = (TagPackage) Class.forName( getClassName() ).newInstance();
             TagLibraryTag tagLibraryTag = (TagLibraryTag) getParent();
-            JellyEngine jellyEngine = (JellyEngine) getContext().getVariable(
-                    JellyEngine.ROLE);
-            jellyEngine.registerTagPackage(tagLibraryTag.getUri(), pkg);
-            logger.debug("Tag package " + pkg + " is registered in waterview");
+            JellyEngine jellyEngine = (JellyEngine) getContext().getVariable( JellyEngine.ROLE );
+            jellyEngine.registerTagPackage( tagLibraryTag.getUri(), pkg );
+            logger.debug( "Tag package " + pkg + " is registered in waterview" );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new JellyTagException(e);
+            throw new JellyTagException( e );
         }
     }
 
@@ -77,7 +77,7 @@ public class TagPackageTag extends TagSupport
      *
      * @param className The className to set.
      */
-    public void setClassName(String className)
+    public void setClassName( String className )
     {
         this.className = className;
     }

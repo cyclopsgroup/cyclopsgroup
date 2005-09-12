@@ -29,7 +29,9 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * Jelly form control tag
  */
-public class JellyFormControlTag extends TagSupport implements FormControlTag
+public class JellyFormControlTag
+    extends TagSupport
+    implements FormControlTag
 {
     private String script;
 
@@ -50,7 +52,7 @@ public class JellyFormControlTag extends TagSupport implements FormControlTag
      *
      * @param script The script to set.
      */
-    public void setScript(String script)
+    public void setScript( String script )
     {
         this.script = script;
     }
@@ -60,24 +62,24 @@ public class JellyFormControlTag extends TagSupport implements FormControlTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("script");
-        invokeBody(XMLOutput.createDummyXMLOutput());
+        requireAttribute( "script" );
+        invokeBody( XMLOutput.createDummyXMLOutput() );
 
-        if (formTag == null)
+        if ( formTag == null )
         {
-            throw new JellyTagException("Form tag must be defined");
+            throw new JellyTagException( "Form tag must be defined" );
         }
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        Script script = je.getScript(getScript());
+        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+        Script script = je.getScript( getScript() );
 
-        JellyContext jc = new JellyContext(getContext());
-        jc.setVariable("formTag", formTag);
-        jc.setVariable("form", formTag.getForm());
+        JellyContext jc = new JellyContext( getContext() );
+        jc.setVariable( "formTag", formTag );
+        jc.setVariable( "form", formTag.getForm() );
 
-        script.run(jc, output);
+        script.run( jc, output );
     }
 
     /**
@@ -85,7 +87,8 @@ public class JellyFormControlTag extends TagSupport implements FormControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.FormControlTag#setFormTag(com.cyclopsgroup.waterview.web.taglib.FormTag)
      */
-    public void setFormTag(FormTag formTag) throws Exception
+    public void setFormTag( FormTag formTag )
+        throws Exception
     {
         this.formTag = formTag;
     }

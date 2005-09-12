@@ -21,21 +21,22 @@ package com.cyclopsgroup.waterview.utils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TagLibrary extends org.apache.commons.jelly.TagLibrary
+public class TagLibrary
+    extends org.apache.commons.jelly.TagLibrary
 {
     /**
      * Register a package of tags
      *
      * @param pkg Tag package
      */
-    public void registerPackage(TagPackage pkg)
+    public void registerPackage( TagPackage pkg )
     {
         String[] tagNames = pkg.getTagNames();
-        for (int i = 0; i < tagNames.length; i++)
+        for ( int i = 0; i < tagNames.length; i++ )
         {
             String tagName = tagNames[i];
-            Class tagClass = pkg.getTagClass(tagName);
-            registerTag(tagName, tagClass);
+            Class tagClass = pkg.getTagClass( tagName );
+            registerTag( tagName, tagClass );
         }
     }
 
@@ -44,8 +45,8 @@ public class TagLibrary extends org.apache.commons.jelly.TagLibrary
      *
      * @see org.apache.commons.jelly.TagLibrary#registerTag(java.lang.String, java.lang.Class)
      */
-    public void registerTag(String name, Class type)
+    public void registerTag( String name, Class type )
     {
-        super.registerTag(name, type);
+        super.registerTag( name, type );
     }
 }

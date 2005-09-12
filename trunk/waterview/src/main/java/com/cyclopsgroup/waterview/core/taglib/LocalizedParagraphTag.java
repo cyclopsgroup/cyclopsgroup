@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LocalizedParagraphTag extends TagSupport
+public class LocalizedParagraphTag
+    extends TagSupport
 {
     private boolean escape;
 
@@ -36,9 +37,10 @@ public class LocalizedParagraphTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        invokeBody(output);
+        invokeBody( output );
     }
 
     /**
@@ -66,7 +68,7 @@ public class LocalizedParagraphTag extends TagSupport
      *
      * @param escape The escape to set.
      */
-    public void setEscape(boolean escape)
+    public void setEscape( boolean escape )
     {
         this.escape = escape;
     }
@@ -76,7 +78,7 @@ public class LocalizedParagraphTag extends TagSupport
      *
      * @param id The id to set.
      */
-    public void setId(String id)
+    public void setId( String id )
     {
         this.id = id;
     }

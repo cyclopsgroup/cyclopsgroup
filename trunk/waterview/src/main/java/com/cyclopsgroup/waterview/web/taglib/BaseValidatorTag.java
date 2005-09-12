@@ -18,7 +18,8 @@ import com.cyclopsgroup.waterview.web.FieldValidator;
  * 
  * Base validator tag
  */
-public abstract class BaseValidatorTag extends TagSupport
+public abstract class BaseValidatorTag
+    extends TagSupport
 {
 
     /**
@@ -27,28 +28,29 @@ public abstract class BaseValidatorTag extends TagSupport
      * @return Validator instance
      * @throws Exception Throw it out
      */
-    protected abstract FieldValidator createValidator() throws Exception;
+    protected abstract FieldValidator createValidator()
+        throws Exception;
 
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
         FieldValidator validator = createValidator();
-        if (getParent() instanceof FieldTag)
+        if ( getParent() instanceof FieldTag )
         {
-            ((FieldTag) getParent()).getField().setValidator(validator);
+            ( (FieldTag) getParent() ).getField().setValidator( validator );
         }
-        else if (getParent() instanceof ValidatorsTag)
+        else if ( getParent() instanceof ValidatorsTag )
         {
-            ((ValidatorsTag) getParent()).addValidator(validator);
+            ( (ValidatorsTag) getParent() ).addValidator( validator );
         }
         else
         {
-            throw new JellyTagException(
-                    "Parent tag must be Field or Validators");
+            throw new JellyTagException( "Parent tag must be Field or Validators" );
         }
     }
 }

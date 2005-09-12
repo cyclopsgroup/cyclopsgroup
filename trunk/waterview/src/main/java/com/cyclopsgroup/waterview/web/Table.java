@@ -32,20 +32,20 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class Table
 {
-    private Map columns = ListOrderedMap.decorate(new HashMap());
+    private Map columns = ListOrderedMap.decorate( new HashMap() );
 
     private String id;
 
     private int pageIndex = 0;
 
-    private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
+    private Set sortedColumns = ListOrderedSet.decorate( new HashSet() );
 
     /**
      * Constructor for class Table
      *
      * @param id Unique table id
      */
-    public Table(String id)
+    public Table( String id )
     {
         this.id = id;
     }
@@ -55,9 +55,9 @@ public class Table
      *
      * @param column Column to add
      */
-    public void addColumn(Column column)
+    public void addColumn( Column column )
     {
-        columns.put(column.getName(), column);
+        columns.put( column.getName(), column );
     }
 
     /**
@@ -66,9 +66,9 @@ public class Table
      * @param name Name of the column
      * @return Column object
      */
-    public Column getColumn(String name)
+    public Column getColumn( String name )
     {
-        return (Column) columns.get(name);
+        return (Column) columns.get( name );
     }
 
     /**
@@ -78,8 +78,7 @@ public class Table
      */
     public String[] getColumnNames()
     {
-        return (String[]) columns.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) columns.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -89,7 +88,7 @@ public class Table
      */
     public Column[] getColumns()
     {
-        return (Column[]) columns.values().toArray(Column.EMPTY_ARRAY);
+        return (Column[]) columns.values().toArray( Column.EMPTY_ARRAY );
     }
 
     /**
@@ -117,7 +116,7 @@ public class Table
      */
     public String[] getSortedColumns()
     {
-        return (String[]) sortedColumns.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) sortedColumns.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -125,7 +124,7 @@ public class Table
      *
      * @param pageIndex Page index
      */
-    public void setPageIndex(int pageIndex)
+    public void setPageIndex( int pageIndex )
     {
         this.pageIndex = pageIndex;
     }
@@ -135,9 +134,9 @@ public class Table
      *
      * @param columnName Column name
      */
-    public void sortOn(String columnName)
+    public void sortOn( String columnName )
     {
-        sortedColumns.add(columnName);
+        sortedColumns.add( columnName );
     }
 
     /**
@@ -145,8 +144,8 @@ public class Table
      *
      * @param columnName Name of column
      */
-    public void unsortOn(String columnName)
+    public void unsortOn( String columnName )
     {
-        sortedColumns.remove(columnName);
+        sortedColumns.remove( columnName );
     }
 }

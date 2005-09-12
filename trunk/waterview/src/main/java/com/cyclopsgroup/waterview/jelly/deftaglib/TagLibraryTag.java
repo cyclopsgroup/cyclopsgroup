@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class TagLibraryTag extends TagSupport
+public class TagLibraryTag
+    extends TagSupport
 {
     private String uri;
 
@@ -36,11 +37,11 @@ public class TagLibraryTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    public void processTag( XMLOutput output )
+        throws MissingAttributeException, JellyTagException
     {
-        requireAttribute("uri");
-        invokeBody(output);
+        requireAttribute( "uri" );
+        invokeBody( output );
     }
 
     /**
@@ -58,7 +59,7 @@ public class TagLibraryTag extends TagSupport
      *
      * @param uri The uri to set.
      */
-    public void setUri(String uri)
+    public void setUri( String uri )
     {
         this.uri = uri;
     }

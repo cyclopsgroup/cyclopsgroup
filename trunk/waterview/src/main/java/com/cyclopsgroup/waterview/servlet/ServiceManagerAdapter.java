@@ -27,18 +27,19 @@ import org.codehaus.plexus.PlexusContainer;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ServiceManagerAdapter implements ServiceManager
+public class ServiceManagerAdapter
+    implements ServiceManager
 {
     private PlexusContainer container;
 
-    private Log logger = LogFactory.getLog(getClass());
+    private Log logger = LogFactory.getLog( getClass() );
 
     /**
      * Constructor of ServiceManagerAdapter
      * 
      * @param container Plexus container instance
      */
-    public ServiceManagerAdapter(PlexusContainer container)
+    public ServiceManagerAdapter( PlexusContainer container )
     {
         this.container = container;
     }
@@ -48,9 +49,9 @@ public class ServiceManagerAdapter implements ServiceManager
      * 
      * @see org.apache.avalon.framework.service.ServiceManager#hasService(java.lang.String)
      */
-    public boolean hasService(String role)
+    public boolean hasService( String role )
     {
-        return container.hasComponent(role);
+        return container.hasComponent( role );
     }
 
     /**
@@ -58,15 +59,16 @@ public class ServiceManagerAdapter implements ServiceManager
      * 
      * @see org.apache.avalon.framework.service.ServiceManager#lookup(java.lang.String)
      */
-    public Object lookup(String role) throws ServiceException
+    public Object lookup( String role )
+        throws ServiceException
     {
         try
         {
-            return container.lookup(role);
+            return container.lookup( role );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new ServiceException(role, "Can not find component", e);
+            throw new ServiceException( role, "Can not find component", e );
         }
     }
 
@@ -75,15 +77,15 @@ public class ServiceManagerAdapter implements ServiceManager
      * 
      * @see org.apache.avalon.framework.service.ServiceManager#release(java.lang.Object)
      */
-    public void release(Object service)
+    public void release( Object service )
     {
         try
         {
-            container.release(service);
+            container.release( service );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            logger.warn("Can not release component " + service, e);
+            logger.warn( "Can not release component " + service, e );
         }
     }
 }

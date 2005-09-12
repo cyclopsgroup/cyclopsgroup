@@ -26,7 +26,8 @@ import org.apache.velocity.runtime.log.LogSystem;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class WaterviewLogSystem implements LogSystem
+public class WaterviewLogSystem
+    implements LogSystem
 {
     private Log logger;
 
@@ -35,11 +36,11 @@ public class WaterviewLogSystem implements LogSystem
      *
      * @see org.apache.velocity.runtime.log.LogSystem#init(org.apache.velocity.runtime.RuntimeServices)
      */
-    public void init(RuntimeServices services) throws Exception
+    public void init( RuntimeServices services )
+        throws Exception
     {
-        String category = services.getString("runtime.log.category",
-                "com.cyclopsgroup.clib.site.velocity");
-        logger = LogFactory.getLog(category);
+        String category = services.getString( "runtime.log.category", "com.cyclopsgroup.clib.site.velocity" );
+        logger = LogFactory.getLog( category );
     }
 
     /**
@@ -47,24 +48,24 @@ public class WaterviewLogSystem implements LogSystem
      *
      * @see org.apache.velocity.runtime.log.LogSystem#logVelocityMessage(int, java.lang.String)
      */
-    public void logVelocityMessage(int level, String value)
+    public void logVelocityMessage( int level, String value )
     {
-        switch (level)
+        switch ( level )
         {
-        case DEBUG_ID:
-            logger.debug(value);
-            break;
-        case WARN_ID:
-            logger.warn(value);
-            break;
-        case INFO_ID:
-            logger.info(value);
-            break;
-        case ERROR_ID:
-            logger.error(value);
-            break;
-        default:
-            logger.debug(value);
+            case DEBUG_ID:
+                logger.debug( value );
+                break;
+            case WARN_ID:
+                logger.warn( value );
+                break;
+            case INFO_ID:
+                logger.info( value );
+                break;
+            case ERROR_ID:
+                logger.error( value );
+                break;
+            default:
+                logger.debug( value );
         }
     }
 }

@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.web.TreeNode;
  * 
  * Runtime node for navigator nodes
  */
-public final class RuntimeNavigatorNode extends RuntimeTreeNode
+public final class RuntimeNavigatorNode
+    extends RuntimeTreeNode
 {
     private static final String KEY = RuntimeNavigatorNode.class.getName();
 
@@ -36,24 +37,22 @@ public final class RuntimeNavigatorNode extends RuntimeTreeNode
      * @return Runtime navigator node
      * @throws Exception Throw it out
      */
-    public synchronized static RuntimeNavigatorNode getRoot(RuntimeData data)
-            throws Exception
+    public synchronized static RuntimeNavigatorNode getRoot( RuntimeData data )
+        throws Exception
     {
-        RuntimeNavigatorNode root = (RuntimeNavigatorNode) data
-                .getSessionContext().get(KEY);
-        if (root == null)
+        RuntimeNavigatorNode root = (RuntimeNavigatorNode) data.getSessionContext().get( KEY );
+        if ( root == null )
         {
-            NavigatorHome navigator = (NavigatorHome) data.getServiceManager()
-                    .lookup(NavigatorHome.ROLE);
-            root = new RuntimeNavigatorNode(null, navigator.getRootNode());
-            root.expand(data);
+            NavigatorHome navigator = (NavigatorHome) data.getServiceManager().lookup( NavigatorHome.ROLE );
+            root = new RuntimeNavigatorNode( null, navigator.getRootNode() );
+            root.expand( data );
             TreeNode[] children = root.getChildrenNodes();
-            for (int i = 0; i < children.length; i++)
+            for ( int i = 0; i < children.length; i++ )
             {
                 TreeNode child = children[i];
-                ((RuntimeNavigatorNode) child).expand(data);
+                ( (RuntimeNavigatorNode) child ).expand( data );
             }
-            data.getSessionContext().put(KEY, root);
+            data.getSessionContext().put( KEY, root );
         }
         return root;
     }
@@ -63,14 +62,14 @@ public final class RuntimeNavigatorNode extends RuntimeTreeNode
      *
      * @param data Runtime data
      */
-    public static void refresh(RuntimeData data)
+    public static void refresh( RuntimeData data )
     {
-        data.getSessionContext().remove(KEY);
+        data.getSessionContext().remove( KEY );
     }
 
-    private RuntimeNavigatorNode(RuntimeTreeNode parentNode, TreeNode node)
+    private RuntimeNavigatorNode( RuntimeTreeNode parentNode, TreeNode node )
     {
-        super(parentNode, node);
+        super( parentNode, node );
     }
 
     /**
@@ -78,8 +77,8 @@ public final class RuntimeNavigatorNode extends RuntimeTreeNode
      *
      * @see com.cyclopsgroup.waterview.web.RuntimeTreeNode#doCreateChild(com.cyclopsgroup.waterview.web.TreeNode)
      */
-    protected RuntimeTreeNode doCreateChild(TreeNode node)
+    protected RuntimeTreeNode doCreateChild( TreeNode node )
     {
-        return new RuntimeNavigatorNode(this, node);
+        return new RuntimeNavigatorNode( this, node );
     }
 }

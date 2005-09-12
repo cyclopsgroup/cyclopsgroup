@@ -13,5 +13,5 @@ public interface ViewAware
      * Handle view
      * @param view View object
      */
-    void doView(View view);
+    void doView( View view );
 }

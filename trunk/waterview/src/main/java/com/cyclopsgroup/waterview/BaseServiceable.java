@@ -25,7 +25,8 @@ import org.apache.avalon.framework.service.Serviceable;
  * 
  * Base serviceable
  */
-public class BaseServiceable implements Serviceable
+public class BaseServiceable
+    implements Serviceable
 {
     private ServiceManager serviceManager;
 
@@ -46,9 +47,10 @@ public class BaseServiceable implements Serviceable
      * @return Component
      * @throws Exception Throw it out
      */
-    public Object lookupComponent(String role) throws Exception
+    public Object lookupComponent( String role )
+        throws Exception
     {
-        return getServiceManager().lookup(role);
+        return getServiceManager().lookup( role );
     }
 
     /**
@@ -56,7 +58,8 @@ public class BaseServiceable implements Serviceable
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
     }

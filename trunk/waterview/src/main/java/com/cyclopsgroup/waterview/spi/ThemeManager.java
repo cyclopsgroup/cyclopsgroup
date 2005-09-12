@@ -30,7 +30,8 @@ import org.apache.commons.lang.ArrayUtils;
  * 
  * Theme manager
  */
-public class ThemeManager implements Configurable
+public class ThemeManager
+    implements Configurable
 {
     /** Role of this component*/
     public static final String ROLE = ThemeManager.class.getName();
@@ -44,9 +45,10 @@ public class ThemeManager implements Configurable
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        defaultThemeName = conf.getChild("default-theme").getValue("default");
+        defaultThemeName = conf.getChild( "default-theme" ).getValue( "default" );
     }
 
     /**
@@ -56,7 +58,7 @@ public class ThemeManager implements Configurable
      */
     public Theme getDefaultTheme()
     {
-        return getTheme(defaultThemeName);
+        return getTheme( defaultThemeName );
     }
 
     /**
@@ -75,14 +77,14 @@ public class ThemeManager implements Configurable
      * @param themeName Theme name
      * @return Theme object
      */
-    public Theme getTheme(String themeName)
+    public Theme getTheme( String themeName )
     {
         Theme theme = null;
-        for (Iterator i = themeProviders.iterator(); i.hasNext();)
+        for ( Iterator i = themeProviders.iterator(); i.hasNext(); )
         {
             ThemeProvider provider = (ThemeProvider) i.next();
-            theme = provider.getTheme(themeName);
-            if (theme != null)
+            theme = provider.getTheme( themeName );
+            if ( theme != null )
             {
                 break;
             }
@@ -98,12 +100,12 @@ public class ThemeManager implements Configurable
     public String[] getThemeNames()
     {
         HashSet names = new HashSet();
-        for (Iterator i = themeProviders.iterator(); i.hasNext();)
+        for ( Iterator i = themeProviders.iterator(); i.hasNext(); )
         {
             ThemeProvider provider = (ThemeProvider) i.next();
-            CollectionUtils.addAll(names, provider.getThemeNames());
+            CollectionUtils.addAll( names, provider.getThemeNames() );
         }
-        return (String[]) names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) names.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -111,8 +113,8 @@ public class ThemeManager implements Configurable
      *
      * @param provider Theme provider
      */
-    public void registerThemeProvider(ThemeProvider provider)
+    public void registerThemeProvider( ThemeProvider provider )
     {
-        themeProviders.add(provider);
+        themeProviders.add( provider );
     }
 }

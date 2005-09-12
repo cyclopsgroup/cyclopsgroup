@@ -28,7 +28,8 @@ import com.cyclopsgroup.waterview.velocity.VelocityView;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityViewTag extends BaseViewTag
+public class VelocityViewTag
+    extends BaseViewTag
 {
     private String template;
 
@@ -37,17 +38,15 @@ public class VelocityViewTag extends BaseViewTag
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        requireAttribute("template");
-        VelocityEngine ve = (VelocityEngine) getServiceManager().lookup(
-                VelocityEngine.ROLE);
+        requireAttribute( "template" );
+        VelocityEngine ve = (VelocityEngine) getServiceManager().lookup( VelocityEngine.ROLE );
 
-        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
-                ModuleManager.ROLE);
-        Path path = mm.parsePath(getTemplate());
-        return new VelocityView(ve.getTemplate(path.getPackage(), path
-                .getPath()), getTemplate());
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        Path path = mm.parsePath( getTemplate() );
+        return new VelocityView( ve.getTemplate( path.getPackage(), path.getPath() ), getTemplate() );
     }
 
     /**
@@ -65,7 +64,7 @@ public class VelocityViewTag extends BaseViewTag
      *
      * @param template The template to set.
      */
-    public void setTemplate(String template)
+    public void setTemplate( String template )
     {
         this.template = template;
     }

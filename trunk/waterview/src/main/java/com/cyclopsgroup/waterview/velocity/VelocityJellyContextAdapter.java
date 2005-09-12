@@ -27,7 +27,8 @@ import org.apache.velocity.context.Context;
  * 
  * Adapter for velocity context with a Jelly context
  */
-public class VelocityJellyContextAdapter implements Context
+public class VelocityJellyContextAdapter
+    implements Context
 {
     private JellyContext context;
 
@@ -36,7 +37,7 @@ public class VelocityJellyContextAdapter implements Context
      *
      * @param context Jelly context
      */
-    public VelocityJellyContextAdapter(JellyContext context)
+    public VelocityJellyContextAdapter( JellyContext context )
     {
         this.context = context;
     }
@@ -46,9 +47,9 @@ public class VelocityJellyContextAdapter implements Context
      *
      * @see org.apache.velocity.context.Context#containsKey(java.lang.Object)
      */
-    public boolean containsKey(Object key)
+    public boolean containsKey( Object key )
     {
-        return get(key.toString()) != null;
+        return get( key.toString() ) != null;
     }
 
     /**
@@ -56,9 +57,9 @@ public class VelocityJellyContextAdapter implements Context
      *
      * @see org.apache.velocity.context.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        return context.getVariable(name);
+        return context.getVariable( name );
     }
 
     /**
@@ -69,7 +70,7 @@ public class VelocityJellyContextAdapter implements Context
     public Object[] getKeys()
     {
         HashSet keys = new HashSet();
-        CollectionUtils.addAll(keys, context.getVariableNames());
+        CollectionUtils.addAll( keys, context.getVariableNames() );
         return keys.toArray();
     }
 
@@ -78,10 +79,10 @@ public class VelocityJellyContextAdapter implements Context
      *
      * @see org.apache.velocity.context.Context#put(java.lang.String, java.lang.Object)
      */
-    public Object put(String name, Object value)
+    public Object put( String name, Object value )
     {
-        Object ret = get(name);
-        context.setVariable(name, value);
+        Object ret = get( name );
+        context.setVariable( name, value );
         return ret;
     }
 
@@ -90,10 +91,10 @@ public class VelocityJellyContextAdapter implements Context
      *
      * @see org.apache.velocity.context.Context#remove(java.lang.Object)
      */
-    public Object remove(Object key)
+    public Object remove( Object key )
     {
-        Object ret = get(key.toString());
-        context.removeVariable(key.toString());
+        Object ret = get( key.toString() );
+        context.removeVariable( key.toString() );
         return ret;
     }
 

@@ -27,7 +27,8 @@ import org.apache.avalon.framework.service.Serviceable;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class FakeServiceManager implements ServiceManager
+public class FakeServiceManager
+    implements ServiceManager
 {
     private Hashtable components = new Hashtable();
 
@@ -36,9 +37,9 @@ public class FakeServiceManager implements ServiceManager
      *
      * @see org.apache.avalon.framework.service.ServiceManager#hasService(java.lang.String)
      */
-    public boolean hasService(String role)
+    public boolean hasService( String role )
     {
-        return components.containsKey(role);
+        return components.containsKey( role );
     }
 
     /**
@@ -46,12 +47,13 @@ public class FakeServiceManager implements ServiceManager
      *
      * @see org.apache.avalon.framework.service.ServiceManager#lookup(java.lang.String)
      */
-    public Object lookup(String role) throws ServiceException
+    public Object lookup( String role )
+        throws ServiceException
     {
-        Object component = components.get(role);
-        if (component == null)
+        Object component = components.get( role );
+        if ( component == null )
         {
-            throw new ServiceException(role, "Component doesn't exsit");
+            throw new ServiceException( role, "Component doesn't exsit" );
         }
         return component;
     }
@@ -63,19 +65,18 @@ public class FakeServiceManager implements ServiceManager
      * @param component Component object
      * @throws ServiceException Throw it out
      */
-    public void registerComponent(String role, Object component)
-            throws ServiceException
+    public void registerComponent( String role, Object component )
+        throws ServiceException
     {
-        if (hasService(role))
+        if ( hasService( role ) )
         {
-            throw new IllegalArgumentException("Role " + role
-                    + " already exists");
+            throw new IllegalArgumentException( "Role " + role + " already exists" );
         }
-        if (component instanceof Serviceable)
+        if ( component instanceof Serviceable )
         {
-            ((Serviceable) component).service(this);
+            ( (Serviceable) component ).service( this );
         }
-        components.put(role, component);
+        components.put( role, component );
     }
 
     /**
@@ -83,7 +84,7 @@ public class FakeServiceManager implements ServiceManager
      *
      * @see org.apache.avalon.framework.service.ServiceManager#release(java.lang.Object)
      */
-    public void release(Object component)
+    public void release( Object component )
     {
     }
 }

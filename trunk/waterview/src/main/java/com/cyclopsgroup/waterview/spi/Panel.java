@@ -31,14 +31,14 @@ public interface Panel
     /** Dummy panel */
     Panel DUMMY = new Panel()
     {
-        public void render(RuntimeData runtime, View[] views) throws Exception
+        public void render( RuntimeData runtime, View[] views )
+            throws Exception
         {
-            for (int i = 0; i < views.length; i++)
+            for ( int i = 0; i < views.length; i++ )
             {
                 View view = views[i];
-                DefaultContext ctx = new DefaultContext(new HashMap(), runtime
-                        .getRequestContext());
-                view.render(runtime, ctx);
+                DefaultContext ctx = new DefaultContext( new HashMap(), runtime.getRequestContext() );
+                view.render( runtime, ctx );
             }
         }
     };
@@ -53,5 +53,6 @@ public interface Panel
      * @param views View array
      * @throws Exception Throw it out
      */
-    void render(RuntimeData runtime, View[] views) throws Exception;
+    void render( RuntimeData runtime, View[] views )
+        throws Exception;
 }

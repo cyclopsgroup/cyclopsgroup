@@ -14,7 +14,8 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * Base view tag
  */
-public abstract class BaseViewTag extends TagSupport
+public abstract class BaseViewTag
+    extends TagSupport
 {
     /**
      * Overwrite this method to create component
@@ -22,40 +23,42 @@ public abstract class BaseViewTag extends TagSupport
      * @return Create view, null is ok
      * @throws Exception Throw it out
      */
-    protected abstract View createView() throws Exception;
+    protected abstract View createView()
+        throws Exception;
 
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
         RuntimeData data = getRuntimeData();
         View view = createView();
 
-        if (view == null)
+        if ( view == null )
         {
             return;
         }
-        if (getParent() instanceof ViewAware)
+        if ( getParent() instanceof ViewAware )
         {
             ViewAware viewAware = (ViewAware) getParent();
-            viewAware.doView(view);
+            viewAware.doView( view );
         }
         else
         {
-            JellyContextAdapter adapter = new JellyContextAdapter(context);
-            DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
+            JellyContextAdapter adapter = new JellyContextAdapter( context );
+            DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
             try
             {
-                view.render(data, ctx);
+                view.render( data, ctx );
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                data.getOutput().println("<pre>");
-                e.printStackTrace(data.getOutput());
-                data.getOutput().println("</pre>");
+                data.getOutput().println( "<pre>" );
+                e.printStackTrace( data.getOutput() );
+                data.getOutput().println( "</pre>" );
             }
         }
     }

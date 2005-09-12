@@ -35,83 +35,79 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ResolveActionsValve extends AbstractLogEnabled implements Valve
+public class ResolveActionsValve
+    extends AbstractLogEnabled
+    implements Valve
 {
     /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
         List actions = data.getActions();
-        if (actions == null || actions.isEmpty())
+        if ( actions == null || actions.isEmpty() )
         {
-            context.invokeNextValve(data);
+            context.invokeNextValve( data );
             return;
         }
 
-        DefaultActionContext actionContext = new DefaultActionContext(data);
+        DefaultActionContext actionContext = new DefaultActionContext( data );
 
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
-                ModuleManager.ROLE);
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
         try
         {
-            for (Iterator i = actions.iterator(); i.hasNext();)
+            for ( Iterator i = actions.iterator(); i.hasNext(); )
             {
                 String actionName = (String) i.next();
-                Path path = mm.parsePath(actionName);
-                String className = path.getPackage() + ".action"
-                        + path.getPathWithoutExtension().replace('/', '.');
+                Path path = mm.parsePath( actionName );
+                String className = path.getPackage() + ".action" + path.getPathWithoutExtension().replace( '/', '.' );
                 Action action = null;
                 try
                 {
-                    action = (Action) Class.forName(className).newInstance();
-                    if (action instanceof Serviceable)
+                    action = (Action) Class.forName( className ).newInstance();
+                    if ( action instanceof Serviceable )
                     {
-                        ((Serviceable) action)
-                                .service(data.getServiceManager());
+                        ( (Serviceable) action ).service( data.getServiceManager() );
                     }
                 }
-                catch (Exception ignored)
+                catch ( Exception ignored )
                 {
                     //do nothing
                 }
-                if (action != null)
+                if ( action != null )
                 {
-                    action.execute(data, actionContext);
+                    action.execute( data, actionContext );
                 }
             }
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            actionContext.fail("Action error", e);
+            actionContext.fail( "Action error", e );
         }
 
-        if (!actionContext.getInputErrorMessages().isEmpty())
+        if ( !actionContext.getInputErrorMessages().isEmpty() )
         {
-            data.getRequestContext().put("formInvalid", Boolean.TRUE);
-            data.getRequestContext().put("formErrors",
-                    actionContext.getInputErrorMessages());
-            if (data.getParams().getBoolean("forced_validation"))
+            data.getRequestContext().put( "formInvalid", Boolean.TRUE );
+            data.getRequestContext().put( "formErrors", actionContext.getInputErrorMessages() );
+            if ( data.getParams().getBoolean( "forced_validation" ) )
             {
                 return;
             }
         }
 
-        if (actionContext.isFailed())
+        if ( actionContext.isFailed() )
         {
-            data.getRequestContext().put(ActionContext.FAIL_MESSAGE,
-                    actionContext.getFailMessage());
-            data.getRequestContext().put(ActionContext.FAIL_CAUSE,
-                    actionContext.getFailCause());
-            data.setPage("/Error.jelly");
-            context.invokeNextValve(data);
+            data.getRequestContext().put( ActionContext.FAIL_MESSAGE, actionContext.getFailMessage() );
+            data.getRequestContext().put( ActionContext.FAIL_CAUSE, actionContext.getFailCause() );
+            data.setPage( "/Error.jelly" );
+            context.invokeNextValve( data );
         }
         else
         {
-            data.setRedirectUrl(actionContext.getTargetUrl());
+            data.setRedirectUrl( actionContext.getTargetUrl() );
         }
     }
 }

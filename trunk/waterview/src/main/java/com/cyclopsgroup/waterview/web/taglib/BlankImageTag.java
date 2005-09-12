@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * Empty image tag
  */
-public class BlankImageTag extends TagSupport
+public class BlankImageTag
+    extends TagSupport
 {
     private int width;
 
@@ -37,15 +38,15 @@ public class BlankImageTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("width");
-        requireAttribute("height");
+        requireAttribute( "width" );
+        requireAttribute( "height" );
 
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        getContext().setVariable("tag", this);
-        je.getScript("/waterview/BlankImage.jelly").run(getContext(), output);
+        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+        getContext().setVariable( "tag", this );
+        je.getScript( "/waterview/BlankImage.jelly" ).run( getContext(), output );
     }
 
     /**
@@ -63,7 +64,7 @@ public class BlankImageTag extends TagSupport
      *
      * @param height The height to set.
      */
-    public void setHeight(int height)
+    public void setHeight( int height )
     {
         this.height = height;
     }
@@ -83,7 +84,7 @@ public class BlankImageTag extends TagSupport
      *
      * @param width The width to set.
      */
-    public void setWidth(int width)
+    public void setWidth( int width )
     {
         this.width = width;
     }

@@ -43,8 +43,9 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
-        DynaViewFactory, Initializable, Contextualizable
+public class VelocityEngine
+    extends AbstractLogEnabled
+    implements Serviceable, DynaViewFactory, Initializable, Contextualizable
 {
     /** Role name of this component */
     public static final String ROLE = VelocityEngine.class.getName();
@@ -59,9 +60,10 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      * Overwrite or implement method contextualize()
      * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
      */
-    public void contextualize(Context context) throws ContextException
+    public void contextualize( Context context )
+        throws ContextException
     {
-        initProperties = (Properties) context.get(Waterview.INIT_PROPERTIES);
+        initProperties = (Properties) context.get( Waterview.INIT_PROPERTIES );
     }
 
     /**
@@ -69,15 +71,15 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      *
      * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(Path path) throws Exception
+    public View createView( Path path )
+        throws Exception
     {
-        Template template = getTemplate(path.getPackage(), path.getPath());
-        if (template != null)
+        Template template = getTemplate( path.getPackage(), path.getPath() );
+        if ( template != null )
         {
-            return new VelocityView(template, path.getFullPath());
+            return new VelocityView( template, path.getFullPath() );
         }
-        return new MessageView("Velocity template for " + path
-                + " doesn't exist");
+        return new MessageView( "Velocity template for " + path + " doesn't exist" );
     }
 
     /**
@@ -87,15 +89,16 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      * @return Template object or null
      * @throws Exception Throw it out
      */
-    public Template getTemplate(String templatePath) throws Exception
+    public Template getTemplate( String templatePath )
+        throws Exception
     {
-        if (templatePath.charAt(0) == '/')
+        if ( templatePath.charAt( 0 ) == '/' )
         {
-            templatePath = templatePath.substring(1);
+            templatePath = templatePath.substring( 1 );
         }
-        if (engine.templateExists(templatePath))
+        if ( engine.templateExists( templatePath ) )
         {
-            return engine.getTemplate(templatePath);
+            return engine.getTemplate( templatePath );
         }
         return null;
     }
@@ -108,36 +111,37 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      * @return Velocity template object
      * @throws Exception Throw it out
      */
-    public Template getTemplate(String packageName, String templatePath)
-            throws Exception
+    public Template getTemplate( String packageName, String templatePath )
+        throws Exception
     {
         String path = templatePath;
-        if (StringUtils.isNotEmpty(packageName))
+        if ( StringUtils.isNotEmpty( packageName ) )
         {
-            path = packageName.replace('.', '/') + templatePath;
+            path = packageName.replace( '.', '/' ) + templatePath;
         }
-        return getTemplate(path);
+        return getTemplate( path );
     }
 
     /**
      * Overwrite or implement method initialize()
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
         ExtendedProperties props = new ExtendedProperties();
-        if (initProperties != null)
+        if ( initProperties != null )
         {
-            for (Iterator i = initProperties.keySet().iterator(); i.hasNext();)
+            for ( Iterator i = initProperties.keySet().iterator(); i.hasNext(); )
             {
                 String name = (String) i.next();
-                props.addProperty(name, initProperties.getProperty(name));
+                props.addProperty( name, initProperties.getProperty( name ) );
             }
         }
-        props.load(getClass().getResourceAsStream("basevelocity.properties"));
+        props.load( getClass().getResourceAsStream( "basevelocity.properties" ) );
 
         engine = new org.apache.velocity.app.VelocityEngine();
-        engine.setExtendedProperties(props);
+        engine.setExtendedProperties( props );
         engine.init();
     }
 
@@ -146,12 +150,12 @@ public class VelocityEngine extends AbstractLogEnabled implements Serviceable,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        moduleManager = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
+        moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
 
         String pattern = ".+\\.vm";
-        moduleManager.registerDynaViewFactory(pattern, this);
+        moduleManager.registerDynaViewFactory( pattern, this );
     }
 }

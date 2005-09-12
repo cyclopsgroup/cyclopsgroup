@@ -28,7 +28,8 @@ import com.cyclopsgroup.waterview.velocity.VelocityJellyContextAdapter;
  * 
  * Directly show a given velocity template
  */
-public class VelocityTemplateTag extends TagSupport
+public class VelocityTemplateTag
+    extends TagSupport
 {
 
     private String template;
@@ -38,20 +39,18 @@ public class VelocityTemplateTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("template");
-        VelocityEngine ve = (VelocityEngine) getRuntimeData()
-                .getServiceManager().lookup(VelocityEngine.ROLE);
-        Template t = ve.getTemplate(getTemplate());
-        if (t == null)
+        requireAttribute( "template" );
+        VelocityEngine ve = (VelocityEngine) getRuntimeData().getServiceManager().lookup( VelocityEngine.ROLE );
+        Template t = ve.getTemplate( getTemplate() );
+        if ( t == null )
         {
-            getRuntimeData().getOutput().println(
-                    "Velocity template " + getTemplate() + " is not found");
+            getRuntimeData().getOutput().println( "Velocity template " + getTemplate() + " is not found" );
         }
-        VelocityJellyContextAdapter adapter = new VelocityJellyContextAdapter(
-                getContext());
-        t.merge(adapter, getRuntimeData().getOutput());
+        VelocityJellyContextAdapter adapter = new VelocityJellyContextAdapter( getContext() );
+        t.merge( adapter, getRuntimeData().getOutput() );
         getRuntimeData().getOutput().flush();
     }
 
@@ -70,7 +69,7 @@ public class VelocityTemplateTag extends TagSupport
      *
      * @param template The template to set.
      */
-    public void setTemplate(String template)
+    public void setTemplate( String template )
     {
         this.template = template;
     }

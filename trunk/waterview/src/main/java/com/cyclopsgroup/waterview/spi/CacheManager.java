@@ -33,7 +33,7 @@ public interface CacheManager
      * @param key Object key
      * @return True if it exist
      */
-    boolean contains(Object host, String key);
+    boolean contains( Object host, String key );
 
     /**
      * Get object from cache
@@ -42,7 +42,7 @@ public interface CacheManager
      * @param key Object key
      * @return Object, null if it doesn't exist
      */
-    Object get(Object host, String key);
+    Object get( Object host, String key );
 
     /**
      * Put object into cache
@@ -51,5 +51,5 @@ public interface CacheManager
      * @param key Object key
      * @param value Object value
      */
-    void put(Object host, String key, Object value);
+    void put( Object host, String key, Object value );
 }

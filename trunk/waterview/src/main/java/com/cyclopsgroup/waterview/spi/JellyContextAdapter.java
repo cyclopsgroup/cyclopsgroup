@@ -28,7 +28,8 @@ import com.cyclopsgroup.waterview.DummyContext;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyContextAdapter implements Context
+public class JellyContextAdapter
+    implements Context
 {
     private JellyContext jellyContext;
 
@@ -37,7 +38,7 @@ public class JellyContextAdapter implements Context
      *
      * @param jellyContext Core jelly context
      */
-    public JellyContextAdapter(JellyContext jellyContext)
+    public JellyContextAdapter( JellyContext jellyContext )
     {
         this.jellyContext = jellyContext;
     }
@@ -46,15 +47,15 @@ public class JellyContextAdapter implements Context
      * Overwrite or implement method get()
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        return jellyContext.getVariable(name);
+        return jellyContext.getVariable( name );
     }
 
     private Context getNestedContext()
     {
-        Context context = (Context) jellyContext.getVariable(Context.NAME);
-        if (context == null)
+        Context context = (Context) jellyContext.getVariable( Context.NAME );
+        if ( context == null )
         {
             context = DummyContext.INSTANCE;
         }
@@ -74,19 +75,19 @@ public class JellyContextAdapter implements Context
      * Overwrite or implement method put()
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object value)
+    public void put( String name, Object value )
     {
-        jellyContext.setVariable(name, value);
-        getNestedContext().put(name, value);
+        jellyContext.setVariable( name, value );
+        getNestedContext().put( name, value );
     }
 
     /**
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        jellyContext.removeVariable(name);
-        getNestedContext().remove(name);
+        jellyContext.removeVariable( name );
+        getNestedContext().remove( name );
     }
 }

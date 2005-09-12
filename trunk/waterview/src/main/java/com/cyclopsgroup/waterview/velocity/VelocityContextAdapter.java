@@ -28,8 +28,8 @@ import com.cyclopsgroup.waterview.Context;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityContextAdapter implements
-        org.apache.velocity.context.Context
+public class VelocityContextAdapter
+    implements org.apache.velocity.context.Context
 {
 
     private Context context;
@@ -39,7 +39,7 @@ public class VelocityContextAdapter implements
      *
      * @param context Given context
      */
-    public VelocityContextAdapter(Context context)
+    public VelocityContextAdapter( Context context )
     {
         this.context = context;
     }
@@ -49,9 +49,9 @@ public class VelocityContextAdapter implements
      *
      * @see org.apache.velocity.context.Context#containsKey(java.lang.Object)
      */
-    public boolean containsKey(Object name)
+    public boolean containsKey( Object name )
     {
-        Object value = context.get(name.toString());
+        Object value = context.get( name.toString() );
         return value != null;
     }
 
@@ -60,9 +60,9 @@ public class VelocityContextAdapter implements
      *
      * @see org.apache.velocity.context.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        return context.get(name);
+        return context.get( name );
     }
 
     /**
@@ -73,7 +73,7 @@ public class VelocityContextAdapter implements
     public Object[] getKeys()
     {
         List keys = new ArrayList();
-        CollectionUtils.addAll(keys, context.keys());
+        CollectionUtils.addAll( keys, context.keys() );
         return keys.toArray();
     }
 
@@ -82,9 +82,9 @@ public class VelocityContextAdapter implements
      *
      * @see org.apache.velocity.context.Context#put(java.lang.String, java.lang.Object)
      */
-    public Object put(String name, Object value)
+    public Object put( String name, Object value )
     {
-        context.put(name, value);
+        context.put( name, value );
         return value;
     }
 
@@ -93,10 +93,10 @@ public class VelocityContextAdapter implements
      *
      * @see org.apache.velocity.context.Context#remove(java.lang.Object)
      */
-    public Object remove(Object name)
+    public Object remove( Object name )
     {
-        Object ret = context.get(name.toString());
-        context.put(name.toString(), null);
+        Object ret = context.get( name.toString() );
+        context.put( name.toString(), null );
         return ret;
     }
 }

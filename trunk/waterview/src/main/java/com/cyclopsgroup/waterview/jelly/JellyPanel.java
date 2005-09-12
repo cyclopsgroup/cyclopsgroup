@@ -31,7 +31,9 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyPanel extends BaseModuleRunnable implements Panel
+public class JellyPanel
+    extends BaseModuleRunnable
+    implements Panel
 {
     private static final String VIEWS_NAME = "views";
 
@@ -43,9 +45,9 @@ public class JellyPanel extends BaseModuleRunnable implements Panel
      * @param script Jelly script object
      * @param modulePath Path of module
      */
-    public JellyPanel(Script script, String modulePath)
+    public JellyPanel( Script script, String modulePath )
     {
-        super(modulePath);
+        super( modulePath );
         this.script = script;
     }
 
@@ -54,26 +56,26 @@ public class JellyPanel extends BaseModuleRunnable implements Panel
      *
      * @see com.cyclopsgroup.waterview.spi.Panel#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.View[])
      */
-    public void render(RuntimeData data, View[] views) throws Exception
+    public void render( RuntimeData data, View[] views )
+        throws Exception
     {
-        JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        JellyContext jc = je.createJellyContext(data.getRequestContext());
-        jc.setVariable(VIEWS_NAME, views);
+        JellyEngine je = (JellyEngine) data.getServiceManager().lookup( JellyEngine.ROLE );
+        JellyContext jc = je.createJellyContext( data.getRequestContext() );
+        jc.setVariable( VIEWS_NAME, views );
 
-        runModule(data, new JellyContextAdapter(jc));
+        runModule( data, new JellyContextAdapter( jc ) );
 
         try
         {
-            XMLOutput output = XMLOutput.createXMLOutput(data.getOutput());
-            script.run(jc, output);
+            XMLOutput output = XMLOutput.createXMLOutput( data.getOutput() );
+            script.run( jc, output );
             output.flush();
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            data.getOutput().println("<pre>");
-            e.printStackTrace(data.getOutput());
-            data.getOutput().println("</pre>");
+            data.getOutput().println( "<pre>" );
+            e.printStackTrace( data.getOutput() );
+            data.getOutput().println( "</pre>" );
         }
         finally
         {

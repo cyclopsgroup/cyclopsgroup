@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LayoutTag extends TagSupport
+public class LayoutTag
+    extends TagSupport
 {
 
     private Layout layout;
@@ -39,17 +40,17 @@ public class LayoutTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireParent(ThemeTag.class);
-        invokeBody(output);
-        if (getLayout() == null)
+        requireAttribute( "name" );
+        requireParent( ThemeTag.class );
+        invokeBody( output );
+        if ( getLayout() == null )
         {
-            throw new JellyTagException(
-                    "There must be a layout defined in layout tag");
+            throw new JellyTagException( "There must be a layout defined in layout tag" );
         }
-        ((ThemeTag) getParent()).getTheme().setLayout(getName(), getLayout());
+        ( (ThemeTag) getParent() ).getTheme().setLayout( getName(), getLayout() );
     }
 
     /**
@@ -77,7 +78,7 @@ public class LayoutTag extends TagSupport
      *
      * @param layout The layout to set.
      */
-    public void setLayout(Layout layout)
+    public void setLayout( Layout layout )
     {
         this.layout = layout;
     }
@@ -87,7 +88,7 @@ public class LayoutTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

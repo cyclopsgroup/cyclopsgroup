@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyViewTag extends BaseViewTag
+public class JellyViewTag
+    extends BaseViewTag
 {
     private String script;
 
@@ -35,13 +36,13 @@ public class JellyViewTag extends BaseViewTag
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        requireAttribute("script");
-        JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
+        requireAttribute( "script" );
+        JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
 
-        return new JellyView(jellyEngine.getScript(getScript()), getScript());
+        return new JellyView( jellyEngine.getScript( getScript() ), getScript() );
     }
 
     /**
@@ -59,7 +60,7 @@ public class JellyViewTag extends BaseViewTag
      *
      * @param script The script to set.
      */
-    public void setScript(String script)
+    public void setScript( String script )
     {
         this.script = script;
     }

@@ -35,7 +35,8 @@ import com.cyclopsgroup.waterview.web.TreeNode;
  *
  * Default implementation of navigator node
  */
-class DefaultNavigatorNode extends BaseNavigatorNode
+class DefaultNavigatorNode
+    extends BaseNavigatorNode
 {
     static final String DESCRIPTION_NAME = "description";
 
@@ -45,7 +46,7 @@ class DefaultNavigatorNode extends BaseNavigatorNode
 
     static final String TITLE_NAME = "title";
 
-    private ValueParser attributes = new MapValueParser(new HashMap());
+    private ValueParser attributes = new MapValueParser( new HashMap() );
 
     private DefaultNavigatorHome navigatorHome;
 
@@ -55,14 +56,13 @@ class DefaultNavigatorNode extends BaseNavigatorNode
 
     private String path;
 
-    DefaultNavigatorNode(DefaultNavigatorHome nav, String name,
-            String parentPath)
+    DefaultNavigatorNode( DefaultNavigatorHome nav, String name, String parentPath )
     {
-        if (StringUtils.isNotEmpty(name))
+        if ( StringUtils.isNotEmpty( name ) )
         {
-            if (parentPath != null)
+            if ( parentPath != null )
             {
-                if (parentPath.equals("/"))
+                if ( parentPath.equals( "/" ) )
                 {
                     this.path = "/" + name;
                 }
@@ -97,8 +97,8 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public TreeNode[] getChildrenNodes()
     {
-        Collection nodes = navigatorHome.getChildren(path);
-        return (TreeNode[]) nodes.toArray(TreeNode.EMPTY_ARRAY);
+        Collection nodes = navigatorHome.getChildren( path );
+        return (TreeNode[]) nodes.toArray( TreeNode.EMPTY_ARRAY );
     }
 
     /**
@@ -108,7 +108,7 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public String getDescription()
     {
-        return getAttributes().getString(DESCRIPTION_NAME);
+        return getAttributes().getString( DESCRIPTION_NAME );
     }
 
     /**
@@ -118,7 +118,7 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public String getNodeId()
     {
-        if (StringUtils.isEmpty(path))
+        if ( StringUtils.isEmpty( path ) )
         {
             return parentPath + getPage();
         }
@@ -132,7 +132,7 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public String getPage()
     {
-        return getAttributes().getString(PAGE_NAME);
+        return getAttributes().getString( PAGE_NAME );
     }
 
     /**
@@ -142,7 +142,7 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public TreeNode getParentNode()
     {
-        return navigatorHome.getNodeByPath(parentPath);
+        return navigatorHome.getNodeByPath( parentPath );
     }
 
     /**
@@ -152,17 +152,16 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public synchronized NavigatorNode[] getParentNodes()
     {
-        if (parentNodes == null)
+        if ( parentNodes == null )
         {
             List parents = new ArrayList();
             NavigatorNode parent = (NavigatorNode) getParentNode();
-            if (parent != null)
+            if ( parent != null )
             {
-                CollectionUtils.addAll(parents, parent.getParentNodes());
-                parents.add(parent);
+                CollectionUtils.addAll( parents, parent.getParentNodes() );
+                parents.add( parent );
             }
-            parentNodes = (NavigatorNode[]) parents
-                    .toArray(NavigatorNode.EMPTY_ARRAY);
+            parentNodes = (NavigatorNode[]) parents.toArray( NavigatorNode.EMPTY_ARRAY );
         }
         return parentNodes;
     }
@@ -194,6 +193,6 @@ class DefaultNavigatorNode extends BaseNavigatorNode
      */
     public String getTitle()
     {
-        return getAttributes().getString(TITLE_NAME);
+        return getAttributes().getString( TITLE_NAME );
     }
 }

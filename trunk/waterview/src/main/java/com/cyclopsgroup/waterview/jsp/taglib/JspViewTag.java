@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
  *
  * Jsp view tag
  */
-public class JspViewTag extends BaseViewTag
+public class JspViewTag
+    extends BaseViewTag
 {
     private String path;
 
@@ -36,14 +37,14 @@ public class JspViewTag extends BaseViewTag
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        requireAttribute("path");
-        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
-                ModuleManager.ROLE);
-        Path p = mm.parsePath(getPath());
-        JspEngine je = (JspEngine) getServiceManager().lookup(JspEngine.ROLE);
-        return je.createView(p);
+        requireAttribute( "path" );
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        Path p = mm.parsePath( getPath() );
+        JspEngine je = (JspEngine) getServiceManager().lookup( JspEngine.ROLE );
+        return je.createView( p );
     }
 
     /**
@@ -57,7 +58,7 @@ public class JspViewTag extends BaseViewTag
     /**
      * @param path The path to set.
      */
-    public void setPath(String path)
+    public void setPath( String path )
     {
         this.path = path;
     }

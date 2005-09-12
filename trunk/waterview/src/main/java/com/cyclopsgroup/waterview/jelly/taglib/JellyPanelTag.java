@@ -29,7 +29,8 @@ import com.cyclopsgroup.waterview.spi.taglib.BasePanelTag;
  *
  * Tag to show a script based panel
  */
-public class JellyPanelTag extends BasePanelTag
+public class JellyPanelTag
+    extends BasePanelTag
 {
     private String script;
 
@@ -38,19 +39,18 @@ public class JellyPanelTag extends BasePanelTag
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BasePanelTag#createPanel()
      */
-    protected synchronized Panel createPanel() throws Exception
+    protected synchronized Panel createPanel()
+        throws Exception
     {
-        requireAttribute("script");
-        CacheManager cache = (CacheManager) getServiceManager().lookup(
-                CacheManager.ROLE);
-        JellyPanel panel = (JellyPanel) cache.get(getClass(), getScript());
-        if (panel == null)
+        requireAttribute( "script" );
+        CacheManager cache = (CacheManager) getServiceManager().lookup( CacheManager.ROLE );
+        JellyPanel panel = (JellyPanel) cache.get( getClass(), getScript() );
+        if ( panel == null )
         {
-            JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            Script jellyScript = je.getScript(getScript());
-            panel = new JellyPanel(jellyScript, getScript());
-            cache.put(getClass(), getScript(), panel);
+            JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+            Script jellyScript = je.getScript( getScript() );
+            panel = new JellyPanel( jellyScript, getScript() );
+            cache.put( getClass(), getScript(), panel );
         }
         return panel;
     }
@@ -66,7 +66,7 @@ public class JellyPanelTag extends BasePanelTag
     /**
      * @param script The script to set.
      */
-    public void setScript(String script)
+    public void setScript( String script )
     {
         this.script = script;
     }

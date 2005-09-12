@@ -23,14 +23,15 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityTagPackage extends TagPackage
+public class VelocityTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class VelocityTagPackage
      */
     public VelocityTagPackage()
     {
-        addTag("VelocityView", VelocityViewTag.class);
-        addTag("VelocityTemplate", VelocityTemplateTag.class);
+        addTag( "VelocityView", VelocityViewTag.class );
+        addTag( "VelocityTemplate", VelocityTemplateTag.class );
     }
 }

@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PanelContentTag extends TagSupport
+public class PanelContentTag
+    extends TagSupport
 {
 
     private boolean append;
@@ -41,16 +42,17 @@ public class PanelContentTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireParent(PageTag.class);
+        requireAttribute( "name" );
+        requireParent( PageTag.class );
 
-        panelContent = new PanelContent(getName());
-        panelContent.setAppend(isAppend());
-        invokeBody(output);
-        Page page = ((PageTag) getParent()).getPage();
-        page.addPanelContent(panelContent);
+        panelContent = new PanelContent( getName() );
+        panelContent.setAppend( isAppend() );
+        invokeBody( output );
+        Page page = ( (PageTag) getParent() ).getPage();
+        page.addPanelContent( panelContent );
     }
 
     /**
@@ -88,7 +90,7 @@ public class PanelContentTag extends TagSupport
      *
      * @param append The append to set.
      */
-    public void setAppend(boolean append)
+    public void setAppend( boolean append )
     {
         this.append = append;
     }
@@ -98,7 +100,7 @@ public class PanelContentTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

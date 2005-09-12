@@ -34,13 +34,13 @@ public interface I18N
      * @param key Key of resource bundle
      * @return Localizzed text
      */
-    String get(String key);
+    String get( String key );
 
     /**
      * @param modulePath Path of module
      * @return I18N instance attached to given module
      */
-    I18N getInstance(String modulePath);
+    I18N getInstance( String modulePath );
 
     /**
      * Get current locale
@@ -55,7 +55,7 @@ public interface I18N
      * @param key Key of resource bundle
      * @return Localizzed text
      */
-    String getText(String key);
+    String getText( String key );
 
     /**
      * Get localized text with given default value
@@ -64,5 +64,5 @@ public interface I18N
      * @param defaultValue Default value
      * @return Localizzed text
      */
-    String getText(String key, String defaultValue);
+    String getText( String key, String defaultValue );
 }

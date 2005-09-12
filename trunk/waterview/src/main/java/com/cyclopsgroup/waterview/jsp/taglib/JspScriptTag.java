@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Jsp script tag
  */
-public class JspScriptTag extends TagSupport
+public class JspScriptTag
+    extends TagSupport
 {
     private String path;
 
@@ -36,12 +37,12 @@ public class JspScriptTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("path");
-        JspEngine je = (JspEngine) getServiceManager().lookup(JspEngine.ROLE);
-        je.renderJsp(getPath(), getRuntimeData(), new JellyContextAdapter(
-                getContext()));
+        requireAttribute( "path" );
+        JspEngine je = (JspEngine) getServiceManager().lookup( JspEngine.ROLE );
+        je.renderJsp( getPath(), getRuntimeData(), new JellyContextAdapter( getContext() ) );
         getRuntimeData().getOutput().flush();
     }
 
@@ -56,7 +57,7 @@ public class JspScriptTag extends TagSupport
     /**
      * @param path The path to set.
      */
-    public void setPath(String path)
+    public void setPath( String path )
     {
         this.path = path;
     }

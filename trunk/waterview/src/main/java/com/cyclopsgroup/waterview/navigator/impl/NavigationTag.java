@@ -26,7 +26,8 @@ import org.apache.commons.jelly.XMLOutput;
  *
  * Navigation tag in navigation.xml
  */
-public class NavigationTag extends TagSupport
+public class NavigationTag
+    extends TagSupport
 {
     private DefaultNavigatorHome navigator;
 
@@ -35,12 +36,11 @@ public class NavigationTag extends TagSupport
      *
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    public void doTag( XMLOutput output )
+        throws MissingAttributeException, JellyTagException
     {
-        navigator = (DefaultNavigatorHome) getContext().getVariable(
-                DefaultNavigatorHome.class.getName());
-        invokeBody(output);
+        navigator = (DefaultNavigatorHome) getContext().getVariable( DefaultNavigatorHome.class.getName() );
+        invokeBody( output );
     }
 
     /**

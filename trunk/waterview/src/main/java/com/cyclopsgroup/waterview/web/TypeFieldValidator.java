@@ -16,7 +16,8 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  * 
  * Validator to check type
  */
-public class TypeFieldValidator implements FieldValidator
+public class TypeFieldValidator
+    implements FieldValidator
 {
     /** Static instance */
     public static final TypeFieldValidator INSTANCE = new TypeFieldValidator();
@@ -26,19 +27,19 @@ public class TypeFieldValidator implements FieldValidator
      *
      * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
      */
-    public ValidationResult validate(Field field)
+    public ValidationResult validate( Field field )
     {
         try
         {
-            Object value = TypeUtils.convert(field.getValue(), field.getType());
-            String string = TypeUtils.toString(value);
-            return StringUtils.equals(string, field.getValue()) ? ValidationResult.SUCCESS
-                    : new ValidationResult(false, "Invalid " + field.getType()
-                            + " format");
+            Object value = TypeUtils.convert( field.getValue(), field.getType() );
+            String string = TypeUtils.toString( value );
+            return StringUtils.equals( string, field.getValue() ) ? ValidationResult.SUCCESS
+                                                                 : new ValidationResult( false, "Invalid "
+                                                                     + field.getType() + " format" );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            return new ValidationResult(false, e.getMessage());
+            return new ValidationResult( false, e.getMessage() );
         }
     }
 }

@@ -23,7 +23,8 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyTagPackage extends TagPackage
+public class JellyTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class UITagPackage
@@ -31,11 +32,11 @@ public class JellyTagPackage extends TagPackage
      */
     public JellyTagPackage()
     {
-        addTag("JellyPanel", JellyPanelTag.class);
-        addTag("JellyView", JellyViewTag.class);
-        addTag("View", ViewTag.class);
-        addTag("Layout", LayoutTag.class);
-        addTag("JellyLayout", JellyLayoutTag.class);
-        addTag("JellyScript", JellyScriptTag.class);
+        addTag( "JellyPanel", JellyPanelTag.class );
+        addTag( "JellyView", JellyViewTag.class );
+        addTag( "View", ViewTag.class );
+        addTag( "Layout", LayoutTag.class );
+        addTag( "JellyLayout", JellyLayoutTag.class );
+        addTag( "JellyScript", JellyScriptTag.class );
     }
 }

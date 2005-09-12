@@ -23,22 +23,23 @@ import org.apache.commons.lang.enums.Enum;
  * 
  * Display policy for column
  */
-public final class ColumnDisplay extends Enum
+public final class ColumnDisplay
+    extends Enum
 {
     /**
      * Forced to display
      */
-    public static ColumnDisplay FORCED = new ColumnDisplay("forced");
+    public static ColumnDisplay FORCED = new ColumnDisplay( "forced" );
 
     /**
      * Optionally displayed
      */
-    public static ColumnDisplay HIDDEN = new ColumnDisplay("hidden");
+    public static ColumnDisplay HIDDEN = new ColumnDisplay( "hidden" );
 
     /**
      * Optional hidden
      */
-    public static ColumnDisplay OPTIONAL = new ColumnDisplay("optional");
+    public static ColumnDisplay OPTIONAL = new ColumnDisplay( "optional" );
 
     /**
      * Get instance from a string
@@ -46,20 +47,19 @@ public final class ColumnDisplay extends Enum
      * @param value String value
      * @return Instance or null
      */
-    public static ColumnDisplay valueOf(String value)
+    public static ColumnDisplay valueOf( String value )
     {
-        ColumnDisplay ret = (ColumnDisplay) getEnum(ColumnDisplay.class, value);
-        if (ret == null)
+        ColumnDisplay ret = (ColumnDisplay) getEnum( ColumnDisplay.class, value );
+        if ( ret == null )
         {
-            throw new IllegalArgumentException(value
-                    + " is not a legal display option");
+            throw new IllegalArgumentException( value + " is not a legal display option" );
         }
         return ret;
     }
 
-    private ColumnDisplay(String value)
+    private ColumnDisplay( String value )
     {
-        super(value);
+        super( value );
     }
 
     /**

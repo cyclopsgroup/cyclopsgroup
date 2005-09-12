@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Tag to instroduce a tag package
  */
-public class ModulePackageTag extends TagSupport
+public class ModulePackageTag
+    extends TagSupport
 {
     private String alias;
 
@@ -37,14 +38,14 @@ public class ModulePackageTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("alias");
-        requireAttribute("name");
+        requireAttribute( "alias" );
+        requireAttribute( "name" );
 
-        ModuleManager moduleManager = (ModuleManager) getServiceManager()
-                .lookup(ModuleManager.ROLE);
-        moduleManager.registerPackage(getAlias(), getName());
+        ModuleManager moduleManager = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        moduleManager.registerPackage( getAlias(), getName() );
     }
 
     /**
@@ -66,7 +67,7 @@ public class ModulePackageTag extends TagSupport
     /**
      * @param alias The alias to set.
      */
-    public void setAlias(String alias)
+    public void setAlias( String alias )
     {
         this.alias = alias;
     }
@@ -74,7 +75,7 @@ public class ModulePackageTag extends TagSupport
     /**
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

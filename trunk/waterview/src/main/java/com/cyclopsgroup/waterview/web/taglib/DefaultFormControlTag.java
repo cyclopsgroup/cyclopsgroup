@@ -21,13 +21,14 @@ package com.cyclopsgroup.waterview.web.taglib;
  * 
  * Default form control tag
  */
-public class DefaultFormControlTag extends JellyFormControlTag
+public class DefaultFormControlTag
+    extends JellyFormControlTag
 {
     /**
      * Constructor for class DefaultFormControlTag
      */
     public DefaultFormControlTag()
     {
-        setScript("/waterview/DefaultFormControl.jelly");
+        setScript( "/waterview/DefaultFormControl.jelly" );
     }
 }

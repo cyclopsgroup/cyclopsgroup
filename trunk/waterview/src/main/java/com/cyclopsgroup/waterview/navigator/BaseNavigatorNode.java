@@ -21,7 +21,8 @@ package com.cyclopsgroup.waterview.navigator;
  * 
  * Base abstract implementation of navigator node
  */
-public abstract class BaseNavigatorNode implements NavigatorNode
+public abstract class BaseNavigatorNode
+    implements NavigatorNode
 {
     /**
      * Getter method for field end
@@ -38,13 +39,13 @@ public abstract class BaseNavigatorNode implements NavigatorNode
      *
      * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#isParent(java.lang.String)
      */
-    public boolean isParent(String page)
+    public boolean isParent( String page )
     {
         NavigatorNode[] parents = getParentNodes();
-        for (int i = 0; i < parents.length; i++)
+        for ( int i = 0; i < parents.length; i++ )
         {
             NavigatorNode parent = parents[i];
-            if (parent.getPage().equals(page))
+            if ( parent.getPage().equals( page ) )
             {
                 return true;
             }

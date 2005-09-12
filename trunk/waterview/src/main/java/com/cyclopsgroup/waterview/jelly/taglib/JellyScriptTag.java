@@ -34,7 +34,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Tag to run a given script
  */
-public class JellyScriptTag extends TagSupport
+public class JellyScriptTag
+    extends TagSupport
 {
     private String path;
 
@@ -45,47 +46,45 @@ public class JellyScriptTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("type");
-        requireAttribute("path");
+        requireAttribute( "type" );
+        requireAttribute( "path" );
         Script script = null;
-        if (StringUtils.equals(getType(), "system"))
+        if ( StringUtils.equals( getType(), "system" ) )
         {
-            JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            script = je.getScript(getPath());
+            JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+            script = je.getScript( getPath() );
         }
-        else if (StringUtils.equals(getType(), "classpath"))
+        else if ( StringUtils.equals( getType(), "classpath" ) )
         {
-            URL resource = getClass().getClassLoader().getResource(getPath());
-            if (resource != null)
+            URL resource = getClass().getClassLoader().getResource( getPath() );
+            if ( resource != null )
             {
-                script = context.compileScript(resource);
+                script = context.compileScript( resource );
             }
         }
-        else if (StringUtils.equals(getType(), "file"))
+        else if ( StringUtils.equals( getType(), "file" ) )
         {
-            File file = new File(getPath());
-            if (file.exists())
+            File file = new File( getPath() );
+            if ( file.exists() )
             {
-                script = context.compileScript(file.toURL());
+                script = context.compileScript( file.toURL() );
             }
         }
         else
         {
-            throw new JellyTagException(
-                    "Type must be system|classpath|file, default value is system");
+            throw new JellyTagException( "Type must be system|classpath|file, default value is system" );
         }
-        if (script == null)
+        if ( script == null )
         {
-            throw new FileNotFoundException("Resource " + getPath()
-                    + " is not found in " + getType());
+            throw new FileNotFoundException( "Resource " + getPath() + " is not found in " + getType() );
         }
-        JellyContext jc = new JellyContext(getContext());
-        if (script != null)
+        JellyContext jc = new JellyContext( getContext() );
+        if ( script != null )
         {
-            script.run(jc, output);
+            script.run( jc, output );
             output.flush();
         }
     }
@@ -109,7 +108,7 @@ public class JellyScriptTag extends TagSupport
     /**
      * @param path The path to set.
      */
-    public void setPath(String path)
+    public void setPath( String path )
     {
         this.path = path;
     }
@@ -117,7 +116,7 @@ public class JellyScriptTag extends TagSupport
     /**
      * @param type The type to set.
      */
-    public void setType(String type)
+    public void setType( String type )
     {
         this.type = type;
     }

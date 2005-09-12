@@ -27,17 +27,19 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LayoutTag extends TagSupport
+public class LayoutTag
+    extends TagSupport
 {
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        Page page = (Page) getContext().getVariable(Page.NAME);
-        JellyLayout layout = new JellyLayout(getBody(), null);
-        page.setLayout(layout);
+        Page page = (Page) getContext().getVariable( Page.NAME );
+        JellyLayout layout = new JellyLayout( getBody(), null );
+        page.setLayout( layout );
     }
 }

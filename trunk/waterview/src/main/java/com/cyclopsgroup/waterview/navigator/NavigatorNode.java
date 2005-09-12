@@ -23,7 +23,8 @@ import com.cyclopsgroup.waterview.web.TreeNode;
  * 
  * Navigator node
  */
-public interface NavigatorNode extends TreeNode
+public interface NavigatorNode
+    extends TreeNode
 {
     /** Empty nodes */
     NavigatorNode[] EMPTY_ARRAY = new NavigatorNode[0];
@@ -62,5 +63,5 @@ public interface NavigatorNode extends TreeNode
      * @param page Page path
      * @return True if it is
      */
-    boolean isParent(String page);
+    boolean isParent( String page );
 }

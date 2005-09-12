@@ -23,15 +23,16 @@ import org.apache.commons.jelly.TagLibrary;
  *
  * Tag library for navigation
  */
-public class NavigatorTagLibrary extends TagLibrary
+public class NavigatorTagLibrary
+    extends TagLibrary
 {
     /**
      * Constructor for class NavigatorTagLibrary
      */
     public NavigatorTagLibrary()
     {
-        registerTag("Navigation", NavigationTag.class);
-        registerTag("Tree", TreeTag.class);
-        registerTag("Node", NodeTag.class);
+        registerTag( "Navigation", NavigationTag.class );
+        registerTag( "Tree", TreeTag.class );
+        registerTag( "Node", NodeTag.class );
     }
 }

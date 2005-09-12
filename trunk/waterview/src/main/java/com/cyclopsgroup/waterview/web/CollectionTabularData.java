@@ -30,7 +30,8 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
  * 
  * Collection implemented table data
  */
-public class CollectionTabularData implements TabularData
+public class CollectionTabularData
+    implements TabularData
 {
     private Collection collection;
 
@@ -39,7 +40,7 @@ public class CollectionTabularData implements TabularData
      *
      * @param collection Collecton of data
      */
-    public CollectionTabularData(Collection collection)
+    public CollectionTabularData( Collection collection )
     {
         this.collection = collection;
     }
@@ -69,33 +70,31 @@ public class CollectionTabularData implements TabularData
      *
      * @see com.cyclopsgroup.waterview.web.TabularData#openIterator(com.cyclopsgroup.waterview.web.Table)
      */
-    public Iterator openIterator(Table table) throws Exception
+    public Iterator openIterator( Table table )
+        throws Exception
     {
         String[] sortedColumnNames = table.getSortedColumns();
-        if (sortedColumnNames.length == 0)
+        if ( sortedColumnNames.length == 0 )
         {
             return collection.iterator();
         }
         ComparatorChain chain = new ComparatorChain();
-        for (int i = 0; i < sortedColumnNames.length; i++)
+        for ( int i = 0; i < sortedColumnNames.length; i++ )
         {
             String columnName = sortedColumnNames[i];
-            Column column = table.getColumn(columnName);
-            if (column.getSort() == ColumnSort.ASC)
+            Column column = table.getColumn( columnName );
+            if ( column.getSort() == ColumnSort.ASC )
             {
-                chain
-                        .addComparator(new BeanPropertyComparator(column
-                                .getName()));
+                chain.addComparator( new BeanPropertyComparator( column.getName() ) );
             }
-            else if (column.getSort() == ColumnSort.DESC)
+            else if ( column.getSort() == ColumnSort.DESC )
             {
-                chain.addComparator(
-                        new BeanPropertyComparator(column.getName()), true);
+                chain.addComparator( new BeanPropertyComparator( column.getName() ), true );
             }
         }
-        chain.addComparator(HashCodeComparator.INSTANCE);
-        TreeSet set = new TreeSet(chain);
-        set.addAll(collection);
+        chain.addComparator( HashCodeComparator.INSTANCE );
+        TreeSet set = new TreeSet( chain );
+        set.addAll( collection );
         return set.iterator();
     }
 }

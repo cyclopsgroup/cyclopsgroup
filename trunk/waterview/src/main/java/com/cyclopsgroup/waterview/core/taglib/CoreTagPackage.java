@@ -23,23 +23,24 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class CoreTagPackage extends TagPackage
+public class CoreTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class CoreTagPackage
      */
     public CoreTagPackage()
     {
-        addTag("Page", PageTag.class);
-        addTag("SystemLayout", SystemLayoutTag.class);
-        addTag("PanelContent", PanelContentTag.class);
-        addTag("SimpleView", SimpleViewTag.class);
-        addTag("DisplayView", DisplayViewTag.class);
-        addTag("LocalizedText", LocalizedTextTag.class);
-        addTag("LocalizedParagraph", LocalizedParagraphTag.class);
-        addTag("t", LocalizedTextTag.class);
-        addTag("p", LocalizedParagraphTag.class);
-        addTag("Dummy", DummyTag.class);
-        addTag("RunScript", RunScriptTag.class);
+        addTag( "Page", PageTag.class );
+        addTag( "SystemLayout", SystemLayoutTag.class );
+        addTag( "PanelContent", PanelContentTag.class );
+        addTag( "SimpleView", SimpleViewTag.class );
+        addTag( "DisplayView", DisplayViewTag.class );
+        addTag( "LocalizedText", LocalizedTextTag.class );
+        addTag( "LocalizedParagraph", LocalizedParagraphTag.class );
+        addTag( "t", LocalizedTextTag.class );
+        addTag( "p", LocalizedParagraphTag.class );
+        addTag( "Dummy", DummyTag.class );
+        addTag( "RunScript", RunScriptTag.class );
     }
 }

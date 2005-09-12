@@ -29,7 +29,7 @@ public interface ThemeProvider
      * @param themeName Theme name
      * @return Theme object or null
      */
-    Theme getTheme(String themeName);
+    Theme getTheme( String themeName );
 
     /**
      * Get theme name array

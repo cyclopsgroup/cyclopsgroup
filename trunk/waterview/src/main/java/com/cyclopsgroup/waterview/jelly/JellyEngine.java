@@ -55,8 +55,9 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyEngine extends AbstractLogEnabled implements Initializable,
-        Contextualizable, Serviceable, DynaViewFactory, ThemeProvider
+public class JellyEngine
+    extends AbstractLogEnabled
+    implements Initializable, Contextualizable, Serviceable, DynaViewFactory, ThemeProvider
 {
     /** Class name of definition tag package */
     private static final String DEFINITION_TAG_PACKAGE = "com.cyclopsgroup.waterview.jelly.deftaglib.DefinitionTagPackage";
@@ -72,7 +73,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
          *
          * @see org.apache.commons.jelly.Script#compile()
          */
-        public Script compile() throws JellyException
+        public Script compile()
+            throws JellyException
         {
             return this;
         }
@@ -82,8 +84,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
          *
          * @see org.apache.commons.jelly.Script#run(org.apache.commons.jelly.JellyContext, org.apache.commons.jelly.XMLOutput)
          */
-        public void run(JellyContext jellyContext, XMLOutput output)
-                throws JellyTagException
+        public void run( JellyContext jellyContext, XMLOutput output )
+            throws JellyTagException
         {
             //doing nothing
         }
@@ -114,17 +116,17 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see org.apache.avalon.framework.context.Contextualizable#contextualize(org.apache.avalon.framework.context.Context)
      */
-    public void contextualize(Context context) throws ContextException
+    public void contextualize( Context context )
+        throws ContextException
     {
         try
         {
-            Properties waterviewProperties = (Properties) context
-                    .get(Waterview.INIT_PROPERTIES);
-            initProperties.putAll(waterviewProperties);
+            Properties waterviewProperties = (Properties) context.get( Waterview.INIT_PROPERTIES );
+            initProperties.putAll( waterviewProperties );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            getLogger().debug("Can not add init properties", e);
+            getLogger().debug( "Can not add init properties", e );
         }
     }
 
@@ -134,17 +136,16 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @param context Given clib context
      * @return JellyContext object
      */
-    public JellyContext createJellyContext(
-            com.cyclopsgroup.waterview.Context context)
+    public JellyContext createJellyContext( com.cyclopsgroup.waterview.Context context )
     {
-        JellyContext jc = new JellyContext(getGlobalContext());
-        for (Iterator i = context.keys(); i.hasNext();)
+        JellyContext jc = new JellyContext( getGlobalContext() );
+        for ( Iterator i = context.keys(); i.hasNext(); )
         {
             String name = (String) i.next();
-            Object value = context.get(name);
-            jc.setVariable(name, value);
+            Object value = context.get( name );
+            jc.setVariable( name, value );
         }
-        jc.setVariable(com.cyclopsgroup.waterview.Context.NAME, context);
+        jc.setVariable( com.cyclopsgroup.waterview.Context.NAME, context );
         return jc;
     }
 
@@ -153,10 +154,11 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(Path path) throws Exception
+    public View createView( Path path )
+        throws Exception
     {
-        Script script = getScript(path.getPackage(), path.getPath());
-        return new JellyView(script, path.getFullPath());
+        Script script = getScript( path.getPackage(), path.getPath() );
+        return new JellyView( script, path.getFullPath() );
     }
 
     /**
@@ -196,10 +198,11 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String path) throws JellyException
+    public Script getScript( String path )
+        throws JellyException
     {
-        Path p = moduleManager.parsePath(path);
-        return getScript(p.getPackage(), p.getPath());
+        Path p = moduleManager.parsePath( path );
+        return getScript( p.getPackage(), p.getPath() );
     }
 
     /**
@@ -210,11 +213,11 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String path, Script defaultScript)
-            throws JellyException
+    public Script getScript( String path, Script defaultScript )
+        throws JellyException
     {
-        Path p = moduleManager.parsePath(path);
-        return getScript(p.getPackage(), p.getPath(), defaultScript);
+        Path p = moduleManager.parsePath( path );
+        return getScript( p.getPackage(), p.getPath(), defaultScript );
     }
 
     /**
@@ -225,10 +228,10 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String packageName, String scriptPath)
-            throws JellyException
+    public Script getScript( String packageName, String scriptPath )
+        throws JellyException
     {
-        return getScript(packageName, scriptPath, DUMMY_SCRIPT);
+        return getScript( packageName, scriptPath, DUMMY_SCRIPT );
     }
 
     /**
@@ -240,37 +243,36 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @return Script object
      * @throws JellyException Throw it out
      */
-    public Script getScript(String packageName, String scriptPath,
-            Script defaultScript) throws JellyException
+    public Script getScript( String packageName, String scriptPath, Script defaultScript )
+        throws JellyException
     {
         String fullPath = scriptPath;
-        String pkg = moduleManager.getPackageName(packageName);
-        if (StringUtils.isNotEmpty(pkg))
+        String pkg = moduleManager.getPackageName( packageName );
+        if ( StringUtils.isNotEmpty( pkg ) )
         {
-            fullPath = pkg.replace('.', '/') + scriptPath;
+            fullPath = pkg.replace( '.', '/' ) + scriptPath;
         }
         Script script = null;
-        synchronized (this)
+        synchronized ( this )
         {
-            if (getCacheManager().contains(this, fullPath))
+            if ( getCacheManager().contains( this, fullPath ) )
             {
-                script = (Script) getCacheManager().get(this, fullPath);
+                script = (Script) getCacheManager().get( this, fullPath );
             }
             else
             {
-                URL resource = getClass().getClassLoader()
-                        .getResource(fullPath);
+                URL resource = getClass().getClassLoader().getResource( fullPath );
 
-                if (resource == null)
+                if ( resource == null )
                 {
                     script = DUMMY_SCRIPT;
                 }
                 else
                 {
-                    JellyContext jc = new JellyContext(getGlobalContext());
-                    script = jc.compileScript(resource);
+                    JellyContext jc = new JellyContext( getGlobalContext() );
+                    script = jc.compileScript( resource );
                 }
-                getCacheManager().put(this, fullPath, script);
+                getCacheManager().put( this, fullPath, script );
             }
         }
         return script == DUMMY_SCRIPT ? defaultScript : script;
@@ -281,9 +283,9 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see com.cyclopsgroup.waterview.spi.ThemeProvider#getTheme(java.lang.String)
      */
-    public Theme getTheme(String themeName)
+    public Theme getTheme( String themeName )
     {
-        return (Theme) themes.get(themeName);
+        return (Theme) themes.get( themeName );
     }
 
     /**
@@ -293,8 +295,7 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      */
     public String[] getThemeNames()
     {
-        return (String[]) themes.keySet()
-                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) themes.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -302,35 +303,34 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @throws Exception Throw it out
      */
-    private void initGlobalContext() throws Exception
+    private void initGlobalContext()
+        throws Exception
     {
         JellyContext jc = new JellyContext();
-        jc.setVariable(SERVICE_MANAGER, serviceManager);
-        jc.setVariable(ROLE, this);
+        jc.setVariable( SERVICE_MANAGER, serviceManager );
+        jc.setVariable( ROLE, this );
         TagLibrary deftaglib = new TagLibrary();
-        deftaglib.registerPackage((TagPackage) Class.forName(
-                DEFINITION_TAG_PACKAGE).newInstance());
-        jc.registerTagLibrary(DEFINITION_TAGLIB_URL, deftaglib);
+        deftaglib.registerPackage( (TagPackage) Class.forName( DEFINITION_TAG_PACKAGE ).newInstance() );
+        jc.registerTagLibrary( DEFINITION_TAGLIB_URL, deftaglib );
 
-        Enumeration e = getClass().getClassLoader().getResources(
-                "META-INF/cyclopsgroup/waterview.xml");
-        while (e.hasMoreElements())
+        Enumeration e = getClass().getClassLoader().getResources( "META-INF/cyclopsgroup/waterview.xml" );
+        while ( e.hasMoreElements() )
         {
             URL resource = (URL) e.nextElement();
-            getLogger().info("Load definition from " + resource);
-            jc.runScript(resource, XMLOutput.createDummyXMLOutput());
+            getLogger().info( "Load definition from " + resource );
+            jc.runScript( resource, XMLOutput.createDummyXMLOutput() );
         }
 
         globalContext = new JellyContext();
-        globalContext.setVariables(initProperties);
-        for (Iterator i = tagLibraries.keySet().iterator(); i.hasNext();)
+        globalContext.setVariables( initProperties );
+        for ( Iterator i = tagLibraries.keySet().iterator(); i.hasNext(); )
         {
             String uri = (String) i.next();
-            TagLibrary taglib = (TagLibrary) tagLibraries.get(uri);
-            globalContext.registerTagLibrary(uri, taglib);
+            TagLibrary taglib = (TagLibrary) tagLibraries.get( uri );
+            globalContext.registerTagLibrary( uri, taglib );
         }
-        globalContext.setVariable(SERVICE_MANAGER, serviceManager);
-        globalContext.setVariable(ROLE, this);
+        globalContext.setVariable( SERVICE_MANAGER, serviceManager );
+        globalContext.setVariable( ROLE, this );
     }
 
     /**
@@ -338,7 +338,8 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
         initGlobalContext();
     }
@@ -349,16 +350,15 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      * @param uri Name space uri
      * @param tagPackage TagPackage object
      */
-    public synchronized void registerTagPackage(String uri,
-            TagPackage tagPackage)
+    public synchronized void registerTagPackage( String uri, TagPackage tagPackage )
     {
-        TagLibrary ctl = (TagLibrary) tagLibraries.get(uri);
-        if (ctl == null)
+        TagLibrary ctl = (TagLibrary) tagLibraries.get( uri );
+        if ( ctl == null )
         {
             ctl = new TagLibrary();
-            tagLibraries.put(uri, ctl);
+            tagLibraries.put( uri, ctl );
         }
-        ctl.registerPackage(tagPackage);
+        ctl.registerPackage( tagPackage );
     }
 
     /**
@@ -366,9 +366,9 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @param theme Theme object
      */
-    public void registerTheme(Theme theme)
+    public void registerTheme( Theme theme )
     {
-        themes.put(theme.getName(), theme);
+        themes.put( theme.getName(), theme );
     }
 
     /**
@@ -376,18 +376,17 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
-        cacheManager = (CacheManager) serviceManager.lookup(CacheManager.ROLE);
-        moduleManager = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
+        cacheManager = (CacheManager) serviceManager.lookup( CacheManager.ROLE );
+        moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
 
         String pattern = ".+\\.jelly";
-        moduleManager.registerDynaViewFactory(pattern, this);
+        moduleManager.registerDynaViewFactory( pattern, this );
 
-        ThemeManager tm = (ThemeManager) serviceManager
-                .lookup(ThemeManager.ROLE);
-        tm.registerThemeProvider(this);
+        ThemeManager tm = (ThemeManager) serviceManager.lookup( ThemeManager.ROLE );
+        tm.registerThemeProvider( this );
     }
 }

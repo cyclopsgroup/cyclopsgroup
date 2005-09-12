@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayoutTag extends TagSupport
+public class JellyLayoutTag
+    extends TagSupport
 {
     private String script;
 
@@ -36,13 +37,14 @@ public class JellyLayoutTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("script");
-        requireParent(LayoutTag.class);
-        Layout layout = new JellyLayoutProxy(getScript());
+        requireAttribute( "script" );
+        requireParent( LayoutTag.class );
+        Layout layout = new JellyLayoutProxy( getScript() );
         LayoutTag layoutTag = (LayoutTag) getParent();
-        layoutTag.setLayout(layout);
+        layoutTag.setLayout( layout );
     }
 
     /**
@@ -60,7 +62,7 @@ public class JellyLayoutTag extends TagSupport
      *
      * @param script The script to set.
      */
-    public void setScript(String script)
+    public void setScript( String script )
     {
         this.script = script;
     }

@@ -29,11 +29,12 @@ import com.cyclopsgroup.waterview.ValueParser;
  * 
  * Default implementation of a node
  */
-public class DefaultTreeNode implements TreeNode
+public class DefaultTreeNode
+    implements TreeNode
 {
-    private ValueParser attributes = new MapValueParser(new HashMap());
+    private ValueParser attributes = new MapValueParser( new HashMap() );
 
-    private Map children = ListOrderedMap.decorate(new HashMap());
+    private Map children = ListOrderedMap.decorate( new HashMap() );
 
     private boolean end;
 
@@ -47,7 +48,7 @@ public class DefaultTreeNode implements TreeNode
      * @param nodeId Unique ID of node
      * @param parentNode Parent node
      */
-    public DefaultTreeNode(String nodeId, TreeNode parentNode)
+    public DefaultTreeNode( String nodeId, TreeNode parentNode )
     {
         this.nodeId = nodeId;
         this.parentNode = parentNode;
@@ -58,9 +59,9 @@ public class DefaultTreeNode implements TreeNode
      *
      * @param child Child node
      */
-    public void addChildNode(TreeNode child)
+    public void addChildNode( TreeNode child )
     {
-        children.put(child.getNodeId(), child);
+        children.put( child.getNodeId(), child );
     }
 
     /**
@@ -80,7 +81,7 @@ public class DefaultTreeNode implements TreeNode
      */
     public TreeNode[] getChildrenNodes()
     {
-        return (TreeNode[]) children.values().toArray(EMPTY_ARRAY);
+        return (TreeNode[]) children.values().toArray( EMPTY_ARRAY );
     }
 
     /**
@@ -118,7 +119,7 @@ public class DefaultTreeNode implements TreeNode
      *
      * @param end The end to set.
      */
-    public void setEnd(boolean end)
+    public void setEnd( boolean end )
     {
         this.end = end;
     }

@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Node tag
  */
-public class NodeTag extends TagSupport
+public class NodeTag
+    extends TagSupport
 {
     private String description;
 
@@ -117,35 +118,34 @@ public class NodeTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("title");
-        requireAttribute("page");
+        requireAttribute( "title" );
+        requireAttribute( "page" );
 
-        if (getParent() instanceof TreeTag)
+        if ( getParent() instanceof TreeTag )
         {
-            parentPath = ((TreeTag) getParent()).getPosition();
+            parentPath = ( (TreeTag) getParent() ).getPosition();
         }
-        else if (getParent() instanceof NodeTag)
+        else if ( getParent() instanceof NodeTag )
         {
-            ((NodeTag) getParent()).requireAttribute("name");
-            parentPath = ((NodeTag) getParent()).getPath();
+            ( (NodeTag) getParent() ).requireAttribute( "name" );
+            parentPath = ( (NodeTag) getParent() ).getPath();
         }
         else
         {
-            throw new JellyTagException("Parent tag must be tree or node");
+            throw new JellyTagException( "Parent tag must be tree or node" );
         }
-        NavigationTag nt = (NavigationTag) findAncestorWithClass(NavigationTag.class);
-        DefaultNavigatorNode node = new DefaultNavigatorNode(nt.getNavigator(),
-                getName(), parentPath);
+        NavigationTag nt = (NavigationTag) findAncestorWithClass( NavigationTag.class );
+        DefaultNavigatorNode node = new DefaultNavigatorNode( nt.getNavigator(), getName(), parentPath );
         path = node.getPath();
-        node.getAttributes().set(DefaultNavigatorNode.PAGE_NAME, getPage());
-        node.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, getTitle());
-        node.getAttributes().set(DefaultNavigatorNode.DESCRIPTION_NAME,
-                getDescription());
+        node.getAttributes().set( DefaultNavigatorNode.PAGE_NAME, getPage() );
+        node.getAttributes().set( DefaultNavigatorNode.TITLE_NAME, getTitle() );
+        node.getAttributes().set( DefaultNavigatorNode.DESCRIPTION_NAME, getDescription() );
 
-        nt.getNavigator().addNode(node);
-        invokeBody(output);
+        nt.getNavigator().addNode( node );
+        invokeBody( output );
     }
 
     /**
@@ -153,7 +153,7 @@ public class NodeTag extends TagSupport
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -163,7 +163,7 @@ public class NodeTag extends TagSupport
      *
      * @param hidden The hidden to set.
      */
-    public void setHidden(boolean hidden)
+    public void setHidden( boolean hidden )
     {
         this.hidden = hidden;
     }
@@ -173,7 +173,7 @@ public class NodeTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
@@ -183,7 +183,7 @@ public class NodeTag extends TagSupport
      *
      * @param page The page to set.
      */
-    public void setPage(String page)
+    public void setPage( String page )
     {
         this.page = page;
     }
@@ -193,7 +193,7 @@ public class NodeTag extends TagSupport
      *
      * @param title The title to set.
      */
-    public void setTitle(String title)
+    public void setTitle( String title )
     {
         this.title = title;
     }

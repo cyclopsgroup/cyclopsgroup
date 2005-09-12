@@ -29,7 +29,8 @@ import com.cyclopsgroup.waterview.Context;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HttpSessionContext implements Context
+public class HttpSessionContext
+    implements Context
 {
     private HttpSession httpSession;
 
@@ -38,7 +39,7 @@ public class HttpSessionContext implements Context
      *
      * @param httpSession Valid http session
      */
-    public HttpSessionContext(HttpSession httpSession)
+    public HttpSessionContext( HttpSession httpSession )
     {
         this.httpSession = httpSession;
     }
@@ -47,9 +48,9 @@ public class HttpSessionContext implements Context
      * Overwrite or implement method get()
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        return httpSession.getAttribute(name);
+        return httpSession.getAttribute( name );
     }
 
     /**
@@ -58,25 +59,24 @@ public class HttpSessionContext implements Context
      */
     public Iterator keys()
     {
-        return new EnumerationIterator(httpSession.getAttributeNames());
+        return new EnumerationIterator( httpSession.getAttributeNames() );
     }
 
-     /**
+    /**
      * Overwrite or implement method put()
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object value)
+    public void put( String name, Object value )
     {
-        httpSession.setAttribute(name, value);
+        httpSession.setAttribute( name, value );
     }
-
 
     /**
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        httpSession.removeAttribute(name);
+        httpSession.removeAttribute( name );
     }
 }

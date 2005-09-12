@@ -26,22 +26,21 @@ import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
  * 
  * Action to expand navigator node
  */
-public class NavigatorCollapseNode implements Action
+public class NavigatorCollapseNode
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, ActionContext context)
-            throws Exception
+    public void execute( RuntimeData data, ActionContext context )
+        throws Exception
     {
-        RuntimeNavigatorNode nav = RuntimeNavigatorNode.getRoot(data);
-        String nodeId = data.getParams().getString(
-                "navigator_node_id");
-        RuntimeNavigatorNode node = (RuntimeNavigatorNode) nav
-                .getNodeById(nodeId);
+        RuntimeNavigatorNode nav = RuntimeNavigatorNode.getRoot( data );
+        String nodeId = data.getParams().getString( "navigator_node_id" );
+        RuntimeNavigatorNode node = (RuntimeNavigatorNode) nav.getNodeById( nodeId );
         node.collapse();
-        context.setTargetUrl(data.getRefererUrl());
+        context.setTargetUrl( data.getRefererUrl() );
     }
 }

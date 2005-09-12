@@ -31,5 +31,6 @@ public interface PipelineContext
      * @param data Page Runtime object
      * @throws Exception Just throw it out
      */
-    void invokeNextValve(RuntimeData data) throws Exception;
+    void invokeNextValve( RuntimeData data )
+        throws Exception;
 }

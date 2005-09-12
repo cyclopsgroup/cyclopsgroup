@@ -48,7 +48,7 @@ public class Field
      * @param name Field name
      * @param type Field type
      */
-    public Field(String name, Class type)
+    public Field( String name, Class type )
     {
         this.name = name;
         this.type = type;
@@ -115,7 +115,7 @@ public class Field
     /**
      * @param errorMessage The errorMessage to set.
      */
-    public void setErrorMessage(String errorMessage)
+    public void setErrorMessage( String errorMessage )
     {
         this.errorMessage = errorMessage;
     }
@@ -123,7 +123,7 @@ public class Field
     /**
      * @param invalid The invalid to set.
      */
-    public void setInvalid(boolean invalid)
+    public void setInvalid( boolean invalid )
     {
         this.invalid = invalid;
     }
@@ -131,7 +131,7 @@ public class Field
     /**
      * @param required The required to set.
      */
-    public void setRequired(boolean required)
+    public void setRequired( boolean required )
     {
         this.required = required;
     }
@@ -139,7 +139,7 @@ public class Field
     /**
      * @param validator The validator to set.
      */
-    public void setValidator(FieldValidator validator)
+    public void setValidator( FieldValidator validator )
     {
         this.validator = validator;
     }
@@ -147,7 +147,7 @@ public class Field
     /**
      * @param value The value to set.
      */
-    public void setValue(String value)
+    public void setValue( String value )
     {
         this.value = value;
     }
@@ -157,34 +157,34 @@ public class Field
      */
     public void validate()
     {
-        if (StringUtils.isEmpty(getValue()))
+        if ( StringUtils.isEmpty( getValue() ) )
         {
-            if (isRequired())
+            if ( isRequired() )
             {
-                setInvalid(true);
-                setErrorMessage("Required !");
+                setInvalid( true );
+                setErrorMessage( "Required !" );
             }
             else
             {
-                setInvalid(false);
-                setErrorMessage(StringUtils.EMPTY);
+                setInvalid( false );
+                setErrorMessage( StringUtils.EMPTY );
             }
             return;
         }
-        ValidationResult result = TypeFieldValidator.INSTANCE.validate(this);
-        if (result.isSuccess() && getValidator() != null)
+        ValidationResult result = TypeFieldValidator.INSTANCE.validate( this );
+        if ( result.isSuccess() && getValidator() != null )
         {
-            result = getValidator().validate(this);
+            result = getValidator().validate( this );
         }
-        if (result.isSuccess())
+        if ( result.isSuccess() )
         {
-            setInvalid(false);
-            setErrorMessage(StringUtils.EMPTY);
+            setInvalid( false );
+            setErrorMessage( StringUtils.EMPTY );
         }
         else
         {
-            setInvalid(true);
-            setErrorMessage(result.getErrorMessage());
+            setInvalid( true );
+            setErrorMessage( result.getErrorMessage() );
         }
     }
 }

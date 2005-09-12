@@ -33,60 +33,58 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve extends AbstractLogEnabled implements Valve
+public class RenderPageValve
+    extends AbstractLogEnabled
+    implements Valve
 {
     /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
-                ModuleManager.ROLE);
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
 
-        mm.runModule('/' + data.getPage().getPackageAlias() + "/page"
-                + data.getPage().getPath(), data, data.getRequestContext());
+        mm.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data, data
+            .getRequestContext() );
 
-        if (data.isStopped())
+        if ( data.isStopped() )
         {
             return;
         }
 
-        Page page = (Page) data.getRequestContext().get(Page.NAME);
-        if (page == null)
+        Page page = (Page) data.getRequestContext().get( Page.NAME );
+        if ( page == null )
         {
             page = Page.DEFAULT;
         }
-        data.setOutputContentType("text/html");
+        data.setOutputContentType( "text/html" );
         Layout layout = page.getLayout();
-        if (layout == null)
+        if ( layout == null )
         {
             Theme theme = null;
-            ThemeManager themes = (ThemeManager) data.getServiceManager()
-                    .lookup(ThemeManager.ROLE);
-            if (StringUtils.isEmpty(data.getThemeName()))
+            ThemeManager themes = (ThemeManager) data.getServiceManager().lookup( ThemeManager.ROLE );
+            if ( StringUtils.isEmpty( data.getThemeName() ) )
             {
-                data.setThemeName(themes.getDefaultThemeName());
+                data.setThemeName( themes.getDefaultThemeName() );
             }
-            theme = themes.getTheme(data.getThemeName());
-            if (theme == null)
+            theme = themes.getTheme( data.getThemeName() );
+            if ( theme == null )
             {
                 theme = themes.getDefaultTheme();
             }
-            if (theme == null)
+            if ( theme == null )
             {
-                throw new NullPointerException(
-                        "Theme is not property configured");
+                throw new NullPointerException( "Theme is not property configured" );
             }
-            layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
+            layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
         }
-        String themeBaseUrl = data.getApplicationBaseUrl() + "/themes/"
-                + data.getThemeName();
-        data.getRequestContext().put("themeBase", themeBaseUrl);
-        layout.render(data, page);
-        context.invokeNextValve(data);
+        String themeBaseUrl = data.getApplicationBaseUrl() + "/themes/" + data.getThemeName();
+        data.getRequestContext().put( "themeBase", themeBaseUrl );
+        layout.render( data, page );
+        context.invokeNextValve( data );
         data.getOutput().flush();
     }
 }

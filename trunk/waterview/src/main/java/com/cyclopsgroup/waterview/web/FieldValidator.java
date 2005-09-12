@@ -29,5 +29,5 @@ public interface FieldValidator
      * @param field Field to validate
      * @return Validation result
      */
-    ValidationResult validate(Field field);
+    ValidationResult validate( Field field );
 }

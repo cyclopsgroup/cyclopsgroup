@@ -32,7 +32,7 @@ public interface NavigatorHome
      * @param page Page path
      * @return Navigator node or null if not found
      */
-    NavigatorNode getNodeByPage(String page);
+    NavigatorNode getNodeByPage( String page );
 
     /**
      * Get root node

@@ -31,7 +31,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SystemLayoutTag extends TagSupport
+public class SystemLayoutTag
+    extends TagSupport
 {
     private String name;
 
@@ -50,29 +51,28 @@ public class SystemLayoutTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
+        requireAttribute( "name" );
+        Page page = (Page) context.getVariable( Page.NAME );
+        if ( page == null )
         {
-            throw new JellyTagException("JellyLayout must be in a page");
+            throw new JellyTagException( "JellyLayout must be in a page" );
         }
-        ThemeManager tm = (ThemeManager) getServiceManager().lookup(
-                ThemeManager.ROLE);
+        ThemeManager tm = (ThemeManager) getServiceManager().lookup( ThemeManager.ROLE );
         String themeName = getRuntimeData().getThemeName();
         Theme theme = tm.getDefaultTheme();
-        if (StringUtils.isNotEmpty(themeName))
+        if ( StringUtils.isNotEmpty( themeName ) )
         {
-            theme = tm.getTheme(themeName);
+            theme = tm.getTheme( themeName );
         }
-        Layout layout = theme.getLayout(getName());
-        if (layout == null)
+        Layout layout = theme.getLayout( getName() );
+        if ( layout == null )
         {
-            throw new NullPointerException("Layout [" + getName()
-                    + "] doesn't exist");
+            throw new NullPointerException( "Layout [" + getName() + "] doesn't exist" );
         }
-        page.setLayout(layout);
+        page.setLayout( layout );
     }
 
     /**
@@ -80,7 +80,7 @@ public class SystemLayoutTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

@@ -39,17 +39,17 @@ public abstract class ValueParser
 
     static
     {
-        booleanTrueValues.add("true");
-        booleanTrueValues.add("yes");
-        booleanTrueValues.add("1");
-        booleanTrueValues.add("t");
-        booleanTrueValues.add("y");
+        booleanTrueValues.add( "true" );
+        booleanTrueValues.add( "yes" );
+        booleanTrueValues.add( "1" );
+        booleanTrueValues.add( "t" );
+        booleanTrueValues.add( "y" );
 
-        booleanFalseValues.add("false");
-        booleanFalseValues.add("no");
-        booleanFalseValues.add("0");
-        booleanFalseValues.add("f");
-        booleanFalseValues.add("n");
+        booleanFalseValues.add( "false" );
+        booleanFalseValues.add( "no" );
+        booleanFalseValues.add( "0" );
+        booleanFalseValues.add( "f" );
+        booleanFalseValues.add( "n" );
     }
 
     /** Default boolean value */
@@ -76,7 +76,7 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @param value
      */
-    public abstract void add(String name, String value);
+    public abstract void add( String name, String value );
 
     /**
      * Internally get string value
@@ -85,7 +85,8 @@ public abstract class ValueParser
      * @return String value of attribute
      * @throws Exception Throw it out
      */
-    protected abstract String doGetValue(String name) throws Exception;
+    protected abstract String doGetValue( String name )
+        throws Exception;
 
     /**
      * Internally get string array value
@@ -94,7 +95,8 @@ public abstract class ValueParser
      * @return String array value of attribute
      * @throws Exception Throw it out
      */
-    protected abstract String[] doGetValues(String name) throws Exception;
+    protected abstract String[] doGetValues( String name )
+        throws Exception;
 
     /**
      * Simple get method
@@ -103,14 +105,15 @@ public abstract class ValueParser
      * @return Attribute value or attribute values
      * @throws Exception Throw it out
      */
-    public Object get(String name) throws Exception
+    public Object get( String name )
+        throws Exception
     {
-        String[] values = doGetValues(name);
-        if (values == null || values.length == 0)
+        String[] values = doGetValues( name );
+        if ( values == null || values.length == 0 )
         {
             return null;
         }
-        if (values.length == 1)
+        if ( values.length == 1 )
         {
             return values[0];
         }
@@ -123,9 +126,9 @@ public abstract class ValueParser
      * @param name Name of attribute
      * @return Boolean value of attribute
      */
-    public boolean getBoolean(String name)
+    public boolean getBoolean( String name )
     {
-        return getBoolean(name, defaultBooleanValue);
+        return getBoolean( name, defaultBooleanValue );
     }
 
     /**
@@ -135,26 +138,26 @@ public abstract class ValueParser
      * @param defaultValue Default value
      * @return Boolean value of attribute
      */
-    public boolean getBoolean(String name, boolean defaultValue)
+    public boolean getBoolean( String name, boolean defaultValue )
     {
         try
         {
-            String ret = doGetValue(name);
-            if (StringUtils.isEmpty(ret))
+            String ret = doGetValue( name );
+            if ( StringUtils.isEmpty( ret ) )
             {
                 return defaultValue;
             }
-            if (booleanTrueValues.contains(ret))
+            if ( booleanTrueValues.contains( ret ) )
             {
                 return true;
             }
-            if (booleanFalseValues.contains(ret))
+            if ( booleanFalseValues.contains( ret ) )
             {
                 return false;
             }
             return defaultValue;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return defaultValue;
         }
@@ -166,9 +169,9 @@ public abstract class ValueParser
      * @param name Attribute name
      * @return Date or null
      */
-    public Date getDate(String name)
+    public Date getDate( String name )
     {
-        return getDate(name, (Date) null);
+        return getDate( name, (Date) null );
     }
 
     /**
@@ -178,18 +181,18 @@ public abstract class ValueParser
      * @param defaultValue Default date value
      * @return Date object
      */
-    public Date getDate(String name, Date defaultValue)
+    public Date getDate( String name, Date defaultValue )
     {
         try
         {
-            Date date = (Date) TypeUtils.convert(doGetValue(name), Date.class);
-            if (date == null)
+            Date date = (Date) TypeUtils.convert( doGetValue( name ), Date.class );
+            if ( date == null )
             {
                 date = defaultValue;
             }
             return date;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return defaultValue;
         }
@@ -203,13 +206,13 @@ public abstract class ValueParser
      * @param format DateFormat
      * @return Date object
      */
-    public Date getDate(String name, Date defaultValue, DateFormat format)
+    public Date getDate( String name, Date defaultValue, DateFormat format )
     {
         try
         {
-            return format.parse(doGetValue(name));
+            return format.parse( doGetValue( name ) );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return defaultValue;
         }
@@ -222,9 +225,9 @@ public abstract class ValueParser
      * @param format Date format
      * @return Date object
      */
-    public Date getDate(String name, DateFormat format)
+    public Date getDate( String name, DateFormat format )
     {
-        return getDate(name, null, format);
+        return getDate( name, null, format );
     }
 
     /**
@@ -233,9 +236,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Double value of attribute
      */
-    public double getDouble(String name)
+    public double getDouble( String name )
     {
-        return getDouble(name, defaultDoubleValue);
+        return getDouble( name, defaultDoubleValue );
     }
 
     /**
@@ -245,13 +248,13 @@ public abstract class ValueParser
      * @param defaultValue Default value of attribute
      * @return String value of attribute
      */
-    public double getDouble(String name, double defaultValue)
+    public double getDouble( String name, double defaultValue )
     {
         try
         {
-            return Double.parseDouble(doGetValue(name));
+            return Double.parseDouble( doGetValue( name ) );
         }
-        catch (Exception ignored)
+        catch ( Exception ignored )
         {
             return defaultValue;
         }
@@ -263,9 +266,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Float value of attribute
      */
-    public float getFloat(String name)
+    public float getFloat( String name )
     {
-        return getFloat(name, defaultFloatValue);
+        return getFloat( name, defaultFloatValue );
     }
 
     /**
@@ -275,13 +278,13 @@ public abstract class ValueParser
      * @param defaultValue Default value of attribute
      * @return String value of attribute
      */
-    public float getFloat(String name, float defaultValue)
+    public float getFloat( String name, float defaultValue )
     {
         try
         {
-            return Float.parseFloat(doGetValue(name));
+            return Float.parseFloat( doGetValue( name ) );
         }
-        catch (Exception ignored)
+        catch ( Exception ignored )
         {
             return defaultValue;
         }
@@ -293,9 +296,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Int value of attribute
      */
-    public int getInt(String name)
+    public int getInt( String name )
     {
-        return getInt(name, defaultIntValue);
+        return getInt( name, defaultIntValue );
     }
 
     /**
@@ -305,13 +308,13 @@ public abstract class ValueParser
      * @param defaultValue Default value of attribute
      * @return Int value of attribute
      */
-    public int getInt(String name, int defaultValue)
+    public int getInt( String name, int defaultValue )
     {
         try
         {
-            return Integer.parseInt(doGetValue(name));
+            return Integer.parseInt( doGetValue( name ) );
         }
-        catch (Exception ignored)
+        catch ( Exception ignored )
         {
             return defaultValue;
         }
@@ -323,9 +326,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Int value array
      */
-    public int[] getInts(String name)
+    public int[] getInts( String name )
     {
-        return getInts(name, defaultIntValue);
+        return getInts( name, defaultIntValue );
     }
 
     /**
@@ -335,27 +338,27 @@ public abstract class ValueParser
      * @param defaultValue Default int value
      * @return Int array
      */
-    public int[] getInts(String name, int defaultValue)
+    public int[] getInts( String name, int defaultValue )
     {
         try
         {
-            String[] values = doGetValues(name);
+            String[] values = doGetValues( name );
             int[] ret = new int[values.length];
-            for (int i = 0; i < values.length; i++)
+            for ( int i = 0; i < values.length; i++ )
             {
                 String value = values[i];
                 try
                 {
-                    ret[i] = Integer.parseInt(value);
+                    ret[i] = Integer.parseInt( value );
                 }
-                catch (Exception ignored)
+                catch ( Exception ignored )
                 {
                     ret[i] = defaultValue;
                 }
             }
             return ret;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return ArrayUtils.EMPTY_INT_ARRAY;
         }
@@ -367,9 +370,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Long value of attribute
      */
-    public long getLong(String name)
+    public long getLong( String name )
     {
-        return getLong(name, defaultLongValue);
+        return getLong( name, defaultLongValue );
     }
 
     /**
@@ -379,13 +382,13 @@ public abstract class ValueParser
      * @param defaultValue Default value of attribute
      * @return Int value of attribute
      */
-    public long getLong(String name, long defaultValue)
+    public long getLong( String name, long defaultValue )
     {
         try
         {
-            return Long.parseLong(doGetValue(name));
+            return Long.parseLong( doGetValue( name ) );
         }
-        catch (Exception ignored)
+        catch ( Exception ignored )
         {
             return defaultValue;
         }
@@ -397,9 +400,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return Long value
      */
-    public long[] getLongs(String name)
+    public long[] getLongs( String name )
     {
-        return getLongs(name, defaultLongValue);
+        return getLongs( name, defaultLongValue );
     }
 
     /**
@@ -409,27 +412,27 @@ public abstract class ValueParser
      * @param defaultValue Default long value
      * @return Long array
      */
-    public long[] getLongs(String name, long defaultValue)
+    public long[] getLongs( String name, long defaultValue )
     {
         try
         {
-            String[] values = doGetValues(name);
+            String[] values = doGetValues( name );
             long[] ret = new long[values.length];
-            for (int i = 0; i < values.length; i++)
+            for ( int i = 0; i < values.length; i++ )
             {
                 String value = values[i];
                 try
                 {
-                    ret[i] = Long.parseLong(value);
+                    ret[i] = Long.parseLong( value );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
                     ret[i] = defaultValue;
                 }
             }
             return ret;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return ArrayUtils.EMPTY_LONG_ARRAY;
         }
@@ -441,9 +444,9 @@ public abstract class ValueParser
      * @param name Name of the attribute
      * @return String value of attribute
      */
-    public String getString(String name)
+    public String getString( String name )
     {
-        return getString(name, defaultStringValue);
+        return getString( name, defaultStringValue );
     }
 
     /**
@@ -453,14 +456,14 @@ public abstract class ValueParser
      * @param defaultValue Default value of attribute
      * @return String value of attribute
      */
-    public String getString(String name, String defaultValue)
+    public String getString( String name, String defaultValue )
     {
         try
         {
-            String ret = doGetValue(name);
+            String ret = doGetValue( name );
             return ret == null ? defaultValue : ret;
         }
-        catch (Exception ignored)
+        catch ( Exception ignored )
         {
             return defaultValue;
         }
@@ -472,9 +475,9 @@ public abstract class ValueParser
      * @param name Attribute name
      * @return String array
      */
-    public String[] getStrings(String name)
+    public String[] getStrings( String name )
     {
-        return getStrings(name, defaultStringValue);
+        return getStrings( name, defaultStringValue );
     }
 
     /**
@@ -484,22 +487,22 @@ public abstract class ValueParser
      * @param defaultValue Default string value
      * @return String array
      */
-    public String[] getStrings(String name, String defaultValue)
+    public String[] getStrings( String name, String defaultValue )
     {
         try
         {
-            String[] values = doGetValues(name);
-            for (int i = 0; i < values.length; i++)
+            String[] values = doGetValues( name );
+            for ( int i = 0; i < values.length; i++ )
             {
                 String value = values[i];
-                if (value == null)
+                if ( value == null )
                 {
                     values[i] = defaultValue;
                 }
             }
             return values;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
@@ -510,7 +513,7 @@ public abstract class ValueParser
      *
      * @param name Name of the attribute
      */
-    public abstract void remove(String name);
+    public abstract void remove( String name );
 
     /**
      * Set a value
@@ -518,12 +521,12 @@ public abstract class ValueParser
      * @param name Name of attribute
      * @param value Value of attribute
      */
-    public void set(String name, String value)
+    public void set( String name, String value )
     {
-        remove(name);
-        if (value != null)
+        remove( name );
+        if ( value != null )
         {
-            add(name, value);
+            add( name, value );
         }
     }
 }

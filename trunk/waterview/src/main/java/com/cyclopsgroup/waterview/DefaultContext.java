@@ -27,7 +27,8 @@ import org.apache.commons.collections.iterators.IteratorChain;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class DefaultContext implements Context
+public class DefaultContext
+    implements Context
 {
     private Map content = new HashMap();
 
@@ -38,9 +39,9 @@ public class DefaultContext implements Context
      * 
      * @param content Content of this context
      */
-    public DefaultContext(Map content)
+    public DefaultContext( Map content )
     {
-        this(content, null);
+        this( content, null );
     }
 
     /**
@@ -49,7 +50,7 @@ public class DefaultContext implements Context
      * @param content Content of this context
      * @param parent Parent context
      */
-    public DefaultContext(Map content, Context parent)
+    public DefaultContext( Map content, Context parent )
     {
         this.content = content;
         this.parent = parent;
@@ -59,12 +60,12 @@ public class DefaultContext implements Context
      * Overwrite or implement method get()
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        Object ret = content.get(name);
-        if (ret == null && parent != null)
+        Object ret = content.get( name );
+        if ( ret == null && parent != null )
         {
-            ret = parent.get(name);
+            ret = parent.get( name );
         }
         return ret;
     }
@@ -85,26 +86,26 @@ public class DefaultContext implements Context
      */
     public Iterator keys()
     {
-        if (parent == null)
+        if ( parent == null )
         {
             return content.keySet().iterator();
         }
-        return new IteratorChain(parent.keys(), content.keySet().iterator());
+        return new IteratorChain( parent.keys(), content.keySet().iterator() );
     }
 
     /**
      * Overwrite or implement method put()
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object variable)
+    public void put( String name, Object variable )
     {
-        if (variable == null)
+        if ( variable == null )
         {
-            content.remove(name);
+            content.remove( name );
         }
         else
         {
-            content.put(name, variable);
+            content.put( name, variable );
         }
     }
 
@@ -112,9 +113,9 @@ public class DefaultContext implements Context
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        content.remove(name);
+        content.remove( name );
     }
 
     /**
@@ -124,13 +125,13 @@ public class DefaultContext implements Context
      */
     public String toString()
     {
-        StringBuffer sb = new StringBuffer('{');
-        sb.append(content.toString());
-        if (parent != null)
+        StringBuffer sb = new StringBuffer( '{' );
+        sb.append( content.toString() );
+        if ( parent != null )
         {
-            sb.append(',').append(parent.toString());
+            sb.append( ',' ).append( parent.toString() );
         }
-        sb.append('}');
+        sb.append( '}' );
         return sb.toString();
     }
 }

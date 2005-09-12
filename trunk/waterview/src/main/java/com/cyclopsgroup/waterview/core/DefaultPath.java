@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.Path;
  *
  * Internal implementation of path
  */
-class DefaultPath implements Path
+class DefaultPath
+    implements Path
 {
     private String extension = StringUtils.EMPTY;
 
@@ -46,9 +47,9 @@ class DefaultPath implements Path
      * @param packageAlias Package alias
      * @param path Relative path without package alias
      */
-    DefaultPath(String packageName, String packageAlias, String path)
+    DefaultPath( String packageName, String packageAlias, String path )
     {
-        if (path.indexOf(0) == '/')
+        if ( path.indexOf( 0 ) == '/' )
         {
             path = '/' + path;
         }
@@ -57,11 +58,11 @@ class DefaultPath implements Path
         this.path = path;
 
         pathWithoutExtension = path;
-        int lastDot = StringUtils.lastIndexOf(path, '.');
-        if (lastDot > -1)
+        int lastDot = StringUtils.lastIndexOf( path, '.' );
+        if ( lastDot > -1 )
         {
-            pathWithoutExtension = path.substring(0, lastDot);
-            extension = path.substring(lastDot);
+            pathWithoutExtension = path.substring( 0, lastDot );
+            extension = path.substring( lastDot );
         }
 
         fullPath = '/' + packageAlias + path;

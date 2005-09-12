@@ -38,8 +38,9 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DeterminePageValve extends AbstractLogEnabled implements
-        Configurable, Valve
+public class DeterminePageValve
+    extends AbstractLogEnabled
+    implements Configurable, Valve
 {
 
     private static final Page EMPTY_PAGE = new Page();
@@ -51,12 +52,13 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        String page = conf.getChild("default-page").getValue(null);
-        if (page != null)
+        String page = conf.getChild( "default-page" ).getValue( null );
+        if ( page != null )
         {
-            setDefaultPage(page);
+            setDefaultPage( page );
         }
     }
 
@@ -75,74 +77,70 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData runtime, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData runtime, PipelineContext context )
+        throws Exception
     {
-        Page page = (Page) runtime.getRequestContext().get(Page.NAME);
-        if (page != null)
+        Page page = (Page) runtime.getRequestContext().get( Page.NAME );
+        if ( page != null )
         {
-            context.invokeNextValve(runtime);
+            context.invokeNextValve( runtime );
             return;
         }
         Path pagePath = runtime.getPage();
-        if (pagePath == null)
+        if ( pagePath == null )
         {
-            throw new NullPointerException("Path is not ready yet");
+            throw new NullPointerException( "Path is not ready yet" );
         }
-        synchronized (this)
+        synchronized ( this )
         {
-            CacheManager cacheManager = (CacheManager) runtime
-                    .getServiceManager().lookup(CacheManager.ROLE);
-            page = (Page) cacheManager.get(this, pagePath.getFullPath());
-            if (page == null)
+            CacheManager cacheManager = (CacheManager) runtime.getServiceManager().lookup( CacheManager.ROLE );
+            page = (Page) cacheManager.get( this, pagePath.getFullPath() );
+            if ( page == null )
             {
-                JellyEngine je = (JellyEngine) runtime.getServiceManager()
-                        .lookup(JellyEngine.ROLE);
+                JellyEngine je = (JellyEngine) runtime.getServiceManager().lookup( JellyEngine.ROLE );
                 //ModuleChain moduleChain = new ModuleChain();
                 String fullPath = "/page" + pagePath.getPath();
                 //moduleChain.addModule(mm.getModule(fullPath));
 
-                Script pageScript = je.getScript(pagePath.getPackage(),
-                        fullPath, null);
-                if (pageScript != null)
+                Script pageScript = je.getScript( pagePath.getPackage(), fullPath, null );
+                if ( pageScript != null )
                 {
-                    page = loadPage(pageScript, je);
+                    page = loadPage( pageScript, je );
                 }
-                String[] parts = StringUtils.split(pagePath.getPath(), '/');
-                for (int j = parts.length - 1; j >= 0; j--)
+                String[] parts = StringUtils.split( pagePath.getPath(), '/' );
+                for ( int j = parts.length - 1; j >= 0; j-- )
                 {
                     parts[j] = "Default";
                     String[] newParts = new String[j + 1];
-                    System.arraycopy(parts, 0, newParts, 0, j + 1);
-                    String defaultPath = StringUtils.join(newParts, '/');
+                    System.arraycopy( parts, 0, newParts, 0, j + 1 );
+                    String defaultPath = StringUtils.join( newParts, '/' );
                     fullPath = "/page/" + defaultPath;
-                    pageScript = je.getScript(pagePath.getPackageAlias(),
-                            fullPath, null);
-                    if (pageScript != null)
+                    pageScript = je.getScript( pagePath.getPackageAlias(), fullPath, null );
+                    if ( pageScript != null )
                     {
-                        page = loadPage(pageScript, je);
+                        page = loadPage( pageScript, je );
                         //moduleChain.addModule(mm.getModule(model.getPackage(), fullPath));
                         break;
                     }
                 }
-                if (page == null)
+                if ( page == null )
                 {
                     page = EMPTY_PAGE;
                 }
                 //page.setModule(moduleChain);
-                cacheManager.put(this, pagePath.getFullPath(), page);
+                cacheManager.put( this, pagePath.getFullPath(), page );
             }
         }
-        runtime.getRequestContext().put(Page.NAME, page);
-        context.invokeNextValve(runtime);
+        runtime.getRequestContext().put( Page.NAME, page );
+        context.invokeNextValve( runtime );
     }
 
-    private Page loadPage(Script script, JellyEngine jellyEngine)
-            throws JellyTagException
+    private Page loadPage( Script script, JellyEngine jellyEngine )
+        throws JellyTagException
     {
-        JellyContext jc = new JellyContext(jellyEngine.getGlobalContext());
-        script.run(jc, XMLOutput.createDummyXMLOutput());
-        return (Page) jc.getVariable(Page.NAME);
+        JellyContext jc = new JellyContext( jellyEngine.getGlobalContext() );
+        script.run( jc, XMLOutput.createDummyXMLOutput() );
+        return (Page) jc.getVariable( Page.NAME );
     }
 
     /**
@@ -150,7 +148,7 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      *
      * @param defaultPage The defaultPage to set.
      */
-    public void setDefaultPage(String defaultPage)
+    public void setDefaultPage( String defaultPage )
     {
         this.defaultPage = defaultPage;
     }

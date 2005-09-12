@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.RequestValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRequestValueParser extends RequestValueParser
+public class ServletRequestValueParser
+    extends RequestValueParser
 {
     private HttpServletRequest httpServletRequest;
 
@@ -36,7 +37,7 @@ public class ServletRequestValueParser extends RequestValueParser
      * 
      * @param request Servlet request
      */
-    public ServletRequestValueParser(HttpServletRequest request)
+    public ServletRequestValueParser( HttpServletRequest request )
     {
         httpServletRequest = request;
     }
@@ -46,7 +47,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add(String name, String value)
+    public void add( String name, String value )
     {
         throw new UnsupportedOperationException();
     }
@@ -56,9 +57,10 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue(String name) throws Exception
+    protected String doGetValue( String name )
+        throws Exception
     {
-        return httpServletRequest.getParameter(name);
+        return httpServletRequest.getParameter( name );
     }
 
     /**
@@ -66,9 +68,10 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues(String name) throws Exception
+    protected String[] doGetValues( String name )
+        throws Exception
     {
-        return httpServletRequest.getParameterValues(name);
+        return httpServletRequest.getParameterValues( name );
     }
 
     /**
@@ -76,7 +79,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
      */
-    public FileItem getFileItem(String name)
+    public FileItem getFileItem( String name )
     {
         return null;
     }
@@ -86,7 +89,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
      */
-    public FileItem[] getFileItems(String name)
+    public FileItem[] getFileItems( String name )
     {
         return EMPTY_FILEITEM_ARRAY;
     }
@@ -96,7 +99,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
         throw new UnsupportedOperationException();
     }

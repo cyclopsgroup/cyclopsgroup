@@ -34,8 +34,9 @@ import org.apache.avalon.framework.service.Serviceable;
  * 
  * A group of components
  */
-public class ComponentGroup extends AbstractLogEnabled implements Configurable,
-        Initializable, Serviceable
+public class ComponentGroup
+    extends AbstractLogEnabled
+    implements Configurable, Initializable, Serviceable
 {
     private List roles = new ArrayList();
 
@@ -46,13 +47,14 @@ public class ComponentGroup extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        Configuration[] components = conf.getChildren("component");
-        for (int i = 0; i < components.length; i++)
+        Configuration[] components = conf.getChildren( "component" );
+        for ( int i = 0; i < components.length; i++ )
         {
             Configuration componentConf = components[i];
-            roles.add(componentConf.getAttribute("role"));
+            roles.add( componentConf.getAttribute( "role" ) );
         }
     }
 
@@ -61,13 +63,14 @@ public class ComponentGroup extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
-        for (Iterator i = roles.iterator(); i.hasNext();)
+        for ( Iterator i = roles.iterator(); i.hasNext(); )
         {
             String role = (String) i.next();
-            Object component = serviceManager.lookup(role);
-            getLogger().debug("Component " + component + " is loaded");
+            Object component = serviceManager.lookup( role );
+            getLogger().debug( "Component " + component + " is loaded" );
         }
     }
 
@@ -76,7 +79,8 @@ public class ComponentGroup extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
     }

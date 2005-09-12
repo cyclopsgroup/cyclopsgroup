@@ -26,8 +26,9 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HashtableCacheManager extends AbstractMapCacheManager implements
-        CacheManager
+public class HashtableCacheManager
+    extends AbstractMapCacheManager
+    implements CacheManager
 {
     private Hashtable content = new Hashtable();
 

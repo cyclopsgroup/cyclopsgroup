@@ -41,8 +41,9 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * JSP engine
  */
-public class JspEngine extends AbstractLogEnabled implements Serviceable,
-        DynaViewFactory
+public class JspEngine
+    extends AbstractLogEnabled
+    implements Serviceable, DynaViewFactory
 {
     /** Role name of this component */
     public static final String ROLE = JspEngine.class.getName();
@@ -52,15 +53,16 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
      *
      * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public View createView(Path path) throws Exception
+    public View createView( Path path )
+        throws Exception
     {
         String p = path.getPath();
-        if (StringUtils.isNotEmpty(path.getPackage()))
+        if ( StringUtils.isNotEmpty( path.getPackage() ) )
         {
-            p = '/' + StringUtils.replace(path.getPackage(), ".", "/") + p;
+            p = '/' + StringUtils.replace( path.getPackage(), ".", "/" ) + p;
         }
         p = "/templates" + p;
-        return new JspView(p, path.getFullPath());
+        return new JspView( p, path.getFullPath() );
     }
 
     /**
@@ -69,46 +71,41 @@ public class JspEngine extends AbstractLogEnabled implements Serviceable,
      * @param viewContext View context
      * @throws Exception Throw it out
      */
-    public void renderJsp(String path, RuntimeData data, Context viewContext)
-            throws Exception
+    public void renderJsp( String path, RuntimeData data, Context viewContext )
+        throws Exception
     {
-        HttpServletRequest request = (HttpServletRequest) data
-                .getRequestContext().get("request");
-        HttpServletResponse response = (HttpServletResponse) data
-                .getRequestContext().get("response");
-        ServletContext servletContext = (ServletContext) data
-                .getRequestContext().get("servletContext");
-        if (request == null || response == null || servletContext == null)
+        HttpServletRequest request = (HttpServletRequest) data.getRequestContext().get( "request" );
+        HttpServletResponse response = (HttpServletResponse) data.getRequestContext().get( "response" );
+        ServletContext servletContext = (ServletContext) data.getRequestContext().get( "servletContext" );
+        if ( request == null || response == null || servletContext == null )
         {
             data.getOutput().println(
-                    "Jsp " + path + " is not rendered correctly with request "
-                            + request + ", response " + response + ", context "
-                            + servletContext);
+                                      "Jsp " + path + " is not rendered correctly with request " + request
+                                          + ", response " + response + ", context " + servletContext );
         }
-        request.setAttribute("viewContext", viewContext);
-        RequestDispatcher dispatcher = servletContext
-                .getRequestDispatcher(path);
-        File jspFile = new File(servletContext.getRealPath(path));
-        if (dispatcher == null || !jspFile.isFile())
+        request.setAttribute( "viewContext", viewContext );
+        RequestDispatcher dispatcher = servletContext.getRequestDispatcher( path );
+        File jspFile = new File( servletContext.getRealPath( path ) );
+        if ( dispatcher == null || !jspFile.isFile() )
         {
-            data.getOutput().println("Jsp " + path + " doesn't exist");
+            data.getOutput().println( "Jsp " + path + " doesn't exist" );
         }
         else
         {
-            dispatcher.include(request, response);
+            dispatcher.include( request, response );
             response.getWriter().flush();
         }
-        request.removeAttribute("viewContext");
+        request.removeAttribute( "viewContext" );
     }
 
     /**
      * Overwrite or implement method service()
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        ModuleManager moduleManager = (ModuleManager) serviceManager
-                .lookup(ModuleManager.ROLE);
-        moduleManager.registerDynaViewFactory(".+\\.jsp", this);
+        ModuleManager moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        moduleManager.registerDynaViewFactory( ".+\\.jsp", this );
     }
 }

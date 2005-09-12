@@ -48,7 +48,7 @@ public interface Theme
      * @param layoutName Layout tname
      * @return Layout Layout object
      */
-    Layout getLayout(String layoutName);
+    Layout getLayout( String layoutName );
 
     /**
      * Get name of this theme

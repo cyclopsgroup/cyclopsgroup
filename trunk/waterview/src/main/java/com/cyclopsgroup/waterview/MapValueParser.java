@@ -30,7 +30,8 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  *
  * Map based value parser
  */
-public class MapValueParser extends ValueParser
+public class MapValueParser
+    extends ValueParser
 {
     private Map map;
 
@@ -39,7 +40,7 @@ public class MapValueParser extends ValueParser
      *
      * @param map Given map content
      */
-    public MapValueParser(Map map)
+    public MapValueParser( Map map )
     {
         this.map = map;
     }
@@ -49,9 +50,9 @@ public class MapValueParser extends ValueParser
      *
      * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add(String name, String value)
+    public void add( String name, String value )
     {
-        getMap().put(name, value);
+        getMap().put( name, value );
     }
 
     /**
@@ -59,21 +60,22 @@ public class MapValueParser extends ValueParser
      *
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue(String name) throws Exception
+    protected String doGetValue( String name )
+        throws Exception
     {
-        Object object = getMap().get(name);
-        if (object == null)
+        Object object = getMap().get( name );
+        if ( object == null )
         {
             return null;
         }
-        if (!TypeUtils.isIteratable(object))
+        if ( !TypeUtils.isIteratable( object ) )
         {
-            return TypeUtils.toString(object);
+            return TypeUtils.toString( object );
         }
-        Iterator it = TypeUtils.iterate(object);
-        if (it.hasNext())
+        Iterator it = TypeUtils.iterate( object );
+        if ( it.hasNext() )
         {
-            return TypeUtils.toString(it.next());
+            return TypeUtils.toString( it.next() );
         }
         return null;
     }
@@ -83,20 +85,21 @@ public class MapValueParser extends ValueParser
      *
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues(String name) throws Exception
+    protected String[] doGetValues( String name )
+        throws Exception
     {
-        Object object = getMap().get(name);
-        if (object == null)
+        Object object = getMap().get( name );
+        if ( object == null )
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         ArrayList values = new ArrayList();
-        CollectionUtils.addAll(values, TypeUtils.iterate(object));
+        CollectionUtils.addAll( values, TypeUtils.iterate( object ) );
         String[] ret = new String[values.size()];
-        for (int i = 0; i < ret.length; i++)
+        for ( int i = 0; i < ret.length; i++ )
         {
-            Object value = values.get(i);
-            ret[i] = TypeUtils.toString(value);
+            Object value = values.get( i );
+            ret[i] = TypeUtils.toString( value );
         }
         return ret;
     }
@@ -116,8 +119,8 @@ public class MapValueParser extends ValueParser
      *
      * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        getMap().remove(name);
+        getMap().remove( name );
     }
 }

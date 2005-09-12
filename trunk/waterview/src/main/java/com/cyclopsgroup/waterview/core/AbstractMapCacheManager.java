@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractMapCacheManager implements CacheManager
+public abstract class AbstractMapCacheManager
+    implements CacheManager
 {
 
     /**
@@ -41,11 +42,10 @@ public abstract class AbstractMapCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#contains(java.lang.Object, java.lang.String)
      */
-    public boolean contains(Object host, String key)
+    public boolean contains( Object host, String key )
     {
-        String name = key + '@' + host.getClass().getName() + '/'
-                + host.hashCode();
-        return getContent().containsKey(name);
+        String name = key + '@' + host.getClass().getName() + '/' + host.hashCode();
+        return getContent().containsKey( name );
     }
 
     /**
@@ -53,11 +53,10 @@ public abstract class AbstractMapCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#get(java.lang.Object, java.lang.String)
      */
-    public Object get(Object host, String key)
+    public Object get( Object host, String key )
     {
-        String name = key + '@' + host.getClass().getName() + '/'
-                + host.hashCode();
-        return getContent().get(name);
+        String name = key + '@' + host.getClass().getName() + '/' + host.hashCode();
+        return getContent().get( name );
     }
 
     /**
@@ -70,10 +69,9 @@ public abstract class AbstractMapCacheManager implements CacheManager
      *
      * @see com.cyclopsgroup.waterview.spi.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
-    public void put(Object host, String key, Object value)
+    public void put( Object host, String key, Object value )
     {
-        String name = key + '@' + host.getClass().getName() + '/'
-                + host.hashCode();
-        getContent().put(name, value);
+        String name = key + '@' + host.getClass().getName() + '/' + host.hashCode();
+        getContent().put( name, value );
     }
 }

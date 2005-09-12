@@ -23,14 +23,16 @@ import org.codehaus.plexus.PlexusTestCase;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultModuleManagerTest extends PlexusTestCase
+public class DefaultModuleManagerTest
+    extends PlexusTestCase
 {
     /**
      * Test getting module
      *
      * @throws Exception
      */
-    public void testGetModule() throws Exception
+    public void testGetModule()
+        throws Exception
     {
         //do nothing
     }

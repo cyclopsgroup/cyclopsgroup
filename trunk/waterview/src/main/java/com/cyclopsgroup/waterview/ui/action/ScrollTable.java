@@ -17,30 +17,29 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Scroll the table
  */
-public class ScrollTable implements Action
+public class ScrollTable
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, ActionContext context)
-            throws Exception
+    public void execute( RuntimeData data, ActionContext context )
+        throws Exception
     {
-        String tableId = data.getParams()
-                .getString("table_id", null);
-        if (tableId == null)
+        String tableId = data.getParams().getString( "table_id", null );
+        if ( tableId == null )
         {
-            throw new IllegalArgumentException("table_id is missing");
+            throw new IllegalArgumentException( "table_id is missing" );
         }
-        Table table = (Table) data.getSessionContext().get(tableId);
-        if (table != null)
+        Table table = (Table) data.getSessionContext().get( tableId );
+        if ( table != null )
         {
-            int pageIndex = data.getParams()
-                    .getInt("page_index", -1);
-            if (pageIndex != -1)
+            int pageIndex = data.getParams().getInt( "page_index", -1 );
+            if ( pageIndex != -1 )
             {
-                table.setPageIndex(pageIndex);
+                table.setPageIndex( pageIndex );
             }
         }
     }

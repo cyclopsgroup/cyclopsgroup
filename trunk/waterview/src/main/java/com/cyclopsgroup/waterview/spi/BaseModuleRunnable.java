@@ -35,7 +35,7 @@ public abstract class BaseModuleRunnable
      *
      * @param modulePath Path for module
      */
-    protected BaseModuleRunnable(String modulePath)
+    protected BaseModuleRunnable( String modulePath )
     {
         this.modulePath = modulePath;
     }
@@ -57,14 +57,13 @@ public abstract class BaseModuleRunnable
      * @param context Context
      * @throws Exception Simply throw it out
      */
-    protected void runModule(RuntimeData data, Context context)
-            throws Exception
+    protected void runModule( RuntimeData data, Context context )
+        throws Exception
     {
-        if (StringUtils.isNotEmpty(getModulePath()))
+        if ( StringUtils.isNotEmpty( getModulePath() ) )
         {
-            ModuleManager moduleManager = (ModuleManager) data
-                    .getServiceManager().lookup(ModuleManager.ROLE);
-            moduleManager.runModule(modulePath, data, context);
+            ModuleManager moduleManager = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
+            moduleManager.runModule( modulePath, data, context );
         }
     }
 }

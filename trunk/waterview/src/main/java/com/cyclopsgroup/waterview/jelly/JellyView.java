@@ -30,7 +30,9 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyView extends BaseModuleRunnable implements View
+public class JellyView
+    extends BaseModuleRunnable
+    implements View
 {
 
     private Script script;
@@ -41,9 +43,9 @@ public class JellyView extends BaseModuleRunnable implements View
      * @param script Script object
      * @param modulePath Path of module
      */
-    public JellyView(Script script, String modulePath)
+    public JellyView( Script script, String modulePath )
     {
-        super(modulePath);
+        super( modulePath );
         this.script = script;
     }
 
@@ -51,23 +53,23 @@ public class JellyView extends BaseModuleRunnable implements View
      * Overwrite or implement method render()
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void render(RuntimeData data, Context viewContext) throws Exception
+    public void render( RuntimeData data, Context viewContext )
+        throws Exception
     {
-        runModule(data, viewContext);
+        runModule( data, viewContext );
 
-        JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        JellyContext jellyContext = je.createJellyContext(viewContext);
-        XMLOutput output = XMLOutput.createXMLOutput(data.getOutput());
+        JellyEngine je = (JellyEngine) data.getServiceManager().lookup( JellyEngine.ROLE );
+        JellyContext jellyContext = je.createJellyContext( viewContext );
+        XMLOutput output = XMLOutput.createXMLOutput( data.getOutput() );
         try
         {
-            script.run(jellyContext, output);
+            script.run( jellyContext, output );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            data.getOutput().print("<div>");
-            e.printStackTrace(data.getOutput());
-            data.getOutput().println("</div>");
+            data.getOutput().print( "<div>" );
+            e.printStackTrace( data.getOutput() );
+            data.getOutput().println( "</div>" );
         }
         finally
         {

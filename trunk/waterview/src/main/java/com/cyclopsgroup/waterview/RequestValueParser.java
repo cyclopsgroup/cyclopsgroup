@@ -23,7 +23,8 @@ import org.apache.commons.fileupload.FileItem;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class RequestValueParser extends ValueParser
+public abstract class RequestValueParser
+    extends ValueParser
 {
     /**
      * Comment for <code>EMPTY_FILEITEM_ARRAY</code>
@@ -39,7 +40,7 @@ public abstract class RequestValueParser extends ValueParser
      * @param name Name of field
      * @return FileItem object
      */
-    public abstract FileItem getFileItem(String name);
+    public abstract FileItem getFileItem( String name );
 
     /**
      * Get array of file items
@@ -47,5 +48,5 @@ public abstract class RequestValueParser extends ValueParser
      * @param name Name of variable
      * @return File item array FileItem array
      */
-    public abstract FileItem[] getFileItems(String name);
+    public abstract FileItem[] getFileItems( String name );
 }

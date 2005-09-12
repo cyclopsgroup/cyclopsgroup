@@ -33,45 +33,45 @@ import com.cyclopsgroup.waterview.web.TreeUtils;
  * 
  * Module for default layout
  */
-public class DefaultLayout extends BaseServiceable implements Module
+public class DefaultLayout
+    extends BaseServiceable
+    implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
-        RuntimeNavigatorNode root = RuntimeNavigatorNode.getRoot(data);
+        RuntimeNavigatorNode root = RuntimeNavigatorNode.getRoot( data );
         TreeNode[] tabNodes = root.getChildrenNodes();
-        context.put("tabNodes", tabNodes);
+        context.put( "tabNodes", tabNodes );
 
-        NavigatorHome navigator = (NavigatorHome) lookupComponent(NavigatorHome.ROLE);
-        context.put("currentNavigatorNode", navigator.getNodeByPage(data
-                .getPage().getFullPath()));
+        NavigatorHome navigator = (NavigatorHome) lookupComponent( NavigatorHome.ROLE );
+        context.put( "currentNavigatorNode", navigator.getNodeByPage( data.getPage().getFullPath() ) );
 
         RuntimeNavigatorNode selectedNode = null;
-        for (int i = 0; i < tabNodes.length; i++)
+        for ( int i = 0; i < tabNodes.length; i++ )
         {
             RuntimeNavigatorNode runtimeNode = (RuntimeNavigatorNode) tabNodes[i];
             NavigatorNode node = (NavigatorNode) runtimeNode.getContent();
-            if (!StringUtils.equals(node.getPage(), data.getPage()
-                    .getFullPath()))
+            if ( !StringUtils.equals( node.getPage(), data.getPage().getFullPath() ) )
             {
-                NavigatorNode n = navigator.getNodeByPage(data.getPage()
-                        .getFullPath());
-                if (n != null && !n.isParent(node.getPage()))
+                NavigatorNode n = navigator.getNodeByPage( data.getPage().getFullPath() );
+                if ( n != null && !n.isParent( node.getPage() ) )
                 {
                     continue;
                 }
             }
             selectedNode = runtimeNode;
-            context.put("selectedNode", selectedNode);
+            context.put( "selectedNode", selectedNode );
             break;
         }
-        if (selectedNode != null)
+        if ( selectedNode != null )
         {
-            context.put("navigatorRows", TreeUtils.flattenTree(selectedNode));
+            context.put( "navigatorRows", TreeUtils.flattenTree( selectedNode ) );
         }
     }
 }

@@ -49,9 +49,9 @@ public final class TypeUtils
      * @param type Given destination type
      * @return Converted object
      */
-    public static Object convert(String expression, Class type)
+    public static Object convert( String expression, Class type )
     {
-        return getConvertUtils().convert(expression, type);
+        return getConvertUtils().convert( expression, type );
     }
 
     /**
@@ -61,18 +61,18 @@ public final class TypeUtils
      * @param type Type name
      * @return Converted object
      */
-    public static Object convert(String expression, String type)
+    public static Object convert( String expression, String type )
     {
-        return convert(expression, getType(type));
+        return convert( expression, getType( type ) );
     }
 
     private synchronized static ConvertUtilsBean getConvertUtils()
     {
-        if (convertUtils == null)
+        if ( convertUtils == null )
         {
             convertUtils = new ConvertUtilsBean();
-            convertUtils.register(new DateConverter(), Date.class);
-            convertUtils.register(new StringConverterAdapter(), String.class);
+            convertUtils.register( new DateConverter(), Date.class );
+            convertUtils.register( new StringConverterAdapter(), String.class );
         }
 
         return convertUtils;
@@ -84,10 +84,10 @@ public final class TypeUtils
      * @param type Type
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType(Class type)
+    public static Class getNonePrimitiveType( Class type )
     {
-        Class ret = (Class) getNonePrimitiveTypeMap().get(type);
-        if (ret == null)
+        Class ret = (Class) getNonePrimitiveTypeMap().get( type );
+        if ( ret == null )
         {
             ret = type;
         }
@@ -100,25 +100,25 @@ public final class TypeUtils
      * @param typeName Type name
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType(String typeName)
+    public static Class getNonePrimitiveType( String typeName )
     {
-        Class type = getType(typeName);
-        return getNonePrimitiveType(type);
+        Class type = getType( typeName );
+        return getNonePrimitiveType( type );
     }
 
     private static Map getNonePrimitiveTypeMap()
     {
-        if (nonePrimitiveTypeMap == null)
+        if ( nonePrimitiveTypeMap == null )
         {
             nonePrimitiveTypeMap = new Hashtable();
-            nonePrimitiveTypeMap.put(Boolean.TYPE, Boolean.class);
-            nonePrimitiveTypeMap.put(Byte.TYPE, Byte.class);
-            nonePrimitiveTypeMap.put(Character.TYPE, Character.class);
-            nonePrimitiveTypeMap.put(Short.TYPE, Short.class);
-            nonePrimitiveTypeMap.put(Integer.TYPE, Integer.class);
-            nonePrimitiveTypeMap.put(Long.TYPE, Long.class);
-            nonePrimitiveTypeMap.put(Float.TYPE, Float.class);
-            nonePrimitiveTypeMap.put(Double.TYPE, Double.class);
+            nonePrimitiveTypeMap.put( Boolean.TYPE, Boolean.class );
+            nonePrimitiveTypeMap.put( Byte.TYPE, Byte.class );
+            nonePrimitiveTypeMap.put( Character.TYPE, Character.class );
+            nonePrimitiveTypeMap.put( Short.TYPE, Short.class );
+            nonePrimitiveTypeMap.put( Integer.TYPE, Integer.class );
+            nonePrimitiveTypeMap.put( Long.TYPE, Long.class );
+            nonePrimitiveTypeMap.put( Float.TYPE, Float.class );
+            nonePrimitiveTypeMap.put( Double.TYPE, Double.class );
         }
 
         return nonePrimitiveTypeMap;
@@ -130,19 +130,18 @@ public final class TypeUtils
      * @param typeName Name of type
      * @return Type class
      */
-    public static Class getType(String typeName)
+    public static Class getType( String typeName )
     {
-        Class type = (Class) getTypeMap().get(typeName);
-        if (type == null)
+        Class type = (Class) getTypeMap().get( typeName );
+        if ( type == null )
         {
             try
             {
-                type = Class.forName(typeName);
+                type = Class.forName( typeName );
             }
-            catch (ClassNotFoundException e)
+            catch ( ClassNotFoundException e )
             {
-                throw new IllegalArgumentException(typeName
-                        + " is not a recognizable type");
+                throw new IllegalArgumentException( typeName + " is not a recognizable type" );
             }
         }
         return type;
@@ -150,19 +149,19 @@ public final class TypeUtils
 
     private static synchronized Map getTypeMap()
     {
-        if (typeMap == null)
+        if ( typeMap == null )
         {
             typeMap = new Hashtable();
-            typeMap.put("boolean", Boolean.TYPE);
-            typeMap.put("byte", Byte.TYPE);
-            typeMap.put("char", Character.TYPE);
-            typeMap.put("short", Short.TYPE);
-            typeMap.put("int", Integer.TYPE);
-            typeMap.put("long", Long.TYPE);
-            typeMap.put("float", Float.TYPE);
-            typeMap.put("double", Double.TYPE);
-            typeMap.put("string", String.class);
-            typeMap.put("date", Date.class);
+            typeMap.put( "boolean", Boolean.TYPE );
+            typeMap.put( "byte", Byte.TYPE );
+            typeMap.put( "char", Character.TYPE );
+            typeMap.put( "short", Short.TYPE );
+            typeMap.put( "int", Integer.TYPE );
+            typeMap.put( "long", Long.TYPE );
+            typeMap.put( "float", Float.TYPE );
+            typeMap.put( "double", Double.TYPE );
+            typeMap.put( "string", String.class );
+            typeMap.put( "date", Date.class );
         }
 
         return typeMap;
@@ -174,9 +173,9 @@ public final class TypeUtils
      * @param name Type name 
      * @param type Type class
      */
-    public static void registerType(String name, Class type)
+    public static void registerType( String name, Class type )
     {
-        getTypeMap().put(name, type);
+        getTypeMap().put( name, type );
     }
 
     /**
@@ -185,9 +184,9 @@ public final class TypeUtils
      * @param value Object
      * @return String expression
      */
-    public static String toString(Object value)
+    public static String toString( Object value )
     {
-        return getConvertUtils().convert(value);
+        return getConvertUtils().convert( value );
     }
 
     /**
@@ -196,28 +195,28 @@ public final class TypeUtils
      * @param items Could be any object
      * @return Iteartor object of it
      */
-    public static Iterator iterate(Object items)
+    public static Iterator iterate( Object items )
     {
-        if (items instanceof Collection)
+        if ( items instanceof Collection )
         {
-            return ((Collection) items).iterator();
+            return ( (Collection) items ).iterator();
         }
-        else if (items instanceof Iterator)
+        else if ( items instanceof Iterator )
         {
             return (Iterator) items;
         }
-        else if (items instanceof Enumeration)
+        else if ( items instanceof Enumeration )
         {
-            return new EnumerationIterator((Enumeration) items);
+            return new EnumerationIterator( (Enumeration) items );
         }
-        else if (items instanceof Object[])
+        else if ( items instanceof Object[] )
         {
-            return new ArrayIterator((Object[]) items);
+            return new ArrayIterator( (Object[]) items );
         }
         else
         {
-            List ret = new ArrayList(1);
-            ret.add(items);
+            List ret = new ArrayList( 1 );
+            ret.add( items );
             return ret.iterator();
         }
     }
@@ -228,14 +227,13 @@ public final class TypeUtils
      * @param items Object
      * @return True if it's collection related
      */
-    public static boolean isIteratable(Object items)
+    public static boolean isIteratable( Object items )
     {
-        if (items == null)
+        if ( items == null )
         {
             return false;
         }
-        return (items instanceof Collection) || (items instanceof Iterator)
-                || (items instanceof Enumeration)
-                || (items instanceof Object[]);
+        return ( items instanceof Collection ) || ( items instanceof Iterator ) || ( items instanceof Enumeration )
+            || ( items instanceof Object[] );
     }
 }

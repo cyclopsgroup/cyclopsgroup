@@ -15,14 +15,16 @@ import com.cyclopsgroup.waterview.web.TypeFieldValidator;
  * 
  * Type validator tag
  */
-public class TypeValidatorTag extends BaseValidatorTag
+public class TypeValidatorTag
+    extends BaseValidatorTag
 {
     /**
      * Overwrite or implement method createValidator()
      *
      * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#createValidator()
      */
-    protected FieldValidator createValidator() throws Exception
+    protected FieldValidator createValidator()
+        throws Exception
     {
         return TypeFieldValidator.INSTANCE;
     }

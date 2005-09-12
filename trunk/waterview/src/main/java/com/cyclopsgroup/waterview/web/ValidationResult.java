@@ -26,8 +26,7 @@ import org.apache.commons.lang.StringUtils;
 public final class ValidationResult
 {
     /** Empty array */
-    public static final ValidationResult SUCCESS = new ValidationResult(true,
-            StringUtils.EMPTY);
+    public static final ValidationResult SUCCESS = new ValidationResult( true, StringUtils.EMPTY );
 
     private String errorMessage;
 
@@ -39,7 +38,7 @@ public final class ValidationResult
      * @param success Success or not
      * @param message Error message
      */
-    public ValidationResult(boolean success, String message)
+    public ValidationResult( boolean success, String message )
     {
         this.success = success;
         errorMessage = message;

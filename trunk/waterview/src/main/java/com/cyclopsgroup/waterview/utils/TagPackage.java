@@ -38,9 +38,9 @@ public class TagPackage
      * @param name Tag name
      * @param tagClass Tag class
      */
-    public void addTag(String name, Class tagClass)
+    public void addTag( String name, Class tagClass )
     {
-        tagClasses.put(name, tagClass);
+        tagClasses.put( name, tagClass );
     }
 
     /**
@@ -49,9 +49,9 @@ public class TagPackage
      * @param name Tag name
      * @return Tag class
      */
-    public Class getTagClass(String name)
+    public Class getTagClass( String name )
     {
-        return (Class) tagClasses.get(name);
+        return (Class) tagClasses.get( name );
     }
 
     /**
@@ -61,7 +61,6 @@ public class TagPackage
      */
     public String[] getTagNames()
     {
-        return (String[]) tagClasses.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) tagClasses.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 }

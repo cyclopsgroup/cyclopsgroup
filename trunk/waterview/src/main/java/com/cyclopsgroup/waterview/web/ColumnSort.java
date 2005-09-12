@@ -23,19 +23,20 @@ import org.apache.commons.lang.enums.Enum;
  * 
  * Column sorting status
  */
-public final class ColumnSort extends Enum
+public final class ColumnSort
+    extends Enum
 {
     /** Ascendingly sorted */
-    public static ColumnSort ASC = new ColumnSort("asc");
+    public static ColumnSort ASC = new ColumnSort( "asc" );
 
     /** Descendingly sorted */
-    public static ColumnSort DESC = new ColumnSort("desc");
+    public static ColumnSort DESC = new ColumnSort( "desc" );
 
     /** Sorting is disabled */
-    public static ColumnSort DISABLED = new ColumnSort("disabled");
+    public static ColumnSort DISABLED = new ColumnSort( "disabled" );
 
     /** Sortable but not sorted */
-    public static ColumnSort UNSORTED = new ColumnSort("unsorted");
+    public static ColumnSort UNSORTED = new ColumnSort( "unsorted" );
 
     /**
      * Value of a given string
@@ -43,13 +44,12 @@ public final class ColumnSort extends Enum
      * @param value String value
      * @return ColumnSort object
      */
-    public static ColumnSort valueOf(String value)
+    public static ColumnSort valueOf( String value )
     {
-        ColumnSort sort = (ColumnSort) getEnum(ColumnSort.class, value);
-        if (sort == null)
+        ColumnSort sort = (ColumnSort) getEnum( ColumnSort.class, value );
+        if ( sort == null )
         {
-            throw new IllegalArgumentException(value
-                    + " is not a legal column sort option");
+            throw new IllegalArgumentException( value + " is not a legal column sort option" );
         }
         return sort;
     }
@@ -59,9 +59,9 @@ public final class ColumnSort extends Enum
      *
      * @param name Name of enum
      */
-    private ColumnSort(String name)
+    private ColumnSort( String name )
     {
-        super(name);
+        super( name );
     }
 
     /**

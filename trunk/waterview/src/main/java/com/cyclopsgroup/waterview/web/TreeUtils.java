@@ -46,7 +46,7 @@ public final class TreeUtils
          * @param node TreeNode object
          * @param depth Depth of it
          */
-        public Row(TreeNode node, int depth)
+        public Row( TreeNode node, int depth )
         {
             this.node = node;
             this.depth = depth;
@@ -87,7 +87,7 @@ public final class TreeUtils
          *
          * @param end End node or not
          */
-        public void setEnd(boolean end)
+        public void setEnd( boolean end )
         {
             this.end = end;
         }
@@ -99,29 +99,29 @@ public final class TreeUtils
      * @param node
      * @return Flattened node rows
      */
-    public static Row[] flattenTree(TreeNode node)
+    public static Row[] flattenTree( TreeNode node )
     {
         List ret = new ArrayList();
-        flattenTree(node, ret, 1);
-        return (Row[]) ret.toArray(Row.EMPTY_ARRAY);
+        flattenTree( node, ret, 1 );
+        return (Row[]) ret.toArray( Row.EMPTY_ARRAY );
     }
 
-    private static void flattenTree(TreeNode node, List result, int depth)
+    private static void flattenTree( TreeNode node, List result, int depth )
     {
-        Row row = new Row(node, depth);
-        result.add(row);
+        Row row = new Row( node, depth );
+        result.add( row );
         TreeNode[] children = node.getChildrenNodes();
-        if (children != null && children.length > 0)
+        if ( children != null && children.length > 0 )
         {
-            for (int i = 0; i < children.length; i++)
+            for ( int i = 0; i < children.length; i++ )
             {
                 TreeNode child = children[i];
-                flattenTree(child, result, depth + 1);
+                flattenTree( child, result, depth + 1 );
             }
         }
         else
         {
-            row.setEnd(true);
+            row.setEnd( true );
         }
     }
 }

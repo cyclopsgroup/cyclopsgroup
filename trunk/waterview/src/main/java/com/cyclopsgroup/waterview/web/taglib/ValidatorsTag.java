@@ -21,7 +21,9 @@ import com.cyclopsgroup.waterview.web.ValidationResult;
  * 
  * Validator group tag
  */
-public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
+public class ValidatorsTag
+    extends BaseValidatorTag
+    implements FieldValidator
 {
     private HashSet validators;
 
@@ -30,9 +32,9 @@ public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
      *
      * @param validator
      */
-    public void addValidator(FieldValidator validator)
+    public void addValidator( FieldValidator validator )
     {
-        validators.add(validator);
+        validators.add( validator );
     }
 
     /**
@@ -40,10 +42,11 @@ public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
      *
      * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
         validators = new HashSet();
-        super.processTag(output);
+        super.processTag( output );
     }
 
     /**
@@ -51,7 +54,8 @@ public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
      *
      * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#createValidator()
      */
-    protected FieldValidator createValidator() throws Exception
+    protected FieldValidator createValidator()
+        throws Exception
     {
         return this;
     }
@@ -61,13 +65,13 @@ public class ValidatorsTag extends BaseValidatorTag implements FieldValidator
      *
      * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
      */
-    public ValidationResult validate(Field field)
+    public ValidationResult validate( Field field )
     {
-        for (Iterator i = validators.iterator(); i.hasNext();)
+        for ( Iterator i = validators.iterator(); i.hasNext(); )
         {
             FieldValidator validator = (FieldValidator) i.next();
-            ValidationResult result = validator.validate(field);
-            if (result != null && !result.isSuccess())
+            ValidationResult result = validator.validate( field );
+            if ( result != null && !result.isSuccess() )
             {
                 return result;
             }

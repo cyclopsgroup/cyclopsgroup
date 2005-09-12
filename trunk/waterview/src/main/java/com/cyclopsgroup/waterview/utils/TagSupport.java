@@ -25,7 +25,8 @@ import org.apache.commons.jelly.MissingAttributeException;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class TagSupport extends TagSupportBase
+public abstract class TagSupport
+    extends TagSupportBase
 {
     /**
      * Throw MissingAttributeException if an attribute is missing
@@ -33,21 +34,21 @@ public abstract class TagSupport extends TagSupportBase
      * @param name Attribute name
      * @throws JellyTagException Throw it out
      */
-    protected final void requireAttribute(String name) throws JellyTagException
+    protected final void requireAttribute( String name )
+        throws JellyTagException
     {
         Object value = null;
         try
         {
-            value = PropertyUtils.getProperty(this, name);
+            value = PropertyUtils.getProperty( this, name );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new JellyTagException("Attribute [" + name
-                    + "] is not defined in tag");
+            throw new JellyTagException( "Attribute [" + name + "] is not defined in tag" );
         }
-        if (value == null)
+        if ( value == null )
         {
-            throw new MissingAttributeException(name);
+            throw new MissingAttributeException( name );
         }
     }
 }

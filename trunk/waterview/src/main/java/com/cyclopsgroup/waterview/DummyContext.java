@@ -24,7 +24,8 @@ import java.util.Iterator;
  * 
  * Dummy fake context
  */
-public class DummyContext implements Context
+public class DummyContext
+    implements Context
 {
     /** static instance */
     public static final DummyContext INSTANCE = new DummyContext();
@@ -34,7 +35,7 @@ public class DummyContext implements Context
      *
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
         return null;
     }
@@ -54,7 +55,7 @@ public class DummyContext implements Context
      *
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object variable)
+    public void put( String name, Object variable )
     {
         //do nothing
     }
@@ -64,7 +65,7 @@ public class DummyContext implements Context
      *
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
         //do nothing
     }

@@ -30,22 +30,24 @@ import com.cyclopsgroup.waterview.spi.CacheManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LRUCacheManager extends AbstractMapCacheManager implements
-        CacheManager, Configurable
+public class LRUCacheManager
+    extends AbstractMapCacheManager
+    implements CacheManager, Configurable
 {
-    private LRUMap content = new LRUMap(1000);
+    private LRUMap content = new LRUMap( 1000 );
 
     /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        int size = conf.getChild("size").getValueAsInteger(-1);
-        if (size > 1)
+        int size = conf.getChild( "size" ).getValueAsInteger( -1 );
+        if ( size > 1 )
         {
-            content = new LRUMap(size);
+            content = new LRUMap( size );
         }
     }
 

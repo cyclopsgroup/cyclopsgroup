@@ -34,7 +34,7 @@ public interface Context
      * @param name Variable name
      * @return Object or null
      */
-    Object get(String name);
+    Object get( String name );
 
     /**
      * Get available variable names in this context
@@ -49,12 +49,12 @@ public interface Context
      * @param name Variable name
      * @param variable Variable value
      */
-    void put(String name, Object variable);
+    void put( String name, Object variable );
 
     /**
      * Remove a variable
      *
      * @param name Variable name
      */
-    void remove(String name);
+    void remove( String name );
 }

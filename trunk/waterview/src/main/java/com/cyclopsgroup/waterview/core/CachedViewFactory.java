@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * Internal cached view factory
  */
-class CachedViewFactory implements DynaViewFactory
+class CachedViewFactory
+    implements DynaViewFactory
 {
     private CacheManager cache;
 
@@ -36,7 +37,7 @@ class CachedViewFactory implements DynaViewFactory
      * @param proxy
      * @param cache
      */
-    CachedViewFactory(DynaViewFactory proxy, CacheManager cache)
+    CachedViewFactory( DynaViewFactory proxy, CacheManager cache )
     {
         this.proxy = proxy;
         this.cache = cache;
@@ -47,15 +48,16 @@ class CachedViewFactory implements DynaViewFactory
      *
      * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
      */
-    public synchronized View createView(Path path) throws Exception
+    public synchronized View createView( Path path )
+        throws Exception
     {
         String key = proxy.hashCode() + '/' + path.getFullPath();
-        if (cache.contains(this, key))
+        if ( cache.contains( this, key ) )
         {
-            return (View) cache.get(this, key);
+            return (View) cache.get( this, key );
         }
-        View view = proxy.createView(path);
-        cache.put(this, key, view);
+        View view = proxy.createView( path );
+        cache.put( this, key, view );
         return view;
     }
 }

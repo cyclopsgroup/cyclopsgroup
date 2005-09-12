@@ -28,7 +28,9 @@ import com.cyclopsgroup.waterview.spi.View;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class VelocityView extends BaseModuleRunnable implements View
+public class VelocityView
+    extends BaseModuleRunnable
+    implements View
 {
     private Template template;
 
@@ -38,9 +40,9 @@ public class VelocityView extends BaseModuleRunnable implements View
      * @param template Velocity template
      * @param modulePath Module path
      */
-    public VelocityView(Template template, String modulePath)
+    public VelocityView( Template template, String modulePath )
     {
-        super(modulePath);
+        super( modulePath );
         this.template = template;
     }
 
@@ -48,15 +50,15 @@ public class VelocityView extends BaseModuleRunnable implements View
      * Overwrite or implement method render()
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void render(RuntimeData runtime, Context viewContext)
-            throws Exception
+    public void render( RuntimeData runtime, Context viewContext )
+        throws Exception
     {
-        runModule(runtime, viewContext);
-        if (template == null)
+        runModule( runtime, viewContext );
+        if ( template == null )
         {
             return;
         }
-        VelocityContextAdapter vca = new VelocityContextAdapter(viewContext);
-        template.merge(vca, runtime.getOutput());
+        VelocityContextAdapter vca = new VelocityContextAdapter( viewContext );
+        template.merge( vca, runtime.getOutput() );
     }
 }

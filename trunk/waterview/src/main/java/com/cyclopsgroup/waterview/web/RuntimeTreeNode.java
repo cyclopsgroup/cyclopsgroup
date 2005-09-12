@@ -31,12 +31,13 @@ import com.cyclopsgroup.waterview.ValueParser;
  * 
  * Runtime instance of tree node
  */
-public class RuntimeTreeNode implements TreeNode
+public class RuntimeTreeNode
+    implements TreeNode
 {
     /** Empty array */
     public static final RuntimeTreeNode[] EMPTY_ARRAY = new RuntimeTreeNode[0];
 
-    private Map children = ListOrderedMap.decorate(new HashMap());
+    private Map children = ListOrderedMap.decorate( new HashMap() );
 
     private boolean expanded;
 
@@ -50,7 +51,7 @@ public class RuntimeTreeNode implements TreeNode
      * @param parentNode Parent runtime node
      * @param node Proxy tree node
      */
-    public RuntimeTreeNode(RuntimeTreeNode parentNode, TreeNode node)
+    public RuntimeTreeNode( RuntimeTreeNode parentNode, TreeNode node )
     {
         this.parentNode = parentNode;
         this.node = node;
@@ -61,7 +62,7 @@ public class RuntimeTreeNode implements TreeNode
      */
     public synchronized void collapse()
     {
-        if (!expanded)
+        if ( !expanded )
         {
             return;
         }
@@ -75,9 +76,9 @@ public class RuntimeTreeNode implements TreeNode
      * @param node Nested node
      * @return Created runtime node
      */
-    protected RuntimeTreeNode doCreateChild(TreeNode node)
+    protected RuntimeTreeNode doCreateChild( TreeNode node )
     {
-        return new RuntimeTreeNode(this, node);
+        return new RuntimeTreeNode( this, node );
     }
 
     /**
@@ -88,8 +89,8 @@ public class RuntimeTreeNode implements TreeNode
      * @return Array of result
      * @throws Exception
      */
-    protected TreeNode[] doFilter(TreeNode[] nodes, RuntimeData data)
-            throws Exception
+    protected TreeNode[] doFilter( TreeNode[] nodes, RuntimeData data )
+        throws Exception
     {
         return nodes;
     }
@@ -100,18 +101,19 @@ public class RuntimeTreeNode implements TreeNode
      * @param data RuntimeData
      * @throws Exception Throw it out
      */
-    public synchronized void expand(RuntimeData data) throws Exception
+    public synchronized void expand( RuntimeData data )
+        throws Exception
     {
-        if (expanded)
+        if ( expanded )
         {
             return;
         }
-        TreeNode[] childNodes = doFilter(node.getChildrenNodes(), data);
-        for (int i = 0; i < childNodes.length; i++)
+        TreeNode[] childNodes = doFilter( node.getChildrenNodes(), data );
+        for ( int i = 0; i < childNodes.length; i++ )
         {
             TreeNode node = childNodes[i];
-            RuntimeTreeNode n = doCreateChild(node);
-            children.put(n.getNodeId(), n);
+            RuntimeTreeNode n = doCreateChild( node );
+            children.put( n.getNodeId(), n );
         }
         expanded = true;
     }
@@ -133,7 +135,7 @@ public class RuntimeTreeNode implements TreeNode
      */
     public TreeNode[] getChildrenNodes()
     {
-        return (TreeNode[]) children.values().toArray(TreeNode.EMPTY_ARRAY);
+        return (TreeNode[]) children.values().toArray( TreeNode.EMPTY_ARRAY );
     }
 
     /**
@@ -152,18 +154,18 @@ public class RuntimeTreeNode implements TreeNode
      * @param nodeId Node id
      * @return Node or null if not found
      */
-    public RuntimeTreeNode getNodeById(String nodeId)
+    public RuntimeTreeNode getNodeById( String nodeId )
     {
         LinkedList buffer = new LinkedList();
-        buffer.addLast(this);
-        while (!buffer.isEmpty())
+        buffer.addLast( this );
+        while ( !buffer.isEmpty() )
         {
             RuntimeTreeNode node = (RuntimeTreeNode) buffer.removeFirst();
-            if (StringUtils.equals(nodeId, node.getNodeId()))
+            if ( StringUtils.equals( nodeId, node.getNodeId() ) )
             {
                 return node;
             }
-            buffer.addAll(node.children.values());
+            buffer.addAll( node.children.values() );
         }
         return null;
     }

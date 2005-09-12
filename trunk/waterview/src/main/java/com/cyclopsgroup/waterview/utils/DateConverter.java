@@ -18,46 +18,45 @@ import org.apache.commons.beanutils.Converter;
  * 
  * Date commons beanutils converter
  */
-class DateConverter implements Converter
+class DateConverter
+    implements Converter
 {
     /** Date format to format date type */
-    static final SimpleDateFormat FORMAT = new SimpleDateFormat("MM/dd/yyyy");
+    static final SimpleDateFormat FORMAT = new SimpleDateFormat( "MM/dd/yyyy" );
 
     /**
      * Override method DateConverter in supper class
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    public Object convert(Class type, Object object)
+    public Object convert( Class type, Object object )
     {
-        if (object == null)
+        if ( object == null )
         {
-            throw new ConversionException("Value is null");
+            throw new ConversionException( "Value is null" );
         }
-        if (type == Date.class)
+        if ( type == Date.class )
         {
-            if (object instanceof Date)
+            if ( object instanceof Date )
             {
                 return object;
             }
             try
             {
-                return FORMAT.parse(object.toString().trim());
+                return FORMAT.parse( object.toString().trim() );
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                throw new ConversionException(object.toString()
-                        + " is not recognizable as a date MM/dd/yyyy", e);
+                throw new ConversionException( object.toString() + " is not recognizable as a date MM/dd/yyyy", e );
             }
         }
-        else if (type == String.class && object instanceof Date)
+        else if ( type == String.class && object instanceof Date )
         {
-            return FORMAT.format((Date) object);
+            return FORMAT.format( (Date) object );
         }
         else
         {
-            throw new ConversionException("Unkonwn conversion type "
-                    + object.getClass() + "->" + type);
+            throw new ConversionException( "Unkonwn conversion type " + object.getClass() + "->" + type );
         }
     }
 }

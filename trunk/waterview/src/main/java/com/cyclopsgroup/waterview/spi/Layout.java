@@ -35,5 +35,6 @@ public interface Layout
      * @param page Page model
      * @throws Exception Throw it out
      */
-    void render(RuntimeData runtime, Page page) throws Exception;
+    void render( RuntimeData runtime, Page page )
+        throws Exception;
 }

@@ -23,19 +23,20 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefinitionTagPackage extends TagPackage
+public class DefinitionTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class DefinitionTagPackage
      */
     public DefinitionTagPackage()
     {
-        addTag("Waterview", WaterviewTag.class);
-        addTag("TagLibrary", TagLibraryTag.class);
-        addTag("TagPackage", TagPackageTag.class);
-        addTag("Layout", LayoutTag.class);
-        addTag("JellyLayout", JellyLayoutTag.class);
-        addTag("ModulePackage", ModulePackageTag.class);
-        addTag("Theme", ThemeTag.class);
+        addTag( "Waterview", WaterviewTag.class );
+        addTag( "TagLibrary", TagLibraryTag.class );
+        addTag( "TagPackage", TagPackageTag.class );
+        addTag( "Layout", LayoutTag.class );
+        addTag( "JellyLayout", JellyLayoutTag.class );
+        addTag( "ModulePackage", ModulePackageTag.class );
+        addTag( "Theme", ThemeTag.class );
     }
 }

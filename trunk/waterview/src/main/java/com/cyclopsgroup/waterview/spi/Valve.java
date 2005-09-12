@@ -37,5 +37,6 @@ public interface Valve
      * @param context Pipeline context
      * @throws Exception Throw it out
      */
-    void invoke(RuntimeData runtime, PipelineContext context) throws Exception;
+    void invoke( RuntimeData runtime, PipelineContext context )
+        throws Exception;
 }

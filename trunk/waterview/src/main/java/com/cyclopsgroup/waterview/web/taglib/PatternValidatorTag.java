@@ -27,8 +27,9 @@ import com.cyclopsgroup.waterview.web.ValidationResult;
  * 
  * Pattern validator tag
  */
-public class PatternValidatorTag extends BaseValidatorTag implements
-        FieldValidator
+public class PatternValidatorTag
+    extends BaseValidatorTag
+    implements FieldValidator
 {
     private String pattern;
 
@@ -37,9 +38,10 @@ public class PatternValidatorTag extends BaseValidatorTag implements
      *
      * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#createValidator()
      */
-    protected FieldValidator createValidator() throws Exception
+    protected FieldValidator createValidator()
+        throws Exception
     {
-        requireAttribute("pattern");
+        requireAttribute( "pattern" );
         return this;
     }
 
@@ -54,7 +56,7 @@ public class PatternValidatorTag extends BaseValidatorTag implements
     /**
      * @param pattern The pattern to set.
      */
-    public void setPattern(String pattern)
+    public void setPattern( String pattern )
     {
         this.pattern = pattern;
     }
@@ -64,10 +66,9 @@ public class PatternValidatorTag extends BaseValidatorTag implements
      *
      * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
      */
-    public ValidationResult validate(Field field)
+    public ValidationResult validate( Field field )
     {
-        boolean success = Pattern.matches(getPattern(), field.getValue());
-        return new ValidationResult(success, "Doesn't match pattern "
-                + getPattern());
+        boolean success = Pattern.matches( getPattern(), field.getValue() );
+        return new ValidationResult( success, "Doesn't match pattern " + getPattern() );
     }
 }

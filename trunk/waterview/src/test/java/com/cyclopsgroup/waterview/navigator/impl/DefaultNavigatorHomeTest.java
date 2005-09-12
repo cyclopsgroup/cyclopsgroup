@@ -26,19 +26,20 @@ import com.cyclopsgroup.waterview.navigator.NavigatorNode;
  *
  * Test case for default navigator home
  */
-public class DefaultNavigatorHomeTest extends PlexusTestCase
+public class DefaultNavigatorHomeTest
+    extends PlexusTestCase
 {
     /**
      * Test getPath();
      *
      * @throws Exception
      */
-    public void testGetPath() throws Exception
+    public void testGetPath()
+        throws Exception
     {
-        NavigatorHome nav = (NavigatorHome) lookup(NavigatorHome.ROLE);
-        NavigatorNode node = nav
-                .getNodeByPage("/waterview/system/status/SessionDump.jelly");
+        NavigatorHome nav = (NavigatorHome) lookup( NavigatorHome.ROLE );
+        NavigatorNode node = nav.getNodeByPage( "/waterview/system/status/SessionDump.jelly" );
         NavigatorNode[] path = node.getParentNodes();
-        assertEquals(3, path.length);
+        assertEquals( 3, path.length );
     }
 }

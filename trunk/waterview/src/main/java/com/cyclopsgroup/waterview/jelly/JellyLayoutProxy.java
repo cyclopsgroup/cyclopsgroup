@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayoutProxy implements Layout
+public class JellyLayoutProxy
+    implements Layout
 {
     private String layoutScript;
 
@@ -35,23 +36,21 @@ public class JellyLayoutProxy implements Layout
      *
      * @param layoutScript Layout script path
      */
-    public JellyLayoutProxy(String layoutScript)
+    public JellyLayoutProxy( String layoutScript )
     {
         this.layoutScript = layoutScript;
     }
 
-    private synchronized JellyLayout getLayout(RuntimeData data)
-            throws Exception
+    private synchronized JellyLayout getLayout( RuntimeData data )
+        throws Exception
     {
-        CacheManager cm = (CacheManager) data.getServiceManager().lookup(
-                CacheManager.ROLE);
-        JellyLayout layout = (JellyLayout) cm.get(this, layoutScript);
-        if (layout == null)
+        CacheManager cm = (CacheManager) data.getServiceManager().lookup( CacheManager.ROLE );
+        JellyLayout layout = (JellyLayout) cm.get( this, layoutScript );
+        if ( layout == null )
         {
-            JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
-                    JellyEngine.ROLE);
-            layout = new JellyLayout(je.getScript(layoutScript), layoutScript);
-            cm.put(this, layoutScript, layout);
+            JellyEngine je = (JellyEngine) data.getServiceManager().lookup( JellyEngine.ROLE );
+            layout = new JellyLayout( je.getScript( layoutScript ), layoutScript );
+            cm.put( this, layoutScript, layout );
         }
         return layout;
     }
@@ -61,8 +60,9 @@ public class JellyLayoutProxy implements Layout
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render(RuntimeData runtime, Page page) throws Exception
+    public void render( RuntimeData runtime, Page page )
+        throws Exception
     {
-        getLayout(runtime).render(runtime, page);
+        getLayout( runtime ).render( runtime, page );
     }
 }

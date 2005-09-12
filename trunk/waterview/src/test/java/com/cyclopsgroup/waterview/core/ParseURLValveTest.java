@@ -31,46 +31,48 @@ import com.cyclopsgroup.waterview.spi.PipelineContext;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ParseURLValveTest extends PlexusTestCase
+public class ParseURLValveTest
+    extends PlexusTestCase
 {
     /**
      * Test invocation
      *
      * @throws Exception
      */
-    public void testInvoke() throws Exception
+    public void testInvoke()
+        throws Exception
     {
-        MockRuntimeData runtime = new MockRuntimeData(new PrintWriter(
-                System.out));
-        runtime
-                .setRequestPath("/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly");
-        ParseURLValve v = (ParseURLValve) lookup(ParseURLValve.class.getName());
-        v.invoke(runtime, new PipelineContext()
+        MockRuntimeData runtime = new MockRuntimeData( new PrintWriter( System.out ) );
+        runtime.setRequestPath( "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly" );
+        ParseURLValve v = (ParseURLValve) lookup( ParseURLValve.class.getName() );
+        v.invoke( runtime, new PipelineContext()
         {
 
-            public void invokeNextValve(RuntimeData runtime) throws Exception
+            public void invokeNextValve( RuntimeData runtime )
+                throws Exception
             {
                 //do nothing
             }
-        });
+        } );
         //assertEquals("/ddd.jelly", runtime.getPage());
-        assertEquals(3, runtime.getActions().size());
-        assertEquals("/aaa", runtime.getActions().get(0));
-        assertEquals("/bbb/BAction", runtime.getActions().get(1));
-        assertEquals("/ccc", runtime.getActions().get(2));
+        assertEquals( 3, runtime.getActions().size() );
+        assertEquals( "/aaa", runtime.getActions().get( 0 ) );
+        assertEquals( "/bbb/BAction", runtime.getActions().get( 1 ) );
+        assertEquals( "/ccc", runtime.getActions().get( 2 ) );
     }
 
     /**
      * @throws Exception
      */
-    public void testParseRequestPath() throws Exception
+    public void testParseRequestPath()
+        throws Exception
     {
         String path = "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly";
-        List parts = ParseURLValve.parseRequestPath(path);
-        assertEquals(4, parts.size());
-        assertEquals("/!do!/aaa", parts.get(0));
-        assertEquals("/!do!/bbb/BAction", parts.get(1));
-        assertEquals("/!do!/ccc", parts.get(2));
-        assertEquals("/!show!/ddd.jelly", parts.get(3));
+        List parts = ParseURLValve.parseRequestPath( path );
+        assertEquals( 4, parts.size() );
+        assertEquals( "/!do!/aaa", parts.get( 0 ) );
+        assertEquals( "/!do!/bbb/BAction", parts.get( 1 ) );
+        assertEquals( "/!do!/ccc", parts.get( 2 ) );
+        assertEquals( "/!show!/ddd.jelly", parts.get( 3 ) );
     }
 }

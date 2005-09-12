@@ -25,15 +25,17 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ViewTag extends BaseViewTag
+public class ViewTag
+    extends BaseViewTag
 {
     /**
      * Overwrite or implement method createView()
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        return new JellyView(getBody(), null);
+        return new JellyView( getBody(), null );
     }
 }

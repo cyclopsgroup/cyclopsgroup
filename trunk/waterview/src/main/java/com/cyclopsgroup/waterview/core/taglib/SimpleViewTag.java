@@ -25,7 +25,8 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SimpleViewTag extends BaseViewTag
+public class SimpleViewTag
+    extends BaseViewTag
 {
     private String path;
 
@@ -34,12 +35,12 @@ public class SimpleViewTag extends BaseViewTag
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        requireAttribute("path");
-        ModuleManager mm = (ModuleManager) getServiceManager().lookup(
-                ModuleManager.ROLE);
-        return mm.createDynaView(getPath());
+        requireAttribute( "path" );
+        ModuleManager mm = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        return mm.createDynaView( getPath() );
     }
 
     /**
@@ -57,7 +58,7 @@ public class SimpleViewTag extends BaseViewTag
      *
      * @param path The path to set.
      */
-    public void setPath(String path)
+    public void setPath( String path )
     {
         this.path = path;
     }

@@ -26,16 +26,17 @@ import org.apache.commons.jelly.XMLOutput;
  * 
  * Simply invoke the body
  */
-public class DummyTag extends TagSupport
+public class DummyTag
+    extends TagSupport
 {
     /**
      * Overwrite or implement method doTag()
      *
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    public void doTag( XMLOutput output )
+        throws MissingAttributeException, JellyTagException
     {
-        invokeBody(output);
+        invokeBody( output );
     }
 }

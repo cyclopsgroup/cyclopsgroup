@@ -28,62 +28,63 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Action to sort table
  */
-public class SortTable implements Action
+public class SortTable
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, ActionContext context)
-            throws Exception
+    public void execute( RuntimeData data, ActionContext context )
+        throws Exception
     {
-        String tableId = data.getParams().getString("table_id", null);
-        if (tableId == null)
+        String tableId = data.getParams().getString( "table_id", null );
+        if ( tableId == null )
         {
-            throw new IllegalArgumentException("table_id is missing");
+            throw new IllegalArgumentException( "table_id is missing" );
         }
-        Table table = (Table) data.getSessionContext().get(tableId);
-        if (table == null)
+        Table table = (Table) data.getSessionContext().get( tableId );
+        if ( table == null )
         {
-            redirectBack(data, context);
+            redirectBack( data, context );
             return;
         }
 
-        String columnName = data.getParams().getString("table_column_name");
-        Column column = table.getColumn(columnName);
-        if (column == null || column.getSort() == ColumnSort.DISABLED)
+        String columnName = data.getParams().getString( "table_column_name" );
+        Column column = table.getColumn( columnName );
+        if ( column == null || column.getSort() == ColumnSort.DISABLED )
         {
-            redirectBack(data, context);
+            redirectBack( data, context );
             return;
         }
 
-        if (column.getSort() == ColumnSort.ASC)
+        if ( column.getSort() == ColumnSort.ASC )
         {
-            column.setSort(ColumnSort.DESC);
+            column.setSort( ColumnSort.DESC );
         }
-        else if (column.getSort() == ColumnSort.DESC)
+        else if ( column.getSort() == ColumnSort.DESC )
         {
-            column.setSort(ColumnSort.UNSORTED);
-            table.unsortOn(columnName);
+            column.setSort( ColumnSort.UNSORTED );
+            table.unsortOn( columnName );
         }
-        else if (column.getSort() == ColumnSort.UNSORTED)
+        else if ( column.getSort() == ColumnSort.UNSORTED )
         {
-            column.setSort(ColumnSort.ASC);
-            table.sortOn(columnName);
+            column.setSort( ColumnSort.ASC );
+            table.sortOn( columnName );
         }
 
-        redirectBack(data, context);
+        redirectBack( data, context );
     }
 
-    private void redirectBack(RuntimeData data, ActionContext context)
+    private void redirectBack( RuntimeData data, ActionContext context )
     {
         String url = data.getRefererUrl();
-        if (url.indexOf("keep_form=true") == -1)
+        if ( url.indexOf( "keep_form=true" ) == -1 )
         {
-            url += url.indexOf('?') == -1 ? '?' : '&';
+            url += url.indexOf( '?' ) == -1 ? '?' : '&';
             url += "keep_form=true";
         }
-        context.setTargetUrl(url);
+        context.setTargetUrl( url );
     }
 }

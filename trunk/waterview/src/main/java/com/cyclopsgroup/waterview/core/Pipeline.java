@@ -38,8 +38,9 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class Pipeline extends AbstractLogEnabled implements Configurable,
-        Initializable, Serviceable
+public class Pipeline
+    extends AbstractLogEnabled
+    implements Configurable, Initializable, Serviceable
 {
     private ServiceManager serviceManager;
 
@@ -52,9 +53,9 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      *
      * @param valve Valve to add
      */
-    public void addValve(Valve valve)
+    public void addValve( Valve valve )
     {
-        valves.add(valve);
+        valves.add( valve );
     }
 
     /**
@@ -62,15 +63,16 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
         valveRoles = new ArrayList();
-        Configuration[] confs = conf.getChild("valves").getChildren("valve");
-        for (int i = 0; i < confs.length; i++)
+        Configuration[] confs = conf.getChild( "valves" ).getChildren( "valve" );
+        for ( int i = 0; i < confs.length; i++ )
         {
             Configuration c = confs[i];
-            String role = c.getAttribute("role");
-            valveRoles.add(role);
+            String role = c.getAttribute( "role" );
+            valveRoles.add( role );
         }
     }
 
@@ -80,10 +82,11 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void handleRuntime(RuntimeData runtime) throws Exception
+    public void handleRuntime( RuntimeData runtime )
+        throws Exception
     {
-        DefaultPipelineContext dpc = new DefaultPipelineContext(valves);
-        dpc.invokeValve(runtime);
+        DefaultPipelineContext dpc = new DefaultPipelineContext( valves );
+        dpc.invokeValve( runtime );
     }
 
     /**
@@ -91,14 +94,15 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
         valves = new Vector();
-        for (Iterator i = valveRoles.iterator(); i.hasNext();)
+        for ( Iterator i = valveRoles.iterator(); i.hasNext(); )
         {
             String valveRole = (String) i.next();
-            Valve valve = (Valve) serviceManager.lookup(valveRole);
-            valves.add(valve);
+            Valve valve = (Valve) serviceManager.lookup( valveRole );
+            valves.add( valve );
         }
     }
 
@@ -107,7 +111,8 @@ public class Pipeline extends AbstractLogEnabled implements Configurable,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
     }

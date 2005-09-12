@@ -23,8 +23,8 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class TagSupport extends
-        com.cyclopsgroup.waterview.utils.TagSupport
+public abstract class TagSupport
+    extends com.cyclopsgroup.waterview.utils.TagSupport
 {
     /**
      * Convenient method to get PageRuntime
@@ -33,6 +33,6 @@ public abstract class TagSupport extends
      */
     protected RuntimeData getRuntimeData()
     {
-        return (RuntimeData) getContext().getVariable(RuntimeData.NAME);
+        return (RuntimeData) getContext().getVariable( RuntimeData.NAME );
     }
 }

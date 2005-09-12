@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PageTag extends TagSupport
+public class PageTag
+    extends TagSupport
 {
     private Page page;
 
@@ -35,11 +36,12 @@ public class PageTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
         page = new Page();
-        getContext().setVariable(Page.NAME, page);
-        invokeBody(output);
+        getContext().setVariable( Page.NAME, page );
+        invokeBody( output );
     }
 
     /**

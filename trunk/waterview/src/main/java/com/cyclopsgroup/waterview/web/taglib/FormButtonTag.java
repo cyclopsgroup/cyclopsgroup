@@ -19,7 +19,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * Show a form button
  */
-public class FormButtonTag extends TagSupport
+public class FormButtonTag
+    extends TagSupport
 {
     private String description;
 
@@ -50,18 +51,18 @@ public class FormButtonTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireParent(SubmitTag.class);
-        if (StringUtils.isEmpty(getTitle()))
+        requireParent( SubmitTag.class );
+        if ( StringUtils.isEmpty( getTitle() ) )
         {
-            setTitle(getBodyText());
+            setTitle( getBodyText() );
         }
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        Script script = je.getScript("/waterview/FormButton.jelly");
-        getContext().setVariable("button", this);
-        script.run(getContext(), output);
+        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+        Script script = je.getScript( "/waterview/FormButton.jelly" );
+        getContext().setVariable( "button", this );
+        script.run( getContext(), output );
     }
 
     /**
@@ -69,7 +70,7 @@ public class FormButtonTag extends TagSupport
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -79,7 +80,7 @@ public class FormButtonTag extends TagSupport
      *
      * @param title The title to set.
      */
-    public void setTitle(String title)
+    public void setTitle( String title )
     {
         this.title = title;
     }

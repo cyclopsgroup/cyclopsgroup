@@ -31,7 +31,8 @@ import com.cyclopsgroup.waterview.web.CollectionTabularData;
  * 
  * Table data tag accepting a collection, iterator, enumeration or array
  */
-public class CollectionTabularDataTag extends TagSupport
+public class CollectionTabularDataTag
+    extends TagSupport
 {
     private Object items;
 
@@ -40,15 +41,15 @@ public class CollectionTabularDataTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("items");
-        requireParent(TableControlTag.class);
+        requireAttribute( "items" );
+        requireParent( TableControlTag.class );
 
         List list = new ArrayList();
-        CollectionUtils.addAll(list, TypeUtils.iterate(getItems()));
-        ((TableControlTag) getParent())
-                .setTabularData(new CollectionTabularData(list));
+        CollectionUtils.addAll( list, TypeUtils.iterate( getItems() ) );
+        ( (TableControlTag) getParent() ).setTabularData( new CollectionTabularData( list ) );
     }
 
     /**
@@ -66,7 +67,7 @@ public class CollectionTabularDataTag extends TagSupport
      *
      * @param items The items to set.
      */
-    public void setItems(Object items)
+    public void setItems( Object items )
     {
         this.items = items;
     }

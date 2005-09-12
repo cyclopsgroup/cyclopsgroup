@@ -29,7 +29,8 @@ import com.cyclopsgroup.waterview.Context;
  *
  * Servlet request implemented clib context
  */
-public class ServletRequestContext implements Context
+public class ServletRequestContext
+    implements Context
 {
     private HttpServletRequest request;
 
@@ -38,7 +39,7 @@ public class ServletRequestContext implements Context
      * 
      * @param request Http servlet request
      */
-    public ServletRequestContext(HttpServletRequest request)
+    public ServletRequestContext( HttpServletRequest request )
     {
         this.request = request;
     }
@@ -47,9 +48,9 @@ public class ServletRequestContext implements Context
      * Overwrite or implement method get()
      * @see com.cyclopsgroup.waterview.Context#get(java.lang.String)
      */
-    public Object get(String name)
+    public Object get( String name )
     {
-        return request.getAttribute(name);
+        return request.getAttribute( name );
     }
 
     /**
@@ -58,24 +59,24 @@ public class ServletRequestContext implements Context
      */
     public Iterator keys()
     {
-        return new EnumerationIterator(request.getAttributeNames());
+        return new EnumerationIterator( request.getAttributeNames() );
     }
 
     /**
      * Overwrite or implement method put()
      * @see com.cyclopsgroup.waterview.Context#put(java.lang.String, java.lang.Object)
      */
-    public void put(String name, Object value)
+    public void put( String name, Object value )
     {
-        request.setAttribute(name, value);
+        request.setAttribute( name, value );
     }
 
     /**
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Context#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        request.removeAttribute(name);
+        request.removeAttribute( name );
     }
 }

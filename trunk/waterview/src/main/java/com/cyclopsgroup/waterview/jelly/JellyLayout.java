@@ -30,7 +30,9 @@ import com.cyclopsgroup.waterview.spi.Page;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class JellyLayout extends BaseModuleRunnable implements Layout
+public class JellyLayout
+    extends BaseModuleRunnable
+    implements Layout
 {
     private Script script;
 
@@ -40,13 +42,13 @@ public class JellyLayout extends BaseModuleRunnable implements Layout
      * @param script Jelly script object
      * @param modulePath Path of module
      */
-    public JellyLayout(Script script, String modulePath)
+    public JellyLayout( Script script, String modulePath )
     {
-        super(modulePath);
+        super( modulePath );
         this.script = script;
-        if (script == null)
+        if ( script == null )
         {
-            throw new NullPointerException("Script can not be null");
+            throw new NullPointerException( "Script can not be null" );
         }
     }
 
@@ -55,21 +57,19 @@ public class JellyLayout extends BaseModuleRunnable implements Layout
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public synchronized void render(RuntimeData data, Page page)
-            throws Exception
+    public synchronized void render( RuntimeData data, Page page )
+        throws Exception
     {
-        data.getRequestContext().put(Page.NAME, page);
-        data.getRequestContext().put(NAME, this);
+        data.getRequestContext().put( Page.NAME, page );
+        data.getRequestContext().put( NAME, this );
 
-        runModule(data, data.getRequestContext());
+        runModule( data, data.getRequestContext() );
 
-        JellyEngine je = (JellyEngine) data.getServiceManager().lookup(
-                JellyEngine.ROLE);
-        JellyContext jellyContext = je.createJellyContext(data
-                .getRequestContext());
-        XMLOutput output = XMLOutput.createXMLOutput(data.getOutput());
-        script.run(jellyContext, output);
-        data.getRequestContext().put(Page.NAME, null);
-        data.getRequestContext().put(NAME, null);
+        JellyEngine je = (JellyEngine) data.getServiceManager().lookup( JellyEngine.ROLE );
+        JellyContext jellyContext = je.createJellyContext( data.getRequestContext() );
+        XMLOutput output = XMLOutput.createXMLOutput( data.getOutput() );
+        script.run( jellyContext, output );
+        data.getRequestContext().put( Page.NAME, null );
+        data.getRequestContext().put( NAME, null );
     }
 }

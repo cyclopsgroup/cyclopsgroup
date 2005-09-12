@@ -17,7 +17,8 @@ import org.apache.commons.beanutils.converters.StringConverter;
  * 
  * Adapter to do backward conversion in commons-beanutils converter
  */
-class StringConverterAdapter implements Converter
+class StringConverterAdapter
+    implements Converter
 {
     private StringConverter converter = new StringConverter();
 
@@ -26,12 +27,12 @@ class StringConverterAdapter implements Converter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    public Object convert(Class type, Object value)
+    public Object convert( Class type, Object value )
     {
-        if (type == String.class && value != null && value instanceof Date)
+        if ( type == String.class && value != null && value instanceof Date )
         {
-            return DateConverter.FORMAT.format(value);
+            return DateConverter.FORMAT.format( value );
         }
-        return converter.convert(type, value);
+        return converter.convert( type, value );
     }
 }

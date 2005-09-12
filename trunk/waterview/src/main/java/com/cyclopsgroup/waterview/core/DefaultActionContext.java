@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.RuntimeData;
  *
  * Internal implementation of action context
  */
-final class DefaultActionContext implements ActionContext
+final class DefaultActionContext
+    implements ActionContext
 {
     private Throwable failCause;
 
@@ -46,12 +47,11 @@ final class DefaultActionContext implements ActionContext
      *
      * @param data Current data
      */
-    DefaultActionContext(RuntimeData data)
+    DefaultActionContext( RuntimeData data )
     {
-        Link link = (Link) data.getRequestContext().get(Link.NAME);
-        String url = link.setPage(data.getPage()).addQueryString(
-                data.getQueryString()).toString();
-        setTargetUrl(url);
+        Link link = (Link) data.getRequestContext().get( Link.NAME );
+        String url = link.setPage( data.getPage() ).addQueryString( data.getQueryString() ).toString();
+        setTargetUrl( url );
     }
 
     /**
@@ -59,9 +59,9 @@ final class DefaultActionContext implements ActionContext
      *
      * @see com.cyclopsgroup.waterview.ActionContext#error(java.lang.String, java.lang.String)
      */
-    public void error(String inputName, String errorMessage)
+    public void error( String inputName, String errorMessage )
     {
-        inputErrorMessages.put(inputName, errorMessage);
+        inputErrorMessages.put( inputName, errorMessage );
     }
 
     /**
@@ -71,7 +71,7 @@ final class DefaultActionContext implements ActionContext
      */
     public void fail()
     {
-        fail("Unknown reason");
+        fail( "Unknown reason" );
     }
 
     /**
@@ -79,9 +79,9 @@ final class DefaultActionContext implements ActionContext
      *
      * @see com.cyclopsgroup.waterview.ActionContext#fail(java.lang.String)
      */
-    public void fail(String errorMessage)
+    public void fail( String errorMessage )
     {
-        fail(errorMessage, null);
+        fail( errorMessage, null );
     }
 
     /**
@@ -89,7 +89,7 @@ final class DefaultActionContext implements ActionContext
      *
      * @see com.cyclopsgroup.waterview.ActionContext#fail(java.lang.String, java.lang.Throwable)
      */
-    public void fail(String errorMessage, Throwable throwable)
+    public void fail( String errorMessage, Throwable throwable )
     {
         failed = true;
         failMessage = errorMessage;
@@ -101,9 +101,9 @@ final class DefaultActionContext implements ActionContext
      *
      * @see com.cyclopsgroup.waterview.ActionContext#fail(java.lang.Throwable)
      */
-    public void fail(Throwable throwable)
+    public void fail( Throwable throwable )
     {
-        fail(null, throwable);
+        fail( null, throwable );
     }
 
     /**
@@ -166,7 +166,7 @@ final class DefaultActionContext implements ActionContext
      *
      * @see com.cyclopsgroup.waterview.ActionContext#setTargetUrl(java.lang.String)
      */
-    public void setTargetUrl(String url)
+    public void setTargetUrl( String url )
     {
         targetUrl = url;
     }

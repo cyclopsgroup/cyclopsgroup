@@ -26,7 +26,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Tag to run script
  */
-public class RunScriptTag extends TagSupport
+public class RunScriptTag
+    extends TagSupport
 {
     private Script script;
 
@@ -35,13 +36,14 @@ public class RunScriptTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        if (getScript() == null)
+        if ( getScript() == null )
         {
             return;
         }
-        getScript().run(getContext(), output);
+        getScript().run( getContext(), output );
     }
 
     /**
@@ -59,7 +61,7 @@ public class RunScriptTag extends TagSupport
      *
      * @param script The script to set.
      */
-    public void setScript(Script script)
+    public void setScript( Script script )
     {
         this.script = script;
     }

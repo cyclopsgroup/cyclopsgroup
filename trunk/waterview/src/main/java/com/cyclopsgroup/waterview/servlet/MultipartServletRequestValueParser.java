@@ -35,7 +35,8 @@ import com.cyclopsgroup.waterview.RequestValueParser;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MultipartServletRequestValueParser extends RequestValueParser
+public class MultipartServletRequestValueParser
+    extends RequestValueParser
 {
     private MultiHashMap content = new MultiHashMap();
 
@@ -48,20 +49,20 @@ public class MultipartServletRequestValueParser extends RequestValueParser
      * @param fileUpload File upload object
      * @throws FileUploadException Throw it out
      */
-    public MultipartServletRequestValueParser(HttpServletRequest request,
-            FileUploadBase fileUpload) throws FileUploadException
+    public MultipartServletRequestValueParser( HttpServletRequest request, FileUploadBase fileUpload )
+        throws FileUploadException
     {
-        List files = fileUpload.parseRequest(request);
-        for (Iterator i = files.iterator(); i.hasNext();)
+        List files = fileUpload.parseRequest( request );
+        for ( Iterator i = files.iterator(); i.hasNext(); )
         {
             FileItem fileItem = (FileItem) i.next();
-            if (fileItem.isFormField())
+            if ( fileItem.isFormField() )
             {
-                add(fileItem.getFieldName(), fileItem.getString());
+                add( fileItem.getFieldName(), fileItem.getString() );
             }
             else
             {
-                fileItems.put(fileItem.getFieldName(), fileItem);
+                fileItems.put( fileItem.getFieldName(), fileItem );
             }
         }
     }
@@ -70,18 +71,19 @@ public class MultipartServletRequestValueParser extends RequestValueParser
      * Overwrite or implement method add()
      * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add(String name, String value)
+    public void add( String name, String value )
     {
-        content.put(name, value);
+        content.put( name, value );
     }
 
     /**
      * Overwrite or implement method doGetValue()
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue(String name) throws Exception
+    protected String doGetValue( String name )
+        throws Exception
     {
-        String[] values = doGetValues(name);
+        String[] values = doGetValues( name );
         return values.length == 0 ? null : values[0];
     }
 
@@ -89,11 +91,12 @@ public class MultipartServletRequestValueParser extends RequestValueParser
      * Overwrite or implement method doGetValues()
      * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues(String name) throws Exception
+    protected String[] doGetValues( String name )
+        throws Exception
     {
-        Collection values = (Collection) content.get(name);
-        return values == null ? ArrayUtils.EMPTY_STRING_ARRAY
-                : (String[]) values.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        Collection values = (Collection) content.get( name );
+        return values == null ? ArrayUtils.EMPTY_STRING_ARRAY : (String[]) values
+            .toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -101,9 +104,9 @@ public class MultipartServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
      */
-    public FileItem getFileItem(String name)
+    public FileItem getFileItem( String name )
     {
-        FileItem[] items = getFileItems(name);
+        FileItem[] items = getFileItems( name );
         return items.length == 0 ? null : items[0];
     }
 
@@ -112,20 +115,19 @@ public class MultipartServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
      */
-    public FileItem[] getFileItems(String name)
+    public FileItem[] getFileItems( String name )
     {
-        Collection items = (Collection) fileItems.get(name);
-        return items == null ? EMPTY_FILEITEM_ARRAY : (FileItem[]) items
-                .toArray(EMPTY_FILEITEM_ARRAY);
+        Collection items = (Collection) fileItems.get( name );
+        return items == null ? EMPTY_FILEITEM_ARRAY : (FileItem[]) items.toArray( EMPTY_FILEITEM_ARRAY );
     }
 
     /**
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        content.remove(name);
-        fileItems.remove(name);
+        content.remove( name );
+        fileItems.remove( name );
     }
 }

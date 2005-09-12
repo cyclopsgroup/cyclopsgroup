@@ -32,16 +32,18 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class PipelineTest extends TestCase
+public class PipelineTest
+    extends TestCase
 {
-    private class TestValve implements Valve
+    private class TestValve
+        implements Valve
     {
         private String value;
 
         /**
          * @param value Value
          */
-        private TestValve(String value)
+        private TestValve( String value )
         {
             this.value = value;
         }
@@ -51,12 +53,12 @@ public class PipelineTest extends TestCase
          *
          * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
          */
-        public void invoke(RuntimeData runtime, PipelineContext context)
-                throws Exception
+        public void invoke( RuntimeData runtime, PipelineContext context )
+            throws Exception
         {
-            List contents = (List) runtime.getRequestContext().get("contents");
-            contents.add(value);
-            context.invokeNextValve(runtime);
+            List contents = (List) runtime.getRequestContext().get( "contents" );
+            contents.add( value );
+            context.invokeNextValve( runtime );
         }
     }
 
@@ -65,21 +67,21 @@ public class PipelineTest extends TestCase
      *
      * @throws Exception
      */
-    public void testInvoke() throws Exception
+    public void testInvoke()
+        throws Exception
     {
         Pipeline pipeline = new Pipeline();
-        MockRuntimeData runtime = new MockRuntimeData(new PrintWriter(
-                System.out));
+        MockRuntimeData runtime = new MockRuntimeData( new PrintWriter( System.out ) );
         List contents = new ArrayList();
-        runtime.getRequestContext().put("contents", contents);
-        pipeline.addValve(new TestValve("aaa"));
-        pipeline.addValve(new TestValve("bbb"));
-        pipeline.addValve(new TestValve("ccc"));
-        pipeline.handleRuntime(runtime);
-        assertEquals(3, contents.size());
+        runtime.getRequestContext().put( "contents", contents );
+        pipeline.addValve( new TestValve( "aaa" ) );
+        pipeline.addValve( new TestValve( "bbb" ) );
+        pipeline.addValve( new TestValve( "ccc" ) );
+        pipeline.handleRuntime( runtime );
+        assertEquals( 3, contents.size() );
         Object[] c = contents.toArray();
-        assertEquals("aaa", c[0]);
-        assertEquals("bbb", c[1]);
-        assertEquals("ccc", c[2]);
+        assertEquals( "aaa", c[0] );
+        assertEquals( "bbb", c[1] );
+        assertEquals( "ccc", c[2] );
     }
 }

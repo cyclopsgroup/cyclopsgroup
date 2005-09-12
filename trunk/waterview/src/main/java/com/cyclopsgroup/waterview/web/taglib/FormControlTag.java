@@ -20,5 +20,6 @@ public interface FormControlTag
      * @param formTag Form tag object
      * @throws Exception Throw it out
      */
-    void setFormTag(FormTag formTag) throws Exception;
+    void setFormTag( FormTag formTag )
+        throws Exception;
 }

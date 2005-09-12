@@ -25,19 +25,18 @@ import junit.framework.TestCase;
  * 
  * Test case for link
  */
-public class LinkTest extends TestCase
+public class LinkTest
+    extends TestCase
 {
     /**
      * TEst link
      */
     public void testLink()
     {
-        MockRuntimeData data = new MockRuntimeData(new PrintWriter(System.out));
-        data.setPage("/aaa/Index.vm");
-        Link link = new Link(data);
-        link.setPage("/Bbb.vm");
-        assertEquals(
-                "http://localhost:8080/waterview/servlet/waterview/!show!/Bbb.vm",
-                link.toString());
+        MockRuntimeData data = new MockRuntimeData( new PrintWriter( System.out ) );
+        data.setPage( "/aaa/Index.vm" );
+        Link link = new Link( data );
+        link.setPage( "/Bbb.vm" );
+        assertEquals( "http://localhost:8080/waterview/servlet/waterview/!show!/Bbb.vm", link.toString() );
     }
 }

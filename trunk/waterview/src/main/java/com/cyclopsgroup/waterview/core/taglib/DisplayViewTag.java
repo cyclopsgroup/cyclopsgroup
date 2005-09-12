@@ -30,7 +30,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Tag to display given view
  */
-public class DisplayViewTag extends TagSupport
+public class DisplayViewTag
+    extends TagSupport
 {
     private View view;
 
@@ -47,18 +48,19 @@ public class DisplayViewTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("view");
-        JellyContextAdapter adapter = new JellyContextAdapter(getContext());
-        DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
-        getView().render(getRuntimeData(), ctx);
+        requireAttribute( "view" );
+        JellyContextAdapter adapter = new JellyContextAdapter( getContext() );
+        DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
+        getView().render( getRuntimeData(), ctx );
     }
 
     /**
      * @param view The view to set.
      */
-    public void setView(View view)
+    public void setView( View view )
     {
         this.view = view;
     }

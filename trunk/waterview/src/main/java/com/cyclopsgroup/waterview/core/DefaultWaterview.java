@@ -40,13 +40,13 @@ import com.cyclopsgroup.waterview.Waterview;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
-        Configurable, Initializable, Serviceable
+public class DefaultWaterview
+    extends AbstractLogEnabled
+    implements Waterview, Configurable, Initializable, Serviceable
 {
-    private transient Map pipelineRoles = ListOrderedMap
-            .decorate(new HashMap());
+    private transient Map pipelineRoles = ListOrderedMap.decorate( new HashMap() );
 
-    private Map pipelines = ListOrderedMap.decorate(new Hashtable());
+    private Map pipelines = ListOrderedMap.decorate( new Hashtable() );
 
     private ServiceManager serviceManager;
 
@@ -55,16 +55,16 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        Configuration[] confs = conf.getChild("pipelines").getChildren(
-                "pipeline");
-        for (int i = 0; i < confs.length; i++)
+        Configuration[] confs = conf.getChild( "pipelines" ).getChildren( "pipeline" );
+        for ( int i = 0; i < confs.length; i++ )
         {
             Configuration c = confs[i];
-            String pattern = c.getAttribute("pattern");
-            String role = c.getAttribute("role");
-            pipelineRoles.put(pattern, role);
+            String pattern = c.getAttribute( "pattern" );
+            String role = c.getAttribute( "role" );
+            pipelineRoles.put( pattern, role );
         }
     }
 
@@ -74,9 +74,9 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      * @param pattern String
      * @return Pipeline object
      */
-    public Pipeline getPipeline(String pattern)
+    public Pipeline getPipeline( String pattern )
     {
-        return (Pipeline) pipelines.get(pattern);
+        return (Pipeline) pipelines.get( pattern );
     }
 
     /**
@@ -84,21 +84,22 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      *
      * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void handleRuntime(RuntimeData runtime) throws Exception
+    public void handleRuntime( RuntimeData runtime )
+        throws Exception
     {
         Pipeline pipeline = null;
-        for (Iterator i = pipelines.keySet().iterator(); i.hasNext();)
+        for ( Iterator i = pipelines.keySet().iterator(); i.hasNext(); )
         {
             String pattern = (String) i.next();
-            if (Pattern.matches('^' + pattern + '$', runtime.getRequestPath()))
+            if ( Pattern.matches( '^' + pattern + '$', runtime.getRequestPath() ) )
             {
-                pipeline = getPipeline(pattern);
+                pipeline = getPipeline( pattern );
                 break;
             }
         }
-        if (pipeline != null)
+        if ( pipeline != null )
         {
-            pipeline.handleRuntime(runtime);
+            pipeline.handleRuntime( runtime );
         }
         else
         {
@@ -111,15 +112,16 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize() throws Exception
+    public void initialize()
+        throws Exception
     {
-        for (Iterator i = pipelineRoles.keySet().iterator(); i.hasNext();)
+        for ( Iterator i = pipelineRoles.keySet().iterator(); i.hasNext(); )
         {
             String pattern = (String) i.next();
 
-            String role = (String) pipelineRoles.get(pattern);
-            Pipeline pipeline = (Pipeline) serviceManager.lookup(role);
-            registerPipeline(pattern, pipeline);
+            String role = (String) pipelineRoles.get( pattern );
+            Pipeline pipeline = (Pipeline) serviceManager.lookup( role );
+            registerPipeline( pattern, pipeline );
         }
         pipelineRoles.clear();
     }
@@ -130,9 +132,9 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      * @param pattern Path pattern
      * @param pipeline Pipeline object
      */
-    public void registerPipeline(String pattern, Pipeline pipeline)
+    public void registerPipeline( String pattern, Pipeline pipeline )
     {
-        pipelines.put(pattern, pipeline);
+        pipelines.put( pattern, pipeline );
     }
 
     /**
@@ -140,7 +142,8 @@ public class DefaultWaterview extends AbstractLogEnabled implements Waterview,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         this.serviceManager = serviceManager;
     }

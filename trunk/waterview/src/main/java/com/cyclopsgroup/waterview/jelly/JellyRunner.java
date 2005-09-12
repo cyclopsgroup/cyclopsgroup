@@ -44,56 +44,55 @@ public class JellyRunner
      * @param args Script paths
      * @throws Exception Throw it out
      */
-    public static final void main(String[] args) throws Exception
+    public static final void main( String[] args )
+        throws Exception
     {
         List scripts = new ArrayList();
-        for (int i = 0; i < args.length; i++)
+        for ( int i = 0; i < args.length; i++ )
         {
             String path = args[i];
-            File file = new File(path);
-            if (file.isFile())
+            File file = new File( path );
+            if ( file.isFile() )
             {
-                scripts.add(file.toURL());
+                scripts.add( file.toURL() );
             }
             else
             {
-                Enumeration enu = JellyRunner.class.getClassLoader()
-                        .getResources(path);
-                CollectionUtils.addAll(scripts, enu);
+                Enumeration enu = JellyRunner.class.getClassLoader().getResources( path );
+                CollectionUtils.addAll( scripts, enu );
             }
         }
-        if (scripts.isEmpty())
+        if ( scripts.isEmpty() )
         {
-            System.out.println("No script to run, return!");
+            System.out.println( "No script to run, return!" );
             return;
         }
 
-        String basedir = new File("").getAbsolutePath();
-        Properties initProperties = new Properties(System.getProperties());
-        initProperties.setProperty("basedir", basedir);
-        initProperties.setProperty("plexus.home", basedir);
+        String basedir = new File( "" ).getAbsolutePath();
+        Properties initProperties = new Properties( System.getProperties() );
+        initProperties.setProperty( "basedir", basedir );
+        initProperties.setProperty( "plexus.home", basedir );
 
         WaterviewPlexusContainer container = new WaterviewPlexusContainer();
-        for (Iterator j = initProperties.keySet().iterator(); j.hasNext();)
+        for ( Iterator j = initProperties.keySet().iterator(); j.hasNext(); )
         {
             String initPropertyName = (String) j.next();
-            container.addContextValue(initPropertyName, initProperties
-                    .get(initPropertyName));
+            container.addContextValue( initPropertyName, initProperties.get( initPropertyName ) );
         }
 
-        container.addContextValue(Waterview.INIT_PROPERTIES, initProperties);
+        container.addContextValue( Waterview.INIT_PROPERTIES, initProperties );
         container.initialize();
         container.start();
 
-        JellyEngine je = (JellyEngine) container.lookup(JellyEngine.ROLE);
-        JellyContext jc = new JellyContext(je.getGlobalContext());
+        JellyEngine je = (JellyEngine) container.lookup( JellyEngine.ROLE );
+        JellyContext jc = new JellyContext( je.getGlobalContext() );
 
-        for (Iterator i = scripts.iterator(); i.hasNext();)
+        for ( Iterator i = scripts.iterator(); i.hasNext(); )
         {
             URL script = (URL) i.next();
-            System.out.print("Running script " + script);
-            jc.runScript(script, XMLOutput.createDummyXMLOutput());
-            System.out.println("... Done!");
+            System.out.print( "Running script " + script );
+            jc.runScript( script, XMLOutput.createDummyXMLOutput() );
+            System.out.println( "... Done!" );
         }
         container.dispose();
     }

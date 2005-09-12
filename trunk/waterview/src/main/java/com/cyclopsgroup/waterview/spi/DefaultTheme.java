@@ -23,7 +23,8 @@ import java.util.Hashtable;
  * 
  * Base abstract theme class
  */
-public class DefaultTheme implements Theme
+public class DefaultTheme
+    implements Theme
 {
     private String description;
 
@@ -36,10 +37,10 @@ public class DefaultTheme implements Theme
      *
      * @param name Name of the theme
      */
-    public DefaultTheme(String name)
+    public DefaultTheme( String name )
     {
         this.name = name;
-        setDescription("Theme [" + name + "]");
+        setDescription( "Theme [" + name + "]" );
     }
 
     /**
@@ -57,9 +58,9 @@ public class DefaultTheme implements Theme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getLayout(java.lang.String)
      */
-    public Layout getLayout(String layoutName)
+    public Layout getLayout( String layoutName )
     {
-        return (Layout) layouts.get(layoutName);
+        return (Layout) layouts.get( layoutName );
     }
 
     /**
@@ -77,7 +78,7 @@ public class DefaultTheme implements Theme
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -88,8 +89,8 @@ public class DefaultTheme implements Theme
      * @param name Layout name
      * @param layout Layout object
      */
-    public void setLayout(String name, Layout layout)
+    public void setLayout( String name, Layout layout )
     {
-        layouts.put(name, layout);
+        layouts.put( name, layout );
     }
 }

@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultPipelineContext implements PipelineContext
+public class DefaultPipelineContext
+    implements PipelineContext
 {
     private int position = 0;
 
@@ -38,7 +39,7 @@ public class DefaultPipelineContext implements PipelineContext
      *
      * @param valveList List of valves
      */
-    public DefaultPipelineContext(List valveList)
+    public DefaultPipelineContext( List valveList )
     {
         valves = valveList;
     }
@@ -58,14 +59,15 @@ public class DefaultPipelineContext implements PipelineContext
      *
      * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public void invokeNextValve(RuntimeData data) throws Exception
+    public void invokeNextValve( RuntimeData data )
+        throws Exception
     {
         position++;
-        if (position >= valves.size())
+        if ( position >= valves.size() )
         {
             return;
         }
-        invokeValve(data);
+        invokeValve( data );
     }
 
     /**
@@ -74,14 +76,15 @@ public class DefaultPipelineContext implements PipelineContext
      * @param data Page runtime object
      * @throws Exception Throw it out
      */
-    public void invokeValve(RuntimeData data) throws Exception
+    public void invokeValve( RuntimeData data )
+        throws Exception
     {
-        if (data.isStopped())
+        if ( data.isStopped() )
         {
             return;
         }
-        Valve valve = (Valve) valves.get(position);
-        valve.invoke(data, this);
+        Valve valve = (Valve) valves.get( position );
+        valve.invoke( data, this );
     }
 
     /**
@@ -89,7 +92,7 @@ public class DefaultPipelineContext implements PipelineContext
      *
      * @param position The position to set.
      */
-    public void setPosition(int position)
+    public void setPosition( int position )
     {
         this.position = position;
     }

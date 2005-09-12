@@ -27,7 +27,8 @@ import com.cyclopsgroup.waterview.I18N;
  *
  * Base implementation of I18N
  */
-public abstract class BaseI18N implements I18N
+public abstract class BaseI18N
+    implements I18N
 {
     private Locale locale;
 
@@ -36,7 +37,7 @@ public abstract class BaseI18N implements I18N
      * 
      * @param locale Locale object
      */
-    protected BaseI18N(Locale locale)
+    protected BaseI18N( Locale locale )
     {
         this.locale = locale;
     }
@@ -48,15 +49,16 @@ public abstract class BaseI18N implements I18N
      * @return String content
      * @throws Exception Throw it out
      */
-    protected abstract String doGetText(String key) throws Exception;
+    protected abstract String doGetText( String key )
+        throws Exception;
 
     /**
      * Overwrite or implement method get()
      * @see com.cyclopsgroup.waterview.I18N#get(java.lang.String)
      */
-    public String get(String key)
+    public String get( String key )
     {
-        return getText(key);
+        return getText( key );
     }
 
     /**
@@ -72,27 +74,27 @@ public abstract class BaseI18N implements I18N
      * Overwrite or implement method getText()
      * @see com.cyclopsgroup.waterview.I18N#getText(java.lang.String)
      */
-    public String getText(String key)
+    public String getText( String key )
     {
-        return getText(key, StringUtils.EMPTY);
+        return getText( key, StringUtils.EMPTY );
     }
 
     /**
      * Overwrite or implement method getText()
      * @see com.cyclopsgroup.waterview.I18N#getText(java.lang.String, java.lang.String)
      */
-    public String getText(String key, String defaultValue)
+    public String getText( String key, String defaultValue )
     {
         String ret = null;
         try
         {
-            ret = doGetText(key);
-            if (StringUtils.isEmpty(ret))
+            ret = doGetText( key );
+            if ( StringUtils.isEmpty( ret ) )
             {
                 ret = defaultValue;
             }
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
             ret = defaultValue;
         }

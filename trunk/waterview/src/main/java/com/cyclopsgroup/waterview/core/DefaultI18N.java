@@ -32,7 +32,8 @@ import com.cyclopsgroup.waterview.spi.BaseI18N;
  * 
  * Default implementation of i18n
  */
-class DefaultI18N extends BaseI18N
+class DefaultI18N
+    extends BaseI18N
 {
     private DefaultModuleManager modules;
 
@@ -45,10 +46,9 @@ class DefaultI18N extends BaseI18N
      * @param resourceBundles ResourceBundle list
      * @param modules Module manager
      */
-    DefaultI18N(Locale locale, List resourceBundles,
-            DefaultModuleManager modules)
+    DefaultI18N( Locale locale, List resourceBundles, DefaultModuleManager modules )
     {
-        super(locale);
+        super( locale );
         this.resourceBundles = resourceBundles;
         this.modules = modules;
     }
@@ -57,21 +57,22 @@ class DefaultI18N extends BaseI18N
      * Overwrite or implement method doGetText()
      * @see com.cyclopsgroup.waterview.spi.BaseI18N#doGetText(java.lang.String)
      */
-    protected String doGetText(String key) throws Exception
+    protected String doGetText( String key )
+        throws Exception
     {
         String text = null;
-        for (Iterator i = resourceBundles.iterator(); i.hasNext();)
+        for ( Iterator i = resourceBundles.iterator(); i.hasNext(); )
         {
             ResourceBundle resourceBundle = (ResourceBundle) i.next();
             try
             {
-                text = resourceBundle.getString(key);
-                if (StringUtils.isNotEmpty(text))
+                text = resourceBundle.getString( key );
+                if ( StringUtils.isNotEmpty( text ) )
                 {
                     break;
                 }
             }
-            catch (Exception ignored)
+            catch ( Exception ignored )
             {
             }
         }
@@ -82,9 +83,9 @@ class DefaultI18N extends BaseI18N
      * Overwrite or implement method getInstance()
      * @see com.cyclopsgroup.waterview.I18N#getInstance(java.lang.String)
      */
-    public I18N getInstance(String modulePath)
+    public I18N getInstance( String modulePath )
     {
-        Path path = modules.parsePath(modulePath);
-        return modules.getInternationalization(path, getLocale());
+        Path path = modules.parsePath( modulePath );
+        return modules.getInternationalization( path, getLocale() );
     }
 }
