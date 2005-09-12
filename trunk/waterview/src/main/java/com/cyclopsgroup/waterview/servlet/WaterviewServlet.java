@@ -44,19 +44,21 @@ import com.cyclopsgroup.waterview.utils.WaterviewPlexusContainer;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class WaterviewServlet
-    extends HttpServlet
+public class WaterviewServlet extends HttpServlet
 {
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = 3544955458881534002L;
+    private static final String REQUEST_NAME = "request";
+
+    private static final String RESPONSE_NAME = "response";
+
+    private static final String SERVLET_CONFIG_NAME = "servletConfig";
+
+    private static final String SERVLET_CONTEXT_NAME = "servletContext";
 
     private PlexusContainer container;
 
     private FileUpload fileUpload = new FileUpload();
 
-    private Log logger = LogFactory.getLog( getClass() );
+    private Log logger = LogFactory.getLog(getClass());
 
     private ServiceManager serviceManager;
 
@@ -73,9 +75,9 @@ public class WaterviewServlet
         {
             container.dispose();
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-            logger.error( "Can properly stop plexus container", e );
+            logger.error("Can properly stop plexus container", e);
         }
     }
 
@@ -84,10 +86,10 @@ public class WaterviewServlet
      * 
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
-    protected void doGet( HttpServletRequest request, HttpServletResponse response )
-        throws ServletException, IOException
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException
     {
-        handleRequest( request, response );
+        handleRequest(request, response);
     }
 
     /**
@@ -98,13 +100,15 @@ public class WaterviewServlet
      * @throws IOException Throw it out
      * @throws ServletException Throw it out
      */
-    protected void doHandleException( HttpServletRequest request, HttpServletResponse response, Throwable e )
-        throws IOException, ServletException
+    protected void doHandleException(HttpServletRequest request,
+            HttpServletResponse response, Throwable e) throws IOException,
+            ServletException
     {
-        response.setContentType( "text/html" );
-        response.getWriter().print( "<html><body><h2>Internal error occurs</h2><p><pre>" );
-        e.printStackTrace( response.getWriter() );
-        response.getWriter().print( "</pre></p></body></html>" );
+        response.setContentType("text/html");
+        response.getWriter().print(
+                "<html><body><h2>Internal error occurs</h2><p><pre>");
+        e.printStackTrace(response.getWriter());
+        response.getWriter().print("</pre></p></body></html>");
     }
 
     /**
@@ -114,28 +118,30 @@ public class WaterviewServlet
      * @param response Http servlet response
      * @throws Exception
      */
-    protected void doHandleRequest( HttpServletRequest request, HttpServletResponse response )
-        throws Exception
+    protected void doHandleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception
     {
         ServletRuntimeData data = null;
-        data = new ServletRuntimeData( request, response, servletConfig.getServletContext(), fileUpload, serviceManager );
+        data = new ServletRuntimeData(request, response, servletConfig
+                .getServletContext(), fileUpload, serviceManager);
         Context ctx = data.getRequestContext();
-        ctx.put( RuntimeData.NAME, data );
-        ctx.put( RequestValueParser.NAME, data.getParams() );
-        ctx.put( RuntimeData.SERVICE_MANAGER_NAME, serviceManager );
 
-        ctx.put( "servletConfig", servletConfig );
-        ctx.put( "servletContext", servletConfig.getServletContext() );
-        ctx.put( "request", request );
-        ctx.put( "response", response );
-        ctx.put( "requestContext", data.getRequestContext() );
+        ctx.put(RuntimeData.NAME, data);
+        ctx.put(RequestValueParser.NAME, data.getParams());
+        ctx.put(RuntimeData.SERVICE_MANAGER_NAME, serviceManager);
 
-        Waterview waterview = (Waterview) container.lookup( Waterview.ROLE );
-        waterview.handleRuntime( data );
+        ctx.put(SERVLET_CONFIG_NAME, servletConfig);
+        ctx.put(SERVLET_CONTEXT_NAME, servletConfig.getServletContext());
+        ctx.put(REQUEST_NAME, request);
+        ctx.put(RESPONSE_NAME, response);
+        ctx.put(RuntimeData.REQUEST_CONTEXT_NAME, data.getRequestContext());
 
-        if ( data.getRedirectUrl() != null )
+        Waterview waterview = (Waterview) container.lookup(Waterview.ROLE);
+        waterview.handleRuntime(data);
+
+        if (data.getRedirectUrl() != null)
         {
-            response.sendRedirect( data.getRedirectUrl() );
+            response.sendRedirect(data.getRedirectUrl());
         }
     }
 
@@ -144,22 +150,22 @@ public class WaterviewServlet
      * 
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
-    protected void doPost( HttpServletRequest request, HttpServletResponse response )
-        throws ServletException, IOException
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException
     {
-        handleRequest( request, response );
+        handleRequest(request, response);
     }
 
-    private void handleRequest( HttpServletRequest request, HttpServletResponse response )
-        throws IOException, ServletException
+    private void handleRequest(HttpServletRequest request,
+            HttpServletResponse response) throws IOException, ServletException
     {
         try
         {
-            doHandleRequest( request, response );
+            doHandleRequest(request, response);
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-            doHandleException( request, response, e );
+            doHandleException(request, response, e);
         }
         finally
         {
@@ -173,38 +179,39 @@ public class WaterviewServlet
      * 
      * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
      */
-    public void init( ServletConfig config )
-        throws ServletException
+    public void init(ServletConfig config) throws ServletException
     {
         servletConfig = config;
-        String basedir = config.getServletContext().getRealPath( "" );
+        String basedir = config.getServletContext().getRealPath("");
         Properties initProperties = new Properties();
-        initProperties.setProperty( "basedir", basedir );
-        initProperties.setProperty( "plexus.home", basedir );
+        initProperties.setProperty("basedir", basedir);
+        initProperties.setProperty("plexus.home", basedir);
         Enumeration i = config.getInitParameterNames();
-        while ( i.hasMoreElements() )
+        while (i.hasMoreElements())
         {
             String key = (String) i.nextElement();
-            String value = config.getInitParameter( key );
-            initProperties.setProperty( key, value );
+            String value = config.getInitParameter(key);
+            initProperties.setProperty(key, value);
         }
         try
         {
             container = new WaterviewPlexusContainer();
-            serviceManager = new ServiceManagerAdapter( container );
-            for ( Iterator j = initProperties.keySet().iterator(); j.hasNext(); )
+            serviceManager = new ServiceManagerAdapter(container);
+            for (Iterator j = initProperties.keySet().iterator(); j.hasNext();)
             {
                 String initPropertyName = (String) j.next();
-                container.addContextValue( initPropertyName, initProperties.get( initPropertyName ) );
+                container.addContextValue(initPropertyName, initProperties
+                        .get(initPropertyName));
             }
 
-            container.addContextValue( Waterview.INIT_PROPERTIES, initProperties );
+            container
+                    .addContextValue(Waterview.INIT_PROPERTIES, initProperties);
             container.initialize();
             container.start();
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-            container.getLogger().fatalError( "Can not start container", e );
+            container.getLogger().fatalError("Can not start container", e);
         }
     }
 }

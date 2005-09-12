@@ -37,6 +37,9 @@ public interface RuntimeData
     /** Page name in context */
     String PAGE_NAME = "page";
 
+    /** Name for request context */
+    String REQUEST_CONTEXT_NAME = "requestContext";
+
     /** Name of service manager in context */
     String SERVICE_MANAGER_NAME = "serviceManager";
 
@@ -74,7 +77,7 @@ public interface RuntimeData
      * @param fileName Name of file
      * @return Mimetype
      */
-    String getMimeType( String fileName );
+    String getMimeType(String fileName);
 
     /**
      * Get output print writer
@@ -96,6 +99,13 @@ public interface RuntimeData
      * @return Base url for page
      */
     String getPageBaseUrl();
+
+    /**
+     * Get parameter parser for request parameters
+     * 
+     * @return Vaue parser interface
+     */
+    RequestValueParser getParams();
 
     /**
      * Get query string
@@ -124,13 +134,6 @@ public interface RuntimeData
      * @return Context interface
      */
     Context getRequestContext();
-
-    /**
-     * Get parameter parser for request parameters
-     * 
-     * @return Vaue parser interface
-     */
-    RequestValueParser getParams();
 
     /**
      * Get path in request
@@ -186,14 +189,14 @@ public interface RuntimeData
      * 
      * @param contentType Content type
      */
-    void setOutputContentType( String contentType );
+    void setOutputContentType(String contentType);
 
     /**
      * Set page with Page model
      *
      * @param page Page path
      */
-    void setPage( Path page );
+    void setPage(Path page);
 
     /**
      * Set page to render
@@ -201,20 +204,19 @@ public interface RuntimeData
      * @param page Page path
      * @throws Exception Throw it out
      */
-    void setPage( String page )
-        throws Exception;
+    void setPage(String page) throws Exception;
 
     /**
      * @param url URL to redirect
      */
-    void setRedirectUrl( String url );
+    void setRedirectUrl(String url);
 
     /**
      * Set theme
      *
      * @param themeName Name of theme to set
      */
-    void setThemeName( String themeName );
+    void setThemeName(String themeName);
 
     /**
      * Stop the pipeline
