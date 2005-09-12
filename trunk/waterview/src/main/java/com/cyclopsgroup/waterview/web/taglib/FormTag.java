@@ -34,8 +34,7 @@ import com.cyclopsgroup.waterview.web.Form;
  * 
  * Form tag
  */
-public class FormTag
-    extends TagSupport
+public class FormTag extends TagSupport
 {
     private String action;
 
@@ -56,9 +55,9 @@ public class FormTag
      *
      * @param tag Field tag
      */
-    public void addFieldTag( FieldTag tag )
+    public void addFieldTag(FieldTag tag)
     {
-        fieldTags.put( tag.getName(), tag );
+        fieldTags.put(tag.getName(), tag);
     }
 
     /**
@@ -66,11 +65,11 @@ public class FormTag
      *
      * @param tag Submit tag
      */
-    public void addSubmitTag( SubmitTag tag )
+    public void addSubmitTag(SubmitTag tag)
     {
-        if ( !submitTags.contains( tag ) )
+        if (!submitTags.contains(tag))
         {
-            submitTags.add( tag );
+            submitTags.add(tag);
         }
     }
 
@@ -100,9 +99,9 @@ public class FormTag
      * @param fieldName Field name
      * @return Field tag object or null
      */
-    public FieldTag getFieldTag( String fieldName )
+    public FieldTag getFieldTag(String fieldName)
     {
-        return (FieldTag) fieldTags.get( fieldName );
+        return (FieldTag) fieldTags.get(fieldName);
     }
 
     /**
@@ -156,26 +155,25 @@ public class FormTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "name" );
-        requireAttribute( "method" );
-        requireParent( FormControlTag.class );
-        fieldTags = ListOrderedMap.decorate( new Hashtable() );
+        requireAttribute("name");
+        requireAttribute("method");
+        requireParent(FormControlTag.class);
+        fieldTags = ListOrderedMap.decorate(new Hashtable());
         submitTags = new ArrayList();
-        String formId = "form/" + getUniqueTagId() + "/" + getName();
-        RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
-        form = (Form) data.getSessionContext().get( formId );
+        String formId = "form/" + getUniqueTagId();
+        RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
+        form = (Form) data.getSessionContext().get(formId);
         formNew = false;
-        if ( form == null || !data.getParams().getBoolean( "keep_form" ) )
+        if (form == null || !data.getParams().getBoolean("keep_form"))
         {
             formNew = true;
-            form = new Form( formId );
-            data.getSessionContext().put( formId, form );
+            form = new Form(formId);
+            data.getSessionContext().put(formId, form);
         }
-        invokeBody( XMLOutput.createDummyXMLOutput() );
-        ( (FormControlTag) getParent() ).setFormTag( this );
+        invokeBody(XMLOutput.createDummyXMLOutput());
+        ((FormControlTag) getParent()).setFormTag(this);
     }
 
     /**
@@ -183,7 +181,7 @@ public class FormTag
      *
      * @param action The action to set.
      */
-    public void setAction( String action )
+    public void setAction(String action)
     {
         this.action = action;
     }
@@ -193,7 +191,7 @@ public class FormTag
      *
      * @param bodyScript The bodyScript to set.
      */
-    public void setBodyScript( Script bodyScript )
+    public void setBodyScript(Script bodyScript)
     {
         this.bodyScript = bodyScript;
     }
@@ -201,7 +199,7 @@ public class FormTag
     /**
      * @param method The method to set.
      */
-    public void setMethod( String method )
+    public void setMethod(String method)
     {
         this.method = method;
     }
@@ -211,8 +209,8 @@ public class FormTag
      *
      * @param name Name
      */
-    public void setName( String name )
+    public void setName(String name)
     {
-        setTagId( name );
+        setTagId(name);
     }
 }
