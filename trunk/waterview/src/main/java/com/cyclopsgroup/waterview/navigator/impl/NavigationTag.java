@@ -29,7 +29,7 @@ import org.apache.commons.jelly.XMLOutput;
 public class NavigationTag
     extends TagSupport
 {
-    private DefaultNavigatorHome navigator;
+    private DefaultNavigatorService navigator;
 
     /**
      * Overwrite or implement method in NavigationTag
@@ -39,7 +39,7 @@ public class NavigationTag
     public void doTag( XMLOutput output )
         throws MissingAttributeException, JellyTagException
     {
-        navigator = (DefaultNavigatorHome) getContext().getVariable( DefaultNavigatorHome.class.getName() );
+        navigator = (DefaultNavigatorService) getContext().getVariable( DefaultNavigatorService.class.getName() );
         invokeBody( output );
     }
 
@@ -48,7 +48,7 @@ public class NavigationTag
      *
      * @return Default navigation home
      */
-    public DefaultNavigatorHome getNavigator()
+    public DefaultNavigatorService getNavigator()
     {
         return navigator;
     }

@@ -24,6 +24,9 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.collections.MultiMap;
@@ -31,8 +34,8 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.navigator.NavigatorHome;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.web.TreeNode;
 
 /**
@@ -40,9 +43,8 @@ import com.cyclopsgroup.waterview.web.TreeNode;
  *
  * Default implementation of navigator home
  */
-public class DefaultNavigatorHome
-    extends AbstractLogEnabled
-    implements NavigatorHome, Initializable
+public class DefaultNavigatorService extends AbstractLogEnabled implements
+        NavigatorService, Initializable, Configurable
 {
 
     private Map pageIndex;
@@ -53,38 +55,40 @@ public class DefaultNavigatorHome
 
     private DefaultNavigatorNode rootNode;
 
+    private String path;
+
     /**
      * Add node
      *
      * @param node Node to add
      */
-    public void addNode( DefaultNavigatorNode node )
+    public void addNode(DefaultNavigatorNode node)
     {
-        if ( StringUtils.isNotEmpty( node.getPath() ) )
+        if (StringUtils.isNotEmpty(node.getPath()))
         {
-            pathIndex.put( node.getPath(), node );
+            pathIndex.put(node.getPath(), node);
         }
-        if ( node.getParentPath() != null )
+        if (node.getParentPath() != null)
         {
-            parentPathIndex.put( node.getParentPath(), node );
+            parentPathIndex.put(node.getParentPath(), node);
         }
-        pageIndex.put( node.getPage(), node );
+        pageIndex.put(node.getPage(), node);
     }
 
-    Collection getChildren( String path )
+    Collection getChildren(String path)
     {
-        Collection c = (Collection) parentPathIndex.get( path );
+        Collection c = (Collection) parentPathIndex.get(path);
         return c == null ? Collections.EMPTY_SET : c;
     }
 
     /**
      * Overwrite or implement method getNodeByPage()
      *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getNodeByPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#getNodeByPage(java.lang.String)
      */
-    public NavigatorNode getNodeByPage( String page )
+    public NavigatorNode getNodeByPage(String page)
     {
-        return (NavigatorNode) pageIndex.get( page );
+        return (NavigatorNode) pageIndex.get(page);
     }
 
     /**
@@ -93,19 +97,19 @@ public class DefaultNavigatorHome
      * @param path Path for node
      * @return Node object or null if not found
      */
-    NavigatorNode getNodeByPath( String path )
+    NavigatorNode getNodeByPath(String path)
     {
-        if ( StringUtils.isEmpty( path ) )
+        if (StringUtils.isEmpty(path))
         {
             return null;
         }
-        return (NavigatorNode) pathIndex.get( path );
+        return (NavigatorNode) pathIndex.get(path);
     }
 
     /**
      * Overwrite or implement method in DefaultNavigatorHome
      *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorHome#getRootNode()
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#getRootNode()
      */
     public NavigatorNode getRootNode()
     {
@@ -117,39 +121,51 @@ public class DefaultNavigatorHome
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize()
-        throws Exception
+    public void initialize() throws Exception
     {
         pathIndex = new Hashtable();
         parentPathIndex = new MultiHashMap();
         pageIndex = new Hashtable();
 
-        rootNode = new DefaultNavigatorNode( this, "/", null );
-        rootNode.getAttributes().set( DefaultNavigatorNode.PAGE_NAME, "/Index.jelly" );
-        rootNode.getAttributes().set( DefaultNavigatorNode.TITLE_NAME, "Start" );
-        addNode( rootNode );
+        rootNode = new DefaultNavigatorNode(this, "/", null);
+        rootNode.getAttributes().set(DefaultNavigatorNode.PAGE_NAME,
+                "/Index.jelly");
+        rootNode.getAttributes().set(DefaultNavigatorNode.TITLE_NAME, "Start");
+        addNode(rootNode);
 
         JellyContext jc = new JellyContext();
-        jc.setVariable( getClass().getName(), this );
-        jc.registerTagLibrary( "http://waterview.cyclopsgroup.com/navigator", new NavigatorTagLibrary() );
-        for ( Enumeration en = getClass().getClassLoader()
-            .getResources( "META-INF/cyclopsgroup/waterview-navigation.xml" ); en.hasMoreElements(); )
+        jc.setVariable(getClass().getName(), this);
+        jc.registerTagLibrary("http://waterview.cyclopsgroup.com/navigator",
+                new NavigatorTagLibrary());
+        for (Enumeration en = getClass().getClassLoader().getResources(path); en
+                .hasMoreElements();)
         {
             URL resource = (URL) en.nextElement();
-            getLogger().info( "Reading navigation from " + resource );
-            jc.runScript( resource, XMLOutput.createDummyXMLOutput() );
+            getLogger().info("Reading navigation from " + resource);
+            jc.runScript(resource, XMLOutput.createDummyXMLOutput());
         }
-        populateNode( rootNode );
+        populateNode(rootNode);
     }
 
-    private void populateNode( NavigatorNode node )
+    private void populateNode(NavigatorNode node)
     {
         node.getParentNodes();
         TreeNode[] nodes = node.getChildrenNodes();
-        for ( int i = 0; i < nodes.length; i++ )
+        for (int i = 0; i < nodes.length; i++)
         {
             NavigatorNode child = (NavigatorNode) nodes[i];
-            populateNode( child );
+            populateNode(child);
         }
+    }
+
+    /**
+     * Overwrite or implement method configure()
+     *
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure(Configuration conf) throws ConfigurationException
+    {
+        path = conf.getChild("path").getValue(
+                "META-INF/cyclopsgroup/waterview-navigation.xml");
     }
 }

@@ -83,11 +83,17 @@
             <role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
             <implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-theme>default</default-theme>
+            </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.navigator.NavigatorHome</role>
-            <implementation>com.cyclopsgroup.waterview.navigator.impl.DefaultNavigatorHome</implementation>
+            <role>com.cyclopsgroup.waterview.navigator.NavigatorService</role>
+            <implementation>com.cyclopsgroup.waterview.navigator.impl.DefaultNavigatorService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <path>META-INF/cyclopsgroup/waterview-navigation.xml</path>
+            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
@@ -97,7 +103,7 @@
                 <component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
                 <component role="com.cyclopsgroup.waterview.jsp.JspEngine" />
                 <component role="com.cyclopsgroup.waterview.velocity.VelocityEngine" />
-                <component role="com.cyclopsgroup.waterview.navigator.NavigatorHome" />
+                <component role="com.cyclopsgroup.waterview.navigator.NavigatorService" />
             </configuration>
         </component>
     </components>

@@ -21,10 +21,10 @@ package com.cyclopsgroup.waterview.navigator;
  * 
  * Home of the navigator
  */
-public interface NavigatorHome
+public interface NavigatorService
 {
     /** Role name of component */
-    String ROLE = NavigatorHome.class.getName();
+    String ROLE = NavigatorService.class.getName();
 
     /**
      * Get node by page

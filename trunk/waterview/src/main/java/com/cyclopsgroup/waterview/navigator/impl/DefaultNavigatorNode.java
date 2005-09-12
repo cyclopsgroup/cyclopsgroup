@@ -48,7 +48,7 @@ class DefaultNavigatorNode
 
     private ValueParser attributes = new MapValueParser( new HashMap() );
 
-    private DefaultNavigatorHome navigatorHome;
+    private DefaultNavigatorService navigatorHome;
 
     private NavigatorNode[] parentNodes;
 
@@ -56,7 +56,7 @@ class DefaultNavigatorNode
 
     private String path;
 
-    DefaultNavigatorNode( DefaultNavigatorHome nav, String name, String parentPath )
+    DefaultNavigatorNode( DefaultNavigatorService nav, String name, String parentPath )
     {
         if ( StringUtils.isNotEmpty( name ) )
         {

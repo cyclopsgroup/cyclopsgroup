@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.navigator.impl;
 
 import org.codehaus.plexus.PlexusTestCase;
 
-import com.cyclopsgroup.waterview.navigator.NavigatorHome;
+import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 
 /**
@@ -37,7 +37,7 @@ public class DefaultNavigatorHomeTest
     public void testGetPath()
         throws Exception
     {
-        NavigatorHome nav = (NavigatorHome) lookup( NavigatorHome.ROLE );
+        NavigatorService nav = (NavigatorService) lookup( NavigatorService.ROLE );
         NavigatorNode node = nav.getNodeByPage( "/waterview/system/status/SessionDump.jelly" );
         NavigatorNode[] path = node.getParentNodes();
         assertEquals( 3, path.length );

@@ -43,7 +43,7 @@ public final class RuntimeNavigatorNode
         RuntimeNavigatorNode root = (RuntimeNavigatorNode) data.getSessionContext().get( KEY );
         if ( root == null )
         {
-            NavigatorHome navigator = (NavigatorHome) data.getServiceManager().lookup( NavigatorHome.ROLE );
+            NavigatorService navigator = (NavigatorService) data.getServiceManager().lookup( NavigatorService.ROLE );
             root = new RuntimeNavigatorNode( null, navigator.getRootNode() );
             root.expand( data );
             TreeNode[] children = root.getChildrenNodes();
