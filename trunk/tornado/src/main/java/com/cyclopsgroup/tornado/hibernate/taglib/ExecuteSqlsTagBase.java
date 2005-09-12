@@ -31,11 +31,12 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Tag to drop all tables
  */
-public abstract class ExecuteSqlsTagBase extends TagSupport
+public abstract class ExecuteSqlsTagBase
+    extends TagSupport
 {
     private boolean batched;
 
-    private Log logger = LogFactory.getLog(ExecuteSqlsTagBase.class);
+    private Log logger = LogFactory.getLog( ExecuteSqlsTagBase.class );
 
     /**
      * Getter method for batched
@@ -52,7 +53,7 @@ public abstract class ExecuteSqlsTagBase extends TagSupport
      *
      * @param batched The batched to set.
      */
-    public void setBatched(boolean batched)
+    public void setBatched( boolean batched )
     {
         this.batched = batched;
     }
@@ -64,46 +65,47 @@ public abstract class ExecuteSqlsTagBase extends TagSupport
      * @return Sqls to execute
      * @throws Exception Throw it out
      */
-    protected abstract String[] getSqls(HibernateTag hibernate)
-            throws Exception;
+    protected abstract String[] getSqls( HibernateTag hibernate )
+        throws Exception;
 
     /**
      * Override method processTag in class CreateTablesTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        HibernateTag hibernate = (HibernateTag) requireInside(HibernateTag.class);
-        String[] sqls = getSqls(hibernate);
+        HibernateTag hibernate = (HibernateTag) requireInside( HibernateTag.class );
+        String[] sqls = getSqls( hibernate );
         Connection dbcon = hibernate.getConnection();
         Statement s = dbcon.createStatement();
-        if (isBatched())
+        if ( isBatched() )
         {
-            for (int i = 0; i < sqls.length; i++)
+            for ( int i = 0; i < sqls.length; i++ )
             {
-                s.addBatch(sqls[i]);
+                s.addBatch( sqls[i] );
             }
             try
             {
                 s.executeBatch();
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                logger.debug("Dropping table error", e);
+                logger.debug( "Dropping table error", e );
             }
         }
         else
         {
-            for (int i = 0; i < sqls.length; i++)
+            for ( int i = 0; i < sqls.length; i++ )
             {
                 try
                 {
-                    s.execute(sqls[i]);
+                    s.execute( sqls[i] );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
-                    logger.debug("Dropping table error", e);
+                    logger.debug( "Dropping table error", e );
                 }
             }
         }

@@ -26,20 +26,20 @@ import org.hibernate.tool.hbm2ddl.DatabaseMetadata;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class UpdateSchemaTag extends ExecuteSqlsTagBase
+public class UpdateSchemaTag
+    extends ExecuteSqlsTagBase
 {
     /**
      * Override method getSqls in class UpdateSchemaTag
      *
      * @see com.cyclopsgroup.tornado.hibernate.taglib.ExecuteSqlsTagBase#getSqls(com.cyclopsgroup.tornado.hibernate.taglib.HibernateTag)
      */
-    protected String[] getSqls(HibernateTag hibernate) throws Exception
+    protected String[] getSqls( HibernateTag hibernate )
+        throws Exception
     {
-        Dialect dialect = Dialect.getDialect(hibernate
-                .getHibernateConfiguration().getProperties());
+        Dialect dialect = Dialect.getDialect( hibernate.getHibernateConfiguration().getProperties() );
         Connection dbcon = hibernate.getConnection();
-        DatabaseMetadata dm = new DatabaseMetadata(dbcon, dialect);
-        return hibernate.getHibernateConfiguration()
-                .generateSchemaUpdateScript(dialect, dm);
+        DatabaseMetadata dm = new DatabaseMetadata( dbcon, dialect );
+        return hibernate.getHibernateConfiguration().generateSchemaUpdateScript( dialect, dm );
     }
 }

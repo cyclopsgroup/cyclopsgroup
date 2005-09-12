@@ -24,18 +24,18 @@ import org.hibernate.dialect.Dialect;
  *
  * Tag to drop all tables
  */
-public class DropTablesTag extends ExecuteSqlsTagBase
+public class DropTablesTag
+    extends ExecuteSqlsTagBase
 {
     /**
      * Override method getSqls in class DropTablesTag
      *
      * @see com.cyclopsgroup.tornado.hibernate.taglib.ExecuteSqlsTagBase#getSqls(com.cyclopsgroup.tornado.hibernate.taglib.HibernateTag)
      */
-    protected String[] getSqls(HibernateTag hibernate) throws Exception
+    protected String[] getSqls( HibernateTag hibernate )
+        throws Exception
     {
-        Dialect dialect = Dialect.getDialect(hibernate
-                .getHibernateConfiguration().getProperties());
-        return hibernate.getHibernateConfiguration().generateDropSchemaScript(
-                dialect);
+        Dialect dialect = Dialect.getDialect( hibernate.getHibernateConfiguration().getProperties() );
+        return hibernate.getHibernateConfiguration().generateDropSchemaScript( dialect );
     }
 }
