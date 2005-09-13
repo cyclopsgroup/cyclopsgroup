@@ -22,10 +22,10 @@ import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.tornado.security.Role;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.tornado.security.User;
+import com.cyclopsgroup.tornado.security.entity.Role;
+import com.cyclopsgroup.tornado.security.entity.User;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

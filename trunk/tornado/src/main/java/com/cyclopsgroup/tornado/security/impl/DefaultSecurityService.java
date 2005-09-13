@@ -31,14 +31,14 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.security.Group;
-import com.cyclopsgroup.tornado.security.GroupRole;
 import com.cyclopsgroup.tornado.security.NoSuchUserException;
 import com.cyclopsgroup.tornado.security.RuntimeUserAPI;
 import com.cyclopsgroup.tornado.security.SecurityListener;
 import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.tornado.security.User;
-import com.cyclopsgroup.tornado.security.UserRole;
+import com.cyclopsgroup.tornado.security.entity.Group;
+import com.cyclopsgroup.tornado.security.entity.GroupRole;
+import com.cyclopsgroup.tornado.security.entity.User;
+import com.cyclopsgroup.tornado.security.entity.UserRole;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

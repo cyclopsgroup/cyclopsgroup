@@ -1,4 +1,4 @@
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.security.entity;
 
 import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;

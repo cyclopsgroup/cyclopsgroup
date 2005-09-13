@@ -1,4 +1,4 @@
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.security.entity;
 
 import java.io.Serializable;
 import java.util.Set;

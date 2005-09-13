@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.cyclopsgroup.tornado.security">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security.entity">
     <class name="User" table="c_t_user">
-        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.UserBase</meta>
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.entity.UserBase</meta>
         <id name="id" type="string" length="128" column="user_id">
             <generator class="uuid.hex" />
         </id>
@@ -28,7 +28,7 @@
         </property>
         <set name="groups" table="c_t_user_group">
             <key column="user_id" />
-            <many-to-many column="group_id" class="com.cyclopsgroup.tornado.security.Group" />
+            <many-to-many column="group_id" class="com.cyclopsgroup.tornado.security.entity.Group" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  * 
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,29 +15,14 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.security.entity;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * User entity bean
  */
-public class User
-    extends UserBase
+public class Role
+    extends RoleBase
 {
-    /**
-     * @return Private password
-     */
-    public String getPrivatePassword()
-    {
-        return getPassword();
-    }
 
-    /**
-     * @param privatePassword
-     */
-    public void setPrivatePassword( String privatePassword )
-    {
-        setPassword( privatePassword );
-    }
 }

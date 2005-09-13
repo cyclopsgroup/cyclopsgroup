@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Hibernate xmlns="http://tornado.cyclopsgroup.com/tool">
+    <Class name="com.cyclopsgroup.tornado.security.entity.User">
+        <New var="userGuest" name="guest" privatePassword="password" email="guest@cyclopdgroup.com" firstName="Guest"
+            lastName="System" country="US" language="en" isSystem="true" />
+    </Class>
+</Hibernate>

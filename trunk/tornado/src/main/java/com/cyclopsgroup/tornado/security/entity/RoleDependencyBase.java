@@ -1,4 +1,4 @@
-package com.cyclopsgroup.tornado.security;
+package com.cyclopsgroup.tornado.security.entity;
 
 import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -17,10 +17,10 @@ abstract public class RoleDependencyBase implements Serializable {
     private String dependencyId;
 
     /** nullable persistent field */
-    private com.cyclopsgroup.tornado.security.Role dependency;
+    private com.cyclopsgroup.tornado.security.entity.Role dependency;
 
     /** full constructor */
-    public RoleDependencyBase(String roleId, String dependencyId, com.cyclopsgroup.tornado.security.Role dependency) {
+    public RoleDependencyBase(String roleId, String dependencyId, com.cyclopsgroup.tornado.security.entity.Role dependency) {
         this.roleId = roleId;
         this.dependencyId = dependencyId;
         this.dependency = dependency;
@@ -60,11 +60,11 @@ abstract public class RoleDependencyBase implements Serializable {
         this.dependencyId = dependencyId;
     }
 
-    public com.cyclopsgroup.tornado.security.Role getDependency() {
+    public com.cyclopsgroup.tornado.security.entity.Role getDependency() {
         return this.dependency;
     }
 
-    public void setDependency(com.cyclopsgroup.tornado.security.Role dependency) {
+    public void setDependency(com.cyclopsgroup.tornado.security.entity.Role dependency) {
         this.dependency = dependency;
     }
 

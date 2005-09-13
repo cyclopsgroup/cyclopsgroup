@@ -28,9 +28,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.security.User;
 import com.cyclopsgroup.tornado.security.UserAuthenticationResult;
 import com.cyclopsgroup.tornado.security.UserAuthenticator;
+import com.cyclopsgroup.tornado.security.entity.User;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

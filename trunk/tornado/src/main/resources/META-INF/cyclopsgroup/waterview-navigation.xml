@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
+    <Tree name="tornado.root" position="/system">
+        <Node name="admin" title="Admin" page="/tornado/admin/Index.jelly">
+            <Node title="Users" page="/tornado/admin/ManageUsers.jelly" />
+            <Node title="New User" page="/tornado/admin/NewUser.jelly" />
+            <Node title="Groups" page="/tornado/admin/ManageGroups.jelly" />
+            <Node title="Roles" page="/tornado/admin/ManageRoles.jelly" />
+        </Node>
+    </Tree>
+</Navigation>
