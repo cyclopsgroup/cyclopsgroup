@@ -40,15 +40,30 @@ public class FormTag extends TagSupport
 
     private Script bodyScript;
 
+    private List buttonTags;
+
     private Map fieldTags;
 
     private Form form;
 
     private boolean formNew;
 
+    private boolean hideControls;
+
     private String method = "get";
 
-    private List submitTags;
+    /**
+     * Add submit tag
+     *
+     * @param tag Submit tag
+     */
+    public void addButtonTag(SubmitTag tag)
+    {
+        if (!buttonTags.contains(tag))
+        {
+            buttonTags.add(tag);
+        }
+    }
 
     /**
      * Add field tag
@@ -58,19 +73,6 @@ public class FormTag extends TagSupport
     public void addFieldTag(FieldTag tag)
     {
         fieldTags.put(tag.getName(), tag);
-    }
-
-    /**
-     * Add submit tag
-     *
-     * @param tag Submit tag
-     */
-    public void addSubmitTag(SubmitTag tag)
-    {
-        if (!submitTags.contains(tag))
-        {
-            submitTags.add(tag);
-        }
     }
 
     /**
@@ -91,6 +93,16 @@ public class FormTag extends TagSupport
     public Script getBodyScript()
     {
         return bodyScript;
+    }
+
+    /**
+     * Get submit tags
+     *
+     * @return Submit tags
+     */
+    public List getButtonTags()
+    {
+        return buttonTags;
     }
 
     /**
@@ -131,16 +143,6 @@ public class FormTag extends TagSupport
     }
 
     /**
-     * Get submit tags
-     *
-     * @return Submit tags
-     */
-    public List getSubmitTags()
-    {
-        return submitTags;
-    }
-
-    /**
      * If the for is new created
      *
      * @return True if form is new
@@ -148,6 +150,16 @@ public class FormTag extends TagSupport
     public boolean isFormNew()
     {
         return formNew;
+    }
+
+    /**
+     * Getter method for property hideControls
+     *
+     * @return Returns the hideControls.
+     */
+    public boolean isHideControls()
+    {
+        return hideControls;
     }
 
     /**
@@ -161,7 +173,7 @@ public class FormTag extends TagSupport
         requireAttribute("method");
         requireParent(FormControlTag.class);
         fieldTags = ListOrderedMap.decorate(new Hashtable());
-        submitTags = new ArrayList();
+        buttonTags = new ArrayList();
         String formId = "form/" + getUniqueTagId();
         RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
         form = (Form) data.getSessionContext().get(formId);
@@ -173,6 +185,7 @@ public class FormTag extends TagSupport
             data.getSessionContext().put(formId, form);
         }
         invokeBody(XMLOutput.createDummyXMLOutput());
+        formNew = false;
         ((FormControlTag) getParent()).setFormTag(this);
     }
 
@@ -194,6 +207,16 @@ public class FormTag extends TagSupport
     public void setBodyScript(Script bodyScript)
     {
         this.bodyScript = bodyScript;
+    }
+
+    /**
+     * Setter method for property hideControls
+     *
+     * @param hideControls The hideControls to set.
+     */
+    public void setHideControls(boolean hideControls)
+    {
+        this.hideControls = hideControls;
     }
 
     /**

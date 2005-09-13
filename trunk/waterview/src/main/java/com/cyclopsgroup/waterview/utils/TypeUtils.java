@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.iterators.ArrayIterator;
 import org.apache.commons.collections.iterators.EnumerationIterator;
 
@@ -49,9 +50,9 @@ public final class TypeUtils
      * @param type Given destination type
      * @return Converted object
      */
-    public static Object convert( String expression, Class type )
+    public static Object convert(String expression, Class type)
     {
-        return getConvertUtils().convert( expression, type );
+        return getConvertUtils().convert(expression, type);
     }
 
     /**
@@ -61,18 +62,87 @@ public final class TypeUtils
      * @param type Type name
      * @return Converted object
      */
-    public static Object convert( String expression, String type )
+    public static Object convert(String expression, String type)
     {
-        return convert( expression, getType( type ) );
+        return convert(expression, getType(type));
+    }
+
+    /**
+     * Create a collection of grouped elements
+     *
+     * @param anyCollection Any collection object
+     * @param size Size of group
+     * @return List of groups
+     */
+    public static List createGroup(Object anyCollection, int size)
+    {
+        if (size < 1)
+        {
+            throw new IllegalArgumentException("Size can not be smaller than 1");
+        }
+        List ret = new ArrayList();
+        List group = null;
+        for (Iterator i = iterate(anyCollection); i.hasNext();)
+        {
+            Object item = i.next();
+            if (group == null)
+            {
+                group = new ArrayList(size);
+            }
+            group.add(item);
+            if (group.size() == size)
+            {
+                ret.add(group);
+                group = null;
+            }
+        }
+        if (group != null)
+        {
+            ret.add(group);
+        }
+        return ret;
+    }
+
+    /**
+     *Create a collection of vertical groups
+     *
+     * @param items Any collection objects
+     * @param size Size of group
+     * @return List of groups
+     */
+    public static List createVerticalGroup(Object items, int size)
+    {
+        Iterator ite = iterate(items);
+        List list = new ArrayList();
+        CollectionUtils.addAll(list, ite);
+        int length = list.size() / size;
+        if (list.size() % size > 0)
+        {
+            length++;
+        }
+        List[] bags = new List[length];
+        for (int i = 0; i < length; i++)
+        {
+            bags[i] = new ArrayList();
+        }
+        for (int i = 0; i < list.size(); i++)
+        {
+            Object item = list.get(i);
+            List bag = bags[i % length];
+            bag.add(i / length, item);
+        }
+        List ret = new ArrayList();
+        CollectionUtils.addAll(ret, bags);
+        return ret;
     }
 
     private synchronized static ConvertUtilsBean getConvertUtils()
     {
-        if ( convertUtils == null )
+        if (convertUtils == null)
         {
             convertUtils = new ConvertUtilsBean();
-            convertUtils.register( new DateConverter(), Date.class );
-            convertUtils.register( new StringConverterAdapter(), String.class );
+            convertUtils.register(new DateConverter(), Date.class);
+            convertUtils.register(new StringConverterAdapter(), String.class);
         }
 
         return convertUtils;
@@ -84,10 +154,10 @@ public final class TypeUtils
      * @param type Type
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType( Class type )
+    public static Class getNonePrimitiveType(Class type)
     {
-        Class ret = (Class) getNonePrimitiveTypeMap().get( type );
-        if ( ret == null )
+        Class ret = (Class) getNonePrimitiveTypeMap().get(type);
+        if (ret == null)
         {
             ret = type;
         }
@@ -100,25 +170,25 @@ public final class TypeUtils
      * @param typeName Type name
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType( String typeName )
+    public static Class getNonePrimitiveType(String typeName)
     {
-        Class type = getType( typeName );
-        return getNonePrimitiveType( type );
+        Class type = getType(typeName);
+        return getNonePrimitiveType(type);
     }
 
     private static Map getNonePrimitiveTypeMap()
     {
-        if ( nonePrimitiveTypeMap == null )
+        if (nonePrimitiveTypeMap == null)
         {
             nonePrimitiveTypeMap = new Hashtable();
-            nonePrimitiveTypeMap.put( Boolean.TYPE, Boolean.class );
-            nonePrimitiveTypeMap.put( Byte.TYPE, Byte.class );
-            nonePrimitiveTypeMap.put( Character.TYPE, Character.class );
-            nonePrimitiveTypeMap.put( Short.TYPE, Short.class );
-            nonePrimitiveTypeMap.put( Integer.TYPE, Integer.class );
-            nonePrimitiveTypeMap.put( Long.TYPE, Long.class );
-            nonePrimitiveTypeMap.put( Float.TYPE, Float.class );
-            nonePrimitiveTypeMap.put( Double.TYPE, Double.class );
+            nonePrimitiveTypeMap.put(Boolean.TYPE, Boolean.class);
+            nonePrimitiveTypeMap.put(Byte.TYPE, Byte.class);
+            nonePrimitiveTypeMap.put(Character.TYPE, Character.class);
+            nonePrimitiveTypeMap.put(Short.TYPE, Short.class);
+            nonePrimitiveTypeMap.put(Integer.TYPE, Integer.class);
+            nonePrimitiveTypeMap.put(Long.TYPE, Long.class);
+            nonePrimitiveTypeMap.put(Float.TYPE, Float.class);
+            nonePrimitiveTypeMap.put(Double.TYPE, Double.class);
         }
 
         return nonePrimitiveTypeMap;
@@ -130,18 +200,19 @@ public final class TypeUtils
      * @param typeName Name of type
      * @return Type class
      */
-    public static Class getType( String typeName )
+    public static Class getType(String typeName)
     {
-        Class type = (Class) getTypeMap().get( typeName );
-        if ( type == null )
+        Class type = (Class) getTypeMap().get(typeName);
+        if (type == null)
         {
             try
             {
-                type = Class.forName( typeName );
+                type = Class.forName(typeName);
             }
-            catch ( ClassNotFoundException e )
+            catch (ClassNotFoundException e)
             {
-                throw new IllegalArgumentException( typeName + " is not a recognizable type" );
+                throw new IllegalArgumentException(typeName
+                        + " is not a recognizable type");
             }
         }
         return type;
@@ -149,76 +220,22 @@ public final class TypeUtils
 
     private static synchronized Map getTypeMap()
     {
-        if ( typeMap == null )
+        if (typeMap == null)
         {
             typeMap = new Hashtable();
-            typeMap.put( "boolean", Boolean.TYPE );
-            typeMap.put( "byte", Byte.TYPE );
-            typeMap.put( "char", Character.TYPE );
-            typeMap.put( "short", Short.TYPE );
-            typeMap.put( "int", Integer.TYPE );
-            typeMap.put( "long", Long.TYPE );
-            typeMap.put( "float", Float.TYPE );
-            typeMap.put( "double", Double.TYPE );
-            typeMap.put( "string", String.class );
-            typeMap.put( "date", Date.class );
+            typeMap.put("boolean", Boolean.TYPE);
+            typeMap.put("byte", Byte.TYPE);
+            typeMap.put("char", Character.TYPE);
+            typeMap.put("short", Short.TYPE);
+            typeMap.put("int", Integer.TYPE);
+            typeMap.put("long", Long.TYPE);
+            typeMap.put("float", Float.TYPE);
+            typeMap.put("double", Double.TYPE);
+            typeMap.put("string", String.class);
+            typeMap.put("date", Date.class);
         }
 
         return typeMap;
-    }
-
-    /**
-     * Register type name
-     *
-     * @param name Type name 
-     * @param type Type class
-     */
-    public static void registerType( String name, Class type )
-    {
-        getTypeMap().put( name, type );
-    }
-
-    /**
-     * Convert object to string
-     *
-     * @param value Object
-     * @return String expression
-     */
-    public static String toString( Object value )
-    {
-        return getConvertUtils().convert( value );
-    }
-
-    /**
-     * Return iterator of given object
-     *
-     * @param items Could be any object
-     * @return Iteartor object of it
-     */
-    public static Iterator iterate( Object items )
-    {
-        if ( items instanceof Collection )
-        {
-            return ( (Collection) items ).iterator();
-        }
-        else if ( items instanceof Iterator )
-        {
-            return (Iterator) items;
-        }
-        else if ( items instanceof Enumeration )
-        {
-            return new EnumerationIterator( (Enumeration) items );
-        }
-        else if ( items instanceof Object[] )
-        {
-            return new ArrayIterator( (Object[]) items );
-        }
-        else
-        {
-            List ret = new ArrayList( 1 );
-            ret.add( items );
-            return ret.iterator();
-        }
     }
 
     /**
@@ -227,13 +244,68 @@ public final class TypeUtils
      * @param items Object
      * @return True if it's collection related
      */
-    public static boolean isIteratable( Object items )
+    public static boolean isIteratable(Object items)
     {
-        if ( items == null )
+        if (items == null)
         {
             return false;
         }
-        return ( items instanceof Collection ) || ( items instanceof Iterator ) || ( items instanceof Enumeration )
-            || ( items instanceof Object[] );
+        return (items instanceof Collection) || (items instanceof Iterator)
+                || (items instanceof Enumeration)
+                || (items instanceof Object[]);
+    }
+
+    /**
+     * Return iterator of given object
+     *
+     * @param items Could be any object
+     * @return Iteartor object of it
+     */
+    public static Iterator iterate(Object items)
+    {
+        if (items instanceof Collection)
+        {
+            return ((Collection) items).iterator();
+        }
+        else if (items instanceof Iterator)
+        {
+            return (Iterator) items;
+        }
+        else if (items instanceof Enumeration)
+        {
+            return new EnumerationIterator((Enumeration) items);
+        }
+        else if (items instanceof Object[])
+        {
+            return new ArrayIterator((Object[]) items);
+        }
+        else
+        {
+            List ret = new ArrayList(1);
+            ret.add(items);
+            return ret.iterator();
+        }
+    }
+
+    /**
+     * Register type name
+     *
+     * @param name Type name 
+     * @param type Type class
+     */
+    public static void registerType(String name, Class type)
+    {
+        getTypeMap().put(name, type);
+    }
+
+    /**
+     * Convert object to string
+     *
+     * @param value Object
+     * @return String expression
+     */
+    public static String toString(Object value)
+    {
+        return getConvertUtils().convert(value);
     }
 }

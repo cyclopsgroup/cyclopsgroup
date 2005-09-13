@@ -25,8 +25,7 @@ import com.cyclopsgroup.waterview.web.Field;
  * 
  * Field tag
  */
-public class FieldTag
-    extends TagSupport
+public class FieldTag extends TagSupport
 {
     private Script bodyScript;
 
@@ -79,15 +78,15 @@ public class FieldTag
      */
     public int getSize()
     {
-        if ( size > 0 )
+        if (size > 0)
         {
             return size;
         }
-        else if ( isNumberType() )
+        else if (isNumberType())
         {
             return 8;
         }
-        else if ( isDateType() )
+        else if (isDateType())
         {
             return 12;
         }
@@ -135,7 +134,7 @@ public class FieldTag
      */
     public boolean isDateType()
     {
-        return Date.class.isAssignableFrom( fieldType );
+        return Date.class.isAssignableFrom(fieldType);
     }
 
     /**
@@ -145,7 +144,7 @@ public class FieldTag
      */
     public boolean isNumberType()
     {
-        return Number.class.isAssignableFrom( fieldType );
+        return Number.class.isAssignableFrom(fieldType);
     }
 
     /**
@@ -179,48 +178,52 @@ public class FieldTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "name" );
-        FormTag formTag = (FormTag) findAncestorWithClass( FormTag.class );
-        if ( formTag == null )
+        requireAttribute("name");
+        FormTag formTag = (FormTag) findAncestorWithClass(FormTag.class);
+        if (formTag == null)
         {
-            throw new JellyTagException( "Field must be inside a Form" );
+            throw new JellyTagException("Field must be inside a Form");
         }
-        formTag.addFieldTag( this );
-        if ( formTag.isFormNew() )
+        formTag.addFieldTag(this);
+        if (formTag.isFormNew())
         {
-            field = new Field( getName(), TypeUtils.getType( getType() ) );
-            field.setRequired( isRequired() );
-            field.setValue( (String) getValue() );
-            formTag.getForm().addField( field );
+            field = new Field(getName(), TypeUtils.getType(getType()));
+            field.setRequired(isRequired());
+            field.setValue((String) getValue());
+            formTag.getForm().addField(field);
         }
         else
         {
-            field = formTag.getForm().getField( getName() );
+            field = formTag.getForm().getField(getName());
         }
 
-        invokeBody( output );
+        invokeBody(output);
 
-        if ( getBodyScript() == null )
+        if (!formTag.isHideControls())
         {
-            JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
-            setBodyScript( je.getScript( "/waterview/FormField.jelly" ) );
-        }
+            if (getBodyScript() == null)
+            {
+                JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                        JellyEngine.ROLE);
+                setBodyScript(je.getScript("/waterview/FormField.jelly"));
+            }
 
-        JellyContext jc = new JellyContext( context );
-        jc.setVariable( "field", field );
-        jc.setVariable( "fieldTag", this );
-        jc.setVariable( "form", formTag.getForm() );
-        jc.setVariable( "formTag", formTag );
-        getBodyScript().run( jc, output );
+            JellyContext jc = new JellyContext(context);
+            jc.setVariable("field", field);
+            jc.setVariable("fieldTag", this);
+            jc.setVariable("form", formTag.getForm());
+            jc.setVariable("formTag", formTag);
+            jc.setVariable("formControl", formTag.getParent());
+            getBodyScript().run(jc, output);
+        }
     }
 
     /**
      * @param bodyScript The bodyScript to set.
      */
-    public void setBodyScript( Script bodyScript )
+    public void setBodyScript(Script bodyScript)
     {
         this.bodyScript = bodyScript;
     }
@@ -228,7 +231,7 @@ public class FieldTag
     /**
      * @param field The field to set.
      */
-    public void setField( Field field )
+    public void setField(Field field)
     {
         this.field = field;
     }
@@ -236,7 +239,7 @@ public class FieldTag
     /**
      * @param name The name to set.
      */
-    public void setName( String name )
+    public void setName(String name)
     {
         this.name = name;
     }
@@ -244,7 +247,7 @@ public class FieldTag
     /**
      * @param password The password to set.
      */
-    public void setPassword( boolean password )
+    public void setPassword(boolean password)
     {
         this.password = password;
     }
@@ -252,7 +255,7 @@ public class FieldTag
     /**
      * @param required The required to set.
      */
-    public void setRequired( boolean required )
+    public void setRequired(boolean required)
     {
         this.required = required;
     }
@@ -262,7 +265,7 @@ public class FieldTag
      *
      * @param size The size to set.
      */
-    public void setSize( int size )
+    public void setSize(int size)
     {
         this.size = size;
     }
@@ -270,7 +273,7 @@ public class FieldTag
     /**
      * @param title The title to set.
      */
-    public void setTitle( String title )
+    public void setTitle(String title)
     {
         this.title = title;
     }
@@ -280,22 +283,21 @@ public class FieldTag
      * 
      * @throws ClassNotFoundException 
      */
-    public void setType( String type )
-        throws ClassNotFoundException
+    public void setType(String type) throws ClassNotFoundException
     {
         this.type = type;
-        this.fieldType = TypeUtils.getNonePrimitiveType( type );
-        if ( fieldType == null )
+        this.fieldType = TypeUtils.getNonePrimitiveType(type);
+        if (fieldType == null)
         {
-            throw new ClassNotFoundException( type );
+            throw new ClassNotFoundException(type);
         }
     }
 
     /**
      * @param value The value to set.
      */
-    public void setValue( Object value )
+    public void setValue(Object value)
     {
-        this.value = TypeUtils.toString( value );
+        this.value = TypeUtils.toString(value);
     }
 }

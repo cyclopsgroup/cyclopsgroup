@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<table cellspacing="0" cellpadding="0" border="0" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+<table cellspacing="0" cellpadding="0" border="0" xmlns:j="jelly:core">
+    <j:set var="fieldClass" value="waterviewFormInput" />
+    <j:if test="${field.invalid}">
+        <j:set var="fieldClass" value="waterviewFormInvalidInput" />
+    </j:if>
     <tr>
         <td>
             <input type="text" name="${field.name}" value="${field.value}" size="${fieldTag.getSize()}" maxlength="10"
-                class="waterviewFormInput" />
+                class="${fieldClass}" title="${field.errorMessage}" />
         </td>
-        <td>
-            <w:BlankImage width="5" height="16" />
-        </td>
-        <td>
+        <td width="20" align="right">
             <img src="${themeBase}/16x16/date.png" width="16" height="16" alt="Pick a date" />
-        </td>
-        <td>
-            <w:BlankImage width="5" height="16" />
-        </td>
-        <td>
-            <w:JellyScript path="/waterview/FormInputFieldSuffix.jelly" />
         </td>
     </tr>
 </table>

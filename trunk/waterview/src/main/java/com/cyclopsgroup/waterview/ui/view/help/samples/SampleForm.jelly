@@ -8,11 +8,16 @@
                     <td>Id</td>
                     <td>
                         <w:Field name="product_id" required="true" />
+                        <font color="red">**</font>
                     </td>
                     <td>Amount</td>
                     <td>
                         <w:Field name="product_amount" required="true" type="int" />
+                        <font color="red">**</font>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="lineBreak" />
                 </tr>
                 <tr>
                     <td colspan="4">

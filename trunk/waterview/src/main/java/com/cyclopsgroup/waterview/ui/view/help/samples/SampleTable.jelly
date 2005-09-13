@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:f="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <f:TableControl script="/waterview/DefaultTableControl.jelly">
-        <f:CollectionTabularData items="${rows}" />
-        <f:Table var="row" name="a">
-            <f:Column name="id" title="ID" sort="unsorted">
-                <font color="red">${row.id}</font>
-            </f:Column>
-            <f:Column name="name" title="Name" sort="unsorted">${row.name}</f:Column>
-            <f:Column name="totalAmount" title="Total Amount" sort="asc">${row.totalAmount}</f:Column>
-            <f:Column name="description" title="Description">${row.description}</f:Column>
-        </f:Table>
-    </f:TableControl>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <w:FormControl>
+        <w:Form name="aform" method="post">
+            <w:TableControl script="/waterview/DefaultTableControl.jelly">
+                <w:CollectionTabularData items="${rows}" />
+                <w:Table var="row" name="atable">
+                    <w:Column name="select" title="Select">
+                        <input type="checkbox" />
+                    </w:Column>
+                    <w:Column name="id" title="ID" sort="unsorted">
+                        <font color="red">${row.id}</font>
+                    </w:Column>
+                    <w:Column name="name" title="Name" sort="unsorted">${row.name}</w:Column>
+                    <w:Column name="totalAmount" title="Total Amount" sort="asc">${row.totalAmount}</w:Column>
+                    <w:Column name="description" title="Description">${row.description}</w:Column>
+                </w:Table>
+            </w:TableControl>
+            <w:Submit action="${link.setPage(page)}">
+                <w:FormButton>Push Me</w:FormButton>
+            </w:Submit>
+        </w:Form>
+    </w:FormControl>
 </div>

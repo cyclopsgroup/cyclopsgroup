@@ -15,6 +15,7 @@
             <Node name="samples" page="/waterview/help/samples/Index.jelly" title="Sample Pages">
                 <Node page="/waterview/help/samples/SampleForm.jelly" title="Sample Form" />
                 <Node page="/waterview/help/samples/SampleTable.jelly" title="Sample Table" />
+                <Node page="/waterview/help/samples/TiledForm.jelly" title="Tiled Form" />
             </Node>
             <Node name="abouts" title="About" page="/waterview/help/about/Index.jelly">
                 <Node page="/waterview/help/about/About.jelly" title="About Waterview" />
