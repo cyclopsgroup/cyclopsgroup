@@ -15,8 +15,7 @@
                                         <h2 class="r">Waterview ${page}</h2>
                                     </td>
                                     <td rowspan="2" align="right">
-                                        <img src="${themeBase}/48x48/logo.png" alt="Waterview System" width="48"
-                                            height="48" />
+                                        <img src="${themeBase}/banner_right.gif" alt="Waterview System" />
                                     </td>
                                 </tr>
                                 <tr>
