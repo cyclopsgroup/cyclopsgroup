@@ -16,7 +16,10 @@
  */
 package com.cyclopsgroup.waterview.utils;
 
+import java.security.MessageDigest;
+
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.Tag;
@@ -29,29 +32,32 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class TagSupportBase extends TagSupport
+public abstract class TagSupportBase
+    extends TagSupport
 {
     private String tagId;
+
+    private static final String DIGEST_ALGORITHM = "SHA";
 
     /**
      * Overwrite or implement method doTag()
      *
      * @see org.apache.commons.jelly.Tag#doTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void doTag(XMLOutput output) throws MissingAttributeException,
-            JellyTagException
+    public void doTag( XMLOutput output )
+        throws MissingAttributeException, JellyTagException
     {
         try
         {
-            processTag(output);
+            processTag( output );
         }
-        catch (JellyTagException e)
+        catch ( JellyTagException e )
         {
             throw e;
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new JellyTagException(e);
+            throw new JellyTagException( e );
         }
     }
 
@@ -62,8 +68,7 @@ public abstract class TagSupportBase extends TagSupport
      */
     protected ServiceManager getServiceManager()
     {
-        return (ServiceManager) getContext().getVariable(
-                ServiceManager.class.getName());
+        return (ServiceManager) getContext().getVariable( ServiceManager.class.getName() );
     }
 
     /**
@@ -80,17 +85,18 @@ public abstract class TagSupportBase extends TagSupport
      * @return Tag id
      * @throws Exception
      */
-    public String getUniqueTagId() throws Exception
+    public String getUniqueTagId()
+        throws Exception
     {
-        if (StringUtils.isEmpty(getTagId()))
+        if ( StringUtils.isEmpty( getTagId() ) )
         {
-            throw new IllegalArgumentException(
-                    "tagId attribute is required for " + this
-                            + " to get unique ID");
+            throw new IllegalArgumentException( "tagId attribute is required for " + this + " to get unique ID" );
         }
-        //TODO need to simplify
-        return new StringBuffer(getContext().getCurrentURL().toString())
-                .append(':').append(getTagId()).toString();
+        String s = new StringBuffer( getContext().getCurrentURL().toString() ).append( ':' ).append( getTagId() )
+            .toString();
+        MessageDigest digest = MessageDigest.getInstance( DIGEST_ALGORITHM );
+        String d = new String( Hex.encodeHex( digest.digest( s.getBytes() ) ) );
+        return d + '/' + getTagId();
     }
 
     /**
@@ -99,18 +105,20 @@ public abstract class TagSupportBase extends TagSupport
      * @param output Output
      * @throws Exception Throw it out
      */
-    protected abstract void processTag(XMLOutput output) throws Exception;
+    protected abstract void processTag( XMLOutput output )
+        throws Exception;
 
     /**
      * Require body of a tag
      *
      * @throws JellyTagException If the body is empty, throw it out
      */
-    protected final void requireBody() throws JellyTagException
+    protected final void requireBody()
+        throws JellyTagException
     {
-        if (StringUtils.isEmpty(getBodyText()))
+        if ( StringUtils.isEmpty( getBodyText() ) )
         {
-            throw new JellyTagException("Body text is required");
+            throw new JellyTagException( "Body text is required" );
         }
     }
 
@@ -121,13 +129,12 @@ public abstract class TagSupportBase extends TagSupport
      * @throws JellyTagException Throw it out if not matched
      * @return Parent tag
      */
-    protected final Tag requireParent(Class parentTagClass)
-            throws JellyTagException
+    protected final Tag requireParent( Class parentTagClass )
+        throws JellyTagException
     {
-        if (!parentTagClass.isAssignableFrom(getParent().getClass()))
+        if ( !parentTagClass.isAssignableFrom( getParent().getClass() ) )
         {
-            throw new JellyTagException("Tag's parent must be "
-                    + parentTagClass.getName());
+            throw new JellyTagException( "Tag's parent must be " + parentTagClass.getName() );
         }
         return getParent();
     }
@@ -139,14 +146,13 @@ public abstract class TagSupportBase extends TagSupport
      * @return Parent tag
      * @throws JellyTagException Throw it if requirement is not met
      */
-    protected final Tag requireInside(Class parentTagClass)
-            throws JellyTagException
+    protected final Tag requireInside( Class parentTagClass )
+        throws JellyTagException
     {
-        Tag parent = findAncestorWithClass(parentTagClass);
-        if (parent == null)
+        Tag parent = findAncestorWithClass( parentTagClass );
+        if ( parent == null )
         {
-            throw new JellyTagException("Tag must be inside "
-                    + parentTagClass.getName());
+            throw new JellyTagException( "Tag must be inside " + parentTagClass.getName() );
         }
         return parent;
     }
@@ -154,7 +160,7 @@ public abstract class TagSupportBase extends TagSupport
     /**
      * @param id The id to set.
      */
-    public final void setTagId(String id)
+    public final void setTagId( String id )
     {
         this.tagId = id;
     }

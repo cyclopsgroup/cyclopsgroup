@@ -13,18 +13,22 @@ body {
 }
 
 table.waterviewTable th {
-	background-color: #4189DE;
+	background-image: url('bar_bg_up.gif');
 	color: white;
-	border-width: 2px;
-	border-style: outset;
-	border-color: #4189DE;
+	border-style: solid;
+	border-color: #295DB4;
+	border-width: 1px;
 }
 
 table.waterviewTable tr.b {
 	background-color: #E6F4FF;
 }
 
-.lineBreak {
+table.waterviewTable .bottom {
+	
+}
+
+.lineBreak,.subLineBreak {
 	background-color: #2662B9;
 }
 
@@ -38,7 +42,11 @@ table.waterviewTable tr.b {
 }
 
 .waterviewViewWrapper {
-	background-color: #80C9FF;
+	background-color: #295DB4;
+}
+
+.waterviewViewWrapper .waterviewViewHeader {
+	background-image: url('bar_bg_down.gif');
 }
 
 .waterviewViewWrapper .waterviewViewTitle {
@@ -58,9 +66,11 @@ table.waterviewTable tr.b {
 }
 
 #bodyPanel .waterviewViewWrapper .waterviewViewHeader {
+	background-image: none;
 	border-width: 0 0 2 0;
 	border-color: #0B73DB;
-	border-style: solid;
+	border-style: solid;;
+	border-width: 0 0 2 0;
 }
 
 #bodyPanel .waterviewViewWrapper .waterviewViewTitle {
@@ -68,10 +78,13 @@ table.waterviewTable tr.b {
 }
 
 input.waterviewFormButton {
-	background-color: #295DB4;
+	background-image: url('bar_bg_up.gif');
 	border-color: #295DB4;
+	border-width: 1px;
+	border-style: solid;
 	color: white;
-	font-weight: bold;
+	font-weight: bold;;
+	color: white
 }
 
 input.waterviewFormInput {

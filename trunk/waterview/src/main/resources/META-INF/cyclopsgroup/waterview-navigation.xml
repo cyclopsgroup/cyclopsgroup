@@ -17,7 +17,7 @@
                 <Node page="/waterview/help/samples/SampleTable.jelly" title="Sample Table" />
             </Node>
             <Node name="abouts" title="About" page="/waterview/help/about/Index.jelly">
-                <Node page="/waterview/help/about/About.helly" title="About Waterview" />
+                <Node page="/waterview/help/about/About.jelly" title="About Waterview" />
             </Node>
         </Node>
     </Tree>

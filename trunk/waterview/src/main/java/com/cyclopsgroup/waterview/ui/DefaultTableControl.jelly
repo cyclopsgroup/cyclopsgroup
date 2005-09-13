@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <table width="100%" border="0" class="waterviewTable" cellspacing="0">
+    <table width="100%" border="0" class="waterviewTable" cellspacing="1">
         <tr>
             <j:forEach var="column" items="${table.columns}">
                 <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />

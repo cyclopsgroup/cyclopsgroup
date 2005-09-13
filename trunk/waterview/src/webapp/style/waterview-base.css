@@ -3,12 +3,22 @@ body,p,td,th,input,select,textarea {
 	font-size: 8pt;
 }
 
+body {
+	margin: 0px;
+}
+
 th {
 	text-align: left;
 }
 
 .lineBreak {
 	height: 2px;
+	background-color: #EFEFEF;
+	padding: 0px;
+}
+
+.subLineBreak {
+	height: 1px;
 	background-color: #EFEFEF;
 	padding: 0px;
 }
