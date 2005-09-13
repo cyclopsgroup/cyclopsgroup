@@ -27,8 +27,7 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * Form image tag
  */
-public class FormImageTag
-    extends TagSupport
+public class FormImageTag extends TagSupport
 {
     private int height = 16;
 
@@ -71,15 +70,15 @@ public class FormImageTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireParent( SubmitTag.class );
-        requireAttribute( "url" );
-        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
-        Script script = je.getScript( "fabric", "/widget/FormImage.jelly" );
-        getContext().setVariable( "image", this );
-        script.run( getContext(), output );
+        requireParent(SubmitTag.class);
+        requireAttribute("url");
+        JellyEngine je = (JellyEngine) getServiceManager().lookup(
+                JellyEngine.ROLE);
+        Script script = je.getScript("/waterview/FormImage.jelly");
+        getContext().setVariable("image", this);
+        script.run(getContext(), output);
     }
 
     /**
@@ -87,7 +86,7 @@ public class FormImageTag
      *
      * @param height The height to set.
      */
-    public void setHeight( int height )
+    public void setHeight(int height)
     {
         this.height = height;
     }
@@ -97,7 +96,7 @@ public class FormImageTag
      *
      * @param url The url to set.
      */
-    public void setUrl( String url )
+    public void setUrl(String url)
     {
         this.url = url;
     }
@@ -107,7 +106,7 @@ public class FormImageTag
      *
      * @param width The width to set.
      */
-    public void setWidth( int width )
+    public void setWidth(int width)
     {
         this.width = width;
     }
