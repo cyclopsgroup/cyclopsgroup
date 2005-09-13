@@ -24,9 +24,10 @@ import com.cyclopsgroup.waterview.RuntimeData;
  * 
  * View to show a message only
  */
-public class MessageView
-    implements View
+public class MessageView implements View
 {
+    private static final String NAME = "message";
+
     private String message;
 
     /**
@@ -34,9 +35,19 @@ public class MessageView
      *
      * @param message Message to show
      */
-    public MessageView( String message )
+    public MessageView(String message)
     {
         this.message = message;
+    }
+
+    /**
+     * Overwrite or implement method getName()
+     *
+     * @see com.cyclopsgroup.waterview.spi.View#getName()
+     */
+    public String getName()
+    {
+        return NAME;
     }
 
     /**
@@ -44,10 +55,10 @@ public class MessageView
      *
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void render( RuntimeData runtime, Context viewContext )
-        throws Exception
+    public void render(RuntimeData runtime, Context viewContext)
+            throws Exception
     {
-        runtime.getOutput().println( message );
+        runtime.getOutput().println(message);
     }
 
 }

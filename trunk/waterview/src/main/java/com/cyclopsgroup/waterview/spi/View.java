@@ -29,12 +29,24 @@ public interface View
     /** Dummy view */
     View DUMMY = new View()
     {
+        private static final String NAME = "dummy";
+
+        /**
+         * Overwrite or implement method getName()
+         *
+         * @see com.cyclopsgroup.waterview.spi.View#getName()
+         */
+        public String getName()
+        {
+            return NAME;
+        }
+
         /**
          * Overwrite or implement method render()
          * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
          */
-        public void render( RuntimeData runtime, Context viewContext )
-            throws Exception
+        public void render(RuntimeData runtime, Context viewContext)
+                throws Exception
         {
             //do nothing
         }
@@ -44,12 +56,18 @@ public interface View
     View[] EMPTY_ARRAY = new View[0];
 
     /**
+     * Get unique name of this view
+     *
+     * @return Unique name of view
+     */
+    String getName();
+
+    /**
      * Render the window with runtime information
      *
      * @param runtime UIRuntime object
      * @param viewContext Context for this window
      * @throws Exception Throw it out
      */
-    void render( RuntimeData runtime, Context viewContext )
-        throws Exception;
+    void render(RuntimeData runtime, Context viewContext) throws Exception;
 }

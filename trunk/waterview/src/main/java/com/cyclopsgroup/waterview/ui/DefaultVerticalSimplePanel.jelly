@@ -2,7 +2,7 @@
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://www.w3.org/1999/xhtml" xmlns:j="jelly:core">
     <table width="100%" border="0" cellpadding="5" cellspacing="0" class="waterviewVerticalPanel">
         <j:forEach var="view" items="${views}">
-            <j:set var="viewTitle" value="${i18n.getInstance(view.modulePath).getText('view_title', 'Unknown View')}" />
+            <j:set var="viewTitle" value="${i18n.getInstance(view.modulePath).getText('view_title', view.name)}" />
             <tr>
                 <td valign="top">
                     <table width="100%" cellspacing="1" cellpadding="0" border="0" class="waterviewViewWrapper">
