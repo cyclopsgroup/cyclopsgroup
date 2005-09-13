@@ -6,8 +6,17 @@
     </properties>
     <body>
         <section name="Overview">
-            <p>Tornado is a <a href="http://jakarta.apache.org/turbine/turbine-3">Apahce Jakarta Turbine 3</a> based web application framework. It enriched turbine with solutions for some common topic in web application design like Menu, Extended Properties, Data Grid Form and Division of Business Logic. Also, some of features in Turbine is enhanced like Security, Intake and Localization. The goal of Tornado is to further simplify the development of a Java based web application.</p>
-            <p>Tornado project is now active, but far away from release. Any participating of development is welcom. Please send email to <a href="mailto:g-cyclops@users.sourceforge.net">Jiaqi Guo</a> to merge your idea into tornado.</p>
+            <p>
+                Tornado is a
+                <a href="http://www.cyclopsgroup.com/projects/waterview">Waterview</a>
+                based web portal system with some basic modules.
+            </p>
+            <p>
+                Tornado project is now active, but far away from release. Any participating of development is welcom.
+                Please send email to
+                <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+                if you are interested in it.
+            </p>
         </section>
     </body>
 </document>
