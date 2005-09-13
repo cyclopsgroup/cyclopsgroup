@@ -16,9 +16,16 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.RequestValueParser;
 
@@ -27,9 +34,10 @@ import com.cyclopsgroup.waterview.RequestValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRequestValueParser
-    extends RequestValueParser
+public class ServletRequestValueParser extends RequestValueParser
 {
+    private MultiHashMap extra = new MultiHashMap();
+
     private HttpServletRequest httpServletRequest;
 
     /**
@@ -37,19 +45,19 @@ public class ServletRequestValueParser
      * 
      * @param request Servlet request
      */
-    public ServletRequestValueParser( HttpServletRequest request )
+    public ServletRequestValueParser(HttpServletRequest request)
     {
         httpServletRequest = request;
     }
 
     /**
-     * Override or implement method of parent class or interface
+     * Overwrite or implement method add()
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add( String name, String value )
+    public void add(String name, String value)
     {
-        throw new UnsupportedOperationException();
+        extra.put(name, value);
     }
 
     /**
@@ -57,10 +65,18 @@ public class ServletRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue( String name )
-        throws Exception
+    protected String doGetValue(String name) throws Exception
     {
-        return httpServletRequest.getParameter( name );
+        String ret = httpServletRequest.getParameter(name);
+        if (ret == null && extra.containsKey(name))
+        {
+            Collection c = (Collection) extra.get(name);
+            if (!c.isEmpty())
+            {
+                ret = (String) c.iterator().next();
+            }
+        }
+        return ret;
     }
 
     /**
@@ -68,10 +84,16 @@ public class ServletRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues( String name )
-        throws Exception
+    protected String[] doGetValues(String name) throws Exception
     {
-        return httpServletRequest.getParameterValues( name );
+        String[] ret = httpServletRequest.getParameterValues(name);
+        if (extra.containsKey(name))
+        {
+            List list = new ArrayList((Collection) extra.get(name));
+            CollectionUtils.addAll(list, ret);
+            ret = (String[]) list.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        }
+        return ret;
     }
 
     /**
@@ -79,7 +101,7 @@ public class ServletRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
      */
-    public FileItem getFileItem( String name )
+    public FileItem getFileItem(String name)
     {
         return null;
     }
@@ -89,7 +111,7 @@ public class ServletRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
      */
-    public FileItem[] getFileItems( String name )
+    public FileItem[] getFileItems(String name)
     {
         return EMPTY_FILEITEM_ARRAY;
     }
@@ -99,8 +121,8 @@ public class ServletRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#remove(java.lang.String)
      */
-    public void remove( String name )
+    public void remove(String name)
     {
-        throw new UnsupportedOperationException();
+        extra.remove(name);
     }
 }
