@@ -6,7 +6,7 @@
         Be aware of what you are doing before pushing the button.
     </p>
     <w:FormControl>
-        <w:Form name="sessionform">
+        <w:Form name="sessionform" method="post">
             <table width="100%" cellspacing="1" border="0" class="waterviewTable">
                 <j:forEach var="attributeName" items="${data.sessionContext.keys()}">
                     <j:set var="attributeValue" value="${data.sessionContext.get(attributeName)}" />
