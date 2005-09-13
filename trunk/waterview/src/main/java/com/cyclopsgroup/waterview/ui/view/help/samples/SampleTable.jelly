@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>A demo only table</h2>
+    <p>
+        The items in this table is only for demo purpose. You can try to sort the items with various combination of
+        sorting columns.
+    </p>
     <w:FormControl>
         <w:Form name="aform" method="post">
             <w:TableControl script="/waterview/DefaultTableControl.jelly">

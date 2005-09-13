@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>A sample of tiled form</h2>
+    <p>A tiled form means the form control itself konws how to display form fields in a default table.</p>
     <w:TiledFormControl>
         <w:Form name="tiledform">
             <input type="hidden" name="abc" value="abc" />

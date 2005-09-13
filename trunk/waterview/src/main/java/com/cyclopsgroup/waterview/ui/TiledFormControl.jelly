@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <table width="100%" border="0" class="fabricFormTable">
+    <table width="100%" border="0" class="waterviewTable">
         <form method="${formTag.method}" name="${form.id}" action="${formTag.action}">
             <w:JellyScript path="/waterview/FormHiddenFields.jelly" />
             <j:expr value="${formTag.setHideControls(true)}" />
@@ -19,13 +19,13 @@
                 <tr>
                     <j:forEach var="field" items="${group}">
                         <j:set var="fieldTag" value="${formTag.getFieldTag(field.name)}" />
-                        <td>
+                        <td class="title">
                             <j:choose>
                                 <j:when test="${fieldTag.title != null}">${fieldTag.title}</j:when>
                                 <j:otherwise>${field.name}</j:otherwise>
                             </j:choose>
                         </td>
-                        <td>
+                        <td class="input">
                             <w:DoTag tag="${fieldTag}" />
                             <j:if test="${field.required}">
                                 <font color="red">**</font>

@@ -14,7 +14,7 @@
                         <td colspan="2" class="subLineBreak" />
                     </tr>
                     <tr>
-                        <td>
+                        <td class="title">
                             <input type="checkbox" name="attribute_name" value="${attributeName}" />
                         </td>
                         <td>
@@ -22,11 +22,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Type</td>
+                        <td class="title">Type</td>
                         <td>${attributeValue.class.name}</td>
                     </tr>
                     <tr>
-                        <td>Value</td>
+                        <td class="title">Value</td>
                         <td>${attributeValue}</td>
                     </tr>
                 </j:forEach>

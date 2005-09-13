@@ -191,7 +191,11 @@ public class FieldTag extends TagSupport
         {
             field = new Field(getName(), TypeUtils.getType(getType()));
             field.setRequired(isRequired());
-            field.setValue((String) getValue());
+            field.setPassword(isPassword());
+            if (!isPassword())
+            {
+                field.setValue((String) getValue());
+            }
             formTag.getForm().addField(field);
         }
         else
