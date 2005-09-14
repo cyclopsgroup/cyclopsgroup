@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <ModulePackage alias="tornado" name="com.cyclopsgroup.tornado.ui" />
     <TagLibrary uri="http://tornado.cyclopsgroup.com/tool">
         <TagPackage className="com.cyclopsgroup.tornado.hibernate.taglib.HibernateTagPackage" />
     </TagLibrary>
