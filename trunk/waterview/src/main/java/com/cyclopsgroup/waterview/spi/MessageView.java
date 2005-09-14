@@ -26,7 +26,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public class MessageView implements View
 {
-    private static final String NAME = "message";
+    private static final String NAME = "Attention!!!";
 
     private String message;
 
