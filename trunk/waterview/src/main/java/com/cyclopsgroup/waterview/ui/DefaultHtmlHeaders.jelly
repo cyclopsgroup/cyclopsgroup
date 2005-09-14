@@ -2,7 +2,6 @@
 <w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview" />
-    <title>Waterview System: ${page}</title>
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource('/waterview/waterview-base.css')}" />
     <link rel="stylesheet" type="text/css" media="screen" href="${themeBase}/style.css" />
     <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterview-print.css" />
