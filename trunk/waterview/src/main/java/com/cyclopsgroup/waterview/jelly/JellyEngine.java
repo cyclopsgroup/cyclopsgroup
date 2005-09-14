@@ -282,8 +282,19 @@ public class JellyEngine extends AbstractLogEnabled implements Initializable,
                                 throws JellyTagException
                         {
                             TagSupport.addScriptResource(resource, context);
-                            s.run(context, output);
-                            TagSupport.removeScriptResource(resource, context);
+                            try
+                            {
+                                s.run(context, output);
+                            }
+                            catch (JellyTagException e)
+                            {
+                                throw e;
+                            }
+                            finally
+                            {
+                                TagSupport.removeScriptResource(resource,
+                                        context);
+                            }
                         }
                     };
                 }
