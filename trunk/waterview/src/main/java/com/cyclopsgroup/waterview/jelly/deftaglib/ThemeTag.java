@@ -28,33 +28,15 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  * 
  * Theme tag
  */
-public class ThemeTag
-    extends TagSupport
+public class ThemeTag extends TagSupport
 {
     private String description;
 
     private String name;
 
-    private DefaultTheme theme;
+    private String packageAlias;
 
-    /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    public void processTag( XMLOutput output )
-        throws Exception
-    {
-        requireAttribute( "name" );
-        theme = new DefaultTheme( name );
-        if ( StringUtils.isNotEmpty( getDescription() ) )
-        {
-            theme.setDescription( getDescription() );
-        }
-        invokeBody( output );
-        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable( JellyEngine.ROLE );
-        jellyEngine.registerTheme( theme );
-    }
+    private DefaultTheme theme;
 
     /**
      * Getter method for field description
@@ -77,6 +59,16 @@ public class ThemeTag
     }
 
     /**
+     * Getter method for package
+     *
+     * @return Package alias
+     */
+    public String getPackage()
+    {
+        return packageAlias;
+    }
+
+    /**
      * Getter method for field theme
      *
      * @return Returns the theme.
@@ -87,11 +79,31 @@ public class ThemeTag
     }
 
     /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("name");
+        requireAttribute("package");
+        theme = new DefaultTheme(name, getPackage());
+        if (StringUtils.isNotEmpty(getDescription()))
+        {
+            theme.setDescription(getDescription());
+        }
+        invokeBody(output);
+        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable(
+                JellyEngine.ROLE);
+        jellyEngine.registerTheme(theme);
+    }
+
+    /**
      * Setter method for field description
      *
      * @param description The description to set.
      */
-    public void setDescription( String description )
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -101,8 +113,18 @@ public class ThemeTag
      *
      * @param name The name to set.
      */
-    public void setName( String name )
+    public void setName(String name)
     {
         this.name = name;
+    }
+
+    /**
+     * Setter method for package
+     *
+     * @param alias Package alias
+     */
+    public void setPackage(String alias)
+    {
+        packageAlias = alias;
     }
 }

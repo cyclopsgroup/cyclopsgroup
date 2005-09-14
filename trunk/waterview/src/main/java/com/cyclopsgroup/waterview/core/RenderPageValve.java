@@ -17,7 +17,9 @@
 package com.cyclopsgroup.waterview.core;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.commons.lang.StringUtils;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
@@ -33,58 +35,66 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve
-    extends AbstractLogEnabled
-    implements Valve
+public class RenderPageValve extends AbstractLogEnabled implements Valve,
+        Serviceable
 {
+    private ThemeManager themes;
+
     /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke( RuntimeData data, PipelineContext context )
-        throws Exception
+    public void invoke(RuntimeData data, PipelineContext context)
+            throws Exception
     {
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup(
+                ModuleManager.ROLE);
 
-        mm.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data, data
-            .getRequestContext() );
+        mm.runModule('/' + data.getPage().getPackageAlias() + "/page"
+                + data.getPage().getPath(), data, data.getRequestContext());
 
-        if ( data.isStopped() )
+        if (data.isStopped())
         {
             return;
         }
 
-        Page page = (Page) data.getRequestContext().get( Page.NAME );
-        if ( page == null )
+        Page page = (Page) data.getRequestContext().get(Page.NAME);
+        if (page == null)
         {
             page = Page.DEFAULT;
         }
-        data.setOutputContentType( "text/html" );
+        data.setOutputContentType("text/html");
         Layout layout = page.getLayout();
-        if ( layout == null )
+        Theme theme = themes.getTheme(data.getThemeName());
+        if (theme == null)
         {
-            Theme theme = null;
-            ThemeManager themes = (ThemeManager) data.getServiceManager().lookup( ThemeManager.ROLE );
-            if ( StringUtils.isEmpty( data.getThemeName() ) )
-            {
-                data.setThemeName( themes.getDefaultThemeName() );
-            }
-            theme = themes.getTheme( data.getThemeName() );
-            if ( theme == null )
-            {
-                theme = themes.getDefaultTheme();
-            }
-            if ( theme == null )
-            {
-                throw new NullPointerException( "Theme is not property configured" );
-            }
-            layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
+            data.setThemeName(themes.getDefaultThemeName());
+            theme = themes.getDefaultTheme();
         }
-        String themeBaseUrl = data.getApplicationBaseUrl() + "/themes/" + data.getThemeName();
-        data.getRequestContext().put( "themeBase", themeBaseUrl );
-        layout.render( data, page );
-        context.invokeNextValve( data );
+        if (theme == null)
+        {
+            throw new NullPointerException("Theme is not property configured");
+        }
+        if (layout == null)
+        {
+            layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
+        }
+
+        String themeBaseUrl = theme.getResourceBaseUrl(data);
+        data.getRequestContext().put("themeBase", themeBaseUrl);
+        layout.render(data, page);
+        context.invokeNextValve(data);
         data.getOutput().flush();
+    }
+
+    /**
+     * Overwrite or implement method service()
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException
+    {
+        themes = (ThemeManager) serviceManager.lookup(ThemeManager.ROLE);
     }
 }

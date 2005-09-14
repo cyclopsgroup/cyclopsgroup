@@ -49,6 +49,11 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.waterview.core.GetResourceValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.GetResourceValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
             <implementation>com.cyclopsgroup.waterview.core.NoneCacheManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -60,6 +65,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <pipelines>
+                    <pipeline pattern="/!get!/.*" role="com.cyclopsgroup.waterview.GetResourcePipeline" />
                     <pipeline pattern=".*" role="com.cyclopsgroup.waterview.DefaultWaterviewPipeline" />
                 </pipelines>
             </configuration>
@@ -78,13 +84,23 @@
                 </valves>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.GetResourcePipeline</role>
+            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <valves>
+                    <valve role="com.cyclopsgroup.waterview.core.GetResourceValve" />
+                </valves>
+            </configuration>
+        </component>
         <!-- Theme related components -->
         <component>
             <role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
             <implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <default-theme>default</default-theme>
+                <default-theme>waterviewtheme</default-theme>
             </configuration>
         </component>
         <component>

@@ -143,6 +143,9 @@ public class WaterviewServlet extends HttpServlet
         {
             response.sendRedirect(data.getRedirectUrl());
         }
+        data.getOutput().flush();
+        data.getOutputStream().flush();
+        data.getOutputStream().close();
     }
 
     /**
@@ -166,11 +169,6 @@ public class WaterviewServlet extends HttpServlet
         catch (Exception e)
         {
             doHandleException(request, response, e);
-        }
-        finally
-        {
-            response.getWriter().flush();
-            response.getWriter().close();
         }
     }
 

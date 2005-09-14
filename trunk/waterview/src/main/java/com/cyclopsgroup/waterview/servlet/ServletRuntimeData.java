@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,12 +36,13 @@ import com.cyclopsgroup.waterview.spi.ModuleManager;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRuntimeData
-    extends AbstractRuntimeData
-    implements RuntimeData
+public class ServletRuntimeData extends AbstractRuntimeData implements
+        RuntimeData
 {
 
     private ServletContext context;
+
+    private OutputStream outputStream;
 
     private HttpServletResponse response;
 
@@ -52,55 +56,57 @@ public class ServletRuntimeData
      * @param services ServiceManager object
      * @throws Exception Throw it out
      */
-    ServletRuntimeData( HttpServletRequest request, HttpServletResponse response, ServletContext context,
-                       FileUpload fileUpload, ServiceManager services )
-        throws Exception
+    ServletRuntimeData(HttpServletRequest request,
+            HttpServletResponse response, ServletContext context,
+            FileUpload fileUpload, ServiceManager services) throws Exception
     {
         this.response = response;
         this.context = context;
 
-        setQueryString( request.getQueryString() );
-        setRefererUrl( request.getHeader( "referer" ) );
+        setQueryString(request.getQueryString());
+        setRefererUrl(request.getHeader("referer"));
 
         //Session Context
-        setSessionContext( new HttpSessionContext( request.getSession() ) );
-        setSessionId( request.getSession().getId() );
+        setSessionContext(new HttpSessionContext(request.getSession()));
+        setSessionId(request.getSession().getId());
 
-        setRequestContext( new ServletRequestContext( request ) );
+        setRequestContext(new ServletRequestContext(request));
 
         //Request path
         String requestPath = request.getPathInfo();
-        setRequestPath( requestPath == null ? StringUtils.EMPTY : requestPath );
+        setRequestPath(requestPath == null ? StringUtils.EMPTY : requestPath);
 
         //Output
-        setOutput( response.getWriter() );
+        outputStream = response.getOutputStream();
+        setOutput(new PrintWriter(outputStream));
 
         //Request value parser
-        if ( FileUpload.isMultipartContent( request ) )
+        if (FileUpload.isMultipartContent(request))
         {
-            setParams( new MultipartServletRequestValueParser( request, fileUpload ) );
+            setParams(new MultipartServletRequestValueParser(request,
+                    fileUpload));
         }
         else
         {
-            setParams( new ServletRequestValueParser( request ) );
+            setParams(new ServletRequestValueParser(request));
         }
 
         //Service manager
-        setServiceManager( services );
+        setServiceManager(services);
 
         //Application base url
-        StringBuffer sb = new StringBuffer( request.getScheme() );
-        sb.append( "://" ).append( request.getServerName() );
-        if ( request.getServerPort() != 80 )
+        StringBuffer sb = new StringBuffer(request.getScheme());
+        sb.append("://").append(request.getServerName());
+        if (request.getServerPort() != 80)
         {
-            sb.append( ':' ).append( request.getServerPort() );
+            sb.append(':').append(request.getServerPort());
         }
-        sb.append( request.getContextPath() );
-        setApplicationBaseUrl( sb.toString() );
+        sb.append(request.getContextPath());
+        setApplicationBaseUrl(sb.toString());
 
         //Page base url
-        sb.append( request.getServletPath() );
-        setPageBaseUrl( sb.toString() );
+        sb.append(request.getServletPath());
+        setPageBaseUrl(sb.toString());
     }
 
     /**
@@ -108,9 +114,19 @@ public class ServletRuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
      */
-    public String getMimeType( String fileName )
+    public String getMimeType(String fileName)
     {
-        return context.getMimeType( fileName );
+        return context.getMimeType(fileName);
+    }
+
+    /**
+     * Overwrite or implement method getOutputStream()
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#getOutputStream()
+     */
+    public OutputStream getOutputStream()
+    {
+        return outputStream;
     }
 
     /**
@@ -118,9 +134,9 @@ public class ServletRuntimeData
      * 
      * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType( String contentType )
+    public void setOutputContentType(String contentType)
     {
-        response.setContentType( contentType );
+        response.setContentType(contentType);
     }
 
     /**
@@ -128,10 +144,10 @@ public class ServletRuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
      */
-    public void setPage( String page )
-        throws Exception
+    public void setPage(String page) throws Exception
     {
-        ModuleManager modules = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
-        setPage( modules.parsePath( page ) );
+        ModuleManager modules = (ModuleManager) getServiceManager().lookup(
+                ModuleManager.ROLE);
+        setPage(modules.parsePath(page));
     }
 }

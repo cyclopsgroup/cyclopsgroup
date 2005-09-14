@@ -18,13 +18,15 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
 
+import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.RuntimeData;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Base abstract theme class
  */
-public class DefaultTheme
-    implements Theme
+public class DefaultTheme implements Theme
 {
     private String description;
 
@@ -32,15 +34,19 @@ public class DefaultTheme
 
     private String name;
 
+    private String packageAlias;
+
     /**
      * Constructor for class BaseTheme
      *
      * @param name Name of the theme
+     * @param packageAlias package this theme belones to
      */
-    public DefaultTheme( String name )
+    public DefaultTheme(String name, String packageAlias)
     {
         this.name = name;
-        setDescription( "Theme [" + name + "]" );
+        this.packageAlias = packageAlias;
+        setDescription("Theme [" + name + "]");
     }
 
     /**
@@ -58,9 +64,9 @@ public class DefaultTheme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getLayout(java.lang.String)
      */
-    public Layout getLayout( String layoutName )
+    public Layout getLayout(String layoutName)
     {
-        return (Layout) layouts.get( layoutName );
+        return (Layout) layouts.get(layoutName);
     }
 
     /**
@@ -74,11 +80,22 @@ public class DefaultTheme
     }
 
     /**
+     * Overwrite or implement method getResourceBaseUrl()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getResourceBaseUrl(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public String getResourceBaseUrl(RuntimeData data)
+    {
+        Link link = (Link) data.getRequestContext().get(Link.NAME);
+        return link.getResource("/" + packageAlias + "/theme/" + name);
+    }
+
+    /**
      * Setter method for field description
      *
      * @param description The description to set.
      */
-    public void setDescription( String description )
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -89,8 +106,8 @@ public class DefaultTheme
      * @param name Layout name
      * @param layout Layout object
      */
-    public void setLayout( String name, Layout layout )
+    public void setLayout(String name, Layout layout)
     {
-        layouts.put( name, layout );
+        layouts.put(name, layout);
     }
 }

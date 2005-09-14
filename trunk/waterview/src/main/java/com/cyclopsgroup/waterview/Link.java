@@ -34,6 +34,9 @@ public class Link
     /** Encoding for parameters */
     public static final String ENCODING = "UTF-8";
 
+    /** Get resource instructor */
+    public static final String GET_INSTRUCTOR = "!get!";
+
     /** Name of this tool */
     public static final String NAME = "link";
 
@@ -53,7 +56,7 @@ public class Link
      *
      * @param data Runtime data
      */
-    public Link( RuntimeData data )
+    public Link(RuntimeData data)
     {
         this.data = data;
     }
@@ -64,10 +67,11 @@ public class Link
      * @param action Action path
      * @return Link itself
      */
-    public Link addAction( String action )
+    public Link addAction(String action)
     {
         checkDisposed();
-        requestPath.append( '/' ).append( ACTION_INSTRUCTOR ).append( getPath( action ) );
+        requestPath.append('/').append(ACTION_INSTRUCTOR).append(
+                getPath(action));
         return this;
     }
 
@@ -79,19 +83,20 @@ public class Link
      * @return Link itself
      * @throws UnsupportedEncodingException Throw it out
      */
-    public Link addQueryData( String name, Object value )
-        throws UnsupportedEncodingException
+    public Link addQueryData(String name, Object value)
+            throws UnsupportedEncodingException
     {
-        if ( queryString == null )
+        if (queryString == null)
         {
             queryString = new StringBuffer();
         }
         else
         {
-            queryString.append( '&' );
+            queryString.append('&');
         }
         String v = value == null ? StringUtils.EMPTY : value.toString();
-        queryString.append( name ).append( '=' ).append( URLEncoder.encode( v, ENCODING ) );
+        queryString.append(name).append('=').append(
+                URLEncoder.encode(v, ENCODING));
         return this;
     }
 
@@ -101,26 +106,26 @@ public class Link
      * @param string Whole query string
      * @return Query string
      */
-    public Link addQueryString( String string )
+    public Link addQueryString(String string)
     {
-        if ( StringUtils.isEmpty( string ) )
+        if (StringUtils.isEmpty(string))
         {
             return this;
         }
-        if ( queryString == null )
+        if (queryString == null)
         {
-            queryString = new StringBuffer( string );
+            queryString = new StringBuffer(string);
         }
         else
         {
-            queryString.append( '&' ).append( string );
+            queryString.append('&').append(string);
         }
         return this;
     }
 
     private void checkDisposed()
     {
-        if ( disposed )
+        if (disposed)
         {
             queryString = null;
             requestPath = new StringBuffer();
@@ -128,23 +133,37 @@ public class Link
         }
     }
 
-    private String getPath( String path )
+    private String getPath(String path)
     {
-        if ( StringUtils.isEmpty( path ) )
+        if (StringUtils.isEmpty(path))
         {
             return null;
         }
-        if ( path.charAt( 0 ) == '/' )
+        if (path.charAt(0) == '/')
         {
             return path;
         }
         String currentPage = data.getPage().getFullPath();
-        int lastSlash = currentPage.lastIndexOf( '/' );
-        if ( lastSlash == -1 )
+        int lastSlash = currentPage.lastIndexOf('/');
+        if (lastSlash == -1)
         {
             return '/' + path;
         }
-        return currentPage.substring( 0, lastSlash + 1 ) + path;
+        return currentPage.substring(0, lastSlash + 1) + path;
+    }
+
+    /**
+     * Get resource path
+     *
+     * @param path Get resource path
+     * @return Full resource path
+     */
+    public String getResource(String path)
+    {
+        StringBuffer sb = new StringBuffer(data.getPageBaseUrl());
+        sb.append('/').append(GET_INSTRUCTOR);
+        sb.append(getPath(path));
+        return sb.toString();
     }
 
     /**
@@ -153,9 +172,9 @@ public class Link
      * @param path Path object
      * @return It self
      */
-    public Link setPage( Path path )
+    public Link setPage(Path path)
     {
-        setPage( path.getFullPath() );
+        setPage(path.getFullPath());
         return this;
     }
 
@@ -165,10 +184,10 @@ public class Link
      * @param path
      * @return Link tool itself
      */
-    public Link setPage( String path )
+    public Link setPage(String path)
     {
         checkDisposed();
-        requestPath.append( '/' ).append( PAGE_INSTRUCTOR ).append( getPath( path ) );
+        requestPath.append('/').append(PAGE_INSTRUCTOR).append(getPath(path));
         return this;
     }
 
@@ -179,10 +198,11 @@ public class Link
      */
     public String toString()
     {
-        StringBuffer url = new StringBuffer( data.getPageBaseUrl() ).append( requestPath );
-        if ( queryString != null )
+        StringBuffer url = new StringBuffer(data.getPageBaseUrl())
+                .append(requestPath);
+        if (queryString != null)
         {
-            url.append( '?' ).append( queryString );
+            url.append('?').append(queryString);
         }
         disposed = true;
         return url.toString();

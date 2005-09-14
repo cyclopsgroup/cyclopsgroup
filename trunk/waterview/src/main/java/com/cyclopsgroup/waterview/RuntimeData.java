@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +86,13 @@ public interface RuntimeData
      * @return PrintWriter object for http response
      */
     PrintWriter getOutput();
+
+    /**
+     * Get output stream
+     *
+     * @return Output stream
+     */
+    OutputStream getOutputStream();
 
     /**
      * Method getRenderTemplate() in class WebRuntime

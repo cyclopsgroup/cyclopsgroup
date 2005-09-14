@@ -37,8 +37,7 @@ public interface ModuleManager
      * @return View object
      * @throws Exception Throw it out
      */
-    View createDynaView( String viewPath )
-        throws Exception;
+    View createDynaView(String viewPath) throws Exception;
 
     /**
      * Get full package name
@@ -46,25 +45,25 @@ public interface ModuleManager
      * @param aliasOrPackage Package alias or package name
      * @return Full package name
      */
-    String getPackageName( String aliasOrPackage );
+    String getPackageName(String aliasOrPackage);
 
     /**
      * @param page
      * @return Path model
      */
-    Path parsePath( String page );
+    Path parsePath(String page);
 
     /**
      * @param pattern
      * @param viewFactory
      */
-    void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory );
+    void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
 
     /**
      * @param alias
      * @param packageName
      */
-    void registerPackage( String alias, String packageName );
+    void registerPackage(String alias, String packageName);
 
     /**
      * Run module
@@ -74,6 +73,6 @@ public interface ModuleManager
      * @param context
      * @throws Exception
      */
-    void runModule( String modulePath, RuntimeData data, Context context )
-        throws Exception;
+    void runModule(String modulePath, RuntimeData data, Context context)
+            throws Exception;
 }
