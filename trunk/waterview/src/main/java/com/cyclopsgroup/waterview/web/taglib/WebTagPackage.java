@@ -38,6 +38,8 @@ public class WebTagPackage extends TagPackage
         addTag("Submit", SubmitTag.class);
         addTag("Validators", ValidatorsTag.class);
         addTag("TypeValidator", TypeValidatorTag.class);
+        addTag("Select", SelectTag.class);
+        addTag("Option", OptionTag.class);
         addTag("Field", FieldTag.class);
         addTag("FieldBody", FieldBodyTag.class);
         addTag("TiledFormControl", TiledFormControlTag.class);

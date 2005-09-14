@@ -11,14 +11,14 @@ import java.util.Date;
 
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.StringConverter;
+import org.apache.commons.lang.enums.Enum;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Adapter to do backward conversion in commons-beanutils converter
  */
-class StringConverterAdapter
-    implements Converter
+class StringConverterAdapter implements Converter
 {
     private StringConverter converter = new StringConverter();
 
@@ -27,12 +27,19 @@ class StringConverterAdapter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    public Object convert( Class type, Object value )
+    public Object convert(Class type, Object value)
     {
-        if ( type == String.class && value != null && value instanceof Date )
+        if (type == String.class && value != null)
         {
-            return DateConverter.FORMAT.format( value );
+            if (value instanceof Date)
+            {
+                return DateConverter.FORMAT.format(value);
+            }
+            if (value instanceof Enum)
+            {
+                return ((Enum) value).getName();
+            }
         }
-        return converter.convert( type, value );
+        return converter.convert(type, value);
     }
 }

@@ -10,6 +10,13 @@
             <w:Field name="total_amount" title="Total Amount" required="true" type="int" />
             <w:Field name="is_disabled" title="Disabled" type="boolean" />
             <w:Field name="created_date" title="Created Date" type="date" />
+            <w:Field name="type" title="Product Type" value="2">
+                <w:Select>
+                    <w:Option value="1">Type I</w:Option>
+                    <w:Option value="2">Type II</w:Option>
+                    <w:Option value="3">Type III</w:Option>
+                </w:Select>
+            </w:Field>
             <w:Submit action="${link.addAction('BogusAction').setPage(page)}" forceValidation="true">
                 <w:FormButton>Push Me</w:FormButton>
             </w:Submit>
