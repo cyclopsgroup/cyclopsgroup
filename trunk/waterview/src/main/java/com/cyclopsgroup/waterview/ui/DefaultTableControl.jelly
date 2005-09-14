@@ -11,16 +11,16 @@
                             href="${link.addAction('/waterview/SortTable').setPage(page).addQueryData('table_id', table.id).addQueryData('table_column_name', column.name)}">
                             <j:switch on="${column.sort.name}">
                                 <j:case value="asc">
-                                    <img src="${applicationBase}/themes/${data.themeName}/16x16/1uparrow.png" width="16"
-                                        height="16" alt="Ascendingly sorted" align="absbottom" />
+                                    <img src="${themeBase}/16x16/1uparrow.png" width="16" height="16"
+                                        alt="Ascendingly sorted" align="absbottom" />
                                 </j:case>
                                 <j:case value="desc">
-                                    <img src="${applicationBase}/themes/${data.themeName}/16x16/1downarrow.png"
-                                        width="16" height="16" alt="Descendingly sorted" align="absbottom" />
+                                    <img src="${themeBase}/16x16/1downarrow.png" width="16" height="16"
+                                        alt="Descendingly sorted" align="absbottom" />
                                 </j:case>
                                 <j:case value="unsorted">
-                                    <img src="${applicationBase}/themes/${data.themeName}/16x16/kwikdisk.png" width="16"
-                                        height="16" alt="Unsorted" align="absbottom" />
+                                    <img src="${themeBase}/16x16/kwikdisk.png" width="16" height="16" alt="Unsorted"
+                                        align="absbottom" />
                                 </j:case>
                             </j:switch>
                         </a>

@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
@@ -58,16 +57,6 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     public String getMimeType(String fileName)
     {
         return "text/html";
-    }
-
-    /**
-     * Overwrite or implement method getOutputStream()
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getOutputStream()
-     */
-    public OutputStream getOutputStream()
-    {
-        return null;
     }
 
     /**

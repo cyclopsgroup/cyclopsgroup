@@ -42,8 +42,6 @@ public class ServletRuntimeData extends AbstractRuntimeData implements
 
     private ServletContext context;
 
-    private OutputStream outputStream;
-
     private HttpServletResponse response;
 
     /**
@@ -77,7 +75,8 @@ public class ServletRuntimeData extends AbstractRuntimeData implements
         setRequestPath(requestPath == null ? StringUtils.EMPTY : requestPath);
 
         //Output
-        outputStream = response.getOutputStream();
+        OutputStream outputStream = response.getOutputStream();
+        setOutputStream(outputStream);
         setOutput(new PrintWriter(outputStream));
 
         //Request value parser
@@ -117,16 +116,6 @@ public class ServletRuntimeData extends AbstractRuntimeData implements
     public String getMimeType(String fileName)
     {
         return context.getMimeType(fileName);
-    }
-
-    /**
-     * Overwrite or implement method getOutputStream()
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getOutputStream()
-     */
-    public OutputStream getOutputStream()
-    {
-        return outputStream;
     }
 
     /**
