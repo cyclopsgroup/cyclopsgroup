@@ -15,50 +15,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.web.taglib;
-
-import com.cyclopsgroup.waterview.utils.TypeUtils;
+package com.cyclopsgroup.waterview;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Option object
+ * Item that can be displayed as a select option
  */
-public class Option
+public interface SelectOption
 {
-    private Object text;
-
-    private Object value;
+    /**
+     * Get name(key) of item
+     *
+     * @return Name/key
+     */
+    String getName();
 
     /**
-     * Constructor for class Option
+     * Get title of item to display
      *
-     * @param value Value of option
-     * @param text Text of option
+     * @return Title of item
      */
-    public Option(Object value, Object text)
-    {
-        this.value = value;
-        this.text = text;
-    }
-
-    /**
-     * Getter method for property text
-     *
-     * @return Returns the text.
-     */
-    public String getText()
-    {
-        return TypeUtils.toString(text);
-    }
-
-    /**
-     * Getter method for property value
-     *
-     * @return Returns the value.
-     */
-    public String getValue()
-    {
-        return TypeUtils.toString(value);
-    }
+    String getTitle();
 }

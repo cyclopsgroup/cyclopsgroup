@@ -21,6 +21,7 @@ import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.SelectOption;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
@@ -28,9 +29,21 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Select option tag
  */
-public class OptionTag extends TagSupport
+public class OptionTag extends TagSupport implements SelectOption
 {
+    private String title;
+
     private String value;
+
+    /**
+     * Overwrite or implement method getName()
+     *
+     * @see com.cyclopsgroup.waterview.SelectOption#getName()
+     */
+    public String getName()
+    {
+        return getValue();
+    }
 
     /**
      * Get text of this tag
@@ -46,6 +59,16 @@ public class OptionTag extends TagSupport
             getValue();
         }
         return text;
+    }
+
+    /**
+     * Overwrite or implement method getTitle()
+     *
+     * @see com.cyclopsgroup.waterview.SelectOption#getTitle()
+     */
+    public String getTitle()
+    {
+        return title;
     }
 
     /**
@@ -67,6 +90,13 @@ public class OptionTag extends TagSupport
     {
         requireAttribute("value");
         SelectTag select = (SelectTag) requireParent(SelectTag.class);
+
+        title = getBodyText();
+        if (StringUtils.isEmpty(title))
+        {
+            title = getValue();
+        }
+
         select.addOption(this);
     }
 

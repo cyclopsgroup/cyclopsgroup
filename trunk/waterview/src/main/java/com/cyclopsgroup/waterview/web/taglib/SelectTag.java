@@ -30,6 +30,8 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.DefaultSelectOption;
+import com.cyclopsgroup.waterview.SelectOption;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
@@ -50,9 +52,9 @@ public class SelectTag extends TagSupport
      *
      * @param option Option tag
      */
-    public void addOption(OptionTag option)
+    public void addOption(SelectOption option)
     {
-        options.put(option.getValue(), option);
+        options.put(option.getName(), option);
     }
 
     /**
@@ -99,20 +101,24 @@ public class SelectTag extends TagSupport
             while (i.hasNext())
             {
                 Object item = i.next();
-                String name = null;
-                Option option = null;
-                if (item instanceof Map.Entry)
+                SelectOption option = null;
+                if (item instanceof SelectOption)
+                {
+                    option = (SelectOption) item;
+                }
+                else if (item instanceof Map.Entry)
                 {
                     Map.Entry e = (Map.Entry) item;
-                    option = new Option(e.getKey(), e.getValue());
-                    name = TypeUtils.toString(e.getKey());
+                    String name = TypeUtils.toString(e.getKey());
+                    option = new DefaultSelectOption(name, TypeUtils.toString(e
+                            .getValue()));
                 }
                 else
                 {
-                    name = TypeUtils.toString(item);
-                    option = new Option(name, item);
+                    String name = TypeUtils.toString(item);
+                    option = new DefaultSelectOption(name, name);
                 }
-                options.put(name, option);
+                addOption(option);
             }
         }
 
