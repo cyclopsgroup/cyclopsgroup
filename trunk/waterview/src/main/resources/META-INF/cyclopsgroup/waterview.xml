@@ -8,7 +8,7 @@
         <TagPackage className="com.cyclopsgroup.waterview.jsp.taglib.JspTagPackage" />
         <TagPackage className="com.cyclopsgroup.waterview.web.taglib.WebTagPackage" />
     </TagLibrary>
-    <Theme name="waterviewtheme" package="waterview" description="System default theme">
+    <Theme name="waterviewtheme" resourceDir="/waterview/defaulttheme" description="System default theme">
         <Layout name="layout.default">
             <JellyLayout script="/waterview/DefaultLayout.jelly" />
         </Layout>

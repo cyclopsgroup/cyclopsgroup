@@ -28,13 +28,14 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  * 
  * Theme tag
  */
-public class ThemeTag extends TagSupport
+public class ThemeTag
+    extends TagSupport
 {
     private String description;
 
     private String name;
 
-    private String packageAlias;
+    private String resourceDir;
 
     private DefaultTheme theme;
 
@@ -59,16 +60,6 @@ public class ThemeTag extends TagSupport
     }
 
     /**
-     * Getter method for package
-     *
-     * @return Package alias
-     */
-    public String getPackage()
-    {
-        return packageAlias;
-    }
-
-    /**
      * Getter method for field theme
      *
      * @return Returns the theme.
@@ -83,19 +74,19 @@ public class ThemeTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireAttribute("package");
-        theme = new DefaultTheme(name, getPackage());
-        if (StringUtils.isNotEmpty(getDescription()))
+        requireAttribute( "name" );
+        requireAttribute( "resourceDir" );
+        theme = new DefaultTheme( name, getResourceDir() );
+        if ( StringUtils.isNotEmpty( getDescription() ) )
         {
-            theme.setDescription(getDescription());
+            theme.setDescription( getDescription() );
         }
-        invokeBody(output);
-        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable(
-                JellyEngine.ROLE);
-        jellyEngine.registerTheme(theme);
+        invokeBody( output );
+        JellyEngine jellyEngine = (JellyEngine) getContext().getVariable( JellyEngine.ROLE );
+        jellyEngine.registerTheme( theme );
     }
 
     /**
@@ -103,7 +94,7 @@ public class ThemeTag extends TagSupport
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -113,18 +104,28 @@ public class ThemeTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
 
     /**
-     * Setter method for package
+     * Getter method for resourceDir
      *
-     * @param alias Package alias
+     * @return Returns the resourceDir.
      */
-    public void setPackage(String alias)
+    public String getResourceDir()
     {
-        packageAlias = alias;
+        return resourceDir;
+    }
+
+    /**
+     * Setter method for resourceDir
+     *
+     * @param resourceDir The resourceDir to set.
+     */
+    public void setResourceDir( String resourceDir )
+    {
+        this.resourceDir = resourceDir;
     }
 }
