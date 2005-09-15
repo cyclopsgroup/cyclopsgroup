@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.web.taglib;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +34,8 @@ import com.cyclopsgroup.waterview.web.Form;
  * 
  * Form tag
  */
-public class FormTag extends TagSupport
+public class FormTag
+    extends TagSupport
 {
     private String action;
 
@@ -57,11 +58,15 @@ public class FormTag extends TagSupport
      *
      * @param tag Submit tag
      */
-    public void addButtonTag(SubmitTag tag)
+    public void addButtonTag( SubmitTag tag )
     {
-        if (!buttonTags.contains(tag))
+        if ( buttonTags == null )
         {
-            buttonTags.add(tag);
+            buttonTags = new ArrayList();
+        }
+        if ( !buttonTags.contains( tag ) )
+        {
+            buttonTags.add( tag );
         }
     }
 
@@ -70,9 +75,13 @@ public class FormTag extends TagSupport
      *
      * @param tag Field tag
      */
-    public void addFieldTag(FieldTag tag)
+    public void addFieldTag( FieldTag tag )
     {
-        fieldTags.put(tag.getName(), tag);
+        if ( fieldTags == null )
+        {
+            fieldTags = ListOrderedMap.decorate( new HashMap() );
+        }
+        fieldTags.put( tag.getName(), tag );
     }
 
     /**
@@ -111,9 +120,13 @@ public class FormTag extends TagSupport
      * @param fieldName Field name
      * @return Field tag object or null
      */
-    public FieldTag getFieldTag(String fieldName)
+    public FieldTag getFieldTag( String fieldName )
     {
-        return (FieldTag) fieldTags.get(fieldName);
+        if ( fieldTags == null )
+        {
+            return null;
+        }
+        return (FieldTag) fieldTags.get( fieldName );
     }
 
     /**
@@ -167,26 +180,27 @@ public class FormTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        requireAttribute("method");
-        requireParent(FormControlTag.class);
-        fieldTags = ListOrderedMap.decorate(new Hashtable());
-        buttonTags = new ArrayList();
+        requireAttribute( "name" );
+        requireAttribute( "method" );
+        requireParent( FormControlTag.class );
+        fieldTags = null;
+        buttonTags = null;
         String formId = "form/" + getUniqueTagId();
-        RuntimeData data = (RuntimeData) context.getVariable(RuntimeData.NAME);
-        form = (Form) data.getSessionContext().get(formId);
+        RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
+        form = (Form) data.getSessionContext().get( formId );
         formNew = false;
-        if (form == null || !data.getParams().getBoolean("keep_form"))
+        if ( form == null || !data.getParams().getBoolean( "keep_form" ) )
         {
             formNew = true;
-            form = new Form(formId);
-            data.getSessionContext().put(formId, form);
+            form = new Form( formId );
+            data.getSessionContext().put( formId, form );
         }
-        invokeBody(XMLOutput.createDummyXMLOutput());
+        invokeBody( XMLOutput.createDummyXMLOutput() );
         formNew = false;
-        ((FormControlTag) getParent()).setFormTag(this);
+        ( (FormControlTag) getParent() ).setFormTag( this );
     }
 
     /**
@@ -194,7 +208,7 @@ public class FormTag extends TagSupport
      *
      * @param action The action to set.
      */
-    public void setAction(String action)
+    public void setAction( String action )
     {
         this.action = action;
     }
@@ -204,7 +218,7 @@ public class FormTag extends TagSupport
      *
      * @param bodyScript The bodyScript to set.
      */
-    public void setBodyScript(Script bodyScript)
+    public void setBodyScript( Script bodyScript )
     {
         this.bodyScript = bodyScript;
     }
@@ -214,7 +228,7 @@ public class FormTag extends TagSupport
      *
      * @param hideControls The hideControls to set.
      */
-    public void setHideControls(boolean hideControls)
+    public void setHideControls( boolean hideControls )
     {
         this.hideControls = hideControls;
     }
@@ -222,7 +236,7 @@ public class FormTag extends TagSupport
     /**
      * @param method The method to set.
      */
-    public void setMethod(String method)
+    public void setMethod( String method )
     {
         this.method = method;
     }
@@ -232,8 +246,8 @@ public class FormTag extends TagSupport
      *
      * @param name Name
      */
-    public void setName(String name)
+    public void setName( String name )
     {
-        setTagId(name);
+        setTagId( name );
     }
 }
