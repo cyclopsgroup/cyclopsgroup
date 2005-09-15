@@ -16,12 +16,13 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -41,9 +42,9 @@ public class FormTag
 
     private Script bodyScript;
 
-    private List buttonTags;
+    private Set buttonTags = ListOrderedSet.decorate( new HashSet() );
 
-    private Map fieldTags;
+    private Map fieldTags = ListOrderedMap.decorate( new HashMap() );
 
     private Form form;
 
@@ -60,10 +61,6 @@ public class FormTag
      */
     public void addButtonTag( SubmitTag tag )
     {
-        if ( buttonTags == null )
-        {
-            buttonTags = new ArrayList();
-        }
         if ( !buttonTags.contains( tag ) )
         {
             buttonTags.add( tag );
@@ -77,10 +74,6 @@ public class FormTag
      */
     public void addFieldTag( FieldTag tag )
     {
-        if ( fieldTags == null )
-        {
-            fieldTags = ListOrderedMap.decorate( new HashMap() );
-        }
         fieldTags.put( tag.getName(), tag );
     }
 
@@ -109,7 +102,7 @@ public class FormTag
      *
      * @return Submit tags
      */
-    public List getButtonTags()
+    public Set getButtonTags()
     {
         return buttonTags;
     }
@@ -122,10 +115,6 @@ public class FormTag
      */
     public FieldTag getFieldTag( String fieldName )
     {
-        if ( fieldTags == null )
-        {
-            return null;
-        }
         return (FieldTag) fieldTags.get( fieldName );
     }
 
@@ -186,8 +175,6 @@ public class FormTag
         requireAttribute( "name" );
         requireAttribute( "method" );
         requireParent( FormControlTag.class );
-        fieldTags = null;
-        buttonTags = null;
         String formId = "form/" + getUniqueTagId();
         RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
         form = (Form) data.getSessionContext().get( formId );
