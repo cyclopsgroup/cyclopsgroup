@@ -22,7 +22,7 @@ package com.cyclopsgroup.waterview.web.taglib;
  * Default table control tag
  */
 public class DefaultTableControlTag
-    extends JellyTableControlTag
+    extends BaseJellyTableControlTag
 {
     /**
      * Constructor for class DefaultTableControlTag

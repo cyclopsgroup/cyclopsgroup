@@ -27,7 +27,7 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class BaseJellyControlTag
+public abstract class BaseJellyControlTag
     extends TagSupport
 {
     private String script;
@@ -66,6 +66,19 @@ public class BaseJellyControlTag
         JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
         Script s = je.getScript( getScript() );
         getContext().setVariable( TAG_NAME, this );
-        s.run( getContext(), output );
+        runScript( s, output );
+    }
+
+    /**
+     * Method to run script
+     * 
+     * @param script Script to run
+     * @param output XMLOutput
+     * @throws Exception Throw it out
+     */
+    protected void runScript( Script script, XMLOutput output )
+        throws Exception
+    {
+        script.run( context, output );
     }
 }

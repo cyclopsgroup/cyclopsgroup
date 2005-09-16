@@ -22,7 +22,7 @@ package com.cyclopsgroup.waterview.web.taglib;
  * Default form control tag
  */
 public class DefaultFormControlTag
-    extends JellyFormControlTag
+    extends BaseJellyFormControlTag
 {
     /**
      * Constructor for class DefaultFormControlTag

@@ -26,7 +26,7 @@ import org.apache.commons.jelly.XMLOutput;
  * Form control with tiled template
  */
 public class TiledFormControlTag
-    extends JellyFormControlTag
+    extends BaseJellyFormControlTag
 {
     private int columns = 2;
 
@@ -63,7 +63,7 @@ public class TiledFormControlTag
     /**
      * Overwrite or implement method processTag()
      *
-     * @see com.cyclopsgroup.waterview.web.taglib.JellyFormControlTag#processTag(org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.web.taglib.BaseJellyFormControlTag#processTag(org.apache.commons.jelly.XMLOutput)
      */
     protected void processTag( XMLOutput output )
         throws Exception

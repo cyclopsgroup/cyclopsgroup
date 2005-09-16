@@ -1,120 +1,36 @@
-/*
- * Copyright (c) 1999-2004 Evavi, Inc. All Rights Reserved.
+/* ==========================================================================
+ * Copyright 2002-2005 Cyclops Group Community
+ * 
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This software is the proprietary information of Evavi, Inc.
- * Use is subject to license terms. License Agreement available at
- * <a href="http://www.evavi.com" target="_blank">www.evavi.com</a>
+ *      http://www.opensource.org/licenses/cddl1.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * =========================================================================
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.JellyException;
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
-import com.cyclopsgroup.waterview.web.TabularData;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Jelly table control tag
+ *
  */
 public class JellyTableControlTag
-    extends TagSupport
-    implements TableControlTag
+    extends BaseJellyTableControlTag
 {
-    private String script;
-
-    private TableTag tableTag;
-
-    private TabularData data;
-
     /**
-     * Get data of this table
+     * Override method setScript in class JellyTableControlTag
      *
-     * @return TabularData
-     */
-    public TabularData getData()
-    {
-        return data;
-    }
-
-    /**
-     * Setter method for property data
-     *
-     * @param data Tabular data to set
-     */
-    public void setData( TabularData data )
-    {
-        this.data = data;
-    }
-
-    /**
-     * @return Returns the script.
-     */
-    public String getScript()
-    {
-        return script;
-    }
-
-    /**
-     * @param script The script to set.
+     * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag#setScript(java.lang.String)
      */
     public void setScript( String script )
     {
-        this.script = script;
-    }
-
-    /**
-     * Overwrite or implement method in JellyTableControlTag
-     *
-     * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTableTag(com.cyclopsgroup.waterview.web.taglib.TableTag)
-     */
-    public void setTableTag( TableTag tableTag )
-    {
-        this.tableTag = tableTag;
-    }
-
-    /**
-     * Overwrite or implement method in JellyTableControlTag
-     *
-     * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTabularData(com.cyclopsgroup.waterview.web.TabularData)
-     */
-    public void setTabularData( TabularData tabularData )
-    {
-        setData( tabularData );
-    }
-
-    /**
-     * Overwrite or implement method processTag()
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    protected void processTag( XMLOutput output )
-        throws Exception
-    {
-        requireAttribute( "script" );
-
-        invokeBody( XMLOutput.createDummyXMLOutput() );
-        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
-        Script s = je.getScript( getScript() );
-
-        if ( tableTag == null )
-        {
-            throw new JellyException( "One table must be defined" );
-        }
-
-        if ( data == null )
-        {
-            throw new JellyException( "Tabular data must be included" );
-        }
-
-        JellyContext jc = new JellyContext( getContext() );
-        jc.setVariable( "tableTag", tableTag );
-        jc.setVariable( "table", tableTag.getTable() );
-        jc.setVariable( "tabularData", getData() );
-        s.run( jc, output );
+        super.setScript( script );
     }
 }
