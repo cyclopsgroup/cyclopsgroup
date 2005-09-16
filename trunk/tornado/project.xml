@@ -128,7 +128,7 @@
         <dependency>
             <groupId>commons-jelly</groupId>
             <artifactId>commons-jelly</artifactId>
-            <version>20040601.171102</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/jelly</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -137,7 +137,7 @@
         <dependency>
             <groupId>commons-jexl</groupId>
             <artifactId>commons-jexl</artifactId>
-            <version>1.0-beta-2</version>
+            <version>1.0</version>
             <url>http://jakarta.apache.org/commons/jexl</url>
             <properties>
                 <war.bundle>true</war.bundle>
