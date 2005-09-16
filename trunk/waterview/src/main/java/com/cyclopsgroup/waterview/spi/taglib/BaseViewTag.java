@@ -1,10 +1,7 @@
 package com.cyclopsgroup.waterview.spi.taglib;
 
-import java.util.HashMap;
-
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.DefaultContext;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
@@ -34,7 +31,6 @@ public abstract class BaseViewTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        RuntimeData data = getRuntimeData();
         View view = createView();
 
         if ( view == null )
@@ -43,16 +39,15 @@ public abstract class BaseViewTag
         }
         if ( getParent() instanceof ViewAware )
         {
-            ViewAware viewAware = (ViewAware) getParent();
-            viewAware.doView( view );
+            ( (ViewAware) getParent() ).doView( view );
         }
         else
         {
-            JellyContextAdapter adapter = new JellyContextAdapter( context );
-            DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
+            RuntimeData data = getRuntimeData();
             try
             {
-                view.render( data, ctx );
+                JellyContextAdapter jc = new JellyContextAdapter( getContext() );
+                view.render( data, jc );
             }
             catch ( Exception e )
             {

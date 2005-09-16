@@ -25,7 +25,8 @@ import org.apache.commons.jelly.XMLOutput;
  *
  * Form control with tiled template
  */
-public class TiledFormControlTag extends JellyFormControlTag
+public class TiledFormControlTag
+    extends JellyFormControlTag
 {
     private int columns = 2;
 
@@ -36,7 +37,7 @@ public class TiledFormControlTag extends JellyFormControlTag
      */
     public TiledFormControlTag()
     {
-        setScript("/waterview/TiledFormControl.jelly");
+        setScript( "/waterview/control/TiledFormControl.jelly" );
     }
 
     /**
@@ -64,13 +65,14 @@ public class TiledFormControlTag extends JellyFormControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.JellyFormControlTag#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        if (getColumns() < 1)
+        if ( getColumns() < 1 )
         {
-            throw new JellyTagException("Columns must be bigger than 1");
+            throw new JellyTagException( "Columns must be bigger than 1" );
         }
-        super.processTag(output);
+        super.processTag( output );
     }
 
     /**
@@ -78,7 +80,7 @@ public class TiledFormControlTag extends JellyFormControlTag
      *
      * @param columns The columns to set.
      */
-    public void setColumns(int columns)
+    public void setColumns( int columns )
     {
         this.columns = columns;
     }
@@ -88,7 +90,7 @@ public class TiledFormControlTag extends JellyFormControlTag
      *
      * @param vertical The vertical to set.
      */
-    public void setVertical(boolean vertical)
+    public void setVertical( boolean vertical )
     {
         this.vertical = vertical;
     }

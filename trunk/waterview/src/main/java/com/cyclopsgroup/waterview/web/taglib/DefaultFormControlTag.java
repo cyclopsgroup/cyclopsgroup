@@ -29,6 +29,6 @@ public class DefaultFormControlTag
      */
     public DefaultFormControlTag()
     {
-        setScript( "/waterview/DefaultFormControl.jelly" );
+        setScript( "/waterview/control/DefaultFormControl.jelly" );
     }
 }

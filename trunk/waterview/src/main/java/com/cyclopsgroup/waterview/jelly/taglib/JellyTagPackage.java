@@ -32,7 +32,6 @@ public class JellyTagPackage
      */
     public JellyTagPackage()
     {
-        addTag( "JellyPanel", JellyPanelTag.class );
         addTag( "JellyView", JellyViewTag.class );
         addTag( "View", ViewTag.class );
         addTag( "Layout", LayoutTag.class );

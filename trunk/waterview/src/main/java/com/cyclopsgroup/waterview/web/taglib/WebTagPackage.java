@@ -23,33 +23,35 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * 
  * Tag package of web tags
  */
-public class WebTagPackage extends TagPackage
+public class WebTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class WebTagPackage
      */
     public WebTagPackage()
     {
-        addTag("JellyFormControl", JellyFormControlTag.class);
-        addTag("FormControl", DefaultFormControlTag.class);
-        addTag("Form", FormTag.class);
-        addTag("FormButton", FormButtonTag.class);
-        addTag("FormImage", FormImageTag.class);
-        addTag("Submit", SubmitTag.class);
-        addTag("Validators", ValidatorsTag.class);
-        addTag("TypeValidator", TypeValidatorTag.class);
-        addTag("Select", SelectTag.class);
-        addTag("Option", OptionTag.class);
-        addTag("Field", FieldTag.class);
-        addTag("FieldBody", FieldBodyTag.class);
-        addTag("TiledFormControl", TiledFormControlTag.class);
+        addTag( "JellyFormControl", JellyFormControlTag.class );
+        addTag( "FormControl", DefaultFormControlTag.class );
+        addTag( "Form", FormTag.class );
+        addTag( "FormButton", FormButtonTag.class );
+        addTag( "FormImage", FormImageTag.class );
+        addTag( "Submit", SubmitTag.class );
+        addTag( "Validators", ValidatorsTag.class );
+        addTag( "TypeValidator", TypeValidatorTag.class );
+        addTag( "Select", SelectTag.class );
+        addTag( "Option", OptionTag.class );
+        addTag( "Field", FieldTag.class );
+        addTag( "FieldBody", FieldBodyTag.class );
+        addTag( "TiledFormControl", TiledFormControlTag.class );
 
-        addTag("JellyTableControl", JellyTableControlTag.class);
-        addTag("TableControl", DefaultTableControlTag.class);
-        addTag("Table", TableTag.class);
-        addTag("Column", ColumnTag.class);
-        addTag("CollectionTabularData", CollectionTabularDataTag.class);
+        addTag( "JellyTableControl", JellyTableControlTag.class );
+        addTag( "TableControl", DefaultTableControlTag.class );
+        addTag( "Table", TableTag.class );
+        addTag( "Column", ColumnTag.class );
+        addTag( "CollectionTabularData", CollectionTabularDataTag.class );
 
-        addTag("BlankImage", BlankImageTag.class);
+        addTag( "BlankImage", BlankImageTag.class );
+        addTag( "WindowControl", WindowControlTag.class );
     }
 }

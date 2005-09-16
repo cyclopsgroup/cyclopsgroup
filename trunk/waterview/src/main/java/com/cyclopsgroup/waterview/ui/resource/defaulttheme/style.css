@@ -49,19 +49,19 @@ table.waterviewTag td.input {
 	padding: 2 16 2 16;
 }
 
-.waterviewViewWrapper {
+.waterviewWindow {
 	background-color: #6291CA;
 }
 
-.waterviewViewWrapper .waterviewViewHeader {
+.waterviewWindow .waterviewWindowHeader {
 	background-image: url('bar_bg_down.gif');
 }
 
-.waterviewViewWrapper .waterviewViewTitle {
+.waterviewWindow .waterviewWindowTitle {
 	color: white;
 }
 
-.waterviewViewBody {
+.waterviewWindowBody {
 	background-color: white;
 }
 
@@ -69,11 +69,11 @@ table.waterviewTag td.input {
 	background-color: #EEEEEE;
 }
 
-#bodyPanel .waterviewViewWrapper {
+#bodyPanel .waterviewWindow {
 	background-color: white;
 }
 
-#bodyPanel .waterviewViewWrapper .waterviewViewHeader {
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
 	background-image: none;
 	border-width: 0 0 2 0;
 	border-color: #0B73DB;
@@ -81,7 +81,7 @@ table.waterviewTag td.input {
 	border-width: 0 0 2 0;
 }
 
-#bodyPanel .waterviewViewWrapper .waterviewViewTitle {
+#bodyPanel .waterviewWindow .waterviewWindowTitle {
 	color: #0B73DB;
 }
 

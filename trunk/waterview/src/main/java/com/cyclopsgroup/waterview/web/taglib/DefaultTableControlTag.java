@@ -24,13 +24,11 @@ package com.cyclopsgroup.waterview.web.taglib;
 public class DefaultTableControlTag
     extends JellyTableControlTag
 {
-    private static final String DEFAULT_TABLE_CONTROL = "/waterview/DefaultTableControl.jelly";
-
     /**
      * Constructor for class DefaultTableControlTag
      */
     public DefaultTableControlTag()
     {
-        setScript( DEFAULT_TABLE_CONTROL );
+        setScript( "/waterview/control/DefaultTableControl.jelly" );
     }
 }

@@ -195,6 +195,10 @@ public class FieldTag
             }
             formTag.getForm().addField( field );
         }
+        else
+        {
+            field = formTag.getForm().getField( getName() );
+        }
 
         invokeBody( output );
 

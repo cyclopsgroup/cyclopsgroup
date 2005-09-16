@@ -7,7 +7,7 @@
     </p>
     <w:FormControl>
         <w:Form name="aform" method="post">
-            <w:TableControl script="/waterview/DefaultTableControl.jelly">
+            <w:TableControl>
                 <w:CollectionTabularData items="${rows}" />
                 <w:Table var="row" name="atable">
                     <w:Column name="select" title="Select">

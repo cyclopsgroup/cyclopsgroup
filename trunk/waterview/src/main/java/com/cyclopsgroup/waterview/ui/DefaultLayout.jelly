@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td width="25%" valign="top" id="leftPanel">
-                            <w:JellyPanel script="/waterview/DefaultVerticalSimplePanel.jelly" name="navigation">
+                            <w:GetPanelViews var="views" panel="navigation">
                                 <w:View name="System Navigation">
                                     <table celllspacing="0" border="0" cellpadding="0">
                                         <j:forEach var="row" items="${navigatorRows}">
@@ -103,7 +103,12 @@
                                 <w:View name="References">
                                     <p>Some reference links</p>
                                 </w:View>
-                            </w:JellyPanel>
+                            </w:GetPanelViews>
+                            <j:forEach var="view" items="${views}">
+                                <w:WindowControl title="${view.name}">
+                                    <w:DisplayView view="${view}" />
+                                </w:WindowControl>
+                            </j:forEach>
                         </td>
                         <td width="75%" valign="top" id="bodyPanel">
                             <table width="100%">
@@ -117,9 +122,14 @@
                                     </td>
                                 </tr>
                             </table>
-                            <w:JellyPanel script="/waterview/DefaultVerticalBodyPanel.jelly" name="body">
+                            <w:GetPanelViews var="views" panel="body">
                                 <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
-                            </w:JellyPanel>
+                            </w:GetPanelViews>
+                            <j:forEach var="view" items="${views}">
+                                <w:WindowControl title="${view.name}" maximizable="true" editable="true">
+                                    <w:DisplayView view="${view}" />
+                                </w:WindowControl>
+                            </j:forEach>
                         </td>
                     </tr>
                     <tr>

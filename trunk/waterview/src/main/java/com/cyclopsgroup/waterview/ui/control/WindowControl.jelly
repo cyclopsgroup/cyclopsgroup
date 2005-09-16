@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core" style="padding: 5px;">
+    <table width="100%" cellspacing="1" cellpadding="0" border="0" class="waterviewWindow">
+        <tr>
+            <td class="waterviewWindowHeader">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td>
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <td>
+                                        <img width="16" height="16" alt="View Actions"
+                                            src="${themeBase}/16x16/view_actions.png" />
+                                    </td>
+                                    <td>
+                                        <span class="waterviewWindowTitle">${controlTag.title}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="right">
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <j:if test="${controlTag.maximizable}">
+                                        <td>
+                                            <img width="16" height="16" alt="Maximize View"
+                                                src="${themeBase}/16x16/view_max.png" />
+                                        </td>
+                                    </j:if>
+                                    <j:if test="${controlTag.editable}">
+                                        <td>
+                                            <img width="16" height="16" alt="Configure"
+                                                src="${themeBase}/16x16/edit.png" />
+                                        </td>
+                                    </j:if>
+                                    <td>
+                                        <img width="16" height="16" alt="Help" src="${themeBase}/16x16/help.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="waterviewWindowBody" style="padding: 5px;">
+                <w:RunScript script="${controlTag.body}" />
+            </td>
+        </tr>
+    </table>
+</div>
