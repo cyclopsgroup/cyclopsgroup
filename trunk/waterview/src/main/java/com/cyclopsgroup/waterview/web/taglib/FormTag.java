@@ -185,7 +185,7 @@ public class FormTag
             form = new Form( formId );
             data.getSessionContext().put( formId, form );
         }
-        invokeBody( XMLOutput.createDummyXMLOutput() );
+        invokeBody( output );
         formNew = false;
         ( (FormControlTag) getParent() ).setFormTag( this );
     }
