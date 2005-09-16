@@ -17,14 +17,14 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import com.cyclopsgroup.waterview.jelly.taglib.JellyControlTag;
+import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
 public class WindowControlTag
-    extends JellyControlTag
+    extends BaseJellyControlTag
 {
     private String title;
 

@@ -17,55 +17,20 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.commons.jelly.Script;
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.utils.TagSupport;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
 public class JellyControlTag
-    extends TagSupport
+    extends BaseJellyControlTag
 {
-    private String script;
-
-    private static final String TAG_NAME = "controlTag";
-
     /**
-     * Getter method for script
+     * Override method setScript in class JellyControlTag
      *
-     * @return Returns the script.
-     */
-    public String getScript()
-    {
-        return script;
-    }
-
-    /**
-     * Setter method for script
-     *
-     * @param script The script to set.
+     * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag#setScript(java.lang.String)
      */
     public void setScript( String script )
     {
-        this.script = script;
-    }
-
-    /**
-     * Override method processTag in class JellyControlTag
-     *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
-     */
-    protected void processTag( XMLOutput output )
-        throws Exception
-    {
-        requireAttribute( "script" );
-        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
-        Script s = je.getScript( getScript() );
-        getContext().setVariable( TAG_NAME, this );
-        s.run( getContext(), output );
+        super.setScript( script );
     }
 }

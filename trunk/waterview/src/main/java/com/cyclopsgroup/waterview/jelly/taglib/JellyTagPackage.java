@@ -37,5 +37,6 @@ public class JellyTagPackage
         addTag( "Layout", LayoutTag.class );
         addTag( "JellyLayout", JellyLayoutTag.class );
         addTag( "JellyScript", JellyScriptTag.class );
+        addTag( "JellyControl", JellyControlTag.class );
     }
 }
