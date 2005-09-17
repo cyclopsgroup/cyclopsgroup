@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:t="http://tornado.cyclopsgroup.com/tornado"
+    xmlns:j="jelly:core">
+    <h2>User Management</h2>
+    <p>You may manage user information here</p>
+    <w:TableControl>
+        <t:HqlTabularData>
+            <![CDATA[
+            FROM com.cyclopsgroup.tornado.security.User
+            WHERE isDisabled = 0
+            ]]>
+        </t:HqlTabularData>
+        <w:Table name="usertable" var="user">
+            <w:Column name="id" title="Select" sort="unsorted">
+                <input type="checkbox" name="user_id" value="user.id" />
+            </w:Column>
+            <w:Column name="name" title="User Name" sort="asc">${user.name}</w:Column>
+            <w:Column name="lastName" title="Display Name" sort="unsorted">
+                ${user.firstName} ${user.lastName} ${user.middleName}
+            </w:Column>
+            <w:Column name="email" title="Email" sort="unsorted">${user.email}</w:Column>
+            <w:Column name="isDisabled" title="Disabled" sort="unsorted">${user.idDisabled}</w:Column>
+            <w:Column name="isSystem" title="System" sort="unsorted">${user.isSystem}</w:Column>
+            <w:Column name="gender" title="Male/Female" sort="unsorted">
+                <j:choose>
+                    <j:when test="${user.gender eq 'M'}">Male</j:when>
+                    <j:when test="${user.gender eq 'F'}">Female</j:when>
+                    <j:otherwise>Unknown</j:otherwise>
+                </j:choose>
+            </w:Column>
+        </w:Table>
+    </w:TableControl>
+</div>

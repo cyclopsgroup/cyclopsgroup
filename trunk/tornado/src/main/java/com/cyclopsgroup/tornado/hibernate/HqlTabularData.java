@@ -39,7 +39,7 @@ import com.cyclopsgroup.waterview.web.TabularData;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HQLTabularData
+public class HqlTabularData
     implements TabularData
 {
     private class Parameter
@@ -103,7 +103,7 @@ public class HQLTabularData
      * @param hql Hibernate query language
      * @param dataSource Data source name
      */
-    public HQLTabularData( String hql, HibernateService hibernate, String dataSource )
+    public HqlTabularData( String hql, HibernateService hibernate, String dataSource )
     {
         this.hql = hql;
         this.hibernate = hibernate;
@@ -116,7 +116,7 @@ public class HQLTabularData
      * @param hql HQL language
      * @param hibernate Hibernate servcie
      */
-    public HQLTabularData( String hql, HibernateService hibernate )
+    public HqlTabularData( String hql, HibernateService hibernate )
     {
         this( hql, hibernate, HibernateService.DEFAULT_DATASOURCE );
     }

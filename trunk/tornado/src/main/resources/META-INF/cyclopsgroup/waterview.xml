@@ -2,6 +2,9 @@
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
     <ModulePackage alias="tornado" name="com.cyclopsgroup.tornado.ui" />
     <TagLibrary uri="http://tornado.cyclopsgroup.com/tool">
-        <TagPackage className="com.cyclopsgroup.tornado.hibernate.taglib.HibernateTagPackage" />
+        <TagPackage className="com.cyclopsgroup.tornado.hibernate.taglib.HibernateToolTagPackage" />
+    </TagLibrary>
+    <TagLibrary uri="http://tornado.cyclopsgroup.com/ui">
+        <TagPackage className="com.cyclopsgroup.tornado.hibernate.taglib.HibernateUITagPackage" />
     </TagLibrary>
 </Waterview>

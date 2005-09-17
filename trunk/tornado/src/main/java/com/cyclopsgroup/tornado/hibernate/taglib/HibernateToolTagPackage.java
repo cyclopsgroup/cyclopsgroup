@@ -23,13 +23,13 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HibernateTagPackage
+public class HibernateToolTagPackage
     extends TagPackage
 {
     /**
      * Constructor for class HibernateTagPackage
      */
-    public HibernateTagPackage()
+    public HibernateToolTagPackage()
     {
         addTag( "Hibernate", HibernateTag.class );
         addTag( "CreateTables", CreateTablesTag.class );
