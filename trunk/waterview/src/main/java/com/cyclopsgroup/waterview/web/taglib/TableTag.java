@@ -29,7 +29,8 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Tag for table
  */
-public class TableTag extends TagSupport
+public class TableTag
+    extends TagSupport
 {
     private Table table;
 
@@ -39,28 +40,52 @@ public class TableTag extends TagSupport
 
     private HashMap columnTags;
 
+    private int pageSize = -1;
+
+    /**
+     * Getter method for pageSize
+     *
+     * @return Returns the pageSize.
+     */
+    public int getPageSize()
+    {
+        return pageSize;
+    }
+
+    /**
+     * Setter method for pageSize
+     *
+     * @param pageSize The pageSize to set.
+     */
+    public void setPageSize( int pageSize )
+    {
+        this.pageSize = pageSize;
+    }
+
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("var");
-        requireAttribute("name");
-        requireParent(TableControlTag.class);
+        requireAttribute( "var" );
+        requireAttribute( "name" );
+        requireParent( TableControlTag.class );
         String tableId = "table/" + getUniqueTagId();
         RuntimeData data = getRuntimeData();
-        table = (Table) data.getSessionContext().get(tableId);
+        table = (Table) data.getSessionContext().get( tableId );
         tableNew = table == null;
-        if (tableNew)
+        if ( tableNew )
         {
-            table = new Table(tableId);
-            data.getSessionContext().put(tableId, table);
+            table = new Table( tableId );
+            table.setPageSize( getPageSize() );
+            data.getSessionContext().put( tableId, table );
         }
         columnTags = new HashMap();
-        invokeBody(output);
-        ((TableControlTag) getParent()).setTableTag(this);
+        invokeBody( output );
+        ( (TableControlTag) getParent() ).setTableTag( this );
     }
 
     /**
@@ -68,12 +93,12 @@ public class TableTag extends TagSupport
      *
      * @param columnTag Column tag
      */
-    public void addColumnTag(ColumnTag columnTag)
+    public void addColumnTag( ColumnTag columnTag )
     {
-        columnTags.put(columnTag.getName(), columnTag);
-        if (tableNew)
+        columnTags.put( columnTag.getName(), columnTag );
+        if ( tableNew )
         {
-            getTable().addColumn(columnTag.getColumn());
+            getTable().addColumn( columnTag.getColumn() );
         }
     }
 
@@ -83,9 +108,9 @@ public class TableTag extends TagSupport
      * @param columnName Name of the column
      * @return ColumnTag object
      */
-    public ColumnTag getColumnTag(String columnName)
+    public ColumnTag getColumnTag( String columnName )
     {
-        return (ColumnTag) columnTags.get(columnName);
+        return (ColumnTag) columnTags.get( columnName );
     }
 
     /**
@@ -129,15 +154,15 @@ public class TableTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
-        setTagId(name);
+        setTagId( name );
     }
 
     /**
      * @param var The var to set.
      */
-    public void setVar(String var)
+    public void setVar( String var )
     {
         this.var = var;
     }

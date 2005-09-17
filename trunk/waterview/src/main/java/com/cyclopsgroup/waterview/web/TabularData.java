@@ -37,6 +37,8 @@ public interface TabularData
      * Get size of the whole data
      *
      * @return Size of data or -1 if data is not countable
+     * @throws Exception Just throw it out
      */
-    int getSize();
+    int getSize()
+        throws Exception;
 }

@@ -38,6 +38,8 @@ public class Table
 
     private int pageIndex = 0;
 
+    private int pageSize = -1;
+
     private Set sortedColumns = ListOrderedSet.decorate( new HashSet() );
 
     /**
@@ -147,5 +149,25 @@ public class Table
     public void unsortOn( String columnName )
     {
         sortedColumns.remove( columnName );
+    }
+
+    /**
+     * Getter method for pageSize
+     *
+     * @return Returns the pageSize.
+     */
+    public int getPageSize()
+    {
+        return pageSize;
+    }
+
+    /**
+     * Setter method for pageSize
+     *
+     * @param pageSize The pageSize to set.
+     */
+    public void setPageSize( int pageSize )
+    {
+        this.pageSize = pageSize;
     }
 }
