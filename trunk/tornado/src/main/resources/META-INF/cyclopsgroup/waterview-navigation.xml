@@ -4,7 +4,7 @@
         <Node name="admin" title="Admin" page="/tornado/admin/Index.jelly">
             <Node name="security" title="Security" page="/tornado/admin/security/Index.jelly">
                 <Node title="Manage Users" page="/tornado/admin/security/ManageUsers.jelly" />
-                <Node title="Create User" page="/tornado/admin/security/NewUser.jelly" />
+                <Node title="Create User" page="/tornado/admin/security/CreateUser.jelly" />
                 <Node title="Manage Groups" page="/tornado/admin/security/ManageGroups.jelly" />
                 <Node title="Manage Roles" page="/tornado/admin/security/ManageRoles.jelly" />
             </Node>

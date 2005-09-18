@@ -5,7 +5,7 @@
     <w:TableControl>
         <t:HqlTabularData>
             <![CDATA[
-            FROM com.cyclopsgroup.tornado.security.User
+            FROM com.cyclopsgroup.tornado.security.entity.User
             WHERE isDisabled = 0
             ]]>
         </t:HqlTabularData>
@@ -20,13 +20,13 @@
             <w:Column name="email" title="Email" sort="unsorted">
                 <a href="mailto:${user.email}">${user.email}</a>
             </w:Column>
-            <w:Column name="isDisabled" title="Disabled" sort="unsorted">${user.idDisabled}</w:Column>
+            <w:Column name="isDisabled" title="Disabled" sort="unsorted">${user.isDisabled}</w:Column>
             <w:Column name="isSystem" title="System" sort="unsorted">${user.isSystem}</w:Column>
             <w:Column name="gender" title="M/F" sort="unsorted">
                 <j:choose>
                     <j:when test="${user.gender eq 'M'}">Male</j:when>
                     <j:when test="${user.gender eq 'F'}">Female</j:when>
-                    <j:otherwise>Unknown</j:otherwise>
+                    <j:otherwise>-</j:otherwise>
                 </j:choose>
             </w:Column>
         </w:Table>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <pipelines>
+                    <pipeline pattern="/!get!/.*" role="com.cyclopsgroup.waterview.GetResourcePipeline" />
+                    <pipeline pattern=".*" role="com.cyclopsgroup.tornado.DefaultTornadoPipeline" />
+                </pipelines>
+            </configuration>
+        </component>
+    </components>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
+        </component>
+    </load-on-start>
+</plexus>

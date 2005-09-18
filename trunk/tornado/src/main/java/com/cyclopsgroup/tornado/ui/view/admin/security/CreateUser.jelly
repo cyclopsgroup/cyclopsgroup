@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:t="http://tornado.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>Create New User</h2>
+    <p>This page take you to creating a new user for system.</p>
+    <w:TiledFormControl>
+        <w:Form name="userform" method="post">
+            <w:Field name="name" required="true" title="User Name" />
+            <w:Field name="email" required="true" title="Email">
+                <w:PatternValidator pattern=".+@.+\..+" />
+            </w:Field>
+            <w:Field name="password" required="true" title="Password" />
+            <w:Field name="confirmed_password" required="true" title="Password Again" />
+            <w:Field name="firstName" required="true" title="First Name" />
+            <w:Field name="middleName" title="Middle Name" />
+            <w:Field name="lastName" required="true" title="Last Name" />
+            <w:Field name="gendar" value="U" title="Gender">
+                <w:Select>
+                    <w:Option value="U">--</w:Option>
+                    <w:Option value="M">Male</w:Option>
+                    <w:Option value="F">Female</w:Option>
+                </w:Select>
+            </w:Field>
+            <w:Field name="birthday" type="date" title="Date of Birth" />
+            <w:Submit action="${link.addAction('/tornado/admin/security/CreateUserAction').setPage(page)}"
+                forceValidation="true">
+                <w:FormButton title="Create" description="Create new user" />
+            </w:Submit>
+        </w:Form>
+    </w:TiledFormControl>
+</div>
