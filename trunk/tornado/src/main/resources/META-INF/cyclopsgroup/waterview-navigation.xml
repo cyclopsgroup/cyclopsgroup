@@ -2,10 +2,12 @@
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="tornado.root" position="/system">
         <Node name="admin" title="Admin" page="/tornado/admin/Index.jelly">
-            <Node title="Users" page="/tornado/admin/ManageUsers.jelly" />
-            <Node title="New User" page="/tornado/admin/NewUser.jelly" />
-            <Node title="Groups" page="/tornado/admin/ManageGroups.jelly" />
-            <Node title="Roles" page="/tornado/admin/ManageRoles.jelly" />
+            <Node name="security" title="Security" page="/tornado/admin/security/Index.jelly">
+                <Node title="Manage Users" page="/tornado/admin/security/ManageUsers.jelly" />
+                <Node title="Create User" page="/tornado/admin/security/NewUser.jelly" />
+                <Node title="Manage Groups" page="/tornado/admin/security/ManageGroups.jelly" />
+                <Node title="Manage Roles" page="/tornado/admin/security/ManageRoles.jelly" />
+            </Node>
         </Node>
     </Tree>
 </Navigation>
