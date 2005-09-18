@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,18 +35,32 @@ import com.cyclopsgroup.waterview.RequestValueParser;
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRequestValueParser extends RequestValueParser
+public class ServletRequestValueParser
+    extends RequestValueParser
 {
     private MultiHashMap extra = new MultiHashMap();
 
     private HttpServletRequest httpServletRequest;
 
     /**
+     * Override method doGetAttributeNames in class ServletRequestValueParser
+     *
+     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     */
+    protected String[] doGetAttributeNames()
+    {
+        HashSet names = new HashSet();
+        CollectionUtils.addAll( names, httpServletRequest.getAttributeNames() );
+        names.addAll( extra.keySet() );
+        return (String[]) names.toArray( ArrayUtils.EMPTY_OBJECT_ARRAY );
+    }
+
+    /**
      * Constructor of HttpRequestValueParser
      * 
      * @param request Servlet request
      */
-    public ServletRequestValueParser(HttpServletRequest request)
+    public ServletRequestValueParser( HttpServletRequest request )
     {
         httpServletRequest = request;
     }
@@ -55,9 +70,9 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
      */
-    public void add(String name, String value)
+    public void add( String name, String value )
     {
-        extra.put(name, value);
+        extra.put( name, value );
     }
 
     /**
@@ -65,13 +80,14 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValue(java.lang.String)
      */
-    protected String doGetValue(String name) throws Exception
+    protected String doGetValue( String name )
+        throws Exception
     {
-        String ret = httpServletRequest.getParameter(name);
-        if (ret == null && extra.containsKey(name))
+        String ret = httpServletRequest.getParameter( name );
+        if ( ret == null && extra.containsKey( name ) )
         {
-            Collection c = (Collection) extra.get(name);
-            if (!c.isEmpty())
+            Collection c = (Collection) extra.get( name );
+            if ( !c.isEmpty() )
             {
                 ret = (String) c.iterator().next();
             }
@@ -84,14 +100,15 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues(String name) throws Exception
+    protected String[] doGetValues( String name )
+        throws Exception
     {
-        String[] ret = httpServletRequest.getParameterValues(name);
-        if (extra.containsKey(name))
+        String[] ret = httpServletRequest.getParameterValues( name );
+        if ( extra.containsKey( name ) )
         {
-            List list = new ArrayList((Collection) extra.get(name));
-            CollectionUtils.addAll(list, ret);
-            ret = (String[]) list.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+            List list = new ArrayList( (Collection) extra.get( name ) );
+            CollectionUtils.addAll( list, ret );
+            ret = (String[]) list.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
         }
         return ret;
     }
@@ -101,7 +118,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
      */
-    public FileItem getFileItem(String name)
+    public FileItem getFileItem( String name )
     {
         return null;
     }
@@ -111,7 +128,7 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
      */
-    public FileItem[] getFileItems(String name)
+    public FileItem[] getFileItems( String name )
     {
         return EMPTY_FILEITEM_ARRAY;
     }
@@ -121,8 +138,8 @@ public class ServletRequestValueParser extends RequestValueParser
      *
      * @see com.cyclopsgroup.waterview.RequestValueParser#remove(java.lang.String)
      */
-    public void remove(String name)
+    public void remove( String name )
     {
-        extra.remove(name);
+        extra.remove( name );
     }
 }

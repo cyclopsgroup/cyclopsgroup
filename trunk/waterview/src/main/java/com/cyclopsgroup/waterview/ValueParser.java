@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Properties;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -528,5 +529,33 @@ public abstract class ValueParser
         {
             add( name, value );
         }
+    }
+
+    /**
+     * @return Array of attribute names
+     */
+    protected abstract String[] doGetAttributeNames();
+
+    /**
+     * @return Array of attribute names
+     */
+    public String[] names()
+    {
+        return doGetAttributeNames();
+    }
+
+    /**
+     * @return Convert to properties
+     */
+    public Properties toProperties()
+    {
+        Properties p = new Properties();
+        String[] names = names();
+        for ( int i = 0; i < names.length; i++ )
+        {
+            String name = names[i];
+            p.setProperty( name, getString( name ) );
+        }
+        return p;
     }
 }

@@ -43,6 +43,16 @@ public class MultipartServletRequestValueParser
     private MultiHashMap fileItems = new MultiHashMap();
 
     /**
+     * Override method doGetAttributeNames in class MultipartServletRequestValueParser
+     *
+     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     */
+    protected String[] doGetAttributeNames()
+    {
+        return (String[]) content.keySet().toArray( ArrayUtils.EMPTY_OBJECT_ARRAY );
+    }
+
+    /**
      * Constructor for class MultipartServletRequestValueParser
      *
      * @param request Http request object

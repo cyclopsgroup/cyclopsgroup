@@ -123,4 +123,14 @@ public class MapValueParser
     {
         getMap().remove( name );
     }
+
+    /**
+     * Override method doGetAttributeNames in class MapValueParser
+     *
+     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     */
+    protected String[] doGetAttributeNames()
+    {
+        return (String[]) getMap().keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+    }
 }

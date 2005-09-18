@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.util.Properties;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * HashMap based request value parser
@@ -29,6 +30,16 @@ class MapRequestValueParser
     extends RequestValueParser
 {
     private Properties content = new Properties();
+
+    /**
+     * Override method doGetAttributeNames in class MapRequestValueParser
+     *
+     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     */
+    protected String[] doGetAttributeNames()
+    {
+        return (String[]) content.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+    }
 
     /**
      * Overwrite or implement method add()
