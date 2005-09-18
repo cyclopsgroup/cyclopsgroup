@@ -50,9 +50,9 @@ public class ServletRequestValueParser
     protected String[] doGetAttributeNames()
     {
         HashSet names = new HashSet();
-        CollectionUtils.addAll( names, httpServletRequest.getAttributeNames() );
+        CollectionUtils.addAll( names, httpServletRequest.getParameterNames() );
         names.addAll( extra.keySet() );
-        return (String[]) names.toArray( ArrayUtils.EMPTY_OBJECT_ARRAY );
+        return (String[]) names.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**

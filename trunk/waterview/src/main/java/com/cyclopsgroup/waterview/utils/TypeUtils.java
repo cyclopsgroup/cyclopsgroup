@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.waterview.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -155,6 +156,53 @@ public final class TypeUtils
 
     private static BeanUtilsBean beanUtils;
 
+    /** INternal beanutils bean */
+    private static class LooseBeanUtilsBean
+        extends BeanUtilsBean
+    {
+        private LooseBeanUtilsBean( ConvertUtilsBean convertUtils )
+        {
+            super( convertUtils, new PropertyUtilsBean() );
+        }
+
+        /**
+         * Override method setProperty in class LooseBeanUtilsBean
+         *
+         * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(java.lang.Object, java.lang.String, java.lang.Object)
+         */
+        public void setProperty( Object object, String name, Object value )
+            throws IllegalAccessException, InvocationTargetException
+        {
+            try
+            {
+                super.setProperty( object, name, value );
+            }
+            catch ( Exception e )
+            {
+                //ignore exception
+            }
+        }
+
+        /**
+         * Override method copyProperty in class LooseBeanUtilsBean
+         *
+         * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperty(java.lang.Object, java.lang.String, java.lang.Object)
+         */
+        public void copyProperty( Object object, String name, Object value )
+            throws IllegalAccessException, InvocationTargetException
+        {
+            try
+            {
+                super.copyProperty( object, name, value );
+            }
+            catch ( Exception e )
+            {
+                //ignored
+            }
+        }
+
+    }
+
     /**
      * @return Instance of bean utils
      */
@@ -162,7 +210,7 @@ public final class TypeUtils
     {
         if ( beanUtils == null )
         {
-            beanUtils = new BeanUtilsBean( getConvertUtils(), new PropertyUtilsBean() );
+            beanUtils = new LooseBeanUtilsBean( getConvertUtils() );
         }
         return beanUtils;
     }

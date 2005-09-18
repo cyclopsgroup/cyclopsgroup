@@ -57,35 +57,28 @@ public class ResolveActionsValve
         DefaultActionContext actionContext = new DefaultActionContext( data );
 
         ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
-        try
+        for ( Iterator i = actions.iterator(); i.hasNext(); )
         {
-            for ( Iterator i = actions.iterator(); i.hasNext(); )
+            String actionName = (String) i.next();
+            Path path = mm.parsePath( actionName );
+            String className = path.getPackage() + ".action" + path.getPathWithoutExtension().replace( '/', '.' );
+            Action action = null;
+            try
             {
-                String actionName = (String) i.next();
-                Path path = mm.parsePath( actionName );
-                String className = path.getPackage() + ".action" + path.getPathWithoutExtension().replace( '/', '.' );
-                Action action = null;
-                try
+                action = (Action) Class.forName( className ).newInstance();
+                if ( action instanceof Serviceable )
                 {
-                    action = (Action) Class.forName( className ).newInstance();
-                    if ( action instanceof Serviceable )
-                    {
-                        ( (Serviceable) action ).service( data.getServiceManager() );
-                    }
-                }
-                catch ( Exception ignored )
-                {
-                    //do nothing
-                }
-                if ( action != null )
-                {
-                    action.execute( data, actionContext );
+                    ( (Serviceable) action ).service( data.getServiceManager() );
                 }
             }
-        }
-        catch ( Exception e )
-        {
-            actionContext.fail( "Action error", e );
+            catch ( Exception ignored )
+            {
+                //do nothing
+            }
+            if ( action != null )
+            {
+                action.execute( data, actionContext );
+            }
         }
 
         if ( !actionContext.getInputErrorMessages().isEmpty() )
@@ -94,6 +87,7 @@ public class ResolveActionsValve
             data.getRequestContext().put( "formErrors", actionContext.getInputErrorMessages() );
             if ( data.getParams().getBoolean( "forced_validation" ) )
             {
+                data.setRedirectUrl( data.getRefererUrl() );
                 return;
             }
         }

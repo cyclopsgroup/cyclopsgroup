@@ -30,6 +30,9 @@ import org.apache.commons.collections.MultiHashMap;
 public class DummyTest
     extends TestCase
 {
+    /**
+     * Dummy  test case
+     */
     public void testDummy()
     {
         MultiHashMap map = new MultiHashMap();
