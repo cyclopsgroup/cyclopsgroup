@@ -8,8 +8,8 @@
             <w:Field name="email" required="true" title="Email">
                 <w:PatternValidator pattern=".+@.+\..+" />
             </w:Field>
-            <w:Field name="password" required="true" title="Password" />
-            <w:Field name="confirmed_password" required="true" title="Password Again" />
+            <w:Field name="password" password="true" required="true" title="Password" />
+            <w:Field name="confirmed_password" password="true" required="true" title="Password Again" />
             <w:Field name="firstName" required="true" title="First Name" />
             <w:Field name="middleName" title="Middle Name" />
             <w:Field name="lastName" required="true" title="Last Name" />
