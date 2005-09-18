@@ -22,8 +22,8 @@ import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
 import com.cyclopsgroup.waterview.web.TreeNode;
 import com.cyclopsgroup.waterview.web.TreeUtils;
@@ -50,6 +50,7 @@ public class DefaultLayout
         context.put( "tabNodes", tabNodes );
 
         NavigatorService navigator = (NavigatorService) lookupComponent( NavigatorService.ROLE );
+        context.put( "navigator", navigator );
         context.put( "currentNavigatorNode", navigator.getNodeByPage( data.getPage().getFullPath() ) );
 
         RuntimeNavigatorNode selectedNode = null;

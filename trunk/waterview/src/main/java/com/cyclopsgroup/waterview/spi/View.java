@@ -45,8 +45,8 @@ public interface View
          * Overwrite or implement method render()
          * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
          */
-        public void render(RuntimeData runtime, Context viewContext)
-                throws Exception
+        public void render( RuntimeData data, Context viewContext )
+            throws Exception
         {
             //do nothing
         }
@@ -65,9 +65,10 @@ public interface View
     /**
      * Render the window with runtime information
      *
-     * @param runtime UIRuntime object
+     * @param data UIRuntime object
      * @param viewContext Context for this window
      * @throws Exception Throw it out
      */
-    void render(RuntimeData runtime, Context viewContext) throws Exception;
+    void render( RuntimeData data, Context viewContext )
+        throws Exception;
 }

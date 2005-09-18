@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core" style="padding: 5px;">
+<w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <table width="100%" cellspacing="1" cellpadding="0" border="0" class="waterviewWindow">
         <tr>
             <td class="waterviewWindowHeader">
@@ -49,4 +49,5 @@
             </td>
         </tr>
     </table>
-</div>
+    <w:BlankImage height="5" width="1" />
+</w:Dummy>

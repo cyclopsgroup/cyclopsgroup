@@ -1,6 +1,6 @@
 body {
 	background-color: white;
-	color: #676767;
+	color: black;
 }
 
 h2 {
@@ -12,37 +12,37 @@ h2 {
 }
 
 #bannerPanel {
-	background-color: #4189D5;
+	background-color: #003399;
 	color: white;
 }
 
 table.waterviewTable th {
-	background-image: url('bar_bg_up.gif');
-	color: white;
+	background-color: #F0EEDE;
+	color: black;
 	border-style: solid;
-	border-color: #295DB4;
+	border-color: #CDCABB;
 	border-width: 1px;
 }
 
 table.waterviewTable tr.b {
-	background-color: #E6F4FF;
+	background-color: #F7F7F7;
 }
 
 table.waterviewTable .title {
 	background-color: #EEEEEE;
 }
 
-table.waterviewTag td.input {
+table.waterviewTable td.input {
 	
 }
 
 .lineBreak,.subLineBreak {
-	background-color: #2662B9;
+	background-color: #2E52AF;
 }
 
 .waterviewSelectedTab {
 	padding: 2 16 2 16;
-	background-color: #2662B9;
+	background-color: #2E52AF;
 }
 
 .waterviewUnselectedTab {
@@ -50,11 +50,11 @@ table.waterviewTag td.input {
 }
 
 .waterviewWindow {
-	background-color: #6291CA;
+	background-color: #5582D2
 }
 
 .waterviewWindow .waterviewWindowHeader {
-	background-image: url('bar_bg_down.gif');
+	background-color: #1F56C0;
 }
 
 .waterviewWindow .waterviewWindowTitle {
@@ -62,19 +62,24 @@ table.waterviewTag td.input {
 }
 
 .waterviewWindowBody {
-	background-color: white;
+	background-color: #EDF2FC;
 }
 
 #leftPanel {
-	background-color: #EEEEEE;
+	background-color: #8CAAE6;
+	padding: 5px;
 }
 
 #bodyPanel .waterviewWindow {
 	background-color: white;
 }
 
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
 #bodyPanel .waterviewWindow .waterviewWindowHeader {
-	background-image: none;
+	background-color: white;
 	border-width: 0 0 2 0;
 	border-color: #0B73DB;
 	border-style: solid;;
@@ -86,13 +91,12 @@ table.waterviewTag td.input {
 }
 
 input.waterviewFormButton {
-	background-image: url('bar_bg_up.gif');
-	border-color: #295DB4;
-	border-width: 1px;
-	border-style: solid;
+	background-color: #51A751;
+	border-color: #51A751;
+	border-width: 2px;
+	border-style: outset;
 	color: white;
 	font-weight: bold;;
-	color: white
 }
 
 input.waterviewFormInput {

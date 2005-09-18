@@ -10,52 +10,14 @@
                 <table width="100%" cellspacing="0" border="0" cellpadding="0">
                     <tr>
                         <td colspan="2" id="bannerPanel">
-                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="padding: 10px;">
-                                        <h2 class="r">Waterview Web Application Framework</h2>
-                                    </td>
-                                    <td rowspan="2" align="right">
-                                        <img src="${themeBase}/banner_right.gif" alt="Waterview System" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="bottom">
-                                        <table border="0" cellspacing="0" cellpadding="5">
-                                            <tr>
-                                                <td />
-                                                <j:forEach var="runtimeNode" items="${tabNodes}">
-                                                    <j:set var="node" value="${runtimeNode.content}" />
-                                                    <j:choose>
-                                                        <j:when test="${runtimeNode eq selectedNode}">
-                                                            <j:set var="currentTabNode" value="${node}" />
-                                                            <td class="waterviewSelectedTab">
-                                                                <a href="${link.setPage(node.page)}" class="r">
-                                                                    ${node.title}
-                                                                </a>
-                                                            </td>
-                                                        </j:when>
-                                                        <j:otherwise>
-                                                            <td class="waterviewUnselectedTab">
-                                                                <a href="${link.setPage(node.page)}" class="r">
-                                                                    ${node.title}
-                                                                </a>
-                                                            </td>
-                                                        </j:otherwise>
-                                                    </j:choose>
-                                                </j:forEach>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+                            <w:JellyScript path="/waterview/DefaultHtmlBanner.jelly" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="lineBreak" />
                     </tr>
                     <tr>
-                        <td width="25%" valign="top" id="leftPanel">
+                        <td width="25%" valign="top" id="leftPanel" rowspan="2">
                             <w:GetPanelViews var="views" panel="navigation">
                                 <w:View name="System Navigation">
                                     <table celllspacing="0" border="0" cellpadding="0">
@@ -110,20 +72,26 @@
                                 </w:WindowControl>
                             </j:forEach>
                         </td>
-                        <td width="75%" valign="top" id="bodyPanel">
+                        <td width="75%" class="lineBreak">
                             <table width="100%">
                                 <tr>
                                     <td>
                                         <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
-                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
-                                            &gt;&gt;
+                                            <a href="${link.setPage(parent.page)}" class="r">${parent.title}</a>
+                                            <span class="r">&gt;&gt;</span>
                                         </j:forEach>
-                                        ${currentNavigatorNode.title}
+                                        <span class="r">${currentNavigatorNode.title}</span>
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" id="bodyPanel">
+                            <j:set var="mainTitle" value="${navigator.getNodeByPage(data.page.fullPath).title}" />
                             <w:GetPanelViews var="views" panel="body">
-                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}"
+                                    title="${mainTitle}" />
                             </w:GetPanelViews>
                             <j:forEach var="view" items="${views}">
                                 <w:WindowControl title="${view.name}" maximizable="true" editable="true">
@@ -139,7 +107,7 @@
                         <td colspan="2">
                             <table width="100%" border="0" id="footerPanel">
                                 <tr>
-                                    <td>Copyrights reserved Cyclops Group 2005</td>
+                                    <td>All rights reserved Cyclops Group 2005</td>
                                     <td align="right">Powered By Cyclops Group Waterview</td>
                                 </tr>
                             </table>
