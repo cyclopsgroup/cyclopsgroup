@@ -17,42 +17,29 @@
 package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
-import java.util.Properties;
-
-import com.cyclopsgroup.waterview.Resource;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Base abstract theme class
  */
-public class DefaultTheme
+public abstract class BaseTheme
     implements Theme
 {
     private String description;
-
-    private Resource iconSet;
 
     private Hashtable layouts = new Hashtable();
 
     private String name;
 
-    private Properties properties = new Properties();
-
-    private Resource styleSheet;
-
     /**
      * Constructor for class BaseTheme
      *
      * @param name Name of the theme
-     * @param iconSet Root of resource directory
-     * @param styleSheet Stylesheet resource
      */
-    public DefaultTheme( String name, Resource iconSet, Resource styleSheet )
+    protected BaseTheme( String name )
     {
         this.name = name;
-        this.iconSet = iconSet;
-        this.styleSheet = styleSheet;
         setDescription( "Theme [" + name + "]" );
     }
 
@@ -64,16 +51,6 @@ public class DefaultTheme
     public String getDescription()
     {
         return description;
-    }
-
-    /**
-     * Overwrite or implement method getIconSet()
-     *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getIconSet()
-     */
-    public Resource getIconSet()
-    {
-        return iconSet;
     }
 
     /**
@@ -94,30 +71,6 @@ public class DefaultTheme
     public String getName()
     {
         return name;
-    }
-
-    /**
-     * Overwrite or implement method getProperty()
-     *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getProperty(java.lang.String)
-     */
-    public String getProperty( String propertyName )
-    {
-        return properties.getProperty( propertyName );
-    }
-
-    /**
-     * Overwrite or implement method getStylesheet()
-     *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
-     */
-    public synchronized Resource getStyleSheet()
-    {
-        if ( styleSheet == null )
-        {
-            styleSheet = new Resource( Resource.INTERNAL, iconSet.getPath() + "/style.css" );
-        }
-        return styleSheet;
     }
 
     /**

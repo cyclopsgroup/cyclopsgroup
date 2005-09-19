@@ -67,14 +67,6 @@ public interface Theme
     String getName();
 
     /**
-     * Get theme property
-     *
-     * @param propertyName Name of the property
-     * @return Value of the property
-     */
-    String getProperty( String propertyName );
-
-    /**
      * Get stylesheet resource
      *
      * @return Resource of stylesheet
