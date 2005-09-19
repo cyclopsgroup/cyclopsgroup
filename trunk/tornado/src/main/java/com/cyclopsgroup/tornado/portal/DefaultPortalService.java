@@ -73,8 +73,7 @@ public class DefaultPortalService
             RuntimeUser user = (RuntimeUser) ( (CreateUserEvent) event ).getUser();
             Criteria criteria = hibernate.getSession().createCriteria( UserPreference.class );
             List prefs = criteria.add( Expression.eq( "userId", user.getId() ) ).setMaxResults( 1 ).list();
-            String themeName = security.getGuestUser().getAttributes().getString( PortalService.USER_THEME_NAME,
-                                                                                  laf.getDefaultTheme().getName() );
+            String themeName = laf.getDefaultTheme().getName();
             if ( !prefs.isEmpty() )
             {
                 UserPreference up = (UserPreference) prefs.get( 0 );
@@ -97,5 +96,6 @@ public class DefaultPortalService
     {
         hibernate = (HibernateService) services.lookup( HibernateService.ROLE );
         security = (SecurityService) services.lookup( SecurityService.ROLE );
+        laf = (LookAndFeelService) services.lookup( LookAndFeelService.ROLE );
     }
 }
