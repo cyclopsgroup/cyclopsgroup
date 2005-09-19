@@ -9,6 +9,8 @@ h2 {
 
 #bodyWrapper {
 	background-color: white;
+	max-width: 860px;
+	width: expression(document . body . clientWidth >   860 ?   "860px" :   "auto");
 }
 
 #bannerPanel {

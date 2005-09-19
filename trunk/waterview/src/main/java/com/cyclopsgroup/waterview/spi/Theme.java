@@ -50,7 +50,7 @@ public interface Theme
      * @param layoutName Layout tname
      * @return Layout Layout object
      */
-    Layout getLayout(String layoutName);
+    Layout getLayout( String layoutName );
 
     /**
      * Get name of this theme
@@ -65,5 +65,5 @@ public interface Theme
      * @param data Runtime data
      * @return URL string
      */
-    String getResourceBaseUrl(RuntimeData data);
+    String getResourceBaseUrl( RuntimeData data );
 }
