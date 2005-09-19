@@ -12,6 +12,7 @@
                 <pathelement path="${maven.build.dest}" />
             </classpath>
             <arg value="META-INF/cyclopsgroup/DropAndCreateTables.jelly" />
+            <arg value="META-INF/cyclopsgroup/InsertData.jelly" />
         </java>
     </goal>
 </project>

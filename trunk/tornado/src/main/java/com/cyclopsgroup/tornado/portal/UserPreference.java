@@ -15,27 +15,15 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.hibernate.taglib;
-
-import com.cyclopsgroup.waterview.utils.TagPackage;
+package com.cyclopsgroup.tornado.portal;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * User preference model
  */
-public class HibernateToolTagPackage
-    extends TagPackage
+public class UserPreference
+    extends UserPreferenceBase
 {
-    /**
-     * Constructor for class HibernateTagPackage
-     */
-    public HibernateToolTagPackage()
-    {
-        addTag( "Hibernate", HibernateTag.class );
-        addTag( "CreateTables", CreateTablesTag.class );
-        addTag( "DropTables", DropTablesTag.class );
-        addTag( "UpdateSchema", UpdateSchemaTag.class );
-        addTag( "Class", ClassTag.class );
-        addTag( "New", NewTag.class );
-    }
+
 }

@@ -15,27 +15,50 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.hibernate.taglib;
+package com.cyclopsgroup.tornado.security;
 
-import com.cyclopsgroup.waterview.utils.TagPackage;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * User login event
  */
-public class HibernateToolTagPackage
-    extends TagPackage
+public class UserLoginEvent
 {
+    private RuntimeData data;
+
+    private RuntimeUser user;
+
     /**
-     * Constructor for class HibernateTagPackage
+     * Constructor for class UserLoginEvent
+     *
+     * @param user Logged in user
+     * @param data Runtime data
      */
-    public HibernateToolTagPackage()
+    public UserLoginEvent( RuntimeUser user, RuntimeData data )
     {
-        addTag( "Hibernate", HibernateTag.class );
-        addTag( "CreateTables", CreateTablesTag.class );
-        addTag( "DropTables", DropTablesTag.class );
-        addTag( "UpdateSchema", UpdateSchemaTag.class );
-        addTag( "Class", ClassTag.class );
-        addTag( "New", NewTag.class );
+        this.user = user;
+        this.data = data;
+    }
+
+    /**
+     * Getter method for property data
+     *
+     * @return Returns the data.
+     */
+    public RuntimeData getData()
+    {
+        return data;
+    }
+
+    /**
+     * Getter method for property user
+     *
+     * @return Returns the user.
+     */
+    public RuntimeUser getUser()
+    {
+        return user;
     }
 }

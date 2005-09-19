@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
-    <Tree name="tornado.root" position="/system">
+    <Tree name="tornado.system" position="/system">
         <Node name="admin" title="Admin" page="/tornado/admin/Index.jelly">
             <Node name="security" title="Security" page="/tornado/admin/security/Index.jelly">
                 <Node title="Manage Users" page="/tornado/admin/security/ManageUsers.jelly" />
@@ -8,6 +8,19 @@
                 <Node title="Manage Groups" page="/tornado/admin/security/ManageGroups.jelly" />
                 <Node title="Manage Roles" page="/tornado/admin/security/ManageRoles.jelly" />
             </Node>
+            <Node name="portal" title="Portal Configuration" page="/tornado/admin/portal/Index.jelly">
+                <Node title="Look and Feel" page="/tornado/admin/portal/LookAndFeel.jelly" />
+                <Node title="Portal Pages" page="/tornado/admin/portal/ManagePages.jelly" />
+                <Node title="Portal Resources" page="/torando/admin/portal/PortalResources.jelly" />
+            </Node>
+        </Node>
+    </Tree>
+    <Tree name="tornado.home" position="/home">
+        <Node title="Login" page="/tornado/UserLogin.jelly" hidden="true" />
+        <Node name="user" title="My Information" page="/tornado/user/Index.jelly">
+            <Node title="My Profile" page="/tornado/user/UserProfile.jelly" />
+            <Node title="Look and Feel" page="/tornado/user/LookAndFeel.jelly" />
+            <Node title="Manage Pages" page="/tornado/user/ManagePages.jelly" />
         </Node>
     </Tree>
 </Navigation>

@@ -3,5 +3,7 @@
     <Class name="com.cyclopsgroup.tornado.security.entity.User">
         <New var="userGuest" name="guest" privatePassword="password" email="guest@cyclopdgroup.com" firstName="Guest"
             lastName="System" country="US" language="en" isSystem="true" />
+        <New var="userAdmin" name="admin" privatePassword="admin" email="admin@cyclopsgroup.com" firstName="Admin"
+            lastName="System" country="US" language="en" isSystem="true" />
     </Class>
 </Hibernate>

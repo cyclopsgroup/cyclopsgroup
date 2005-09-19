@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.portal">
+    <class name="UserPreference" table="c_t_user_preference">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.portal.UserPreferenceBase</meta>
+        <id name="id" type="string" length="128" column="preference_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="userId" type="string" column="user_id" not-null="true" length="128" />
+        <property name="themeName" type="string" column="theme_name" not-null="true" />
+        <property name="defaultLayout" type="string" column="default_layout" />
+        <property name="iconset" type="string" />
+        <property name="stylesheet" type="string" />
+        <property name="windowStyle" type="string" column="window_style" />
+    </class>
+</hibernate-mapping>

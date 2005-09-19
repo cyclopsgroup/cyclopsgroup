@@ -71,6 +71,7 @@ public class HibernateTag
         requireAttribute( "name" );
         hibernate = (HibernateService) getServiceManager().lookup( HibernateService.ROLE );
         invokeBody( output );
+        hibernate.commitTransactions();
     }
 
     /**

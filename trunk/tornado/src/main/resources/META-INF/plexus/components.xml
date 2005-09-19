@@ -33,8 +33,23 @@
             </configuration>
         </component>
         <component>
+            <role>com.cyclopsgroup.tornado.security.SecurityService</role>
+            <implementation>com.cyclopsgroup.tornado.security.impl.DefaultSecurityService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.security.UserAuthenticator</role>
+            <implementation>com.cyclopsgroup.tornado.security.impl.DefaultUserAuthenticator</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve</role>
             <implementation>com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.portal.SetUserPreferenceValve</role>
+            <implementation>com.cyclopsgroup.tornado.portal.SetUserPreferenceValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
@@ -45,6 +60,7 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
                     <valve role="com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve" />
+                    <valve role="com.cyclopsgroup.tornado.portal.SetUserPreferenceValve" />
                     <valve role="com.cyclopsgroup.waterview.web.ProcessFormValve" />
                     <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
                     <valve role="com.cyclopsgroup.waterview.jelly.DeterminePageValve" />
