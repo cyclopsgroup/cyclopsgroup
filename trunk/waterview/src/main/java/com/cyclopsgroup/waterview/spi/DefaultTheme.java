@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
+import java.util.Properties;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RuntimeData;
@@ -34,6 +35,8 @@ public class DefaultTheme
     private Hashtable layouts = new Hashtable();
 
     private String name;
+
+    private Properties properties = new Properties();
 
     private String resourceDirectory;
 
@@ -81,6 +84,16 @@ public class DefaultTheme
     }
 
     /**
+     * Overwrite or implement method getProperty()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getProperty(java.lang.String)
+     */
+    public String getProperty( String propertyName )
+    {
+        return properties.getProperty( propertyName );
+    }
+
+    /**
      * Overwrite or implement method getResourceBaseUrl()
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getResourceBaseUrl(com.cyclopsgroup.waterview.RuntimeData)
@@ -89,6 +102,16 @@ public class DefaultTheme
     {
         Link link = (Link) data.getRequestContext().get( Link.NAME );
         return link.getResource( resourceDirectory );
+    }
+
+    /**
+     * Overwrite or implement method getStylesheetUrl()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStylesheetUrl(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public String getStylesheetUrl( RuntimeData data )
+    {
+        return getResourceBaseUrl( data ) + "/style.css";
     }
 
     /**

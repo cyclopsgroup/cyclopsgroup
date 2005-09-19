@@ -43,12 +43,12 @@ table.waterviewTable td.input {
 }
 
 .waterviewSelectedTab {
-	padding: 2 16 2 16;
+	padding: 3 20 3 20;
 	background-color: #2E52AF;
 }
 
 .waterviewUnselectedTab {
-	padding: 2 16 2 16;
+	padding: 3 20 3 20;
 }
 
 .waterviewWindow {

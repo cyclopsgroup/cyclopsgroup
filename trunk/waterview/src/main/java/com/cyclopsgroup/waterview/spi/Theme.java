@@ -60,10 +60,26 @@ public interface Theme
     String getName();
 
     /**
+     * Get theme property
+     *
+     * @param propertyName Name of the property
+     * @return Value of the property
+     */
+    String getProperty( String propertyName );
+
+    /**
      * Get base url for theme resource
      *
      * @param data Runtime data
      * @return URL string
      */
     String getResourceBaseUrl( RuntimeData data );
+
+    /**
+     * Get url of style sheet
+     *
+     * @param data Runtime data
+     * @return URL of stylesheet
+     */
+    String getStylesheetUrl( RuntimeData data );
 }
