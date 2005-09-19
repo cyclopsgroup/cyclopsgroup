@@ -13,7 +13,7 @@
             <w:Field name="firstName" required="true" title="First Name" />
             <w:Field name="middleName" title="Middle Name" />
             <w:Field name="lastName" required="true" title="Last Name" />
-            <w:Field name="gendar" value="U" title="Gender">
+            <w:Field name="gender" value="U" title="Gender">
                 <w:Select>
                     <w:Option value="U">--</w:Option>
                     <w:Option value="M">Male</w:Option>
