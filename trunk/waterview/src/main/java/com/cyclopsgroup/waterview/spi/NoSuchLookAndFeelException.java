@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  * 
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,23 +19,20 @@ package com.cyclopsgroup.waterview.spi;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Provider of themes
+ *
+ * Exception to identify invalid theme name
  */
-public interface ThemeProvider
+public class NoSuchLookAndFeelException
+    extends Exception
 {
     /**
-     * Get theme object
+     * Constructor for class NoSuchThemeException
      *
-     * @param themeName Theme name
-     * @return Theme object or null
+     * @param type Type name
+     * @param name Name
      */
-    Theme getTheme( String themeName );
-
-    /**
-     * Get theme name array
-     *
-     * @return Theme name array
-     */
-    String[] getThemeNames();
+    public NoSuchLookAndFeelException( String type, String name )
+    {
+        super( type + " [" + name + "] doesnt exist" );
+    }
 }

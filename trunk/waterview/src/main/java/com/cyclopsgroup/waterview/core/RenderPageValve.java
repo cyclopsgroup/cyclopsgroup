@@ -23,11 +23,11 @@ import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Theme;
-import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -39,7 +39,7 @@ public class RenderPageValve
     extends AbstractLogEnabled
     implements Valve, Serviceable
 {
-    private ThemeManager themes;
+    private LookAndFeelService laf;
 
     /**
      * Override or implement method of parent class or interface
@@ -66,24 +66,19 @@ public class RenderPageValve
         }
         data.setOutputContentType( "text/html" );
         Layout layout = page.getLayout();
-        Theme theme = themes.getTheme( data.getThemeName() );
+        Theme theme = laf.getTheme( data.getThemeName() );
         if ( theme == null )
         {
-            data.setThemeName( themes.getDefaultThemeName() );
-            theme = themes.getDefaultTheme();
+            data.setThemeName( laf.getDefaultTheme().getName() );
+            theme = laf.getDefaultTheme();
         }
-        if ( theme == null )
-        {
-            throw new NullPointerException( "Theme is not property configured" );
-        }
-        data.getRequestContext().put( RuntimeTheme.NAME, new RuntimeTheme( theme, data ) );
+        RuntimeTheme rt = new RuntimeTheme( theme, data );
+        data.getRequestContext().put( RuntimeTheme.NAME, rt );
         if ( layout == null )
         {
             layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
         }
-
-        String themeBaseUrl = theme.getResourceBaseUrl( data );
-        data.getRequestContext().put( "themeBase", themeBaseUrl );
+        data.getRequestContext().put( "themeBase", rt.getIconSetUrl() );
         layout.render( data, page );
         context.invokeNextValve( data );
         data.getOutput().flush();
@@ -97,6 +92,6 @@ public class RenderPageValve
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        themes = (ThemeManager) serviceManager.lookup( ThemeManager.ROLE );
+        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }

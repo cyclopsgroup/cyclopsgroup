@@ -20,9 +20,9 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.Theme;
-import com.cyclopsgroup.waterview.spi.ThemeManager;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -46,7 +46,7 @@ public class DefaultLayoutTag
         {
             throw new JellyTagException( "JellyLayout must be in a page" );
         }
-        ThemeManager tm = (ThemeManager) getServiceManager().lookup( ThemeManager.ROLE );
+        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
         String themeName = getRuntimeData().getThemeName();
         Theme theme = tm.getDefaultTheme();
         if ( StringUtils.isNotEmpty( themeName ) )

@@ -19,8 +19,7 @@ package com.cyclopsgroup.waterview.spi;
 import java.util.Hashtable;
 import java.util.Properties;
 
-import com.cyclopsgroup.waterview.Link;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.Resource;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -32,24 +31,28 @@ public class DefaultTheme
 {
     private String description;
 
+    private Resource iconSet;
+
     private Hashtable layouts = new Hashtable();
 
     private String name;
 
     private Properties properties = new Properties();
 
-    private String resourceDirectory;
+    private Resource styleSheet;
 
     /**
      * Constructor for class BaseTheme
      *
      * @param name Name of the theme
-     * @param resourceDirectory Root of resource directory
+     * @param iconSet Root of resource directory
+     * @param styleSheet Stylesheet resource
      */
-    public DefaultTheme( String name, String resourceDirectory )
+    public DefaultTheme( String name, Resource iconSet, Resource styleSheet )
     {
         this.name = name;
-        this.resourceDirectory = resourceDirectory;
+        this.iconSet = iconSet;
+        this.styleSheet = styleSheet;
         setDescription( "Theme [" + name + "]" );
     }
 
@@ -61,6 +64,16 @@ public class DefaultTheme
     public String getDescription()
     {
         return description;
+    }
+
+    /**
+     * Overwrite or implement method getIconSet()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getIconSet()
+     */
+    public Resource getIconSet()
+    {
+        return iconSet;
     }
 
     /**
@@ -94,24 +107,17 @@ public class DefaultTheme
     }
 
     /**
-     * Overwrite or implement method getResourceBaseUrl()
+     * Overwrite or implement method getStylesheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getResourceBaseUrl(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
      */
-    public String getResourceBaseUrl( RuntimeData data )
+    public synchronized Resource getStyleSheet()
     {
-        Link link = (Link) data.getRequestContext().get( Link.NAME );
-        return link.getResource( resourceDirectory );
-    }
-
-    /**
-     * Overwrite or implement method getStylesheetUrl()
-     *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStylesheetUrl(com.cyclopsgroup.waterview.RuntimeData)
-     */
-    public String getStylesheetUrl( RuntimeData data )
-    {
-        return getResourceBaseUrl( data ) + "/style.css";
+        if ( styleSheet == null )
+        {
+            styleSheet = new Resource( Resource.INTERNAL, iconSet.getPath() + "/style.css" );
+        }
+        return styleSheet;
     }
 
     /**

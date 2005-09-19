@@ -51,9 +51,9 @@ public class RuntimeTheme
      *
      * @return Resource base url
      */
-    public String getResourceBaseUrl()
+    public String getIconSetUrl()
     {
-        return theme.getResourceBaseUrl( data );
+        return theme.getIconSet().toURL( data );
     }
 
     /**
@@ -63,7 +63,7 @@ public class RuntimeTheme
      */
     public String getStylesheetUrl()
     {
-        return theme.getStylesheetUrl( data );
+        return theme.getStyleSheet().toURL( data );
     }
 
     /**

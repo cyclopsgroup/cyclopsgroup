@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  * 
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,30 +20,25 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Resource;
-import com.cyclopsgroup.waterview.spi.DefaultTheme;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Theme tag
+ *
+ * Tag to define icon set
  */
-public class ThemeTag
+public class IconSetTag
     extends TagSupport
 {
     private String description;
 
-    private String iconset;
-
     private String name;
 
-    private String stylesheet;
-
-    private DefaultTheme theme;
+    private String path;
 
     /**
-     * Getter method for field description
+     * Getter method for property description
      *
      * @return Returns the description.
      */
@@ -52,17 +48,7 @@ public class ThemeTag
     }
 
     /**
-     * Getter method for property iconSet
-     *
-     * @return Returns the iconSet.
-     */
-    public String getIconset()
-    {
-        return iconset;
-    }
-
-    /**
-     * Getter method for field name
+     * Getter method for property name
      *
      * @return Returns the name.
      */
@@ -72,23 +58,13 @@ public class ThemeTag
     }
 
     /**
-     * Getter method for property stylesheet
+     * Getter method for property path
      *
-     * @return Returns the stylesheet.
+     * @return Returns the path.
      */
-    public String getStylesheet()
+    public String getPath()
     {
-        return stylesheet;
-    }
-
-    /**
-     * Getter method for field theme
-     *
-     * @return Returns the theme.
-     */
-    public DefaultTheme getTheme()
-    {
-        return theme;
+        return path;
     }
 
     /**
@@ -96,24 +72,20 @@ public class ThemeTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag( XMLOutput output )
+    protected void processTag( XMLOutput output )
         throws Exception
     {
         requireAttribute( "name" );
-        requireAttribute( "iconset" );
-        requireAttribute( "stylesheet" );
+        requireAttribute( "path" );
+        Resource iconset = new Resource( Resource.INTERNAL, getPath() );
+        iconset.setDescription( getDescription() );
 
         LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        Resource ic = laf.getIconSet( getIconset() );
-        Resource ss = laf.getStyleSheet( getStylesheet() );
-        theme = new DefaultTheme( getName(), ic, ss );
-        theme.setDescription( getDescription() );
-        invokeBody( output );
-        laf.registerTheme( theme );
+        laf.registerIconSet( getName(), iconset );
     }
 
     /**
-     * Setter method for field description
+     * Setter method for property description
      *
      * @param description The description to set.
      */
@@ -123,17 +95,7 @@ public class ThemeTag
     }
 
     /**
-     * Setter method for property iconSet
-     *
-     * @param iconSet The iconSet to set.
-     */
-    public void setIconset( String iconSet )
-    {
-        this.iconset = iconSet;
-    }
-
-    /**
-     * Setter method for field name
+     * Setter method for property name
      *
      * @param name The name to set.
      */
@@ -143,12 +105,12 @@ public class ThemeTag
     }
 
     /**
-     * Setter method for property stylesheet
+     * Setter method for property path
      *
-     * @param stylesheet The stylesheet to set.
+     * @param path The path to set.
      */
-    public void setStylesheet( String stylesheet )
+    public void setPath( String path )
     {
-        this.stylesheet = stylesheet;
+        this.path = path;
     }
 }

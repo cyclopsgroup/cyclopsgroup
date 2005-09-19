@@ -10,12 +10,16 @@ h2 {
 #bodyWrapper {
 	background-color: white;
 	max-width: 860px;
-	width: expression(document . body . clientWidth >   860 ?   "860px" :   "auto");
+	width: expression(document.body.clientWidth > 860 ? "860px" : "auto");
 }
 
 #bannerPanel {
 	background-color: #003399;
 	color: white;
+}
+
+#bannerPanelRight {
+	background: url('banner_right.gif') no-repeat;
 }
 
 table.waterviewTable th {

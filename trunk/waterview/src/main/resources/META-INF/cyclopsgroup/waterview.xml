@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
-    <ModulePackage alias="waterview" name="com.cyclopsgroup.waterview.ui" />
+    <!-- Tag support -->
     <TagLibrary uri="http://waterview.cyclopsgroup.com/ui">
         <TagPackage className="com.cyclopsgroup.waterview.core.taglib.CoreTagPackage" />
         <TagPackage className="com.cyclopsgroup.waterview.jelly.taglib.JellyTagPackage" />
@@ -8,7 +8,14 @@
         <TagPackage className="com.cyclopsgroup.waterview.jsp.taglib.JspTagPackage" />
         <TagPackage className="com.cyclopsgroup.waterview.web.taglib.WebTagPackage" />
     </TagLibrary>
-    <Theme name="waterviewtheme" resourceDir="/waterview/defaulttheme" description="System default theme">
+    <!-- UI modules -->
+    <ModulePackage alias="waterview" name="com.cyclopsgroup.waterview.ui" />
+    <!-- Look and feel -->
+    <IconSet name="waterview.icons.default" path="/waterview/defaulttheme" description="Waterview default icons" />
+    <StyleSheet name="waterview.stylesheet.default" path="/waterview/defaulttheme/style.css"
+        description="Waterview default stylesheet" />
+    <Theme name="waterview.theme.default" iconset="waterview.icons.default" stylesheet="waterview.stylesheet.default"
+        description="System default theme">
         <Layout name="layout.default">
             <JellyLayout script="/waterview/DefaultLayout.jelly" />
         </Layout>

@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.Resource;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -45,6 +45,13 @@ public interface Theme
     String getDescription();
 
     /**
+     * Get icon set resource
+     *
+     * @return Resource object icon set
+     */
+    Resource getIconSet();
+
+    /**
      * Get named layout
      *
      * @param layoutName Layout tname
@@ -68,18 +75,9 @@ public interface Theme
     String getProperty( String propertyName );
 
     /**
-     * Get base url for theme resource
+     * Get stylesheet resource
      *
-     * @param data Runtime data
-     * @return URL string
+     * @return Resource of stylesheet
      */
-    String getResourceBaseUrl( RuntimeData data );
-
-    /**
-     * Get url of style sheet
-     *
-     * @param data Runtime data
-     * @return URL of stylesheet
-     */
-    String getStylesheetUrl( RuntimeData data );
+    Resource getStyleSheet();
 }
