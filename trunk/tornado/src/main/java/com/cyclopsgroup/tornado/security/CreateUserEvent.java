@@ -17,55 +17,33 @@
  */
 package com.cyclopsgroup.tornado.security;
 
-import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * User object is created
  */
-public interface RuntimeUserAPI
+public class CreateUserEvent
 {
+    private RuntimeUserAPI user;
+
     /**
-     * Get attributes
+     * Constructor for class CreateUserEvent
      *
-     * @return User attributes
+     * @param user Runtime user
      */
-    ValueParser getAttributes();
+    public CreateUserEvent( RuntimeUserAPI user )
+    {
+        this.user = user;
+    }
 
     /**
-     * @return Get displayed name
+     * Getter method for property user
+     *
+     * @return Returns the user.
      */
-    String getDisplayName();
-
-    /**
-     * @return Get email address
-     */
-    String getEmailAddress();
-
-    /**
-     * @return Get unique id
-     */
-    String getId();
-
-    /**
-     * @return Get user account name
-     */
-    String getName();
-
-    /**
-     * @param permission Permission object
-     * @return True if user has such permission
-     */
-    boolean hasPermission( Object permission );
-
-    /**
-     * @param roleName Role name to check
-     * @return True if user has such a role
-     */
-    boolean hasRole( String roleName );
-
-    /**
-     * @return Is the user guest or not
-     */
-    boolean isGuest();
+    public RuntimeUserAPI getUser()
+    {
+        return user;
+    }
 }

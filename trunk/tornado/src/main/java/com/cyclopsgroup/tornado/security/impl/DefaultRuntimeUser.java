@@ -20,12 +20,15 @@ package com.cyclopsgroup.tornado.security.impl;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.Role;
 import com.cyclopsgroup.tornado.security.entity.User;
+import com.cyclopsgroup.waterview.MapValueParser;
+import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -34,34 +37,19 @@ import com.cyclopsgroup.tornado.security.entity.User;
 public class DefaultRuntimeUser
     extends RuntimeUser
 {
+    private ValueParser attributes = new MapValueParser( new MultiHashMap() );
+
+    private String displayName;
+
+    private String emailAddress;
+
+    private boolean guest;
+
     private String id;
 
     private String name;
 
-    private String emailAddress;
-
-    private String displayName;
-
-    private boolean guest;
-
     private HashSet roleNames = new HashSet();
-
-    /**
-     * @param role Role object
-     */
-    public void addRole( Role role )
-    {
-        if ( roleNames.contains( role.getName() ) )
-        {
-            return;
-        }
-        roleNames.add( role.getName() );
-        for ( Iterator i = role.getDependencies().iterator(); i.hasNext(); )
-        {
-            Role dependency = (Role) i.next();
-            addRole( dependency );
-        }
-    }
 
     /**
      * Constructor for class RuntimeUserBase
@@ -81,6 +69,53 @@ public class DefaultRuntimeUser
         sb.append( " " ).append( user.getLastName() );
         displayName = sb.toString();
         guest = user.getName().equals( SecurityService.USER_GUEST );
+    }
+
+    /**
+     * @param role Role object
+     */
+    public void addRole( Role role )
+    {
+        if ( roleNames.contains( role.getName() ) )
+        {
+            return;
+        }
+        roleNames.add( role.getName() );
+        for ( Iterator i = role.getDependencies().iterator(); i.hasNext(); )
+        {
+            Role dependency = (Role) i.next();
+            addRole( dependency );
+        }
+    }
+
+    /**
+     * Overwrite or implement method getAttributes()
+     *
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getAttributes()
+     */
+    public ValueParser getAttributes()
+    {
+        return attributes;
+    }
+
+    /**
+     * Override method getDisplayName in class RuntimeUserBase
+     *
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getDisplayName()
+     */
+    public String getDisplayName()
+    {
+        return displayName;
+    }
+
+    /**
+     * Override method getEmailAddress in class RuntimeUserBase
+     *
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getEmailAddress()
+     */
+    public String getEmailAddress()
+    {
+        return emailAddress;
     }
 
     /**
@@ -104,33 +139,14 @@ public class DefaultRuntimeUser
     }
 
     /**
-     * Override method getDisplayName in class RuntimeUserBase
+     * Override method hasPermission in class RuntimeUserBase
      *
-     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getDisplayName()
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#hasPermission(java.lang.Object)
      */
-    public String getDisplayName()
+    public boolean hasPermission( Object permission )
     {
-        return displayName;
-    }
-
-    /**
-     * Override method isGuest in class RuntimeUserBase
-     *
-     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#isGuest()
-     */
-    public boolean isGuest()
-    {
-        return guest;
-    }
-
-    /**
-     * Override method getEmailAddress in class RuntimeUserBase
-     *
-     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getEmailAddress()
-     */
-    public String getEmailAddress()
-    {
-        return emailAddress;
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /**
@@ -144,13 +160,12 @@ public class DefaultRuntimeUser
     }
 
     /**
-     * Override method hasPermission in class RuntimeUserBase
+     * Override method isGuest in class RuntimeUserBase
      *
-     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#hasPermission(java.lang.Object)
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#isGuest()
      */
-    public boolean hasPermission( Object permission )
+    public boolean isGuest()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return guest;
     }
 }

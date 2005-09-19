@@ -31,6 +31,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.security.CreateUserEvent;
 import com.cyclopsgroup.tornado.security.NoSuchUserException;
 import com.cyclopsgroup.tornado.security.RuntimeUserAPI;
 import com.cyclopsgroup.tornado.security.SecurityListener;
@@ -48,6 +49,8 @@ public class DefaultSecurityService
     extends AbstractLogEnabled
     implements SecurityService, Serviceable, Startable
 {
+    private Thread checkTimeoutThread;
+
     private HibernateService hibernate;
 
     private Vector listeners = new Vector();
@@ -56,37 +59,14 @@ public class DefaultSecurityService
 
     private Hashtable userEntries = new Hashtable();
 
-    private Thread checkTimeoutThread;
-
     /**
-     * Override method start in class DefaultSecurityService
+     * Override method addListener in class DefaultSecurityService
      *
-     * @see org.apache.avalon.framework.activity.Startable#start()
+     * @see com.cyclopsgroup.tornado.security.SecurityService#addListener(com.cyclopsgroup.tornado.security.SecurityListener)
      */
-    public void start()
-        throws Exception
+    public void addListener( SecurityListener listener )
     {
-        checkTimeoutThread = new Thread()
-        {
-            public void run()
-            {
-                while ( true )
-                {
-                    try
-                    {
-                        Thread.sleep( 10000 );
-                        checkTimeout();
-                    }
-                    catch ( InterruptedException e )
-                    {
-                        break;
-                    }
-                }
-            }
-        };
-        checkTimeoutThread.setDaemon( true );
-        checkTimeoutThread.setPriority( Thread.MIN_PRIORITY );
-        checkTimeoutThread.start();
+        listeners.add( listener );
     }
 
     private void checkTimeout()
@@ -100,46 +80,6 @@ public class DefaultSecurityService
                 userEntries.remove( sessionId );
             }
         }
-    }
-
-    /**
-     * Override method stop in class DefaultSecurityService
-     *
-     * @see org.apache.avalon.framework.activity.Startable#stop()
-     */
-    public void stop()
-        throws Exception
-    {
-        checkTimeoutThread.interrupt();
-        checkTimeoutThread = null;
-    }
-
-    /**
-     * Override method getGuest in class DefaultSecurityService
-     *
-     * @see com.cyclopsgroup.tornado.security.SecurityService#getGuestUser()
-     */
-    public RuntimeUserAPI getGuestUser()
-        throws Exception
-    {
-        return getUser( USER_GUEST );
-    }
-
-    /**
-     * Override method getUserBySessionId in class DefaultSecurityService
-     *
-     * @see com.cyclopsgroup.tornado.security.SecurityService#getUserBySessionId(java.lang.String)
-     */
-    public RuntimeUserAPI getUserBySessionId( String sessionId )
-        throws Exception
-    {
-        UserEntry ue = (UserEntry) userEntries.get( sessionId );
-        if ( ue == null )
-        {
-            return getGuestUser();
-        }
-        ue.update();
-        return getUser( ue.getUserName() );
     }
 
     /**
@@ -183,6 +123,17 @@ public class DefaultSecurityService
     }
 
     /**
+     * Override method getGuest in class DefaultSecurityService
+     *
+     * @see com.cyclopsgroup.tornado.security.SecurityService#getGuestUser()
+     */
+    public RuntimeUserAPI getGuestUser()
+        throws Exception
+    {
+        return getUser( USER_GUEST );
+    }
+
+    /**
      * Override method getUser in class DefaultSecurityService
      *
      * @see com.cyclopsgroup.tornado.security.SecurityService#getUser(java.lang.String)
@@ -194,9 +145,52 @@ public class DefaultSecurityService
         if ( user == null )
         {
             user = doLoadUser( userName );
+            handleEvent( new CreateUserEvent( user ) );
             runtimeUsers.put( userName, user );
         }
         return user;
+    }
+
+    /**
+     * Override method getUserBySessionId in class DefaultSecurityService
+     *
+     * @see com.cyclopsgroup.tornado.security.SecurityService#getUserBySessionId(java.lang.String)
+     */
+    public RuntimeUserAPI getUserBySessionId( String sessionId )
+        throws Exception
+    {
+        UserEntry ue = (UserEntry) userEntries.get( sessionId );
+        if ( ue == null )
+        {
+            return getGuestUser();
+        }
+        ue.update();
+        return getUser( ue.getUserName() );
+    }
+
+    /**
+     * Override method handleEvent in class DefaultSecurityService
+     *
+     * @see com.cyclopsgroup.tornado.security.SecurityService#handleEvent(java.lang.Object)
+     */
+    public void handleEvent( Object event )
+    {
+        if ( event == null )
+        {
+            return;
+        }
+        for ( Iterator i = listeners.iterator(); i.hasNext(); )
+        {
+            SecurityListener listener = (SecurityListener) i.next();
+            try
+            {
+                listener.performAction( event );
+            }
+            catch ( Exception e )
+            {
+                getLogger().warn( "Event handling error", e );
+            }
+        }
     }
 
     /**
@@ -241,38 +235,13 @@ public class DefaultSecurityService
     }
 
     /**
-     * Override method addListener in class DefaultSecurityService
+     * Override method refreshUser in class DefaultSecurityService
      *
-     * @see com.cyclopsgroup.tornado.security.SecurityService#addListener(com.cyclopsgroup.tornado.security.SecurityListener)
+     * @see com.cyclopsgroup.tornado.security.SecurityService#refreshUser(java.lang.String)
      */
-    public void addListener( SecurityListener listener )
+    public void refreshUser( String userName )
     {
-        listeners.add( listener );
-    }
-
-    /**
-     * Override method handleEvent in class DefaultSecurityService
-     *
-     * @see com.cyclopsgroup.tornado.security.SecurityService#handleEvent(java.lang.Object)
-     */
-    public void handleEvent( Object event )
-    {
-        if ( event == null )
-        {
-            return;
-        }
-        for ( Iterator i = listeners.iterator(); i.hasNext(); )
-        {
-            SecurityListener listener = (SecurityListener) i.next();
-            try
-            {
-                listener.performAction( event );
-            }
-            catch ( Exception e )
-            {
-                getLogger().warn( "Event handling error", e );
-            }
-        }
+        runtimeUsers.remove( userName );
     }
 
     /**
@@ -287,12 +256,45 @@ public class DefaultSecurityService
     }
 
     /**
-     * Override method refreshUser in class DefaultSecurityService
+     * Override method start in class DefaultSecurityService
      *
-     * @see com.cyclopsgroup.tornado.security.SecurityService#refreshUser(java.lang.String)
+     * @see org.apache.avalon.framework.activity.Startable#start()
      */
-    public void refreshUser( String userName )
+    public void start()
+        throws Exception
     {
-        runtimeUsers.remove( userName );
+        checkTimeoutThread = new Thread()
+        {
+            public void run()
+            {
+                while ( true )
+                {
+                    try
+                    {
+                        Thread.sleep( 10000 );
+                        checkTimeout();
+                    }
+                    catch ( InterruptedException e )
+                    {
+                        break;
+                    }
+                }
+            }
+        };
+        checkTimeoutThread.setDaemon( true );
+        checkTimeoutThread.setPriority( Thread.MIN_PRIORITY );
+        checkTimeoutThread.start();
+    }
+
+    /**
+     * Override method stop in class DefaultSecurityService
+     *
+     * @see org.apache.avalon.framework.activity.Startable#stop()
+     */
+    public void stop()
+        throws Exception
+    {
+        checkTimeoutThread.interrupt();
+        checkTimeoutThread = null;
     }
 }

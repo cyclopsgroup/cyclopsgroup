@@ -17,5 +17,8 @@
         <component>
             <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
         </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.portal.PortalService</role>
+        </component>
     </load-on-start>
 </plexus>

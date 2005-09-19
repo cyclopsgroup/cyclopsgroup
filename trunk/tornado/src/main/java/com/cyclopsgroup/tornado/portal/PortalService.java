@@ -17,33 +17,21 @@
  */
 package com.cyclopsgroup.tornado.portal;
 
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-
-import com.cyclopsgroup.tornado.security.RuntimeUser;
-import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.PipelineContext;
-import com.cyclopsgroup.waterview.spi.Valve;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Valve to set user preference
+ * Portal service
  */
-public class SetUserPreferenceValve
-    extends AbstractLogEnabled
-    implements Valve
+public interface PortalService
 {
     /**
-     * Overwrite or implement method invoke()
-     *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * Role of service
      */
-    public void invoke( RuntimeData data, PipelineContext context )
-        throws Exception
-    {
-        RuntimeUser user = RuntimeUser.getInstance( data );
-        String themeName = user.getAttributes().getString( PortalService.USER_THEME_NAME );
-        data.setThemeName( themeName );
-        context.invokeNextValve( data );
-    }
+    String ROLE = PortalService.class.getName();
+
+    /** Theme name for unset theme */
+    String UNSET_THEME_NAME = "!unset!";
+
+    /** User theme name */
+    String USER_THEME_NAME = "tornado.user.theme";
 }

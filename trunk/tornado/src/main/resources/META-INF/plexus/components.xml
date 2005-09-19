@@ -43,6 +43,11 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.tornado.portal.PortalService</role>
+            <implementation>com.cyclopsgroup.tornado.portal.DefaultPortalService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve</role>
             <implementation>com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
