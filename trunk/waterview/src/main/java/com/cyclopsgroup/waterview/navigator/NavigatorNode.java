@@ -58,6 +58,13 @@ public interface NavigatorNode
     String getTitle();
 
     /**
+     * Is the node hidden
+     *
+     * @return True if node is not in menu
+     */
+    boolean isHidden();
+
+    /**
      * Check if given page is parent of this node
      *
      * @param page Page path

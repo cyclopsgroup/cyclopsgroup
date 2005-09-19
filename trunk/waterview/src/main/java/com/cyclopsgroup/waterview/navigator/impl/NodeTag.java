@@ -143,6 +143,7 @@ public class NodeTag
         node.getAttributes().set( DefaultNavigatorNode.PAGE_NAME, getPage() );
         node.getAttributes().set( DefaultNavigatorNode.TITLE_NAME, getTitle() );
         node.getAttributes().set( DefaultNavigatorNode.DESCRIPTION_NAME, getDescription() );
+        node.getAttributes().set( DefaultNavigatorNode.HIDDEN_NAME, isHidden() ? "true" : "false" );
 
         nt.getNavigator().addNode( node );
         invokeBody( output );

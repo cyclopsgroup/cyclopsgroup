@@ -40,6 +40,8 @@ class DefaultNavigatorNode
 {
     static final String DESCRIPTION_NAME = "description";
 
+    static final String HIDDEN_NAME = "hidden";
+
     static final String NAME_NAME = "name";
 
     static final String PAGE_NAME = "page";
@@ -194,5 +196,15 @@ class DefaultNavigatorNode
     public String getTitle()
     {
         return getAttributes().getString( TITLE_NAME );
+    }
+
+    /**
+     * Overwrite or implement method isHidden()
+     *
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#isHidden()
+     */
+    public boolean isHidden()
+    {
+        return getAttributes().getBoolean( HIDDEN_NAME );
     }
 }

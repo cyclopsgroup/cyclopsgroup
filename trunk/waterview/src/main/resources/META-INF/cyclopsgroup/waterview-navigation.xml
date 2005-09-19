@@ -2,7 +2,7 @@
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="waterview.root" position="/">
         <Node name="home" title="Home" page="/waterview/Index.jelly">
-            <Node page="/waterview/Login.jelly" title="User Login" />
+            <Node page="/waterview/Overview.jelly" title="Waterview Overview" />
         </Node>
         <Node name="system" title="System" page="/waterview/system/Index.jelly">
             <Node name="status" title="Status" page="/waterview/system/status/Index.jelly">

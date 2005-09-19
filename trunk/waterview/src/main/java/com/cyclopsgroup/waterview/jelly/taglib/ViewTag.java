@@ -25,38 +25,18 @@ import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class ViewTag extends BaseViewTag
+public class ViewTag
+    extends BaseViewTag
 {
-    private String name;
-
     /**
      * Overwrite or implement method createView()
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
      */
-    protected View createView() throws Exception
+    protected View createView()
+        throws Exception
     {
-        requireAttribute("name");
-        return new JellyView(getBody(), getName());
-    }
-
-    /**
-     * Getter method for property name
-     *
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * Setter method for property name
-     *
-     * @param name The name to set.
-     */
-    public void setName(String name)
-    {
-        this.name = name;
+        requireAttribute( "name" );
+        return new JellyView( getBody(), getName() );
     }
 }
