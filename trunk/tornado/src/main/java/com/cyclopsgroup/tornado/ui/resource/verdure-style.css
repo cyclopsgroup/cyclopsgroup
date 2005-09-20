@@ -1,0 +1,122 @@
+body {
+	background-color: white;
+	color: #878486;
+}
+
+h2 {
+	color: #C2D18F;
+}
+
+#bodyWrapper {
+	background-color: white;
+	max-width: 860px;
+	width: expression(document.body.clientWidth > 860 ? "860px" : "auto");
+}
+
+#bannerPanel {
+	background-color: #466D36;
+	color: white;
+}
+
+#bannerPanelRight {
+	
+}
+
+table.waterviewTable th {
+	background-color: #F0EEDE;
+	color: black;
+	border-style: solid;
+	border-color: #CDCABB;
+	border-width: 1px;
+}
+
+table.waterviewTable tr.b {
+	background-color: #F7F7F7;
+}
+
+table.waterviewTable .title {
+	background-color: #EEEEEE;
+}
+
+table.waterviewTable td.input {
+	
+}
+
+.lineBreak,.subLineBreak {
+	background-color: #969799;
+}
+
+.waterviewSelectedTab {
+	padding: 3 20 3 20;
+	background-color: #969799;
+}
+
+.waterviewUnselectedTab {
+	padding: 3 20 3 20;
+}
+
+.waterviewWindow {
+	background-color: #F2F5D9;
+}
+
+.waterviewWindow .waterviewWindowHeader {
+	background-color: #F2F5D9;
+}
+
+.waterviewWindow .waterviewWindowTitle {
+	color: #939587;
+}
+
+.waterviewWindowBody {
+	background-color: #F4F7E0;
+}
+
+#leftPanel {
+	background-color: #E6ECB9;
+	padding: 5px;
+}
+
+#bodyPanel {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
+	background-color: white;
+	border-width: 0 0 2 0;
+	border-color: #939587;
+	border-style: solid;;
+	border-width: 0 0 2 0;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowTitle {
+	color: #939587;
+}
+
+input.waterviewFormButton {
+	background-color: #51A751;
+	border-color: #51A751;
+	border-width: 2px;
+	border-style: outset;
+	color: white;
+	font-weight: bold;;
+}
+
+input.waterviewFormInput {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #999999;
+}
+
+input.waterviewFormInvalidInput {
+	border-style: solid;
+	border-width: 1px;
+	border-color: red;
+}

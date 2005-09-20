@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.portal.PortalService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -59,18 +57,13 @@ public class LookAndFeel
 
         context.put( "userId", userId );
 
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hibernate.getSession();
-
-        List prefs = s.createCriteria( UserPreference.class ).add( Expression.eq( "userId", userId ) )
-            .setMaxResults( 1 ).list();
-        context.put( "noPreference", new Boolean( prefs.isEmpty() ) );
-        if ( prefs.isEmpty() )
+        PortalService portal = (PortalService) lookupComponent( PortalService.ROLE );
+        UserPreference up = portal.findUserPreference( userId );
+        context.put( "noPreference", new Boolean( up == null ) );
+        if ( up == null )
         {
             return;
         }
-
-        UserPreference up = (UserPreference) prefs.get( 0 );
         context.put( "pref", up );
 
         LookAndFeelService laf = (LookAndFeelService) lookupComponent( LookAndFeelService.ROLE );

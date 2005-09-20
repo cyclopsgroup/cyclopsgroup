@@ -44,7 +44,7 @@
         </component>
         <component>
             <role>com.cyclopsgroup.tornado.portal.PortalService</role>
-            <implementation>com.cyclopsgroup.tornado.portal.DefaultPortalService</implementation>
+            <implementation>com.cyclopsgroup.tornado.portal.impl.DefaultPortalService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
@@ -77,9 +77,9 @@
             <role>com.cyclopsgroup.tornado.TornadoComponents</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
+                <component role="com.cyclopsgroup.waterview.WaterviewComponents" />
                 <component role="com.cyclopsgroup.tornado.portal.PortalService" />
                 <component role="com.cyclopsgroup.tornado.security.SecurityService" />
-                <component role="com.cyclopsgroup.waterview.WaterviewComponents" />
             </configuration>
         </component>
     </components>

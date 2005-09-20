@@ -25,14 +25,10 @@
                 </w:Field>
                 <w:Field name="defaultLayout" value="${pref.defaultLayout}" title="Layout" />
                 <w:Field name="iconset" value="${pref.iconset}" title="Icon Set">
-                    <w:Select items="${iconSets}">
-                        <w:Option value="">--</w:Option>
-                    </w:Select>
+                    <w:Select items="${iconSets}" />
                 </w:Field>
                 <w:Field name="stylesheet" value="${pref.stylesheet}" title="Stylesheet">
-                    <w:Select items="${styleSheets}">
-                        <w:Option value="">--</w:Option>
-                    </w:Select>
+                    <w:Select items="${styleSheets}" />
                 </w:Field>
                 <w:Submit action="${link.addAction('/tornado/user/SavePreferenceAction').setPage(page)}"
                     forceValidation="true">

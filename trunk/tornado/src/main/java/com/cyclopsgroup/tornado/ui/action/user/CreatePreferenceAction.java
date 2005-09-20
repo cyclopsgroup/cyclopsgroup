@@ -24,6 +24,8 @@ import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Theme;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -45,6 +47,11 @@ public class CreatePreferenceAction
         UserPreference up = new UserPreference();
         up.setUserId( userId );
         up.setThemeName( PortalService.UNSET_THEME_NAME );
+
+        LookAndFeelService laf = (LookAndFeelService) lookupComponent( LookAndFeelService.ROLE );
+        Theme theme = laf.getTheme( data.getThemeName() );
+        up.setIconset( theme.getIconSetName() );
+        up.setStylesheet( theme.getStyleSheetName() );
 
         HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
         hibernate.getSession().save( up );

@@ -15,7 +15,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.portal;
+package com.cyclopsgroup.tornado.portal.impl;
 
 import java.util.List;
 
@@ -24,14 +24,17 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.portal.PortalService;
+import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.tornado.security.CreateUserEvent;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityListener;
 import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 
 /**
@@ -50,6 +53,20 @@ public class DefaultPortalService
     private SecurityService security;
 
     /**
+     * Overwrite or implement method findUserPreference()
+     *
+     * @see com.cyclopsgroup.tornado.portal.PortalService#findUserPreference(java.lang.String)
+     */
+    public UserPreference findUserPreference( String userId )
+        throws Exception
+    {
+        Session s = hibernate.getSession();
+        List prefs = s.createCriteria( UserPreference.class ).add( Expression.eq( "userId", userId ) )
+            .setMaxResults( 1 ).list();
+        return prefs.isEmpty() ? null : (UserPreference) prefs.get( 0 );
+    }
+
+    /**
      * Overwrite or implement method initialize()
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
@@ -58,6 +75,7 @@ public class DefaultPortalService
         throws Exception
     {
         security.addListener( this );
+        laf.registerTheme( new CustomTheme( laf.getDefaultTheme() ) );
     }
 
     /**
@@ -71,18 +89,16 @@ public class DefaultPortalService
         if ( event instanceof CreateUserEvent )
         {
             RuntimeUser user = (RuntimeUser) ( (CreateUserEvent) event ).getUser();
-            Criteria criteria = hibernate.getSession().createCriteria( UserPreference.class );
-            List prefs = criteria.add( Expression.eq( "userId", user.getId() ) ).setMaxResults( 1 ).list();
-            String themeName = laf.getDefaultTheme().getName();
-            if ( !prefs.isEmpty() )
+
+            UserPreference up = findUserPreference( user.getId() );
+            if ( up == null )
             {
-                UserPreference up = (UserPreference) prefs.get( 0 );
-                if ( !up.getThemeName().equals( PortalService.UNSET_THEME_NAME ) )
-                {
-                    themeName = up.getThemeName();
-                }
+                return;
             }
-            user.getAttributes().set( PortalService.USER_THEME_NAME, themeName );
+            if ( !up.getThemeName().equals( PortalService.UNSET_THEME_NAME ) )
+            {
+                user.getAttributes().set( PortalService.USER_THEME_NAME, up.getThemeName() );
+            }
         }
     }
 
@@ -97,5 +113,6 @@ public class DefaultPortalService
         hibernate = (HibernateService) services.lookup( HibernateService.ROLE );
         security = (SecurityService) services.lookup( SecurityService.ROLE );
         laf = (LookAndFeelService) services.lookup( LookAndFeelService.ROLE );
+        services.lookup( JellyEngine.ROLE );
     }
 }

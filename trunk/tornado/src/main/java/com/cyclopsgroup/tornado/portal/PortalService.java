@@ -34,4 +34,14 @@ public interface PortalService
 
     /** User theme name */
     String USER_THEME_NAME = "tornado.user.theme";
+
+    /**
+     * Find user preference based on userId
+     *
+     * @param userId User id
+     * @return UserPreference or null
+     * @throws Exception Throw it out
+     */
+    UserPreference findUserPreference( String userId )
+        throws Exception;
 }
