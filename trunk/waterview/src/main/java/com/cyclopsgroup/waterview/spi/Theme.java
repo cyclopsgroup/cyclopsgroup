@@ -52,6 +52,13 @@ public interface Theme
     Resource getIconSet();
 
     /**
+     * Get name of icon set
+     *
+     * @return Name of iconset
+     */
+    String getIconSetName();
+
+    /**
      * Get named layout
      *
      * @param layoutName Layout tname
@@ -72,4 +79,11 @@ public interface Theme
      * @return Resource of stylesheet
      */
     Resource getStyleSheet();
+
+    /**
+     * Get name of stylesheet
+     *
+     * @return Name of stylesheet
+     */
+    String getStyleSheetName();
 }

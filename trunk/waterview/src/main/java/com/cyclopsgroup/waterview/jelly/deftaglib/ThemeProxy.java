@@ -56,6 +56,16 @@ class ThemeProxy
     }
 
     /**
+     * Overwrite or implement method getIconSetName()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getIconSetName()
+     */
+    public String getIconSetName()
+    {
+        return iconSetName;
+    }
+
+    /**
      * Overwrite or implement method getStyleSheet()
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
@@ -70,5 +80,15 @@ class ThemeProxy
         {
             throw new RuntimeException( e );
         }
+    }
+
+    /**
+     * Overwrite or implement method getStyleSheetName()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheetName()
+     */
+    public String getStyleSheetName()
+    {
+        return styleSheetName;
     }
 }
