@@ -119,7 +119,7 @@ public class DefaultLookAndFeelService
      */
     public String[] getStyleSheetNames()
     {
-        return (String[]) iconSets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) styleSheets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
