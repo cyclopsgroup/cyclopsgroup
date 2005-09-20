@@ -66,11 +66,16 @@ public class UserLoginAction
         if ( result != UserAuthenticationResult.SUCCESS )
         {
             context.fail( "Login failed " + result );
+            context.addMessage( "Login failed " + result );
             return;
         }
-        long timeout = data.getParams().getLong( "timeout", 30 * 60 * 1000 );
+        int timeout = data.getParams().getInt( "timeout", 30 );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
-        RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout );
+        RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout * 60000L );
         security.handleEvent( new UserLoginEvent( user, data ) );
+
+        String url = data.getParams().getString( "redirectto", data.getRefererUrl() );
+        context.setTargetUrl( url );
+        context.addMessage( "User " + userName + " just logged in" );
     }
 }

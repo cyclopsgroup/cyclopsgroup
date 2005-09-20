@@ -76,5 +76,7 @@ public class CreateUserAction
         User user = new User();
         TypeUtils.getBeanUtils().copyProperties( user, params.toProperties() );
         s.save( user );
+
+        context.addMessage( "User " + name + " is created" );
     }
 }

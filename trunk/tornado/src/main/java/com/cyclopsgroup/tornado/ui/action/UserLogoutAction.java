@@ -50,5 +50,6 @@ public class UserLogoutAction
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.handleEvent( new UserLogoutEvent( user, data ) );
         security.logout( data.getSessionId() );
+        context.addMessage( "You just logged out" );
     }
 }

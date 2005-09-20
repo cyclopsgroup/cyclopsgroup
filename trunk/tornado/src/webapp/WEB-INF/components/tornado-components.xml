@@ -12,6 +12,14 @@
                 </pipelines>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-theme>tornado.theme.default</default-theme>
+            </configuration>
+        </component>
     </components>
     <load-on-start>
         <component>

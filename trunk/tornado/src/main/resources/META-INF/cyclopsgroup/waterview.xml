@@ -7,4 +7,10 @@
     <TagLibrary uri="http://tornado.cyclopsgroup.com/ui">
         <TagPackage className="com.cyclopsgroup.tornado.hibernate.taglib.HibernateUITagPackage" />
     </TagLibrary>
+    <Theme name="tornado.theme.default" iconset="waterview.icons.default" stylesheet="waterview.stylesheet.default"
+        description="Tornado default theme">
+        <Layout name="layout.default">
+            <JellyLayout script="/tornado/DefaultLayout.jelly" />
+        </Layout>
+    </Theme>
 </Waterview>

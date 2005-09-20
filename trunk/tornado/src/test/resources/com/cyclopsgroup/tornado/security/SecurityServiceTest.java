@@ -15,34 +15,35 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.ui;
+package com.cyclopsgroup.tornado.security;
 
-import com.cyclopsgroup.tornado.security.RuntimeUser;
-import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
+import org.codehaus.plexus.PlexusTestCase;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Default tornado layout
  */
-public class DefaultLayout
-    extends com.cyclopsgroup.waterview.ui.DefaultLayout
+public class SecurityServiceTest
+    extends PlexusTestCase
 {
     /**
-     * Overwrite or implement method execute()
-     *
-     * @see com.cyclopsgroup.waterview.ui.DefaultLayout#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * Test user manipulating
+     * 
+     * @throws Exception
      */
-    public void execute( RuntimeData data, Context context )
+    public void testUser()
         throws Exception
     {
-        RuntimeUser user = RuntimeUser.getInstance( data );
-        context.put( "currentUser", user );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
+        RuntimeUserAPI user = security.getUserBySessionId( "aa" );
+        assertTrue( user.isGuest() );
 
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
-        context.put( "guestUser", security.getGuestUser() );
-        super.execute( data, context );
+        security.login( "admin", "aa", 60000 );
+        user = security.getUserBySessionId( "aa" );
+        assertEquals( "admin", user.getName() );
+
+        security.logout( "aa" );
+        user = security.getUserBySessionId( "aa" );
+        assertTrue( user.isGuest() );
     }
 }

@@ -202,7 +202,7 @@ public class DefaultSecurityService
         throws Exception
     {
         UserEntry ue = new UserEntry( userName, timeout );
-        userEntries.put( userName, ue );
+        userEntries.put( sessionId, ue );
         return getUser( userName );
     }
 
