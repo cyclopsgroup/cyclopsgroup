@@ -51,7 +51,7 @@
                         <td valign="top" id="bodyPanel">
                             <j:set var="messages" value="${data.messages}" />
                             <j:if test="${size(messages) gt 0}">
-                                <table border="0" width="100%">
+                                <table border="0">
                                     <j:forEach var="msg" items="${messages}">
                                         <tr>
                                             <td>
