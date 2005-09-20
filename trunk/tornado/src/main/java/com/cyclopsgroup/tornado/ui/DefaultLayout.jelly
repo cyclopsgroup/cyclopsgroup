@@ -33,7 +33,7 @@
                                                     </a>
                                                 </j:when>
                                                 <j:otherwise>
-                                                    Hello ${currentUser.displayName}
+                                                    Hello ${currentUser.displayName},
                                                     <a
                                                         href="${link.addAction('/tornado/UserLogoutAction').setPage(page)}"
                                                         class="r">
@@ -49,6 +49,9 @@
                         <td class="lineBreak">
                             <table width="100%">
                                 <tr>
+                                    <td width="16">
+                                        <img src="${themeBase}/16x16/screen.png" width="16" height="16" alt="Position" />
+                                    </td>
                                     <td>
                                         <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
                                             <a href="${link.setPage(parent.page)}" class="r">${parent.title}</a>
@@ -57,7 +60,9 @@
                                         <span class="r">${currentNavigatorNode.title}</span>
                                     </td>
                                     <td align="right">
-                                        <a href="something">Configure</a>
+                                        <a href="something" title="Configure Page ${page}">
+                                            <img src="${themeBase}/16x16/edit.png" width="16" height="16" alt="Edit" />
+                                        </a>
                                     </td>
                                 </tr>
                             </table>

@@ -23,10 +23,7 @@
     </components>
     <load-on-start>
         <component>
-            <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
-        </component>
-        <component>
-            <role>com.cyclopsgroup.tornado.portal.PortalService</role>
+            <role>com.cyclopsgroup.tornado.TornadoComponents</role>
         </component>
     </load-on-start>
 </plexus>
