@@ -39,6 +39,23 @@ import com.cyclopsgroup.waterview.web.Form;
 public class FormTag
     extends TagSupport
 {
+    private static final String HIDE_CONTROLS = FormTag.class.getName() + "/hideControls";
+
+    /**
+     * @param context Jelly context
+     * @return True if control is supposed to be displayed
+     */
+    public static boolean isControlsHidden( JellyContext context )
+    {
+        Boolean b = (Boolean) context.getVariable( HIDE_CONTROLS );
+        return b == null ? false : b.booleanValue();
+    }
+
+    static void setHideControls( boolean hideControls, JellyContext context )
+    {
+        context.setVariable( HIDE_CONTROLS, new Boolean( hideControls ) );
+    }
+
     private String action;
 
     private Script bodyScript;
@@ -215,18 +232,5 @@ public class FormTag
     public void setName( String name )
     {
         setTagId( name );
-    }
-
-    private static final String HIDE_CONTROLS = FormTag.class.getName() + "/hideControls";
-
-    static void setHideControls( boolean hideControls, JellyContext context )
-    {
-        context.setVariable( HIDE_CONTROLS, new Boolean( hideControls ) );
-    }
-
-    static boolean isControlsHidden( JellyContext context )
-    {
-        Boolean b = (Boolean) context.getVariable( HIDE_CONTROLS );
-        return b == null ? false : b.booleanValue();
     }
 }
