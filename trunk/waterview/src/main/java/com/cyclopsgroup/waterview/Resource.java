@@ -24,7 +24,7 @@ import org.apache.commons.lang.enums.Enum;
  *
  * Resource object
  */
-public final class Resource
+public class Resource
 {
     /** Type of resource */
     public static final class ResourceType
@@ -37,13 +37,13 @@ public final class Resource
     }
 
     /** external type */
-    public static ResourceType EXTERNAL = new ResourceType( "external" );
+    public static final ResourceType EXTERNAL = new ResourceType( "external" );
 
     /** Internal type */
-    public static ResourceType INTERNAL = new ResourceType( "internal" );
+    public static final ResourceType INTERNAL = new ResourceType( "internal" );
 
     /** Web resource type */
-    public static ResourceType WEB = new ResourceType( "web" );
+    public static final ResourceType WEB = new ResourceType( "web" );
 
     /**
      * get resource type
@@ -94,7 +94,7 @@ public final class Resource
      *
      * @return Returns the description.
      */
-    public String getDescription()
+    public final String getDescription()
     {
         return description;
     }
@@ -104,7 +104,7 @@ public final class Resource
      *
      * @return Returns the path.
      */
-    public String getPath()
+    protected String getPath()
     {
         return path;
     }
@@ -114,7 +114,7 @@ public final class Resource
      *
      * @return Returns the type.
      */
-    public ResourceType getType()
+    public final ResourceType getType()
     {
         return type;
     }
@@ -124,7 +124,7 @@ public final class Resource
      *
      * @param description The description to set.
      */
-    public void setDescription( String description )
+    public final void setDescription( String description )
     {
         this.description = description;
     }
@@ -137,18 +137,30 @@ public final class Resource
      */
     public String toURL( RuntimeData data )
     {
+        return toURL( data, path );
+    }
+
+    /**
+     * Convert to url with given path
+     *
+     * @param data Runtime data
+     * @param resourcePath Given path
+     * @return URL of string
+     */
+    protected String toURL( RuntimeData data, String resourcePath )
+    {
         if ( type == INTERNAL )
         {
             Link link = (Link) data.getRequestContext().get( Link.NAME );
-            return link.getResource( path );
+            return link.getResource( resourcePath );
         }
         else if ( type == WEB )
         {
-            return data.getApplicationBaseUrl() + path;
+            return data.getApplicationBaseUrl() + resourcePath;
         }
         else if ( type == EXTERNAL )
         {
-            return path;
+            return resourcePath;
         }
         else
         {
