@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.collections.set.ListOrderedSet;
+import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -49,8 +50,6 @@ public class FormTag
     private Form form;
 
     private boolean formNew;
-
-    private boolean hideControls;
 
     private String method = "get";
 
@@ -155,16 +154,6 @@ public class FormTag
     }
 
     /**
-     * Getter method for property hideControls
-     *
-     * @return Returns the hideControls.
-     */
-    public boolean isHideControls()
-    {
-        return hideControls;
-    }
-
-    /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
@@ -211,16 +200,6 @@ public class FormTag
     }
 
     /**
-     * Setter method for property hideControls
-     *
-     * @param hideControls The hideControls to set.
-     */
-    public void setHideControls( boolean hideControls )
-    {
-        this.hideControls = hideControls;
-    }
-
-    /**
      * @param method The method to set.
      */
     public void setMethod( String method )
@@ -236,5 +215,18 @@ public class FormTag
     public void setName( String name )
     {
         setTagId( name );
+    }
+
+    private static final String HIDE_CONTROLS = FormTag.class.getName() + "/hideControls";
+
+    static void setHideControls( boolean hideControls, JellyContext context )
+    {
+        context.setVariable( HIDE_CONTROLS, new Boolean( hideControls ) );
+    }
+
+    static boolean isControlsHidden( JellyContext context )
+    {
+        Boolean b = (Boolean) context.getVariable( HIDE_CONTROLS );
+        return b == null ? false : b.booleanValue();
     }
 }

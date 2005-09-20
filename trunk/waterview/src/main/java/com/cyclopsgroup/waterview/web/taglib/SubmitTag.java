@@ -17,7 +17,8 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * Submit tag
  */
-public class SubmitTag extends TagSupport
+public class SubmitTag
+    extends TagSupport
 {
     private String action;
 
@@ -46,36 +47,36 @@ public class SubmitTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("action");
-        FormTag formTag = (FormTag) findAncestorWithClass(FormTag.class);
-        if (formTag != null)
+        requireAttribute( "action" );
+        FormTag formTag = (FormTag) findAncestorWithClass( FormTag.class );
+        if ( formTag != null )
         {
-            formTag.addButtonTag(this);
+            formTag.addButtonTag( this );
         }
-        if (!formTag.isHideControls())
+        if ( !FormTag.isControlsHidden( getContext() ) )
         {
-            JellyContext jc = new JellyContext(getContext());
-            jc.setVariable("submit", this);
-            StringBuffer onclick = new StringBuffer("this.form.action='")
-                    .append(getAction()).append("'; ");
-            if (isForceValidation())
+            JellyContext jc = new JellyContext( getContext() );
+            jc.setVariable( "submit", this );
+            StringBuffer onclick = new StringBuffer( "this.form.action='" ).append( getAction() ).append( "'; " );
+            if ( isForceValidation() )
             {
-                onclick.append("if(this.form.force_validation) ");
-                onclick.append(" {this.form.force_validation.value='true'; }");
+                onclick.append( "if(this.form.force_validation) " );
+                onclick.append( " {this.form.force_validation.value='true'; }" );
             }
-            onclick.append("this.disabled=true; ");
-            onclick.append("this.form.submit(); return false; ");
-            jc.setVariable("onclick", onclick.toString());
-            getBody().run(jc, output);
+            onclick.append( "this.disabled=true; " );
+            onclick.append( "this.form.submit(); return false; " );
+            jc.setVariable( "onclick", onclick.toString() );
+            getBody().run( jc, output );
         }
     }
 
     /**
      * @param to The to to set.
      */
-    public void setAction(String to)
+    public void setAction( String to )
     {
         this.action = to;
     }
@@ -85,7 +86,7 @@ public class SubmitTag extends TagSupport
      *
      * @param forceValidation The forceValidation to set.
      */
-    public void setForceValidation(boolean forceValidation)
+    public void setForceValidation( boolean forceValidation )
     {
         this.forceValidation = forceValidation;
     }

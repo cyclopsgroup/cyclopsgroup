@@ -202,7 +202,7 @@ public class FieldTag
 
         invokeBody( output );
 
-        if ( !formTag.isHideControls() )
+        if ( !FormTag.isControlsHidden( getContext() ) )
         {
             if ( getBodyScript() == null )
             {

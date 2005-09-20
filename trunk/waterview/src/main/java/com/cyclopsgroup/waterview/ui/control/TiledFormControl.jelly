@@ -3,6 +3,7 @@
     <table width="100%" border="0" class="waterviewTable">
         <form method="${formTag.method}" name="${form.id}" action="${formTag.action}">
             <w:JellyScript path="/waterview/FormHiddenFields.jelly" />
+            ${formContent}
             <j:new var="groupUtils" className="com.cyclopsgroup.waterview.utils.TypeUtils" />
             <j:choose>
                 <j:when test="${formControl.vertical}">

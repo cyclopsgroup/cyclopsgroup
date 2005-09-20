@@ -42,7 +42,9 @@ public abstract class BaseJellyFormControlTag
     protected void runScript( Script script, XMLOutput output )
         throws Exception
     {
-        invokeBody( XMLOutput.createDummyXMLOutput() );
+        FormTag.setHideControls( true, getContext() );
+        String formContent = getBodyText();
+        FormTag.setHideControls( false, getContext() );
         if ( formTag == null )
         {
             throw new JellyTagException( "Form tag must be defined" );
@@ -51,7 +53,7 @@ public abstract class BaseJellyFormControlTag
         jc.setVariable( "formControl", this );
         jc.setVariable( "formTag", formTag );
         jc.setVariable( "form", formTag.getForm() );
-
+        jc.setVariable( "formContent", formContent );
         script.run( jc, output );
     }
 
