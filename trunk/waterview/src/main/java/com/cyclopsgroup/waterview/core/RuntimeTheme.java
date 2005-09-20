@@ -30,7 +30,9 @@ public class RuntimeTheme
     /** Name of this object */
     public static final String NAME = "theme";
 
-    private RuntimeData data;
+    private String iconSetUrl;
+
+    private String styleSheetUrl;
 
     private Theme theme;
 
@@ -39,11 +41,14 @@ public class RuntimeTheme
      *
      * @param theme Theme object
      * @param data Runtime data
+     * @throws Exception Just throw it out
      */
     public RuntimeTheme( Theme theme, RuntimeData data )
+        throws Exception
     {
         this.theme = theme;
-        this.data = data;
+        iconSetUrl = theme.getIconSet().toURL( data );
+        styleSheetUrl = theme.getStyleSheet().toURL( data );
     }
 
     /**
@@ -53,7 +58,7 @@ public class RuntimeTheme
      */
     public String getIconSetUrl()
     {
-        return theme.getIconSet().toURL( data );
+        return iconSetUrl;
     }
 
     /**
@@ -63,7 +68,7 @@ public class RuntimeTheme
      */
     public String getStylesheetUrl()
     {
-        return theme.getStyleSheet().toURL( data );
+        return styleSheetUrl;
     }
 
     /**

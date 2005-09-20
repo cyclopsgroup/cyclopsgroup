@@ -134,8 +134,10 @@ public class Resource
      *
      * @param data Runtime data
      * @return String of url
+     * @throws Exception Throw possible exception
      */
     public String toURL( RuntimeData data )
+        throws Exception
     {
         return toURL( data, path );
     }
@@ -146,8 +148,10 @@ public class Resource
      * @param data Runtime data
      * @param resourcePath Given path
      * @return URL of string
+     * @throws Exception Throw possible exception
      */
     protected String toURL( RuntimeData data, String resourcePath )
+        throws Exception
     {
         if ( type == INTERNAL )
         {
