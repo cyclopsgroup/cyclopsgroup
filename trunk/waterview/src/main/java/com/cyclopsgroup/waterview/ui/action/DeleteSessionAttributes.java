@@ -42,5 +42,6 @@ public class DeleteSessionAttributes
             String attributeName = attributeNames[i];
             data.getSessionContext().remove( attributeName );
         }
+        context.addMessage( attributeNames.length + " attributes are deleted from session" );
     }
 }

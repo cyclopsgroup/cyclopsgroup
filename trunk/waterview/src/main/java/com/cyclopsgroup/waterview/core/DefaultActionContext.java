@@ -16,9 +16,12 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 import com.cyclopsgroup.waterview.ActionContext;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RuntimeData;
 
@@ -42,6 +45,8 @@ final class DefaultActionContext
 
     private String targetUrl;
 
+    private Context sessionContext;
+
     /**
      * Constructor for class DefaultActionContext
      *
@@ -52,6 +57,7 @@ final class DefaultActionContext
         Link link = (Link) data.getRequestContext().get( Link.NAME );
         String url = link.setPage( data.getPage() ).addQueryString( data.getQueryString() ).toString();
         setTargetUrl( url );
+        sessionContext = data.getSessionContext();
     }
 
     /**
@@ -169,5 +175,21 @@ final class DefaultActionContext
     public void setTargetUrl( String url )
     {
         targetUrl = url;
+    }
+
+    /**
+     * Override method addMessage in class DefaultActionContext
+     *
+     * @see com.cyclopsgroup.waterview.ActionContext#addMessage(java.lang.String)
+     */
+    public synchronized void addMessage( String message )
+    {
+        List messages = (List) sessionContext.get( RuntimeData.MESSAGES_NAME );
+        if ( messages == null )
+        {
+            messages = new LinkedList();
+            sessionContext.put( RuntimeData.MESSAGES_NAME, messages );
+        }
+        messages.add( message );
     }
 }

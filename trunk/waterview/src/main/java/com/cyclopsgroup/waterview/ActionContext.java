@@ -77,4 +77,9 @@ public interface ActionContext
      * @param url Target url
      */
     void setTargetUrl( String url );
+
+    /**
+     * @param message Message to add
+     */
+    void addMessage( String message );
 }

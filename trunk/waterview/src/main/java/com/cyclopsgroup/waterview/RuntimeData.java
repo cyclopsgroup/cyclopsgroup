@@ -44,6 +44,9 @@ public interface RuntimeData
     /** Name of service manager in context */
     String SERVICE_MANAGER_NAME = "serviceManager";
 
+    /** Message list name in session context */
+    String MESSAGES_NAME = RuntimeData.class.getName() + "/messags";
+
     /**
      * Get modifiable processor list
      * 
@@ -78,7 +81,7 @@ public interface RuntimeData
      * @param fileName Name of file
      * @return Mimetype
      */
-    String getMimeType(String fileName);
+    String getMimeType( String fileName );
 
     /**
      * Get output print writer
@@ -197,14 +200,14 @@ public interface RuntimeData
      * 
      * @param contentType Content type
      */
-    void setOutputContentType(String contentType);
+    void setOutputContentType( String contentType );
 
     /**
      * Set page with Page model
      *
      * @param page Page path
      */
-    void setPage(Path page);
+    void setPage( Path page );
 
     /**
      * Set page to render
@@ -212,22 +215,28 @@ public interface RuntimeData
      * @param page Page path
      * @throws Exception Throw it out
      */
-    void setPage(String page) throws Exception;
+    void setPage( String page )
+        throws Exception;
 
     /**
      * @param url URL to redirect
      */
-    void setRedirectUrl(String url);
+    void setRedirectUrl( String url );
 
     /**
      * Set theme
      *
      * @param themeName Name of theme to set
      */
-    void setThemeName(String themeName);
+    void setThemeName( String themeName );
 
     /**
      * Stop the pipeline
      */
     void stop();
+
+    /**
+     * @return Array of messages
+     */
+    String[] getMessages();
 }

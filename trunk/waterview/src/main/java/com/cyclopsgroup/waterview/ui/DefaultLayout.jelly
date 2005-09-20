@@ -49,6 +49,20 @@
                     </tr>
                     <tr>
                         <td valign="top" id="bodyPanel">
+                            <j:set var="messages" value="${data.messages}" />
+                            <j:if test="${size(messages) gt 0}">
+                                <table border="0">
+                                    <j:forEach var="msg" items="${messages}">
+                                        <tr>
+                                            <td>
+                                                <img src="${themeBase}/16x16/info.png" width="16" height="16"
+                                                    alt="Message" />
+                                            </td>
+                                            <td class="waterviewMessage">${msg}</td>
+                                        </tr>
+                                    </j:forEach>
+                                </table>
+                            </j:if>
                             <j:set var="mainTitle" value="${navigator.getNodeByPage(data.page.fullPath).title}" />
                             <w:GetPanelViews var="views" panel="body">
                                 <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}"
