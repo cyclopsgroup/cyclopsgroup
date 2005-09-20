@@ -41,7 +41,8 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  *
  * Select tag
  */
-public class SelectTag extends TagSupport
+public class SelectTag
+    extends TagSupport
 {
     private Object items;
 
@@ -52,9 +53,9 @@ public class SelectTag extends TagSupport
      *
      * @param option Option tag
      */
-    public void addOption(SelectOption option)
+    public void addOption( SelectOption option )
     {
-        options.put(option.getName(), option);
+        options.put( option.getName(), option );
     }
 
     /**
@@ -82,67 +83,64 @@ public class SelectTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        FieldTag fieldTag = (FieldTag) requireParent(FieldTag.class);
-        options = ListOrderedMap.decorate(new HashMap());
-
-        if (getItems() != null)
+        FieldTag fieldTag = (FieldTag) requireParent( FieldTag.class );
+        options = ListOrderedMap.decorate( new HashMap() );
+        invokeBody( output );
+        if ( getItems() != null )
         {
             Iterator i = Collections.EMPTY_LIST.iterator();
-            if (TypeUtils.isIteratable(getItems()))
+            if ( TypeUtils.isIteratable( getItems() ) )
             {
-                i = TypeUtils.iterate(getItems());
+                i = TypeUtils.iterate( getItems() );
             }
-            else if (getItems() instanceof Map)
+            else if ( getItems() instanceof Map )
             {
-                i = ((Map) getItems()).entrySet().iterator();
+                i = ( (Map) getItems() ).entrySet().iterator();
             }
-            while (i.hasNext())
+            while ( i.hasNext() )
             {
                 Object item = i.next();
                 SelectOption option = null;
-                if (item instanceof SelectOption)
+                if ( item instanceof SelectOption )
                 {
                     option = (SelectOption) item;
                 }
-                else if (item instanceof Map.Entry)
+                else if ( item instanceof Map.Entry )
                 {
                     Map.Entry e = (Map.Entry) item;
-                    String name = TypeUtils.toString(e.getKey());
-                    option = new DefaultSelectOption(name, TypeUtils.toString(e
-                            .getValue()));
+                    String name = TypeUtils.toString( e.getKey() );
+                    option = new DefaultSelectOption( name, TypeUtils.toString( e.getValue() ) );
                 }
                 else
                 {
-                    String name = TypeUtils.toString(item);
-                    option = new DefaultSelectOption(name, name);
+                    String name = TypeUtils.toString( item );
+                    option = new DefaultSelectOption( name, name );
                 }
-                addOption(option);
+                addOption( option );
             }
         }
-
-        invokeBody(output);
-
-        JellyEngine je = (JellyEngine) getServiceManager().lookup(
-                JellyEngine.ROLE);
-        final Script script = je.getScript("/waterview/FormSelectInput.jelly");
+        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
+        final Script script = je.getScript( "/waterview/FormSelectInput.jelly" );
         Script s = new Script()
         {
 
-            public Script compile() throws JellyException
+            public Script compile()
+                throws JellyException
             {
                 return this;
             }
 
-            public void run(JellyContext context, XMLOutput output)
-                    throws JellyTagException
+            public void run( JellyContext context, XMLOutput output )
+                throws JellyTagException
             {
-                context.setVariable("selectTag", SelectTag.this);
-                script.run(context, output);
+                context.setVariable( "selectTag", SelectTag.this );
+                script.run( context, output );
             }
         };
-        fieldTag.setBodyScript(s);
+        fieldTag.setBodyScript( s );
     }
 
     /**
@@ -150,7 +148,7 @@ public class SelectTag extends TagSupport
      *
      * @param items The items to set.
      */
-    public void setItems(Object items)
+    public void setItems( Object items )
     {
         this.items = items;
     }

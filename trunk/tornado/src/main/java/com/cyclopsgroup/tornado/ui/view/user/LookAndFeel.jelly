@@ -15,7 +15,7 @@
         </w:FormControl>
     </j:if>
     <j:if test="${not noPreference}">
-        <w:TiledFormControl>
+        <w:TiledFormControl columns="1">
             <w:Form name="preferenceform" method="post">
                 <input type="hidden" name="preference_id" value="${pref.id}" />
                 <w:Field name="themeName" value="${pref.themeName}" title="Theme">
