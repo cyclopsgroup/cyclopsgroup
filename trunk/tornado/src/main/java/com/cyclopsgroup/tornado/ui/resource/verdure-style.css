@@ -7,6 +7,10 @@ h2 {
 	color: #C2D18F;
 }
 
+a:link, a:visited {
+	color: #AC877C;
+}
+
 #bodyWrapper {
 	background-color: white;
 	max-width: 860px;

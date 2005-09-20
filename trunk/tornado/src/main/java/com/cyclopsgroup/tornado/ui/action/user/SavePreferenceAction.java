@@ -53,7 +53,6 @@ public class SavePreferenceAction
 
         TypeUtils.getBeanUtils().copyProperties( up, data.getParams().toProperties() );
         s.update( up );
-
         User user = (User) s.load( User.class, up.getUserId() );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.refreshUser( user.getName() );

@@ -15,44 +15,32 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.ui.action.user;
+package com.cyclopsgroup.tornado.ui.view.admin.portal;
 
-import org.hibernate.Session;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.portal.UserPreference;
-import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.waterview.Action;
-import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * Look and feel for system
  */
-public class DeletePreferenceAction
+public class LookAndFeel
     extends BaseServiceable
-    implements Action
+    implements Module
 {
-
     /**
-     * Override method execute in class DeletePreferenceAction
+     * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RuntimeData data, Context ctx )
         throws Exception
     {
-        String prefId = data.getParams().getString( "preference_id" );
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hibernate.getSession();
-        UserPreference up = (UserPreference) s.load( UserPreference.class, prefId );
-        s.delete( up );
-        RuntimeUser user = RuntimeUser.getInstance( data );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
-        security.refreshUser( user.getName() );
-        context.addMessage( "User setting is deleted, default setting is applied" );
+        ctx.put( "userId", security.getGuestUser().getId() );
     }
 }
