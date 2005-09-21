@@ -21,7 +21,7 @@ import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.UserAuthenticationResult;
 import com.cyclopsgroup.tornado.security.UserAuthenticator;
-import com.cyclopsgroup.tornado.security.UserLoginEvent;
+import com.cyclopsgroup.tornado.security.UserChangedEvent;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -72,7 +72,7 @@ public class UserLoginAction
         int timeout = data.getParams().getInt( "timeout", 30 );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout * 60000L );
-        security.handleEvent( new UserLoginEvent( user, data ) );
+        security.handleEvent( new UserChangedEvent( user, data ) );
 
         String url = data.getParams().getString( "redirectto", data.getRefererUrl() );
         context.setTargetUrl( url );

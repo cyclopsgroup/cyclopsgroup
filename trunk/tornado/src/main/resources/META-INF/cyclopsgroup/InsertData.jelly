@@ -10,7 +10,7 @@
         <New var="groupAdmins" name="admins" description="Administrators only" isSystem="true" />
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.UserGroup">
-        <New userId="{userAdmin.id}" groupId="${groupAdmins.id}" />
+        <New userId="${userAdmin.id}" groupId="${groupAdmins.id}" />
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.Role">
         <New var="roleUser" name="user" description="For any valid user" isSystem="true" />

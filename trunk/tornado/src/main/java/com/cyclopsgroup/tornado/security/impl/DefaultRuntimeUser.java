@@ -18,8 +18,10 @@
 package com.cyclopsgroup.tornado.security.impl;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.collections.MultiMap;
@@ -55,6 +57,8 @@ public class DefaultRuntimeUser
     private String name;
 
     private MultiMap permissions = new MultiHashMap();
+
+    private HashSet roleIds = new HashSet();
 
     private HashSet roleNames = new HashSet();
 
@@ -94,26 +98,17 @@ public class DefaultRuntimeUser
      */
     public void addRole( Role role )
     {
-        if ( roleNames.contains( role.getName() ) )
+        if ( role == null || role.getIsDisabled() || roleNames.contains( role.getName() ) )
         {
             return;
         }
         roleNames.add( role.getName() );
+        roleIds.add( role.getId() );
         for ( Iterator i = role.getDependencies().iterator(); i.hasNext(); )
         {
             Role dependency = (Role) i.next();
             addRole( dependency );
         }
-    }
-
-    /**
-     * Add role
-     *
-     * @param role Role name
-     */
-    public void addRole( String role )
-    {
-        roleNames.add( role );
     }
 
     /**
@@ -164,6 +159,11 @@ public class DefaultRuntimeUser
     public String getName()
     {
         return name;
+    }
+
+    Set getRoleIds()
+    {
+        return Collections.unmodifiableSet( roleIds );
     }
 
     /**

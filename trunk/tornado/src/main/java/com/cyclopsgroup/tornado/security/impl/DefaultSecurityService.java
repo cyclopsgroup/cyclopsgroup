@@ -33,11 +33,15 @@ import org.hibernate.criterion.Expression;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.security.CreateUserEvent;
 import com.cyclopsgroup.tornado.security.NoSuchUserException;
+import com.cyclopsgroup.tornado.security.Permission;
+import com.cyclopsgroup.tornado.security.PermissionType;
 import com.cyclopsgroup.tornado.security.RuntimeUserAPI;
 import com.cyclopsgroup.tornado.security.SecurityListener;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.Group;
 import com.cyclopsgroup.tornado.security.entity.GroupRole;
+import com.cyclopsgroup.tornado.security.entity.Role;
+import com.cyclopsgroup.tornado.security.entity.RolePermission;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.tornado.security.entity.UserRole;
 
@@ -106,6 +110,11 @@ public class DefaultSecurityService
             UserRole ur = (UserRole) i.next();
             user.addRole( ur.getRole() );
         }
+        user.addRole( getRole( ROLE_GUEST ) );
+        if ( !userName.equals( USER_GUEST ) )
+        {
+            user.addRole( getRole( ROLE_USER ) );
+        }
 
         for ( Iterator i = userModel.getGroups().iterator(); i.hasNext(); )
         {
@@ -116,6 +125,25 @@ public class DefaultSecurityService
             {
                 GroupRole gr = (GroupRole) j.next();
                 user.addRole( gr.getRole() );
+            }
+            if ( group.getName().equals( GROUP_ADMINS ) )
+            {
+                user.addRole( getRole( ROLE_ADMIN ) );
+            }
+        }
+        List rps = s.createCriteria( RolePermission.class ).add( Expression.in( "roleId", user.getRoleIds() ) ).list();
+        for ( Iterator i = rps.iterator(); i.hasNext(); )
+        {
+            RolePermission rp = (RolePermission) i.next();
+            try
+            {
+                PermissionType pt = (PermissionType) Class.forName( rp.getPermissionType() ).newInstance();
+                Permission p = pt.createPermission( rp.getPermission() );
+                user.addPermission( pt, p );
+            }
+            catch ( Exception e )
+            {
+                getLogger().warn( "Permission is not valid " + rp.getPermissionType() + "|" + rp.getPermission() );
             }
         }
 
@@ -131,6 +159,15 @@ public class DefaultSecurityService
         throws Exception
     {
         return getUser( USER_GUEST );
+    }
+
+    private Role getRole( String roleName )
+        throws Exception
+    {
+        Session s = hibernate.getSession();
+        List list = s.createCriteria( Role.class ).add( Expression.eq( "name", roleName ) )
+            .add( Expression.eq( "isDisabled", Boolean.FALSE ) ).setMaxResults( 1 ).list();
+        return list.isEmpty() ? null : (Role) list.get( 0 );
     }
 
     /**

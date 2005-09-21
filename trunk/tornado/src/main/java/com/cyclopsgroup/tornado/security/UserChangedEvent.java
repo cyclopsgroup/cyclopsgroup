@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  *
  * User login event
  */
-public class UserLoginEvent
+public class UserChangedEvent
 {
     private RuntimeData data;
 
@@ -36,7 +36,7 @@ public class UserLoginEvent
      * @param user Logged in user
      * @param data Runtime data
      */
-    public UserLoginEvent( RuntimeUser user, RuntimeData data )
+    public UserChangedEvent( RuntimeUser user, RuntimeData data )
     {
         this.user = user;
         this.data = data;
@@ -47,7 +47,7 @@ public class UserLoginEvent
      *
      * @return Returns the data.
      */
-    public RuntimeData getData()
+    public RuntimeData getRuntimeData()
     {
         return data;
     }

@@ -17,7 +17,13 @@
  */
 package com.cyclopsgroup.tornado.portal.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cyclopsgroup.tornado.portal.PageAsset;
+import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 import com.cyclopsgroup.waterview.web.TreeNode;
 
@@ -58,6 +64,16 @@ public class SecureRuntimeNavigatorNode
     protected TreeNode[] doFilter( TreeNode[] nodes, RuntimeData data )
         throws Exception
     {
-        return nodes;
+        List children = new ArrayList();
+        RuntimeUser user = RuntimeUser.getInstance( data );
+        for ( int i = 0; i < nodes.length; i++ )
+        {
+            NavigatorNode node = (NavigatorNode) nodes[i];
+            if ( user.isAuthorized( new PageAsset( node.getPage() ) ) )
+            {
+                children.add( node );
+            }
+        }
+        return (TreeNode[]) children.toArray( TreeNode.EMPTY_ARRAY );
     }
 }

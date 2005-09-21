@@ -17,6 +17,13 @@
  */
 package com.cyclopsgroup.tornado.portal.impl;
 
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+
+import com.cyclopsgroup.tornado.security.SecurityListener;
+import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.tornado.security.UserChangedEvent;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.impl.DefaultNavigatorService;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
@@ -28,6 +35,7 @@ import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
  */
 public class SecureNavigatorService
     extends DefaultNavigatorService
+    implements SecurityListener, Serviceable
 {
     /**
      * Overwrite or implement method doCreateRuntimeRoot()
@@ -37,5 +45,31 @@ public class SecureNavigatorService
     protected RuntimeTreeNode doCreateRuntimeRoot( RuntimeData data )
     {
         return new SecureRuntimeNavigatorNode( null, getRootNode() );
+    }
+
+    /**
+     * Overwrite or implement method performAction()
+     *
+     * @see com.cyclopsgroup.tornado.security.SecurityListener#performAction(java.lang.Object)
+     */
+    public void performAction( Object event )
+        throws Exception
+    {
+        if ( event instanceof UserChangedEvent )
+        {
+            refresh( ( (UserChangedEvent) event ).getRuntimeData() );
+        }
+    }
+
+    /**
+     * Overwrite or implement method service()
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
+    {
+        SecurityService security = (SecurityService) serviceManager.lookup( SecurityService.ROLE );
+        security.addListener( this );
     }
 }

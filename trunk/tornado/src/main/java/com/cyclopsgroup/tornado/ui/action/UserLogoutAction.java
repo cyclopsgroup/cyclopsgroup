@@ -19,7 +19,7 @@ package com.cyclopsgroup.tornado.ui.action;
 
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.tornado.security.UserLogoutEvent;
+import com.cyclopsgroup.tornado.security.UserChangedEvent;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -48,8 +48,8 @@ public class UserLogoutAction
             return;
         }
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
-        security.handleEvent( new UserLogoutEvent( user, data ) );
         security.logout( data.getSessionId() );
+        security.handleEvent( new UserChangedEvent( (RuntimeUser) security.getGuestUser(), data ) );
         context.addMessage( "You just logged out" );
     }
 }
