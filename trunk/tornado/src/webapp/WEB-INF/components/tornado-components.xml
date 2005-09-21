@@ -20,6 +20,14 @@
                 <default-theme>tornado.theme.default</default-theme>
             </configuration>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.navigator.NavigatorService</role>
+            <implementation>com.cyclopsgroup.tornado.portal.impl.SecureNavigatorService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <path>META-INF/cyclopsgroup/waterview-navigation.xml</path>
+            </configuration>
+        </component>
     </components>
     <load-on-start>
         <component>
