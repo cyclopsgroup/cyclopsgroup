@@ -97,11 +97,11 @@ table.waterviewTable td.input {
 }
 
 .waterviewWindow {
-	background-color: #5582D2
+	background-color: #2E52AF;
 }
 
 .waterviewWindowShadow {
-	background-color: #2E52AF;
+	background-color: #5582D2;
 }
 
 .waterviewWindow .waterviewWindowHeader {
