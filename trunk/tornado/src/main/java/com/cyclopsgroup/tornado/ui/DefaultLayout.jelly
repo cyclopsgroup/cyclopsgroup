@@ -14,39 +14,31 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="lineBreak" />
-                    </tr>
-                    <tr>
-                        <td class="lineBreak">
+                        <td class="bannerPanelBelt">
                             <table border="0">
                                 <tr>
                                     <td>
                                         <img src="${themeBase}/16x16/aim.png" width="16" height="16" alt="User" />
                                     </td>
                                     <td>
-                                        <span class="r">
-                                            <j:choose>
-                                                <j:when test="${currentUser.guest}">
-                                                    Dear Visitor,
-                                                    <a href="${link.setPage('/tornado/UserLogin.jelly')}" class="r">
-                                                        Login
-                                                    </a>
-                                                </j:when>
-                                                <j:otherwise>
-                                                    Hello ${currentUser.displayName},
-                                                    <a
-                                                        href="${link.addAction('/tornado/UserLogoutAction').setPage(page)}"
-                                                        class="r">
-                                                        Logout
-                                                    </a>
-                                                </j:otherwise>
-                                            </j:choose>
-                                        </span>
+                                        <j:choose>
+                                            <j:when test="${currentUser.guest}">
+                                                Dear Visitor,
+                                                <a href="${link.setPage('/tornado/UserLogin.jelly')}">Login</a>
+                                            </j:when>
+                                            <j:otherwise>
+                                                Hello ${currentUser.displayName},
+                                                <a
+                                                    href="${link.addAction('/tornado/UserLogoutAction').setPage(page)}">
+                                                    Logout
+                                                </a>
+                                            </j:otherwise>
+                                        </j:choose>
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                        <td class="lineBreak">
+                        <td class="bannerPanelBelt">
                             <table width="100%">
                                 <tr>
                                     <td width="16">
@@ -54,10 +46,10 @@
                                     </td>
                                     <td>
                                         <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
-                                            <a href="${link.setPage(parent.page)}" class="r">${parent.title}</a>
-                                            <span class="r">&gt;&gt;</span>
+                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                            &gt;&gt;
                                         </j:forEach>
-                                        <span class="r">${currentNavigatorNode.title}</span>
+                                        <b>${currentNavigatorNode.title}</b>
                                     </td>
                                     <td align="right">
                                         <a href="something" title="Configure Page ${page}">
@@ -80,7 +72,7 @@
                                 </w:View>
                             </w:GetPanelViews>
                             <j:forEach var="view" items="${views}">
-                                <w:WindowControl title="${view.name}">
+                                <w:WindowControl title="${view.name}" shadow="2">
                                     <w:DisplayView view="${view}" />
                                 </w:WindowControl>
                             </j:forEach>
