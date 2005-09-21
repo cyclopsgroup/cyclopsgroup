@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
-import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
+import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 import com.cyclopsgroup.waterview.web.TreeNode;
 import com.cyclopsgroup.waterview.web.TreeUtils;
 
@@ -45,18 +45,18 @@ public class DefaultLayout
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        RuntimeNavigatorNode root = RuntimeNavigatorNode.getRoot( data );
+        NavigatorService navigator = (NavigatorService) lookupComponent( NavigatorService.ROLE );
+        RuntimeTreeNode root = navigator.getRuntimeNode( data );
         TreeNode[] tabNodes = root.getChildrenNodes();
         context.put( "tabNodes", tabNodes );
 
-        NavigatorService navigator = (NavigatorService) lookupComponent( NavigatorService.ROLE );
         context.put( "navigator", navigator );
         context.put( "currentNavigatorNode", navigator.getNodeByPage( data.getPage().getFullPath() ) );
 
-        RuntimeNavigatorNode selectedNode = null;
+        RuntimeTreeNode selectedNode = null;
         for ( int i = 0; i < tabNodes.length; i++ )
         {
-            RuntimeNavigatorNode runtimeNode = (RuntimeNavigatorNode) tabNodes[i];
+            RuntimeTreeNode runtimeNode = (RuntimeTreeNode) tabNodes[i];
             NavigatorNode node = (NavigatorNode) runtimeNode.getContent();
             if ( !StringUtils.equals( node.getPage(), data.getPage().getFullPath() ) )
             {

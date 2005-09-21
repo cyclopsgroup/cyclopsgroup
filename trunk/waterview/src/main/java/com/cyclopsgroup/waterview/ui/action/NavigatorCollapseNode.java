@@ -19,7 +19,8 @@ package com.cyclopsgroup.waterview.ui.action;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.navigator.RuntimeNavigatorNode;
+import com.cyclopsgroup.waterview.navigator.NavigatorService;
+import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -37,9 +38,10 @@ public class NavigatorCollapseNode
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        RuntimeNavigatorNode nav = RuntimeNavigatorNode.getRoot( data );
+        NavigatorService navigator = (NavigatorService) data.getServiceManager().lookup( NavigatorService.ROLE );
+        RuntimeTreeNode nav = navigator.getRuntimeNode( data );
         String nodeId = data.getParams().getString( "navigator_node_id" );
-        RuntimeNavigatorNode node = (RuntimeNavigatorNode) nav.getNodeById( nodeId );
+        RuntimeTreeNode node = (RuntimeTreeNode) nav.getNodeById( nodeId );
         node.collapse();
         context.setTargetUrl( data.getRefererUrl() );
     }
