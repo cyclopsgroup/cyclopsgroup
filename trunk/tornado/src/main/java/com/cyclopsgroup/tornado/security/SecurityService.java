@@ -23,14 +23,14 @@ package com.cyclopsgroup.tornado.security;
  */
 public interface SecurityService
 {
+    /** Name of admin groups */
+    String GROUP_ADMINS = "admins";
+
     /** Role name of component */
     String ROLE = SecurityService.class.getName();
 
-    /** Guest user */
-    String USER_GUEST = "guest";
-
-    /** Admin user */
-    String USER_ADMIN = "admin";
+    /** Admin role */
+    String ROLE_ADMIN = "admin";
 
     /** Guest role */
     String ROLE_GUEST = "guest";
@@ -38,8 +38,31 @@ public interface SecurityService
     /** User role */
     String ROLE_USER = "user";
 
-    /** Admin role */
-    String ROLE_ADMIN = "admin";
+    /** Admin user */
+    String USER_ADMIN = "admin";
+
+    /** Guest user */
+    String USER_GUEST = "guest";
+
+    /**
+     * @param listener Listener to add
+     */
+    void addListener( SecurityListener listener );
+
+    /**
+     * @return Get guest user
+     * @throws Exception System error
+     */
+    RuntimeUserAPI getGuestUser()
+        throws Exception;
+
+    /**
+     * @param userName User name
+     * @return RuntimeUser object
+     * @throws Exception Throw it out
+     */
+    RuntimeUserAPI getUser( String userName )
+        throws Exception;
 
     /**
      * @param sessionId Session id
@@ -50,12 +73,9 @@ public interface SecurityService
         throws Exception;
 
     /**
-     * @param userName User name
-     * @return RuntimeUser object
-     * @throws Exception Throw it out
+     * @param event Event to handle
      */
-    RuntimeUserAPI getUser( String userName )
-        throws Exception;
+    void handleEvent( Object event );
 
     /**
      * @param userName User name
@@ -73,26 +93,9 @@ public interface SecurityService
     void logout( String sessionId );
 
     /**
-     * @param listener Listener to add
-     */
-    void addListener( SecurityListener listener );
-
-    /**
      * Refresh content of a user
      * 
      * @param userName User name
      */
     void refreshUser( String userName );
-
-    /**
-     * @param event Event to handle
-     */
-    void handleEvent( Object event );
-
-    /**
-     * @return Get guest user
-     * @throws Exception System error
-     */
-    RuntimeUserAPI getGuestUser()
-        throws Exception;
 }

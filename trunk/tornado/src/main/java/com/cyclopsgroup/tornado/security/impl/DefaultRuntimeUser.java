@@ -17,12 +17,17 @@
  */
 package com.cyclopsgroup.tornado.security.impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import org.apache.commons.collections.MultiHashMap;
+import org.apache.commons.collections.MultiMap;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.tornado.security.Asset;
+import com.cyclopsgroup.tornado.security.Permission;
+import com.cyclopsgroup.tornado.security.PermissionType;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.Role;
@@ -49,6 +54,8 @@ public class DefaultRuntimeUser
 
     private String name;
 
+    private MultiMap permissions = new MultiHashMap();
+
     private HashSet roleNames = new HashSet();
 
     /**
@@ -72,6 +79,17 @@ public class DefaultRuntimeUser
     }
 
     /**
+     * Add permission
+     *
+     * @param type Permisson type
+     * @param p Permission
+     */
+    public void addPermission( PermissionType type, Permission p )
+    {
+        permissions.put( type.getClass(), p );
+    }
+
+    /**
      * @param role Role object
      */
     public void addRole( Role role )
@@ -86,6 +104,16 @@ public class DefaultRuntimeUser
             Role dependency = (Role) i.next();
             addRole( dependency );
         }
+    }
+
+    /**
+     * Add role
+     *
+     * @param role Role name
+     */
+    public void addRole( String role )
+    {
+        roleNames.add( role );
     }
 
     /**
@@ -145,8 +173,7 @@ public class DefaultRuntimeUser
      */
     public boolean hasPermission( Object permission )
     {
-        // TODO Auto-generated method stub
-        return false;
+        return permissions.containsValue( permission );
     }
 
     /**
@@ -157,6 +184,33 @@ public class DefaultRuntimeUser
     public boolean hasRole( String roleName )
     {
         return roleNames.contains( roleName );
+    }
+
+    /**
+     * Overwrite or implement method isAuthorized()
+     *
+     * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#isAuthorized(com.cyclopsgroup.tornado.security.Asset)
+     */
+    public boolean isAuthorized( Asset asset )
+    {
+        if ( hasRole( SecurityService.ROLE_ADMIN ) )
+        {
+            return true;
+        }
+        Collection ps = (Collection) permissions.get( asset.getPermissionType().getClass() );
+        if ( ps == null )
+        {
+            return false;
+        }
+        for ( Iterator iter = ps.iterator(); iter.hasNext(); )
+        {
+            Permission p = (Permission) iter.next();
+            if ( asset.authorize( p ) )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

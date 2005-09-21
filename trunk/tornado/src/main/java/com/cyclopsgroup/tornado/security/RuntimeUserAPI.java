@@ -65,6 +65,14 @@ public interface RuntimeUserAPI
     boolean hasRole( String roleName );
 
     /**
+     * Check if user is authorized to an asset
+     *
+     * @param asset Asset to check
+     * @return True if it's authorized
+     */
+    boolean isAuthorized( Asset asset );
+
+    /**
      * @return Is the user guest or not
      */
     boolean isGuest();
