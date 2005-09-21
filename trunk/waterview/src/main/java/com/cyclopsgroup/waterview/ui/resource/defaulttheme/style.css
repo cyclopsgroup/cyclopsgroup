@@ -17,15 +17,15 @@ h2 {
 	color: white;
 	border-width: 0 0 2 0;
 	border-style: solid;
-	border-color: #00256E;
+	border-color: #2E52AF;
 }
 
 #bannerPanel .waterviewUnselectedTab {
-	background-color: #2E52AF;
+	background-color: #00256E;
 }
 
 #bannerPanel .waterviewSelectedTab {
-	background-color: #00256E;
+	background-color: #2E52AF;
 }
 
 #bannerPanel #pageTitle,#bannerPanel a {
