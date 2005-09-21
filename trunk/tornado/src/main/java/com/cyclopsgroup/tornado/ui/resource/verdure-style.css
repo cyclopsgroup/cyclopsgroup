@@ -7,23 +7,59 @@ h2 {
 	color: #C2D18F;
 }
 
-a:link, a:visited {
+a:link,a:visited {
 	color: #AC877C;
 }
 
 #bodyWrapper {
 	background-color: white;
 	max-width: 860px;
-	width: expression(document.body.clientWidth > 860 ? "860px" : "auto");
 }
 
 #bannerPanel {
 	background-color: #466D36;
 	color: white;
+	border-width: 0 0 2 0;
+	border-style: solid;
+	border-color: #969799;
 }
 
-#bannerPanelRight {
-	
+#leftPanel {
+	background-color: #E6ECB9;
+	padding: 5px;
+}
+
+#bodyPanel {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
+	background-color: white;
+	border-width: 0 0 2 0;
+	border-color: #939587;
+	border-style: solid;;
+	border-width: 0 0 2 0;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowTitle {
+	color: #939587;
+}
+
+.bannerPanelBelt {
+	background-color: #969799;
+}
+
+.bannerPanelBelt a,.bannerPanelBelt td,.waterviewSelectedTab a,.waterviewUnselectedTab a
+	{
+	color: white;
 }
 
 table.waterviewTable th {
@@ -61,10 +97,17 @@ table.waterviewTable td.input {
 
 .waterviewWindow {
 	background-color: #F2F5D9;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #B0B682;
+}
+
+.waterviewWindowShadow {
+	background-color: #C9CEA2;
 }
 
 .waterviewWindow .waterviewWindowHeader {
-	background-color: #F2F5D9;
+	background-color: #F0F5C4;
 }
 
 .waterviewWindow .waterviewWindowTitle {
@@ -75,38 +118,9 @@ table.waterviewTable td.input {
 	background-color: #F4F7E0;
 }
 
-#leftPanel {
-	background-color: #E6ECB9;
-	padding: 5px;
-}
-
-#bodyPanel {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindow {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindowBody {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindow .waterviewWindowHeader {
-	background-color: white;
-	border-width: 0 0 2 0;
-	border-color: #939587;
-	border-style: solid;;
-	border-width: 0 0 2 0;
-}
-
-#bodyPanel .waterviewWindow .waterviewWindowTitle {
-	color: #939587;
-}
-
 input.waterviewFormButton {
-	background-color: #51A751;
-	border-color: #51A751;
+	background-color: #78787A;
+	border-color: #78787A;
 	border-width: 2px;
 	border-style: outset;
 	color: white;
