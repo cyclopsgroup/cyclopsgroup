@@ -178,7 +178,7 @@ public class DefaultNavigatorService
         addNode( rootNode );
 
         JellyContext jc = new JellyContext();
-        jc.setVariable( getClass().getName(), this );
+        jc.setVariable( DefaultNavigatorService.class.getName(), this );
         jc.registerTagLibrary( "http://waterview.cyclopsgroup.com/navigator", new NavigatorTagLibrary() );
         for ( Enumeration en = getClass().getClassLoader().getResources( path ); en.hasMoreElements(); )
         {
