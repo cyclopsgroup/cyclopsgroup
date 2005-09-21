@@ -33,22 +33,6 @@ a:link,a:visited {
 	background-color: white;
 }
 
-#bodyPanel .waterviewWindow {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindowBody {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindow .waterviewWindowHeader {
-	background-color: white;
-	border-width: 0 0 2 0;
-	border-color: #939587;
-	border-style: solid;;
-	border-width: 0 0 2 0;
-}
-
 #bodyPanel .waterviewWindow .waterviewWindowTitle {
 	color: #939587;
 }
@@ -116,6 +100,23 @@ table.waterviewTable td.input {
 
 .waterviewWindowBody {
 	background-color: #F4F7E0;
+}
+
+#bodyPanel .waterviewWindow {
+	background-color: white;
+	border-width: 0px;
+}
+
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
+	background-color: white;
+	border-width: 0 0 2 0;
+	border-color: #939587;
+	border-style: solid;;
+	border-width: 0 0 2 0;
 }
 
 input.waterviewFormButton {
