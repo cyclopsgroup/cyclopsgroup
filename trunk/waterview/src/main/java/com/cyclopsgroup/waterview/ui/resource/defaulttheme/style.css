@@ -100,6 +100,10 @@ table.waterviewTable td.input {
 	background-color: #5582D2
 }
 
+.waterviewWindowShadow {
+	background-color: #2E52AF;
+}
+
 .waterviewWindow .waterviewWindowHeader {
 	background-color: #1F56C0;
 }

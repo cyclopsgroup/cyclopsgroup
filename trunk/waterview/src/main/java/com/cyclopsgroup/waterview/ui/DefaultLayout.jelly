@@ -25,7 +25,7 @@
                                 </w:View>
                             </w:GetPanelViews>
                             <j:forEach var="view" items="${views}">
-                                <w:WindowControl title="${view.name}">
+                                <w:WindowControl title="${view.name}" shadow="2" border="1">
                                     <w:DisplayView view="${view}" />
                                 </w:WindowControl>
                             </j:forEach>
@@ -70,7 +70,7 @@
                                     title="${mainTitle}" />
                             </w:GetPanelViews>
                             <j:forEach var="view" items="${views}">
-                                <w:WindowControl title="${view.name}" maximizable="true" editable="true">
+                                <w:WindowControl title="${view.name}" maximizable="true" editable="true" border="0">
                                     <w:DisplayView view="${view}" />
                                 </w:WindowControl>
                             </j:forEach>
