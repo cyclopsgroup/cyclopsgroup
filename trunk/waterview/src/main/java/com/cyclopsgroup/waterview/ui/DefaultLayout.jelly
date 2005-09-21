@@ -14,9 +14,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="lineBreak" />
-                    </tr>
-                    <tr>
                         <td width="25%" valign="top" id="leftPanel" rowspan="2">
                             <w:GetPanelViews var="views" panel="navigation">
                                 <w:JellyView name="System Navigation" script="/waterview/DefaultNavigation.jelly" />
@@ -33,15 +30,19 @@
                                 </w:WindowControl>
                             </j:forEach>
                         </td>
-                        <td width="75%" class="lineBreak">
-                            <table border="0" width="100%">
+                        <td width="75%" class="bannerPanelBelt">
+                            <table border="0">
                                 <tr>
                                     <td>
+                                        <img src="${themeBase}/16x16/screen.png" width="16" height="16"
+                                            alt="Your position" />
+                                    </td>
+                                    <td>
                                         <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
-                                            <a href="${link.setPage(parent.page)}" class="r">${parent.title}</a>
-                                            <span class="r">&gt;&gt;</span>
+                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                            &gt;&gt;
                                         </j:forEach>
-                                        <span class="r">${currentNavigatorNode.title}</span>
+                                        <b>${currentNavigatorNode.title}</b>
                                     </td>
                                 </tr>
                             </table>
@@ -76,10 +77,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="lineBreak" />
-                    </tr>
-                    <tr>
-                        <td colspan="2">
+                        <td colspan="2" id="footerPanel">
                             <w:JellyScript path="/waterview/DefaultHtmlFooter.jelly" />
                         </td>
                     </tr>

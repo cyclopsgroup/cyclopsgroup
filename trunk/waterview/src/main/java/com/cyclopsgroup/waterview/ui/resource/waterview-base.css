@@ -34,3 +34,12 @@ th {
 a img {
 	border-width: 0px;
 }
+
+#bannerPanel .waterviewSelectedTab,#bannerPanel .waterviewUnselectedTab
+	{
+	padding: 3 20 3 20;
+}
+
+#bannerPanel .waterviewSelectedTab a {
+	font-weight: bold;
+}

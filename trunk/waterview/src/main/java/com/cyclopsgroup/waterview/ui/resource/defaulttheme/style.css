@@ -10,16 +10,66 @@ h2 {
 #bodyWrapper {
 	background-color: white;
 	max-width: 860px;
-	width: expression(document.body.clientWidth > 860 ? "860px" : "auto");
 }
 
 #bannerPanel {
 	background-color: #003399;
 	color: white;
+	border-width: 0 0 2 0;
+	border-style: solid;
+	border-color: #00256E;
+}
+
+#bannerPanel .waterviewUnselectedTab {
+	background-color: #2E52AF;
+}
+
+#bannerPanel .waterviewSelectedTab {
+	background-color: #00256E;
+}
+
+#bannerPanel #pageTitle,#bannerPanel a {
+	color: white;
 }
 
 #bannerPanelRight {
 	background: url('banner_right.gif') no-repeat;
+}
+
+.bannerPanelBelt {
+	background-color: #8CAAE6;
+	height: 16px;
+}
+
+#leftPanel {
+	background-color: #8CAAE6;
+	padding: 5px;
+}
+
+#bodyPanel .waterviewWindow {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
+	background-color: white;
+	border-width: 0 0 2 0;
+	border-color: #0B73DB;
+	border-style: solid;;
+	border-width: 0 0 2 0;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowTitle {
+	color: #0B73DB;
+}
+
+#footerPanel {
+	border-width: 2 0 0 0;
+	border-style: solid;
+	border-color: #2E52AF;
 }
 
 table.waterviewTable th {
@@ -46,15 +96,6 @@ table.waterviewTable td.input {
 	background-color: #2E52AF;
 }
 
-.waterviewSelectedTab {
-	padding: 3 20 3 20;
-	background-color: #2E52AF;
-}
-
-.waterviewUnselectedTab {
-	padding: 3 20 3 20;
-}
-
 .waterviewWindow {
 	background-color: #5582D2
 }
@@ -69,31 +110,6 @@ table.waterviewTable td.input {
 
 .waterviewWindowBody {
 	background-color: #EDF2FC;
-}
-
-#leftPanel {
-	background-color: #8CAAE6;
-	padding: 5px;
-}
-
-#bodyPanel .waterviewWindow {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindowBody {
-	background-color: white;
-}
-
-#bodyPanel .waterviewWindow .waterviewWindowHeader {
-	background-color: white;
-	border-width: 0 0 2 0;
-	border-color: #0B73DB;
-	border-style: solid;;
-	border-width: 0 0 2 0;
-}
-
-#bodyPanel .waterviewWindow .waterviewWindowTitle {
-	color: #0B73DB;
 }
 
 input.waterviewFormButton {
