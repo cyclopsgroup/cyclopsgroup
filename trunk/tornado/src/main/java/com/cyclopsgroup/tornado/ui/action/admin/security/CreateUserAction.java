@@ -77,6 +77,6 @@ public class CreateUserAction
         TypeUtils.getBeanUtils().copyProperties( user, params.toProperties() );
         s.save( user );
 
-        context.addMessage( "User " + name + " is created" );
+        context.addMessage( "User " + user.getDisplayName() + " is created" );
     }
 }

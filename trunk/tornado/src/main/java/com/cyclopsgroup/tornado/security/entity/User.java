@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.tornado.security.entity;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
@@ -38,5 +40,18 @@ public class User
     public void setPrivatePassword( String privatePassword )
     {
         setPassword( privatePassword );
+    }
+
+    /**
+     * @return Full name
+     */
+    public String getDisplayName()
+    {
+        StringBuffer sb = new StringBuffer( getFirstName() );
+        if ( StringUtils.isNotEmpty( getMiddleName() ) )
+        {
+            sb.append( ' ' ).append( getMiddleName() );
+        }
+        return sb.append( ' ' ).append( getLastName() ).toString();
     }
 }

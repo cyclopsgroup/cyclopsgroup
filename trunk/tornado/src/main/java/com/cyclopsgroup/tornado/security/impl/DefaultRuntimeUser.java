@@ -25,7 +25,6 @@ import java.util.Set;
 
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.collections.MultiMap;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.tornado.security.Asset;
 import com.cyclopsgroup.tornado.security.Permission;
@@ -72,13 +71,7 @@ public class DefaultRuntimeUser
         id = user.getId();
         name = user.getName();
         emailAddress = user.getEmail();
-        StringBuffer sb = new StringBuffer( user.getFirstName() );
-        if ( StringUtils.isNotEmpty( user.getMiddleName() ) )
-        {
-            sb.append( " " ).append( user.getMiddleName() );
-        }
-        sb.append( " " ).append( user.getLastName() );
-        displayName = sb.toString();
+        displayName = user.getDisplayName();
         guest = user.getName().equals( SecurityService.USER_GUEST );
     }
 

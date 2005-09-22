@@ -27,7 +27,7 @@
                                                 <a href="${link.setPage('/tornado/UserLogin.jelly')}">Login</a>
                                             </j:when>
                                             <j:otherwise>
-                                                Hello ${currentUser.displayName},
+                                                ${currentUser.displayName},
                                                 <a
                                                     href="${link.addAction('/tornado/UserLogoutAction').setPage(page)}">
                                                     Logout
