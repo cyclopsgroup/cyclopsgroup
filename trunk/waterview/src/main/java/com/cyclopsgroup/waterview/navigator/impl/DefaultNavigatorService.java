@@ -90,6 +90,12 @@ public class DefaultNavigatorService
         path = conf.getChild( "path" ).getValue( "META-INF/cyclopsgroup/waterview-navigation.xml" );
     }
 
+    /**
+     * Create runtime root node
+     * 
+     * @param data Runtime data
+     * @return Runtiem tree node object
+     */
     protected RuntimeTreeNode doCreateRuntimeRoot( RuntimeData data )
     {
         return new RuntimeTreeNode( null, getRootNode() );

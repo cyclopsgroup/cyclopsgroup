@@ -29,7 +29,9 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Select option tag
  */
-public class OptionTag extends TagSupport implements SelectOption
+public class OptionTag
+    extends TagSupport
+    implements SelectOption
 {
     private String title;
 
@@ -51,10 +53,11 @@ public class OptionTag extends TagSupport implements SelectOption
      * @return Text content
      * @throws JellyException Throw it out
      */
-    public String getText() throws JellyException
+    public String getText()
+        throws JellyException
     {
         String text = getBodyText();
-        if (StringUtils.isEmpty(text))
+        if ( StringUtils.isEmpty( text ) )
         {
             getValue();
         }
@@ -86,18 +89,19 @@ public class OptionTag extends TagSupport implements SelectOption
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("value");
-        SelectTag select = (SelectTag) requireParent(SelectTag.class);
+        requireAttribute( "value" );
+        SelectTag select = (SelectTag) requireInside( SelectTag.class );
 
         title = getBodyText();
-        if (StringUtils.isEmpty(title))
+        if ( StringUtils.isEmpty( title ) )
         {
             title = getValue();
         }
 
-        select.addOption(this);
+        select.addOption( this );
     }
 
     /**
@@ -105,7 +109,7 @@ public class OptionTag extends TagSupport implements SelectOption
      *
      * @param value The value to set.
      */
-    public void setValue(String value)
+    public void setValue( String value )
     {
         this.value = value;
     }
