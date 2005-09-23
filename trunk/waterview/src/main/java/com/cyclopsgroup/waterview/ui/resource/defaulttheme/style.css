@@ -22,6 +22,7 @@ h2 {
 
 #bannerPanel .waterviewUnselectedTab {
 	background-color: #00256E;
+	border-width: 0px;
 }
 
 #bannerPanel .waterviewSelectedTab {
@@ -114,6 +115,24 @@ table.waterviewTable td.input {
 
 .waterviewWindowBody {
 	background-color: #EDF2FC;
+}
+
+.waterviewUnselectedTab {
+	background-color: #EDF2FC;
+	border-color: #5582D2;
+	border-width: 1 1 0 1;
+	border-style: solid;
+}
+
+.waterviewSelectedTab {
+	background-color: #2E52AF;
+	color: white;
+}
+
+.waterviewTabHeader {
+	border-color: #2E52AF;
+	border-width: 0 0 2 0;
+	border-style: solid;
 }
 
 input.waterviewFormButton {

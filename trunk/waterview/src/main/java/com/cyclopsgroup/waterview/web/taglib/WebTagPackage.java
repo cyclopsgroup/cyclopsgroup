@@ -53,5 +53,7 @@ public class WebTagPackage
 
         addTag( "BlankImage", BlankImageTag.class );
         addTag( "WindowControl", WindowControlTag.class );
+        addTag( "Tab", TabTag.class );
+        addTag( "HorizontalTabControl", HorizontalTabControlTag.class );
     }
 }

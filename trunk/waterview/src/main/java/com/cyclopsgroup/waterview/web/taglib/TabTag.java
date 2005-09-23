@@ -15,70 +15,79 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.jelly.taglib;
+package com.cyclopsgroup.waterview.web.taglib;
 
-import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
+import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * Tab tag inside any tab control
  */
-public abstract class BaseJellyControlTag
+public class TabTag
     extends TagSupport
 {
-    private String script;
+    private String name;
 
-    private static final String TAG_NAME = "controlTag";
+    private String title;
 
     /**
-     * Getter method for script
+     * Getter method for property name
      *
-     * @return Returns the script.
+     * @return Returns the name.
      */
-    public String getScript()
+    public String getName()
     {
-        return script;
+        return name;
     }
 
     /**
-     * Setter method for script
+     * Getter method for property title
      *
-     * @param script The script to set.
+     * @return Returns the title.
      */
-    protected void setScript( String script )
+    public String getTitle()
     {
-        this.script = script;
+        return title;
     }
 
     /**
-     * Override method processTag in class JellyControlTag
+     * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        requireAttribute( "script" );
-        JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
-        Script s = je.getScript( getScript() );
-        getContext().setVariable( TAG_NAME, this );
-        runScript( s, output );
+        requireAttribute( "name" );
+        if ( StringUtils.isEmpty( title ) )
+        {
+            setTitle( getName() );
+        }
+        TabTagAware parent = (TabTagAware) requireInside( TabTagAware.class );
+        parent.doTabTag( this );
     }
 
     /**
-     * Method to run script
-     * 
-     * @param script Script to run
-     * @param output XMLOutput
-     * @throws Exception Throw it out
+     * Setter method for property name
+     *
+     * @param name The name to set.
      */
-    protected void runScript( Script script, XMLOutput output )
-        throws Exception
+    public void setName( String name )
     {
-        script.run( context, output );
+        this.name = name;
+    }
+
+    /**
+     * Setter method for property title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
     }
 }

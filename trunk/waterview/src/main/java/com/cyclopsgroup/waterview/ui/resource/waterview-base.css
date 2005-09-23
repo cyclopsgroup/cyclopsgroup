@@ -35,11 +35,18 @@ a img {
 	border-width: 0px;
 }
 
-#bannerPanel .waterviewSelectedTab,#bannerPanel .waterviewUnselectedTab
-	{
+.waterviewSelectedTab,.waterviewUnselectedTab {
 	padding: 3 20 3 20;
 }
 
-#bannerPanel .waterviewSelectedTab a {
+.waterviewSelectedTab,.waterviewSelectedTab a {
 	font-weight: bold;
+}
+
+.waterviewUnselectedTab,.waterviewUnselectedTab {
+	
+}
+
+.waterviewTabBody {
+	padding: 5px;
 }
