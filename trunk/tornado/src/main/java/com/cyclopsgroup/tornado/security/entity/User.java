@@ -16,6 +16,7 @@
  */
 package com.cyclopsgroup.tornado.security.entity;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -27,22 +28,6 @@ public class User
     extends UserBase
 {
     /**
-     * @return Private password
-     */
-    public String getPrivatePassword()
-    {
-        return getPassword();
-    }
-
-    /**
-     * @param privatePassword
-     */
-    public void setPrivatePassword( String privatePassword )
-    {
-        setPassword( privatePassword );
-    }
-
-    /**
      * @return Full name
      */
     public String getDisplayName()
@@ -53,5 +38,23 @@ public class User
             sb.append( ' ' ).append( getMiddleName() );
         }
         return sb.append( ' ' ).append( getLastName() ).toString();
+    }
+
+    /**
+     * @return Private password
+     */
+    public String getPrivatePassword()
+    {
+        String pwd = getPassword();
+        return new String( Base64.decodeBase64( pwd.getBytes() ) );
+    }
+
+    /**
+     * @param privatePassword
+     */
+    public void setPrivatePassword( String privatePassword )
+    {
+        String pwd = new String( Base64.encodeBase64( privatePassword.getBytes() ) );
+        setPassword( pwd );
     }
 }
