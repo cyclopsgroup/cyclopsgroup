@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Dummy xmlns="http://waterview.cyclopsgroup.com/ui">
     <JellyView script="/tornado/view/user/LookAndFeel.jelly" />
+    <p>You may have to logout to see the result.</p>
 </Dummy>
