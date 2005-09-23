@@ -54,5 +54,8 @@
                 </w:Form>
             </w:TiledFormControl>
         </w:Tab>
+        <w:Tab name="security" title="Group/Role">
+            <p>Group and Roles</p>
+        </w:Tab>
     </w:HorizontalTabControl>
 </div>
