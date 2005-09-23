@@ -13,6 +13,14 @@
             </configuration>
         </component>
         <component>
+            <role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <defualt-package>tornado</defualt-package>
+            </configuration>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>

@@ -5,6 +5,7 @@
             <Node name="security" title="Security" page="/tornado/admin/security/Index.jelly">
                 <Node title="Manage Users" page="/tornado/admin/security/ManageUsers.jelly" />
                 <Node title="Create User" page="/tornado/admin/security/CreateUser.jelly" />
+                <Node title="User Profile" page="/tornado/admin/security/UserProfile.jelly" hidden="true" />
                 <Node title="Manage Groups" page="/tornado/admin/security/ManageGroups.jelly" />
                 <Node title="Manage Roles" page="/tornado/admin/security/ManageRoles.jelly" />
             </Node>
@@ -16,7 +17,6 @@
         </Node>
     </Tree>
     <Tree name="tornado.home" position="/home">
-        <Node title="User Login" page="/tornado/UserLogin.jelly" hidden="true" />
         <Node name="user" title="My Information" page="/tornado/user/Index.jelly">
             <Node title="My Profile" page="/tornado/user/UserProfile.jelly" />
             <Node title="Look and Feel" page="/tornado/user/LookAndFeel.jelly" />

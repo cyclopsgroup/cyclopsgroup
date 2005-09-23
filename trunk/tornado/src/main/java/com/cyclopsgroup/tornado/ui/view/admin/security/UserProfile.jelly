@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>User Profile</h2>
+    <w:HorizontalTabControl name="userprofile">
+        <w:Tab name="basic" title="Basic Information">
+            <table width="100%" class="waterviewTable">
+                <tr>
+                    <td>Name</td>
+                    <td>${userObject.name}</td>
+                </tr>
+                <tr>
+                    <td>Internal ID</td>
+                    <td>${userObject.id}</td>
+                </tr>
+                <tr>
+                    <td>Display Name</td>
+                    <td>${userObject.displayName}</td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>
+                        <a href="mailto:${userObject.email}">${userObject.email}</a>
+                    </td>
+                </tr>
+            </table>
+        </w:Tab>
+        <w:Tab name="edit" title="Edit">
+            <w:TiledFormControl>
+                <w:Form name="edituser" method="post">
+                    <input type="hidden" name="user_id" value="${userObject.id}" />
+                    <w:Field name="firstName" title="First Name" value="${userObject.firstName}" required="true" />
+                    <w:Field name="middleName" title="Middle Name" value="${userObject.middleName}" />
+                    <w:Field name="lastName" title="Last Name" value="${userObject.lastName}" required="true" />
+                    <w:Field name="email" title="Email" value="${userObject.email}" required="true" />
+                    <w:Field name="gender" title="Gender" value="${userObject.gender}">
+                        <w:Select>
+                            <w:Option value="U">--</w:Option>
+                            <w:Option value="M">Male</w:Option>
+                            <w:Option value="F">Female</w:Option>
+                        </w:Select>
+                    </w:Field>
+                    <w:Field name="isDisabled" title="Disabled" type="boolean" value="${userObject.isDisabled}" />
+                    <w:Submit
+                        action="${link.addAction('/tornado/admin/security/SaveUserAction').setPage(page).addQueryData('user_id', userObject.id)}"
+                        forceValidation="true">
+                        <w:FormButton title="Save Change" />
+                    </w:Submit>
+                    <j:if test="${not userObject.isDisabled and not userObject.isSystem}">
+                        <w:Submit
+                            action="${link.addAction('/tornado/admin/security/DeleteUserAction').setPage('/tornado/admin/security/ManageUsers.jelly')}">
+                            <w:FormButton title="Delete" />
+                        </w:Submit>
+                    </j:if>
+                </w:Form>
+            </w:TiledFormControl>
+        </w:Tab>
+    </w:HorizontalTabControl>
+</div>
