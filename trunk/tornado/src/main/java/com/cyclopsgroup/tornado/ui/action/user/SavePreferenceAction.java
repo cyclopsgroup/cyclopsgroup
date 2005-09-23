@@ -21,6 +21,7 @@ import org.hibernate.Session;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
+import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.Action;
@@ -56,7 +57,7 @@ public class SavePreferenceAction
         User user = (User) s.load( User.class, up.getUserId() );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.refreshUser( user.getName() );
-
+        security.refreshUser( RuntimeUser.getInstance( data ).getName() );
         context.addMessage( "User preference is changed" );
     }
 }

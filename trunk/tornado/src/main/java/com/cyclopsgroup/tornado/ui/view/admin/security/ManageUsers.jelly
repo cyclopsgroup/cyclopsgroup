@@ -26,7 +26,14 @@
                 </t:HqlTabularData>
                 <w:Table name="usertable" var="user">
                     <w:Column name="id" title="Select" sort="unsorted">
-                        <input type="checkbox" name="user_id" value="${user.id}" />
+                        <j:choose>
+                            <j:when test="${user.isSystem or user.isDisabled}">
+                                <input type="checkbox" name="user_id" value="${user.id}" disabled="true" />
+                            </j:when>
+                            <j:otherwise>
+                                <input type="checkbox" name="user_id" value="${user.id}" />
+                            </j:otherwise>
+                        </j:choose>
                     </w:Column>
                     <w:Column name="name" title="User Name" sort="asc">
                         <a

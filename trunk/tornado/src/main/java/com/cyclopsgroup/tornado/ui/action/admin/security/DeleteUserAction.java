@@ -15,46 +15,50 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.ui.action.user;
+package com.cyclopsgroup.tornado.ui.action.admin.security;
+
+import org.hibernate.Session;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.portal.PortalService;
-import com.cyclopsgroup.tornado.portal.UserPreference;
+import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Theme;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
+ * Action to disabled users
  */
-public class CreatePreferenceAction
+public class DeleteUserAction
     extends BaseServiceable
     implements Action
 {
     /**
-     * Override method execute in class CreatePreferenceAction
+     * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String userId = data.getParams().getString( "user_id" );
-        UserPreference up = new UserPreference();
-        up.setUserId( userId );
-        up.setThemeName( PortalService.UNSET_THEME_NAME );
-
-        LookAndFeelService laf = (LookAndFeelService) lookupComponent( LookAndFeelService.ROLE );
-        Theme theme = laf.getTheme( data.getThemeName() );
-        up.setIconset( theme.getIconSetName() );
-        up.setStylesheet( theme.getStyleSheetName() );
-
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
-        hibernate.getSession().save( up );
-        context.addMessage( "User setting is created" );
+        String[] userIds = data.getParams().getStrings( "user_id" );
+        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
+        Session s = hib.getSession();
+        int count = 0;
+        for ( int i = 0; i < userIds.length; i++ )
+        {
+            String userId = userIds[i];
+            User user = (User) s.load( User.class, userId );
+            if ( user.getIsSystem() || user.getIsDisabled() )
+            {
+                continue;
+            }
+            user.setIsDisabled( true );
+            s.update( user );
+            count++;
+        }
+        context.addMessage( count + " users are disabled" );
     }
 }
