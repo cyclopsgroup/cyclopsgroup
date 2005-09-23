@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>My Profile</h2>
+    <w:TiledFormControl>
+        <w:Form method="post" name="userinfo">
+            <w:Field name="firstName" required="true" title="First Name" value="${userObject.firstName}" />
+            <w:Field name="middleName" title="Middle Name" value="${userObject.middleName}" />
+            <w:Field name="lastName" required="true" title="Last Name" value="${userObject.lastName}" />
+            <w:Field name="gender" title="Gender" value="${userObject.gender}">
+                <w:Select>
+                    <w:Option value="U">--</w:Option>
+                    <w:Option value="M">Male</w:Option>
+                    <w:Option value="F">Female</w:Option>
+                </w:Select>
+            </w:Field>
+            <w:Field name="email" title="Email" value="${userObject.email}" required="true" size="30" />
+            <w:Field name="birthday" title="Birthday" value="${userObject.birthday}" type="date" />
+            <w:Field name="country" title="Country/Area" value="${userObject.country}">
+                <w:Select items="${countries}" />
+            </w:Field>
+            <w:Field name="language" title="Language" value="${userObject.language}">
+                <w:Select items="${languages}" />
+            </w:Field>
+            <w:Submit action="${link.addAction('/tornado/user/SaveProfileAction').setPage(page)}"
+                forceValidation="true">
+                <w:FormButton title="Save Change" />
+            </w:Submit>
+        </w:Form>
+    </w:TiledFormControl>
+</div>
