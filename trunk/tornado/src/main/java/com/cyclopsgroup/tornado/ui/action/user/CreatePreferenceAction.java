@@ -20,8 +20,8 @@ package com.cyclopsgroup.tornado.ui.action.user;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.portal.PortalService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
-import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -57,7 +57,7 @@ public class CreatePreferenceAction
 
         HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
         hibernate.getSession().save( up );
-        RuntimeUser user = RuntimeUser.getInstance( data );
+        User user = (User) hibernate.getSession().load( User.class, up.getUserId() );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.refreshUser( user.getName() );
         context.addMessage( "User setting is created" );
