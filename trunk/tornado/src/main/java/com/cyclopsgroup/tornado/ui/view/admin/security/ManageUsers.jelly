@@ -17,14 +17,14 @@
     </w:TiledFormControl>
     <w:FormControl>
         <w:Form name="userform" method="post">
-            <w:TableControl>
+            <w:TableControl configurable="true">
                 <t:HqlTabularData>
                     <![CDATA[
                     FROM com.cyclopsgroup.tornado.security.entity.User
                     WHERE isDisabled = 0
                     ]]>
                 </t:HqlTabularData>
-                <w:Table name="usertable" var="user">
+                <w:Table name="usertable" var="user" pageSize="20">
                     <w:Column name="id" title="Select" sort="unsorted">
                         <j:choose>
                             <j:when test="${user.isSystem or user.isDisabled}">
@@ -48,9 +48,13 @@
                     <w:Column name="email" title="Email" sort="unsorted">
                         <a href="mailto:${user.email}">${user.email}</a>
                     </w:Column>
-                    <w:Column name="isDisabled" title="Disabled" sort="unsorted">${user.isDisabled}</w:Column>
-                    <w:Column name="isSystem" title="System" sort="unsorted">${user.isSystem}</w:Column>
-                    <w:Column name="gender" title="M/F" sort="unsorted">
+                    <w:Column name="isDisabled" title="Disabled" sort="unsorted" display="hidden">
+                        ${user.isDisabled}
+                    </w:Column>
+                    <w:Column name="isSystem" title="System" sort="unsorted" display="hidden">
+                        ${user.isSystem}
+                    </w:Column>
+                    <w:Column name="gender" title="M/F" sort="unsorted" display="hidden">
                         <j:choose>
                             <j:when test="${user.gender eq 'M'}">Male</j:when>
                             <j:when test="${user.gender eq 'F'}">Female</j:when>

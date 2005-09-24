@@ -42,9 +42,8 @@ import com.cyclopsgroup.waterview.spi.LookAndFeelService;
  *
  * Default portal service
  */
-public class DefaultPortalService
-    extends AbstractLogEnabled
-    implements Serviceable, Initializable, SecurityListener, PortalService
+public class DefaultPortalService extends AbstractLogEnabled implements
+        Serviceable, Initializable, SecurityListener, PortalService
 {
     private HibernateService hibernate;
 
@@ -57,13 +56,12 @@ public class DefaultPortalService
      *
      * @see com.cyclopsgroup.tornado.portal.PortalService#findUserPreference(java.lang.String)
      */
-    public UserPreference findUserPreference( String userId )
-        throws Exception
+    public UserPreference findUserPreference(String userId) throws Exception
     {
         Session s = hibernate.getSession();
-        List prefs = s.createCriteria( UserPreference.class ).add( Expression.eq( "userId", userId ) )
-            .setMaxResults( 1 ).list();
-        return prefs.isEmpty() ? null : (UserPreference) prefs.get( 0 );
+        List prefs = s.createCriteria(UserPreference.class).add(
+                Expression.eq("userId", userId)).setMaxResults(1).list();
+        return prefs.isEmpty() ? null : (UserPreference) prefs.get(0);
     }
 
     /**
@@ -71,11 +69,10 @@ public class DefaultPortalService
      *
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public void initialize()
-        throws Exception
+    public void initialize() throws Exception
     {
-        security.addListener( this );
-        laf.registerTheme( new CustomTheme( laf.getDefaultTheme() ) );
+        security.addListener(this);
+        laf.registerTheme(new CustomTheme(laf.getDefaultTheme()));
     }
 
     /**
@@ -83,21 +80,26 @@ public class DefaultPortalService
      *
      * @see com.cyclopsgroup.tornado.security.SecurityListener#performAction(java.lang.Object)
      */
-    public void performAction( Object event )
-        throws Exception
+    public void performAction(Object event) throws Exception
     {
-        if ( event instanceof CreateUserEvent )
+        if (event instanceof CreateUserEvent)
         {
-            RuntimeUser user = (RuntimeUser) ( (CreateUserEvent) event ).getUser();
+            RuntimeUser user = (RuntimeUser) ((CreateUserEvent) event)
+                    .getUser();
 
-            UserPreference up = findUserPreference( user.getId() );
-            if ( up == null )
+            UserPreference up = findUserPreference(user.getId());
+            if (up == null && !user.isGuest())
+            {
+                up = findUserPreference(security.getGuestUser().getId());
+            }
+            if (up == null)
             {
                 return;
             }
-            if ( !up.getThemeName().equals( PortalService.UNSET_THEME_NAME ) )
+            if (!up.getThemeName().equals(PortalService.UNSET_THEME_NAME))
             {
-                user.getAttributes().set( PortalService.USER_THEME_NAME, up.getThemeName() );
+                user.getAttributes().set(PortalService.USER_THEME_NAME,
+                        up.getThemeName());
             }
         }
     }
@@ -107,12 +109,11 @@ public class DefaultPortalService
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service( ServiceManager services )
-        throws ServiceException
+    public void service(ServiceManager services) throws ServiceException
     {
-        hibernate = (HibernateService) services.lookup( HibernateService.ROLE );
-        security = (SecurityService) services.lookup( SecurityService.ROLE );
-        laf = (LookAndFeelService) services.lookup( LookAndFeelService.ROLE );
-        services.lookup( JellyEngine.ROLE );
+        hibernate = (HibernateService) services.lookup(HibernateService.ROLE);
+        security = (SecurityService) services.lookup(SecurityService.ROLE);
+        laf = (LookAndFeelService) services.lookup(LookAndFeelService.ROLE);
+        services.lookup(JellyEngine.ROLE);
     }
 }

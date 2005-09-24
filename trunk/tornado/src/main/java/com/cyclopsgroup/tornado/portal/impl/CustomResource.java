@@ -20,6 +20,7 @@ package com.cyclopsgroup.tornado.portal.impl;
 import com.cyclopsgroup.tornado.portal.PortalService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
+import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
@@ -29,37 +30,52 @@ import com.cyclopsgroup.waterview.spi.LookAndFeelService;
  *
  * Custom resource
  */
-public abstract class CustomResource
-    extends Resource
+public abstract class CustomResource extends Resource
 {
     /**
      * Constructor for class CustomResource
      */
     public CustomResource()
     {
-        super( Resource.INTERNAL, null );
+        super(Resource.INTERNAL, null);
     }
 
-    protected abstract Resource doGetResource( LookAndFeelService laf, UserPreference pref )
-        throws Exception;
+    /**
+     * Get resource
+     *
+     * @param laf Look and feel service
+     * @param pref User preference
+     * @return Resource object
+     * @throws Exception Throw it out
+     */
+    protected abstract Resource doGetResource(LookAndFeelService laf,
+            UserPreference pref) throws Exception;
 
     /**
      * Overwrite or implement method toURL()
      *
      * @see com.cyclopsgroup.waterview.Resource#toURL(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public String toURL( RuntimeData data )
-        throws Exception
+    public String toURL(RuntimeData data) throws Exception
     {
-        RuntimeUser user = RuntimeUser.getInstance( data );
-        PortalService portal = (PortalService) data.getServiceManager().lookup( PortalService.ROLE );
-        UserPreference up = portal.findUserPreference( user.getId() );
-        if ( up == null )
+        RuntimeUser user = RuntimeUser.getInstance(data);
+        PortalService portal = (PortalService) data.getServiceManager().lookup(
+                PortalService.ROLE);
+        UserPreference up = portal.findUserPreference(user.getId());
+        if (up == null && !user.isGuest())
         {
-            throw new IllegalStateException( "Custom style must be selected when user preference is created" );
+            SecurityService security = (SecurityService) data
+                    .getServiceManager().lookup(SecurityService.ROLE);
+            up = portal.findUserPreference(security.getGuestUser().getId());
         }
-        LookAndFeelService laf = (LookAndFeelService) data.getServiceManager().lookup( LookAndFeelService.ROLE );
-        Resource resource = doGetResource( laf, up );
-        return resource.toURL( data );
+        if (up == null)
+        {
+            throw new IllegalStateException(
+                    "Custom style must be selected when user preference is created");
+        }
+        LookAndFeelService laf = (LookAndFeelService) data.getServiceManager()
+                .lookup(LookAndFeelService.ROLE);
+        Resource resource = doGetResource(laf, up);
+        return resource.toURL(data);
     }
 }

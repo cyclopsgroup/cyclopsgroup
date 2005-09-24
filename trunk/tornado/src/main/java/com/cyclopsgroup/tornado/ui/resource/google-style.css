@@ -1,0 +1,147 @@
+body {
+	background-color: white;
+	color: black;
+}
+
+#bodyWrapper {
+	max-width: 860px;
+}
+
+#bannerPanel {
+	background-color: #3366cc;
+	border-width: 0 0 2 0;
+	border-style: solid;
+	border-color: #c3d9ff;
+}
+
+#bannerPanel .waterviewUnselectedTab {
+	background-color: #749ce1;
+	border-width: 0px;
+}
+
+#bannerPanel .waterviewSelectedTab {
+	background-color: #c3d9ff;
+}
+
+#bannerPanel #pageTitle,#bannerPanel a {
+	color: white;
+}
+
+.bannerPanelBelt {
+	background-color: white;
+	height: 16px;
+}
+
+#leftPanel {
+	background-color: white;
+	padding: 5px;
+}
+
+#bodyPanel .waterviewWindow {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindowBody {
+	background-color: white;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowHeader {
+	background-color: white;
+	border-width: 0 0 2 0;
+	border-color: #0B73DB;
+	border-style: solid;;
+	border-width: 0 0 2 0;
+}
+
+#bodyPanel .waterviewWindow .waterviewWindowTitle {
+	color: #0B73DB;
+}
+
+#footerPanel {
+	border-width: 2 0 0 0;
+	border-style: solid;
+	border-color: #2E52AF;
+}
+
+table.waterviewTable th {
+	background-color: #F0EEDE;
+	color: black;
+	border-style: solid;
+	border-color: #CDCABB;
+	border-width: 1px;
+}
+
+table.waterviewTable tr.b {
+	background-color: #F7F7F7;
+}
+
+table.waterviewTable .title {
+	background-color: #EEEEEE;
+}
+
+table.waterviewTable td.input {
+	
+}
+
+.lineBreak,.subLineBreak {
+	background-color: #3366cc;
+}
+
+.waterviewWindow {
+	background-color: #b5edbd;
+}
+
+.waterviewWindowShadow {
+	background-color: #e2ffe6;
+}
+
+.waterviewWindow .waterviewWindowHeader {
+	background-color: #b5edbd;
+}
+
+.waterviewWindow .waterviewWindowTitle {
+	color: black;
+}
+
+.waterviewWindowBody {
+	background-color: white;
+}
+
+.waterviewUnselectedTab {
+	background-color: #EDF2FC;
+	border-color: #5582D2;
+	border-width: 1 1 0 1;
+	border-style: solid;
+}
+
+.waterviewSelectedTab {
+	background-color: #2E52AF;
+	color: white;
+}
+
+.waterviewTabHeader {
+	border-color: #2E52AF;
+	border-width: 0 0 2 0;
+	border-style: solid;
+}
+
+input.waterviewFormButton {
+	background-color: #51A751;
+	border-color: #51A751;
+	border-width: 2px;
+	border-style: outset;
+	color: white;
+	font-weight: bold;;
+}
+
+input.waterviewFormInput {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #999999;
+}
+
+input.waterviewFormInvalidInput {
+	border-style: solid;
+	border-width: 1px;
+	border-color: red;
+}
