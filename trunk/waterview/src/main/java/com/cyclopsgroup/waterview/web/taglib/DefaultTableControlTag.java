@@ -21,14 +21,35 @@ package com.cyclopsgroup.waterview.web.taglib;
  *
  * Default table control tag
  */
-public class DefaultTableControlTag
-    extends BaseJellyTableControlTag
+public class DefaultTableControlTag extends BaseJellyTableControlTag
 {
+    private boolean configurable;
+
     /**
      * Constructor for class DefaultTableControlTag
      */
     public DefaultTableControlTag()
     {
-        setScript( "/waterview/control/DefaultTableControl.jelly" );
+        setScript("/waterview/control/DefaultTableControl.jelly");
+    }
+
+    /**
+     * Getter method for field configurable
+     *
+     * @return Returns the configurable.
+     */
+    public boolean isConfigurable()
+    {
+        return configurable;
+    }
+
+    /**
+     * Setter method for field configurable
+     *
+     * @param configurable The configurable to set.
+     */
+    public void setConfigurable(boolean configurable)
+    {
+        this.configurable = configurable;
     }
 }

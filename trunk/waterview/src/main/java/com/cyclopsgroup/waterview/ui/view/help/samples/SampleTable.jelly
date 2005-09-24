@@ -7,9 +7,9 @@
     </p>
     <w:FormControl>
         <w:Form name="aform" method="post">
-            <w:TableControl>
+            <w:TableControl configurable="true">
                 <w:CollectionTabularData items="${rows}" />
-                <w:Table var="row" name="atable">
+                <w:Table var="row" name="atable" pageSize="8">
                     <w:Column name="select" title="Select">
                         <input type="checkbox" />
                     </w:Column>
@@ -19,6 +19,7 @@
                     <w:Column name="name" title="Name" sort="unsorted">${row.name}</w:Column>
                     <w:Column name="totalAmount" title="Total Amount" sort="asc">${row.totalAmount}</w:Column>
                     <w:Column name="description" title="Description">${row.description}</w:Column>
+                    <w:Column name="something" title="Something" display="hidden">ddd</w:Column>
                 </w:Table>
             </w:TableControl>
             <w:Submit action="${link.setPage(page)}">

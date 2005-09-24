@@ -32,7 +32,7 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class Table
 {
-    private Map columns = ListOrderedMap.decorate( new HashMap() );
+    private Map columns = ListOrderedMap.decorate(new HashMap());
 
     private String id;
 
@@ -40,14 +40,14 @@ public class Table
 
     private int pageSize = -1;
 
-    private Set sortedColumns = ListOrderedSet.decorate( new HashSet() );
+    private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
 
     /**
      * Constructor for class Table
      *
      * @param id Unique table id
      */
-    public Table( String id )
+    public Table(String id)
     {
         this.id = id;
     }
@@ -57,9 +57,9 @@ public class Table
      *
      * @param column Column to add
      */
-    public void addColumn( Column column )
+    public void addColumn(Column column)
     {
-        columns.put( column.getName(), column );
+        columns.put(column.getName(), column);
     }
 
     /**
@@ -68,9 +68,9 @@ public class Table
      * @param name Name of the column
      * @return Column object
      */
-    public Column getColumn( String name )
+    public Column getColumn(String name)
     {
-        return (Column) columns.get( name );
+        return (Column) columns.get(name);
     }
 
     /**
@@ -80,7 +80,8 @@ public class Table
      */
     public String[] getColumnNames()
     {
-        return (String[]) columns.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) columns.keySet().toArray(
+                ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -90,7 +91,7 @@ public class Table
      */
     public Column[] getColumns()
     {
-        return (Column[]) columns.values().toArray( Column.EMPTY_ARRAY );
+        return (Column[]) columns.values().toArray(Column.EMPTY_ARRAY);
     }
 
     /**
@@ -99,6 +100,32 @@ public class Table
     public String getId()
     {
         return id;
+    }
+
+    /**
+     * Get page count
+     *
+     * @param data Tabular data
+     * @return Page count
+     * @throws Exception Throw it out
+     */
+    public int getPageCount(TabularData data) throws Exception
+    {
+        if (!data.isCountable())
+        {
+            throw new IllegalStateException("Tabular data is not countable");
+        }
+        if (getPageSize() <= 0)
+        {
+            throw new IllegalStateException("Table is not pagenized");
+        }
+        int recordCount = data.getSize();
+        int pageCount = recordCount / getPageSize();
+        if (recordCount % getPageSize() > 0)
+        {
+            pageCount++;
+        }
+        return pageCount;
     }
 
     /**
@@ -112,46 +139,6 @@ public class Table
     }
 
     /**
-     * Get sorted column names
-     *
-     * @return Array of column names
-     */
-    public String[] getSortedColumns()
-    {
-        return (String[]) sortedColumns.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
-    }
-
-    /**
-     * Set page index
-     *
-     * @param pageIndex Page index
-     */
-    public void setPageIndex( int pageIndex )
-    {
-        this.pageIndex = pageIndex;
-    }
-
-    /**
-     * Sort on column
-     *
-     * @param columnName Column name
-     */
-    public void sortOn( String columnName )
-    {
-        sortedColumns.add( columnName );
-    }
-
-    /**
-     * Unsort on column
-     *
-     * @param columnName Name of column
-     */
-    public void unsortOn( String columnName )
-    {
-        sortedColumns.remove( columnName );
-    }
-
-    /**
      * Getter method for pageSize
      *
      * @return Returns the pageSize.
@@ -162,12 +149,52 @@ public class Table
     }
 
     /**
+     * Get sorted column names
+     *
+     * @return Array of column names
+     */
+    public String[] getSortedColumns()
+    {
+        return (String[]) sortedColumns.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * Set page index
+     *
+     * @param pageIndex Page index
+     */
+    public void setPageIndex(int pageIndex)
+    {
+        this.pageIndex = pageIndex;
+    }
+
+    /**
      * Setter method for pageSize
      *
      * @param pageSize The pageSize to set.
      */
-    public void setPageSize( int pageSize )
+    public void setPageSize(int pageSize)
     {
         this.pageSize = pageSize;
+    }
+
+    /**
+     * Sort on column
+     *
+     * @param columnName Column name
+     */
+    public void sortOn(String columnName)
+    {
+        sortedColumns.add(columnName);
+    }
+
+    /**
+     * Unsort on column
+     *
+     * @param columnName Name of column
+     */
+    public void unsortOn(String columnName)
+    {
+        sortedColumns.remove(columnName);
     }
 }

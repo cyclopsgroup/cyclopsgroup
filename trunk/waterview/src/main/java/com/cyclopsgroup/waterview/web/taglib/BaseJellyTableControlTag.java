@@ -20,9 +20,8 @@ import com.cyclopsgroup.waterview.web.TabularData;
  * 
  * Jelly table control tag
  */
-public abstract class BaseJellyTableControlTag
-    extends BaseJellyControlTag
-    implements TableControlTag
+public abstract class BaseJellyTableControlTag extends BaseJellyControlTag
+        implements TableControlTag
 {
     private TableTag tableTag;
 
@@ -43,7 +42,7 @@ public abstract class BaseJellyTableControlTag
      *
      * @param data Tabular data to set
      */
-    public void setData( TabularData data )
+    public void setData(TabularData data)
     {
         this.data = data;
     }
@@ -53,7 +52,7 @@ public abstract class BaseJellyTableControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTableTag(com.cyclopsgroup.waterview.web.taglib.TableTag)
      */
-    public void setTableTag( TableTag tableTag )
+    public void setTableTag(TableTag tableTag)
     {
         this.tableTag = tableTag;
     }
@@ -63,9 +62,9 @@ public abstract class BaseJellyTableControlTag
      *
      * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTabularData(com.cyclopsgroup.waterview.web.TabularData)
      */
-    public void setTabularData( TabularData tabularData )
+    public void setTabularData(TabularData tabularData)
     {
-        setData( tabularData );
+        setData(tabularData);
     }
 
     /**
@@ -73,24 +72,24 @@ public abstract class BaseJellyTableControlTag
      *
      * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag#runScript(org.apache.commons.jelly.Script, org.apache.commons.jelly.XMLOutput)
      */
-    protected void runScript( Script script, XMLOutput output )
-        throws Exception
+    protected void runScript(Script script, XMLOutput output) throws Exception
     {
-        invokeBody( XMLOutput.createDummyXMLOutput() );
-        if ( tableTag == null )
+        invokeBody(XMLOutput.createDummyXMLOutput());
+        if (tableTag == null)
         {
-            throw new JellyException( "One table must be defined" );
+            throw new JellyException("One table must be defined");
         }
 
-        if ( data == null )
+        if (data == null)
         {
-            throw new JellyException( "Tabular data must be included" );
+            throw new JellyException("Tabular data must be included");
         }
 
-        JellyContext jc = new JellyContext( getContext() );
-        jc.setVariable( "tableTag", tableTag );
-        jc.setVariable( "table", tableTag.getTable() );
-        jc.setVariable( "tabularData", getData() );
-        script.run( jc, output );
+        JellyContext jc = new JellyContext(getContext());
+        jc.setVariable("tableTag", tableTag);
+        jc.setVariable("table", tableTag.getTable());
+        jc.setVariable("tabularData", getData());
+        jc.setVariable("tableControl", this);
+        script.run(jc, output);
     }
 }

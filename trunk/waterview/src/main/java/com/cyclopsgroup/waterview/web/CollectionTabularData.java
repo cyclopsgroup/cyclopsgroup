@@ -16,8 +16,10 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -30,8 +32,7 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
  * 
  * Collection implemented table data
  */
-public class CollectionTabularData
-    implements TabularData
+public class CollectionTabularData implements TabularData
 {
     private Collection collection;
 
@@ -40,7 +41,7 @@ public class CollectionTabularData
      *
      * @param collection Collecton of data
      */
-    public CollectionTabularData( Collection collection )
+    public CollectionTabularData(Collection collection)
     {
         this.collection = collection;
     }
@@ -70,31 +71,50 @@ public class CollectionTabularData
      *
      * @see com.cyclopsgroup.waterview.web.TabularData#openIterator(com.cyclopsgroup.waterview.web.Table)
      */
-    public Iterator openIterator( Table table )
-        throws Exception
+    public Iterator openIterator(Table table) throws Exception
     {
         String[] sortedColumnNames = table.getSortedColumns();
-        if ( sortedColumnNames.length == 0 )
+        if (sortedColumnNames.length == 0)
         {
             return collection.iterator();
         }
         ComparatorChain chain = new ComparatorChain();
-        for ( int i = 0; i < sortedColumnNames.length; i++ )
+        for (int i = 0; i < sortedColumnNames.length; i++)
         {
             String columnName = sortedColumnNames[i];
-            Column column = table.getColumn( columnName );
-            if ( column.getSort() == ColumnSort.ASC )
+            Column column = table.getColumn(columnName);
+            if (column.getSort() == ColumnSort.ASC)
             {
-                chain.addComparator( new BeanPropertyComparator( column.getName() ) );
+                chain
+                        .addComparator(new BeanPropertyComparator(column
+                                .getName()));
             }
-            else if ( column.getSort() == ColumnSort.DESC )
+            else if (column.getSort() == ColumnSort.DESC)
             {
-                chain.addComparator( new BeanPropertyComparator( column.getName() ), true );
+                chain.addComparator(
+                        new BeanPropertyComparator(column.getName()), true);
             }
         }
-        chain.addComparator( HashCodeComparator.INSTANCE );
-        TreeSet set = new TreeSet( chain );
-        set.addAll( collection );
-        return set.iterator();
+        chain.addComparator(HashCodeComparator.INSTANCE);
+        TreeSet set = new TreeSet(chain);
+        set.addAll(collection);
+        if (table.getPageSize() <= 0)
+        {
+            return set.iterator();
+        }
+
+        List list = new ArrayList();
+        int index = 0;
+        int startIndex = table.getPageSize() * table.getPageIndex();
+        for (Iterator i = set.iterator(); i.hasNext();)
+        {
+            Object object = i.next();
+            if (index >= startIndex && index < startIndex + table.getPageSize())
+            {
+                list.add(object);
+            }
+            index++;
+        }
+        return list.iterator();
     }
 }
