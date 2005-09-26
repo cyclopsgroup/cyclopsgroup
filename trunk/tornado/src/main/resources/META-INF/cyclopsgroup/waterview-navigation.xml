@@ -22,5 +22,6 @@
             <Node title="Look and Feel" page="/tornado/user/LookAndFeel.jelly" />
             <Node title="Manage Pages" page="/tornado/user/ManagePages.jelly" />
         </Node>
+        <Node title="Page Not Authorized" page="/tornado/NotAuthorized.jelly" hidden="true" />
     </Tree>
 </Navigation>

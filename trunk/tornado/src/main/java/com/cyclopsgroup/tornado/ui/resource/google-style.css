@@ -23,6 +23,10 @@ body {
 	background-color: #c3d9ff;
 }
 
+#bannerPanel .waterviewSelectedTab a {
+	color: black;
+}
+
 #bannerPanel #pageTitle,#bannerPanel a {
 	color: white;
 }

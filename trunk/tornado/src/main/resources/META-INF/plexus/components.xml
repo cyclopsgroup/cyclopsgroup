@@ -58,6 +58,11 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.tornado.portal.CheckPagePermissionValve</role>
+            <implementation>com.cyclopsgroup.tornado.portal.CheckPagePermissionValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.tornado.DefaultTornadoPipeline</role>
             <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -65,6 +70,7 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
                     <valve role="com.cyclopsgroup.tornado.hibernate.HibernateTransactionValve" />
+                    <valve role="com.cyclopsgroup.tornado.portal.CheckPagePermissionValve" />
                     <valve role="com.cyclopsgroup.tornado.portal.SetUserPreferenceValve" />
                     <valve role="com.cyclopsgroup.waterview.web.ProcessFormValve" />
                     <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
