@@ -23,8 +23,6 @@ import org.apache.commons.jelly.DynaTag;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 
-import com.cyclopsgroup.waterview.MapValueParser;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
@@ -36,8 +34,6 @@ public abstract class DynaTagSupport
 {
     private HashMap attributeMap = new HashMap();
 
-    private MapValueParser attributes = new MapValueParser( attributeMap );
-
     /**
      * Getter method for property attributeMap
      *
@@ -46,16 +42,6 @@ public abstract class DynaTagSupport
     public HashMap getAttributeMap()
     {
         return attributeMap;
-    }
-
-    /**
-     * Getter method for property attributes
-     *
-     * @return Returns the attributes.
-     */
-    public MapValueParser getAttributes()
-    {
-        return attributes;
     }
 
     /**

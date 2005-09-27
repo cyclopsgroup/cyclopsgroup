@@ -79,7 +79,7 @@ public class NewTag
         Object entity = classTag.getEntityClass().newInstance();
         TypeUtils.getBeanUtils().populate( entity, getAttributeMap() );
         hibernateTag.getSession().save( entity );
-        String var = getAttributes().getString( "var" );
+        String var = (String) getAttributeMap().get( "var" );
         if ( StringUtils.isNotEmpty( var ) )
         {
             context.setVariable( var, entity );
