@@ -67,7 +67,7 @@
             </td>
         </tr>
         <tr>
-            <td width="${shadowWidth}" class="${shadowClass}">
+            <td width="${shadowWidth}" class="${shadowClass}" id="${windowId}_rightshadow">
                 <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
             </td>
         </tr>
@@ -86,4 +86,9 @@
     <div>
         <w:BlankImage height="5" width="1" />
     </div>
+    <script language="javascript">
+        <![CDATA[
+            var windowBodyTable = document.getElementById("${windowId}");
+        ]]>
+    </script>
 </w:Dummy>
