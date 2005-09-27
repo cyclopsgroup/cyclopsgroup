@@ -35,9 +35,7 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class CreateUserAction
-    extends BaseServiceable
-    implements Action
+public class CreateUserAction extends BaseServiceable implements Action
 {
 
     /**
@@ -45,38 +43,44 @@ public class CreateUserAction
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
-        throws Exception
+    public void execute(RuntimeData data, ActionContext context)
+            throws Exception
     {
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
+        HibernateService hibernate = (HibernateService) lookupComponent(HibernateService.ROLE);
         ValueParser params = data.getParams();
-        String name = params.getString( "name" );
+        String name = params.getString("name");
         boolean failed = false;
         Session s = hibernate.getSession();
-        List existingUsers = s.createCriteria( User.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) )
-            .add( Expression.eq( "name", name ) ).setMaxResults( 1 ).list();
-        if ( !existingUsers.isEmpty() )
+        List existingUsers = s.createCriteria(User.class).add(
+                Expression.eq("isDisabled", Boolean.FALSE)).add(
+                Expression.eq("name", name)).setMaxResults(1).list();
+        if (!existingUsers.isEmpty())
         {
-            context.error( "user", "User [" + name + " already exists, try another one" );
+            context.error("user", "User [" + name
+                    + " already exists, try another one");
             failed = true;
         }
 
-        String password = params.getString( "password" );
-        if ( !password.equals( params.getString( "confirmed_password" ) ) )
+        String password = params.getString("privatePassword");
+        if (!password.equals(params.getString("confirmedPassword")))
         {
-            context.error( "confirmed_password", "Two passwords are not the same" );
+            context
+                    .error("confirmedPassword",
+                            "Two passwords are not the same");
             failed = true;
         }
 
-        if ( failed )
+        if (failed)
         {
             return;
         }
 
         User user = new User();
-        TypeUtils.getBeanUtils().copyProperties( user, params.toProperties() );
-        s.save( user );
+        TypeUtils.getBeanUtils().copyProperties(user, params.toProperties());
+        user.setCountry(data.getLocale().getCountry());
+        user.setLanguage(data.getLocale().getLanguage());
+        s.save(user);
 
-        context.addMessage( "User " + user.getDisplayName() + " is created" );
+        context.addMessage("User " + user.getDisplayName() + " is created");
     }
 }
