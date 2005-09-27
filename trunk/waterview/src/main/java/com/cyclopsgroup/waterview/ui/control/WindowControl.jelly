@@ -6,12 +6,11 @@
         <j:set var="shadowWidth" value="1" />
         <j:set var="shadowClass" value="waterviewWindowNoShadow" />
     </j:if>
-    <j:set var="windowId" value="waterviewWindow${controlTag.hashCode()}" />
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
             <td colspan="2" rowspan="2">
                 <table width="100%" cellspacing="${controlTag.border}" cellpadding="0" border="0"
-                    class="waterviewWindow" id="${windowId}">
+                    class="waterviewWindow">
                     <tr>
                         <td class="waterviewWindowHeader">
                             <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -67,7 +66,7 @@
             </td>
         </tr>
         <tr>
-            <td width="${shadowWidth}" class="${shadowClass}" id="${windowId}_rightshadow">
+            <td width="${shadowWidth}" class="${shadowClass}">
                 <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
             </td>
         </tr>
@@ -86,9 +85,4 @@
     <div>
         <w:BlankImage height="5" width="1" />
     </div>
-    <script language="javascript">
-        <![CDATA[
-            var windowBodyTable = document.getElementById("${windowId}");
-        ]]>
-    </script>
 </w:Dummy>
