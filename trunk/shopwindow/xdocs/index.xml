@@ -30,9 +30,9 @@
                         <p>
                             <a href="projects/waterview">waterview</a>
                             ,
-                            <a href="projects/levistone">levistone</a>
-                            ,
                             <a href="projects/tornado">tornado</a>
+                            ,
+                            <a href="projects/levistone">levistone</a>
                             ,
                             <a href="projects/clib">clib</a>
                             ,
@@ -60,9 +60,9 @@
                         <p>
                             <a href="issues/browse/waterview">waterview</a>
                             ,
-                            <a href="issues/browse/levistone">levistone</a>
-                            ,
                             <a href="issues/browse/tornado">tornado</a>
+                            ,
+                            <a href="issues/browse/levistone">levistone</a>
                             ,
                             <a href="issues/browse/clib">clib</a>
                             ,
@@ -91,9 +91,10 @@
                             ,
                             <a href="kb/display/waterview">waterview</a>
                             ,
-                            <a href="kb/display/levistone">levistone</a>
-                            ,
+
                             <a href="kb/display/tornado">tornado</a>
+                            ,
+                            <a href="kb/display/levistone">levistone</a>
                             ...
                         </p>
                     </td>
