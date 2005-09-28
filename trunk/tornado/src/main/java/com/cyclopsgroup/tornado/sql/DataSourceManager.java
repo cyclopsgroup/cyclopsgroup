@@ -47,7 +47,7 @@ public class DataSourceManager
     /** Role name of service */
     public static final String ROLE = DataSourceManager.class.getName();
 
-    private Map dataSourceFactories;
+    private Map dataSourceServices;
 
     private Map dataSourceRoles;
 
@@ -94,7 +94,7 @@ public class DataSourceManager
     public DataSource getDataSource( String name )
         throws NoSuchDataSourceException
     {
-        DataSourceHome dsf = getDataSourceHome( name );
+        DataSourceService dsf = getDataSourceHome( name );
         if ( dsf == null )
         {
             throw new NoSuchDataSourceException( name );
@@ -108,9 +108,9 @@ public class DataSourceManager
      * @param name Data source name
      * @return Data source factory instance or null
      */
-    public DataSourceHome getDataSourceHome( String name )
+    public DataSourceService getDataSourceHome( String name )
     {
-        return (DataSourceHome) dataSourceFactories.get( name );
+        return (DataSourceService) dataSourceServices.get( name );
     }
 
     /**
@@ -121,13 +121,13 @@ public class DataSourceManager
     public void initialize()
         throws Exception
     {
-        dataSourceFactories = new Hashtable();
+        dataSourceServices = new Hashtable();
         for ( Iterator i = dataSourceRoles.keySet().iterator(); i.hasNext(); )
         {
             String name = (String) i.next();
             String role = (String) dataSourceRoles.get( name );
-            DataSourceHome dsf = (DataSourceHome) serviceManager.lookup( role );
-            dataSourceFactories.put( name, dsf );
+            DataSourceService dsf = (DataSourceService) serviceManager.lookup( role );
+            dataSourceServices.put( name, dsf );
         }
     }
 

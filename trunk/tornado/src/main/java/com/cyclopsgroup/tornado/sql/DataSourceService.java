@@ -23,7 +23,7 @@ import javax.sql.DataSource;
  *
  * Data source factory interface
  */
-public interface DataSourceHome
+public interface DataSourceService
 {
     /** Empty data source array */
     DataSource[] EMPTY_DATASOURCE_ARRAY = new DataSource[0];

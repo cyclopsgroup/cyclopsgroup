@@ -2,8 +2,8 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.tornado.sql.DataSourceHome.default</role>
-            <implementation>com.cyclopsgroup.tornado.sql.DBCPDataSourceHome</implementation>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceService.default</role>
+            <implementation>com.cyclopsgroup.tornado.sql.DBCPDataSourceService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <property name="driverClassName">com.mysql.jdbc.Driver</property>
@@ -19,7 +19,7 @@
             <implementation>com.cyclopsgroup.tornado.sql.DataSourceManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <data-source name="default" role="com.cyclopsgroup.tornado.sql.DataSourceHome.default" />
+                <data-source name="default" role="com.cyclopsgroup.tornado.sql.DataSourceService.default" />
             </configuration>
         </component>
         <component>

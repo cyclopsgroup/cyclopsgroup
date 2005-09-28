@@ -35,9 +35,9 @@ import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
  *
  * DBCP implemented data source factory
  */
-public class DBCPDataSourceHome
+public class DBCPDataSourceService
     extends AbstractLogEnabled
-    implements DataSourceHome, Configurable, Initializable
+    implements DataSourceService, Configurable, Initializable
 {
     private DataSource dataSource;
 
@@ -57,7 +57,7 @@ public class DBCPDataSourceHome
     /**
      * Overwrite or implement method getDataSource()
      *
-     * @see com.cyclopsgroup.tornado.sql.DataSourceHome#getDataSource()
+     * @see com.cyclopsgroup.tornado.sql.DataSourceService#getDataSource()
      */
     public DataSource getDataSource()
     {
