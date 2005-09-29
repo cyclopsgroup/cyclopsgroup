@@ -17,23 +17,23 @@
  */
 package com.cyclopsgroup.tornado.ui.action.admin.security;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.User;
+import com.cyclopsgroup.tornado.security.entity.UserGroup;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to save user profile
+ * Action for user to join a group
  */
-public class SaveUserAction
+public class JoinGroupAction
     extends BaseServiceable
     implements Action
 {
@@ -45,24 +45,27 @@ public class SaveUserAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String newPassword = data.getParams().getString( "new_password" );
-        if ( StringUtils.isNotEmpty( newPassword )
-            && !StringUtils.equals( newPassword, data.getParams().getString( "confirmed_password" ) ) )
+        String[] groupIds = data.getParams().getStrings( "group_to_join" );
+        if ( groupIds.length == 0 )
         {
-            context.error( "confirmed_password", "Two passwords are not the same" );
             return;
         }
+        String userId = data.getParams().getString( "user_id" );
 
         HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
         Session s = hib.getSession();
-        User user = (User) s.load( User.class, data.getParams().getString( "user_id" ) );
-
-        TypeUtils.getBeanUtils().copyProperties( user, data.getParams().toProperties() );
-        if ( StringUtils.isNotEmpty( newPassword ) )
+        User user = (User) s.load( User.class, userId );
+        for ( int i = 0; i < groupIds.length; i++ )
         {
-            user.setPrivatePassword( newPassword );
+            String groupId = groupIds[i];
+            UserGroup ug = new UserGroup();
+            ug.setUserId( userId );
+            ug.setGroupId( groupId );
+            s.save( ug );
         }
-        s.update( user );
-        context.addMessage( "User " + user.getDisplayName() + " is changed" );
+        hib.commitTransaction();
+        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        security.refreshUser( user.getName() );
+        context.addMessage( "User " + user.getName() + " joined " + groupIds.length + " groups" );
     }
 }

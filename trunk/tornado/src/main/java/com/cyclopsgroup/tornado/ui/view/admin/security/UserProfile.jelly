@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>User Profile</h2>
+    <h2>User Profile - ${userObject.displayName}</h2>
     <w:HorizontalTabControl name="userprofile">
         <w:Tab name="basic" title="Basic Information">
             <table width="100%" class="waterviewTable">
@@ -40,6 +40,8 @@
                         </w:Select>
                     </w:Field>
                     <w:Field name="isDisabled" title="Disabled" type="boolean" value="${userObject.isDisabled}" />
+                    <w:Field name="new_password" title="New Password" password="true" />
+                    <w:Field name="confirmed_password" title="Confirm Password" password="true" />
                     <w:Submit
                         action="${link.addAction('/tornado/admin/security/SaveUserAction').setPage(page).addQueryData('user_id', userObject.id)}"
                         forceValidation="true">
@@ -55,7 +57,7 @@
             </w:TiledFormControl>
         </w:Tab>
         <w:Tab name="security" title="Group/Role">
-            <p>Group and Roles</p>
+            <w:JellyView script="/tornado/view/admin/security/UserGroupRole.jelly" />
         </w:Tab>
     </w:HorizontalTabControl>
 </div>

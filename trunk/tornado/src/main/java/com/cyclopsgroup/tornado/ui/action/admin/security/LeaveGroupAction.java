@@ -17,23 +17,27 @@
  */
 package com.cyclopsgroup.tornado.ui.action.admin.security;
 
-import org.apache.commons.lang.StringUtils;
+import java.util.Iterator;
+import java.util.List;
+
 import org.hibernate.Session;
+import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.User;
+import com.cyclopsgroup.tornado.security.entity.UserGroup;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to save user profile
+ * Action for user to join a group
  */
-public class SaveUserAction
+public class LeaveGroupAction
     extends BaseServiceable
     implements Action
 {
@@ -45,24 +49,26 @@ public class SaveUserAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String newPassword = data.getParams().getString( "new_password" );
-        if ( StringUtils.isNotEmpty( newPassword )
-            && !StringUtils.equals( newPassword, data.getParams().getString( "confirmed_password" ) ) )
+        String[] groupIds = data.getParams().getStrings( "group_to_leave" );
+        if ( groupIds.length == 0 )
         {
-            context.error( "confirmed_password", "Two passwords are not the same" );
             return;
         }
+        String userId = data.getParams().getString( "user_id" );
 
         HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
         Session s = hib.getSession();
-        User user = (User) s.load( User.class, data.getParams().getString( "user_id" ) );
-
-        TypeUtils.getBeanUtils().copyProperties( user, data.getParams().toProperties() );
-        if ( StringUtils.isNotEmpty( newPassword ) )
+        User user = (User) s.load( User.class, userId );
+        List ugs = s.createCriteria( UserGroup.class ).add( Expression.eq( "userId", userId ) )
+            .add( Expression.in( "groupId", groupIds ) ).list();
+        for ( Iterator i = ugs.iterator(); i.hasNext(); )
         {
-            user.setPrivatePassword( newPassword );
+            UserGroup ug = (UserGroup) i.next();
+            s.delete( ug );
         }
-        s.update( user );
-        context.addMessage( "User " + user.getDisplayName() + " is changed" );
+        hib.commitTransaction();
+        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        security.refreshUser( user.getName() );
+        context.addMessage( "User " + user.getName() + " left " + groupIds.length + " groups" );
     }
 }

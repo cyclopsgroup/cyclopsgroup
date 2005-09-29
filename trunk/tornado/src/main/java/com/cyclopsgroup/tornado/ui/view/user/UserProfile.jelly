@@ -3,6 +3,7 @@
     <h2>My Profile</h2>
     <w:TiledFormControl>
         <w:Form method="post" name="userinfo">
+            <input type="hidden" name="user_id" value="${userObject.id}" />
             <w:Field name="firstName" required="true" title="First Name" value="${userObject.firstName}" />
             <w:Field name="middleName" title="Middle Name" value="${userObject.middleName}" />
             <w:Field name="lastName" required="true" title="Last Name" value="${userObject.lastName}" />
@@ -21,7 +22,9 @@
             <w:Field name="language" title="Language" value="${userObject.language}">
                 <w:Select items="${languages}" />
             </w:Field>
-            <w:Submit action="${link.addAction('/tornado/user/SaveProfileAction').setPage(page)}"
+            <w:Field name="new_password" title="New Password" password="true" />
+            <w:Field name="confirmed_password" title="Confirm Password" password="true" />
+            <w:Submit action="${link.addAction('/tornado/admin/security/SaveUserAction').setPage(page)}"
                 forceValidation="true">
                 <w:FormButton title="Save Change" />
             </w:Submit>
