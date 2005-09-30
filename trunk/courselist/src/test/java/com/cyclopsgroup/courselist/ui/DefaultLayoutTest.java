@@ -20,29 +20,31 @@ import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Theme;
-import com.cyclopsgroup.waterview.spi.ThemeManager;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Test case
  */
-public class DefaultLayoutTest extends PlexusTestCase
+public class DefaultLayoutTest
+    extends PlexusTestCase
 {
     /**
      * Test case to find layout
      *
      * @throws Exception
      */
-    public void testLayout() throws Exception
+    public void testLayout()
+        throws Exception
     {
-        lookup(JellyEngine.ROLE);
-        ThemeManager tm = (ThemeManager) lookup(ThemeManager.ROLE);
-        Theme t = tm.getTheme("courselist");
-        assertNotNull(t);
-        Layout layout = t.getLayout("layout.default");
+        lookup( JellyEngine.ROLE );
+        LookAndFeelService tm = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
+        Theme t = tm.getDefaultTheme();
+        assertNotNull( t );
+        Layout layout = t.getLayout( "layout.default" );
 
-        assertNotNull(layout);
+        assertNotNull( layout );
     }
 }

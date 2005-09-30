@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
     <ModulePackage alias="courselist" name="com.cyclopsgroup.courselist.ui" />
-    <Theme name="courselist" description="Default theme for course list">
-        <Layout name="layout.default">
-            <JellyLayout script="/courselist/DefaultLayout.jelly" />
-        </Layout>
-    </Theme>
 </Waterview>
