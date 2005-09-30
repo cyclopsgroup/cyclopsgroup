@@ -33,17 +33,8 @@
     <!--
         Download and redownload base pom file
     -->
-    <goal name="cyclops:download-base-pom">
-        <d:taglib uri="cyclops">
-            <d:tag name="download">
-                <j:useBean var="downloader" class="com.cyclopsgroup.amulets.cyclops.DownloadTag" url="${url}" file="${file}"/>
-                <j:expr value="{downloader.execute()}"/>
-            </d:tag>
-        </d:taglib>
-        <c:download url="${maven.cyclops.pom.url}" file="${maven.cyclops.pom.localfile}"/>
-    </goal>
-    <goal name="cyclops:redownload-base-pom">
-        <delete file="${maven.cyclops.pom.localfile}"/>
-        <attainGoal name="cyclops:download-base-pom"/>
+    <goal name="cyclops:deploy-pom">
+        <mkdir dir="${maven.repo.local}/com.cyclopsgroup/poms"/>
+        <copy file="cyclopsgroup-1.0.pom" todir="${maven.repo.local}/com.cyclopsgroup/poms"/>
     </goal>
 </project>

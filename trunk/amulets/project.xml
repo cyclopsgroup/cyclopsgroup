@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-	<extend>${maven.repo.local}/clib/poms/cyclopsgroup.pom</extend>
+	<extend>${maven.repo.local}/com.cyclopsgroup/poms/cyclopsgroup.pom</extend>
 	<pomVersion>3</pomVersion>
 	<id>amulets</id>
 	<name>amulets</name>
