@@ -5,7 +5,9 @@
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <body>
-        <section name="Members Introduction" />
+        <section name="Members Introduction">
+            <p>Cyclops Group is made up of a group of talent people. So far everybody here comes from China.</p>
+        </section>
         <section name="Member List">
             <table>
                 <tr>
