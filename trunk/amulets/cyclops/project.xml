@@ -9,7 +9,7 @@
     <organization>
         <name>Cyclops Group</name>
         <url>www.cyclopsgroup.com</url>
-        <logo>/images/cyclopsgroup_logo.gif</logo>
+        <logo>/images/cyclopsgroup_logo.png</logo>
     </organization>
     <inceptionYear>2002</inceptionYear>
     <shortDescription>
@@ -35,7 +35,6 @@
             <name>Guo, Jiaqi</name>
             <id>jiaqi</id>
             <email>jiaqi.guo@gmail.com</email>
-            <organization>Evavi</organization>
             <roles>
                 <role>Developer</role>
             </roles>

@@ -1,74 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
-    <extend>../project.xml</extend>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+    <extend>../subproject-base.xml</extend>
     <pomVersion>3</pomVersion>
     <id>maven-xtorque-plugin</id>
     <name>Maven Cross Torque Plug-in</name>
     <currentVersion>1.0-b1</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>www.cyclopsgroup.com</url>
+        <logo>/images/cyclopsgroup_logo.png</logo>
+    </organization>
+    <inceptionYear>2002</inceptionYear>
     <shortDescription>Cross Torque Plugin for Maven</shortDescription>
-    <url>http://cyclops-group.sourceforge.net/project/amulets/multiproject/maven-xtorque-plugin/</url>
-    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/amulets/multiproject/maven-xtorque-plugin/</siteDirectory>
-    <repository>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/xtorque/</connection>
-        <url>http://cvs.sourceforge.net/viewcvs/cyclops-group/amulets/xtorque</url>
-    </repository>
+    <developers>
+        <developer>
+            <name>Guo, Jiaqi</name>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
     <dependencies>
         <dependency>
             <id>commons-collections</id>
             <version>2.1</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>commons-configuration</id>
             <version>20030311.152757</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>commons-dbcp</id>
             <version>20030825.184428</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>commons-lang</id>
             <version>1.0.1</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>commons-logging</id>
             <version>1.0.3</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>log4j</id>
             <version>1.2.8</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>stratum</id>
             <version>1.0-b3</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <groupId>torque</groupId>
             <artifactId>torque-gen</artifactId>
             <version>3.1</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
         <dependency>
             <id>velocity</id>
@@ -80,40 +68,29 @@
         <dependency>
             <id>village</id>
             <version>2.0-dev-20030825</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>xerces</id>
-            <version>2.4.0</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.0.b2</version>
-            <properties>
-                <classloader>root</classloader>
-            </properties>
         </dependency>
     </dependencies>
-    <reports>
-        <report>maven-jdepend-plugin</report>
-        <report>maven-checkstyle-plugin</report>
-        <report>maven-changes-plugin</report>
-        <report>maven-changelog-plugin</report>
-        <report>maven-file-activity-plugin</report>
-        <report>maven-developer-activity-plugin</report>
-        <report>maven-javadoc-plugin</report>
-        <report>maven-jxr-plugin</report>
-        <report>maven-junit-report-plugin</report>
-        <report>maven-tasklist-plugin</report>
-        <report>maven-pmd-plugin</report>
-        <report>maven-simian-plugin</report>
-        <report>maven-jcoverage-plugin</report>
-        <report>maven-license-plugin</report>
-    </reports>
+    <build>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+        </unitTest>
+        <resources>
+            <resource>
+                <directory>src/plugin-resources</directory>
+                <targetPath>plugin-resources</targetPath>
+            </resource>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>*.xml</include>
+                    <include>*.properties</include>
+                    <include>*.jelly</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

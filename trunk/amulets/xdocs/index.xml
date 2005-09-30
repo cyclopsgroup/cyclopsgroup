@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>CylcopsGroup Amulets</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Overview">
+            <p>
+                Amulets is a collections of useful
+                <a href="http://maven.apache.org">Apache Maven</a>
+                plugins.
+            </p>
+        </section>
+    </body>
+</document>
