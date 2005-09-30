@@ -14,7 +14,7 @@
     <inceptionYear>2003</inceptionYear>
     <logo>/images/amulets_logo.png</logo>
     <shortDescription>Java Project Management Tools</shortDescription>
-    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/amulets/${pom.artifactId}</siteDirectory>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/amulets/multiproject/${pom.artifactId}</siteDirectory>
     <repository>
         <connection>
             scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/${maven.amulets.subproject}

@@ -15,7 +15,7 @@
     <shortDescription>
         Maven plugin for cyclopsgroup specific operations like cyclopsgroup project website generation.
     </shortDescription>
-    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/amulets/${pom.artifactId}</siteDirectory>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/amulets/multiproject/${pom.artifactId}</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops</connection>
         <developerConnection>
