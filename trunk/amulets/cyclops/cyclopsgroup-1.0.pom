@@ -47,6 +47,12 @@
             <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</unsubscribe>
             <archive>http://groups.google.com/group/cyclopsgroup-discussion</archive>
         </mailingList>
+        <mailingList>
+            <name>Cyclops Group Change Log</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-changelog/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-changelog/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-changelog</archive>
+        </mailingList>
     </mailingLists>
     <developers>
         <developer>

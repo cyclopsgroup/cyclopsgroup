@@ -8,19 +8,20 @@
     <currentVersion>1.0-b3</currentVersion>
     <organization>
         <name>Cyclops Group</name>
-        <url>http://cyclops-group.sourceforge.net</url>
+        <url>www.cyclopsgroup.com</url>
         <logo>/images/cyclopsgroup_logo.gif</logo>
     </organization>
     <inceptionYear>2002</inceptionYear>
     <shortDescription>
         Maven plugin for cyclopsgroup specific operations like cyclopsgroup project website generation.
     </shortDescription>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/amulets/${pom.artifactId}</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops</connection>
         <developerConnection>
-            scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops
+            scm:cvs:ext:your-name@cvs.sourceforge.net:/cvsroot/cyclops-group:amulets/cyclops
         </developerConnection>
-        <url>http://cvs.sourceforge.net/viewcvs.py/cyclops-group/amulets/cyclops</url>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/amulets/cyclops</url>
     </repository>
     <versions>
         <version>
@@ -55,5 +56,28 @@
             <version>3.8.1</version>
         </dependency>
     </dependencies>
-    <build />
+    <build>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+        </unitTest>
+        <resources>
+            <resource>
+                <directory>src/plugin-resources</directory>
+                <targetPath>plugin-resources</targetPath>
+            </resource>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>*.xml</include>
+                    <include>*.properties</include>
+                    <include>*.jelly</include>
+                    <include>*.pom</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
