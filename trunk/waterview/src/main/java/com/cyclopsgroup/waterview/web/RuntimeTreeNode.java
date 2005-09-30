@@ -32,7 +32,7 @@ import com.cyclopsgroup.waterview.ValueParser;
  * Runtime instance of tree node
  */
 public class RuntimeTreeNode
-    implements TreeNode
+    implements StaticNode
 {
     /** Empty array */
     public static final RuntimeTreeNode[] EMPTY_ARRAY = new RuntimeTreeNode[0];
@@ -41,7 +41,7 @@ public class RuntimeTreeNode
 
     private boolean expanded;
 
-    private TreeNode node;
+    private StaticNode node;
 
     private RuntimeTreeNode parentNode;
 
@@ -51,7 +51,7 @@ public class RuntimeTreeNode
      * @param parentNode Parent runtime node
      * @param node Proxy tree node
      */
-    public RuntimeTreeNode( RuntimeTreeNode parentNode, TreeNode node )
+    public RuntimeTreeNode( RuntimeTreeNode parentNode, StaticNode node )
     {
         this.parentNode = parentNode;
         this.node = node;
@@ -76,7 +76,7 @@ public class RuntimeTreeNode
      * @param node Nested node
      * @return Created runtime node
      */
-    protected RuntimeTreeNode doCreateChild( TreeNode node )
+    protected RuntimeTreeNode doCreateChild( StaticNode node )
     {
         return new RuntimeTreeNode( this, node );
     }
@@ -89,7 +89,7 @@ public class RuntimeTreeNode
      * @return Array of result
      * @throws Exception
      */
-    protected TreeNode[] doFilter( TreeNode[] nodes, RuntimeData data )
+    protected Node[] doFilter( Node[] nodes, RuntimeData data )
         throws Exception
     {
         return nodes;
@@ -108,10 +108,11 @@ public class RuntimeTreeNode
         {
             return;
         }
-        TreeNode[] childNodes = doFilter( node.getChildrenNodes(), data );
+        //TODO handle the none static node scenario
+        Node[] childNodes = doFilter( node.getChildrenNodes(), data );
         for ( int i = 0; i < childNodes.length; i++ )
         {
-            TreeNode node = childNodes[i];
+            StaticNode node = (StaticNode) childNodes[i];
             RuntimeTreeNode n = doCreateChild( node );
             children.put( n.getNodeId(), n );
         }
@@ -121,7 +122,7 @@ public class RuntimeTreeNode
     /**
      * Overwrite or implement method in RuntimeTreeNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getAttributes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
     public ValueParser getAttributes()
     {
@@ -131,11 +132,11 @@ public class RuntimeTreeNode
     /**
      * Overwrite or implement method in RuntimeTreeNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getChildrenNodes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public TreeNode[] getChildrenNodes()
+    public Node[] getChildrenNodes()
     {
-        return (TreeNode[]) children.values().toArray( TreeNode.EMPTY_ARRAY );
+        return (Node[]) children.values().toArray( Node.EMPTY_ARRAY );
     }
 
     /**
@@ -143,7 +144,7 @@ public class RuntimeTreeNode
      *
      * @return Node it contains
      */
-    public TreeNode getContent()
+    public StaticNode getContent()
     {
         return node;
     }
@@ -173,7 +174,7 @@ public class RuntimeTreeNode
     /**
      * Overwrite or implement method getNodeId()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getNodeId()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getNodeId()
      */
     public String getNodeId()
     {
@@ -183,9 +184,9 @@ public class RuntimeTreeNode
     /**
      * Overwrite or implement method getParentNode()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getParentNode()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getParentNode()
      */
-    public TreeNode getParentNode()
+    public Node getParentNode()
     {
         return parentNode;
     }
@@ -193,7 +194,7 @@ public class RuntimeTreeNode
     /**
      * Overwrite or implement method isEnd()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#isEnd()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#isEnd()
      */
     public boolean isEnd()
     {

@@ -24,8 +24,8 @@ import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
+import com.cyclopsgroup.waterview.web.Node;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
-import com.cyclopsgroup.waterview.web.TreeNode;
 import com.cyclopsgroup.waterview.web.TreeUtils;
 
 /**
@@ -47,7 +47,7 @@ public class DefaultLayout
     {
         NavigatorService navigator = (NavigatorService) lookupComponent( NavigatorService.ROLE );
         RuntimeTreeNode root = navigator.getRuntimeNode( data );
-        TreeNode[] tabNodes = root.getChildrenNodes();
+        Node[] tabNodes = root.getChildrenNodes();
         context.put( "tabNodes", tabNodes );
 
         context.put( "navigator", navigator );

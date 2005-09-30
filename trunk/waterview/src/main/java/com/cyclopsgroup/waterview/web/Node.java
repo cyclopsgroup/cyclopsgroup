@@ -14,61 +14,45 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.navigator;
+package com.cyclopsgroup.waterview.web;
 
-import com.cyclopsgroup.waterview.web.StaticNode;
+import com.cyclopsgroup.waterview.ValueParser;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * Navigator node
+ * Generic tree node interface
  */
-public interface NavigatorNode
-    extends StaticNode
+public interface Node
 {
-    /** Empty nodes */
-    NavigatorNode[] EMPTY_ARRAY = new NavigatorNode[0];
+    /** Empty array */
+    Node[] EMPTY_ARRAY = new Node[0];
 
     /**
-     * Get description of node
+     * Get attributes of it
      *
-     * @return Description of node
+     * @return Attributes object
      */
-    String getDescription();
+    ValueParser getAttributes();
 
     /**
-     * Get linked page of node
+     * Get unique ID of this node
      *
-     * @return Linked page of node
+     * @return Unique node id
      */
-    String getPage();
+    String getNodeId();
 
     /**
-     * Get array of parent nodes
+     * Get parent node
      *
-     * @return Array of parent nodes
+     * @return Parent node
      */
-    NavigatorNode[] getParentNodes();
+    Node getParentNode();
 
     /**
-     * Get title of node
+     * If node is end
      *
-     * @return Title of node
+     * @return True if it's end
      */
-    String getTitle();
-
-    /**
-     * Is the node hidden
-     *
-     * @return True if node is not in menu
-     */
-    boolean isHidden();
-
-    /**
-     * Check if given page is parent of this node
-     *
-     * @param page Page path
-     * @return True if it is
-     */
-    boolean isParent( String page );
+    boolean isEnd();
 }

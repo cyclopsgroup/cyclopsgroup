@@ -28,7 +28,7 @@ import com.cyclopsgroup.waterview.MapValueParser;
 import com.cyclopsgroup.waterview.ValueParser;
 import com.cyclopsgroup.waterview.navigator.BaseNavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
-import com.cyclopsgroup.waterview.web.TreeNode;
+import com.cyclopsgroup.waterview.web.Node;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -85,7 +85,7 @@ class DefaultNavigatorNode
     /**
      * Overwrite or implement method in DefaultNavigatorNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getAttributes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
     public ValueParser getAttributes()
     {
@@ -95,12 +95,12 @@ class DefaultNavigatorNode
     /**
      * Overwrite or implement method in DefaultNavigatorNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getChildrenNodes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public TreeNode[] getChildrenNodes()
+    public Node[] getChildrenNodes()
     {
         Collection nodes = navigatorHome.getChildren( path );
-        return (TreeNode[]) nodes.toArray( TreeNode.EMPTY_ARRAY );
+        return (Node[]) nodes.toArray( Node.EMPTY_ARRAY );
     }
 
     /**
@@ -116,7 +116,7 @@ class DefaultNavigatorNode
     /**
      * Overwrite or implement method in DefaultNavigatorNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getNodeId()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getNodeId()
      */
     public String getNodeId()
     {
@@ -138,11 +138,11 @@ class DefaultNavigatorNode
     }
 
     /**
-     * Overwrite or implement method in DefaultNavigatorNode
+     * Overwrite or implement method getParentNode()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getParentNode()
+     * @see com.cyclopsgroup.waterview.web.Node#getParentNode()
      */
-    public TreeNode getParentNode()
+    public Node getParentNode()
     {
         return navigatorHome.getNodeByPath( parentPath );
     }

@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  * 
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,50 +17,23 @@
  */
 package com.cyclopsgroup.waterview.web;
 
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Generic tree node interface
+ *
+ * Dynamic tree node
  */
-public interface TreeNode
+public interface DynamicNode
+    extends Node
 {
-    /** Empty array */
-    TreeNode[] EMPTY_ARRAY = new TreeNode[0];
-
     /**
-     * Get attributes of it
+     * Get children dynamically
      *
-     * @return Attributes object
-     */
-    ValueParser getAttributes();
-
-    /**
-     * Get children nodes
-     *
+     * @param data Runtime data
      * @return Children nodes
+     * @throws Exception Throw it out
      */
-    TreeNode[] getChildrenNodes();
-
-    /**
-     * Get unique ID of this node
-     *
-     * @return Unique node id
-     */
-    String getNodeId();
-
-    /**
-     * Get parent node
-     *
-     * @return Parent node
-     */
-    TreeNode getParentNode();
-
-    /**
-     * Is end node
-     *
-     * @return True if the node is end
-     */
-    boolean isEnd();
+    Node[] getChildrenNodes( RuntimeData data )
+        throws Exception;
 }

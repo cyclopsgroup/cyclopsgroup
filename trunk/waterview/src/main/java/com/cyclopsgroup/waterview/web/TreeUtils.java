@@ -38,7 +38,7 @@ public final class TreeUtils
 
         private boolean end = false;
 
-        private TreeNode node;
+        private StaticNode node;
 
         /**
          * Constructor for class NodeRow
@@ -46,7 +46,7 @@ public final class TreeUtils
          * @param node TreeNode object
          * @param depth Depth of it
          */
-        public Row( TreeNode node, int depth )
+        public Row( StaticNode node, int depth )
         {
             this.node = node;
             this.depth = depth;
@@ -67,7 +67,7 @@ public final class TreeUtils
          *
          * @return Tree node object
          */
-        public TreeNode getNode()
+        public StaticNode getNode()
         {
             return node;
         }
@@ -99,23 +99,24 @@ public final class TreeUtils
      * @param node
      * @return Flattened node rows
      */
-    public static Row[] flattenTree( TreeNode node )
+    public static Row[] flattenTree( StaticNode node )
     {
         List ret = new ArrayList();
         flattenTree( node, ret, 1 );
         return (Row[]) ret.toArray( Row.EMPTY_ARRAY );
     }
 
-    private static void flattenTree( TreeNode node, List result, int depth )
+    private static void flattenTree( StaticNode node, List result, int depth )
     {
         Row row = new Row( node, depth );
         result.add( row );
-        TreeNode[] children = node.getChildrenNodes();
+        Node[] children = node.getChildrenNodes();
         if ( children != null && children.length > 0 )
         {
             for ( int i = 0; i < children.length; i++ )
             {
-                TreeNode child = children[i];
+                //TODO handle the none static node scenario
+                StaticNode child = (StaticNode) children[i];
                 flattenTree( child, result, depth + 1 );
             }
         }

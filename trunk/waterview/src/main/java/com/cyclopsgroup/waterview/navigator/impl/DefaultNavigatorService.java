@@ -37,8 +37,9 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
+import com.cyclopsgroup.waterview.web.Node;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
-import com.cyclopsgroup.waterview.web.TreeNode;
+import com.cyclopsgroup.waterview.web.StaticNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -155,10 +156,11 @@ public class DefaultNavigatorService
         {
             root = doCreateRuntimeRoot( data );
             root.expand( data );
-            TreeNode[] children = root.getChildrenNodes();
+            Node[] children = root.getChildrenNodes();
             for ( int i = 0; i < children.length; i++ )
             {
-                TreeNode child = children[i];
+                //TODO handle dynamic node
+                StaticNode child = (StaticNode) children[i];
                 ( (RuntimeTreeNode) child ).expand( data );
             }
             data.getSessionContext().put( NODE_RUNTIME_NAME, root );
@@ -198,7 +200,7 @@ public class DefaultNavigatorService
     private void populateNode( NavigatorNode node )
     {
         node.getParentNodes();
-        TreeNode[] nodes = node.getChildrenNodes();
+        Node[] nodes = node.getChildrenNodes();
         for ( int i = 0; i < nodes.length; i++ )
         {
             NavigatorNode child = (NavigatorNode) nodes[i];

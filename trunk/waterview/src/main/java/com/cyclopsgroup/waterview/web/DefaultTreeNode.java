@@ -30,7 +30,7 @@ import com.cyclopsgroup.waterview.ValueParser;
  * Default implementation of a node
  */
 public class DefaultTreeNode
-    implements TreeNode
+    implements StaticNode
 {
     private ValueParser attributes = new MapValueParser( new HashMap() );
 
@@ -40,7 +40,7 @@ public class DefaultTreeNode
 
     private String nodeId;
 
-    private TreeNode parentNode;
+    private StaticNode parentNode;
 
     /**
      * Constructor for class DefaultTreeNode
@@ -48,7 +48,7 @@ public class DefaultTreeNode
      * @param nodeId Unique ID of node
      * @param parentNode Parent node
      */
-    public DefaultTreeNode( String nodeId, TreeNode parentNode )
+    public DefaultTreeNode( String nodeId, StaticNode parentNode )
     {
         this.nodeId = nodeId;
         this.parentNode = parentNode;
@@ -59,7 +59,7 @@ public class DefaultTreeNode
      *
      * @param child Child node
      */
-    public void addChildNode( TreeNode child )
+    public void addChildNode( StaticNode child )
     {
         children.put( child.getNodeId(), child );
     }
@@ -67,7 +67,7 @@ public class DefaultTreeNode
     /**
      * Overwrite or implement method in DefaultTreeNode
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getAttributes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
     public ValueParser getAttributes()
     {
@@ -77,17 +77,17 @@ public class DefaultTreeNode
     /**
      * Overwrite or implement method getChildrenNodes()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getChildrenNodes()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public TreeNode[] getChildrenNodes()
+    public Node[] getChildrenNodes()
     {
-        return (TreeNode[]) children.values().toArray( EMPTY_ARRAY );
+        return (Node[]) children.values().toArray( EMPTY_ARRAY );
     }
 
     /**
      * Overwrite or implement method getNodeId()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getNodeId()
+     * @see com.cyclopsgroup.waterview.web.StaticNode#getNodeId()
      */
     public String getNodeId()
     {
@@ -97,9 +97,9 @@ public class DefaultTreeNode
     /**
      * Overwrite or implement method getParentNode()
      *
-     * @see com.cyclopsgroup.waterview.web.TreeNode#getParentNode()
+     * @see com.cyclopsgroup.waterview.web.Node#getParentNode()
      */
-    public TreeNode getParentNode()
+    public Node getParentNode()
     {
         return parentNode;
     }
