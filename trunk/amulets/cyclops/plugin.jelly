@@ -35,6 +35,6 @@
     -->
     <goal name="cyclops:deploy-pom">
         <mkdir dir="${maven.repo.local}/com.cyclopsgroup/poms"/>
-        <copy file="cyclopsgroup-1.0.pom" todir="${maven.repo.local}/com.cyclopsgroup/poms"/>
+        <copy file="${plugin.dir}/cyclopsgroup-1.0.pom" todir="${maven.repo.local}/com.cyclopsgroup/poms"/>
     </goal>
 </project>
