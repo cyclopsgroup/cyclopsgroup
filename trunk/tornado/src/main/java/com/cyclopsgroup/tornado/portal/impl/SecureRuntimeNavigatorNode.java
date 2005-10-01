@@ -24,8 +24,9 @@ import com.cyclopsgroup.tornado.portal.PageAsset;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.web.Node;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
-import com.cyclopsgroup.waterview.web.TreeNode;
+import com.cyclopsgroup.waterview.web.StaticNode;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -41,9 +42,9 @@ public class SecureRuntimeNavigatorNode
      * @param parentNode Parent onde
      * @param node current static node
      */
-    public SecureRuntimeNavigatorNode( RuntimeTreeNode parentNode, TreeNode node )
+    public SecureRuntimeNavigatorNode( RuntimeTreeNode parentNode, Node node )
     {
-        super( parentNode, node );
+        super( parentNode, (StaticNode) node );
     }
 
     /**
@@ -51,7 +52,7 @@ public class SecureRuntimeNavigatorNode
      *
      * @see com.cyclopsgroup.waterview.web.RuntimeTreeNode#doCreateChild(com.cyclopsgroup.waterview.web.TreeNode)
      */
-    protected RuntimeTreeNode doCreateChild( TreeNode node )
+    protected RuntimeTreeNode doCreateChild( Node node )
     {
         return new SecureRuntimeNavigatorNode( this, node );
     }
@@ -59,9 +60,9 @@ public class SecureRuntimeNavigatorNode
     /**
      * Overwrite or implement method doFilter()
      *
-     * @see com.cyclopsgroup.waterview.web.RuntimeTreeNode#doFilter(com.cyclopsgroup.waterview.web.TreeNode[], com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.web.RuntimeTreeNode#doFilter(com.cyclopsgroup.waterview.web.Node[], com.cyclopsgroup.waterview.RuntimeData)
      */
-    protected TreeNode[] doFilter( TreeNode[] nodes, RuntimeData data )
+    protected Node[] doFilter( Node[] nodes, RuntimeData data )
         throws Exception
     {
         List children = new ArrayList();
@@ -74,6 +75,6 @@ public class SecureRuntimeNavigatorNode
                 children.add( node );
             }
         }
-        return (TreeNode[]) children.toArray( TreeNode.EMPTY_ARRAY );
+        return (Node[]) children.toArray( Node.EMPTY_ARRAY );
     }
 }
