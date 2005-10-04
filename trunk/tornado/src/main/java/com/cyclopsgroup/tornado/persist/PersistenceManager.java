@@ -23,6 +23,7 @@ import java.io.Serializable;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Generic persistence layer API
+ * Once levistone project is ready, this package will be deprecated
  */
 public interface PersistenceManager
 {
