@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.view.admin.security;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
@@ -41,8 +41,8 @@ public class UserProfile
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        User user = (User) hib.getSession().load( User.class, data.getParams().getString( "user_id" ) );
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        User user = (User) persist.load( User.class, data.getParams().getString( "user_id" ) );
         context.put( "userObject", user );
     }
 }

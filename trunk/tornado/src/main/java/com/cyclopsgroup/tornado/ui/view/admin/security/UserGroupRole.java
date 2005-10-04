@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,15 @@
  */
 package com.cyclopsgroup.tornado.ui.view.admin.security;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.entity.Group;
+import com.cyclopsgroup.tornado.security.entity.SecurityEntityManager;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
@@ -50,10 +49,9 @@ public class UserGroupRole
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hib.getSession();
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         String userId = data.getParams().getString( "user_id" );
-        User user = (User) s.load( User.class, userId );
+        User user = (User) persist.load( User.class, userId );
         context.put( "userObject", user );
         Set userGroups = user.getGroups();
         context.put( "userGroups", userGroups );
@@ -64,14 +62,15 @@ public class UserGroupRole
             Group group = (Group) i.next();
             userGroupIds.add( group.getId() );
         }
-        List restGroups = s.createCriteria( Group.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) ).list();
+
+        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        List restGroups = new ArrayList( sem.getAllGroups() );
         for ( Iterator i = restGroups.iterator(); i.hasNext(); )
         {
             Group group = (Group) i.next();
             if ( userGroupIds.contains( group.getId() ) )
             {
                 i.remove();
-                //restGroups.remove( group );
             }
         }
         context.put( "restGroups", restGroups );

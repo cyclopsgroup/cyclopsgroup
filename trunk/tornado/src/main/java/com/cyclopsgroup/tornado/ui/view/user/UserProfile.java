@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -49,8 +49,8 @@ public class UserProfile
         throws Exception
     {
         RuntimeUser user = RuntimeUser.getInstance( data );
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        User u = (User) hib.getSession().load( User.class, user.getId() );
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        User u = (User) persist.load( User.class, user.getId() );
         context.put( "userObject", u );
 
         TreeMap languages = new TreeMap();

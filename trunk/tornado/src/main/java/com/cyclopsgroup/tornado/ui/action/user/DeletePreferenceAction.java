@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.action.user;
 
-import org.hibernate.Session;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
@@ -47,11 +45,10 @@ public class DeletePreferenceAction
         throws Exception
     {
         String prefId = data.getParams().getString( "preference_id" );
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hibernate.getSession();
-        UserPreference up = (UserPreference) s.load( UserPreference.class, prefId );
-        s.delete( up );
-        User user = (User) s.load( User.class, up.getUserId() );
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        UserPreference up = (UserPreference) persist.load( UserPreference.class, prefId );
+        persist.delete( up );
+        User user = (User) persist.load( User.class, up.getUserId() );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.refreshUser( user.getName() );
         security.refreshUser( RuntimeUser.getInstance( data ).getName() );

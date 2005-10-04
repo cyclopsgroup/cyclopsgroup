@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.action.user;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.portal.PortalService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.waterview.Action;
@@ -43,8 +43,9 @@ public class CreatePreferenceAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         String userId = data.getParams().getString( "user_id" );
-        UserPreference up = new UserPreference();
+        UserPreference up = (UserPreference) persist.create( UserPreference.class );
         up.setUserId( userId );
         up.setThemeName( PortalService.UNSET_THEME_NAME );
 
@@ -53,8 +54,7 @@ public class CreatePreferenceAction
         up.setIconset( theme.getIconSetName() );
         up.setStylesheet( theme.getStyleSheetName() );
 
-        HibernateService hibernate = (HibernateService) lookupComponent( HibernateService.ROLE );
-        hibernate.getSession().save( up );
+        persist.saveNew( up );
         context.addMessage( "User setting is created" );
     }
 }

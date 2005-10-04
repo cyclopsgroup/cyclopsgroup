@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.view.admin.security;
 
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.security.entity.Group;
+import com.cyclopsgroup.tornado.security.entity.SecurityEntityManager;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
@@ -46,10 +40,7 @@ public class ManageGroups
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hib.getSession();
-
-        List groups = s.createCriteria( Group.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) ).list();
-        context.put( "allGroups", groups );
+        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        context.put( "allGroups", sem.getAllGroups() );
     }
 }

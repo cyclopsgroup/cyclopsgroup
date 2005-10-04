@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,8 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
+import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.security.CreateUserEvent;
 import com.cyclopsgroup.tornado.security.NoSuchUserException;
 import com.cyclopsgroup.tornado.security.Permission;
@@ -39,11 +37,10 @@ import com.cyclopsgroup.tornado.security.RuntimeUserAPI;
 import com.cyclopsgroup.tornado.security.SecurityListener;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.Group;
-import com.cyclopsgroup.tornado.security.entity.GroupRole;
 import com.cyclopsgroup.tornado.security.entity.Role;
 import com.cyclopsgroup.tornado.security.entity.RolePermission;
+import com.cyclopsgroup.tornado.security.entity.SecurityEntityManager;
 import com.cyclopsgroup.tornado.security.entity.User;
-import com.cyclopsgroup.tornado.security.entity.UserRole;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -55,7 +52,7 @@ public class DefaultSecurityService
 {
     private Thread checkTimeoutThread;
 
-    private HibernateService hibernate;
+    private SecurityEntityManager sem;
 
     private Vector listeners = new Vector();
 
@@ -94,44 +91,39 @@ public class DefaultSecurityService
     protected RuntimeUserAPI doLoadUser( String userName )
         throws Exception
     {
-        Session s = hibernate.getSession();
-        List users = s.createCriteria( User.class ).add( Expression.eq( "name", userName ) )
-            .add( Expression.eq( "isDisabled", Boolean.FALSE ) ).setMaxResults( 1 ).list();
-        if ( users.isEmpty() )
+        User userModel = sem.findUserByName( userName );
+        if ( userModel == null )
         {
             throw new NoSuchUserException( userName );
         }
-        User userModel = (User) users.get( 0 );
         DefaultRuntimeUser user = new DefaultRuntimeUser( userModel );
 
-        List userRoles = s.createCriteria( UserRole.class ).add( Expression.eq( "userId", user.getId() ) ).list();
+        List userRoles = sem.findRolesByUser( userModel.getId() );
         for ( Iterator i = userRoles.iterator(); i.hasNext(); )
         {
-            UserRole ur = (UserRole) i.next();
-            user.addRole( ur.getRole() );
+            user.addRole( (Role) i.next() );
         }
-        user.addRole( getRole( ROLE_GUEST ) );
+        user.addRole( sem.findRoleByName( ROLE_GUEST ) );
         if ( !userName.equals( USER_GUEST ) )
         {
-            user.addRole( getRole( ROLE_USER ) );
+            user.addRole( sem.findRoleByName( ROLE_USER ) );
         }
 
         for ( Iterator i = userModel.getGroups().iterator(); i.hasNext(); )
         {
             Group group = (Group) i.next();
-            List groupRoles = s.createCriteria( GroupRole.class ).add( Expression.eq( "groupId", group.getId() ) )
-                .list();
+            List groupRoles = sem.findRolesByGroup( group.getId() );
             for ( Iterator j = groupRoles.iterator(); j.hasNext(); )
             {
-                GroupRole gr = (GroupRole) j.next();
-                user.addRole( gr.getRole() );
+                user.addRole( (Role) j.next() );
             }
             if ( group.getName().equals( GROUP_ADMINS ) )
             {
-                user.addRole( getRole( ROLE_ADMIN ) );
+                user.addRole( sem.findRoleByName( ROLE_ADMIN ) );
             }
         }
-        List rps = s.createCriteria( RolePermission.class ).add( Expression.in( "roleId", user.getRoleIds() ) ).list();
+        String[] roleIdArray = (String[]) user.getRoleIds().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        List rps = sem.findRolePermissionsByRoles( roleIdArray );
         for ( Iterator i = rps.iterator(); i.hasNext(); )
         {
             RolePermission rp = (RolePermission) i.next();
@@ -159,15 +151,6 @@ public class DefaultSecurityService
         throws Exception
     {
         return getUser( USER_GUEST );
-    }
-
-    private Role getRole( String roleName )
-        throws Exception
-    {
-        Session s = hibernate.getSession();
-        List list = s.createCriteria( Role.class ).add( Expression.eq( "name", roleName ) )
-            .add( Expression.eq( "isDisabled", Boolean.FALSE ) ).setMaxResults( 1 ).list();
-        return list.isEmpty() ? null : (Role) list.get( 0 );
     }
 
     /**
@@ -289,7 +272,7 @@ public class DefaultSecurityService
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        hibernate = (HibernateService) serviceManager.lookup( HibernateService.ROLE );
+        sem = (SecurityEntityManager) serviceManager.lookup( SecurityEntityManager.ROLE );
     }
 
     /**
