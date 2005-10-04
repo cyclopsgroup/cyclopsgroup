@@ -2,11 +2,11 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.waterview.spi.ThemeManager</role>
-            <implementation>com.cyclopsgroup.waterview.spi.ThemeManager</implementation>
+            <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <default-theme>courselist</default-theme>
+                <default-theme>courselist.theme.default</default-theme>
             </configuration>
         </component>
         <component>

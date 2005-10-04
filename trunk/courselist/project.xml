@@ -49,19 +49,36 @@
     </developers>
     <dependencies>
         <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>2.7.5</version>
+            <url>http://antlr.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
-            <version>2.0</version>
+            <version>1.4.3</version>
             <url>http://asm.objectweb.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
+            <groupId>avalon-framework</groupId>
             <artifactId>avalon-framework</artifactId>
             <version>4.1.4</version>
             <url>http://avalon.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.0.2</version>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -71,6 +88,24 @@
             <artifactId>classworlds</artifactId>
             <version>1.1-alpha-1</version>
             <url>http://classworlds.codehaus.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>com.cyclopsgroup</groupId>
+            <artifactId>waterview</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://www.cyclopsgroup.com/projects/waterview</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>com.cyclopsgroup</groupId>
+            <artifactId>tornado</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://www.cyclopsgroup.com/projects/tornado</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -103,19 +138,19 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.0</version>
-            <url>http://jakarta.apache.org/commons/fileupload</url>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2</version>
+            <url>http://jakarta.apache.org/commons/dbcp</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
             <version>1.0</version>
-            <url>http://jakarta.apache.org/commons/io</url>
+            <url>http://jakarta.apache.org/commons/fileupload</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -157,6 +192,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.2</version>
+            <url>http://jakarta.apache.org/commons/pool</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5-beta-2</version>
@@ -166,10 +210,32 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>1.1</version>
+            <url>http://ehcache.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.0.5</version>
+            <url>http://hibernate.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
-            <type>jar</type>
             <url>http://junit.org</url>
         </dependency>
         <dependency>
@@ -177,6 +243,23 @@
             <artifactId>log4j</artifactId>
             <version>1.2.8</version>
             <url>http://logging.apache.org/log4j</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>logkit</groupId>
+            <artifactId>logkit</artifactId>
+            <version>1.0.1</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>mysql-connector-java</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>3.1.10</version>
+            <url>http://www.mysql.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -191,19 +274,9 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>plexus</groupId>
-            <artifactId>plexus-avalon-personality</artifactId>
-            <version>0.12</version>
-            <url>http://plexus.codehaus.org</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>servletapi</groupId>
             <artifactId>servletapi</artifactId>
             <version>2.3</version>
-            <url>http://java.sun.com/j2ee</url>
         </dependency>
         <dependency>
             <groupId>tomcat</groupId>
@@ -212,25 +285,10 @@
             <url>http://jakarta.apache.org/tomcat</url>
         </dependency>
         <dependency>
-            <groupId>tools</groupId>
-            <artifactId>tools</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
             <groupId>velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>1.4-rc1</version>
-            <type>jar</type>
+            <version>1.4</version>
             <url>http://jakarta.apache.org/velocity</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>com.cyclopsgroup</groupId>
-            <artifactId>waterview</artifactId>
-            <version>SNAPSHOT</version>
-            <url>http://www.cyclopsgroup.com/projects/waterview</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -249,6 +307,15 @@
             <artifactId>xstream</artifactId>
             <version>20040809</version>
             <url>http://xstream.codehaus.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>plexus</groupId>
+            <artifactId>plexus-avalon-personality</artifactId>
+            <version>0.12</version>
+            <url>http://plexus.codehaus.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
