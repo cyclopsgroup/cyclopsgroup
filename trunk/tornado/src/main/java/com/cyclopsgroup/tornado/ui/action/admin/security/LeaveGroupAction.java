@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,10 @@
  */
 package com.cyclopsgroup.tornado.ui.action.admin.security;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.tornado.security.entity.SecurityEntityManager;
 import com.cyclopsgroup.tornado.security.entity.User;
-import com.cyclopsgroup.tornado.security.entity.UserGroup;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -56,17 +50,12 @@ public class LeaveGroupAction
         }
         String userId = data.getParams().getString( "user_id" );
 
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hib.getSession();
-        User user = (User) s.load( User.class, userId );
-        List ugs = s.createCriteria( UserGroup.class ).add( Expression.eq( "userId", userId ) )
-            .add( Expression.in( "groupId", groupIds ) ).list();
-        for ( Iterator i = ugs.iterator(); i.hasNext(); )
-        {
-            UserGroup ug = (UserGroup) i.next();
-            s.delete( ug );
-        }
-        hib.commitTransaction();
+        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        sem.leaveGroups( userId, groupIds );
+
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        User user = (User) persist.load( User.class, userId );
+
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         security.refreshUser( user.getName() );
         context.addMessage( "User " + user.getName() + " left " + groupIds.length + " groups" );

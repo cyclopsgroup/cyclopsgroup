@@ -80,6 +80,16 @@
             </configuration>
         </component>
         <component>
+            <role>com.cyclopsgroup.tornado.persist.PersistenceManager</role>
+            <implementation>com.cyclopsgroup.tornado.hibernate.impl.HibernatePersistenceManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.security.entity.SecurityEntityManager</role>
+            <implementation>com.cyclopsgroup.tornado.security.entity.SecurityEntityManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.tornado.TornadoComponents</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>

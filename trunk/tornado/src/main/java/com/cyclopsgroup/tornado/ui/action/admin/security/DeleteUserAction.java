@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.action.admin.security;
 
-import org.hibernate.Session;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
@@ -44,19 +42,18 @@ public class DeleteUserAction
         throws Exception
     {
         String[] userIds = data.getParams().getStrings( "user_id" );
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hib.getSession();
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         int count = 0;
         for ( int i = 0; i < userIds.length; i++ )
         {
             String userId = userIds[i];
-            User user = (User) s.load( User.class, userId );
+            User user = (User) persist.load( User.class, userId );
             if ( user.getIsSystem() || user.getIsDisabled() )
             {
                 continue;
             }
             user.setIsDisabled( true );
-            s.update( user );
+            persist.update( user );
             count++;
         }
         context.addMessage( count + " users are disabled" );

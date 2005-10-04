@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,7 @@
  */
 package com.cyclopsgroup.tornado.ui.action.admin.security;
 
-import org.hibernate.Session;
-
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.tornado.security.entity.Group;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
@@ -48,18 +46,18 @@ public class DeleteGroupAction
         {
             return;
         }
-        HibernateService hib = (HibernateService) lookupComponent( HibernateService.ROLE );
-        Session s = hib.getSession();
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         int n = 0;
         for ( int i = 0; i < groupIds.length; i++ )
         {
             String groupId = groupIds[i];
-            Group group = (Group) s.load( Group.class, groupId );
+            Group group = (Group) persist.load( Group.class, groupId );
             if ( group.getIsSystem() || group.getIsDisabled() )
             {
                 continue;
             }
             group.setIsDisabled( true );
+            persist.update( group );
             n++;
         }
         context.addMessage( n + " groups are deleted" );
