@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * Typed value parser
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public abstract class ValueParser
@@ -78,6 +78,11 @@ public abstract class ValueParser
      * @param value
      */
     public abstract void add( String name, String value );
+
+    /**
+     * @return Array of attribute names
+     */
+    protected abstract String[] doGetAttributeNames();
 
     /**
      * Internally get string value
@@ -510,6 +515,25 @@ public abstract class ValueParser
     }
 
     /**
+     * Check if an attribute is empty or not
+     *
+     * @param name Attribute name
+     * @return True if attribute value is empty or doesn't exist
+     */
+    public boolean isEmpty( String name )
+    {
+        return StringUtils.isEmpty( getString( name ) );
+    }
+
+    /**
+     * @return Array of attribute names
+     */
+    public String[] names()
+    {
+        return doGetAttributeNames();
+    }
+
+    /**
      * Remove an attribute
      *
      * @param name Name of the attribute
@@ -529,19 +553,6 @@ public abstract class ValueParser
         {
             add( name, value );
         }
-    }
-
-    /**
-     * @return Array of attribute names
-     */
-    protected abstract String[] doGetAttributeNames();
-
-    /**
-     * @return Array of attribute names
-     */
-    public String[] names()
-    {
-        return doGetAttributeNames();
     }
 
     /**
