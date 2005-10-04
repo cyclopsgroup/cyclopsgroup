@@ -5,6 +5,10 @@
         <attainGoal name="cyclops:pre-xdoc" />
     </preGoal>
 
+    <postGoal name="xdoc:transform">
+        <attainGoal name="cyclops:post-xdoc" />
+    </postGoal>
+
     <goal name="resetdb" prereqs="war:webapp">
         <java classname="com.cyclopsgroup.waterview.jelly.JellyRunner" fork="true" dir="${maven.war.webapp.dir}">
             <classpath>
