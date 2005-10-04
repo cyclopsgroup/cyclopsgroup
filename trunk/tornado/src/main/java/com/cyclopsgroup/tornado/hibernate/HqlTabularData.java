@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.type.Type;
 
+import com.cyclopsgroup.waterview.ValueParser;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnSort;
 import com.cyclopsgroup.waterview.web.Table;
@@ -88,13 +89,28 @@ public class HqlTabularData
         }
     }
 
+    private static final String HQL_AND = " AND ";
+
+    private static final String HQL_LIKE = " LIKE :";
+
     private String dataSource;
 
     private HibernateService hibernate;
 
+    private String hql;
+
     private Map parameters = new HashMap();
 
-    private String hql;
+    /**
+     * Constructor for class HQLTabularData
+     *
+     * @param hql HQL language
+     * @param hibernate Hibernate servcie
+     */
+    public HqlTabularData( String hql, HibernateService hibernate )
+    {
+        this( hql, hibernate, HibernateService.DEFAULT_DATASOURCE );
+    }
 
     /**
      * Constructor for type QueryTableData
@@ -110,17 +126,6 @@ public class HqlTabularData
         this.dataSource = dataSource;
     }
 
-    /**
-     * Constructor for class HQLTabularData
-     *
-     * @param hql HQL language
-     * @param hibernate Hibernate servcie
-     */
-    public HqlTabularData( String hql, HibernateService hibernate )
-    {
-        this( hql, hibernate, HibernateService.DEFAULT_DATASOURCE );
-    }
-
     /**return
      * Add a parameter
      *
@@ -133,8 +138,38 @@ public class HqlTabularData
         throws Exception
     {
         Type hibernateType = (Type) Hibernate.class.getField( type.toUpperCase() ).get( null );
-        Parameter p = new Parameter( name, hibernateType, value );
+        addParameter( name, hibernateType, value );
+    }
+
+    /**
+     * Add parameter
+     *
+     * @param name Parameter name
+     * @param type Parameter type
+     * @param value Parameter value
+     */
+    public void addParameter( String name, Type type, Object value )
+    {
+        Parameter p = new Parameter( name, type, value );
         parameters.put( name, p );
+    }
+
+    /**
+     * Conveniet method to add a string attribute
+     *
+     * @param attributes Attributes parser
+     * @param fieldName Field name
+     */
+    public void addStringCriterion( ValueParser attributes, String fieldName )
+    {
+        String value = attributes.getString( fieldName );
+        if ( StringUtils.isEmpty( value ) )
+        {
+            return;
+        }
+        hql = new StringBuffer( hql ).append( HQL_AND ).append( fieldName ).append( HQL_LIKE ).append( fieldName )
+            .toString();
+        addParameter( fieldName, Hibernate.STRING, '%' + value + '%' );
     }
 
     /**
@@ -234,5 +269,15 @@ public class HqlTabularData
             q.setFirstResult( table.getPageSize() * table.getPageIndex() );
         }
         return q.iterate();
+    }
+
+    /**
+     * Setter method for property hql
+     *
+     * @param hql The hql to set.
+     */
+    public void setHql( String hql )
+    {
+        this.hql = hql;
     }
 }

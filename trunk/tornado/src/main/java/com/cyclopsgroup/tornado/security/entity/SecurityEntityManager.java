@@ -27,6 +27,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
+import com.cyclopsgroup.tornado.hibernate.HqlTabularData;
+import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -125,7 +128,7 @@ public class SecurityEntityManager
             roles.put( ur.getRoleId(), ur.getRole() );
         }
         return new ArrayList( roles.values() );
-    }
+    };
 
     /**
      * Find active user by its name
@@ -141,7 +144,7 @@ public class SecurityEntityManager
         List rs = s.createCriteria( User.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) )
             .add( Expression.eq( "name", name ) ).setMaxResults( 1 ).list();
         return rs.isEmpty() ? null : (User) rs.get( 0 );
-    };
+    }
 
     /**
      * Get all active groups
@@ -190,5 +193,32 @@ public class SecurityEntityManager
             UserGroup ug = (UserGroup) i.next();
             s.delete( ug );
         }
+    }
+
+    /**
+     * Search user
+     *
+     * @param attributes Attributes as input
+     * @return Tabular data
+     * @throws Exception Just throw it out
+     */
+    public TabularData searchUser( ValueParser attributes )
+        throws Exception
+    {
+        StringBuffer sb = new StringBuffer( "FROM " ).append( User.class.getName() ).append( " WHERE 1 = 1" );
+        if ( attributes.getBoolean( "isDisabled" ) )
+        {
+            sb.append( " AND isDisabled = 1" );
+        }
+        else if ( !attributes.getString( "isDisabled" ).equals( "any" ) )
+        {
+            sb.append( " AND isDisabled = 0" );
+        }
+        HqlTabularData data = new HqlTabularData( sb.toString(), getHibernateService() );
+        data.addStringCriterion( attributes, "name" );
+        data.addStringCriterion( attributes, "firstName" );
+        data.addStringCriterion( attributes, "lastName" );
+        data.addStringCriterion( attributes, "email" );
+        return data;
     }
 }
