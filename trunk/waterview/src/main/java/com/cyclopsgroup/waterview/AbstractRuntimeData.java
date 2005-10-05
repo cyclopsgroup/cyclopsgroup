@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Abstract base runtime class
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public abstract class AbstractRuntimeData
@@ -112,6 +112,23 @@ public abstract class AbstractRuntimeData
     public Locale getLocale()
     {
         return locale;
+    }
+
+    /**
+     * Override method getMessages in class AbstractRuntimeData
+     *
+     * @see com.cyclopsgroup.waterview.RuntimeData#getMessages()
+     */
+    public String[] getMessages()
+    {
+        List messages = (List) getSessionContext().get( MESSAGES_NAME );
+        if ( messages == null )
+        {
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        }
+        String[] ret = (String[]) messages.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        messages.clear();
+        return ret;
     }
 
     /**
@@ -297,9 +314,9 @@ public abstract class AbstractRuntimeData
     }
 
     /**
-     * Setter method for locale
+     * Overwrite or implement method setLocale()
      *
-     * @param locale The locale to set.
+     * @see com.cyclopsgroup.waterview.RuntimeData#setLocale(java.util.Locale)
      */
     public void setLocale( Locale locale )
     {
@@ -467,22 +484,5 @@ public abstract class AbstractRuntimeData
     public void stop()
     {
         stopped = true;
-    }
-
-    /**
-     * Override method getMessages in class AbstractRuntimeData
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getMessages()
-     */
-    public String[] getMessages()
-    {
-        List messages = (List) getSessionContext().get( MESSAGES_NAME );
-        if ( messages == null )
-        {
-            return ArrayUtils.EMPTY_STRING_ARRAY;
-        }
-        String[] ret = (String[]) messages.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
-        messages.clear();
-        return ret;
     }
 }

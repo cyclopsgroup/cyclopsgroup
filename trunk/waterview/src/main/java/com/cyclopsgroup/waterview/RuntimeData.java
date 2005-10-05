@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,12 +26,18 @@ import org.apache.avalon.framework.service.ServiceManager;
 
 /**
  * Runtime objects
- * 
+ *
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 
 public interface RuntimeData
 {
+    /** Locale name in session context */
+    String LOCALE_NAME = RuntimeData.class.getName() + "/locale";
+
+    /** Message list name in session context */
+    String MESSAGES_NAME = RuntimeData.class.getName() + "/messags";
+
     /** Name of it in context */
     String NAME = "data";
 
@@ -44,36 +50,38 @@ public interface RuntimeData
     /** Name of service manager in context */
     String SERVICE_MANAGER_NAME = "serviceManager";
 
-    /** Message list name in session context */
-    String MESSAGES_NAME = RuntimeData.class.getName() + "/messags";
-
     /**
      * Get modifiable processor list
-     * 
+     *
      * @return Modifiable list
      */
     List getActions();
 
     /**
      * Get base url for this waterview application
-     * 
+     *
      * @return Base url
      */
     String getApplicationBaseUrl();
 
     /**
      * Get content type of request
-     * 
+     *
      * @return Content type of request
      */
     String getInputContentType();
 
     /**
      * Method getLocale() in class WebRuntime
-     * 
+     *
      * @return Current local object
      */
     Locale getLocale();
+
+    /**
+     * @return Array of messages
+     */
+    String[] getMessages();
 
     /**
      * Get mime type of given path
@@ -99,21 +107,21 @@ public interface RuntimeData
 
     /**
      * Method getRenderTemplate() in class WebRuntime
-     * 
+     *
      * @return Render template
      */
     Path getPage();
 
     /**
      * Base url for page
-     * 
+     *
      * @return Base url for page
      */
     String getPageBaseUrl();
 
     /**
      * Get parameter parser for request parameters
-     * 
+     *
      * @return Vaue parser interface
      */
     RequestValueParser getParams();
@@ -141,21 +149,21 @@ public interface RuntimeData
 
     /**
      * Get context for page rendering
-     * 
+     *
      * @return Context interface
      */
     Context getRequestContext();
 
     /**
      * Get path in request
-     * 
+     *
      * @return Path in request
      */
     String getRequestPath();
 
     /**
      * Method getComponentManager() in class UIRuntime
-     * 
+     *
      * @return Service manager instance
      */
     ServiceManager getServiceManager();
@@ -169,7 +177,7 @@ public interface RuntimeData
 
     /**
      * Get unique ID of session
-     * 
+     *
      * @return Session ID
      */
     String getSessionId();
@@ -183,7 +191,7 @@ public interface RuntimeData
 
     /**
      * Get time zone for current request
-     * 
+     *
      * @return Time zone
      */
     TimeZone getTimeZone();
@@ -196,8 +204,15 @@ public interface RuntimeData
     boolean isStopped();
 
     /**
+     * Set locale
+     *
+     * @param locale Locale to set
+     */
+    void setLocale( Locale locale );
+
+    /**
      * Set content type for response
-     * 
+     *
      * @param contentType Content type
      */
     void setOutputContentType( String contentType );
@@ -211,7 +226,7 @@ public interface RuntimeData
 
     /**
      * Set page to render
-     * 
+     *
      * @param page Page path
      * @throws Exception Throw it out
      */
@@ -234,9 +249,4 @@ public interface RuntimeData
      * Stop the pipeline
      */
     void stop();
-
-    /**
-     * @return Array of messages
-     */
-    String[] getMessages();
 }

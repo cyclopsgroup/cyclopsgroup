@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,7 +22,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * Module manager
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface ModuleManager
@@ -37,7 +37,15 @@ public interface ModuleManager
      * @return View object
      * @throws Exception Throw it out
      */
-    View createDynaView(String viewPath) throws Exception;
+    View createDynaView( String viewPath )
+        throws Exception;
+
+    /**
+     * Get package aliases
+     *
+     * @return Package aliases
+     */
+    String[] getPackageAliases();
 
     /**
      * Get full package name
@@ -45,25 +53,25 @@ public interface ModuleManager
      * @param aliasOrPackage Package alias or package name
      * @return Full package name
      */
-    String getPackageName(String aliasOrPackage);
+    String getPackageName( String aliasOrPackage );
 
     /**
      * @param page
      * @return Path model
      */
-    Path parsePath(String page);
+    Path parsePath( String page );
 
     /**
      * @param pattern
      * @param viewFactory
      */
-    void registerDynaViewFactory(String pattern, DynaViewFactory viewFactory);
+    void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory );
 
     /**
      * @param alias
      * @param packageName
      */
-    void registerPackage(String alias, String packageName);
+    void registerPackage( String alias, String packageName );
 
     /**
      * Run module
@@ -73,6 +81,6 @@ public interface ModuleManager
      * @param context
      * @throws Exception
      */
-    void runModule(String modulePath, RuntimeData data, Context context)
-            throws Exception;
+    void runModule( String modulePath, RuntimeData data, Context context )
+        throws Exception;
 }

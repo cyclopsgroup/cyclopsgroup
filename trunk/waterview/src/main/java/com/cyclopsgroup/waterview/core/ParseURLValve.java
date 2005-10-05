@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.StringUtils;
@@ -31,7 +32,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to prepare information contained by URL
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ParseURLValve
@@ -103,6 +104,11 @@ public class ParseURLValve
             }
         }
         data.getRequestContext().put( Link.NAME, new Link( data ) );
+        Locale locale = (Locale) data.getSessionContext().get( RuntimeData.LOCALE_NAME );
+        if ( locale != null )
+        {
+            data.setLocale( locale );
+        }
         context.invokeNextValve( data );
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>Session Dump</h2>
+    <h2>%waterview.view.sessiondump</h2>
     <p>
         This table lists all attributes in current session context. You may be able to delete any of them from session.
         Be aware of what you are doing before pushing the button.

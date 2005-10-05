@@ -30,6 +30,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.AbstractRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.I18NService;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
 
@@ -81,7 +82,6 @@ public class ServletRuntimeData
         OutputStream outputStream = response.getOutputStream();
         setOutputStream( outputStream );
 
-        //TODO change it to the right one
         InterpolationFilterWriter filterWriter = new InterpolationFilterWriter( new OutputStreamWriter( outputStream ),
                                                                                 '%' )
         {
@@ -93,7 +93,8 @@ public class ServletRuntimeData
             protected String interpolate( String name )
                 throws Exception
             {
-                return name;
+                I18NService i18n = (I18NService) getServiceManager().lookup( I18NService.ROLE );
+                return i18n.translate( name, getLocale() );
             }
         };
         setOutput( new PrintWriter( filterWriter ) );

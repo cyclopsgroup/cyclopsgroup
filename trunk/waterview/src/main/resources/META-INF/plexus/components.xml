@@ -58,6 +58,16 @@
             <implementation>com.cyclopsgroup.waterview.core.NoneCacheManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.I18NService</role>
+            <implementation>com.cyclopsgroup.waterview.core.ResourceBundleI18NService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <bundles>
+                    <bundle>ResourceBundle</bundle>
+                </bundles>
+            </configuration>
+        </component>
         <!--  Default Waterview Configurations -->
         <component>
             <role>com.cyclopsgroup.waterview.Waterview</role>

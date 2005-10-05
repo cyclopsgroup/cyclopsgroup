@@ -6,7 +6,7 @@
                 <img src="${link.getResource('/waterview/cyclopsgroup_logo.png')}" width="160" height="48" />
             </td>
             <td style="padding: 10px;" nowrap="nowrap">
-                <h2 id="pageTitle">Waterview Web Application Framework</h2>
+                <h2 id="pageTitle">%application.description</h2>
             </td>
             <td rowspan="2" align="right" id="bannerPanelRight">
                 <w:BlankImage width="170" height="72" />

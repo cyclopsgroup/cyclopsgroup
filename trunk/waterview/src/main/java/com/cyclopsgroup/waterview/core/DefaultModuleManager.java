@@ -27,6 +27,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
@@ -95,6 +96,16 @@ public class DefaultModuleManager
         Path path = parsePath( viewPath );
         View view = viewFactory.createView( path );
         return view == null ? View.DUMMY : view;
+    }
+
+    /**
+     * Overwrite or implement method getPackageAliases()
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageAliases()
+     */
+    public String[] getPackageAliases()
+    {
+        return (String[]) packageNames.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**

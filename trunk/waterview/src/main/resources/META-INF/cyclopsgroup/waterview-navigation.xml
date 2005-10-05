@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
     <Tree name="waterview.root" position="/">
-        <Node name="home" title="Home" page="/waterview/Index.jelly">
-            <Node page="/waterview/Overview.jelly" title="Waterview Overview" />
+        <Node name="home" title="%waterview.navigation.home" page="/waterview/Index.jelly">
+            <Node page="/waterview/Overview.jelly" title="%waterview.view.waterviewoverview" />
         </Node>
-        <Node name="system" title="System" page="/waterview/system/Index.jelly">
-            <Node name="status" title="Status" page="/waterview/system/status/Index.jelly">
-                <Node page="/waterview/system/status/SessionDump.jelly" title="Session Dump" />
+        <Node name="system" title="%waterview.navigation.system" page="/waterview/system/Index.jelly">
+            <Node name="status" title="%waterview.navigation.status" page="/waterview/system/status/Index.jelly">
+                <Node page="/waterview/system/status/SessionDump.jelly" title="%waterview.view.sessiondump" />
                 <Node page="/waterview/system/status/GlobalVariables.jelly" title="System Variables" />
+                <Node page="/waterview/system/status/SetLocale.jelly" title="%waterview.view.setlocale" />
             </Node>
         </Node>
-        <Node name="help" title="Help" page="/waterview/help/Index.jelly">
+        <Node name="help" title="%waterview.navigation.help" page="/waterview/help/Index.jelly">
             <Node page="/waterview/help/Content.jelly" title="Help Content" />
             <Node name="samples" page="/waterview/help/samples/Index.jelly" title="Sample Pages">
                 <Node page="/waterview/help/samples/SampleForm.jelly" title="Sample Form" />
@@ -19,7 +20,7 @@
                 <Node page="/waterview/help/samples/VelocityView.vm" title="Velocity VIew" />
                 <Node page="/waterview/help/samples/HorizontalTab.jelly" title="Horizontal Tab Sample" />
             </Node>
-            <Node name="abouts" title="About" page="/waterview/help/about/Index.jelly">
+            <Node name="abouts" title="%waterview.navigation.abouts" page="/waterview/help/about/Index.jelly">
                 <Node page="/waterview/help/about/About.jelly" title="About Waterview" />
             </Node>
         </Node>
