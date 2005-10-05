@@ -83,7 +83,7 @@ public class ServletRuntimeData
 
         //TODO change it to the right one
         InterpolationFilterWriter filterWriter = new InterpolationFilterWriter( new OutputStreamWriter( outputStream ),
-                                                                                '^', ';' )
+                                                                                '%' )
         {
             /**
              * Overwrite or implement method interpolate()

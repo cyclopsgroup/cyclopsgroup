@@ -20,6 +20,9 @@ package com.cyclopsgroup.waterview.utils;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -29,9 +32,9 @@ import java.io.Writer;
 public abstract class InterpolationFilterWriter
     extends FilterWriter
 {
-    private Writer output;
+    private static final Pattern NAME_PATTERN = Pattern.compile( "^[a-zA-Z][\\w\\.\\-]*$" );
 
-    private char tokenEnd;
+    private Writer output;
 
     private StringBuffer tokenName;
 
@@ -42,14 +45,12 @@ public abstract class InterpolationFilterWriter
      *
      * @param output Output writer
      * @param tokenStart Start token
-     * @param tokenEnd End token
      */
-    public InterpolationFilterWriter( Writer output, char tokenStart, char tokenEnd )
+    public InterpolationFilterWriter( Writer output, char tokenStart )
     {
         super( output );
         this.output = output;
         this.tokenStart = tokenStart;
-        this.tokenEnd = tokenEnd;
     }
 
     private void exportWord()
@@ -61,16 +62,22 @@ public abstract class InterpolationFilterWriter
         }
         String name = tokenName.toString();
         tokenName = null;
-        try
-        {
-            String value = interpolate( name );
-            output.write( value );
-        }
-        catch ( Exception e )
+        if ( StringUtils.isEmpty( name ) )
         {
             output.write( tokenStart );
-            output.write( name );
-            output.write( tokenEnd );
+        }
+        else
+        {
+            try
+            {
+                String value = interpolate( name );
+                output.write( value );
+            }
+            catch ( Exception e )
+            {
+                output.write( tokenStart );
+                output.write( name );
+            }
         }
     }
 
@@ -111,10 +118,8 @@ public abstract class InterpolationFilterWriter
         throws IOException
     {
         int startPosition = indexOf( cbuf, tokenStart, off );
-        int endPosition = indexOf( cbuf, tokenEnd, off );
         int outBound = off + len;
-        if ( tokenName == null && ( startPosition == -1 || startPosition >= outBound )
-            && ( endPosition == -1 || endPosition >= outBound ) )
+        if ( tokenName == null && ( startPosition == -1 || startPosition >= outBound ) )
         {
             output.write( cbuf, off, len );
         }
@@ -147,17 +152,22 @@ public abstract class InterpolationFilterWriter
         }
         else
         {
-            if ( c == tokenStart || c == tokenEnd )
+            String potentialName = tokenName.toString() + (char) c;
+            if ( NAME_PATTERN.matcher( potentialName ).matches() )
+            {
+                tokenName.append( (char) c );
+            }
+            else
             {
                 exportWord();
                 if ( c == tokenStart )
                 {
                     tokenName = new StringBuffer();
                 }
-            }
-            else
-            {
-                tokenName.append( (char) c );
+                else
+                {
+                    output.write( c );
+                }
             }
         }
     }
@@ -171,10 +181,8 @@ public abstract class InterpolationFilterWriter
         throws IOException
     {
         int startPosition = str.indexOf( tokenStart, off );
-        int endPosition = str.indexOf( tokenEnd, off );
         int outBound = off + len;
-        if ( tokenName == null && ( startPosition == -1 || startPosition >= outBound )
-            && ( endPosition == -1 || endPosition >= outBound ) )
+        if ( tokenName == null && ( startPosition == -1 || startPosition >= outBound ) )
         {
             output.write( str, off, len );
         }

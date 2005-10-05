@@ -21,14 +21,24 @@ import java.io.StringWriter;
 
 import junit.framework.TestCase;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ * Test case for interpolation filter writer
+ */
 public class InterpolationFilterWriterTest
     extends TestCase
 {
+    /**
+     * Test scenario 1
+     *
+     * @throws Exception
+     */
     public void testScenario1()
         throws Exception
     {
         StringWriter s = new StringWriter();
-        InterpolationFilterWriter writer = new InterpolationFilterWriter( s, '%', ' ' )
+        InterpolationFilterWriter writer = new InterpolationFilterWriter( s, '%' )
         {
             /**
              * Overwrite or implement method interpolate()
@@ -43,7 +53,8 @@ public class InterpolationFilterWriterTest
         };
         writer.write( (int) '%' );
         writer.write( "aa" );
-        writer.write( "%missing ,haha, %xyz " );
+        writer.write( "%missing,haha, %xyz%100%abc," );
         System.out.println( s.toString() );
+        assertEquals( "[a][a],haha, [a]%100[a],", s.toString() );
     }
 }
