@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Meta File Sepcfication</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="What is meta file">
+            <p>Meta file means the META-INF/cyclopsgroup/waterview.xml file in classpath in your proejct.</p>
+            <p>
+                This file tells the system what does you package(jar file) contribute to a waterview system. It defines
+                your GUI package(s), tag libraries and resources. You can think it as plugin.xml file in an eclipse
+                plugin, components.xml file in a plexus component or plugin.jelly file in a maven plugin.
+            </p>
+        </section>
+        <section name="Tag Specification">
+            <p>The XML name space file meta file is http://waterview.cyclopsgroup.com/definition.</p>
+            <table>
+                <tr>
+                    <th>Tag</th>
+                    <th>Tag Description</th>
+                    <th>Children</th>
+                    <th>Attribute</th>
+                    <th>Attribute Description</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td>Waterview</td>
+                    <td>Root node of meta file</td>
+                    <td>
+                        TagLibrary*
+                        <br />
+                        ModulePackage*
+                        <br />
+                        IconSet*
+                        <br />
+                        StyleSheet*
+                        <br />
+                        Theme*
+                    </td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>TagLibrary</td>
+                    <td>To define a tag library</td>
+                    <td>TagPackage+</td>
+                    <td>uri</td>
+                    <td>XML namespace for this library</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td>TagPackage</td>
+                    <td>A package of tags</td>
+                    <td>--</td>
+                    <td>className</td>
+                    <td>Full class name of package class</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">ModulePackage</td>
+                    <td rowspan="2">UI module package</td>
+                    <td rowspan="2">--</td>
+                    <td>alias</td>
+                    <td>Short name of package</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>Java package name</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">IconSet</td>
+                    <td rowspan="3">Icon set option</td>
+                    <td rowspan="3">--</td>
+                    <td>name</td>
+                    <td>Icon set unique name</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td>path</td>
+                    <td>Path in classpath for iconset</td>
+                    <td>required</td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td>Description of icon set</td>
+                    <td>optional</td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>

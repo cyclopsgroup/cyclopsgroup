@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -93,7 +93,7 @@ public class DefaultNavigatorService
 
     /**
      * Create runtime root node
-     * 
+     *
      * @param data Runtime data
      * @return Runtiem tree node object
      */
@@ -182,7 +182,7 @@ public class DefaultNavigatorService
 
         rootNode = new DefaultNavigatorNode( this, "/", null );
         rootNode.getAttributes().set( DefaultNavigatorNode.PAGE_NAME, "/Index.jelly" );
-        rootNode.getAttributes().set( DefaultNavigatorNode.TITLE_NAME, "Start" );
+        rootNode.getAttributes().set( DefaultNavigatorNode.TITLE_NAME, "%waterview.navigation.start" );
         addNode( rootNode );
 
         JellyContext jc = new JellyContext();

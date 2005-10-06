@@ -16,6 +16,7 @@
                 <item name="Development Process" href="/guide/process.html" />
             </item>
             <item name="References" href="/guide/references.html" collapse="true">
+                <item name="Meta file specification" href="/guide/metaspec.html" />
                 <item name="UI Tags" href="/guide/uitags.html" />
                 <item name="Module and action" href="/guide/development.html" />
                 <item name="Components" href="/guide/components.html" />

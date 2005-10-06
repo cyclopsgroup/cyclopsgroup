@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <table width="100%" border="0">
     <tr>
-        <td>All rights reserved Cyclops Group 2005</td>
-        <td align="right">Powered By Cyclops Group Waterview</td>
+        <td>%waterview.text.footer.allrights</td>
+        <td align="right">%waterview.text.footer.poweredby</td>
     </tr>
 </table>

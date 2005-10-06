@@ -1,5 +1,5 @@
 body,p,td,th,input,select,textarea {
-	font-family: Sans, Verdana;
+	font-family: Sans, Verdana, Arial;
 	font-size: 8pt;
 }
 
@@ -44,7 +44,7 @@ a img {
 }
 
 .waterviewUnselectedTab,.waterviewUnselectedTab {
-	
+
 }
 
 .waterviewTabBody {

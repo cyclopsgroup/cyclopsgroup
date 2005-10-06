@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 
 import org.apache.avalon.framework.service.ServiceException;
@@ -38,7 +37,8 @@ import com.cyclopsgroup.waterview.spi.Valve;
  *
  * Get resource directly
  */
-public class GetResourceValve implements Valve, Serviceable
+public class GetResourceValve
+    implements Valve, Serviceable
 {
     private static final String PATH_PREFIX = "/resource";
 
@@ -51,31 +51,29 @@ public class GetResourceValve implements Valve, Serviceable
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
         String requestPath = data.getRequestPath();
-        if (!requestPath.startsWith(PREFIX))
+        if ( !requestPath.startsWith( PREFIX ) )
         {
-            throw new IllegalStateException("Make sure the configuration for "
-                    + PREFIX + " is correct");
+            throw new IllegalStateException( "Make sure the configuration for " + PREFIX + " is correct" );
         }
-        String path = requestPath.substring(PREFIX.length());
-        Path p = modules.parsePath(path);
-        String mimeType = data.getMimeType(path);
-        data.setOutputContentType(mimeType);
+        String path = requestPath.substring( PREFIX.length() );
+        Path p = modules.parsePath( path );
+        String mimeType = data.getMimeType( path );
+        data.setOutputContentType( mimeType );
 
         String resourcePath = PATH_PREFIX + p.getPath();
-        if (StringUtils.isNotEmpty(p.getPackage()))
+        if ( StringUtils.isNotEmpty( p.getPackage() ) )
         {
-            resourcePath = p.getPackage().replace('.', '/') + resourcePath;
+            resourcePath = p.getPackage().replace( '.', '/' ) + resourcePath;
         }
-        URL resource = getClass().getClassLoader().getResource(resourcePath);
-        if (resource == null)
+        URL resource = getClass().getClassLoader().getResource( resourcePath );
+        if ( resource != null )
         {
-            throw new FileNotFoundException(resourcePath);
+            IOUtil.copy( resource.openStream(), data.getOutputStream() );
         }
-        IOUtil.copy(resource.openStream(), data.getOutputStream());
     }
 
     /**
@@ -83,8 +81,9 @@ public class GetResourceValve implements Valve, Serviceable
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        modules = (ModuleManager) serviceManager.lookup(ModuleManager.ROLE);
+        modules = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
     }
 }

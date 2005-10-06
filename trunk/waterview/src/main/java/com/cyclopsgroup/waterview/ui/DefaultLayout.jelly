@@ -16,11 +16,12 @@
                     <tr>
                         <td width="25%" valign="top" id="leftPanel">
                             <w:GetPanelViews var="views" panel="navigation">
-                                <w:JellyView name="System Navigation" script="/waterview/DefaultNavigation.jelly" />
-                                <w:View name="Links">
+                                <w:JellyView name="%waterview.view.systemnavigation"
+                                    script="/waterview/DefaultNavigation.jelly" />
+                                <w:View name="%waterview.view.links">
                                     <p>Some help links</p>
                                 </w:View>
-                                <w:View name="References">
+                                <w:View name="%waterview.view.references">
                                     <p>Some reference links</p>
                                 </w:View>
                             </w:GetPanelViews>

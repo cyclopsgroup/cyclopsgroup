@@ -30,6 +30,7 @@ public class ResourceBundle_zh
     private static final Object[][] CONTENTS = {
         { "application.title", "waterview在线系统" },
         { "application.description", "Waterview在线系统框架" },
+        { "waterview.navigation.start", "开始" },
         { "waterview.navigation.home", "首页" },
         { "waterview.navigation.system", "系统" },
         { "waterview.navigation.help", "帮助" },
@@ -37,7 +38,12 @@ public class ResourceBundle_zh
         { "waterview.navigation.status", "当前状态" },
         { "waterview.view.setlocale", "设置地区和语言" },
         { "waterview.view.sessiondump", "查看Session内容" },
-        { "waterview.view.waterviewoverview", "Waterview简介" } };
+        { "waterview.view.waterviewoverview", "Waterview简介" },
+        { "waterview.view.systemnavigation", "系统导航" },
+        { "waterview.view.links", "链接" },
+        { "waterview.view.references", "相关信息" },
+        { "waterview.text.footer.allrights", "所有版权归Cyclops Group所有，2005" },
+        { "waterview.text.footer.poweredby", "由Cyclops Group Waterview大力支持" } };
 
     /**
      * Overwrite or implement method getContents()

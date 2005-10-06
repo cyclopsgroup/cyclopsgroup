@@ -7,6 +7,10 @@ h2 {
 	color: #FF9300;
 }
 
+a:link, a:visited {
+	color: #2E52AF;
+}
+
 #bodyWrapper {
 	background-color: white;
 	max-width: 860px;
@@ -90,7 +94,7 @@ table.waterviewTable .title {
 }
 
 table.waterviewTable td.input {
-	
+
 }
 
 .lineBreak,.subLineBreak {
