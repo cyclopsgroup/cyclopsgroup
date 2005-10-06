@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Home</title>
+        <properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
+    </properties>
+    <body>
+        <section name="What is it">
+            <p>
+                The goal of Cyclops Group is making simple software. The Cyclops Group is an open source project
+                foundation focusing on common, abstract, simple and high quality java software that solve real complex
+                problems.
+            </p>
+            <p>
+                In a spontaneously evolved software world, open source is the power of evolution. We believe that the
+                most innovative solution for real business problem can only be created in the free open source
+                envrionment.
+            </p>
+        </section>
+        <section name="Stuffs">
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            <a href="projects.html">
+                                <b>Projects</b>
+                            </a>
+                        </p>
+                        <p>All projects are currently Java based.</p>
+                        <p>
+                            <a href="projects/waterview">waterview</a>
+                            ,
+                            <a href="projects/tornado">tornado</a>
+                            ,
+                            <a href="projects/levistone">levistone</a>
+                            ,
+                            <a href="projects/clib">clib</a>
+                            ,
+                            <a href="projects/amulets">amulets</a>
+                            ...
+                        </p>
+                    </td>
+                    <td>
+                        <a href="projects.html">
+                            <img src="images/projects_icon.png" width="48" height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <a href="issues">
+                                <b>Issue Tracker</b>
+                            </a>
+                        </p>
+                        <p>
+                            <a href="http://www.atlassian.com/software/jira">Atlassian JIRA</a>
+                            based system, featrues and tasks are maintained here.
+                        </p>
+                        <p>
+                            <a href="issues/browse/waterview">waterview</a>
+                            ,
+                            <a href="issues/browse/tornado">tornado</a>
+                            ,
+                            <a href="issues/browse/levistone">levistone</a>
+                            ,
+                            <a href="issues/browse/clib">clib</a>
+                            ,
+                            <a href="issues/browse/amulets">amulets</a>
+                            ...
+                        </p>
+                    </td>
+                    <td>
+                        <a href="issues">
+                            <img src="images/issues_icon.png" width="48" height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap">
+                        <p>
+                            <a href="kb/display/pkb">
+                                <b>Knowledge Base</b>
+                            </a>
+                        </p>
+                        <p>This knownledge base collects the documentation related to Cyclops Group projects.</p>
+                        <p>
+                            <a href="kb/display/pkb">public</a>
+                            ,
+                            <a href="kb/display/jiaqi">jiaqi</a>
+                            ,
+                            <a href="kb/display/waterview">waterview</a>
+                            ,
+
+                            <a href="kb/display/tornado">tornado</a>
+                            ,
+                            <a href="kb/display/levistone">levistone</a>
+                            ...
+                        </p>
+                    </td>
+                    <td>
+                        <a href="kb/display/pkb">
+                            <img src="images/kb_icon.png" width="48" height="48" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap">
+                        <p>
+                            <a href="http://fisheye.cenqua.com/viewrep/cyclops-group">
+                                <b>Source Repository</b>
+                            </a>
+                        </p>
+                        <p>
+                            Web based CVS monitor system based on
+                            <a href="http://www.cenqua.com/fisheye">cenque fisheye</a>
+                            .
+                        </p>
+                        <p>
+                            <a href="http://fisheye.cenqua.com/viewrep/cyclops-group">View CVS</a>
+                            ,
+                            <a href="http://fisheye.cenqua.com/changelog/cyclops-group">CVS Change Log</a>
+                            ,
+                            <a href="http://fisheye.cenqua.com/search/cyclops-group">Search CVS</a>
+                        </p>
+                    </td>
+                    <td>
+                        <a href="http://fisheye.cenqua.com/viewrep/cyclops-group">
+                            <img src="images/cvs_icon.png" width="48" height="48" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section name="Powered By">
+            <p>
+                There are a lot of items that can be called &quot;Powered By&quot;. For example, my old Pentium MMX 200
+                desktop, my tiny shabby apartment and my favourite chinese restaurant. Of course I'm most powered by
+                <a href="members/xuying/index.html">Xuying</a>
+                , my beautiful and smart wife.
+            </p>
+            <p>
+                Here's a partial list of technologies supporting Cyclops Group foundation. The actual list could go on
+                and on.
+                <table>
+                    <tr>
+                        <td>SourceForge.net</td>
+                        <td>
+                            <a href="http://sourceforge.net">http://sourceforge.net</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apache Maven</td>
+                        <td>
+                            <a href="http://maven.apache.org">http://maven.apache.org</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Anthill</td>
+                        <td>
+                            <a href="http://www.urbancode.com/products/anthillpro">
+                                http://www.urbancode.com/products/anthillpro
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Eclipse</td>
+                        <td>
+                            <a href="http://eclipse.org">http://eclipse.org</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Atlassian JIRA</td>
+                        <td>
+                            <a href="http://www.atlassian.com/software/jira">http://www.atlassian.com/software/jira</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Atlassian Confluence</td>
+                        <td>
+                            <a href="http://www.atlassian.com/software/confluence">
+                                http://www.atlassian.com/software/confluence
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cenqua Clover</td>
+                        <td>
+                            <a href="http://www.cenqua.com/clover">http://www.cenqua.com/clover</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cenqua Fisheye</td>
+                        <td>
+                            <a href="http://www.cenqua.com/fisheye">http://www.cenqua.com/fisheye</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Codehaus Maven Proxy</td>
+                        <td>
+                            <a href="http://maven-proxy.codehaus.org">http://maven-proxy.codehaus.org</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Codehaus MevenIDE</td>
+                        <td>
+                            <a href="http://mevenide.codehaus.org">http://mevenide.codehaus.org</a>
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+    </body>
+</document>

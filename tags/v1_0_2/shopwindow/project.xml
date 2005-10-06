@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+    <extend>${maven.repo.local}/com.cyclopsgroup/poms/cyclopsgroup-1.0.pom</extend>
+    <pomVersion>3</pomVersion>
+    <id>shopwindow</id>
+    <name>Cyclops Group</name>
+    <currentVersion>1.0-b2</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.com</url>
+        <logo>/images/cyclopsgroup_logo.png</logo>
+    </organization>
+    <inceptionYear>2003</inceptionYear>
+    <shortDescription>Simple software for real human</shortDescription>
+    <url>www.cyclopsgroup.com</url>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}</siteDirectory>
+    <developers>
+        <developer>
+            <name>Guo, Jiaqi</name>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+    <build />
+</project>
