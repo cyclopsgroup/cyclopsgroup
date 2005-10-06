@@ -37,7 +37,7 @@ public class ResourceBundle_zh
         { "waterview.navigation.status", "当前状态" },
         { "waterview.view.setlocale", "设置地区和语言" },
         { "waterview.view.sessiondump", "查看Session内容" },
-        { "waterview.view.waterviewoverview", "Water简介" } };
+        { "waterview.view.waterviewoverview", "Waterview简介" } };
 
     /**
      * Overwrite or implement method getContents()
