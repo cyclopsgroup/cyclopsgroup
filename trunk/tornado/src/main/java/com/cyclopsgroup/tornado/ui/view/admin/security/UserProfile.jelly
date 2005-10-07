@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>User Profile - ${userObject.displayName}</h2>
+    <h2>%tornado.navigation.userprofile - ${userObject.displayName}</h2>
     <w:HorizontalTabControl name="userprofile">
         <w:Tab name="basic" title="Basic Information">
             <table width="100%" class="waterviewTable">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>My Profile</h2>
+    <h2>%tornado.navigation.myprofile</h2>
     <w:TiledFormControl>
         <w:Form method="post" name="userinfo">
             <input type="hidden" name="user_id" value="${userObject.id}" />

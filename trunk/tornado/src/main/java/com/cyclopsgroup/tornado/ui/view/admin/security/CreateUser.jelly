@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>Create New User</h2>
+    <h2>%tornado.navigation.createuser</h2>
     <p>This page take you to creating a new user for system.</p>
     <w:TiledFormControl>
         <w:Form name="userform" method="post">

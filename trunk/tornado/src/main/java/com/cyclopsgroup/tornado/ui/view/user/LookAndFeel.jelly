@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <h2>Look and Feel Settings</h2>
+    <h2>%tornado.navigation.lookandfeel</h2>
     <j:if test="${noPreference}">
         <w:FormControl>
             <w:Form method="post" name="createpreference">

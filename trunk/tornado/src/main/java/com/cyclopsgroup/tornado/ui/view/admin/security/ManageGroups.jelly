@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <h2>Group Management</h2>
+    <h2>%tornado.navigation.groups</h2>
     <w:FormControl>
         <w:Form name="groupform" method="post">
             <w:TableControl configurable="true">

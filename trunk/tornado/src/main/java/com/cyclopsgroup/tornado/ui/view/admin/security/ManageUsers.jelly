@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:t="http://tornado.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <h2>User Management</h2>
+    <h2>%tornado.navigation.users</h2>
     <p>You may manage user information here</p>
     <w:TiledFormControl>
         <w:Form name="searchuser">
