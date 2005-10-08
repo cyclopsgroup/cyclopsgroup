@@ -17,9 +17,9 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.spi.BaseTheme;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Resource;
 
 class ThemeProxy
     extends BaseTheme

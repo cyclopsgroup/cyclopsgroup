@@ -26,9 +26,9 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
+import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
 
 /**
@@ -155,7 +155,7 @@ public class DefaultLookAndFeelService
     /**
      * Overwrite or implement method registerIconSet()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerIconSet(java.lang.String, com.cyclopsgroup.waterview.Resource)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerIconSet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
      */
     public void registerIconSet( String name, Resource resource )
     {
@@ -165,7 +165,7 @@ public class DefaultLookAndFeelService
     /**
      * Overwrite or implement method registerStylesheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyleSheet(java.lang.String, com.cyclopsgroup.waterview.Resource)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyleSheet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
      */
     public void registerStyleSheet( String name, Resource stylesheet )
     {

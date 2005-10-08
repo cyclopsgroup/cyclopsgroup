@@ -19,8 +19,8 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**

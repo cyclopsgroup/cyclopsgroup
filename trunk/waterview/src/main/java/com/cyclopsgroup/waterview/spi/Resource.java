@@ -15,9 +15,12 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
 
 import org.apache.commons.lang.enums.Enum;
+
+import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
