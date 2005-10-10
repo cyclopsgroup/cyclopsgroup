@@ -2,6 +2,17 @@
 <plexus>
     <components>
         <component>
+            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <pipelines>
+                    <pipeline pattern="/!get!/.*" role="com.cyclopsgroup.waterview.GetResourcePipeline" />
+                    <pipeline pattern=".*" role="com.cyclopsgroup.tornado.DefaultTornadoPipeline" />
+                </pipelines>
+            </configuration>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -15,6 +26,27 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <default-package>courselist</default-package>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.navigator.NavigatorService</role>
+            <implementation>com.cyclopsgroup.tornado.portal.impl.SecureNavigatorService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <path>META-INF/cyclopsgroup/waterview-navigation.xml</path>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceService.default</role>
+            <implementation>com.cyclopsgroup.tornado.sql.DBCPDataSourceService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <property name="driverClassName">com.mysql.jdbc.Driver</property>
+                <property name="url">jdbc:mysql://localhost/courselist</property>
+                <property name="username">dev</property>
+                <property name="password">dev</property>
+                <property name="maxActive">5</property>
+                <property name="defaultAutoCommit">false</property>
             </configuration>
         </component>
     </components>

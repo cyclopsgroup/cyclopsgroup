@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Hibernate xmlns="http://tornado.cyclopsgroup.com/tool">
+    <Class name="com.cyclopsgroup.tornado.security.entity.Role">
+        <New var="roleStudent" name="student" description="Student role" isSystem="true" />
+    </Class>
+    <Class name="com.cyclopsgroup.tornado.security.entity.Group">
+        <New var="groupStudents" name="students" description="Student group" isSystem="true" />
+    </Class>
+    <Class name="com.cyclopsgroup.tornado.security.entity.GroupRole">
+        <New groupId="${groupStudents.id}" roleId="${roleStudent.id}" />
+    </Class>
+    <Class name="com.cyclopsgroup.tornado.security.entity.RolePermission">
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/Index.jelly" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/CourseIndex.jelly" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/CourseList.jelly" />
+    </Class>
+</Hibernate>
