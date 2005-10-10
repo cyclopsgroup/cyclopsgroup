@@ -6,24 +6,30 @@
             <w:TableControl configurable="true">
                 <w:CollectionTabularData items="${allGroups}" />
                 <w:Table name="grouptable" var="group">
-                    <w:Column name="id" title="Select" sort="unsorted" display="forced">
+                    <w:Column name="id" title="%document.text.select" sort="unsorted" display="forced">
                         <input type="checkbox" name="group_id" value="${group.id}" />
                     </w:Column>
-                    <w:Column name="name" title="Group Name" sort="asc" display="forced">${group.name}</w:Column>
-                    <w:Column name="description" title="Description">
+                    <w:Column name="name" title="%document.text.name" sort="asc" display="forced">
+                        ${group.name}
+                    </w:Column>
+                    <w:Column name="description" title="%document.text.description">
                         <input type="text" name="description_${group.id}" value="${group.description}" size="40"
                             class="waterviewFormInput" />
                     </w:Column>
-                    <w:Column name="isDisabled" title="Disabled" display="hidden">${group.idDisabled}</w:Column>
-                    <w:Column name="isSystem" title="System" sort="unsorted">${group.isSystem}</w:Column>
+                    <w:Column name="isDisabled" title="%document.text.disabled" display="hidden">
+                        %document.text.${group.idDisabled}
+                    </w:Column>
+                    <w:Column name="isSystem" title="%document.text.system" sort="unsorted">
+                        %document.text.${group.isSystem}
+                    </w:Column>
                 </w:Table>
             </w:TableControl>
             <div>
                 <w:Submit action="${link.addAction('/tornado/admin/security/SaveGroupAction').setPage(page)}">
-                    <w:FormButton title="Save Selected" />
+                    <w:FormButton title="%document.text.savechange" />
                 </w:Submit>
                 <w:Submit action="${link.addAction('/tornado/admin/security/DeleteGroupAction').setPage(page)}">
-                    <w:FormButton title="Delete Selected" />
+                    <w:FormButton title="%document.text.deleteselected" />
                 </w:Submit>
             </div>
         </w:Form>
@@ -31,8 +37,8 @@
     <h2>Create New Group</h2>
     <w:TiledFormControl columns="1">
         <w:Form name="creategroup" method="post">
-            <w:Field name="name" title="Group name" required="true" />
-            <w:Field name="description" title="Description" size="40" />
+            <w:Field name="name" title="%document.text.name" required="true" />
+            <w:Field name="description" title="%document.text.description" size="40" />
             <w:Submit action="${link.addAction('/tornado/admin/security/CreateGroupAction').setPage(page)}"
                 forceValidation="true">
                 <w:FormButton title="Create" />

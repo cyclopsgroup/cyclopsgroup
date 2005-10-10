@@ -42,7 +42,7 @@
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <property name="driverClassName">com.mysql.jdbc.Driver</property>
-                <property name="url">jdbc:mysql://localhost/tornado</property>
+                <property name="url">jdbc:mysql://localhost/tornado?useUnicode=true</property>
                 <property name="username">dev</property>
                 <property name="password">dev</property>
                 <property name="maxActive">5</property>
