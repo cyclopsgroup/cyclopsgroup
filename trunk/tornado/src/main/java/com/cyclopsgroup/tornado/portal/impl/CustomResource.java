@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,23 +21,24 @@ import com.cyclopsgroup.tornado.portal.PortalService;
 import com.cyclopsgroup.tornado.portal.UserPreference;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
-import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Resource;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Custom resource
  */
-public abstract class CustomResource extends Resource
+public abstract class CustomResource
+    extends Resource
 {
     /**
      * Constructor for class CustomResource
      */
     public CustomResource()
     {
-        super(Resource.INTERNAL, null);
+        super( Resource.INTERNAL, null );
     }
 
     /**
@@ -48,34 +49,31 @@ public abstract class CustomResource extends Resource
      * @return Resource object
      * @throws Exception Throw it out
      */
-    protected abstract Resource doGetResource(LookAndFeelService laf,
-            UserPreference pref) throws Exception;
+    protected abstract Resource doGetResource( LookAndFeelService laf, UserPreference pref )
+        throws Exception;
 
     /**
      * Overwrite or implement method toURL()
      *
-     * @see com.cyclopsgroup.waterview.Resource#toURL(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.Resource#toURL(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public String toURL(RuntimeData data) throws Exception
+    public String toURL( RuntimeData data )
+        throws Exception
     {
-        RuntimeUser user = RuntimeUser.getInstance(data);
-        PortalService portal = (PortalService) data.getServiceManager().lookup(
-                PortalService.ROLE);
-        UserPreference up = portal.findUserPreference(user.getId());
-        if (up == null && !user.isGuest())
+        RuntimeUser user = RuntimeUser.getInstance( data );
+        PortalService portal = (PortalService) data.getServiceManager().lookup( PortalService.ROLE );
+        UserPreference up = portal.findUserPreference( user.getId() );
+        if ( up == null && !user.isGuest() )
         {
-            SecurityService security = (SecurityService) data
-                    .getServiceManager().lookup(SecurityService.ROLE);
-            up = portal.findUserPreference(security.getGuestUser().getId());
+            SecurityService security = (SecurityService) data.getServiceManager().lookup( SecurityService.ROLE );
+            up = portal.findUserPreference( security.getGuestUser().getId() );
         }
-        if (up == null)
+        if ( up == null )
         {
-            throw new IllegalStateException(
-                    "Custom style must be selected when user preference is created");
+            throw new IllegalStateException( "Custom style must be selected when user preference is created" );
         }
-        LookAndFeelService laf = (LookAndFeelService) data.getServiceManager()
-                .lookup(LookAndFeelService.ROLE);
-        Resource resource = doGetResource(laf, up);
-        return resource.toURL(data);
+        LookAndFeelService laf = (LookAndFeelService) data.getServiceManager().lookup( LookAndFeelService.ROLE );
+        Resource resource = doGetResource( laf, up );
+        return resource.toURL( data );
     }
 }

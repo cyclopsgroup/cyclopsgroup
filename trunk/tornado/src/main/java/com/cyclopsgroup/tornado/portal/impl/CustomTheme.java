@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@
 package com.cyclopsgroup.tornado.portal.impl;
 
 import com.cyclopsgroup.tornado.portal.UserPreference;
-import com.cyclopsgroup.waterview.Resource;
 import com.cyclopsgroup.waterview.spi.BaseTheme;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
 
 /**
@@ -45,7 +45,7 @@ public class CustomTheme
 
     /**
      * Constructor for class CustomTheme
-     * 
+     *
      * @param defaultTheme Default proxy theme
      */
     public CustomTheme( Theme defaultTheme )
