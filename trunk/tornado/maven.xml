@@ -10,13 +10,13 @@
     </postGoal>
 
     <goal name="resetdb" prereqs="war:webapp">
-        <java classname="com.cyclopsgroup.waterview.jelly.JellyRunner" fork="true" dir="${maven.war.webapp.dir}">
+        <java classname="com.cyclopsgroup.waterview.jelly.JellyScriptsRunner" fork="true"
+            dir="${maven.war.webapp.dir}">
             <classpath>
                 <path refid="maven.dependency.classpath" />
                 <pathelement path="${maven.build.dest}" />
             </classpath>
-            <arg value="META-INF/cyclopsgroup/DropAndCreateTables.jelly" />
-            <arg value="META-INF/cyclopsgroup/InsertData.jelly" />
+            <arg value="WEB-INF/resetdb.properties" />
         </java>
     </goal>
 </project>
