@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,6 +83,7 @@ public class NewTag
         if ( StringUtils.isNotEmpty( var ) )
         {
             context.setVariable( var, entity );
+            context.setVariable( var, "parent", entity );
         }
     }
 }
