@@ -3,16 +3,14 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
     <display-name>Waterview</display-name>
-    <description>
-      Waterview Web Application Framework
-    </description>
+    <description>Waterview Web Application Framework</description>
     <servlet>
-        <servlet-name>waterview</servlet-name>
+        <servlet-name>laputa</servlet-name>
         <servlet-class>com.cyclopsgroup.waterview.servlet.WaterviewServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>waterview</servlet-name>
-        <url-pattern>/servlet/waterview/*</url-pattern>
+        <servlet-name>laputa</servlet-name>
+        <url-pattern>/servlet/laputa/*</url-pattern>
     </servlet-mapping>
 </web-app>
