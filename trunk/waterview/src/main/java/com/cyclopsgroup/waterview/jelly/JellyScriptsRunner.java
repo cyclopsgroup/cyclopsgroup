@@ -95,13 +95,9 @@ public class JellyScriptsRunner
             ExtendedProperties ep = new ExtendedProperties();
             ep.putAll( initProperties );
             ep.load( script.openStream() );
-            for ( Iterator j = ep.keySet().iterator(); i.hasNext(); )
+            for ( Iterator j = ep.getKeys( "script" ); j.hasNext(); )
             {
                 String name = (String) j.next();
-                if ( !name.startsWith( "script." ) )
-                {
-                    continue;
-                }
                 if ( name.endsWith( ".file" ) )
                 {
                     File file = new File( ep.getString( name ) );
