@@ -69,7 +69,13 @@ public class ResourceBundle_zh
         { "document.text.configure", "配置" },
         { "document.text.info", "信息" },
         { "document.text.reload", "重新载入" },
-        { "document.text.page", "页" } };
+        { "document.text.page", "页" },
+        { "document.text.system", "系统" },
+        { "document.text.true", "是" },
+        { "document.text.false", "否" },
+        { "document.text.any", "任何" },
+        { "document.text.time", "时间" },
+        { "document.text.date", "日期" } };
 
     /**
      * Overwrite or implement method getContents()
