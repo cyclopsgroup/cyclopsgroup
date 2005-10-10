@@ -3,9 +3,11 @@
     <body>
         <menu name="Documentation">
             <item name="What is it" href="/index.html" />
-            <item name="Test story" href="/integratedtesting.html" />
+            <item name="The benefit" href="/benefit.html" />
+            <item name="Test stories" href="/integratedtesting.html" />
             <item name="Design" href="/design.html" />
             <item name="Install and run" href="/install.html" />
+            <item name="Development team" href="/team-list.html" />
         </menu>
         <links>
             <item name="Live Demo" href="http://www.cyclopsgroup.com/courselist" />
