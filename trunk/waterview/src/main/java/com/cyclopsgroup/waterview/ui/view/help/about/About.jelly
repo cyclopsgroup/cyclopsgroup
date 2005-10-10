@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
-    <h2>About Waterview</h2>
+    <h2>%waterview.view.aboutwaterview</h2>
     <p>
         Waterview is an open source portal-like web application framework. It is founded by Cyclops Group software
         foundation, under Common Development and Distribution License 1.0. Please go to

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <head>
-        <title>${application.title}</title>
+        <j:set var="mainTitle" value="${navigator.getNodeByPage(data.page.fullPath).title}" />
+        <title>%application.title :::: ${mainTitle}</title>
         <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
     </head>
     <body>
@@ -73,8 +74,6 @@
                                 </j:if>
                                 <tr>
                                     <td>
-                                        <j:set var="mainTitle"
-                                            value="${navigator.getNodeByPage(data.page.fullPath).title}" />
                                         <w:GetPanelViews var="views" panel="body">
                                             <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}"
                                                 title="${mainTitle}" />

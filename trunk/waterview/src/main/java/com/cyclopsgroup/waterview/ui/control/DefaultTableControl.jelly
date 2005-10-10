@@ -69,9 +69,9 @@
                 <table width="100%" cellspading="0" cellpadding="0">
                     <tr>
                         <td>
-                            <j:if test="${tabularData.countable}">${tabularData.getSize()} Records.</j:if>
+                            <j:if test="${tabularData.countable}">${tabularData.getSize()} %document.text.record</j:if>
                             <j:if test="${table.pageSize gt 0}">
-                                Page ${table.pageIndex + 1}
+                                %document.text.page ${table.pageIndex + 1}
                                 <j:set var="pageCount" value="${table.getPageCount(tabularData)}" />
                                 <j:if test="${tabularData.countable}">of ${pageCount}</j:if>
                             </j:if>
@@ -98,7 +98,7 @@
                                         </j:if>
                                         <td>
                                             <j:set var="startIndex" value="${table.pageIndex * table.pageSize}" />
-                                            Record ${startIndex + 1} ~ ${startIndex + rowCount}
+                                            %document.text.record ${startIndex + 1} ~ ${startIndex + rowCount}
                                         </td>
                                         <j:if test="${table.pageIndex lt pageCount - 1}">
                                             <td>
@@ -125,14 +125,14 @@
                                             <a
                                                 href="${link.addAction('/waterview/DeleteSessionAttributes').setPage(page).addQueryString(data.queryString).addQueryData('attribute_name', table.id)}">
                                                 <img src="${themeBase}/16x16/reload.png" width="16" height="16"
-                                                    alt="Reload Table" />
+                                                    alt="%document.text.reload" />
                                             </a>
                                         </td>
                                         <td>
                                             <a
                                                 href="${link.setPage('/waterview/popup/ConfigureTable.jelly').addQueryData('table_id', table.id)}">
                                                 <img src="${themeBase}/16x16/edit.png" width="16" height="16"
-                                                    alt="Configure Table" />
+                                                    alt="%document.text.configure" />
                                             </a>
                                         </td>
                                     </j:if>

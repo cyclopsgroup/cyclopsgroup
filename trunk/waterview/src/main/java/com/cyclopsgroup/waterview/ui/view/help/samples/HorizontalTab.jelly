@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <h2>Sample of a horizontal tab control</h2>
+    <h2>%waterview.view.horizontaltab</h2>
     <w:HorizontalTabControl name="tabs">
         <w:Tab name="tab1" title="First Tab">
             <h3>Hello everyone</h3>

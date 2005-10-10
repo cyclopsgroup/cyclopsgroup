@@ -20,7 +20,7 @@
                 </j:forEach>
             </select>
             <w:Submit action="${link.addAction('/waterview/ChangeLocale').setPage(page)}">
-                <w:FormButton title="Save Change" />
+                <w:FormButton title="%document.text.savechange" />
             </w:Submit>
         </w:Form>
     </w:FormControl>
