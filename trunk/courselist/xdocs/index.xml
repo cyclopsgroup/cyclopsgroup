@@ -53,5 +53,13 @@
                 or contact capabilities.
             </p>
         </section>
+        <section name="Be Attention">
+            <p>
+                Courselist is a pure academic project only for study purpose. It's not intent to solve any real industry
+                problem or become a software product. Currently it's under
+                <a href="http://www.opensource.org/licenses/cddl1.php">CDDL-1.0</a>
+                license.
+            </p>
+        </section>
     </body>
 </document>
