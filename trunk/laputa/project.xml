@@ -22,30 +22,6 @@
             <url>http://www.cyclopsgroup.com/kb/display/jiaqi</url>
             <timezone>-6</timezone>
         </developer>
-        <developer>
-            <name>Chris Menken</name>
-            <id>chrismenken</id>
-            <email>cpm022000@utdallas.edu</email>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>Jarvis Cline</name>
-            <id>jarviscline</id>
-            <email>jrc032000@utdallas.edu</email>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>John Christin</name>
-            <id>jchristin</id>
-            <email>jchristin@gmail.com</email>
-            <timezone>-6</timezone>
-        </developer>
-        <developer>
-            <name>Josh Allen</name>
-            <id>joshallen</id>
-            <email>HoopsJosh@gmail.com</email>
-            <timezone>-6</timezone>
-        </developer>
     </developers>
     <dependencies>
         <dependency>
