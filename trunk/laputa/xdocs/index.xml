@@ -6,7 +6,13 @@
     </properties>
     <body>
         <section name="What is Laputa">
-            <p>Laputa is a community system based on <a href="http://www.cyclopsgroup.com/projects">waterview</a>, <a href="http://incubator.apache.org/jackrabbit">apache jackrabbit</a> and <a href="http://www.hibernate.org">hibernate</a>.</p>
+            <p>
+                Laputa is a community system based on
+                <a href="http://www.cyclopsgroup.com/projects/waterview">waterview</a>
+                and
+                <a href="http://www.cyclopsgroup.com/projects/tornado">tornado</a>
+                .
+            </p>
         </section>
     </body>
 </document>
