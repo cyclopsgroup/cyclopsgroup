@@ -38,7 +38,16 @@ public class ResourceBundle_zh
         { "tornado.navigation.portal", "站点管理" },
         { "tornado.navigation.lookandfeel", "网站外观" },
         { "tornado.navigation.myinfo", "我的地盘" },
-        { "tornado.navigation.myprofile", "我的个人信息" } };
+        { "tornado.navigation.myprofile", "我的个人信息" },
+        { "tornado.p.notlogin", "您还没有登录" },
+        { "document.text.password", "口令" },
+        { "document.text.timeout", "超时" },
+        { "document.text.minute", "分钟" },
+        { "document.text.hour", "小时" },
+        { "document.text.second", "秒" },
+        { "document.text.login", "登录" },
+        { "document.text.logout", "离开" },
+        { "document.text.hello", "您好" } };
 
     /**
      * Overwrite or implement method getContents()

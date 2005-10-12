@@ -75,7 +75,9 @@ public class ResourceBundle_zh
         { "document.text.false", "否" },
         { "document.text.any", "任何" },
         { "document.text.time", "时间" },
-        { "document.text.date", "日期" } };
+        { "document.text.date", "日期" },
+        { "document.text.search", "搜索" },
+        { "document.text.save", "保存" } };
 
     /**
      * Overwrite or implement method getContents()
