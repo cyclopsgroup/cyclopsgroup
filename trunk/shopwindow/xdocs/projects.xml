@@ -106,13 +106,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.cyclopsgroup.com">shopwindow</a>
-                        </td>
-                        <td>The project is this website itself.</td>
-                        <td>Planning</td>
-                    </tr>
-                    <tr>
-                        <td>
                             <a href="http://albumbuilder.sourceforge.net">albumbuilder</a>
                         </td>
                         <td>A tool to generate static photo album web site from folders of images.</td>
