@@ -27,6 +27,13 @@
                     </tr>
                     <tr>
                         <td>
+                            <a href="projects/tornado">tornado</a>
+                        </td>
+                        <td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
+                        <td>First version is released</td>
+                    </tr>
+                    <tr>
+                        <td>
                             <a href="projects/levistone">levistone</a>
                         </td>
                         <td>A database access interface higher than JDBC. Very similar to Apache Torque.</td>
@@ -41,24 +48,29 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="projects/clib">clib</a>
-                        </td>
-                        <td>Common library</td>
-                        <td>Under active development</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="projects/tornado">tornado</a>
-                        </td>
-                        <td>Tornado is a web application framework, an enriched servlet of Apache Jakarta Turbine.</td>
-                        <td>First version is released</td>
-                    </tr>
-                    <tr>
-                        <td>
                             <a href="projects/laputa">laputa</a>
                         </td>
-                        <td>Laputa is expected to be a collaboration platform</td>
-                        <td>Just started</td>
+                        <td>Laputa is expected to be a collaboration platform based on waterview and tornado</td>
+                        <td>Planning</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="http://www.cyclopsgroup.com">shopwindow</a>
+                        </td>
+                        <td>The project is this website itself.</td>
+                        <td>Stable</td>
+                    </tr>
+                    <tr>
+                        <td>nimbus</td>
+                        <td>The portal website for the next generation of cyclopsgroup website</td>
+                        <td>Planning</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="projects/courselist">courselist</a>
+                        </td>
+                        <td>A simple academic web application which maintains a list of college courses.</td>
+                        <td>Under development</td>
                     </tr>
                     <tr>
                         <td>
@@ -69,7 +81,7 @@
                             plug into this framework.
                             <font color="red">This project is deprecated.</font>
                         </td>
-                        <td>It is able to work now but not released yet.</td>
+                        <td>Deprecated</td>
                     </tr>
                     <tr>
                         <td>
@@ -81,7 +93,7 @@
                             implementation. Also, jrepo will provide applications based on this standard which provides
                             web based user interface.
                         </td>
-                        <td>Just started</td>
+                        <td>Planning</td>
                     </tr>
                     <tr>
                         <td>
@@ -90,21 +102,21 @@
                         <td>
                             Jlone will be a CMS based web application similar to ZOPE. It will try to work with JSR 170.
                         </td>
-                        <td>Nothing but an idea</td>
+                        <td>Planning</td>
                     </tr>
                     <tr>
                         <td>
                             <a href="http://www.cyclopsgroup.com">shopwindow</a>
                         </td>
                         <td>The project is this website itself.</td>
-                        <td>Stable</td>
+                        <td>Planning</td>
                     </tr>
                     <tr>
                         <td>
                             <a href="http://albumbuilder.sourceforge.net">albumbuilder</a>
                         </td>
                         <td>A tool to generate static photo album web site from folders of images.</td>
-                        <td>Dead lone time ago.</td>
+                        <td>Deprecated</td>
                     </tr>
                 </table>
             </p>
