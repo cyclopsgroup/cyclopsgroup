@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <j:set var="mainTitle" scope="parent" value="${navigator.getNodeByPage(data.page.fullPath).title}" />
+    <title>%application.title :::: ${mainTitle}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="keyword" content="Cyclops Group, cyclopsgroup, waterview" />
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource('/waterview/waterviewbase.css')}" />
