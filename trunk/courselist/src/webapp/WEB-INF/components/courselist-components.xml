@@ -2,17 +2,6 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.waterview.Waterview</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <pipelines>
-                    <pipeline pattern="/!get!/.*" role="com.cyclopsgroup.waterview.GetResourcePipeline" />
-                    <pipeline pattern=".*" role="com.cyclopsgroup.tornado.DefaultTornadoPipeline" />
-                </pipelines>
-            </configuration>
-        </component>
-        <component>
             <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>

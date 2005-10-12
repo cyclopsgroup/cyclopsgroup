@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,19 +16,24 @@
  */
 package com.cyclopsgroup.courselist.ui.action;
 
-import com.cyclopsgroup.courselist.Course;
-import com.cyclopsgroup.courselist.CoursePersistenceManager;
+import com.cyclopsgroup.courselist.CourseListService;
+import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
+import com.cyclopsgroup.waterview.RequestValueParser;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Action to create course
  */
-public class CreateCourseAction extends BaseServiceable implements Action
+public class CreateCourseAction
+    extends BaseServiceable
+    implements Action
 {
 
     /**
@@ -36,27 +41,23 @@ public class CreateCourseAction extends BaseServiceable implements Action
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, ActionContext context)
-            throws Exception
+    public void execute( RuntimeData data, ActionContext context )
+        throws Exception
     {
-        String number = data.getParams().getString("course_number");
-        CoursePersistenceManager cpm = (CoursePersistenceManager) lookupComponent(CoursePersistenceManager.ROLE);
-        Course course = cpm.findByNumber(number);
-        if (course != null)
+        RequestValueParser params = data.getParams();
+        String prefix = params.getString( "prefix" );
+        String code = params.getString( "courseCode" );
+        CourseListService cl = (CourseListService) lookupComponent( CourseListService.ROLE );
+        if ( cl.findByCode( prefix, code ) != null )
         {
-            context.error("course_number", "Course " + number
-                    + " already exists");
-            return;
+            context.error( "courseCode", "This course already exists" );
         }
 
-        course = new Course();
-        course.setPrefix(data.getParams().getString("prefix"));
-        course.setTitle(data.getParams().getString("course_title"));
-        course.setNumber(number);
-        course.setDescription(data.getParams().getString("description"));
-        course.setPrerequisite(data.getParams().getString("pre_requisite"));
-        course.setCoRequisite(data.getParams().getString("co_requisite"));
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        Course course = (Course) persist.create( Course.class );
+        TypeUtils.getBeanUtils().populate( course, params.toProperties() );
 
-        cpm.save(course);
+        persist.saveNew( course );
+        context.addMessage( "New course " + prefix + "/" + code + " is created" );
     }
 }

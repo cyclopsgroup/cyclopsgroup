@@ -6,24 +6,28 @@
             <w:Form method="post" name="deletecourse">
                 <tr>
                     <td>
-                        <w:TableControl>
+                        <w:TableControl configurable="true">
                             <w:CollectionTabularData items="${courses}" />
                             <w:Table var="course" name="coursetable">
-                                <w:Column name="select" title="Select">
-                                    <input type="checkbox" name="course_number" value="${course.number}" />
+                                <w:Column name="select" title="%document.text.select">
+                                    <input type="checkbox" name="course_id" value="${course.id}" />
                                 </w:Column>
-                                <w:Column name="number" title="Course Number" sort="asc">
+                                <w:Column name="courseCode" title="Course Code" sort="asc">
                                     <a
-                                        href="${link.setPage('/courselist/EditCourse.jelly').addQueryData('course_number', course.number)}">
-                                        ${course.number}
+                                        href="${link.setPage('/courselist/EditCourse.jelly').addQueryData('course_id', course.id)}">
+                                        ${course.courseCode}
                                     </a>
                                 </w:Column>
-                                <w:Column name="title" title="Title" sort="unsorted">${course.title}</w:Column>
-                                <w:Column name="prequisite" title="Pre-requisite">${course.prerequisite}</w:Column>
-                                <w:Column name="coRequisite" title="Co-requisite" sort="unsorted">
-                                    ${course.coRequisite}
+                                <w:Column name="name" title="%document.text.name" sort="unsorted">
+                                    ${course.name}
                                 </w:Column>
-                                <w:Column name="description" title="Description">${course.description}</w:Column>
+                                <w:Column name="prequisite" title="Pre-requisite">${course.prerequisites}</w:Column>
+                                <w:Column name="coRequisites" title="Co-requisite" sort="unsorted">
+                                    ${course.coRequisites}
+                                </w:Column>
+                                <w:Column name="description" title="%document.text.description">
+                                    ${course.description}
+                                </w:Column>
                             </w:Table>
                         </w:TableControl>
                     </td>
@@ -31,7 +35,7 @@
                 <tr>
                     <td>
                         <w:Submit action="${link.addAction('/courselist/DeleteCourseAction').setPage(page)}">
-                            <w:FormButton>Delete Selected</w:FormButton>
+                            <w:FormButton title="%document.text.deleteselected" />
                         </w:Submit>
                     </td>
                 </tr>

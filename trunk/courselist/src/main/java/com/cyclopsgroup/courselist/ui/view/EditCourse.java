@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,8 +16,8 @@
  */
 package com.cyclopsgroup.courselist.ui.view;
 
-import com.cyclopsgroup.courselist.Course;
-import com.cyclopsgroup.courselist.CoursePersistenceManager;
+import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
@@ -25,21 +25,23 @@ import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Module to edit course
  */
-public class EditCourse extends BaseServiceable implements Module
+public class EditCourse
+    extends BaseServiceable
+    implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
-        CoursePersistenceManager cpm = (CoursePersistenceManager) lookupComponent(CoursePersistenceManager.ROLE);
-        Course course = cpm.findByNumber(data.getParams().getString(
-                "course_number"));
-        context.put("course", course);
+        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        Course course = (Course) persist.load( Course.class, data.getParams().getString( "course_id" ) );
+        context.put( "course", course );
     }
 }

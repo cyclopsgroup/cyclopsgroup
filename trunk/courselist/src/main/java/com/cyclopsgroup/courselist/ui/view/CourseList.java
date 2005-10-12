@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.courselist.ui.view;
 
-import com.cyclopsgroup.courselist.CoursePersistenceManager;
+import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
@@ -24,19 +24,22 @@ import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Course list
  */
-public class CourseList extends BaseServiceable implements Module
+public class CourseList
+    extends BaseServiceable
+    implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
-        CoursePersistenceManager cpm = (CoursePersistenceManager) lookupComponent(CoursePersistenceManager.ROLE);
-        context.put("courses", cpm.list());
+        CourseListService cl = (CourseListService) lookupComponent( CourseListService.ROLE );
+        context.put( "courses", cl.getAllCourses() );
     }
 }

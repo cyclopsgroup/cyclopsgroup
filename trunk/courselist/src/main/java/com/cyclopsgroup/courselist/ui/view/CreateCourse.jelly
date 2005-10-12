@@ -11,19 +11,13 @@
                     </td>
                     <td>Course Number:</td>
                     <td>
-                        <w:Field name="course_number" required="true" />
+                        <w:Field name="courseCode" required="true" />
                     </td>
                 </tr>
                 <tr>
                     <td>Title:</td>
                     <td colspan="3">
-                        <w:Field name="course_title" required="true" size="60" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pre-requisite:</td>
-                    <td colspan="3">
-                        <w:Field name="pre_requisite" size="60" />
+                        <w:Field name="name" required="true" size="60" />
                     </td>
                 </tr>
                 <tr>
@@ -35,7 +29,7 @@
                 <tr>
                     <td>Co-requisite:</td>
                     <td>
-                        <w:Field name="co_requisite" />
+                        <w:Field name="coRequisites" />
                     </td>
                 </tr>
                 <tr>
