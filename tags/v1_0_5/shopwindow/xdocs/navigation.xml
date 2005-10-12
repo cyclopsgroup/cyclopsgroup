@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="shopwindow">
+    <title>Cyclops Group</title>
+    <body>
+        <menu name="Overview">
+            <item name="What is it" href="/index.html"/>
+            <item name="Projects list" href="/projects.html"/>
+            <item name="Members" href="/members/index.html" collapse="true">
+                <item name="Jiaqi Guo" href="/members/jiaqi/index.html" collapse="true">
+                    <item name="Introduction" href="/members/jiaqi/index.html"/>
+                    <item name="Resume" href="/members/jiaqi/resume.html"/>
+                </item>
+                <item name="Xuying Zhao" href="/members/xuying/index.html" collapse="true">
+                    <item name="Introduction" href="/members/xuying/index.html"/>
+                    <item name="CV" href="/members/xuying/cv.html"/>
+                </item>
+            </item>
+            <item name="About Us" href="/about.html"/>
+        </menu>
+        <links>
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/pkb"/>
+            <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues"/>
+            <item name="Browse CVS" href="http://fisheye.cenqua.com/viewrep/cyclops-group"/>
+            <item name="Source Forge Summary" href="http://sourceforge.net/projects/cyclops-group"/>
+        </links>
+    </body>
+</project>

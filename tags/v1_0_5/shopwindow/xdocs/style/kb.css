@@ -1,0 +1,17 @@
+img
+{
+	behavior: url('http://www.cyclopsgroup.com/style/pngbehavior.htc');
+}
+
+#banner
+{
+    background-color: #0D3B9D;
+    background-image: url('http://www.cyclopsgroup.com/images/cyclopsgroup_kb_bg.png');
+    background-repeat: no-repeat;
+    padding: 0px;
+}
+
+#banner span.smalltext, #banner span.smalltext a
+{
+    color: white;
+}
