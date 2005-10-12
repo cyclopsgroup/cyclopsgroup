@@ -16,7 +16,7 @@
                 <path refid="maven.dependency.classpath" />
                 <pathelement path="${maven.build.dest}" />
             </classpath>
-            <arg value="WEB-INF/resetdb.properties" />
+            <arg value="${basedir}/resetdb.properties" />
         </java>
     </goal>
 </project>
