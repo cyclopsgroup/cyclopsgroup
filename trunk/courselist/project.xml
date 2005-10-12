@@ -4,7 +4,7 @@
     <extend>${maven.repo.local}/com.cyclopsgroup/poms/cyclopsgroup-1.0.pom</extend>
     <pomVersion>3</pomVersion>
     <id>courselist</id>
-    <name>courselist</name>
+    <name>Courselist</name>
     <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
