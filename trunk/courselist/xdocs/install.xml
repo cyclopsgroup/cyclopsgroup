@@ -9,7 +9,23 @@
                 Until course list project release a war version package, users need to check out code from cvs and build
                 war file with maven.
             </p>
-            <p></p>
+            <p>
+                Pull out courselist module from cvs server by following this script. Make sure cvs client is properly
+                installed before doing this.
+                <source>
+                    <![CDATA[
+[...]$ cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group login
+(Logging in to anonymous@cvs.sourceforge.net)
+CVS password:
+[...]$ cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group co courselist
+                    ]]>
+                </source>
+            </p>
+            <p>
+                Download and install mysql 4.1 from
+                <a href="http://dev.mysql.com/downloads/mysql/4.1.html">mysql.com</a>
+                . Mysql 5.0 is not fully supported by hibernate so far, so make sure
+            </p>
         </section>
         <section name="Run it with Tomcat">
             <p>
