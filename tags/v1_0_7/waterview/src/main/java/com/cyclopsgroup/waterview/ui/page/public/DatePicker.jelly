@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:Page xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <w:Layout>
+        <head>
+            <title>Calendar</title>
+            <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
+        </head>
+        <body>
+            <table width="100%" class="waterviewTable">
+                <w:FormControl>
+                    <w:Form name="datepickerform">
+                        <tr>
+                            <td colspan="7">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <w:Submit action="${link.setPage(page)}">
+                                                <w:FormImage url="${themeBase}/16x16/2leftarrow.png" />
+                                            </w:Submit>
+                                            <w:Submit action="${link.setPage(page)}">
+                                                <w:FormImage url="${themeBase}/16x16/1leftarrow.png" />
+                                            </w:Submit>
+                                        </td>
+                                        <td align="center">
+                                            <select name="month">
+                                                <option value="1">January</option>
+                                            </select>
+                                            <w:Field name="year" size="4" type="int" required="true" value="${year}" />
+                                        </td>
+                                        <td align="right">
+                                            <w:Submit action="${link.setPage(page)}">
+                                                <w:FormImage url="${themeBase}/16x16/1rightarrow.png" />
+                                            </w:Submit>
+                                            <w:Submit action="${link.setPage(page)}">
+                                                <w:FormImage url="${themeBase}/16x16/2rightarrow.png" />
+                                            </w:Submit>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <j:forEach var="dayName" items="${dayNames}">
+                                            <th>${dayName}</th>
+                                        </j:forEach>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </w:Form>
+                </w:FormControl>
+            </table>
+        </body>
+    </w:Layout>
+</w:Page>
