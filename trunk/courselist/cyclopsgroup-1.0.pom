@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
+    <pomVersion>3</pomVersion>
+    <id>unknow</id>
+    <name>unknow</name>
+    <groupId>com.cyclopsgroup</groupId>
+    <currentVersion>SNAPSHOT</currentVersion>
+    <organization>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.com</url>
+        <logo>/images/cyclopsgroup_logo.gif</logo>
+    </organization>
+    <inceptionYear>2004</inceptionYear>
+    <package>com.cyclopsgroup.${pom.artifactId}</package>
+    <logo>/images/${pom.artifactId}_logo.gif</logo>
+    <gumpRepositoryId>cyclopsgroup-${pom.artifactId}</gumpRepositoryId>
+    <description>Sample project</description>
+    <shortDescription>Sample proect</shortDescription>
+    <url>${pom.organization.url}/projects/${pom.artifactId}</url>
+    <issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
+    <siteAddress>${maven.cyclopsgroup.site.address}</siteAddress>
+    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/${pom.artifactId}</siteDirectory>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
+        <developerConnection>
+            scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
+        </developerConnection>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/${pom.artifactId}</url>
+    </repository>
+    <mailingLists>
+        <mailingList>
+            <name>Cyclops Group News</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-news</archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Support</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-support</archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Discussion</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-discussion</archive>
+        </mailingList>
+        <mailingList>
+            <name>Cyclops Group Change Log</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-changelog/subscribe</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-changelog/subscribe</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-changelog</archive>
+        </mailingList>
+    </mailingLists>
+    <developers>
+        <developer>
+            <name>Jiaqi Guo</name>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+    <contributors />
+    <licenses>
+        <license>
+            <name>CDDL</name>
+            <url>http://www.opensource.org/licenses/cddl1.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <dependencies />
+    <build>
+        <nagEmailAddress>cyclopsgroup-changelog@googlegroups.com</nagEmailAddress>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <resources>
+                <resource>
+                    <directory>src/test/java</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/test/resources</directory>
+                    <filtering>false</filtering>
+                </resource>
+                <resource>
+                    <directory>src/webapp/WEB-INF/classes</directory>
+                    <filtering>false</filtering>
+                </resource>
+            </resources>
+        </unitTest>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+    <reports>
+        <report>maven-jdepend-plugin</report>
+        <report>maven-checkstyle-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-jxr-plugin</report>
+        <report>maven-junit-report-plugin</report>
+        <report>maven-tasklist-plugin</report>
+        <report>maven-pmd-plugin</report>
+        <report>maven-simian-plugin</report>
+        <report>maven-clover-plugin</report>
+        <report>maven-license-plugin</report>
+    </reports>
+    <properties />
+</project>

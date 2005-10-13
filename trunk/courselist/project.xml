@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
-    <extend>${maven.repo.local}/com.cyclopsgroup/poms/cyclopsgroup-1.0.pom</extend>
+    <extend>${basedir}/cyclopsgroup-1.0.pom</extend>
     <pomVersion>3</pomVersion>
     <id>courselist</id>
     <name>Courselist</name>
