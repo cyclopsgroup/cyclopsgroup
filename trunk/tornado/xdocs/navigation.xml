@@ -3,7 +3,7 @@
     <title>Maven</title>
     <body>
         <links>
-            <item name="Documentation" href="http://www.cyclopsgroup.com/kb/display/tornado" />
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/tornado" />
             <item name="Waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
             <item name="Hibernate" href="http://www.hibernate.org" />
             <item name="Maven" href="http://maven.apache.org/" />
