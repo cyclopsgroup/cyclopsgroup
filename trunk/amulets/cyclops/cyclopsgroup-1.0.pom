@@ -26,7 +26,7 @@
         <developerConnection>
             scm:cvs:ext:${maven.username}@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/${pom.artifactId}</url>
+        <url>http://cvs.cyclopsgropu.com/viewrep/cyclops-group/${pom.artifactId}</url>
     </repository>
     <mailingLists>
         <mailingList>
