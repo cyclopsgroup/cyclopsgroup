@@ -1,0 +1,14 @@
+ img
+{
+    border-width: 0px;
+}
+
+div.top-level-menu
+{
+    display: none;
+}
+
+tr.a
+{
+    background-color: #EFEFEF;
+}

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>My Resume</title>
+        <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
+    </properties>
+    <body>
+        <section name="My Resume">
+            <p>
+                <a href="resume.pdf">
+                    <img src="../../images/pdf_icon.png" width="48" height="48" alt="download PDF format resume"
+                        align="right" />
+                </a>
+                <a href="resume.doc">
+                    <img src="../../images/word_icon.png" width="48" height="48" alt="download WORD format resume"
+                        align="right" />
+                </a>
+                <ol>
+                    <li>
+                        <a href="#Objective">Objective</a>
+                    </li>
+                    <li>
+                        <a href="#Summary">Summary</a>
+                    </li>
+                    <li>
+                        <a href="#Skills">Skills</a>
+                        <ol>
+                            <li>
+                                <a href="#JAVA">JAVA</a>
+                            </li>
+                            <li>
+                                <a href="#Web Development">Web Development</a>
+                            </li>
+                            <li>
+                                <a href="#Database">Database</a>
+                            </li>
+                            <li>
+                                <a href="#Other Skills">Other Skills</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#Job Experience">Job Experience</a>
+                        <ol>
+                            <li>
+                                <a href="#Systems People Inc.">Systems People Inc.</a>
+                            </li>
+                            <li>
+                                <a href="#vTradEx Information Technology">vTradEx Information Technoloty</a>
+                            </li>
+                            <li>
+                                <a href="#Eigenet Software">Eigenet Software</a>
+                            </li>
+                            <li>
+                                <a href="#Zhejiang University">Zhejiang University</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#Featured Projects">Featured Projects</a>
+                        <ol>
+                            <li>
+                                <a href="#In Systems People">In Systems People</a>
+                            </li>
+                            <li>
+                                <a href="#In vTradEx">In vTradEx</a>
+                            </li>
+                            <li>
+                                <a href="#In Eigenet">In Eigenet</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#Education">Education</a>
+                    </li>
+                    <li>
+                        <a href="#Training and Award">Training and Award</a>
+                    </li>
+                    <li>
+                        <a href="#References">References</a>
+                    </li>
+                </ol>
+            </p>
+        </section>
+        <section name="Objective">
+            <ul>
+                <li>Java Architect</li>
+                <li>Java Developer Lead</li>
+                <li>Quality Assurance, Test Engineer</li>
+            </ul>
+        </section>
+        <section name="Summary">
+            <ul>
+                <li>
+                    Java Open Source guru. Participated in many java open source projects. Founder of Java open source
+                    software foundation cyclops-group.sourceforge.net.
+                </li>
+                <li>
+                    Extensive knowledge in java area, both J2EE and open source projects. Strong self motivation for the
+                    latest technology, never stop learning.
+                </li>
+                <li>
+                    Experienced in full lifecycle of software development: analysis, design, development, code review,
+                    testing, debug, and quality assurance.
+                </li>
+                <li>Good at working in a team, and helping the team achieve the best performance.</li>
+                <li>
+                    Good at developing in an XP way with automatic and continuous testing, documentation, integration
+                    and distribution support.
+                </li>
+                <li>SCJP and MCSD certificated.</li>
+            </ul>
+        </section>
+        <section name="Skills">
+            <subsection name="JAVA">
+                <ul>
+                    <li>
+                        Five years of experience of Java development with J2EE standards including JSP, Servlet, EJB,
+                        JMS, etc.
+                    </li>
+                    <li>
+                        Four years experience of using java open source projects in Apache, CodeHaus, SourceForge and
+                        some other open source foundation. Expert in Apache
+                        <a href="http://jakarta.apache.org/turbine">Turbine</a>
+                        ,
+                        <a href="http://jakarta.apache.org/velocity">Velocity</a>
+                        ,
+                        <a href="http://maven.apache.org">Maven</a>
+                        ,
+                        <a href="http://excabular.apache.org">Avalon</a>
+                        ,
+                        <a href="http://db.apache.org/torque">Torque</a>
+                        ,
+                        <a href="http://jakarta.apache.org/jetspeed">Jetspeed</a>
+                        , Codehaus
+                        <a href="http://plexus.codehaus.org">Plexus</a>
+                        ,
+                        <a href="http://werkflow.codehaus.org">Werkflow</a>
+                        ,
+                        <a href="http://drools.org">Drools</a>
+                        and
+                        <a href="http://hibernate.org">Hibernate</a>
+                        ,
+                        <a href="http://jasperreports.sourceforge.net">Jasperreports</a>
+                        etc.
+                    </li>
+                    <li>
+                        Expert of Java web application/portal framework. The two core web application frameworks in
+                        vTradEx (pharos) and Evavi (fabric) are designed and mostly developed by me. My personal web
+                        application framework projects
+                        <a href="http://cyclops-group.sourceforge.net/projects/waterview">waterview</a>
+                        and
+                        <a href="http://cyclops-group.sourceforge.net/projects/tornado">tornado</a>
+                        are under active development right now. The goal of waterview and tornado is to take place
+                        Struts.
+                    </li>
+                    <li>
+                        Owner of many java open source projects in SourceForge, Check
+                        <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a>
+                        for details please.
+                    </li>
+                    <li>
+                        Thorough understanding of XP development process with continuous and automatic testing,
+                        documentation, distribution and integration, powered by
+                        <a href="http://maven.apache.org">Maven</a>
+                        ,
+                        <a href="http://ant.apache.org">Ant</a>
+                        ,
+                        <a href="http://junit.org">JUNIT</a>
+                        ,
+                        <a href="http://jakarta.apache.org/cactus">Cactus</a>
+                        and
+                        <a href="http://www.thecortex.net/clover">Clover</a>
+                        , etc.
+                    </li>
+                    <li>Working with WSAD, Eclipse, JBuilder and IDEA Intellij.</li>
+                    <li>
+                        Three years of experience of using java open source projects in Apache foundation, Werken
+                        company, SourceForge and some other open source foundation. These projects include
+                        <a href="http://jakarta.apace.org/turbine">Turbine</a>
+                        ,
+                        <a href="http://db.apache.org/torque">Torque</a>
+                        ,
+                        <a href="http://jakarta.apache.org/turbine/fulcrum">Fulcrum</a>
+                        ,
+                        <a href="http://avalon.apache.org">Avalon</a>
+                        ,
+                        <a href="jakarta.apache.org/struts">Struts</a>
+                        ,
+                        <a href="jakarta.apache.org/velocity">Velocity</a>
+                        ,
+                        <a href="http://jakarta.apache.org/poi">POI</a>
+                        ,
+                        <a href="http://jakarta.apache.org/jmeter">JMeter</a>
+                        ,
+                        <a href="http://jakarta.apache.org/lucene">Lucene</a>
+                        ,
+                        <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a>
+                        and
+                        <a href="http://jakarta.apache.org/commons">Jakarta Commons projects</a>
+                        , etc.
+                    </li>
+                    <li>
+                        Experience in development with Werken rule engine(
+                        <a href="http://drools.org">Drools</a>
+                        ), workflow engine(
+                        <a href="http://werkflow.codehaus.org">Werkflow</a>
+                        ) and petrinet(
+                        <a href="http://petridish.werken.com">Petridish</a>
+                        ) model.
+                    </li>
+                    <li>
+                        Have deployment experience on Weblogic, Websphere, JBOSS, Resin, TOMCAT, Sun Iplanet WebServer,
+                        AppServer, Portal Server and Identity Server.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="Web Development">
+                <ul>
+                    <li>
+                        Over five years experience of HTML and JAVASCRIPT. Please visit
+                        <a href="http://www.zope.org/Members/joeblack">http://www.zope.org/Members/joeblack</a>
+                        ,
+                        <a href="http://www.goldsgym.com.cn">http://www.goldsgym.com.cn</a>
+                        ,
+                        <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a>
+                        , and
+                        <a href="http://www.agrosquare.com">http://www.agrosquare.com</a>
+                        .
+                    </li>
+                    <li>Using PhotoShop without any trouble.</li>
+                    <li>Good at developing ActiveX Control in VB.</li>
+                </ul>
+            </subsection>
+            <subsection name="Database">
+                <ul>
+                    <li>Experienced in MySQL, Oracle, MSSQL databases.</li>
+                    <li>
+                        Expert in java O-R mapping projects and DB tools such as Apache Torque, OJB. Dbdigger at
+                        SourceForge is another java DB project created by me.
+                    </li>
+                    <li>
+                        Be familiar with many CA data warehouse products like Repository, DecisionBase, Forrest and
+                        Tree, InfoBeacon, Harvest, Portal and ERWin, etc.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="Other Skills">
+                <ul>
+                    <li>Experienced in project management of software projects.</li>
+                    <li>Experienced in XML, XSLT, XPath, DTD, Schema and corresponding programming tools.</li>
+                    <li>Experienced in development based on Python, ZOPE and PLONE.</li>
+                    <li>Experienced in ASP, VC, Perl and PHP development</li>
+                    <li>Eight years of experience of C/C++ development.</li>
+                </ul>
+            </subsection>
+        </section>
+        <section name="Job Experience">
+            <subsection name="Systems People Inc.">
+                <p>Location: Sterling, VA, USA. Time: 2/2004~the present. Position: Software Analyst</p>
+                <p>
+                    Responsibility:
+                    <ul>
+                        <li>Working as key developer</li>
+                        <li>Software system architect</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="vTradEx Information Technology">
+                <p>Location: Shanghai, China. Time: 3/2001~7/2003. Position: Java System Architect</p>
+                <p>
+                    Responsibility:
+                    <ul>
+                        <li>Java developer lead in 90% projects</li>
+                        <li>System Architect of 70% software products and solutions</li>
+                        <li>Manage the development department in shanghai office.</li>
+                        <li>Project manager of 30% projects</li>
+                        <li>Be responsible for QA(quality assurance) of 100% projects</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Eigenet Software">
+                <p>Location: Shanghai, China. Time: 7/2000~3/2001. Position: Software Engineer</p>
+                <p>
+                    Responsibility:
+                    <ul>
+                        <li>
+                            Product Manager. Product manager for several certain products including ROI analyzing tool,
+                            Market Platform and Sale System.
+                        </li>
+                        <li>Software Engineer. Analyze, design and develop ERP product in JAVA and Python.</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="Zhejiang University">
+                <p>Location: Hangzhou, China. Time: 9/1996~7/2000</p>
+                <p>
+                    Responsibility:
+                    <ul>
+                        <li>
+                            Software Developer. Design and develop web systems and desktop applications in VC, C/C++,
+                            ASP and VB
+                        </li>
+                    </ul>
+                </p>
+            </subsection>
+        </section>
+        <section name="Featured Projects">
+            <subsection name="In Systems People">
+                <ul>
+                    <li>
+                        ZOPE, PLONE based content management system, 2/2004~Now. Roles: System Architect and Key
+                        Developer. The client of this system is Human Development department of World Bank in Washington
+                        DC. Based on PLONE, this system reorganizes and centralizes mass of existed static content like
+                        web pages, documents, topics, news and discussions.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="In vTradEx">
+                <ul>
+                    <li>
+                        Pharos, 3/2001~Now. Roles: SA, PM, QA and developer. Pharos is the base of all other vTradEx
+                        projects in JAVA, it has been adopted since vTradEx development team was founded, and still in
+                        service now. Depending on apache and werken open source projects, Pharos contains a lot of
+                        features like workflow, security, O-R mapping etc. which enrich and simplify java web
+                        development. The design is based on open source projects like Apache
+                        <a href="http://jakarta.apache.org/turbine">Turbine</a>
+                        ,
+                        <a href="http://jakarta.apache.org/velocity">Velocity</a>
+                        ,
+                        <a href="http://db.apache.org/torque">Torque</a>
+                        ,
+                        <a href="http://maven.apache.org">Maven</a>
+                        ,
+                        <a href="http://ant.apache.org">Ant</a>
+                        ,
+                        <a href="http://jakarta.apache.org/poi">POI</a>
+                        ,
+                        <a href="http://www.object-refinery.com/jfreechart">JFreeChart</a>
+                        , and Werken
+                        <a href="http://drools.org">Drools</a>
+                        ,
+                        <a href="http://werkflow.codehaus.org">Werkflow</a>
+                        . Current version of pharos is 5.2.
+                    </li>
+                    <li>
+                        Sun Portal Integration Project, 5/2003~8/2003. Roles: SA and developer. The goal of this project
+                        is to integrate existing Domino OA, Applet based Oracle ERP 11i and some other systems with
+                        thousands of users into a Sun Portal System. The solution includes some of Sun products like
+                        Iplanet Web Server, App Server, Portal Server, Identity Server and Sun MetaView. The
+                        technologies covered by this project include JNDI, web browser certificates, Solaris deployment,
+                        JSP, Sun workflow engine in App Server, etc.
+                    </li>
+                    <li>
+                        BPR of a vehicle logistic company, 7/2003~8/2003. Roles: SA and developer. The project is to
+                        develop a system for a refined business process, which integrates with tens of existing
+                        subsystem (coded in VFP, VB or JAVA, located in different cities) seamlessly. The solution is
+                        departed into two systems based on Pharos and Avalon.
+                    </li>
+                    <li>
+                        CA Portal Integration project, 1/2003~5/2003. Roles: SA and QA. It integrates CA Portal, CA
+                        Harvest and Pharos, provides an auto-publish-from-Harvest-to-Portal solution.
+                    </li>
+                    <li>
+                        Pilotlogistic, a total logistic solution product, 12/2002 ~ 5/2003. Roels: SA, QA and developer.
+                        This product targets generic logistic industrial, it covers OMS, WMS, TMS and Finance aspects of
+                        logistic companies.
+                    </li>
+                    <li>
+                        Route Optimization Solution powered by ILOG Solver, 1/2003 ~ 5/2003. Roles: SA and QA. The
+                        solution calculates optimized route for distribution of an logistic enterprise which has
+                        hundreds of stores in Shanghai. Supported by ILOG Solver, we integrated this C/C++ API supported
+                        product into our Java framework with JNI.
+                    </li>
+                    <li>
+                        Continuous Integration Backend Engine, 7/2002~5/2003. Roles: SA, QA and Developer. Automaticlly
+                        and Continuously check out code from CVS and generate reports and distribute the project
+                        everyday. The reports covers many aspect of the projects including testing result, testing
+                        coverage, database spec, development documentation.
+                        <a href="http://cyclops-group.sourceforge.net/projects/tornado/maven-reports.html">Here</a>
+                        is a sample of the building result. This engine is powered by projects lilke
+                        <a href="http://maven.apache.org">Maven</a>
+                        ,
+                        <a href="http://jakata.apache.org/cactus">Cactus</a>
+                        ,
+                        <a href="http://jakarta.apache.org/jmeter">JMeter</a>
+                        and
+                        <a href="http://www.thecortex.net/clover">Clover</a>
+                        .
+                    </li>
+                    <li>
+                        Advanced PM System, 7/2002~3/2003. Roles: SA, PM and QA. We developed this product for ourselves
+                        to manage our own projects. The product created a Test-Driven project management concept, which
+                        means in a project, all tasks, test cases and documents are combined to test stories. Current
+                        version is 2.1.
+                    </li>
+                    <li>
+                        Speedsale, an CRM product, 5/2002~3/2003. . Roles: SA, PM, QA and developer. This product
+                        provides workflow supported process flow control for sale activities other than ordinary CRM
+                        products. Based on Pharos, it imported a Rule Engine powered by werken
+                        <a href="http://drools.org">Drools</a>
+                        for the first time. Current version of Speedsale is 3.4.
+                    </li>
+                    <li>
+                        Apache
+                        <a href="http://avalon.apache.org">Avalon</a>
+                        based SMS transmitting server, 12/2001~2/2002. . It’s a backend process which receiving and
+                        processing SMS messages continuously, based on Avalon framework.
+                    </li>
+                    <li>
+                        TMS with GPS support, 10/2001~3/2002.. Roles: SA, PM and developer. The system schedules and
+                        instructs drivers and vehicles, collects runtime data from GPS device in vehicles and generates
+                        reports for China Post.
+                    </li>
+                    <li>
+                        Some websites. Roles, 8/2001: Developer. ASP powered websites,
+                        <a href="http://www.goldsgym.com.cn">http://www.goldsgym.com.cn</a>
+                        and
+                        <a href="http://www.agrosquare.com">http://www.agrosquare.com</a>
+                        .
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="In Eigenet">
+                <ul>
+                    <li>
+                        Value based HR Evaluation System. Roles: SA and developer. A sub HR system to evaluate salesmen
+                        by their projects. Programmed in JSP and JavaBean. This simple product brought the company 1M$
+                        revenue.
+                    </li>
+                    <li>
+                        Free Transaction Platform developed on ZOPE. Roles: SA and developer. It’s a standard market
+                        system, powered by ZOPE and developed in Python and DTML(A script language in ZOPE).
+                    </li>
+                    <li>
+                        Procurement System with XMLRPC support. Roles: Developer. This procurement system is part of
+                        Eigenet Habahaba 2000, a ERP solution. It communicates with the ZOPE powered transaction
+                        platform in XMLRPC standard.
+                    </li>
+                </ul>
+            </subsection>
+            <subsection name="Other Projects">
+                <ul>
+                    <li>
+                        Several personal java projects at
+                        <a href="http://cyclops-group.sourceforge.net">http://cyclops-group.sourceforge.net</a>
+                        ,
+                        <a href="http://cyclops-group.sourceforge.net/projects">
+                            http://cyclops-group.sourceforge.net/projects
+                        </a>
+                        is a list of these project.
+                    </li>
+                    <li>
+                        My personal website, 9/2002.
+                        <a href="http://www.zope.org/Members/joeblack">http://www.zope.org/Members/joeblack</a>
+                        . Base on ZOPE application server and DTML language. I just made several pages and put some
+                        photos in it. It's probably out of date now.
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+        <section name="Education">
+            <p>
+                Zhejiang University. Location: Hangzhou, China. Time: 9/1996~7/2000
+                <ul>
+                    <li>Zhejiang University is one of the top 5 universities in China.</li>
+                    <li>Bachelor of EE, majored in microelectronics.</li>
+                    <li>Top 10% in class.</li>
+                    <li>Years of scholarship.</li>
+                </ul>
+            </p>
+        </section>
+        <section name="Training and Award">
+            <ul>
+                <li>
+                    <b>SCJP</b>
+                    : Sun Certificated Java Professional. 5/2003
+                </li>
+                <li>Professional training for CA data warehouse products. 2/2002</li>
+                <li>Training for Project Management. 11/2001</li>
+                <li>
+                    <b>MCSD</b>
+                    : Microsoft Certificated Professional Solution Developer.9/2001
+                </li>
+                <li>Training for using Oracle9i JDeveloper. 7/2001</li>
+                <li>China Senior Programmer. 7/2000</li>
+            </ul>
+        </section>
+        <section name="References">
+            <ul>
+                <li>
+                    <b>Menghuai Chen</b>
+                    . CEO and president of vTradEx Information Technology Co., Ltd, who used to be Vice President and
+                    Sales Director of NetEase.com Inc(NASDAQ:NTES), General Manager of Unisys East China, Market
+                    Director of American Airline. Graduated from MIT Sloan School of Management with three master
+                    degrees.
+                </li>
+                <li>
+                    <b>Frank Fan</b>
+                    . Vice president of vTradEx Information Technology Co., Ltd. Department manager in Unisys and
+                    Computer Associates.
+                </li>
+                <li>
+                    <b>Alan Chen</b>
+                    .Vice president of InsIt Technologies, Inc. Founder of NetEase.com(NASDAQ:NTES), ZOTN(HK:0231), and
+                    InsIt.
+                </li>
+            </ul>
+        </section>
+    </body>
+</document>
