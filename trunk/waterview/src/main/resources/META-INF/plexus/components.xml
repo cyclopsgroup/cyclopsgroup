@@ -54,6 +54,11 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.waterview.core.OpenViewValve</role>
+            <implementation>com.cyclopsgroup.waterview.core.OpenViewValve</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
             <implementation>com.cyclopsgroup.waterview.core.NoneCacheManager</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
@@ -101,6 +106,19 @@
             <configuration>
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.GetResourceValve" />
+                </valves>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.waterview.OpenViewPipeline</role>
+            <implementation>com.cyclopsgroup.waterview.core.Pipeline</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <valves>
+                    <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
+                    <valve role="com.cyclopsgroup.waterview.web.ProcessFormValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
+                    <valve role="com.cyclopsgroup.waterview.core.OpenViewValve" />
                 </valves>
             </configuration>
         </component>

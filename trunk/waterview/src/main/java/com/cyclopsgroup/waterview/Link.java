@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,6 +40,9 @@ public class Link
     /** Name of this tool */
     public static final String NAME = "link";
 
+    /** Open resource instructor */
+    public static final String OPEN_INSTRUCTOR = "!open";
+
     /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
 
@@ -56,47 +59,45 @@ public class Link
      *
      * @param data Runtime data
      */
-    public Link(RuntimeData data)
+    public Link( RuntimeData data )
     {
         this.data = data;
     }
 
     /**
      * Add action for current link
-     * 
+     *
      * @param action Action path
      * @return Link itself
      */
-    public Link addAction(String action)
+    public Link addAction( String action )
     {
         checkDisposed();
-        requestPath.append('/').append(ACTION_INSTRUCTOR).append(
-                getPath(action));
+        requestPath.append( '/' ).append( ACTION_INSTRUCTOR ).append( getPath( action ) );
         return this;
     }
 
     /**
      * Add query parameter
-     * 
+     *
      * @param name Name of parameter
      * @param value Value of parameter
      * @return Link itself
      * @throws UnsupportedEncodingException Throw it out
      */
-    public Link addQueryData(String name, Object value)
-            throws UnsupportedEncodingException
+    public Link addQueryData( String name, Object value )
+        throws UnsupportedEncodingException
     {
-        if (queryString == null)
+        if ( queryString == null )
         {
             queryString = new StringBuffer();
         }
         else
         {
-            queryString.append('&');
+            queryString.append( '&' );
         }
         String v = value == null ? StringUtils.EMPTY : value.toString();
-        queryString.append(name).append('=').append(
-                URLEncoder.encode(v, ENCODING));
+        queryString.append( name ).append( '=' ).append( URLEncoder.encode( v, ENCODING ) );
         return this;
     }
 
@@ -106,26 +107,26 @@ public class Link
      * @param string Whole query string
      * @return Query string
      */
-    public Link addQueryString(String string)
+    public Link addQueryString( String string )
     {
-        if (StringUtils.isEmpty(string))
+        if ( StringUtils.isEmpty( string ) )
         {
             return this;
         }
-        if (queryString == null)
+        if ( queryString == null )
         {
-            queryString = new StringBuffer(string);
+            queryString = new StringBuffer( string );
         }
         else
         {
-            queryString.append('&').append(string);
+            queryString.append( '&' ).append( string );
         }
         return this;
     }
 
     private void checkDisposed()
     {
-        if (disposed)
+        if ( disposed )
         {
             queryString = null;
             requestPath = new StringBuffer();
@@ -133,23 +134,23 @@ public class Link
         }
     }
 
-    private String getPath(String path)
+    private String getPath( String path )
     {
-        if (StringUtils.isEmpty(path))
+        if ( StringUtils.isEmpty( path ) )
         {
             return null;
         }
-        if (path.charAt(0) == '/')
+        if ( path.charAt( 0 ) == '/' )
         {
             return path;
         }
         String currentPage = data.getPage().getFullPath();
-        int lastSlash = currentPage.lastIndexOf('/');
-        if (lastSlash == -1)
+        int lastSlash = currentPage.lastIndexOf( '/' );
+        if ( lastSlash == -1 )
         {
             return '/' + path;
         }
-        return currentPage.substring(0, lastSlash + 1) + path;
+        return currentPage.substring( 0, lastSlash + 1 ) + path;
     }
 
     /**
@@ -158,12 +159,36 @@ public class Link
      * @param path Get resource path
      * @return Full resource path
      */
-    public String getResource(String path)
+    public String getResource( String path )
     {
-        StringBuffer sb = new StringBuffer(data.getPageBaseUrl());
-        sb.append('/').append(GET_INSTRUCTOR);
-        sb.append(getPath(path));
+        StringBuffer sb = new StringBuffer( data.getPageBaseUrl() );
+        sb.append( '/' ).append( GET_INSTRUCTOR );
+        sb.append( getPath( path ) );
         return sb.toString();
+    }
+
+    /**
+     * Open given path
+     *
+     * @param path Script path
+     * @return Link object itself
+     */
+    public Link open( Path path )
+    {
+        return open( path.getFullPath() );
+    }
+
+    /**
+     * Open given path
+     *
+     * @param path Script path
+     * @return Link object itself
+     */
+    public Link open( String path )
+    {
+        checkDisposed();
+        requestPath.append( '/' ).append( OPEN_INSTRUCTOR ).append( getPath( path ) );
+        return this;
     }
 
     /**
@@ -172,9 +197,9 @@ public class Link
      * @param path Path object
      * @return It self
      */
-    public Link setPage(Path path)
+    public Link setPage( Path path )
     {
-        setPage(path.getFullPath());
+        setPage( path.getFullPath() );
         return this;
     }
 
@@ -184,10 +209,10 @@ public class Link
      * @param path
      * @return Link tool itself
      */
-    public Link setPage(String path)
+    public Link setPage( String path )
     {
         checkDisposed();
-        requestPath.append('/').append(PAGE_INSTRUCTOR).append(getPath(path));
+        requestPath.append( '/' ).append( PAGE_INSTRUCTOR ).append( getPath( path ) );
         return this;
     }
 
@@ -198,11 +223,10 @@ public class Link
      */
     public String toString()
     {
-        StringBuffer url = new StringBuffer(data.getPageBaseUrl())
-                .append(requestPath);
-        if (queryString != null)
+        StringBuffer url = new StringBuffer( data.getPageBaseUrl() ).append( requestPath );
+        if ( queryString != null )
         {
-            url.append('?').append(queryString);
+            url.append( '?' ).append( queryString );
         }
         disposed = true;
         return url.toString();

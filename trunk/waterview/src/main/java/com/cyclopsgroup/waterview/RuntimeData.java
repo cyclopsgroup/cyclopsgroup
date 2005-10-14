@@ -41,6 +41,11 @@ public interface RuntimeData
     /** Name of it in context */
     String NAME = "data";
 
+    /**
+     * Name of variable for view to open
+     */
+    String OPEN_VIEW_NAME = "openView";
+
     /** Page name in context */
     String PAGE_NAME = "page";
 
