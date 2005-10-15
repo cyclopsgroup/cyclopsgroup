@@ -29,6 +29,14 @@
             <url>http://www.cyclopsgroup.com</url>
             <timezone>-6</timezone>
         </developer>
+        <developer>
+            <name>Xuying Zhao</name>
+            <id>todzhao</id>
+            <email>todzhao@hotmail.com</email>
+            <organization>University of Texas at Dallas</organization>
+            <url>http://www.utdallas.edu/~kxz024000</url>
+            <timezone>-6</timezone>
+        </developer>
     </developers>
     <dependencies>
         <dependency>
