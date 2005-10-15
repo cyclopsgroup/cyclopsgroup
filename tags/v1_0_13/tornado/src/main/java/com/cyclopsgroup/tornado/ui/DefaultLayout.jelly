@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <head>
+        <title>Welcom to Tornado portal</title>
+        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
+    </head>
+    <body>
+        <div align="center">
+            <div id="bodyWrapper">
+                <table width="100%" cellspacing="0" border="0" cellpadding="0">
+                    <tr>
+                        <td colspan="2" id="bannerPanel">
+                            <w:JellyScript path="/waterview/DefaultHtmlBanner.jelly" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" id="leftPanel" rowspan="2">
+                            <w:GetPanelViews var="views" panel="navigation">
+                                <w:JellyView name="System Navigation" script="/waterview/DefaultNavigation.jelly" />
+                                <w:View name="My Information">
+                                    <j:choose>
+                                        <j:when test="${currentUser.guest}">
+                                            <p>You are not logged.</p>
+                                            <table border="0">
+                                                <w:FormControl>
+                                                    <w:Form name="login" method="post">
+                                                        <input type="hidden" name="redirectto"
+                                                            value="${data.params.getString('redirectto')}" />
+                                                        <tr>
+                                                            <td>Name</td>
+                                                            <td>
+                                                                <w:Field name="username" required="true" title="Name"
+                                                                    size="12" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Password</td>
+                                                            <td>
+                                                                <w:Field name="password" password="true" required="true"
+                                                                    title="Password" size="12" />
+                                                            </td>
+                                                            <tr>
+                                                                <td>Timeout</td>
+                                                                <td>
+                                                                    <w:Field name="timeout" type="int" title="Timeout"
+                                                                        required="true" value="30" size="3" />
+                                                                    minutes
+                                                                </td>
+                                                            </tr>
+                                                            <td colspan="2">
+                                                                <w:Submit
+                                                                    action="${link.addAction('/tornado/UserLoginAction.jelly').setPage('/Index.jelly')}"
+                                                                    forceValidation="true">
+                                                                    <w:FormButton title="Login" />
+                                                                </w:Submit>
+                                                            </td>
+                                                        </tr>
+                                                    </w:Form>
+                                                </w:FormControl>
+                                            </table>
+                                        </j:when>
+                                        <j:otherwise>
+                                            <p>Hello, ${currentUser.displayName}</p>
+                                            <p>
+                                                <a
+                                                    href="${link.addAction('/tornado/UserLogoutAction').setPage('/Index.jelly')}">
+                                                    Logout
+                                                </a>
+                                            </p>
+                                        </j:otherwise>
+                                    </j:choose>
+                                </w:View>
+                            </w:GetPanelViews>
+                            <j:forEach var="view" items="${views}">
+                                <w:WindowControl title="${view.name}" shadow="2" border="1">
+                                    <w:DisplayView view="${view}" />
+                                </w:WindowControl>
+                            </j:forEach>
+                        </td>
+                        <td width="75%" class="bannerPanelBelt">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <img src="${themeBase}/16x16/screen.png" width="16" height="16"
+                                            alt="Your position" />
+                                    </td>
+                                    <td>
+                                        <j:forEach var="parent" items="${currentNavigatorNode.parentNodes}">
+                                            <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                            &gt;&gt;
+                                        </j:forEach>
+                                        <b>${currentNavigatorNode.title}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" id="bodyPanel">
+                            <j:set var="messages" value="${data.messages}" />
+                            <j:if test="${size(messages) gt 0}">
+                                <table border="0">
+                                    <j:forEach var="msg" items="${messages}">
+                                        <tr>
+                                            <td>
+                                                <img src="${themeBase}/16x16/info.png" width="16" height="16"
+                                                    alt="Message" />
+                                            </td>
+                                            <td class="waterviewMessage">${msg}</td>
+                                        </tr>
+                                    </j:forEach>
+                                </table>
+                            </j:if>
+                            <j:set var="mainTitle" value="${navigator.getNodeByPage(data.page.fullPath).title}" />
+                            <w:GetPanelViews var="views" panel="body">
+                                <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}"
+                                    title="${mainTitle}" />
+                            </w:GetPanelViews>
+                            <j:forEach var="view" items="${views}">
+                                <w:WindowControl title="${view.name}" maximizable="true" editable="true" border="0">
+                                    <w:DisplayView view="${view}" />
+                                </w:WindowControl>
+                            </j:forEach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="footerPanel">
+                            <w:JellyScript path="/waterview/DefaultHtmlFooter.jelly" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
