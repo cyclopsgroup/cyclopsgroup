@@ -9,7 +9,7 @@
                     <td>Prefix:</td>
                     <td>${course.prefix}</td>
                     <td>Course Code:</td>
-                    <td>${course.courseCode}</td>
+                    <td>${course.courseCode} </td>
                 </tr>
                 <tr>
                     <td>%document.text.name:</td>
