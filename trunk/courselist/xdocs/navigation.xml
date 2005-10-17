@@ -14,6 +14,7 @@
             <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group/courselist" />
             <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/courselist" />
             <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/courselist" />
+            <item name="Download Document" href="courselist.pdf" />
         </links>
     </body>
 </project>

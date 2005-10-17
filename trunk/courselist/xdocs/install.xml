@@ -73,7 +73,7 @@ Bye
                     . Assume the unzipped directory of tomcat is C:/java/apache/jakarta-apache-4.1.31.
                 </p>
             </subsection>
-            <subsection name="Install Apache Manve">
+            <subsection name="Install Apache Maven">
                 <p>Maven is a building and project managing tool which can be considered as a replacement of ant.</p>
                 <p>
                     Download and unzip maven from http://maven.apache.org/start/download.html, unzip it to a directory.
