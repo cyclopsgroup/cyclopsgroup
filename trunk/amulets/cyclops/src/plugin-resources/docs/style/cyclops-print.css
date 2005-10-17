@@ -7,3 +7,9 @@
 {
     display: block !import;
 }
+
+.section .sectionTitle, .subsection .subsectionTitle
+{
+	text-indent: 0px !important;
+	background-image: none !important;
+}
