@@ -23,8 +23,10 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.Valve;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -36,6 +38,8 @@ import com.cyclopsgroup.waterview.spi.View;
 public class OpenViewValve
     implements Valve, Serviceable
 {
+    private LookAndFeelService laf;
+
     private ModuleManager modules;
 
     /**
@@ -46,6 +50,17 @@ public class OpenViewValve
     public void invoke( RuntimeData data, PipelineContext context )
         throws Exception
     {
+        data.setOutputContentType( "text/html" );
+        Theme theme = laf.getTheme( data.getThemeName() );
+        if ( theme == null )
+        {
+            data.setThemeName( laf.getDefaultTheme().getName() );
+            theme = laf.getDefaultTheme();
+        }
+        RuntimeTheme rt = new RuntimeTheme( theme, data );
+        data.getRequestContext().put( RuntimeTheme.NAME, rt );
+        data.getRequestContext().put( "themeBase", rt.getIconSetUrl() );
+
         String viewPath = (String) data.getRequestContext().get( RuntimeData.OPEN_VIEW_NAME );
         if ( StringUtils.isEmpty( viewPath ) )
         {
@@ -69,5 +84,6 @@ public class OpenViewValve
         throws ServiceException
     {
         modules = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }

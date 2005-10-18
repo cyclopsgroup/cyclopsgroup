@@ -23,10 +23,14 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -37,7 +41,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class ParseURLValve
     extends AbstractLogEnabled
-    implements Valve
+    implements Valve, Serviceable
 {
 
     private static HashSet instructors;
@@ -76,6 +80,8 @@ public class ParseURLValve
         return ret;
     }
 
+    private LookAndFeelService laf;
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -108,12 +114,26 @@ public class ParseURLValve
                 data.setPage( behavior );
             }
         }
+
         data.getRequestContext().put( Link.NAME, new Link( data ) );
+
         Locale locale = (Locale) data.getSessionContext().get( RuntimeData.LOCALE_NAME );
         if ( locale != null )
         {
             data.setLocale( locale );
         }
+        data.setThemeName( laf.getDefaultTheme().getName() );
         context.invokeNextValve( data );
+    }
+
+    /**
+     * Overwrite or implement method service()
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
+    {
+        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }

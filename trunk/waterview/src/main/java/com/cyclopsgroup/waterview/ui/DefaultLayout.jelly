@@ -14,9 +14,10 @@
                     </tr>
                     <tr>
                         <td width="25%" valign="top" id="leftPanel">
+                            <j:set var="navigationNode" value="${selectedNode}" />
                             <w:GetPanelViews var="views" panel="navigation">
                                 <w:JellyView name="%waterview.view.systemnavigation"
-                                    script="/waterview/DefaultNavigation.jelly" />
+                                    script="/waterview/sysview/DefaultNavigationNode.jelly" />
                                 <w:View name="%waterview.view.links">
                                     <p>Some help links</p>
                                 </w:View>

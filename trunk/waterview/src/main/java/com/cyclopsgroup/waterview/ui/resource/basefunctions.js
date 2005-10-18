@@ -47,7 +47,7 @@ else if(window.ActiveXObject)
 	_XMLHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 }
 
-function fillDynaContent(tagId, url)
+function _fillDynaContent(tagId, url, outer)
 {
 	if(_XMLHttpRequest == null)
 	{
@@ -63,12 +63,31 @@ function fillDynaContent(tagId, url)
     _XMLHttpRequest.send("");
     if(_XMLHttpRequest.status == "200")
 	{
-		el.innerHTML = _XMLHttpRequest.responseText;
+		var text = _XMLHttpRequest.responseText;
+		//alert(text);
+		if(outer)
+		{
+			el.outerHTML = text;
+		}
+		else
+		{
+			el.innerHTML = text;
+		}
 	}
 	else
 	{
 		alert("Something is wrong " + _XMLHttpRequest.response.Text);
 	}
+}
+
+function fillDynaContent(tagId, url)
+{
+	_fillDynaContent(tagId, url, false);
+}
+
+function replaceDynaContent(tagId, url)
+{
+	_fillDynaContent(tagId, url, true);
 }
 
 function clearDynaContent(tagId)
@@ -78,4 +97,4 @@ function clearDynaContent(tagId)
 	{
 		el.innerHTML = "";
 	}
-}	
+}

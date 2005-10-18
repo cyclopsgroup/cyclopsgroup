@@ -18,6 +18,7 @@
 package com.cyclopsgroup.waterview.web.taglib;
 
 import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
@@ -38,19 +39,9 @@ public class TreeTag
 
     private Node root;
 
-    private String var = "node";
-
     private boolean runtime;
 
-    /**
-     * Getter method for property runtime
-     *
-     * @return Returns the runtime.
-     */
-    public boolean isRuntime()
-    {
-        return runtime;
-    }
+    private String var = "node";
 
     /**
      * Getter method for property root
@@ -72,6 +63,16 @@ public class TreeTag
         return var;
     }
 
+    /**
+     * Getter method for property runtime
+     *
+     * @return Returns the runtime.
+     */
+    public boolean isRuntime()
+    {
+        return runtime;
+    }
+
     protected void processTag( XMLOutput output )
         throws Exception
     {
@@ -89,10 +90,23 @@ public class TreeTag
             //TODO not supported yet
             throw new UnsupportedOperationException();
         }
-
         JellyContext jc = new JellyContext( getContext() );
-        jc.setVariable( getVar(), runtime ? runtimeNode : runtimeNode.getContent() );
-        jc.setVariable( CURRENT_RUNTIME_NODE, runtimeNode );
+        renderTag( runtimeNode, jc, output );
+    }
+
+    /**
+     * Render tag content
+     *
+     * @param node Node to render
+     * @param output XMLOutput
+     * @param jc JellyContext
+     * @throws JellyTagException Throw it out
+     */
+    public void renderTag( RuntimeTreeNode node, JellyContext jc, XMLOutput output )
+        throws JellyTagException
+    {
+        jc.setVariable( getVar(), runtime ? node : node.getContent() );
+        jc.setVariable( CURRENT_RUNTIME_NODE, node );
         jc.setVariable( TREE_TAG, this );
 
         getBody().run( jc, output );
