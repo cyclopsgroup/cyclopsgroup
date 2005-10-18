@@ -34,7 +34,7 @@
                 <property name="url">jdbc:mysql://localhost/courselist</property>
                 <property name="username">dev</property>
                 <property name="password">dev</property>
-                <property name="maxActive">5</property>
+                <property name="maxActive">3</property>
                 <property name="defaultAutoCommit">false</property>
             </configuration>
         </component>
