@@ -13,7 +13,7 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Validator to check type
  */
 public class TypeFieldValidator
@@ -25,13 +25,13 @@ public class TypeFieldValidator
     /**
      * Overwrite or implement method validate()
      *
-     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
+     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field, java.lang.String)
      */
-    public ValidationResult validate( Field field )
+    public ValidationResult validate( Field field, String fieldValue )
     {
         try
         {
-            Object value = TypeUtils.convert( field.getValue(), field.getType() );
+            Object value = TypeUtils.convert( fieldValue, field.getType() );
             String string = TypeUtils.toString( value );
             return StringUtils.equals( string, field.getValue() ) ? ValidationResult.SUCCESS
                                                                  : new ValidationResult( false, "Invalid "

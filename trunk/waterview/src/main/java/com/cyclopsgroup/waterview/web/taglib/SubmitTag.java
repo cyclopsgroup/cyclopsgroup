@@ -14,7 +14,7 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Submit tag
  */
 public class SubmitTag
@@ -65,9 +65,16 @@ public class SubmitTag
             {
                 onclick.append( "if(this.form.force_validation) " );
                 onclick.append( " {this.form.force_validation.value='true'; }" );
+                onclick.append( "if(validateForm(this.form, '" + formTag.getForm().getId() + "')) {" );
+                onclick.append( "this.disabled=true; " );
+                onclick.append( "this.form.submit(); return false; " );
+                onclick.append( "}" );
             }
-            onclick.append( "this.disabled=true; " );
-            onclick.append( "this.form.submit(); return false; " );
+            else
+            {
+                onclick.append( "this.disabled=true; " );
+                onclick.append( "this.form.submit(); return false; " );
+            }
             jc.setVariable( "onclick", onclick.toString() );
             getBody().run( jc, output );
         }

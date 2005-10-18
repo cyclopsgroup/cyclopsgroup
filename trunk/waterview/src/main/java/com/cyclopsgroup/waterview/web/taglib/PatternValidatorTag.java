@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.web.ValidationResult;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Pattern validator tag
  */
 public class PatternValidatorTag
@@ -64,11 +64,11 @@ public class PatternValidatorTag
     /**
      * Overwrite or implement method validate()
      *
-     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
+     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field, java.lang.String)
      */
-    public ValidationResult validate( Field field )
+    public ValidationResult validate( Field field, String value )
     {
-        boolean success = Pattern.matches( getPattern(), field.getValue() );
+        boolean success = Pattern.matches( getPattern(), value );
         return new ValidationResult( success, "Doesn't match pattern " + getPattern() );
     }
 }

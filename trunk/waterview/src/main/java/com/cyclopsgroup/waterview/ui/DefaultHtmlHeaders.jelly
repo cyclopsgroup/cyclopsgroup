@@ -13,6 +13,7 @@
     <script language="javascript">
         <![CDATA[
                 var blankGif="${link.getResource('/waterview/blank.gif')}";
+                var pageBaseUrl = "${pageBase}";
             ]]>
     </script>
     <style type="text/css">

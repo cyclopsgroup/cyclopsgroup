@@ -117,7 +117,6 @@
             <configuration>
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.ParseURLValve" />
-                    <valve role="com.cyclopsgroup.waterview.web.ProcessFormValve" />
                     <valve role="com.cyclopsgroup.waterview.core.ResolveActionsValve" />
                     <valve role="com.cyclopsgroup.waterview.core.OpenViewValve" />
                 </valves>

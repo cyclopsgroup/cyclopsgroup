@@ -7,12 +7,12 @@
                 <tr>
                     <td>%document.text.id</td>
                     <td>
-                        <w:Field name="product_id" required="true" />
+                        <w:Field name="product_id" required="true" title="Product ID" />
                         <font color="red">**</font>
                     </td>
                     <td>Amount</td>
                     <td>
-                        <w:Field name="product_amount" required="true" type="int" />
+                        <w:Field name="product_amount" required="true" type="int" title="Product Amount" />
                         <font color="red">**</font>
                     </td>
                 </tr>
@@ -24,6 +24,7 @@
                         <w:Submit action="dddddd" forceValidation="true">
                             <w:FormButton>%document.text.pushme</w:FormButton>
                         </w:Submit>
+                        <input type="button" onclick="validateForm(this.form, '${form.id}')" value="hehe" />
                     </td>
                 </tr>
             </w:Form>

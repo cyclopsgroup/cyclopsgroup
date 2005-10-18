@@ -18,7 +18,7 @@ import com.cyclopsgroup.waterview.web.ValidationResult;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Validator group tag
  */
 public class ValidatorsTag
@@ -38,6 +38,17 @@ public class ValidatorsTag
     }
 
     /**
+     * Overwrite or implement method createValidator()
+     *
+     * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#createValidator()
+     */
+    protected FieldValidator createValidator()
+        throws Exception
+    {
+        return this;
+    }
+
+    /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#processTag(org.apache.commons.jelly.XMLOutput)
@@ -50,27 +61,16 @@ public class ValidatorsTag
     }
 
     /**
-     * Overwrite or implement method createValidator()
-     *
-     * @see com.cyclopsgroup.waterview.web.taglib.BaseValidatorTag#createValidator()
-     */
-    protected FieldValidator createValidator()
-        throws Exception
-    {
-        return this;
-    }
-
-    /**
      * Overwrite or implement method validate()
      *
-     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field)
+     * @see com.cyclopsgroup.waterview.web.FieldValidator#validate(com.cyclopsgroup.waterview.web.Field, java.lang.String)
      */
-    public ValidationResult validate( Field field )
+    public ValidationResult validate( Field field, String value )
     {
         for ( Iterator i = validators.iterator(); i.hasNext(); )
         {
             FieldValidator validator = (FieldValidator) i.next();
-            ValidationResult result = validator.validate( field );
+            ValidationResult result = validator.validate( field, value );
             if ( result != null && !result.isSuccess() )
             {
                 return result;

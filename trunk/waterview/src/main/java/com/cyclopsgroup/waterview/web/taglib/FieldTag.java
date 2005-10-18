@@ -21,7 +21,7 @@ import com.cyclopsgroup.waterview.web.Field;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Field tag
  */
 public class FieldTag
@@ -187,6 +187,7 @@ public class FieldTag
         if ( formTag.isFormNew() )
         {
             field = new Field( getName(), TypeUtils.getType( getType() ) );
+            field.setTitle( getTitle() );
             field.setRequired( isRequired() );
             field.setPassword( isPassword() );
             if ( !isPassword() )
@@ -280,8 +281,8 @@ public class FieldTag
 
     /**
      * @param type The type to set.
-     * 
-     * @throws ClassNotFoundException 
+     *
+     * @throws ClassNotFoundException
      */
     public void setType( String type )
         throws ClassNotFoundException

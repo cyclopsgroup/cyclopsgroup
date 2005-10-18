@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.web;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Form field validator
  */
 public interface FieldValidator
@@ -27,7 +27,8 @@ public interface FieldValidator
      * Validate field
      *
      * @param field Field to validate
+     * @param value Value to validate
      * @return Validation result
      */
-    ValidationResult validate( Field field );
+    ValidationResult validate( Field field, String value );
 }

@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Form field object
  */
 public class Field
@@ -38,6 +38,8 @@ public class Field
 
     private boolean required;
 
+    private String title;
+
     private Class type;
 
     private FieldValidator validator;
@@ -50,7 +52,7 @@ public class Field
      * @param name Field name
      * @param type Field type
      */
-    public Field(String name, Class type)
+    public Field( String name, Class type )
     {
         this.name = name;
         this.type = type;
@@ -72,6 +74,16 @@ public class Field
     public String getName()
     {
         return name;
+    }
+
+    /**
+     * Getter method for property title
+     *
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
     }
 
     /**
@@ -127,7 +139,7 @@ public class Field
     /**
      * @param errorMessage The errorMessage to set.
      */
-    public void setErrorMessage(String errorMessage)
+    public void setErrorMessage( String errorMessage )
     {
         this.errorMessage = errorMessage;
     }
@@ -135,7 +147,7 @@ public class Field
     /**
      * @param invalid The invalid to set.
      */
-    public void setInvalid(boolean invalid)
+    public void setInvalid( boolean invalid )
     {
         this.invalid = invalid;
     }
@@ -145,7 +157,7 @@ public class Field
      *
      * @param password The password to set.
      */
-    public void setPassword(boolean password)
+    public void setPassword( boolean password )
     {
         this.password = password;
     }
@@ -153,15 +165,25 @@ public class Field
     /**
      * @param required The required to set.
      */
-    public void setRequired(boolean required)
+    public void setRequired( boolean required )
     {
         this.required = required;
     }
 
     /**
+     * Setter method for property title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
+    }
+
+    /**
      * @param validator The validator to set.
      */
-    public void setValidator(FieldValidator validator)
+    public void setValidator( FieldValidator validator )
     {
         this.validator = validator;
     }
@@ -169,7 +191,7 @@ public class Field
     /**
      * @param value The value to set.
      */
-    public void setValue(String value)
+    public void setValue( String value )
     {
         this.value = value;
     }
@@ -179,34 +201,34 @@ public class Field
      */
     public void validate()
     {
-        if (StringUtils.isEmpty(getValue()))
+        if ( StringUtils.isEmpty( getValue() ) )
         {
-            if (isRequired())
+            if ( isRequired() )
             {
-                setInvalid(true);
-                setErrorMessage("Field value is equired !");
+                setInvalid( true );
+                setErrorMessage( "Field value is equired !" );
             }
             else
             {
-                setInvalid(false);
-                setErrorMessage(StringUtils.EMPTY);
+                setInvalid( false );
+                setErrorMessage( StringUtils.EMPTY );
             }
             return;
         }
-        ValidationResult result = TypeFieldValidator.INSTANCE.validate(this);
-        if (result.isSuccess() && getValidator() != null)
+        ValidationResult result = TypeFieldValidator.INSTANCE.validate( this, getValue() );
+        if ( result.isSuccess() && getValidator() != null )
         {
-            result = getValidator().validate(this);
+            result = getValidator().validate( this, getValue() );
         }
-        if (result.isSuccess())
+        if ( result.isSuccess() )
         {
-            setInvalid(false);
-            setErrorMessage(StringUtils.EMPTY);
+            setInvalid( false );
+            setErrorMessage( StringUtils.EMPTY );
         }
         else
         {
-            setInvalid(true);
-            setErrorMessage(result.getErrorMessage());
+            setInvalid( true );
+            setErrorMessage( result.getErrorMessage() );
         }
     }
 }
