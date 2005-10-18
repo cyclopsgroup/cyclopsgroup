@@ -6,5 +6,10 @@
     <j:forEach var="i" items="${data.actions}">
         <p>${i}</p>
     </j:forEach>
-    <b>${link.setPage('/aaa')}</b>
+    <div id="testdiv">
+        <b>${link.setPage('/aaa')}</b>
+    </div>
+    <a href="#" onclick="fillDynaContent('testdiv', '${link.setView('/waterview/view/TestVM.vm')}'); return false;">
+        Click me
+    </a>
 </div>
