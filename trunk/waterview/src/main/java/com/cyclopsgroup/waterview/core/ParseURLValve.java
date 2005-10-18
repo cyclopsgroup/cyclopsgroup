@@ -98,9 +98,9 @@ public class ParseURLValve
                 String page = behavior.substring( Link.PAGE_INSTRUCTOR.length() + 1 );
                 data.setPage( page );
             }
-            else if ( behavior.startsWith( '/' + Link.OPEN_INSTRUCTOR ) )
+            else if ( behavior.startsWith( '/' + Link.VIEW_INSTRUCTOR ) )
             {
-                String viewPath = behavior.substring( Link.OPEN_INSTRUCTOR.length() + 1 );
+                String viewPath = behavior.substring( Link.VIEW_INSTRUCTOR.length() + 1 );
                 data.getRequestContext().put( RuntimeData.OPEN_VIEW_NAME, viewPath );
             }
             else

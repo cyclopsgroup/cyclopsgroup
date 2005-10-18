@@ -81,6 +81,7 @@
             <configuration>
                 <pipelines>
                     <pipeline pattern="/!get!/.*" role="com.cyclopsgroup.waterview.GetResourcePipeline" />
+                    <pipeline pattern="/!view!/.*" role="com.cyclopsgroup.waterview.OpenViewPipeline" />
                     <pipeline pattern=".*" role="com.cyclopsgroup.waterview.DefaultWaterviewPipeline" />
                 </pipelines>
             </configuration>

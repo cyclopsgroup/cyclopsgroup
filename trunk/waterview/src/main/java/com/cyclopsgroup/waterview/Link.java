@@ -41,7 +41,7 @@ public class Link
     public static final String NAME = "link";
 
     /** Open resource instructor */
-    public static final String OPEN_INSTRUCTOR = "!open";
+    public static final String VIEW_INSTRUCTOR = "!view!";
 
     /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
@@ -168,26 +168,26 @@ public class Link
     }
 
     /**
-     * Open given path
+     * Open given path as a view
      *
      * @param path Script path
      * @return Link object itself
      */
-    public Link open( Path path )
+    public Link setView( Path path )
     {
-        return open( path.getFullPath() );
+        return setView( path.getFullPath() );
     }
 
     /**
-     * Open given path
+     * Open given path as a view
      *
      * @param path Script path
      * @return Link object itself
      */
-    public Link open( String path )
+    public Link setView( String path )
     {
         checkDisposed();
-        requestPath.append( '/' ).append( OPEN_INSTRUCTOR ).append( getPath( path ) );
+        requestPath.append( '/' ).append( VIEW_INSTRUCTOR ).append( getPath( path ) );
         return this;
     }
 
