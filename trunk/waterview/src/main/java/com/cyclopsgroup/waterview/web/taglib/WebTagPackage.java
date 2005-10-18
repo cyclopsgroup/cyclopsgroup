@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Tag package of web tags
  */
 public class WebTagPackage
@@ -55,5 +55,8 @@ public class WebTagPackage
         addTag( "WindowControl", WindowControlTag.class );
         addTag( "Tab", TabTag.class );
         addTag( "HorizontalTabControl", HorizontalTabControlTag.class );
+
+        addTag( "Tree", TreeTag.class );
+        addTag( "RenderTreeChildren", RenderTreeChildrenTag.class );
     }
 }

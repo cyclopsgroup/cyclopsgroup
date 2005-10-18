@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,11 +26,10 @@ import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.web.Node;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
-import com.cyclopsgroup.waterview.web.TreeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Module for default layout
  */
 public class DefaultLayout
@@ -70,9 +69,10 @@ public class DefaultLayout
             context.put( "selectedNode", selectedNode );
             break;
         }
-        if ( selectedNode != null )
-        {
-            context.put( "navigatorRows", TreeUtils.flattenTree( selectedNode ) );
-        }
+        /*
+         if ( selectedNode != null )
+         {
+         context.put( "navigatorRows", TreeUtils.flattenTree( selectedNode ) );
+         }*/
     }
 }

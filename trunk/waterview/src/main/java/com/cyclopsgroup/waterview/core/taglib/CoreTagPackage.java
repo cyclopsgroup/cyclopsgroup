@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
 
 /**
  * Core tag package
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class CoreTagPackage
@@ -37,12 +37,9 @@ public class CoreTagPackage
         addTag( "GetPanelViews", GetPanelViewsTag.class );
         addTag( "SimpleView", SimpleViewTag.class );
         addTag( "DisplayView", DisplayViewTag.class );
-        addTag( "LocalizedText", LocalizedTextTag.class );
-        addTag( "LocalizedParagraph", LocalizedParagraphTag.class );
-        addTag( "t", LocalizedTextTag.class );
-        addTag( "p", LocalizedParagraphTag.class );
         addTag( "Dummy", DummyTag.class );
         addTag( "RunScript", RunScriptTag.class );
         addTag( "DoTag", DoTagTag.class );
+        addTag( "CreateUniqueId", CreateUniqueIdTag.class );
     }
 }

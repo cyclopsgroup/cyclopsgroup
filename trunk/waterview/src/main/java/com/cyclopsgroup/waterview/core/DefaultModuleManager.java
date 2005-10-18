@@ -20,6 +20,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -46,7 +47,7 @@ import com.cyclopsgroup.waterview.spi.View;
  */
 public class DefaultModuleManager
     extends AbstractLogEnabled
-    implements Configurable, ModuleManager, Serviceable
+    implements Configurable, ModuleManager, Serviceable, DynaViewFactory, Initializable
 {
     private CacheManager cache;
 
@@ -99,6 +100,30 @@ public class DefaultModuleManager
     }
 
     /**
+     * Overwrite or implement method createView()
+     *
+     * @see com.cyclopsgroup.waterview.spi.DynaViewFactory#createView(com.cyclopsgroup.waterview.Path)
+     */
+    public View createView( final Path path )
+        throws Exception
+    {
+        return new View()
+        {
+
+            public String getName()
+            {
+                return path.getFullPath();
+            }
+
+            public void render( RuntimeData data, Context viewContext )
+                throws Exception
+            {
+                runModule( path, data, viewContext );
+            }
+        };
+    }
+
+    /**
      * Overwrite or implement method getPackageAliases()
      *
      * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageAliases()
@@ -124,6 +149,17 @@ public class DefaultModuleManager
             return (String) packageNames.get( aliasOrPackage );
         }
         return aliasOrPackage;
+    }
+
+    /**
+     * Overwrite or implement method initialize()
+     *
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
+    public void initialize()
+        throws Exception
+    {
+        registerDynaViewFactory( ".+\\.jm", this );
     }
 
     /**

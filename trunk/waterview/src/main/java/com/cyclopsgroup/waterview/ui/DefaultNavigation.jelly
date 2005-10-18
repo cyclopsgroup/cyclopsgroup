@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <table celllspacing="0" border="0" cellpadding="0">
-        <j:forEach var="row" items="${navigatorRows}">
-            <j:set var="node" value="${row.node.content}" />
-            <j:if test="${not node.hidden}">
+    <w:Tree var="runtimeNode" root="${selectedNode}">
+        <j:set var="node" value="${runtimeNode.content}" />
+        <table cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td colspan="2">
+                    <j:choose>
+                        <j:when test="${node.end}">
+                            <img src="${themeBase}/16x16/screen.png" width="16" height="16" alt="Goto ${node.page}" />
+                        </j:when>
+                        <j:when test="${runtimeNode.expanded}">
+                            <a
+                                href="${link.addAction('/waterview/NavigatorCollapseNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                <img src="${themeBase}/16x16/folder_opened.png" width="16" height="16"
+                                    alt="Click to collapse" />
+                            </a>
+                        </j:when>
+                        <j:otherwise>
+                            <a
+                                href="${link.addAction('/waterview/NavigatorExpandNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
+                                <img src="${themeBase}/16x16/folder.png" width="16" height="16" alt="Click to expand" />
+                            </a>
+                        </j:otherwise>
+                    </j:choose>
+                </td>
+                <td style="padding: 2px;" nowrap="nowrap">
+                    <a href="${link.setPage(node.page)}" title="${node.description}">${node.title}</a>
+                </td>
+            </tr>
+            <j:if test="${!node.end}">
                 <tr>
-                    <td colspan="${row.depth}" />
                     <td>
                         <w:BlankImage width="6" height="16" />
                     </td>
                     <td colspan="2">
-                        <j:choose>
-                            <j:when test="${node.end}">
-                                <img src="${themeBase}/16x16/screen.png" width="16" height="16" alt="Goto ${node.page}" />
-                            </j:when>
-                            <j:when test="${row.node.expanded}">
-                                <a
-                                    href="${link.addAction('/waterview/NavigatorCollapseNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
-                                    <img src="${themeBase}/16x16/folder_opened.png" width="16" height="16"
-                                        alt="Click to collapse" />
-                                </a>
-                            </j:when>
-                            <j:otherwise>
-                                <a
-                                    href="${link.addAction('/waterview/NavigatorExpandNode').setPage(page).addQueryString(data.queryString).addQueryData('navigator_node_id', node.nodeId)}">
-                                    <img src="${themeBase}/16x16/folder.png" width="16" height="16"
-                                        alt="Click to expand" />
-                                </a>
-                            </j:otherwise>
-                        </j:choose>
-                    </td>
-                    <td colspan="${10 - row.depth}">
-                        <a href="${link.setPage(node.page)}" title="${node.description}">${node.title}</a>
+                        <w:RenderTreeChildren />
                     </td>
                 </tr>
             </j:if>
-        </j:forEach>
-    </table>
+        </table>
+    </w:Tree>
 </div>
