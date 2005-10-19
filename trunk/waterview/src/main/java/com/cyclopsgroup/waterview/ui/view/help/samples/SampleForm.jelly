@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <w:Submit action="dddddd" forceValidation="true">
+                        <w:Submit action="${link.addAction('/waterview/FakeAction').setPage('/Index.jelly')}" forceValidation="true">
                             <w:FormButton>%document.text.pushme</w:FormButton>
                         </w:Submit>
                     </td>

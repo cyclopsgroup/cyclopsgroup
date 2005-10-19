@@ -215,6 +215,7 @@ function submitForm(form, url, validation)
 	}
 	for(var i = 0; i < form.elements.length; i++)
 	{
+		var element = form.elements[i];
 		if(element.type == "submit" || element.type == "image" || element.type == "button")
 		{
 			element.disabled = true;
