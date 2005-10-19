@@ -24,7 +24,6 @@
                         <w:Submit action="dddddd" forceValidation="true">
                             <w:FormButton>%document.text.pushme</w:FormButton>
                         </w:Submit>
-                        <input type="button" onclick="validateForm(this.form, '${form.id}')" value="hehe" />
                     </td>
                 </tr>
             </w:Form>

@@ -186,7 +186,7 @@ function validateForm(form, formId)
 					if( !focused )
 					{
 						focused = true;
-						//field.select();
+						field.select();
 						field.focus();
 					}
 				}
@@ -200,6 +200,27 @@ function validateForm(form, formId)
 	return successful;
 }
 
-function submitForm(form)
+function submitForm(form, url, validation)
 {
+	if( validation )
+	{
+		if( form.force_validation )
+		{
+			form.force_validation.value = "true";
+		}
+		if( !validateForm(form, form.form_id.value))
+		{
+			return false;
+		}
+	}
+	for(var i = 0; i < form.elements.length; i++)
+	{
+		if(element.type == "submit" || element.type == "image" || element.type == "button")
+		{
+			element.disabled = true;
+		}
+	}
+	form.action = url;
+	form.submit();
+	return false;
 }

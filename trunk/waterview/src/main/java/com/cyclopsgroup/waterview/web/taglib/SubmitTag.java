@@ -60,22 +60,6 @@ public class SubmitTag
         {
             JellyContext jc = new JellyContext( getContext() );
             jc.setVariable( "submit", this );
-            StringBuffer onclick = new StringBuffer( "this.form.action='" ).append( getAction() ).append( "'; " );
-            if ( isForceValidation() )
-            {
-                onclick.append( "if(this.form.force_validation) " );
-                onclick.append( " {this.form.force_validation.value='true'; }" );
-                onclick.append( "if(validateForm(this.form, '" + formTag.getForm().getId() + "')) {" );
-                onclick.append( "this.disabled=true; " );
-                onclick.append( "this.form.submit(); return false; " );
-                onclick.append( "}" );
-            }
-            else
-            {
-                onclick.append( "this.disabled=true; " );
-                onclick.append( "this.form.submit(); return false; " );
-            }
-            jc.setVariable( "onclick", onclick.toString() );
             getBody().run( jc, output );
         }
     }
