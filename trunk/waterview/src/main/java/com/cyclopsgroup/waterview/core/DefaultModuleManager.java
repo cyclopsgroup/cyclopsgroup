@@ -109,12 +109,6 @@ public class DefaultModuleManager
     {
         return new View()
         {
-
-            public String getName()
-            {
-                return path.getFullPath();
-            }
-
             public void render( RuntimeData data, Context viewContext )
                 throws Exception
             {

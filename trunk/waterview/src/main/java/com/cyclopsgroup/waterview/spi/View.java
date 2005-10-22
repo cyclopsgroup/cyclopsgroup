@@ -29,18 +29,6 @@ public interface View
     /** Dummy view */
     View DUMMY = new View()
     {
-        private static final String NAME = "dummy";
-
-        /**
-         * Overwrite or implement method getName()
-         *
-         * @see com.cyclopsgroup.waterview.spi.View#getName()
-         */
-        public String getName()
-        {
-            return NAME;
-        }
-
         /**
          * Overwrite or implement method render()
          * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
@@ -54,13 +42,6 @@ public interface View
 
     /** Empty array */
     View[] EMPTY_ARRAY = new View[0];
-
-    /**
-     * Get unique name of this view
-     *
-     * @return Unique name of view
-     */
-    String getName();
 
     /**
      * Render the window with runtime information

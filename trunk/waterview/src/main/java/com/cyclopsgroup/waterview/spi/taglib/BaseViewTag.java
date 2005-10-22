@@ -1,9 +1,7 @@
 package com.cyclopsgroup.waterview.spi.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
 import com.cyclopsgroup.waterview.spi.View;
@@ -16,28 +14,6 @@ import com.cyclopsgroup.waterview.spi.View;
 public abstract class BaseViewTag
     extends TagSupport
 {
-    private String name;
-
-    /**
-     * Get name
-     *
-     * @return Name of view
-     */
-    public final String getName()
-    {
-        return name;
-    }
-
-    /**
-     *Set view name
-     *
-     * @param name View name
-     */
-    public final void setName( String name )
-    {
-        this.name = name;
-    }
-
     /**
      * Overwrite this method to create component
      *
@@ -55,29 +31,7 @@ public abstract class BaseViewTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        final View v = createView();
-        View view = null;
-        if ( StringUtils.isNotEmpty( getName() ) )
-        {
-            view = new View()
-            {
-
-                public String getName()
-                {
-                    return BaseViewTag.this.getName();
-                }
-
-                public void render( RuntimeData data, Context viewContext )
-                    throws Exception
-                {
-                    v.render( data, viewContext );
-                }
-            };
-        }
-        else
-        {
-            view = v;
-        }
+        final View view = createView();
 
         if ( view == null )
         {

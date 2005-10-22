@@ -16,10 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.ModuleManager;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
@@ -34,28 +30,6 @@ public class SimpleViewTag
 {
     private String path;
 
-    private String title;
-
-    /**
-     * Getter method for title
-     *
-     * @return Returns the title.
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * Setter method for title
-     *
-     * @param title The title to set.
-     */
-    public void setTitle( String title )
-    {
-        this.title = title;
-    }
-
     /**
      * Overwrite or implement method createView()
      *
@@ -66,25 +40,7 @@ public class SimpleViewTag
     {
         requireAttribute( "path" );
         ModuleManager mm = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
-        final View view = mm.createDynaView( getPath() );
-        if ( StringUtils.isEmpty( getTitle() ) )
-        {
-            return view;
-        }
-        return new View()
-        {
-
-            public String getName()
-            {
-                return getTitle();
-            }
-
-            public void render( RuntimeData data, Context viewContext )
-                throws Exception
-            {
-                view.render( data, viewContext );
-            }
-        };
+        return mm.createDynaView( getPath() );
     }
 
     /**

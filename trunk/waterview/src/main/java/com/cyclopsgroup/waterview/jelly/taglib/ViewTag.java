@@ -36,7 +36,6 @@ public class ViewTag
     protected View createView()
         throws Exception
     {
-        requireAttribute( "name" );
-        return new JellyView( getBody(), getName() );
+        return new JellyView( getBody(), null );
     }
 }

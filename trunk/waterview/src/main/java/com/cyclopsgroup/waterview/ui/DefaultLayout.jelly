@@ -16,17 +16,16 @@
                         <td width="25%" valign="top" id="leftPanel">
                             <j:set var="navigationNode" value="${selectedNode}" />
                             <w:GetPanelViews var="views" panel="navigation">
-                                <w:JellyView name="%waterview.view.systemnavigation"
-                                    script="/waterview/sysview/DefaultNavigationNode.jelly" />
-                                <w:View name="%waterview.view.links">
+                                <w:JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
+                                <w:View>
                                     <p>Some help links</p>
                                 </w:View>
-                                <w:View name="%waterview.view.references">
+                                <w:View>
                                     <p>Some reference links</p>
                                 </w:View>
                             </w:GetPanelViews>
                             <j:forEach var="view" items="${views}">
-                                <w:WindowControl title="${view.name}" shadow="2" border="1">
+                                <w:WindowControl title="Side Window" shadow="2" border="1">
                                     <w:DisplayView view="${view}" />
                                 </w:WindowControl>
                             </j:forEach>
@@ -74,12 +73,10 @@
                                 <tr>
                                     <td>
                                         <w:GetPanelViews var="views" panel="body">
-                                            <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}"
-                                                title="${mainTitle}" />
+                                            <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
                                         </w:GetPanelViews>
                                         <j:forEach var="view" items="${views}">
-                                            <w:WindowControl title="${view.name}" maximizable="true" editable="true"
-                                                border="0">
+                                            <w:WindowControl title="" maximizable="true" editable="true" border="0">
                                                 <w:DisplayView view="${view}" />
                                             </w:WindowControl>
                                         </j:forEach>
