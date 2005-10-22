@@ -34,7 +34,7 @@
                 <div id="tab${uniqueId}">
                     <script language="javascript">
                         <![CDATA[
-document.write(fetchExternalContent("${controlTag.selectedTabTag.url}"));
+fillDynaContent("tab${uniqueId}", "${controlTag.selectedTabTag.url}");
                     ]]>
                     </script>
                 </div>
