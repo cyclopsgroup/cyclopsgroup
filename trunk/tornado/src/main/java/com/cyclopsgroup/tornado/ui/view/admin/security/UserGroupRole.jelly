@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <h3>Groups for ${userObject.displayName}</h3>
-    <table class="waterviewTable">
-        <tr>
-            <th>Belong to groups</th>
-            <th>Join/Leave</th>
-            <th>Other groups</th>
-        </tr>
-        <w:FormControl>
-            <w:Form name="groupform" method="post">
-                <input type="hidden" name="user_id" value="${userObject.id}" />
+    <w:FormControl>
+        <w:Form name="groupform" method="post">
+            <input type="hidden" name="user_id" value="${userObject.id}" />
+            <table class="waterviewTable">
+                <tr>
+                    <th>Belong to groups</th>
+                    <th>Join/Leave</th>
+                    <th>Other groups</th>
+                </tr>
                 <tr>
                     <td>
                         <select name="group_to_leave" size="10">
@@ -37,7 +37,7 @@
                         </select>
                     </td>
                 </tr>
-            </w:Form>
-        </w:FormControl>
-    </table>
+            </table>
+        </w:Form>
+    </w:FormControl>
 </div>
