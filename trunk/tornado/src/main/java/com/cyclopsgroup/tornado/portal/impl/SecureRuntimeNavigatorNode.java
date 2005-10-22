@@ -70,7 +70,7 @@ public class SecureRuntimeNavigatorNode
         for ( int i = 0; i < nodes.length; i++ )
         {
             NavigatorNode node = (NavigatorNode) nodes[i];
-            if ( user.isAuthorized( new PageAsset( node.getPage() ) ) )
+            if ( !node.isHidden() && user.isAuthorized( new PageAsset( node.getPage() ) ) )
             {
                 children.add( node );
             }

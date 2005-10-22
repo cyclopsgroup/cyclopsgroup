@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <table width="100%" class="waterviewTable">
+        <tr>
+            <td>Name</td>
+            <td>${userObject.name}</td>
+        </tr>
+        <tr>
+            <td>Internal ID</td>
+            <td>${userObject.id}</td>
+        </tr>
+        <tr>
+            <td>Display Name</td>
+            <td>${userObject.displayName}</td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td>
+                <a href="mailto:${userObject.email}">${userObject.email}</a>
+            </td>
+        </tr>
+    </table>
+</div>

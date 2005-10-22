@@ -20,12 +20,12 @@
                     </td>
                     <td align="center">
                         <w:Submit
-                            action="${link.addAction('/tornado/admin/security/LeaveGroupAction').setPage(page).addQueryData('user_id', userObject.id)}">
+                            action="${link.addAction('/tornado/admin/security/LeaveGroupAction').setPage('/tornado/admin/security/UserProfile.jelly').addQueryData('user_id', userObject.id)}">
                             <w:FormButton title="Leave &gt;&gt;" />
                         </w:Submit>
                         <br />
                         <w:Submit
-                            action="${link.addAction('/tornado/admin/security/JoinGroupAction').setPage(page).addQueryData('user_id', userObject.id)}">
+                            action="${link.addAction('/tornado/admin/security/JoinGroupAction').setPage('/tornado/admin/security/UserProfile.jelly').addQueryData('user_id', userObject.id)}">
                             <w:FormButton title="&lt;&lt; Join" />
                         </w:Submit>
                     </td>
