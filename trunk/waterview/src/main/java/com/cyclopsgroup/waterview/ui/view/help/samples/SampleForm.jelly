@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <h2>%waterview.view.sampleform</h2>
-    <table width="100%">
-        <w:FormControl>
-            <w:Form name="aform" method="post">
+    <w:FormControl>
+        <w:Form name="aform" method="post">
+            <table width="100%">
                 <tr>
                     <td>%document.text.id</td>
                     <td>
@@ -21,12 +21,13 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <w:Submit action="${link.addAction('/waterview/FakeAction').setPage('/Index.jelly')}" forceValidation="true">
+                        <w:Submit action="${link.addAction('/waterview/FakeAction').setPage('/Index.jelly')}"
+                            forceValidation="true">
                             <w:FormButton>%document.text.pushme</w:FormButton>
                         </w:Submit>
                     </td>
                 </tr>
-            </w:Form>
-        </w:FormControl>
-    </table>
+            </table>
+        </w:Form>
+    </w:FormControl>
 </div>

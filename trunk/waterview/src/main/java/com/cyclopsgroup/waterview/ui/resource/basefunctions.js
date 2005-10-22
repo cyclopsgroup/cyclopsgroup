@@ -71,7 +71,7 @@ function _fillDynaContent(tagId, url, outer)
 	}
 
 	var text = fetchExternalContent(url);
-	alert(text);
+
 	if(outer)
 	{
 		el.outerHTML = text;
