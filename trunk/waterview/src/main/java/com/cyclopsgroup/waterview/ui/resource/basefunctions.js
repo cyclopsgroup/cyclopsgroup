@@ -50,6 +50,18 @@ function createHttpRequest()
 	}
 }
 
+function fetchExternalContent(url)
+{
+	var req = createHttpRequest();
+    req.open("GET", url, false);
+    req.send("");
+    if(req.status == "200")
+	{
+		return req.responseText;
+	}
+	return req.statusText;
+}
+
 function _fillDynaContent(tagId, url, outer)
 {
 	var el = document.getElementById(tagId);
@@ -58,25 +70,14 @@ function _fillDynaContent(tagId, url, outer)
 		return;
 	}
 
-	var req = createHttpRequest();
-    req.open("GET", url, false);
-    req.send("");
-    if(req.status == "200")
+	var text = fetchExternalContent(url);
+	if(outer)
 	{
-		var text = req.responseText;
-		//alert(text);
-		if(outer)
-		{
-			el.outerHTML = text;
-		}
-		else
-		{
-			el.innerHTML = text;
-		}
+		el.outerHTML = text;
 	}
 	else
 	{
-		alert("Something is wrong " + req.response.Text);
+		el.innerHTML = text;
 	}
 }
 
@@ -223,5 +224,24 @@ function submitForm(form, url, validation)
 	}
 	form.action = url;
 	form.submit();
+	return false;
+}
+
+var _waterviewCurrentTabName = new Array();
+
+function setTabName(tabId, tabName)
+{
+	_waterviewCurrentTabName[ tabId ] = tabName;
+}
+
+function changeTab(tabId, tabName, url)
+{
+	previousName = _waterviewCurrentTabName[ tabId ];
+	var previousTd = document.getElementById("tabtd" + tabId +"_" + previousName);
+	previousTd.className = "waterviewUnselectedTab";
+	var currentTd = document.getElementById("tabtd" + tabId +"_" + tabName);
+	setTabName(tabId, tabName);
+	currentTd.className = "waterviewSelectedTab";
+	fillDynaContent("tab" + tabId, url);
 	return false;
 }

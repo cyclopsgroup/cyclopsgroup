@@ -24,7 +24,6 @@ import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
 
@@ -37,11 +36,9 @@ public class HorizontalTabControlTag
     extends BaseJellyControlTag
     implements TabTagAware
 {
-    private String defaultTab;
-
-    private String selectedTabName;
-
     private Map tabTags = ListOrderedMap.decorate( new HashMap() );
+
+    private String selected = "default";
 
     /**
      * Constructor for class HorizontalTabControlTag
@@ -62,36 +59,6 @@ public class HorizontalTabControlTag
     }
 
     /**
-     * Getter method for property defaultTab
-     *
-     * @return Returns the defaultTab.
-     */
-    public String getDefaultTab()
-    {
-        return defaultTab;
-    }
-
-    /**selectedTabName = getDefaultTab();
-     * Getter method for property name
-     *
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return getTagId();
-    }
-
-    /**
-     * Get selected tab tag
-     *
-     * @return Tab tag object
-     */
-    public TabTag getSelectedTabTag()
-    {
-        return (TabTag) tabTags.get( selectedTabName );
-    }
-
-    /**
      * Get tab tags
      *
      * @return Collection of tab tags
@@ -109,46 +76,46 @@ public class HorizontalTabControlTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        requireAttribute( "name" );
+        requireAttribute( "selected" );
         invokeBody( XMLOutput.createDummyXMLOutput() );
         if ( tabTags.isEmpty() )
         {
             throw new JellyTagException( "At least one tab must be defined" );
         }
-
-        String key = getUniqueTagId() + "/tabName";
-        String tabName = (String) getRuntimeData().getSessionContext().get( key );
-        if ( StringUtils.isEmpty( tabName ) )
+        if ( !tabTags.containsKey( getSelected() ) )
         {
-            tabName = getDefaultTab();
+            setSelected( (String) tabTags.keySet().iterator().next() );
         }
-
-        if ( StringUtils.isEmpty( tabName ) )
-        {
-            tabName = ( (TabTag) tabTags.values().iterator().next() ).getName();
-        }
-        selectedTabName = tabName;
-        getContext().setVariable( "controlTabNameKey", key );
         super.processTag( output );
     }
 
     /**
-     * Setter method for property defaultTab
+     * Getter method for field selected
      *
-     * @param defaultTab The defaultTab to set.
+     * @return Returns the selected.
      */
-    public void setDefaultTab( String defaultTab )
+    public String getSelected()
     {
-        this.defaultTab = defaultTab;
+        return selected;
     }
 
     /**
-     * Setter method for property name
+     * Setter method for field selected
      *
-     * @param name The name to set.
+     * @param selected The selected to set.
      */
-    public void setName( String name )
+    public void setSelected( String selected )
     {
-        setTagId( name );
+        this.selected = selected;
+    }
+
+    /**
+     * Get selected tab
+     *
+     * @return Selected tab
+     */
+    public TabTag getSelectedTabTag()
+    {
+        return (TabTag) tabTags.get( getSelected() );
     }
 }

@@ -39,12 +39,8 @@ a img {
 	padding: 3 20 3 20;
 }
 
-.waterviewSelectedTab,.waterviewSelectedTab a {
+.waterviewSelectedTab a {
 	font-weight: bold;
-}
-
-.waterviewUnselectedTab,.waterviewUnselectedTab {
-
 }
 
 .waterviewTabBody {

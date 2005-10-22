@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div class="fabricHorizontalTab" xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <w:CreateUniqueId var="uniqueId" />
+    <script language="javascript">setTabName('${uniqueId}', '${controlTag.selected}');</script>
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
             <td class="waterviewTabHeader">
@@ -9,22 +11,19 @@
                             <w:BlankImage width="1" height="1" />
                         </td>
                         <j:forEach var="tabTag" items="${controlTag.tabTags}">
-                            <j:choose>
-                                <j:when test="${tabTag eq controlTag.selectedTabTag}">
-                                    <td class="waterviewSelectedTab">${tabTag.title}</td>
-                                </j:when>
-                                <j:otherwise>
-                                    <td class="waterviewUnselectedTab">
-                                        <a
-                                            href="${link.addAction('/waterview/ChangeTab').setPage(page).addQueryData('tab_name', tabTag.name).addQueryData('tab_name_key', controlTabNameKey)}">
-                                            ${tabTag.title}
-                                        </a>
-                                    </td>
-                                </j:otherwise>
-                                <td>
-                                    <w:BlankImage width="1" height="1" />
-                                </td>
-                            </j:choose>
+                            <j:set var="className" value="waterviewUnselectedTab" />
+                            <j:if test="${tabTag.name eq controlTag.selected}">
+                                <j:set var="className" value="waterviewSelectedTab" />
+                            </j:if>
+                            <td class="${className}" id="tabtd${uniqueId}_${tabTag.name}">
+                                <a href="#"
+                                    onclick="return changeTab('${uniqueId}', '${tabTag.name}', '${tabTag.url}');">
+                                    ${tabTag.title}
+                                </a>
+                            </td>
+                            <td>
+                                <w:BlankImage width="1" height="1" />
+                            </td>
                         </j:forEach>
                     </tr>
                 </table>
@@ -32,7 +31,13 @@
         </tr>
         <tr>
             <td class="waterviewTabBody">
-                <w:RunScript script="${controlTag.selectedTabTag.body}" />
+                <div id="tab${uniqueId}">
+                    <script language="javascript">
+                        <![CDATA[
+document.write(fetchExternalContent("${controlTag.selectedTabTag.url}"));
+                    ]]>
+                    </script>
+                </div>
             </td>
         </tr>
     </table>

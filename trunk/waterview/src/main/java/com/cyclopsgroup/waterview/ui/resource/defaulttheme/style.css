@@ -7,7 +7,7 @@ h2 {
 	color: #FF9300;
 }
 
-a:link, a:visited {
+a:link,a:visited {
 	color: #2E52AF;
 }
 
@@ -94,7 +94,7 @@ table.waterviewTable .title {
 }
 
 table.waterviewTable td.input {
-
+	
 }
 
 .lineBreak,.subLineBreak {
@@ -130,6 +130,10 @@ table.waterviewTable td.input {
 
 .waterviewSelectedTab {
 	background-color: #2E52AF;
+	color: white;
+}
+
+.waterviewSelectedTab a {
 	color: white;
 }
 

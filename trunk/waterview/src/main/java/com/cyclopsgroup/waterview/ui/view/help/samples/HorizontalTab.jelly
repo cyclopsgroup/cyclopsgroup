@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <h2>%waterview.view.horizontaltab</h2>
-    <w:HorizontalTabControl name="tabs">
-        <w:Tab name="tab1" title="First Tab">
-            <h3>Hello everyone</h3>
-            <p>what what what?</p>
-        </w:Tab>
-        <w:Tab name="tab2" title="Second tab">
-            <p>Kyle</p>
-            <p>Cartman</p>
-            <p>Stan</p>
-            <p>Kenny</p>
-        </w:Tab>
+    <w:HorizontalTabControl selected="tab2">
+        <w:Tab name="tab1" title="First Tab" url="${link.setView('/waterview/view/help/samples/View1.vm')}" />
+        <w:Tab name="tab2" title="Second tab" url="${link.setView('/waterview/view/help/samples/View2.vm')}" />
     </w:HorizontalTabControl>
 </div>

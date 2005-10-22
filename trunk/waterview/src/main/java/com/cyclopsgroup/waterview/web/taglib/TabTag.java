@@ -34,6 +34,28 @@ public class TabTag
 
     private String title;
 
+    private String url;
+
+    /**
+     * Getter method for field url
+     *
+     * @return Returns the url.
+     */
+    public String getUrl()
+    {
+        return url;
+    }
+
+    /**
+     * Setter method for field url
+     *
+     * @param url The url to set.
+     */
+    public void setUrl( String url )
+    {
+        this.url = url;
+    }
+
     /**
      * Getter method for property name
      *
@@ -63,6 +85,7 @@ public class TabTag
         throws Exception
     {
         requireAttribute( "name" );
+        requireAttribute( "url" );
         if ( StringUtils.isEmpty( title ) )
         {
             setTitle( getName() );
