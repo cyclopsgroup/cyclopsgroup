@@ -36,7 +36,7 @@ public class DeleteSessionAttributes
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] attributeNames = data.getParams().getStrings( "attribute_name" );
+        String[] attributeNames = data.getParameters().getStrings( "attribute_name" );
         for ( int i = 0; i < attributeNames.length; i++ )
         {
             String attributeName = attributeNames[i];

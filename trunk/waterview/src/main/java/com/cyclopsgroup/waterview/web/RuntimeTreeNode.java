@@ -24,7 +24,7 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -124,7 +124,7 @@ public class RuntimeTreeNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
-    public ValueParser getAttributes()
+    public Attributes getAttributes()
     {
         return node.getAttributes();
     }

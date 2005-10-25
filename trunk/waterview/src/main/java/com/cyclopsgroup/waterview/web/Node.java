@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.web;
 
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,7 +33,7 @@ public interface Node
      *
      * @return Attributes object
      */
-    ValueParser getAttributes();
+    Attributes getAttributes();
 
     /**
      * Get unique ID of this node

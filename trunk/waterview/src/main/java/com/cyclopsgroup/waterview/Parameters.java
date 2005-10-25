@@ -23,8 +23,8 @@ import org.apache.commons.fileupload.FileItem;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class RequestValueParser
-    extends ValueParser
+public abstract class Parameters
+    extends Attributes
 {
     /**
      * Comment for <code>EMPTY_FILEITEM_ARRAY</code>

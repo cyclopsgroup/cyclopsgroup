@@ -39,7 +39,7 @@ public class SortTable
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String tableId = data.getParams().getString( "table_id", null );
+        String tableId = data.getParameters().getString( "table_id", null );
         if ( tableId == null )
         {
             throw new IllegalArgumentException( "table_id is missing" );
@@ -51,7 +51,7 @@ public class SortTable
             return;
         }
 
-        String columnName = data.getParams().getString( "table_column_name" );
+        String columnName = data.getParameters().getString( "table_column_name" );
         Column column = table.getColumn( columnName );
         if ( column == null || column.getSort() == ColumnSort.DISABLED )
         {

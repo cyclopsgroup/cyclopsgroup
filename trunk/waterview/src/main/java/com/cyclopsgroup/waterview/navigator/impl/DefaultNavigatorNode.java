@@ -24,8 +24,8 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.MapValueParser;
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.MapAttributes;
+import com.cyclopsgroup.waterview.Attributes;
 import com.cyclopsgroup.waterview.navigator.BaseNavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.web.Node;
@@ -48,7 +48,7 @@ class DefaultNavigatorNode
 
     static final String TITLE_NAME = "title";
 
-    private ValueParser attributes = new MapValueParser( new HashMap() );
+    private Attributes attributes = new MapAttributes( new HashMap() );
 
     private DefaultNavigatorService navigatorHome;
 
@@ -87,7 +87,7 @@ class DefaultNavigatorNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
-    public ValueParser getAttributes()
+    public Attributes getAttributes()
     {
         return attributes;
     }

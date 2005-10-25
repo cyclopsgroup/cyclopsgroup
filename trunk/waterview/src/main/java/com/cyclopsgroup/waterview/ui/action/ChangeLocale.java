@@ -41,7 +41,7 @@ public class ChangeLocale
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String localeName = data.getParams().getString( "locale_name" );
+        String localeName = data.getParameters().getString( "locale_name" );
         if ( StringUtils.isEmpty( localeName ) )
         {
             data.getSessionContext().remove( RuntimeData.LOCALE_NAME );

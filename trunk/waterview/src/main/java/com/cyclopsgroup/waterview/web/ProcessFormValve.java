@@ -12,7 +12,7 @@ import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -48,7 +48,7 @@ public class ProcessFormValve implements Valve
      */
     public void invoke(RuntimeData data, PipelineContext pc) throws Exception
     {
-        RequestValueParser params = data.getParams();
+        Parameters params = data.getParameters();
         String formId = params.getString("form_id");
         Form form = null;
         if (StringUtils.isNotEmpty(formId))

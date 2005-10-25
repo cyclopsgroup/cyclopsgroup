@@ -46,7 +46,7 @@ public class DefaultNavigationNode
     {
         RuntimeTreeNode navigationNode = null;
 
-        String nodeId = data.getParams().getString( "node_id" );
+        String nodeId = data.getParameters().getString( "node_id" );
         if ( StringUtils.isNotEmpty( nodeId ) )
         {
             NavigatorService nav = (NavigatorService) lookupComponent( NavigatorService.ROLE );
@@ -65,7 +65,7 @@ public class DefaultNavigationNode
 
         context.put( "navigationNode", navigationNode );
 
-        String action = data.getParams().getString( "node_action" );
+        String action = data.getParameters().getString( "node_action" );
         if ( StringUtils.equals( "expand", action ) )
         {
             navigationNode.expand( data );

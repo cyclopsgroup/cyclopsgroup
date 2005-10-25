@@ -28,7 +28,7 @@ public class ScrollTable implements Action
             throws Exception
     {
         context.setTargetUrl(data.getRefererUrl());
-        String tableId = data.getParams().getString("table_id", null);
+        String tableId = data.getParameters().getString("table_id", null);
         if (tableId == null)
         {
             throw new IllegalArgumentException("table_id is missing");
@@ -36,7 +36,7 @@ public class ScrollTable implements Action
         Table table = (Table) data.getSessionContext().get(tableId);
         if (table != null)
         {
-            int pageIndex = data.getParams().getInt("page_index", -1);
+            int pageIndex = data.getParameters().getInt("page_index", -1);
             if (pageIndex != -1)
             {
                 table.setPageIndex(pageIndex);

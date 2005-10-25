@@ -85,7 +85,7 @@ public class ResolveActionsValve
         {
             data.getRequestContext().put( "formInvalid", Boolean.TRUE );
             data.getRequestContext().put( "formErrors", actionContext.getInputErrorMessages() );
-            if ( data.getParams().getBoolean( "forced_validation" ) )
+            if ( data.getParameters().getBoolean( "forced_validation" ) )
             {
                 data.setRedirectUrl( data.getRefererUrl() );
                 return;

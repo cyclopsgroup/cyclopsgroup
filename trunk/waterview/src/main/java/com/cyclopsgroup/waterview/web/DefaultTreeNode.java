@@ -21,8 +21,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.MapValueParser;
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.MapAttributes;
+import com.cyclopsgroup.waterview.Attributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -32,7 +32,7 @@ import com.cyclopsgroup.waterview.ValueParser;
 public class DefaultTreeNode
     implements StaticNode
 {
-    private ValueParser attributes = new MapValueParser( new HashMap() );
+    private Attributes attributes = new MapAttributes( new HashMap() );
 
     private Map children = ListOrderedMap.decorate( new HashMap() );
 
@@ -69,7 +69,7 @@ public class DefaultTreeNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getAttributes()
      */
-    public ValueParser getAttributes()
+    public Attributes getAttributes()
     {
         return attributes;
     }

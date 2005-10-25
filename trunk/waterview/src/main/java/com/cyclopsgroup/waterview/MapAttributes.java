@@ -30,8 +30,8 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  *
  * Map based value parser
  */
-public class MapValueParser
-    extends ValueParser
+public class MapAttributes
+    extends Attributes
 {
     private Map map;
 
@@ -40,7 +40,7 @@ public class MapValueParser
      *
      * @param map Given map content
      */
-    public MapValueParser( Map map )
+    public MapAttributes( Map map )
     {
         this.map = map;
     }
@@ -48,7 +48,7 @@ public class MapValueParser
     /**
      * Overwrite or implement method in MapValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
     public void add( String name, String value )
     {
@@ -58,7 +58,7 @@ public class MapValueParser
     /**
      * Overwrite or implement method in MapValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
     protected String doGetValue( String name )
         throws Exception
@@ -83,7 +83,7 @@ public class MapValueParser
     /**
      * Overwrite or implement method in MapValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
     protected String[] doGetValues( String name )
         throws Exception
@@ -117,7 +117,7 @@ public class MapValueParser
     /**
      * Overwrite or implement method in MapValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
     public void remove( String name )
     {
@@ -127,7 +127,7 @@ public class MapValueParser
     /**
      * Override method doGetAttributeNames in class MapValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
     protected String[] doGetAttributeNames()
     {

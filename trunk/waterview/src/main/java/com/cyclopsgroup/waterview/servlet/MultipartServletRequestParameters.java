@@ -28,15 +28,15 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.Parameters;
 
 /**
  * Multipart servlet request value parser
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MultipartServletRequestValueParser
-    extends RequestValueParser
+public class MultipartServletRequestParameters
+    extends Parameters
 {
     private MultiHashMap content = new MultiHashMap();
 
@@ -45,7 +45,7 @@ public class MultipartServletRequestValueParser
     /**
      * Override method doGetAttributeNames in class MultipartServletRequestValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
     protected String[] doGetAttributeNames()
     {
@@ -59,7 +59,7 @@ public class MultipartServletRequestValueParser
      * @param fileUpload File upload object
      * @throws FileUploadException Throw it out
      */
-    public MultipartServletRequestValueParser( HttpServletRequest request, FileUploadBase fileUpload )
+    public MultipartServletRequestParameters( HttpServletRequest request, FileUploadBase fileUpload )
         throws FileUploadException
     {
         List files = fileUpload.parseRequest( request );
@@ -79,7 +79,7 @@ public class MultipartServletRequestValueParser
 
     /**
      * Overwrite or implement method add()
-     * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
     public void add( String name, String value )
     {
@@ -88,7 +88,7 @@ public class MultipartServletRequestValueParser
 
     /**
      * Overwrite or implement method doGetValue()
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
     protected String doGetValue( String name )
         throws Exception
@@ -99,7 +99,7 @@ public class MultipartServletRequestValueParser
 
     /**
      * Overwrite or implement method doGetValues()
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
     protected String[] doGetValues( String name )
         throws Exception
@@ -112,7 +112,7 @@ public class MultipartServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
     public FileItem getFileItem( String name )
     {
@@ -123,7 +123,7 @@ public class MultipartServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
     public FileItem[] getFileItems( String name )
     {
@@ -133,7 +133,7 @@ public class MultipartServletRequestValueParser
 
     /**
      * Overwrite or implement method remove()
-     * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
     public void remove( String name )
     {

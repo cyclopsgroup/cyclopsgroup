@@ -58,7 +58,7 @@ public abstract class AbstractRuntimeData
 
     private Context requestContext;
 
-    private RequestValueParser requestParameters;
+    private Parameters requestParameters;
 
     private String requestPath;
 
@@ -174,9 +174,9 @@ public abstract class AbstractRuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getParams()
+     * @see com.cyclopsgroup.waterview.RuntimeData#getParameters()
      */
-    public RequestValueParser getParams()
+    public Parameters getParameters()
     {
         return requestParameters;
     }
@@ -373,7 +373,7 @@ public abstract class AbstractRuntimeData
      *
      * @param requestParameters The requestParameters to set.
      */
-    public void setParams( RequestValueParser requestParameters )
+    public void setParams( Parameters requestParameters )
     {
         this.requestParameters = requestParameters;
     }

@@ -28,15 +28,15 @@ import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.lang.ArrayUtils;
 
-import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.Parameters;
 
 /**
  * Servet request implemented value parser
  * 
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRequestValueParser
-    extends RequestValueParser
+public class ServletRequestParameters
+    extends Parameters
 {
     private MultiHashMap extra = new MultiHashMap();
 
@@ -45,7 +45,7 @@ public class ServletRequestValueParser
     /**
      * Override method doGetAttributeNames in class ServletRequestValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
     protected String[] doGetAttributeNames()
     {
@@ -60,7 +60,7 @@ public class ServletRequestValueParser
      * 
      * @param request Servlet request
      */
-    public ServletRequestValueParser( HttpServletRequest request )
+    public ServletRequestParameters( HttpServletRequest request )
     {
         httpServletRequest = request;
     }
@@ -68,7 +68,7 @@ public class ServletRequestValueParser
     /**
      * Overwrite or implement method add()
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
     public void add( String name, String value )
     {
@@ -78,7 +78,7 @@ public class ServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#doGetValue(java.lang.String)
      */
     protected String doGetValue( String name )
         throws Exception
@@ -98,7 +98,7 @@ public class ServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#doGetValues(java.lang.String)
      */
     protected String[] doGetValues( String name )
         throws Exception
@@ -116,7 +116,7 @@ public class ServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
     public FileItem getFileItem( String name )
     {
@@ -126,7 +126,7 @@ public class ServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
     public FileItem[] getFileItems( String name )
     {
@@ -136,7 +136,7 @@ public class ServletRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#remove(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#remove(java.lang.String)
      */
     public void remove( String name )
     {

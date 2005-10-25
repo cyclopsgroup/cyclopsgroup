@@ -43,7 +43,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
         setApplicationBaseUrl("http://localhost:8080/waterview");
         setPageBaseUrl("http://localhost:8080/waterview/servlet/waterview");
         setRequestContext(new DefaultContext(new HashMap()));
-        setParams(new MapRequestValueParser());
+        setParams(new MapParameters());
         setRequestPath("/index.html");
         setServiceManager(new FakeServiceManager());
         setSessionContext(new DefaultContext(new HashMap()));

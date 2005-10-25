@@ -185,7 +185,7 @@ public class FormTag
         RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
         form = (Form) data.getSessionContext().get( formId );
         formNew = false;
-        if ( form == null || !data.getParams().getBoolean( "keep_form" ) )
+        if ( form == null || !data.getParameters().getBoolean( "keep_form" ) )
         {
             formNew = true;
             form = new Form( formId );

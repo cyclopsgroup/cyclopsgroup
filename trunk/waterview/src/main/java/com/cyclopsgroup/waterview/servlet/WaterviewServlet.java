@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.utils.WaterviewPlexusContainer;
@@ -129,7 +129,7 @@ public class WaterviewServlet
         Context ctx = data.getRequestContext();
 
         ctx.put( RuntimeData.NAME, data );
-        ctx.put( RequestValueParser.NAME, data.getParams() );
+        ctx.put( Parameters.NAME, data.getParameters() );
         ctx.put( RuntimeData.SERVICE_MANAGER_NAME, serviceManager );
 
         ctx.put( SERVLET_CONFIG_NAME, servletConfig );

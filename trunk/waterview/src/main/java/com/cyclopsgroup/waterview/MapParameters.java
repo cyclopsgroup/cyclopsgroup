@@ -26,15 +26,15 @@ import org.apache.commons.lang.ArrayUtils;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-class MapRequestValueParser
-    extends RequestValueParser
+class MapParameters
+    extends Parameters
 {
     private Properties content = new Properties();
 
     /**
      * Override method doGetAttributeNames in class MapRequestValueParser
      *
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetAttributeNames()
+     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
     protected String[] doGetAttributeNames()
     {
@@ -43,7 +43,7 @@ class MapRequestValueParser
 
     /**
      * Overwrite or implement method add()
-     * @see com.cyclopsgroup.waterview.ValueParser#add(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
     public void add( String name, String value )
     {
@@ -52,7 +52,7 @@ class MapRequestValueParser
 
     /**
      * Overwrite or implement method doGetValue()
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValue(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
     protected String doGetValue( String name )
         throws Exception
@@ -62,7 +62,7 @@ class MapRequestValueParser
 
     /**
      * Overwrite or implement method doGetValues()
-     * @see com.cyclopsgroup.waterview.ValueParser#doGetValues(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
     protected String[] doGetValues( String name )
         throws Exception
@@ -73,7 +73,7 @@ class MapRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItem(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
     public FileItem getFileItem( String name )
     {
@@ -83,7 +83,7 @@ class MapRequestValueParser
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RequestValueParser#getFileItems(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
     public FileItem[] getFileItems( String name )
     {
@@ -92,7 +92,7 @@ class MapRequestValueParser
 
     /**
      * Overwrite or implement method remove()
-     * @see com.cyclopsgroup.waterview.ValueParser#remove(java.lang.String)
+     * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
     public void remove( String name )
     {

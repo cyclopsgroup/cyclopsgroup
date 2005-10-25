@@ -102,11 +102,11 @@ public class ServletRuntimeData
         //Request value parser
         if ( FileUpload.isMultipartContent( request ) )
         {
-            setParams( new MultipartServletRequestValueParser( request, fileUpload ) );
+            setParams( new MultipartServletRequestParameters( request, fileUpload ) );
         }
         else
         {
-            setParams( new ServletRequestValueParser( request ) );
+            setParams( new ServletRequestParameters( request ) );
         }
 
         //Service manager

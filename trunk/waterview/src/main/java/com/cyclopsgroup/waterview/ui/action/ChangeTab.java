@@ -38,7 +38,7 @@ public class ChangeTab
         throws Exception
     {
         context.setTargetUrl( data.getRefererUrl() );
-        String key = data.getParams().getString( "tab_name_key" );
-        data.getSessionContext().put( key, data.getParams().getString( "tab_name" ) );
+        String key = data.getParameters().getString( "tab_name_key" );
+        data.getSessionContext().put( key, data.getParameters().getString( "tab_name" ) );
     }
 }

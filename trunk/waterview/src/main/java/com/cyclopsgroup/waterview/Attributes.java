@@ -31,7 +31,7 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class ValueParser
+public abstract class Attributes
 {
 
     private static HashSet booleanFalseValues = new HashSet();
