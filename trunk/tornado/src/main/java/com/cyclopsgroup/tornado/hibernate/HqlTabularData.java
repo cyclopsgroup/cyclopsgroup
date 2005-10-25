@@ -30,7 +30,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.type.Type;
 
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnSort;
 import com.cyclopsgroup.waterview.web.Table;
@@ -40,8 +40,7 @@ import com.cyclopsgroup.waterview.web.TabularData;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HqlTabularData
-    implements TabularData
+public class HqlTabularData implements TabularData
 {
     private class Parameter
     {
@@ -51,7 +50,7 @@ public class HqlTabularData
 
         private Object value;
 
-        private Parameter( String name, Type type, Object value )
+        private Parameter(String name, Type type, Object value)
         {
             this.name = name;
             this.type = type;
@@ -107,9 +106,9 @@ public class HqlTabularData
      * @param hql HQL language
      * @param hibernate Hibernate servcie
      */
-    public HqlTabularData( String hql, HibernateService hibernate )
+    public HqlTabularData(String hql, HibernateService hibernate)
     {
-        this( hql, hibernate, HibernateService.DEFAULT_DATASOURCE );
+        this(hql, hibernate, HibernateService.DEFAULT_DATASOURCE);
     }
 
     /**
@@ -119,7 +118,8 @@ public class HqlTabularData
      * @param hql Hibernate query language
      * @param dataSource Data source name
      */
-    public HqlTabularData( String hql, HibernateService hibernate, String dataSource )
+    public HqlTabularData(String hql, HibernateService hibernate,
+            String dataSource)
     {
         this.hql = hql;
         this.hibernate = hibernate;
@@ -134,11 +134,12 @@ public class HqlTabularData
      * @param value Parameter value
      * @throws Exception Throw it out
      */
-    public void addParameter( String name, String type, Object value )
-        throws Exception
+    public void addParameter(String name, String type, Object value)
+            throws Exception
     {
-        Type hibernateType = (Type) Hibernate.class.getField( type.toUpperCase() ).get( null );
-        addParameter( name, hibernateType, value );
+        Type hibernateType = (Type) Hibernate.class
+                .getField(type.toUpperCase()).get(null);
+        addParameter(name, hibernateType, value);
     }
 
     /**
@@ -148,10 +149,10 @@ public class HqlTabularData
      * @param type Parameter type
      * @param value Parameter value
      */
-    public void addParameter( String name, Type type, Object value )
+    public void addParameter(String name, Type type, Object value)
     {
-        Parameter p = new Parameter( name, type, value );
-        parameters.put( name, p );
+        Parameter p = new Parameter(name, type, value);
+        parameters.put(name, p);
     }
 
     /**
@@ -160,16 +161,16 @@ public class HqlTabularData
      * @param attributes Attributes parser
      * @param fieldName Field name
      */
-    public void addStringCriterion( ValueParser attributes, String fieldName )
+    public void addStringCriterion(Attributes attributes, String fieldName)
     {
-        String value = attributes.getString( fieldName );
-        if ( StringUtils.isEmpty( value ) )
+        String value = attributes.getString(fieldName);
+        if (StringUtils.isEmpty(value))
         {
             return;
         }
-        hql = new StringBuffer( hql ).append( HQL_AND ).append( fieldName ).append( HQL_LIKE ).append( fieldName )
-            .toString();
-        addParameter( fieldName, Hibernate.STRING, '%' + value + '%' );
+        hql = new StringBuffer(hql).append(HQL_AND).append(fieldName).append(
+                HQL_LIKE).append(fieldName).toString();
+        addParameter(fieldName, Hibernate.STRING, '%' + value + '%');
     }
 
     /**
@@ -177,28 +178,27 @@ public class HqlTabularData
      *
      * @see com.cyclopsgroup.waterview.web.TabularData#getSize()
      */
-    public int getSize()
-        throws Exception
+    public int getSize() throws Exception
     {
         String countQuery = "SELECT COUNT(*) " + hql;
-        Session s = hibernate.getSession( dataSource );
-        Query query = s.createQuery( countQuery );
+        Session s = hibernate.getSession(dataSource);
+        Query query = s.createQuery(countQuery);
         HashSet parameterNames = new HashSet();
-        CollectionUtils.addAll( parameterNames, query.getNamedParameters() );
-        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
+        CollectionUtils.addAll(parameterNames, query.getNamedParameters());
+        for (Iterator i = parameters.values().iterator(); i.hasNext();)
         {
             Parameter p = (Parameter) i.next();
-            if ( parameterNames.contains( p.getName() ) )
+            if (parameterNames.contains(p.getName()))
             {
-                query.setParameter( p.getName(), p.getValue(), p.getType() );
+                query.setParameter(p.getName(), p.getValue(), p.getType());
             }
         }
         List result = query.list();
-        if ( result == null || result.isEmpty() )
+        if (result == null || result.isEmpty())
         {
             return -1;
         }
-        Integer i = (Integer) result.get( 0 );
+        Integer i = (Integer) result.get(0);
         return i.intValue();
     }
 
@@ -217,56 +217,56 @@ public class HqlTabularData
      *
      * @see com.cyclopsgroup.waterview.web.TabularData#openIterator(com.cyclopsgroup.waterview.web.Table)
      */
-    public Iterator openIterator( Table table )
-        throws Exception
+    public Iterator openIterator(Table table) throws Exception
     {
-        if ( StringUtils.isEmpty( hql ) )
+        if (StringUtils.isEmpty(hql))
         {
-            throw new IllegalStateException( "query is still emtpy" );
+            throw new IllegalStateException("query is still emtpy");
         }
-        Session s = hibernate.getSession( dataSource );
-        StringBuffer sb = new StringBuffer( hql );
+        Session s = hibernate.getSession(dataSource);
+        StringBuffer sb = new StringBuffer(hql);
 
         String[] sortedColumns = table.getSortedColumns();
         boolean first = true;
-        for ( int i = 0; i < sortedColumns.length; i++ )
+        for (int i = 0; i < sortedColumns.length; i++)
         {
             String columnName = sortedColumns[i];
-            Column column = table.getColumn( columnName );
-            if ( column.getSort() == ColumnSort.ASC || column.getSort() == ColumnSort.DESC )
+            Column column = table.getColumn(columnName);
+            if (column.getSort() == ColumnSort.ASC
+                    || column.getSort() == ColumnSort.DESC)
             {
-                if ( first )
+                if (first)
                 {
-                    sb.append( " ORDER BY " );
+                    sb.append(" ORDER BY ");
                     first = false;
                 }
                 else
                 {
-                    sb.append( ", " );
+                    sb.append(", ");
                 }
-                sb.append( columnName );
-                if ( column.getSort() == ColumnSort.DESC )
+                sb.append(columnName);
+                if (column.getSort() == ColumnSort.DESC)
                 {
-                    sb.append( " DESC" );
+                    sb.append(" DESC");
                 }
             }
         }
 
-        Query q = s.createQuery( sb.toString() );
+        Query q = s.createQuery(sb.toString());
         HashSet parameterNames = new HashSet();
-        CollectionUtils.addAll( parameterNames, q.getNamedParameters() );
-        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
+        CollectionUtils.addAll(parameterNames, q.getNamedParameters());
+        for (Iterator i = parameters.values().iterator(); i.hasNext();)
         {
             Parameter p = (Parameter) i.next();
-            if ( parameterNames.contains( p.getName() ) )
+            if (parameterNames.contains(p.getName()))
             {
-                q.setParameter( p.getName(), p.getValue(), p.getType() );
+                q.setParameter(p.getName(), p.getValue(), p.getType());
             }
         }
-        if ( table.getPageSize() > 0 )
+        if (table.getPageSize() > 0)
         {
-            q.setMaxResults( table.getPageSize() );
-            q.setFirstResult( table.getPageSize() * table.getPageIndex() );
+            q.setMaxResults(table.getPageSize());
+            q.setFirstResult(table.getPageSize() * table.getPageIndex());
         }
         return q.iterate();
     }
@@ -276,7 +276,7 @@ public class HqlTabularData
      *
      * @param hql The hql to set.
      */
-    public void setHql( String hql )
+    public void setHql(String hql)
     {
         this.hql = hql;
     }

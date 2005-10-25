@@ -42,7 +42,7 @@ public class UserProfile
         throws Exception
     {
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        User user = (User) persist.load( User.class, data.getParams().getString( "user_id" ) );
+        User user = (User) persist.load( User.class, data.getParameters().getString( "user_id" ) );
         context.put( "userObject", user );
     }
 }

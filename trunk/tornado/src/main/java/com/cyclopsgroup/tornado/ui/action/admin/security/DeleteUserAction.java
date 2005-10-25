@@ -41,7 +41,7 @@ public class DeleteUserAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] userIds = data.getParams().getStrings( "user_id" );
+        String[] userIds = data.getParameters().getStrings( "user_id" );
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         int count = 0;
         for ( int i = 0; i < userIds.length; i++ )

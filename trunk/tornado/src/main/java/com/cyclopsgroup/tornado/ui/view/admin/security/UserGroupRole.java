@@ -50,7 +50,7 @@ public class UserGroupRole
         throws Exception
     {
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        String userId = data.getParams().getString( "user_id" );
+        String userId = data.getParameters().getString( "user_id" );
         User user = (User) persist.load( User.class, userId );
         context.put( "userObject", user );
         Set userGroups = user.getGroups();

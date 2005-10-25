@@ -42,7 +42,7 @@ public class ManageUsers
         throws Exception
     {
         SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
-        TabularData tabularData = sem.searchUser( data.getParams() );
+        TabularData tabularData = sem.searchUser( data.getParameters() );
         context.put( "userData", tabularData );
     }
 }

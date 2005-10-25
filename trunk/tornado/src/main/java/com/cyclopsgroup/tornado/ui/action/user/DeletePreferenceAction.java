@@ -44,7 +44,7 @@ public class DeletePreferenceAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String prefId = data.getParams().getString( "preference_id" );
+        String prefId = data.getParameters().getString( "preference_id" );
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         UserPreference up = (UserPreference) persist.load( UserPreference.class, prefId );
         persist.delete( up );

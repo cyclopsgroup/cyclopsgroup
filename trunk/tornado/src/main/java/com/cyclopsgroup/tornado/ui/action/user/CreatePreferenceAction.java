@@ -44,7 +44,7 @@ public class CreatePreferenceAction
         throws Exception
     {
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        String userId = data.getParams().getString( "user_id" );
+        String userId = data.getParameters().getString( "user_id" );
         UserPreference up = (UserPreference) persist.create( UserPreference.class );
         up.setUserId( userId );
         up.setThemeName( PortalService.UNSET_THEME_NAME );

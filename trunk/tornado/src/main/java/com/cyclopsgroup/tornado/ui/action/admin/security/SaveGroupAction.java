@@ -41,7 +41,7 @@ public class SaveGroupAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] groupIds = data.getParams().getStrings( "group_id" );
+        String[] groupIds = data.getParameters().getStrings( "group_id" );
         if ( groupIds.length == 0 )
         {
             return;
@@ -51,7 +51,7 @@ public class SaveGroupAction
         {
             String groupId = groupIds[i];
             Group group = (Group) persist.load( Group.class, groupId );
-            String newDescription = data.getParams().getString( "description_" + groupId );
+            String newDescription = data.getParameters().getString( "description_" + groupId );
             group.setDescription( newDescription );
             persist.update( group );
         }

@@ -44,18 +44,18 @@ public class SaveUserAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String newPassword = data.getParams().getString( "new_password" );
+        String newPassword = data.getParameters().getString( "new_password" );
         if ( StringUtils.isNotEmpty( newPassword )
-            && !StringUtils.equals( newPassword, data.getParams().getString( "confirmed_password" ) ) )
+            && !StringUtils.equals( newPassword, data.getParameters().getString( "confirmed_password" ) ) )
         {
             context.error( "confirmed_password", "Two passwords are not the same" );
             return;
         }
 
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        User user = (User) persist.load( User.class, data.getParams().getString( "user_id" ) );
+        User user = (User) persist.load( User.class, data.getParameters().getString( "user_id" ) );
 
-        TypeUtils.getBeanUtils().copyProperties( user, data.getParams().toProperties() );
+        TypeUtils.getBeanUtils().copyProperties( user, data.getParameters().toProperties() );
         if ( StringUtils.isNotEmpty( newPassword ) )
         {
             user.setPrivatePassword( newPassword );

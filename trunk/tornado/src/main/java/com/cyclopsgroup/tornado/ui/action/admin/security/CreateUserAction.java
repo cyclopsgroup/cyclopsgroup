@@ -23,17 +23,15 @@ import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
+import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.ValueParser;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class CreateUserAction
-    extends BaseServiceable
-    implements Action
+public class CreateUserAction extends BaseServiceable implements Action
 {
 
     /**
@@ -41,39 +39,42 @@ public class CreateUserAction
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
-        throws Exception
+    public void execute(RuntimeData data, ActionContext context)
+            throws Exception
     {
 
-        ValueParser params = data.getParams();
-        String name = params.getString( "name" );
+        Parameters params = data.getParameters();
+        String name = params.getString("name");
         boolean failed = false;
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
-        if ( sem.findUserByName( name ) != null )
+        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent(SecurityEntityManager.ROLE);
+        if (sem.findUserByName(name) != null)
         {
-            context.error( "user", "User [" + name + " already exists, try another one" );
+            context.error("user", "User [" + name
+                    + " already exists, try another one");
             failed = true;
         }
 
-        String password = params.getString( "privatePassword" );
-        if ( !password.equals( params.getString( "confirmedPassword" ) ) )
+        String password = params.getString("privatePassword");
+        if (!password.equals(params.getString("confirmedPassword")))
         {
-            context.error( "confirmedPassword", "Two passwords are not the same" );
+            context
+                    .error("confirmedPassword",
+                            "Two passwords are not the same");
             failed = true;
         }
 
-        if ( failed )
+        if (failed)
         {
             return;
         }
 
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        User user = (User) persist.create( User.class );
-        TypeUtils.getBeanUtils().copyProperties( user, params.toProperties() );
-        user.setCountry( data.getLocale().getCountry() );
-        user.setLanguage( data.getLocale().getLanguage() );
-        persist.saveNew( user );
+        PersistenceManager persist = (PersistenceManager) lookupComponent(PersistenceManager.ROLE);
+        User user = (User) persist.create(User.class);
+        TypeUtils.getBeanUtils().copyProperties(user, params.toProperties());
+        user.setCountry(data.getLocale().getCountry());
+        user.setLanguage(data.getLocale().getLanguage());
+        persist.saveNew(user);
 
-        context.addMessage( "User " + user.getDisplayName() + " is created" );
+        context.addMessage("User " + user.getDisplayName() + " is created");
     }
 }

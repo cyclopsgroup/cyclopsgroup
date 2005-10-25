@@ -30,31 +30,29 @@ import com.cyclopsgroup.waterview.RuntimeData;
  *
  * Action to create group
  */
-public class CreateGroupAction
-    extends BaseServiceable
-    implements Action
+public class CreateGroupAction extends BaseServiceable implements Action
 {
-
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
-        throws Exception
+    public void execute(RuntimeData data, ActionContext context)
+            throws Exception
     {
-        String groupName = data.getParams().getString( "name" );
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
-        if ( sem.findGroupByName( groupName ) != null )
+        String groupName = data.getParameters().getString("name");
+        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent(SecurityEntityManager.ROLE);
+        if (sem.findGroupByName(groupName) != null)
         {
-            context.error( "name", "Group " + groupName + " alread exists, try another name" );
+            context.error("name", "Group " + groupName
+                    + " alread exists, try another name");
             return;
         }
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        Group group = (Group) persist.create( Group.class );
-        group.setName( groupName );
-        group.setDescription( data.getParams().getString( "description" ) );
-        persist.saveNew( group );
-        context.addMessage( "Group " + groupName + " is created" );
+        PersistenceManager persist = (PersistenceManager) lookupComponent(PersistenceManager.ROLE);
+        Group group = (Group) persist.create(Group.class);
+        group.setName(groupName);
+        group.setDescription(data.getParameters().getString("description"));
+        persist.saveNew(group);
+        context.addMessage("Group " + groupName + " is created");
     }
 }

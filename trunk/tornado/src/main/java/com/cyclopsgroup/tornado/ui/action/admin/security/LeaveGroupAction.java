@@ -43,12 +43,12 @@ public class LeaveGroupAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] groupIds = data.getParams().getStrings( "group_to_leave" );
+        String[] groupIds = data.getParameters().getStrings( "group_to_leave" );
         if ( groupIds.length == 0 )
         {
             return;
         }
-        String userId = data.getParams().getString( "user_id" );
+        String userId = data.getParameters().getString( "user_id" );
 
         SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
         sem.leaveGroups( userId, groupIds );

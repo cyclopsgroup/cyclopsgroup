@@ -28,7 +28,7 @@ import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
 import com.cyclopsgroup.tornado.hibernate.HqlTabularData;
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
 import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
@@ -36,8 +36,7 @@ import com.cyclopsgroup.waterview.web.TabularData;
  *
  * Security entity manager
  */
-public class SecurityEntityManager
-    extends AbstractHibernateEnabled
+public class SecurityEntityManager extends AbstractHibernateEnabled
 {
     /** Role name */
     public static final String ROLE = SecurityEntityManager.class.getName();
@@ -49,13 +48,14 @@ public class SecurityEntityManager
      * @return Group object
      * @throws Exception Throw it outs
      */
-    public Group findGroupByName( String groupName )
-        throws Exception
+    public Group findGroupByName(String groupName) throws Exception
     {
         Session s = getHibernateSession();
-        List rs = s.createCriteria( Group.class ).add( Expression.eq( "name", groupName ) )
-            .add( Expression.eq( "isDisabled", Boolean.FALSE ) ).setMaxResults( 1 ).list();
-        return rs.isEmpty() ? null : (Group) rs.get( 0 );
+        List rs = s.createCriteria(Group.class).add(
+                Expression.eq("name", groupName)).add(
+                Expression.eq("isDisabled", Boolean.FALSE)).setMaxResults(1)
+                .list();
+        return rs.isEmpty() ? null : (Group) rs.get(0);
     }
 
     /**
@@ -65,13 +65,14 @@ public class SecurityEntityManager
      * @return Role object
      * @throws Exception Throw it out
      */
-    public Role findRoleByName( String roleName )
-        throws Exception
+    public Role findRoleByName(String roleName) throws Exception
     {
         Session s = getHibernateSession();
-        List list = s.createCriteria( Role.class ).add( Expression.eq( "name", roleName ) )
-            .add( Expression.eq( "isDisabled", Boolean.FALSE ) ).setMaxResults( 1 ).list();
-        return list.isEmpty() ? null : (Role) list.get( 0 );
+        List list = s.createCriteria(Role.class).add(
+                Expression.eq("name", roleName)).add(
+                Expression.eq("isDisabled", Boolean.FALSE)).setMaxResults(1)
+                .list();
+        return list.isEmpty() ? null : (Role) list.get(0);
     }
 
     /**
@@ -81,11 +82,10 @@ public class SecurityEntityManager
      * @return List of role permissions
      * @throws Exception Throw it out
      */
-    public List findRolePermissionsByRoles( String[] roleIds )
-        throws Exception
+    public List findRolePermissionsByRoles(String[] roleIds) throws Exception
     {
-        return getHibernateSession().createCriteria( RolePermission.class ).add( Expression.in( "roleId", roleIds ) )
-            .list();
+        return getHibernateSession().createCriteria(RolePermission.class).add(
+                Expression.in("roleId", roleIds)).list();
     }
 
     /**
@@ -95,18 +95,19 @@ public class SecurityEntityManager
      * @return List of roles
      * @throws Exception Throw it out
      */
-    public List findRolesByGroup( String groupId )
-        throws Exception
+    public List findRolesByGroup(String groupId) throws Exception
     {
-        Criteria criteria = getHibernateSession().createCriteria( GroupRole.class );
-        List groupRoles = criteria.add( Expression.eq( "groupId", groupId ) ).list();
+        Criteria criteria = getHibernateSession().createCriteria(
+                GroupRole.class);
+        List groupRoles = criteria.add(Expression.eq("groupId", groupId))
+                .list();
         HashMap roles = new HashMap();
-        for ( Iterator i = groupRoles.iterator(); i.hasNext(); )
+        for (Iterator i = groupRoles.iterator(); i.hasNext();)
         {
             GroupRole gr = (GroupRole) i.next();
-            roles.put( gr.getRoleId(), gr.getRole() );
+            roles.put(gr.getRoleId(), gr.getRole());
         }
-        return new ArrayList( roles.values() );
+        return new ArrayList(roles.values());
     }
 
     /**
@@ -116,18 +117,18 @@ public class SecurityEntityManager
      * @return List of roles
      * @throws Exception Throw it out
      */
-    public List findRolesByUser( String userId )
-        throws Exception
+    public List findRolesByUser(String userId) throws Exception
     {
-        Criteria criteria = getHibernateSession().createCriteria( UserRole.class );
-        List userRoles = criteria.add( Expression.eq( "userId", userId ) ).list();
+        Criteria criteria = getHibernateSession()
+                .createCriteria(UserRole.class);
+        List userRoles = criteria.add(Expression.eq("userId", userId)).list();
         HashMap roles = new HashMap();
-        for ( Iterator i = userRoles.iterator(); i.hasNext(); )
+        for (Iterator i = userRoles.iterator(); i.hasNext();)
         {
             UserRole ur = (UserRole) i.next();
-            roles.put( ur.getRoleId(), ur.getRole() );
+            roles.put(ur.getRoleId(), ur.getRole());
         }
-        return new ArrayList( roles.values() );
+        return new ArrayList(roles.values());
     };
 
     /**
@@ -137,13 +138,13 @@ public class SecurityEntityManager
      * @return User object
      * @throws Exception Throw it out
      */
-    public User findUserByName( String name )
-        throws Exception
+    public User findUserByName(String name) throws Exception
     {
         Session s = getHibernateSession();
-        List rs = s.createCriteria( User.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) )
-            .add( Expression.eq( "name", name ) ).setMaxResults( 1 ).list();
-        return rs.isEmpty() ? null : (User) rs.get( 0 );
+        List rs = s.createCriteria(User.class).add(
+                Expression.eq("isDisabled", Boolean.FALSE)).add(
+                Expression.eq("name", name)).setMaxResults(1).list();
+        return rs.isEmpty() ? null : (User) rs.get(0);
     }
 
     /**
@@ -152,11 +153,10 @@ public class SecurityEntityManager
      * @return List of all groups
      * @throws Exception Throw it out
      */
-    public List getAllGroups()
-        throws Exception
+    public List getAllGroups() throws Exception
     {
-        return getHibernateSession().createCriteria( Group.class ).add( Expression.eq( "isDisabled", Boolean.FALSE ) )
-            .list();
+        return getHibernateSession().createCriteria(Group.class).add(
+                Expression.eq("isDisabled", Boolean.FALSE)).list();
     }
 
     /**
@@ -166,13 +166,12 @@ public class SecurityEntityManager
      * @param groupId Group id
      * @throws Exception Throw it out
      */
-    public void joinGroup( String userId, String groupId )
-        throws Exception
+    public void joinGroup(String userId, String groupId) throws Exception
     {
         UserGroup ug = new UserGroup();
-        ug.setUserId( userId );
-        ug.setGroupId( groupId );
-        getHibernateSession().save( ug );
+        ug.setUserId(userId);
+        ug.setGroupId(groupId);
+        getHibernateSession().save(ug);
     }
 
     /**
@@ -182,16 +181,16 @@ public class SecurityEntityManager
      * @param groupIds Group ids
      * @throws Exception Throw it out
      */
-    public void leaveGroups( String userId, String[] groupIds )
-        throws Exception
+    public void leaveGroups(String userId, String[] groupIds) throws Exception
     {
         Session s = getHibernateSession();
-        List ugs = s.createCriteria( UserGroup.class ).add( Expression.eq( "userId", userId ) )
-            .add( Expression.in( "groupId", groupIds ) ).list();
-        for ( Iterator i = ugs.iterator(); i.hasNext(); )
+        List ugs = s.createCriteria(UserGroup.class).add(
+                Expression.eq("userId", userId)).add(
+                Expression.in("groupId", groupIds)).list();
+        for (Iterator i = ugs.iterator(); i.hasNext();)
         {
             UserGroup ug = (UserGroup) i.next();
-            s.delete( ug );
+            s.delete(ug);
         }
     }
 
@@ -202,23 +201,24 @@ public class SecurityEntityManager
      * @return Tabular data
      * @throws Exception Just throw it out
      */
-    public TabularData searchUser( ValueParser attributes )
-        throws Exception
+    public TabularData searchUser(Attributes attributes) throws Exception
     {
-        StringBuffer sb = new StringBuffer( "FROM " ).append( User.class.getName() ).append( " WHERE 1 = 1" );
-        if ( attributes.getBoolean( "isDisabled" ) )
+        StringBuffer sb = new StringBuffer("FROM ")
+                .append(User.class.getName()).append(" WHERE 1 = 1");
+        if (attributes.getBoolean("isDisabled"))
         {
-            sb.append( " AND isDisabled = 1" );
+            sb.append(" AND isDisabled = 1");
         }
-        else if ( !attributes.getString( "isDisabled" ).equals( "any" ) )
+        else if (!attributes.getString("isDisabled").equals("any"))
         {
-            sb.append( " AND isDisabled = 0" );
+            sb.append(" AND isDisabled = 0");
         }
-        HqlTabularData data = new HqlTabularData( sb.toString(), getHibernateService() );
-        data.addStringCriterion( attributes, "name" );
-        data.addStringCriterion( attributes, "firstName" );
-        data.addStringCriterion( attributes, "lastName" );
-        data.addStringCriterion( attributes, "email" );
+        HqlTabularData data = new HqlTabularData(sb.toString(),
+                getHibernateService());
+        data.addStringCriterion(attributes, "name");
+        data.addStringCriterion(attributes, "firstName");
+        data.addStringCriterion(attributes, "lastName");
+        data.addStringCriterion(attributes, "email");
         return data;
     }
 }

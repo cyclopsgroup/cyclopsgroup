@@ -33,17 +33,16 @@ import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.entity.Role;
 import com.cyclopsgroup.tornado.security.entity.User;
-import com.cyclopsgroup.waterview.MapValueParser;
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.MapAttributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class DefaultRuntimeUser
-    extends RuntimeUser
+public class DefaultRuntimeUser extends RuntimeUser
 {
-    private ValueParser attributes = new MapValueParser( new MultiHashMap() );
+    private Attributes attributes = new MapAttributes(new MultiHashMap());
 
     private String displayName;
 
@@ -66,13 +65,13 @@ public class DefaultRuntimeUser
      *
      * @param user User object
      */
-    protected DefaultRuntimeUser( User user )
+    protected DefaultRuntimeUser(User user)
     {
         id = user.getId();
         name = user.getName();
         emailAddress = user.getEmail();
         displayName = user.getDisplayName();
-        guest = user.getName().equals( SecurityService.USER_GUEST );
+        guest = user.getName().equals(SecurityService.USER_GUEST);
     }
 
     /**
@@ -81,26 +80,27 @@ public class DefaultRuntimeUser
      * @param type Permisson type
      * @param p Permission
      */
-    public void addPermission( PermissionType type, Permission p )
+    public void addPermission(PermissionType type, Permission p)
     {
-        permissions.put( type.getClass(), p );
+        permissions.put(type.getClass(), p);
     }
 
     /**
      * @param role Role object
      */
-    public void addRole( Role role )
+    public void addRole(Role role)
     {
-        if ( role == null || role.getIsDisabled() || roleNames.contains( role.getName() ) )
+        if (role == null || role.getIsDisabled()
+                || roleNames.contains(role.getName()))
         {
             return;
         }
-        roleNames.add( role.getName() );
-        roleIds.add( role.getId() );
-        for ( Iterator i = role.getDependencies().iterator(); i.hasNext(); )
+        roleNames.add(role.getName());
+        roleIds.add(role.getId());
+        for (Iterator i = role.getDependencies().iterator(); i.hasNext();)
         {
             Role dependency = (Role) i.next();
-            addRole( dependency );
+            addRole(dependency);
         }
     }
 
@@ -109,7 +109,7 @@ public class DefaultRuntimeUser
      *
      * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#getAttributes()
      */
-    public ValueParser getAttributes()
+    public Attributes getAttributes()
     {
         return attributes;
     }
@@ -156,7 +156,7 @@ public class DefaultRuntimeUser
 
     Set getRoleIds()
     {
-        return Collections.unmodifiableSet( roleIds );
+        return Collections.unmodifiableSet(roleIds);
     }
 
     /**
@@ -164,9 +164,9 @@ public class DefaultRuntimeUser
      *
      * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#hasPermission(java.lang.Object)
      */
-    public boolean hasPermission( Object permission )
+    public boolean hasPermission(Object permission)
     {
-        return permissions.containsValue( permission );
+        return permissions.containsValue(permission);
     }
 
     /**
@@ -174,9 +174,9 @@ public class DefaultRuntimeUser
      *
      * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#hasRole(java.lang.String)
      */
-    public boolean hasRole( String roleName )
+    public boolean hasRole(String roleName)
     {
-        return roleNames.contains( roleName );
+        return roleNames.contains(roleName);
     }
 
     /**
@@ -184,21 +184,22 @@ public class DefaultRuntimeUser
      *
      * @see com.cyclopsgroup.tornado.security.RuntimeUserAPI#isAuthorized(com.cyclopsgroup.tornado.security.Asset)
      */
-    public boolean isAuthorized( Asset asset )
+    public boolean isAuthorized(Asset asset)
     {
-        if ( hasRole( SecurityService.ROLE_ADMIN ) )
+        if (hasRole(SecurityService.ROLE_ADMIN))
         {
             return true;
         }
-        Collection ps = (Collection) permissions.get( asset.getPermissionType().getClass() );
-        if ( ps == null )
+        Collection ps = (Collection) permissions.get(asset.getPermissionType()
+                .getClass());
+        if (ps == null)
         {
             return false;
         }
-        for ( Iterator iter = ps.iterator(); iter.hasNext(); )
+        for (Iterator iter = ps.iterator(); iter.hasNext();)
         {
             Permission p = (Permission) iter.next();
-            if ( asset.authorize( p ) )
+            if (asset.authorize(p))
             {
                 return true;
             }

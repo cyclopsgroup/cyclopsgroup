@@ -41,7 +41,7 @@ public class DeleteGroupAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] groupIds = data.getParams().getStrings( "group_id" );
+        String[] groupIds = data.getParameters().getStrings( "group_id" );
         if ( groupIds.length == 0 )
         {
             return;

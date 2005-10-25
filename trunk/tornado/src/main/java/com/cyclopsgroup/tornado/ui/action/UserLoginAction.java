@@ -45,8 +45,8 @@ public class UserLoginAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String userName = data.getParams().getString( "username" );
-        String password = data.getParams().getString( "password" );
+        String userName = data.getParameters().getString( "username" );
+        String password = data.getParameters().getString( "password" );
 
         UserAuthenticator auth = (UserAuthenticator) lookupComponent( UserAuthenticator.ROLE );
         UserAuthenticationResult result = auth.authenticate( userName, password );
@@ -69,12 +69,12 @@ public class UserLoginAction
             context.addMessage( "Login failed " + result );
             return;
         }
-        int timeout = data.getParams().getInt( "timeout", 30 );
+        int timeout = data.getParameters().getInt( "timeout", 30 );
         SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
         RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout * 60000L );
         security.handleEvent( new UserChangedEvent( user, data ) );
 
-        String url = data.getParams().getString( "redirectto", data.getRefererUrl() );
+        String url = data.getParameters().getString( "redirectto", data.getRefererUrl() );
         context.setTargetUrl( url );
         context.addMessage( "User " + userName + " just logged in" );
     }

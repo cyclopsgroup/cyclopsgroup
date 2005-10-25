@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.tornado.security;
 
-import com.cyclopsgroup.waterview.ValueParser;
+import com.cyclopsgroup.waterview.Attributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -30,7 +30,7 @@ public interface RuntimeUserAPI
      *
      * @return User attributes
      */
-    ValueParser getAttributes();
+    Attributes getAttributes();
 
     /**
      * @return Get displayed name
@@ -56,13 +56,13 @@ public interface RuntimeUserAPI
      * @param permission Permission object
      * @return True if user has such permission
      */
-    boolean hasPermission( Object permission );
+    boolean hasPermission(Object permission);
 
     /**
      * @param roleName Role name to check
      * @return True if user has such a role
      */
-    boolean hasRole( String roleName );
+    boolean hasRole(String roleName);
 
     /**
      * Check if user is authorized to an asset
@@ -70,7 +70,7 @@ public interface RuntimeUserAPI
      * @param asset Asset to check
      * @return True if it's authorized
      */
-    boolean isAuthorized( Asset asset );
+    boolean isAuthorized(Asset asset);
 
     /**
      * @return Is the user guest or not
