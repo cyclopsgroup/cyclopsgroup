@@ -26,8 +26,6 @@ import com.cyclopsgroup.waterview.RuntimeData;
  */
 public class MessageView implements View
 {
-    private static final String NAME = "Attention!!!";
-
     private String message;
 
     /**
@@ -38,16 +36,6 @@ public class MessageView implements View
     public MessageView(String message)
     {
         this.message = message;
-    }
-
-    /**
-     * Overwrite or implement method getName()
-     *
-     * @see com.cyclopsgroup.waterview.spi.View#getName()
-     */
-    public String getName()
-    {
-        return NAME;
     }
 
     /**
