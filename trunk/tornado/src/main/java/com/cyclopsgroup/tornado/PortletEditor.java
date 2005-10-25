@@ -16,49 +16,39 @@
  */
 package com.cyclopsgroup.tornado;
 
+import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
- * Portlet API
+ * Portlet editor
  */
-public interface Portlet
+public interface PortletEditor
 {
     /**
-     * Get description of portlet
+     * Get portlet this editor belongs to
      *
-     * @return Portlet description
+     * @return
      */
-    String getDescription();
+    Portlet getPortlet();
 
     /**
-     * Get portlet editor
-     *
-     * @return Portlet editor or null
-     */
-    PortletEditor getEditor();
-
-    /**
-     * Get runtime unique id of portlet
-     *
-     * @return Portlet ID
-     */
-    String getId();
-
-    /**
-     * Get title of portlet
-     *
-     * @return Portlet title
-     */
-    String getTitle();
-
-    /**
-     * Runtime data
+     * Render the editor
      *
      * @param data Runtime data
-     * @param context Portlet context
+     * @param context Editor context
      * @throws Exception Throw it out
      */
-    void render(RuntimeData data, PortletContext context) throws Exception;
+    void render(RuntimeData data, Context context) throws Exception;
+
+    /**
+     * Save attributes changes
+     *
+     * @param data Runtime data
+     * @param attributes Portlet attributes
+     * @throws Exception Throw it out
+     */
+    void saveChange(RuntimeData data, Attributes attributes) throws Exception;
 }

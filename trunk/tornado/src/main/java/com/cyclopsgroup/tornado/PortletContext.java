@@ -16,7 +16,20 @@
  */
 package com.cyclopsgroup.tornado;
 
-public interface PortletDefinition
-{
+import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.Context;
 
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Context for portlet
+ */
+public interface PortletContext extends Context
+{
+    /**
+     * Get portlet attributes
+     *
+     * @return Attributes object
+     */
+    Attributes getAttributes();
 }
