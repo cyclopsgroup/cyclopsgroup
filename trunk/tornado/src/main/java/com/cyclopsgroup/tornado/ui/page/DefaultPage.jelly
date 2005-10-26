@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page xmlns="http://waterview.cyclopsgroup.com/ui">
+    <PanelContent name="navigation">
+        <Portlet title="
+            %waterview.view.systemnavigation">
+            <JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
+        </Portlet>
+        <Portlet title="%tornado.navigation.myinfo">
+            <JellyView script="/tornado/sysview/UserInfo.jelly" />
+        </Portlet>
+    </PanelContent>
+</Page>

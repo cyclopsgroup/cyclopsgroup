@@ -10,11 +10,11 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
+            <role>com.cyclopsgroup.waterview.jelly.DeterminePageValve</role>
+            <implementation>com.cyclopsgroup.waterview.jelly.DeterminePageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <default-theme>tornado.theme.default</default-theme>
+                <default-page>/tornado/page/DefaultPage.jelly</default-page>
             </configuration>
         </component>
         <component>
@@ -38,6 +38,7 @@
                 <property name="defaultAutoCommit">false</property>
             </configuration>
         </component>
+
     </components>
     <load-on-start>
         <component>
