@@ -21,8 +21,8 @@ import java.util.HashMap;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.DefaultContext;
+import com.cyclopsgroup.waterview.Portlet;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
-import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -30,38 +30,41 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  *
  * Tag to display given view
  */
-public class DisplayViewTag
-    extends TagSupport
+public class RenderPortletTag extends TagSupport
 {
-    private View view;
-
-    /**
-     * @return Returns the view.
-     */
-    public View getView()
-    {
-        return view;
-    }
+    private Portlet portlet;
 
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "view" );
-        JellyContextAdapter adapter = new JellyContextAdapter( getContext() );
-        DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
-        getView().render( getRuntimeData(), ctx );
+        requireAttribute("portlet");
+        JellyContextAdapter adapter = new JellyContextAdapter(getContext());
+        DefaultContext ctx = new DefaultContext(new HashMap(), adapter);
+        getPortlet().render(getRuntimeData(), ctx);
     }
 
     /**
-     * @param view The view to set.
+     * Getter method for field portlet
+     *
+     * @return Returns the portlet.
      */
-    public void setView( View view )
+    public Portlet getPortlet()
     {
-        this.view = view;
+        return portlet;
     }
+
+    /**
+     * Setter method for field portlet
+     *
+     * @param portlet The portlet to set.
+     */
+    public void setPortlet(Portlet portlet)
+    {
+        this.portlet = portlet;
+    }
+
 }

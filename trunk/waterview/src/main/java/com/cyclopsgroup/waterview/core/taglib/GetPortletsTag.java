@@ -27,25 +27,23 @@ import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.Portlet;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PanelContent;
-import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.spi.taglib.PortletAware;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
-import com.cyclopsgroup.waterview.spi.taglib.ViewAware;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class GetPanelViewsTag
-    extends TagSupport
-    implements ViewAware
+public class GetPortletsTag extends TagSupport implements PortletAware
 {
-    private String var = "views";
+    private String var = "portlets";
 
     private String panel;
 
-    private Set defaultViews = ListOrderedSet.decorate( new HashSet() );
+    private Set defaultPortlets = ListOrderedSet.decorate(new HashSet());
 
     /**
      * Getter method for panel
@@ -62,7 +60,7 @@ public class GetPanelViewsTag
      *
      * @param panel The panel to set.
      */
-    public void setPanel( String panel )
+    public void setPanel(String panel)
     {
         this.panel = panel;
     }
@@ -82,7 +80,7 @@ public class GetPanelViewsTag
      *
      * @param var The var to set.
      */
-    public void setVar( String var )
+    public void setVar(String var)
     {
         this.var = var;
     }
@@ -92,45 +90,44 @@ public class GetPanelViewsTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "var" );
-        requireAttribute( "panel" );
-        Page page = (Page) getContext().getVariable( Page.NAME );
-        if ( page == null )
+        requireAttribute("var");
+        requireAttribute("panel");
+        Page page = (Page) getContext().getVariable(Page.NAME);
+        if (page == null)
         {
-            throw new JellyTagException( "Page is not found" );
+            throw new JellyTagException("Page is not found");
         }
-        PanelContent content = page.getPanelContent( getPanel() );
+        PanelContent content = page.getPanelContent(getPanel());
 
-        List views;
-        if ( content == null )
+        List portlets;
+        if (content == null)
         {
-            invokeBody( XMLOutput.createDummyXMLOutput() );
-            views = new ArrayList( defaultViews );
+            invokeBody(XMLOutput.createDummyXMLOutput());
+            portlets = new ArrayList(defaultPortlets);
         }
-        else if ( content.isAppend() )
+        else if (content.isAppend())
         {
-            invokeBody( XMLOutput.createDummyXMLOutput() );
-            views = new ArrayList( defaultViews );
-            CollectionUtils.addAll( views, content.getViews() );
+            invokeBody(XMLOutput.createDummyXMLOutput());
+            portlets = new ArrayList(defaultPortlets);
+            CollectionUtils.addAll(portlets, content.getPortlets());
         }
         else
         {
-            views = new ArrayList();
-            CollectionUtils.addAll( views, content.getViews() );
+            portlets = new ArrayList();
+            CollectionUtils.addAll(portlets, content.getPortlets());
         }
-        getContext().setVariable( getVar(), views );
+        getContext().setVariable(getVar(), portlets);
     }
 
     /**
-     * Override method doView in class GetPanelViewsTag
+     * Overwrite or implement method doPortlet()
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.ViewAware#doView(com.cyclopsgroup.waterview.spi.View)
+     * @see com.cyclopsgroup.waterview.spi.taglib.PortletAware#doPortlet(com.cyclopsgroup.waterview.Portlet)
      */
-    public void doView( View view )
+    public void doPortlet(Portlet portlet)
     {
-        defaultViews.add( view );
+        defaultPortlets.add(portlet);
     }
 }

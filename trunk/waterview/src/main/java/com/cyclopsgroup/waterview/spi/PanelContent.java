@@ -18,6 +18,8 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.Vector;
 
+import com.cyclopsgroup.waterview.Portlet;
+
 /**
  * Panel content model
  * 
@@ -29,14 +31,14 @@ public class PanelContent
 
     private String name;
 
-    private Vector views = new Vector();
+    private Vector portlets = new Vector();
 
     /**
      * Constructor for class PanelContent
      *
      * @param name
      */
-    public PanelContent( String name )
+    public PanelContent(String name)
     {
         this.name = name;
     }
@@ -44,11 +46,11 @@ public class PanelContent
     /**
      * Add window into panel
      *
-     * @param view Window model
+     * @param portlet Window model
      */
-    public void addView( View view )
+    public void addPortlet(Portlet portlet)
     {
-        views.add( view );
+        portlets.add(portlet);
     }
 
     /**
@@ -66,9 +68,9 @@ public class PanelContent
      *
      * @return Returns the windows.
      */
-    public View[] getViews()
+    public Portlet[] getPortlets()
     {
-        return (View[]) views.toArray( View.EMPTY_ARRAY );
+        return (Portlet[]) portlets.toArray(Portlet.EMPTY_ARRAY);
     }
 
     /**
@@ -86,7 +88,7 @@ public class PanelContent
      *
      * @param append The append to set.
      */
-    public void setAppend( boolean append )
+    public void setAppend(boolean append)
     {
         this.append = append;
     }

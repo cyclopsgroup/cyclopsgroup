@@ -23,7 +23,12 @@
                                                         src="${themeBase}/16x16/view_actions.png" />
                                                 </td>
                                                 <td>
-                                                    <span class="waterviewWindowTitle">${controlTag.title}</span>
+                                                    <span class="waterviewWindowTitle">
+                                                        ${controlTag.portlet.title}
+                                                        <j:if test="${controlTag.length() gt 0}">
+                                                            :: ${controlTag.portlet.description}
+                                                        </j:if>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -37,7 +42,7 @@
                                                             src="${themeBase}/16x16/view_max.png" />
                                                     </td>
                                                 </j:if>
-                                                <j:if test="${controlTag.editable}">
+                                                <j:if test="${controlTag.portlet.editor}">
                                                     <td>
                                                         <img width="16" height="16" alt="Configure"
                                                             src="${themeBase}/16x16/edit.png" />
@@ -56,7 +61,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="waterviewWindowBody" style="padding: 5px;">
-                            <w:RunScript script="${controlTag.body}" />
+                            <w:RenderPortlet portlet="${controlTag.portlet}" />
                         </td>
                     </tr>
                 </table>

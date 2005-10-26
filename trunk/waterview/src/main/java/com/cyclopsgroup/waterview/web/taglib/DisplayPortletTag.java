@@ -17,32 +17,34 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.XMLOutput;
+
+import com.cyclopsgroup.waterview.Portlet;
 import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
+import com.cyclopsgroup.waterview.spi.taglib.PortletAware;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class WindowControlTag
-    extends BaseJellyControlTag
+public class DisplayPortletTag extends BaseJellyControlTag implements
+        PortletAware
 {
     private int border = 1;
 
-    private boolean editable;
-
     private boolean maximizable;
 
-    private int shadow = 0;
+    private Portlet portlet;
 
-    private String title;
+    private int shadow = 0;
 
     /**
      * Constructor for class WindowControlTag
      *
      */
-    public WindowControlTag()
+    public DisplayPortletTag()
     {
-        setScript( "/waterview/control/WindowControl.jelly" );
+        setScript("/waterview/control/PortletControl.jelly");
     }
 
     /**
@@ -56,6 +58,16 @@ public class WindowControlTag
     }
 
     /**
+     * Getter method for field portlet
+     *
+     * @return Returns the portlet.
+     */
+    public Portlet getPortlet()
+    {
+        return portlet;
+    }
+
+    /**
      * Getter method for property shadow
      *
      * @return Returns the shadow.
@@ -63,26 +75,6 @@ public class WindowControlTag
     public int getShadow()
     {
         return shadow;
-    }
-
-    /**
-     * Getter method for title
-     *
-     * @return Returns the title.
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * Getter method for editable
-     *
-     * @return Returns the editable.
-     */
-    public boolean isEditable()
-    {
-        return editable;
     }
 
     /**
@@ -96,23 +88,25 @@ public class WindowControlTag
     }
 
     /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        invokeBody(XMLOutput.createDummyXMLOutput());
+        requireAttribute("portlet");
+        super.processTag(output);
+    }
+
+    /**
      * Setter method for property border
      *
      * @param border The border to set.
      */
-    public void setBorder( int border )
+    public void setBorder(int border)
     {
         this.border = border;
-    }
-
-    /**
-     * Setter method for editable
-     *
-     * @param editable The editable to set.
-     */
-    public void setEditable( boolean editable )
-    {
-        this.editable = editable;
     }
 
     /**
@@ -120,9 +114,19 @@ public class WindowControlTag
      *
      * @param maximizable The maximizable to set.
      */
-    public void setMaximizable( boolean maximizable )
+    public void setMaximizable(boolean maximizable)
     {
         this.maximizable = maximizable;
+    }
+
+    /**
+     * Setter method for field portlet
+     *
+     * @param portlet The portlet to set.
+     */
+    public void setPortlet(Portlet portlet)
+    {
+        this.portlet = portlet;
     }
 
     /**
@@ -130,18 +134,18 @@ public class WindowControlTag
      *
      * @param shadow The shadow to set.
      */
-    public void setShadow( int shadow )
+    public void setShadow(int shadow)
     {
         this.shadow = shadow;
     }
 
     /**
-     * Setter method for title
+     * Overwrite or implement method doPortlet()
      *
-     * @param title The title to set.
+     * @see com.cyclopsgroup.waterview.spi.taglib.PortletAware#doPortlet(com.cyclopsgroup.waterview.Portlet)
      */
-    public void setTitle( String title )
+    public void doPortlet(Portlet portlet)
     {
-        this.title = title;
+        setPortlet(portlet);
     }
 }
