@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,17 +18,20 @@ package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.Portlet;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PanelContent;
+import com.cyclopsgroup.waterview.spi.taglib.PortletAware;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Panel content tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class PanelContentTag
     extends TagSupport
+    implements PortletAware
 {
 
     private boolean append;
@@ -38,21 +41,13 @@ public class PanelContentTag
     private PanelContent panelContent;
 
     /**
-     * Overwrite or implement method processTag()
+     * Overwrite or implement method doPortlet()
      *
-     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     * @see com.cyclopsgroup.waterview.spi.taglib.PortletAware#doPortlet(com.cyclopsgroup.waterview.Portlet)
      */
-    public void processTag( XMLOutput output )
-        throws Exception
+    public void doPortlet( Portlet portlet )
     {
-        requireAttribute( "name" );
-        requireParent( PageTag.class );
-
-        panelContent = new PanelContent( getName() );
-        panelContent.setAppend( isAppend() );
-        invokeBody( output );
-        Page page = ( (PageTag) getParent() ).getPage();
-        page.addPanelContent( panelContent );
+        panelContent.addPortlet( portlet );
     }
 
     /**
@@ -83,6 +78,24 @@ public class PanelContentTag
     public boolean isAppend()
     {
         return append;
+    }
+
+    /**
+     * Overwrite or implement method processTag()
+     *
+     * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
+     */
+    public void processTag( XMLOutput output )
+        throws Exception
+    {
+        requireAttribute( "name" );
+        requireParent( PageTag.class );
+
+        panelContent = new PanelContent( getName() );
+        panelContent.setAppend( isAppend() );
+        invokeBody( output );
+        Page page = ( (PageTag) getParent() ).getPage();
+        page.addPanelContent( panelContent );
     }
 
     /**

@@ -15,21 +15,7 @@
                     <tr>
                         <td width="25%" valign="top" id="leftPanel">
                             <j:set var="navigationNode" value="${selectedNode}" />
-                            <w:GetPortlets var="portlets" panel="navigation">
-                                <w:Portlet title="%waterview.view.systemnavigation">
-                                    <w:JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
-                                </w:Portlet>
-                                <w:Portlet title="%waterview.view.links">
-                                    <w:View>
-                                        <p>Some help links</p>
-                                    </w:View>
-                                </w:Portlet>
-                                <w:Portlet title="%waterview.view.references">
-                                    <w:View>
-                                        <p>Some reference links</p>
-                                    </w:View>
-                                </w:Portlet>
-                            </w:GetPortlets>
+                            <w:GetPortlets var="portlets" panel="navigation" />
                             <j:forEach var="portlet" items="${portlets}">
                                 <w:DisplayPortlet portlet="${portlet}" shadow="2" border="1" />
                             </j:forEach>

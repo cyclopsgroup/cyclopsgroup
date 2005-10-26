@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page xmlns="http://waterview.cyclopsgroup.com/ui">
+    <PanelContent name="navigation">
+        <Portlet title="
+            %waterview.view.systemnavigation">
+            <JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
+        </Portlet>
+        <Portlet title="%waterview.view.links">
+            <View>
+                <div xmlns="html">
+                    <p>Some help links</p>
+                </div>
+            </View>
+        </Portlet>
+        <Portlet title="%waterview.view.references">
+            <View>
+                <div xmlns="html">
+                    <p>Some reference links</p>
+                </div>
+            </View>
+        </Portlet>
+    </PanelContent>
+</Page>

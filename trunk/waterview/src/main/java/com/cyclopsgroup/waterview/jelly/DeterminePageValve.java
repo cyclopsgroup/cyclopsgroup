@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,10 +16,14 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;
@@ -35,39 +39,54 @@ import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to find page object
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DeterminePageValve extends AbstractLogEnabled implements
-        Configurable, Valve
+public class DeterminePageValve
+    extends AbstractLogEnabled
+    implements Configurable, Valve, Initializable, Serviceable
 {
 
     private static final Page EMPTY_PAGE = new Page();
 
-    private String defaultPage = "/waterview/Index.jelly";
+    private Page defaultPage = EMPTY_PAGE;
+
+    private String defaultPageScript;
+
+    private JellyEngine jelly;
 
     /**
      * Override or implement method of parent class or interface
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        String page = conf.getChild("default-page").getValue(null);
-        if (page != null)
+        String page = conf.getChild( "default-page" ).getValue( null );
+        if ( page != null )
         {
-            setDefaultPage(page);
+            defaultPageScript = page;
         }
     }
 
     /**
-     * Getter method for defaultPage
+     * Overwrite or implement method initialize()
      *
-     * @return Returns the defaultPage.
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
-    public String getDefaultPage()
+    public void initialize()
+        throws Exception
     {
-        return defaultPage;
+        if ( StringUtils.isNotEmpty( defaultPageScript ) )
+        {
+            Script script = jelly.getScript( defaultPageScript, (Script) null );
+            if ( script == null )
+            {
+                return;
+            }
+            defaultPage = loadPage( script );
+        }
     }
 
     /**
@@ -75,83 +94,79 @@ public class DeterminePageValve extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData runtime, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData runtime, PipelineContext context )
+        throws Exception
     {
-        Page page = (Page) runtime.getRequestContext().get(Page.NAME);
-        if (page != null)
+        Page page = (Page) runtime.getRequestContext().get( Page.NAME );
+        if ( page != null )
         {
-            context.invokeNextValve(runtime);
+            context.invokeNextValve( runtime );
             return;
         }
         Path pagePath = runtime.getPage();
-        if (pagePath == null)
+        if ( pagePath == null )
         {
-            throw new NullPointerException("Path is not ready yet");
+            throw new NullPointerException( "Path is not ready yet" );
         }
-        synchronized (this)
+        synchronized ( this )
         {
-            CacheManager cacheManager = (CacheManager) runtime
-                    .getServiceManager().lookup(CacheManager.ROLE);
-            page = (Page) cacheManager.get(this, pagePath.getFullPath());
-            if (page == null)
+            CacheManager cacheManager = (CacheManager) runtime.getServiceManager().lookup( CacheManager.ROLE );
+            page = (Page) cacheManager.get( this, pagePath.getFullPath() );
+            if ( page == null )
             {
-                JellyEngine je = (JellyEngine) runtime.getServiceManager()
-                        .lookup(JellyEngine.ROLE);
                 //ModuleChain moduleChain = new ModuleChain();
                 String fullPath = "/page" + pagePath.getPath();
                 //moduleChain.addModule(mm.getModule(fullPath));
 
-                Script pageScript = je.getScript(pagePath.getPackage(),
-                        fullPath, null);
-                if (pageScript != null)
+                Script pageScript = jelly.getScript( pagePath.getPackage(), fullPath, null );
+                if ( pageScript != null )
                 {
-                    page = loadPage(pageScript, je);
+                    page = loadPage( pageScript );
                 }
-                String[] parts = StringUtils.split(pagePath.getPath(), '/');
-                for (int j = parts.length - 1; j >= 0; j--)
+                String[] parts = StringUtils.split( pagePath.getPath(), '/' );
+                for ( int j = parts.length - 1; j >= 0; j-- )
                 {
                     parts[j] = "Default.jelly";
                     String[] newParts = new String[j + 1];
-                    System.arraycopy(parts, 0, newParts, 0, j + 1);
-                    String defaultPath = StringUtils.join(newParts, '/');
+                    System.arraycopy( parts, 0, newParts, 0, j + 1 );
+                    String defaultPath = StringUtils.join( newParts, '/' );
                     fullPath = "/page/" + defaultPath;
-                    pageScript = je.getScript(pagePath.getPackageAlias(),
-                            fullPath, null);
-                    if (pageScript != null)
+                    pageScript = jelly.getScript( pagePath.getPackageAlias(), fullPath, null );
+                    if ( pageScript != null )
                     {
-                        page = loadPage(pageScript, je);
+                        page = loadPage( pageScript );
                         //moduleChain.addModule(mm.getModule(model.getPackage(), fullPath));
                         break;
                     }
                 }
-                if (page == null)
+                if ( page == null )
                 {
-                    page = EMPTY_PAGE;
+                    page = defaultPage;
                 }
                 //page.setModule(moduleChain);
-                cacheManager.put(this, pagePath.getFullPath(), page);
+                cacheManager.put( this, pagePath.getFullPath(), page );
             }
         }
-        runtime.getRequestContext().put(Page.NAME, page);
-        context.invokeNextValve(runtime);
+        runtime.getRequestContext().put( Page.NAME, page );
+        context.invokeNextValve( runtime );
     }
 
-    private Page loadPage(Script script, JellyEngine jellyEngine)
-            throws JellyTagException
+    private Page loadPage( Script script )
+        throws JellyTagException
     {
-        JellyContext jc = new JellyContext(jellyEngine.getGlobalContext());
-        script.run(jc, XMLOutput.createDummyXMLOutput());
-        return (Page) jc.getVariable(Page.NAME);
+        JellyContext jc = new JellyContext( jelly.getGlobalContext() );
+        script.run( jc, XMLOutput.createDummyXMLOutput() );
+        return (Page) jc.getVariable( Page.NAME );
     }
 
     /**
-     * Setter method for defaultPage
+     * Overwrite or implement method service()
      *
-     * @param defaultPage The defaultPage to set.
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void setDefaultPage(String defaultPage)
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        this.defaultPage = defaultPage;
+        jelly = (JellyEngine) serviceManager.lookup( JellyEngine.ROLE );
     }
 }
