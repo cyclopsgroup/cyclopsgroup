@@ -17,6 +17,8 @@
  */
 package com.cyclopsgroup.tornado.ui.action;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.tornado.security.UserAuthenticationResult;
@@ -74,7 +76,11 @@ public class UserLoginAction
         RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout * 60000L );
         security.handleEvent( new UserChangedEvent( user, data ) );
 
-        String url = data.getParameters().getString( "redirectto", data.getRefererUrl() );
+        String url = data.getParameters().getString( "redirectto" );
+        if ( StringUtils.isEmpty( url ) )
+        {
+            url = data.getRefererUrl();
+        }
         context.setTargetUrl( url );
         context.addMessage( "User " + userName + " just logged in" );
     }

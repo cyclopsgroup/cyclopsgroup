@@ -27,6 +27,8 @@
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/waterview/Index.jelly" />
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/waterview/Overview.jelly" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/waterview/help/Index.jelly" />
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/waterview/help/about/.*" />

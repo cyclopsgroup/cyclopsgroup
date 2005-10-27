@@ -12,10 +12,4 @@
     <StyleSheet name="tornado.stylesheet.google" path="/tornado/google-style.css"
         description="Tornado google stylesheet" />
     <StyleSheet name="tornado.stylesheet.leaf" path="/tornado/leaf-style.css" description="Tornado leaf stylesheet" />
-    <Theme name="tornado.theme.default" iconset="waterview.icons.default" stylesheet="waterview.stylesheet.default"
-        description="Tornado default theme">
-        <Layout name="layout.default">
-            <JellyLayout script="/tornado/DefaultLayout.jelly" />
-        </Layout>
-    </Theme>
 </Waterview>
