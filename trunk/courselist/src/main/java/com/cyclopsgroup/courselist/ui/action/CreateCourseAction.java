@@ -22,7 +22,7 @@ import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.RequestValueParser;
+import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 
@@ -44,7 +44,7 @@ public class CreateCourseAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        RequestValueParser params = data.getParams();
+        Parameters params = data.getParameters();
         String prefix = params.getString( "prefix" );
         String code = params.getString( "courseCode" );
         CourseListService cl = (CourseListService) lookupComponent( CourseListService.ROLE );

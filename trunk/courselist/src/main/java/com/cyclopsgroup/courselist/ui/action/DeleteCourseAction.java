@@ -40,7 +40,7 @@ public class DeleteCourseAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] courseIds = data.getParams().getStrings( "course_id" );
+        String[] courseIds = data.getParameters().getStrings( "course_id" );
         if ( courseIds.length == 0 )
         {
             return;

@@ -41,10 +41,10 @@ public class SaveCourseAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String id = data.getParams().getString( "course_id" );
+        String id = data.getParameters().getString( "course_id" );
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
         Course course = (Course) persist.load( Course.class, id );
-        TypeUtils.getBeanUtils().populate( course, data.getParams().toProperties() );
+        TypeUtils.getBeanUtils().populate( course, data.getParameters().toProperties() );
         persist.save( course );
         context.addMessage( "Course is changed" );
     }

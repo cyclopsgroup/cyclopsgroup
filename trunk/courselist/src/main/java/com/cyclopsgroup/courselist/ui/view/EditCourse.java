@@ -41,7 +41,7 @@ public class EditCourse
         throws Exception
     {
         PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
-        Course course = (Course) persist.load( Course.class, data.getParams().getString( "course_id" ) );
+        Course course = (Course) persist.load( Course.class, data.getParameters().getString( "course_id" ) );
         context.put( "course", course );
     }
 }
