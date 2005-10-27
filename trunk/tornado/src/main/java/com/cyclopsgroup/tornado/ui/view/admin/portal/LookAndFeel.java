@@ -40,7 +40,7 @@ public class LookAndFeel
     public void execute( RuntimeData data, Context ctx )
         throws Exception
     {
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
         ctx.put( "userId", security.getGuestUser().getId() );
     }
 }

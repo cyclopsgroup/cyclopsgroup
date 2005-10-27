@@ -41,7 +41,7 @@ public class UserInfo
         RuntimeUser user = RuntimeUser.getInstance( data );
         context.put( "currentUser", user );
 
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
         context.put( "guestUser", security.getGuestUser() );
         super.execute( data, context );
     }

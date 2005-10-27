@@ -39,7 +39,7 @@ public class CourseList
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        CourseListService cl = (CourseListService) lookupComponent( CourseListService.ROLE );
+        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
         context.put( "courses", cl.getAllCourses() );
     }
 }

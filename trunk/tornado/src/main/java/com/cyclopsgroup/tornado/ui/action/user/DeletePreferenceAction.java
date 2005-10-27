@@ -45,11 +45,11 @@ public class DeletePreferenceAction
         throws Exception
     {
         String prefId = data.getParameters().getString( "preference_id" );
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         UserPreference up = (UserPreference) persist.load( UserPreference.class, prefId );
         persist.delete( up );
         User user = (User) persist.load( User.class, up.getUserId() );
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
         security.refreshUser( user.getName() );
         security.refreshUser( RuntimeUser.getInstance( data ).getName() );
         context.addMessage( "User setting is deleted, default setting is applied" );

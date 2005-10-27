@@ -41,7 +41,7 @@ public class UserProfile
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         User user = (User) persist.load( User.class, data.getParameters().getString( "user_id" ) );
         context.put( "userObject", user );
     }

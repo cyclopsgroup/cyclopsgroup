@@ -46,7 +46,7 @@ public class SaveGroupAction
         {
             return;
         }
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         for ( int i = 0; i < groupIds.length; i++ )
         {
             String groupId = groupIds[i];

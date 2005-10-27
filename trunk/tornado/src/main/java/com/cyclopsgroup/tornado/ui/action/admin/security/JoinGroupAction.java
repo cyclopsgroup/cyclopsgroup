@@ -50,7 +50,7 @@ public class JoinGroupAction
         }
         String userId = data.getParameters().getString( "user_id" );
 
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        SecurityEntityManager sem = (SecurityEntityManager) lookup( SecurityEntityManager.ROLE );
 
         for ( int i = 0; i < groupIds.length; i++ )
         {
@@ -58,9 +58,9 @@ public class JoinGroupAction
             sem.joinGroup( userId, groupId );
         }
 
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         User user = (User) persist.load( User.class, userId );
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
         security.refreshUser( user.getName() );
         context.addMessage( "User " + user.getName() + " joined " + groupIds.length + " groups" );
     }

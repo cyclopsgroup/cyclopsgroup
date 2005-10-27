@@ -52,7 +52,7 @@ public class SaveUserAction
             return;
         }
 
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         User user = (User) persist.load( User.class, data.getParameters().getString( "user_id" ) );
 
         TypeUtils.getBeanUtils().copyProperties( user, data.getParameters().toProperties() );

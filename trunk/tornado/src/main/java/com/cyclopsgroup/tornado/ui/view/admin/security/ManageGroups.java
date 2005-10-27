@@ -40,7 +40,7 @@ public class ManageGroups
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        SecurityEntityManager sem = (SecurityEntityManager) lookup( SecurityEntityManager.ROLE );
         context.put( "allGroups", sem.getAllGroups() );
     }
 }

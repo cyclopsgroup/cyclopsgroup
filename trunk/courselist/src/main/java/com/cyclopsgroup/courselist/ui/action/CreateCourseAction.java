@@ -47,13 +47,13 @@ public class CreateCourseAction
         Parameters params = data.getParameters();
         String prefix = params.getString( "prefix" );
         String code = params.getString( "courseCode" );
-        CourseListService cl = (CourseListService) lookupComponent( CourseListService.ROLE );
+        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
         if ( cl.findByCode( prefix, code ) != null )
         {
             context.error( "courseCode", "This course already exists" );
         }
 
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         Course course = (Course) persist.create( Course.class );
         TypeUtils.getBeanUtils().populate( course, params.toProperties() );
 

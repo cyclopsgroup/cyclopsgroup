@@ -41,7 +41,7 @@ public class ManageUsers
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        SecurityEntityManager sem = (SecurityEntityManager) lookup( SecurityEntityManager.ROLE );
         TabularData tabularData = sem.searchUser( data.getParameters() );
         context.put( "userData", tabularData );
     }

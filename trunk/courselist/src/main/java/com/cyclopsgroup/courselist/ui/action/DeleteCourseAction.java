@@ -46,7 +46,7 @@ public class DeleteCourseAction
             return;
         }
 
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         for ( int i = 0; i < courseIds.length; i++ )
         {
             String id = courseIds[i];

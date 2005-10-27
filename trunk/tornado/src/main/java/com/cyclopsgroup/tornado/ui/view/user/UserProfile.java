@@ -49,7 +49,7 @@ public class UserProfile
         throws Exception
     {
         RuntimeUser user = RuntimeUser.getInstance( data );
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         User u = (User) persist.load( User.class, user.getId() );
         context.put( "userObject", u );
 

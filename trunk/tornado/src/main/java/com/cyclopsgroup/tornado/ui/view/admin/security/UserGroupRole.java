@@ -49,7 +49,7 @@ public class UserGroupRole
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         String userId = data.getParameters().getString( "user_id" );
         User user = (User) persist.load( User.class, userId );
         context.put( "userObject", user );
@@ -63,7 +63,7 @@ public class UserGroupRole
             userGroupIds.add( group.getId() );
         }
 
-        SecurityEntityManager sem = (SecurityEntityManager) lookupComponent( SecurityEntityManager.ROLE );
+        SecurityEntityManager sem = (SecurityEntityManager) lookup( SecurityEntityManager.ROLE );
         List restGroups = new ArrayList( sem.getAllGroups() );
         for ( Iterator i = restGroups.iterator(); i.hasNext(); )
         {

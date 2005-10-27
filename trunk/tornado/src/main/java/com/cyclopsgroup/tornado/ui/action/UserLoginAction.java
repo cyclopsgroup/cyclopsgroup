@@ -50,7 +50,7 @@ public class UserLoginAction
         String userName = data.getParameters().getString( "username" );
         String password = data.getParameters().getString( "password" );
 
-        UserAuthenticator auth = (UserAuthenticator) lookupComponent( UserAuthenticator.ROLE );
+        UserAuthenticator auth = (UserAuthenticator) lookup( UserAuthenticator.ROLE );
         UserAuthenticationResult result = auth.authenticate( userName, password );
 
         if ( result == UserAuthenticationResult.NO_SUCH_USER )
@@ -72,7 +72,7 @@ public class UserLoginAction
             return;
         }
         int timeout = data.getParameters().getInt( "timeout", 30 );
-        SecurityService security = (SecurityService) lookupComponent( SecurityService.ROLE );
+        SecurityService security = (SecurityService) lookup( SecurityService.ROLE );
         RuntimeUser user = (RuntimeUser) security.login( userName, data.getSessionId(), timeout * 60000L );
         security.handleEvent( new UserChangedEvent( user, data ) );
 

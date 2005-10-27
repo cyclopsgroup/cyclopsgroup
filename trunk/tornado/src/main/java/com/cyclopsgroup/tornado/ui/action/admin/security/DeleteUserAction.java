@@ -42,7 +42,7 @@ public class DeleteUserAction
         throws Exception
     {
         String[] userIds = data.getParameters().getStrings( "user_id" );
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         int count = 0;
         for ( int i = 0; i < userIds.length; i++ )
         {

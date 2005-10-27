@@ -57,7 +57,7 @@ public class LookAndFeel
 
         context.put( "userId", userId );
 
-        PortalService portal = (PortalService) lookupComponent( PortalService.ROLE );
+        PortalService portal = (PortalService) lookup( PortalService.ROLE );
         UserPreference up = portal.findUserPreference( userId );
         context.put( "noPreference", new Boolean( up == null ) );
         if ( up == null )
@@ -66,7 +66,7 @@ public class LookAndFeel
         }
         context.put( "pref", up );
 
-        LookAndFeelService laf = (LookAndFeelService) lookupComponent( LookAndFeelService.ROLE );
+        LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
         List themeSelection = new ArrayList();
         String[] themeNames = laf.getThemeNames();
         for ( int i = 0; i < themeNames.length; i++ )

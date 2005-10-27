@@ -42,7 +42,7 @@ public class SaveCourseAction
         throws Exception
     {
         String id = data.getParameters().getString( "course_id" );
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         Course course = (Course) persist.load( Course.class, id );
         TypeUtils.getBeanUtils().populate( course, data.getParameters().toProperties() );
         persist.save( course );

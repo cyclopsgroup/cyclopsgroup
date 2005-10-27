@@ -40,7 +40,7 @@ public class EditCourse
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         Course course = (Course) persist.load( Course.class, data.getParameters().getString( "course_id" ) );
         context.put( "course", course );
     }

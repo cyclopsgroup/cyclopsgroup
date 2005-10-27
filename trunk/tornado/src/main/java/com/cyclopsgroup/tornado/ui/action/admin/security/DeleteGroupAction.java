@@ -46,7 +46,7 @@ public class DeleteGroupAction
         {
             return;
         }
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         int n = 0;
         for ( int i = 0; i < groupIds.length; i++ )
         {

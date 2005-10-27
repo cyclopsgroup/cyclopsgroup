@@ -43,13 +43,13 @@ public class CreatePreferenceAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        PersistenceManager persist = (PersistenceManager) lookupComponent( PersistenceManager.ROLE );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
         String userId = data.getParameters().getString( "user_id" );
         UserPreference up = (UserPreference) persist.create( UserPreference.class );
         up.setUserId( userId );
         up.setThemeName( PortalService.UNSET_THEME_NAME );
 
-        LookAndFeelService laf = (LookAndFeelService) lookupComponent( LookAndFeelService.ROLE );
+        LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
         Theme theme = laf.getTheme( data.getThemeName() );
         up.setIconset( theme.getIconSetName() );
         up.setStylesheet( theme.getStyleSheetName() );

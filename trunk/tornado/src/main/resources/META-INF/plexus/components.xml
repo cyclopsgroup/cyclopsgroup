@@ -90,10 +90,10 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.tornado.TornadoComponents</role>
+            <role>com.cyclopsgroup.tornado.TornadoServices</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
-                <component role="com.cyclopsgroup.waterview.WaterviewComponents" />
+                <component role="com.cyclopsgroup.waterview.WaterviewServices" />
                 <component role="com.cyclopsgroup.tornado.portal.PortalService" />
                 <component role="com.cyclopsgroup.tornado.security.SecurityService" />
             </configuration>
