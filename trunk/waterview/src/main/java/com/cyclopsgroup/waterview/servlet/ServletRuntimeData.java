@@ -31,7 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.AbstractRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.I18NService;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
 
 /**
@@ -155,7 +155,7 @@ public class ServletRuntimeData
     public void setPage( String page )
         throws Exception
     {
-        ModuleManager modules = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleService modules = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
         setPage( modules.parsePath( page ) );
     }
 }

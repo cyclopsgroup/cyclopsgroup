@@ -16,45 +16,24 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import org.codehaus.plexus.PlexusTestCase;
 
 /**
- * Always load new cache manager
+ * Test case for DefaultModuleManager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class NoneCacheManager
-    implements CacheManager
+public class DefaultModuleServiceTest
+    extends PlexusTestCase
 {
-
     /**
-     * Override or implement method of parent class or interface
+     * Test getting module
      *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#contains(java.lang.Object, java.lang.String)
+     * @throws Exception
      */
-    public boolean contains( Object host, String key )
-    {
-        return false;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#get(java.lang.Object, java.lang.String)
-     */
-    public Object get( Object host, String key )
-    {
-        return null;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
-     */
-    public void put( Object host, String key, Object value )
+    public void testGetModule()
+        throws Exception
     {
         //do nothing
     }
-
 }

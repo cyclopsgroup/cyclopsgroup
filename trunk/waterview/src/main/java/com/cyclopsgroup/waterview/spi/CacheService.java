@@ -14,31 +14,42 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core;
-
-import java.util.Hashtable;
-import java.util.Map;
-
-import com.cyclopsgroup.waterview.spi.CacheManager;
+package com.cyclopsgroup.waterview.spi;
 
 /**
- * Hashtable implemented cache manager
+ * Interface to handle all cache
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class HashtableCacheManager
-    extends AbstractMapCacheManager
-    implements CacheManager
+public interface CacheService
 {
-    private Hashtable content = new Hashtable();
+    /** Role name of CacheManager */
+    String ROLE = CacheService.class.getName();
 
     /**
-     * Override or implement method of parent class or interface
+     * Check if an object exists in the cache
      *
-     * @see com.cyclopsgroup.waterview.core.AbstractMapCacheManager#getContent()
+     * @param host Host
+     * @param key Object key
+     * @return True if it exist
      */
-    protected Map getContent()
-    {
-        return content;
-    }
+    boolean contains( Object host, String key );
+
+    /**
+     * Get object from cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @return Object, null if it doesn't exist
+     */
+    Object get( Object host, String key );
+
+    /**
+     * Put object into cache
+     *
+     * @param host Host
+     * @param key Object key
+     * @param value Object value
+     */
+    void put( Object host, String key, Object value );
 }

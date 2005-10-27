@@ -2,8 +2,8 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.waterview.spi.ModuleManager</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleManager</implementation>
+            <role>com.cyclopsgroup.waterview.spi.ModuleService</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <!-- Render engines -->
@@ -62,8 +62,8 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.spi.CacheManager</role>
-            <implementation>com.cyclopsgroup.waterview.core.NoneCacheManager</implementation>
+            <role>com.cyclopsgroup.waterview.spi.CacheService</role>
+            <implementation>com.cyclopsgroup.waterview.core.NoneCacheService</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
@@ -143,7 +143,7 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.waterview.WaterviewComponents</role>
+            <role>com.cyclopsgroup.waterview.WaterviewServices</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
                 <component role="com.cyclopsgroup.waterview.Waterview" />

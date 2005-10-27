@@ -49,7 +49,7 @@ public class DefaultNavigationNode
         String nodeId = data.getParameters().getString( "node_id" );
         if ( StringUtils.isNotEmpty( nodeId ) )
         {
-            NavigatorService nav = (NavigatorService) lookupComponent( NavigatorService.ROLE );
+            NavigatorService nav = (NavigatorService) lookup( NavigatorService.ROLE );
             navigationNode = nav.getRuntimeNode( data ).getNodeById( nodeId );
         }
 

@@ -24,7 +24,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -40,7 +40,7 @@ public class OpenViewValve
 {
     private LookAndFeelService laf;
 
-    private ModuleManager modules;
+    private ModuleService modules;
 
     /**
      * Overwrite or implement method invoke()
@@ -83,7 +83,7 @@ public class OpenViewValve
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        modules = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        modules = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
         laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }

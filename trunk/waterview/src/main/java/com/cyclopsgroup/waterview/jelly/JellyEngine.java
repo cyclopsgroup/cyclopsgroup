@@ -39,9 +39,9 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.Waterview;
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.utils.TagLibrary;
 import com.cyclopsgroup.waterview.utils.TagPackage;
@@ -94,13 +94,13 @@ public class JellyEngine
     /** Name of service manager */
     public static final String SERVICE_MANAGER = ServiceManager.class.getName();
 
-    private CacheManager cacheManager;
+    private CacheService cacheManager;
 
     private JellyContext globalContext;
 
     private Properties initProperties = new Properties();
 
-    private ModuleManager moduleManager;
+    private ModuleService moduleManager;
 
     private ServiceManager serviceManager;
 
@@ -161,7 +161,7 @@ public class JellyEngine
      *
      * @return Returns the cacheManager.
      */
-    public CacheManager getCacheManager()
+    public CacheService getCacheManager()
     {
         return cacheManager;
     }
@@ -372,8 +372,8 @@ public class JellyEngine
         throws ServiceException
     {
         this.serviceManager = serviceManager;
-        cacheManager = (CacheManager) serviceManager.lookup( CacheManager.ROLE );
-        moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        cacheManager = (CacheService) serviceManager.lookup( CacheService.ROLE );
+        moduleManager = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
 
         String pattern = ".+\\.jelly";
         moduleManager.registerDynaViewFactory( pattern, this );

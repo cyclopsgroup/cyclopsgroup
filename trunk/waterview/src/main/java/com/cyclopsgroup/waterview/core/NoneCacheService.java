@@ -14,52 +14,47 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
+package com.cyclopsgroup.waterview.core;
 
-import com.cyclopsgroup.waterview.spi.ModuleService;
-import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
+import com.cyclopsgroup.waterview.spi.CacheService;
 
 /**
- * Simple view tag
+ * Always load new cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SimpleViewTag
-    extends BaseViewTag
+public class NoneCacheService
+    implements CacheService
 {
-    private String path;
 
     /**
-     * Overwrite or implement method createView()
+     * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.taglib.BaseViewTag#createView()
+     * @see com.cyclopsgroup.waterview.spi.CacheService#contains(java.lang.Object, java.lang.String)
      */
-    protected View createView()
-        throws Exception
+    public boolean contains( Object host, String key )
     {
-        requireAttribute( "path" );
-        ModuleService mm = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
-        return mm.createDynaView( getPath() );
+        return false;
     }
 
     /**
-     * Getter method for path
+     * Override or implement method of parent class or interface
      *
-     * @return Returns the path.
+     * @see com.cyclopsgroup.waterview.spi.CacheService#get(java.lang.Object, java.lang.String)
      */
-    public String getPath()
+    public Object get( Object host, String key )
     {
-        return path;
+        return null;
     }
 
     /**
-     * Setter method for path
+     * Override or implement method of parent class or interface
      *
-     * @param path The path to set.
+     * @see com.cyclopsgroup.waterview.spi.CacheService#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
-    public void setPath( String path )
+    public void put( Object host, String key, Object value )
     {
-        this.path = path;
+        //do nothing
     }
+
 }

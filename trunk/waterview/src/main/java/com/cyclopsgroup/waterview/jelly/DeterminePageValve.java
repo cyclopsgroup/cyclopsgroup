@@ -32,7 +32,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -110,7 +110,7 @@ public class DeterminePageValve
         }
         synchronized ( this )
         {
-            CacheManager cacheManager = (CacheManager) runtime.getServiceManager().lookup( CacheManager.ROLE );
+            CacheService cacheManager = (CacheService) runtime.getServiceManager().lookup( CacheService.ROLE );
             page = (Page) cacheManager.get( this, pagePath.getFullPath() );
             if ( page == null )
             {

@@ -3,13 +3,13 @@ package com.cyclopsgroup.waterview;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 
 /**
  * @author jiaqi
  *
  */
-public class ModuleManagerTest
+public class ModuleServiceTest
     extends PlexusTestCase
 {
 
@@ -20,7 +20,7 @@ public class ModuleManagerTest
         throws Exception
     {
         lookup( JellyEngine.ROLE );
-        ModuleManager mm = (ModuleManager) lookup( ModuleManager.ROLE );
+        ModuleService mm = (ModuleService) lookup( ModuleService.ROLE );
         Path path = mm.parsePath( "/waterview/x/Xyz.jelly" );
         System.out.println( path.getPathWithoutExtension() );
     }

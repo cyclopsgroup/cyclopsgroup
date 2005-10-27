@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.core;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -29,7 +29,7 @@ import com.cyclopsgroup.waterview.spi.View;
 class CachedViewFactory
     implements DynaViewFactory
 {
-    private CacheManager cache;
+    private CacheService cache;
 
     private DynaViewFactory proxy;
 
@@ -37,7 +37,7 @@ class CachedViewFactory
      * @param proxy
      * @param cache
      */
-    CachedViewFactory( DynaViewFactory proxy, CacheManager cache )
+    CachedViewFactory( DynaViewFactory proxy, CacheService cache )
     {
         this.proxy = proxy;
         this.cache = cache;

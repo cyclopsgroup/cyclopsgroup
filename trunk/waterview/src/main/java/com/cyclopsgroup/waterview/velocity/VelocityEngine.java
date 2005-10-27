@@ -35,7 +35,7 @@ import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.MessageView;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -54,7 +54,7 @@ public class VelocityEngine
 
     private Properties initProperties;
 
-    private ModuleManager moduleManager;
+    private ModuleService moduleManager;
 
     /**
      * Overwrite or implement method contextualize()
@@ -153,7 +153,7 @@ public class VelocityEngine
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        moduleManager = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
 
         String pattern = ".+\\.vm";
         moduleManager.registerDynaViewFactory( pattern, this );

@@ -33,7 +33,7 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -105,7 +105,7 @@ public class JspEngine
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        ModuleManager moduleManager = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        ModuleService moduleManager = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
         moduleManager.registerDynaViewFactory( ".+\\.jsp", this );
     }
 }

@@ -16,24 +16,29 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import org.codehaus.plexus.PlexusTestCase;
+import java.util.Hashtable;
+import java.util.Map;
+
+import com.cyclopsgroup.waterview.spi.CacheService;
 
 /**
- * Test case for DefaultModuleManager
+ * Hashtable implemented cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultModuleManagerTest
-    extends PlexusTestCase
+public class HashtableCacheService
+    extends AbstractMapCacheService
+    implements CacheService
 {
+    private Hashtable content = new Hashtable();
+
     /**
-     * Test getting module
+     * Override or implement method of parent class or interface
      *
-     * @throws Exception
+     * @see com.cyclopsgroup.waterview.core.AbstractMapCacheService#getContent()
      */
-    public void testGetModule()
-        throws Exception
+    protected Map getContent()
     {
-        //do nothing
+        return content;
     }
 }

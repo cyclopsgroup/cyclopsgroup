@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.velocity.taglib;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.BaseViewTag;
 import com.cyclopsgroup.waterview.velocity.VelocityEngine;
@@ -44,7 +44,7 @@ public class VelocityViewTag
         requireAttribute( "template" );
         VelocityEngine ve = (VelocityEngine) getServiceManager().lookup( VelocityEngine.ROLE );
 
-        ModuleManager mm = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleService mm = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
         Path path = mm.parsePath( getTemplate() );
         return new VelocityView( ve.getTemplate( path.getPackage(), path.getPath() ), getTemplate() );
     }

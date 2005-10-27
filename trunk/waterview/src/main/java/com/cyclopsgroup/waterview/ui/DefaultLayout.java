@@ -44,7 +44,7 @@ public class DefaultLayout
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        NavigatorService navigator = (NavigatorService) lookupComponent( NavigatorService.ROLE );
+        NavigatorService navigator = (NavigatorService) lookup( NavigatorService.ROLE );
         RuntimeTreeNode root = navigator.getRuntimeNode( data );
         Node[] tabNodes = root.getChildrenNodes();
         context.put( "tabNodes", tabNodes );

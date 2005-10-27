@@ -39,7 +39,7 @@ public class NavigatorNodeContent extends BaseServiceable implements Module
      */
     public void execute(RuntimeData data, Context context) throws Exception
     {
-        NavigatorService navigator = (NavigatorService) lookupComponent(NavigatorService.ROLE);
+        NavigatorService navigator = (NavigatorService) lookup(NavigatorService.ROLE);
         String pagePath = data.getParameters().getString("page");
         NavigatorNode node = navigator.getNodeByPage(pagePath);
         context.put("navigatorNode", node);

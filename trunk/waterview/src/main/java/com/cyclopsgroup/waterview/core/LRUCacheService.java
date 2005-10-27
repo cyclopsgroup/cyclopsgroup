@@ -23,16 +23,16 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.commons.collections.map.LRUMap;
 
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 
 /**
  * LRU implemented cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class LRUCacheManager
-    extends AbstractMapCacheManager
-    implements CacheManager, Configurable
+public class LRUCacheService
+    extends AbstractMapCacheService
+    implements CacheService, Configurable
 {
     private LRUMap content = new LRUMap( 1000 );
 
@@ -54,7 +54,7 @@ public class LRUCacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.core.AbstractMapCacheManager#getContent()
+     * @see com.cyclopsgroup.waterview.core.AbstractMapCacheService#getContent()
      */
     protected Map getContent()
     {

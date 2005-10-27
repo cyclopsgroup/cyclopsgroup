@@ -35,9 +35,9 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -45,11 +45,11 @@ import com.cyclopsgroup.waterview.spi.View;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultModuleManager
+public class DefaultModuleService
     extends AbstractLogEnabled
-    implements Configurable, ModuleManager, Serviceable, DynaViewFactory, Initializable
+    implements Configurable, ModuleService, Serviceable, DynaViewFactory, Initializable
 {
-    private CacheManager cache;
+    private CacheService cache;
 
     private String defaultPackageAlias = "waterview";
 
@@ -75,7 +75,7 @@ public class DefaultModuleManager
     /**
      * Overwrite or implement method createDynaView()
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#createDynaView(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDynaView(java.lang.String)
      */
     public View createDynaView( String viewPath )
         throws Exception
@@ -120,7 +120,7 @@ public class DefaultModuleManager
     /**
      * Overwrite or implement method getPackageAliases()
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageAliases()
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#getPackageAliases()
      */
     public String[] getPackageAliases()
     {
@@ -130,7 +130,7 @@ public class DefaultModuleManager
     /**
      * Overwrite or implement method getPackageName()
      *
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#getPackageName(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#getPackageName(java.lang.String)
      */
     public String getPackageName( String aliasOrPackage )
     {
@@ -158,7 +158,7 @@ public class DefaultModuleManager
 
     /**
      * Overwrite or implement method parsePage()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#parsePath(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#parsePath(java.lang.String)
      */
     public Path parsePath( String modulePath )
     {
@@ -187,7 +187,7 @@ public class DefaultModuleManager
 
     /**
      * Overwrite or implement method registerDynaViewFactory()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerDynaViewFactory(java.lang.String, com.cyclopsgroup.waterview.spi.DynaViewFactory)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#registerDynaViewFactory(java.lang.String, com.cyclopsgroup.waterview.spi.DynaViewFactory)
      */
     public void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory )
     {
@@ -196,7 +196,7 @@ public class DefaultModuleManager
 
     /**
      * Overwrite or implement method registerPackageAlias()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#registerPackage(java.lang.String, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#registerPackage(java.lang.String, java.lang.String)
      */
     public void registerPackage( String alias, String packageName )
     {
@@ -228,7 +228,7 @@ public class DefaultModuleManager
 
     /**
      * Overwrite or implement method runModule()
-     * @see com.cyclopsgroup.waterview.spi.ModuleManager#runModule(java.lang.String, com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#runModule(java.lang.String, com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
     public void runModule( String modulePath, RuntimeData data, Context context )
         throws Exception
@@ -245,6 +245,6 @@ public class DefaultModuleManager
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        cache = (CacheManager) serviceManager.lookup( CacheManager.ROLE );
+        cache = (CacheService) serviceManager.lookup( CacheService.ROLE );
     }
 }

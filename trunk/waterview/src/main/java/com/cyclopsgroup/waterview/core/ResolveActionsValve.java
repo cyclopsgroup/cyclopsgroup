@@ -26,7 +26,7 @@ import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -56,7 +56,7 @@ public class ResolveActionsValve
 
         DefaultActionContext actionContext = new DefaultActionContext( data );
 
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleService mm = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
         for ( Iterator i = actions.iterator(); i.hasNext(); )
         {
             String actionName = (String) i.next();

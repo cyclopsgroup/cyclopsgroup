@@ -33,7 +33,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.I18NService;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -46,7 +46,7 @@ public class ResourceBundleI18NService
 {
     private Vector resourceKeys = new Vector();
 
-    private ModuleManager modules;
+    private ModuleService modules;
 
     /**
      * Overwrite or implement method translate()
@@ -119,6 +119,6 @@ public class ResourceBundleI18NService
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        modules = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        modules = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
     }
 }

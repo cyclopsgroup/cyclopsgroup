@@ -71,8 +71,8 @@ public abstract class BaseModuleRunnable
     {
         if (StringUtils.isNotEmpty(getModulePath()))
         {
-            ModuleManager moduleManager = (ModuleManager) data
-                    .getServiceManager().lookup(ModuleManager.ROLE);
+            ModuleService moduleManager = (ModuleService) data
+                    .getServiceManager().lookup(ModuleService.ROLE);
             moduleManager.runModule(modulePath, data, context);
         }
     }

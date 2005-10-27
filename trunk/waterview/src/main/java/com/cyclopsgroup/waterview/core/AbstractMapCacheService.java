@@ -18,15 +18,15 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.Map;
 
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 
 /**
  * Hashtable implemented cache manager
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractMapCacheManager
-    implements CacheManager
+public abstract class AbstractMapCacheService
+    implements CacheService
 {
 
     /**
@@ -40,7 +40,7 @@ public abstract class AbstractMapCacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#contains(java.lang.Object, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.CacheService#contains(java.lang.Object, java.lang.String)
      */
     public boolean contains( Object host, String key )
     {
@@ -51,7 +51,7 @@ public abstract class AbstractMapCacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#get(java.lang.Object, java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.CacheService#get(java.lang.Object, java.lang.String)
      */
     public Object get( Object host, String key )
     {
@@ -67,7 +67,7 @@ public abstract class AbstractMapCacheManager
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.CacheManager#put(java.lang.Object, java.lang.String, java.lang.Object)
+     * @see com.cyclopsgroup.waterview.spi.CacheService#put(java.lang.Object, java.lang.String, java.lang.Object)
      */
     public void put( Object host, String key, Object value )
     {

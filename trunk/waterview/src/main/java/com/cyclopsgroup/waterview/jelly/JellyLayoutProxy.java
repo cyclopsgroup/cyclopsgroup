@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.jelly;
 
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.CacheManager;
+import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
 
@@ -44,7 +44,7 @@ public class JellyLayoutProxy
     private synchronized JellyLayout getLayout( RuntimeData data )
         throws Exception
     {
-        CacheManager cm = (CacheManager) data.getServiceManager().lookup( CacheManager.ROLE );
+        CacheService cm = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
         JellyLayout layout = (JellyLayout) cm.get( this, layoutScript );
         if ( layout == null )
         {

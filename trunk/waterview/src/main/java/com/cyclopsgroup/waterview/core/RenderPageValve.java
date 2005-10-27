@@ -24,7 +24,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Theme;
@@ -49,7 +49,7 @@ public class RenderPageValve
     public void invoke( RuntimeData data, PipelineContext context )
         throws Exception
     {
-        ModuleManager mm = (ModuleManager) data.getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleService mm = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
 
         mm.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data, data
             .getRequestContext() );

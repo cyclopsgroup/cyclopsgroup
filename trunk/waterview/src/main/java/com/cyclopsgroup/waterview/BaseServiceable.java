@@ -47,7 +47,7 @@ public class BaseServiceable
      * @return Component
      * @throws Exception Throw it out
      */
-    public Object lookupComponent( String role )
+    public Object lookup( String role )
         throws Exception
     {
         return getServiceManager().lookup( role );

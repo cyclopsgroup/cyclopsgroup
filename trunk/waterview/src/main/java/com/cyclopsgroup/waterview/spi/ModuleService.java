@@ -25,10 +25,10 @@ import com.cyclopsgroup.waterview.RuntimeData;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface ModuleManager
+public interface ModuleService
 {
     /** Role name of the component */
-    String ROLE = ModuleManager.class.getName();
+    String ROLE = ModuleService.class.getName();
 
     /**
      * Create view dynamically

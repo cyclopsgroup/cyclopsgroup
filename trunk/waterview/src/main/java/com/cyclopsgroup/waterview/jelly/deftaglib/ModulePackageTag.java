@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -44,7 +44,7 @@ public class ModulePackageTag
         requireAttribute( "alias" );
         requireAttribute( "name" );
 
-        ModuleManager moduleManager = (ModuleManager) getServiceManager().lookup( ModuleManager.ROLE );
+        ModuleService moduleManager = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
         moduleManager.registerPackage( getAlias(), getName() );
     }
 

@@ -28,7 +28,7 @@ import org.codehaus.plexus.util.IOUtil;
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.spi.ModuleManager;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -44,7 +44,7 @@ public class GetResourceValve
 
     private static final String PREFIX = "/" + Link.GET_INSTRUCTOR;
 
-    private ModuleManager modules;
+    private ModuleService modules;
 
     /**
      * Overwrite or implement method invoke()
@@ -84,6 +84,6 @@ public class GetResourceValve
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        modules = (ModuleManager) serviceManager.lookup( ModuleManager.ROLE );
+        modules = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
     }
 }
