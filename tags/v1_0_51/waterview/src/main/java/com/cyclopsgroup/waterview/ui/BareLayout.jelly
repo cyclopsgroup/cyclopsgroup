@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dummy xmlns="http://waterview.cyclopsgroup.com/ui">
+    <SimpleView path="/${data.page.packageAlias}/view${data.page.path}" title="${mainTitle}" />
+</Dummy>
