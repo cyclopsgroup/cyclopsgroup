@@ -64,7 +64,7 @@ public class RenderPageValve
         {
             page = Page.DEFAULT;
         }
-        data.setOutputContentType( "text/html" );
+        data.setOutputContentType( "text/html; charset=UTF-8" );
         Layout layout = page.getLayout();
         Theme theme = laf.getTheme( data.getThemeName() );
         if ( theme == null )
