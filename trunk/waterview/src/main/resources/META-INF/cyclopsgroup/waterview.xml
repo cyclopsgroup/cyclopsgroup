@@ -14,10 +14,11 @@
     <IconSet name="waterview.icons.default" path="/waterview/defaulttheme" description="Waterview default icons" />
     <StyleSheet name="waterview.stylesheet.default" path="/waterview/defaulttheme/style.css"
         description="Waterview default stylesheet" />
+    <Layout name="waterview.layout.default">
+        <JellyLayout script="/waterview/DefaultLayout.jelly" />
+    </Layout>
     <Theme name="waterview.theme.default" iconset="waterview.icons.default" stylesheet="waterview.stylesheet.default"
         description="Waterview default theme">
-        <Layout name="layout.default">
-            <JellyLayout script="/waterview/DefaultLayout.jelly" />
-        </Layout>
+        <DefineLayout name="layout.default" layout="waterview.layout.default" />
     </Theme>
 </Waterview>

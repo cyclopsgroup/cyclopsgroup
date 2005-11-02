@@ -17,7 +17,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
@@ -25,6 +24,18 @@ package com.cyclopsgroup.waterview.spi;
  */
 public interface LookAndFeelService
 {
+    public interface PredefinedLayout
+        extends Layout
+    {
+        PredefinedLayout[] EMPTY_ARRAY = new PredefinedLayout[0];
+
+        String getDescription();
+
+        String getName();
+
+        String getTitle();
+    }
+
     /** role name of service */
     String ROLE = LookAndFeelService.class.getName();
 
@@ -53,6 +64,10 @@ public interface LookAndFeelService
      * @return Array of names
      */
     String[] getIconSetNames();
+
+    PredefinedLayout getLayout( String layoutName );
+
+    String[] getLayoutNames();
 
     /**
      *Get stylesheet
@@ -95,6 +110,8 @@ public interface LookAndFeelService
      * @param resource Resource of icon set
      */
     void registerIconSet( String name, Resource resource );
+
+    void registerLayout( PredefinedLayout layout );
 
     /**
      * Register stylesheet

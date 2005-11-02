@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -24,9 +23,6 @@ package com.cyclopsgroup.waterview.spi;
  */
 public interface Theme
 {
-    /** Bare layout name */
-    String LAYOUT_FOR_BARE = "layout.bare";
-
     /** Default layout name */
     String LAYOUT_FOR_DEFAULT = "layout.default";
 

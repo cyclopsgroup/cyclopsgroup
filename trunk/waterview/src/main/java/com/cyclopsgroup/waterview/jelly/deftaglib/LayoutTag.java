@@ -19,7 +19,11 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -29,11 +33,56 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  */
 public class LayoutTag
     extends TagSupport
+    implements PredefinedLayout
 {
 
     private Layout layout;
 
     private String name;
+
+    private String title;
+
+    private String description;
+
+    /**
+     * Overwrite or implement method getDescription()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout#getDescription()
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * Setter method for field description
+     *
+     * @param description The description to set.
+     */
+    public void setDescription( String description )
+    {
+        this.description = description;
+    }
+
+    /**
+     * Overwrite or implement method getTitle()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout#getTitle()
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * Setter method for field title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
+    }
 
     /**
      * Overwrite or implement method processTag()
@@ -44,13 +93,13 @@ public class LayoutTag
         throws Exception
     {
         requireAttribute( "name" );
-        requireParent( ThemeTag.class );
         invokeBody( output );
         if ( getLayout() == null )
         {
             throw new JellyTagException( "There must be a layout defined in layout tag" );
         }
-        ( (ThemeTag) getParent() ).getTheme().setLayout( getName(), getLayout() );
+        LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
+        laf.registerLayout( this );
     }
 
     /**
@@ -64,9 +113,9 @@ public class LayoutTag
     }
 
     /**
-     * Getter method for field name
+     * Overwrite or implement method getName()
      *
-     * @return Returns the name.
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout#getName()
      */
     public String getName()
     {
@@ -91,5 +140,16 @@ public class LayoutTag
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * Overwrite or implement method render()
+     *
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
+     */
+    public void render( RuntimeData data, Page page )
+        throws Exception
+    {
+        getLayout().render( data, page );
     }
 }

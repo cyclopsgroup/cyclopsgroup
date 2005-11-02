@@ -40,5 +40,6 @@ public class DefinitionTagPackage
         addTag( "Theme", ThemeTag.class );
         addTag( "IconSet", IconSetTag.class );
         addTag( "StyleSheet", StyleSheetTag.class );
+        addTag( "DefineLayout", DefineLayoutTag.class );
     }
 }

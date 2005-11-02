@@ -48,6 +48,8 @@ public class DefaultLookAndFeelService
 
     private Hashtable themes = new Hashtable();
 
+    private Hashtable layouts = new Hashtable();
+
     /**
      * Overwrite or implement method configure()
      *
@@ -180,5 +182,20 @@ public class DefaultLookAndFeelService
     public void registerTheme( Theme theme )
     {
         themes.put( theme.getName(), theme );
+    }
+
+    public PredefinedLayout getLayout( String layoutName )
+    {
+        return (PredefinedLayout) layouts.get( layoutName );
+    }
+
+    public String[] getLayoutNames()
+    {
+        return (String[]) layouts.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+    }
+
+    public void registerLayout( PredefinedLayout layout )
+    {
+        layouts.put( layout.getName(), layout );
     }
 }
