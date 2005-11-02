@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:j="jelly:core" xmlns:a="jelly:ant">
+    <goal name="cgt:deploy-pom">
+        <j:set var="destDir" value="${maven.cgt.basepom.destdir}" />
+        <a:mkdir dir="${destDir}" />
+        <a:copy file="${plugin.dir}/cgbase-1.0.pom" todir="${destDir}" />
+        <a:echo>File cgbase-1.0.pom is copied into ${destDir}</a:echo>
+    </goal>
+</project>
