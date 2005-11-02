@@ -67,9 +67,7 @@ Bye
             <subsection name="Install Apache Tomcat">
                 <p>
                     Download and unzip apache tomcat 4.1.x from
-                    <a href="http://jakarta.apache.org/tomcat/download-41.cgi">
-                        http://jakarta.apache.org/tomcat/download-41.cgi
-                    </a>
+                    <a href="http://tomcat.apache.org/download-41.cgi">http://tomcat.apache.org/download-41.cgi</a>
                     . Assume the unzipped directory of tomcat is C:/java/apache/jakarta-apache-4.1.31.
                 </p>
             </subsection>
