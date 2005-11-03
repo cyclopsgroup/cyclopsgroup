@@ -2,7 +2,7 @@
 <w:Dummy xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <w:CreateUniqueId var="tableDivId" />
     <div id="${tableDivId}">
-        <table width="100%" border="0" class="waterviewTable" cellspacing="1">
+        <table width="100%" border="0" class="waterviewTable" cellspacing="0">
             <tr>
                 <j:forEach var="column" items="${table.columns}">
                     <j:set var="columnDisplay" value="${column.display.name}" />
@@ -55,16 +55,13 @@
                     </j:forEach>
                 </tr>
             </j:forEach>
-            <tr>
-                <j:set var="displayedColumns" value="0" />
-                <j:forEach var="column" items="${table.columns}">
-                    <j:set var="columnDisplay" value="${column.display.name}" />
-                    <j:if test="${not columnDisplay.equals('hidden')}">
-                        <j:set var="displayedColumns" value="${displayedColumns + 1}" />
-                        <td class="lineBreak" />
-                    </j:if>
-                </j:forEach>
-            </tr>
+            <j:set var="displayedColumns" value="0" />
+            <j:forEach var="column" items="${table.columns}">
+                <j:set var="columnDisplay" value="${column.display.name}" />
+                <j:if test="${not columnDisplay.equals('hidden')}">
+                    <j:set var="displayedColumns" value="${displayedColumns + 1}" />
+                </j:if>
+            </j:forEach>
             <tr>
                 <td colspan="${displayedColumns}">
                     <j:set var="pageCount" value="-1" />

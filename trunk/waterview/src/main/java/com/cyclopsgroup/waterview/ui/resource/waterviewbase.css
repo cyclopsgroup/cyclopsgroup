@@ -11,6 +11,15 @@ th {
 	text-align: left;
 }
 
+a img {
+	border-width: 0px;
+}
+
+h2 {
+	font-size: 16px !important;
+	line-height: 100% !important;
+}
+
 .lineBreak {
 	height: 2px;
 	background-color: #EFEFEF;
@@ -23,20 +32,24 @@ th {
 	padding: 0px;
 }
 
-.waterviewWindowTitle {
+.waterviewPortlet {
+	margin: 3px 3px 12px 6px;
+}
+
+.waterviewPortletTitle {
 	font-weight: bold;
+}
+
+.waterviewPortletBody {
+	padding: 3px;
 }
 
 .r {
 	color: white !important;
 }
 
-a img {
-	border-width: 0px;
-}
-
 .waterviewSelectedTab,.waterviewUnselectedTab {
-	padding: 3 20 3 20;
+	padding: 3px 20px 3px 20px;
 }
 
 .waterviewSelectedTab a {
@@ -44,10 +57,9 @@ a img {
 }
 
 .waterviewTabBody {
-	padding: 5px;
+	padding: 3px;
 }
 
-h2 {
-	font-size: 16px !important;
-	line-height: 100% !important;
+#leftPanel {
+	padding: 3px;
 }

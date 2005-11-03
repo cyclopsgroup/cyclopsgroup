@@ -1,93 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <j:set var="shadowWidth" value="${controlTag.shadow}" />
-    <j:set var="shadowClass" value="waterviewWindowShadow" />
-    <j:if test="${shadowWidth lt 1}">
-        <j:set var="shadowWidth" value="1" />
-        <j:set var="shadowClass" value="waterviewWindowNoShadow" />
-    </j:if>
-    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-        <tr>
-            <td colspan="2" rowspan="2">
-                <table width="100%" cellspacing="${controlTag.border}" cellpadding="0" border="0"
-                    class="waterviewWindow">
+    <div class="waterviewPortlet">
+        <div class="waterviewPortletWrapper">
+            <div class="waterviewPortletHeader">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tr>
-                        <td class="waterviewWindowHeader">
-                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <td>
+                            <table cellspacing="2" cellpadding="0" border="0">
                                 <tr>
                                     <td>
-                                        <table cellspacing="2" cellpadding="0" border="0">
-                                            <tr>
-                                                <td>
-                                                    <img width="16" height="16" alt="View Actions"
-                                                        src="${themeBase}/16x16/view_actions.png" />
-                                                </td>
-                                                <td>
-                                                    <span class="waterviewWindowTitle">
-                                                        ${controlTag.portlet.title}
-                                                        <j:if test="${controlTag.length() gt 0}">
-                                                            :: ${controlTag.portlet.description}
-                                                        </j:if>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <img width="16" height="16" alt="View Actions"
+                                            src="${themeBase}/16x16/view_actions.png" />
                                     </td>
-                                    <td align="right">
-                                        <table cellspacing="2" cellpadding="0" border="0">
-                                            <tr>
-                                                <j:if test="${controlTag.maximizable}">
-                                                    <td>
-                                                        <img width="16" height="16" alt="Maximize View"
-                                                            src="${themeBase}/16x16/view_max.png" />
-                                                    </td>
-                                                </j:if>
-                                                <j:if test="${controlTag.portlet.editor}">
-                                                    <td>
-                                                        <img width="16" height="16" alt="Configure"
-                                                            src="${themeBase}/16x16/edit.png" />
-                                                    </td>
-                                                </j:if>
-                                                <td>
-                                                    <img width="16" height="16" alt="Help"
-                                                        src="${themeBase}/16x16/help.png" />
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td>
+                                        <div class="waterviewPortletTitle">
+                                            ${controlTag.portlet.title}
+                                            <j:if test="${controlTag.length() gt 0}">
+                                                :: ${controlTag.portlet.description}
+                                            </j:if>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="right">
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <j:if test="${controlTag.maximizable}">
+                                        <td>
+                                            <img width="16" height="16" alt="Maximize View"
+                                                src="${themeBase}/16x16/view_max.png" />
+                                        </td>
+                                    </j:if>
+                                    <j:if test="${controlTag.portlet.editor}">
+                                        <td>
+                                            <img width="16" height="16" alt="Configure"
+                                                src="${themeBase}/16x16/edit.png" />
+                                        </td>
+                                    </j:if>
+                                    <td>
+                                        <img width="16" height="16" alt="Help" src="${themeBase}/16x16/help.png" />
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2" class="waterviewWindowBody" style="padding: 5px;">
-                            <w:RenderPortlet portlet="${controlTag.portlet}" />
-                        </td>
-                    </tr>
                 </table>
-            </td>
-            <td width="${shadowWidth}" height="${shadowWidth}">
-                <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
-            </td>
-        </tr>
-        <tr>
-            <td width="${shadowWidth}" class="${shadowClass}">
-                <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
-            </td>
-        </tr>
-        <tr height="${shadowWidth}">
-            <td width="${shadowWidth}">
-                <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
-            </td>
-            <td width="100%" class="${shadowClass}">
-                <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
-            </td>
-            <td width="${shadowWidth}" class="${shadowClass}">
-                <w:BlankImage width="${shadowWidth}" height="${shadowWidth}" />
-            </td>
-        </tr>
-    </table>
-    <div>
-        <w:BlankImage height="5" width="1" />
+            </div>
+            <div class="waterviewPortletBody">
+                <w:RenderPortlet portlet="${controlTag.portlet}" />
+            </div>
+        </div>
     </div>
 </w:Dummy>

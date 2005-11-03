@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,16 +27,13 @@ import com.cyclopsgroup.waterview.spi.taglib.PortletAware;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class DisplayPortletTag extends BaseJellyControlTag implements
-        PortletAware
+public class DisplayPortletTag
+    extends BaseJellyControlTag
+    implements PortletAware
 {
-    private int border = 1;
-
     private boolean maximizable;
 
     private Portlet portlet;
-
-    private int shadow = 0;
 
     /**
      * Constructor for class WindowControlTag
@@ -44,17 +41,7 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
      */
     public DisplayPortletTag()
     {
-        setScript("/waterview/control/PortletControl.jelly");
-    }
-
-    /**
-     * Getter method for property border
-     *
-     * @return Returns the border.
-     */
-    public int getBorder()
-    {
-        return border;
+        setScript( "/waterview/control/PortletControl.jelly" );
     }
 
     /**
@@ -65,16 +52,6 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
     public Portlet getPortlet()
     {
         return portlet;
-    }
-
-    /**
-     * Getter method for property shadow
-     *
-     * @return Returns the shadow.
-     */
-    public int getShadow()
-    {
-        return shadow;
     }
 
     /**
@@ -92,21 +69,12 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
      *
      * @see com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag(XMLOutput output) throws Exception
+    protected void processTag( XMLOutput output )
+        throws Exception
     {
-        invokeBody(XMLOutput.createDummyXMLOutput());
-        requireAttribute("portlet");
-        super.processTag(output);
-    }
-
-    /**
-     * Setter method for property border
-     *
-     * @param border The border to set.
-     */
-    public void setBorder(int border)
-    {
-        this.border = border;
+        invokeBody( XMLOutput.createDummyXMLOutput() );
+        requireAttribute( "portlet" );
+        super.processTag( output );
     }
 
     /**
@@ -114,7 +82,7 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
      *
      * @param maximizable The maximizable to set.
      */
-    public void setMaximizable(boolean maximizable)
+    public void setMaximizable( boolean maximizable )
     {
         this.maximizable = maximizable;
     }
@@ -124,19 +92,9 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
      *
      * @param portlet The portlet to set.
      */
-    public void setPortlet(Portlet portlet)
+    public void setPortlet( Portlet portlet )
     {
         this.portlet = portlet;
-    }
-
-    /**
-     * Setter method for property shadow
-     *
-     * @param shadow The shadow to set.
-     */
-    public void setShadow(int shadow)
-    {
-        this.shadow = shadow;
     }
 
     /**
@@ -144,8 +102,8 @@ public class DisplayPortletTag extends BaseJellyControlTag implements
      *
      * @see com.cyclopsgroup.waterview.spi.taglib.PortletAware#doPortlet(com.cyclopsgroup.waterview.Portlet)
      */
-    public void doPortlet(Portlet portlet)
+    public void doPortlet( Portlet portlet )
     {
-        setPortlet(portlet);
+        setPortlet( portlet );
     }
 }
