@@ -15,7 +15,10 @@
     <StyleSheet name="waterview.stylesheet.default" path="/waterview/defaulttheme/style.css"
         description="Waterview default stylesheet" />
     <Layout name="waterview.layout.default">
-        <JellyLayout script="/waterview/DefaultLayout.jelly" />
+        <JellyLayout script="/waterview/layout/DefaultLayout.jelly" />
+    </Layout>
+    <Layout name="waterview.layout.rawview">
+        <JellyLayout script="/waterview/layout/RawViewLayout.jelly" />
     </Layout>
     <Theme name="waterview.theme.default" iconset="waterview.icons.default" stylesheet="waterview.stylesheet.default"
         description="Waterview default theme">

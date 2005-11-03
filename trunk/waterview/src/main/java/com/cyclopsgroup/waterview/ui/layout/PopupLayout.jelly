@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <head>
-        <title>Welcom to Waterview Web Framework</title>
-        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
+        <w:JellyScript path="/waterview/layout/DefaultHtmlHeaders.jelly" />
     </head>
     <body>
         <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" title="${mainTitle}" />
