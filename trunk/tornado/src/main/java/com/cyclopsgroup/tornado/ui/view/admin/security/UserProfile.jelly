@@ -3,10 +3,10 @@
     <h2>%tornado.navigation.userprofile - ${userObject.displayName}</h2>
     <w:HorizontalTabControl selected="basic">
         <w:Tab name="basic" title="Basic Information"
-            url="${link.setView('/tornado/view/admin/security/UserDetail.jelly').addQueryData('user_id', userObject.id)}" />
+            url="${link.setPage('/tornado/admin/security/UserDetail.jelly').addQueryData('user_id', userObject.id)}" />
         <w:Tab name="edit" title="Edit"
-            url="${link.setView('/tornado/view/admin/security/UserEdit.jelly').addQueryData('user_id', userObject.id)}" />
+            url="${link.setPage('/tornado/admin/security/UserEdit.jelly').addQueryData('user_id', userObject.id)}" />
         <w:Tab name="security" title="Group/Role"
-            url="${link.setView('/tornado/view/admin/security/UserGroupRole.jelly').addQueryData('user_id', userObject.id)}" />
+            url="${link.setPage('/tornado/admin/security/UserGroupRole.jelly').addQueryData('user_id', userObject.id)}" />
     </w:HorizontalTabControl>
 </div>
