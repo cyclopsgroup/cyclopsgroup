@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,10 +29,11 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Collection implemented table data
  */
-public class CollectionTabularData implements TabularData
+public class CollectionTabularData
+    implements TabularData
 {
     private Collection collection;
 
@@ -41,7 +42,7 @@ public class CollectionTabularData implements TabularData
      *
      * @param collection Collecton of data
      */
-    public CollectionTabularData(Collection collection)
+    public CollectionTabularData( Collection collection )
     {
         this.collection = collection;
     }
@@ -71,47 +72,44 @@ public class CollectionTabularData implements TabularData
      *
      * @see com.cyclopsgroup.waterview.web.TabularData#openIterator(com.cyclopsgroup.waterview.web.Table)
      */
-    public Iterator openIterator(Table table) throws Exception
+    public Iterator openIterator( Table table )
+        throws Exception
     {
         String[] sortedColumnNames = table.getSortedColumns();
-        if (sortedColumnNames.length == 0)
+        Collection sortedResult = collection;
+        if ( sortedColumnNames.length > 0 )
         {
-            return collection.iterator();
-        }
-        ComparatorChain chain = new ComparatorChain();
-        for (int i = 0; i < sortedColumnNames.length; i++)
-        {
-            String columnName = sortedColumnNames[i];
-            Column column = table.getColumn(columnName);
-            if (column.getSort() == ColumnSort.ASC)
+            ComparatorChain chain = new ComparatorChain();
+            for ( int i = 0; i < sortedColumnNames.length; i++ )
             {
-                chain
-                        .addComparator(new BeanPropertyComparator(column
-                                .getName()));
+                String columnName = sortedColumnNames[i];
+                Column column = table.getColumn( columnName );
+                if ( column.getSort() == ColumnSort.ASC )
+                {
+                    chain.addComparator( new BeanPropertyComparator( column.getName() ) );
+                }
+                else if ( column.getSort() == ColumnSort.DESC )
+                {
+                    chain.addComparator( new BeanPropertyComparator( column.getName() ), true );
+                }
             }
-            else if (column.getSort() == ColumnSort.DESC)
-            {
-                chain.addComparator(
-                        new BeanPropertyComparator(column.getName()), true);
-            }
+            chain.addComparator( HashCodeComparator.INSTANCE );
+            sortedResult = new TreeSet( chain );
+            sortedResult.addAll( collection );
         }
-        chain.addComparator(HashCodeComparator.INSTANCE);
-        TreeSet set = new TreeSet(chain);
-        set.addAll(collection);
-        if (table.getPageSize() <= 0)
+        if ( table.getPageSize() <= 0 )
         {
-            return set.iterator();
+            return sortedResult.iterator();
         }
-
         List list = new ArrayList();
         int index = 0;
         int startIndex = table.getPageSize() * table.getPageIndex();
-        for (Iterator i = set.iterator(); i.hasNext();)
+        for ( Iterator i = sortedResult.iterator(); i.hasNext(); )
         {
             Object object = i.next();
-            if (index >= startIndex && index < startIndex + table.getPageSize())
+            if ( index >= startIndex && index < startIndex + table.getPageSize() )
             {
-                list.add(object);
+                list.add( object );
             }
             index++;
         }
