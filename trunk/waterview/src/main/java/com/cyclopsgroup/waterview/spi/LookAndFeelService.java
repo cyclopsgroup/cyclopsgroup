@@ -24,15 +24,27 @@ package com.cyclopsgroup.waterview.spi;
  */
 public interface LookAndFeelService
 {
-    public interface PredefinedLayout
-        extends Layout
+    /**
+     * Predefined layout
+     */
+    public interface PredefinedLayout extends Layout
     {
+        /** Empty array */
         PredefinedLayout[] EMPTY_ARRAY = new PredefinedLayout[0];
 
+        /**
+         *@return Description of layout
+         */
         String getDescription();
 
+        /**
+         *@return Name of layout
+         */
         String getName();
 
+        /**
+         *@return Display title of layout
+         */
         String getTitle();
     }
 
@@ -45,8 +57,7 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException Theme is not found
      */
-    Theme getDefaultTheme()
-        throws NoSuchLookAndFeelException;
+    Theme getDefaultTheme() throws NoSuchLookAndFeelException;
 
     /**
      * Get icon set
@@ -55,8 +66,7 @@ public interface LookAndFeelService
      * @return Icon set resource
      * @throws NoSuchLookAndFeelException If name doesnt exist
      */
-    Resource getIconSet( String name )
-        throws NoSuchLookAndFeelException;
+    Resource getIconSet(String name) throws NoSuchLookAndFeelException;
 
     /**
      * Get all icon set names
@@ -65,8 +75,19 @@ public interface LookAndFeelService
      */
     String[] getIconSetNames();
 
-    PredefinedLayout getLayout( String layoutName );
+    /**
+     * Get layout object
+     *
+     * @param layoutName Layout name
+     * @return Layout object
+     */
+    PredefinedLayout getLayout(String layoutName);
 
+    /**
+     * Get layout names
+     *
+     * @return Layout names
+     */
     String[] getLayoutNames();
 
     /**
@@ -76,8 +97,7 @@ public interface LookAndFeelService
      * @return Resource of stylesheet
      * @throws NoSuchLookAndFeelException If name doesn't exist
      */
-    Resource getStyleSheet( String name )
-        throws NoSuchLookAndFeelException;
+    Resource getStyleSheet(String name) throws NoSuchLookAndFeelException;
 
     /**
      * Get stylesheet names
@@ -93,8 +113,7 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException Theme is not found
      */
-    Theme getTheme( String themeName )
-        throws NoSuchLookAndFeelException;
+    Theme getTheme(String themeName) throws NoSuchLookAndFeelException;
 
     /**
      * Get all theme names
@@ -109,9 +128,14 @@ public interface LookAndFeelService
      * @param name Name of icon set
      * @param resource Resource of icon set
      */
-    void registerIconSet( String name, Resource resource );
+    void registerIconSet(String name, Resource resource);
 
-    void registerLayout( PredefinedLayout layout );
+    /**
+     * Register predefined layout
+     *
+     * @param layout Layout object
+     */
+    void registerLayout(PredefinedLayout layout);
 
     /**
      * Register stylesheet
@@ -119,12 +143,12 @@ public interface LookAndFeelService
      * @param name Name of stylesheet
      * @param stylesheet Resource of stylesheet
      */
-    void registerStyleSheet( String name, Resource stylesheet );
+    void registerStyleSheet(String name, Resource stylesheet);
 
     /**
      * Register a theme
      *
      * @param theme Theme object
      */
-    void registerTheme( Theme theme );
+    void registerTheme(Theme theme);
 }
