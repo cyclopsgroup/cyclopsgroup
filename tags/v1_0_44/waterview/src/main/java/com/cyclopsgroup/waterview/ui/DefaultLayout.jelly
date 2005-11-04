@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <head>
+        <w:JellyScript path="/waterview/DefaultHtmlHeaders.jelly" />
+    </head>
+    <body>
+        <div align="center">
+            <div id="bodyWrapper">
+                <table width="100%" cellspacing="0" border="0" cellpadding="0">
+                    <tr>
+                        <td colspan="2" id="bannerPanel">
+                            <w:JellyScript path="/waterview/DefaultHtmlBanner.jelly" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" id="leftPanel">
+                            <j:set var="navigationNode" value="${selectedNode}" />
+                            <w:GetPanelViews var="views" panel="navigation">
+                                <w:JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
+                                <w:View>
+                                    <p>Some help links</p>
+                                </w:View>
+                                <w:View>
+                                    <p>Some reference links</p>
+                                </w:View>
+                            </w:GetPanelViews>
+                            <j:forEach var="view" items="${views}">
+                                <w:WindowControl title="Side Window" shadow="2" border="1">
+                                    <w:DisplayView view="${view}" />
+                                </w:WindowControl>
+                            </j:forEach>
+                        </td>
+                        <td valign="top" id="bodyPanel" width="75%">
+                            <table width="100%" cellpading="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td class="bannerPanelBelt">
+                                        <table border="0">
+                                            <tr>
+                                                <td>
+                                                    <img src="${themeBase}/16x16/screen.png" width="16" height="16"
+                                                        alt="Your position" />
+                                                </td>
+                                                <td>
+                                                    <j:forEach var="parent"
+                                                        items="${currentNavigatorNode.parentNodes}">
+                                                        <a href="${link.setPage(parent.page)}">${parent.title}</a>
+                                                        &gt;&gt;
+                                                    </j:forEach>
+                                                    <b>${currentNavigatorNode.title}</b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <j:set var="messages" value="${data.messages}" />
+                                <j:if test="${size(messages) gt 0}">
+                                    <tr>
+                                        <td id="bodyMessagePanel">
+                                            <table border="0">
+                                                <j:forEach var="msg" items="${messages}">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="${themeBase}/16x16/info.png" width="16"
+                                                                height="16" alt="Message" />
+                                                        </td>
+                                                        <td class="waterviewMessage">${msg}</td>
+                                                    </tr>
+                                                </j:forEach>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </j:if>
+                                <tr>
+                                    <td>
+                                        <w:GetPanelViews var="views" panel="body">
+                                            <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" />
+                                        </w:GetPanelViews>
+                                        <j:forEach var="view" items="${views}">
+                                            <w:WindowControl title="" maximizable="true" editable="true" border="0">
+                                                <w:DisplayView view="${view}" />
+                                            </w:WindowControl>
+                                        </j:forEach>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="footerPanel">
+                            <w:JellyScript path="/waterview/DefaultHtmlFooter.jelly" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
