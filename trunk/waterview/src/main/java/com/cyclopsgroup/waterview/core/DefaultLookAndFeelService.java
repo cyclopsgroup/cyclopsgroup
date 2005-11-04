@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,11 +44,11 @@ public class DefaultLookAndFeelService
 
     private Hashtable iconSets = new Hashtable();
 
+    private Hashtable layouts = new Hashtable();
+
     private Hashtable styleSheets = new Hashtable();
 
     private Hashtable themes = new Hashtable();
-
-    private Hashtable layouts = new Hashtable();
 
     /**
      * Overwrite or implement method configure()
@@ -96,6 +96,26 @@ public class DefaultLookAndFeelService
     public String[] getIconSetNames()
     {
         return (String[]) iconSets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+    }
+
+    /**
+     * Overwrite or implement method getLayout()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getLayout(java.lang.String)
+     */
+    public PredefinedLayout getLayout( String layoutName )
+    {
+        return (PredefinedLayout) layouts.get( layoutName );
+    }
+
+    /**
+     * Overwrite or implement method getLayoutNames()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getLayoutNames()
+     */
+    public String[] getLayoutNames()
+    {
+        return (String[]) layouts.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -165,6 +185,16 @@ public class DefaultLookAndFeelService
     }
 
     /**
+     * Overwrite or implement method registerLayout()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerLayout(com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout)
+     */
+    public void registerLayout( PredefinedLayout layout )
+    {
+        layouts.put( layout.getName(), layout );
+    }
+
+    /**
      * Overwrite or implement method registerStylesheet()
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyleSheet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
@@ -182,20 +212,5 @@ public class DefaultLookAndFeelService
     public void registerTheme( Theme theme )
     {
         themes.put( theme.getName(), theme );
-    }
-
-    public PredefinedLayout getLayout( String layoutName )
-    {
-        return (PredefinedLayout) layouts.get( layoutName );
-    }
-
-    public String[] getLayoutNames()
-    {
-        return (String[]) layouts.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
-    }
-
-    public void registerLayout( PredefinedLayout layout )
-    {
-        layouts.put( layout.getName(), layout );
     }
 }
