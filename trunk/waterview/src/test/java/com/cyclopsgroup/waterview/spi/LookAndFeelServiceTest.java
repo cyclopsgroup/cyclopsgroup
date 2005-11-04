@@ -25,17 +25,20 @@ import com.cyclopsgroup.waterview.jelly.JellyEngine;
  * 
  * Test case for look and feel
  */
-public class LookAndFeelServiceTest
-    extends PlexusTestCase
+public class LookAndFeelServiceTest extends PlexusTestCase
 {
-    public void testTheme()
-        throws Exception
+    /**
+     * Test theme
+     *
+     * @throws Exception
+     */
+    public void testTheme() throws Exception
     {
-        lookup( JellyEngine.ROLE );
-        LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
+        lookup(JellyEngine.ROLE);
+        LookAndFeelService laf = (LookAndFeelService) lookup(LookAndFeelService.ROLE);
         Theme theme = laf.getDefaultTheme();
-        assertNotNull( theme );
-        Layout layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
-        assertNotNull( layout );
+        assertNotNull(theme);
+        Layout layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
+        assertNotNull(layout);
     }
 }

@@ -16,7 +16,67 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
+import org.apache.commons.jelly.XMLOutput;
+
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.utils.TagSupport;
+
 public class DefineLayoutTag
+    extends TagSupport
 {
+    private String name;
+
+    private String layout;
+
+    protected void processTag( XMLOutput output )
+        throws Exception
+    {
+        requireAttribute( "name" );
+        requireAttribute( "layout" );
+
+        ThemeTag theme = (ThemeTag) requireParent( ThemeTag.class );
+        LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
+        theme.getTheme().setLayout( getName(), new PredefinedLayoutProxy( laf, getLayout() ) );
+    }
+
+    /**
+     * Getter method for field layout
+     *
+     * @return Returns the layout.
+     */
+    public String getLayout()
+    {
+        return layout;
+    }
+
+    /**
+     * Setter method for field layout
+     *
+     * @param layout The layout to set.
+     */
+    public void setLayout( String layout )
+    {
+        this.layout = layout;
+    }
+
+    /**
+     * Getter method for field name
+     *
+     * @return Returns the name.
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Setter method for field name
+     *
+     * @param name The name to set.
+     */
+    public void setName( String name )
+    {
+        this.name = name;
+    }
 
 }

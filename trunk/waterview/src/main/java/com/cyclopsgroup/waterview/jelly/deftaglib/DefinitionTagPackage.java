@@ -39,5 +39,6 @@ public class DefinitionTagPackage extends TagPackage
         addTag("Theme", ThemeTag.class);
         addTag("IconSet", IconSetTag.class);
         addTag("StyleSheet", StyleSheetTag.class);
+        addTag("DefineLayout", DefineLayoutTag.class);
     }
 }
