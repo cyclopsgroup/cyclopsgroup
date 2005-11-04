@@ -10,7 +10,7 @@
             <role>com.cyclopsgroup.courselist.CourseListComponents</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
-                <component role="com.cyclopsgroup.tornado.TornadoComponents" />
+                <component role="com.cyclopsgroup.tornado.TornadoServices" />
                 <component role="com.cyclopsgroup.courselist.CourseListService" />
             </configuration>
         </component>
