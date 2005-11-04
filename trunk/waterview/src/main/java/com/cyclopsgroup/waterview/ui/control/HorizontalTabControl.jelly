@@ -34,7 +34,16 @@
                 <div id="tab${uniqueId}">
                     <script language="javascript">
                         <![CDATA[
-fillDynaContent("tab${uniqueId}", "${controlTag.selectedTabTag.url}");
+var url = "${controlTag.selectedTabTag.url}";
+if(url.indexOf('?') == -1)
+{
+    url += "?page_layout_id=layout.rawview";
+}
+else
+{
+    url += "&page_layout_id=layout.rawview";
+}
+fillDynaContent("tab${uniqueId}", url);
                     ]]>
                     </script>
                 </div>

@@ -48,7 +48,10 @@
                 </table>
             </div>
             <div class="waterviewPortletBody">
-                <w:RenderPortlet portlet="${controlTag.portlet}" />
+                <w:CreateUniqueId var="dynamicPortletId" />
+                <div id="${dynamicPortletId}">
+                    <w:RenderPortlet portlet="${controlTag.portlet}" />
+                </div>
             </div>
         </div>
     </div>

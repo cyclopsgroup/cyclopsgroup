@@ -13,14 +13,14 @@
                             </j:when>
                             <j:when test="${runtimeNode.expanded}">
                                 <a href="#"
-                                    onclick="fillDynaContent('${uniqueId}', '${link.setView('/waterview/sysview/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'collapse')}'); return false;">
+                                    onclick="fillDynaContent('${uniqueId}', '${link.setPage('/waterview/pub/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'collapse').addQueryData('page_layout_id', 'layout.rawview')}'); return false;">
                                     <img src="${themeBase}/16x16/folder_opened.png" width="16" height="16"
                                         alt="Click to collapse" />
                                 </a>
                             </j:when>
                             <j:otherwise>
                                 <a href="#"
-                                    onclick="fillDynaContent('${uniqueId}', '${link.setView('/waterview/sysview/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'expand')}'); return false;">
+                                    onclick="fillDynaContent('${uniqueId}', '${link.setPage('/waterview/pub/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'expand').addQueryData('page_layout_id', 'layout.rawview')}'); return false;">
                                     <img src="${themeBase}/16x16/folder.png" width="16" height="16"
                                         alt="Click to expand" />
                                 </a>

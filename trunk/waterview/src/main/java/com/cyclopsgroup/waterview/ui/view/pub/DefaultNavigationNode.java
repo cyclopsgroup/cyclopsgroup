@@ -15,7 +15,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.ui.sysview;
+package com.cyclopsgroup.waterview.ui.view.pub;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -40,9 +40,6 @@ public class Link
     /** Name of this tool */
     public static final String NAME = "link";
 
-    /** Open resource instructor */
-    public static final String VIEW_INSTRUCTOR = "!view!";
-
     /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
 
@@ -165,30 +162,6 @@ public class Link
         sb.append( '/' ).append( GET_INSTRUCTOR );
         sb.append( getPath( path ) );
         return sb.toString();
-    }
-
-    /**
-     * Open given path as a view
-     *
-     * @param path Script path
-     * @return Link object itself
-     */
-    public Link setView( Path path )
-    {
-        return setView( path.getFullPath() );
-    }
-
-    /**
-     * Open given path as a view
-     *
-     * @param path Script path
-     * @return Link object itself
-     */
-    public Link setView( String path )
-    {
-        checkDisposed();
-        requestPath.append( '/' ).append( VIEW_INSTRUCTOR ).append( getPath( path ) );
-        return this;
     }
 
     /**

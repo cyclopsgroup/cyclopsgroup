@@ -3,7 +3,7 @@
     <PanelContent name="navigation">
         <Portlet title="
             %waterview.view.systemnavigation">
-            <JellyView script="/waterview/sysview/DefaultNavigationNode.jelly" />
+            <JellyView script="/waterview/view/pub/DefaultNavigationNode.jelly" />
         </Portlet>
         <Portlet title="%waterview.view.links">
             <View>

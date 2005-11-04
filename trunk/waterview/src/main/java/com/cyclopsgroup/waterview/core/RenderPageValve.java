@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.Layout;
@@ -32,7 +33,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Valve to render page
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class RenderPageValve
@@ -66,6 +67,11 @@ public class RenderPageValve
         }
         data.setOutputContentType( "text/html; charset=UTF-8" );
         Layout layout = page.getLayout();
+        String pageLayoutId = data.getParameters().getString( "page_layout_id" );
+        if ( StringUtils.isNotEmpty( pageLayoutId ) )
+        {
+            layout = laf.getLayout( pageLayoutId );
+        }
         Theme theme = laf.getTheme( data.getThemeName() );
         if ( theme == null )
         {

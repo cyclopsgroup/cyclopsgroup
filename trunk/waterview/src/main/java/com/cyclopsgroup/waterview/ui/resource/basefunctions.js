@@ -62,7 +62,7 @@ function fetchExternalContent(url)
 	return req.statusText;
 }
 
-function _fillDynaContent(tagId, url, outer)
+function fillDynaContent(tagId, url)
 {
 	var el = document.getElementById(tagId);
 	if(el == null)
@@ -72,24 +72,7 @@ function _fillDynaContent(tagId, url, outer)
 
 	var text = fetchExternalContent(url);
 
-	if(outer)
-	{
-		el.outerHTML = text;
-	}
-	else
-	{
-		el.innerHTML = text;
-	}
-}
-
-function fillDynaContent(tagId, url)
-{
-	_fillDynaContent(tagId, url, false);
-}
-
-function replaceDynaContent(tagId, url)
-{
-	_fillDynaContent(tagId, url, true);
+	el.innerHTML = text;
 }
 
 function clearDynaContent(tagId)
@@ -139,8 +122,8 @@ function _createFormData(form) {
 
 function validateForm(form, formId)
 {
-	var query = _createFormData(form) + "&form_id=" + escape(formId);
-	var url = pageBaseUrl + "/!view!/waterview/sysview/FormValidation.jm";
+	var query = _createFormData(form) + "&form_id=" + escape(formId)+ "&page_layout_id=layout.rawview";
+	var url = pageBaseUrl + "/!show!/waterview/pub/FormValidation.jm";
 
 	var req = createHttpRequest();
 	req.open("POST", url, false);
@@ -243,6 +226,16 @@ function changeTab(tabId, tabName, url)
 	var currentTd = document.getElementById("tabtd" + tabId +"_" + tabName);
 	setTabName(tabId, tabName);
 	currentTd.className = "waterviewSelectedTab";
-	fillDynaContent("tab" + tabId, url);
+
+	var furl = url;
+	if(url.indexOf('?') == -1)
+	{
+		furl = url + "?page_layout_id=layout.rawview";
+	}
+	else
+	{
+		furl = url + "&page_layout_id=layout.rawview";
+	}
+	fillDynaContent("tab" + tabId, furl);
 	return false;
 }
