@@ -21,23 +21,16 @@ import org.apache.commons.jelly.XMLOutput;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
-public class DefineLayoutTag
-    extends TagSupport
+/**
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * 
+ * Tag to define layout
+ */
+public class DefineLayoutTag extends TagSupport
 {
-    private String name;
-
     private String layout;
 
-    protected void processTag( XMLOutput output )
-        throws Exception
-    {
-        requireAttribute( "name" );
-        requireAttribute( "layout" );
-
-        ThemeTag theme = (ThemeTag) requireParent( ThemeTag.class );
-        LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        theme.getTheme().setLayout( getName(), new PredefinedLayoutProxy( laf, getLayout() ) );
-    }
+    private String name;
 
     /**
      * Getter method for field layout
@@ -50,16 +43,6 @@ public class DefineLayoutTag
     }
 
     /**
-     * Setter method for field layout
-     *
-     * @param layout The layout to set.
-     */
-    public void setLayout( String layout )
-    {
-        this.layout = layout;
-    }
-
-    /**
      * Getter method for field name
      *
      * @return Returns the name.
@@ -69,12 +52,34 @@ public class DefineLayoutTag
         return name;
     }
 
+    protected void processTag(XMLOutput output) throws Exception
+    {
+        requireAttribute("name");
+        requireAttribute("layout");
+
+        ThemeTag theme = (ThemeTag) requireParent(ThemeTag.class);
+        LookAndFeelService laf = (LookAndFeelService) getServiceManager()
+                .lookup(LookAndFeelService.ROLE);
+        theme.getTheme().setLayout(getName(),
+                new PredefinedLayoutProxy(laf, getLayout()));
+    }
+
+    /**
+     * Setter method for field layout
+     *
+     * @param layout The layout to set.
+     */
+    public void setLayout(String layout)
+    {
+        this.layout = layout;
+    }
+
     /**
      * Setter method for field name
      *
      * @param name The name to set.
      */
-    public void setName( String name )
+    public void setName(String name)
     {
         this.name = name;
     }
