@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
-    <Tree name="courselist" position="/">
+    <Tree name="courselist" position="/home">
         <Node name="course" title="Course Listing" page="/courselist/Index.jelly">
             <Node name="cm" title="Course Management" page="/courselist/CourseIndex.jelly">
-                <Node title="Create Course" page="/courselist/CreateCourse.jelly" />
-                <Node title="Course List" page="/courselist/CourseList.jelly" />
-                <Node title="Edit Course" page="/courselist/EditCourse.jelly" hidden="true" />
-                <Node title="Download List" page="/courselist/DownloadList.jelly" />
+                <Node title="Course board" page="/courselist/CourseList.jelly" />
+                <Node title="Create course" page="/courselist/CreateCourse.jelly" />
+                <Node title="Course details" page="/courselist/EditCourse.jelly" hidden="true" />
             </Node>
             <Node name="student" title="Student Workbench" page="/courselist/StudentWorkbench.jelly">
-                <Node title="My Courses" page="/courselist/MyCourses.jelly" />
-                <Node title="My History" page="/courselist/StudentHistory.jelly" />
+                <Node title="My courses" page="/courselist/MyCourses.jelly" />
+                <Node title="My course status" page="/courselist/MyCourseStatus.jelly" />
+                <Node title="My history" page="/courselist/StudentHistory.jelly" />
                 <Node title="Transcript" page="/courselist/Transcript.jelly" />
             </Node>
         </Node>
