@@ -15,7 +15,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.tornado.ui.sysview;
+package com.cyclopsgroup.tornado.ui.view.pub;
 
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityService;

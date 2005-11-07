@@ -25,4 +25,7 @@
         </Node>
         <Node title="Page Not Authorized" page="/tornado/NotAuthorized.jelly" hidden="true" />
     </Tree>
+    <Tree name="tornado.help.about" position="/help/abouts">
+        <Node title="About Tornado" page="/tornado/pub/AboutTornado.jelly" />
+    </Tree>
 </Navigation>

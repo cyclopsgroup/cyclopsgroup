@@ -33,7 +33,11 @@
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/waterview/help/about/.*" />
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/waterview/pub/.*" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/tornado/UserLogin.jelly" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/tornado/pub/.*" />
         <New roleId="${roleUser.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/tornado/user/.*" />
     </Class>

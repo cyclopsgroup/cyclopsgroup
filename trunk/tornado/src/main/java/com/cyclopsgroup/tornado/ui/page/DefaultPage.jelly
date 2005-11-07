@@ -6,7 +6,7 @@
             <JellyView script="/waterview/view/pub/DefaultNavigationNode.jelly" />
         </Portlet>
         <Portlet title="%tornado.navigation.myinfo">
-            <JellyView script="/tornado/sysview/UserInfo.jelly" />
+            <JellyView script="/tornado/view/pub/UserInfo.jelly" />
         </Portlet>
     </PanelContent>
 </Page>
