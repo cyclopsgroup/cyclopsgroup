@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ import com.cyclopsgroup.waterview.web.Table;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Column tag
  */
 public class ColumnTag
@@ -126,8 +126,8 @@ public class ColumnTag
     {
         requireAttribute( "name" );
         requireAttribute( "display" );
-        requireParent( TableTag.class );
-        if ( ( (TableTag) getParent() ).isTableNew() )
+        TableTag tableTag = (TableTag) requireInside( TableTag.class );
+        if ( tableTag.isTableNew() )
         {
             Class columnType = TypeUtils.getType( getType() );
             Table table = ( (TableTag) getParent() ).getTable();
@@ -142,7 +142,7 @@ public class ColumnTag
             }
             column.setValue( getValue() );
         }
-        ( (TableTag) getParent() ).addColumnTag( this );
+        tableTag.addColumnTag( this );
     }
 
     /**
