@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:t="http://tornado.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <h2>All Courses</h2>
     <table width="100%">
         <w:FormControl>
@@ -30,18 +30,22 @@
                                 <w:Column name="coRequisites" title="Co-requisite" sort="unsorted">
                                     ${course.coRequisites}
                                 </w:Column>
-                                <w:Column name="apply" title="Apply">
-                                    <w:Submit
-                                        action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
-                                        <w:FormButton title="Apply" />
-                                    </w:Submit>
-                                </w:Column>
-                                <w:Column name="apply_for" title="Apply for...">
-                                    <w:Submit
-                                        action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
-                                        <w:FormButton title="Apply for..." />
-                                    </w:Submit>
-                                </w:Column>
+                                <t:SecureControl role="student">
+                                    <w:Column name="apply" title="Apply">
+                                        <w:Submit
+                                            action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
+                                            <w:FormButton title="Apply" />
+                                        </w:Submit>
+                                    </w:Column>
+                                </t:SecureControl>
+                                <t:SecureControl role="teacher">
+                                    <w:Column name="apply_for" title="Apply for...">
+                                        <w:Submit
+                                            action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
+                                            <w:FormButton title="Apply for..." />
+                                        </w:Submit>
+                                    </w:Column>
+                                </t:SecureControl>
                             </w:Table>
                         </w:TableControl>
                     </td>

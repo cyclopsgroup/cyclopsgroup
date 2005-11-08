@@ -29,17 +29,25 @@ abstract public class CourseBase implements Serializable {
     /** nullable persistent field */
     private boolean isDisabled;
 
+    /** nullable persistent field */
+    private String teacherId;
+
+    /** nullable persistent field */
+    private float credit;
+
     /** persistent field */
     private Set prerequisites;
 
     /** full constructor */
-    public CourseBase(String prefix, String courseCode, String name, String description, String coRequisites, boolean isDisabled, Set prerequisites) {
+    public CourseBase(String prefix, String courseCode, String name, String description, String coRequisites, boolean isDisabled, String teacherId, float credit, Set prerequisites) {
         this.prefix = prefix;
         this.courseCode = courseCode;
         this.name = name;
         this.description = description;
         this.coRequisites = coRequisites;
         this.isDisabled = isDisabled;
+        this.teacherId = teacherId;
+        this.credit = credit;
         this.prerequisites = prerequisites;
     }
 
@@ -109,6 +117,22 @@ abstract public class CourseBase implements Serializable {
 
     public void setIsDisabled(boolean isDisabled) {
         this.isDisabled = isDisabled;
+    }
+
+    public String getTeacherId() {
+        return this.teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public float getCredit() {
+        return this.credit;
+    }
+
+    public void setCredit(float credit) {
+        this.credit = credit;
     }
 
     public Set getPrerequisites() {
