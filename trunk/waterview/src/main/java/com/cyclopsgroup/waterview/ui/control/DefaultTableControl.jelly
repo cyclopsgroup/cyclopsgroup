@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w:Dummy xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <j:set var="nbsp" value="&amp;nbsp;"/>
     <w:CreateUniqueId var="tableDivId" />
     <div id="${tableDivId}">
         <table width="100%" border="0" class="waterviewTable" cellspacing="0">
@@ -29,7 +30,7 @@
                                     </j:switch>
                                 </a>
                             </j:if>
-                            ${columnTag.title}
+                            ${columnTag.title}${nbsp}
                         </th>
                     </j:if>
                 </j:forEach>
@@ -49,7 +50,7 @@
                         <j:if test="${not columnDisplay.equals('hidden')}">
                             <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
                             <td>
-                                <w:RunScript script="${columnTag.body}" />
+                                <w:RunScript script="${columnTag.body}" />${nbsp}
                             </td>
                         </j:if>
                     </j:forEach>
