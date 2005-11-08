@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.tornado.hibernate;
 
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -26,6 +28,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * Valve to deal with hibernate sessions
  */
 public class HibernateTransactionValve
+    extends AbstractLogEnabled
     implements Valve
 {
     /**
@@ -44,8 +47,8 @@ public class HibernateTransactionValve
         }
         catch ( Exception e )
         {
+            getLogger().warn( "Error occurs, transaction is rolled back" );
             hibernate.rollbackTransactions();
-            throw e;
         }
         finally
         {
