@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Action to delete prerequisite course
  */
 public class DeletePrerequisiteAction
@@ -43,5 +43,6 @@ public class DeletePrerequisiteAction
         CourseListService cls = (CourseListService) lookup( CourseListService.ROLE );
         cls.deletePrerequisite( data.getParameters().getString( "course_id" ), data.getParameters()
             .getString( "prereq_id" ) );
+        context.addMessage( "Prerequisite is removed" );
     }
 }

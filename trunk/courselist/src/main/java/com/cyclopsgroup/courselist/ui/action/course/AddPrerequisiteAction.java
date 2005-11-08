@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,6 @@ import java.util.Iterator;
 
 import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.courselist.entity.Course;
-import com.cyclopsgroup.courselist.entity.CoursePrerequisite;
 import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
@@ -29,7 +28,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Action to add prerequisite course
  */
 public class AddPrerequisiteAction
@@ -64,10 +63,7 @@ public class AddPrerequisiteAction
                 return;
             }
         }
-
-        CoursePrerequisite cp = new CoursePrerequisite();
-        cp.setCourseId( courseId );
-        cp.setPrerequisiteId( prerequisite.getId() );
-        persist.saveNew( cp );
+        cls.addPrerequisite( courseId, prerequisite.getId() );
+        context.addMessage( "Course " + prerequisite.getName() + " is added as a prerequisite of " + course.getName() );
     }
 }

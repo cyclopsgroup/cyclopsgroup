@@ -39,6 +39,27 @@ public class DefaultCourseListService
     implements CourseListService
 {
     /**
+     * Overwrite or implement method addPrerequisite()
+     *
+     * @see com.cyclopsgroup.courselist.CourseListService#addPrerequisite(java.lang.String, java.lang.String)
+     */
+    public void addPrerequisite( String courseId, String prereqId )
+        throws Exception
+    {
+        Session s = getHibernateSession();
+        Criteria criteria = s.createCriteria( CoursePrerequisite.class );
+        criteria.add( Expression.eq( "courseId", courseId ) ).add( Expression.eq( "prerequisiteId", prereqId ) );
+        List rs = criteria.list();
+        if ( rs.isEmpty() )
+        {
+            CoursePrerequisite cp = new CoursePrerequisite();
+            cp.setCourseId( courseId );
+            cp.setPrerequisiteId( prereqId );
+            s.save( cp );
+        }
+    }
+
+    /**
      * Overwrite or implement method deletePrerequisite()
      *
      * @see com.cyclopsgroup.courselist.CourseListService#deletePrerequisite(java.lang.String, java.lang.String)

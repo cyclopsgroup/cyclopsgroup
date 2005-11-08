@@ -32,6 +32,26 @@ public interface CourseListService
     String ROLE = CourseListService.class.getName();
 
     /**
+     * Add prerequisite course for another course
+     *
+     * @param courseId Course id
+     * @param prereqId Prerequisite course id
+     * @throws Exception Throw it out
+     */
+    void addPrerequisite( String courseId, String prereqId )
+        throws Exception;
+
+    /**
+     * Delete prerequisite of a course
+     *
+     * @param courseId Course id
+     * @param prereqId Prerequisite course id
+     * @throws Exception Throw it out
+     */
+    void deletePrerequisite( String courseId, String prereqId )
+        throws Exception;
+
+    /**
      * Find a course by prefix and code
      *
      * @param prefix Course prefix
@@ -49,8 +69,5 @@ public interface CourseListService
      * @throws Exception Throw it out
      */
     List getAllCourses()
-        throws Exception;
-
-    void deletePrerequisite( String courseId, String prereqId )
         throws Exception;
 }
