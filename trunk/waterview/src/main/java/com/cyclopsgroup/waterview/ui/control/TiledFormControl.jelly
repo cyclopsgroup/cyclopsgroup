@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <j:set var="nbsp" value="&amp;bsp;"/>
+    <j:set var="nbsp" value="&amp;nbsp;"/>
     <form method="${formTag.method}" name="${form.id}" action="${formTag.action}">
         <w:JellyScript path="/waterview/FormHiddenFields.jelly" />
         ${formContent}

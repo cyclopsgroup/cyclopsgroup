@@ -51,6 +51,7 @@ public class CreateCourseAction
         if ( cl.findByCode( prefix, code ) != null )
         {
             context.error( "courseCode", "This course already exists" );
+            return;
         }
 
         PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
