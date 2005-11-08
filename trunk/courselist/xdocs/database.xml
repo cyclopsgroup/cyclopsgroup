@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Database</title>
+    </properties>
+    <body>
+        <section name="Database entities">
+            <p>
+                Course list project simply take
+                <a href="http://hibernate.org">Hibernate</a>
+                as the database layer technology. With tools provided by tornado, most of the operations are simplified.
+                In this project, the only thing developer need to do is creating hibernate mapping file and generate
+                POJOs(Plain old java object).
+            </p>
+            <p>
+                <table>
+                    <tr>
+                        <th>Entity class</th>
+                        <th>Table name</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#com.cyclopsgroup.courselist.entity.Course">
+                                com.cyclopsgroup.courselist.entity.Course
+                            </a>
+                        </td>
+                        <td>c_cl_course</td>
+                        <td>Main course table</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#com.cyclopsgroup.courselist.entity.CoursePrerequisite">
+                                com.cyclopsgroup.courselist.entity.CoursePrerequisite
+                            </a>
+                        </td>
+                        <td>c_cl_course_prerequisite</td>
+                        <td>Course rerequisite relation</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#com.cyclopsgroup.courselist.entity.Student">
+                                com.cyclopsgroup.courselist.entity.Student
+                            </a>
+                        </td>
+                        <td>c_cl_student</td>
+                        <td>Student</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#com.cyclopsgroup.courselist.entity.StudentCourse">
+                                com.cyclopsgroup.courselist.entity.StudentCourse
+                            </a>
+                        </td>
+                        <td>c_cl_student_course</td>
+                        <td>Student course relation</td>
+                    </tr>
+                </table>
+            </p>
+            <subsection name="com.cyclopsgroup.courselist.entity.Course">
+                <table>
+                    <tr>
+                        <th>Property name</th>
+                        <th>Column name</th>
+                        <th>PK</th>
+                        <th>Required</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>course_id</td>
+                        <td>true</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Primary key of course table</td>
+                    </tr>
+                    <tr>
+                        <td>prefix</td>
+                        <td>prefix</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Course code prefix</td>
+                    </tr>
+                    <tr>
+                        <td>courseCode</td>
+                        <td>course_code</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Course code</td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>course_name</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Displayed name for course</td>
+                    </tr>
+                    <tr>
+                        <td>description</td>
+                        <td>description</td>
+                        <td>false</td>
+                        <td>false</td>
+                        <td>string</td>
+                        <td>Long description for course</td>
+                    </tr>
+                    <tr>
+                        <td>coRequisites</td>
+                        <td>co_requisites</td>
+                        <td>false</td>
+                        <td>false</td>
+                        <td>string</td>
+                        <td>Course co-requisites</td>
+                    </tr>
+                    <tr>
+                        <td>isDisabled</td>
+                        <td>is_disabled</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>boolean</td>
+                        <td>True if course is disabled</td>
+                    </tr>
+                </table>
+            </subsection>
+            <subsection name="com.cyclopsgroup.courselist.entity.CoursePrerequisite">
+                <table>
+                    <tr>
+                        <th>Property name</th>
+                        <th>Column name</th>
+                        <th>PK</th>
+                        <th>Required</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>course_prerequisite_id</td>
+                        <td>true</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Primary key of course table</td>
+                    </tr>
+                    <tr>
+                        <td>courseId</td>
+                        <td>course_id</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Course id</td>
+                    </tr>
+                    <tr>
+                        <td>prerequisteId</td>
+                        <td>prerequisite_id</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Prerequisite course id</td>
+                    </tr>
+                </table>
+            </subsection>
+            <subsection name="com.cyclopsgroup.courselist.entity.Student">
+                <table>
+                    <tr>
+                        <th>Property name</th>
+                        <th>Column name</th>
+                        <th>PK</th>
+                        <th>Required</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>student_id</td>
+                        <td>true</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Student primary key</td>
+                    </tr>
+                    <tr>
+                        <td>ssn</td>
+                        <td>ssn</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>int</td>
+                        <td>Student SSN number</td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>student_name</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Student's full name</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>email</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Email address</td>
+                    </tr>
+                    <tr>
+                        <td>address</td>
+                        <td>address</td>
+                        <td>false</td>
+                        <td>false</td>
+                        <td>string</td>
+                        <td>Residential address</td>
+                    </tr>
+                    <tr>
+                        <td>telephone</td>
+                        <td>telephone</td>
+                        <td>false</td>
+                        <td>false</td>
+                        <td>string</td>
+                        <td>Telephone number</td>
+                    </tr>
+                    <tr>
+                        <td>isDisabled</td>
+                        <td>is_disabled</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>boolean</td>
+                        <td>True if course is disabled</td>
+                    </tr>
+                </table>
+            </subsection>
+            <subsection name="com.cyclopsgroup.courselist.entity.StudentCourse">
+                <table>
+                    <tr>
+                        <th>Property name</th>
+                        <th>Column name</th>
+                        <th>PK</th>
+                        <th>Required</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>student_course_id</td>
+                        <td>true</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Primary key of course table</td>
+                    </tr>
+                    <tr>
+                        <td>courseId</td>
+                        <td>course_id</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Course ID</td>
+                    </tr>
+                    <tr>
+                        <td>studentId</td>
+                        <td>student_id</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Student ID</td>
+                    </tr>
+                    <tr>
+                        <td>status</td>
+                        <td>course_status</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Status of this relationship. Could be finished, taking or failed</td>
+                    </tr>
+                    <tr>
+                        <td>credit</td>
+                        <td>credit</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>float</td>
+                        <td>The credit student got on this course</td>
+                    </tr>
+                </table>
+            </subsection>
+        </section>
+    </body>
+</document>

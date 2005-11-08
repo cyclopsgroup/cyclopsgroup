@@ -134,7 +134,7 @@ maven.jar.tools=${java.home}/../lib/tools.jar
             <p>
                 If the server is successfully started, visit
                 <a href="http://localhost:7080/courselist">http://localhost:7080/courselist</a>
-                to see the home page.
+                to see the home page. Log in as admin(password is admin) to try the functions.
             </p>
         </section>
     </body>
