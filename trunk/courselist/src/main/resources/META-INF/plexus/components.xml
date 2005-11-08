@@ -7,11 +7,17 @@
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
         <component>
+            <role>com.cyclopsgroup.courselist.StudentService</role>
+            <implementation>com.cyclopsgroup.courselist.impl.DefaultStudentService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+        <component>
             <role>com.cyclopsgroup.courselist.CourseListComponents</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
                 <component role="com.cyclopsgroup.tornado.TornadoServices" />
                 <component role="com.cyclopsgroup.courselist.CourseListService" />
+                <component role="com.cyclopsgroup.courselist.StudentService" />
             </configuration>
         </component>
     </components>

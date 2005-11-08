@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.ModuleService</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultModuleService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-package>courselist</default-package>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceService.default</role>
+            <implementation>com.cyclopsgroup.tornado.sql.DBCPDataSourceService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <property name="driverClassName">com.mysql.jdbc.Driver</property>
+                <property name="url">jdbc:mysql://localhost/courselist</property>
+                <property name="username">dev</property>
+                <property name="password">dev</property>
+                <property name="maxActive">5</property>
+                <property name="defaultAutoCommit">false</property>
+            </configuration>
+        </component>
+    </components>
+</plexus>

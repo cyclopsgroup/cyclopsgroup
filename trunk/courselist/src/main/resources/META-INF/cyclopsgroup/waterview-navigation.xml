@@ -17,6 +17,7 @@
                 <Node title="My course status" page="/courselist/student/MyCourseStatus.jelly" />
                 <Node title="My history" page="/courselist/student/StudentHistory.jelly" />
                 <Node title="Transcript" page="/courselist/student/Transcript.jelly" />
+                <Node title="Add course" page="/courselist/student/AddCourse.jelly" hidden="true" />
             </Node>
         </Node>
     </Tree>
