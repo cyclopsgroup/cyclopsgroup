@@ -47,7 +47,7 @@ public class HibernateTransactionValve
         }
         catch ( Exception e )
         {
-            getLogger().warn( "Error occurs, transaction is rolled back" );
+            getLogger().warn( "Error occurs, transaction is rolled back", e );
             hibernate.rollbackTransactions();
         }
         finally
