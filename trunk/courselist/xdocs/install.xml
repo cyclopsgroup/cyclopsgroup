@@ -72,11 +72,17 @@ Bye
                 </p>
             </subsection>
             <subsection name="Install Apache Maven">
-                <p>Maven is a building and project managing tool which can be considered as a replacement of ant.</p>
                 <p>
-                    Download and unzip maven from http://maven.apache.org/start/download.html, unzip it to a directory.
-                    Assume the directory is C:/java/apache/maven-1.0.2. Append C:/java/apache/maven-1.0.2/bin into the
-                    system path.
+                    Maven is a building and project managing tool which can be considered as a replacement of ant.
+                    Currently the courselist project is managed and built by maven 1.0.2.
+                </p>
+                <p>
+                    Download and unzip maven 1.0.2 from
+                    <a href="http://maven.apache.org/start/download.html">
+                        http://maven.apache.org/start/download.html
+                    </a>
+                    , unzip it to a directory. Assume the directory is C:/java/apache/maven-1.0.2. Append
+                    C:/java/apache/maven-1.0.2/bin into the system path.
                 </p>
                 <p>
                     Create file C:/Documents and Settings/&lt;your windows user name&gt;/build.properties. Copy the
