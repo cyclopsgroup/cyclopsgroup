@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui">
     <h2>Edit Course ${course.number}</h2>
-    <table width="100%">
-        <w:FormControl>
-            <w:Form name="editcourse" method="post">
-                <input type="hidden" name="course_id" value="${course.id}" />
+    <w:FormControl>
+        <w:Form name="editcourse" method="post">
+            <input type="hidden" name="course_id" value="${course.id}" />
+            <table width="100%" class="waterviewTable">
                 <tr>
-                    <td>Prefix:</td>
-                    <td>${course.prefix}</td>
-                    <td>Course Code:</td>
-                    <td>${course.courseCode}</td>
+                    <td class="title" width="20%">Prefix:</td>
+                    <td class="input" width="30%">${course.prefix}</td>
+                    <td class="title" width="20%">Course Code:</td>
+                    <td class="input" width="30%">${course.courseCode}</td>
                 </tr>
                 <tr>
-                    <td>%document.text.name:</td>
-                    <td colspan="3">
+                    <td class="title">%document.text.name:</td>
+                    <td colspan="3" class="input">
                         <w:Field name="name" required="true" size="60" value="${course.name}" />
                     </td>
                 </tr>
                 <tr>
-                    <td>%document.text.description:</td>
-                    <td colspan="3">
+                    <td class="title">%document.text.description:</td>
+                    <td colspan="3" class="input">
                         <w:Field name="description" size="60" value="${course.description}" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Co-requisite:</td>
-                    <td colspan="3">
+                    <td class="title">Co-requisite:</td>
+                    <td colspan="3" class="input">
                         <w:Field name="coRequisites" value="${course.coRequisites}" />
                     </td>
                 </tr>
@@ -41,7 +41,7 @@
                         </w:Submit>
                     </td>
                 </tr>
-            </w:Form>
-        </w:FormControl>
-    </table>
+            </table>
+        </w:Form>
+    </w:FormControl>
 </div>
