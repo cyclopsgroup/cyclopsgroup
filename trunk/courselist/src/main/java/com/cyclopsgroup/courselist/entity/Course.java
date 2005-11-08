@@ -25,5 +25,5 @@ package com.cyclopsgroup.courselist.entity;
 public class Course
     extends CourseBase
 {
-
+    public static final String PREFIX = "CS";
 }

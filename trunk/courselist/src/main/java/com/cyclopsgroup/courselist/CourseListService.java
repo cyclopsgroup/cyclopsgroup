@@ -50,4 +50,7 @@ public interface CourseListService
      */
     List getAllCourses()
         throws Exception;
+
+    void deletePrerequisite( String courseId, String prereqId )
+        throws Exception;
 }

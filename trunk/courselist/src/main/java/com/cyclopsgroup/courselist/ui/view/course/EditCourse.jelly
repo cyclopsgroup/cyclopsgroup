@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
     <h2>Edit Course ${course.number}</h2>
+    <p>Change the basic course information and push the button to save changes.</p>
     <w:FormControl>
         <w:Form name="editcourse" method="post">
             <input type="hidden" name="course_id" value="${course.id}" />
@@ -44,4 +45,51 @@
             </table>
         </w:Form>
     </w:FormControl>
+    <h2>Maintain the prerequisites</h2>
+    <p>
+        Some other courses could be the rerequisites of course ${course.number}. The following function maintains these
+        prerequisites.
+    </p>
+    <w:FormControl>
+        <w:Form name="addprerequisite" method="post">
+            <input type="hidden" name="course_id" value="${course.id}" />
+            <p>
+                Add course CS:
+                <w:Field name="course_number" title="Course number" required="true" />
+                as a prerequisite course of ${course.number}.
+                <w:Submit
+                    action="${link.addAction('/courselist/course/AddPrerequisiteAction').setPage(page).addQueryData('course_id', course.id)}"
+                    forceValidation="true">
+                    <w:FormButton title="Add" />
+                </w:Submit>
+            </p>
+        </w:Form>
+    </w:FormControl>
+    <j:if test="${!course.prerequisites.isEmpty()}">
+        <w:FormControl>
+            <w:Form name="prerequisites" method="post">
+                <input type="hidden" name="course_id" value="${course.id}" />
+                <w:TableControl configurable="true">
+                    <w:CollectionTabularData items="${course.prerequisites}" />
+                    <w:Table name="prerequisitetable" var="prereq">
+                        <w:Column name="id" title="%document.text.select">
+                            <input type="checkbox" name="prereq_id" value="${prereq.id}" />
+                        </w:Column>
+                        <w:Column name="prefix" title="Prefix" sort="unsorted">${prereq.prefix}</w:Column>
+                        <w:Column name="courseCode" title="Code" sort="unsorted">${prereq.courseCode}</w:Column>
+                        <w:Column name="name" title="Name">
+                            <a
+                                href="${link.setPage('/courselist/course/EditCourse.jelly').addQueryData('course_id', prereq.id)}">
+                                ${prereq.name}
+                            </a>
+                        </w:Column>
+                    </w:Table>
+                </w:TableControl>
+                <w:Submit
+                    action="${link.addAction('/courselist/course/DeletePrerequisiteAction').setPage(page).addQueryData('course_id', course.id)}">
+                    <w:FormButton title="%document.text.deleteselected" />
+                </w:Submit>
+            </w:Form>
+        </w:FormControl>
+    </j:if>
 </div>

@@ -17,13 +17,16 @@
  */
 package com.cyclopsgroup.courselist.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.courselist.entity.CoursePrerequisite;
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
 
 /**
@@ -35,6 +38,25 @@ public class DefaultCourseListService
     extends AbstractHibernateEnabled
     implements CourseListService
 {
+    /**
+     * Overwrite or implement method deletePrerequisite()
+     *
+     * @see com.cyclopsgroup.courselist.CourseListService#deletePrerequisite(java.lang.String, java.lang.String)
+     */
+    public void deletePrerequisite( String courseId, String prereqId )
+        throws Exception
+    {
+        Session s = getHibernateSession();
+        Criteria criteria = s.createCriteria( CoursePrerequisite.class );
+        criteria.add( Expression.eq( "courseId", courseId ) ).add( Expression.eq( "prerequisiteId", prereqId ) );
+        List rs = criteria.list();
+        for ( Iterator iter = rs.iterator(); iter.hasNext(); )
+        {
+            CoursePrerequisite cp = (CoursePrerequisite) iter.next();
+            s.delete( cp );
+        }
+    }
+
     /**
      * Overwrite or implement method findByCode()
      *
