@@ -130,7 +130,7 @@ public class ColumnTag
         if ( tableTag.isTableNew() )
         {
             Class columnType = TypeUtils.getType( getType() );
-            Table table = ( (TableTag) getParent() ).getTable();
+            Table table = tableTag.getTable();
             column = new Column( getName(), columnType );
             table.addColumn( column );
             column.setDisplay( ColumnDisplay.valueOf( getDisplay() ) );
