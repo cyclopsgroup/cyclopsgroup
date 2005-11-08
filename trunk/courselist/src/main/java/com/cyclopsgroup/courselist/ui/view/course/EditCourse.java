@@ -14,50 +14,34 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.action;
+package com.cyclopsgroup.courselist.ui.view.course;
 
-import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.tornado.persist.PersistenceManager;
-import com.cyclopsgroup.waterview.Action;
-import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.Parameters;
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to create course
+ * Module to edit course
  */
-public class CreateCourseAction
+public class EditCourse
     extends BaseServiceable
-    implements Action
+    implements Module
 {
-
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        Parameters params = data.getParameters();
-        String prefix = params.getString( "prefix" );
-        String code = params.getString( "courseCode" );
-        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
-        if ( cl.findByCode( prefix, code ) != null )
-        {
-            context.error( "courseCode", "This course already exists" );
-        }
-
         PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        Course course = (Course) persist.create( Course.class );
-        TypeUtils.getBeanUtils().populate( course, params.toProperties() );
-
-        persist.saveNew( course );
-        context.addMessage( "New course " + prefix + "/" + code + " is created" );
+        Course course = (Course) persist.load( Course.class, data.getParameters().getString( "course_id" ) );
+        context.put( "course", course );
     }
 }

@@ -14,7 +14,7 @@
                                 </w:Column>
                                 <w:Column name="courseCode" title="Course Code" sort="asc">
                                     <a
-                                        href="${link.setPage('/courselist/EditCourse.jelly').addQueryData('course_id', course.id)}">
+                                        href="${link.setPage('/courselist/course/EditCourse.jelly').addQueryData('course_id', course.id)}">
                                         ${course.courseCode}
                                     </a>
                                 </w:Column>
@@ -25,8 +25,17 @@
                                 <w:Column name="coRequisites" title="Co-requisite" sort="unsorted">
                                     ${course.coRequisites}
                                 </w:Column>
-                                <w:Column name="description" title="%document.text.description">
-                                    ${course.description}
+                                <w:Column name="apply" title="Apply">
+                                    <w:Submit
+                                        action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
+                                        <w:FormButton title="Apply" />
+                                    </w:Submit>
+                                </w:Column>
+                                <w:Column name="apply_for" title="Apply for...">
+                                    <w:Submit
+                                        action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
+                                        <w:FormButton title="Apply for..." />
+                                    </w:Submit>
                                 </w:Column>
                             </w:Table>
                         </w:TableControl>
@@ -34,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <w:Submit action="${link.addAction('/courselist/DeleteCourseAction').setPage(page)}">
+                        <w:Submit action="${link.addAction('/courselist/course/DeleteCourseAction').setPage(page)}">
                             <w:FormButton title="%document.text.deleteselected" />
                         </w:Submit>
                     </td>

@@ -2,19 +2,30 @@
 <Hibernate xmlns="http://tornado.cyclopsgroup.com/tool">
     <Class name="com.cyclopsgroup.tornado.security.entity.Role">
         <New var="roleStudent" name="student" description="Student role" isSystem="true" />
+        <New var="roleTeacher" name="teacher" description="Teacher role" isSystem="true" />
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.Group">
         <New var="groupStudents" name="students" description="Student group" isSystem="true" />
+        <New var="groupTeachers" name="teachers" description="Teacher group" isSystem="true" />
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.GroupRole">
         <New groupId="${groupStudents.id}" roleId="${roleStudent.id}" />
+        <New groupId="${groupTeachers.id}" roleId="${roleTeacher.id}" />
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.RolePermission">
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
             permission="/courselist/Index.jelly" />
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
-            permission="/courselist/CourseIndex.jelly" />
+            permission="/courselist/course/Index.jelly" />
         <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
-            permission="/courselist/CourseList.jelly" />
+            permission="/courselist/course/CourseList.jelly" />
+        <New roleId="${roleGuest.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/course/CourseDetail.jelly" />
+
+        <New roleId="${roleTeacher.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/teacher/*" />
+
+        <New roleId="${roleStudent.id}" permissionType="com.cyclopsgroup.tornado.portal.PagePermissionType"
+            permission="/courselist/student/*" />
     </Class>
 </Hibernate>

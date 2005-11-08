@@ -14,34 +14,38 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.view;
+package com.cyclopsgroup.courselist.ui.action.course;
 
 import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.tornado.persist.PersistenceManager;
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Module to edit course
+ * Save course change
  */
-public class EditCourse
+public class SaveCourseAction
     extends BaseServiceable
-    implements Module
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
+        String id = data.getParameters().getString( "course_id" );
         PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        Course course = (Course) persist.load( Course.class, data.getParameters().getString( "course_id" ) );
-        context.put( "course", course );
+        Course course = (Course) persist.load( Course.class, id );
+        TypeUtils.getBeanUtils().populate( course, data.getParameters().toProperties() );
+        persist.save( course );
+        context.addMessage( "Course is changed" );
     }
 }

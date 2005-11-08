@@ -14,38 +14,32 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.action;
+package com.cyclopsgroup.courselist.ui.view.course;
 
-import com.cyclopsgroup.courselist.entity.Course;
-import com.cyclopsgroup.tornado.persist.PersistenceManager;
-import com.cyclopsgroup.waterview.Action;
-import com.cyclopsgroup.waterview.ActionContext;
+import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.waterview.BaseServiceable;
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Save course change
+ * Course list
  */
-public class SaveCourseAction
+public class CourseList
     extends BaseServiceable
-    implements Action
+    implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        String id = data.getParameters().getString( "course_id" );
-        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        Course course = (Course) persist.load( Course.class, id );
-        TypeUtils.getBeanUtils().populate( course, data.getParameters().toProperties() );
-        persist.save( course );
-        context.addMessage( "Course is changed" );
+        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
+        context.put( "courses", cl.getAllCourses() );
     }
 }

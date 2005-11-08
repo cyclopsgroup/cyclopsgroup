@@ -14,24 +14,28 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.action;
+package com.cyclopsgroup.courselist.ui.action.course;
 
+import com.cyclopsgroup.courselist.CourseListService;
 import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.tornado.persist.PersistenceManager;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
+import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to delete courses
+ * Action to create course
  */
-public class DeleteCourseAction
+public class CreateCourseAction
     extends BaseServiceable
     implements Action
 {
+
     /**
      * Overwrite or implement method execute()
      *
@@ -40,21 +44,20 @@ public class DeleteCourseAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        String[] courseIds = data.getParameters().getStrings( "course_id" );
-        if ( courseIds.length == 0 )
+        Parameters params = data.getParameters();
+        String prefix = params.getString( "prefix" );
+        String code = params.getString( "courseCode" );
+        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
+        if ( cl.findByCode( prefix, code ) != null )
         {
-            return;
+            context.error( "courseCode", "This course already exists" );
         }
 
         PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        for ( int i = 0; i < courseIds.length; i++ )
-        {
-            String id = courseIds[i];
-            Course course = (Course) persist.load( Course.class, id );
-            course.setIsDisabled( true );
-            persist.save( course );
-        }
+        Course course = (Course) persist.create( Course.class );
+        TypeUtils.getBeanUtils().populate( course, params.toProperties() );
 
-        context.addMessage( courseIds.length + " courses are disabled" );
+        persist.saveNew( course );
+        context.addMessage( "New course " + prefix + "/" + code + " is created" );
     }
 }

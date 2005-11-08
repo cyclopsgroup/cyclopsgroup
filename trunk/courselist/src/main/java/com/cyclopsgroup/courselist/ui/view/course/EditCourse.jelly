@@ -9,7 +9,7 @@
                     <td>Prefix:</td>
                     <td>${course.prefix}</td>
                     <td>Course Code:</td>
-                    <td>${course.courseCode} </td>
+                    <td>${course.courseCode}</td>
                 </tr>
                 <tr>
                     <td>%document.text.name:</td>
@@ -35,7 +35,7 @@
                 <tr>
                     <td colspan="4">
                         <w:Submit
-                            action="${link.addAction('/courselist/SaveCourseAction').setPage('/courselist/CourseList.jelly')}"
+                            action="${link.addAction('/courselist/course/SaveCourseAction').setPage('/courselist/course/CourseList.jelly')}"
                             forceValidation="true">
                             <w:FormButton title="%document.text.savechange" />
                         </w:Submit>
