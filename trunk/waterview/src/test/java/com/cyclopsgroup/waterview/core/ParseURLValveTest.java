@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,12 +23,12 @@ import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.core.ParseURLValve;
+import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 
 /**
  * Test case for ParseURLValve
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ParseURLValveTest
@@ -42,6 +42,7 @@ public class ParseURLValveTest
     public void testInvoke()
         throws Exception
     {
+        lookup( JellyEngine.ROLE );
         MockRuntimeData runtime = new MockRuntimeData( new PrintWriter( System.out ) );
         runtime.setRequestPath( "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly" );
         ParseURLValve v = (ParseURLValve) lookup( ParseURLValve.class.getName() );
