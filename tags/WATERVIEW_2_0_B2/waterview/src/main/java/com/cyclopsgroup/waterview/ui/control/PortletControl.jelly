@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <div class="waterviewPortlet">
+        <div class="waterviewPortletWrapper">
+            <div class="waterviewPortletHeader">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td>
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <td>
+                                        <img width="16" height="16" alt="View Actions"
+                                            src="${themeBase}/16x16/view_actions.png" />
+                                    </td>
+                                    <td>
+                                        <div class="waterviewPortletTitle">
+                                            ${controlTag.portlet.title}
+                                            <j:if test="${controlTag.length() gt 0}">
+                                                :: ${controlTag.portlet.description}
+                                            </j:if>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="right">
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <j:if test="${controlTag.maximizable}">
+                                        <td>
+                                            <img width="16" height="16" alt="Maximize View"
+                                                src="${themeBase}/16x16/view_max.png" />
+                                        </td>
+                                    </j:if>
+                                    <j:if test="${controlTag.portlet.editor}">
+                                        <td>
+                                            <img width="16" height="16" alt="Configure"
+                                                src="${themeBase}/16x16/edit.png" />
+                                        </td>
+                                    </j:if>
+                                    <td>
+                                        <img width="16" height="16" alt="Help" src="${themeBase}/16x16/help.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="waterviewPortletBody">
+                <w:CreateUniqueId var="dynamicPortletId" />
+                <div id="${dynamicPortletId}">
+                    <w:RenderPortlet portlet="${controlTag.portlet}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</w:Dummy>

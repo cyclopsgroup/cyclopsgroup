@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>%waterview.view.horizontaltab</h2>
+    <w:HorizontalTabControl selected="tab2">
+        <w:Tab name="tab1" title="First Tab" url="${link.setPage('/waterview/help/samples/View1.jelly')}" />
+        <w:Tab name="tab2" title="Second tab" url="${link.setPage('/waterview/help/samples/View2.vm')}" />
+    </w:HorizontalTabControl>
+</div>

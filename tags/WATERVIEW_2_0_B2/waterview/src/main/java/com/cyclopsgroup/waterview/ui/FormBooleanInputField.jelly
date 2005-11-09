@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<span xmlns:j="jelly:core">
+    <j:choose>
+        <j:when test="${field.value.equals('true')}">
+            <input type="radio" name="${field.name}" value="true" id="${form.id}_${field.name}_1" checked="checked" />
+        </j:when>
+        <j:otherwise>
+            <input type="radio" name="${field.name}" value="true" id="${form.id}_${field.name}_1" />
+        </j:otherwise>
+    </j:choose>
+    <label for="${form.id}_${field.name}_1">Yes</label>
+    <j:choose>
+        <j:when test="${field.value.equals('true')}">
+            <input type="radio" name="${field.name}" value="false" id="${form.id}_${field.name}_0" />
+        </j:when>
+        <j:otherwise>
+            <input type="radio" name="${field.name}" value="false" id="${form.id}_${field.name}_0" checked="checked" />
+        </j:otherwise>
+    </j:choose>
+    <label for="${form.id}_${field.name}_0">No</label>
+</span>
