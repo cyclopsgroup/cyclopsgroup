@@ -157,7 +157,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <dependency>http://news.wenxuecity.com/BBSView.php?SubID=news&MsgID=108936
+        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5-beta-2</version>
