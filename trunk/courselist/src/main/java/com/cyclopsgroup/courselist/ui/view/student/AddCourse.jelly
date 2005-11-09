@@ -12,6 +12,19 @@
         <j:when test="${courseStatus.name eq 'finished'}">
             <p>You have already finished course ${course.courseCode}</p>
         </j:when>
+        <j:when test="${!isReady}">
+            <p>At least one of the prerequisite courses of ${course.name} is not taking by you.</p>
+            <p>
+                Please make sure the following courses are finished before apply this course
+                <ul>
+                    <j:forEach var="prereq" items="${course.prerequisites}">
+                        <li>
+                            ${prereq.prefix}${prereq.courseCode}:${prereq.name}, tought by ${prereq.teacher.displayName}
+                        </li>
+                    </j:forEach>
+                </ul>
+            </p>
+        </j:when>
         <j:otherwise>
             <form method="post"
                 action="${link.addAction('/courselist/student/AddCourseAction').setPage('/courselist/student/MyCourses.jelly')}">
