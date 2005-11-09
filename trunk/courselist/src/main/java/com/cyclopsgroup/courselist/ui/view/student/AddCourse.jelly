@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:j="jelly:core">
+    <h2>Add course ${course.name}</h2>
     <j:choose>
-        <j:when test="${courseStatus.name eq ' taking '}">
-            <p>You are taking course ${course.courseCode} right now</p>
+        <j:when test="${courseStatus.name eq 'taking'}">
+            <p>
+                You are taking course ${course.courseCode} right now.
+                <a href="${link.setPage('/courselist/student/MyCourses.jelly')}">Check your list please</a>
+                .
+            </p>
         </j:when>
         <j:when test="${courseStatus.name eq 'finished'}">
             <p>You have already finished course ${course.courseCode}</p>

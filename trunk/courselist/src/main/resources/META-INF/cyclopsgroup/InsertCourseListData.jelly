@@ -3,6 +3,8 @@
     <Class name="com.cyclopsgroup.tornado.security.entity.User">
         <New var="userJohn" name="john" privatePassword="john" email="john@cyclopdgroup.com" firstName="John"
             lastName="Goodman" country="US" language="en" />
+        <New var="userTracy" name="tracy" privatePassword="tracy" email="tracy@cyclopdgroup.com" firstName="Tracy"
+            lastName="Mac" country="US" language="en" />
         <New var="userTim" name="tim" privatePassword="tim" email="tim@cyclopdgroup.com" firstName="Tim"
             lastName="Allen" country="US" language="en" />
         <New var="userJiaqi" name="jiaqi" privatePassword="jiaqi" email="john@cyclopdgroup.com" firstName="Jiaqi"
@@ -22,6 +24,7 @@
     </Class>
     <Class name="com.cyclopsgroup.tornado.security.entity.UserGroup">
         <New userId="${userJohn.id}" groupId="${groupTeachers.id}" />
+        <New userId="${userTracy.id}" groupId="${groupTeachers.id}" />
         <New userId="${userTim.id}" groupId="${groupStudents.id}" />
         <New userId="${userJiaqi.id}" groupId="${groupStudents.id}" />
     </Class>
@@ -43,18 +46,20 @@
     </Class>
 
     <Class name="com.cyclopsgroup.courselist.entity.Course">
-        <New prefix="CS" courseCode="5301" name="Adv Prof &amp; Tech Communication" credit="3.0" />
-        <New var="course5303" prefix="CS" courseCode="5303" name="CS I" credit="3.0" />
-        <New var="course5330" prefix="CS" courseCode="5330" name="CS II" credit="3.0" />
-        <New prefix="CS" courseCode="5333" name="Discrete Structures" credit="3.0" />
+        <New prefix="CS" courseCode="5301" name="Adv Prof &amp; Tech Communication" credit="3.0"
+            teacherId="${userTracy.id}" />
+        <New var="course5303" prefix="CS" courseCode="5303" name="CS I" credit="3.0" teacherId="${userTracy.id}" />
+        <New var="course5330" prefix="CS" courseCode="5330" name="CS II" credit="3.0" teacherId="${userTracy.id}" />
+        <New prefix="CS" courseCode="5333" name="Discrete Structures" credit="3.0" teacherId="${userJohn.id}" />
         <New prefix="CS" courseCode="5335" name="Programming Projects in C/C++"
-            coRequisites="CS 5303, CS 5330 or equivalent experience" credit="2.0" />
+            coRequisites="CS 5303, CS 5330 or equivalent experience" credit="2.0" teacherId="${userTracy.id}" />
         <New prefix="CS" courseCode="5336" name="Programming Projects in JAVA"
-            coRequisites="CS 5303 or equivalent experience" credit="2.0" />
+            coRequisites="CS 5303 or equivalent experience" credit="2.0" teacherId="${userJohnid}" />
         <New var="course5343" prefix="CS" courseCode="5343" name="Algorithm Analysis &amp; Data Structures"
-            coRequisites="CS 5303, CS 5333" credit="3.0" />
+            coRequisites="CS 5303, CS 5333" credit="3.0" teacherId="${userTracy.id}" />
         <New var="course5348" prefix="CS" courseCode="5348" name="Operating Systems Concepts"
-            coRequisites="CS 5330, CS 5343 &amp; working knowledge of C &amp; UNIX" credit="3.0" />
+            coRequisites="CS 5330, CS 5343 &amp; working knowledge of C &amp; UNIX" credit="3.0"
+            teacherId="${userJohn.id}" />
     </Class>
     <Class name="com.cyclopsgroup.courselist.entity.CoursePrerequisite">
         <New courseId="${course5330.id}" prerequisiteId="${course5303.id}" />
