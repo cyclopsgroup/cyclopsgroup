@@ -13,7 +13,7 @@
     </organization>
     <inceptionYear>2003</inceptionYear>
     <shortDescription>Simple software for real human</shortDescription>
-    <url>www.cyclopsgroup.com</url>
+    <url>http://www.cyclopsgroup.com</url>
     <siteDirectory>${maven.cyclopsgroup.site.directory}</siteDirectory>
     <developers>
         <developer>
