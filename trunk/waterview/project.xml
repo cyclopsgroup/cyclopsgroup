@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>2.0-b2</currentVersion>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
