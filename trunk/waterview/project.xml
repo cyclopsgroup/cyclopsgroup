@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>SNAPSHOT</currentVersion>
+    <currentVersion>2.0-b2</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
@@ -18,6 +18,16 @@
             <id>1.0</id>
             <name>1.0</name>
             <tag>WATERVIEW_1_0</tag>
+        </version>
+        <version>
+            <id>2.0-b1</id>
+            <name>2.0-beta-1</name>
+            <tag>WATERVIEW_2_0_B1</tag>
+        </version>
+        <version>
+            <id>2.0-b2</id>
+            <name>2.0-beta-2</name>
+            <tag>WATERVIEW_2_0_B2</tag>
         </version>
     </versions>
     <developers>
