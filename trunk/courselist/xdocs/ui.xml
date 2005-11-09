@@ -22,9 +22,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="#Student management component">Student management component</a>
+                            <a href="#Teacher workbench">Teacher workbench</a>
                         </td>
-                        <td>Administrators manage student information in this component.</td>
+                        <td>Component for teacher to manage his courses and students.</td>
                     </tr>
                     <tr>
                         <td>
@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td>View</td>
-                        <td>CreateCourse d</td>
+                        <td>CreateCourse</td>
                         <td>A form for user to input information for creating new form</td>
                     </tr>
                     <tr>
@@ -82,20 +82,35 @@
                         <td>Action to save basic information of course</td>
                     </tr>
                     <tr>
-                        <td>View</td>
-                        <td>EditPrerequisite</td>
-                        <td>Edit prerequisite relation between courses</td>
+                        <td>Action</td>
+                        <td>AddPrerequisiteAction</td>
+                        <td>Add a prerequisite course for another course</td>
                     </tr>
                     <tr>
                         <td>Action</td>
-                        <td>SavePrerequisiteAction</td>
-                        <td>Action to save prerequisition changes</td>
+                        <td>DeletePrerequisiteAction</td>
+                        <td>Delete a prerequisite from a course</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>Teachers</td>
+                        <td>View to manage teachers in system</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>AddTeacherAction</td>
+                        <td>Add a new teacher</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DeleteTeacherAction</td>
+                        <td>Action to delete existing teacher</td>
                     </tr>
                 </table>
             </p>
         </section>
-        <section name="Student management component">
-            <p>Administrators manage student information in this component.</p>
+        <section name="Teacher workbench">
+            <p>Component for teacher to manage his courses and students.</p>
             <p>
                 <table>
                     <tr>
@@ -105,52 +120,32 @@
                     </tr>
                     <tr>
                         <td>View</td>
-                        <td>StudentSearch</td>
-                        <td>
-                            Search student with ID, name, email, address or telephone number. There will be checkbox for
-                            each search result where admin can delete a student.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Action</td>
-                        <td>DeleteStudentAction</td>
-                        <td>Delete checked student(s) and return to previous page</td>
+                        <td>My courses</td>
+                        <td>Display the summary of the courses whose teacher is current user.</td>
                     </tr>
                     <tr>
                         <td>View</td>
-                        <td>CreateStudent</td>
-                        <td>A form for user to input student information for creating new student</td>
+                        <td>My course detail</td>
+                        <td>Display the course information and the students under this course</td>
                     </tr>
                     <tr>
                         <td>Action</td>
-                        <td>CreateStudentAction</td>
-                        <td>
-                            Action to take form information from CreateStudent view and create the student in database
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>View</td>
-                        <td>StudentProfile</td>
-                        <td>View or edit information of a student</td>
-                    </tr>
-                    <tr>
-                        <td>View</td>
-                        <td>StudentTranscript</td>
-                        <td>View student's course history.</td>
+                        <td>AddStudentAction</td>
+                        <td>Add a student into given course</td>
                     </tr>
                     <tr>
                         <td>Action</td>
-                        <td>SaveStudentAction</td>
-                        <td>Action to save change of student information</td>
+                        <td>SaveScoreAction</td>
+                        <td>Action to save the score of a student in a course</td>
                     </tr>
                     <tr>
                         <td>Action</td>
-                        <td>AddCourseAction</td>
-                        <td>Force student to register a course</td>
+                        <td>RemoveStudentAction</td>
+                        <td>Force student to be removed from a course</td>
                     </tr>
                     <tr>
                         <td>Action</td>
-                        <td>DropCourseAction</td>
+                        <td>DropStudentAction</td>
                         <td>Force student to drop a course</td>
                     </tr>
                 </table>
@@ -170,18 +165,13 @@
                     </tr>
                     <tr>
                         <td>View</td>
-                        <td>My Profile</td>
-                        <td>View/edit my information.</td>
-                    </tr>
-                    <tr>
-                        <td>Action</td>
-                        <td>SaveProfileAction</td>
-                        <td>Student save profile change.</td>
+                        <td>My courses</td>
+                        <td>View/edit the courses that current student participates.</td>
                     </tr>
                     <tr>
                         <td>View</td>
                         <td>MyTranscript</td>
-                        <td>View his/her own course history.</td>
+                        <td>Show all courses related to current student.</td>
                     </tr>
                     <tr>
                         <td>Action</td>

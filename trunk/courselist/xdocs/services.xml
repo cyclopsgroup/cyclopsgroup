@@ -35,12 +35,15 @@
                 <table>
                     <tr>
                         <td>Role</td>
-                        com.cyclopsgroup.courselist.StudentService
                         <td>com.cyclopsgroup.courselist.CourseListService</td>
                     </tr>
                     <tr>
                         <td>Implementation</td>
-                        <td>com.cyclopsgroup.courselist.impl.DefaultCourseListService</td>
+                        <td>
+                            <a href="/apidocs/com/cyclopsgroup/courselist/impl/DefaultCourseListService.html">
+                                com.cyclopsgroup.courselist.impl.DefaultCourseListService
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Description</td>
@@ -58,16 +61,34 @@
                         <th>Description</th>
                     </tr>
                     <tr>
+                        <tr>
+                            <td>registerCourse</td>
+                            <td>String studentId, String courseId, boolean forced</td>
+                            <td>Nothing</td>
+                            <td>Register a course for student</td>
+                        </tr>
                         <td>findByCode</td>
                         <td>String prefix, String code</td>
                         <td>Course object</td>
                         <td>Find a course object with given prefix and code</td>
                     </tr>
                     <tr>
+                        <td>findByTeacher</td>
+                        <td>A teacher's ID</td>
+                        <td>List of courses</td>
+                        <td>Find courses related to a teacher</td>
+                    </tr>
+                    <tr>
                         <td>getAllCourses</td>
                         <td>Nothing</td>
                         <td>A list of all active courses</td>
                         <td>Get all active courses</td>
+                    </tr>
+                    <tr>
+                        <td>getAllTeachers</td>
+                        <td>Nothing</td>
+                        <td>List of teacher objects</td>
+                        <td>Get all teachers</td>
                     </tr>
                 </table>
             </p>
@@ -82,7 +103,11 @@
                     </tr>
                     <tr>
                         <td>Implementation</td>
-                        <td>com.cyclopsgroup.courselist.impl.DefaultStudentService</td>
+                        <td>
+                            <a href="/apidocs/com/cyclopsgroup/courselist/impl/DefaultStudentService.html">
+                                com.cyclopsgroup.courselist.impl.DefaultStudentService
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Description</td>
@@ -100,22 +125,16 @@
                         <th>Description</th>
                     </tr>
                     <tr>
-                        <td>search</td>
-                        <td>Student ID, name, email, address or telephone</td>
-                        <td>List of students</td>
-                        <td>Find students with given information</td>
+                        <td>addCourse</td>
+                        <td>String studentId, String courseId</td>
+                        <td>nothing</td>
+                        <td>Add course for a student</td>
                     </tr>
                     <tr>
                         <td>dropCourse</td>
                         <td>String studentId, String courseId</td>
                         <td>Nothing</td>
-                        <td>Drop an registered course</td>
-                    </tr>
-                    <tr>
-                        <td>registerCourse</td>
-                        <td>String studentId, String courseId, boolean forced</td>
-                        <td>Nothing</td>
-                        <td>Register a course for student</td>
+                        <td>Drop an registered course for a student</td>
                     </tr>
                 </table>
             </p>

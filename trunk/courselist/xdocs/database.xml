@@ -39,12 +39,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="#com.cyclopsgroup.courselist.entity.Student">
-                                com.cyclopsgroup.courselist.entity.Student
+                            <a href="#com.cyclopsgroup.courselist.entity.Teacher">
+                                com.cyclopsgroup.courselist.entity.Teacher
                             </a>
                         </td>
-                        <td>c_cl_student</td>
-                        <td>Student</td>
+                        <td>c_cl_teacher</td>
+                        <td>Teacher</td>
                     </tr>
                     <tr>
                         <td>
@@ -123,6 +123,22 @@
                         <td>boolean</td>
                         <td>True if course is disabled</td>
                     </tr>
+                    <tr>
+                        <td>teacherId</td>
+                        <td>teacher_id</td>
+                        <td>false</td>
+                        <td>true</td>
+                        <td>string</td>
+                        <td>Teacher's user ID</td>
+                    </tr>
+                    <tr>
+                        <td>credit</td>
+                        <td>credit</td>
+                        <td>false</td>
+                        <td>false</td>
+                        <td>float</td>
+                        <td>Credit for this course</td>
+                    </tr>
                 </table>
             </subsection>
             <subsection name="com.cyclopsgroup.courselist.entity.CoursePrerequisite">
@@ -161,7 +177,7 @@
                     </tr>
                 </table>
             </subsection>
-            <subsection name="com.cyclopsgroup.courselist.entity.Student">
+            <subsection name="com.cyclopsgroup.courselist.entity.Teacher">
                 <table>
                     <tr>
                         <th>Property name</th>
@@ -173,59 +189,19 @@
                     </tr>
                     <tr>
                         <td>id</td>
-                        <td>student_id</td>
+                        <td>teacher_id</td>
                         <td>true</td>
                         <td>true</td>
                         <td>string</td>
                         <td>Student primary key</td>
                     </tr>
                     <tr>
-                        <td>ssn</td>
-                        <td>ssn</td>
-                        <td>false</td>
-                        <td>true</td>
-                        <td>int</td>
-                        <td>Student SSN number</td>
-                    </tr>
-                    <tr>
-                        <td>name</td>
-                        <td>student_name</td>
+                        <td>userId</td>
+                        <td>user_id</td>
                         <td>false</td>
                         <td>true</td>
                         <td>string</td>
-                        <td>Student's full name</td>
-                    </tr>
-                    <tr>
-                        <td>email</td>
-                        <td>email</td>
-                        <td>false</td>
-                        <td>true</td>
-                        <td>string</td>
-                        <td>Email address</td>
-                    </tr>
-                    <tr>
-                        <td>address</td>
-                        <td>address</td>
-                        <td>false</td>
-                        <td>false</td>
-                        <td>string</td>
-                        <td>Residential address</td>
-                    </tr>
-                    <tr>
-                        <td>telephone</td>
-                        <td>telephone</td>
-                        <td>false</td>
-                        <td>false</td>
-                        <td>string</td>
-                        <td>Telephone number</td>
-                    </tr>
-                    <tr>
-                        <td>isDisabled</td>
-                        <td>is_disabled</td>
-                        <td>false</td>
-                        <td>true</td>
-                        <td>boolean</td>
-                        <td>True if course is disabled</td>
+                        <td>Id of user object</td>
                     </tr>
                 </table>
             </subsection>
@@ -264,16 +240,16 @@
                         <td>Student ID</td>
                     </tr>
                     <tr>
-                        <td>status</td>
-                        <td>course_status</td>
+                        <td>relationType</td>
+                        <td>relationType</td>
                         <td>false</td>
                         <td>true</td>
                         <td>string</td>
-                        <td>Status of this relationship. Could be finished, taking or failed</td>
+                        <td>Status of this relationship. Could be finished, dropped or taking</td>
                     </tr>
                     <tr>
-                        <td>credit</td>
-                        <td>credit</td>
+                        <td>score</td>
+                        <td>score</td>
                         <td>false</td>
                         <td>true</td>
                         <td>float</td>
