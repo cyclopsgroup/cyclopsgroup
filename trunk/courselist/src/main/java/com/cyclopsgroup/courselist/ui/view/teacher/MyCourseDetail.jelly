@@ -28,6 +28,19 @@
                 <j:forEach var="req" items="${course.prerequisites}">${req.prefix}:${req.courseCode}${nbsp}</j:forEach>
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <w:FormControl>
+                    <w:Form name="terminitecourse" method="post">
+                        <input type="hidden" name="course_id" value="${course.id}" />
+                        <w:Submit
+                            action="${link.addAction('/courselist/teacher/FinishCourseAction').setPage('/courselist/teacher/MyCourses.jelly')}">
+                            <w:FormButton title="Finish course" />
+                        </w:Submit>
+                    </w:Form>
+                </w:FormControl>
+            </td>
+        </tr>
     </table>
     <h2>Students</h2>
     <p>

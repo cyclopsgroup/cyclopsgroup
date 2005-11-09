@@ -27,5 +27,17 @@
             <td>teacher</td>
             <td>Another teacher</td>
         </tr>
+        <tr class="a">
+            <td>tim</td>
+            <td>tim</td>
+            <td>student</td>
+            <td>Student who can take/drop cources</td>
+        </tr>
+        <tr class="a">
+            <td>jiaqi</td>
+            <td>jiaqi</td>
+            <td>student</td>
+            <td>Another student</td>
+        </tr>
     </table>
 </div>
