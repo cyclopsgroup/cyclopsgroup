@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>2.0-b2</currentVersion>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
@@ -157,7 +157,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <dependency>
+        <dependency>http://news.wenxuecity.com/BBSView.php?SubID=news&MsgID=108936
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5-beta-2</version>
