@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.courselist.StudentService;
@@ -39,6 +40,21 @@ public class DefaultStudentService
     extends AbstractHibernateEnabled
     implements StudentService
 {
+    /**
+     * Overwrite or implement method addCourse()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#addCourse(java.lang.String, java.lang.String)
+     */
+    public void addCourse( String studentId, String courseId )
+        throws Exception
+    {
+        StudentCourse sc = new StudentCourse();
+        sc.setStudentId( studentId );
+        sc.setCourseId( courseId );
+        sc.setStatus( CourseStatus.TAKING );
+        getHibernateSession().save( sc );
+    }
+
     private void addPrerequisites( HashSet ids, Course course )
     {
         for ( Iterator i = course.getPrerequisites().iterator(); i.hasNext(); )
@@ -50,6 +66,40 @@ public class DefaultStudentService
                 addPrerequisites( ids, prereq );
             }
         }
+    }
+
+    /**
+     * Overwrite or implement method dropCourse()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#dropCourse(java.lang.String, java.lang.String)
+     */
+    public void dropCourse( String studentId, String courseId )
+        throws Exception
+    {
+        Session s = getHibernateSession();
+        Criteria criteria = s.createCriteria( StudentCourse.class );
+        criteria.add( Expression.eq( "studentId", studentId ) ).add( Expression.eq( "courseId", courseId ) );
+        for ( Iterator i = criteria.list().iterator(); i.hasNext(); )
+        {
+            StudentCourse sc = (StudentCourse) i.next();
+            if ( sc.getStatus() != CourseStatus.DROPPED )
+            {
+                sc.setStatus( CourseStatus.DROPPED );
+                s.update( sc );
+            }
+        }
+    }
+
+    /**
+     * Overwrite or implement method getCourse()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#getCourses(java.lang.String)
+     */
+    public List getCourses( String studentId )
+        throws Exception
+    {
+        return getHibernateSession().createCriteria( StudentCourse.class )
+            .add( Expression.eq( "studentId", studentId ) ).list();
     }
 
     /**
@@ -102,20 +152,5 @@ public class DefaultStudentService
             }
         }
         return true;
-    }
-
-    /**
-     * Overwrite or implement method addCourse()
-     *
-     * @see com.cyclopsgroup.courselist.StudentService#addCourse(java.lang.String, java.lang.String)
-     */
-    public void addCourse( String studentId, String courseId )
-        throws Exception
-    {
-        StudentCourse sc = new StudentCourse();
-        sc.setStudentId( studentId );
-        sc.setCourseId( courseId );
-        sc.setStatus( CourseStatus.TAKING );
-        getHibernateSession().save( sc );
     }
 }

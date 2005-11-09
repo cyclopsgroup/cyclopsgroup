@@ -6,6 +6,7 @@
                 <Node title="Course board" page="/courselist/course/CourseList.jelly" />
                 <Node title="Create course" page="/courselist/course/CreateCourse.jelly" />
                 <Node title="Course details" page="/courselist/course/EditCourse.jelly" hidden="true" />
+                <Node title="Teachers" page="/courselist/course/Teachers.jelly" />
             </Node>
             <Node name="teacher" title="Teacher workbench" page="/courselist/teacher/Index.jelly">
                 <Node title="Teacher information" page="/courselist/teacher/MyInfo.jelly" />
@@ -14,8 +15,6 @@
             </Node>
             <Node name="student" title="Student workbench" page="/courselist/student/Index.jelly">
                 <Node title="My courses" page="/courselist/student/MyCourses.jelly" />
-                <Node title="My course status" page="/courselist/student/MyCourseStatus.jelly" />
-                <Node title="My history" page="/courselist/student/StudentHistory.jelly" />
                 <Node title="Transcript" page="/courselist/student/Transcript.jelly" />
                 <Node title="Add course" page="/courselist/student/AddCourse.jelly" hidden="true" />
             </Node>

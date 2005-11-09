@@ -17,6 +17,8 @@
  */
 package com.cyclopsgroup.courselist;
 
+import java.util.List;
+
 import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.courselist.entity.CourseStatus;
 
@@ -29,6 +31,36 @@ public interface StudentService
 {
     /** Role of this service */
     String ROLE = StudentService.class.getName();
+
+    /**
+     * Add course for a student
+     *
+     * @param studentId Student id
+     * @param courseId Course id
+     * @throws Exception Throw it out
+     */
+    void addCourse( String studentId, String courseId )
+        throws Exception;
+
+    /**
+     * Drop a course
+     *
+     * @param studentId Student id
+     * @param courseId Course id
+     * @throws Exception Throw it out
+     */
+    void dropCourse( String studentId, String courseId )
+        throws Exception;
+
+    /**
+     * Get student course related to a student
+     *
+     * @param studentId Student id
+     * @return List of student course
+     * @throws Exception Throw it out
+     */
+    List getCourses( String studentId )
+        throws Exception;
 
     /**
      * Get status of course
@@ -50,15 +82,5 @@ public interface StudentService
      * @throws Exception Throw it out
      */
     boolean isReadyFor( String studentId, Course course )
-        throws Exception;
-
-    /**
-     * Add course for a student
-     *
-     * @param studentId Student id
-     * @param courseId Course id
-     * @throws Exception Throw it out
-     */
-    void addCourse( String studentId, String courseId )
         throws Exception;
 }

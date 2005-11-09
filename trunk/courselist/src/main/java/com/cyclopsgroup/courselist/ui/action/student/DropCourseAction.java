@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  *
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,24 +15,20 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.action.course;
+package com.cyclopsgroup.courselist.ui.action.student;
 
-import com.cyclopsgroup.courselist.CourseListService;
-import com.cyclopsgroup.courselist.entity.Course;
-import com.cyclopsgroup.tornado.persist.PersistenceManager;
+import com.cyclopsgroup.courselist.StudentService;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to create course
+ * Action to drop courses
  */
-public class CreateCourseAction
+public class DropCourseAction
     extends BaseServiceable
     implements Action
 {
@@ -43,21 +40,14 @@ public class CreateCourseAction
     public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        Parameters params = data.getParameters();
-        String prefix = params.getString( "prefix" );
-        String code = params.getString( "courseCode" );
-        CourseListService cl = (CourseListService) lookup( CourseListService.ROLE );
-        if ( cl.findByCode( prefix, code ) != null )
+        StudentService ss = (StudentService) lookup( StudentService.ROLE );
+        String studentId = data.getParameters().getString( "student_id" );
+        String[] courseIds = data.getParameters().getStrings( "course_id" );
+        for ( int i = 0; i < courseIds.length; i++ )
         {
-            context.error( "courseCode", "This course already exists" );
-            return;
+            String courseId = courseIds[i];
+            ss.dropCourse( studentId, courseId );
         }
-
-        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        Course course = (Course) persist.create( Course.class );
-        TypeUtils.getBeanUtils().populate( course, params.toProperties() );
-
-        persist.saveNew( course );
-        context.addMessage( "New course " + prefix + "/" + code + " is created" );
+        context.addMessage( "Selected courses are dropped" );
     }
 }
