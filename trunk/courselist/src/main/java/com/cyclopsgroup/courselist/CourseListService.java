@@ -27,6 +27,7 @@ import com.cyclopsgroup.courselist.entity.Course;
  * Facade course list service
  */
 public interface CourseListService
+    extends Constants
 {
     /** Service role */
     String ROLE = CourseListService.class.getName();

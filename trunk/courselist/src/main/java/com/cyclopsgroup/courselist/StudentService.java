@@ -28,6 +28,7 @@ import com.cyclopsgroup.courselist.entity.CourseStatus;
  * Student related service
  */
 public interface StudentService
+    extends Constants
 {
     /** Role of this service */
     String ROLE = StudentService.class.getName();
