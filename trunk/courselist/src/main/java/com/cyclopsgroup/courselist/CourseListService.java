@@ -38,8 +38,7 @@ public interface CourseListService
      * @param prereqId Prerequisite course id
      * @throws Exception Throw it out
      */
-    void addPrerequisite( String courseId, String prereqId )
-        throws Exception;
+    void addPrerequisite(String courseId, String prereqId) throws Exception;
 
     /**
      * Delete prerequisite of a course
@@ -48,8 +47,7 @@ public interface CourseListService
      * @param prereqId Prerequisite course id
      * @throws Exception Throw it out
      */
-    void deletePrerequisite( String courseId, String prereqId )
-        throws Exception;
+    void deletePrerequisite(String courseId, String prereqId) throws Exception;
 
     /**
      * Find a course by prefix and code
@@ -59,8 +57,7 @@ public interface CourseListService
      * @return Course object or null if not found
      * @throws Exception Throw it out
      */
-    Course findByCode( String prefix, String code )
-        throws Exception;
+    Course findByCode(String prefix, String code) throws Exception;
 
     /**
      * Find all courses
@@ -68,6 +65,13 @@ public interface CourseListService
      * @return List of all courses
      * @throws Exception Throw it out
      */
-    List getAllCourses()
-        throws Exception;
+    List getAllCourses() throws Exception;
+
+    /**
+     * Get all teachers
+     *
+     * @return LIst of teacher object
+     * @throws Exception Throw it out
+     */
+    List getAllTeachers() throws Exception;
 }

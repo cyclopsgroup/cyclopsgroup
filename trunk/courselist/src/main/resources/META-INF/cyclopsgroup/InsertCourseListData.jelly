@@ -45,6 +45,11 @@
             permission="/courselist/student/.*" />
     </Class>
 
+    <Class name="com.cyclopsgroup.courselist.entity.Teacher">
+        <New userId="${userJohn.id}" />
+        <New userId="${userTracy.id}" />
+    </Class>
+
     <Class name="com.cyclopsgroup.courselist.entity.Course">
         <New prefix="CS" courseCode="5301" name="Adv Prof &amp; Tech Communication" credit="3.0"
             teacherId="${userTracy.id}" />

@@ -1,5 +1,6 @@
 package com.cyclopsgroup.courselist.entity;
 
+import com.cyclopsgroup.tornado.security.entity.User;
 import java.io.Serializable;
 import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -35,11 +36,14 @@ abstract public class CourseBase implements Serializable {
     /** nullable persistent field */
     private float credit;
 
+    /** nullable persistent field */
+    private User teacher;
+
     /** persistent field */
     private Set prerequisites;
 
     /** full constructor */
-    public CourseBase(String prefix, String courseCode, String name, String description, String coRequisites, boolean isDisabled, String teacherId, float credit, Set prerequisites) {
+    public CourseBase(String prefix, String courseCode, String name, String description, String coRequisites, boolean isDisabled, String teacherId, float credit, User teacher, Set prerequisites) {
         this.prefix = prefix;
         this.courseCode = courseCode;
         this.name = name;
@@ -48,6 +52,7 @@ abstract public class CourseBase implements Serializable {
         this.isDisabled = isDisabled;
         this.teacherId = teacherId;
         this.credit = credit;
+        this.teacher = teacher;
         this.prerequisites = prerequisites;
     }
 
@@ -133,6 +138,14 @@ abstract public class CourseBase implements Serializable {
 
     public void setCredit(float credit) {
         this.credit = credit;
+    }
+
+    public User getTeacher() {
+        return this.teacher;
+    }
+
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
     }
 
     public Set getPrerequisites() {

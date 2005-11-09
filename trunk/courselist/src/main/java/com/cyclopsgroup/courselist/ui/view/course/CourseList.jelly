@@ -22,6 +22,9 @@
                                 <w:Column name="name" title="%document.text.name" sort="unsorted">
                                     ${course.name}
                                 </w:Column>
+                                <w:Column name="teacherId" title="Teacher" sort="unsorted">
+                                    ${course.teacher.displayName}
+                                </w:Column>
                                 <w:Column name="prequisite" title="Pre-requisite">
                                     <j:forEach var="req" items="${course.prerequisites}">
                                         ${req.prefix}:${req.courseCode}${nbsp}
@@ -36,14 +39,6 @@
                                             href="${link.setPage('/courselist/student/AddCourse.jelly').addQueryData('course_id', course.id)}">
                                             Apply
                                         </a>
-                                    </w:Column>
-                                </t:SecureControl>
-                                <t:SecureControl role="teacher">
-                                    <w:Column name="apply_for" title="Apply for...">
-                                        <w:Submit
-                                            action="${link.setPage('/courselist/student/ApplyCourse.jelly').addQueryData('course_id', course.id)}">
-                                            <w:FormButton title="Apply for..." />
-                                        </w:Submit>
                                     </w:Column>
                                 </t:SecureControl>
                             </w:Table>

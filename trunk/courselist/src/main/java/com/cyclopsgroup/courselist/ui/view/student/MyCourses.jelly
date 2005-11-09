@@ -12,7 +12,7 @@
                     </w:Column>
                     <w:Column name="courseCode" title="Code" sort="asc">${course.prefix}:${course.courseCode}</w:Column>
                     <w:Column name="name" title="%document.text.name" sort="unsorted">${course.name}</w:Column>
-                    <w:Column name="teacherId" title="Teacher" sort="unsorted">${course.teacherId}</w:Column>
+                    <w:Column name="teacherId" title="Teacher" sort="unsorted">${course.teacher.displayName}</w:Column>
                     <w:Column name="description" title="%document.text.description">${course.description}</w:Column>
                 </w:Table>
             </w:TableControl>
