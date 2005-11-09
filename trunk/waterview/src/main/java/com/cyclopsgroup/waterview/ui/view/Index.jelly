@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://waterview.cyclopsgroup.com/html"
     xmlns:j="jelly:core">
-    <h2>Welcom</h2>
-    <p>Page is ${page}</p>
+    <h2>Welcom to waterview</h2>
+    <p>Waterview is a web portal application framework</p>
 </div>
