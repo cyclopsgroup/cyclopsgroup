@@ -59,7 +59,7 @@
         <New prefix="CS" courseCode="5335" name="Programming Projects in C/C++"
             coRequisites="CS 5303, CS 5330 or equivalent experience" credit="2.0" teacherId="${userTracy.id}" />
         <New prefix="CS" courseCode="5336" name="Programming Projects in JAVA"
-            coRequisites="CS 5303 or equivalent experience" credit="2.0" teacherId="${userJohnid}" />
+            coRequisites="CS 5303 or equivalent experience" credit="2.0" teacherId="${userJohn.id}" />
         <New var="course5343" prefix="CS" courseCode="5343" name="Algorithm Analysis &amp; Data Structures"
             coRequisites="CS 5303, CS 5333" credit="3.0" teacherId="${userTracy.id}" />
         <New var="course5348" prefix="CS" courseCode="5348" name="Operating Systems Concepts"

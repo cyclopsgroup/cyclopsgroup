@@ -31,6 +31,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="title">Teacher:</td>
+                    <td>
+                        <w:Field name="teacherId" value="${course.teacherId}">
+                            <w:Select items="${teachers}" />
+                        </w:Field>
+                    </td>
+                    <td colspan="2" />
+                </tr>
+                <tr>
                     <td colspan="4" class="lineBreak" />
                 </tr>
                 <tr>

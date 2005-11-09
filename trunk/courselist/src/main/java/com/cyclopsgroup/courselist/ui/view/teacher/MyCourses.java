@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
  *
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,28 +15,22 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.view.course;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+package com.cyclopsgroup.courselist.ui.view.teacher;
 
 import com.cyclopsgroup.courselist.CourseListService;
-import com.cyclopsgroup.courselist.entity.Course;
-import com.cyclopsgroup.courselist.entity.Teacher;
-import com.cyclopsgroup.tornado.persist.PersistenceManager;
+import com.cyclopsgroup.courselist.StudentService;
+import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.SelectOption;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Module to edit course
+ * Teacher's courses
  */
-public class EditCourse
+public class MyCourses
     extends BaseServiceable
     implements Module
 {
@@ -47,30 +42,12 @@ public class EditCourse
     public void execute( RuntimeData data, Context context )
         throws Exception
     {
-        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
-        Course course = (Course) persist.load( Course.class, data.getParameters().getString( "course_id" ) );
-        context.put( "course", course );
-
         CourseListService cls = (CourseListService) lookup( CourseListService.ROLE );
-        List teachers = cls.getAllTeachers();
+        RuntimeUser user = RuntimeUser.getInstance( data );
+        context.put( "teacher", user );
+        context.put( "myCourses", cls.findByTeacher( user.getId() ) );
 
-        List teacherItems = new ArrayList();
-        for ( Iterator i = teachers.iterator(); i.hasNext(); )
-        {
-            final Teacher teacher = (Teacher) i.next();
-            teacherItems.add( new SelectOption()
-            {
-                public String getName()
-                {
-                    return teacher.getUserId();
-                }
-
-                public String getTitle()
-                {
-                    return teacher.getUser().getDisplayName();
-                }
-            } );
-        }
-        context.put( "teachers", teacherItems );
+        StudentService ss = (StudentService) lookup( StudentService.ROLE );
+        context.put( "studentService", ss );
     }
 }

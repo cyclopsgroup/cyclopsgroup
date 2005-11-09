@@ -15,51 +15,42 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.view.student;
+package com.cyclopsgroup.courselist.ui.action.teacher;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import com.cyclopsgroup.courselist.StudentService;
 import com.cyclopsgroup.courselist.entity.CourseStatus;
 import com.cyclopsgroup.courselist.entity.StudentCourse;
-import com.cyclopsgroup.tornado.security.RuntimeUser;
+import com.cyclopsgroup.tornado.persist.PersistenceManager;
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * My courses
+ * Remove student record
  */
-public class MyCourses
+public class DropStudentAction
     extends BaseServiceable
-    implements Module
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        RuntimeUser user = RuntimeUser.getInstance( data );
-        context.put( "student", user );
-        List studentCourses = ss.findByStudent( user.getId() );
-        List courses = new ArrayList();
-        for ( Iterator i = studentCourses.iterator(); i.hasNext(); )
+        String[] ids = data.getParameters().getStrings( "sc_id" );
+        PersistenceManager persist = (PersistenceManager) lookup( PersistenceManager.ROLE );
+        for ( int i = 0; i < ids.length; i++ )
         {
-            StudentCourse sc = (StudentCourse) i.next();
-            if ( sc.getStatus() == CourseStatus.TAKING )
-            {
-                courses.add( sc.getCourse() );
-            }
+            String id = ids[i];
+            StudentCourse sc = (StudentCourse) persist.load( StudentCourse.class, id );
+            sc.setStatus( CourseStatus.DROPPED );
+            persist.update( sc );
         }
-        context.put( "currentCourses", courses );
+        context.addMessage( ids.length + " users are dropped from class" );
     }
 }

@@ -91,15 +91,41 @@ public class DefaultStudentService
     }
 
     /**
-     * Overwrite or implement method getCourse()
+     * Overwrite or implement method findAllByStudent()
      *
-     * @see com.cyclopsgroup.courselist.StudentService#getCourses(java.lang.String)
+     * @see com.cyclopsgroup.courselist.StudentService#findAllByStudent(java.lang.String)
      */
-    public List getCourses( String studentId )
+    public List findAllByStudent( String studentId )
         throws Exception
     {
         return getHibernateSession().createCriteria( StudentCourse.class )
             .add( Expression.eq( "studentId", studentId ) ).list();
+    }
+
+    /**
+     * Overwrite or implement method findByCourse()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#findByCourse(java.lang.String)
+     */
+    public List findByCourse( String courseId )
+        throws Exception
+    {
+        return getHibernateSession().createCriteria( StudentCourse.class ).add( Expression.eq( "courseId", courseId ) )
+            .add( Expression.eq( "relationType", CourseStatus.TAKING.getName() ) ).list();
+    }
+
+    /**
+     * Overwrite or implement method getCourse()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#findByStudent(java.lang.String)
+     */
+    public List findByStudent( String studentId )
+        throws Exception
+    {
+        return getHibernateSession().createCriteria( StudentCourse.class )
+            .add( Expression.eq( "studentId", studentId ) ).add(
+                                                                 Expression.eq( "relationType", CourseStatus.TAKING
+                                                                     .getName() ) ).list();
     }
 
     /**

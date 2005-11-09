@@ -17,13 +17,9 @@
  */
 package com.cyclopsgroup.courselist.ui.view.student;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.cyclopsgroup.courselist.StudentService;
-import com.cyclopsgroup.courselist.entity.CourseStatus;
-import com.cyclopsgroup.courselist.entity.StudentCourse;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
@@ -35,7 +31,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
  *
  * My courses
  */
-public class MyCourses
+public class Transcript
     extends BaseServiceable
     implements Module
 {
@@ -50,16 +46,7 @@ public class MyCourses
         StudentService ss = (StudentService) lookup( StudentService.ROLE );
         RuntimeUser user = RuntimeUser.getInstance( data );
         context.put( "student", user );
-        List studentCourses = ss.findByStudent( user.getId() );
-        List courses = new ArrayList();
-        for ( Iterator i = studentCourses.iterator(); i.hasNext(); )
-        {
-            StudentCourse sc = (StudentCourse) i.next();
-            if ( sc.getStatus() == CourseStatus.TAKING )
-            {
-                courses.add( sc.getCourse() );
-            }
-        }
-        context.put( "currentCourses", courses );
+        List studentCourses = ss.findAllByStudent( user.getId() );
+        context.put( "currentCourses", studentCourses );
     }
 }

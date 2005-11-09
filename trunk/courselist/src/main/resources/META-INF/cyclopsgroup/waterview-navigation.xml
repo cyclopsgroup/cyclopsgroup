@@ -9,9 +9,8 @@
                 <Node title="Teachers" page="/courselist/course/Teachers.jelly" />
             </Node>
             <Node name="teacher" title="Teacher workbench" page="/courselist/teacher/Index.jelly">
-                <Node title="Teacher information" page="/courselist/teacher/MyInfo.jelly" />
                 <Node title="My courses" page="/courselist/teacher/MyCourses.jelly" />
-                <Node title="My students" page="/courselist/teacher/MyStudents.jelly" />
+                <Mode title="My course detail" page="/courselist/teacher/MyCourseDetail.jelly" hidden="true" />
             </Node>
             <Node name="student" title="Student workbench" page="/courselist/student/Index.jelly">
                 <Node title="My courses" page="/courselist/student/MyCourses.jelly" />

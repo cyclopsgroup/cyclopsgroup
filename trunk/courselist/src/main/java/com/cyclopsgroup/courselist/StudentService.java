@@ -53,13 +53,33 @@ public interface StudentService
         throws Exception;
 
     /**
+     * Find all courses related to a student
+     *
+     * @param studentId Studnet id
+     * @return List of student course
+     * @throws Exception
+     */
+    List findAllByStudent( String studentId )
+        throws Exception;
+
+    /**
+     * Find by course id
+     *
+     * @param courseId Course id
+     * @return List of student course objects
+     * @throws Exception Throw it out
+     */
+    List findByCourse( String courseId )
+        throws Exception;
+
+    /**
      * Get student course related to a student
      *
      * @param studentId Student id
      * @return List of student course
      * @throws Exception Throw it out
      */
-    List getCourses( String studentId )
+    List findByStudent( String studentId )
         throws Exception;
 
     /**

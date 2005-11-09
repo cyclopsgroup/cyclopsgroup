@@ -15,51 +15,45 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.courselist.ui.view.student;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+package com.cyclopsgroup.courselist.ui.action.teacher;
 
 import com.cyclopsgroup.courselist.StudentService;
-import com.cyclopsgroup.courselist.entity.CourseStatus;
-import com.cyclopsgroup.courselist.entity.StudentCourse;
 import com.cyclopsgroup.tornado.security.RuntimeUser;
+import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.waterview.Action;
+import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * My courses
+ * Action to add student
  */
-public class MyCourses
+public class AddStudentAction
     extends BaseServiceable
-    implements Module
+    implements Action
 {
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RuntimeData data, ActionContext context )
         throws Exception
     {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        RuntimeUser user = RuntimeUser.getInstance( data );
-        context.put( "student", user );
-        List studentCourses = ss.findByStudent( user.getId() );
-        List courses = new ArrayList();
-        for ( Iterator i = studentCourses.iterator(); i.hasNext(); )
+        SecurityService ss = (SecurityService) lookup( SecurityService.ROLE );
+        String studentName = data.getParameters().getString( "student_name" );
+        RuntimeUser student = (RuntimeUser) ss.getUser( studentName );
+        if ( !student.hasRole( "student" ) )
         {
-            StudentCourse sc = (StudentCourse) i.next();
-            if ( sc.getStatus() == CourseStatus.TAKING )
-            {
-                courses.add( sc.getCourse() );
-            }
+            context.error( "student_name", "User " + studentName + " doesn't have student role" );
+            return;
         }
-        context.put( "currentCourses", courses );
+
+        StudentService students = (StudentService) lookup( StudentService.ROLE );
+        students.addCourse( student.getId(), data.getParameters().getString( "course_id" ) );
+
+        context.addMessage( "Student " + student.getDisplayName() + " is added to the class" );
     }
 }
