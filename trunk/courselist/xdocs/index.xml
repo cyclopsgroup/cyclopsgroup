@@ -23,27 +23,25 @@
                             <li>List, search, delete, or create courses</li>
                             <li>Change existing course</li>
                             <li>Set course prerequisites/co-requisites</li>
-                            <li>Change course dependency</li>
+                            <li>Manage the teachers in system</li>
                         </ul>
                     </li>
                     <li>
-                        Student Management (by sysadmin)
+                        Teacher workbench (by teacher)
                         <ul>
-                            <li>List, search, delete, or create students</li>
-                            <li>Change student details, password</li>
-                            <li>Force student to register/drop courses</li>
-                            <li>Override a prerequisite requirement (with special permission)</li>
+                            <li>Show my courses</li>
+                            <li>Manage the students in my courses</li>
                         </ul>
                     </li>
                     <li>
                         Student Workbench (by student)
                         <ul>
-                            <li>List, search courses</li>
+                            <li>Show the courses that I'm currently taking</li>
+                            <li>Show a transcript including all related courses</li>
                             <li>
                                 Register or drop a course (based on course dependency; the student may not be able to
                                 see all available courses for him to register)
                             </li>
-                            <li>See student’s own information and related courses</li>
                         </ul>
                     </li>
                 </ul>
