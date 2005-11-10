@@ -35,13 +35,13 @@
                         <th>Automated Process</th>
                     </tr>
                     <tr>
-                        <td>sysadmin</td>
+                        <td>administrator</td>
                         <td>Looking for a course</td>
                         <td>Open a drawer and find the printed list.</td>
                         <td>Login, open list. Probably input some search criterion.</td>
                     </tr>
                     <tr>
-                        <td>sysadmin</td>
+                        <td>administrator</td>
                         <td>Create/Edit/Delete courses</td>
                         <td>
                             Print another 1000 copy of new course list and email/call every student that the course is
