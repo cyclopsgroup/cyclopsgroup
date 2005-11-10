@@ -13,9 +13,9 @@
             <p>You have already finished course ${course.courseCode}</p>
         </j:when>
         <j:when test="${!isReady}">
-            <p>At least one of the prerequisite courses of ${course.name} is not taking by you.</p>
             <p>
-                Please make sure the following courses are finished before apply this course
+                At least one of the prerequisite courses of ${course.name} has not been taken by you. Please make sure
+                the following courses are taken before applying this course.
                 <ul>
                     <j:forEach var="prereq" items="${course.prerequisites}">
                         <li>
@@ -33,6 +33,8 @@
                 <p>
                     You are going to add course ${course.courseCode} (${course.name}) into your schedule. Are you sure
                     to continue?
+                </p>
+                <p>
                     <input type="submit" class="waterviewFormButton" value="Continue" />
                 </p>
             </form>
