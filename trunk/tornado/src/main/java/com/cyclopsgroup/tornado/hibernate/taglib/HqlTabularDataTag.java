@@ -26,7 +26,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
-import com.cyclopsgroup.tornado.hibernate.HqlTabularData;
+import com.cyclopsgroup.tornado.hibernate.HqlLargeList;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 import com.cyclopsgroup.waterview.web.taglib.TableControlTag;
 
@@ -93,7 +93,7 @@ public class HqlTabularDataTag
             throw new JellyTagException( "HQL must be defined" );
         }
         HibernateService hibernate = (HibernateService) getServiceManager().lookup( HibernateService.ROLE );
-        HqlTabularData data = new HqlTabularData( hql, hibernate, getDataSource() );
+        HqlLargeList data = new HqlLargeList( hql, hibernate, getDataSource() );
         for ( Iterator i = parameterTags.iterator(); i.hasNext(); )
         {
             HqlParameterTag param = (HqlParameterTag) i.next();

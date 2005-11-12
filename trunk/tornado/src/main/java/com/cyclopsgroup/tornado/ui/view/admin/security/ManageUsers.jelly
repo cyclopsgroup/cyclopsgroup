@@ -17,8 +17,8 @@
     </w:TiledFormControl>
     <w:FormControl>
         <w:Form name="userform" method="post">
-            <w:TableControl configurable="true" data="${userData}">
-                <w:Table name="usertable" var="user" pageSize="20">
+            <w:TableControl configurable="true">
+                <w:Table name="usertable" var="user" pageSize="20" data="${userData}">
                     <w:Column name="id" title="Select" sort="unsorted">
                         <j:choose>
                             <j:when test="${user.isSystem or user.isDisabled}">

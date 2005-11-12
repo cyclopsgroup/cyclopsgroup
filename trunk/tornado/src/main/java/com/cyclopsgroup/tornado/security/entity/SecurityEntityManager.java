@@ -27,9 +27,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
-import com.cyclopsgroup.tornado.hibernate.HqlTabularData;
+import com.cyclopsgroup.tornado.hibernate.HqlLargeList;
 import com.cyclopsgroup.waterview.Attributes;
-import com.cyclopsgroup.waterview.web.TabularData;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -201,7 +201,7 @@ public class SecurityEntityManager extends AbstractHibernateEnabled
      * @return Tabular data
      * @throws Exception Just throw it out
      */
-    public TabularData searchUser(Attributes attributes) throws Exception
+    public LargeList searchUser(Attributes attributes) throws Exception
     {
         StringBuffer sb = new StringBuffer("FROM ")
                 .append(User.class.getName()).append(" WHERE 1 = 1");
@@ -213,7 +213,7 @@ public class SecurityEntityManager extends AbstractHibernateEnabled
         {
             sb.append(" AND isDisabled = 0");
         }
-        HqlTabularData data = new HqlTabularData(sb.toString(),
+        HqlLargeList data = new HqlLargeList(sb.toString(),
                 getHibernateService());
         data.addStringCriterion(attributes, "name");
         data.addStringCriterion(attributes, "firstName");

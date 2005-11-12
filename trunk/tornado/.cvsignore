@@ -1,14 +1,4 @@
 target
 *.log
-*.ser
+*.log.*
 .*
-ssh.exe.stackdump
-cruisecontrol.xml
-*.iml
-*.ipr
-*.iws
-*.jpx
-*.library
-*.local
-*.oif
-Model Folder

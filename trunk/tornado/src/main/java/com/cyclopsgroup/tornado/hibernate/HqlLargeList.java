@@ -31,16 +31,13 @@ import org.hibernate.Session;
 import org.hibernate.type.Type;
 
 import com.cyclopsgroup.waterview.Attributes;
-import com.cyclopsgroup.waterview.web.Column;
-import com.cyclopsgroup.waterview.web.ColumnSort;
-import com.cyclopsgroup.waterview.web.Table;
-import com.cyclopsgroup.waterview.web.TabularData;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HqlTabularData implements TabularData
+public class HqlLargeList implements LargeList
 {
     private class Parameter
     {
@@ -106,7 +103,7 @@ public class HqlTabularData implements TabularData
      * @param hql HQL language
      * @param hibernate Hibernate servcie
      */
-    public HqlTabularData(String hql, HibernateService hibernate)
+    public HqlLargeList(String hql, HibernateService hibernate)
     {
         this(hql, hibernate, HibernateService.DEFAULT_DATASOURCE);
     }
@@ -118,7 +115,7 @@ public class HqlTabularData implements TabularData
      * @param hql Hibernate query language
      * @param dataSource Data source name
      */
-    public HqlTabularData(String hql, HibernateService hibernate,
+    public HqlLargeList(String hql, HibernateService hibernate,
             String dataSource)
     {
         this.hql = hql;
@@ -174,9 +171,9 @@ public class HqlTabularData implements TabularData
     }
 
     /**
-     * Override method getSize in class HQLTabularData
+     * Overwrite or implement method getSize()
      *
-     * @see com.cyclopsgroup.waterview.web.TabularData#getSize()
+     * @see com.cyclopsgroup.waterview.LargeList#getSize()
      */
     public int getSize() throws Exception
     {
@@ -203,21 +200,12 @@ public class HqlTabularData implements TabularData
     }
 
     /**
-     * Override method isCountable in class HQLTabularData
+     * Overwrite or implement method iterate()
      *
-     * @see com.cyclopsgroup.waterview.web.TabularData#isCountable()
+     * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public boolean isCountable()
-    {
-        return true;
-    }
-
-    /**
-     * Override method openIterator in class HQLTabularData
-     *
-     * @see com.cyclopsgroup.waterview.web.TabularData#openIterator(com.cyclopsgroup.waterview.web.Table)
-     */
-    public Iterator openIterator(Table table) throws Exception
+    public Iterator iterate(int startPosition, int maxRecords,
+            Sorting[] sortings) throws Exception
     {
         if (StringUtils.isEmpty(hql))
         {
@@ -226,29 +214,23 @@ public class HqlTabularData implements TabularData
         Session s = hibernate.getSession(dataSource);
         StringBuffer sb = new StringBuffer(hql);
 
-        String[] sortedColumns = table.getSortedColumns();
         boolean first = true;
-        for (int i = 0; i < sortedColumns.length; i++)
+        for (int i = 0; i < sortings.length; i++)
         {
-            String columnName = sortedColumns[i];
-            Column column = table.getColumn(columnName);
-            if (column.getSort() == ColumnSort.ASC
-                    || column.getSort() == ColumnSort.DESC)
+            Sorting sorting = sortings[i];
+            if (first)
             {
-                if (first)
-                {
-                    sb.append(" ORDER BY ");
-                    first = false;
-                }
-                else
-                {
-                    sb.append(", ");
-                }
-                sb.append(columnName);
-                if (column.getSort() == ColumnSort.DESC)
-                {
-                    sb.append(" DESC");
-                }
+                sb.append(" ORDER BY ");
+                first = false;
+            }
+            else
+            {
+                sb.append(", ");
+            }
+            sb.append(sorting.getName());
+            if (sorting.isDescending())
+            {
+                sb.append(" DESC");
             }
         }
 
@@ -263,10 +245,10 @@ public class HqlTabularData implements TabularData
                 q.setParameter(p.getName(), p.getValue(), p.getType());
             }
         }
-        if (table.getPageSize() > 0)
+        q.setFirstResult(startPosition);
+        if (maxRecords > 0)
         {
-            q.setMaxResults(table.getPageSize());
-            q.setFirstResult(table.getPageSize() * table.getPageIndex());
+            q.setMaxResults(maxRecords);
         }
         return q.iterate();
     }

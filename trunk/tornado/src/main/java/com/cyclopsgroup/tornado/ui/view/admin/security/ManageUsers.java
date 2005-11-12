@@ -20,29 +20,26 @@ package com.cyclopsgroup.tornado.ui.view.admin.security;
 import com.cyclopsgroup.tornado.security.entity.SecurityEntityManager;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.LargeList;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
-import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * View to manage users
  */
-public class ManageUsers
-    extends BaseServiceable
-    implements Module
+public class ManageUsers extends BaseServiceable implements Module
 {
     /**
      * Overwrite or implement method execute()
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, Context context )
-        throws Exception
+    public void execute(RuntimeData data, Context context) throws Exception
     {
-        SecurityEntityManager sem = (SecurityEntityManager) lookup( SecurityEntityManager.ROLE );
-        TabularData tabularData = sem.searchUser( data.getParameters() );
-        context.put( "userData", tabularData );
+        SecurityEntityManager sem = (SecurityEntityManager) lookup(SecurityEntityManager.ROLE);
+        LargeList tabularData = sem.searchUser(data.getParameters());
+        context.put("userData", tabularData);
     }
 }
