@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>UI of courselist</title>
+    </properties>
+    <body>
+        <section name="UI overview">
+            <p>
+                UI module is the presentation layer of course list project. Horizontally, ui modules are separated into
+                the following three components. Each component is made up of several views and actions. Here a view
+                means a part of HTML page that shows information and an action means a class that will be executed after
+                some button is pushed.
+            </p>
+            <p>
+                Three components are included by ui module
+                <table>
+                    <tr>
+                        <td>
+                            <a href="#Course management component">Course management component</a>
+                        </td>
+                        <td>Administrators can manage(add/edit/delete) course informations in this component.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Teacher workbench">Teacher workbench</a>
+                        </td>
+                        <td>Component for teacher to manage his courses and students.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Student workbench">Student workbench</a>
+                        </td>
+                        <td>
+                            Student workbench component is where student manages his own information. He can change
+                            profile, add/drop class and print transcript.
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+        <section name="Course management component">
+            <p>Administrators can manage(add/edit/delete) course informations in this component.</p>
+            <p>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Page/Action</th>
+                        <th>Function</th>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>CourseList</td>
+                        <td>
+                            Shows a list of all courses. The list can be sorted based on prefix, code, name and credit.
+                            Each row of course has a checkbox, user and delete courses by checking and pushing "Delete
+                            Selected" button.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DeleteCourseAction</td>
+                        <td>Delete checked course(s) and return to previous page</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>CreateCourse</td>
+                        <td>A form for user to input information for creating new form</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>CreateCourseAction</td>
+                        <td>Action to take form information from CreateForm view and create the form in database</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>EditCourse</td>
+                        <td>Edit basic information of a course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>SaveCourseAction</td>
+                        <td>Action to save basic information of course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>AddPrerequisiteAction</td>
+                        <td>Add a prerequisite course for another course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DeletePrerequisiteAction</td>
+                        <td>Delete a prerequisite from a course</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>Teachers</td>
+                        <td>View to manage teachers in system</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>AddTeacherAction</td>
+                        <td>Add a new teacher</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DeleteTeacherAction</td>
+                        <td>Action to delete existing teacher</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+        <section name="Teacher workbench">
+            <p>Component for teacher to manage his courses and students.</p>
+            <p>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Page/Action</th>
+                        <th>Function</th>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>My courses</td>
+                        <td>Display the summary of the courses whose teacher is current user.</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>My course detail</td>
+                        <td>Display the course information and the students under this course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>AddStudentAction</td>
+                        <td>Add a student into given course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>SaveScoreAction</td>
+                        <td>Action to save the score of a student in a course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>RemoveStudentAction</td>
+                        <td>Force student to be removed from a course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DropStudentAction</td>
+                        <td>Force student to drop a course</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+        <section name="Student workbench">
+            <p>
+                Student workbench component is where student manages his own information. He can change profile,
+                add/drop class and print transcript.
+            </p>
+            <p>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Page/Action</th>
+                        <th>Function</th>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>My courses</td>
+                        <td>View/edit the courses that current student participates.</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>MyTranscript</td>
+                        <td>Show all courses related to current student.</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>AddCourseAction</td>
+                        <td>Register a course</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>DropCourseAction</td>
+                        <td>Drop a course. If prerequiste is not completely satisfied, throw exception.</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+    </body>
+</document>

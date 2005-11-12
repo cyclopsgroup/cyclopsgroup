@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+    <h2>Welcom to UTD CS Graduate Course 2002 ~ 2004 Catalog</h2>
+    <p>The following users are available in this system</p>
+    <table width="100%" class="waterviewTable">
+        <tr>
+            <th>User name</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Description</th>
+        </tr>
+        <tr class="b">
+            <td>admin</td>
+            <td>admin</td>
+            <td>administrator</td>
+            <td>Can do anything</td>
+        </tr>
+        <tr class="a">
+            <td>john</td>
+            <td>john</td>
+            <td>teacher</td>
+            <td>Manage the students in his courses</td>
+        </tr>
+        <tr class="b">
+            <td>tracy</td>
+            <td>tracy</td>
+            <td>teacher</td>
+            <td>Another teacher</td>
+        </tr>
+        <tr class="a">
+            <td>tim</td>
+            <td>tim</td>
+            <td>student</td>
+            <td>Student who can take/drop cources</td>
+        </tr>
+        <tr class="b">
+            <td>jiaqi</td>
+            <td>jiaqi</td>
+            <td>student</td>
+            <td>Another student</td>
+        </tr>
+    </table>
+</div>
