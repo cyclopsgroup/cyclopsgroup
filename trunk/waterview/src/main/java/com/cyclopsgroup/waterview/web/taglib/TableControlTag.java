@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
-import com.cyclopsgroup.waterview.web.TabularData;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -30,12 +30,12 @@ public interface TableControlTag
      *
      * @param tableTag TableTag to set
      */
-    void setTableTag( TableTag tableTag );
+    void setTableTag(TableTag tableTag);
 
     /**
      * Set tabular data
      *
      * @param tabularData Tabular data to set
      */
-    void setTabularData( TabularData tabularData );
+    void setTabularData(LargeList tabularData);
 }

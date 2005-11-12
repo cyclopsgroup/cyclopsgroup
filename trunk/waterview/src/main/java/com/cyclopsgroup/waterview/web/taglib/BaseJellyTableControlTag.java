@@ -12,8 +12,8 @@ import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.LargeList;
 import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
-import com.cyclopsgroup.waterview.web.TabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -25,27 +25,7 @@ public abstract class BaseJellyTableControlTag extends BaseJellyControlTag
 {
     private TableTag tableTag;
 
-    private TabularData data;
-
-    /**
-     * Get data of this table
-     *
-     * @return TabularData
-     */
-    public TabularData getData()
-    {
-        return data;
-    }
-
-    /**
-     * Setter method for property data
-     *
-     * @param data Tabular data to set
-     */
-    public void setData(TabularData data)
-    {
-        this.data = data;
-    }
+    private LargeList data;
 
     /**
      * Overwrite or implement method in JellyTableControlTag
@@ -58,13 +38,13 @@ public abstract class BaseJellyTableControlTag extends BaseJellyControlTag
     }
 
     /**
-     * Overwrite or implement method in JellyTableControlTag
+     * Overwrite or implement method setTabularData()
      *
-     * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTabularData(com.cyclopsgroup.waterview.web.TabularData)
+     * @see com.cyclopsgroup.waterview.web.taglib.TableControlTag#setTabularData(com.cyclopsgroup.waterview.LargeList)
      */
-    public void setTabularData(TabularData tabularData)
+    public void setTabularData(LargeList tabularData)
     {
-        setData(tabularData);
+        data = tabularData;
     }
 
     /**
@@ -88,7 +68,7 @@ public abstract class BaseJellyTableControlTag extends BaseJellyControlTag
         JellyContext jc = new JellyContext(getContext());
         jc.setVariable("tableTag", tableTag);
         jc.setVariable("table", tableTag.getTable());
-        jc.setVariable("tabularData", getData());
+        jc.setVariable("tabularData", data);
         jc.setVariable("tableControl", this);
         script.run(jc, output);
     }

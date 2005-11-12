@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w:Dummy xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <j:set var="nbsp" value="&amp;nbsp;"/>
+    <j:set var="nbsp" value="&amp;nbsp;" />
     <w:CreateUniqueId var="tableDivId" />
     <div id="${tableDivId}">
         <table width="100%" border="0" class="waterviewTable" cellspacing="0">
@@ -37,7 +37,7 @@
             </tr>
             <j:set var="rowIndex" value="0" />
             <j:set var="rowCount" value="0" />
-            <j:forEach var="${tableTag.var}" items="${tabularData.openIterator(table)}">
+            <j:forEach var="${tableTag.var}" items="${table.iterate(tabularData)}">
                 <j:set var="rowIndex" value="${(rowIndex + 1) % 2}" />
                 <j:set var="rowCount" value="${rowCount + 1}" />
                 <j:set var="rowClass" value="a" />
@@ -50,7 +50,8 @@
                         <j:if test="${not columnDisplay.equals('hidden')}">
                             <j:set var="columnTag" value="${tableTag.getColumnTag(column.name)}" />
                             <td>
-                                <w:RunScript script="${columnTag.body}" />${nbsp}
+                                <w:RunScript script="${columnTag.body}" />
+                                ${nbsp}
                             </td>
                         </j:if>
                     </j:forEach>
@@ -69,13 +70,12 @@
                     <table width="100%" cellspading="0" cellpadding="0">
                         <tr>
                             <td>
-                                <j:if test="${tabularData.countable}">
-                                    ${tabularData.getSize()} %document.text.record
-                                </j:if>
+                                <j:set var="recordCount" value="${tabularData.getSize()}" />
+                                <j:if test="${!recordCount eq -1}">${recordCount} %document.text.record</j:if>
                                 <j:if test="${table.pageSize gt 0}">
                                     %document.text.page ${table.pageIndex + 1}
-                                    <j:set var="pageCount" value="${table.getPageCount(tabularData)}" />
-                                    <j:if test="${tabularData.countable}">of ${pageCount}</j:if>
+                                    <j:set var="pageCount" value="${table.getPageCount(recordCount)}" />
+                                    <j:if test="${!recordCount eq -1}">of ${pageCount}</j:if>
                                 </j:if>
                             </td>
                             <td align="right">

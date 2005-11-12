@@ -22,17 +22,16 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.CollectionLargeList;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
-import com.cyclopsgroup.waterview.web.CollectionTabularData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Table data tag accepting a collection, iterator, enumeration or array
  */
-public class CollectionTabularDataTag
-    extends TagSupport
+public class CollectionTabularDataTag extends TagSupport
 {
     private Object items;
 
@@ -41,15 +40,15 @@ public class CollectionTabularDataTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "items" );
-        requireParent( TableControlTag.class );
+        requireAttribute("items");
+        requireParent(TableControlTag.class);
 
         List list = new ArrayList();
-        CollectionUtils.addAll( list, TypeUtils.iterate( getItems() ) );
-        ( (TableControlTag) getParent() ).setTabularData( new CollectionTabularData( list ) );
+        CollectionUtils.addAll(list, TypeUtils.iterate(getItems()));
+        ((TableControlTag) getParent()).setTabularData(new CollectionLargeList(
+                list));
     }
 
     /**
@@ -67,7 +66,7 @@ public class CollectionTabularDataTag
      *
      * @param items The items to set.
      */
-    public void setItems( Object items )
+    public void setItems(Object items)
     {
         this.items = items;
     }

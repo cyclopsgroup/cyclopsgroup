@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.LargeList;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.Table;
@@ -29,8 +30,7 @@ import com.cyclopsgroup.waterview.web.Table;
  * 
  * Tag for table
  */
-public class TableTag
-    extends TagSupport
+public class TableTag extends TagSupport
 {
     private Table table;
 
@@ -41,6 +41,28 @@ public class TableTag
     private HashMap columnTags;
 
     private int pageSize = -1;
+
+    private LargeList tabularData;
+
+    /**
+     * Getter method for field data
+     *
+     * @return Returns the data.
+     */
+    public LargeList getData()
+    {
+        return tabularData;
+    }
+
+    /**
+     * Setter method for field data
+     *
+     * @param data The data to set.
+     */
+    public void setData(LargeList data)
+    {
+        this.tabularData = data;
+    }
 
     /**
      * Getter method for pageSize
@@ -57,7 +79,7 @@ public class TableTag
      *
      * @param pageSize The pageSize to set.
      */
-    public void setPageSize( int pageSize )
+    public void setPageSize(int pageSize)
     {
         this.pageSize = pageSize;
     }
@@ -67,25 +89,28 @@ public class TableTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    protected void processTag( XMLOutput output )
-        throws Exception
+    protected void processTag(XMLOutput output) throws Exception
     {
-        requireAttribute( "var" );
-        requireAttribute( "name" );
-        requireParent( TableControlTag.class );
+        requireAttribute("var");
+        requireAttribute("name");
+        requireParent(TableControlTag.class);
         String tableId = "table/" + getUniqueTagId();
         RuntimeData data = getRuntimeData();
-        table = (Table) data.getSessionContext().get( tableId );
+        table = (Table) data.getSessionContext().get(tableId);
         tableNew = table == null;
-        if ( tableNew )
+        if (tableNew)
         {
-            table = new Table( tableId );
-            table.setPageSize( getPageSize() );
-            data.getSessionContext().put( tableId, table );
+            table = new Table(tableId);
+            table.setPageSize(getPageSize());
+            data.getSessionContext().put(tableId, table);
         }
         columnTags = new HashMap();
-        invokeBody( output );
-        ( (TableControlTag) getParent() ).setTableTag( this );
+        invokeBody(output);
+        ((TableControlTag) getParent()).setTableTag(this);
+        if (getData() != null)
+        {
+            ((TableControlTag) getParent()).setTabularData(getData());
+        }
     }
 
     /**
@@ -93,12 +118,12 @@ public class TableTag
      *
      * @param columnTag Column tag
      */
-    public void addColumnTag( ColumnTag columnTag )
+    public void addColumnTag(ColumnTag columnTag)
     {
-        columnTags.put( columnTag.getName(), columnTag );
-        if ( tableNew )
+        columnTags.put(columnTag.getName(), columnTag);
+        if (tableNew)
         {
-            getTable().addColumn( columnTag.getColumn() );
+            getTable().addColumn(columnTag.getColumn());
         }
     }
 
@@ -108,9 +133,9 @@ public class TableTag
      * @param columnName Name of the column
      * @return ColumnTag object
      */
-    public ColumnTag getColumnTag( String columnName )
+    public ColumnTag getColumnTag(String columnName)
     {
-        return (ColumnTag) columnTags.get( columnName );
+        return (ColumnTag) columnTags.get(columnName);
     }
 
     /**
@@ -154,15 +179,15 @@ public class TableTag
      *
      * @param name The name to set.
      */
-    public void setName( String name )
+    public void setName(String name)
     {
-        setTagId( name );
+        setTagId(name);
     }
 
     /**
      * @param var The var to set.
      */
-    public void setVar( String var )
+    public void setVar(String var)
     {
         this.var = var;
     }

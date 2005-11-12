@@ -16,14 +16,20 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang.ArrayUtils;
+
+import com.cyclopsgroup.waterview.LargeList;
+import com.cyclopsgroup.waterview.LargeList.Sorting;
 
 /**
  * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
@@ -32,13 +38,16 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class Table
 {
+    /** Undefined page size */
+    public static final int UNDEFINED_PAGE_SIZE = -1;
+
     private Map columns = ListOrderedMap.decorate(new HashMap());
 
     private String id;
 
     private int pageIndex = 0;
 
-    private int pageSize = -1;
+    private int pageSize = UNDEFINED_PAGE_SIZE;
 
     private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
 
@@ -105,23 +114,18 @@ public class Table
     /**
      * Get page count
      *
-     * @param data Tabular data
+     * @param size Total size of data
      * @return Page count
      * @throws Exception Throw it out
      */
-    public int getPageCount(TabularData data) throws Exception
+    public int getPageCount(int size) throws Exception
     {
-        if (!data.isCountable())
+        if (size < 0)
         {
             throw new IllegalStateException("Tabular data is not countable");
         }
-        if (getPageSize() <= 0)
-        {
-            throw new IllegalStateException("Table is not pagenized");
-        }
-        int recordCount = data.getSize();
-        int pageCount = recordCount / getPageSize();
-        if (recordCount % getPageSize() > 0)
+        int pageCount = size / getPageSize();
+        if (size % getPageSize() > 0)
         {
             pageCount++;
         }
@@ -156,6 +160,53 @@ public class Table
     public String[] getSortedColumns()
     {
         return (String[]) sortedColumns.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * This method will be called in table template
+     *
+     * @param tabularData Table data
+     * @return Iterator of data
+     * @throws Exception Throw it out
+     */
+    public Iterator iterate(LargeList tabularData) throws Exception
+    {
+        String[] sortedColumns = getSortedColumns();
+        List sortings = new ArrayList();
+        for (int i = 0; i < sortedColumns.length; i++)
+        {
+            String columnName = sortedColumns[i];
+            final Column column = getColumn(columnName);
+            if (column.getSort() == ColumnSort.ASC
+                    || column.getSort() == ColumnSort.DESC)
+            {
+                Sorting s = new Sorting()
+                {
+
+                    public String getName()
+                    {
+                        return column.getName();
+                    }
+
+                    public boolean isDescending()
+                    {
+                        return column.getSort() == ColumnSort.DESC;
+                    }
+
+                };
+                sortings.add(s);
+            }
+        }
+        Sorting[] sorts = (Sorting[]) sortings.toArray(Sorting.EMPTY_ARRAY);
+
+        if (getPageSize() == UNDEFINED_PAGE_SIZE)
+        {
+            return tabularData
+                    .iterate(0, LargeList.UNLIMITED_MAX_AMOUNT, sorts);
+        }
+
+        int startPosition = getPageIndex() * getPageSize();
+        return tabularData.iterate(startPosition, getPageSize(), sorts);
     }
 
     /**
