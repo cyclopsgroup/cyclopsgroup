@@ -104,7 +104,7 @@
         <dependency>
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>tornado</artifactId>
-            <version>SNAPSHOT</version>
+            <version>20051112.051228</version>
             <url>http://www.cyclopsgroup.com/projects/tornado</url>
             <properties>
                 <war.bundle>true</war.bundle>
