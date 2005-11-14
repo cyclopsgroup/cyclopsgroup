@@ -23,10 +23,11 @@ import java.util.Hashtable;
  * 
  * Base abstract theme class
  */
-public abstract class BaseTheme
-    implements Theme
+public abstract class BaseTheme implements Theme
 {
     private String description;
+
+    private LookAndFeelService laf;
 
     private Hashtable layouts = new Hashtable();
 
@@ -36,11 +37,13 @@ public abstract class BaseTheme
      * Constructor for class BaseTheme
      *
      * @param name Name of the theme
+     * @param laf Look and feel service
      */
-    protected BaseTheme( String name )
+    protected BaseTheme(String name, LookAndFeelService laf)
     {
         this.name = name;
-        setDescription( "Theme [" + name + "]" );
+        this.laf = laf;
+        setDescription("Theme [" + name + "]");
     }
 
     /**
@@ -54,13 +57,39 @@ public abstract class BaseTheme
     }
 
     /**
+     * Get look and feel service
+     *
+     * @return Look and feel service
+     */
+    protected LookAndFeelService getLAFService()
+    {
+        return laf;
+    }
+
+    /**
      * Overwrite or implement method getLayout()
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getLayout(java.lang.String)
      */
-    public Layout getLayout( String layoutName )
+    public Layout getLayout(String layoutName)
     {
-        return (Layout) layouts.get( layoutName );
+        Layout layout = (Layout) layouts.get(layoutName);
+        if (layout == null)
+        {
+            try
+            {
+                Theme defaultTheme = getLAFService().getDefaultTheme();
+                if (!defaultTheme.getName().equals(getName()))
+                {
+                    layout = defaultTheme.getLayout(layoutName);
+                }
+            }
+            catch (NoSuchLookAndFeelException e)
+            {
+                //ignore
+            }
+        }
+        return layout;
     }
 
     /**
@@ -78,7 +107,7 @@ public abstract class BaseTheme
      *
      * @param description The description to set.
      */
-    public void setDescription( String description )
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -89,8 +118,8 @@ public abstract class BaseTheme
      * @param name Layout name
      * @param layout Layout object
      */
-    public void setLayout( String name, Layout layout )
+    public void setLayout(String name, Layout layout)
     {
-        layouts.put( name, layout );
+        layouts.put(name, layout);
     }
 }

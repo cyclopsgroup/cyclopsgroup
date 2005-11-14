@@ -94,7 +94,7 @@ public interface RuntimeData
      * @param fileName Name of file
      * @return Mimetype
      */
-    String getMimeType( String fileName );
+    String getMimeType(String fileName);
 
     /**
      * Get output print writer
@@ -188,13 +188,6 @@ public interface RuntimeData
     String getSessionId();
 
     /**
-     * Get theme name
-     *
-     * @return Theme name
-     */
-    String getThemeName();
-
-    /**
      * Get time zone for current request
      *
      * @return Time zone
@@ -213,21 +206,21 @@ public interface RuntimeData
      *
      * @param locale Locale to set
      */
-    void setLocale( Locale locale );
+    void setLocale(Locale locale);
 
     /**
      * Set content type for response
      *
      * @param contentType Content type
      */
-    void setOutputContentType( String contentType );
+    void setOutputContentType(String contentType);
 
     /**
      * Set page with Page model
      *
      * @param page Page path
      */
-    void setPage( Path page );
+    void setPage(Path page);
 
     /**
      * Set page to render
@@ -235,20 +228,12 @@ public interface RuntimeData
      * @param page Page path
      * @throws Exception Throw it out
      */
-    void setPage( String page )
-        throws Exception;
+    void setPage(String page) throws Exception;
 
     /**
      * @param url URL to redirect
      */
-    void setRedirectUrl( String url );
-
-    /**
-     * Set theme
-     *
-     * @param themeName Name of theme to set
-     */
-    void setThemeName( String themeName );
+    void setRedirectUrl(String url);
 
     /**
      * Stop the pipeline

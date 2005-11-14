@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -30,29 +29,23 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultLayoutTag
-    extends TagSupport
+public class DefaultLayoutTag extends TagSupport
 {
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag( XMLOutput output )
-        throws Exception
+    public void processTag(XMLOutput output) throws Exception
     {
-        Page page = (Page) context.getVariable( Page.NAME );
-        if ( page == null )
+        Page page = (Page) context.getVariable(Page.NAME);
+        if (page == null)
         {
-            throw new JellyTagException( "JellyLayout must be in a page" );
+            throw new JellyTagException("JellyLayout must be in a page");
         }
-        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        String themeName = getRuntimeData().getThemeName();
-        Theme theme = tm.getDefaultTheme();
-        if ( StringUtils.isNotEmpty( themeName ) )
-        {
-            theme = tm.getTheme( themeName );
-        }
-        page.setLayout( theme.getLayout( Theme.LAYOUT_FOR_DEFAULT ) );
+        LookAndFeelService tm = (LookAndFeelService) getServiceManager()
+                .lookup(LookAndFeelService.ROLE);
+        Theme theme = tm.getRuntimeTheme(getRuntimeData());
+        page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
     }
 }

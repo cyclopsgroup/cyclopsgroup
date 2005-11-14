@@ -17,6 +17,8 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.RuntimeData;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
@@ -91,6 +93,15 @@ public interface LookAndFeelService
     String[] getLayoutNames();
 
     /**
+     * Set runtime theme
+     *
+     * @param data Runtime data
+     * @return Theme object
+     * @throws NoSuchLookAndFeelException If name doesn't exist
+     */
+    Theme getRuntimeTheme(RuntimeData data) throws NoSuchLookAndFeelException;
+
+    /**
      *Get stylesheet
      *
      * @param name Stylesheet name
@@ -151,4 +162,12 @@ public interface LookAndFeelService
      * @param theme Theme object
      */
     void registerTheme(Theme theme);
+
+    /**
+     * Set theme to runtime envionment
+     *
+     * @param data Runtime data
+     * @param theme Theme object to set
+     */
+    void setRuntimeData(RuntimeData data, Theme theme);
 }

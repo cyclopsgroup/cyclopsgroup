@@ -26,6 +26,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
 import com.cyclopsgroup.waterview.spi.Resource;
@@ -36,10 +37,13 @@ import com.cyclopsgroup.waterview.spi.Theme;
  *
  * implementation of look and feel service
  */
-public class DefaultLookAndFeelService
-    extends AbstractLogEnabled
-    implements LookAndFeelService, Configurable
+public class DefaultLookAndFeelService extends AbstractLogEnabled implements
+        LookAndFeelService, Configurable
 {
+    private static final String THEME_KEY = DefaultLookAndFeelService.class
+            .getName()
+            + "/theme";
+
     private String defaultThemeName;
 
     private Hashtable iconSets = new Hashtable();
@@ -55,10 +59,10 @@ public class DefaultLookAndFeelService
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure( Configuration conf )
-        throws ConfigurationException
+    public void configure(Configuration conf) throws ConfigurationException
     {
-        defaultThemeName = conf.getChild( "default-theme" ).getValue( "waterview.theme.default" );
+        defaultThemeName = conf.getChild("default-theme").getValue(
+                "waterview.theme.default");
     }
 
     /**
@@ -66,10 +70,9 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getDefaultTheme()
      */
-    public Theme getDefaultTheme()
-        throws NoSuchLookAndFeelException
+    public Theme getDefaultTheme() throws NoSuchLookAndFeelException
     {
-        return getTheme( defaultThemeName );
+        return getTheme(defaultThemeName);
     }
 
     /**
@@ -77,13 +80,12 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getIconSet(java.lang.String)
      */
-    public Resource getIconSet( String name )
-        throws NoSuchLookAndFeelException
+    public Resource getIconSet(String name) throws NoSuchLookAndFeelException
     {
-        Resource iconset = (Resource) iconSets.get( name );
-        if ( iconset == null )
+        Resource iconset = (Resource) iconSets.get(name);
+        if (iconset == null)
         {
-            throw new NoSuchLookAndFeelException( "Icon Set", name );
+            throw new NoSuchLookAndFeelException("Icon Set", name);
         }
         return iconset;
     }
@@ -95,7 +97,8 @@ public class DefaultLookAndFeelService
      */
     public String[] getIconSetNames()
     {
-        return (String[]) iconSets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) iconSets.keySet().toArray(
+                ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -103,9 +106,9 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getLayout(java.lang.String)
      */
-    public PredefinedLayout getLayout( String layoutName )
+    public PredefinedLayout getLayout(String layoutName)
     {
-        return (PredefinedLayout) layouts.get( layoutName );
+        return (PredefinedLayout) layouts.get(layoutName);
     }
 
     /**
@@ -115,7 +118,24 @@ public class DefaultLookAndFeelService
      */
     public String[] getLayoutNames()
     {
-        return (String[]) layouts.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) layouts.keySet().toArray(
+                ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    /**
+     * Overwrite or implement method getRuntimeTheme()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public Theme getRuntimeTheme(RuntimeData data)
+            throws NoSuchLookAndFeelException
+    {
+        Theme theme = (Theme) data.getSessionContext().get(THEME_KEY);
+        if (theme == null)
+        {
+            theme = getDefaultTheme();
+        }
+        return theme;
     }
 
     /**
@@ -123,13 +143,13 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getStyleSheet(java.lang.String)
      */
-    public Resource getStyleSheet( String name )
-        throws NoSuchLookAndFeelException
+    public Resource getStyleSheet(String name)
+            throws NoSuchLookAndFeelException
     {
-        Resource stylesheet = (Resource) styleSheets.get( name );
-        if ( stylesheet == null )
+        Resource stylesheet = (Resource) styleSheets.get(name);
+        if (stylesheet == null)
         {
-            throw new NoSuchLookAndFeelException( "Stylesheet", name );
+            throw new NoSuchLookAndFeelException("Stylesheet", name);
         }
         return stylesheet;
     }
@@ -141,7 +161,8 @@ public class DefaultLookAndFeelService
      */
     public String[] getStyleSheetNames()
     {
-        return (String[]) styleSheets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) styleSheets.keySet().toArray(
+                ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -149,17 +170,16 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getTheme(java.lang.String)
      */
-    public Theme getTheme( String themeName )
-        throws NoSuchLookAndFeelException
+    public Theme getTheme(String themeName) throws NoSuchLookAndFeelException
     {
-        if ( StringUtils.isEmpty( themeName ) )
+        if (StringUtils.isEmpty(themeName))
         {
             return getDefaultTheme();
         }
-        Theme theme = (Theme) themes.get( themeName );
-        if ( theme == null )
+        Theme theme = (Theme) themes.get(themeName);
+        if (theme == null)
         {
-            throw new NoSuchLookAndFeelException( "Theme", themeName );
+            throw new NoSuchLookAndFeelException("Theme", themeName);
         }
         return theme;
     }
@@ -171,7 +191,8 @@ public class DefaultLookAndFeelService
      */
     public String[] getThemeNames()
     {
-        return (String[]) themes.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return (String[]) themes.keySet()
+                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -179,9 +200,9 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerIconSet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
      */
-    public void registerIconSet( String name, Resource resource )
+    public void registerIconSet(String name, Resource resource)
     {
-        iconSets.put( name, resource );
+        iconSets.put(name, resource);
     }
 
     /**
@@ -189,9 +210,9 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerLayout(com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout)
      */
-    public void registerLayout( PredefinedLayout layout )
+    public void registerLayout(PredefinedLayout layout)
     {
-        layouts.put( layout.getName(), layout );
+        layouts.put(layout.getName(), layout);
     }
 
     /**
@@ -199,9 +220,9 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyleSheet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
      */
-    public void registerStyleSheet( String name, Resource stylesheet )
+    public void registerStyleSheet(String name, Resource stylesheet)
     {
-        styleSheets.put( name, stylesheet );
+        styleSheets.put(name, stylesheet);
     }
 
     /**
@@ -209,8 +230,18 @@ public class DefaultLookAndFeelService
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerTheme(com.cyclopsgroup.waterview.spi.Theme)
      */
-    public void registerTheme( Theme theme )
+    public void registerTheme(Theme theme)
     {
-        themes.put( theme.getName(), theme );
+        themes.put(theme.getName(), theme);
+    }
+
+    /**
+     * Overwrite or implement method setRuntimeData()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeData(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Theme)
+     */
+    public void setRuntimeData(RuntimeData data, Theme theme)
+    {
+        data.getSessionContext().put(THEME_KEY, theme);
     }
 }

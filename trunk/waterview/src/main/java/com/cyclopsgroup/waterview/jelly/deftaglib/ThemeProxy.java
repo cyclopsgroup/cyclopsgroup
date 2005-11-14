@@ -21,19 +21,16 @@ import com.cyclopsgroup.waterview.spi.BaseTheme;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Resource;
 
-class ThemeProxy
-    extends BaseTheme
+class ThemeProxy extends BaseTheme
 {
     private String iconSetName;
 
-    private LookAndFeelService laf;
-
     private String styleSheetName;
 
-    ThemeProxy( String name, LookAndFeelService laf, String iconSetName, String styleSheetName )
+    ThemeProxy(String name, LookAndFeelService laf, String iconSetName,
+            String styleSheetName)
     {
-        super( name );
-        this.laf = laf;
+        super(name, laf);
         this.iconSetName = iconSetName;
         this.styleSheetName = styleSheetName;
     }
@@ -47,11 +44,11 @@ class ThemeProxy
     {
         try
         {
-            return laf.getIconSet( iconSetName );
+            return getLAFService().getIconSet(iconSetName);
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-            throw new RuntimeException( e );
+            throw new RuntimeException(e);
         }
     }
 
@@ -74,11 +71,11 @@ class ThemeProxy
     {
         try
         {
-            return laf.getStyleSheet( styleSheetName );
+            return getLAFService().getStyleSheet(styleSheetName);
         }
-        catch ( Exception e )
+        catch (Exception e)
         {
-            throw new RuntimeException( e );
+            throw new RuntimeException(e);
         }
     }
 

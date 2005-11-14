@@ -31,8 +31,7 @@ import org.apache.commons.lang.ArrayUtils;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractRuntimeData
-    implements RuntimeData
+public abstract class AbstractRuntimeData implements RuntimeData
 {
     private List actions = new LinkedList();
 
@@ -69,8 +68,6 @@ public abstract class AbstractRuntimeData
     private String sessionId;
 
     private boolean stopped;
-
-    private String themeName;
 
     private TimeZone timeZone = TimeZone.getDefault();
 
@@ -121,12 +118,13 @@ public abstract class AbstractRuntimeData
      */
     public String[] getMessages()
     {
-        List messages = (List) getSessionContext().get( MESSAGES_NAME );
-        if ( messages == null )
+        List messages = (List) getSessionContext().get(MESSAGES_NAME);
+        if (messages == null)
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        String[] ret = (String[]) messages.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        String[] ret = (String[]) messages
+                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         messages.clear();
         return ret;
     }
@@ -260,16 +258,6 @@ public abstract class AbstractRuntimeData
     }
 
     /**
-     * Overwrite or implement method getThemeName()
-     *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getThemeName()
-     */
-    public String getThemeName()
-    {
-        return themeName;
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#getTimeZone()
@@ -294,12 +282,12 @@ public abstract class AbstractRuntimeData
      *
      * @param applicationBaseUrl The applicationBaseUrl to set.
      */
-    public void setApplicationBaseUrl( String applicationBaseUrl )
+    public void setApplicationBaseUrl(String applicationBaseUrl)
     {
         this.applicationBaseUrl = applicationBaseUrl;
-        if ( getRequestContext() != null )
+        if (getRequestContext() != null)
         {
-            getRequestContext().put( "applicationBase", applicationBaseUrl );
+            getRequestContext().put("applicationBase", applicationBaseUrl);
         }
     }
 
@@ -308,7 +296,7 @@ public abstract class AbstractRuntimeData
      *
      * @param inputContentType The inputContentType to set.
      */
-    public void setInputContentType( String inputContentType )
+    public void setInputContentType(String inputContentType)
     {
         this.inputContentType = inputContentType;
     }
@@ -318,7 +306,7 @@ public abstract class AbstractRuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setLocale(java.util.Locale)
      */
-    public void setLocale( Locale locale )
+    public void setLocale(Locale locale)
     {
         this.locale = locale;
     }
@@ -328,7 +316,7 @@ public abstract class AbstractRuntimeData
      *
      * @param output The output to set.
      */
-    public void setOutput( PrintWriter output )
+    public void setOutput(PrintWriter output)
     {
         this.output = output;
     }
@@ -338,7 +326,7 @@ public abstract class AbstractRuntimeData
      *
      * @param outputStream The outputStream to set.
      */
-    public void setOutputStream( OutputStream outputStream )
+    public void setOutputStream(OutputStream outputStream)
     {
         this.outputStream = outputStream;
     }
@@ -348,9 +336,9 @@ public abstract class AbstractRuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setPage(com.cyclopsgroup.waterview.Path)
      */
-    public void setPage( Path page )
+    public void setPage(Path page)
     {
-        getRequestContext().put( PAGE_NAME, page );
+        getRequestContext().put(PAGE_NAME, page);
         this.page = page;
     }
 
@@ -359,12 +347,12 @@ public abstract class AbstractRuntimeData
      *
      * @param pageBaseUrl The pageBaseUrl to set.
      */
-    public void setPageBaseUrl( String pageBaseUrl )
+    public void setPageBaseUrl(String pageBaseUrl)
     {
         this.pageBaseUrl = pageBaseUrl;
-        if ( getRequestContext() != null )
+        if (getRequestContext() != null)
         {
-            getRequestContext().put( "pageBase", pageBaseUrl );
+            getRequestContext().put("pageBase", pageBaseUrl);
         }
     }
 
@@ -373,7 +361,7 @@ public abstract class AbstractRuntimeData
      *
      * @param requestParameters The requestParameters to set.
      */
-    public void setParams( Parameters requestParameters )
+    public void setParams(Parameters requestParameters)
     {
         this.requestParameters = requestParameters;
     }
@@ -383,7 +371,7 @@ public abstract class AbstractRuntimeData
      *
      * @param queryString The queryString to set.
      */
-    public void setQueryString( String queryString )
+    public void setQueryString(String queryString)
     {
         this.queryString = queryString;
     }
@@ -393,7 +381,7 @@ public abstract class AbstractRuntimeData
      *
      * @see com.cyclopsgroup.waterview.RuntimeData#setRedirectUrl(java.lang.String)
      */
-    public void setRedirectUrl( String url )
+    public void setRedirectUrl(String url)
     {
         redirectUrl = url;
     }
@@ -403,7 +391,7 @@ public abstract class AbstractRuntimeData
      *
      * @param refererUrl The refererUrl to set.
      */
-    public void setRefererUrl( String refererUrl )
+    public void setRefererUrl(String refererUrl)
     {
         this.refererUrl = refererUrl;
     }
@@ -412,7 +400,7 @@ public abstract class AbstractRuntimeData
      * Set request context
      * @param pageContext Context object
      */
-    public void setRequestContext( Context pageContext )
+    public void setRequestContext(Context pageContext)
     {
         this.requestContext = pageContext;
     }
@@ -422,7 +410,7 @@ public abstract class AbstractRuntimeData
      *
      * @param requestPath The requestPath to set.
      */
-    public void setRequestPath( String requestPath )
+    public void setRequestPath(String requestPath)
     {
         this.requestPath = requestPath;
     }
@@ -432,7 +420,7 @@ public abstract class AbstractRuntimeData
      *
      * @param serviceManager The serviceManager to set.
      */
-    public void setServiceManager( ServiceManager serviceManager )
+    public void setServiceManager(ServiceManager serviceManager)
     {
         this.serviceManager = serviceManager;
     }
@@ -442,7 +430,7 @@ public abstract class AbstractRuntimeData
      *
      * @param sessionContext The sessionContext to set.
      */
-    public void setSessionContext( Context sessionContext )
+    public void setSessionContext(Context sessionContext)
     {
         this.sessionContext = sessionContext;
     }
@@ -451,19 +439,9 @@ public abstract class AbstractRuntimeData
      * Set session ID
      * @param sessionId
      */
-    public void setSessionId( String sessionId )
+    public void setSessionId(String sessionId)
     {
         this.sessionId = sessionId;
-    }
-
-    /**
-     * Setter method for field themeName
-     *
-     * @param themeName The themeName to set.
-     */
-    public void setThemeName( String themeName )
-    {
-        this.themeName = themeName;
     }
 
     /**
@@ -471,7 +449,7 @@ public abstract class AbstractRuntimeData
      *
      * @param timeZone The timeZone to set.
      */
-    public void setTimeZone( TimeZone timeZone )
+    public void setTimeZone(TimeZone timeZone)
     {
         this.timeZone = timeZone;
     }
