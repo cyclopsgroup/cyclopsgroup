@@ -10,7 +10,10 @@
                 <item name="Business logic layer" href="/services.html" />
                 <item name="Database layer" href="/database.html" />
             </item>
-            <item name="Install and run" href="/install.html" />
+            <item name="Download and install" href="/download.html" collapse="true">
+                <item name="Installation guide" href="/install.html" />
+                <item name="Development environment" href="/devenv.html" />
+            </item>
             <item name="Development team" href="/team-list.html" />
         </menu>
         <links>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Download and install</title>
+    </properties>
+    <body>
+        <section name="Released packages">
+            <p>
+                Course list project just released the 1.0 beta 1 version, the first released version. The related
+                packages are available to download at
+                <a href="https://sourceforge.net/project/showfiles.php?group_id=91358&amp;package_id=169293">
+                    https://sourceforge.net/project/showfiles.php?group_id=91358&amp;package_id=169293
+                </a>
+                .
+            </p>
+            <p>
+                Please read the
+                <a href="install.html">installation guide</a>
+                document to find out how to install release packages in your machine.
+            </p>
+        </section>
+        <section name="Latest develop version">
+            <p>
+                To check out latest develop version from CVS and build it, please check
+                <a href="devenv.html">Development environment</a>
+                document.
+            </p>
+        </section>
+    </body>
+</document>
