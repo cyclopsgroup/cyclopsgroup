@@ -43,8 +43,9 @@ public interface Theme
      * Get icon set resource
      *
      * @return Resource object icon set
+     * @throws NoSuchLookAndFeelException name error
      */
-    Resource getIconSet();
+    Resource getIconSet() throws NoSuchLookAndFeelException;
 
     /**
      * Get name of icon set
@@ -59,7 +60,7 @@ public interface Theme
      * @param layoutName Layout tname
      * @return Layout Layout object
      */
-    Layout getLayout( String layoutName );
+    Layout getLayout(String layoutName);
 
     /**
      * Get name of this theme
@@ -72,8 +73,9 @@ public interface Theme
      * Get stylesheet resource
      *
      * @return Resource of stylesheet
+     * @throws NoSuchLookAndFeelException name error
      */
-    Resource getStyleSheet();
+    Resource getStyleSheet() throws NoSuchLookAndFeelException;
 
     /**
      * Get name of stylesheet

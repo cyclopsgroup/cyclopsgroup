@@ -9,6 +9,7 @@
                 <Node page="/waterview/system/status/SessionDump.jelly" title="%waterview.view.sessiondump" />
                 <Node page="/waterview/system/status/GlobalVariables.jelly" title="%waterview.view.globalvariables" />
                 <Node page="/waterview/system/status/SetLocale.jelly" title="%waterview.view.setlocale" />
+                <Node page="/waterview/system/status/SetLookAndFeel.jelly" title="%waterview.view.setlookandfeel" />
             </Node>
         </Node>
         <Node name="help" title="%waterview.navigation.help" page="/waterview/help/Index.jelly">
