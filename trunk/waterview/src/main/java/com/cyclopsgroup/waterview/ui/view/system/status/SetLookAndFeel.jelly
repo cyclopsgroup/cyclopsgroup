@@ -35,7 +35,7 @@
                 </tr>
             </table>
             <div>
-                <w:Submit action="${link.addAction('/waterview/ChagneTheme').setPage(page)}">
+                <w:Submit action="${link.addAction('/waterview/ChangeTheme').setPage(page)}">
                     <w:FormButton title="%document.text.savechange" />
                 </w:Submit>
             </div>

@@ -49,31 +49,11 @@ public class ChangeTheme extends BaseServiceable implements Action
         {
             final String styleName = data.getParameters().getString(
                     "style_name");
-            final String iconSetName = data.getParameters().getString(
-                    "iconset_name");
+            //final String iconSetName = data.getParameters().getString(
+            //       "iconset_name");
 
             theme = new ThemeProxy(laf.getDefaultTheme())
             {
-                /**
-                 * Overwrite or implement method getIconSet()
-                 *
-                 * @see com.cyclopsgroup.waterview.ui.action.ThemeProxy#getIconSet()
-                 */
-                public Resource getIconSet() throws NoSuchLookAndFeelException
-                {
-                    return laf.getIconSet(iconSetName);
-                }
-
-                /**
-                 * Overwrite or implement method getIconSetName()
-                 *
-                 * @see com.cyclopsgroup.waterview.ui.action.ThemeProxy#getIconSetName()
-                 */
-                public String getIconSetName()
-                {
-                    return iconSetName;
-                }
-
                 /**
                  * Overwrite or implement method getName()
                  *
@@ -104,7 +84,6 @@ public class ChangeTheme extends BaseServiceable implements Action
                 {
                     return styleName;
                 }
-
             };
         }
         else
