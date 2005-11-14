@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Overview</title>
+    </properties>
+    <body>
+        <section name="WSL Overview">
+            <p>WSL is the stylesheet libraries for waterview project.</p>
+        </section>
+    </body>
+</document>
