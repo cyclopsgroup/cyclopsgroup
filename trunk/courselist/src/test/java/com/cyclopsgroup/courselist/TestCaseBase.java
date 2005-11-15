@@ -17,37 +17,26 @@
  */
 package com.cyclopsgroup.courselist;
 
-import com.cyclopsgroup.courselist.entity.CourseStatus;
+import java.io.InputStream;
+
+import org.codehaus.plexus.PlexusTestCase;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Test case for student service
+ * Base of other test cases
  */
-public class StudentServiceTest
-    extends TestCaseBase
+public class TestCaseBase
+    extends PlexusTestCase
 {
     /**
-     * Test if service is there
+     * Overwrite or implement method getCustomConfiguration()
      *
-     * @throws Exception
+     * @see org.codehaus.plexus.PlexusTestCase#getCustomConfiguration()
      */
-    public void testExisting()
+    protected InputStream getCustomConfiguration()
         throws Exception
     {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        assertNotNull( ss );
-    }
-
-    /**
-     * Test student
-     *
-     * @throws Exception Throw it out
-     */
-    public void testStudent()
-        throws Exception
-    {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        assertEquals( CourseStatus.NONE, ss.getStatus( "aaa", "bbbb" ) );
+        return getClass().getClassLoader().getResourceAsStream( "test-components.xml" );
     }
 }

@@ -17,37 +17,42 @@
  */
 package com.cyclopsgroup.courselist;
 
-import com.cyclopsgroup.courselist.entity.CourseStatus;
+import java.util.List;
+
+import com.cyclopsgroup.courselist.entity.Course;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Test case for student service
+ * Test case for courselist service
  */
-public class StudentServiceTest
+public class CourseListServiceTest
     extends TestCaseBase
 {
     /**
-     * Test if service is there
+     * Test method for findByCode method
      *
      * @throws Exception
      */
-    public void testExisting()
+    public void testFindByCode()
         throws Exception
     {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        assertNotNull( ss );
+        CourseListService cls = (CourseListService) lookup( CourseListService.ROLE );
+        Course course = cls.findByCode( "CS", "5348" );
+        assertNotNull( course );
+        assertEquals( "Operating Systems Concepts", course.getName() );
     }
 
     /**
-     * Test student
+     * Test method for getAllCourses()
      *
-     * @throws Exception Throw it out
+     * @throws Exception
      */
-    public void testStudent()
+    public void testGetAllCourse()
         throws Exception
     {
-        StudentService ss = (StudentService) lookup( StudentService.ROLE );
-        assertEquals( CourseStatus.NONE, ss.getStatus( "aaa", "bbbb" ) );
+        CourseListService cls = (CourseListService) lookup( CourseListService.ROLE );
+        List courses = cls.getAllCourses();
+        assertEquals( 8, courses.size() );
     }
 }
