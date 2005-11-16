@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ public interface PortalService
      */
     String ROLE = PortalService.class.getName();
 
+    /** Theme name in attributes */
+    String THEME_ATTRIBUTE_NAME = PortalService.class.getName() + "/themeName";
+
     /** Theme name for unset theme */
     String UNSET_THEME_NAME = "!unset!";
-
-    /** User theme name */
-    String USER_THEME_NAME = "tornado.user.theme";
 
     /**
      * Find user preference based on userId

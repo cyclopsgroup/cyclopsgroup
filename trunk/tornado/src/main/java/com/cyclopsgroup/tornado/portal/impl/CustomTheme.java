@@ -47,10 +47,11 @@ public class CustomTheme
      * Constructor for class CustomTheme
      *
      * @param defaultTheme Default proxy theme
+     * @param laf Look and feel service
      */
-    public CustomTheme( Theme defaultTheme )
+    public CustomTheme( Theme defaultTheme, LookAndFeelService laf )
     {
-        super( NAME );
+        super( NAME, laf );
         this.defaultTheme = defaultTheme;
         setDescription( "Customized Theme" );
         iconSet = new CustomResource()

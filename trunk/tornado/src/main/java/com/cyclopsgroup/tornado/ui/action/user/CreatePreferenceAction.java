@@ -50,7 +50,8 @@ public class CreatePreferenceAction
         up.setThemeName( PortalService.UNSET_THEME_NAME );
 
         LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
-        Theme theme = laf.getTheme( data.getThemeName() );
+        Theme theme = laf.getRuntimeTheme( data );
+
         up.setIconset( theme.getIconSetName() );
         up.setStylesheet( theme.getStyleSheetName() );
 

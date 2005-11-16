@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,16 @@
 package com.cyclopsgroup.tornado.portal;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -31,8 +37,10 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class SetUserPreferenceValve
     extends AbstractLogEnabled
-    implements Valve
+    implements Valve, Serviceable
 {
+    private LookAndFeelService laf;
+
     /**
      * Overwrite or implement method invoke()
      *
@@ -42,8 +50,23 @@ public class SetUserPreferenceValve
         throws Exception
     {
         RuntimeUser user = RuntimeUser.getInstance( data );
-        String themeName = user.getAttributes().getString( PortalService.USER_THEME_NAME );
-        data.setThemeName( themeName );
+        String themeName = user.getAttributes().getString( PortalService.THEME_ATTRIBUTE_NAME );
+        if ( !StringUtils.isEmpty( themeName ) && !PortalService.UNSET_THEME_NAME.equals( themeName ) )
+        {
+            Theme theme = laf.getTheme( themeName );
+            laf.setRuntimeTheme( data, theme );
+        }
         context.invokeNextValve( data );
+    }
+
+    /**
+     * Overwrite or implement method service()
+     *
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
+    {
+        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }
