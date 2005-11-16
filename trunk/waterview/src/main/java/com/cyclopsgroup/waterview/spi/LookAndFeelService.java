@@ -169,5 +169,5 @@ public interface LookAndFeelService
      * @param data Runtime data
      * @param theme Theme object to set
      */
-    void setRuntimeData(RuntimeData data, Theme theme);
+    void setRuntimeTheme(RuntimeData data, Theme theme);
 }

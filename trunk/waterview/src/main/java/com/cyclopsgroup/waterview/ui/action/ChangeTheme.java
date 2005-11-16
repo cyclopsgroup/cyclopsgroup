@@ -90,7 +90,7 @@ public class ChangeTheme extends BaseServiceable implements Action
         {
             theme = laf.getTheme(themeName);
         }
-        laf.setRuntimeData(data, theme);
+        laf.setRuntimeTheme(data, theme);
 
         context.addMessage("Theme for current session is changed");
     }

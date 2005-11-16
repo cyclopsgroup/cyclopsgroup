@@ -238,9 +238,9 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method setRuntimeData()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeData(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Theme)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Theme)
      */
-    public void setRuntimeData(RuntimeData data, Theme theme)
+    public void setRuntimeTheme(RuntimeData data, Theme theme)
     {
         data.getSessionContext().put(THEME_KEY, theme);
     }
