@@ -31,30 +31,29 @@ public abstract class BaseViewTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        final View view = createView();
-
-        if ( view == null )
+        RuntimeData data = getRuntimeData();
+        try
         {
-            return;
-        }
-        if ( getParent() instanceof ViewAware )
-        {
-            ( (ViewAware) getParent() ).doView( view );
-        }
-        else
-        {
-            RuntimeData data = getRuntimeData();
-            try
+            final View view = createView();
+            if ( view == null )
+            {
+                return;
+            }
+            if ( getParent() instanceof ViewAware )
+            {
+                ( (ViewAware) getParent() ).doView( view );
+            }
+            else
             {
                 JellyContextAdapter jc = new JellyContextAdapter( getContext() );
                 view.render( data, jc );
             }
-            catch ( Exception e )
-            {
-                data.getOutput().println( "<pre>" );
-                e.printStackTrace( data.getOutput() );
-                data.getOutput().println( "</pre>" );
-            }
+        }
+        catch ( Exception e )
+        {
+            data.getOutput().println( "<pre>" );
+            e.printStackTrace( data.getOutput() );
+            data.getOutput().println( "</pre>" );
         }
     }
 }
