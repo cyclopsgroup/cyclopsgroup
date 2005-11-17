@@ -17,15 +17,21 @@
  */
 package com.cyclopsgroup.courselist.ui.view.teacher;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.cyclopsgroup.courselist.StudentService;
 import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.courselist.entity.StudentCourse;
 import com.cyclopsgroup.tornado.persist.PersistenceManager;
+import com.cyclopsgroup.tornado.security.entity.User;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.SelectOption;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -53,5 +59,35 @@ public class MyCourseDetail
         StudentService ss = (StudentService) lookup( StudentService.ROLE );
         List studentCourses = ss.findByCourse( courseId );
         context.put( "studentCourses", studentCourses );
+
+        HashSet existingStudentIds = new HashSet();
+        for ( Iterator i = studentCourses.iterator(); i.hasNext(); )
+        {
+            StudentCourse sc = (StudentCourse) i.next();
+            existingStudentIds.add( sc.getStudentId() );
+        }
+
+        List allStudents = ss.getAllStudents();
+        TreeMap students = new TreeMap();
+        for ( Iterator i = allStudents.iterator(); i.hasNext(); )
+        {
+            final User user = (User) i.next();
+            if ( !existingStudentIds.contains( user.getId() ) )
+            {
+                students.put( user.getName(), new SelectOption()
+                {
+                    public String getName()
+                    {
+                        return user.getName();
+                    }
+
+                    public String getTitle()
+                    {
+                        return user.getName() + "(" + user.getDisplayName() + ")";
+                    }
+                } );
+            }
+        }
+        context.put( "students", students.values() );
     }
 }

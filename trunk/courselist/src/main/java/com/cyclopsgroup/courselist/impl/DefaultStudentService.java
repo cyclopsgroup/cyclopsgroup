@@ -17,10 +17,14 @@
  */
 package com.cyclopsgroup.courselist.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
@@ -30,6 +34,9 @@ import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.courselist.entity.CourseStatus;
 import com.cyclopsgroup.courselist.entity.StudentCourse;
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
+import com.cyclopsgroup.tornado.security.RuntimeUser;
+import com.cyclopsgroup.tornado.security.SecurityService;
+import com.cyclopsgroup.tornado.security.entity.User;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -38,8 +45,10 @@ import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
  */
 public class DefaultStudentService
     extends AbstractHibernateEnabled
-    implements StudentService
+    implements StudentService, Serviceable
 {
+    private SecurityService security;
+
     /**
      * Overwrite or implement method addCourse()
      *
@@ -129,6 +138,30 @@ public class DefaultStudentService
     }
 
     /**
+     * Overwrite or implement method getAllStudents()
+     *
+     * @see com.cyclopsgroup.courselist.StudentService#getAllStudents()
+     */
+    public List getAllStudents()
+        throws Exception
+    {
+        Criteria criteria = getHibernateSession().createCriteria( User.class );
+        criteria.add( Expression.eq( "isDisabled", Boolean.FALSE ) );
+        List users = criteria.list();
+        List ret = new ArrayList();
+        for ( Iterator i = users.iterator(); i.hasNext(); )
+        {
+            User user = (User) i.next();
+            RuntimeUser ru = (RuntimeUser) security.getUser( user.getName() );
+            if ( ru.hasRole( ROLE_STUDENT ) )
+            {
+                ret.add( user );
+            }
+        }
+        return ret;
+    }
+
+    /**
      * Overwrite or implement method getStatus()
      *
      * @see com.cyclopsgroup.courselist.StudentService#getStatus(java.lang.String, java.lang.String)
@@ -178,5 +211,17 @@ public class DefaultStudentService
             }
         }
         return true;
+    }
+
+    /**
+     * Overwrite or implement method service()
+     *
+     * @see com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
+    {
+        super.service( serviceManager );
+        security = (SecurityService) serviceManager.lookup( SecurityService.ROLE );
     }
 }

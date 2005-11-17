@@ -84,6 +84,15 @@ public interface StudentService
         throws Exception;
 
     /**
+     * Get all users with student role
+     *
+     * @return List of user objects
+     * @throws Exception Throw it out
+     */
+    List getAllStudents()
+        throws Exception;
+
+    /**
      * Get status of course
      *
      * @param studentId Student id

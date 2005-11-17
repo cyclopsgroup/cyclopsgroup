@@ -88,18 +88,22 @@
             </w:Submit>
         </w:Form>
     </w:FormControl>
-    <w:FormControl>
-        <w:Form name="addstudent" method="post">
-            <input type="hidden" name="course_id" value="${course.id}" />
-            <p>
-                Add a student:
-                <w:Field name="student_name" title="Student name" required="true" size="8" />
-                <w:Submit
-                    action="${link.addAction('/courselist/teacher/AddStudentAction').setPage(page).addQueryData('course_id', course.id)}"
-                    forceValidation="true">
-                    <w:FormButton title="Add student" />
-                </w:Submit>
-            </p>
-        </w:Form>
-    </w:FormControl>
+    <j:if test="${!students.isEmpty()}">
+        <w:FormControl>
+            <w:Form name="addstudent" method="post">
+                <input type="hidden" name="course_id" value="${course.id}" />
+                <p>
+                    Add a student:
+                    <w:Field name="student_name" title="Student name" required="true">
+                        <w:Select items="${students}" />
+                    </w:Field>
+                    <w:Submit
+                        action="${link.addAction('/courselist/teacher/AddStudentAction').setPage(page).addQueryData('course_id', course.id)}"
+                        forceValidation="true">
+                        <w:FormButton title="Add student" />
+                    </w:Submit>
+                </p>
+            </w:Form>
+        </w:FormControl>
+    </j:if>
 </div>
