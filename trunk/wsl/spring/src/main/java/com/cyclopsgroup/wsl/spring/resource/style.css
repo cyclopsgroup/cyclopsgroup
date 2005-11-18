@@ -8,7 +8,7 @@ h2 {
 }
 
 a:link,a:visited {
-	color: #2E52AF;
+	color: #003333;
 }
 
 #bodyWrapper {
@@ -43,12 +43,16 @@ a:link,a:visited {
 }
 
 .bannerPanelBelt {
-	background-color: #8CAAE6;
+	background-color: #FFCC66;
 	height: 16px;
 }
 
 #leftPanel {
-	background-color: #8CAAE6;
+	background-color: #FFCC66;
+}
+
+#bodyPanel {
+	background-color: #FFFFCC;
 }
 
 #footerPanel {
@@ -58,20 +62,17 @@ a:link,a:visited {
 }
 
 table.waterviewTable th {
+	background-color: #CCFF99;
 	border-style: solid;
-	border-color: #2E52AF;
-	border-width: 0px 0px 2px 0px;;
-	border-color: #2E52AF;
+	border-color: #99CC33;
+	border-width: 2px 0px 1px 0px;
 }
 
 table.waterviewTable tr.a td,table.waterviewTable tr.b td {
-	border-style: dashed;
-	border-color: #2E52AF;
+	background-color: #B1EC76;
+	border-style: solid;
+	border-color: #99CC33;
 	border-width: 0px 0px 1px 0px;
-}
-
-table.waterviewTable tr.b {
-	background-color: #F7F7F7;
 }
 
 table.waterviewTable .title {
@@ -79,33 +80,28 @@ table.waterviewTable .title {
 }
 
 table.waterviewTable td.input {
-	
+
 }
 
 .lineBreak,.subLineBreak {
 	background-color: #2E52AF;
 }
 
-#leftPanel .waterviewPortlet {
-	background-color: #5582D2;
+#leftPanel .waterviewPortletWrapper {
+	border-width: 1px;
+	background-color: #FFCC66;
+	border-color: #FFCC66;
+	border-style: inset;
 }
 
-#leftPanel .waterviewPortletWrapper {
-	position: relative;
-	top: -2px;
-	left: -2px;
+#leftPanel .waterviewPortletHeader, #leftPanel .waterviewPortletBody {
 	border-width: 1px;
-	border-style: solid;
-	border-color: #003399;
-	background-color: #EDF2FC;
+	border-color: #FFCC66;
+	border-style: outset;
 }
 
 #leftPanel .waterviewPortletHeader {
-	background-color: #1F56C0;
-}
-
-#leftPanel .waterviewPortletTitle {
-	color: white;
+	background-color: #FF9933;
 }
 
 .waterviewUnselectedTab {
