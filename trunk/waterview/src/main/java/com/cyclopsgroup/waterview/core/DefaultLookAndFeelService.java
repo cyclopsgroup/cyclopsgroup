@@ -29,7 +29,6 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
-import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
 
 /**
@@ -37,12 +36,11 @@ import com.cyclopsgroup.waterview.spi.Theme;
  *
  * implementation of look and feel service
  */
-public class DefaultLookAndFeelService extends AbstractLogEnabled implements
-        LookAndFeelService, Configurable
+public class DefaultLookAndFeelService
+    extends AbstractLogEnabled
+    implements LookAndFeelService, Configurable
 {
-    private static final String THEME_KEY = DefaultLookAndFeelService.class
-            .getName()
-            + "/theme";
+    private static final String THEME_KEY = DefaultLookAndFeelService.class.getName() + "/theme";
 
     private String defaultThemeName;
 
@@ -59,10 +57,10 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
      */
-    public void configure(Configuration conf) throws ConfigurationException
+    public void configure( Configuration conf )
+        throws ConfigurationException
     {
-        defaultThemeName = conf.getChild("default-theme").getValue(
-                "waterview.theme.default");
+        defaultThemeName = conf.getChild( "default-theme" ).getValue( "waterview.theme.default" );
     }
 
     /**
@@ -70,9 +68,10 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getDefaultTheme()
      */
-    public Theme getDefaultTheme() throws NoSuchLookAndFeelException
+    public Theme getDefaultTheme()
+        throws NoSuchLookAndFeelException
     {
-        return getTheme(defaultThemeName);
+        return getTheme( defaultThemeName );
     }
 
     /**
@@ -80,12 +79,13 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getIconSet(java.lang.String)
      */
-    public Resource getIconSet(String name) throws NoSuchLookAndFeelException
+    public IconSet getIconSet( String name )
+        throws NoSuchLookAndFeelException
     {
-        Resource iconset = (Resource) iconSets.get(name);
-        if (iconset == null)
+        IconSet iconset = (IconSet) iconSets.get( name );
+        if ( iconset == null )
         {
-            throw new NoSuchLookAndFeelException("Icon Set", name);
+            throw new NoSuchLookAndFeelException( "Icon Set", name );
         }
         return iconset;
     }
@@ -97,8 +97,7 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      */
     public String[] getIconSetNames()
     {
-        return (String[]) iconSets.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) iconSets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -106,9 +105,9 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getLayout(java.lang.String)
      */
-    public PredefinedLayout getLayout(String layoutName)
+    public PredefinedLayout getLayout( String layoutName )
     {
-        return (PredefinedLayout) layouts.get(layoutName);
+        return (PredefinedLayout) layouts.get( layoutName );
     }
 
     /**
@@ -118,8 +117,7 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      */
     public String[] getLayoutNames()
     {
-        return (String[]) layouts.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) layouts.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -127,11 +125,11 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData)
      */
-    public Theme getRuntimeTheme(RuntimeData data)
-            throws NoSuchLookAndFeelException
+    public Theme getRuntimeTheme( RuntimeData data )
+        throws NoSuchLookAndFeelException
     {
-        Theme theme = (Theme) data.getSessionContext().get(THEME_KEY);
-        if (theme == null)
+        Theme theme = (Theme) data.getSessionContext().get( THEME_KEY );
+        if ( theme == null )
         {
             theme = getDefaultTheme();
         }
@@ -141,15 +139,15 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getStylesheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getStyleSheet(java.lang.String)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getStyle(java.lang.String)
      */
-    public Resource getStyleSheet(String name)
-            throws NoSuchLookAndFeelException
+    public Style getStyle( String name )
+        throws NoSuchLookAndFeelException
     {
-        Resource stylesheet = (Resource) styleSheets.get(name);
-        if (stylesheet == null)
+        Style stylesheet = (Style) styleSheets.get( name );
+        if ( stylesheet == null )
         {
-            throw new NoSuchLookAndFeelException("Stylesheet", name);
+            throw new NoSuchLookAndFeelException( "Stylesheet", name );
         }
         return stylesheet;
     }
@@ -157,12 +155,11 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
     /**
      * Overwrite or implement method getStylesheetNames()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getStyleSheetNames()
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getStyleNames()
      */
-    public String[] getStyleSheetNames()
+    public String[] getStyleNames()
     {
-        return (String[]) styleSheets.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) styleSheets.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -170,16 +167,17 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getTheme(java.lang.String)
      */
-    public Theme getTheme(String themeName) throws NoSuchLookAndFeelException
+    public Theme getTheme( String themeName )
+        throws NoSuchLookAndFeelException
     {
-        if (StringUtils.isEmpty(themeName))
+        if ( StringUtils.isEmpty( themeName ) )
         {
             return getDefaultTheme();
         }
-        Theme theme = (Theme) themes.get(themeName);
-        if (theme == null)
+        Theme theme = (Theme) themes.get( themeName );
+        if ( theme == null )
         {
-            throw new NoSuchLookAndFeelException("Theme", themeName);
+            throw new NoSuchLookAndFeelException( "Theme", themeName );
         }
         return theme;
     }
@@ -191,18 +189,17 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      */
     public String[] getThemeNames()
     {
-        return (String[]) themes.keySet()
-                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) themes.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
      * Overwrite or implement method registerIconSet()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerIconSet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerIconSet(java.lang.String, com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet)
      */
-    public void registerIconSet(String name, Resource resource)
+    public void registerIconSet( String name, IconSet resource )
     {
-        iconSets.put(name, resource);
+        iconSets.put( name, resource );
     }
 
     /**
@@ -210,19 +207,19 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerLayout(com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout)
      */
-    public void registerLayout(PredefinedLayout layout)
+    public void registerLayout( PredefinedLayout layout )
     {
-        layouts.put(layout.getName(), layout);
+        layouts.put( layout.getName(), layout );
     }
 
     /**
-     * Overwrite or implement method registerStylesheet()
+     * Overwrite or implement method registerStyle()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyleSheet(java.lang.String, com.cyclopsgroup.waterview.spi.Resource)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerStyle(java.lang.String, com.cyclopsgroup.waterview.spi.LookAndFeelService.Style)
      */
-    public void registerStyleSheet(String name, Resource stylesheet)
+    public void registerStyle( String name, Style style )
     {
-        styleSheets.put(name, stylesheet);
+        styleSheets.put( name, style );
     }
 
     /**
@@ -230,9 +227,9 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#registerTheme(com.cyclopsgroup.waterview.spi.Theme)
      */
-    public void registerTheme(Theme theme)
+    public void registerTheme( Theme theme )
     {
-        themes.put(theme.getName(), theme);
+        themes.put( theme.getName(), theme );
     }
 
     /**
@@ -240,8 +237,8 @@ public class DefaultLookAndFeelService extends AbstractLogEnabled implements
      *
      * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Theme)
      */
-    public void setRuntimeTheme(RuntimeData data, Theme theme)
+    public void setRuntimeTheme( RuntimeData data, Theme theme )
     {
-        data.getSessionContext().put(THEME_KEY, theme);
+        data.getSessionContext().put( THEME_KEY, theme );
     }
 }

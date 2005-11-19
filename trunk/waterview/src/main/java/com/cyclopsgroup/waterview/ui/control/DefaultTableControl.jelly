@@ -16,16 +16,13 @@
                                     href="${link.addAction('/waterview/SortTable').setPage(page).addQueryData('table_id', table.id).addQueryData('table_column_name', column.name)}">
                                     <j:switch on="${column.sort.name}">
                                         <j:case value="asc">
-                                            <img src="${themeBase}/16x16/1uparrow.png" width="16" height="16"
-                                                alt="Ascendingly sorted" align="absbottom" />
+                                            <w:Icon file="1uparrow.png" alt="Ascendingly sorted" />
                                         </j:case>
                                         <j:case value="desc">
-                                            <img src="${themeBase}/16x16/1downarrow.png" width="16" height="16"
-                                                alt="Descendingly sorted" align="absbottom" />
+                                            <w:Icon file="1downarrow.png" alt="Descendingly sorted" />
                                         </j:case>
                                         <j:case value="unsorted">
-                                            <img src="${themeBase}/16x16/kwikdisk.png" width="16" height="16"
-                                                alt="Unsorted" align="absbottom" />
+                                            <w:Icon file="kwikdisk.png" alt="Unsorted" />
                                         </j:case>
                                     </j:switch>
                                 </a>
@@ -86,15 +83,13 @@
                                                 <td>
                                                     <a
                                                         href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', 0).addQueryData('table_id', table.id)}">
-                                                        <img src="${themeBase}/16x16/2leftarrow.png" width="16"
-                                                            height="16" alt="First Page" />
+                                                        <w:Icon file="2leftarrow.png" alt="First Page" />
                                                     </a>
                                                 </td>
                                                 <td>
                                                     <a
                                                         href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex - 1).addQueryData('table_id', table.id)}">
-                                                        <img src="${themeBase}/16x16/1leftarrow.png" width="16"
-                                                            height="16" alt="Prevous Page" />
+                                                        <w:Icon file="1leftarrow.png" alt="Prevous Page" />
                                                     </a>
                                                 </td>
                                             </j:if>
@@ -106,15 +101,13 @@
                                                 <td>
                                                     <a
                                                         href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex + 1).addQueryData('table_id', table.id)}">
-                                                        <img src="${themeBase}/16x16/1rightarrow.png" width="16"
-                                                            height="16" alt="Next Page" />
+                                                        <w:Icon file="1rightarrow.png" alt="Next Page" />
                                                     </a>
                                                 </td>
                                                 <td>
                                                     <a
                                                         href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', pageCount - 1).addQueryData('table_id', table.id)}">
-                                                        <img src="${themeBase}/16x16/2rightarrow.png" width="16"
-                                                            height="16" alt="Last Page" />
+                                                        <w:Icon file="2rightarrow.png" alt="Last Page" />
                                                     </a>
                                                 </td>
                                             </j:if>
@@ -126,15 +119,13 @@
                                             <td>
                                                 <a
                                                     href="${link.addAction('/waterview/DeleteSessionAttributes').setPage(page).addQueryString(data.queryString).addQueryData('attribute_name', table.id)}">
-                                                    <img src="${themeBase}/16x16/reload.png" width="16" height="16"
-                                                        alt="%document.text.reload" />
+                                                    <w:Icon file="reload.png" alt="%document.text.reload" />
                                                 </a>
                                             </td>
                                             <td>
                                                 <a
                                                     href="${link.setPage('/waterview/popup/ConfigureTable.jelly').addQueryData('table_id', table.id)}">
-                                                    <img src="${themeBase}/16x16/edit.png" width="16" height="16"
-                                                        alt="%document.text.configure" />
+                                                    <w:Icon file="edit.png" alt="%document.text.configure" />
                                                 </a>
                                             </td>
                                         </j:if>

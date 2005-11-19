@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,19 +26,21 @@ import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.SelectOption;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * View to set look and feel
  */
-public class SetLookAndFeel extends BaseServiceable implements Module
+public class SetLookAndFeel
+    extends BaseServiceable
+    implements Module
 {
     /**
      * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
-     * 
+     *
      * Internal fake theme item
      */
     public class Item
@@ -69,30 +71,31 @@ public class SetLookAndFeel extends BaseServiceable implements Module
      *
      * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute( RuntimeData data, Context context )
+        throws Exception
     {
-        LookAndFeelService laf = (LookAndFeelService) lookup(LookAndFeelService.ROLE);
-        context.put("defaultTheme", laf.getDefaultTheme());
+        LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
+        context.put( "defaultTheme", laf.getDefaultTheme() );
 
         String[] themeNames = laf.getThemeNames();
         List themes = new ArrayList();
-        for (int i = 0; i < themeNames.length; i++)
+        for ( int i = 0; i < themeNames.length; i++ )
         {
             String themeName = themeNames[i];
-            themes.add(laf.getTheme(themeName));
+            themes.add( laf.getTheme( themeName ) );
         }
-        themes.add(new Item());
-        context.put("themeData", new CollectionLargeList(themes));
-        Theme currentTheme = laf.getRuntimeTheme(data);
-        context.put("currentTheme", currentTheme);
+        themes.add( new Item() );
+        context.put( "themeData", new CollectionLargeList( themes ) );
+        Theme currentTheme = laf.getRuntimeTheme( data );
+        context.put( "currentTheme", currentTheme );
 
-        String[] styleNames = laf.getStyleSheetNames();
+        String[] styleNames = laf.getStyleNames();
         List styles = new ArrayList();
-        for (int i = 0; i < styleNames.length; i++)
+        for ( int i = 0; i < styleNames.length; i++ )
         {
             final String styleName = styleNames[i];
-            final Resource style = laf.getStyleSheet(styleName);
-            styles.add(new SelectOption()
+            final Style style = laf.getStyle( styleName );
+            styles.add( new SelectOption()
             {
 
                 public String getName()
@@ -104,8 +107,8 @@ public class SetLookAndFeel extends BaseServiceable implements Module
                 {
                     return style.getDescription();
                 }
-            });
+            } );
         }
-        context.put("styles", styles);
+        context.put( "styles", styles );
     }
 }

@@ -24,6 +24,6 @@
     <j:set var="path">/waterview/waterviewbase_${data.locale.language}.css</j:set>
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource('/waterview/calendar_system.css')}" />
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource(path)}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="${theme.stylesheetUrl}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${pageTheme.style.getUrl(data)}" />
     <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterviewprint.css" />
 </w:Dummy>

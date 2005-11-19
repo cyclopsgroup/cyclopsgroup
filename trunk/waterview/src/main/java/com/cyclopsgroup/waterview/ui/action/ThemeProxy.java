@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,19 +18,21 @@ package com.cyclopsgroup.waterview.ui.action;
 
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
-import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Theme proxy
  */
-class ThemeProxy implements Theme
+class ThemeProxy
+    implements Theme
 {
     private Theme proxy;
 
-    ThemeProxy(Theme proxy)
+    ThemeProxy( Theme proxy )
     {
         this.proxy = proxy;
     }
@@ -50,7 +52,8 @@ class ThemeProxy implements Theme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getIconSet()
      */
-    public Resource getIconSet() throws NoSuchLookAndFeelException
+    public IconSet getIconSet()
+        throws NoSuchLookAndFeelException
     {
         return proxy.getIconSet();
     }
@@ -70,9 +73,9 @@ class ThemeProxy implements Theme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getLayout(java.lang.String)
      */
-    public Layout getLayout(String layoutName)
+    public Layout getLayout( String layoutName )
     {
-        return proxy.getLayout(layoutName);
+        return proxy.getLayout( layoutName );
     }
 
     /**
@@ -88,20 +91,31 @@ class ThemeProxy implements Theme
     /**
      * Overwrite or implement method getStyleSheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyle()
      */
-    public Resource getStyleSheet() throws NoSuchLookAndFeelException
+    public Style getStyle()
+        throws NoSuchLookAndFeelException
     {
-        return proxy.getStyleSheet();
+        return proxy.getStyle();
     }
 
     /**
      * Overwrite or implement method getStyleSheetName()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheetName()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleName()
      */
-    public String getStyleSheetName()
+    public String getStyleName()
     {
-        return proxy.getStyleSheetName();
+        return proxy.getStyleName();
+    }
+
+    /**
+     * Overwrite or implement method getTitle()
+     *
+     * @see com.cyclopsgroup.waterview.spi.SelectableItem#getTitle()
+     */
+    public String getTitle()
+    {
+        return proxy.getTitle();
     }
 }

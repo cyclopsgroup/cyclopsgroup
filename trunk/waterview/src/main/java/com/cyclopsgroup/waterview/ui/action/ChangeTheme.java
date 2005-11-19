@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,15 +22,17 @@ import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
-import com.cyclopsgroup.waterview.spi.Resource;
 import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Action to change theme
  */
-public class ChangeTheme extends BaseServiceable implements Action
+public class ChangeTheme
+    extends BaseServiceable
+    implements Action
 {
     private static final String CUSTOM_THEME = "custom";
 
@@ -39,20 +41,19 @@ public class ChangeTheme extends BaseServiceable implements Action
      *
      * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute(RuntimeData data, ActionContext context)
-            throws Exception
+    public void execute( RuntimeData data, ActionContext context )
+        throws Exception
     {
-        String themeName = data.getParameters().getString("theme_name");
-        final LookAndFeelService laf = (LookAndFeelService) lookup(LookAndFeelService.ROLE);
+        String themeName = data.getParameters().getString( "theme_name" );
+        final LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );
         Theme theme = null;
-        if (themeName.equals(CUSTOM_THEME))
+        if ( themeName.equals( CUSTOM_THEME ) )
         {
-            final String styleName = data.getParameters().getString(
-                    "style_name");
+            final String styleName = data.getParameters().getString( "style_name" );
             //final String iconSetName = data.getParameters().getString(
             //       "iconset_name");
 
-            theme = new ThemeProxy(laf.getDefaultTheme())
+            theme = new ThemeProxy( laf.getDefaultTheme() )
             {
                 /**
                  * Overwrite or implement method getName()
@@ -65,22 +66,22 @@ public class ChangeTheme extends BaseServiceable implements Action
                 }
 
                 /**
-                 * Overwrite or implement method getStyleSheet()
+                 * Overwrite or implement method getStyle()
                  *
-                 * @see com.cyclopsgroup.waterview.ui.action.ThemeProxy#getStyleSheet()
+                 * @see com.cyclopsgroup.waterview.spi.Theme#getStyle()
                  */
-                public Resource getStyleSheet()
-                        throws NoSuchLookAndFeelException
+                public Style getStyle()
+                    throws NoSuchLookAndFeelException
                 {
-                    return laf.getStyleSheet(styleName);
+                    return laf.getStyle( styleName );
                 }
 
                 /**
                  * Overwrite or implement method getStyleSheetName()
                  *
-                 * @see com.cyclopsgroup.waterview.ui.action.ThemeProxy#getStyleSheetName()
+                 * @see com.cyclopsgroup.waterview.ui.action.ThemeProxy#getStyleName()
                  */
-                public String getStyleSheetName()
+                public String getStyleName()
                 {
                     return styleName;
                 }
@@ -88,10 +89,10 @@ public class ChangeTheme extends BaseServiceable implements Action
         }
         else
         {
-            theme = laf.getTheme(themeName);
+            theme = laf.getTheme( themeName );
         }
-        laf.setRuntimeTheme(data, theme);
+        laf.setRuntimeTheme( data, theme );
 
-        context.addMessage("Theme for current session is changed");
+        context.addMessage( "Theme for current session is changed" );
     }
 }

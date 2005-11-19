@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,25 +20,26 @@ import com.cyclopsgroup.waterview.utils.TagPackage;
 
 /**
  * Tag library for waterview definition
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefinitionTagPackage extends TagPackage
+public class DefinitionTagPackage
+    extends TagPackage
 {
     /**
      * Constructor for class DefinitionTagPackage
      */
     public DefinitionTagPackage()
     {
-        addTag("Waterview", WaterviewTag.class);
-        addTag("TagLibrary", TagLibraryTag.class);
-        addTag("TagPackage", TagPackageTag.class);
-        addTag("Layout", LayoutTag.class);
-        addTag("JellyLayout", JellyLayoutTag.class);
-        addTag("ModulePackage", ModulePackageTag.class);
-        addTag("Theme", ThemeTag.class);
-        addTag("IconSet", IconSetTag.class);
-        addTag("StyleSheet", StyleSheetTag.class);
-        addTag("DefineLayout", DefineLayoutTag.class);
+        addTag( "Waterview", WaterviewTag.class );
+        addTag( "TagLibrary", TagLibraryTag.class );
+        addTag( "TagPackage", TagPackageTag.class );
+        addTag( "Layout", LayoutTag.class );
+        addTag( "JellyLayout", JellyLayoutTag.class );
+        addTag( "ModulePackage", ModulePackageTag.class );
+        addTag( "Theme", ThemeTag.class );
+        addTag( "IconSet", IconSetTag.class );
+        addTag( "Style", StyleTag.class );
+        addTag( "DefineLayout", DefineLayoutTag.class );
     }
 }

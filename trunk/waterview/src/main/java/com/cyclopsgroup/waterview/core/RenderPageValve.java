@@ -36,8 +36,9 @@ import com.cyclopsgroup.waterview.spi.Valve;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class RenderPageValve extends AbstractLogEnabled implements Valve,
-        Serviceable
+public class RenderPageValve
+    extends AbstractLogEnabled
+    implements Valve, Serviceable
 {
     private LookAndFeelService laf;
 
@@ -46,42 +47,39 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext context)
-            throws Exception
+    public void invoke( RuntimeData data, PipelineContext context )
+        throws Exception
     {
-        ModuleService mm = (ModuleService) data.getServiceManager().lookup(
-                ModuleService.ROLE);
+        ModuleService mm = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
 
-        mm.runModule('/' + data.getPage().getPackageAlias() + "/page"
-                + data.getPage().getPath(), data, data.getRequestContext());
+        mm.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data, data
+            .getRequestContext() );
 
-        if (data.isStopped())
+        if ( data.isStopped() )
         {
             return;
         }
 
-        Page page = (Page) data.getRequestContext().get(Page.NAME);
-        if (page == null)
+        Page page = (Page) data.getRequestContext().get( Page.NAME );
+        if ( page == null )
         {
             page = Page.DEFAULT;
         }
-        data.setOutputContentType("text/html; charset=UTF-8");
+        data.setOutputContentType( "text/html; charset=UTF-8" );
         Layout layout = page.getLayout();
-        String pageLayoutId = data.getParameters().getString("page_layout_id");
-        if (StringUtils.isNotEmpty(pageLayoutId))
+        String pageLayoutId = data.getParameters().getString( "page_layout_id" );
+        if ( StringUtils.isNotEmpty( pageLayoutId ) )
         {
-            layout = laf.getLayout(pageLayoutId);
+            layout = laf.getLayout( pageLayoutId );
         }
-        Theme theme = laf.getRuntimeTheme(data);
-        RuntimeTheme rt = new RuntimeTheme(theme, data);
-        data.getRequestContext().put(RuntimeTheme.NAME, rt);
-        if (layout == null)
+        Theme theme = laf.getRuntimeTheme( data );
+        if ( layout == null )
         {
-            layout = theme.getLayout(Theme.LAYOUT_FOR_DEFAULT);
+            layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
         }
-        data.getRequestContext().put("themeBase", rt.getIconSetUrl());
-        layout.render(data, page);
-        context.invokeNextValve(data);
+        data.getRequestContext().put( Theme.NAME, theme );
+        layout.render( data, page );
+        context.invokeNextValve( data );
         data.getOutput().flush();
     }
 
@@ -90,9 +88,9 @@ public class RenderPageValve extends AbstractLogEnabled implements Valve,
      *
      * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void service(ServiceManager serviceManager) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
-        laf = (LookAndFeelService) serviceManager
-                .lookup(LookAndFeelService.ROLE);
+        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
     }
 }

@@ -26,8 +26,7 @@
                                             <table border="0">
                                                 <tr>
                                                     <td>
-                                                        <img src="${themeBase}/16x16/screen.png" width="16" height="16"
-                                                            alt="Your position" />
+                                                        <w:Icon file="screen.png" alt="Your position" />
                                                     </td>
                                                     <td>
                                                         <j:forEach var="parent"
@@ -49,8 +48,7 @@
                                                     <j:forEach var="msg" items="${messages}">
                                                         <tr>
                                                             <td>
-                                                                <img src="${themeBase}/16x16/info.png" width="16"
-                                                                    height="16" alt="Message" />
+                                                                <w:Icon file="info.png" alt="Message" />
                                                             </td>
                                                             <td class="waterviewMessage">${msg}</td>
                                                         </tr>

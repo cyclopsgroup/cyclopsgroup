@@ -43,6 +43,23 @@ public class Link
     /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
 
+    /**
+     * Get instance from runtime data
+     *
+     * @param data Runtime data
+     * @return Link object
+     */
+    public synchronized static Link getInstance( RuntimeData data )
+    {
+        Link link = (Link) data.getRequestContext().get( Link.NAME );
+        if ( link == null )
+        {
+            link = new Link( data );
+            data.getRequestContext().put( Link.NAME, link );
+        }
+        return link;
+    }
+
     private RuntimeData data;
 
     private boolean disposed = false;

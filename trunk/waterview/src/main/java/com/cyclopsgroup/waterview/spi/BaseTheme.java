@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,10 +20,11 @@ import java.util.Hashtable;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Base abstract theme class
  */
-public abstract class BaseTheme implements Theme
+public abstract class BaseTheme
+    implements Theme
 {
     private String description;
 
@@ -33,17 +34,19 @@ public abstract class BaseTheme implements Theme
 
     private String name;
 
+    private String title;
+
     /**
      * Constructor for class BaseTheme
      *
      * @param name Name of the theme
      * @param laf Look and feel service
      */
-    protected BaseTheme(String name, LookAndFeelService laf)
+    protected BaseTheme( String name, LookAndFeelService laf )
     {
         this.name = name;
         this.laf = laf;
-        setDescription("Theme [" + name + "]");
+        setDescription( "Theme [" + name + "]" );
     }
 
     /**
@@ -71,20 +74,20 @@ public abstract class BaseTheme implements Theme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getLayout(java.lang.String)
      */
-    public Layout getLayout(String layoutName)
+    public Layout getLayout( String layoutName )
     {
-        Layout layout = (Layout) layouts.get(layoutName);
-        if (layout == null)
+        Layout layout = (Layout) layouts.get( layoutName );
+        if ( layout == null )
         {
             try
             {
                 Theme defaultTheme = getLAFService().getDefaultTheme();
-                if (!defaultTheme.getName().equals(getName()))
+                if ( !defaultTheme.getName().equals( getName() ) )
                 {
-                    layout = defaultTheme.getLayout(layoutName);
+                    layout = defaultTheme.getLayout( layoutName );
                 }
             }
-            catch (NoSuchLookAndFeelException e)
+            catch ( NoSuchLookAndFeelException e )
             {
                 //ignore
             }
@@ -103,11 +106,21 @@ public abstract class BaseTheme implements Theme
     }
 
     /**
+     * Getter method for property title
+     *
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
      * Setter method for field description
      *
      * @param description The description to set.
      */
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -118,8 +131,18 @@ public abstract class BaseTheme implements Theme
      * @param name Layout name
      * @param layout Layout object
      */
-    public void setLayout(String name, Layout layout)
+    public void setLayout( String name, Layout layout )
     {
-        layouts.put(name, layout);
+        layouts.put( name, layout );
+    }
+
+    /**
+     * Setter method for property title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
     }
 }

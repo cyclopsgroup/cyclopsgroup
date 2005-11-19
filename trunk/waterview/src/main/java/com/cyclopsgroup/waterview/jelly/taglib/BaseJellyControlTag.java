@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,13 +65,15 @@ public abstract class BaseJellyControlTag
         requireAttribute( "script" );
         JellyEngine je = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
         Script s = je.getScript( getScript() );
+        Object tagObject = getContext().getVariable( TAG_NAME );
         getContext().setVariable( TAG_NAME, this );
         runScript( s, output );
+        getContext().setVariable( TAG_NAME, tagObject );
     }
 
     /**
      * Method to run script
-     * 
+     *
      * @param script Script to run
      * @param output XMLOutput
      * @throws Exception Throw it out

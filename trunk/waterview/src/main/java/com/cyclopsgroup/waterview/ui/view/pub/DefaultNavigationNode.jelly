@@ -9,20 +9,18 @@
                     <td colspan="2">
                         <j:choose>
                             <j:when test="${node.end}">
-                                <img src="${themeBase}/16x16/screen.png" width="16" height="16" alt="Goto ${node.page}" />
+                                <w:Icon file="screen.png" alt="Goto ${node.page}" />
                             </j:when>
                             <j:when test="${runtimeNode.expanded}">
                                 <a href="#"
                                     onclick="fillDynaContent('${uniqueId}', '${link.setPage('/waterview/pub/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'collapse').addQueryData('page_layout_id', 'layout.rawview')}'); return false;">
-                                    <img src="${themeBase}/16x16/folder_opened.png" width="16" height="16"
-                                        alt="Click to collapse" />
+                                    <w:Icon file="folder_opened.png" alt="Click to collapse" />
                                 </a>
                             </j:when>
                             <j:otherwise>
                                 <a href="#"
                                     onclick="fillDynaContent('${uniqueId}', '${link.setPage('/waterview/pub/DefaultNavigationNode.jelly').addQueryData('node_id', node.nodeId).addQueryData('node_action', 'expand').addQueryData('page_layout_id', 'layout.rawview')}'); return false;">
-                                    <img src="${themeBase}/16x16/folder.png" width="16" height="16"
-                                        alt="Click to expand" />
+                                    <w:Icon file="folder.png" alt="Click to expand" />
                                 </a>
                             </j:otherwise>
                         </j:choose>

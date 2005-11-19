@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,27 +27,51 @@ import com.cyclopsgroup.waterview.RuntimeData;
 public interface LookAndFeelService
 {
     /**
+     * Icon set model
+     */
+    public interface IconSet
+        extends SelectableItem
+    {
+        /** Empty array */
+        IconSet[] EMPTY_ARRAY = new IconSet[0];
+
+        /**
+         * Get icon url
+         *
+         * @param data Runtime data
+         * @param file File name
+         * @param size Size of the icon
+         * @return Url of image resource
+         */
+        String getUrl( RuntimeData data, String file, int size );
+    }
+
+    /**
      * Predefined layout
      */
-    public interface PredefinedLayout extends Layout
+    public interface PredefinedLayout
+        extends Layout, SelectableItem
     {
         /** Empty array */
         PredefinedLayout[] EMPTY_ARRAY = new PredefinedLayout[0];
+    }
+
+    /**
+     * Style model
+     */
+    public interface Style
+        extends SelectableItem
+    {
+        /** Empty array */
+        Style[] EMPTY_ARRAY = new Style[0];
 
         /**
-         *@return Description of layout
+         * Get url of style sheet
+         *
+         * @param data Runtime data
+         * @return Url of stylesheet resource
          */
-        String getDescription();
-
-        /**
-         *@return Name of layout
-         */
-        String getName();
-
-        /**
-         *@return Display title of layout
-         */
-        String getTitle();
+        String getUrl( RuntimeData data );
     }
 
     /** role name of service */
@@ -59,7 +83,8 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException Theme is not found
      */
-    Theme getDefaultTheme() throws NoSuchLookAndFeelException;
+    Theme getDefaultTheme()
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get icon set
@@ -68,7 +93,8 @@ public interface LookAndFeelService
      * @return Icon set resource
      * @throws NoSuchLookAndFeelException If name doesnt exist
      */
-    Resource getIconSet(String name) throws NoSuchLookAndFeelException;
+    IconSet getIconSet( String name )
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get all icon set names
@@ -83,7 +109,7 @@ public interface LookAndFeelService
      * @param layoutName Layout name
      * @return Layout object
      */
-    PredefinedLayout getLayout(String layoutName);
+    PredefinedLayout getLayout( String layoutName );
 
     /**
      * Get layout names
@@ -99,7 +125,8 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException If name doesn't exist
      */
-    Theme getRuntimeTheme(RuntimeData data) throws NoSuchLookAndFeelException;
+    Theme getRuntimeTheme( RuntimeData data )
+        throws NoSuchLookAndFeelException;
 
     /**
      *Get stylesheet
@@ -108,14 +135,15 @@ public interface LookAndFeelService
      * @return Resource of stylesheet
      * @throws NoSuchLookAndFeelException If name doesn't exist
      */
-    Resource getStyleSheet(String name) throws NoSuchLookAndFeelException;
+    Style getStyle( String name )
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get stylesheet names
      *
      * @return Name array
      */
-    String[] getStyleSheetNames();
+    String[] getStyleNames();
 
     /**
      * Get theme with given name
@@ -124,7 +152,8 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException Theme is not found
      */
-    Theme getTheme(String themeName) throws NoSuchLookAndFeelException;
+    Theme getTheme( String themeName )
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get all theme names
@@ -137,31 +166,31 @@ public interface LookAndFeelService
      * Register icon set
      *
      * @param name Name of icon set
-     * @param resource Resource of icon set
+     * @param iconSet Resource of icon set
      */
-    void registerIconSet(String name, Resource resource);
+    void registerIconSet( String name, IconSet iconSet );
 
     /**
      * Register predefined layout
      *
      * @param layout Layout object
      */
-    void registerLayout(PredefinedLayout layout);
+    void registerLayout( PredefinedLayout layout );
 
     /**
      * Register stylesheet
      *
      * @param name Name of stylesheet
-     * @param stylesheet Resource of stylesheet
+     * @param style Resource of stylesheet
      */
-    void registerStyleSheet(String name, Resource stylesheet);
+    void registerStyle( String name, Style style );
 
     /**
      * Register a theme
      *
      * @param theme Theme object
      */
-    void registerTheme(Theme theme);
+    void registerTheme( Theme theme );
 
     /**
      * Set theme to runtime envionment
@@ -169,5 +198,5 @@ public interface LookAndFeelService
      * @param data Runtime data
      * @param theme Theme object to set
      */
-    void setRuntimeTheme(RuntimeData data, Theme theme);
+    void setRuntimeTheme( RuntimeData data, Theme theme );
 }

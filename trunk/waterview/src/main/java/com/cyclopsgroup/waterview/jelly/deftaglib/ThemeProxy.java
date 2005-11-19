@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,21 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 
 import com.cyclopsgroup.waterview.spi.BaseTheme;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Resource;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 
-class ThemeProxy extends BaseTheme
+class ThemeProxy
+    extends BaseTheme
 {
     private String iconSetName;
 
-    private String styleSheetName;
+    private String styleName;
 
-    ThemeProxy(String name, LookAndFeelService laf, String iconSetName,
-            String styleSheetName)
+    ThemeProxy( String name, LookAndFeelService laf, String iconSetName, String styleSheetName )
     {
-        super(name, laf);
+        super( name, laf );
         this.iconSetName = iconSetName;
-        this.styleSheetName = styleSheetName;
+        this.styleName = styleSheetName;
     }
 
     /**
@@ -40,15 +41,15 @@ class ThemeProxy extends BaseTheme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getIconSet()
      */
-    public Resource getIconSet()
+    public IconSet getIconSet()
     {
         try
         {
-            return getLAFService().getIconSet(iconSetName);
+            return getLAFService().getIconSet( iconSetName );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new RuntimeException(e);
+            throw new RuntimeException( e );
         }
     }
 
@@ -65,27 +66,27 @@ class ThemeProxy extends BaseTheme
     /**
      * Overwrite or implement method getStyleSheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyle()
      */
-    public Resource getStyleSheet()
+    public Style getStyle()
     {
         try
         {
-            return getLAFService().getStyleSheet(styleSheetName);
+            return getLAFService().getStyle( styleName );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            throw new RuntimeException(e);
+            throw new RuntimeException( e );
         }
     }
 
     /**
      * Overwrite or implement method getStyleSheetName()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheetName()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleName()
      */
-    public String getStyleSheetName()
+    public String getStyleName()
     {
-        return styleSheetName;
+        return styleName;
     }
 }

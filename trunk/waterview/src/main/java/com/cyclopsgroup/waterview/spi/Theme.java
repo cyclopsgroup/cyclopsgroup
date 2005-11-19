@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +16,16 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Theme interface
  */
 public interface Theme
+    extends SelectableItem
 {
     /** Default layout name */
     String LAYOUT_FOR_DEFAULT = "layout.default";
@@ -32,12 +36,8 @@ public interface Theme
     /** Popup layout name */
     String LAYOUT_FOR_POPUP = "layout.popup";
 
-    /**
-     * Get description of this theme
-     *
-     * @return Theme description
-     */
-    String getDescription();
+    /** Name in context */
+    String NAME = "pageTheme";
 
     /**
      * Get icon set resource
@@ -45,7 +45,8 @@ public interface Theme
      * @return Resource object icon set
      * @throws NoSuchLookAndFeelException name error
      */
-    Resource getIconSet() throws NoSuchLookAndFeelException;
+    IconSet getIconSet()
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get name of icon set
@@ -60,14 +61,7 @@ public interface Theme
      * @param layoutName Layout tname
      * @return Layout Layout object
      */
-    Layout getLayout(String layoutName);
-
-    /**
-     * Get name of this theme
-     *
-     * @return Theme name
-     */
-    String getName();
+    Layout getLayout( String layoutName );
 
     /**
      * Get stylesheet resource
@@ -75,12 +69,13 @@ public interface Theme
      * @return Resource of stylesheet
      * @throws NoSuchLookAndFeelException name error
      */
-    Resource getStyleSheet() throws NoSuchLookAndFeelException;
+    Style getStyle()
+        throws NoSuchLookAndFeelException;
 
     /**
      * Get name of stylesheet
      *
      * @return Name of stylesheet
      */
-    String getStyleSheetName();
+    String getStyleName();
 }

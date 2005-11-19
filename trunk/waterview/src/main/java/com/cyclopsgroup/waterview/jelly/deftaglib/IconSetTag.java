@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Resource;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
@@ -30,12 +32,15 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  */
 public class IconSetTag
     extends TagSupport
+    implements IconSet
 {
     private String description;
 
     private String name;
 
     private String path;
+
+    private String title;
 
     /**
      * Getter method for property description
@@ -68,6 +73,29 @@ public class IconSetTag
     }
 
     /**
+     * Getter method for property title
+     *
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * Overwrite or implement method getUrl()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet#getUrl(com.cyclopsgroup.waterview.RuntimeData, java.lang.String, int)
+     */
+    public String getUrl( RuntimeData data, String file, int size )
+    {
+        Link link = Link.getInstance( data );
+        StringBuffer sb = new StringBuffer( link.getResource( getPath() ) );
+        sb.append( '/' ).append( size ).append( '/' ).append( file );
+        return sb.toString();
+    }
+
+    /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
@@ -77,11 +105,8 @@ public class IconSetTag
     {
         requireAttribute( "name" );
         requireAttribute( "path" );
-        Resource iconset = new Resource( Resource.INTERNAL, getPath() );
-        iconset.setDescription( getDescription() );
-
         LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        laf.registerIconSet( getName(), iconset );
+        laf.registerIconSet( getName(), this );
     }
 
     /**
@@ -112,5 +137,15 @@ public class IconSetTag
     public void setPath( String path )
     {
         this.path = path;
+    }
+
+    /**
+     * Setter method for property title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
     }
 }

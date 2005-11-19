@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
+import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Resource;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
@@ -28,14 +30,17 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
  *
  * Tag to define stylesheet
  */
-public class StyleSheetTag
+public class StyleTag
     extends TagSupport
+    implements Style
 {
     private String description;
 
     private String name;
 
     private String path;
+
+    private String title;
 
     /**
      * Getter method for property description
@@ -68,6 +73,27 @@ public class StyleSheetTag
     }
 
     /**
+     * Getter method for property title
+     *
+     * @return Returns the title.
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * Overwrite or implement method getUrl()
+     *
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.Style#getUrl(com.cyclopsgroup.waterview.RuntimeData)
+     */
+    public String getUrl( RuntimeData data )
+    {
+        Link link = Link.getInstance( data );
+        return link.getResource( getPath() );
+    }
+
+    /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
@@ -77,11 +103,9 @@ public class StyleSheetTag
     {
         requireAttribute( "name" );
         requireAttribute( "path" );
-        Resource stylesheet = new Resource( Resource.INTERNAL, getPath() );
-        stylesheet.setDescription( getDescription() );
 
         LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        laf.registerStyleSheet( getName(), stylesheet );
+        laf.registerStyle( getName(), this );
     }
 
     /**
@@ -112,5 +136,15 @@ public class StyleSheetTag
     public void setPath( String path )
     {
         this.path = path;
+    }
+
+    /**
+     * Setter method for property title
+     *
+     * @param title The title to set.
+     */
+    public void setTitle( String title )
+    {
+        this.title = title;
     }
 }
