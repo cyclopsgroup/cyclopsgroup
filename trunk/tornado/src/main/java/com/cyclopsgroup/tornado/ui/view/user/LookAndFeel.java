@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,12 +88,12 @@ public class LookAndFeel
         }
         context.put( "iconSets", iconSets );
 
-        String[] styleSheetNames = laf.getStyleSheetNames();
+        String[] styleSheetNames = laf.getStyleNames();
         List styleSheets = new ArrayList();
         for ( int i = 0; i < styleSheetNames.length; i++ )
         {
             String name = styleSheetNames[i];
-            DefaultSelectOption dso = new DefaultSelectOption( name, laf.getStyleSheet( name ).getDescription() );
+            DefaultSelectOption dso = new DefaultSelectOption( name, laf.getStyle( name ).getDescription() );
             styleSheets.add( dso );
         }
         context.put( "styleSheets", styleSheets );

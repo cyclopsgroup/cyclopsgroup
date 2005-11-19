@@ -27,8 +27,7 @@
                                 </td>
                             </tr>
                             <td colspan="2">
-                                <w:Submit
-                                    action="${link.addAction('/tornado/UserLoginAction.jelly').setPage(data.page)}"
+                                <w:Submit action="${link.addAction('/tornado/UserLoginAction.jelly').setPage(page)}"
                                     forceValidation="true">
                                     <w:FormButton title="%document.text.login" />
                                 </w:Submit>

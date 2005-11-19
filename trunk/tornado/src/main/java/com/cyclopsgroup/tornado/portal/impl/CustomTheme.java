@@ -18,11 +18,11 @@
 package com.cyclopsgroup.tornado.portal.impl;
 
 import com.cyclopsgroup.tornado.portal.UserPreference;
+import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.BaseTheme;
-import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
-import com.cyclopsgroup.waterview.spi.Resource;
-import com.cyclopsgroup.waterview.spi.Theme;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
+import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -37,38 +37,78 @@ public class CustomTheme
      */
     public static final String NAME = "custom";
 
-    private Theme defaultTheme;
+    private IconSet iconSet;
 
-    private CustomResource iconSet;
-
-    private CustomResource styleSheet;
+    private Style style;
 
     /**
      * Constructor for class CustomTheme
      *
-     * @param defaultTheme Default proxy theme
+     * @param pref User preference object
      * @param laf Look and feel service
      */
-    public CustomTheme( Theme defaultTheme, LookAndFeelService laf )
+    public CustomTheme( final UserPreference pref, final LookAndFeelService laf )
     {
         super( NAME, laf );
-        this.defaultTheme = defaultTheme;
-        setDescription( "Customized Theme" );
-        iconSet = new CustomResource()
+        setDescription( "Customized theme" );
+        setTitle( "Customized theme" );
+        iconSet = new IconSet()
         {
-            protected Resource doGetResource( LookAndFeelService laf, UserPreference pref )
-                throws Exception
+            public String getUrl( RuntimeData data, String file, int size )
             {
-                return laf.getIconSet( pref.getIconset() );
+                try
+                {
+                    return laf.getIconSet( pref.getIconset() ).getUrl( data, file, size );
+                }
+                catch ( Exception e )
+                {
+                    throw new RuntimeException( e );
+                }
+            }
+
+            public String getDescription()
+            {
+                return "Customized icon set";
+            }
+
+            public String getName()
+            {
+                return NAME;
+            }
+
+            public String getTitle()
+            {
+                return "Customized icon set";
             }
         };
 
-        styleSheet = new CustomResource()
+        style = new Style()
         {
-            protected Resource doGetResource( LookAndFeelService laf, UserPreference pref )
-                throws Exception
+            public String getUrl( RuntimeData data )
             {
-                return laf.getStyleSheet( pref.getStylesheet() );
+                try
+                {
+                    return laf.getStyle( pref.getStylesheet() ).getUrl( data );
+                }
+                catch ( Exception e )
+                {
+                    throw new RuntimeException( e );
+                }
+            }
+
+            public String getDescription()
+            {
+                return "Customized style";
+            }
+
+            public String getName()
+            {
+                return "Customized style";
+            }
+
+            public String getTitle()
+            {
+                return NAME;
             }
         };
     }
@@ -78,7 +118,7 @@ public class CustomTheme
      *
      * @see com.cyclopsgroup.waterview.spi.Theme#getIconSet()
      */
-    public Resource getIconSet()
+    public IconSet getIconSet()
     {
         return iconSet;
     }
@@ -94,31 +134,21 @@ public class CustomTheme
     }
 
     /**
-     * Overwrite or implement method getLayout()
-     *
-     * @see com.cyclopsgroup.waterview.spi.BaseTheme#getLayout(java.lang.String)
-     */
-    public Layout getLayout( String layoutName )
-    {
-        return defaultTheme.getLayout( layoutName );
-    }
-
-    /**
      * Overwrite or implement method getStyleSheet()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheet()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyle()
      */
-    public Resource getStyleSheet()
+    public Style getStyle()
     {
-        return styleSheet;
+        return style;
     }
 
     /**
      * Overwrite or implement method getStyleSheetName()
      *
-     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleSheetName()
+     * @see com.cyclopsgroup.waterview.spi.Theme#getStyleName()
      */
-    public String getStyleSheetName()
+    public String getStyleName()
     {
         return NAME;
     }

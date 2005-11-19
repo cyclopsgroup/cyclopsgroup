@@ -38,7 +38,7 @@ public class Link
     public static final String GET_INSTRUCTOR = "!get!";
 
     /** Name of this tool */
-    public static final String NAME = "link";
+    private static final String NAME = "link";
 
     /** Show page instruction */
     public static final String PAGE_INSTRUCTOR = "!show!";
@@ -73,7 +73,7 @@ public class Link
      *
      * @param data Runtime data
      */
-    public Link( RuntimeData data )
+    protected Link( RuntimeData data )
     {
         this.data = data;
     }

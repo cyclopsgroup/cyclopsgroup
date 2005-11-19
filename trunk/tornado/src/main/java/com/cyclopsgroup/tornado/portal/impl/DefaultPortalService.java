@@ -75,7 +75,7 @@ public class DefaultPortalService
         throws Exception
     {
         security.addListener( this );
-        laf.registerTheme( new CustomTheme( laf.getDefaultTheme(), laf ) );
+        //laf.registerTheme( new CustomTheme( laf.getDefaultTheme(), laf ) );
     }
 
     /**

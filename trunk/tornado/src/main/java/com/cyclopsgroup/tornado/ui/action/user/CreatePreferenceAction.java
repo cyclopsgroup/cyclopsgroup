@@ -53,7 +53,7 @@ public class CreatePreferenceAction
         Theme theme = laf.getRuntimeTheme( data );
 
         up.setIconset( theme.getIconSetName() );
-        up.setStylesheet( theme.getStyleSheetName() );
+        up.setStylesheet( theme.getStyleName() );
 
         persist.saveNew( up );
         context.addMessage( "User setting is created" );

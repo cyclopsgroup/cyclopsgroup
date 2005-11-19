@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -54,7 +54,7 @@ final class DefaultActionContext
      */
     DefaultActionContext( RuntimeData data )
     {
-        Link link = (Link) data.getRequestContext().get( Link.NAME );
+        Link link = Link.getInstance( data );
         String url = link.setPage( data.getPage() ).addQueryString( data.getQueryString() ).toString();
         setTargetUrl( url );
         sessionContext = data.getSessionContext();

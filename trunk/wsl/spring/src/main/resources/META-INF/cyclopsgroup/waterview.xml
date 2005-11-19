@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
     <ModulePackage alias="wsl_spring" name="com.cyclopsgroup.wsl.spring" />
-    <StyleSheet name="wsl.spring.stylesheet" path="/wsl_spring/style.css" description="WSL spring stylesheet" />
-    <Theme name="wsl.spring.theme" iconset="waterview.icons.default" stylesheet="wsl.spring.stylesheet"
+    <Style name="wsl.spring.style" path="/wsl_spring/style.css" description="WSL spring style" />
+    <Theme name="wsl.spring.theme" iconset="waterview.icons.default" stylesheet="wsl.spring.style"
         description="WSL spring theme" />
 </Waterview>
