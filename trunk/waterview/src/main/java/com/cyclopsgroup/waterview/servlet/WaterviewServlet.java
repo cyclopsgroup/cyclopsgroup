@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.PlexusContainer;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.Waterview;
@@ -42,7 +43,7 @@ import com.cyclopsgroup.waterview.utils.WaterviewPlexusContainer;
 
 /**
  * Main waterview servlet
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class WaterviewServlet
@@ -68,7 +69,7 @@ public class WaterviewServlet
 
     /**
      * Override method destroy in super class of WaterviewServlet
-     * 
+     *
      * @see javax.servlet.Servlet#destroy()
      */
     public void destroy()
@@ -85,7 +86,7 @@ public class WaterviewServlet
 
     /**
      * Override method doGet in super class of WaterviewServlet
-     * 
+     *
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
@@ -116,7 +117,7 @@ public class WaterviewServlet
 
     /**
      * Handle request and response
-     * 
+     *
      * @param request Http servlet request
      * @param response Http servlet response
      * @throws Exception
@@ -138,6 +139,8 @@ public class WaterviewServlet
         ctx.put( RESPONSE_NAME, response );
         ctx.put( RuntimeData.REQUEST_CONTEXT_NAME, data.getRequestContext() );
 
+        Link.getInstance( data );
+
         Waterview waterview = (Waterview) container.lookup( Waterview.ROLE );
         waterview.handleRuntime( data );
 
@@ -152,7 +155,7 @@ public class WaterviewServlet
 
     /**
      * Override method doPost in super class of WaterviewServlet
-     * 
+     *
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
@@ -176,7 +179,7 @@ public class WaterviewServlet
 
     /**
      * Override method init in super class of MainServlet
-     * 
+     *
      * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
      */
     public void init( ServletConfig config )
