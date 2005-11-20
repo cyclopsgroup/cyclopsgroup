@@ -1,9 +1,9 @@
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
 
 import org.codehaus.plexus.PlexusTestCase;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.ModuleService;
 
 /**
  * @author jiaqi
