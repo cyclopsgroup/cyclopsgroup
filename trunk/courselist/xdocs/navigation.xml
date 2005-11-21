@@ -12,9 +12,9 @@
             </item>
             <item name="Download and install" href="/download.html" collapse="true">
                 <item name="Installation guide" href="/install.html" />
-                <item name="Development environment" href="/devenv.html" />
+                <item name="Dev environment" href="/devenv.html" />
             </item>
-            <item name="Development team" href="/team-list.html" />
+            <item name="About us" href="/team-list.html" />
         </menu>
         <links>
             <item name="Live Demo" href="http://demo.cyclopsgroup.com/courselist" />
