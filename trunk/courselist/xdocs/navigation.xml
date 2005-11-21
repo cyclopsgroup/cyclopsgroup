@@ -22,6 +22,7 @@
             <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/courselist" />
             <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/courselist" />
             <item name="PDF Document" href="courselist.pdf" />
+            <item name="introcution Slides" href="overview.ppt" />
         </links>
     </body>
 </project>

@@ -5,7 +5,11 @@
     </properties>
     <body>
         <section name="Download packages">
-            <p>Coming soon...</p>
+            <p>Under construction...</p>
+            <p>
+                Basically what you need to do is install tomcat, download and copy war file into webapps directory of
+                your tomcat, configure the database.
+            </p>
         </section>
     </body>
 </document>
