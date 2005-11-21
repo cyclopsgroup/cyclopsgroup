@@ -92,6 +92,17 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+        <!--
+            <dependency>
+            <groupId>clover</groupId>
+            <artifactId>clover-ant</artifactId>
+            <version>1.3_01</version>
+            <properties>
+            <war.bundle>true</war.bundle>
+            <classloader>root</classloader>
+            </properties>
+            </dependency>
+        -->
         <dependency>
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>waterview</artifactId>
