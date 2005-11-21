@@ -2,11 +2,17 @@
 <project name="Maven">
     <title>Maven</title>
     <body>
+        <menu name="Overview">
+            <item name="Home" href="/index.html" />
+            <item name="Big picture" href="/bigpicture.html" />
+        </menu>
+        <menu name="Development guide">
+            <item name="Reference" href="/ref.html" />
+        </menu>
         <links>
             <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/tornado" />
             <item name="Waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
             <item name="Hibernate" href="http://www.hibernate.org" />
-            <item name="Maven" href="http://maven.apache.org/" />
         </links>
     </body>
 </project>
