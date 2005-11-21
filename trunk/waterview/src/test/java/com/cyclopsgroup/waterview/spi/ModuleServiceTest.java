@@ -22,6 +22,6 @@ public class ModuleServiceTest
         lookup( JellyEngine.ROLE );
         ModuleService mm = (ModuleService) lookup( ModuleService.ROLE );
         Path path = mm.parsePath( "/waterview/x/Xyz.jelly" );
-        System.out.println( path.getPathWithoutExtension() );
+        assertEquals( "/x/Xyz", path.getPathWithoutExtension() );
     }
 }
