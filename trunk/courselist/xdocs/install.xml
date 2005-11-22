@@ -8,7 +8,7 @@
             <p>
                 Released packages of courselist project are available at
                 <a href="http://sourceforge.net/project/showfiles.php?group_id=91358&amp;package_id=169293">
-                    http://sourceforge.net/project/showfiles.php?group_id=91358&package_id=169293
+                    http://sourceforge.net/project/showfiles.php?group_id=91358&amp;package_id=169293
                 </a>
                 . Please download the war file (courselist-versionnumber.war) and the sql file
                 (courselist-mysql-data-versionnumber.sql) for future installable.
@@ -66,7 +66,7 @@ Query OK, 1 row affected (0.00 sec)
 
 mysql> quit
 Bye
-[$]> mysql -u root courselist < courselist-mysql-data-1.0-b2.sql
+$> mysql -u root courselist < courselist-mysql-data-1.0-b2.sql
                 ]]>
                 </source>
                 Now the data is imported. If you have a password for root user, don't forget to add -p for mysql command
@@ -134,14 +134,8 @@ INFO: Initializing Coyote HTTP/1.1 on http-7080
 Starting service Tomcat-Standalone
 Apache Tomcat/4.1.31
 [INFO] Loading on start [role]: [com.cyclopsgroup.courselist.CourseListComponents]
-log4j:WARN No appenders could be found for logger (org.apache.commons.jelly.JellyContext).
-log4j:WARN Please initialize the log4j system properly.
-[INFO] Load definition from file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/classes/META-INF/cyclopsgroup/waterview.xml
-[INFO] Load definition from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/tornado-20051112.051228.jar!/META-INF/cyclopsgroup/waterview.xml
-[INFO] Load definition from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/waterview-2.0-b2.jar!/META-INF/cyclopsgroup/waterview.xml
-[INFO] Reading navigation from file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/classes/META-INF/cyclopsgroup/waterview-navigation.xml
-[INFO] Reading navigation from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/tornado-20051112.051228.jar!/META-INF/cyclopsgroup/waterview-navigation.xml
-[INFO] Reading navigation from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/waterview-2.0-b2.jar!/META-INF/cyclopsgroup/waterview-navigation.xml
+...
+...
 Nov 22, 2005 11:14:42 AM org.apache.coyote.http11.Http11Protocol start
 INFO: Starting Coyote HTTP/1.1 on http-7080
                 ]]>
