@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>courselist</id>
     <name>Courselist</name>
-    <currentVersion>1.0-b2</currentVersion>
+    <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group Software Foundation</name>
         <url>http://www.cyclopsgroup.com</url>
