@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <body>
+        <menu name="Documentation">
+            <item name="What is it" href="/index.html" />
+            <item name="The benefit" href="/benefit.html" />
+            <item name="Test stories" href="/integratedtesting.html" />
+            <item name="Design" href="/design.html" collapse="true">
+                <item name="Presentation layer" href="/ui.html" />
+                <item name="Business logic layer" href="/services.html" />
+                <item name="Database layer" href="/database.html" />
+            </item>
+            <item name="Download and install" href="/download.html" collapse="true">
+                <item name="Installation guide" href="/install.html" />
+                <item name="Dev environment" href="/devenv.html" />
+            </item>
+            <item name="About us" href="/team-list.html" />
+        </menu>
+        <links>
+            <item name="Live Demo" href="http://demo.cyclopsgroup.com/courselist" />
+            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group/courselist" />
+            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/courselist" />
+            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/courselist" />
+            <item name="PDF Document" href="courselist.pdf" />
+            <item name="introcution Slides" href="overview.ppt" />
+        </links>
+    </body>
+</project>

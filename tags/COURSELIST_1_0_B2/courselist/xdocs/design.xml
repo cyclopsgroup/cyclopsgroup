@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Design</title>
+    </properties>
+    <body>
+        <section name="Overview">
+            <p>
+                Course list is a J2EE web application based on
+                <a href="http://www.cyclopsgroup.com/project/tornado">Cyclops Group Tornado project</a>
+                . Vertically the application is separated into three layers ---- UI modules, services and database
+                entities.
+                <img src="images/designstructure.jpg" alt="Design structure" />
+            </p>
+            <p>
+                Please look at
+                <a href="dependencies.html">Dependencies</a>
+                to find out the related tools and technologies.
+            </p>
+        </section>
+        <section name="Roles">
+            <p>
+                Three user roles(admin, teacher, student) are defined in the system.
+                <table>
+                    <tr>
+                        <th>User</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>admin</td>
+                        <td>administrator</td>
+                        <td>Can do anything in this system</td>
+                    </tr>
+                    <tr>
+                        <td>john</td>
+                        <td>john</td>
+                        <td>student</td>
+                        <td>Can see the list, add and drop some courses</td>
+                    </tr>
+                    <tr>
+                        <td>tim</td>
+                        <td>tim</td>
+                        <td>teacher</td>
+                        <td>Can force student to add/drop his course</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+    </body>
+</document>

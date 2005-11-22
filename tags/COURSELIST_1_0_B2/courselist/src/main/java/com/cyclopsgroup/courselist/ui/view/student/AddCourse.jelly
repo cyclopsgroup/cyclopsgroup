@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:j="jelly:core">
+    <h2>Add course ${course.name}</h2>
+    <j:choose>
+        <j:when test="${courseStatus.name eq 'taking'}">
+            <p>
+                You are taking course ${course.courseCode} right now.
+                <a href="${link.setPage('/courselist/student/MyCourses.jelly')}">Check your list please</a>
+                .
+            </p>
+        </j:when>
+        <j:when test="${courseStatus.name eq 'finished'}">
+            <p>You have already finished course ${course.courseCode}</p>
+        </j:when>
+        <j:when test="${!isReady}">
+            <p>
+                At least one of the prerequisite courses of ${course.name} has not been taken by you. Please make sure
+                the following courses are taken before applying this course.
+                <ul>
+                    <j:forEach var="prereq" items="${course.prerequisites}">
+                        <li>
+                            ${prereq.prefix}${prereq.courseCode}:${prereq.name}, tought by ${prereq.teacher.displayName}
+                        </li>
+                    </j:forEach>
+                </ul>
+            </p>
+        </j:when>
+        <j:otherwise>
+            <form method="post"
+                action="${link.addAction('/courselist/student/AddCourseAction').setPage('/courselist/student/MyCourses.jelly')}">
+                <input type="hidden" name="course_id" value="${course.id}" />
+                <input type="hidden" name="student_id" value="${student.id}" />
+                <p>
+                    You are going to add course ${course.courseCode} (${course.name}) into your schedule. Are you sure
+                    to continue?
+                </p>
+                <p>
+                    <input type="submit" class="waterviewFormButton" value="Continue" />
+                </p>
+            </form>
+        </j:otherwise>
+    </j:choose>
+</div>

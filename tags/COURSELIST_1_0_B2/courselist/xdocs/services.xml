@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Service layer</title>
+    </properties>
+    <body>
+        <section name="Services">
+            <p>
+                Tornado is a simple web application on top of
+                <a href="http://excalibur.apache.org">Apache Avalon</a>
+                SOA architecture. Therefore many core functions are implemented following avalon service standard. In
+                course list project, the following services will be created. These services will be the implementation
+                of business logic in course list project.
+            </p>
+            <p>
+                Each service is defined as an interface, implemented by a concrete class and configured in the SOA
+                container. Two services exist in courselist project.
+                <ul>
+                    <li>
+                        <a href="#com.cyclopsgroup.courselist.CourseListService">
+                            com.cyclopsgroup.courselist.CourseListService
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#com.cyclopsgroup.courselist.StudentService">
+                            com.cyclopsgroup.courselist.StudentService
+                        </a>
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section name="com.cyclopsgroup.courselist.CourseListService">
+            <p>
+                CourseListService overview
+                <table>
+                    <tr>
+                        <td>Role</td>
+                        <td>com.cyclopsgroup.courselist.CourseListService</td>
+                    </tr>
+                    <tr>
+                        <td>Implementation</td>
+                        <td>
+                            <a href="/apidocs/com/cyclopsgroup/courselist/impl/DefaultCourseListService.html">
+                                com.cyclopsgroup.courselist.impl.DefaultCourseListService
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Core course list management service</td>
+                    </tr>
+                </table>
+            </p>
+            <p>
+                CourseListService functions
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Inputs</th>
+                        <th>Returns</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <tr>
+                            <td>registerCourse</td>
+                            <td>String studentId, String courseId, boolean forced</td>
+                            <td>Nothing</td>
+                            <td>Register a course for student</td>
+                        </tr>
+                        <td>findByCode</td>
+                        <td>String prefix, String code</td>
+                        <td>Course object</td>
+                        <td>Find a course object with given prefix and code</td>
+                    </tr>
+                    <tr>
+                        <td>findByTeacher</td>
+                        <td>A teacher's ID</td>
+                        <td>List of courses</td>
+                        <td>Find courses related to a teacher</td>
+                    </tr>
+                    <tr>
+                        <td>getAllCourses</td>
+                        <td>Nothing</td>
+                        <td>A list of all active courses</td>
+                        <td>Get all active courses</td>
+                    </tr>
+                    <tr>
+                        <td>getAllTeachers</td>
+                        <td>Nothing</td>
+                        <td>List of teacher objects</td>
+                        <td>Get all teachers</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+        <section name="com.cyclopsgroup.courselist.StudentService">
+            <p>
+                StudentService overview
+                <table>
+                    <tr>
+                        <td>Role</td>
+                        <td>com.cyclopsgroup.courselist.StudentService</td>
+                    </tr>
+                    <tr>
+                        <td>Implementation</td>
+                        <td>
+                            <a href="/apidocs/com/cyclopsgroup/courselist/impl/DefaultStudentService.html">
+                                com.cyclopsgroup.courselist.impl.DefaultStudentService
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Service to handle</td>
+                    </tr>
+                </table>
+            </p>
+            <p>
+                StudentService functions
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Inputs</th>
+                        <th>Returns</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>addCourse</td>
+                        <td>String studentId, String courseId</td>
+                        <td>nothing</td>
+                        <td>Add course for a student</td>
+                    </tr>
+                    <tr>
+                        <td>dropCourse</td>
+                        <td>String studentId, String courseId</td>
+                        <td>Nothing</td>
+                        <td>Drop an registered course for a student</td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+    </body>
+</document>

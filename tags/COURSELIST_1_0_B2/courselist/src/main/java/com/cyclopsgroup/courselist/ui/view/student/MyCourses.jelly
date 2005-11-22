@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>My current courses</h2>
+    <w:FormControl>
+        <w:Form name="courseform" method="post">
+            <input type="hidden" name="student_id" value="${student.id}" />
+            <w:TableControl configurable="true">
+                <w:CollectionTabularData items="${currentCourses}" />
+                <w:Table name="courses" var="course">
+                    <w:Column name="id" title="%document.text.select" sort="unsorted">
+                        <input type="checkbox" name="course_id" value="${course.id}" />
+                    </w:Column>
+                    <w:Column name="courseCode" title="Code" sort="asc">${course.prefix}:${course.courseCode}</w:Column>
+                    <w:Column name="name" title="%document.text.name" sort="unsorted">${course.name}</w:Column>
+                    <w:Column name="teacherId" title="Teacher" sort="unsorted">${course.teacher.displayName}</w:Column>
+                    <w:Column name="description" title="%document.text.description">${course.description}</w:Column>
+                </w:Table>
+            </w:TableControl>
+            <w:Submit action="${link.addAction('/courselist/student/DropCourseAction').setPage(page)}">
+                <w:FormButton title="Drop selected" />
+            </w:Submit>
+        </w:Form>
+    </w:FormControl>
+</div>

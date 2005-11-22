@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>My transcript</h2>
+    <w:TableControl configurable="true">
+        <w:CollectionTabularData items="${currentCourses}" />
+        <w:Table name="courses" var="sc">
+            <w:Column name="courseId" title="Code">${sc.course.prefix}:${sc.course.courseCode}</w:Column>
+            <w:Column name="name" title="%document.text.name">${sc.course.name}</w:Column>
+            <w:Column name="credit" title="Credit">${sc.course.credit}</w:Column>
+            <w:Column name="score" title="Score" sort="unsorted">${sc.score}</w:Column>
+            <w:Column name="relationType" title="Status" sort="unsorted">${sc.relationType}</w:Column>
+            <w:Column name="teacher" title="Teacher">${sc.course.teacher.displayName}</w:Column>
+        </w:Table>
+    </w:TableControl>
+</div>

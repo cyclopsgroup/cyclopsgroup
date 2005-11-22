@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Project Benefit</title>
+    </properties>
+    <body>
+        <section name="Overview">
+            <p>
+                Automation and simplification of information management related to the courses is the benefit of the
+                University Course Listing system.
+            </p>
+            <p>
+                A University Course Listing would be much more efficiently handled through an online system over a
+                printed list, or book. No longer would you need to reprint a book of courses every so often, updating
+                all the course changes made since the last update. An online system would waste no paper and therefore
+                could be updated with even the smallest of changes, preventing the need to create a collection of
+                changes for the next updating of a book. This system could also automatically send out e-mails informing
+                everyone the changes made when there is an update. Searching for courses online would also be much
+                easier with the ability to use a search feature to narrow courses down, or to find a specific course,
+                rather than searching the table of contents and then flipping to the right page with a book.
+            </p>
+        </section>
+        <section name="Goals">
+            <p>
+                The goal of “Course List” project is to automate and simplify the manual process. It moves the manual
+                process to an online system and sysadmin, students can work within a simple workflow based on their
+                role.
+            </p>
+            <p>
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Operation</th>
+                        <th>Manual Process</th>
+                        <th>Automated Process</th>
+                    </tr>
+                    <tr>
+                        <td>administrator</td>
+                        <td>Looking for a course</td>
+                        <td>Open a drawer and find the printed list.</td>
+                        <td>Login, open list. Probably input some search criterion.</td>
+                    </tr>
+                    <tr>
+                        <td>administrator</td>
+                        <td>Create/Edit/Delete courses</td>
+                        <td>
+                            Print another 1000 copy of new course list and email/call every student that the course is
+                            changed. Please com and get new version of the it.
+                        </td>
+                        <td>
+                            Commit the change online. Everybody can see the latest version there. It can even send
+                            emails to the possible related student automatically.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>student</td>
+                        <td>Register/drop a course</td>
+                        <td>
+                            Call sysadmin that I want to register a course. Probably he will refuse because the
+                            prerequisite courses are not taken.
+                        </td>
+                        <td>
+                            Check the courses and push “Register” button. If prerequisite is not satisfied, the course
+                            will not be checkable.
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </section>
+        <section name="The Roadmap">
+            <p>
+                After the student management modules are done, it will be convenient for students to add/drop courses
+                online instead of repeated telephone calls and manual paperwork. The process for student to get
+                transcript, pay tuition, view his status will be further automated and simplified.
+            </p>
+        </section>
+    </body>
+</document>
