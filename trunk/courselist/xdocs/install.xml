@@ -5,10 +5,152 @@
     </properties>
     <body>
         <section name="Download packages">
-            <p>Under construction...</p>
             <p>
-                Basically what you need to do is install tomcat, download and copy war file into webapps directory of
-                your tomcat, configure the database.
+                Released packages of courselist project are available at
+                <a href="http://sourceforge.net/project/showfiles.php?group_id=91358&amp;package_id=169293">
+                    http://sourceforge.net/project/showfiles.php?group_id=91358&package_id=169293
+                </a>
+                . Please download the war file (courselist-versionnumber.war) and the sql file
+                (courselist-mysql-data-versionnumber.sql) for future installable.
+            </p>
+        </section>
+        <section name="Tomcat and mysql">
+            <p>
+                Technically, courselist is a platform, database type and J2EE container neutralized web application. The
+                released package is a J2EE compliant war file. However I have not test it on each kind of web container
+                and database so far. Therefore to make the process simple, let's install it on Apache Tomcat 4.1 and
+                MySQL 4.1.
+            </p>
+            <p>
+                <ul>
+                    <li>Make sure JDK 1.4 or 1.5 is properly installed and java is in the path and ready to use.</li>
+                    <li>
+                        Go to
+                        <a href="http://tomcat.apache.org/download-41.cgi">http://tomcat.apache.org/download-41.cgi</a>
+                        to download tomcat 4.1.31 and unzip it in your local machine.
+                    </li>
+                    <li>
+                        Go to
+                        <a href="http://dev.mysql.com/downloads/mysql/4.1.html">
+                            http://dev.mysql.com/downloads/mysql/4.1.html
+                        </a>
+                        , download and install MySQL
+                        <b>4.1</b>
+                        . Make sure the mysql service is started.
+                    </li>
+                    <li>
+                        Go to
+                        <a href="http://dev.mysql.com/downloads/administrator">
+                            http://dev.mysql.com/downloads/administrator
+                        </a>
+                        , download and install mysql administrator for future usage.
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Deploy courselist sql">
+            <p>
+                The released sql file (courselist-mysql-data-versionnumber.sql) that you just downloaded contains the
+                sql to create tables and insert data. You need to create a mysql database called "courselist" and import
+                data into it.
+                <source>
+                    <![CDATA[
+$> mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3 to server version: 3.23.58
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> create database courselist;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> quit
+Bye
+[$]> mysql -u root courselist < courselist-mysql-data-1.0-b2.sql
+                ]]>
+                </source>
+                Now the data is imported. If you have a password for root user, don't forget to add -p for mysql command
+                propertly.
+            </p>
+            <p>
+                By default, courselist is talking to local mysql though a mysql user called "dev" whose password is
+                "dev". So you need to create this user for mysql before start running the application. To do this, you
+                can open the mysql administrator, create user "dev" with password "dev" and assign all permission of
+                database "courselist" to this user.
+            </p>
+            <p>
+                Once you can login mysql with user "dev" and see all the tables, that means your database is ready to
+                go.
+                <source>
+                    <![CDATA[
+$> mysql -u dev -p courselist
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5 to server version: 3.23.58
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> show tables;
++--------------------------+
+| Tables_in_courselist     |
++--------------------------+
+| c_cl_course              |
+| c_cl_course_prerequisite |
+| c_cl_student_course      |
+| c_cl_teacher             |
+| c_t_group                |
+| c_t_group_role           |
+| c_t_role                 |
+| c_t_role_dependency      |
+| c_t_role_permission      |
+| c_t_user                 |
+| c_t_user_group           |
+| c_t_user_preference      |
+| c_t_user_role            |
++--------------------------+
+13 rows in set (0.00 sec)
+
+mysql> quit
+Bye
+$>
+                ]]>
+                </source>
+            </p>
+        </section>
+        <section name="Deploy courselist war">
+            <p>
+                Last step, rename to downloaded war file into courselist.war and copy it to the webapps directory of
+                tomcat. So under TOMCAT_INSTALL_DIR/webapps, there should be courselist.war file.
+            </p>
+            <p>
+                Go to TOMCAT_INSTALL_DIR/bin and start tomcat server, wait for some messages coming out.
+                <source>
+                    <![CDATA[
+Nov 22, 2005 11:14:34 AM org.apache.coyote.http11.Http11Protocol init
+INFO: Initializing Coyote HTTP/1.1 on http-7080
+Starting service Tomcat-Standalone
+Apache Tomcat/4.1.31
+[INFO] Loading on start [role]: [com.cyclopsgroup.courselist.CourseListComponents]
+log4j:WARN No appenders could be found for logger (org.apache.commons.jelly.JellyContext).
+log4j:WARN Please initialize the log4j system properly.
+[INFO] Load definition from file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/classes/META-INF/cyclopsgroup/waterview.xml
+[INFO] Load definition from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/tornado-20051112.051228.jar!/META-INF/cyclopsgroup/waterview.xml
+[INFO] Load definition from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/waterview-2.0-b2.jar!/META-INF/cyclopsgroup/waterview.xml
+[INFO] Reading navigation from file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/classes/META-INF/cyclopsgroup/waterview-navigation.xml
+[INFO] Reading navigation from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/tornado-20051112.051228.jar!/META-INF/cyclopsgroup/waterview-navigation.xml
+[INFO] Reading navigation from jar:file:/home/jiaqi/workshop/cyclopsgroup/courselist/target/server/webapps/courselist/WEB-INF/lib/waterview-2.0-b2.jar!/META-INF/cyclopsgroup/waterview-navigation.xml
+Nov 22, 2005 11:14:42 AM org.apache.coyote.http11.Http11Protocol start
+INFO: Starting Coyote HTTP/1.1 on http-7080
+                ]]>
+                </source>
+            </p>
+            <p>
+                Now you can visit
+                <a href="http://localhost:8080/courselist">http://localhost:8080/courselist</a>
+                to see the home page.
             </p>
         </section>
     </body>
