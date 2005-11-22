@@ -77,7 +77,7 @@
                     </table>
                 </div>
                 <div id="footerPanel">
-                    <w:JellyScript path="/waterview/DefaultHtmlFooter.jelly" />
+                    <w:JellyScript path="/waterview/layout/DefaultHtmlFooter.jelly" />
                 </div>
             </div>
         </div>
