@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Members</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Members Introduction">
+            <p>Cyclops Group is made up of a group of talent people. So far everybody here comes from China.</p>
+        </section>
+        <section name="Member List">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th />
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xxu">xxu</a>
+                    </td>
+                    <td>Xiaofang, Xu</td>
+                    <td>xiaofang@evavi.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xxu">Wiki Space</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/pzhai">pzhai</a>
+                    </td>
+                    <td>Peng Zhai</td>
+                    <td>peng.zhai@evavi.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/pzhai">Wiki Space</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="xuying/index.html">xuying</a>
+                    </td>
+                    <td>Xuying Zhao</td>
+                    <td>xuyingzhao@gmail.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/xuying">Wiki Space</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="jiaqi/index.html">jiaqi</a>
+                    </td>
+                    <td>Jiaqi Guo</td>
+                    <td>jiaqi.guo@gmail.com</td>
+                    <td>
+                        <a href="http://www.cyclopsgroup.com/kb/display/jiaqi">Wiki Space</a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>
