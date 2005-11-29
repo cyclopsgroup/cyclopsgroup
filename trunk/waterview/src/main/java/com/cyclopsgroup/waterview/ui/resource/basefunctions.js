@@ -227,6 +227,11 @@ function changeTab(tabId, tabName, url)
 	setTabName(tabId, tabName);
 	currentTd.className = "waterviewSelectedTab";
 
+	var actionUrl = pageBaseUrl + "/!do!/waterview/ChangeSessionAttribute/!show!/waterview/pub/Empty.jelly?attribute_name="
+			+ tabId + "&attribute_value=" + tabName;
+	//alert(actionUrl);
+	fetchExternalContent( actionUrl );
+
 	var furl = url;
 	if(url.indexOf('?') == -1)
 	{

@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
  * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
 
@@ -36,9 +37,9 @@ public class HorizontalTabControlTag
     extends BaseJellyControlTag
     implements TabTagAware
 {
-    private Map tabTags = ListOrderedMap.decorate( new HashMap() );
-
     private String selected = "default";
+
+    private Map tabTags = ListOrderedMap.decorate( new HashMap() );
 
     /**
      * Constructor for class HorizontalTabControlTag
@@ -59,6 +60,36 @@ public class HorizontalTabControlTag
     }
 
     /**
+     * Get unique name
+     *
+     * @return Name value
+     */
+    public String getName()
+    {
+        return getTagId();
+    }
+
+    /**
+     * Getter method for field selected
+     *
+     * @return Returns the selected.
+     */
+    public String getSelected()
+    {
+        return selected;
+    }
+
+    /**
+     * Get selected tab
+     *
+     * @return Selected tab
+     */
+    public TabTag getSelectedTabTag()
+    {
+        return (TabTag) tabTags.get( getSelected() );
+    }
+
+    /**
      * Get tab tags
      *
      * @return Collection of tab tags
@@ -76,13 +107,18 @@ public class HorizontalTabControlTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        requireAttribute( "selected" );
+        requireAttribute( "name" );
         invokeBody( XMLOutput.createDummyXMLOutput() );
         if ( tabTags.isEmpty() )
         {
             throw new JellyTagException( "At least one tab must be defined" );
         }
-        if ( !tabTags.containsKey( getSelected() ) )
+        String selectedTabName = (String) getRuntimeData().getSessionContext().get( getUniqueTagId() );
+        if ( StringUtils.isNotEmpty( selectedTabName ) )
+        {
+            setSelected( selectedTabName );
+        }
+        else if ( StringUtils.isEmpty( getSelected() ) || !tabTags.containsKey( getSelected() ) )
         {
             setSelected( (String) tabTags.keySet().iterator().next() );
         }
@@ -90,13 +126,13 @@ public class HorizontalTabControlTag
     }
 
     /**
-     * Getter method for field selected
+     * Set unique name
      *
-     * @return Returns the selected.
+     * @param name Control name
      */
-    public String getSelected()
+    public void setName( String name )
     {
-        return selected;
+        setTagId( name );
     }
 
     /**
@@ -107,15 +143,5 @@ public class HorizontalTabControlTag
     public void setSelected( String selected )
     {
         this.selected = selected;
-    }
-
-    /**
-     * Get selected tab
-     *
-     * @return Selected tab
-     */
-    public TabTag getSelectedTabTag()
-    {
-        return (TabTag) tabTags.get( getSelected() );
     }
 }

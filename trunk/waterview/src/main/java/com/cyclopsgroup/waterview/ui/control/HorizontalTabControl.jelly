@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div class="fabricHorizontalTab" xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <w:CreateUniqueId var="uniqueId" />
+    <j:set var="uniqueId" value="${controlTag.uniqueTagId}" />
     <script language="javascript">setTabName('${uniqueId}', '${controlTag.selected}');</script>
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>

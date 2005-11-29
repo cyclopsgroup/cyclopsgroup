@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ import com.cyclopsgroup.waterview.web.Form;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Form tag
  */
 public class FormTag
@@ -181,7 +181,7 @@ public class FormTag
         requireAttribute( "name" );
         requireAttribute( "method" );
         requireParent( FormControlTag.class );
-        String formId = "form/" + getUniqueTagId();
+        String formId = "form_" + getUniqueTagId();
         RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
         form = (Form) data.getSessionContext().get( formId );
         formNew = false;

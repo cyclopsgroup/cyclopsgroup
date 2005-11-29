@@ -15,48 +15,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.core.taglib;
-
-import org.apache.commons.jelly.XMLOutput;
-
-import com.cyclopsgroup.waterview.utils.IdUtils;
-import com.cyclopsgroup.waterview.utils.TagSupport;
+package com.cyclopsgroup.waterview.utils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Tag to create a unique ID
+ * ID related utilities
  */
-public class CreateUniqueIdTag
-    extends TagSupport
+public final class IdUtils
 {
-    private String var;
+    private static int rollingNumber = 0;
 
     /**
-     * Getter method for property var
+     * Create new string id
      *
-     * @return Returns the var.
+     * @return String id
      */
-    public String getVar()
+    public static long newLongId()
     {
-        return var;
-    }
-
-    protected void processTag( XMLOutput output )
-        throws Exception
-    {
-        requireAttribute( "var" );
-        String id = IdUtils.newStringId();
-        getContext().setVariable( getVar(), id );
+        synchronized ( IdUtils.class )
+        {
+            rollingNumber = ( rollingNumber + 1 ) % 1024768;
+        }
+        long number = System.currentTimeMillis() * 1024768 + rollingNumber;
+        return number;
     }
 
     /**
-     * Setter method for property var
+     * New unique string id
      *
-     * @param var The var to set.
+     * @return String ID
      */
-    public void setVar( String var )
+    public static String newStringId()
     {
-        this.var = var;
+        return "t" + newLongId();
     }
 }
