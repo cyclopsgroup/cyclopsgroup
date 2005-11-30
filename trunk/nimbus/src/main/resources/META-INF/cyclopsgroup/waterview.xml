@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <ModulePackage alias="nimbus" name="com.cyclopsgroup.nimbus.ui" />
+    <!-- Look and feel -->
+    <Layout name="nimbus.layout.default">
+        <JellyLayout script="/nimbus/layout/DefaultLayout.jelly" />
+    </Layout>
+    <Theme name="nimbus.theme.default" iconset="waterview.icons.default" stylesheet="waterview.style.empty"
+        description="Waterview default theme">
+        <DefineLayout name="layout.default" layout="nimbus.layout.default" />
+    </Theme>
+</Waterview>
