@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
+            <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-theme>nimbus.theme.default</default-theme>
+            </configuration>
+        </component>
+    </components>
+    <load-on-start>
+        <component>
+            <role>com.cyclopsgroup.waterview.WaterviewServices</role>
+        </component>
+    </load-on-start>
+</plexus>
