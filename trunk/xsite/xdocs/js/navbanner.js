@@ -1,0 +1,13 @@
+document.write('<div id="cyclopsgroupNavBanner">');
+document.write('	<table width="100%" cellpadding="0" cellspacing="0" border="0" id="cyclopsgroupNavBannerTable">');
+document.write('		<tr>');
+document.write('			<td id="cyclopsgroupNavBannerLeft">');
+document.write('				<a href="http://www.cyclopsgroup.com">Home</a>');
+document.write('			</td>');
+document.write('			<td id="cyclopsgroupNavBannerMiddle">');
+document.write('			</td>');
+document.write('			<td id="cyclopsgroupNavBannerRight" align="right">');
+document.write('			</td>');
+document.write('		</tr>');
+document.write('	</table>');
+document.write('</div>');
