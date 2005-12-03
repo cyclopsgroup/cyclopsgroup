@@ -35,7 +35,6 @@ import com.cyclopsgroup.tornado.security.RuntimeUser;
 import com.cyclopsgroup.tornado.security.SecurityListener;
 import com.cyclopsgroup.tornado.security.SecurityService;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
-import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -47,8 +46,6 @@ public class DefaultPortalService
     implements Serviceable, Initializable, SecurityListener, PortalService
 {
     private HibernateService hibernate;
-
-    private LookAndFeelService laf;
 
     private SecurityService security;
 
@@ -116,7 +113,7 @@ public class DefaultPortalService
     {
         hibernate = (HibernateService) services.lookup( HibernateService.ROLE );
         security = (SecurityService) services.lookup( SecurityService.ROLE );
-        laf = (LookAndFeelService) services.lookup( LookAndFeelService.ROLE );
+        //laf = (LookAndFeelService) services.lookup( LookAndFeelService.ROLE );
         services.lookup( JellyEngine.ROLE );
     }
 }
