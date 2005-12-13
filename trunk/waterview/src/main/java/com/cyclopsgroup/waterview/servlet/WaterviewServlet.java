@@ -67,6 +67,8 @@ public class WaterviewServlet
 
     private ServletConfig servletConfig;
 
+    private String applicationBase;
+
     /**
      * Override method destroy in super class of WaterviewServlet
      *
@@ -126,7 +128,8 @@ public class WaterviewServlet
         throws Exception
     {
         ServletRuntimeData data = null;
-        data = new ServletRuntimeData( request, response, servletConfig.getServletContext(), fileUpload, serviceManager );
+        data = new ServletRuntimeData( request, response, servletConfig.getServletContext(), fileUpload,
+                                       serviceManager, applicationBase );
         Context ctx = data.getRequestContext();
 
         ctx.put( RuntimeData.NAME, data );
@@ -185,6 +188,8 @@ public class WaterviewServlet
     public void init( ServletConfig config )
         throws ServletException
     {
+        applicationBase = config.getInitParameter( "application.base" );
+
         servletConfig = config;
         String basedir = config.getServletContext().getRealPath( "" );
         Properties initProperties = new Properties();

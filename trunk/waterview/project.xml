@@ -263,6 +263,10 @@
                     <directory>src/test/resources</directory>
                     <filtering>false</filtering>
                 </resource>
+                <resource>
+                    <directory>/src/webapp/WEB-INF/classes</directory>
+                    <filtering>false</filtering>
+                </resource>
             </resources>
         </unitTest>
         <resources>

@@ -43,7 +43,6 @@ public class ServletRuntimeData
     extends AbstractRuntimeData
     implements RuntimeData
 {
-
     private ServletContext context;
 
     private HttpServletResponse response;
@@ -56,10 +55,11 @@ public class ServletRuntimeData
      * @param context Http servlet context
      * @param fileUpload File upload component
      * @param services ServiceManager object
+     * @param applicationBase application base url
      * @throws Exception Throw it out
      */
     ServletRuntimeData( HttpServletRequest request, HttpServletResponse response, ServletContext context,
-                       FileUpload fileUpload, ServiceManager services )
+                       FileUpload fileUpload, ServiceManager services, String applicationBase )
         throws Exception
     {
         this.response = response;
@@ -113,18 +113,21 @@ public class ServletRuntimeData
         setServiceManager( services );
 
         //Application base url
-        StringBuffer sb = new StringBuffer( request.getScheme() );
-        sb.append( "://" ).append( request.getServerName() );
-        if ( request.getServerPort() != 80 )
+        if ( StringUtils.isEmpty( applicationBase ) )
         {
-            sb.append( ':' ).append( request.getServerPort() );
+            StringBuffer sb = new StringBuffer( request.getScheme() );
+            sb.append( "://" ).append( request.getServerName() );
+            if ( request.getServerPort() != 80 )
+            {
+                sb.append( ':' ).append( request.getServerPort() );
+            }
+            sb.append( request.getContextPath() );
+            applicationBase = sb.toString();
         }
-        sb.append( request.getContextPath() );
-        setApplicationBaseUrl( sb.toString() );
+        setApplicationBaseUrl( applicationBase );
 
         //Page base url
-        sb.append( request.getServletPath() );
-        setPageBaseUrl( sb.toString() );
+        setPageBaseUrl( applicationBase + request.getServletPath() );
     }
 
     /**
