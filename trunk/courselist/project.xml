@@ -261,7 +261,7 @@
         <dependency>
             <groupId>mysql-connector-java</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>3.1.10</version>
+            <version>3.0.14</version>
             <url>http://www.mysql.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
