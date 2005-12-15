@@ -8,8 +8,7 @@
                     <td>
                         <j:set var="nbsp" value="&amp;nbsp;" />
                         <w:TableControl configurable="true">
-                            <w:CollectionTabularData items="${courses}" />
-                            <w:Table var="course" name="coursetable" pageSize="20">
+                            <w:Table var="course" name="coursetable" pageSize="20" data="${courses}">
                                 <w:Column name="select" title="%document.text.select">
                                     <input type="checkbox" name="course_id" value="${course.id}" />
                                 </w:Column>

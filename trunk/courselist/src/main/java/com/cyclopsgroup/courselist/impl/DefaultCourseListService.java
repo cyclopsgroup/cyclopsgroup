@@ -29,6 +29,8 @@ import com.cyclopsgroup.courselist.entity.Course;
 import com.cyclopsgroup.courselist.entity.CoursePrerequisite;
 import com.cyclopsgroup.courselist.entity.Teacher;
 import com.cyclopsgroup.tornado.hibernate.AbstractHibernateEnabled;
+import com.cyclopsgroup.tornado.hibernate.CriteriaLargeList;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -111,11 +113,12 @@ public class DefaultCourseListService
      *
      * @see com.cyclopsgroup.courselist.CourseListService#getAllCourses()
      */
-    public List getAllCourses()
+    public LargeList getAllCourses()
         throws Exception
     {
         Criteria criteria = getHibernateSession().createCriteria( Course.class );
-        return criteria.add( Expression.eq( "isDisabled", Boolean.FALSE ) ).list();
+        criteria.add( Expression.eq( "isDisabled", Boolean.FALSE ) );
+        return new CriteriaLargeList( criteria );
     }
 
     /**

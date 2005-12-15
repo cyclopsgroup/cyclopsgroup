@@ -20,6 +20,7 @@ package com.cyclopsgroup.courselist;
 import java.util.List;
 
 import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -79,7 +80,7 @@ public interface CourseListService
      * @return List of all courses
      * @throws Exception Throw it out
      */
-    List getAllCourses()
+    LargeList getAllCourses()
         throws Exception;
 
     /**

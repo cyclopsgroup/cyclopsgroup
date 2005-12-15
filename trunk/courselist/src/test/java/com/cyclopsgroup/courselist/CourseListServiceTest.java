@@ -17,9 +17,8 @@
  */
 package com.cyclopsgroup.courselist;
 
-import java.util.List;
-
 import com.cyclopsgroup.courselist.entity.Course;
+import com.cyclopsgroup.waterview.LargeList;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -52,7 +51,7 @@ public class CourseListServiceTest
         throws Exception
     {
         CourseListService cls = (CourseListService) lookup( CourseListService.ROLE );
-        List courses = cls.getAllCourses();
-        assertEquals( 8, courses.size() );
+        LargeList courses = cls.getAllCourses();
+        assertNotNull( courses );
     }
 }
