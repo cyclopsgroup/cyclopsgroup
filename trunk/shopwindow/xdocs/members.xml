@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Members</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Members Introduction">
+            <p>
+                Cyclops Group is founded by
+                <a href="members/jiaqi/">Jiaqi Guo</a>
+                and made up of a group of talented people.
+            </p>
+        </section>
+        <section name="Member List">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/jiaqi/">jiaqi</a>
+                    </td>
+                    <td>Jiaqi Guo</td>
+                    <td>jiaqi.guo@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/xuying/">xuying</a>
+                    </td>
+                    <td>Xuying Zhao</td>
+                    <td>xuyingzhao@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/xxu/">xxu</a>
+                    </td>
+                    <td>Xiaofang, Xu</td>
+                    <td>xiaofang@evavi.com</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/crazytmac/">crazytmac</a>
+                    </td>
+                    <td>Crazy TMac</td>
+                    <td>crazytmac@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/pzhai/">pzhai</a>
+                    </td>
+                    <td>Peng Zhai</td>
+                    <td>peng.zhai@evavi.com</td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>
