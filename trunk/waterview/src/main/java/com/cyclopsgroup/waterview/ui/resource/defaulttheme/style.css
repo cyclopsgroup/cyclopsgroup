@@ -1,152 +1,152 @@
 body {
-	background-color: white;
-	color: black;
+    background-color: white;
+    color: black;
 }
 
 h2 {
-	color: #FF9300;
+    color: #FF9300;
 }
 
 a:link,a:visited {
-	color: #2E52AF;
+    color: #2E52AF;
 }
 
 #bodyWrapper {
-	background-color: white;
-	max-width: 860px;
-	width: expression(document.body.clientWidth > 860 ? "860px" : "auto" );
+    background-color: white;
+    max-width: 860px;
+    width: expression(document.body.clientWidth > 860 ? "860px" : "auto" );
 }
 
 #bannerPanel {
-	background-color: #003399;
-	color: white;
-	border-width: 0 0 2 0;
-	border-style: solid;
-	border-color: #2E52AF;
+    background-color: #003399;
+    color: white;
+    border-width: 0 0 2 0;
+    border-style: solid;
+    border-color: #2E52AF;
 }
 
 #bannerPanel .waterviewUnselectedTab {
-	background-color: #00256E;
-	border-width: 0px;
+    background-color: #00256E;
+    border-width: 0px;
 }
 
 #bannerPanel .waterviewSelectedTab {
-	background-color: #2E52AF;
+    background-color: #2E52AF;
 }
 
 #bannerPanel #pageTitle,#bannerPanel a {
-	color: white;
+    color: white;
 }
 
 #bannerPanelRight {
-	background: url('banner_right.gif') no-repeat;
+    background: url('banner_right.gif') no-repeat;
 }
 
 .bannerPanelBelt {
-	background-color: #8CAAE6;
-	height: 16px;
+    background-color: #8CAAE6;
+    height: 16px;
 }
 
 #leftPanel {
-	background-color: #8CAAE6;
+    background-color: #8CAAE6;
 }
 
 #footerPanel {
-	border-width: 2 0 0 0;
-	border-style: solid;
-	border-color: #2E52AF;
+    border-width: 2 0 0 0;
+    border-style: solid;
+    border-color: #2E52AF;
 }
 
 table.waterviewTable th {
-	border-style: solid;
-	border-color: #2E52AF;
-	border-width: 0px 0px 2px 0px;;
-	border-color: #2E52AF;
+    border-style: solid;
+    border-color: #2E52AF;
+    border-width: 0px 0px 2px 0px;;
+    border-color: #2E52AF;
 }
 
 table.waterviewTable tr.a td,table.waterviewTable tr.b td {
-	border-style: dashed;
-	border-color: #2E52AF;
-	border-width: 0px 0px 1px 0px;
+    border-style: dashed;
+    border-color: #2E52AF;
+    border-width: 0px 0px 1px 0px;
 }
 
 table.waterviewTable tr.b {
-	background-color: #F7F7F7;
+    background-color: #F7F7F7;
 }
 
 table.waterviewTable .title {
-	background-color: #EEEEEE;
+    background-color: #EEEEEE;
 }
 
 table.waterviewTable td.input {
-	
+
 }
 
 .lineBreak,.subLineBreak {
-	background-color: #2E52AF;
+    background-color: #2E52AF;
 }
 
 #leftPanel .waterviewPortlet {
-	background-color: #5582D2;
+    background-color: #5582D2;
 }
 
 #leftPanel .waterviewPortletWrapper {
-	position: relative;
-	top: -2px;
-	left: -2px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #003399;
-	background-color: #EDF2FC;
+    position: relative;
+    top: -2px;
+    left: -2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #003399;
+    background-color: #EDF2FC;
 }
 
 #leftPanel .waterviewPortletHeader {
-	background-color: #1F56C0;
+    background-image: url('title_bar_bg.gif');
 }
 
 #leftPanel .waterviewPortletTitle {
-	color: white;
+    color: white;
 }
 
 .waterviewUnselectedTab {
-	background-color: #EDF2FC;
-	border-color: #5582D2;
-	border-width: 1 1 0 1;
-	border-style: solid;
+    background-color: #EDF2FC;
+    border-color: #5582D2;
+    border-width: 1 1 0 1;
+    border-style: solid;
 }
 
 .waterviewSelectedTab {
-	background-color: #2E52AF;
-	color: white;
+    background-color: #2E52AF;
+    color: white;
 }
 
 .waterviewSelectedTab a {
-	color: white;
+    color: white;
 }
 
 .waterviewTabHeader {
-	border-color: #2E52AF;
-	border-width: 0 0 2 0;
-	border-style: solid;
+    border-color: #2E52AF;
+    border-width: 0 0 2 0;
+    border-style: solid;
 }
 
 input.waterviewFormButton {
-	background-color: #51A751;
-	border-color: #51A751;
-	border-width: 2px;
-	border-style: outset;
-	color: white;
-	font-weight: bold;;
+    background-color: #51A751;
+    border-color: #51A751;
+    border-width: 2px;
+    border-style: outset;
+    color: white;
+    font-weight: bold;;
 }
 
 input.waterviewFormInput {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #999999;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #999999;
 }
 
 input.waterviewFormInvalidInput {
-	border-style: solid;
-	border-width: 1px;
-	border-color: red;
+    border-style: solid;
+    border-width: 1px;
+    border-color: red;
 }
