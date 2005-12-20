@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -48,6 +48,8 @@ public class Table
     private int pageIndex = 0;
 
     private int pageSize = UNDEFINED_PAGE_SIZE;
+
+    private static final int UNKNOW_PAGE = -1;
 
     private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
 
@@ -122,7 +124,7 @@ public class Table
     {
         if (size < 0)
         {
-            throw new IllegalStateException("Tabular data is not countable");
+            return UNKNOW_PAGE;
         }
         int pageCount = size / getPageSize();
         if (size % getPageSize() > 0)

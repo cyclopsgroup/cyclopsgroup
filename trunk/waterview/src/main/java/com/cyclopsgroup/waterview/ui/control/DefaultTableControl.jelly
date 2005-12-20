@@ -78,39 +78,46 @@
                             <td align="right">
                                 <table cellspacing="2" cellpadding="0" border="0">
                                     <tr>
-                                        <j:if test="${table.pageSize gt 0}">
-                                            <j:if test="${table.pageIndex gt 0}">
-                                                <td>
-                                                    <a
-                                                        href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', 0).addQueryData('table_id', table.id)}">
-                                                        <w:Icon file="2leftarrow.png" alt="First Page" />
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a
-                                                        href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex - 1).addQueryData('table_id', table.id)}">
-                                                        <w:Icon file="1leftarrow.png" alt="Prevous Page" />
-                                                    </a>
-                                                </td>
-                                            </j:if>
+                                        <j:if test="${table.pageIndex gt 0}">
                                             <td>
-                                                <j:set var="startIndex" value="${table.pageIndex * table.pageSize}" />
-                                                %document.text.record ${startIndex + 1} ~ ${startIndex + rowCount}
+                                                <a
+                                                    href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', 0).addQueryData('table_id', table.id)}">
+                                                    <w:Icon file="2leftarrow.png" alt="First Page" />
+                                                </a>
                                             </td>
-                                            <j:if test="${table.pageIndex lt pageCount - 1}">
-                                                <td>
-                                                    <a
-                                                        href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex + 1).addQueryData('table_id', table.id)}">
-                                                        <w:Icon file="1rightarrow.png" alt="Next Page" />
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a
-                                                        href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', pageCount - 1).addQueryData('table_id', table.id)}">
-                                                        <w:Icon file="2rightarrow.png" alt="Last Page" />
-                                                    </a>
-                                                </td>
-                                            </j:if>
+                                            <td>
+                                                <a
+                                                    href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex - 1).addQueryData('table_id', table.id)}">
+                                                    <w:Icon file="1leftarrow.png" alt="Prevous Page" />
+                                                </a>
+                                            </td>
+                                        </j:if>
+                                        <td>
+                                            <j:set var="startIndex" value="${table.pageIndex * table.pageSize}" />
+                                            %document.text.record ${startIndex + 1} ~ ${startIndex + rowCount}
+                                        </td>
+                                        <j:set var="hasNext" value="false" />
+                                        <j:choose>
+                                            <j:when test="${pageCount gt 0 and table.pageIndex lt (pageCount - 1)}">
+                                                <j:set var="hasNext" value="true" />
+                                            </j:when>
+                                            <j:when test="${pageCount eq -1 and rowCount eq table.pageSize}">
+                                                <j:set var="hasNext" value="true" />
+                                            </j:when>
+                                        </j:choose>
+                                        <j:if test="${hasNext}">
+                                            <td>
+                                                <a
+                                                    href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', table.pageIndex + 1).addQueryData('table_id', table.id)}">
+                                                    <w:Icon file="1rightarrow.png" alt="Next Page" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a
+                                                    href="${link.addAction('/waterview/ScrollTable').setPage(page).addQueryData('page_index', pageCount - 1).addQueryData('table_id', table.id)}">
+                                                    <w:Icon file="2rightarrow.png" alt="Last Page" />
+                                                </a>
+                                            </td>
                                         </j:if>
                                         <td>
                                             <w:BlankImage width="16" height="16" />
