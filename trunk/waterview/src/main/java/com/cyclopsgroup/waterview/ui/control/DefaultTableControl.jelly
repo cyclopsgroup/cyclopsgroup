@@ -72,7 +72,7 @@
                                 <j:if test="${table.pageSize gt 0}">
                                     %document.text.page ${table.pageIndex + 1}
                                     <j:set var="pageCount" value="${table.getPageCount(recordCount)}" />
-                                    <j:if test="${!recordCount eq -1}">of ${pageCount}</j:if>
+                                    <j:if test="${pageCount gt 0}">of ${pageCount}</j:if>
                                 </j:if>
                             </td>
                             <td align="right">
