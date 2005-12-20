@@ -7,6 +7,12 @@
     <servlet>
         <servlet-name>courselist</servlet-name>
         <servlet-class>com.cyclopsgroup.waterview.servlet.WaterviewServlet</servlet-class>
+        <!--
+            <init-param>
+            <param-name>application.base</param-name>
+            <param-value>http://demo.cyclopsgroup.com/courselist</param-value>
+            </init-param>
+        -->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
