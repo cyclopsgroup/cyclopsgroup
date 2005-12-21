@@ -58,7 +58,12 @@ a:visited {
     color: white;
     border-width: 0px;
     margin: 0px;
-    margin-right: 0px;
+    float: left;
+    width: 20%;
+}
+
+#navcolumn {
+    padding: 0;
 }
 
 #leftColumn h5 {

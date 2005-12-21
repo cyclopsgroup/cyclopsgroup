@@ -170,343 +170,347 @@
                     <x:attribute name="${attr.name}">${attr.value}</x:attribute>
                 </x:forEach>
             </j:whitespace>
+            <div id="wrapper">
+                <div id="banner">
+                    <!-- organization logo -->
+                    <j:set var="logo" value="${pom.organization.logo}" />
+                    <j:if test="${!empty(logo)}">
+                        <!-- set url to org or project url -->
+                        <j:set var="url" value="${pom.organization.url}" />
+                        <j:if test="${!empty(url)}">
+                            <j:set var="home" value="${pom.organization.url}" />
+                        </j:if>
+                        <j:if test="${empty(url)}">
+                            <j:set var="home" value="${pom.url}" />
+                        </j:if>
+                        <!-- set home to relative or complete -->
+                        <j:if test="${!home.startsWith('http://') and !home.startsWith('https://')}">
+                            <j:set var="home" value="${relativePath}${home}" />
+                        </j:if>
 
-            <div id="banner">
-                <!-- organization logo -->
-                <j:set var="logo" value="${pom.organization.logo}" />
-                <j:if test="${!empty(logo)}">
-                    <!-- set url to org or project url -->
-                    <j:set var="url" value="${pom.organization.url}" />
-                    <j:if test="${!empty(url)}">
-                        <j:set var="home" value="${pom.organization.url}" />
+                        <!-- set image to relative or complete -->
+                        <j:set var="image" value="${pom.organization.logo}" />
+                        <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
+                            <j:if test="${!image.startsWith('/')}" trim="yes">
+                                <j:set var="image" value="${relativePathForLocale}${image}" />
+                            </j:if>
+                            <j:if test="${image.startsWith('/')}" trim="yes">
+                                <j:set var="image" value="${relativePathForLocale}${image.substring(1)}" />
+                            </j:if>
+                        </j:if>
+                        <a href="${home}" id="organizationLogo">
+                            <img src="${image}" alt="${pom.organization.name}" />
+                        </a>
                     </j:if>
-                    <j:if test="${empty(url)}">
-                        <j:set var="home" value="${pom.url}" />
-                    </j:if>
-                    <!-- set home to relative or complete -->
+
+                    <!-- set project to relative or complete -->
+                    <j:set var="home" value="${pom.url}" />
                     <j:if test="${!home.startsWith('http://') and !home.startsWith('https://')}">
                         <j:set var="home" value="${relativePath}${home}" />
                     </j:if>
 
-                    <!-- set image to relative or complete -->
-                    <j:set var="image" value="${pom.organization.logo}" />
-                    <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
-                        <j:if test="${!image.startsWith('/')}" trim="yes">
-                            <j:set var="image" value="${relativePathForLocale}${image}" />
-                        </j:if>
-                        <j:if test="${image.startsWith('/')}" trim="yes">
-                            <j:set var="image" value="${relativePathForLocale}${image.substring(1)}" />
-                        </j:if>
-                    </j:if>
-                    <a href="${home}" id="organizationLogo">
-                        <img src="${image}" alt="${pom.organization.name}" />
-                    </a>
-                </j:if>
-
-                <!-- set project to relative or complete -->
-                <j:set var="home" value="${pom.url}" />
-                <j:if test="${!home.startsWith('http://') and !home.startsWith('https://')}">
-                    <j:set var="home" value="${relativePath}${home}" />
-                </j:if>
-
-                <!-- project logo and link -->
-                <j:set var="logo" value="${pom.logo}" />
-                <j:if test="${logo != null and logo != ''}">
-                    <!-- set image to relative or complete -->
-                    <j:set var="image" value="${pom.logo}" />
-                    <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
-                        <j:if test="${!image.startsWith('/')}" trim="yes">
-                            <j:set var="image" value="${relativePathForLocale}${image}" />
-                        </j:if>
-                        <j:if test="${image.startsWith('/')}" trim="yes">
-                            <j:set var="image" value="${relativePathForLocale}${image.substring(1)}" />
-                        </j:if>
-                    </j:if>
-
-                    <a href="${home}" id="projectLogo">
-                        <img src="${image}" alt="${pom.name}" />
-                    </a>
-                </j:if>
-                <j:if test="${logo == null or logo == ''}">
-                    <a href="${home}" id="projectLogo">
-                        <span>${pom.name}</span>
-                    </a>
-                </j:if>
-                <div class="clear">
-                    <hr />
-                </div>
-            </div>
-
-            <div id="breadcrumbs">
-                <maven:property var="version" name="maven.xdoc.version" defaultValue="${pom.currentVersion}" />
-
-                <j:set var="breadcrumbsUsed" value="" />
-                <x:if select="$nav/body/breadcrumbs">
-                    <j:set var="breadcrumbsUsed" value="'true'" />
-                </x:if>
-
-                <div class="xleft">
-                    <j:if test="${empty(breadcrumbsUsed)}">
-                        <j:if test="${date == 'left'}">
-                            <fmt:message key="site.last_published" bundle="${msg}" />
-                            : ${build.date}
-                            <j:if test="${!empty(version)}">
-                                <j:if test="${!(maven.xdoc.crumb.separator == '')}">
-                                    <span class="separator">${maven.xdoc.crumb.separator}</span>
-                                </j:if>
-                                &#160;
-                                <fmt:message key="site.doc_for" bundle="${msg}" />
-                                ${version}
+                    <!-- project logo and link -->
+                    <j:set var="logo" value="${pom.logo}" />
+                    <j:if test="${logo != null and logo != ''}">
+                        <!-- set image to relative or complete -->
+                        <j:set var="image" value="${pom.logo}" />
+                        <j:if test="${!image.startsWith('http://') and !image.startsWith('https://')}">
+                            <j:if test="${!image.startsWith('/')}" trim="yes">
+                                <j:set var="image" value="${relativePathForLocale}${image}" />
+                            </j:if>
+                            <j:if test="${image.startsWith('/')}" trim="yes">
+                                <j:set var="image" value="${relativePathForLocale}${image.substring(1)}" />
                             </j:if>
                         </j:if>
+
+                        <a href="${home}" id="projectLogo">
+                            <img src="${image}" alt="${pom.name}" />
+                        </a>
                     </j:if>
-                    <j:if test="${!empty( breadcrumbsUsed )}">
-                        <jsl:applyTemplates select="$nav/body/breadcrumbs" />
-                        <a href="${home}">${pom.name}</a>
-                        &#160;
-                        <span class="separator">&gt;</span>
-                        &#160;${_docTitle}
+                    <j:if test="${logo == null or logo == ''}">
+                        <a href="${home}" id="projectLogo">
+                            <span>${pom.name}</span>
+                        </a>
                     </j:if>
+                    <div class="clear">
+                        <hr />
+                    </div>
                 </div>
 
-                <div class="xright">
-                    <j:if test="${empty(breadcrumbsUsed)}">
-                        <j:if test="${date == 'right'}">
-                            <fmt:message key="site.last_published" bundle="${msg}" />
-                            : ${build.date}
-                            <j:if test="${!empty(version)}">
-                                <j:if test="${!(maven.xdoc.crumb.separator == '')}">
-                                    <span class="separator">${maven.xdoc.crumb.separator}</span>
+                <div id="breadcrumbs">
+                    <maven:property var="version" name="maven.xdoc.version" defaultValue="${pom.currentVersion}" />
+
+                    <j:set var="breadcrumbsUsed" value="" />
+                    <x:if select="$nav/body/breadcrumbs">
+                        <j:set var="breadcrumbsUsed" value="'true'" />
+                    </x:if>
+
+                    <div class="xleft">
+                        <j:if test="${empty(breadcrumbsUsed)}">
+                            <j:if test="${date == 'left'}">
+                                <fmt:message key="site.last_published" bundle="${msg}" />
+                                : ${build.date}
+                                <j:if test="${!empty(version)}">
+                                    <j:if test="${!(maven.xdoc.crumb.separator == '')}">
+                                        <span class="separator">${maven.xdoc.crumb.separator}</span>
+                                    </j:if>
+                                    &#160;
+                                    <fmt:message key="site.doc_for" bundle="${msg}" />
+                                    ${version}
                                 </j:if>
-                                &#160;
-                                <fmt:message key="site.doc_for" bundle="${msg}" />
-                                ${version}
                             </j:if>
                         </j:if>
-                    </j:if>
-                    <!-- render links -->
-                    <x:if select="$nav/body/links">
-                        <jsl:applyTemplates select="$nav/body/links" />
-                    </x:if>
+                        <j:if test="${!empty( breadcrumbsUsed )}">
+                            <jsl:applyTemplates select="$nav/body/breadcrumbs" />
+                            <a href="${home}">${pom.name}</a>
+                            &#160;
+                            <span class="separator">&gt;</span>
+                            &#160;${_docTitle}
+                        </j:if>
+                    </div>
+
+                    <div class="xright">
+                        <j:if test="${empty(breadcrumbsUsed)}">
+                            <j:if test="${date == 'right'}">
+                                <fmt:message key="site.last_published" bundle="${msg}" />
+                                : ${build.date}
+                                <j:if test="${!empty(version)}">
+                                    <j:if test="${!(maven.xdoc.crumb.separator == '')}">
+                                        <span class="separator">${maven.xdoc.crumb.separator}</span>
+                                    </j:if>
+                                    &#160;
+                                    <fmt:message key="site.doc_for" bundle="${msg}" />
+                                    ${version}
+                                </j:if>
+                            </j:if>
+                        </j:if>
+                        <!-- render links -->
+                        <x:if select="$nav/body/links">
+                            <jsl:applyTemplates select="$nav/body/links" />
+                        </x:if>
+                    </div>
+                    <div class="clear">
+                        <hr />
+                    </div>
                 </div>
-                <div class="clear">
-                    <hr />
-                </div>
-            </div>
 
-            <!-- left column start -->
-            <div id="leftColumn">
-                <div id="navcolumn">
-                    <x:if select="$nav">
-                        <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search" />
-                    </x:if>
-                    <jsl:applyTemplates select="$projectNav/body/menu" />
-                    <!-- allows user to put menu items after standard reports -->
-                    <x:if select="$nav">
-                        <jsl:applyTemplates select="$nav/body/menu[@type='footer']" />
-                    </x:if>
-                    <j:if test="${context.getVariable('maven.xdoc.legend') == 'true'}">
-                        <div id="legend">
-                            <h5>
-                                <fmt:message key="site.legend" bundle="${msg}" />
-                            </h5>
-                            <ul>
-                                <li class="externalLink">
-                                    <fmt:message key="site.external_link" bundle="${msg}" />
-                                </li>
-                                <li class="newWindow">
-                                    <fmt:message key="site.opens_new_window" bundle="${msg}" />
-                                </li>
-                            </ul>
-                        </div>
-                    </j:if>
-
-                    <!-- Display all availables locales depending :
-                        * the user preferences
-                        * the size of the maven.xdoc.locale.supported property -->
-                    <j:if test="${locales != null}">
-                        <j:if test="${size(locales) gt 0}">
-                            <j:set var="displaySelect" value="${maven.xdoc.ui.localeList.asSelect}" />
-                            <j:set var="displayMaxElt" value="${maven.xdoc.ui.localeList.max}" />
-                            <j:useBean var="mavenTool" class="org.apache.maven.util.MavenTool" />
-                            <j:set var="displayMaxEltAsInteger" value="${mavenTool.toInteger(displayMaxElt)}" />
-
-                            <div id="language">
+                <!-- left column start -->
+                <div id="leftColumn">
+                    <div id="navcolumn">
+                        <x:if select="$nav">
+                            <jsl:applyTemplates select="$nav/body/menu[not(@type) | @type='header'] | $nav/body/search" />
+                        </x:if>
+                        <jsl:applyTemplates select="$projectNav/body/menu" />
+                        <!-- allows user to put menu items after standard reports -->
+                        <x:if select="$nav">
+                            <jsl:applyTemplates select="$nav/body/menu[@type='footer']" />
+                        </x:if>
+                        <j:if test="${context.getVariable('maven.xdoc.legend') == 'true'}">
+                            <div id="legend">
                                 <h5>
-                                    <fmt:message key="site.language" bundle="${msg}" />
+                                    <fmt:message key="site.legend" bundle="${msg}" />
                                 </h5>
                                 <ul>
-                                    <!--  Display language in a form with select tag -->
-                                    <j:if
-                                        test="${displaySelect == 'true' or size(locales) gt displayMaxEltAsInteger}">
-                                        <form name="languageForm" method="GET">
-                                            <select size="1" name="languageSelect"
-                                                onChange="javascript:window.location=this.options[this.selectedIndex].value;">
-                                                <!-- Default language -->
-                                                <j:invokeStatic className="org.apache.maven.xdoc.util.LocaleUtil"
-                                                    method="displayName" var="displayLocale">
-                                                    <j:arg value="${defaultLocale}" type="java.util.Locale" />
-                                                    <j:arg value="${defaultLocale}" type="java.util.Locale" />
-                                                </j:invokeStatic>
-                                                <j:if test="${maven.xdoc.ui.displayByDefault == 'true'}">
-                                                    <j:set var="displayLocale">
-                                                        ${displayLocale}
-                                                        <fmt:message key="defaultLocale.byDefault" bundle="${msg}" />
-                                                    </j:set>
-                                                </j:if>
-                                                <option value="${relativePathForLocale}${location}">
-                                                    ${displayLocale}
-                                                </option>
+                                    <li class="externalLink">
+                                        <fmt:message key="site.external_link" bundle="${msg}" />
+                                    </li>
+                                    <li class="newWindow">
+                                        <fmt:message key="site.opens_new_window" bundle="${msg}" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </j:if>
 
-                                                <!-- Supported language -->
-                                                <j:forEach var="locale" items="${locales}">
+                        <!-- Display all availables locales depending :
+                            * the user preferences
+                            * the size of the maven.xdoc.locale.supported property -->
+                        <j:if test="${locales != null}">
+                            <j:if test="${size(locales) gt 0}">
+                                <j:set var="displaySelect" value="${maven.xdoc.ui.localeList.asSelect}" />
+                                <j:set var="displayMaxElt" value="${maven.xdoc.ui.localeList.max}" />
+                                <j:useBean var="mavenTool" class="org.apache.maven.util.MavenTool" />
+                                <j:set var="displayMaxEltAsInteger" value="${mavenTool.toInteger(displayMaxElt)}" />
+
+                                <div id="language">
+                                    <h5>
+                                        <fmt:message key="site.language" bundle="${msg}" />
+                                    </h5>
+                                    <ul>
+                                        <!--  Display language in a form with select tag -->
+                                        <j:if
+                                            test="${displaySelect == 'true' or size(locales) gt displayMaxEltAsInteger}">
+                                            <form name="languageForm" method="GET">
+                                                <select size="1" name="languageSelect"
+                                                    onChange="javascript:window.location=this.options[this.selectedIndex].value;">
+                                                    <!-- Default language -->
                                                     <j:invokeStatic className="org.apache.maven.xdoc.util.LocaleUtil"
                                                         method="displayName" var="displayLocale">
-                                                        <j:arg value="${locale}" type="java.util.Locale" />
-                                                        <j:arg value="${locale}" type="java.util.Locale" />
+                                                        <j:arg value="${defaultLocale}" type="java.util.Locale" />
+                                                        <j:arg value="${defaultLocale}" type="java.util.Locale" />
                                                     </j:invokeStatic>
-                                                    <j:if test="${currentLocale.equals(defaultLocale)}">
-                                                        <option value="${relativePathForLocale}${locale}${location}">
+                                                    <j:if test="${maven.xdoc.ui.displayByDefault == 'true'}">
+                                                        <j:set var="displayLocale">
                                                             ${displayLocale}
-                                                        </option>
+                                                            <fmt:message key="defaultLocale.byDefault" bundle="${msg}" />
+                                                        </j:set>
                                                     </j:if>
-                                                    <j:if test="${!currentLocale.equals(defaultLocale)}">
-                                                        <j:if test="${locale.equals(currentLocale)}">
-                                                            <option value="${relativePathForLocale}${locale}${location}"
-                                                                selected="true">
-                                                                ${displayLocale}
-                                                            </option>
-                                                        </j:if>
-                                                        <j:if test="${!locale.equals(currentLocale)}">
+                                                    <option value="${relativePathForLocale}${location}">
+                                                        ${displayLocale}
+                                                    </option>
+
+                                                    <!-- Supported language -->
+                                                    <j:forEach var="locale" items="${locales}">
+                                                        <j:invokeStatic
+                                                            className="org.apache.maven.xdoc.util.LocaleUtil"
+                                                            method="displayName" var="displayLocale">
+                                                            <j:arg value="${locale}" type="java.util.Locale" />
+                                                            <j:arg value="${locale}" type="java.util.Locale" />
+                                                        </j:invokeStatic>
+                                                        <j:if test="${currentLocale.equals(defaultLocale)}">
                                                             <option
                                                                 value="${relativePathForLocale}${locale}${location}">
                                                                 ${displayLocale}
                                                             </option>
                                                         </j:if>
-                                                    </j:if>
-                                                </j:forEach>
-                                            </select>
-                                        </form>
-                                    </j:if>
-
-                                    <!--  Display language as listing -->
-                                    <j:if
-                                        test="${!(displaySelect == 'true' or size(locales) gt displayMaxEltAsInteger)}">
-                                        <!-- Default language -->
-                                        <j:invokeStatic className="org.apache.maven.xdoc.util.LocaleUtil"
-                                            method="displayName" var="displayLocale">
-                                            <j:arg value="${defaultLocale}" type="java.util.Locale" />
-                                            <j:arg value="${defaultLocale}" type="java.util.Locale" />
-                                        </j:invokeStatic>
-                                        <j:if test="${maven.xdoc.ui.displayByDefault == 'true'}">
-                                            <j:set var="displayLocale">
-                                                ${displayLocale}
-                                                <fmt:message key="defaultLocale.byDefault" bundle="${msg}" />
-                                            </j:set>
+                                                        <j:if test="${!currentLocale.equals(defaultLocale)}">
+                                                            <j:if test="${locale.equals(currentLocale)}">
+                                                                <option
+                                                                    value="${relativePathForLocale}${locale}${location}"
+                                                                    selected="true">
+                                                                    ${displayLocale}
+                                                                </option>
+                                                            </j:if>
+                                                            <j:if test="${!locale.equals(currentLocale)}">
+                                                                <option
+                                                                    value="${relativePathForLocale}${locale}${location}">
+                                                                    ${displayLocale}
+                                                                </option>
+                                                            </j:if>
+                                                        </j:if>
+                                                    </j:forEach>
+                                                </select>
+                                            </form>
                                         </j:if>
-                                        <li>
-                                            <doc:itemLink name="${displayLocale}" link="/${location}"
-                                                relativePath="${relativePathForLocale}" />
-                                        </li>
 
-                                        <!-- Supported language -->
-                                        <j:forEach var="locale" items="${locales}">
+                                        <!--  Display language as listing -->
+                                        <j:if
+                                            test="${!(displaySelect == 'true' or size(locales) gt displayMaxEltAsInteger)}">
+                                            <!-- Default language -->
                                             <j:invokeStatic className="org.apache.maven.xdoc.util.LocaleUtil"
                                                 method="displayName" var="displayLocale">
-                                                <j:arg value="${locale}" type="java.util.Locale" />
-                                                <j:arg value="${locale}" type="java.util.Locale" />
+                                                <j:arg value="${defaultLocale}" type="java.util.Locale" />
+                                                <j:arg value="${defaultLocale}" type="java.util.Locale" />
                                             </j:invokeStatic>
+                                            <j:if test="${maven.xdoc.ui.displayByDefault == 'true'}">
+                                                <j:set var="displayLocale">
+                                                    ${displayLocale}
+                                                    <fmt:message key="defaultLocale.byDefault" bundle="${msg}" />
+                                                </j:set>
+                                            </j:if>
                                             <li>
-                                                <doc:itemLink name="${displayLocale}" link="${locale}${location}"
+                                                <doc:itemLink name="${displayLocale}" link="/${location}"
                                                     relativePath="${relativePathForLocale}" />
                                             </li>
-                                        </j:forEach>
-                                    </j:if>
-                                </ul>
-                            </div>
-                        </j:if>
-                    </j:if>
 
-                    <!-- Standard Maven Navigation -->
-                    <j:set var="fileName">${file}</j:set>
-                    <j:set var="poweredbyimage">${maven.xdoc.poweredby.image}</j:set>
-                    <j:set var="poweredbytitle">${maven.xdoc.poweredby.title}</j:set>
-                    <j:set var="poweredbyurl" value="${maven.xdoc.poweredby.url}" />
-                    <j:if test="${!empty(poweredbyimage)}">
-                        <a id="poweredBy" href="${poweredbyurl}" title="${poweredbytitle}">
-                            <img alt="${maven.xdoc.poweredby.title}"
-                                src="${relativePathForLocale}images/logos/${poweredbyimage}" />
-                        </a>
-                    </j:if>
-                    <j:if test="${empty( breadcrumbsUsed )}">
-                        <j:if test="${date == 'navigation-bottom'}">
-                            <div id="lastPublished">
-                                <fmt:message key="site.last_published" bundle="${msg}" />
-                                : ${build.date}
-                            </div>
-                        </j:if>
-                    </j:if>
-                </div>
-            </div>
-            <!-- left column end -->
-
-            <!-- body start -->
-            <div id="bodyColumn">
-                <div class="contentBox">
-                    <jsl:applyTemplates select="$templateContext/*" />
-                </div>
-            </div>
-            <div class="clear">
-                <hr />
-            </div>
-            <!-- body end -->
-
-            <!-- footer start -->
-            <div id="footer">
-                <jsl:applyTemplates select="$nav/body/footer" />
-
-                <j:if test="${!empty(breadcrumbsUsed)}">
-                    <div class="xleft">
-                        <fmt:message key="site.last_published" bundle="${msg}" />
-                        : ${build.date}
-                        <j:if test="${!empty(version)}">
-                            <j:if test="${!(maven.xdoc.crumb.separator == '')}">
-                                <span class="separator">${maven.xdoc.crumb.separator}</span>
+                                            <!-- Supported language -->
+                                            <j:forEach var="locale" items="${locales}">
+                                                <j:invokeStatic className="org.apache.maven.xdoc.util.LocaleUtil"
+                                                    method="displayName" var="displayLocale">
+                                                    <j:arg value="${locale}" type="java.util.Locale" />
+                                                    <j:arg value="${locale}" type="java.util.Locale" />
+                                                </j:invokeStatic>
+                                                <li>
+                                                    <doc:itemLink name="${displayLocale}" link="${locale}${location}"
+                                                        relativePath="${relativePathForLocale}" />
+                                                </li>
+                                            </j:forEach>
+                                        </j:if>
+                                    </ul>
+                                </div>
                             </j:if>
-                            &#160;
-                            <fmt:message key="site.doc_for" bundle="${msg}" />
-                            ${version}
+                        </j:if>
+
+                        <!-- Standard Maven Navigation -->
+                        <j:set var="fileName">${file}</j:set>
+                        <j:set var="poweredbyimage">${maven.xdoc.poweredby.image}</j:set>
+                        <j:set var="poweredbytitle">${maven.xdoc.poweredby.title}</j:set>
+                        <j:set var="poweredbyurl" value="${maven.xdoc.poweredby.url}" />
+                        <j:if test="${!empty(poweredbyimage)}">
+                            <a id="poweredBy" href="${poweredbyurl}" title="${poweredbytitle}">
+                                <img alt="${maven.xdoc.poweredby.title}"
+                                    src="${relativePathForLocale}images/logos/${poweredbyimage}" />
+                            </a>
+                        </j:if>
+                        <j:if test="${empty( breadcrumbsUsed )}">
+                            <j:if test="${date == 'navigation-bottom'}">
+                                <div id="lastPublished">
+                                    <fmt:message key="site.last_published" bundle="${msg}" />
+                                    : ${build.date}
+                                </div>
+                            </j:if>
                         </j:if>
                     </div>
-                </j:if>
-                <div class="xright">
-                    <j:if test="${!empty(pom.organization.name)}">
-                        <j:if test="${!empty(pom.inceptionYear)}">
-                            <j:if test="${pom.inceptionYear == mavenCurrentYear}">
-                                &#169; ${mavenCurrentYear}, ${pom.organization.name}
-                            </j:if>
-                            <j:if test="${pom.inceptionYear != mavenCurrentYear}">
-                                &#169; ${pom.inceptionYear}-${mavenCurrentYear}, ${pom.organization.name}
-                            </j:if>
-                        </j:if>
-                        <j:if test="${empty(pom.inceptionYear)}">
-                            &#169; ${mavenCurrentYear}, ${pom.organization.name}
-                        </j:if>
-                        <j:if test="${empty(breadcrumbsUsed)}">
-                            <j:if test="${date == 'bottom'}">
-                                &#169; -
-                                <fmt:message key="site.last_published" bundle="${msg}" />
-                                : ${build.date}
-                            </j:if>
-                        </j:if>
+                </div>
+                <!-- left column end -->
 
-                    </j:if>
+                <!-- body start -->
+                <div id="bodyColumn">
+                    <div class="contentBox">
+                        <jsl:applyTemplates select="$templateContext/*" />
+                    </div>
                 </div>
                 <div class="clear">
                     <hr />
                 </div>
+                <!-- body end -->
+
+                <!-- footer start -->
+                <div id="footer">
+                    <jsl:applyTemplates select="$nav/body/footer" />
+
+                    <j:if test="${!empty(breadcrumbsUsed)}">
+                        <div class="xleft">
+                            <fmt:message key="site.last_published" bundle="${msg}" />
+                            : ${build.date}
+                            <j:if test="${!empty(version)}">
+                                <j:if test="${!(maven.xdoc.crumb.separator == '')}">
+                                    <span class="separator">${maven.xdoc.crumb.separator}</span>
+                                </j:if>
+                                &#160;
+                                <fmt:message key="site.doc_for" bundle="${msg}" />
+                                ${version}
+                            </j:if>
+                        </div>
+                    </j:if>
+                    <div class="xright">
+                        <j:if test="${!empty(pom.organization.name)}">
+                            <j:if test="${!empty(pom.inceptionYear)}">
+                                <j:if test="${pom.inceptionYear == mavenCurrentYear}">
+                                    &#169; ${mavenCurrentYear}, ${pom.organization.name}
+                                </j:if>
+                                <j:if test="${pom.inceptionYear != mavenCurrentYear}">
+                                    &#169; ${pom.inceptionYear}-${mavenCurrentYear}, ${pom.organization.name}
+                                </j:if>
+                            </j:if>
+                            <j:if test="${empty(pom.inceptionYear)}">
+                                &#169; ${mavenCurrentYear}, ${pom.organization.name}
+                            </j:if>
+                            <j:if test="${empty(breadcrumbsUsed)}">
+                                <j:if test="${date == 'bottom'}">
+                                    &#169; -
+                                    <fmt:message key="site.last_published" bundle="${msg}" />
+                                    : ${build.date}
+                                </j:if>
+                            </j:if>
+
+                        </j:if>
+                    </div>
+                    <div class="clear">
+                        <hr />
+                    </div>
+                </div>
+                <!-- footer end -->
             </div>
-            <!-- footer end -->
         </x:element>
     </jsl:template>
 
