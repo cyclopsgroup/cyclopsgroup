@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5 {
     font-weight: normal;
 }
 
-.section p,.section .bodyTable {
+.section p, .section .bodyTable {
     font-size:11pt;
 }
 
@@ -50,6 +50,10 @@ h1,h2,h3,h4,h5 {
 .section h3, .section h4, .section h5 {
     border-width: 0px;
     background-color: transparent;
+}
+
+#breadcrumbs, #leftColumn li, #footer {
+    font-size: 8pt;
 }
 
 #banner {
@@ -82,7 +86,6 @@ h1,h2,h3,h4,h5 {
 
 #leftColumn li {
     padding: 3px;
-    font-size: 8pt;
 }
 
 #leftColumn #search a {
