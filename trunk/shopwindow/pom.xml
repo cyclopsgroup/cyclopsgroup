@@ -28,4 +28,10 @@
         </developer>
     </developers>
     <reporting />
+    <distributionManagement>
+        <site>
+            <id>sourceforge</id>
+            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/temp</url>
+        </site>
+    </distributionManagement>
 </project>

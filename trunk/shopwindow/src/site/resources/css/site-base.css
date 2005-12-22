@@ -82,6 +82,7 @@ h1,h2,h3,h4,h5 {
 
 #leftColumn li {
     padding: 3px;
+    font-size: 8pt;
 }
 
 #leftColumn #search a {
