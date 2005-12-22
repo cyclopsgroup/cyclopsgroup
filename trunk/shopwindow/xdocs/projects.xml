@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Hosted Projects</title>
+        <title>What we have</title>
         <author email="chinajoeblack@hotmail.com">Jiaqi Guo</author>
     </properties>
     <head>
         <script type="text/javascript" src="js/head.js" />
     </head>
     <body>
-        <section name="Hosted Projects">
+        <section name="Hosted projects">
             <p>
-                <img src="images/projects_icon.png" width="48" height="48" align="right" />
-                Not all of these projects are under active development. Please follow the link to find out the detail of
-                each project.
+                This is a full list of projects founded and hosted in Cyclops Group. Not all of these projects are under
+                active development. Please follow the link to find out the detail of each project.
             </p>
             <p>
                 <table>

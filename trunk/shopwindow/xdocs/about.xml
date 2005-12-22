@@ -1,54 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>About Us</title>
+        <title>About the founcation</title>
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <head>
         <script type="text/javascript" src="js/head.js" />
     </head>
     <body>
-        <section name="Who is it?">
+        <section name="About the foundation">
             <p>
-                Cyclops Group is a group of talented people trying to make their contribution to the java open source
-                world.
-            </p>
-            <p>
-                Mailing list is coming soon. Today if you want to share ideas, feel free to send email to
+                Cyclops Group software foundation is started in the end of 2002. Mailing list is coming soon. Today if
+                you want to share ideas, feel free to send email to
                 <a href="mailto:cyclopsgroup@gmail.com">cyclopsgroup@gmail.com</a>
                 .
-            </p>
-        </section>
-        <section name="How to work">
-            <p>
-                After the code is checked out, the maven goals are still not ready to use. Because all project POM files
-                extend one base POM. To retrieve this POM, please install maven-cyclops-plugin and do maven
-                cyclops:deploy-pom.
-                <source>
-                    <![CDATA[
-$>maven plugin:download
- __  __
-|  \/  |__ _Apache__ ___
-| |\/| / _` \ V / -_) ' \  ~ intelligent projects ~
-|_|  |_\__,_|\_/\___|_||_|  v. 1.0.2
-
-What is the artifactId of the plugin to download (e.g. maven-java-plugin)?
-maven-cyclops-plugin
-
-What is the groupId of the plugin to download? [maven]
-com.cyclopsgroup
-What is the version of the plugin to download?
-1.0-b3
-build:start:
-
-plugin:download-artifact:
-......
-
-$>cd ~
-$>maven cyclops:deploy-pom
-......
-            ]]>
-                </source>
             </p>
         </section>
     </body>

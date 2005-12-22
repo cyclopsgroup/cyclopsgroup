@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Home</title>
+        <title>What is it</title>
         <properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
     </properties>
     <head>
@@ -10,14 +10,13 @@
     <body>
         <section name="What is it">
             <p>
-                The goal of Cyclops Group is making simple software. The Cyclops Group is an open source project
-                foundation focusing on common, abstract, simple and high quality java software that solve real complex
-                problems.
+                The goal of Cyclops Group is to contribute simple software to the open source world. The Cyclops Group
+                is an open source software foundation focusing on common, abstract, simple and high quality java
+                software that solve complex problems in the real world.
             </p>
             <p>
                 In a spontaneously evolved software world, open source is the power of evolution. We believe that the
-                most innovative solution for real business problem can only be created in the free open source
-                envrionment.
+                most innovative solution for real business problem can only be created in the free open envrionment.
             </p>
         </section>
         <section name="Stuffs">
@@ -50,57 +49,17 @@
                 <tr>
                     <td>
                         <p>
-                            <a href="issues">
-                                <b>Issue Tracker</b>
-                            </a>
+                            <b>Talkings</b>
                         </p>
                         <p>
-                            <a href="http://www.atlassian.com/software/jira">Atlassian JIRA</a>
-                            based system, featrues and tasks are maintained here.
-                        </p>
-                        <p>
-                            <a href="issues/browse/waterview">waterview</a>
+                            <a href="members/jiaqi/">Jiaqi's talk</a>
                             ,
-                            <a href="issues/browse/tornado">tornado</a>
-                            ,
-                            <a href="issues/browse/courselist">courselist</a>
-                            ,
-                            <a href="issues/browse/amulets">amulets</a>
+                            <a href="members/crazytmac/">Crazy TMac</a>
                             ...
                         </p>
                     </td>
                     <td>
-                        <a href="issues">
-                            <img src="images/issues_icon.png" width="48" height="48" />
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td nowrap="nowrap">
-                        <p>
-                            <a href="kb/display/pkb">
-                                <b>Knowledge Base</b>
-                            </a>
-                        </p>
-                        <p>This knownledge base collects the documentation related to Cyclops Group projects.</p>
-                        <p>
-                            <a href="kb/display/pkb">public</a>
-                            ,
-                            <a href="kb/display/jiaqi">jiaqi</a>
-                            ,
-                            <a href="kb/display/waterview">waterview</a>
-                            ,
-
-                            <a href="kb/display/tornado">tornado</a>
-                            ,
-                            <a href="kb/display/levistone">levistone</a>
-                            ...
-                        </p>
-                    </td>
-                    <td>
-                        <a href="kb/display/pkb">
-                            <img src="images/kb_icon.png" width="48" height="48" />
-                        </a>
+                        <img src="images/issues_icon.png" width="48" height="48" />
                     </td>
                 </tr>
                 <tr>
@@ -139,8 +98,8 @@
                 , my beautiful and smart wife.
             </p>
             <p>
-                Here's a partial list of technologies supporting Cyclops Group foundation. The actual list could go on
-                and on.
+                Here's a partial list of technologies supporting Cyclops Group foundation. Each one of them is actually
+                running in the very moment.
                 <table>
                     <tr>
                         <td>SourceForge.net</td>

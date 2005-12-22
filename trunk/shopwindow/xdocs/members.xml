@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Members</title>
+        <title>Get to know us</title>
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <head>
         <script type="text/javascript" src="js/head.js" />
     </head>
     <body>
-        <section name="Members Introduction">
+        <section name="Students and working people">
             <p>
                 Cyclops Group is founded by
                 <a href="members/jiaqi/">Jiaqi Guo</a>
-                and made up of a group of talented people.
+                and many other talented people.
             </p>
         </section>
         <section name="Member List">
