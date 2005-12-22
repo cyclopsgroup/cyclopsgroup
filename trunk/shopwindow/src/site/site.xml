@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cyclops Group">
+    <bannerLeft>
+        <name>Cyclops Group</name>
+        <src>images/cyclopsgroup_logo.gif</src>
+        <href>http://www.cyclopsgroup.com</href>
+    </bannerLeft>
+    <body>
+        <links>
+            <item name="Home" href="/index.html" />
+            <item name="Waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
+            <item name="Tornado" href="http://www.cyclopsgroup.com/projects/tornado" />
+            <item name="Course List" href="http://www.cyclopsgroup.com/projects/courselist" />
+        </links>
+        <menu name="Content">
+            <item name="What is it" href="/index.html" />
+            <item name="What we have" href="/projects.html" />
+            <item name="Get to know us" href="/members.html" />
+            <item name="About the foundation" href="/about.html" />
+        </menu>
+        <menu name="Links">
+            <item name="Source Forge Summary" href="http://sourceforge.net/projects/cyclops-group" />
+            <item name="Downloads" href="http://sourceforge.net/project/showfiles.php?group_id=91358" />
+            <item name="CVS View" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group" />
+            <item name="Crazy TMac's Blog" href="members/crazytmac/" />
+            <item name="Jiaqi's Blog" href="members/jiaqi/" />
+        </menu>
+        ${reports}
+    </body>
+</project>
