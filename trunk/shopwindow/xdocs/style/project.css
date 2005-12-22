@@ -93,8 +93,8 @@ h1,h2,h3,h4,h5 {
     background-color: #73A1D6;
     color: white;
     border-width: 0px;
-    margin: 0px;
-    float: left;
+    margin: 20px 0px 0px 0px;
+    float: right;
     width: 20%;
 }
 
@@ -129,6 +129,8 @@ h1,h2,h3,h4,h5 {
 #bodyColumn {
     background-color: white;
     padding: 10px;
+    margin-left: 0px;
+    width: 75%;
 }
 
 #footer {
