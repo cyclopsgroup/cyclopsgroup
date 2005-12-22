@@ -39,7 +39,7 @@ a:link,a:visited {
 }
 
 #bannerPanelRight {
-    background: url('banner_right.gif') no-repeat;
+    background: url('banner_right.gif') no-repeat right;
 }
 
 .bannerPanelBelt {
