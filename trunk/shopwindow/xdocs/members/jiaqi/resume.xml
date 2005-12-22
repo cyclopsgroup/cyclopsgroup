@@ -4,6 +4,9 @@
         <title>My Resume</title>
         <author email="chinajoeblack@hotmail.com">jiaqi guo</author>
     </properties>
+    <head>
+        <script type="text/javascript" src="js/head.js" />
+    </head>
     <body>
         <section name="My Resume">
             <p>

@@ -4,6 +4,9 @@
         <title>Members</title>
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
+    <head>
+        <script type="text/javascript" src="js/head.js" />
+    </head>
     <body>
         <section name="Members Introduction">
             <p>
