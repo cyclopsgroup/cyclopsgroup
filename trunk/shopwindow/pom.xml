@@ -27,4 +27,5 @@
             </roles>
         </developer>
     </developers>
+    <reporting />
 </project>

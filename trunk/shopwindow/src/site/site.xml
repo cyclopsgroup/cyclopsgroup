@@ -25,6 +25,5 @@
             <item name="Crazy TMac's Blog" href="members/crazytmac/" />
             <item name="Jiaqi's Blog" href="members/jiaqi/" />
         </menu>
-        ${reports}
     </body>
 </project>
