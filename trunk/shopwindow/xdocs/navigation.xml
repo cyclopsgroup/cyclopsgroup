@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="shopwindow">
     <title>Cyclops Group</title>
+    <head>
+        <script language="javascript">
+            //aaaa;
+        </script>
+    </head>
     <body>
         <menu name="Overview">
             <item name="What is it" href="/index.html" />
