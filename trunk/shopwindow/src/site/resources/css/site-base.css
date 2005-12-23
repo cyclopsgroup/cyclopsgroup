@@ -21,7 +21,7 @@ h1,h2,h3,h4,h5 {
 }
 
 .section p, .section .bodyTable {
-    font-size:11pt;
+    font-size: 10pt;
 }
 
 .section .bodyTable tr.a {
@@ -69,13 +69,20 @@ h1,h2,h3,h4,h5 {
 
 #leftColumn {
     border-width: 0px;
-    //margin: 0px 0px 0px 0px;
     float: left;
     width: 20%;
 }
 
 #navcolumn {
     padding: 5px;
+}
+
+#navcolumn li {
+    padding-left: 32px;
+}
+
+#navcolumn li.expanded, #navcolumn li.collapsed {
+    background-image: none;
 }
 
 #leftColumn h5 {

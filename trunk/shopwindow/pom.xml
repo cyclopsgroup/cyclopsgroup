@@ -31,7 +31,7 @@
     <distributionManagement>
         <site>
             <id>sourceforge</id>
-            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/temp</url>
+            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs</url>
         </site>
     </distributionManagement>
 </project>

@@ -18,13 +18,17 @@ a:visited {
 }
 
 #banner {
-    background: url('banner_bg.png');
+    background-color: #1D54A6;
+    background-image: url('banner_bg.png');
+    background-position: right;
+    background-repeat: no-repeat;
     border-color: #73A1D6;
     color: white;
+    padding-left: 20px;
 }
 
 #breadcrumbs {
-    background-color: #1772BD;
+    background-color: #1F5195;
     color: white;
 }
 
@@ -35,16 +39,19 @@ a:visited {
 #leftColumn {
     background-color: #C4C4C4;
     color: white;
-    margin: 20px 0px 0px 0px;
+    margin: 20px 2px 2px 0px;
     float: right;
     width: 20%;
 }
 
 #navcolumn {
-    background: url('side_bar_bg.gif') repeat-y right;
+    background: url('side_bar_bg.png') repeat-y right;
     position: relative;
     top: -3px;
     left: -3px;
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color:  #1F5195;
 }
 
 #leftColumn h5 {
@@ -55,6 +62,11 @@ a:visited {
 }
 
 #leftColumn a {
+    color: #B5D7FF;
+    letter-spacing: 2px;
+}
+
+#leftColumn a:hover {
     color: white;
 }
 

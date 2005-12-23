@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Get to know us</title>
+        <title>People</title>
         <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
     </properties>
     <body>
@@ -24,35 +24,41 @@
                         <a href="members/jiaqi/">jiaqi</a>
                     </td>
                     <td>Jiaqi Guo</td>
-                    <td>jiaqi.guo@gmail.com</td>
+                    <td>
+                        <a href="mailto:jiaqi.guo@gmail.com">jiaqi.guo@gmail.com</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <a href="members/xuying/">xuying</a>
                     </td>
                     <td>Xuying Zhao</td>
-                    <td>xuyingzhao@gmail.com</td>
-                </tr>
-                <tr>
                     <td>
-                        <a href="members/xxu/">xxu</a>
+                        <a href="mailto:xuyingzhao@gmail.com">xuyingzhao@gmail.com</a>
                     </td>
+                </tr>
+                <tr>
+                    <td>xxu</td>
                     <td>Xiaofang, Xu</td>
-                    <td>xiaofang@evavi.com</td>
+                    <td>
+                        <a href="mailto:xiaofang@evavi.com">xiaofang@evavi.com</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="members/crazytmac/">crazytmac</a>
+                        <a href="members/crazytmac/blog.html">crazytmac</a>
                     </td>
                     <td>Crazy TMac</td>
-                    <td>crazytmac@gmail.com</td>
+                    <td>
+                        <a href="mailto:crazytmac@gmail.com">crazytmac@gmail.com</a>
+                    </td>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="members/pzhai/">pzhai</a>
-                    </td>
+                    <td>pzhai</td>
                     <td>Peng Zhai</td>
-                    <td>peng.zhai@evavi.com</td>
+                    <td>
+                        <a href="mailto:peng.zhai@evavi.com">peng.zhai@evavi.com</a>
+                    </td>
                 </tr>
             </table>
         </section>
