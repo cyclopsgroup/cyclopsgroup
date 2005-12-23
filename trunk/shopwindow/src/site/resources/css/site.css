@@ -18,7 +18,7 @@ a:visited {
 }
 
 #banner {
-    background-color: #3C83CF;
+    background: url('banner_bg.png');
     border-color: #73A1D6;
     color: white;
 }
