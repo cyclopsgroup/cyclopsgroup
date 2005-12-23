@@ -77,8 +77,9 @@ h1,h2,h3,h4,h5 {
     padding: 5px;
 }
 
-#navcolumn li {
-    padding-left: 32px;
+#navcolumn li, #navcolumn ul {
+    padding: 0px 0px 0px 4px;
+    line-height: 18px;
 }
 
 #navcolumn li.expanded, #navcolumn li.collapsed {
@@ -89,18 +90,6 @@ h1,h2,h3,h4,h5 {
     border-width: 0px;
     text-transform: uppercase;
     font-size: 10pt;
-}
-
-#leftColumn li {
-    padding: 3px;
-}
-
-#leftColumn #search a {
-    display: none;
-}
-
-#leftColumn #search form {
-    padding: 5px;
 }
 
 #bodyColumn {
