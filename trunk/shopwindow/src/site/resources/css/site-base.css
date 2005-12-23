@@ -1,6 +1,4 @@
 body {
-    max-width: 920px;
-    width: expression(document.body.clientWidth > 920 ? "920px" : "auto" );
     font-family: 'Lucida Grande', 'Bitstream Vera Sans', Verdana, Arial,
         Sans-Serif;
     color: #333333;

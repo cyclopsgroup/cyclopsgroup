@@ -1,5 +1,9 @@
 @import url(site-base.css);
 
+body {
+    max-width: 920px;
+}
+
 a:link {
     color: #6699CC;
 }
@@ -45,7 +49,10 @@ a:visited {
 }
 
 #navcolumn {
-    background: url('side_bar_bg.png') repeat-y right;
+    background-color: #6898D1;
+    background-image: url('side_bar_bg.png');
+    background-repeat: repeat-y;
+    background-position: right;
     position: relative;
     top: -3px;
     left: -3px;
