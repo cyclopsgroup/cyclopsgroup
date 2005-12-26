@@ -6,6 +6,8 @@
     </properties>
     <body>
         <section name="What is it">
+            <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+            <script type="text/javascript">_uacct = "UA-76203-1"; urchinTracker();</script>
             <p>
                 The goal of Cyclops Group is to contribute simple software to the open source world. The Cyclops Group
                 is an open source software foundation focusing on common, abstract, simple and high quality java
