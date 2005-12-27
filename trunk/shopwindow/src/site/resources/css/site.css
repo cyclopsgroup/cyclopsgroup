@@ -31,6 +31,11 @@ a:visited {
     padding-left: 20px;
 }
 
+#bannerLeft img {
+    width: 540px;
+    height: 80px;
+}
+
 #breadcrumbs {
     background-color: #1F5195;
     color: white;

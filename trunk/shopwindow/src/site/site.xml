@@ -2,7 +2,7 @@
 <project name="Cyclops Group">
     <bannerLeft>
         <name>Cyclops Group</name>
-        <src>images/cyclopsgroup_logo.gif</src>
+        <src>images/cyclopsgroup_logo.png</src>
         <href>http://www.cyclopsgroup.com</href>
     </bannerLeft>
     <body>

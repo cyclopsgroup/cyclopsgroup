@@ -7,10 +7,16 @@ body {
 
 h1,h2,h3,h4,h5 {
     font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    background-color: transparent;
+    border-style: none;
+}
+
+img {
+    /** Stupid patch only because MSIE doesn't support PNG images well */
+    behavior: url('http://www.cyclopsgroup.com/pngbehavior.htc');
 }
 
 .section h2 {
-    background-color: transparent;
     border-width: 0px 0px 2px 0px;
     border-style: dashed;
     border-color: #999999;
