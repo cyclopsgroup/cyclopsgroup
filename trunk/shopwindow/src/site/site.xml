@@ -12,10 +12,12 @@
             <item name="tornado" href="http://www.cyclopsgroup.com/projects/tornado" />
             <item name="course list" href="http://www.cyclopsgroup.com/projects/courselist" />
         </links>
-        <head>
+        <!--
+            <head>
             <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
             <script type="text/javascript">_uacct = "UA-76203-1"; urchinTracker();</script>
-        </head>
+            </head>
+        -->
         <menu name="Content">
             <item name="home" href="/index.html" />
             <item name="projects" href="/projects.html" />
@@ -30,6 +32,7 @@
                     <item name="research" href="/members/xuying/research.html" />
                     <item name="talk" href="/members/xuying/blog.html" />
                 </item>
+                <item name="crazytmac" href="/members/crazytmac/blog.html" />
             </item>
             <item name="forum" href="http://www.nabble.com/Cyclops-Group-Forum-f13938.html" />
             <item name="about" href="/about.html" />
@@ -38,8 +41,6 @@
             <item name="sf.net home" href="http://sourceforge.net/projects/cyclops-group" />
             <item name="download" href="http://sourceforge.net/project/showfiles.php?group_id=91358" />
             <item name="cvs" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group" />
-            <item name="crazy tmac" href="members/crazytmac/blog.html" />
-            <item name="jiaqi" href="members/jiaqi/blog.html" />
         </menu>
     </body>
 </project>

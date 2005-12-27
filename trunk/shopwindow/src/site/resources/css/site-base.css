@@ -41,6 +41,7 @@ h1,h2,h3,h4,h5 {
     border-width: 1px;
     border-style: solid;
     border-color: #666666;
+    background-color: white;
     padding: 8px;
     font-size: 9pt;
 }
@@ -69,6 +70,7 @@ h1,h2,h3,h4,h5 {
     border-width: 0px;
     float: left;
     width: 20%;
+    overflow: visible;
 }
 
 #navcolumn {

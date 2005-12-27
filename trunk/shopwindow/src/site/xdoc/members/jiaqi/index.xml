@@ -2,8 +2,16 @@
 <document>
     <properties>
         <title>Jiaqi Guo</title>
-        <properties email="xuyingzhao@gmail.com">xuying zhao</properties>
+        <properties>
+            <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+        </properties>
     </properties>
     <body>
+        <section name="Me">
+            <p>
+                My name is Jiaqi Guo and I'm an expert of Java open source. CyclopsGroup.com is the portfolio of my open
+                source projects.
+            </p>
+        </section>
     </body>
 </document>
