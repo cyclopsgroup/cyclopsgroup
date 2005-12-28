@@ -58,6 +58,14 @@ img {
     background-color: transparent;
 }
 
+.rss_box li.rss_item {
+    margin: 10px 0px 10px 0px;
+}
+
+.rss_box li.rss_item .rss_date {
+    font-size: 8pt;
+}
+
 #breadcrumbs,#leftColumn li,#footer {
     font-size: 8pt;
 }
