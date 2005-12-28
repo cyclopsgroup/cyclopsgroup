@@ -64,6 +64,7 @@ img {
 
 .rss_box li.rss_item .rss_date {
     font-size: 8pt;
+    font-style: italic;
 }
 
 #breadcrumbs,#leftColumn li,#footer {
