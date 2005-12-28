@@ -6,7 +6,8 @@ body {
 }
 
 h1,h2,h3,h4,h5 {
-    font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif
+        ;
     background-color: transparent;
     border-style: none;
 }
@@ -20,11 +21,11 @@ img {
     border-width: 0px 0px 2px 0px;
     border-style: dashed;
     border-color: #999999;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: normal;
 }
 
-.section p, .section .bodyTable {
+.section p,.section .bodyTable {
     font-size: 10pt;
 }
 
@@ -52,12 +53,12 @@ img {
     font-size: 9pt;
 }
 
-.section h3, .section h4, .section h5 {
+.section h3,.section h4,.section h5 {
     border-width: 0px;
     background-color: transparent;
 }
 
-#breadcrumbs, #leftColumn li, #footer {
+#breadcrumbs,#leftColumn li,#footer {
     font-size: 8pt;
 }
 
@@ -83,12 +84,12 @@ img {
     padding: 5px;
 }
 
-#navcolumn li, #navcolumn ul {
+#navcolumn li,#navcolumn ul {
     padding: 0px 0px 0px 6px;
     line-height: 18px;
 }
 
-#navcolumn li.expanded, #navcolumn li.collapsed {
+#navcolumn li.expanded,#navcolumn li.collapsed {
     background-image: none;
 }
 
@@ -103,8 +104,8 @@ img {
 }
 
 #footer {
-	padding: 10px;
-	border-width: 2px 0px 0px 0px;
-	border-style: dashed;
-	border-color: #666666;
+    padding: 10px;
+    border-width: 2px 0px 0px 0px;
+    border-style: dashed;
+    border-color: #666666;
 }

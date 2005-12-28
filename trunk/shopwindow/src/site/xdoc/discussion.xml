@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Discussion</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Rencet posts">
+            <script language="JavaScript"
+                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fgroups.google.com%2Fgroup%2Fcyclopsgroup-discussion%2Ffeed%2Frss_v2_0_msgs.xml%3Fnum%3D50&amp;desc=1&amp;date=y&amp;tz=6&amp;utf=y&amp;html=a"
+                type="text/javascript" />
+            <noscript>
+                <p>
+                    <a href="http://groups.google.com/group/cyclopsgroup-discussion">
+                        http://groups.google.com/group/cyclopsgroup-discussion
+                    </a>
+                </p>
+            </noscript>
+            <p>
+                <a href="http://groups.google.com/group/cyclopsgroup-discussion">Read more..</a>
+                |
+                <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Join...</a>
+                |
+                <a href="mailto:cyclopsgroup-discussion@googlegroups.com">Add your post immediately</a>
+            </p>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title></title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Rencet news">
+            <script language="JavaScript"
+                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fgroups.google.com%2Fgroup%2Fcyclopsgroup-news%2Ffeed%2Frss_v2_0_msgs.xml%3Fnum%3D50&amp;desc=1&amp;date=y&amp;tz=6&amp;utf=y&amp;html=a"
+                type="text/javascript" />
+            <noscript>
+                <p>
+                    <a href="http://groups.google.com/group/cyclopsgroup-news">
+                        http://groups.google.com/group/cyclopsgroup-news
+                    </a>
+                </p>
+            </noscript>
+            <p>
+                <a href="http://groups.google.com/group/cyclopsgroup-discussion">Read more..</a>
+                |
+                <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Keep me updated...</a>
+            </p>
+        </section>
+    </body>
+</document>

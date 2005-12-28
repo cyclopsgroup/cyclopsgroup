@@ -18,152 +18,72 @@
                 most innovative solution for real business problem can only be created in the free open envrionment.
             </p>
         </section>
-        <section name="Stuffs">
-            <table>
-                <tr>
-                    <td>
-                        <p>
-                            <a href="projects.html">
-                                <b>Projects</b>
-                            </a>
-                        </p>
-                        <p>All projects are currently Java based.</p>
-                        <p>
-                            <a href="projects/waterview">waterview</a>
-                            ,
-                            <a href="projects/tornado">tornado</a>
-                            ,
-                            <a href="projects/courselist">courselist</a>
-                            ,
-                            <a href="projects/amulets">amulets</a>
-                            ...
-                        </p>
-                    </td>
-                    <td>
-                        <a href="projects.html">
-                            <img src="images/projects_icon.png" width="48" height="48" />
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>
-                            <b>Talkings</b>
-                        </p>
-                        <p>
-                            <a href="members/jiaqi/blog.html">Jiaqi's talk</a>
-                            ,
-                            <a href="members/crazytmac/blog.html">Crazy TMac</a>
-                            ,
-                            <a href="members/xuying/blog.html">Xuying's talk</a>
-                            ...
-                        </p>
-                    </td>
-                    <td>
-                        <img src="images/issues_icon.png" width="48" height="48" />
-                    </td>
-                </tr>
-                <tr>
-                    <td nowrap="nowrap">
-                        <p>
-                            <a href="http://fisheye.cenqua.com/viewrep/cyclops-group">
-                                <b>Source Repository</b>
-                            </a>
-                        </p>
-                        <p>
-                            Web based CVS monitor system based on
-                            <a href="http://www.cenqua.com/fisheye">cenque fisheye</a>
-                            .
-                        </p>
-                        <p>
-                            <a href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group">View CVS</a>
-                            ,
-                            <a href="http://cvs.cyclopsgroup.com/changelog/cyclops-group">CVS Change Log</a>
-                            ,
-                            <a href="http://cvs.cyclopsgroup.com/search/cyclops-group">Search CVS</a>
-                        </p>
-                    </td>
-                    <td>
-                        <a href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group">
-                            <img src="images/cvs_icon.png" width="48" height="48" />
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </section>
-        <section name="Powered By">
+        <section name="Recent news">
+            <script language="JavaScript"
+                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fgroups.google.com%2Fgroup%2Fcyclopsgroup-news%2Ffeed%2Frss_v2_0_msgs.xml&amp;desc=1&amp;date=y&amp;tz=6&amp;utf=y&amp;html=a"
+                type="text/javascript" />
+            <noscript>
+                <p>
+                    <a href="http://groups.google.com/group/cyclopsgroup-news">
+                        http://groups.google.com/group/cyclopsgroup-news
+                    </a>
+                </p>
+            </noscript>
             <p>
-                There are a lot of items that can be called &quot;Powered By&quot;. For example, my old Pentium MMX 200
-                desktop, my tiny shabby apartment and my favourite chinese restaurant. Of course I'm most powered by
-                <a href="members/xuying/index.html">Xuying</a>
-                , my beautiful and smart wife.
+                <a href="news.html">More..</a>
             </p>
+        </section>
+        <section name="Get me involved">
             <p>
-                Here's a partial list of technologies supporting Cyclops Group foundation. Each one of them is actually
-                running in the very moment.
+                A couple of google user groups are available for Cyclops Group. You may want to join if you want to keep
+                being updated.
                 <table>
                     <tr>
-                        <td>SourceForge.net</td>
-                        <td>
-                            <a href="http://sourceforge.net">http://sourceforge.net</a>
-                        </td>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Readonly</th>
+                        <th>Post</th>
+                        <th>Join</th>
                     </tr>
                     <tr>
-                        <td>Apache Maven</td>
                         <td>
-                            <a href="http://maven.apache.org">http://maven.apache.org</a>
+                            <a href="http://groups.google.com/group/cyclopsgroup-discussion">Discussion</a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Anthill</td>
+                        <td>The general discussion group. Anonymous posts are allowed.</td>
+                        <td>No</td>
                         <td>
-                            <a href="http://www.urbancode.com/products/anthillpro">
-                                http://www.urbancode.com/products/anthillpro
+                            <a href="mailto:cyclopsgroup-discussion@googlegroups.com">
+                                cyclopsgroup-discussion@googlegroups.com
                             </a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Eclipse</td>
                         <td>
-                            <a href="http://eclipse.org">http://eclipse.org</a>
+                            <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Go</a>
                         </td>
                     </tr>
                     <tr>
-                        <td>Atlassian JIRA</td>
                         <td>
-                            <a href="http://www.atlassian.com/software/jira">http://www.atlassian.com/software/jira</a>
+                            <a href="http://groups.google.com/group/cyclopsgroup-discussion">News</a>
+                        </td>
+                        <td>News and annoncement of cyclops group</td>
+                        <td>Yes</td>
+                        <td>cyclopsgroup-news@googlegroups.com</td>
+                        <td>
+                            <a href="http://groups.google.com/group/cyclopsgroup-news/subscribe">Go</a>
                         </td>
                     </tr>
                     <tr>
-                        <td>Atlassian Confluence</td>
                         <td>
-                            <a href="http://www.atlassian.com/software/confluence">
-                                http://www.atlassian.com/software/confluence
+                            <a href="http://groups.google.com/group/cyclopsgroup-support">Support</a>
+                        </td>
+                        <td>Support for Cyclops Group projects</td>
+                        <td>No</td>
+                        <td>
+                            <a href="mailto:cyclopsgroup-support@googlegroups.com">
+                                cyclopsgroup-support@googlegroups.com
                             </a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Cenqua Clover</td>
                         <td>
-                            <a href="http://www.cenqua.com/clover">http://www.cenqua.com/clover</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cenqua Fisheye</td>
-                        <td>
-                            <a href="http://www.cenqua.com/fisheye">http://www.cenqua.com/fisheye</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Codehaus Maven Proxy</td>
-                        <td>
-                            <a href="http://maven-proxy.codehaus.org">http://maven-proxy.codehaus.org</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Codehaus MevenIDE</td>
-                        <td>
-                            <a href="http://mevenide.codehaus.org">http://mevenide.codehaus.org</a>
+                            <a href="http://groups.google.com/group/cyclopsgroup-support/subscribe">Go</a>
                         </td>
                     </tr>
                 </table>

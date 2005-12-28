@@ -21,6 +21,9 @@
         <menu name="Content">
             <item name="home" href="/index.html" />
             <item name="projects" href="/projects.html" />
+            <item name="downloads" href="/downloads.html" />
+            <item name="news" href="/news.html" />
+            <item name="discussion" href="/discussion.html" />
             <item name="people" href="/people.html" collapse="true">
                 <item name="jiaqi" href="/members/jiaqi/index.html" collapse="true">
                     <item name="resume" href="/members/jiaqi/resume.html" />
@@ -34,13 +37,12 @@
                 </item>
                 <item name="crazytmac" href="/members/crazytmac/blog.html" />
             </item>
-            <item name="forum" href="http://www.nabble.com/Cyclops-Group-Forum-f13938.html" />
             <item name="about" href="/about.html" />
         </menu>
         <menu name="Links">
             <item name="sf.net home" href="http://sourceforge.net/projects/cyclops-group" />
-            <item name="download" href="http://sourceforge.net/project/showfiles.php?group_id=91358" />
             <item name="cvs" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group" />
+            <item name="for developers" href="http://dev.cyclopsgroup.com" />
         </menu>
     </body>
 </project>
