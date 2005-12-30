@@ -23,7 +23,7 @@
             <item name="projects" href="/projects.html" />
             <item name="downloads" href="/downloads.html" />
             <item name="news" href="/news.html" />
-            <item name="discussion" href="/discussion.html" />
+            <item name="discussion" href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html" />
             <item name="people" href="/people.html" collapse="true">
                 <item name="jiaqi" href="/members/jiaqi/index.html" collapse="true">
                     <item name="resume" href="/members/jiaqi/resume.html" />
@@ -42,7 +42,7 @@
         <menu name="Links">
             <item name="sf.net home" href="http://sourceforge.net/projects/cyclops-group" />
             <item name="cvs" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group" />
-            <item name="for developers" href="http://dev.cyclopsgroup.com" />
+            <item name="for developers" href="http://dev.cyclopsgroup.com/kb/display/portal" />
         </menu>
     </body>
 </project>
