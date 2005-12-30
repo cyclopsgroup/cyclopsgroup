@@ -12,3 +12,7 @@
 .blogpost .blogHeading {
     font-size: 11pt;
 }
+
+#PageContentSideBar {
+    padding: 0px 10px 0px 10px;
+}
