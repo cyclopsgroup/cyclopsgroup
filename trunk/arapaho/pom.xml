@@ -41,7 +41,7 @@
       <timezone>-6</timezone>
     </developer>
   </developers>
-  <license>
+  <licenses>
     <license>
       <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</name>
       <url>http://opensource.org/licenses/cddl1.php</url>
