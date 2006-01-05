@@ -14,7 +14,7 @@
     <url>http://www.cyclopsgroup.com/</url>
     <distributionManagement>
         <site>
-            <id>cyclopsgroup.central</id>
+            <id>cyclopsgroup.server.sourceforge</id>
             <name>CyclopsGroup.com central web server</name>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs</url>
         </site>
