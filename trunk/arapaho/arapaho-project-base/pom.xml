@@ -153,17 +153,17 @@
     </reporting>
     <distributionManagement>
         <repository>
-            <id>cyclopsgroup.central</id>
+            <id>cyclopsgroup.server.sourceforge</id>
             <name>CyclopsGroup.com central m2 repository</name>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
         </repository>
         <snapshotRepository>
-            <id>cyclopsgroup.central</id>
+            <id>cyclopsgroup.server.sourceforge</id>
             <name>CyclopsGroup.com central m2 snapshot repository</name>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
         </snapshotRepository>
         <site>
-            <id>cyclopsgroup.central</id>
+            <id>cyclopsgroup.server.sourceforge</id>
             <name>CyclopsGroup.com central web server</name>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/${project.artifactId}</url>
         </site>
