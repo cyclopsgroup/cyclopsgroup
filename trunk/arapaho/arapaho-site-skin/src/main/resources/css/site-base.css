@@ -1,5 +1,3 @@
-@import url(pngfix.css);
-
 body {
     font-family: 'Lucida Grande', 'Bitstream Vera Sans', Verdana, Arial,
         Sans-Serif;
@@ -57,11 +55,16 @@ h1,h2,h3,h4,h5 {
 
 .rss_box li.rss_item {
     margin: 10px 0px 10px 0px;
+    font-size: 10pt;
 }
 
 .rss_box li.rss_item .rss_date {
     font-size: 8pt;
     font-style: italic;
+}
+
+#documentBody {
+    text-align: left;
 }
 
 #breadcrumbs,#leftColumn li,#footer {
