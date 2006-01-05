@@ -8,10 +8,10 @@
     <name>Maven</name>
     <version>1.0-SNAPSHOT</version>
     <description>The base pom for other projects</description>
-    <url>http://www.cyclopsgroup.com/</url>
+    <url>http://www.cyclopsgroup.com/projects/${project.artifactId}</url>
     <issueManagement>
         <system>jira</system>
-        <url>http://dev.cyclopsgroup.com/issues/browse/arapaho</url>
+        <url>http://dev.cyclopsgroup.com/issues/browse/${project.artifactId}</url>
     </issueManagement>
     <mailingLists>
         <mailingList>
@@ -72,18 +72,18 @@
     <licenses>
         <license>
             <name>Common Development and Distribution License (CDDL) Version 1.0</name>
-            <url>http://opensource.org/licenses/cddl1.php</url>
-            <distribution>repo</distribution>
+            <url>http://opensource.org/licenses/cddl1.txt</url>
+            <distribution>cyclopsgroup.central</distribution>
         </license>
     </licenses>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-project-base
+            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:${project.artifactId}
         </connection>
         <developerConnection>
-            scm:cvs:ext:sfuser@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-project-base
+            scm:cvs:ext:sfuser@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/${project.artifactId}
         </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-project-base</url>
+        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/${project.artifactId}</url>
     </scm>
     <organization>
         <name>CyclopsGroup.com</name>
@@ -113,21 +113,29 @@
         </repository>
         <repository>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </releases>
             <id>apache.snapshots</id>
             <name>Apache Development Repository</name>
             <url>http://cvs.apache.org/maven-snapshot-repository</url>
         </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <id>apache.snapshots</id>
+            <name>Apache Development Repository</name>
+            <url>http://cvs.apache.org/maven-snapshot-repository</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <id>cyclopsgroup.central</id>
+            <name>CyclopsGroup.com Central M2 Repository</name>
+            <url>http://www.cyclospgroup.com/m2</url>
+        </repository>
     </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
     <reporting>
         <plugins>
             <plugin>
@@ -157,7 +165,7 @@
         <site>
             <id>cyclopsgroup.central</id>
             <name>CyclopsGroup.com central web server</name>
-            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs</url>
+            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/${project.artifactId}</url>
         </site>
     </distributionManagement>
 </project>
