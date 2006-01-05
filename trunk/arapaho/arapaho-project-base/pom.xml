@@ -161,6 +161,7 @@
             <id>cyclopsgroup.server.sourceforge</id>
             <name>CyclopsGroup.com central m2 snapshot repository</name>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
