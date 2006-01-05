@@ -75,9 +75,9 @@
         </pluginManagement>
     </build>
     <modules>
-        <module>arapaho-site-skin</module>
-        <module>arapaho-main-site</module>
         <module>arapaho-project-base</module>
+        <module>arapaho-skin-default</module>
+        <module>arapaho-main-site</module>
     </modules>
     <repositories>
         <repository>
