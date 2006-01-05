@@ -93,9 +93,10 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
                     <configuration>
-                        <tagBase>https://svn.apache.org/repos/asf/maven/components/tags</tagBase>
+                        <outputEncoding>UTF-8</outputEncoding>
                     </configuration>
                 </plugin>
             </plugins>
