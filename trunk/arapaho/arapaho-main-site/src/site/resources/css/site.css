@@ -1,7 +1,10 @@
-@import url(site-base.css);
+#documentWrapper {
+    text-align: left;
+}
 
-body {
+#documentBody {
     max-width: 920px;
+    width: expression(document.body.clientWidth > 920 ? "920px" : "auto" );
 }
 
 a:link {
@@ -29,6 +32,7 @@ a:visited {
     border-color: #73A1D6;
     color: white;
     padding-left: 20px;
+    height: 80px;
 }
 
 #bannerLeft img {
