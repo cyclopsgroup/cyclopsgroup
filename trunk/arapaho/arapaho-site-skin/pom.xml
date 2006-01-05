@@ -4,10 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>arapaho-site-skin</artifactId>
+        <artifactId>arapaho-project-base</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.cyclopsgroup.arapaho</groupId>
     <artifactId>arapaho-site-skin</artifactId>
     <name>Maven</name>
     <version>1.0-SNAPSHOT</version>
