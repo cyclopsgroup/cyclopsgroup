@@ -1,0 +1,120 @@
+@import url(pngfix.css);
+
+body {
+    font-family: 'Lucida Grande', 'Bitstream Vera Sans', Verdana, Arial,
+        Sans-Serif;
+    color: #333333;
+    background-color: white;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif
+        ;
+    background-color: transparent;
+    border-style: none;
+}
+
+.section h2 {
+    border-width: 0px 0px 2px 0px;
+    border-style: dashed;
+    border-color: #999999;
+    text-transform: lowercase;
+    font-weight: normal;
+}
+
+.section p,.section .bodyTable {
+    font-size: 10pt;
+}
+
+.section .bodyTable tr.a {
+    background-color: #F9F9F9;
+}
+
+.section .source {
+    border-width: 0px;
+    background-color: #CCCCCC;
+    padding: 0px;
+    margin: 10px 6px 6px 10px;
+}
+
+.section .source pre {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: white;
+    padding: 8px;
+    font-size: 9pt;
+}
+
+.section h3,.section h4,.section h5 {
+    border-width: 0px;
+    background-color: transparent;
+}
+
+.rss_box li.rss_item {
+    margin: 10px 0px 10px 0px;
+}
+
+.rss_box li.rss_item .rss_date {
+    font-size: 8pt;
+    font-style: italic;
+}
+
+#breadcrumbs,#leftColumn li,#footer {
+    font-size: 8pt;
+}
+
+#banner {
+    background-color: #999999;
+}
+
+#breadcrumbs {
+    border-width: 0px;
+    padding: 4px;
+    display: block;
+    letter-spacing: 2px;
+}
+
+#leftColumn {
+    border-width: 0px;
+    float: left;
+    width: 18%;
+    overflow: visible;
+    background-color: transparent;
+}
+
+#navcolumn {
+    padding: 5px;
+}
+
+#navcolumn li,#navcolumn ul {
+    padding: 0px 0px 0px 6px;
+    line-height: 18px;
+}
+
+#navcolumn li.expanded, #navcolumn li.collapsed {
+    background-image: none;
+}
+
+#leftColumn h5 {
+    border-width: 0px;
+    text-transform: uppercase;
+    font-size: 10pt;
+    padding: 10px;
+}
+
+#bodyColumn {
+    padding: 10px;
+    margin-left: 18%;
+}
+
+#footer {
+    padding: 10px;
+    border-width: 2px 0px 0px 0px;
+    border-style: dashed;
+    border-color: #666666;
+}

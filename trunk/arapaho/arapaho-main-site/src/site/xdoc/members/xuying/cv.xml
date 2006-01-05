@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Curriculum Vitae</title>
+        <properties email="xuyingzhao@gmail.com">xuying zhao</properties>
+    </properties>
+    <body>
+        <section name="Content">
+            <p>
+                <ol>
+                    <li>
+                        <a href="#Education">Education</a>
+                        <ol>
+                            <li><a href="#2002-Present">2002-Present</a></li>
+                            <li><a href="#01/2002-07/2002">01/2002-07/2002</a></li>
+                            <li><a href="#1996-2000">1996-2000</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#Employment">Employment</a>
+                        <ol>
+                            <li><a href="#08/2002-Present">08/2002-Present</a></li>
+                            <li><a href="#01/2002-07/2002">01/2002-07/2002</a></li>
+                            <li><a href="#10/2000-12/2001">10/2000-12/2001</a></li>
+                            <li><a href="#07/2000-10/2000">07/2000-10/2000</a></li>
+                            <li><a href="#2/1998-06/2000">2/1998-06/2000</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#Research Papers">Research Papers</a></li>
+                    <li><a href="#Business Analysis Projects">Business Analysis Projects</a></li>
+                    <li><a href="#Certifications">Certifications</a></li>
+                    <li><a href="#Courses taken">Courses taken</a></li>
+                </ol>
+            </p>
+        </section>
+        <section name="Education">
+            <subsection name="2002-Present">
+                <p>Ph.D. student in Operations Management, School of Management
+                    , The University of Texas at Dallas, 2601 N Floyd Rd.,
+                    Richardson, TX, 75083<ul>
+                        <li>Advisor: Dr. Kathryn E. Stecke</li>
+                        <li>Research domain: Supply Chain Management</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="01/2002-07/2002">
+                <p>Graduate Program in Computer Science, Department of Computer
+                    Science, National University of Singapore<ul>
+                        <li>Excellent Research Scholarship, 2002</li>
+                        <li>Research domain: Datamining and database management</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="1996-2000">
+                <p>Bachelor in Computer Science and Engineering, School of
+                    Computer Science and Engineering, ZheJiang University (one
+                    of the top 5 universities in China)<ul>
+                        <li>Excellent Student Scholarship of ZJU</li>
+                        <li>Sai Ba Enterprise Scholarship</li>
+                    </ul>
+                </p>
+            </subsection>
+        </section>
+        <section name="Employment">
+            <subsection name="08/2002-Present">
+                <p>The University of Texas at Dallas</p>
+                <p>Teaching Assistant for:<ul>
+                        <li>Business Process Management (MS/MBA course) (2002/8
+                            ¨C 2004/12)</li>
+                        <li>Inventory Control (MS/MBA/Ph.D course) (2005/1-2005/5)</li>
+                        <li>Production Management (Bachelor course) (2003/1-2003/5)</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="01/2002-07/2002">
+                <p>Datamining Research Laboratory, National University of Singapore</p>
+                <p>Research Assistant in Datamining and database management<ul>
+                        <li>Performed Research on Distributed Database and
+                            Parallel Computation</li>
+                        <li>Performed Research on Datamining</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="10/2000-12/2001">
+                <p>Microsoft (Shanghai) Global Technology Center, China</p>
+                <p>Support Engineer of Microsoft Excel<ul>
+                        <li>Troubleshooted system problems that occurred in Excel</li>
+                        <li>Provided extra functions and programmed add-ons in
+                            Excel for customers</li>
+                        <li>During the 14 months at MS, resolved over 1000 cases
+                            successfully and received over 500 compliment
+                            letters from customers</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="07/2000-10/2000">
+                <p>Eigenet (Shanghai) Software Ltd., China</p>
+                <p>Software Engineer<ul>
+                        <li>Performed research on XML, Java, Python and Zope</li>
+                        <li>Designed and programmed some models in the Eigenet
+                            ERP software product</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="12/1998-06/2000">
+                <p>CAPP Research Laboratories, ZheJiang University</p>
+                <p>Research Assistant<ul>
+                        <li>Performed research on computer aided tool design</li>
+                        <li>Designed and programmed some models in the DaTian
+                            CAPP (Computer Aided Process Planning) system</li>
+                    </ul>
+                </p>
+            </subsection>
+        </section>
+        <section name="Research Papers">
+            <p>
+                <ul>
+                    <li> &quot;Production and Transportation Integration for
+                        a Make-to-Order Manufacturing Company with a
+                        Commit-to-Delivery Business Mode,&quot; (with Dr.
+                        Kathryn E. Stecke), submitted to Management Science.</li>
+                    <li> &quot;Managing the Technology of Integrating the
+                        Production and Transportation Functions in Assembly or
+                        Flow Operations for Make-to-order Industries,
+                        &quot;(with Dr. Kathryn E. Stecke), <font color="red">
+                            <b>PICMET best paper award in 2005</b>
+                        </font>.</li>
+                    <li> &quot;Lead Time and Price Quotation Mode Selection:
+                        Uniform or Differentiated?&quot; (with Dr. Kathryn
+                        E. Stecke and Dr. Ashutosh Prasad), submitted to
+                        Management Science.</li>
+                    <li>&quot;Revenue Sharing Contract with Service Level
+                        Constraint&quot; (with Dr. Kathryn E. Stecke and
+                        Casey Chung), working in progress. </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Business Analysis Projects">
+            <subsection name="08/2003-12/2003">
+                <p>Lead time reliability project for Dell, Ltd.</p>
+                <p>
+                    <ul>
+                        <li>Analyzed 667,732 orders and figured out three key
+                            factors which are responsible for major delivery
+                            delay. Dell executive managers are very satisfied
+                            with and surprised by this finding.</li>
+                        <li>Analyzed the Dell production process in detail and
+                            pointed out the problems together with suggestions.</li>
+                        <li>Analyzed Dell customer segmentation and suggested
+                            potential 3 profit growing points.</li>
+                    </ul>
+                </p>
+            </subsection>
+            <subsection name="2/2005-Present">
+                <p>Risk management project for EDS.</p>
+                <p>
+                    <ul>
+                        <li>Outsourcing risk analysis</li>
+                        <li>Flexible capacity investment</li>
+                    </ul>
+                </p>
+            </subsection>
+        </section>
+        <section name="Certifications">
+            <p>
+                <ul>
+                    <li> MCSE (Microsoft Certified System Engineer), 2001</li>
+                    <li> MCSD (Microsoft Certified Solution Developer), 2001 </li>
+                    <li> PICMET best paper award, 2005 </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Courses taken">
+            <p>
+                <ul>
+                    <li> Ph.D level: Stochastic Processes, Optimal Control
+                        Theory, Deterministic Models in Operations Research,
+                        Network Flow, Advanced Topics in Supply Chain
+                        Management, Game theory, Dynamic Programming, Advanced
+                        Stochastic Inventory Control and Flexible Manufacturing System.</li>
+                    <li> Masters Level: Probability and Stochastic theory,
+                        Statistics, Financial Accounting, Financial Management,
+                        Inventory Control, Industrial Application of SCM,
+                        Logistics, MIS Foundation, Capstone Projects in SCM,
+                        Distributed Database, Datamining, Parallel Computing. </li>
+                </ul>
+            </p>
+        </section>
+    </body>
+</document>
