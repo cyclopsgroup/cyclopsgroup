@@ -133,7 +133,7 @@
             </releases>
             <id>cyclopsgroup.central</id>
             <name>CyclopsGroup.com Central M2 Repository</name>
-            <url>http://www.cyclospgroup.com/m2</url>
+            <url>http://www.cyclopsgroup.com/m2</url>
         </repository>
     </repositories>
     <reporting>
