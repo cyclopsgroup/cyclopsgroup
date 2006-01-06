@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<j:whitespace xmlns:j="jelly:core">
+    <input type="hidden" name="keep_form" value="true" />
+    <input type="hidden" name="force_validation" value="false" />
+    <input type="hidden" name="form_id" value="${form.id}" />
+</j:whitespace>

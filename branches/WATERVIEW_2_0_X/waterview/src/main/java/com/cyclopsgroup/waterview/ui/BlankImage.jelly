@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<img src="${link.getResource('/waterview/blank.gif')}" width="${tag.width}" height="${tag.height}" alt="Place Holder"
+    border="0" />
