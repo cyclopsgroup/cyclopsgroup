@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>%waterview.view.tiledform</h2>
+    <p>A tiled form means the form control itself konws how to display form fields in a default table.</p>
+    <w:TiledFormControl>
+        <w:Form name="tiledform">
+            <input type="hidden" name="abc" value="abc" />
+            <w:Field name="id" title="%document.text.id" required="true" />
+            <w:Field name="name" title="Product %document.text.name" required="true" />
+            <w:Field name="total_amount" title="Total Amount" required="true" type="int" />
+            <w:Field name="is_disabled" title="%document.text.disabled" type="boolean" />
+            <w:Field name="created_date" title="%document.text.createddate" type="date" />
+            <w:Field name="type" title="Product %document.text.type" value="2">
+                <w:Select>
+                    <w:Option value="1">%document.text.type I</w:Option>
+                    <w:Option value="2">%document.text.type II</w:Option>
+                    <w:Option value="3">%document.text.type III</w:Option>
+                </w:Select>
+            </w:Field>
+            <w:Submit action="${link.addAction('BogusAction').setPage(page)}" forceValidation="true">
+                <w:FormButton>%document.text.pushme</w:FormButton>
+            </w:Submit>
+        </w:Form>
+    </w:TiledFormControl>
+</div>

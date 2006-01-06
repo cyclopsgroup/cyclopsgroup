@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table width="100%" border="0">
+    <tr>
+        <td>
+            <a href="http://www.cyclopsgroup.com">%waterview.text.footer.allrights</a>
+        </td>
+        <td align="right">
+            <a href="http://www.cyclopsgroup.com/projects/waterview">%waterview.text.footer.poweredby</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <body>
+        <menu name="Overview">
+            <item name="What is waterview" href="/index.html" />
+            <item name="Feature compare" href="/features.html" />
+            <item name="Story and history" href="/history.html" />
+        </menu>
+        <menu name="Get Started">
+            <item name="Examples" href="/guide/examples.html" collapse="true">
+                <item name="One minute example" href="/guide/simpleexample.html" />
+                <item name="Cool stuff" href="/guide/collexample.html" />
+            </item>
+            <item name="Architect" href="/guide/architect.html" collapse="true">
+                <item name="Overview" href="/guide/designoverview.html" />
+                <item name="Development Process" href="/guide/process.html" />
+            </item>
+            <item name="References" href="/guide/references.html" collapse="true">
+                <item name="Meta file specification" href="/guide/metaspec.html" />
+                <item name="UI Tags" href="/guide/uitags.html" />
+                <item name="Module and action" href="/guide/development.html" />
+                <item name="Components" href="/guide/components.html" />
+                <item name="Tool Tags" href="/guide/tooltags.html" />
+            </item>
+            <item name="Howtos" href="/guide/howtos.html" />
+        </menu>
+        <links>
+            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/waterview" />
+            <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues/browse/waterview" />
+            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group/waterview" />
+            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/waterview" />
+            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/waterview" />
+        </links>
+    </body>
+</project>
