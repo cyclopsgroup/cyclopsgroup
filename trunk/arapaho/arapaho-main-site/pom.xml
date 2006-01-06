@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>arapaho-main-site</artifactId>
-    <name>Maven</name>
+    <name>CyclopsGroup.com</name>
     <version>1.0-SNAPSHOT</version>
     <description>The website of CyclopsGroup.com</description>
     <url>http://www.cyclopsgroup.com/</url>

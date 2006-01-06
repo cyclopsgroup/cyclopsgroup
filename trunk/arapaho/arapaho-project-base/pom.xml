@@ -5,7 +5,7 @@
     <groupId>com.cyclopsgroup.arapaho</groupId>
     <artifactId>arapaho-project-base</artifactId>
     <packaging>pom</packaging>
-    <name>Maven</name>
+    <name>CyclopsGroup.com Project Base</name>
     <version>1.0-SNAPSHOT</version>
     <description>The base pom for other projects</description>
     <url>http://www.cyclopsgroup.com/projects/${project.artifactId}</url>
