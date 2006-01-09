@@ -16,7 +16,6 @@
         Arapaho is the project dedicating on the development process of other projects in CyclopsGroup software
         foundation. It contains tools to make developers work smoothly on those projects.
     </description>
-    <url>http://www.cyclopsgroup.com/projects/arapaho</url>
     <issueManagement>
         <system>jira</system>
         <url>http://dev.cyclopsgroup.com/issues/browse/arapaho</url>
