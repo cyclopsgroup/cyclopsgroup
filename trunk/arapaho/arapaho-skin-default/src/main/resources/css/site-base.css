@@ -28,6 +28,10 @@ a:link, a:visited {
     font-size: 10pt;
 }
 
+.section .bodyTable th {
+    text-align: left;
+}
+
 .section .bodyTable tr.a {
     background-color: #F9F9F9;
 }

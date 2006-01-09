@@ -1,10 +1,6 @@
-#documentWrapper {
-    text-align: left;
-}
-
-#documentBody {
-    max-width: 920px;
-    width: expression(document.body.clientWidth > 920 ? "920px" : "auto" );
+body {
+    /* margin: 0px auto; */
+    width: 920px;
 }
 
 a:link {
