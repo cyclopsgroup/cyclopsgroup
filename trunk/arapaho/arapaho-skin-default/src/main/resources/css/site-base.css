@@ -67,10 +67,6 @@ a:link, a:visited {
     font-style: italic;
 }
 
-#documentBody {
-    text-align: left;
-}
-
 #breadcrumbs,#leftColumn li,#footer {
     font-size: 8pt;
 }

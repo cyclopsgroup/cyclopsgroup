@@ -32,7 +32,7 @@
       #end
     #end
   </head>
-  <body class="composite"><div id="documentWrapper" align="center"><div id="documentBody">
+  <body class="composite"><div id="documentBody">
     <div id="banner">
       #banner( $decoration.bannerLeft "bannerLeft" )
       #banner( $decoration.bannerRight "bannerRight" )
@@ -69,5 +69,5 @@
         <hr/>
       </div>
     </div>
-  </div></div></body>
+  </div></body>
 </html>
