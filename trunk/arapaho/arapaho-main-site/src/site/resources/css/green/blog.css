@@ -1,6 +1,4 @@
 body {
-    max-width: 920px;
-    margin: 0px auto;
     background-color: #F2F6D5;
     color: #666666;
     font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif, SimSun;
@@ -17,11 +15,14 @@ img {
 
 h2 {
     text-transform: lowercase;
-    font-size: 12pt;
     padding: 6px;
+    font-size: 12pt;
 }
 
 #content {
+    margin: 0px auto;
+    width: expression(document.body.clientWidth > 920 ? "920px": "auto");
+    max-width: 920px;
     background-color: white;
 }
 
@@ -55,8 +56,12 @@ h2 {
 }
 
 .date-header {
-    background-color: #DADFBF;
     margin: 6px 6px 0px 6px;
+    background-color: #DADFBF;
+    background-image: url('config-date.png');
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+    text-indent: 28px;
 }
 
 .post-title, .post-footer, .post-footer a {
@@ -73,18 +78,31 @@ h2 {
 }
 
 .post {
-    background-color: #8EBD33;
+    background-color: #B7DC73;
     padding: 6px;
     margin: 6px;
 }
 
 .post-body {
-    background-color: #C3E086;
+    background-color: #D0E7A1;
     padding: 6px;
+}
+
+.post-footer {
+    font-size: smaller;
 }
 
 #comments {
     padding: 6px;
+    font-size: smaller;
+}
+
+.source {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: white;
+    margin: 6px;
+    font-size: 10pt;
 }
 
 #profile-container {
@@ -97,6 +115,7 @@ h2 {
     background-color: transparent;
     border-width: 0px;
     padding: 0px;
+    background-position: 0px 0px;
 }
 
 #profile-container a {
@@ -105,17 +124,13 @@ h2 {
 
 .sidebar-title {
     background-color: #FDAB00;
+    background-image: url('blender.png');
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+    text-indent: 28px;
     color: white;
     margin: 0px;
     border-width: 6px 0px 0px 0px;
     border-style: solid;
     border-color: white;
-}
-
-.source {
-    border-width: 2px;
-    border-style: dashed;
-    border-color: white;
-    font-size: 10pt;
-    margin: 6px;
 }
