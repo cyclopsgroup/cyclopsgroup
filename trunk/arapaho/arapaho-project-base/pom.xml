@@ -89,17 +89,32 @@
         <url>http://www.cyclopsgroup.com/</url>
     </organization>
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <configuration>
-                        <outputEncoding>UTF-8</outputEncoding>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty6-plugin</artifactId>
+                <configuration>
+                    <goalPrefix>jetty6</goalPrefix>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <contextPath>/app</contextPath>
+                    <webXmlFile>${basedir}/src/main/webapp/web.xml</webXmlFile>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <repositories>
         <repository>
