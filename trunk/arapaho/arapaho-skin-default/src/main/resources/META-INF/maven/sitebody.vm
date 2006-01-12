@@ -51,7 +51,7 @@
       <div id="navcolumn">
        #publishDate( "navigation-top" $decoration.publishDate $decoration.version )
        #mainMenu( $decoration.body.menus )
-       #poweredByLogo( $decoration.poweredBy )
+
        #publishDate( "navigation-bottom" $decoration.publishDate $decoration.version )
       </div>
     </div>
@@ -64,7 +64,21 @@
       <hr/>
     </div>
     <div id="footer">
-      <div class="xright">&#169;#copyright()#publishDate( "bottom" $decoration.publishDate $decoration.version )</div>
+      <div class="xleft">
+        All rights reserved, 2003 ~ 2006, &#169;CyclopsGroup.com #publishDate( "bottom" $decoration.publishDate $decoration.version )
+      </div>
+      <div class="xright">
+      	<a href="http://sourceforge.net" title="sourceforge.net">
+      	  <img border="0" alt="SourceForge Foundation" src="http://sourceforge.net/sflogo.php?group_id=91358&amp;type=1" />
+      	</a>
+      	<a href="http://sourceforge.net/donate/index.php?group_id=91358">
+      	  <img border="0" alt="Donate to Cyclops Group" src="http://images.sourceforge.net/images/project-support.jpg" />
+      	</a>
+      	#poweredByLogo( $decoration.poweredBy )
+        <a href="http://validator.w3.org/check?uri=referer">
+          <img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+        </a>
+      </div>
       <div class="clear">
         <hr/>
       </div>

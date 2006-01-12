@@ -12,7 +12,7 @@ h1,h2,h3,h4,h5 {
     border-style: none;
 }
 
-a:link, a:visited {
+a:link,a:visited {
     text-decoration: none;
 }
 
@@ -103,7 +103,7 @@ a:link, a:visited {
     line-height: 18px;
 }
 
-#navcolumn li.expanded, #navcolumn li.collapsed {
+#navcolumn li.expanded,#navcolumn li.collapsed {
     background-image: none;
 }
 
@@ -124,4 +124,9 @@ a:link, a:visited {
     border-width: 2px 0px 0px 0px;
     border-style: dashed;
     border-color: #666666;
+}
+
+#poweredBy img {
+    margin: 0px;
+    display: inline;
 }
