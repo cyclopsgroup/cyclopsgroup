@@ -35,57 +35,89 @@
             <p>
                 A couple of google user groups are available for Cyclops Group. You may want to join if you want to keep
                 being updated.
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Readonly</th>
-                        <th>Post</th>
-                        <th>Join</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-discussion">Discussion</a>
-                        </td>
-                        <td>The general discussion group. Anonymous posts are allowed.</td>
-                        <td>No</td>
-                        <td>
-                            <a href="mailto:cyclopsgroup-discussion@googlegroups.com">
-                                cyclopsgroup-discussion@googlegroups.com
-                            </a>
-                        </td>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Go</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-news">News</a>
-                        </td>
-                        <td>News and annoncement of cyclops group</td>
-                        <td>Yes</td>
-                        <td>cyclopsgroup-news@googlegroups.com</td>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-news/subscribe">Go</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-support">Support</a>
-                        </td>
-                        <td>Support for Cyclops Group projects</td>
-                        <td>No</td>
-                        <td>
-                            <a href="mailto:cyclopsgroup-support@googlegroups.com">
-                                cyclopsgroup-support@googlegroups.com
-                            </a>
-                        </td>
-                        <td>
-                            <a href="http://groups.google.com/group/cyclopsgroup-support/subscribe">Go</a>
-                        </td>
-                    </tr>
-                </table>
             </p>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Readonly</th>
+                    <th>Post</th>
+                    <th>Join</th>
+                    <th>Archive</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-discussion">Discussion</a>
+                    </td>
+                    <td>The general discussion group. Anonymous posts are allowed.</td>
+                    <td>No</td>
+                    <td>
+                        <a href="mailto:cyclopsgroup-discussion@googlegroups.com">
+                            cyclopsgroup-discussion@googlegroups.com
+                        </a>
+                    </td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Go</a>
+                    </td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-discussion">GoogleGroup.com</a>
+                        ,
+                        <a href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html">Nabble.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-news">News</a>
+                    </td>
+                    <td>News and annoncement of cyclops group</td>
+                    <td>Yes</td>
+                    <td>cyclopsgroup-news@googlegroups.com</td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-news/subscribe">Go</a>
+                    </td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-news">GoogleGroup.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-support">Support</a>
+                    </td>
+                    <td>Support for Cyclops Group projects</td>
+                    <td>No</td>
+                    <td>
+                        <a href="mailto:cyclopsgroup-support@googlegroups.com">cyclopsgroup-support@googlegroups.com</a>
+                    </td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-support/subscribe">Go</a>
+                    </td>
+                    <td>
+                        <a href="http://groups.google.com/group/cyclopsgroup-support">GoogleGroup.com</a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section name="Other resources">
+            <table>
+                <tr>
+                    <td>
+                        <a href="members/xuying/blog.html">Xuying's personal blog</a>
+                    </td>
+                    <td />
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/jiaqi/blog.html">Jiaqi's personal blog</a>
+                    </td>
+                    <td>Chinese version</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://groups.googlegroup.com/group/dengyunsheng">Jiaqi's secondary school friends</a>
+                    </td>
+                    <td>Chinese version</td>
+                </tr>
+            </table>
         </section>
     </body>
 </document>

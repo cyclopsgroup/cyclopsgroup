@@ -32,6 +32,18 @@
                         <td>First version is released</td>
                     </tr>
                     <tr>
+                        <td>arapaho</td>
+                        <td>Tools to support CyclopsGroup.com project development.</td>
+                        <td>Going well</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="projects/courselist">courselist</a>
+                        </td>
+                        <td>A simple academic web application which maintains a list of college courses.</td>
+                        <td>Under development</td>
+                    </tr>
+                    <tr>
                         <td>
                             <a href="projects/levistone">levistone</a>
                         </td>
@@ -57,20 +69,14 @@
                             <a href="http://www.cyclopsgroup.com">shopwindow</a>
                         </td>
                         <td>The project is this website itself.</td>
-                        <td>Stable</td>
+                        <td>Deprecated. Refer to arapaho project please.</td>
                     </tr>
                     <tr>
                         <td>nimbus</td>
                         <td>The portal website for the next generation of cyclopsgroup website</td>
                         <td>Planning</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <a href="projects/courselist">courselist</a>
-                        </td>
-                        <td>A simple academic web application which maintains a list of college courses.</td>
-                        <td>Under development</td>
-                    </tr>
+
                     <tr>
                         <td>
                             <a href="projects/jmainboard">jmainboard</a>

@@ -1,5 +1,4 @@
 body {
-    /* margin: 0px auto; */
     width: 920px;
 }
 
@@ -16,8 +15,19 @@ a:visited {
     border-color: #C4C4C4;
 }
 
-.section h3, .section h4, .section h5 {
+.section h3,.section h4,.section h5 {
     color: #666666;
+}
+
+.section table.bodyTable th {
+    background: url('title_bar_bg.png');
+    color: white;
+    font-size: smaller;
+    padding: 3px;
+}
+
+.section table.bodyTable tr.b td {
+    background-color: #DDDDDD;
 }
 
 #banner {
@@ -63,7 +73,7 @@ a:visited {
     left: -3px;
     border-width: 2px 0px 0px 0px;
     border-style: solid;
-    border-color:  #1F5195;
+    border-color: #1F5195;
 }
 
 #leftColumn h5 {

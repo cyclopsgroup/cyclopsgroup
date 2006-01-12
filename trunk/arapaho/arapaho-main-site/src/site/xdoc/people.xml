@@ -18,6 +18,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Resources</th>
                 </tr>
                 <tr>
                     <td>
@@ -26,6 +27,13 @@
                     <td>Jiaqi Guo</td>
                     <td>
                         <a href="mailto:jiaqi.guo@gmail.com">jiaqi.guo@gmail.com</a>
+                    </td>
+                    <td>
+                        <a href="members/jiaqi/blog.html">Blog</a>
+                        ,
+                        <a href="members/jiaqi/resume.html">resume</a>
+                        ,
+                        <a href="http://groups.google.com/group/dengyunsheng">secondary school friends</a>
                     </td>
                 </tr>
                 <tr>
@@ -36,6 +44,11 @@
                     <td>
                         <a href="mailto:xuyingzhao@gmail.com">xuyingzhao@gmail.com</a>
                     </td>
+                    <td>
+                        <a href="members/xuying/blog.html">Blog</a>
+                        ,
+                        <a href="members/xuying/cv.html">cv</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>xxu</td>
@@ -43,6 +56,7 @@
                     <td>
                         <a href="mailto:xiaofang@evavi.com">xiaofang@evavi.com</a>
                     </td>
+                    <td />
                 </tr>
                 <tr>
                     <td>
@@ -52,6 +66,9 @@
                     <td>
                         <a href="mailto:crazytmac@gmail.com">crazytmac@gmail.com</a>
                     </td>
+                    <td>
+                        <a href="members/crazytmac/blog.html">Blog</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>pzhai</td>
@@ -59,6 +76,7 @@
                     <td>
                         <a href="mailto:peng.zhai@evavi.com">peng.zhai@evavi.com</a>
                     </td>
+                    <td />
                 </tr>
             </table>
         </section>
