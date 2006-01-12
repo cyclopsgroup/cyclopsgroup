@@ -98,22 +98,58 @@
         <section name="Other resources">
             <table>
                 <tr>
+                    <th>Name</th>
+                    <th>Language</th>
+                </tr>
+                <tr>
                     <td>
-                        <a href="members/xuying/blog.html">Xuying's personal blog</a>
+                        <a href="http://fisheye.cenqua.com/viewrep/cyclops-group">CVS fisheye view</a>
                     </td>
-                    <td />
+                    <td>English</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://dev.cyclopsgroup.com/kb/display/portal">Knowledge base</a>
+                    </td>
+                    <td>English</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://dev.cyclopsgroup.com/issues">Issue tracking system</a>
+                    </td>
+                    <td>English</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://sourceforge.net/projects/cyclops-group">
+                            CyclopsGroup sourceforge project summary
+                        </a>
+                    </td>
+                    <td>English</td>
                 </tr>
                 <tr>
                     <td>
                         <a href="members/jiaqi/blog.html">Jiaqi's personal blog</a>
                     </td>
-                    <td>Chinese version</td>
+                    <td>Chinese</td>
                 </tr>
                 <tr>
                     <td>
                         <a href="http://groups.google.com/group/dengyunsheng">Jiaqi's secondary school friends</a>
                     </td>
-                    <td>Chinese version</td>
+                    <td>Chinese</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/xuying/blog.html">Xuying's personal blog</a>
+                    </td>
+                    <td>English</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="members/crazytmac/blog.html">Crazy TMac's personal blog</a>
+                    </td>
+                    <td>Chinese</td>
                 </tr>
             </table>
         </section>
