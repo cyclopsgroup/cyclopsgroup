@@ -41,8 +41,8 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Readonly</th>
-                    <th>Post</th>
-                    <th>Join</th>
+                    <th />
+                    <th />
                     <th>Archive</th>
                 </tr>
                 <tr>
@@ -52,12 +52,10 @@
                     <td>The general discussion group. Anonymous posts are allowed.</td>
                     <td>No</td>
                     <td>
-                        <a href="mailto:cyclopsgroup-discussion@googlegroups.com">
-                            cyclopsgroup-discussion@googlegroups.com
-                        </a>
+                        <a href="mailto:cyclopsgroup-discussion@googlegroups.com">Post</a>
                     </td>
                     <td>
-                        <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Go</a>
+                        <a href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">Join</a>
                     </td>
                     <td>
                         <a href="http://groups.google.com/group/cyclopsgroup-discussion">GoogleGroup.com</a>
@@ -71,9 +69,9 @@
                     </td>
                     <td>News and annoncement of cyclops group</td>
                     <td>Yes</td>
-                    <td>cyclopsgroup-news@googlegroups.com</td>
+                    <td />
                     <td>
-                        <a href="http://groups.google.com/group/cyclopsgroup-news/subscribe">Go</a>
+                        <a href="http://groups.google.com/group/cyclopsgroup-news/subscribe">Join</a>
                     </td>
                     <td>
                         <a href="http://groups.google.com/group/cyclopsgroup-news">GoogleGroup.com</a>
@@ -86,10 +84,10 @@
                     <td>Support for Cyclops Group projects</td>
                     <td>No</td>
                     <td>
-                        <a href="mailto:cyclopsgroup-support@googlegroups.com">cyclopsgroup-support@googlegroups.com</a>
+                        <a href="mailto:cyclopsgroup-support@googlegroups.com">Post</a>
                     </td>
                     <td>
-                        <a href="http://groups.google.com/group/cyclopsgroup-support/subscribe">Go</a>
+                        <a href="http://groups.google.com/group/cyclopsgroup-support/subscribe">Join</a>
                     </td>
                     <td>
                         <a href="http://groups.google.com/group/cyclopsgroup-support">GoogleGroup.com</a>
