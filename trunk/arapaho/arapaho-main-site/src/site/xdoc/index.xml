@@ -17,16 +17,10 @@
             </p>
         </section>
         <section name="Recent news">
-            <script language="JavaScript"
-                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fdev.cyclopsgroup.com%2Fkb%2Fspaces%2Fcreaterssfeed.action%3Ftypes%3Dblogpost%26spaces%3Dportal%26statuses%3Dcreated%26maxResults%3D5%26publicFeed%3Dtrue%26title%3D%5BCyclopsGroup.com%2BPortal%5D%2BNews%2BFeed&amp;date=y&amp;utf=y&amp;html=a"
-                type="text/javascript" />
-            <noscript>
-                <p>
-                    <a href="http://groups.google.com/group/cyclopsgroup-news">
-                        http://groups.google.com/group/cyclopsgroup-news
-                    </a>
-                </p>
-            </noscript>
+            <script language="javascript" src="js/rsscontrol.js" />
+            <script language="javascript">
+                <![CDATA[ displayRss('http://dev.cyclopsgroup.com/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=5&timeSpan=500&publicFeed=true&title=Last+5+news'); ]]>
+            </script>
             <p>
                 <a href="http://dev.cyclopsgroup.com/kb/pages/viewrecentblogposts.action?key=portal">More..</a>
             </p>
