@@ -30,16 +30,20 @@
         <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/${project.artifactId}</url>
     </scm>
     <modules>
+        <module>arapaho-dependency-jetty</module>
         <module>arapaho-project-base</module>
         <module>arapaho-skin-default</module>
         <module>arapaho-main-site</module>
+        <module>arapaho-maven-plugin</module>
     </modules>
-    <distributionManagement>
-        <site>
-            <id>website</id>
-            <url>
-                scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/arapaho/${project.artifactId}
-            </url>
-        </site>
-    </distributionManagement>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <id>cyclopsgroup.central</id>
+            <name>CyclopsGroup.com Central M2 Repository</name>
+            <url>http://www.cyclopsgroup.com/m2</url>
+        </repository>
+    </repositories>
 </project>

@@ -104,25 +104,15 @@
                     <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty6-plugin</artifactId>
-                <configuration>
-                    <goalPrefix>jetty6</goalPrefix>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <contextPath>/app</contextPath>
-                    <webXmlFile>${basedir}/src/main/webapp/web.xml</webXmlFile>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <repositories>
         <repository>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </releases>
-            <id>snapshots</id>
-            <name>Maven Central Development Repository</name>
+            <id>codehaus.snapshots</id>
+            <name>Maven central development repository</name>
             <url>http://snapshots.maven.codehaus.org/maven2</url>
         </repository>
         <repository>
@@ -130,7 +120,7 @@
                 <enabled>true</enabled>
             </releases>
             <id>apache.snapshots</id>
-            <name>Apache Development Repository</name>
+            <name>Apache development repository</name>
             <url>http://cvs.apache.org/maven-snapshot-repository</url>
         </repository>
         <repository>
@@ -138,8 +128,16 @@
                 <enabled>true</enabled>
             </releases>
             <id>apache.snapshots</id>
-            <name>Apache Development Repository</name>
+            <name>Apache development repository</name>
             <url>http://cvs.apache.org/maven-snapshot-repository</url>
+        </repository>
+        <repository>
+            <id>jetty.snapshots</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <name>Jetty development repository</name>
+            <url>http://www.mortbay.org/maven2/snapshot</url>
         </repository>
         <repository>
             <releases>
