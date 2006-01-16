@@ -15,22 +15,16 @@
                 if you are interested.
             </p>
         </section>
-        <section name="rencet talk">
+        <section name="Rencet talk (chinese language)">
             <p>
                 <a href="blog.html">More talk..</a>
                 |
                 <a href="mailto:jiaqi.guo@gmail.com">Send mail..</a>
             </p>
-            <script language="JavaScript"
-                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fwww.cyclopsgroup.com%2Fmembers%2Fjiaqi%2Fatom.xml&amp;date=y&amp;tz=6&amp;utf=y&amp;html=a"
-                type="text/javascript" />
-            <noscript>
-                <p>
-                    Your browser doesn't support javascript, try
-                    <a href="blog.html">this page</a>
-                    .
-                </p>
-            </noscript>
+            <script language="javascript" src="../../js/rsscontrol.js" />
+            <script language="javascript">
+                <![CDATA[ displayRss('http://www.cyclopsgroup.com/members/jiaqi/atom.xml'); ]]>
+            </script>
         </section>
     </body>
 </document>
