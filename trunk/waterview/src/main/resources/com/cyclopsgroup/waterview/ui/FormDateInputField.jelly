@@ -10,9 +10,9 @@
                 class="${fieldClass}" title="${field.errorMessage}" id="${form.id}_${field.name}" />
             <span />
         </td>
-        <td width="20" align="right">
-            <img src="${themeBase}/16x16/date.png" width="16" height="16" alt="Pick a date"
-                onclick="return showDateCalendar('${form.id}_${field.name}')" style="cursor: hand" />
+        <td width="20" align="right" onclick="return showDateCalendar('${form.id}_${field.name}')"
+            style="cursor: hand">
+            <Icon alt="Pick a date" file="date.png" xmlns="http://waterview.cyclopsgroup.com/ui" />
         </td>
     </tr>
 </table>
