@@ -6,9 +6,10 @@
     </properties>
     <body>
         <section name="Release and download">
-            <script language="JavaScript"
-                src="http://jade.mcli.dist.maricopa.edu/feed/feed2js.php?src=http%3A%2F%2Fsourceforge.net%2Fexport%2Frss2_projfiles.php%3Fgroup_id%3D91358&amp;date=y&amp;tz=6&amp;utf=y&amp;html=a"
-                type="text/javascript" />
+            <script language="javascript" src="js/rsscontrol.js" />
+            <script language="javascript">
+                <![CDATA[ displayRss('http://sourceforge.net/export/rss2_projfiles.php?group_id=91358'); ]]>
+            </script>
             <p>
                 All downloads and releases are managed in sourceforge.net. Download page at sourceforge.net is
                 <a href="http://sourceforge.net/project/showfiles.php?group_id=91358">here</a>
