@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>arapaho-project-base</artifactId>
-        <version>1.0-SNAPSHOT</version>
+		<groupId>com.cyclopsgroup.arapaho</groupId>
+		<artifactId>arapaho-project-base</artifactId>
+		<version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.cyclopsgroup.arapaho</groupId>
-    <artifactId>arapaho-project-parent</artifactId>
+    <artifactId>arapaho</artifactId>
     <packaging>pom</packaging>
     <name>Arapaho</name>
     <version>1.0-SNAPSHOT</version>
@@ -16,19 +14,6 @@
         Arapaho is the project dedicating on the development process of other projects in CyclopsGroup software
         foundation. It contains tools to make developers work smoothly on those projects.
     </description>
-    <issueManagement>
-        <system>jira</system>
-        <url>http://dev.cyclopsgroup.com/issues/browse/arapaho</url>
-    </issueManagement>
-    <scm>
-        <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/${project.artifactId}
-        </connection>
-        <developerConnection>
-            scm:cvs:ext:sfuser@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/${project.artifactId}
-        </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/${project.artifactId}</url>
-    </scm>
     <modules>
         <module>arapaho-dependency-jetty</module>
         <module>arapaho-project-base</module>
@@ -41,6 +26,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+				<enabled>true</enabled>
+            </snapshots>
             <id>cyclopsgroup.central</id>
             <name>CyclopsGroup.com Central M2 Repository</name>
             <url>http://www.cyclopsgroup.com/m2</url>

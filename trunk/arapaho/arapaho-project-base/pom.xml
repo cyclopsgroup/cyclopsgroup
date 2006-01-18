@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cyclopsgroup.arapaho</groupId>
     <artifactId>arapaho-project-base</artifactId>
@@ -10,7 +9,7 @@
     <description>The base pom for other projects</description>
     <issueManagement>
         <system>jira</system>
-        <url>http://dev.cyclopsgroup.com/issues/browse/${project.artifactId}</url>
+        <url>http://dev.cyclopsgroup.com/issues</url>
     </issueManagement>
     <mailingLists>
         <mailingList>
@@ -105,12 +104,12 @@
                 </configuration>
             </plugin>
             <plugin>
-				<groupId>com.cyclopsgroup.arapaho</groupId>
-				<artifactId>arapaho-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<configuration>
-					<goalPrefix>arapaho</goalPrefix>
-				</configuration>
+                <groupId>com.cyclopsgroup.arapaho</groupId>
+                <artifactId>arapaho-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <goalPrefix>arapaho</goalPrefix>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -143,6 +142,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+				<enabled>true</enabled>
+            </snapshots>
             <id>cyclopsgroup.central</id>
             <name>CyclopsGroup.com Central M2 Repository</name>
             <url>http://www.cyclopsgroup.com/m2</url>
@@ -175,10 +177,5 @@
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
-        <site>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <name>CyclopsGroup.com central web server</name>
-            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/${project.artifactId}</url>
-        </site>
     </distributionManagement>
 </project>
