@@ -140,14 +140,6 @@
             <url>http://cvs.apache.org/maven-snapshot-repository</url>
         </repository>
         <repository>
-            <id>jetty.snapshots</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <name>Jetty development repository</name>
-            <url>http://www.mortbay.org/maven2/snapshot</url>
-        </repository>
-        <repository>
             <releases>
                 <enabled>true</enabled>
             </releases>
