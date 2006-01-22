@@ -113,6 +113,19 @@
             </plugin>
         </plugins>
     </build>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>cyclopsgroup.central</id>
+            <name>CyclopsGroup.com Central M2 repository</name>
+            <url>http://www.cyclopsgroup.com/m2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <repositories>
         <repository>
             <releases>
@@ -143,7 +156,7 @@
                 <enabled>true</enabled>
             </releases>
             <snapshots>
-				<enabled>true</enabled>
+                <enabled>true</enabled>
             </snapshots>
             <id>cyclopsgroup.central</id>
             <name>CyclopsGroup.com Central M2 Repository</name>
