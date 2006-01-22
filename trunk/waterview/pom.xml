@@ -115,4 +115,17 @@
             <version>1.4</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+				<enabled>true</enabled>
+            </snapshots>
+            <id>cyclopsgroup.central</id>
+            <name>CyclopsGroup.com Central M2 Repository</name>
+            <url>http://www.cyclopsgroup.com/m2</url>
+        </repository>
+    </repositories>
 </project>
