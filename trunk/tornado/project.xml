@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>tornado</id>
     <name>tornado</name>
-    <currentVersion>1.0-b1</currentVersion>
+    <currentVersion>3.0-b1</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
