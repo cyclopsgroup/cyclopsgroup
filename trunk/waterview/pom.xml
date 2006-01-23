@@ -13,6 +13,7 @@
     <packaging>jar</packaging>
     <name>Waterview</name>
     <version>2.1-SNAPSHOT</version>
+    <url>http://www.cyclopsgroup.com/projects/waterview</url>
     <description>
         Waterview is a highly componentized portal framework
     </description>
