@@ -3,12 +3,14 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
     <display-name>Waterview</display-name>
-    <description>
-      Waterview Web Application Framework
-    </description>
+    <description>Waterview Web Application Framework</description>
     <servlet>
         <servlet-name>tornado</servlet-name>
         <servlet-class>com.cyclopsgroup.waterview.servlet.WaterviewServlet</servlet-class>
+        <init-param>
+            <param-name>plexus.descriptor</param-name>
+            <param-value>WEB-INF/tornado-components.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
