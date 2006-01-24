@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>%tornado.navigation.userprofile - ${userObject.displayName}</h2>
+    <w:HorizontalTabControl selected="basic">
+        <w:Tab name="basic" title="Basic Information"
+            url="${link.setPage('/tornado/admin/security/UserDetail.jelly').addQueryData('user_id', userObject.id)}" />
+        <w:Tab name="edit" title="Edit"
+            url="${link.setPage('/tornado/admin/security/UserEdit.jelly').addQueryData('user_id', userObject.id)}" />
+        <w:Tab name="security" title="Group/Role"
+            url="${link.setPage('/tornado/admin/security/UserGroupRole.jelly').addQueryData('user_id', userObject.id)}" />
+    </w:HorizontalTabControl>
+</div>

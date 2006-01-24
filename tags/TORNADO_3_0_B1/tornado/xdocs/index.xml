@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Tornado Project</title>
+        <author email="g-cyclops@users.sourceforge.net">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Overview">
+            <p>
+                Tornado is a
+                <a href="http://www.cyclopsgroup.com/projects/waterview">Waterview</a>
+                based web portal system with some basic modules.
+            </p>
+            <p>
+                Tornado project is now active, but far away from release. Any participating of development is welcom.
+                Please send email to
+                <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+                if you are interested in it.
+            </p>
+        </section>
+    </body>
+</document>

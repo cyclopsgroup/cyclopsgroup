@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Navigation xmlns="http://waterview.cyclopsgroup.com/navigator">
+    <Tree name="tornado.system" position="/system">
+        <Node name="admin" title="%tornado.navigation.admin" page="/tornado/admin/Index.jelly">
+            <Node name="security" title="%tornado.navigation.security" page="/tornado/admin/security/Index.jelly">
+                <Node title="%tornado.navigation.users" page="/tornado/admin/security/ManageUsers.jelly" />
+                <Node title="%tornado.navigation.createuser" page="/tornado/admin/security/CreateUser.jelly" />
+                <Node title="%tornado.navigation.userprofile" page="/tornado/admin/security/UserProfile.jelly"
+                    hidden="true" />
+                <Node title="%tornado.navigation.groups" page="/tornado/admin/security/ManageGroups.jelly" />
+                <Node title="%tornado.navigation.roles" page="/tornado/admin/security/ManageRoles.jelly" />
+            </Node>
+            <Node name="portal" title="%tornado.navigation.portal" page="/tornado/admin/portal/Index.jelly">
+                <Node title="%tornado.navigation.lookandfeel" page="/tornado/admin/portal/LookAndFeel.jelly" />
+                <Node title="Portal Pages" page="/tornado/admin/portal/ManagePages.jelly" />
+                <Node title="Portal Resources" page="/torando/admin/portal/PortalResources.jelly" />
+            </Node>
+        </Node>
+    </Tree>
+    <Tree name="tornado.home" position="/home">
+        <Node name="user" title="%tornado.navigation.myinfo" page="/tornado/user/Index.jelly">
+            <Node title="%tornado.navigation.myprofile" page="/tornado/user/UserProfile.jelly" />
+            <Node title="%tornado.navigation.lookandfeel" page="/tornado/user/LookAndFeel.jelly" />
+            <Node title="Manage Pages" page="/tornado/user/ManagePages.jelly" />
+        </Node>
+        <Node title="Page Not Authorized" page="/tornado/NotAuthorized.jelly" hidden="true" />
+    </Tree>
+    <Tree name="tornado.help.about" position="/help/abouts">
+        <Node title="About Tornado" page="/tornado/pub/AboutTornado.jelly" />
+    </Tree>
+</Navigation>

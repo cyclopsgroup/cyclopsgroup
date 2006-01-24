@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security.entity">
+    <class name="Role" table="c_t_role">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.entity.RoleBase</meta>
+        <id name="id" type="string" length="128" column="role_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="name" type="string" column="role_name" not-null="true" length="60" />
+        <property name="description" type="string" length="500" />
+        <property name="isDisabled" column="is_disabled" type="boolean">
+            <meta attribute="property-type">boolean</meta>
+        </property>
+        <property name="isSystem" column="is_system" type="boolean">
+            <meta attribute="property-type">boolean</meta>
+        </property>
+        <set name="dependencies" table="c_t_role_dependency">
+            <key column="role_id" />
+            <many-to-many column="dependency_role_id" class="com.cyclopsgroup.tornado.security.entity.Role" />
+        </set>
+        <!-- 
+            <set name="permissions" table="c_t_role_permission">
+            <key column="role_id" />
+            <one-to-many
+            </set>
+        -->
+    </class>
+</hibernate-mapping>

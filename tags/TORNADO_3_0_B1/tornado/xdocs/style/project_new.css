@@ -1,0 +1,70 @@
+body
+{
+    background-color: #EFEFEF;
+}
+
+#navigatorBlock
+{
+    background-color: #DDDDDD;
+}
+
+#navigatorBlock table.menu th
+{
+    background-color: #BBBBBB;
+    color: white;
+}
+
+#navigatorBlock table.menu a
+{
+    color: #3480CD;
+}
+
+#bodyBlock
+{
+    background-color: white;
+}
+
+#copyrightsBlock
+{
+    background-color: #666666;
+    color: white;
+}
+
+div.section table.bodyTable
+{
+    background-color:white;
+}
+
+div.section table.bodyTable th
+{
+    background-color: white;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    border-color: #999999;
+    color: black;
+}
+
+div.section table.bodyTable td
+{
+    border-width: 0px 0px 1px 0px;
+    border-style: dashed;
+    border-color: #999999;
+    background-color: white;
+}
+
+div.section div.sectionTitle
+{
+    color: #124599;
+    border-color: #EFEFEF;
+}
+
+div.subsection div.subsectionTitle
+{
+    color: #2378CC;
+    border-width: 0px;
+}
+
+.banner
+{
+    background-color: #497DAF;
+}

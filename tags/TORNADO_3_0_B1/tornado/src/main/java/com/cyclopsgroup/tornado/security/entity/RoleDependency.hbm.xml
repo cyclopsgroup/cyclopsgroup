@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security.entity">
+    <class name="RoleDependency" table="c_t_role_dependency">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.entity.RoleDependencyBase</meta>
+        <id name="id" length="128" type="string" column="role_dependency_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="roleId" type="string">
+            <column name="role_id" length="128" not-null="true" />
+        </property>
+        <property name="dependencyId" type="string">
+            <column name="dependency_role_id" length="128" not-null="true" />
+        </property>
+        <many-to-one name="dependency" class="com.cyclopsgroup.tornado.security.entity.Role" column="dependency_role_id"
+            insert="false" update="false" />
+    </class>
+</hibernate-mapping>
