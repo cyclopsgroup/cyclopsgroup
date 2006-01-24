@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security.entity">
+    <class name="Group" table="c_t_group">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.entity.GroupBase</meta>
+        <id name="id" type="string" length="128" column="group_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="name" type="string" column="group_name" not-null="true" length="60" />
+        <property name="description" type="string" length="500" />
+        <property name="isDisabled" column="is_disabled" type="boolean">
+            <meta attribute="property-type">boolean</meta>
+        </property>
+        <property name="isSystem" column="is_system" type="boolean">
+            <meta attribute="property-type">boolean</meta>
+        </property>
+    </class>
+</hibernate-mapping>

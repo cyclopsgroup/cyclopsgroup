@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cyclopsgroup.tornado.security.entity">
+    <class name="GroupRole" table="c_t_group_role">
+        <meta attribute="generated-class">com.cyclopsgroup.tornado.security.entity.GroupRoleBase</meta>
+        <id name="id" length="128" type="string" column="group_role_id">
+            <generator class="uuid.hex" />
+        </id>
+        <property name="groupId" type="string" column="group_id" not-null="true" length="128" />
+        <property name="roleId" type="string" column="role_id" not-null="true" length="128" />
+        <many-to-one name="role" class="com.cyclopsgroup.tornado.security.entity.Role" column="role_id" insert="false"
+            update="false" />
+    </class>
+</hibernate-mapping>

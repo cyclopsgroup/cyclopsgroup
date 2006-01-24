@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:t="http://tornado.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>%tornado.navigation.roles</h2>
+    <w:FormControl>
+        <w:Form method="post" name="roleform">
+            <w:TableControl>
+                <t:HqlTabularData>
+                    <t:Hql>FROM com.cyclopsgroup.tornado.security.entity.Role</t:Hql>
+                </t:HqlTabularData>
+                <w:Table name="roletable" var="role">
+                    <w:Column name="select" title="%document.text.select" sort="unsorted">
+                        <input type="checkbox" name="role_id" value="${role.id}" />
+                    </w:Column>
+                    <w:Column name="name" title="%document.text.name" sort="asc">${role.name}</w:Column>
+                    <w:Column name="description" title="%document.text.description">
+                        <input type="text" name="description_${role.id}" value="${role.description}"
+                            class="waterviewFormInput" size="40" />
+                    </w:Column>
+                    <w:Column name="system" title="%document.text.system" sort="unsorted">
+                        %document.text.${role.isSystem}
+                    </w:Column>
+                    <w:Column name="disabled" title="$document.text.disabled" sort="unsorted" display="hidden">
+                        %document.text.${role.isDisabled}
+                    </w:Column>
+                </w:Table>
+            </w:TableControl>
+            <div>
+                <w:Submit action="${link.addAction('/tornado/admin/security/DeleteRole').setPage(page)}">
+                    <w:FormButton title="%document.text.deleteselected" />
+                </w:Submit>
+                <w:Submit action="${link.addAction('/tornado/admin/security/SaveRole').setPage(page)}">
+                    <w:FormButton title="%document.text.savechange" />
+                </w:Submit>
+            </div>
+        </w:Form>
+    </w:FormControl>
+</div>

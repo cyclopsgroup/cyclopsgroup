@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:j="jelly:core" xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    <h2>%tornado.navigation.lookandfeel</h2>
+    <j:if test="${noPreference}">
+        <w:FormControl>
+            <w:Form method="post" name="createpreference">
+                <input type="hidden" name="user_id" value="${userId}" />
+                <p>
+                    No setting exsits! Create one ?
+                    <w:Submit action="${link.addAction('/tornado/user/CreatePreferenceAction').setPage(page)}">
+                        <w:FormButton title="Create" />
+                    </w:Submit>
+                </p>
+            </w:Form>
+        </w:FormControl>
+    </j:if>
+    <j:if test="${not noPreference}">
+        <w:TiledFormControl columns="1">
+            <w:Form name="preferenceform" method="post">
+                <input type="hidden" name="preference_id" value="${pref.id}" />
+                <w:Field name="themeName" value="${pref.themeName}" title="Theme">
+                    <w:Select items="${themes}">
+                        <w:Option value="!unset!">--System Theme--</w:Option>
+                    </w:Select>
+                </w:Field>
+                <w:Field name="defaultLayout" value="${pref.defaultLayout}" title="Layout" />
+                <w:Field name="iconset" value="${pref.iconset}" title="Icon Set">
+                    <w:Select items="${iconSets}" />
+                </w:Field>
+                <w:Field name="stylesheet" value="${pref.stylesheet}" title="Stylesheet">
+                    <w:Select items="${styleSheets}" />
+                </w:Field>
+                <w:Submit action="${link.addAction('/tornado/user/SavePreferenceAction').setPage(page)}"
+                    forceValidation="true">
+                    <w:FormButton title="Save Change" />
+                </w:Submit>
+                <w:Submit action="${link.addAction('/tornado/user/DeletePreferenceAction').setPage(page)}">
+                    <w:FormButton title="Delete Preference" />
+                </w:Submit>
+            </w:Form>
+        </w:TiledFormControl>
+    </j:if>
+</div>
