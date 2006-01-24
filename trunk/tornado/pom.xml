@@ -8,7 +8,7 @@
     <groupId>com.cyclopsgroup.tornado</groupId>
     <artifactId>tornado</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.1-SNAPSHOT</version>
     <name>Tornado Platform</name>
     <description>A waterview based web application platform</description>
     <url>http://www.cyclopsgroup.com/projects/tornado</url>
