@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>courselist</id>
     <name>Courselist</name>
-    <currentVersion>SNAPSHOT</currentVersion>
+    <currentVersion>1.0-SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group Software Foundation</name>
         <url>http://www.cyclopsgroup.com</url>
@@ -115,7 +115,7 @@
         <dependency>
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>tornado</artifactId>
-            <version>SNAPSHOT</version>
+            <version>3.0-b1</version>
             <url>http://www.cyclopsgroup.com/projects/tornado</url>
             <properties>
                 <war.bundle>true</war.bundle>
