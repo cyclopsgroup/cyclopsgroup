@@ -6,6 +6,7 @@
         <groupId>com.cyclopsgroup.arapaho</groupId>
         <artifactId>arapaho-project-base</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../arapaho-project-base/pom.xml</relativePath>
     </parent>
     <artifactId>arapaho-skin-default</artifactId>
     <name>Default Site Skin</name>
