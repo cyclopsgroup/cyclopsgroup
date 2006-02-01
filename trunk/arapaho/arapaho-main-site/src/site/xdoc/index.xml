@@ -19,7 +19,7 @@
         <section name="Recent news">
             <script language="javascript" src="js/rsscontrol.js" />
             <script language="javascript">
-                displayRss('http://dev.cyclopsgroup.org/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=5&timeSpan=500&publicFeed=true&title=Last+5+news');
+                <![CDATA[displayRss('http://dev.cyclopsgroup.org/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=5&timeSpan=500&publicFeed=true&title=Last+5+news');]]>
             </script>
             <p>
                 <a href="http://dev.cyclopsgroup.org/kb/pages/viewrecentblogposts.action?key=portal">More..</a>

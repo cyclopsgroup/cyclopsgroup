@@ -40,8 +40,8 @@
         </menu>
         <menu name="Links">
             <item name="sf.net home" href="http://sourceforge.net/projects/cyclops-group" />
-            <item name="cvs" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group" />
-            <item name="for developers" href="http://dev.cyclopsgroup.com/kb/display/portal" />
+            <item name="cvs" href="http://fisheye.cenque.com/viewrep/cyclops-group" />
+            <item name="for developers" href="http://dev.cyclopsgroup.org/kb/display/portal" />
         </menu>
     </body>
 </project>
