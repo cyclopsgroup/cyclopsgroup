@@ -11,7 +11,7 @@
                 <![CDATA[ displayRss('http://dev.cyclopsgroup.com/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=20&timeSpan=500&publicFeed=true&title=Last+5+news'); ]]>
             </script>
             <p>
-                <a href="http://dev.cyclopsgroup.com/kb/pages/viewrecentblogposts.action?key=portal">Read more..</a>
+                <a href="http://dev.cyclopsgroup.org/kb/pages/viewrecentblogposts.action?key=portal">Read more..</a>
             </p>
         </section>
     </body>
