@@ -76,12 +76,12 @@
     </licenses>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:${project.artifactId}
+            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-project-base
         </connection>
         <developerConnection>
-            scm:cvs:ext:sfuser@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/${project.artifactId}
+            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-project-base
         </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/${project.artifactId}</url>
+        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-project-base</url>
     </scm>
     <organization>
         <name>CyclopsGroup.com</name>
