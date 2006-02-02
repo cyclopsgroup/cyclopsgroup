@@ -9,8 +9,17 @@
         <relativePath>../arapaho-project-base/pom.xml</relativePath>
     </parent>
     <artifactId>arapaho-skin-default</artifactId>
-    <name>Default Site Skin</name>
+    <name>Arapaho Default Site Skin</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>The site skin for CyclopsGroup.com</description>
+    <scm>
+        <connection>
+            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-skin-default
+        </connection>
+        <developerConnection>
+            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-skin-default
+        </developerConnection>
+        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-skin-default</url>
+    </scm>
 </project>
