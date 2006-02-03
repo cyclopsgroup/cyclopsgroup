@@ -10,7 +10,7 @@
     <description>The base pom for other projects</description>
     <issueManagement>
         <system>jira</system>
-        <url>http://dev.cyclopsgroup.com/issues</url>
+        <url>http://dev.cyclopsgroup.org/issues</url>
     </issueManagement>
     <mailingLists>
         <mailingList>
@@ -82,11 +82,11 @@
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-project-base
         </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-project-base</url>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-project-base</url>
     </scm>
     <organization>
-        <name>CyclopsGroup.com</name>
-        <url>http://www.cyclopsgroup.com/</url>
+        <name>Cyclops Group</name>
+        <url>http://www.cyclopsgroup.org/</url>
     </organization>
     <build>
         <plugins>
@@ -149,37 +149,14 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <id>apache.snapshots</id>
-            <name>Apache development repository</name>
-            <url>http://cvs.apache.org/maven-snapshot-repository</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-            <id>cyclopsgroup.central</id>
+            <id>cyclopsgroup.repository.sourceforge</id>
             <name>CyclopsGroup.com Central M2 Repository</name>
             <url>http://cyclops-group.sourceforge.net/m2</url>
         </repository>
     </repositories>
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>changelog-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </reporting>
     <distributionManagement>
         <repository>
             <id>cyclopsgroup.server.sourceforge</id>
