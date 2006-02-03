@@ -21,7 +21,7 @@
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-main-site
         </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-main-site</url>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-main-site</url>
     </scm>
     <distributionManagement>
         <site>

@@ -20,6 +20,6 @@
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-skin-default
         </developerConnection>
-        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/arapaho/arapaho-skin-default</url>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-skin-default</url>
     </scm>
 </project>
