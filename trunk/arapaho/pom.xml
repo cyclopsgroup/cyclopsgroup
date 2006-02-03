@@ -23,4 +23,11 @@
         <module>arapaho-main-site</module>
         <module>arapaho-maven-plugin</module>
     </modules>
+    <scm>
+        <connection>scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho</connection>
+        <developerConnection>
+            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho
+        </developerConnection>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho</url>
+    </scm>
 </project>

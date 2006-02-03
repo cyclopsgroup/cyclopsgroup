@@ -11,7 +11,7 @@
     <groupId>com.cyclopsgroup.arapaho</groupId>
     <artifactId>arapaho-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>Arapaho maven plugin</name>
+    <name>Arapaho Maven Plugin</name>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
@@ -49,4 +49,13 @@
             </plugin>
         </plugins>
     </build>
+    <scm>
+        <connection>
+            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-maven-plugin
+        </connection>
+        <developerConnection>
+            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-maven-plugin
+        </developerConnection>
+        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-maven-plugin</url>
+    </scm>
 </project>
