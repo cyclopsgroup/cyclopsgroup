@@ -119,6 +119,28 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>codehaus.snapshots</id>
+            <name>Maven central development repository</name>
+            <url>http://snapshots.maven.codehaus.org/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>apache.snapshots</id>
+            <name>Apache development repository</name>
+            <url>http://cvs.apache.org/maven-snapshot-repository</url>
+        </pluginRepository>
     </pluginRepositories>
     <repositories>
         <repository>
