@@ -12,10 +12,10 @@
     </bannerLeft>
     <body>
         <links>
-            <item name="home" href="http://www.cyclopsgroup.com" />
-            <item name="waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
-            <item name="tornado" href="http://www.cyclopsgroup.com/projects/tornado" />
-            <item name="course list" href="http://www.cyclopsgroup.com/projects/courselist" />
+            <item name="home" href="/index.html" />
+            <item name="waterview" href="/projects/waterview" />
+            <item name="tornado" href="/projects/tornado" />
+            <item name="course list" href="/projects/courselist" />
         </links>
         <menu name="Content">
             <item name="home" href="/index.html" />
