@@ -8,14 +8,14 @@
     <bannerLeft>
         <name>Cyclops Group</name>
         <src>images/cyclopsgroup_logo.png</src>
-        <href>http://www.cyclopsgroup.org</href>
+        <href>cyclops-group.sourceforge.net</href>
     </bannerLeft>
     <body>
         <links>
-            <item name="home" href="http://www.cyclopsgroup.org/index.html" />
-            <item name="waterview" href="http://www.cyclopsgroup.org/projects/waterview" />
-            <item name="tornado" href="http://www.cyclopsgroup.org/projects/tornado" />
-            <item name="course list" href="http://www.cyclopsgroup.org/projects/courselist" />
+            <item name="home" href="http://cyclops-group.sourceforge.net/index.html" />
+            <item name="waterview" href="http://cyclops-group.sourceforge.net/projects/waterview" />
+            <item name="tornado" href="http://cyclops-group.sourceforge.net/projects/tornado" />
+            <item name="course list" href="http://cyclops-group.sourceforge.net/projects/courselist" />
         </links>
         <menu name="Content">
             <item name="home" href="/index.html" />

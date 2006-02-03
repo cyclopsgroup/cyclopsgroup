@@ -86,7 +86,7 @@
     </scm>
     <organization>
         <name>Cyclops Group</name>
-        <url>http://www.cyclopsgroup.org/</url>
+        <url>http://cyclops-group.sourceforge.net/</url>
     </organization>
     <build>
         <plugins>
