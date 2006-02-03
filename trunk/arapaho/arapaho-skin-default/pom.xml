@@ -15,7 +15,7 @@
     <description>The site skin for CyclopsGroup.com</description>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-skin-default
+            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-skin-default
         </connection>
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-skin-default

@@ -52,7 +52,7 @@
     </dependencies>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-dependency-jetty
+            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-dependency-jetty
         </connection>
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-dependency-jetty

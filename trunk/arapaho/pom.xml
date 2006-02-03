@@ -24,7 +24,7 @@
         <module>arapaho-maven-plugin</module>
     </modules>
     <scm>
-        <connection>scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho</connection>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho</connection>
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho
         </developerConnection>

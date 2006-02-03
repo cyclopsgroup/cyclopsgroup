@@ -16,7 +16,7 @@
     <url>http://www.cyclopsgroup.com/</url>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-main-site
+            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-main-site
         </connection>
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-main-site

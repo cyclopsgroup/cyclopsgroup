@@ -2,6 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.cyclopsgroup.arapaho</groupId>
+        <artifactId>arapaho-project-base</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../arapaho-project-base/pom.xml</relativePath>
+    </parent>
     <groupId>com.cyclopsgroup.arapaho</groupId>
     <artifactId>arapaho-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
@@ -9,7 +15,7 @@
     <version>1.0-SNAPSHOT</version>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-maven-plugin
+            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-maven-plugin
         </connection>
         <developerConnection>
             scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-maven-plugin
@@ -52,30 +58,4 @@
             </plugin>
         </plugins>
     </build>
-    <distributionManagement>
-        <repository>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <name>CyclopsGroup.com central m2 repository</name>
-            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
-        </repository>
-        <snapshotRepository>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <name>CyclopsGroup.com central m2 snapshot repository</name>
-            <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-    <repositories>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>cyclopsgroup.repository.sourceforge</id>
-            <name>CyclopsGroup.com Central M2 Repository</name>
-            <url>http://cyclops-group.sourceforge.net/m2</url>
-        </repository>
-    </repositories>
 </project>
