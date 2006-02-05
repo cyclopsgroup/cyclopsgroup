@@ -17,6 +17,11 @@
     <description>
         Waterview is a highly componentized portal framework
     </description>
+    <scm>
+        <connection>scm:cvs:pserver:anonymous:@cvs.sourceforge.net:/usr/local/cvsroot/cyclops-group:waterview</connection>
+        <developerConnection>scm:cvs:ext:your-name@cvs.evavi.net:/usr/local/cvsroot/cyclops-group:waterview</developerConnection>
+        <url>http://cvs.cyclopsgroup.com/viewrep/cyclops-group/waterview</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>avalon</groupId>
