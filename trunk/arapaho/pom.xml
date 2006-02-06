@@ -22,6 +22,7 @@
         <module>arapaho-skin-default</module>
         <module>arapaho-main-site</module>
         <module>arapaho-maven-plugin</module>
+        <module>arapaho-project</module>
     </modules>
     <scm>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho</connection>
