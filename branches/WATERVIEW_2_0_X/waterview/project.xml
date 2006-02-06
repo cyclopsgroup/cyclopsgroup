@@ -5,7 +5,7 @@
     <pomVersion>3</pomVersion>
     <id>waterview</id>
     <name>waterview</name>
-    <currentVersion>2.0-b3</currentVersion>
+    <currentVersion>2.0-SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
         <url>http://www.cyclopsgroup.com</url>
@@ -36,7 +36,7 @@
             <id>jiaqi</id>
             <email>jiaqi.guo@gmail.com</email>
             <organization>Cyclops Group</organization>
-            <url>http://www.cyclopsgroup.com</url>
+            <url>http://www.cyclopsgroup.org</url>
             <timezone>-6</timezone>
         </developer>
         <developer>
@@ -247,7 +247,6 @@
         </dependency>
     </dependencies>
     <build>
-        <nagEmailAddress>cyclops-group-develop@lists.sourceforge.net</nagEmailAddress>
         <sourceDirectory>src/main/java</sourceDirectory>
         <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
         <unitTest>
@@ -256,15 +255,11 @@
             </includes>
             <resources>
                 <resource>
-                    <directory>${pom.build.unitTestSourceDirectory}</directory>
+                    <directory>src/main/java</directory>
                     <filtering>false</filtering>
                 </resource>
                 <resource>
                     <directory>src/test/resources</directory>
-                    <filtering>false</filtering>
-                </resource>
-                <resource>
-                    <directory>/src/webapp/WEB-INF/classes</directory>
                     <filtering>false</filtering>
                 </resource>
             </resources>
