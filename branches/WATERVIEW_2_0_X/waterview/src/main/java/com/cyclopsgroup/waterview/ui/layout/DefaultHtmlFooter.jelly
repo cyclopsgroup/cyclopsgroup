@@ -2,10 +2,10 @@
 <table width="100%" border="0">
     <tr>
         <td>
-            <a href="http://www.cyclopsgroup.com">%waterview.text.footer.allrights</a>
+            <a href="http://www.cyclopsgroup.org">%waterview.text.footer.allrights</a>
         </td>
         <td align="right">
-            <a href="http://www.cyclopsgroup.com/projects/waterview">%waterview.text.footer.poweredby</a>
+            <a href="http://www.cyclopsgroup.org/projects/waterview">%waterview.text.footer.poweredby</a>
         </td>
     </tr>
 </table>
