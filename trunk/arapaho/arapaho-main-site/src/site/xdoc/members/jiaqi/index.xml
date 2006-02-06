@@ -23,7 +23,7 @@
             </p>
             <script language="javascript" src="../../js/rsscontrol.js" />
             <script language="javascript">
-                <![CDATA[ displayRss('http://www.cyclopsgroup.com/members/jiaqi/atom.xml'); ]]>
+                <![CDATA[ displayRss('http://cyclops-group.sourceforge.net/members/jiaqi/atom.xml'); ]]>
             </script>
         </section>
     </body>
