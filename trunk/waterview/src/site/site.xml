@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project name="Cyclops Group">
+    <skin>
+        <groupId>com.cyclopsgroup.arapaho</groupId>
+        <artifactId>arapaho-skin-default</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </skin>
+    <bannerLeft>
+        <name>Cyclops Group</name>
+        <src>images/cyclopsgroup_logo.png</src>
+        <href>http://www.cyclopsgroup.org</href>
+    </bannerLeft>
     <body>
+        <links>
+            <item name="home" href="http://www.cyclopsgroup.org/index.html" />
+            <item name="waterview" href="http://www.cyclopsgroup.org/projects/waterview" />
+            <item name="tornado" href="http://www.cyclopsgroup.org/projects/tornado" />
+            <item name="course list" href="http://www.cyclopsgroup.org/projects/courselist" />
+        </links>
         <menu name="Overview">
             <item name="What is waterview" href="/index.html" />
             <item name="Feature compare" href="/features.html" />
@@ -24,12 +40,13 @@
             </item>
             <item name="Howtos" href="/guide/howtos.html" />
         </menu>
-        <links>
-            <item name="Knowledge Base" href="http://www.cyclopsgroup.com/kb/display/waterview" />
-            <item name="Issue Tracker" href="http://www.cyclopsgroup.com/issues/browse/waterview" />
-            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group/waterview" />
-            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/waterview" />
-            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/waterview" />
-        </links>
+        ${reports}
+        <menu name="Links">
+            <item name="Knowledge Base" href="http://dev.cyclopsgroup.org/kb/display/waterview" />
+            <item name="Issue Tracker" href="http://dev.cyclopsgroup.org/issues/browse/waterview" />
+            <item name="View CVS" href="http://fisheye.cenqua.com/viewrep/cyclops-group/waterview" />
+            <item name="Change Log" href="http://fisheye.cenqua.com/changelog/cyclops-group/waterview" />
+            <item name="Search Source" href="http://fisheye.cenqua.com/search/cyclops-group/waterview" />
+        </menu>
     </body>
 </project>
