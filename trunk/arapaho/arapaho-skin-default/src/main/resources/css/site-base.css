@@ -16,7 +16,7 @@ a:link,a:visited {
     text-decoration: none;
 }
 
-.section h2 {
+#contentBox h2 {
     border-width: 0px 0px 2px 0px;
     border-style: dashed;
     border-color: #999999;
@@ -24,26 +24,26 @@ a:link,a:visited {
     font-weight: normal;
 }
 
-.section p,.section {
+#contentBox p, #contentBox {
     font-size: 10pt;
 }
 
-.section .bodyTable th {
+#contentBox .bodyTable th {
     text-align: left;
 }
 
-.section .bodyTable tr.a {
+#contentBox .bodyTable tr.a {
     background-color: #F9F9F9;
 }
 
-.section .source {
+#contentBox .source {
     border-width: 0px;
     background-color: #CCCCCC;
     padding: 0px;
     margin: 10px 6px 6px 10px;
 }
 
-.section .source pre {
+#contentBox .source pre {
     position: relative;
     top: -3px;
     left: -3px;
@@ -56,7 +56,7 @@ a:link,a:visited {
     font-size: 9pt;
 }
 
-.section h3,.section h4,.section h5 {
+#contentBox h3,#contentBox h4,#contentBox h5 {
     border-width: 0px;
     background-color: transparent;
 }
