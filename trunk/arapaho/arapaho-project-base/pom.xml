@@ -14,7 +14,7 @@
     </issueManagement>
     <mailingLists>
         <mailingList>
-            <name>CyclopsGroup.com Discussion</name>
+            <name>CyclopsGroup Discussion</name>
             <subscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</subscribe>
             <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion/subscribe</unsubscribe>
             <post>cyclopsgroup-discussion@googlegroups.com</post>
@@ -24,13 +24,13 @@
             </otherArchives>
         </mailingList>
         <mailingList>
-            <name>CyclopsGroup.com News</name>
+            <name>CyclopsGroup News</name>
             <subscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</subscribe>
             <unsubscribe>http://groups.google.com/group/cyclopsgroup-news/subscribe</unsubscribe>
             <archive>http://groups.google.com/group/cyclopsgroup-news</archive>
         </mailingList>
         <mailingList>
-            <name>CyclopsGroup.com Support</name>
+            <name>CyclopsGroup Support</name>
             <subscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</subscribe>
             <unsubscribe>http://groups.google.com/group/cyclopsgroup-support/subscribe</unsubscribe>
             <archive>http://groups.google.com/group/cyclopsgroup-support</archive>
