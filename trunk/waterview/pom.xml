@@ -132,4 +132,10 @@
             <url>http://cyclops-group.sourceforge.net/m2</url>
         </repository>
     </repositories>
+    <distributionManagement>
+        <site>
+            <id>cyclopsgroup.server.sourceforge</id>
+            <url>scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/waterview</url>
+        </site>
+    </distributionManagement>
 </project>
