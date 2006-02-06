@@ -1,0 +1,57 @@
+body {
+    text-align: center;
+}
+
+#documentBody {
+	width: 720px;
+	text-align: left;
+	margin: 0px auto;
+}
+
+#contentBox .bodyTable, #contentBox p, #contentBox .source pre {
+	font-size: 8pt;
+}
+
+#contentBox .bodyTable th {
+    padding: 1px;
+    color: white;
+    background-color: #F7941C;
+    border: #FF0000 solid;
+    border-width: 0px 0px 1px 0px;
+}
+
+#contentBox .bodyTable tr.b td {
+    background-color: #FFFBC5;
+}
+
+#banner {
+	height: 200px;
+	background: url('../images/waterview_banner.jpg') no-repeat;
+}
+
+#breadcrumbs {
+    border: outset #DDDDDD;
+    border-width: 1px 0px 1px 0px;
+    background-color: #DDDDDD;
+}
+
+#navcolumn {
+    padding: 0px;
+    background-color: #EEEEEE;
+}
+
+#leftColumn {
+    width: 160px;
+    border-right: 1px solid #AAAAAA;
+}
+
+#leftColumn h5 {
+    border: outset 1px #DDDDDD;
+    border-width: 1px 0px 1px 0px;
+    padding: 2px;
+    background: #DDDDDD;
+}
+
+#bodyColumn {
+	margin-left: 160px;
+}

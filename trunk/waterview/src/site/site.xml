@@ -5,11 +5,6 @@
         <artifactId>arapaho-skin-default</artifactId>
         <version>1.0-SNAPSHOT</version>
     </skin>
-    <bannerLeft>
-        <name>Cyclops Group</name>
-        <src>images/cyclopsgroup_logo.png</src>
-        <href>http://www.cyclopsgroup.org</href>
-    </bannerLeft>
     <body>
         <links>
             <item name="home" href="http://www.cyclopsgroup.org/index.html" />

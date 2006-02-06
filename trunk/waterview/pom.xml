@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>arapaho-project-base</artifactId>
+        <artifactId>arapaho-project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.cyclopsgroup.waterview</groupId>
@@ -12,6 +12,7 @@
     <packaging>jar</packaging>
     <name>Waterview</name>
     <version>2.1-SNAPSHOT</version>
+    <inceptionYear>2002</inceptionYear>
     <url>http://www.cyclopsgroup.com/projects/waterview</url>
     <description>Waterview is a highly componentized portal framework</description>
     <scm>
@@ -112,9 +113,6 @@
         <dependency>
             <groupId>sun.jdk</groupId>
             <artifactId>tools</artifactId>
-            <version>1.4</version>
-            <scope>system</scope>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>velocity</groupId>
@@ -134,16 +132,4 @@
             <url>http://cyclops-group.sourceforge.net/m2</url>
         </repository>
     </repositories>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.cyclopsgroup.arapaho</groupId>
-                <artifactId>arapaho-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <configuration>
-                    <goalPrefix>arapaho</goalPrefix>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
