@@ -8,14 +8,14 @@
     <bannerLeft>
         <name>Cyclops Group</name>
         <src>images/cyclopsgroup_logo.png</src>
-        <href>cyclops-group.sourceforge.net</href>
+        <href>http://www.cyclopsgroup.com</href>
     </bannerLeft>
     <body>
         <links>
-            <item name="home" href="http://www.cyclopsgroup.org/index.html" />
-            <item name="waterview" href="http://www.cyclopsgroup.org/projects/waterview" />
-            <item name="tornado" href="http://www.cyclopsgroup.org/projects/tornado" />
-            <item name="course list" href="http://www.cyclopsgroup.org/projects/courselist" />
+            <item name="home" href="http://www.cyclopsgroup.com/index.html" />
+            <item name="waterview" href="http://www.cyclopsgroup.com/projects/waterview" />
+            <item name="tornado" href="http://www.cyclopsgroup.com/projects/tornado" />
+            <item name="course list" href="http://www.cyclopsgroup.com/projects/courselist" />
         </links>
         <menu name="Content">
             <item name="home" href="/index.html" />
@@ -41,7 +41,7 @@
         <menu name="Links">
             <item name="sf.net home" href="http://sourceforge.net/projects/cyclops-group" />
             <item name="cvs" href="http://fisheye.cenque.com/viewrep/cyclops-group" />
-            <item name="for developers" href="http://dev.cyclopsgroup.org/kb/display/portal" />
+            <item name="for developers" href="http://dev.cyclopsgroup.com/kb/display/portal" />
         </menu>
     </body>
 </project>
