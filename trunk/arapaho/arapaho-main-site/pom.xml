@@ -25,7 +25,7 @@
     </scm>
     <distributionManagement>
         <site>
-            <id>cyclopsgroup.server.awardspace</id>
+            <id>cyclopsgroup.server.sourceforge</id>
             <url>scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs</url>
         </site>
     </distributionManagement>
