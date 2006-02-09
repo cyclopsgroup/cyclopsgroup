@@ -19,10 +19,10 @@
         <section name="Recent news">
             <script language="javascript" src="js/rsscontrol.js" />
             <script language="javascript">
-                <![CDATA[displayRss('http://dev.cyclopsgroup.org/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=5&timeSpan=500&publicFeed=true&title=Last+5+news');]]>
+                <![CDATA[displayRss('http://dev.cyclopsgroup.com/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=5&timeSpan=500&publicFeed=true&title=Last+5+news');]]>
             </script>
             <p>
-                <a href="http://dev.cyclopsgroup.org/kb/pages/viewrecentblogposts.action?key=portal">More..</a>
+                <a href="http://dev.cyclopsgroup.com/kb/pages/viewrecentblogposts.action?key=portal">More..</a>
             </p>
         </section>
         <section name="Get me involved">
@@ -147,7 +147,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <a href="http://demo.cyclopsgroup.org/courselist">Courselist project live demo</a>
+                        <a href="http://demo.cyclopsgroup.com/courselist">Courselist project live demo</a>
                     </td>
                     <td>English</td>
                 </tr>
