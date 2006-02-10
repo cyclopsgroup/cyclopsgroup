@@ -24,6 +24,18 @@ body {
     background-color: #FFFBC5;
 }
 
+#contentBox h2 {
+    text-indent: 64px;
+    background: url('../images/folder_64.png') no-repeat;
+    height: 32px;
+}
+
+#contentBox h3 {
+    text-indent: 24px;
+    background: url('../images/folder_16.png') no-repeat;
+    height: 24px;
+}
+
 #banner {
 	height: 200px;
 	background: url('../images/waterview_banner.jpg') no-repeat;
@@ -50,6 +62,7 @@ body {
     border-width: 1px 0px 1px 0px;
     padding: 2px;
     background: #DDDDDD;
+    font-size: 9pt;
 }
 
 #bodyColumn {
