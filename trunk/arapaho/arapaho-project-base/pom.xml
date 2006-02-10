@@ -10,7 +10,7 @@
     <description>The base pom for other projects</description>
     <issueManagement>
         <system>jira</system>
-        <url>http://dev.cyclopsgroup.org/issues</url>
+        <url>http://dev.cyclopsgroup.com/issues</url>
     </issueManagement>
     <mailingLists>
         <mailingList>
