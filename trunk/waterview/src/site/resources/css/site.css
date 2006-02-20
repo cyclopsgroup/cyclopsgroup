@@ -1,11 +1,21 @@
 body {
     text-align: center;
+    background: url('../images/body_background.gif') repeat-x;
+}
+
+a:link, a:visited {
+	color: #666666;
 }
 
 #documentBody {
 	width: 720px;
 	text-align: left;
 	margin: 0px auto;
+}
+
+
+#bodyColumn {
+	margin-left: 160px;
 }
 
 #contentBox .bodyTable, #contentBox p, #contentBox .source pre {
@@ -26,24 +36,26 @@ body {
 
 #contentBox h2 {
     text-indent: 64px;
-    background: url('../images/folder_64.png') no-repeat;
+    background: url('../images/folder_64.gif') no-repeat;
     height: 32px;
 }
 
 #contentBox h3 {
-    text-indent: 24px;
-    background: url('../images/folder_16.png') no-repeat;
-    height: 24px;
+	background-color: #DDDDDD;
+	text-indent: 6px;
 }
 
 #banner {
+	margin-top: 80px;
 	height: 200px;
 	background: url('../images/waterview_banner.jpg') no-repeat;
 }
 
 #breadcrumbs {
-    border: outset #DDDDDD;
-    border-width: 1px 0px 1px 0px;
+	border-width: 1px 0px 1px 0px;
+	border-style: solid;
+	border-top-color: white;
+	border-bottom-color: #999999;
     background-color: #DDDDDD;
 }
 
@@ -54,17 +66,33 @@ body {
 
 #leftColumn {
     width: 160px;
-    border-right: 1px solid #AAAAAA;
+    border-right: 1px solid #999999;
 }
 
 #leftColumn h5 {
-    border: outset 1px #DDDDDD;
-    border-width: 1px 0px 1px 0px;
+	border-width: 1px 0px 1px 0px;
+	border-style: solid;
+	border-top-color: white;
+	border-bottom-color: #999999;
     padding: 2px;
     background: #DDDDDD;
     font-size: 9pt;
 }
 
-#bodyColumn {
-	margin-left: 160px;
+#leftColumn li {
+	text-indent: 16px;
+	min-height: 16px;
+	background-repeat: no-repeat;
+}
+
+#leftColumn li.none {
+	background-image: url('../images/document_16.png');
+}
+
+#leftColumn li.collapsed {
+	background-image: url('../images/folder_16.png');
+}
+
+#leftColumn li.expanded {
+	background-image: url('../images/expanded_folder_16.png');
 }
