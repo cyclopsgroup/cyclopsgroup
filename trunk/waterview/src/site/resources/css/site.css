@@ -11,6 +11,8 @@ a:link, a:visited {
 	width: 720px;
 	text-align: left;
 	margin: 0px auto;
+	padding-top: 80px;
+	background: url('../images/cyclops_group_banner.jpg') no-repeat;
 }
 
 
@@ -46,7 +48,6 @@ a:link, a:visited {
 }
 
 #banner {
-	margin-top: 80px;
 	height: 200px;
 	background: url('../images/waterview_banner.jpg') no-repeat;
 }
