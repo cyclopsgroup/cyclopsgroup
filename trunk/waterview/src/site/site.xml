@@ -37,8 +37,8 @@
         </menu>
         ${reports}
         <menu name="Links">
-            <item name="Knowledge Base" href="http://dev.cyclopsgroup.org/kb/display/waterview" />
-            <item name="Issue Tracker" href="http://dev.cyclopsgroup.org/issues/browse/waterview" />
+            <item name="Knowledge Base" href="http://dev.cyclopsgroup.com/kb/display/waterview" />
+            <item name="Issue Tracker" href="http://dev.cyclopsgroup.com/issues/browse/waterview" />
             <item name="View CVS" href="http://fisheye.cenqua.com/viewrep/cyclops-group/waterview" />
             <item name="Change Log" href="http://fisheye.cenqua.com/changelog/cyclops-group/waterview" />
             <item name="Search Source" href="http://fisheye.cenqua.com/search/cyclops-group/waterview" />
