@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<span xmlns:j="jelly:core">
+    <select name="${field.name}" class="waterviewFormSelect">
+        <j:forEach var="option" items="${selectTag.options}">
+            <j:choose>
+                <j:when test="${field.value eq option.name}">
+                    <option value="${option.name}" selected="selected">${option.title}</option>
+                </j:when>
+                <j:otherwise>
+                    <option value="${option.name}">${option.title}</option>
+                </j:otherwise>
+            </j:choose>
+        </j:forEach>
+    </select>
+</span>

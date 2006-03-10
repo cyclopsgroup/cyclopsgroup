@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Waterview xmlns="http://waterview.cyclopsgroup.com/definition">
+    <IconSet name="waterview.icons.test" path="/waterview/defaulttheme" description="Waterview test icons" />
+    <StyleSheet name="waterview.stylesheet.test" path="/waterview/defaulttheme/style.css"
+        description="Waterview test stylesheet" />
+    <Theme name="waterview.theme.test" iconset="waterview.icons.test" stylesheet="waterview.stylesheet.test"
+        description="Waterview test theme">
+        <DefineLayout name="layout.default" layout="waterview.layout.default" />
+    </Theme>
+</Waterview>

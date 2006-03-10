@@ -1,0 +1,99 @@
+body {
+    text-align: center;
+    background: url('../images/body_background.gif') repeat-x;
+}
+
+a:link, a:visited {
+	color: #666666;
+}
+
+#documentBody {
+	width: 920px;
+	text-align: left;
+	margin: 0px auto;
+	padding-top: 80px;
+	background: url('../images/cyclops_group_banner.jpg') no-repeat;
+}
+
+
+#bodyColumn {
+	margin-left: 160px;
+}
+
+#contentBox .bodyTable, #contentBox p, #contentBox .source pre {
+	font-size: 8pt;
+}
+
+#contentBox .bodyTable th {
+    padding: 1px;
+    color: white;
+    background-color: #F7941C;
+    border: #FF0000 solid;
+    border-width: 0px 0px 1px 0px;
+}
+
+#contentBox .bodyTable tr.b td {
+    background-color: #FFFBC5;
+}
+
+#contentBox h2 {
+    text-indent: 64px;
+    background: url('../images/folder_64.gif') no-repeat;
+    height: 32px;
+}
+
+#contentBox h3 {
+	background-color: #DDDDDD;
+	text-indent: 6px;
+}
+
+#banner {
+	height: 200px;
+	background: url('../images/waterview_banner.jpg') no-repeat;
+}
+
+#breadcrumbs {
+	border-width: 1px 0px 1px 0px;
+	border-style: solid;
+	border-top-color: white;
+	border-bottom-color: #999999;
+    background-color: #DDDDDD;
+}
+
+#navcolumn {
+    padding: 0px;
+    background-color: #EEEEEE;
+}
+
+#leftColumn {
+    width: 160px;
+    border-right: 1px solid #999999;
+}
+
+#leftColumn h5 {
+	border-width: 1px 0px 1px 0px;
+	border-style: solid;
+	border-top-color: white;
+	border-bottom-color: #999999;
+    padding: 2px;
+    background: #DDDDDD;
+    font-size: 9pt;
+}
+
+#leftColumn li {
+	text-indent: 16px;
+	min-height: 16px;
+	background-repeat: no-repeat;
+}
+
+#leftColumn li.none {
+	background-image: url('../images/document_16.png');
+}
+
+#leftColumn li.collapsed {
+	background-image: url('../images/folder_16.png');
+}
+
+#leftColumn li.expanded {
+	background-image: url('../images/expanded_folder_16.png');
+}

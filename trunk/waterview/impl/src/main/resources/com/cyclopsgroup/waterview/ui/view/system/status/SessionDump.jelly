@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>%waterview.view.sessiondump</h2>
+    <p>
+        This table lists all attributes in current session context. You may be able to delete any of them from session.
+        Be aware of what you are doing before pushing the button.
+    </p>
+    <w:FormControl>
+        <w:Form name="sessionform" method="post">
+            <table width="100%" cellspacing="1" border="0" class="waterviewTable">
+                <tr>
+                    <td colspan="2" class="lineBreak" />
+                </tr>
+                <j:forEach var="attributeName" items="${data.sessionContext.keys()}">
+                    <j:set var="attributeValue" value="${data.sessionContext.get(attributeName)}" />
+                    <tr>
+                        <td class="title">
+                            <input type="checkbox" name="attribute_name" value="${attributeName}" />
+                        </td>
+                        <td>
+                            <b>${attributeName}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">Type</td>
+                        <td>${attributeValue.class.name}</td>
+                    </tr>
+                    <tr class="a">
+                        <td class="title">Value</td>
+                        <td>${attributeValue}</td>
+                    </tr>
+                </j:forEach>
+                <tr>
+                    <td colspan="2" class="bottom">
+                        <w:Submit action="${link.addAction('/waterview/DeleteSessionAttributes').setPage(page)}">
+                            <w:FormButton>Delete Selected</w:FormButton>
+                        </w:Submit>
+                    </td>
+                </tr>
+            </table>
+        </w:Form>
+    </w:FormControl>
+</div>

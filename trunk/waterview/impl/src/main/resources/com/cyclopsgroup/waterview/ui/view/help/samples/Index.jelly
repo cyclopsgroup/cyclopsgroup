@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui">
+    ${params.set('page', page.fullPath)}
+    <w:JellyView script="/waterview/view/system/NavigatorNodeContent.jelly" />
+</div>

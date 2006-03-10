@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <div class="waterviewPortlet">
+        <div class="waterviewPortletWrapper">
+            <div class="waterviewPortletHeader">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td>
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <td>
+                                        <w:Icon alt="View Actions" file="view_actions.png" />
+                                    </td>
+                                    <td>
+                                        <div class="waterviewPortletTitle">
+                                            ${controlTag.portlet.title}
+                                            <j:if test="${controlTag.length() gt 0}">
+                                                :: ${controlTag.portlet.description}
+                                            </j:if>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="right">
+                            <table cellspacing="2" cellpadding="0" border="0">
+                                <tr>
+                                    <j:if test="${controlTag.maximizable}">
+                                        <td>
+                                            <w:Icon alt="Maximize View" file="view_max.png" />
+                                        </td>
+                                    </j:if>
+                                    <j:if test="${controlTag.portlet.editor}">
+                                        <td>
+                                            <w:Icon alt="Configure" file="edit.png" />
+                                        </td>
+                                    </j:if>
+                                    <td>
+                                        <w:Icon alt="Help" file="help.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="waterviewPortletBody">
+                <w:CreateUniqueId var="dynamicPortletId" />
+                <div id="${dynamicPortletId}">
+                    <w:RenderPortlet portlet="${controlTag.portlet}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</w:Dummy>

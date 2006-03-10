@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
+    <h2>%waterview.view.setlookandfeel</h2>
+    <w:FormControl>
+        <w:Form name="laf" method="post">
+            <w:TableControl configurable="true">
+                <w:Table name="laftable" var="theme" data="${themeData}">
+                    <w:Column name="select" title="%document.text.select">
+                        <j:choose>
+                            <j:when test="${currentTheme.name eq theme.name}">
+                                <input type="radio" name="theme_name" value="${theme.name}" checked="checked" />
+                            </j:when>
+                            <j:otherwise>
+                                <input type="radio" name="theme_name" value="${theme.name}" />
+                            </j:otherwise>
+                        </j:choose>
+                    </w:Column>
+                    <w:Column name="name" title="%document.text.name" sort="asc">${theme.name}</w:Column>
+                    <w:Column name="description" title="%document.text.description" sort="unsorted">
+                        ${theme.description}
+                    </w:Column>
+                    <w:Column name="default" title="Is default">
+                        <j:if test="${defaultTheme.name eq theme.name}">true</j:if>
+                    </w:Column>
+                </w:Table>
+            </w:TableControl>
+            <table class="waterviewTable">
+                <tr>
+                    <td class="title">Stylesheet</td>
+                    <td class="input">
+                        <w:Field name="style_name" title="Stylesheet" value="${currentTheme.stylesheetName}">
+                            <w:Select items="${styles}" />
+                        </w:Field>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <w:Submit action="${link.addAction('/waterview/ChangeTheme').setPage(page)}">
+                    <w:FormButton title="%document.text.savechange" />
+                </w:Submit>
+            </div>
+        </w:Form>
+    </w:FormControl>
+</div>

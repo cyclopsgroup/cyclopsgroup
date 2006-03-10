@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page xmlns="http://waterview.cyclopsgroup.com/ui">
+    <Title><Label id="Title"/></Title>
+    <PanelContent name="body">
+        <HtmlView>
+            <div xmlns="com.cyclopsgroup.waterview.html">
+                <h2>Default Page</h2>
+                <p>Bla bla bla bla</p>
+            </div>
+        </HtmlView>
+    </PanelContent>
+</Page>

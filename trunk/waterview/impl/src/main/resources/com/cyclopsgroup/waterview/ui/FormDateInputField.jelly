@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table cellspacing="0" cellpadding="0" border="0" xmlns:j="jelly:core">
+    <j:set var="fieldClass" value="waterviewFormInput" />
+    <j:if test="${field.invalid}">
+        <j:set var="fieldClass" value="waterviewFormInvalidInput" />
+    </j:if>
+    <tr>
+        <td>
+            <input type="text" name="${field.name}" value="${field.value}" size="${fieldTag.getSize()}" maxlength="10"
+                class="${fieldClass}" title="${field.errorMessage}" id="${form.id}_${field.name}" />
+            <span />
+        </td>
+        <td width="20" align="right" onclick="return showDateCalendar('${form.id}_${field.name}')"
+            style="cursor: hand">
+            <Icon alt="Pick a date" file="date.png" xmlns="http://waterview.cyclopsgroup.com/ui" />
+        </td>
+    </tr>
+</table>
