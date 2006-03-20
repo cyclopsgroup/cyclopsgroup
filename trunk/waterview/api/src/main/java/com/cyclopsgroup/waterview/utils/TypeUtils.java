@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -142,13 +142,19 @@ public final class TypeUtils
     /**
      * @return Convert utils
      */
-    public synchronized static ConvertUtilsBean getConvertUtils()
+    public static ConvertUtilsBean getConvertUtils()
     {
         if ( convertUtils == null )
         {
-            convertUtils = new ConvertUtilsBean();
-            convertUtils.register( new DateConverter(), Date.class );
-            convertUtils.register( new StringConverterAdapter(), String.class );
+            synchronized ( TypeUtils.class )
+            {
+                if ( convertUtils == null )
+                {
+                    convertUtils = new ConvertUtilsBean();
+                    convertUtils.register( new DateConverter(), Date.class );
+                    convertUtils.register( new StringConverterAdapter(), String.class );
+                }
+            }
         }
 
         return convertUtils;
@@ -206,11 +212,17 @@ public final class TypeUtils
     /**
      * @return Instance of bean utils
      */
-    public synchronized static BeanUtilsBean getBeanUtils()
+    public static BeanUtilsBean getBeanUtils()
     {
         if ( beanUtils == null )
         {
-            beanUtils = new LooseBeanUtilsBean( getConvertUtils() );
+            synchronized ( TypeUtils.class )
+            {
+                if ( beanUtils == null )
+                {
+                    beanUtils = new LooseBeanUtilsBean( getConvertUtils() );
+                }
+            }
         }
         return beanUtils;
     }
@@ -355,7 +367,7 @@ public final class TypeUtils
     /**
      * Register type name
      *
-     * @param name Type name 
+     * @param name Type name
      * @param type Type class
      */
     public static void registerType( String name, Class type )
