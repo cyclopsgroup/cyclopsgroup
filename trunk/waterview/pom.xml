@@ -22,6 +22,12 @@
         </developerConnection>
         <url>http://fisheye.cenqua.com/viewrep/cyclops-group/waterview</url>
     </scm>
+    <modules>
+        <module>api</module>
+        <module>doc</module>
+        <module>impl</module>
+        <module>plugin</module>
+    </modules>
     <repositories>
         <repository>
             <releases>
