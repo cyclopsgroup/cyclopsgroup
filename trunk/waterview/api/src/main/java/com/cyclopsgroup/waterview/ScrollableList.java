@@ -24,7 +24,7 @@ import java.util.Iterator;
  *
  * Large list that can be accessed partially
  */
-public interface LargeList
+public interface ScrollableList
 {
     /** Sorting option */
     public interface Sorting

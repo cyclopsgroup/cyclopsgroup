@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Panel content model
@@ -25,6 +28,33 @@ package com.cyclopsgroup.waterview.spi;
 public class PanelContent
 {
     private String name;
+
+    private List views = new ArrayList();
+
+    public void addView(View view)
+    {
+        views.add(view);
+    }
+
+    /**
+     * Get all views in this panel
+     *
+     * @return View array
+     */
+    public View[] getViews()
+    {
+        return (View[]) views.toArray(View.EMPTY_ARRAY);
+    }
+
+    /**
+     * Get modifiable view list
+     *
+     * @return Modifiable list of views
+     */
+    public List getViewList()
+    {
+        return views;
+    }
 
     /**
      * Constructor for class PanelContent

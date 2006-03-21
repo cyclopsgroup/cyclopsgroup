@@ -31,7 +31,7 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
  *
  * Collection implemented large list
  */
-public class CollectionLargeList implements LargeList
+public class CollectionScrollableList implements ScrollableList
 {
     private Collection collection;
 
@@ -40,7 +40,7 @@ public class CollectionLargeList implements LargeList
      *
      * @param collection Collecton of data
      */
-    public CollectionLargeList(Collection collection)
+    public CollectionScrollableList(Collection collection)
     {
         this.collection = collection;
     }
@@ -48,7 +48,7 @@ public class CollectionLargeList implements LargeList
     /**
      * Overwrite or implement method getSize()
      *
-     * @see com.cyclopsgroup.waterview.LargeList#getSize()
+     * @see com.cyclopsgroup.waterview.ScrollableList#getSize()
      */
     public int getSize()
     {
@@ -58,7 +58,7 @@ public class CollectionLargeList implements LargeList
     /**
      * Overwrite or implement method iterate()
      *
-     * @see com.cyclopsgroup.waterview.IteratorLargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
+     * @see com.cyclopsgroup.waterview.IteratorLargeList#iterate(int, int, com.cyclopsgroup.waterview.ScrollableList.Sorting[])
      */
     public Iterator iterate(int startPosition, int maxAmount, Sorting[] sortings)
             throws Exception

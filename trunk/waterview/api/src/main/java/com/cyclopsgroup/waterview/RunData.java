@@ -30,13 +30,13 @@ import org.apache.avalon.framework.service.ServiceManager;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 
-public interface RuntimeData
+public interface RunData
 {
     /** Locale name in session context */
-    String LOCALE_NAME = RuntimeData.class.getName() + "/locale";
+    String LOCALE_NAME = RunData.class.getName() + "/locale";
 
     /** Message list name in session context */
-    String MESSAGES_NAME = RuntimeData.class.getName() + "/messags";
+    String MESSAGES_NAME = RunData.class.getName() + "/messags";
 
     /** Name of it in context */
     String NAME = "data";

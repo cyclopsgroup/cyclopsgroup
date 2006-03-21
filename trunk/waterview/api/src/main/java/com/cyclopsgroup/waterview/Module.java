@@ -30,6 +30,6 @@ public interface Module
      * @param context Environment context
      * @throws Exception Throw it out
      */
-    void execute( RuntimeData data, Context context )
+    void execute( RunData data, Context context )
         throws Exception;
 }

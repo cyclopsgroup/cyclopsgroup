@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,14 +21,11 @@ import java.util.Hashtable;
 /**
  * Page model is the model mapped to a particular URI
  * If a page is not found for given URI, default page will be applied
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class Page
 {
-    /** Default page model */
-    public static final Page DEFAULT = new Page();
-
     /** Name of this model */
     public static final String NAME = Page.class.getName();
 
