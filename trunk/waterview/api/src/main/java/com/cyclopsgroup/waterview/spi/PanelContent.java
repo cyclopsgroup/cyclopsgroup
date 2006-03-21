@@ -24,8 +24,6 @@ package com.cyclopsgroup.waterview.spi;
  */
 public class PanelContent
 {
-    private boolean append;
-
     private String name;
 
     /**
@@ -46,25 +44,5 @@ public class PanelContent
     public String getName()
     {
         return name;
-    }
-
-    /**
-     * Getter method for append
-     *
-     * @return Returns the append.
-     */
-    public boolean isAppend()
-    {
-        return append;
-    }
-
-    /**
-     * Setter method for append
-     *
-     * @param append The append to set.
-     */
-    public void setAppend(boolean append)
-    {
-        this.append = append;
     }
 }
