@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<w:View xmlns="http://waterview.cyclopsgroup.com/html" xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <w:GetComponent var="wfs" role="com.cyclopsgroup.waterview.apps.webfs.WebFileSystem"/>
-    <ul>
-        <j:forEach var="file" items="${currentFile.listFiles(wfs.fileFilter)}">
-            <li>${file.name}</li>
-        </j:forEach>
-    </ul>
-</w:View>
