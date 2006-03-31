@@ -15,13 +15,11 @@
     <description>The website of CyclopsGroup.com</description>
     <url>http://www.cyclopsgroup.com/</url>
     <scm>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-main-site
-        </connection>
+        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-main-site</connection>
         <developerConnection>
-            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-main-site
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-main-site
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-main-site</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-main-site</url>
     </scm>
     <distributionManagement>
         <site>

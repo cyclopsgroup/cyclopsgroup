@@ -52,11 +52,11 @@
     </dependencies>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-dependency-jetty
+            scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-dependency-jetty
         </connection>
         <developerConnection>
-            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-dependency-jetty
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-dependency-jetty
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-dependency-jetty</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-dependency-jetty</url>
     </scm>
 </project>

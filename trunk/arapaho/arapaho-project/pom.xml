@@ -15,13 +15,11 @@
     <version>1.0-SNAPSHOT</version>
     <description>The base pom for other cyclospgroup projects</description>
     <scm>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/usr/local/cvsroot/cyclops-group:arapaho/arapaho-project
-        </connection>
+        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-project</connection>
         <developerConnection>
-            scm:cvs:ext:your-name@cvs.evavi.net:/usr/local/cvsroot/cyclops-group:arapaho/arapaho-project
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-project
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-project</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-project</url>
     </scm>
     <dependencyManagement>
         <dependencies>

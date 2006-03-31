@@ -14,13 +14,11 @@
     <name>Arapaho Maven Plugin</name>
     <version>1.0-SNAPSHOT</version>
     <scm>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-maven-plugin
-        </connection>
+        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-maven-plugin</connection>
         <developerConnection>
-            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-maven-plugin
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-maven-plugin
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-maven-plugin</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-maven-plugin</url>
     </scm>
     <dependencies>
         <dependency>

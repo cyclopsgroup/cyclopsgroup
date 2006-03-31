@@ -76,13 +76,11 @@
         </license>
     </licenses>
     <scm>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:arapaho/arapaho-project-base
-        </connection>
+        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-project-base</connection>
         <developerConnection>
-            scm:cvs:ext:username@cvs.sourceforge.net:/cvsroot/cyclopsgroup:arapaho/arapaho-project-base
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-project-base
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/arapaho/arapaho-project-base</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-project-base</url>
     </scm>
     <organization>
         <name>Cyclops Group</name>
