@@ -14,13 +14,11 @@
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2006</inceptionYear>
     <scm>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/usr/local/cvsroot/cyclops-group:waterview
-        </connection>
+        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview</connection>
         <developerConnection>
-            scm:cvs:ext:your-name@cvs.evavi.net:/usr/local/cvsroot/cyclops-group:waterview
+            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview
         </developerConnection>
-        <url>http://fisheye.cenqua.com/viewrep/cyclops-group/waterview</url>
+        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/waterview</url>
     </scm>
     <modules>
         <module>api</module>
