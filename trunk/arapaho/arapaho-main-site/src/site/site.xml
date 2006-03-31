@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Cyclops Group">
-    <skin>
+    <!--
+        <skin>
         <groupId>com.cyclopsgroup.arapaho</groupId>
         <artifactId>arapaho-skin-default</artifactId>
         <version>1.0-SNAPSHOT</version>
-    </skin>
+        </skin>
+    -->
     <bannerLeft>
         <name>Cyclops Group</name>
         <src>images/cyclopsgroup_logo.png</src>
