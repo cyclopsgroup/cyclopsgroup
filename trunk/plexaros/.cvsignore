@@ -1,8 +1,0 @@
-target
-Model Folder
-.*
-*.log
-*.log.*
-*.ser
-*.ipr
-*.iws
