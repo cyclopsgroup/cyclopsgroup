@@ -1,7 +1,0 @@
-target
-*.log
-*.log.*
-.*
-*.jpx
-*.jpx.local
-*.library

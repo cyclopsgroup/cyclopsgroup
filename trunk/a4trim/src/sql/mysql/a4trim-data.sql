@@ -1,1 +1,0 @@
-insert into c_a4trim_categories (category_id, parent_id, category_code, category_path, depth) values (51, -1, 'TRIM', '/0033/', 0);

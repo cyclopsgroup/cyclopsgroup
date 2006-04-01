@@ -1,2 +1,0 @@
-#h2("Page not Found" "error")
-<p>The page requested ($template) not exists!</p>
