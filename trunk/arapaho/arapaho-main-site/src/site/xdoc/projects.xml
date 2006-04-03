@@ -76,46 +76,6 @@
                         <td>The portal website for the next generation of cyclopsgroup website</td>
                         <td>Planning</td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <a href="projects/jmainboard">jmainboard</a>
-                        </td>
-                        <td>
-                            A light weight plugable components framework. Additional module can be easily developed and
-                            plug into this framework.
-                            <font color="red">This project is deprecated.</font>
-                        </td>
-                        <td>Deprecated</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="projects/jrepo">jrepo</a>
-                        </td>
-                        <td>
-                            The goal of jrepo is creating a JAVA standard for Content Management System(CMS), and
-                            providing different implementation for it like file system implementation and database
-                            implementation. Also, jrepo will provide applications based on this standard which provides
-                            web based user interface.
-                        </td>
-                        <td>Planning</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="projects/jlone">jlone</a>
-                        </td>
-                        <td>
-                            Jlone will be a CMS based web application similar to ZOPE. It will try to work with JSR 170.
-                        </td>
-                        <td>Planning</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="http://albumbuilder.sourceforge.net">albumbuilder</a>
-                        </td>
-                        <td>A tool to generate static photo album web site from folders of images.</td>
-                        <td>Deprecated</td>
-                    </tr>
                 </table>
             </p>
         </section>
