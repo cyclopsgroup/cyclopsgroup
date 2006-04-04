@@ -33,14 +33,11 @@ public class CoreTagPackage extends TagPackage
         addTag("Page", PageTag.class);
         addTag("SystemLayout", SystemLayoutTag.class);
         addTag("PanelContent", PanelContentTag.class);
-        addTag("GetPortlets", GetPortletsTag.class);
         addTag("SimpleView", SimpleViewTag.class);
         addTag("RenderView", RenderViewTag.class);
-        addTag("RenderPortlet", RenderPortletTag.class);
         addTag("Dummy", DummyTag.class);
         addTag("RunScript", RunScriptTag.class);
         addTag("DoTag", DoTagTag.class);
         addTag("CreateUniqueId", CreateUniqueIdTag.class);
-        addTag("Portlet", PortletTag.class);
     }
 }

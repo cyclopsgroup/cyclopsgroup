@@ -38,6 +38,7 @@ import com.cyclopsgroup.waterview.RuntimeData;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleService;
+import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -56,6 +57,17 @@ public class DefaultModuleService
     private Hashtable dynaViewFactories = new Hashtable();
 
     private Hashtable packageNames = new Hashtable();
+
+
+    /**
+     * @todo Not implemented yet
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDefaultPage()
+     */
+    public Page createDefaultPage()
+    {
+        return new Page();
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -210,7 +222,8 @@ public class DefaultModuleService
         Module module = null;
         try
         {
-            module = (Module) Class.forName( className ).newInstance();
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            module = (Module) cl.loadClass( className ).newInstance();
             if ( module instanceof Serviceable )
             {
                 ( (Serviceable) module ).service( data.getServiceManager() );

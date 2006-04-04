@@ -52,7 +52,6 @@ public class WebTagPackage
         addTag( "CollectionTabularData", CollectionTabularDataTag.class );
 
         addTag( "BlankImage", BlankImageTag.class );
-        addTag( "DisplayPortlet", DisplayPortletTag.class );
         addTag( "Tab", TabTag.class );
         addTag( "HorizontalTabControl", HorizontalTabControlTag.class );
 

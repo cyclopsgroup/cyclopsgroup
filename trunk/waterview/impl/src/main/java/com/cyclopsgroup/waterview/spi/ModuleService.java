@@ -31,6 +31,13 @@ public interface ModuleService
     String ROLE = ModuleService.class.getName();
 
     /**
+     * Create default intial page
+     *
+     * @return Create new default page
+     */
+    Page createDefaultPage();
+
+    /**
      * Create view dynamically
      *
      * @param viewPath String view path

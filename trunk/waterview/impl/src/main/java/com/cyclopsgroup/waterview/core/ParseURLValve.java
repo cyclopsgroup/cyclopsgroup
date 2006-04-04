@@ -23,10 +23,15 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.spi.ModuleService;
+import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -37,10 +42,12 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class ParseURLValve
     extends AbstractLogEnabled
-    implements Valve
+    implements Valve, Serviceable
 {
 
     private static HashSet instructors;
+
+    private ModuleService moduleService;
 
     private static HashSet getInstructors()
     {
@@ -109,6 +116,17 @@ public class ParseURLValve
         {
             data.setLocale( locale );
         }
+
+        data.getRequestContext().put(Page.NAME, moduleService.createDefaultPage());
         context.invokeNextValve( data );
+    }
+
+    /**
+     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
+     */
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
+    {
+        moduleService = (ModuleService) serviceManager.lookup(ModuleService.ROLE);
     }
 }

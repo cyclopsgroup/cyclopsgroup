@@ -18,10 +18,8 @@ package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.Portlet;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PanelContent;
-import com.cyclopsgroup.waterview.spi.taglib.PortletAware;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -31,24 +29,12 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  */
 public class PanelContentTag
     extends TagSupport
-    implements PortletAware
 {
-
     private boolean append;
 
     private String name;
 
     private PanelContent panelContent;
-
-    /**
-     * Overwrite or implement method doPortlet()
-     *
-     * @see com.cyclopsgroup.waterview.spi.taglib.PortletAware#doPortlet(com.cyclopsgroup.waterview.Portlet)
-     */
-    public void doPortlet( Portlet portlet )
-    {
-        panelContent.addPortlet( portlet );
-    }
 
     /**
      * Getter method for name
@@ -92,7 +78,6 @@ public class PanelContentTag
         requireParent( PageTag.class );
 
         panelContent = new PanelContent( getName() );
-        panelContent.setAppend( isAppend() );
         invokeBody( output );
         Page page = ( (PageTag) getParent() ).getPage();
         page.addPanelContent( panelContent );

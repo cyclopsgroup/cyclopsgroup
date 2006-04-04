@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,11 +17,12 @@
 package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 /**
  * Page model is the model mapped to a particular URI
  * If a page is not found for given URI, default page will be applied
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class Page
@@ -75,5 +76,22 @@ public class Page
     public void setLayout( Layout layout )
     {
         this.layout = layout;
+    }
+
+    /**
+     * @see java.lang.Object#clone()
+     */
+    public Object clone()
+        throws CloneNotSupportedException
+    {
+        Page page = new Page();
+        page.setLayout(layout);
+        for ( Iterator i = panelContents.values().iterator(); i.hasNext(); )
+        {
+            PanelContent pc = (PanelContent) i.next();
+            PanelContent pcCopy = (PanelContent) pc.clone();
+            page.addPanelContent(pcCopy);
+        }
+        return page;
     }
 }

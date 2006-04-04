@@ -14,9 +14,8 @@
                         <tr>
                             <td width="25%" valign="top" id="leftPanel">
                                 <j:set var="navigationNode" value="${selectedNode}" />
-                                <w:GetPortlets var="portlets" panel="navigation" />
-                                <j:forEach var="portlet" items="${portlets}">
-                                    <w:DisplayPortlet portlet="${portlet}" />
+                                <j:forEach var="view" items="${page.getPanelContent('navigation').views}">
+                                    <w:RenderView view="${view}" />
                                 </j:forEach>
                             </td>
                             <td valign="top" id="bodyPanel" width="75%">
@@ -59,15 +58,8 @@
                                     </j:if>
                                     <tr>
                                         <td>
-                                            <w:GetPortlets var="portlets" panel="body">
-                                                <w:Portlet title="${navigator.getNodeByPage(data.page.fullPath).title}"
-                                                    description="${navigator.getNodeByPage(data.page.fullPath).description}">
-                                                    <w:SimpleView
-                                                        path="/${data.page.packageAlias}/view${data.page.path}" />
-                                                </w:Portlet>
-                                            </w:GetPortlets>
-                                            <j:forEach var="portlet" items="${portlets}">
-                                                <w:DisplayPortlet portlet="${portlet}" maximizable="true" />
+                                            <j:forEach var="view" items="${page.getPanelContent('body').views}">
+                                                <w:RenderView view="${view}" />
                                             </j:forEach>
                                         </td>
                                     </tr>
