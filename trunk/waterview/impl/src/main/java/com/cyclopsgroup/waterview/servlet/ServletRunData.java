@@ -29,9 +29,10 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.AbstractRunData;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.I18NService;
 import com.cyclopsgroup.waterview.spi.ModuleService;
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
 
 /**
@@ -39,13 +40,15 @@ import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
  *
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
-public class ServletRuntimeData
+public class ServletRunData
     extends AbstractRunData
-    implements RunData
+    implements RunDataSpi
 {
     private ServletContext context;
 
     private HttpServletResponse response;
+
+    private Page page;
 
     /**
      * Default constructor of default web runtime
@@ -58,7 +61,7 @@ public class ServletRuntimeData
      * @param applicationBase application base url
      * @throws Exception Throw it out
      */
-    ServletRuntimeData( HttpServletRequest request, HttpServletResponse response, ServletContext context,
+    ServletRunData( HttpServletRequest request, HttpServletResponse response, ServletContext context,
                        FileUpload fileUpload, ServiceManager services, String applicationBase )
         throws Exception
     {
@@ -160,5 +163,21 @@ public class ServletRuntimeData
     {
         ModuleService modules = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
         setPage( modules.parsePath( page ) );
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.RunDataSpi#getPageObject()
+     */
+    public Page getPageObject()
+    {
+        return page;
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.RunDataSpi#setPageObject(com.cyclopsgroup.waterview.spi.Page)
+     */
+    public void setPageObject( Page page )
+    {
+        this.page = page;
     }
 }

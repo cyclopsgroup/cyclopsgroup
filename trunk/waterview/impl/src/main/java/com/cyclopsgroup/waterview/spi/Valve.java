@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,9 +18,10 @@ package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.RunData;
 
+
 /**
  * Valve for pipeline
- * 
+ *
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public interface Valve
