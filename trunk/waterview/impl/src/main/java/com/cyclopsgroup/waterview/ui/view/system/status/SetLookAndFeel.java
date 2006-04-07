@@ -23,7 +23,7 @@ import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.CollectionLargeList;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.SelectOption;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Theme;
@@ -69,9 +69,9 @@ public class SetLookAndFeel
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RunData data, Context context )
         throws Exception
     {
         LookAndFeelService laf = (LookAndFeelService) lookup( LookAndFeelService.ROLE );

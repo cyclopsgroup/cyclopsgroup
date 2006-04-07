@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -145,9 +145,9 @@ public class LayoutTag
     /**
      * Overwrite or implement method render()
      *
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RuntimeData data, Page page )
+    public void render( RunData data, Page page )
         throws Exception
     {
         getLayout().render( data, page );

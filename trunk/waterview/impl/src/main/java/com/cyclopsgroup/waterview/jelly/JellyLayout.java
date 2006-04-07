@@ -20,7 +20,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -55,9 +55,9 @@ public class JellyLayout
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public synchronized void render( RuntimeData data, Page page )
+    public synchronized void render( RunData data, Page page )
         throws Exception
     {
         data.getRequestContext().put( Page.NAME, page );

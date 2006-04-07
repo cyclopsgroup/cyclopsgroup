@@ -20,7 +20,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Link;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService.Style;
 import com.cyclopsgroup.waterview.utils.TagSupport;
@@ -85,9 +85,9 @@ public class StyleTag
     /**
      * Overwrite or implement method getUrl()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.Style#getUrl(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.Style#getUrl(com.cyclopsgroup.waterview.RunData)
      */
-    public String getUrl( RuntimeData data )
+    public String getUrl( RunData data )
     {
         Link link = Link.getInstance( data );
         return link.getResource( getPath() );

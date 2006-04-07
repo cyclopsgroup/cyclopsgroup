@@ -21,7 +21,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 
 /**
@@ -35,9 +35,9 @@ public class ChangeSessionAttribute
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RunData data, ActionContext context )
         throws Exception
     {
         String name = data.getParameters().getString( "attribute_name" );

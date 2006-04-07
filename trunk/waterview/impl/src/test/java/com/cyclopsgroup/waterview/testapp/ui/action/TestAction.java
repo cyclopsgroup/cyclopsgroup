@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.testapp.ui.action;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * Action for test
@@ -32,7 +32,7 @@ public class TestAction
      * @param context
      * @throws Exception
      */
-    public void execute( RuntimeData pageRuntime, Context context )
+    public void execute( RunData pageRuntime, Context context )
         throws Exception
     {
         //do nothing

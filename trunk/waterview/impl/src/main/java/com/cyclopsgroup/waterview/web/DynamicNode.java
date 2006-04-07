@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.waterview.web;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -34,6 +34,6 @@ public interface DynamicNode
      * @return Children nodes
      * @throws Exception Throw it out
      */
-    Node[] getChildrenNodes( RuntimeData data )
+    Node[] getChildrenNodes( RunData data )
         throws Exception;
 }

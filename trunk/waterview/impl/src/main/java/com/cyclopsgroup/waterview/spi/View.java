@@ -17,7 +17,7 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * Window is the reusable small area in page
@@ -31,9 +31,9 @@ public interface View
     {
         /**
          * Overwrite or implement method render()
-         * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+         * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
          */
-        public void render( RuntimeData data, Context viewContext )
+        public void render( RunData data, Context viewContext )
             throws Exception
         {
             //do nothing
@@ -50,6 +50,6 @@ public interface View
      * @param viewContext Context for this window
      * @throws Exception Throw it out
      */
-    void render( RuntimeData data, Context viewContext )
+    void render( RunData data, Context viewContext )
         throws Exception;
 }

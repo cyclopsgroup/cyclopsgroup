@@ -49,7 +49,7 @@ public class Link
      * @param data Runtime data
      * @return Link object
      */
-    public synchronized static Link getInstance( RuntimeData data )
+    public synchronized static Link getInstance( RunData data )
     {
         Link link = (Link) data.getRequestContext().get( Link.NAME );
         if ( link == null )
@@ -60,7 +60,7 @@ public class Link
         return link;
     }
 
-    private RuntimeData data;
+    private RunData data;
 
     private boolean disposed = false;
 
@@ -73,7 +73,7 @@ public class Link
      *
      * @param data Runtime data
      */
-    protected Link( RuntimeData data )
+    protected Link( RunData data )
     {
         this.data = data;
     }

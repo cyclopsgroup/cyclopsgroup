@@ -13,7 +13,7 @@ import java.util.Properties;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Parameters;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -24,7 +24,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class ProcessFormValve implements Valve
 {
-    private void fail(RuntimeData data, PipelineContext pc) throws Exception
+    private void fail(RunData data, PipelineContext pc) throws Exception
     {
         String url = data.getRefererUrl();
         if (url.indexOf("keep_form=true") == -1)
@@ -44,9 +44,9 @@ public class ProcessFormValve implements Valve
     /**
      * Overwrite or implement method invoke()
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RuntimeData data, PipelineContext pc) throws Exception
+    public void invoke(RunData data, PipelineContext pc) throws Exception
     {
         Parameters params = data.getParameters();
         String formId = params.getString("form_id");

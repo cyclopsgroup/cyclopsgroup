@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
@@ -41,7 +41,7 @@ public class JellyLayoutProxy
         this.layoutScript = layoutScript;
     }
 
-    private synchronized JellyLayout getLayout( RuntimeData data )
+    private synchronized JellyLayout getLayout( RunData data )
         throws Exception
     {
         CacheService cm = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
@@ -58,9 +58,9 @@ public class JellyLayoutProxy
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RuntimeData runtime, Page page )
+    public void render( RunData runtime, Page page )
         throws Exception
     {
         getLayout( runtime ).render( runtime, page );

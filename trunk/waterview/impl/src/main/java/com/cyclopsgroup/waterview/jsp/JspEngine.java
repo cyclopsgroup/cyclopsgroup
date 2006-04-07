@@ -31,7 +31,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
@@ -71,7 +71,7 @@ public class JspEngine
      * @param viewContext View context
      * @throws Exception Throw it out
      */
-    public void renderJsp( String path, RuntimeData data, Context viewContext )
+    public void renderJsp( String path, RunData data, Context viewContext )
         throws Exception
     {
         HttpServletRequest request = (HttpServletRequest) data.getRequestContext().get( "request" );

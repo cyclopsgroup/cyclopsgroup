@@ -31,7 +31,7 @@ import org.apache.commons.lang.ArrayUtils;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractRuntimeData implements RuntimeData
+public abstract class AbstractRunData implements RunData
 {
     private List actions = new LinkedList();
 
@@ -74,7 +74,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getActions()
+     * @see com.cyclopsgroup.waterview.RunData#getActions()
      */
     public List getActions()
     {
@@ -84,7 +84,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getApplicationBaseUrl()
+     * @see com.cyclopsgroup.waterview.RunData#getApplicationBaseUrl()
      */
     public String getApplicationBaseUrl()
     {
@@ -94,7 +94,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getInputContentType()
+     * @see com.cyclopsgroup.waterview.RunData#getInputContentType()
      */
     public String getInputContentType()
     {
@@ -104,7 +104,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getLocale()
+     * @see com.cyclopsgroup.waterview.RunData#getLocale()
      */
     public Locale getLocale()
     {
@@ -114,7 +114,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override method getMessages in class AbstractRuntimeData
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getMessages()
+     * @see com.cyclopsgroup.waterview.RunData#getMessages()
      */
     public String[] getMessages()
     {
@@ -132,7 +132,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getOutput()
+     * @see com.cyclopsgroup.waterview.RunData#getOutput()
      */
     public PrintWriter getOutput()
     {
@@ -142,7 +142,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method getOutputStream()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getOutputStream()
+     * @see com.cyclopsgroup.waterview.RunData#getOutputStream()
      */
     public OutputStream getOutputStream()
     {
@@ -152,7 +152,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getPage()
+     * @see com.cyclopsgroup.waterview.RunData#getPage()
      */
     public Path getPage()
     {
@@ -162,7 +162,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getPageBaseUrl()
+     * @see com.cyclopsgroup.waterview.RunData#getPageBaseUrl()
      */
     public String getPageBaseUrl()
     {
@@ -172,7 +172,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getParameters()
+     * @see com.cyclopsgroup.waterview.RunData#getParameters()
      */
     public Parameters getParameters()
     {
@@ -192,7 +192,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method getRedirectUrl()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getRedirectUrl()
+     * @see com.cyclopsgroup.waterview.RunData#getRedirectUrl()
      */
     public String getRedirectUrl()
     {
@@ -211,7 +211,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
 
     /**
      * Overwrite or implement method getRequestContext()
-     * @see com.cyclopsgroup.waterview.RuntimeData#getRequestContext()
+     * @see com.cyclopsgroup.waterview.RunData#getRequestContext()
      */
     public Context getRequestContext()
     {
@@ -221,7 +221,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getRequestPath()
+     * @see com.cyclopsgroup.waterview.RunData#getRequestPath()
      */
     public String getRequestPath()
     {
@@ -231,7 +231,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getServiceManager()
+     * @see com.cyclopsgroup.waterview.RunData#getServiceManager()
      */
     public ServiceManager getServiceManager()
     {
@@ -241,7 +241,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionContext()
+     * @see com.cyclopsgroup.waterview.RunData#getSessionContext()
      */
     public Context getSessionContext()
     {
@@ -250,7 +250,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
 
     /**
      * Overwrite or implement method getSessionId()
-     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
+     * @see com.cyclopsgroup.waterview.RunData#getSessionId()
      */
     public String getSessionId()
     {
@@ -260,7 +260,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getTimeZone()
+     * @see com.cyclopsgroup.waterview.RunData#getTimeZone()
      */
     public TimeZone getTimeZone()
     {
@@ -270,7 +270,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method isStopped()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#isStopped()
+     * @see com.cyclopsgroup.waterview.RunData#isStopped()
      */
     public boolean isStopped()
     {
@@ -304,7 +304,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method setLocale()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setLocale(java.util.Locale)
+     * @see com.cyclopsgroup.waterview.RunData#setLocale(java.util.Locale)
      */
     public void setLocale(Locale locale)
     {
@@ -334,7 +334,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method setPage()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(com.cyclopsgroup.waterview.Path)
+     * @see com.cyclopsgroup.waterview.RunData#setPage(com.cyclopsgroup.waterview.Path)
      */
     public void setPage(Path page)
     {
@@ -379,7 +379,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method setRedirectUrl()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setRedirectUrl(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#setRedirectUrl(java.lang.String)
      */
     public void setRedirectUrl(String url)
     {
@@ -457,7 +457,7 @@ public abstract class AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method stop()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#stop()
+     * @see com.cyclopsgroup.waterview.RunData#stop()
      */
     public void stop()
     {

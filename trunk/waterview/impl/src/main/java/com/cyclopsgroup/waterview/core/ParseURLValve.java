@@ -29,7 +29,7 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Link;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
@@ -86,9 +86,9 @@ public class ParseURLValve
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
+     * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke( RuntimeData data, PipelineContext context )
+    public void invoke( RunData data, PipelineContext context )
         throws Exception
     {
         List behaviors = parseRequestPath( data.getRequestPath() );
@@ -111,7 +111,7 @@ public class ParseURLValve
             }
         }
 
-        Locale locale = (Locale) data.getSessionContext().get( RuntimeData.LOCALE_NAME );
+        Locale locale = (Locale) data.getSessionContext().get( RunData.LOCALE_NAME );
         if ( locale != null )
         {
             data.setLocale( locale );

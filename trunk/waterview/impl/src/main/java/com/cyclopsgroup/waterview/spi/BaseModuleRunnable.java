@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.spi;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -66,7 +66,7 @@ public abstract class BaseModuleRunnable
      * @param context Context
      * @throws Exception Simply throw it out
      */
-    protected void runModule(RuntimeData data, Context context)
+    protected void runModule(RunData data, Context context)
             throws Exception
     {
         if (StringUtils.isNotEmpty(getModulePath()))

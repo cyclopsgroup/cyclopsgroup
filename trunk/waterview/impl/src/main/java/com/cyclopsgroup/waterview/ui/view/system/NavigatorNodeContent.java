@@ -20,7 +20,7 @@ package com.cyclopsgroup.waterview.ui.view.system;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
 
@@ -35,9 +35,9 @@ public class NavigatorNodeContent extends BaseServiceable implements Module
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute(RuntimeData data, Context context) throws Exception
+    public void execute(RunData data, Context context) throws Exception
     {
         NavigatorService navigator = (NavigatorService) lookup(NavigatorService.ROLE);
         String pagePath = data.getParameters().getString("page");

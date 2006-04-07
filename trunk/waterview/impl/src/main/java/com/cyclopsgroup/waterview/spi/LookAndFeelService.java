@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -43,7 +43,7 @@ public interface LookAndFeelService
          * @param size Size of the icon
          * @return Url of image resource
          */
-        String getUrl( RuntimeData data, String file, int size );
+        String getUrl( RunData data, String file, int size );
     }
 
     /**
@@ -71,7 +71,7 @@ public interface LookAndFeelService
          * @param data Runtime data
          * @return Url of stylesheet resource
          */
-        String getUrl( RuntimeData data );
+        String getUrl( RunData data );
     }
 
     /** role name of service */
@@ -125,7 +125,7 @@ public interface LookAndFeelService
      * @return Theme object
      * @throws NoSuchLookAndFeelException If name doesn't exist
      */
-    Theme getRuntimeTheme( RuntimeData data )
+    Theme getRuntimeTheme( RunData data )
         throws NoSuchLookAndFeelException;
 
     /**
@@ -198,5 +198,5 @@ public interface LookAndFeelService
      * @param data Runtime data
      * @param theme Theme object to set
      */
-    void setRuntimeTheme( RuntimeData data, Theme theme );
+    void setRuntimeTheme( RunData data, Theme theme );
 }

@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 
 /**
@@ -51,7 +51,7 @@ public interface NavigatorService
      * @return Runtime tree node
      * @throws Exception Throw it out
      */
-    RuntimeTreeNode getRuntimeNode( RuntimeData data )
+    RuntimeTreeNode getRuntimeNode( RunData data )
         throws Exception;
 
     /**
@@ -59,5 +59,5 @@ public interface NavigatorService
      *
      * @param data Runtime data
      */
-    void refresh( RuntimeData data );
+    void refresh( RunData data );
 }

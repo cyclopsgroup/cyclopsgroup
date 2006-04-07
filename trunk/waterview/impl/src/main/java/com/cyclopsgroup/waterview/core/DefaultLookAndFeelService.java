@@ -26,7 +26,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
 import com.cyclopsgroup.waterview.spi.Theme;
@@ -123,9 +123,9 @@ public class DefaultLookAndFeelService
     /**
      * Overwrite or implement method getRuntimeTheme()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#getRuntimeTheme(com.cyclopsgroup.waterview.RunData)
      */
-    public Theme getRuntimeTheme( RuntimeData data )
+    public Theme getRuntimeTheme( RunData data )
         throws NoSuchLookAndFeelException
     {
         Theme theme = (Theme) data.getSessionContext().get( THEME_KEY );
@@ -235,9 +235,9 @@ public class DefaultLookAndFeelService
     /**
      * Overwrite or implement method setRuntimeData()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeTheme(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Theme)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService#setRuntimeTheme(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Theme)
      */
-    public void setRuntimeTheme( RuntimeData data, Theme theme )
+    public void setRuntimeTheme( RunData data, Theme theme )
     {
         data.getSessionContext().put( THEME_KEY, theme );
     }

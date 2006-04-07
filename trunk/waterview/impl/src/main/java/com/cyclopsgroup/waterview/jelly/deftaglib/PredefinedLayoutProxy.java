@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout;
@@ -88,9 +88,9 @@ class PredefinedLayoutProxy
     /**
      * Overwrite or implement method render()
      *
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RuntimeData data, Page page )
+    public void render( RunData data, Page page )
         throws Exception
     {
         getProxy().render( data, page );

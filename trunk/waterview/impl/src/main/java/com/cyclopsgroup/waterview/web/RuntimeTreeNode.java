@@ -23,7 +23,7 @@ import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.Attributes;
 
 /**
@@ -89,7 +89,7 @@ public class RuntimeTreeNode
      * @return Array of result
      * @throws Exception
      */
-    protected Node[] doFilter( Node[] nodes, RuntimeData data )
+    protected Node[] doFilter( Node[] nodes, RunData data )
         throws Exception
     {
         return nodes;
@@ -101,7 +101,7 @@ public class RuntimeTreeNode
      * @param data RuntimeData
      * @throws Exception Throw it out
      */
-    public synchronized void expand( RuntimeData data )
+    public synchronized void expand( RunData data )
         throws Exception
     {
         if ( expanded )

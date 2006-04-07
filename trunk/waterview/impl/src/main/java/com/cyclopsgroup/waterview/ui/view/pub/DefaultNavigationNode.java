@@ -22,7 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.web.RuntimeTreeNode;
 
@@ -39,9 +39,9 @@ public class DefaultNavigationNode
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RunData data, Context context )
         throws Exception
     {
         RuntimeTreeNode navigationNode = null;

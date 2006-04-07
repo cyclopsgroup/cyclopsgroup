@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.BaseServiceable;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -39,9 +39,9 @@ public class SetLocale
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.Module#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void execute( RuntimeData data, Context context )
+    public void execute( RunData data, Context context )
         throws Exception
     {
         Locale[] locales = Locale.getAvailableLocales();
@@ -57,6 +57,6 @@ public class SetLocale
             availableLocales.put( key, locale );
         }
         context.put( "availableLocales", availableLocales.values() );
-        context.put( "currentLocale", data.getSessionContext().get( RuntimeData.LOCALE_NAME ) );
+        context.put( "currentLocale", data.getSessionContext().get( RunData.LOCALE_NAME ) );
     }
 }

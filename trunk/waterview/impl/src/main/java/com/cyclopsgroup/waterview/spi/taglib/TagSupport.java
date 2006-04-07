@@ -16,7 +16,7 @@
  */
 package com.cyclopsgroup.waterview.spi.taglib;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * Base jelly tag
@@ -31,8 +31,8 @@ public abstract class TagSupport
      *
      * @return PageRuntime object
      */
-    protected RuntimeData getRuntimeData()
+    protected RunData getRuntimeData()
     {
-        return (RuntimeData) getContext().getVariable( RuntimeData.NAME );
+        return (RunData) getContext().getVariable( RunData.NAME );
     }
 }

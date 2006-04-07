@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.ui.action;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -31,9 +31,9 @@ public class DeleteSessionAttributes
     /**
      * Override method execute in class DeleteSessionAttributes
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RunData data, ActionContext context )
         throws Exception
     {
         String[] attributeNames = data.getParameters().getStrings( "attribute_name" );

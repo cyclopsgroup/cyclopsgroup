@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.ui.action;
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.BaseServiceable;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.NoSuchLookAndFeelException;
 import com.cyclopsgroup.waterview.spi.Theme;
@@ -39,9 +39,9 @@ public class ChangeTheme
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RunData data, ActionContext context )
         throws Exception
     {
         String themeName = data.getParameters().getString( "theme_name" );

@@ -26,7 +26,7 @@ import com.cyclopsgroup.waterview.utils.FakeServiceManager;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
+public class MockRuntimeData extends AbstractRunData implements RunData
 {
     private String page;
 
@@ -52,7 +52,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#getMimeType(java.lang.String)
      */
     public String getMimeType(String fileName)
     {
@@ -62,7 +62,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method getPage()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getPage()
+     * @see com.cyclopsgroup.waterview.RunData#getPage()
      */
     public Path getPage()
     {
@@ -70,7 +70,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     }
 
     /**
-     * @see com.cyclopsgroup.waterview.RuntimeData#getSessionId()
+     * @see com.cyclopsgroup.waterview.RunData#getSessionId()
      */
     public String getSessionId()
     {
@@ -80,7 +80,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType(String contentType)
     {
@@ -89,7 +89,7 @@ public class MockRuntimeData extends AbstractRuntimeData implements RuntimeData
     /**
      * Overwrite or implement method setPage()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#setPage(java.lang.String)
      */
     public void setPage(String page)
     {

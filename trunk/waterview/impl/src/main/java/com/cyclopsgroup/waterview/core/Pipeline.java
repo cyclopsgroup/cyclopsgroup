@@ -30,7 +30,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -82,7 +82,7 @@ public class Pipeline
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void handleRuntime( RuntimeData runtime )
+    public void handleRuntime( RunData runtime )
         throws Exception
     {
         DefaultPipelineContext dpc = new DefaultPipelineContext( valves );

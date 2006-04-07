@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.web.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.jelly.taglib.BaseJellyControlTag;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Theme;
@@ -60,7 +60,7 @@ public class IconTag
     {
         requireAttribute( "file" );
         LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        RuntimeData data = getRuntimeData();
+        RunData data = getRuntimeData();
         Theme theme = laf.getRuntimeTheme( data );
         setUrl( theme.getIconSet().getUrl( data, getFile(), getSize() ) );
         super.processTag( output );

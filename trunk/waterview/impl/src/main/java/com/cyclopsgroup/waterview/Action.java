@@ -30,6 +30,6 @@ public interface Action
      * @param context Action context interface
      * @throws Exception Throw it out
      */
-    void execute( RuntimeData data, ActionContext context )
+    void execute( RunData data, ActionContext context )
         throws Exception;
 }

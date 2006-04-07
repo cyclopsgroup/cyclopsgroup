@@ -28,8 +28,8 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.AbstractRuntimeData;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.AbstractRunData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.I18NService;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
@@ -40,8 +40,8 @@ import com.cyclopsgroup.waterview.utils.InterpolationFilterWriter;
  * @author <a href="mailto:jiiaqi@yahoo.com">Jiaqi Guo </a>
  */
 public class ServletRuntimeData
-    extends AbstractRuntimeData
-    implements RuntimeData
+    extends AbstractRunData
+    implements RunData
 {
     private ServletContext context;
 
@@ -133,7 +133,7 @@ public class ServletRuntimeData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#getMimeType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#getMimeType(java.lang.String)
      */
     public String getMimeType( String fileName )
     {
@@ -143,7 +143,7 @@ public class ServletRuntimeData
     /**
      * Override method setContentType in super class of ServletUIRuntime
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setOutputContentType(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#setOutputContentType(java.lang.String)
      */
     public void setOutputContentType( String contentType )
     {
@@ -153,7 +153,7 @@ public class ServletRuntimeData
     /**
      * Overwrite or implement method setPage()
      *
-     * @see com.cyclopsgroup.waterview.RuntimeData#setPage(java.lang.String)
+     * @see com.cyclopsgroup.waterview.RunData#setPage(java.lang.String)
      */
     public void setPage( String page )
         throws Exception

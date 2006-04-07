@@ -27,7 +27,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.Form;
 
@@ -182,7 +182,7 @@ public class FormTag
         requireAttribute( "method" );
         requireParent( FormControlTag.class );
         String formId = "form_" + getUniqueTagId();
-        RuntimeData data = (RuntimeData) context.getVariable( RuntimeData.NAME );
+        RunData data = (RunData) context.getVariable( RunData.NAME );
         form = (Form) data.getSessionContext().get( formId );
         formNew = false;
         if ( form == null || !data.getParameters().getBoolean( "keep_form" ) )

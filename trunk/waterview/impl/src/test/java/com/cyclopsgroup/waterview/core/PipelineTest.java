@@ -23,7 +23,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.Valve;
 
@@ -51,9 +51,9 @@ public class PipelineTest
         /**
          * Override or implement method of parent class or interface
          *
-         * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.spi.PipelineContext)
+         * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
          */
-        public void invoke( RuntimeData runtime, PipelineContext context )
+        public void invoke( RunData runtime, PipelineContext context )
             throws Exception
         {
             List contents = (List) runtime.getRequestContext().get( "contents" );

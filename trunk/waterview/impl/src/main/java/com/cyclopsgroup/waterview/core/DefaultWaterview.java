@@ -32,7 +32,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.Waterview;
 
 /**
@@ -82,9 +82,9 @@ public class DefaultWaterview
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.RunData)
      */
-    public void handleRuntime( RuntimeData runtime )
+    public void handleRuntime( RunData runtime )
         throws Exception
     {
         Pipeline pipeline = null;

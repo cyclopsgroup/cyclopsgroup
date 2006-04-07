@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.ui.action;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.web.Column;
 import com.cyclopsgroup.waterview.web.ColumnSort;
 import com.cyclopsgroup.waterview.web.Table;
@@ -34,9 +34,9 @@ public class SortTable
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RunData data, ActionContext context )
         throws Exception
     {
         String tableId = data.getParameters().getString( "table_id", null );
@@ -77,7 +77,7 @@ public class SortTable
         redirectBack( data, context );
     }
 
-    private void redirectBack( RuntimeData data, ActionContext context )
+    private void redirectBack( RunData data, ActionContext context )
     {
         String url = data.getRefererUrl();
         if ( url.indexOf( "keep_form=true" ) == -1 )

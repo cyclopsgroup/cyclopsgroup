@@ -40,7 +40,7 @@ import org.codehaus.plexus.PlexusContainer;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Parameters;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.Waterview;
 
 /**
@@ -136,15 +136,15 @@ public class WaterviewServlet extends HttpServlet {
 				applicationBase);
 		Context ctx = data.getRequestContext();
 
-		ctx.put(RuntimeData.NAME, data);
+		ctx.put(RunData.NAME, data);
 		ctx.put(Parameters.NAME, data.getParameters());
-		ctx.put(RuntimeData.SERVICE_MANAGER_NAME, serviceManager);
+		ctx.put(RunData.SERVICE_MANAGER_NAME, serviceManager);
 
 		ctx.put(SERVLET_CONFIG_NAME, servletConfig);
 		ctx.put(SERVLET_CONTEXT_NAME, servletConfig.getServletContext());
 		ctx.put(REQUEST_NAME, request);
 		ctx.put(RESPONSE_NAME, response);
-		ctx.put(RuntimeData.REQUEST_CONTEXT_NAME, data.getRequestContext());
+		ctx.put(RunData.REQUEST_CONTEXT_NAME, data.getRequestContext());
 
 		Link.getInstance(data);
 

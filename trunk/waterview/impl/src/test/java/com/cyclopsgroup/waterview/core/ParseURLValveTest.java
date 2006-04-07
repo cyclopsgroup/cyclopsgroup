@@ -22,7 +22,7 @@ import java.util.List;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 
@@ -49,7 +49,7 @@ public class ParseURLValveTest
         v.invoke( runtime, new PipelineContext()
         {
 
-            public void invokeNextValve( RuntimeData runtime )
+            public void invokeNextValve( RunData runtime )
                 throws Exception
             {
                 //do nothing

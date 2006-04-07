@@ -34,7 +34,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.web.Node;
@@ -97,7 +97,7 @@ public class DefaultNavigatorService
      * @param data Runtime data
      * @return Runtiem tree node object
      */
-    protected RuntimeTreeNode doCreateRuntimeRoot( RuntimeData data )
+    protected RuntimeTreeNode doCreateRuntimeRoot( RunData data )
     {
         return new RuntimeTreeNode( null, getRootNode() );
     }
@@ -146,9 +146,9 @@ public class DefaultNavigatorService
     /**
      * Overwrite or implement method getRuntimeNode()
      *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#getRuntimeNode(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#getRuntimeNode(com.cyclopsgroup.waterview.RunData)
      */
-    public RuntimeTreeNode getRuntimeNode( RuntimeData data )
+    public RuntimeTreeNode getRuntimeNode( RunData data )
         throws Exception
     {
         RuntimeTreeNode root = (RuntimeTreeNode) data.getSessionContext().get( NODE_RUNTIME_NAME );
@@ -211,9 +211,9 @@ public class DefaultNavigatorService
     /**
      * Overwrite or implement method refresh()
      *
-     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#refresh(com.cyclopsgroup.waterview.RuntimeData)
+     * @see com.cyclopsgroup.waterview.navigator.NavigatorService#refresh(com.cyclopsgroup.waterview.RunData)
      */
-    public void refresh( RuntimeData data )
+    public void refresh( RunData data )
     {
         data.getSessionContext().remove( NODE_RUNTIME_NAME );
     }

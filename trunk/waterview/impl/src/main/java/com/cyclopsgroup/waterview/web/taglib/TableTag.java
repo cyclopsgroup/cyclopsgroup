@@ -21,7 +21,7 @@ import java.util.HashMap;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.LargeList;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 import com.cyclopsgroup.waterview.web.Table;
 
@@ -97,7 +97,7 @@ public class TableTag
         requireAttribute( "name" );
         requireParent( TableControlTag.class );
         String tableId = "table_" + getUniqueTagId();
-        RuntimeData data = getRuntimeData();
+        RunData data = getRuntimeData();
         table = (Table) data.getSessionContext().get( tableId );
         tableNew = table == null;
         if ( tableNew )

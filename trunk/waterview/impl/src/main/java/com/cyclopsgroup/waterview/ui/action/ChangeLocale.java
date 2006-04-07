@@ -23,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -36,21 +36,21 @@ public class ChangeLocale
     /**
      * Overwrite or implement method execute()
      *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.ActionContext)
+     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
      */
-    public void execute( RuntimeData data, ActionContext context )
+    public void execute( RunData data, ActionContext context )
         throws Exception
     {
         String localeName = data.getParameters().getString( "locale_name" );
         if ( StringUtils.isEmpty( localeName ) )
         {
-            data.getSessionContext().remove( RuntimeData.LOCALE_NAME );
+            data.getSessionContext().remove( RunData.LOCALE_NAME );
         }
         else
         {
             String[] countryLanguage = StringUtils.split( localeName, '|' );
             Locale locale = new Locale( countryLanguage[1], countryLanguage[0] );
-            data.getSessionContext().put( RuntimeData.LOCALE_NAME, locale );
+            data.getSessionContext().put( RunData.LOCALE_NAME, locale );
         }
     }
 }

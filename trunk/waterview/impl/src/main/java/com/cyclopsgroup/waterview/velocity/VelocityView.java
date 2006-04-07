@@ -19,7 +19,7 @@ package com.cyclopsgroup.waterview.velocity;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
 import com.cyclopsgroup.waterview.spi.View;
 
@@ -48,9 +48,9 @@ public class VelocityView
 
     /**
      * Overwrite or implement method render()
-     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RuntimeData, com.cyclopsgroup.waterview.Context)
+     * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void render( RuntimeData runtime, Context viewContext )
+    public void render( RunData runtime, Context viewContext )
         throws Exception
     {
         runModule( runtime, viewContext );

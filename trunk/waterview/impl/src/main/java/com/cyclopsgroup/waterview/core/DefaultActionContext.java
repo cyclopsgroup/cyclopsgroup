@@ -23,7 +23,7 @@ import java.util.Properties;
 import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Link;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -52,7 +52,7 @@ final class DefaultActionContext
      *
      * @param data Current data
      */
-    DefaultActionContext( RuntimeData data )
+    DefaultActionContext( RunData data )
     {
         Link link = Link.getInstance( data );
         String url = link.setPage( data.getPage() ).addQueryString( data.getQueryString() ).toString();
@@ -184,11 +184,11 @@ final class DefaultActionContext
      */
     public synchronized void addMessage( String message )
     {
-        List messages = (List) sessionContext.get( RuntimeData.MESSAGES_NAME );
+        List messages = (List) sessionContext.get( RunData.MESSAGES_NAME );
         if ( messages == null )
         {
             messages = new LinkedList();
-            sessionContext.put( RuntimeData.MESSAGES_NAME, messages );
+            sessionContext.put( RunData.MESSAGES_NAME, messages );
         }
         messages.add( message );
     }

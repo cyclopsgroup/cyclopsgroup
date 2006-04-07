@@ -20,7 +20,7 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Link;
-import com.cyclopsgroup.waterview.RuntimeData;
+import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet;
 import com.cyclopsgroup.waterview.utils.TagSupport;
@@ -85,9 +85,9 @@ public class IconSetTag
     /**
      * Overwrite or implement method getUrl()
      *
-     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet#getUrl(com.cyclopsgroup.waterview.RuntimeData, java.lang.String, int)
+     * @see com.cyclopsgroup.waterview.spi.LookAndFeelService.IconSet#getUrl(com.cyclopsgroup.waterview.RunData, java.lang.String, int)
      */
-    public String getUrl( RuntimeData data, String file, int size )
+    public String getUrl( RunData data, String file, int size )
     {
         Link link = Link.getInstance( data );
         StringBuffer sb = new StringBuffer( link.getResource( getPath() ) );
