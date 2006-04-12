@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly.taglib;
 
-import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
@@ -27,7 +26,7 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Jelly layout tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyLayoutTag
@@ -54,11 +53,7 @@ public class JellyLayoutTag
         throws Exception
     {
         requireAttribute( "script" );
-        Page page = (Page) context.getVariable( Page.NAME );
-        if ( page == null )
-        {
-            throw new JellyTagException( "JellyLayout must be in a page" );
-        }
+        Page page = getRunData().getPageObject();
         JellyEngine jellyEngine = (JellyEngine) getServiceManager().lookup( JellyEngine.ROLE );
         Layout layout = new JellyLayout( jellyEngine.getScript( getScript() ), getScript() );
         page.setLayout( layout );

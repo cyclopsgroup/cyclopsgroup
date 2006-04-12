@@ -30,9 +30,6 @@ public class Page
     /** Default page model */
     public static final Page DEFAULT = new Page();
 
-    /** Name of this model */
-    public static final String NAME = Page.class.getName();
-
     private Layout layout;
 
     private Hashtable panelContents = new Hashtable();
@@ -85,12 +82,12 @@ public class Page
         throws CloneNotSupportedException
     {
         Page page = new Page();
-        page.setLayout(layout);
+        page.setLayout( layout );
         for ( Iterator i = panelContents.values().iterator(); i.hasNext(); )
         {
             PanelContent pc = (PanelContent) i.next();
             PanelContent pcCopy = (PanelContent) pc.clone();
-            page.addPanelContent(pcCopy);
+            page.addPanelContent( pcCopy );
         }
         return page;
     }

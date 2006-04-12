@@ -40,10 +40,10 @@ public class PageTag
     public void processTag( XMLOutput output )
         throws Exception
     {
-        page = (Page)getContext().getVariable(Page.NAME);
-        if(page == null)
+        page = getRunData().getPageObject();
+        if ( page == null )
         {
-            throw new JellyTagException("There must be a Page object defined here");
+            throw new JellyTagException( "There must be a Page object defined here" );
         }
         invokeBody( output );
     }

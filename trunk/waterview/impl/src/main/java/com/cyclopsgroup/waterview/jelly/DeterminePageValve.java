@@ -16,10 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -31,8 +27,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.CacheService;
-import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -44,50 +38,9 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class DeterminePageValve
     extends AbstractLogEnabled
-    implements Configurable, Valve, Initializable, Serviceable
+    implements Valve, Serviceable
 {
-
-    private static final Page EMPTY_PAGE = new Page();
-
-    private Page defaultPage = EMPTY_PAGE;
-
-    private String defaultPageScript;
-
     private JellyEngine jelly;
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
-     */
-    public void configure( Configuration conf )
-        throws ConfigurationException
-    {
-        String page = conf.getChild( "default-page" ).getValue( null );
-        if ( page != null )
-        {
-            defaultPageScript = page;
-        }
-    }
-
-    /**
-     * Overwrite or implement method initialize()
-     *
-     * @see org.apache.avalon.framework.activity.Initializable#initialize()
-     */
-    public void initialize()
-        throws Exception
-    {
-        if ( StringUtils.isNotEmpty( defaultPageScript ) )
-        {
-            Script script = jelly.getScript( defaultPageScript, (Script) null );
-            if ( script == null )
-            {
-                return;
-            }
-            defaultPage = loadPage( script );
-        }
-    }
 
     /**
      * Override or implement method of parent class or interface
@@ -97,7 +50,6 @@ public class DeterminePageValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        Page page = data.getPageObject();
         Path pagePath = data.getPage();
         if ( pagePath == null )
         {
@@ -105,53 +57,37 @@ public class DeterminePageValve
         }
         synchronized ( this )
         {
-            CacheService cacheManager = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
-            page = (Page) cacheManager.get( this, pagePath.getFullPath() );
-            if ( page == null )
-            {
-                //ModuleChain moduleChain = new ModuleChain();
-                String fullPath = "/page" + pagePath.getPath();
-                //moduleChain.addModule(mm.getModule(fullPath));
+            String fullPath = "/page" + pagePath.getPath();
 
-                Script pageScript = jelly.getScript( pagePath.getPackage(), fullPath, null );
+            Script pageScript = jelly.getScript( pagePath.getPackage(), fullPath, null );
+            if ( pageScript != null )
+            {
+                populatePage( data, pageScript );
+            }
+            String[] parts = StringUtils.split( pagePath.getPath(), '/' );
+            for ( int j = parts.length - 1; j >= 0; j-- )
+            {
+                parts[j] = "Default.jelly";
+                String[] newParts = new String[j + 1];
+                System.arraycopy( parts, 0, newParts, 0, j + 1 );
+                String defaultPath = StringUtils.join( newParts, '/' );
+                fullPath = "/page/" + defaultPath;
+                pageScript = jelly.getScript( pagePath.getPackageAlias(), fullPath, null );
                 if ( pageScript != null )
                 {
-                    page = loadPage( pageScript );
+                    populatePage( data, pageScript );
+                    break;
                 }
-                String[] parts = StringUtils.split( pagePath.getPath(), '/' );
-                for ( int j = parts.length - 1; j >= 0; j-- )
-                {
-                    parts[j] = "Default.jelly";
-                    String[] newParts = new String[j + 1];
-                    System.arraycopy( parts, 0, newParts, 0, j + 1 );
-                    String defaultPath = StringUtils.join( newParts, '/' );
-                    fullPath = "/page/" + defaultPath;
-                    pageScript = jelly.getScript( pagePath.getPackageAlias(), fullPath, null );
-                    if ( pageScript != null )
-                    {
-                        page = loadPage( pageScript );
-                        //moduleChain.addModule(mm.getModule(model.getPackage(), fullPath));
-                        break;
-                    }
-                }
-                if ( page == null )
-                {
-                    page = defaultPage;
-                }
-                //page.setModule(moduleChain);
-                cacheManager.put( this, pagePath.getFullPath(), page );
             }
         }
-        data.getRequestContext().put( Page.NAME, page );
         context.invokeNextValve( data );
     }
 
-    private Page loadPage( Script script )
+    private void populatePage( RunDataSpi data, Script script )
         throws JellyTagException
     {
         JellyContext jc = new JellyContext( jelly.getGlobalContext() );
         script.run( jc, XMLOutput.createDummyXMLOutput() );
-        return (Page) jc.getVariable( Page.NAME );
     }
 
     /**

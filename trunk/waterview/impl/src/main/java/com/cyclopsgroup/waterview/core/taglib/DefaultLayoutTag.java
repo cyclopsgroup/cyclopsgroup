@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
@@ -26,26 +25,23 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Default layout definition tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class DefaultLayoutTag extends TagSupport
+public class DefaultLayoutTag
+    extends TagSupport
 {
     /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
-        {
-            throw new JellyTagException("JellyLayout must be in a page");
-        }
-        LookAndFeelService tm = (LookAndFeelService) getServiceManager()
-                .lookup(LookAndFeelService.ROLE);
-        Theme theme = tm.getRuntimeTheme(getRunData());
-        page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
+        Page page = getRunData().getPageObject();
+        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
+        Theme theme = tm.getRuntimeTheme( getRunData() );
+        page.setLayout( theme.getLayout( Theme.LAYOUT_FOR_DEFAULT ) );
     }
 }

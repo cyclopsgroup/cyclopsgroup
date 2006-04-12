@@ -60,11 +60,8 @@ public class RenderPageValve
             return;
         }
 
-        Page page = (Page) data.getRequestContext().get( Page.NAME );
-        if ( page == null )
-        {
-            page = Page.DEFAULT;
-        }
+        Page page = data.getPageObject();
+
         data.setOutputContentType( "text/html; charset=UTF-8" );
         Layout layout = page.getLayout();
         String pageLayoutId = data.getParameters().getString( "page_layout_id" );

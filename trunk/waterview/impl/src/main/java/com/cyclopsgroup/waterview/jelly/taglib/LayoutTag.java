@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,12 +19,11 @@ package com.cyclopsgroup.waterview.jelly.taglib;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.jelly.JellyLayout;
-import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Tag for layout
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class LayoutTag
@@ -38,8 +37,7 @@ public class LayoutTag
     public void processTag( XMLOutput output )
         throws Exception
     {
-        Page page = (Page) getContext().getVariable( Page.NAME );
         JellyLayout layout = new JellyLayout( getBody(), null );
-        page.setLayout( layout );
+        getRunData().getPageObject().setLayout( layout );
     }
 }

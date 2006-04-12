@@ -31,7 +31,6 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.ModuleService;
-import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -118,7 +117,7 @@ public class ParseURLValve
             data.setLocale( locale );
         }
 
-        data.getRequestContext().put( Page.NAME, moduleService.createDefaultPage() );
+        data.setPageObject( moduleService.createDefaultPage() );
         context.invokeNextValve( data );
     }
 

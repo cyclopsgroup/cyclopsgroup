@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,10 +27,11 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * System predefined layout tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class SystemLayoutTag extends TagSupport
+public class SystemLayoutTag
+    extends TagSupport
 {
     private String name;
 
@@ -49,24 +50,23 @@ public class SystemLayoutTag extends TagSupport
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
-    public void processTag(XMLOutput output) throws Exception
+    public void processTag( XMLOutput output )
+        throws Exception
     {
-        requireAttribute("name");
-        Page page = (Page) context.getVariable(Page.NAME);
-        if (page == null)
+        requireAttribute( "name" );
+        Page page = getRunData().getPageObject();
+        if ( page == null )
         {
-            throw new JellyTagException("JellyLayout must be in a page");
+            throw new JellyTagException( "JellyLayout must be in a page" );
         }
-        LookAndFeelService tm = (LookAndFeelService) getServiceManager()
-                .lookup(LookAndFeelService.ROLE);
-        Theme theme = tm.getRuntimeTheme(getRunData());
-        Layout layout = theme.getLayout(getName());
-        if (layout == null)
+        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
+        Theme theme = tm.getRuntimeTheme( getRunData() );
+        Layout layout = theme.getLayout( getName() );
+        if ( layout == null )
         {
-            throw new NullPointerException("Layout [" + getName()
-                    + "] doesn't exist");
+            throw new NullPointerException( "Layout [" + getName() + "] doesn't exist" );
         }
-        page.setLayout(layout);
+        page.setLayout( layout );
     }
 
     /**
@@ -74,7 +74,7 @@ public class SystemLayoutTag extends TagSupport
      *
      * @param name The name to set.
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }

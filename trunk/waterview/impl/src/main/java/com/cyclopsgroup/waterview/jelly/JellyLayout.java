@@ -60,7 +60,6 @@ public class JellyLayout
     public synchronized void render( RunDataSpi data, Page page )
         throws Exception
     {
-        data.getRequestContext().put( Page.NAME, page );
         data.getRequestContext().put( NAME, this );
 
         runModule( data, data.getRequestContext() );
@@ -69,7 +68,6 @@ public class JellyLayout
         JellyContext jellyContext = je.createJellyContext( data.getRequestContext() );
         XMLOutput output = XMLOutput.createXMLOutput( data.getOutput() );
         script.run( jellyContext, output );
-        data.getRequestContext().put( Page.NAME, null );
         data.getRequestContext().put( NAME, null );
     }
 }
