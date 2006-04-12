@@ -21,9 +21,10 @@
     <script language="javascript" src="${link.getResource('/waterview/calendar_en.js')}" />
     <script language="javascript" src="${link.getResource('/waterview/basefunctions.js')}" />
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource('/waterview/waterviewbase.css')}" />
-    <j:set var="path">/waterview/waterviewbase_${data.locale.language}.css</j:set>
     <link rel="stylesheet" type="text/css" media="all" href="${link.getResource('/waterview/calendar_system.css')}" />
-    <link rel="stylesheet" type="text/css" media="all" href="${link.getResource(path)}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="${pageTheme.style.getUrl(data)}" />
+    <j:set var="languageSpecificStyle">/waterview/waterviewbase_${data.locale.language}.css</j:set>
+    <link rel="stylesheet" type="text/css" media="all" href="${link.getResource(languageSpecificStyle)}" />
+    <link rel="stylesheet" type="text/css" media="screen"
+        href="${link.getResource('/waterview/defaulttheme/style.css')}" />
     <link rel="stylesheet" type="text/css" media="print" href="${applicationBase}/style/waterviewprint.css" />
 </w:Dummy>

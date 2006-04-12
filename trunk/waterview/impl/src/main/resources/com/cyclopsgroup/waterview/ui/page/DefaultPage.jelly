@@ -13,4 +13,7 @@
             </div>
         </View>
     </PanelContent>
+    <PanelContent name="body">
+        <SimpleView path="${data.page.packageAlias}/view/${data.page.path}" />
+    </PanelContent>
 </Page>
