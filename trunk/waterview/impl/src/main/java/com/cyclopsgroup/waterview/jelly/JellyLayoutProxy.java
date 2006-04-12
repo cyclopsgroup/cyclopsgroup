@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
@@ -31,6 +30,8 @@ public class JellyLayoutProxy
 {
     private String layoutScript;
 
+    private JellyLayout layout;
+
     /**
      * Constructor for class ShellScriptLayout
      *
@@ -44,13 +45,10 @@ public class JellyLayoutProxy
     private synchronized JellyLayout getLayout( RunDataSpi data )
         throws Exception
     {
-        CacheService cm = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
-        JellyLayout layout = (JellyLayout) cm.get( this, layoutScript );
         if ( layout == null )
         {
             JellyEngine je = (JellyEngine) data.getServiceManager().lookup( JellyEngine.ROLE );
             layout = new JellyLayout( je.getScript( layoutScript ), layoutScript );
-            cm.put( this, layoutScript, layout );
         }
         return layout;
     }

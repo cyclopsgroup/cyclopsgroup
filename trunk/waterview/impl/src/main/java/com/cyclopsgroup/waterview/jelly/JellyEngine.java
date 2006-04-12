@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,7 +38,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
@@ -49,7 +48,7 @@ import com.cyclopsgroup.waterview.utils.TagSupport;
 
 /**
  * Jelly engine for jelly processing
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyEngine
@@ -94,8 +93,6 @@ public class JellyEngine
     /** Name of service manager */
     public static final String SERVICE_MANAGER = ServiceManager.class.getName();
 
-    private CacheService cacheManager;
-
     private JellyContext globalContext;
 
     private Properties initProperties = new Properties();
@@ -127,7 +124,7 @@ public class JellyEngine
 
     /**
      * Create new Jelly context with all variables in given context
-     * 
+     *
      * @param context Given clib context
      * @return JellyContext object
      */
@@ -154,16 +151,6 @@ public class JellyEngine
     {
         Script script = getScript( path.getPackage(), path.getPath() );
         return new JellyView( script, path.getFullPath() );
-    }
-
-    /**
-     * Getter method for cacheManager
-     *
-     * @return Returns the cacheManager.
-     */
-    public CacheService getCacheManager()
-    {
-        return cacheManager;
     }
 
     /**
@@ -250,51 +237,41 @@ public class JellyEngine
         Script script = null;
         synchronized ( this )
         {
-            if ( getCacheManager().contains( this, fullPath ) )
+            final URL resource = getClass().getClassLoader().getResource( fullPath );
+            if ( resource == null )
             {
-                script = (Script) getCacheManager().get( this, fullPath );
+                script = DUMMY_SCRIPT;
             }
             else
             {
-                final URL resource = getClass().getClassLoader().getResource( fullPath );
-
-                if ( resource == null )
+                JellyContext jc = new JellyContext( getGlobalContext() );
+                final Script s = jc.compileScript( resource );
+                script = new Script()
                 {
-                    script = DUMMY_SCRIPT;
-                }
-                else
-                {
-                    JellyContext jc = new JellyContext( getGlobalContext() );
-                    final Script s = jc.compileScript( resource );
-                    script = new Script()
+                    public Script compile()
+                        throws JellyException
                     {
+                        return this;
+                    }
 
-                        public Script compile()
-                            throws JellyException
+                    public void run( JellyContext context, XMLOutput output )
+                        throws JellyTagException
+                    {
+                        TagSupport.addScriptResource( resource, context );
+                        try
                         {
-                            return this;
+                            s.run( context, output );
                         }
-
-                        public void run( JellyContext context, XMLOutput output )
-                            throws JellyTagException
+                        catch ( JellyTagException e )
                         {
-                            TagSupport.addScriptResource( resource, context );
-                            try
-                            {
-                                s.run( context, output );
-                            }
-                            catch ( JellyTagException e )
-                            {
-                                throw e;
-                            }
-                            finally
-                            {
-                                TagSupport.removeScriptResource( resource, context );
-                            }
+                            throw e;
                         }
-                    };
-                }
-                getCacheManager().put( this, fullPath, script );
+                        finally
+                        {
+                            TagSupport.removeScriptResource( resource, context );
+                        }
+                    }
+                };
             }
         }
         return script == DUMMY_SCRIPT ? defaultScript : script;
@@ -372,7 +349,6 @@ public class JellyEngine
         throws ServiceException
     {
         this.serviceManager = serviceManager;
-        cacheManager = (CacheService) serviceManager.lookup( CacheService.ROLE );
         moduleManager = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
 
         String pattern = ".+\\.jelly";

@@ -25,8 +25,6 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -34,7 +32,6 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleService;
@@ -49,9 +46,8 @@ import com.cyclopsgroup.waterview.spi.View;
  */
 public class DefaultModuleService
     extends AbstractLogEnabled
-    implements Configurable, ModuleService, Serviceable, DynaViewFactory, Initializable
+    implements Configurable, ModuleService, DynaViewFactory, Initializable
 {
-    private CacheService cache;
 
     private String defaultPackageAlias = "waterview";
 
@@ -213,7 +209,7 @@ public class DefaultModuleService
      */
     public void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory )
     {
-        dynaViewFactories.put( pattern, new CachedViewFactory( viewFactory, cache ) );
+        dynaViewFactories.put( pattern, viewFactory );
     }
 
     /**
@@ -266,16 +262,5 @@ public class DefaultModuleService
     {
         Path path = parsePath( modulePath );
         runModule( path, data, context );
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service( ServiceManager serviceManager )
-        throws ServiceException
-    {
-        cache = (CacheService) serviceManager.lookup( CacheService.ROLE );
     }
 }

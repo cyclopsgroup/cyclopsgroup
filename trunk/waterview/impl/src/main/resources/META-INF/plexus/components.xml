@@ -58,11 +58,7 @@
             <implementation>com.cyclopsgroup.waterview.core.OpenViewValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
-        <component>
-            <role>com.cyclopsgroup.waterview.spi.CacheService</role>
-            <implementation>com.cyclopsgroup.waterview.core.NoneCacheService</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-        </component>
+
         <component>
             <role>com.cyclopsgroup.waterview.spi.I18NService</role>
             <implementation>com.cyclopsgroup.waterview.core.ResourceBundleI18NService</implementation>
@@ -121,7 +117,7 @@
             <role>com.cyclopsgroup.waterview.WaterviewServices</role>
             <implementation>com.cyclopsgroup.waterview.utils.ComponentGroup</implementation>
             <configuration>
-                <component role="com.cyclopsgroup.waterview.Waterview" />
+                <component role="com.cyclopsgroup.waterview.spi.Waterview" />
                 <component role="com.cyclopsgroup.waterview.jelly.JellyEngine" />
                 <component role="com.cyclopsgroup.waterview.jsp.JspEngine" />
                 <component role="com.cyclopsgroup.waterview.velocity.VelocityEngine" />
