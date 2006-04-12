@@ -57,7 +57,5 @@ public class WebTagPackage
 
         addTag( "Tree", TreeTag.class );
         addTag( "RenderTreeChildren", RenderTreeChildrenTag.class );
-
-        addTag( "Icon", IconTag.class );
     }
 }

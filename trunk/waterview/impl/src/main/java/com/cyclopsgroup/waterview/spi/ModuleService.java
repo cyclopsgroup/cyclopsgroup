@@ -26,6 +26,8 @@ import com.cyclopsgroup.waterview.Path;
  */
 public interface ModuleService
 {
+    String DEFAULT_LAYOUT_NAME = "waterview.layout.default";
+
     /** Role name of the component */
     String ROLE = ModuleService.class.getName();
 
@@ -45,6 +47,8 @@ public interface ModuleService
      */
     View createDynaView( String viewPath )
         throws Exception;
+
+    Layout getLayout( String name );
 
     /**
      * Get package aliases
@@ -72,6 +76,8 @@ public interface ModuleService
      * @param viewFactory
      */
     void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory );
+
+    void registerLayout( String name, Layout layout );
 
     /**
      * @param alias

@@ -18,9 +18,9 @@ package com.cyclopsgroup.waterview.core.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.Layout;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
-import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -40,8 +40,8 @@ public class DefaultLayoutTag
         throws Exception
     {
         Page page = getRunData().getPageObject();
-        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        Theme theme = tm.getRuntimeTheme( getRunData() );
-        page.setLayout( theme.getLayout( Theme.LAYOUT_FOR_DEFAULT ) );
+        ModuleService modules = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
+        Layout defaultLayout = modules.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
+        page.setLayout( defaultLayout );
     }
 }

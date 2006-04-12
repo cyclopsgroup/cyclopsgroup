@@ -16,13 +16,11 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.LookAndFeelService;
+import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
-import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
@@ -55,13 +53,8 @@ public class SystemLayoutTag
     {
         requireAttribute( "name" );
         Page page = getRunData().getPageObject();
-        if ( page == null )
-        {
-            throw new JellyTagException( "JellyLayout must be in a page" );
-        }
-        LookAndFeelService tm = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        Theme theme = tm.getRuntimeTheme( getRunData() );
-        Layout layout = theme.getLayout( getName() );
+        ModuleService moduleService = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
+        Layout layout = moduleService.getLayout( getName() );
         if ( layout == null )
         {
             throw new NullPointerException( "Layout [" + getName() + "] doesn't exist" );

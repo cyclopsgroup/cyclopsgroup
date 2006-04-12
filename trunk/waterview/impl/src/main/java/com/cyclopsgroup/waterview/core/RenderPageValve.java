@@ -23,12 +23,10 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.spi.Layout;
-import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
-import com.cyclopsgroup.waterview.spi.Theme;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -40,7 +38,7 @@ public class RenderPageValve
     extends AbstractLogEnabled
     implements Valve, Serviceable
 {
-    private LookAndFeelService laf;
+    private ModuleService moduleService;
 
     /**
      * Override or implement method of parent class or interface
@@ -50,11 +48,8 @@ public class RenderPageValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        ModuleService mm = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
-
-        mm.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data, data
-            .getRequestContext() );
-
+        moduleService.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data,
+                                 data.getRequestContext() );
         if ( data.isStopped() )
         {
             return;
@@ -67,14 +62,13 @@ public class RenderPageValve
         String pageLayoutId = data.getParameters().getString( "page_layout_id" );
         if ( StringUtils.isNotEmpty( pageLayoutId ) )
         {
-            layout = laf.getLayout( pageLayoutId );
+            layout = moduleService.getLayout( pageLayoutId );
         }
-        Theme theme = laf.getRuntimeTheme( data );
         if ( layout == null )
         {
-            layout = theme.getLayout( Theme.LAYOUT_FOR_DEFAULT );
+            layout = moduleService.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
         }
-        data.getRequestContext().put( Theme.NAME, theme );
+        page.setLayout( layout );
         layout.render( data, page );
         context.invokeNextValve( data );
         data.getOutput().flush();
@@ -88,6 +82,6 @@ public class RenderPageValve
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        laf = (LookAndFeelService) serviceManager.lookup( LookAndFeelService.ROLE );
+        moduleService = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
     }
 }

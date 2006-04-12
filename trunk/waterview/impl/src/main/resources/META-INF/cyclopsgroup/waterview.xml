@@ -11,22 +11,10 @@
     <!-- UI modules -->
     <ModulePackage alias="waterview" name="com.cyclopsgroup.waterview.ui" />
     <!-- Look and feel -->
-    <IconSet name="waterview.icons.default" path="/waterview/defaulttheme" description="Waterview default icons" />
-    <Style name="waterview.style.default" path="/waterview/defaulttheme/style.css"
-        description="Waterview default stylesheet" />
-    <Style name="waterview.style.empty" path="/waterview/emptystyle.css" description="Empty style" />
     <Layout name="waterview.layout.default">
         <JellyLayout script="/waterview/layout/DefaultLayout.jelly" />
     </Layout>
     <Layout name="layout.rawview">
         <JellyLayout script="/waterview/layout/RawViewLayout.jelly" />
     </Layout>
-    <Theme name="waterview.theme.default" iconset="waterview.icons.default" stylesheet="waterview.style.default"
-        description="Waterview default theme">
-        <DefineLayout name="layout.default" layout="waterview.layout.default" />
-    </Theme>
-    <Theme name="waterview.theme.empty" iconset="waterview.icons.default" stylesheet="waterview.style.empty"
-        description="Waterview default theme">
-        <DefineLayout name="layout.default" layout="waterview.layout.default" />
-    </Theme>
 </Waterview>

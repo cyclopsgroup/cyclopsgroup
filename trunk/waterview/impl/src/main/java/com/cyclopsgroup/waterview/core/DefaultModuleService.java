@@ -36,6 +36,7 @@ import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
+import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
@@ -56,17 +57,9 @@ public class DefaultModuleService
 
     private Hashtable dynaViewFactories = new Hashtable();
 
-    private Hashtable packageNames = new Hashtable();
+    private Hashtable layouts = new Hashtable();
 
-    /**
-     * @todo Not implemented yet
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDefaultPage()
-     */
-    public Page createDefaultPage()
-    {
-        return new Page();
-    }
+    private Hashtable packageNames = new Hashtable();
 
     /**
      * Override or implement method of parent class or interface
@@ -81,6 +74,16 @@ public class DefaultModuleService
         {
             defaultPackageAlias = defaultPackage;
         }
+    }
+
+    /**
+     * @todo Not implemented yet
+     *
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDefaultPage()
+     */
+    public Page createDefaultPage()
+    {
+        return new Page();
     }
 
     /**
@@ -126,6 +129,14 @@ public class DefaultModuleService
                 runModule( path, data, viewContext );
             }
         };
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#getLayout(java.lang.String)
+     */
+    public Layout getLayout( String name )
+    {
+        return (Layout) layouts.get( name );
     }
 
     /**
@@ -203,6 +214,14 @@ public class DefaultModuleService
     public void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory )
     {
         dynaViewFactories.put( pattern, new CachedViewFactory( viewFactory, cache ) );
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#registerLayout(java.lang.String, com.cyclopsgroup.waterview.spi.Layout)
+     */
+    public void registerLayout( String name, Layout layout )
+    {
+        layouts.put( name, layout );
     }
 
     /**

@@ -32,9 +32,6 @@
             <role>com.cyclopsgroup.waterview.jelly.DeterminePageValve</role>
             <implementation>com.cyclopsgroup.waterview.jelly.DeterminePageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <default-page>/waterview/page/DefaultPage.jelly</default-page>
-            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.core.ResolveActionsValve</role>
@@ -78,7 +75,7 @@
         </component>
         <!--  Default Waterview Configurations -->
         <component>
-            <role>com.cyclopsgroup.waterview.Waterview</role>
+            <role>com.cyclopsgroup.waterview.spi.Waterview</role>
             <implementation>com.cyclopsgroup.waterview.core.DefaultWaterview</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
@@ -110,15 +107,6 @@
                 <valves>
                     <valve role="com.cyclopsgroup.waterview.core.GetResourceValve" />
                 </valves>
-            </configuration>
-        </component>
-        <!-- Theme related components -->
-        <component>
-            <role>com.cyclopsgroup.waterview.spi.LookAndFeelService</role>
-            <implementation>com.cyclopsgroup.waterview.core.DefaultLookAndFeelService</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-            <configuration>
-                <default-theme>waterview.theme.default</default-theme>
             </configuration>
         </component>
         <component>

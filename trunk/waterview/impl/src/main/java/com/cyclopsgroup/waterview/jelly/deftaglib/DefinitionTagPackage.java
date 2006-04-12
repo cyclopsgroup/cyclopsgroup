@@ -37,9 +37,5 @@ public class DefinitionTagPackage
         addTag( "Layout", LayoutTag.class );
         addTag( "JellyLayout", JellyLayoutTag.class );
         addTag( "ModulePackage", ModulePackageTag.class );
-        addTag( "Theme", ThemeTag.class );
-        addTag( "IconSet", IconSetTag.class );
-        addTag( "Style", StyleTag.class );
-        addTag( "DefineLayout", DefineLayoutTag.class );
     }
 }
