@@ -16,11 +16,16 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PanelContent;
+import com.cyclopsgroup.waterview.spi.View;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
+import com.cyclopsgroup.waterview.spi.taglib.ViewAware;
 
 /**
  * Panel content tag
@@ -29,12 +34,13 @@ import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
  */
 public class PanelContentTag
     extends TagSupport
+    implements ViewAware
 {
     private boolean append;
 
     private String name;
 
-    private PanelContent panelContent;
+    private List views;
 
     /**
      * Getter method for name
@@ -44,16 +50,6 @@ public class PanelContentTag
     public String getName()
     {
         return name;
-    }
-
-    /**
-     * Getter method for panelContent
-     *
-     * @return Returns the panelContent.
-     */
-    public PanelContent getPanelContent()
-    {
-        return panelContent;
     }
 
     /**
@@ -77,10 +73,21 @@ public class PanelContentTag
         requireAttribute( "name" );
         requireParent( PageTag.class );
 
-        panelContent = new PanelContent( getName() );
-        invokeBody( output );
         Page page = ( (PageTag) getParent() ).getPage();
-        page.addPanelContent( panelContent );
+        PanelContent panelContent = page.getPanelContent( getName() );
+        if ( panelContent == null )
+        {
+            panelContent = new PanelContent( getName() );
+            page.addPanelContent( panelContent );
+        }
+        views = new ArrayList();
+        invokeBody( output );
+
+        if ( !isAppend() )
+        {
+            panelContent.getViewList().clear();
+        }
+        panelContent.getViewList().addAll( views );
     }
 
     /**
@@ -101,5 +108,13 @@ public class PanelContentTag
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.taglib.ViewAware#doView(com.cyclopsgroup.waterview.spi.View)
+     */
+    public void doView( View view )
+    {
+        views.add( view );
     }
 }

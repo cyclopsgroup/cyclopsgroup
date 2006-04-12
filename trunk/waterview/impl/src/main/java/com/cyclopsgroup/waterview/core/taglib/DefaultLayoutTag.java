@@ -45,7 +45,7 @@ public class DefaultLayoutTag extends TagSupport
         }
         LookAndFeelService tm = (LookAndFeelService) getServiceManager()
                 .lookup(LookAndFeelService.ROLE);
-        Theme theme = tm.getRuntimeTheme(getRuntimeData());
+        Theme theme = tm.getRuntimeTheme(getRunData());
         page.setLayout(theme.getLayout(Theme.LAYOUT_FOR_DEFAULT));
     }
 }

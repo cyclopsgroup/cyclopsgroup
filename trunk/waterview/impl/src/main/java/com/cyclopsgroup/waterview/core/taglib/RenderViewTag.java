@@ -54,7 +54,7 @@ public class RenderViewTag
         requireAttribute( "view" );
         JellyContextAdapter adapter = new JellyContextAdapter( getContext() );
         DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
-        getView().render( getRuntimeData(), ctx );
+        getView().render( getRunData(), ctx );
     }
 
     /**

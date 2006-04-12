@@ -43,15 +43,15 @@ public class VelocityTemplateTag
         throws Exception
     {
         requireAttribute( "template" );
-        VelocityEngine ve = (VelocityEngine) getRuntimeData().getServiceManager().lookup( VelocityEngine.ROLE );
+        VelocityEngine ve = (VelocityEngine) getRunData().getServiceManager().lookup( VelocityEngine.ROLE );
         Template t = ve.getTemplate( getTemplate() );
         if ( t == null )
         {
-            getRuntimeData().getOutput().println( "Velocity template " + getTemplate() + " is not found" );
+            getRunData().getOutput().println( "Velocity template " + getTemplate() + " is not found" );
         }
         VelocityJellyContextAdapter adapter = new VelocityJellyContextAdapter( getContext() );
-        t.merge( adapter, getRuntimeData().getOutput() );
-        getRuntimeData().getOutput().flush();
+        t.merge( adapter, getRunData().getOutput() );
+        getRunData().getOutput().flush();
     }
 
     /**

@@ -31,7 +31,7 @@ public abstract class BaseViewTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        RunData data = getRuntimeData();
+        RunData data = getRunData();
         try
         {
             final View view = createView();

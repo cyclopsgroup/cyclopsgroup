@@ -42,8 +42,8 @@ public class JspScriptTag
     {
         requireAttribute( "path" );
         JspEngine je = (JspEngine) getServiceManager().lookup( JspEngine.ROLE );
-        je.renderJsp( getPath(), getRuntimeData(), new JellyContextAdapter( getContext() ) );
-        getRuntimeData().getOutput().flush();
+        je.renderJsp( getPath(), getRunData(), new JellyContextAdapter( getContext() ) );
+        getRunData().getOutput().flush();
     }
 
     /**

@@ -31,7 +31,7 @@ public abstract class TagSupport
      *
      * @return PageRuntime object
      */
-    protected RunData getRuntimeData()
+    protected RunData getRunData()
     {
         return (RunData) getContext().getVariable( RunData.NAME );
     }

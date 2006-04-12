@@ -59,7 +59,7 @@ public class SystemLayoutTag extends TagSupport
         }
         LookAndFeelService tm = (LookAndFeelService) getServiceManager()
                 .lookup(LookAndFeelService.ROLE);
-        Theme theme = tm.getRuntimeTheme(getRuntimeData());
+        Theme theme = tm.getRuntimeTheme(getRunData());
         Layout layout = theme.getLayout(getName());
         if (layout == null)
         {

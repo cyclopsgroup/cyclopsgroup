@@ -113,7 +113,7 @@ public class HorizontalTabControlTag
         {
             throw new JellyTagException( "At least one tab must be defined" );
         }
-        String selectedTabName = (String) getRuntimeData().getSessionContext().get( getUniqueTagId() );
+        String selectedTabName = (String) getRunData().getSessionContext().get( getUniqueTagId() );
         if ( StringUtils.isNotEmpty( selectedTabName ) )
         {
             setSelected( selectedTabName );

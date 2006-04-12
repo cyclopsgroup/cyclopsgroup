@@ -97,7 +97,7 @@ public class TableTag
         requireAttribute( "name" );
         requireParent( TableControlTag.class );
         String tableId = "table_" + getUniqueTagId();
-        RunData data = getRuntimeData();
+        RunData data = getRunData();
         table = (Table) data.getSessionContext().get( tableId );
         tableNew = table == null;
         if ( tableNew )

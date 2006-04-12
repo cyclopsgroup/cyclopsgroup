@@ -60,7 +60,7 @@ public class IconTag
     {
         requireAttribute( "file" );
         LookAndFeelService laf = (LookAndFeelService) getServiceManager().lookup( LookAndFeelService.ROLE );
-        RunData data = getRuntimeData();
+        RunData data = getRunData();
         Theme theme = laf.getRuntimeTheme( data );
         setUrl( theme.getIconSet().getUrl( data, getFile(), getSize() ) );
         super.processTag( output );
