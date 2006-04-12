@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,14 +16,14 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
 /**
  * Script layout which doesn't initial script object initially
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyLayoutProxy
@@ -41,7 +41,7 @@ public class JellyLayoutProxy
         this.layoutScript = layoutScript;
     }
 
-    private synchronized JellyLayout getLayout( RunData data )
+    private synchronized JellyLayout getLayout( RunDataSpi data )
         throws Exception
     {
         CacheService cm = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
@@ -60,9 +60,9 @@ public class JellyLayoutProxy
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RunData runtime, Page page )
+    public void render( RunDataSpi data, Page page )
         throws Exception
     {
-        getLayout( runtime ).render( runtime, page );
+        getLayout( data ).render( data, page );
     }
 }

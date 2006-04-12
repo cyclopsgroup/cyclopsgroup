@@ -41,7 +41,7 @@ import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RunData;
-import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.spi.Waterview;
 
 /**
  * Main waterview servlet

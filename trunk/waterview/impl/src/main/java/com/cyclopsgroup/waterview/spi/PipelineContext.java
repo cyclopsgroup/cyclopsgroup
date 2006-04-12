@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,10 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RunData;
 
 /**
  * Runtime pipeline context
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface PipelineContext
@@ -31,6 +30,6 @@ public interface PipelineContext
      * @param data Page Runtime object
      * @throws Exception Just throw it out
      */
-    void invokeNextValve( RunData data )
+    void invokeNextValve( RunDataSpi data )
         throws Exception;
 }

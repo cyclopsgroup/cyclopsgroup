@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,14 +17,14 @@
 package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * View to show a message only
  */
-public class MessageView implements View
+public class MessageView
+    implements View
 {
     private String message;
 
@@ -33,7 +33,7 @@ public class MessageView implements View
      *
      * @param message Message to show
      */
-    public MessageView(String message)
+    public MessageView( String message )
     {
         this.message = message;
     }
@@ -43,10 +43,9 @@ public class MessageView implements View
      *
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void render(RunData runtime, Context viewContext)
-            throws Exception
+    public void render( RunDataSpi data, Context viewContext )
+        throws Exception
     {
-        runtime.getOutput().println(message);
+        data.getOutput().println( message );
     }
-
 }

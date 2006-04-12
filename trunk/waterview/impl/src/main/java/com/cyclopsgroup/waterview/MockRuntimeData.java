@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,14 +19,18 @@ package com.cyclopsgroup.waterview;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.utils.FakeServiceManager;
 
 /**
  * Fake page runtime object
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public class MockRuntimeData extends AbstractRunData implements RunData
+public class MockRuntimeData
+    extends AbstractRunData
+    implements RunDataSpi
 {
     private String page;
 
@@ -37,16 +41,16 @@ public class MockRuntimeData extends AbstractRunData implements RunData
      *
      * @param output Output
      */
-    public MockRuntimeData(PrintWriter output)
+    public MockRuntimeData( PrintWriter output )
     {
-        setOutput(output);
-        setApplicationBaseUrl("http://localhost:8080/waterview");
-        setPageBaseUrl("http://localhost:8080/waterview/servlet/waterview");
-        setRequestContext(new DefaultContext(new HashMap()));
-        setParams(new MapParameters());
-        setRequestPath("/index.html");
-        setServiceManager(new FakeServiceManager());
-        setSessionContext(new DefaultContext(new HashMap()));
+        setOutput( output );
+        setApplicationBaseUrl( "http://localhost:8080/waterview" );
+        setPageBaseUrl( "http://localhost:8080/waterview/servlet/waterview" );
+        setRequestContext( new DefaultContext( new HashMap() ) );
+        setParams( new MapParameters() );
+        setRequestPath( "/index.html" );
+        setServiceManager( new FakeServiceManager() );
+        setSessionContext( new DefaultContext( new HashMap() ) );
     }
 
     /**
@@ -54,7 +58,7 @@ public class MockRuntimeData extends AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#getMimeType(java.lang.String)
      */
-    public String getMimeType(String fileName)
+    public String getMimeType( String fileName )
     {
         return "text/html";
     }
@@ -82,7 +86,7 @@ public class MockRuntimeData extends AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#setOutputContentType(java.lang.String)
      */
-    public void setOutputContentType(String contentType)
+    public void setOutputContentType( String contentType )
     {
     }
 
@@ -91,7 +95,7 @@ public class MockRuntimeData extends AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#setPage(java.lang.String)
      */
-    public void setPage(String page)
+    public void setPage( String page )
     {
         this.page = page;
         this.pageObject = new Path()
@@ -157,5 +161,23 @@ public class MockRuntimeData extends AbstractRunData implements RunData
                 return getPath();
             }
         };
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.RunDataSpi#getPageObject()
+     */
+    public Page getPageObject()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.RunDataSpi#setPageObject(com.cyclopsgroup.waterview.spi.Page)
+     */
+    public void setPageObject( Page page )
+    {
+        // TODO Auto-generated method stub
+
     }
 }

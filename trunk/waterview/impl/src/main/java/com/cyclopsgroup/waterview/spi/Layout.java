@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2004 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,9 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.RunData;
-
 /**
  * Layout interface
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface Layout
@@ -31,10 +29,10 @@ public interface Layout
     /**
      * Render given runtime and page model
      *
-     * @param runtime Runtime object
+     * @param data Runtime object
      * @param page Page model
      * @throws Exception Throw it out
      */
-    void render( RunData runtime, Page page )
+    void render( RunDataSpi data, Page page )
         throws Exception;
 }

@@ -31,10 +31,10 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -94,23 +94,18 @@ public class DeterminePageValve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke( RunData runtime, PipelineContext context )
+    public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        Page page = (Page) runtime.getRequestContext().get( Page.NAME );
-        if ( page != null )
-        {
-            context.invokeNextValve( runtime );
-            return;
-        }
-        Path pagePath = runtime.getPage();
+        Page page = data.getPageObject();
+        Path pagePath = data.getPage();
         if ( pagePath == null )
         {
             throw new NullPointerException( "Path is not ready yet" );
         }
         synchronized ( this )
         {
-            CacheService cacheManager = (CacheService) runtime.getServiceManager().lookup( CacheService.ROLE );
+            CacheService cacheManager = (CacheService) data.getServiceManager().lookup( CacheService.ROLE );
             page = (Page) cacheManager.get( this, pagePath.getFullPath() );
             if ( page == null )
             {
@@ -147,8 +142,8 @@ public class DeterminePageValve
                 cacheManager.put( this, pagePath.getFullPath(), page );
             }
         }
-        runtime.getRequestContext().put( Page.NAME, page );
-        context.invokeNextValve( runtime );
+        data.getRequestContext().put( Page.NAME, page );
+        context.invokeNextValve( data );
     }
 
     private Page loadPage( Script script )

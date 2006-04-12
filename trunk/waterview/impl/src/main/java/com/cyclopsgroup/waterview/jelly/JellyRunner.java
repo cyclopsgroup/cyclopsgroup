@@ -30,7 +30,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 import org.codehaus.plexus.DefaultPlexusContainer;
 
-import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.spi.Waterview;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

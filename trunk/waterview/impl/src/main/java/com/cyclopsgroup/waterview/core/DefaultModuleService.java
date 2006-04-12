@@ -34,11 +34,11 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Module;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -57,7 +57,6 @@ public class DefaultModuleService
     private Hashtable dynaViewFactories = new Hashtable();
 
     private Hashtable packageNames = new Hashtable();
-
 
     /**
      * @todo Not implemented yet
@@ -121,7 +120,7 @@ public class DefaultModuleService
     {
         return new View()
         {
-            public void render( RunData data, Context viewContext )
+            public void render( RunDataSpi data, Context viewContext )
                 throws Exception
             {
                 runModule( path, data, viewContext );
@@ -215,7 +214,7 @@ public class DefaultModuleService
         packageNames.put( alias, packageName );
     }
 
-    private void runModule( Path modulePath, RunData data, Context context )
+    private void runModule( Path modulePath, RunDataSpi data, Context context )
         throws Exception
     {
         String className = modulePath.getPackage() + modulePath.getPathWithoutExtension().replace( '/', '.' );
@@ -243,7 +242,7 @@ public class DefaultModuleService
      * Overwrite or implement method runModule()
      * @see com.cyclopsgroup.waterview.spi.ModuleService#runModule(java.lang.String, com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void runModule( String modulePath, RunData data, Context context )
+    public void runModule( String modulePath, RunDataSpi data, Context context )
         throws Exception
     {
         Path path = parsePath( modulePath );

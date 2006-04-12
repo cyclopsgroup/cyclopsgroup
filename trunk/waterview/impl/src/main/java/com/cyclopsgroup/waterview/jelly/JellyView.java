@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,13 +21,13 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
  * Script view
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class JellyView
@@ -53,7 +53,7 @@ public class JellyView
      * Overwrite or implement method render()
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void render( RunData data, Context viewContext )
+    public void render( RunDataSpi data, Context viewContext )
         throws Exception
     {
         runModule( data, viewContext );

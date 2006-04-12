@@ -22,9 +22,9 @@ import java.util.List;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
 /**
  * Test case for ParseURLValve
@@ -43,23 +43,23 @@ public class ParseURLValveTest
         throws Exception
     {
         lookup( JellyEngine.ROLE );
-        MockRuntimeData runtime = new MockRuntimeData( new PrintWriter( System.out ) );
-        runtime.setRequestPath( "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly" );
+        MockRuntimeData data = new MockRuntimeData( new PrintWriter( System.out ) );
+        data.setRequestPath( "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly" );
         ParseURLValve v = (ParseURLValve) lookup( ParseURLValve.class.getName() );
-        v.invoke( runtime, new PipelineContext()
+        v.invoke( data, new PipelineContext()
         {
 
-            public void invokeNextValve( RunData runtime )
+            public void invokeNextValve( RunDataSpi data )
                 throws Exception
             {
                 //do nothing
             }
         } );
         //assertEquals("/ddd.jelly", runtime.getPage());
-        assertEquals( 3, runtime.getActions().size() );
-        assertEquals( "/aaa", runtime.getActions().get( 0 ) );
-        assertEquals( "/bbb/BAction", runtime.getActions().get( 1 ) );
-        assertEquals( "/ccc", runtime.getActions().get( 2 ) );
+        assertEquals( 3, data.getActions().size() );
+        assertEquals( "/aaa", data.getActions().get( 0 ) );
+        assertEquals( "/bbb/BAction", data.getActions().get( 1 ) );
+        assertEquals( "/ccc", data.getActions().get( 2 ) );
     }
 
     /**

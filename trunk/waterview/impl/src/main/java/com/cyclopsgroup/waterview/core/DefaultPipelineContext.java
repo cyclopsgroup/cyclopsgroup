@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,13 +18,13 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.List;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Default implementation of pipeline context
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultPipelineContext
@@ -59,7 +59,7 @@ public class DefaultPipelineContext
      *
      * @see com.cyclopsgroup.waterview.spi.PipelineContext#invokeNextValve(com.cyclopsgroup.waterview.RunData)
      */
-    public void invokeNextValve( RunData data )
+    public void invokeNextValve( RunDataSpi data )
         throws Exception
     {
         position++;
@@ -76,7 +76,7 @@ public class DefaultPipelineContext
      * @param data Page runtime object
      * @throws Exception Throw it out
      */
-    public void invokeValve( RunData data )
+    public void invokeValve( RunDataSpi data )
         throws Exception
     {
         if ( data.isStopped() )

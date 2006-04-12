@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,8 +17,8 @@
 package com.cyclopsgroup.waterview.jsp;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.BaseModuleRunnable;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -47,7 +47,7 @@ public class JspView
      * Overwrite or implement method render()
      * @see com.cyclopsgroup.waterview.spi.View#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.Context)
      */
-    public void render( RunData data, Context viewContext )
+    public void render( RunDataSpi data, Context viewContext )
         throws Exception
     {
         runModule( data, viewContext );

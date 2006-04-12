@@ -38,11 +38,11 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.CacheService;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.spi.Waterview;
 import com.cyclopsgroup.waterview.utils.TagLibrary;
 import com.cyclopsgroup.waterview.utils.TagPackage;
 import com.cyclopsgroup.waterview.utils.TagSupport;

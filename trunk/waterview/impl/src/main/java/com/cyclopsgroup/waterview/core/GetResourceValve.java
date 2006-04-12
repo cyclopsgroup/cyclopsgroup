@@ -27,9 +27,9 @@ import org.codehaus.plexus.util.IOUtil;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -51,7 +51,7 @@ public class GetResourceValve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke( RunData data, PipelineContext context )
+    public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
         String requestPath = data.getRequestPath();

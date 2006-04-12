@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,12 +30,12 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
-import com.cyclopsgroup.waterview.RunData;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Pipe line component
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class Pipeline
@@ -82,11 +82,11 @@ public class Pipeline
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void handleRuntime( RunData runtime )
+    public void handleRuntime( RunDataSpi data )
         throws Exception
     {
         DefaultPipelineContext dpc = new DefaultPipelineContext( valves );
-        dpc.invokeValve( runtime );
+        dpc.invokeValve( data );
     }
 
     /**

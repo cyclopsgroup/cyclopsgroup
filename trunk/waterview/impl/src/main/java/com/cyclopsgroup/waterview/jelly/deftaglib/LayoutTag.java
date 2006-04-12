@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,16 +19,16 @@ package com.cyclopsgroup.waterview.jelly.deftaglib;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.Layout;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout;
 import com.cyclopsgroup.waterview.spi.taglib.TagSupport;
 
 /**
  * Layout tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class LayoutTag
@@ -147,7 +147,7 @@ public class LayoutTag
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RunData data, Page page )
+    public void render( RunDataSpi data, Page page )
         throws Exception
     {
         getLayout().render( data, page );

@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,11 +14,12 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi;
+
 
 /**
  * Waterview interface
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public interface Waterview
@@ -35,6 +36,6 @@ public interface Waterview
      * @param runtime Runtime page runtime object
      * @throws Exception Throw it to caller
      */
-    void handleRuntime( RunData runtime )
+    void handleRuntime( RunDataSpi runtime )
         throws Exception;
 }

@@ -15,21 +15,24 @@ import org.apache.commons.lang.StringUtils;
 import com.cyclopsgroup.waterview.Parameters;
 import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Handle possible form
  */
-public class ProcessFormValve implements Valve
+public class ProcessFormValve
+    implements Valve
 {
-    private void fail(RunData data, PipelineContext pc) throws Exception
+    private void fail( RunData data, PipelineContext pc )
+        throws Exception
     {
         String url = data.getRefererUrl();
-        if (url.indexOf("keep_form=true") == -1)
+        if ( url.indexOf( "keep_form=true" ) == -1 )
         {
-            if (url.indexOf('?') == -1)
+            if ( url.indexOf( '?' ) == -1 )
             {
                 url += "?keep_form=true";
             }
@@ -38,7 +41,7 @@ public class ProcessFormValve implements Valve
                 url += "&keep_form=true";
             }
         }
-        data.setRedirectUrl(url);
+        data.setRedirectUrl( url );
     }
 
     /**
@@ -46,74 +49,73 @@ public class ProcessFormValve implements Valve
      *
      * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
      */
-    public void invoke(RunData data, PipelineContext pc) throws Exception
+    public void invoke( RunDataSpi data, PipelineContext pc )
+        throws Exception
     {
         Parameters params = data.getParameters();
-        String formId = params.getString("form_id");
+        String formId = params.getString( "form_id" );
         Form form = null;
-        if (StringUtils.isNotEmpty(formId))
+        if ( StringUtils.isNotEmpty( formId ) )
         {
-            form = (Form) data.getSessionContext().get(formId);
+            form = (Form) data.getSessionContext().get( formId );
         }
 
-        if (form == null)
+        if ( form == null )
         {
-            pc.invokeNextValve(data);
+            pc.invokeNextValve( data );
             return;
         }
 
         boolean hasError = false;
         Field[] fields = form.getFields();
-        for (int i = 0; i < fields.length; i++)
+        for ( int i = 0; i < fields.length; i++ )
         {
             Field field = fields[i];
-            field.setValue(params.getString(field.getName()));
+            field.setValue( params.getString( field.getName() ) );
             field.validate();
-            if (field.isPassword())
+            if ( field.isPassword() )
             {
-                field.setValue(StringUtils.EMPTY);
+                field.setValue( StringUtils.EMPTY );
             }
-            if (!hasError && field.isInvalid())
+            if ( !hasError && field.isInvalid() )
             {
                 hasError = true;
             }
         }
-        if (hasError)
+        if ( hasError )
         {
-            if (params.getBoolean("force_validation"))
+            if ( params.getBoolean( "force_validation" ) )
             {
-                fail(data, pc);
+                fail( data, pc );
                 return;
             }
         }
-        pc.invokeNextValve(data);
-        Boolean formInvalid = (Boolean) data.getRequestContext().get(
-                "formInvalid");
-        if (formInvalid != null && formInvalid.booleanValue())
+        pc.invokeNextValve( data );
+        Boolean formInvalid = (Boolean) data.getRequestContext().get( "formInvalid" );
+        if ( formInvalid != null && formInvalid.booleanValue() )
         {
-            Properties formErrors = (Properties) data.getRequestContext().get(
-                    "formErrors");
-            for (Iterator i = formErrors.keySet().iterator(); i.hasNext();)
+            Properties formErrors = (Properties) data.getRequestContext().get( "formErrors" );
+            for ( Iterator i = formErrors.keySet().iterator(); i.hasNext(); )
             {
                 String fieldName = (String) i.next();
-                String errorMessage = formErrors.getProperty(fieldName);
-                Field field = form.getField(fieldName);
-                if (field != null)
+                String errorMessage = formErrors.getProperty( fieldName );
+                Field field = form.getField( fieldName );
+                if ( field != null )
                 {
-                    field.setInvalid(true);
-                    if (StringUtils.isEmpty(errorMessage))
+                    field.setInvalid( true );
+                    if ( StringUtils.isEmpty( errorMessage ) )
                     {
-                        field.setErrorMessage("Invalid field value ");
+                        field.setErrorMessage( "Invalid field value " );
                     }
                     else
                     {
-                        field.setErrorMessage(errorMessage);
+                        field.setErrorMessage( errorMessage );
                     }
                 }
             }
-            if (params.getBoolean("force_validation"))
+            if ( params.getBoolean( "force_validation" ) )
             {
-                fail(data, pc);
+                fail( data, pc );
             }
         }
     }

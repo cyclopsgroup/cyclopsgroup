@@ -32,11 +32,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.Waterview;
 import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.MessageView;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
+import com.cyclopsgroup.waterview.spi.Waterview;
 
 /**
  * Velocity engine object

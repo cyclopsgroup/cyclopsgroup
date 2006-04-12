@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,13 +23,13 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import com.cyclopsgroup.waterview.MockRuntimeData;
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Test case for pipeline
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class PipelineTest
@@ -53,12 +53,12 @@ public class PipelineTest
          *
          * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
          */
-        public void invoke( RunData runtime, PipelineContext context )
+        public void invoke( RunDataSpi data, PipelineContext context )
             throws Exception
         {
-            List contents = (List) runtime.getRequestContext().get( "contents" );
+            List contents = (List) data.getRequestContext().get( "contents" );
             contents.add( value );
-            context.invokeNextValve( runtime );
+            context.invokeNextValve( data );
         }
     }
 

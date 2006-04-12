@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,11 +19,10 @@ package com.cyclopsgroup.waterview.spi;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
-import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
+ *
  * Base module runnable
  */
 public abstract class BaseModuleRunnable
@@ -35,7 +34,7 @@ public abstract class BaseModuleRunnable
      *
      * @param modulePath Path for module
      */
-    protected BaseModuleRunnable(String modulePath)
+    protected BaseModuleRunnable( String modulePath )
     {
         this.modulePath = modulePath;
     }
@@ -66,14 +65,13 @@ public abstract class BaseModuleRunnable
      * @param context Context
      * @throws Exception Simply throw it out
      */
-    protected void runModule(RunData data, Context context)
-            throws Exception
+    protected void runModule( RunDataSpi data, Context context )
+        throws Exception
     {
-        if (StringUtils.isNotEmpty(getModulePath()))
+        if ( StringUtils.isNotEmpty( getModulePath() ) )
         {
-            ModuleService moduleManager = (ModuleService) data
-                    .getServiceManager().lookup(ModuleService.ROLE);
-            moduleManager.runModule(modulePath, data, context);
+            ModuleService moduleManager = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
+            moduleManager.runModule( modulePath, data, context );
         }
     }
 }

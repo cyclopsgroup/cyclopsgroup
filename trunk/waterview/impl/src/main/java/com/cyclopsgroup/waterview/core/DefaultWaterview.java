@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -32,12 +32,12 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.RunData;
-import com.cyclopsgroup.waterview.Waterview;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
+import com.cyclopsgroup.waterview.spi.Waterview;
 
 /**
  * Default waterview implementation
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class DefaultWaterview
@@ -82,16 +82,16 @@ public class DefaultWaterview
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.Waterview#handleRuntime(com.cyclopsgroup.waterview.RunData)
+     * @see com.cyclopsgroup.waterview.spi.Waterview#handleRuntime(com.cyclopsgroup.waterview.RunData)
      */
-    public void handleRuntime( RunData runtime )
+    public void handleRuntime( RunDataSpi data )
         throws Exception
     {
         Pipeline pipeline = null;
         for ( Iterator i = pipelines.keySet().iterator(); i.hasNext(); )
         {
             String pattern = (String) i.next();
-            if ( Pattern.matches( '^' + pattern + '$', runtime.getRequestPath() ) )
+            if ( Pattern.matches( '^' + pattern + '$', data.getRequestPath() ) )
             {
                 pipeline = getPipeline( pattern );
                 break;
@@ -99,7 +99,7 @@ public class DefaultWaterview
         }
         if ( pipeline != null )
         {
-            pipeline.handleRuntime( runtime );
+            pipeline.handleRuntime( data );
         }
         else
         {

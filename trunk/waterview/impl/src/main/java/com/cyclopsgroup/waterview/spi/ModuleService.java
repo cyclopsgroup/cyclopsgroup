@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.spi;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.RunData;
 
 /**
  * Module manager
@@ -88,6 +87,6 @@ public interface ModuleService
      * @param context
      * @throws Exception
      */
-    void runModule( String modulePath, RunData data, Context context )
+    void runModule( String modulePath, RunDataSpi data, Context context )
         throws Exception;
 }

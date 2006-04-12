@@ -2,8 +2,8 @@ package com.cyclopsgroup.waterview.spi.taglib;
 
 import org.apache.commons.jelly.XMLOutput;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.JellyContextAdapter;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.View;
 
 /**
@@ -31,7 +31,7 @@ public abstract class BaseViewTag
     protected void processTag( XMLOutput output )
         throws Exception
     {
-        RunData data = getRunData();
+        RunDataSpi data = getRunData();
         try
         {
             final View view = createView();

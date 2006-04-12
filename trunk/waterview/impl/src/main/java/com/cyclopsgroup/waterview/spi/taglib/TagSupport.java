@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,10 +17,11 @@
 package com.cyclopsgroup.waterview.spi.taglib;
 
 import com.cyclopsgroup.waterview.RunData;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
 /**
  * Base jelly tag
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public abstract class TagSupport
@@ -31,8 +32,8 @@ public abstract class TagSupport
      *
      * @return PageRuntime object
      */
-    protected RunData getRunData()
+    protected RunDataSpi getRunData()
     {
-        return (RunData) getContext().getVariable( RunData.NAME );
+        return (RunDataSpi) getContext().getVariable( RunData.NAME );
     }
 }

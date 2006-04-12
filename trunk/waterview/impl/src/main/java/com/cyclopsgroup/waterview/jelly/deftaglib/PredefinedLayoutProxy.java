@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,9 +16,9 @@
  */
 package com.cyclopsgroup.waterview.jelly.deftaglib;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService;
 import com.cyclopsgroup.waterview.spi.Page;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.LookAndFeelService.PredefinedLayout;
 
 class PredefinedLayoutProxy
@@ -90,7 +90,7 @@ class PredefinedLayoutProxy
      *
      * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RunData data, Page page )
+    public void render( RunDataSpi data, Page page )
         throws Exception
     {
         getProxy().render( data, page );
