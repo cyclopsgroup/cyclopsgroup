@@ -14,7 +14,7 @@
                         <tr>
                             <td width="25%" valign="top" id="leftPanel">
                                 <j:set var="navigationNode" value="${selectedNode}" />
-                                <j:forEach var="view" items="${page.getPanelContent('navigation').views}">
+                                <j:forEach var="view" items="${data.pageObject.getPanelContent('navigation').views}">
                                     <w:RenderView view="${view}" />
                                 </j:forEach>
                             </td>
@@ -58,7 +58,8 @@
                                     </j:if>
                                     <tr>
                                         <td>
-                                            <j:forEach var="view" items="${page.getPanelContent('body').views}">
+                                            <j:forEach var="view"
+                                                items="${data.pageObject.getPanelContent('body').views}">
                                                 <w:RenderView view="${view}" />
                                             </j:forEach>
                                         </td>

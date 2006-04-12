@@ -117,7 +117,7 @@ public class ParseURLValve
             data.setLocale( locale );
         }
 
-        data.setPageObject( moduleService.createDefaultPage() );
+        data.setPageObject( moduleService.createDefaultPage( data ) );
         context.invokeNextValve( data );
     }
 

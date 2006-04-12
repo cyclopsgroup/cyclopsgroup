@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page xmlns="http://waterview.cyclopsgroup.com/ui">
     <PanelContent name="navigation">
+        <JellyView script="/waterview/view/pub/DefaultNavigationNode.jelly" />
         <View>
             <div xmlns="html">
                 <p>Some help links</p>

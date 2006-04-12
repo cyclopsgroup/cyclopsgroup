@@ -16,6 +16,10 @@
  */
 package com.cyclopsgroup.waterview.jelly;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -38,9 +42,28 @@ import com.cyclopsgroup.waterview.spi.Valve;
  */
 public class DeterminePageValve
     extends AbstractLogEnabled
-    implements Valve, Serviceable
+    implements Valve, Serviceable, Configurable, Initializable
 {
+    private String defaultPage;
+
+    private Script defaultPageScript;
+
     private JellyEngine jelly;
+
+    public void configure( Configuration conf )
+        throws ConfigurationException
+    {
+        defaultPage = conf.getChild( "default-page" ).getValue( null );
+    }
+
+    public void initialize()
+        throws Exception
+    {
+        if ( StringUtils.isNotEmpty( defaultPage ) )
+        {
+            defaultPageScript = jelly.getScript( defaultPage, (Script) null );
+        }
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -51,12 +74,14 @@ public class DeterminePageValve
         throws Exception
     {
         Path pagePath = data.getPage();
-        if ( pagePath == null )
-        {
-            throw new NullPointerException( "Path is not ready yet" );
-        }
+
         synchronized ( this )
         {
+            if ( defaultPageScript != null )
+            {
+                populatePage( data, defaultPageScript );
+            }
+
             String fullPath = "/page" + pagePath.getPath();
 
             Script pageScript = jelly.getScript( pagePath.getPackage(), fullPath, null );
@@ -86,7 +111,7 @@ public class DeterminePageValve
     private void populatePage( RunDataSpi data, Script script )
         throws JellyTagException
     {
-        JellyContext jc = new JellyContext( jelly.getGlobalContext() );
+        JellyContext jc = jelly.createJellyContext( data.getRequestContext() );
         script.run( jc, XMLOutput.createDummyXMLOutput() );
     }
 

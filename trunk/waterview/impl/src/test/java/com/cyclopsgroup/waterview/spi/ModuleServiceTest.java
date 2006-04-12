@@ -25,12 +25,6 @@ public class ModuleServiceTest
         moduleService = (ModuleService) lookup( ModuleService.ROLE );
     }
 
-    public void testDefaultPage()
-    {
-        Page page = moduleService.createDefaultPage();
-        assertNotNull( page );
-    }
-
     /**
      * @throws Exception
      */

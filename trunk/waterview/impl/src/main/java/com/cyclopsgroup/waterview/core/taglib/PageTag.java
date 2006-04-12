@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.core.taglib;
 
-import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.XMLOutput;
 
 import com.cyclopsgroup.waterview.spi.Page;
@@ -33,6 +32,16 @@ public class PageTag
     private Page page;
 
     /**
+     * Getter method for page
+     *
+     * @return Returns the page.
+     */
+    public Page getPage()
+    {
+        return page;
+    }
+
+    /**
      * Overwrite or implement method processTag()
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
@@ -41,20 +50,6 @@ public class PageTag
         throws Exception
     {
         page = getRunData().getPageObject();
-        if ( page == null )
-        {
-            throw new JellyTagException( "There must be a Page object defined here" );
-        }
         invokeBody( output );
-    }
-
-    /**
-     * Getter method for page
-     *
-     * @return Returns the page.
-     */
-    public Page getPage()
-    {
-        return page;
     }
 }

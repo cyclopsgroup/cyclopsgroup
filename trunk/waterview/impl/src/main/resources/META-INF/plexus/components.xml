@@ -32,6 +32,9 @@
             <role>com.cyclopsgroup.waterview.jelly.DeterminePageValve</role>
             <implementation>com.cyclopsgroup.waterview.jelly.DeterminePageValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <default-page>/waterview/page/DefaultPage.jelly</default-page>
+            </configuration>
         </component>
         <component>
             <role>com.cyclopsgroup.waterview.core.ResolveActionsValve</role>
@@ -58,7 +61,6 @@
             <implementation>com.cyclopsgroup.waterview.core.OpenViewValve</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
-
         <component>
             <role>com.cyclopsgroup.waterview.spi.I18NService</role>
             <implementation>com.cyclopsgroup.waterview.core.ResourceBundleI18NService</implementation>

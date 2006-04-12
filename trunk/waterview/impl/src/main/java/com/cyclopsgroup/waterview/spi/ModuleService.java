@@ -36,7 +36,7 @@ public interface ModuleService
      *
      * @return Create new default page
      */
-    Page createDefaultPage();
+    Page createDefaultPage( RunDataSpi data );
 
     /**
      * Create view dynamically

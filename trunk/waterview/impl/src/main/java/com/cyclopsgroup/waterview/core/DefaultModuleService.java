@@ -73,13 +73,14 @@ public class DefaultModuleService
     }
 
     /**
-     * @todo Not implemented yet
-     *
-     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDefaultPage()
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#createDefaultPage(com.cyclopsgroup.waterview.spi.RunDataSpi)
      */
-    public Page createDefaultPage()
+    public Page createDefaultPage( RunDataSpi data )
     {
-        return new Page();
+        Page page = new Page();
+        data.setPageObject( page );
+
+        return page;
     }
 
     /**
