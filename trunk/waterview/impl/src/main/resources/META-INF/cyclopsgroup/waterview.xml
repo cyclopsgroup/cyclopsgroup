@@ -14,7 +14,7 @@
     <Layout name="waterview.layout.default">
         <JellyLayout script="/waterview/layout/DefaultLayout.jelly" />
     </Layout>
-    <Layout name="layout.rawview">
+    <Layout name="waterview.layout.raw">
         <JellyLayout script="/waterview/layout/RawViewLayout.jelly" />
     </Layout>
 </Waterview>

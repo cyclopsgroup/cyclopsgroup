@@ -12,6 +12,24 @@ import com.cyclopsgroup.waterview.jelly.JellyEngine;
 public class ModuleServiceTest
     extends PlexusTestCase
 {
+    private ModuleService moduleService;
+
+    /**
+     * @see org.codehaus.plexus.PlexusTestCase#setUp()
+     */
+    protected void setUp()
+        throws Exception
+    {
+        super.setUp();
+        lookup( JellyEngine.ROLE );
+        moduleService = (ModuleService) lookup( ModuleService.ROLE );
+    }
+
+    public void testDefaultPage()
+    {
+        Page page = moduleService.createDefaultPage();
+        assertNotNull( page );
+    }
 
     /**
      * @throws Exception
@@ -19,9 +37,16 @@ public class ModuleServiceTest
     public void testGetPackage()
         throws Exception
     {
-        lookup( JellyEngine.ROLE );
-        ModuleService mm = (ModuleService) lookup( ModuleService.ROLE );
-        Path path = mm.parsePath( "/waterview/x/Xyz.jelly" );
+        Path path = moduleService.parsePath( "/waterview/x/Xyz.jelly" );
         assertEquals( "/x/Xyz", path.getPathWithoutExtension() );
+    }
+
+    /**
+     * Test the availability of layouts
+     */
+    public void testLayouts()
+    {
+        Layout defaultLayout = moduleService.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
+        assertNotNull( defaultLayout );
     }
 }
