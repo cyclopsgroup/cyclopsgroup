@@ -1,5 +1,5 @@
 /* ==========================================================================
- * Copyright 2002-2004 Cyclops Group Community
+ * Copyright 2002-2005 Cyclops Group Community
  * 
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,39 +14,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
-
-import org.apache.commons.fileupload.FileItem;
+package com.cyclopsgroup.waterview.utils;
 
 /**
- * Typed value parser
+ * Clib tag library
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class Parameters
-    extends Attributes
+public class TagLibrary
+    extends org.apache.commons.jelly.TagLibrary
 {
     /**
-     * Comment for <code>EMPTY_FILEITEM_ARRAY</code>
+     * Register a package of tags
+     *
+     * @param pkg Tag package
      */
-    public static final FileItem[] EMPTY_FILEITEM_ARRAY = new FileItem[0];
-
-    /** Name of it in context */
-    public static String NAME = "params";
+    public void registerPackage( TagPackage pkg )
+    {
+        String[] tagNames = pkg.getTagNames();
+        for ( int i = 0; i < tagNames.length; i++ )
+        {
+            String tagName = tagNames[i];
+            Class tagClass = pkg.getTagClass( tagName );
+            registerTag( tagName, tagClass );
+        }
+    }
 
     /**
-     * Get file item object
+     * Override or implement method of parent class or interface
      *
-     * @param name Name of field
-     * @return FileItem object
+     * @see org.apache.commons.jelly.TagLibrary#registerTag(java.lang.String, java.lang.Class)
      */
-    public abstract FileItem getFileItem( String name );
-
-    /**
-     * Get array of file items
-     *
-     * @param name Name of variable
-     * @return File item array FileItem array
-     */
-    public abstract FileItem[] getFileItems( String name );
+    public void registerTag( String name, Class type )
+    {
+        super.registerTag( name, type );
+    }
 }

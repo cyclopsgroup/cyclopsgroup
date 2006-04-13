@@ -1,6 +1,6 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
+ *
  * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,22 +14,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.spi.taglib;
+
+import com.cyclopsgroup.waterview.RunData;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
 /**
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * 
- * Module will be attached to view/frame/layout/panel...
+ * Base jelly tag
+ *
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public interface Module
+public abstract class TagSupport
+    extends com.cyclopsgroup.waterview.utils.TagSupport
 {
     /**
-     * Run this module
+     * Convenient method to get PageRuntime
      *
-     * @param data Runtime data
-     * @param context Environment context
-     * @throws Exception Throw it out
+     * @return PageRuntime object
      */
-    void execute( RunData data, Context context )
-        throws Exception;
+    protected RunDataSpi getRunData()
+    {
+        return (RunDataSpi) getContext().getVariable( RunData.NAME );
+    }
 }
