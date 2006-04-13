@@ -3,12 +3,12 @@
     <PanelContent name="navigation">
         <JellyView script="/waterview/view/pub/DefaultNavigationNode.jelly" />
         <View>
-            <div xmlns="html">
+            <div xmlns="http://www.w3.org/1999/xhtml">
                 <p>Some help links</p>
             </div>
         </View>
         <View>
-            <div xmlns="html">
+            <div xmlns="http://www.w3.org/1999/xhtml">
                 <p>Some reference links</p>
             </div>
         </View>
