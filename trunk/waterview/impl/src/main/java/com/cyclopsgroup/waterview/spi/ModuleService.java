@@ -82,6 +82,12 @@ public interface ModuleService
      */
     void registerDynaViewFactory( String pattern, DynaViewFactory viewFactory );
 
+    /**
+     * Register an existing layout
+     *
+     * @param name Layout name
+     * @param layout Layout object
+     */
     void registerLayout( String name, Layout layout );
 
     /**
