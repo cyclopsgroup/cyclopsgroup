@@ -50,12 +50,18 @@ public class DeterminePageValve
 
     private JellyEngine jelly;
 
+    /**
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
     public void configure( Configuration conf )
         throws ConfigurationException
     {
         defaultPage = conf.getChild( "default-page" ).getValue( null );
     }
 
+    /**
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
     public void initialize()
         throws Exception
     {
