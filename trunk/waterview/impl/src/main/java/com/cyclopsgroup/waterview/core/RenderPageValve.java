@@ -66,7 +66,7 @@ public class RenderPageValve
         }
         if ( layout == null )
         {
-            layout = moduleService.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
+            layout = moduleService.getDefaultLayout();
         }
         page.setLayout( layout );
         layout.render( data, page );

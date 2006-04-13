@@ -40,7 +40,7 @@ public class ModuleServiceTest
      */
     public void testLayouts()
     {
-        Layout defaultLayout = moduleService.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
+        Layout defaultLayout = moduleService.getDefaultLayout();
         assertNotNull( defaultLayout );
     }
 }

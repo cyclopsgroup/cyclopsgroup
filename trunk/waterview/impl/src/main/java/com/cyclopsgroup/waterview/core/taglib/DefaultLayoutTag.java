@@ -41,7 +41,7 @@ public class DefaultLayoutTag
     {
         Page page = getRunData().getPageObject();
         ModuleService modules = (ModuleService) getServiceManager().lookup( ModuleService.ROLE );
-        Layout defaultLayout = modules.getLayout( ModuleService.DEFAULT_LAYOUT_NAME );
+        Layout defaultLayout = modules.getDefaultLayout();
         page.setLayout( defaultLayout );
     }
 }

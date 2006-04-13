@@ -49,6 +49,8 @@ public class DefaultModuleService
     implements Configurable, ModuleService, DynaViewFactory, Initializable
 {
 
+    private String defaultLayoutName = "waterview.layout.default";
+
     private String defaultPackageAlias = "waterview";
 
     private Hashtable dynaViewFactories = new Hashtable();
@@ -70,6 +72,7 @@ public class DefaultModuleService
         {
             defaultPackageAlias = defaultPackage;
         }
+        defaultLayoutName = conf.getChild( "default-layout" ).getValue( "waterview.layout.default" );
     }
 
     /**
@@ -126,6 +129,14 @@ public class DefaultModuleService
                 runModule( path, data, viewContext );
             }
         };
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.spi.ModuleService#getDefaultLayout()
+     */
+    public Layout getDefaultLayout()
+    {
+        return getLayout( defaultLayoutName );
     }
 
     /**
