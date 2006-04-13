@@ -82,9 +82,9 @@ public class DefaultWaterview
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.spi.Waterview#handleRuntime(com.cyclopsgroup.waterview.RunData)
+     * @see com.cyclopsgroup.waterview.spi.Waterview#handleRunData(com.cyclopsgroup.waterview.RunData)
      */
-    public void handleRuntime( RunDataSpi data )
+    public void handleRunData( RunDataSpi data )
         throws Exception
     {
         Pipeline pipeline = null;

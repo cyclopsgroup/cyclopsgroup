@@ -36,6 +36,6 @@ public interface Waterview
      * @param runtime Runtime page runtime object
      * @throws Exception Throw it to caller
      */
-    void handleRuntime( RunDataSpi runtime )
+    void handleRunData( RunDataSpi runtime )
         throws Exception;
 }
