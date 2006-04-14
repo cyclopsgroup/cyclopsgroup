@@ -82,7 +82,7 @@ public class Pipeline
      * @param runtime Page runtime object
      * @throws Exception Throw it out
      */
-    public void handleRuntime( RunDataSpi data )
+    public void processRunData( RunDataSpi data )
         throws Exception
     {
         DefaultPipelineContext dpc = new DefaultPipelineContext( valves );

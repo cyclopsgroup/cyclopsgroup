@@ -16,15 +16,13 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-import org.codehaus.plexus.PlexusTestCase;
-
-import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
+import com.cyclopsgroup.waterview.test.MockRunData;
+import com.cyclopsgroup.waterview.test.WaterviewTestCase;
 
 /**
  * Test case for ParseURLValve
@@ -32,7 +30,7 @@ import com.cyclopsgroup.waterview.spi.RunDataSpi;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class ParseURLValveTest
-    extends PlexusTestCase
+    extends WaterviewTestCase
 {
     /**
      * Test invocation
@@ -43,7 +41,7 @@ public class ParseURLValveTest
         throws Exception
     {
         lookup( JellyEngine.ROLE );
-        MockRuntimeData data = new MockRuntimeData( new PrintWriter( System.out ) );
+        MockRunData data = createRunData();
         data.setRequestPath( "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly" );
         ParseURLValve v = (ParseURLValve) lookup( ParseURLValve.class.getName() );
         v.invoke( data, new PipelineContext()

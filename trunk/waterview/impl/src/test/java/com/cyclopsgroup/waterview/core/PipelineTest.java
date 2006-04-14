@@ -16,16 +16,14 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import com.cyclopsgroup.waterview.MockRuntimeData;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
+import com.cyclopsgroup.waterview.test.MockRunData;
+import com.cyclopsgroup.waterview.test.WaterviewTestCase;
 
 /**
  * Test case for pipeline
@@ -33,7 +31,7 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public class PipelineTest
-    extends TestCase
+    extends WaterviewTestCase
 {
     private class TestValve
         implements Valve
@@ -71,13 +69,13 @@ public class PipelineTest
         throws Exception
     {
         Pipeline pipeline = new Pipeline();
-        MockRuntimeData runtime = new MockRuntimeData( new PrintWriter( System.out ) );
+        MockRunData data = createRunData();
         List contents = new ArrayList();
-        runtime.getRequestContext().put( "contents", contents );
+        data.getRequestContext().put( "contents", contents );
         pipeline.addValve( new TestValve( "aaa" ) );
         pipeline.addValve( new TestValve( "bbb" ) );
         pipeline.addValve( new TestValve( "ccc" ) );
-        pipeline.handleRuntime( runtime );
+        pipeline.processRunData( data );
         assertEquals( 3, contents.size() );
         Object[] c = contents.toArray();
         assertEquals( "aaa", c[0] );

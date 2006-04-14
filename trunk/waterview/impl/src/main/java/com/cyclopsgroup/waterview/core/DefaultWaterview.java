@@ -99,7 +99,7 @@ public class DefaultWaterview
         }
         if ( pipeline != null )
         {
-            pipeline.handleRuntime( data );
+            pipeline.processRunData( data );
         }
         else
         {

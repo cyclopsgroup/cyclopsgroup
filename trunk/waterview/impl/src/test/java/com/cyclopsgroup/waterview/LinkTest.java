@@ -16,9 +16,8 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.io.PrintWriter;
-
-import junit.framework.TestCase;
+import com.cyclopsgroup.waterview.test.MockRunData;
+import com.cyclopsgroup.waterview.test.WaterviewTestCase;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -26,14 +25,15 @@ import junit.framework.TestCase;
  * Test case for link
  */
 public class LinkTest
-    extends TestCase
+    extends WaterviewTestCase
 {
     /**
      * TEst link
      */
     public void testLink()
+        throws Exception
     {
-        MockRuntimeData data = new MockRuntimeData( new PrintWriter( System.out ) );
+        MockRunData data = createRunData();
         data.setPage( "/aaa/Index.vm" );
         Link link = new Link( data );
         link.setPage( "/Bbb.vm" );

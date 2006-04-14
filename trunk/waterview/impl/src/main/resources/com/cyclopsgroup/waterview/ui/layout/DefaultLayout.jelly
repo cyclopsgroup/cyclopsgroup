@@ -60,7 +60,9 @@
                                         <td>
                                             <j:forEach var="view"
                                                 items="${data.pageObject.getPanelContent('body').views}">
-                                                <w:RenderView view="${view}" />
+                                                <div style="padding: 10px">
+                                                    <w:RenderView view="${view}" />
+                                                </div>
                                             </j:forEach>
                                         </td>
                                     </tr>
