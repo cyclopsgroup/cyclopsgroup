@@ -4,7 +4,7 @@ import com.cyclopsgroup.waterview.AbstractRunData;
 import com.cyclopsgroup.waterview.spi.Page;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
-class MockRunData
+public class MockRunData
     extends AbstractRunData
     implements RunDataSpi
 {

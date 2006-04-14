@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import org.codehaus.plexus.PlexusTestCase;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.utils.ServiceManagerAdapter;
 
 public class WaterviewTestCase
@@ -19,7 +18,7 @@ public class WaterviewTestCase
      * 
      * @return New create rundata
      */
-    protected RunData createRunData()
+    protected MockRunData createRunData()
     {
         MockRunData data = new MockRunData();
         data.setServiceManager( new ServiceManagerAdapter( getContainer() ) );
