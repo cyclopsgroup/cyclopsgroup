@@ -1,9 +1,9 @@
 package com.cyclopsgroup.waterview.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.codehaus.plexus.PlexusTestCase;
 
 import com.cyclopsgroup.waterview.RunData;
@@ -14,18 +14,6 @@ public class WaterviewTestCase
 {
     public static final String PLEXUS_COMPONENT_DESCRIPTOR = "src/main/webapp/WEB-INF/waterview-components.xml";
 
-    protected ServiceManager serviceManager;
-
-    /**
-     * @see junit.framework.TestCase#setUp()
-     */
-    protected void setUp()
-        throws Exception
-    {
-        super.setUp();
-        serviceManager = new ServiceManagerAdapter( getContainer() );
-    }
-
     /**
      * Create mock RunData
      * 
@@ -34,19 +22,9 @@ public class WaterviewTestCase
     protected RunData createRunData()
     {
         MockRunData data = new MockRunData();
-        data.setServiceManager( getServiceManager() );
+        data.setServiceManager( new ServiceManagerAdapter( getContainer() ) );
 
         return data;
-    }
-
-    /**
-     * Get avalon service manager
-     * 
-     * @return ServiceManager object
-     */
-    public ServiceManager getServiceManager()
-    {
-        return serviceManager;
     }
 
     /**
@@ -55,6 +33,12 @@ public class WaterviewTestCase
     protected InputStream getCustomConfiguration()
         throws Exception
     {
+        File descriptor = new File( getConstomConfigurationPath() );
+        if ( !descriptor.exists() )
+        {
+            System.out.println( "Plexus descriptor file " + descriptor.getAbsolutePath() + " doesn't exist" );
+            return null;
+        }
         return new FileInputStream( getConstomConfigurationPath() );
     }
 
