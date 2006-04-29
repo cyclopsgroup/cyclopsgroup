@@ -3,6 +3,7 @@ body {
         Sans-Serif;
     color: #333333;
     background-color: white;
+    margin: 0px;
 }
 
 h1,h2,h3,h4,h5 {
@@ -17,6 +18,11 @@ a:link,a:visited {
     color: #333333;
 }
 
+img {
+    border-width: 0px;
+    border-style: none;
+}
+
 #contentBox h2 {
     border-width: 0px 0px 2px 0px;
     border-style: dashed;
@@ -27,6 +33,10 @@ a:link,a:visited {
 
 #contentBox p, #contentBox {
     font-size: 10pt;
+}
+
+#contentBox .bodyTable {
+    width: 100%;
 }
 
 #contentBox .bodyTable th {
@@ -72,6 +82,18 @@ a:link,a:visited {
     font-style: italic;
 }
 
+.xright {
+    float: right;
+}
+
+.xleft {
+    float: left;
+}
+
+#breadcrumbs {
+    height: 15px;
+}
+
 #breadcrumbs,#leftColumn li,#footer {
     font-size: 8pt;
 }
@@ -102,6 +124,11 @@ a:link,a:visited {
 #navcolumn li,#navcolumn ul {
     padding: 0px 0px 0px 6px;
     line-height: 18px;
+    margin-left: 0px;
+}
+
+#navcolumn li {
+    list-style: none;
 }
 
 #navcolumn li.expanded,#navcolumn li.collapsed {
