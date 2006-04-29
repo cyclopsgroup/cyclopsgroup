@@ -1,3 +1,7 @@
+@import url("http://cyclops-group.sourceforge.net/css/site-base.css");
+
+/*
+
 body {
     text-align: center;
     background: url('../images/body_background.gif') repeat-x;
@@ -97,3 +101,5 @@ a:link, a:visited {
 #leftColumn li.expanded {
 	background-image: url('../images/expanded_folder_16.png');
 }
+
+*/
