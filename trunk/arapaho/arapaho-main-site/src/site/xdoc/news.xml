@@ -6,12 +6,15 @@
     </properties>
     <body>
         <section name="Rencet news">
-            <script language="javascript" src="js/rsscontrol.js" />
-            <script language="javascript">
-                <![CDATA[ displayRss('http://dev.cyclopsgroup.com/kb/createrssfeed.action?types=blogpost&statuses=created&spaces=&labelString=&rssType=rss2&maxResults=20&timeSpan=500&publicFeed=true&title=Last+5+news'); ]]>
-            </script>
             <p>
-                <a href="http://dev.cyclopsgroup.org/kb/pages/viewrecentblogposts.action?key=portal">Read more..</a>
+                <script language="javascript" src="js/rsscontrol.js" />
+                <script language="javascript">
+                    <![CDATA[displayRss('http://sourceforge.net/export/rss2_projnews.php?group_id=91358');]]>
+                </script>
+                <a
+                    href="http://sourceforge.net/projects/cyclops-group">
+                    More..
+                </a>
             </p>
         </section>
     </body>
