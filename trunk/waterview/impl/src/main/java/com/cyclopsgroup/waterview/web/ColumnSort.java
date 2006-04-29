@@ -26,6 +26,11 @@ import org.apache.commons.lang.enums.Enum;
 public final class ColumnSort
     extends Enum
 {
+    /**
+     * Generated serial ID
+     */
+    private static final long serialVersionUID = 5183468517358245865L;
+
     /** Ascendingly sorted */
     public static ColumnSort ASC = new ColumnSort( "asc" );
 

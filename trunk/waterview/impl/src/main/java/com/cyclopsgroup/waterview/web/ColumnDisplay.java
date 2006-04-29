@@ -27,6 +27,11 @@ public final class ColumnDisplay
     extends Enum
 {
     /**
+     * Generated serial ID
+     */
+    private static final long serialVersionUID = 878194429685051218L;
+
+    /**
      * Forced to display
      */
     public static ColumnDisplay FORCED = new ColumnDisplay( "forced" );

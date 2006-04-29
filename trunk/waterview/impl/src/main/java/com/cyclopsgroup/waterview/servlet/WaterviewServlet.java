@@ -52,6 +52,8 @@ import com.cyclopsgroup.waterview.utils.ServiceManagerAdapter;
 public class WaterviewServlet
     extends HttpServlet
 {
+    private static final long serialVersionUID = -2766216543035975372L;
+
     private static final String REQUEST_NAME = "request";
 
     private static final String RESPONSE_NAME = "response";
