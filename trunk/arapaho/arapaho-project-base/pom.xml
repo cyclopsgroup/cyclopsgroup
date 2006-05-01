@@ -80,7 +80,7 @@
         <developerConnection>
             scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-project-base
         </developerConnection>
-        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-project-base</url>
+        <url>http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/arapaho/arapaho-project-base</url>
     </scm>
     <organization>
         <name>Cyclops Group</name>
