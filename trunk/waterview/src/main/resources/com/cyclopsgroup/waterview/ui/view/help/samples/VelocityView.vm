@@ -1,8 +1,0 @@
-<h2>Velocity File</h2>
-<p>This is a velocity file example
-	<ul>
-		#foreach($i in [1..20])
-		 <li>Line $i</li>
-		#end
-	</ul>
-</p>
