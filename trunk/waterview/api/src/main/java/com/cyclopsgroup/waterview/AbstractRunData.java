@@ -18,12 +18,13 @@ package com.cyclopsgroup.waterview;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.LinkedList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -31,10 +32,9 @@ import org.apache.commons.lang.ArrayUtils;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-public abstract class AbstractRunData implements RunData
+public abstract class AbstractRunData
+    implements RunData
 {
-    private List actions = new LinkedList();
-
     private String applicationBaseUrl;
 
     private String inputContentType;
@@ -48,6 +48,8 @@ public abstract class AbstractRunData implements RunData
     private Path page;
 
     private String pageBaseUrl;
+
+    private MultiHashMap paths = new MultiHashMap();
 
     private String queryString;
 
@@ -70,16 +72,6 @@ public abstract class AbstractRunData implements RunData
     private boolean stopped;
 
     private TimeZone timeZone = TimeZone.getDefault();
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getActions()
-     */
-    public List getActions()
-    {
-        return actions;
-    }
 
     /**
      * Override or implement method of parent class or interface
@@ -118,13 +110,12 @@ public abstract class AbstractRunData implements RunData
      */
     public String[] getMessages()
     {
-        List messages = (List) getSessionContext().get(MESSAGES_NAME);
-        if (messages == null)
+        List messages = (List) getSessionContext().get( MESSAGES_NAME );
+        if ( messages == null )
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        String[] ret = (String[]) messages
-                .toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        String[] ret = (String[]) messages.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
         messages.clear();
         return ret;
     }
@@ -177,6 +168,24 @@ public abstract class AbstractRunData implements RunData
     public Parameters getParameters()
     {
         return requestParameters;
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.RunData#getPath(java.lang.String)
+     */
+    public Path getPath( String pathInstruction )
+    {
+        Path[] ps = getPaths( pathInstruction );
+        return ps.length == 0 ? null : ps[0];
+    }
+
+    /**
+     * @see com.cyclopsgroup.waterview.RunData#getPaths(java.lang.String)
+     */
+    public Path[] getPaths( String pathInstruction )
+    {
+        Collection ps = (Collection) paths.get( pathInstruction );
+        return ps == null || ps.isEmpty() ? Path.EMPTY_ARRAY : (Path[]) ps.toArray( Path.EMPTY_ARRAY );
     }
 
     /**
@@ -282,12 +291,12 @@ public abstract class AbstractRunData implements RunData
      *
      * @param applicationBaseUrl The applicationBaseUrl to set.
      */
-    public void setApplicationBaseUrl(String applicationBaseUrl)
+    public void setApplicationBaseUrl( String applicationBaseUrl )
     {
         this.applicationBaseUrl = applicationBaseUrl;
-        if (getRequestContext() != null)
+        if ( getRequestContext() != null )
         {
-            getRequestContext().put("applicationBase", applicationBaseUrl);
+            getRequestContext().put( "applicationBase", applicationBaseUrl );
         }
     }
 
@@ -296,7 +305,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param inputContentType The inputContentType to set.
      */
-    public void setInputContentType(String inputContentType)
+    public void setInputContentType( String inputContentType )
     {
         this.inputContentType = inputContentType;
     }
@@ -306,7 +315,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#setLocale(java.util.Locale)
      */
-    public void setLocale(Locale locale)
+    public void setLocale( Locale locale )
     {
         this.locale = locale;
     }
@@ -316,7 +325,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param output The output to set.
      */
-    public void setOutput(PrintWriter output)
+    public void setOutput( PrintWriter output )
     {
         this.output = output;
     }
@@ -326,7 +335,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param outputStream The outputStream to set.
      */
-    public void setOutputStream(OutputStream outputStream)
+    public void setOutputStream( OutputStream outputStream )
     {
         this.outputStream = outputStream;
     }
@@ -336,9 +345,9 @@ public abstract class AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#setPage(com.cyclopsgroup.waterview.Path)
      */
-    public void setPage(Path page)
+    public void setPage( Path page )
     {
-        getRequestContext().put(PAGE_NAME, page);
+        getRequestContext().put( PAGE_NAME, page );
         this.page = page;
     }
 
@@ -347,12 +356,12 @@ public abstract class AbstractRunData implements RunData
      *
      * @param pageBaseUrl The pageBaseUrl to set.
      */
-    public void setPageBaseUrl(String pageBaseUrl)
+    public void setPageBaseUrl( String pageBaseUrl )
     {
         this.pageBaseUrl = pageBaseUrl;
-        if (getRequestContext() != null)
+        if ( getRequestContext() != null )
         {
-            getRequestContext().put("pageBase", pageBaseUrl);
+            getRequestContext().put( "pageBase", pageBaseUrl );
         }
     }
 
@@ -361,9 +370,20 @@ public abstract class AbstractRunData implements RunData
      *
      * @param requestParameters The requestParameters to set.
      */
-    public void setParams(Parameters requestParameters)
+    public void setParams( Parameters requestParameters )
     {
         this.requestParameters = requestParameters;
+    }
+
+    /**
+     * Set a path
+     * 
+     * @param pathInstruction Path instruction without decorator, like display, get...
+     * @param path Path object
+     */
+    public void setPath( String pathInstruction, Path path )
+    {
+        paths.put( pathInstruction, path );
     }
 
     /**
@@ -371,7 +391,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param queryString The queryString to set.
      */
-    public void setQueryString(String queryString)
+    public void setQueryString( String queryString )
     {
         this.queryString = queryString;
     }
@@ -381,7 +401,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @see com.cyclopsgroup.waterview.RunData#setRedirectUrl(java.lang.String)
      */
-    public void setRedirectUrl(String url)
+    public void setRedirectUrl( String url )
     {
         redirectUrl = url;
     }
@@ -391,7 +411,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param refererUrl The refererUrl to set.
      */
-    public void setRefererUrl(String refererUrl)
+    public void setRefererUrl( String refererUrl )
     {
         this.refererUrl = refererUrl;
     }
@@ -400,7 +420,7 @@ public abstract class AbstractRunData implements RunData
      * Set request context
      * @param pageContext Context object
      */
-    public void setRequestContext(Context pageContext)
+    public void setRequestContext( Context pageContext )
     {
         this.requestContext = pageContext;
     }
@@ -410,7 +430,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param requestPath The requestPath to set.
      */
-    public void setRequestPath(String requestPath)
+    public void setRequestPath( String requestPath )
     {
         this.requestPath = requestPath;
     }
@@ -420,7 +440,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param serviceManager The serviceManager to set.
      */
-    public void setServiceManager(ServiceManager serviceManager)
+    public void setServiceManager( ServiceManager serviceManager )
     {
         this.serviceManager = serviceManager;
     }
@@ -430,7 +450,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param sessionContext The sessionContext to set.
      */
-    public void setSessionContext(Context sessionContext)
+    public void setSessionContext( Context sessionContext )
     {
         this.sessionContext = sessionContext;
     }
@@ -439,7 +459,7 @@ public abstract class AbstractRunData implements RunData
      * Set session ID
      * @param sessionId
      */
-    public void setSessionId(String sessionId)
+    public void setSessionId( String sessionId )
     {
         this.sessionId = sessionId;
     }
@@ -449,7 +469,7 @@ public abstract class AbstractRunData implements RunData
      *
      * @param timeZone The timeZone to set.
      */
-    public void setTimeZone(TimeZone timeZone)
+    public void setTimeZone( TimeZone timeZone )
     {
         this.timeZone = timeZone;
     }

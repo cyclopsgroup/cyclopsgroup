@@ -27,6 +27,16 @@ public class WaterviewTestCase
     }
 
     /**
+     * Get the file path of custom plexus configuration
+     * 
+     * @return Path of custom configuration file
+     */
+    protected String getConstomConfigurationPath()
+    {
+        return PLEXUS_COMPONENT_DESCRIPTOR;
+    }
+
+    /**
      * @see org.codehaus.plexus.PlexusTestCase#getCustomConfiguration()
      */
     protected InputStream getCustomConfiguration()
@@ -42,12 +52,10 @@ public class WaterviewTestCase
     }
 
     /**
-     * Get the file path of custom plexus configuration
-     * 
-     * @return Path of custom configuration file
+     * Eliminate the problem of empty test case
      */
-    protected String getConstomConfigurationPath()
+    public void testDummy()
     {
-        return PLEXUS_COMPONENT_DESCRIPTOR;
+        //do nothing
     }
 }

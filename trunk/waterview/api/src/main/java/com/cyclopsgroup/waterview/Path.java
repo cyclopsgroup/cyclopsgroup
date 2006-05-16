@@ -8,6 +8,10 @@ package com.cyclopsgroup.waterview;
 public interface Path
 {
     /**
+     * Empty path array
+     */
+    Path[] EMPTY_ARRAY = new Path[0];
+    /**
      * Get extension of this path
      *
      * @return Extension of empty string if there's no extension

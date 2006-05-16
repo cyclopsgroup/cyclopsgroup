@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -56,13 +55,6 @@ public interface RunData
     String SERVICE_MANAGER_NAME = "serviceManager";
 
     /**
-     * Get modifiable processor list
-     *
-     * @return Modifiable list
-     */
-    List getActions();
-
-    /**
      * Get base url for this waterview application
      *
      * @return Base url
@@ -94,7 +86,7 @@ public interface RunData
      * @param fileName Name of file
      * @return Mimetype
      */
-    String getMimeType(String fileName);
+    String getMimeType( String fileName );
 
     /**
      * Get output print writer
@@ -116,6 +108,10 @@ public interface RunData
      * @return Render template
      */
     Path getPage();
+
+    Path getPath( String pathInstruction );
+
+    Path[] getPaths( String pathInstruction );
 
     /**
      * Base url for page
@@ -206,21 +202,21 @@ public interface RunData
      *
      * @param locale Locale to set
      */
-    void setLocale(Locale locale);
+    void setLocale( Locale locale );
 
     /**
      * Set content type for response
      *
      * @param contentType Content type
      */
-    void setOutputContentType(String contentType);
+    void setOutputContentType( String contentType );
 
     /**
      * Set page with Page model
      *
      * @param page Page path
      */
-    void setPage(Path page);
+    void setPage( Path page );
 
     /**
      * Set page to render
@@ -228,12 +224,13 @@ public interface RunData
      * @param page Page path
      * @throws Exception Throw it out
      */
-    void setPage(String page) throws Exception;
+    void setPage( String page )
+        throws Exception;
 
     /**
      * @param url URL to redirect
      */
-    void setRedirectUrl(String url);
+    void setRedirectUrl( String url );
 
     /**
      * Stop the pipeline

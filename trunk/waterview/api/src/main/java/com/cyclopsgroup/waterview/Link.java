@@ -28,20 +28,17 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Link
 {
-    /** Do action instruction */
-    public static final String ACTION_INSTRUCTOR = "!do!";
-
     /** Encoding for parameters */
     public static final String ENCODING = "UTF-8";
 
-    /** Get resource instructor */
-    public static final String GET_INSTRUCTOR = "!get!";
+    public static final String INSTRUCTION_DISPLAY = "display";
+
+    public static final String INSTRUCTION_DO = "do";
+
+    public static final String INSTRUCTION_GET = "get";
 
     /** Name of this tool */
     private static final String NAME = "link";
-
-    /** Show page instruction */
-    public static final String PAGE_INSTRUCTOR = "!show!";
 
     /**
      * Get instance from runtime data
@@ -86,8 +83,20 @@ public class Link
      */
     public Link addAction( String action )
     {
+        return addPath( INSTRUCTION_DO, action );
+    }
+
+    /**
+     * Add arbituary path with given instruction
+     * 
+     * @param instruction Instruction name
+     * @param path Path to add
+     * @return Link itself
+     */
+    public Link addPath( String instruction, String path )
+    {
         checkDisposed();
-        requestPath.append( '/' ).append( ACTION_INSTRUCTOR ).append( getPath( action ) );
+        requestPath.append( "/!" ).append( instruction ).append( "!" ).append( path );
         return this;
     }
 
@@ -176,7 +185,7 @@ public class Link
     public String getResource( String path )
     {
         StringBuffer sb = new StringBuffer( data.getPageBaseUrl() );
-        sb.append( '/' ).append( GET_INSTRUCTOR );
+        sb.append( "/!" ).append( INSTRUCTION_GET ).append( '!' );
         sb.append( getPath( path ) );
         return sb.toString();
     }
@@ -201,9 +210,7 @@ public class Link
      */
     public Link setPage( String path )
     {
-        checkDisposed();
-        requestPath.append( '/' ).append( PAGE_INSTRUCTOR ).append( getPath( path ) );
-        return this;
+        return addPath( INSTRUCTION_DISPLAY, path );
     }
 
     /**

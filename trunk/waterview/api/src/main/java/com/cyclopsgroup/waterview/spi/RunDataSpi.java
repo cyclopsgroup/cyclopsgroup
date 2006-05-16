@@ -1,5 +1,6 @@
 package com.cyclopsgroup.waterview.spi;
 
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RunData;
 
 /**
@@ -23,4 +24,12 @@ public interface RunDataSpi
      * @param page Page object
      */
     void setPageObject( Page page );
+
+    /**
+     * Set path with instruction
+     * 
+     * @param instruction Instruction name
+     * @param path Path object
+     */
+    void setPath( String instruction, Path path );
 }
