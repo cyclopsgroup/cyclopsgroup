@@ -48,16 +48,20 @@ public class RenderPageValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        moduleService.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data,
-                                 data.getRequestContext() );
+        //Stop rendering if any of action stopped the request
         if ( data.isStopped() )
         {
             return;
         }
 
+        //Run page module
+        moduleService.runModule( '/' + data.getPage().getPackageAlias() + "/page" + data.getPage().getPath(), data,
+                                 data.getRequestContext() );
         Page page = data.getPageObject();
 
+        //Render page
         data.setOutputContentType( "text/html; charset=UTF-8" );
+        //Figure out which layout should be used to render page
         Layout layout = page.getLayout();
         String pageLayoutId = data.getParameters().getString( "page_layout_id" );
         if ( StringUtils.isNotEmpty( pageLayoutId ) )
@@ -69,8 +73,14 @@ public class RenderPageValve
             layout = moduleService.getDefaultLayout();
         }
         page.setLayout( layout );
+
+        //Render the page
         layout.render( data, page );
+
+        //Goto the next valve
         context.invokeNextValve( data );
+
+        //Flush response output
         data.getOutput().flush();
     }
 

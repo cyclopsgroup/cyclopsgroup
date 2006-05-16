@@ -134,5 +134,4 @@ class DefaultPath
     {
         return getFullPath();
     }
-
 }

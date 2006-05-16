@@ -36,7 +36,6 @@ import com.cyclopsgroup.waterview.spi.DynaViewFactory;
 import com.cyclopsgroup.waterview.spi.MessageView;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.View;
-import com.cyclopsgroup.waterview.spi.Waterview;
 
 /**
  * Velocity engine object
@@ -63,7 +62,7 @@ public class VelocityEngine
     public void contextualize( Context context )
         throws ContextException
     {
-        initProperties = (Properties) context.get( Waterview.INIT_PROPERTIES );
+        //initProperties = (Properties) context.get( Waterview.INIT_PROPERTIES );
     }
 
     /**

@@ -16,19 +16,20 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.NotImplementedException;
 
 import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
@@ -45,43 +46,79 @@ public class ParseURLValve
     implements Valve, Serviceable
 {
 
-    private static HashSet instructors;
+    static class Part
+    {
+        private String instruction;
+
+        private String path;
+
+        private Part( String instruction, String path )
+        {
+            this.instruction = instruction;
+            this.path = path;
+        }
+
+        public String getInstruction()
+        {
+            return instruction;
+        }
+
+        public String getPath()
+        {
+            return path;
+        }
+
+        public String toString()
+        {
+            return instruction + ':' + path;
+        }
+    }
+
+    static class PartIterator
+        implements Iterator
+    {
+        private static final Pattern INSTRUCTION_PATTERN = Pattern.compile( "\\/\\![a-zA-Z0-9]+\\!" );
+
+        private boolean hasNext;
+
+        private Matcher matcher;
+
+        private String requestPath;
+
+        PartIterator( String requestPath )
+        {
+            this.requestPath = requestPath;
+            matcher = INSTRUCTION_PATTERN.matcher( requestPath );
+            hasNext = matcher.find();
+        }
+
+        public boolean hasNext()
+        {
+            return hasNext;
+        }
+
+        public Object next()
+        {
+            if ( !hasNext )
+            {
+                throw new NoSuchElementException();
+            }
+
+            String instruction = requestPath.substring( matcher.start() + 2, matcher.end() - 1 );
+            int pathStart = matcher.end();
+            hasNext = matcher.find();
+            int pathEnd = hasNext ? matcher.start() : requestPath.length();
+            String path = requestPath.substring( pathStart, pathEnd );
+            return new Part( instruction, path );
+        }
+
+        public void remove()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     private ModuleService moduleService;
-
-    private static HashSet getInstructors()
-    {
-        if ( instructors == null )
-        {
-            instructors = new HashSet();
-            instructors.add( Link.ACTION_INSTRUCTOR );
-            instructors.add( Link.PAGE_INSTRUCTOR );
-        }
-        return instructors;
-    }
-
-    /**
-     * @param requestPath
-     * @return list of parts
-     */
-    static List parseRequestPath( String requestPath )
-    {
-        List ret = new ArrayList();
-        String[] parts = StringUtils.split( requestPath, '/' );
-        StringBuffer sb = new StringBuffer();
-        for ( int i = 0; i < parts.length; i++ )
-        {
-            String part = parts[i];
-            if ( getInstructors().contains( part ) && sb.length() != 0 )
-            {
-                ret.add( sb.toString() );
-                sb = new StringBuffer();
-            }
-            sb.append( '/' ).append( part );
-        }
-        ret.add( sb.toString() );
-        return ret;
-    }
 
     /**
      * Override or implement method of parent class or interface
@@ -91,25 +128,17 @@ public class ParseURLValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        List behaviors = parseRequestPath( data.getRequestPath() );
-        for ( Iterator i = behaviors.iterator(); i.hasNext(); )
+        Iterator parts = new PartIterator( data.getRequestPath() );
+        for ( Iterator i = parts; i.hasNext(); )
         {
-            String behavior = (String) i.next();
-            if ( behavior.startsWith( '/' + Link.ACTION_INSTRUCTOR ) )
-            {
-                String action = behavior.substring( Link.ACTION_INSTRUCTOR.length() + 1 );
-                data.getActions().add( action );
-            }
-            else if ( behavior.startsWith( '/' + Link.PAGE_INSTRUCTOR ) )
-            {
-                String page = behavior.substring( Link.PAGE_INSTRUCTOR.length() + 1 );
-                data.setPage( page );
-            }
-            else
-            {
-                data.setPage( behavior );
-            }
+            Part part = (Part) i.next();
+            Path path = moduleService.parsePath( part.getPath() );
+            data.setPath( part.instruction, path );
         }
+
+        Path pagePath = data.getPath( Link.INSTRUCTION_DISPLAY );
+        String page = pagePath == null ? "/waterview/Index.jelly" : pagePath.getFullPath();
+        data.setPage( page );
 
         Locale locale = (Locale) data.getSessionContext().get( RunData.LOCALE_NAME );
         if ( locale != null )

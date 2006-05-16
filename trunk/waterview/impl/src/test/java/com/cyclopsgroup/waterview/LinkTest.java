@@ -34,9 +34,11 @@ public class LinkTest
         throws Exception
     {
         MockRunData data = createRunData();
+        data.setPageBaseUrl( "http://localhost:8080/waterview/servlet/waterview" );
         data.setPage( "/aaa/Index.vm" );
         Link link = new Link( data );
+        assertEquals( "http://localhost:8080/waterview/servlet/waterview", link.toString() );
         link.setPage( "/Bbb.vm" );
-        assertEquals( "http://localhost:8080/waterview/servlet/waterview/!show!/Bbb.vm", link.toString() );
+        assertEquals( "http://localhost:8080/waterview/servlet/waterview/!display!/Bbb.vm", link.toString() );
     }
 }

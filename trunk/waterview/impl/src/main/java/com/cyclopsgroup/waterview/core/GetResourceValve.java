@@ -19,15 +19,11 @@ package com.cyclopsgroup.waterview.core;
 
 import java.net.URL;
 
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.util.IOUtil;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -38,13 +34,9 @@ import com.cyclopsgroup.waterview.spi.Valve;
  * Get resource directly
  */
 public class GetResourceValve
-    implements Valve, Serviceable
+    implements Valve
 {
     private static final String PATH_PREFIX = "/resource";
-
-    private static final String PREFIX = "/" + Link.GET_INSTRUCTOR;
-
-    private ModuleService modules;
 
     /**
      * Overwrite or implement method invoke()
@@ -54,14 +46,9 @@ public class GetResourceValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        String requestPath = data.getRequestPath();
-        if ( !requestPath.startsWith( PREFIX ) )
-        {
-            throw new IllegalStateException( "Make sure the configuration for " + PREFIX + " is correct" );
-        }
-        String path = requestPath.substring( PREFIX.length() );
-        Path p = modules.parsePath( path );
-        String mimeType = data.getMimeType( path );
+
+        Path p = data.getPath( Link.INSTRUCTION_GET );
+        String mimeType = data.getMimeType( p.getPath() );
         data.setOutputContentType( mimeType );
 
         String resourcePath = PATH_PREFIX + p.getPath();
@@ -74,16 +61,5 @@ public class GetResourceValve
         {
             IOUtil.copy( resource.openStream(), data.getOutputStream() );
         }
-    }
-
-    /**
-     * Overwrite or implement method service()
-     *
-     * @see org.apache.avalon.framework.service.Serviceable#service(org.apache.avalon.framework.service.ServiceManager)
-     */
-    public void service( ServiceManager serviceManager )
-        throws ServiceException
-    {
-        modules = (ModuleService) serviceManager.lookup( ModuleService.ROLE );
     }
 }

@@ -37,11 +37,11 @@
 var url = "${controlTag.selectedTabTag.url}";
 if(url.indexOf('?') == -1)
 {
-    url += "?page_layout_id=layout.rawview";
+    url += "?page_layout_id=waterview.layout.raw";
 }
 else
 {
-    url += "&page_layout_id=layout.rawview";
+    url += "&page_layout_id=waterview.layout.raw";
 }
 fillDynaContent("tab${uniqueId}", url);
                     ]]>

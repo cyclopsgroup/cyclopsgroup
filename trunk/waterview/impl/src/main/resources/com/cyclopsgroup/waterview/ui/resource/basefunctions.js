@@ -235,11 +235,11 @@ function changeTab(tabId, tabName, url)
 	var furl = url;
 	if(url.indexOf('?') == -1)
 	{
-		furl = url + "?page_layout_id=layout.rawview";
+		furl = url + "?page_layout_id=waterview.layout.raw";
 	}
 	else
 	{
-		furl = url + "&page_layout_id=layout.rawview";
+		furl = url + "&page_layout_id=waterview.layout.raw";
 	}
 	fillDynaContent("tab" + tabId, furl);
 	return false;

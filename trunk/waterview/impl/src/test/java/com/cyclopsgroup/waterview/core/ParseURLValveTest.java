@@ -16,8 +16,14 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import com.cyclopsgroup.waterview.Link;
+import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.core.ParseURLValve.PartIterator;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
@@ -54,24 +60,27 @@ public class ParseURLValveTest
             }
         } );
         //assertEquals("/ddd.jelly", runtime.getPage());
-        assertEquals( 3, data.getActions().size() );
-        assertEquals( "/aaa", data.getActions().get( 0 ) );
-        assertEquals( "/bbb/BAction", data.getActions().get( 1 ) );
-        assertEquals( "/ccc", data.getActions().get( 2 ) );
+
+        Path[] actions = data.getPaths( Link.INSTRUCTION_DO );
+
+        assertEquals( 3, actions.length );
+        assertEquals( "/aaa", actions[0].getPath() );
+        assertEquals( "/bbb/BAction", actions[1].getPath() );
+        assertEquals( "/ccc", actions[2].getPath() );
     }
 
-    /**
-     * @throws Exception
-     */
-    public void testParseRequestPath()
-        throws Exception
+    public void testSomethingStupid()
     {
         String path = "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly";
-        List parts = ParseURLValve.parseRequestPath( path );
-        assertEquals( 4, parts.size() );
-        assertEquals( "/!do!/aaa", parts.get( 0 ) );
-        assertEquals( "/!do!/bbb/BAction", parts.get( 1 ) );
-        assertEquals( "/!do!/ccc", parts.get( 2 ) );
-        assertEquals( "/!show!/ddd.jelly", parts.get( 3 ) );
+
+        PartIterator pi = new PartIterator( path );
+        List result = new ArrayList();
+        CollectionUtils.addAll( result, pi );
+
+        assertEquals( 4, result.size() );
+        assertEquals( "do:/aaa", result.get( 0 ).toString() );
+        assertEquals( "do:/bbb/BAction", result.get( 1 ).toString() );
+        assertEquals( "do:/ccc", result.get( 2 ).toString() );
+        assertEquals( "show:/ddd.jelly", result.get( 3 ).toString() );
     }
 }

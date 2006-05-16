@@ -36,6 +36,7 @@ public class DefinitionTagPackage
         addTag( "TagPackage", TagPackageTag.class );
         addTag( "Layout", LayoutTag.class );
         addTag( "JellyLayout", JellyLayoutTag.class );
+        addTag( "ClassLayout", ClassLayoutTag.class );
         addTag( "ModulePackage", ModulePackageTag.class );
     }
 }

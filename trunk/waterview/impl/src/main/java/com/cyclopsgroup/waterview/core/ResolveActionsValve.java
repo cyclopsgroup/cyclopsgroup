@@ -16,16 +16,13 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.Serviceable;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;
+import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Path;
-import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -39,6 +36,8 @@ public class ResolveActionsValve
     extends AbstractLogEnabled
     implements Valve
 {
+    private static final String ACTION_SUFFIX = ".action";
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -47,21 +46,19 @@ public class ResolveActionsValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        List actions = data.getActions();
-        if ( actions == null || actions.isEmpty() )
+        Path[] actionPaths = data.getPaths( Link.INSTRUCTION_DO );
+        if ( actionPaths.length == 0 )
         {
             context.invokeNextValve( data );
             return;
         }
 
         DefaultActionContext actionContext = new DefaultActionContext( data );
-
-        ModuleService mm = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
-        for ( Iterator i = actions.iterator(); i.hasNext(); )
+        for ( int i = 0; i < actionPaths.length; i++ )
         {
-            String actionName = (String) i.next();
-            Path path = mm.parsePath( actionName );
-            String className = path.getPackage() + ".action" + path.getPathWithoutExtension().replace( '/', '.' );
+            Path path = actionPaths[i];
+
+            String className = path.getPackage() + ACTION_SUFFIX + path.getPathWithoutExtension().replace( '/', '.' );
             Action action = null;
             try
             {
