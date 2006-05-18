@@ -64,14 +64,20 @@ public class RenderPageValve
         //Figure out which layout should be used to render page
         Layout layout = page.getLayout();
         String pageLayoutId = data.getParameters().getString( "page_layout_id" );
+
+        //If url explictly specifies a layout, use it whatsoever
         if ( StringUtils.isNotEmpty( pageLayoutId ) )
         {
             layout = moduleService.getLayout( pageLayoutId );
         }
+        
+        //If layout is still null, use the default one
         if ( layout == null )
         {
             layout = moduleService.getDefaultLayout();
         }
+        
+        //Set it back
         page.setLayout( layout );
 
         //Render the page

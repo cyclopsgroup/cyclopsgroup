@@ -92,11 +92,21 @@ public class ParseURLValve
             hasNext = matcher.find();
         }
 
+        /**
+         * Overwrite or implement parent method
+         *
+         * @see java.util.Iterator#hasNext()
+         */
         public boolean hasNext()
         {
             return hasNext;
         }
 
+        /**
+         * Overwrite or implement parent method
+         *
+         * @see java.util.Iterator#next()
+         */
         public Object next()
         {
             if ( !hasNext )
@@ -112,6 +122,11 @@ public class ParseURLValve
             return new Part( instruction, path );
         }
 
+        /**
+         * Overwrite or implement parent method
+         *
+         * @see java.util.Iterator#remove()
+         */
         public void remove()
         {
             throw new NotImplementedException();
@@ -128,25 +143,35 @@ public class ParseURLValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
+        //Iterate every part of request
         Iterator parts = new PartIterator( data.getRequestPath() );
         for ( Iterator i = parts; i.hasNext(); )
         {
             Part part = (Part) i.next();
             Path path = moduleService.parsePath( part.getPath() );
+
+            //Add path of each part into data object
             data.setPath( part.instruction, path );
         }
 
+        //Figure out the part for display
         Path pagePath = data.getPath( Link.INSTRUCTION_DISPLAY );
+
+        //Set it to default view if nothing is specified to display
         String page = pagePath == null ? "/waterview/Index.jelly" : pagePath.getFullPath();
         data.setPage( page );
+        
+        //Set the corresponding page object
+        data.setPageObject( moduleService.createDefaultPage( data ) );
 
+        //Figure out the requested Locale
         Locale locale = (Locale) data.getSessionContext().get( RunData.LOCALE_NAME );
         if ( locale != null )
         {
             data.setLocale( locale );
         }
 
-        data.setPageObject( moduleService.createDefaultPage( data ) );
+        //Invoke next valve
         context.invokeNextValve( data );
     }
 

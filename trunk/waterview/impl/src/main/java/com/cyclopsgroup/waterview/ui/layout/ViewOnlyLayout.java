@@ -24,7 +24,7 @@ public class ViewOnlyLayout
         throws Exception
     {
         ModuleService moduleService = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
-        String path = data.getPage().getPackageAlias() + VIEW + data.getPage().getPath();
+        String path = '/' + data.getPage().getPackageAlias() + VIEW + data.getPage().getPath();
         View view = moduleService.createDynaView( path );
         view.render( data, data.getRequestContext() );
     }
