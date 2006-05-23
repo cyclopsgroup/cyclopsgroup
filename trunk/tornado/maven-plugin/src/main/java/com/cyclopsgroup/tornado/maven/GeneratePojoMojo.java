@@ -16,28 +16,42 @@
  */
 package com.cyclopsgroup.tornado.maven;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.hibernate.cfg.Configuration;
+
+import com.cyclopsgroup.tornado.hibernate.HibernateService;
 
 /**
- * Mojo to generate hibernate Pojos
+ * @goal generate-pojo
+ * @descriptionk Mojo to generate hibernate Pojos
+ * @requiresDependencyResolution compile
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- *
  */
-public class GenerateHibernatePojosMojo
-    extends AbstractMojo
+public class GeneratePojoMojo
+    extends AbstractHibernateMojoBase
 {
+    /**
+     * @expression="false"
+     * @description Generate EJB3 style entities
+     */
+    private boolean ejb3;
+
+    /**
+     * @expression="false"
+     * @description Generate JDK5 style constructors
+     */
+    private boolean jdk5;
+
     /**
      * Overwrite or implement parent method
      *
-     * @see org.apache.maven.plugin.Mojo#execute()
+     * @see com.cyclopsgroup.tornado.maven.AbstractHibernateMojoBase#execute(org.apache.avalon.framework.service.ServiceManager)
      */
-    public void execute()
-        throws MojoExecutionException, MojoFailureException
+    public void execute( ServiceManager serviceManager )
+        throws Exception
     {
-        // TODO Auto-generated method stub
-
+        HibernateService hibernate = (HibernateService) serviceManager.lookup( HibernateService.ROLE );
+        Configuration conf = hibernate.getHibernateConfiguration( getDataSource() );
     }
 }
