@@ -25,6 +25,11 @@ public class NoSuchHibernateConfiguredException
     extends Exception
 {
     /**
+     * Generated sevrial version id
+     */
+    private static final long serialVersionUID = 5369780715550725147L;
+
+    /**
      * Constructor for class NoSuchHibernateConfiguredException
      *
      * @param name Hibernate name
