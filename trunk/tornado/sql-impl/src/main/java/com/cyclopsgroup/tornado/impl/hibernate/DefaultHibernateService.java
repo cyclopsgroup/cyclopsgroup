@@ -47,6 +47,7 @@ import org.hibernate.Transaction;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.hibernate.NoSuchHibernateConfiguredException;
 import com.cyclopsgroup.tornado.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
 /**
  * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
