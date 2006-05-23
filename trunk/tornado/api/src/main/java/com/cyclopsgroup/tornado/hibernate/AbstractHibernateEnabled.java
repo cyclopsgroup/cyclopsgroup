@@ -22,6 +22,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -54,6 +55,18 @@ public abstract class AbstractHibernateEnabled
         throws Exception
     {
         return hibernate.getSession();
+    }
+
+    protected Session getHibernateSession( String name )
+        throws Exception
+    {
+        return hibernate.getSession( name );
+    }
+
+    protected SessionFactory getHibernateSessionFactory( String name )
+        throws Exception
+    {
+        return hibernate.getSessionFactory( name );
     }
 
     /**
