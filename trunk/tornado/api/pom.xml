@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cyclopsgroup.tornado</groupId>
@@ -10,12 +12,14 @@
     <packaging>jar</packaging>
     <version>3.1-SNAPSHOT</version>
     <name>Tornado API</name>
-    <description>A waterview based web application platform</description>
+    <description>
+        A waterview based web application platform
+    </description>
     <url>http://www.cyclopsgroup.com/projects/tornado</url>
     <dependencies>
         <dependency>
             <groupId>com.cyclopsgroup.waterview</groupId>
-            <artifactId>waterview</artifactId>
+            <artifactId>waterview-api</artifactId>
             <version>2.1-SNAPSHOT</version>
         </dependency>
         <dependency>
