@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.sql.DataSourceService.default
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.sql.DbcpDataSourceService
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <properties>
+                    <property name="driverClassName">
+                        com.mysql.jdbc.Driver
+                    </property>
+                    <property name="user">dev</property>
+                    <property name="password">dev</property>
+                    <property name="url">
+                        jdbc:mysql://localhost/cyclopsgroup?useUnicode=yes&amp;characterEncoding=UTF-8
+                    </property>
+                </properties>
+            </configuration>
+        </component>
+
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceManager</role>
+            <implementation>
+                com.cyclopsgroup.tornado.sql.DataSourceManager
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <datasource name="default"
+                    role="com.cyclopsgroup.tornado.sql.DataSourceService.default" />
+            </configuration>
+        </component>
+
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.hibernate.HibernateService
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hibernate.DefaultHibernateService
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <sessionfactory name="default"
+                    dialect="org.hibernate.dialect.MySQLDialect" />
+            </configuration>
+        </component>
+    </components>
+</plexus>
