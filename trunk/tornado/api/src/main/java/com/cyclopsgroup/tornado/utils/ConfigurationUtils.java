@@ -35,8 +35,8 @@ public final class ConfigurationUtils
         for ( int i = 0; i < confs.length; i++ )
         {
             Configuration conf = confs[i];
-            String name = conf.getAttribute( "name" );
-            String value = conf.getValue( StringUtils.EMPTY );
+            String name = conf.getAttribute( "name" ).trim();
+            String value = conf.getValue( StringUtils.EMPTY ).trim();
             if ( StringUtils.isNotEmpty( name ) )
             {
                 p.setProperty( name, value );
