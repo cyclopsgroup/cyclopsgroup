@@ -11,8 +11,8 @@
     <artifactId>tornado-persistence</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Tornado Hibernate Component</name>
-    <description>Tornado hibernate component</description>
+    <name>Tornado Persistence Package</name>
+    <description>Implementation of tornado persistence</description>
     <dependencies>
         <dependency>
             <groupId>com.cyclopsgroup.tornado</groupId>

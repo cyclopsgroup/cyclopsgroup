@@ -14,7 +14,9 @@
     <description>A waterview based web application platform</description>
     <url>http://www.cyclopsgroup.com/projects/tornado</url>
     <modules>
-        <module>tornado-core</module>
+        <module>api</module>
+        <module>persistence</module>
+        <module>maven-plugin</module>
     </modules>
     <repositories>
         <repository>
