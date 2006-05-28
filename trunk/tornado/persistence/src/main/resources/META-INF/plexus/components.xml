@@ -44,7 +44,7 @@
             </implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <sessionfactory name="default"
+                <session-factory name="default"
                     dialect="org.hibernate.dialect.HSQLDialect" />
             </configuration>
         </component>

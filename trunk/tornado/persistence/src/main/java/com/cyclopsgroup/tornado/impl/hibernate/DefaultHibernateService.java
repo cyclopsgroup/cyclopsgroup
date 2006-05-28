@@ -202,12 +202,15 @@ public class DefaultHibernateService
     public void configure( org.apache.avalon.framework.configuration.Configuration conf )
         throws ConfigurationException
     {
-        Configuration[] props = conf.getChildren( "data-source" );
+        Configuration[] props = conf.getChildren( "session-factory" );
         for ( int i = 0; i < props.length; i++ )
         {
             Configuration prop = props[i];
             String name = prop.getAttribute( "name" );
             Properties p = ConfigurationUtils.getProperties( prop );
+            String dialect = prop.getAttribute( "dialect" );
+            p.setProperty( "hibernate.dialect", dialect );
+
             hibernateProperties.put( name, p );
         }
     }

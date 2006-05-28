@@ -1,6 +1,6 @@
 package com.cyclopsgroup.tornado.hibernate;
 
-import org.codehaus.plexus.PlexusTestCase;
+import com.cyclopsgroup.waterview.test.WaterviewTestCase;
 
 /**
  * Test case for HibernateService
@@ -9,12 +9,14 @@ import org.codehaus.plexus.PlexusTestCase;
  *
  */
 public class HibernateServiceTest
-    extends PlexusTestCase
+    extends WaterviewTestCase
 {
     public void testAvaliability()
         throws Exception
     {
         HibernateService hib = (HibernateService) lookup( HibernateService.ROLE );
         assertNotNull( hib );
+
+        hib.getSessionFactory( HibernateService.DEFAULT_DATASOURCE );
     }
 }
