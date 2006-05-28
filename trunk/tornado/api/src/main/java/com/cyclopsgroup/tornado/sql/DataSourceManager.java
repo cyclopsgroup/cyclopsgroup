@@ -94,7 +94,7 @@ public class DataSourceManager
     public DataSource getDataSource( String name )
         throws NoSuchDataSourceException
     {
-        return getDataSourceHome( name ).getDataSource();
+        return getDataSourceService( name ).getDataSource();
     }
 
     /**
@@ -103,7 +103,7 @@ public class DataSourceManager
      * @param name Data source name
      * @return Data source factory instance or null
      */
-    public DataSourceService getDataSourceHome( String name )
+    public DataSourceService getDataSourceService( String name )
         throws NoSuchDataSourceException
     {
         DataSourceService service = (DataSourceService) dataSourceServices.get( name );
