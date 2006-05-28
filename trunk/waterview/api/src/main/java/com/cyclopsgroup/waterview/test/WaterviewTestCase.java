@@ -22,8 +22,14 @@ public class WaterviewTestCase
     {
         MockRunData data = new MockRunData();
         data.setServiceManager( new ServiceManagerAdapter( getContainer() ) );
-
         return data;
+    }
+
+    protected void setUp()
+        throws Exception
+    {
+        super.setUp();
+        
     }
 
     /**
