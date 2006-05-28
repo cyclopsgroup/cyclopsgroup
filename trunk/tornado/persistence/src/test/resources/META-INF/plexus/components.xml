@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.impl.hsql.StandaloneServer
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hsql.StandaloneServer
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <databases>
+                    <database name="cyclopsgroup"
+                        path="${basedir}/target/database/cyclopsgroup" />
+                </databases>
+            </configuration>
+        </component>
+    </components>
+</plexus>

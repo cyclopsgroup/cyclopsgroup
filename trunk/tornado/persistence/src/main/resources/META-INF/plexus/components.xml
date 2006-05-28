@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.sql.DataSourceService.localHsql
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.sql.DbcpDataSourceService
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <properties>
+                    <property name="driverClassName">
+                        org.hsqldb.jdbcDriver
+                    </property>
+                    <property name="user">sa</property>
+                    <property name="password"></property>
+                    <property name="url">
+                        jdbc:hsqldb:mem:cyclopsgroup
+                    </property>
+                </properties>
+            </configuration>
+        </component>
+
+        <component>
+            <role>com.cyclopsgroup.tornado.sql.DataSourceManager</role>
+            <implementation>
+                com.cyclopsgroup.tornado.sql.DataSourceManager
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <datasource name="default"
+                    role="com.cyclopsgroup.tornado.sql.DataSourceService.localHsql" />
+            </configuration>
+        </component>
+
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.hibernate.HibernateService
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hibernate.DefaultHibernateService
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <sessionfactory name="default"
+                    dialect="org.hibernate.dialect.HSQLDialect" />
+            </configuration>
+        </component>
+
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.impl.hsql.StandaloneServer
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hsql.StandaloneServer
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <databases>
+                    <database name="cyclopsgroup"
+                        path="${basedir}/database/cyclopsgroup" />
+                </databases>
+            </configuration>
+        </component>
+    </components>
+</plexus>
