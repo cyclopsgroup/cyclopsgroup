@@ -1,5 +1,7 @@
 package com.cyclopsgroup.tornado.hibernate;
 
+import org.hibernate.Session;
+
 import com.cyclopsgroup.waterview.test.WaterviewTestCase;
 
 /**
@@ -14,9 +16,16 @@ public class HibernateServiceTest
     public void testAvaliability()
         throws Exception
     {
-        HibernateService hib = (HibernateService) lookup( HibernateService.ROLE );
+        HibernateManager hib = (HibernateManager) lookup( HibernateManager.ROLE );
         assertNotNull( hib );
 
-        hib.getSessionFactory( HibernateService.DEFAULT_DATASOURCE );
+        HibernateService hs = hib.getDefaultHibernateService();
+        assertNotNull( hs );
+
+        Session s = hs.getSession();
+        assertNotNull( s );
+
+        hs.closeSession();
+        assertFalse( s.isOpen() );
     }
 }

@@ -37,15 +37,37 @@
 
         <component>
             <role>
-                com.cyclopsgroup.tornado.hibernate.HibernateService
+                com.cyclopsgroup.tornado.hibernate.HibernateService.default
             </role>
             <implementation>
                 com.cyclopsgroup.tornado.impl.hibernate.DefaultHibernateService
             </implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
-                <session-factory name="default"
-                    dialect="org.hibernate.dialect.HSQLDialect" />
+                <name>default</name>
+                <data-source
+                    role="com.cyclopsgroup.tornado.sql.DataSourceService.localHsql" />
+                <properties>
+                    <property name="hibernate.dialect">
+                        org.hibernate.dialect.HSQLDialect
+                    </property>
+                </properties>
+            </configuration>
+        </component>
+
+        <component>
+            <role>
+                com.cyclopsgroup.tornado.hibernate.HibernateManager
+            </role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hibernate.DefaultHibernateManager
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <hibernate-services>
+                    <service
+                        role="com.cyclopsgroup.tornado.hibernate.HibernateService.default" />
+                </hibernate-services>
             </configuration>
         </component>
 
@@ -63,6 +85,14 @@
                         path="${basedir}/database/cyclopsgroup" />
                 </databases>
             </configuration>
+        </component>
+
+        <component>
+            <role>com.cyclopsgroup.tornado.PersistenceService</role>
+            <implementation>
+                com.cyclopsgroup.tornado.impl.hibernate.HibernatePersistenceService
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
         </component>
     </components>
 </plexus>

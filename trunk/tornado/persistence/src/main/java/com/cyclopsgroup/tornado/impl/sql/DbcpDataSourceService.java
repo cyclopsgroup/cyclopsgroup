@@ -8,10 +8,10 @@ import org.apache.avalon.framework.activity.Startable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbcp.BasicDataSource;
 
+import com.cyclopsgroup.tornado.sql.AbstractDataSourceService;
 import com.cyclopsgroup.tornado.sql.DataSourceService;
 import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
@@ -22,7 +22,7 @@ import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
  *
  */
 public class DbcpDataSourceService
-    extends AbstractLogEnabled
+    extends AbstractDataSourceService
     implements DataSourceService, Configurable, Startable
 {
 

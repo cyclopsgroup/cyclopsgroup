@@ -20,11 +20,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
 import org.apache.avalon.framework.service.ServiceManager;
 
-import com.cyclopsgroup.tornado.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.sql.DataSourceService;
 import com.cyclopsgroup.waterview.Context;
 
 /**
@@ -36,16 +34,16 @@ import com.cyclopsgroup.waterview.Context;
 public class SqlQueryExecutor
     implements SqlHandler
 {
-    private String dataSource;
+    private DataSourceService dataSourceService;
 
     /**
      * Constructor for class SqlQueryExecutor
      *
      * @param dataSource dataSource name
      */
-    public SqlQueryExecutor( String dataSource )
+    public SqlQueryExecutor( DataSourceService dataSourceService )
     {
-        this.dataSource = dataSource;
+        this.dataSourceService = dataSourceService;
     }
 
     /**
@@ -56,10 +54,7 @@ public class SqlQueryExecutor
     public void handleSqls( String[] sqls, ServiceManager serviceManager, Context context )
         throws Exception
     {
-        DataSourceManager dsManager = (DataSourceManager) serviceManager.lookup( DataSourceManager.ROLE );
-        DataSource ds = dsManager.getDataSource( dataSource );
-
-        Connection dbcon = ds.getConnection();
+        Connection dbcon = dataSourceService.getLocalConnection();
 
         try
         {

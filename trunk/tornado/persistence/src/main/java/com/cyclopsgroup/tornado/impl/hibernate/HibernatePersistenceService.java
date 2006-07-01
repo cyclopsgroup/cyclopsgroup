@@ -29,20 +29,20 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.hibernate.Session;
 
 import com.cyclopsgroup.tornado.PersistenceService;
-import com.cyclopsgroup.tornado.hibernate.HibernateService;
+import com.cyclopsgroup.tornado.hibernate.HibernateManager;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Hibernate implementation of persistence manager
  */
-public class HibernatePersistenceManager
+public class HibernatePersistenceService
     extends AbstractLogEnabled
     implements PersistenceService, Serviceable, Configurable
 {
-    private String dataSource = HibernateService.DEFAULT_DATASOURCE;
+    private HibernateManager hibernate;
 
-    private HibernateService hibernate;
+    private String hibernateName;
 
     /**
      * Overwrite or implement method configure()
@@ -52,7 +52,7 @@ public class HibernatePersistenceManager
     public void configure( Configuration conf )
         throws ConfigurationException
     {
-        dataSource = conf.getChild( "data-source" ).getValue( dataSource );
+        hibernateName = conf.getChild( "hibernate-name" ).getValue( HibernateManager.DEFAULT_HIBERNATE );
     }
 
     /**
@@ -114,10 +114,15 @@ public class HibernatePersistenceManager
         return getSession().get( type, id );
     }
 
+    public String getHibernateName()
+    {
+        return hibernateName;
+    }
+
     private Session getSession()
         throws Exception
     {
-        return hibernate.getSession( dataSource );
+        return hibernate.getHibernateService( getHibernateName() ).getSession();
     }
 
     /**
@@ -161,7 +166,12 @@ public class HibernatePersistenceManager
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        hibernate = (HibernateService) serviceManager.lookup( HibernateService.ROLE );
+        hibernate = (HibernateManager) serviceManager.lookup( HibernateManager.ROLE );
+    }
+
+    public void setHibernateName( String hibernateName )
+    {
+        this.hibernateName = hibernateName;
     }
 
     /**

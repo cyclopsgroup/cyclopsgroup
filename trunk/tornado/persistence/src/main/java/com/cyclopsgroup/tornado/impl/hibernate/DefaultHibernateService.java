@@ -18,26 +18,18 @@ package com.cyclopsgroup.tornado.impl.hibernate;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Properties;
-
-import javax.sql.DataSource;
+import java.util.Vector;
 
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.collections.ExtendedProperties;
-import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
@@ -46,7 +38,7 @@ import org.hibernate.Transaction;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 import com.cyclopsgroup.tornado.hibernate.NoSuchHibernateConfiguredException;
-import com.cyclopsgroup.tornado.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.sql.DataSourceService;
 import com.cyclopsgroup.tornado.utils.ConfigurationUtils;
 
 /**
@@ -58,88 +50,43 @@ public class DefaultHibernateService
     extends AbstractLogEnabled
     implements HibernateService, Configurable, Disposable, Initializable, Serviceable
 {
-    private DataSourceManager dataSourceManager;
+    private DataSourceService dataSourceService;
 
-    private MultiHashMap entityClasses = new MultiHashMap();
+    private String dataSourceServiceRole;
 
-    private Hashtable hibernateConfigurations = new Hashtable();
+    private Vector entityClasses = new Vector();
 
-    private HashMap hibernateProperties = new HashMap();
+    private org.hibernate.cfg.Configuration hibernateConfiguration;
+
+    private Properties hibernateProperties = new Properties();
 
     private ThreadLocal localSession = new ThreadLocal();
 
-    private Hashtable sessionFactories = new Hashtable();
+    private ThreadLocal localTransaction = new ThreadLocal();
+
+    private String name;
+
+    private ServiceManager serviceManager;
+
+    private SessionFactory sessionFactory;
 
     /**
-     * Overwrite or implement method closeSession()
+     * Overwrite or implement parent method
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSession()
      */
     public void closeSession()
     {
-        closeSession( DEFAULT_DATASOURCE );
-    }
-
-    /**
-     * Overwrite or implement method closeSession()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSession(java.lang.String)
-     */
-    public void closeSession( String dataSourceName )
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
+        Session session = (Session) localSession.get();
+        if ( session != null )
         {
-            try
+            if ( session.isOpen() )
             {
-                Session session = wrapper.getSession( dataSourceName );
-                if ( session != null )
-                {
-                    session.flush();
-                    session.close();
-                }
-                Connection dbcon = wrapper.getConnection( dataSourceName );
-                if ( dbcon != null )
-                {
-                    dbcon.close();
-                }
-                wrapper.remove( dataSourceName );
+                session.flush();
+                session.close();
             }
-            catch ( Exception e )
-            {
-                getLogger().warn( "Can not close hibernate session", e );
-            }
+            localSession.set( null );
         }
-    }
-
-    /**
-     * Overwrite or implement method closeSessions()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSessions()
-     */
-    public void closeSessions()
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
-        {
-            String[] names = wrapper.getDataSourceNames();
-            for ( int i = 0; i < names.length; i++ )
-            {
-                closeSession( names[i] );
-            }
-        }
-        localSession.set( null );
-    }
-
-    /**
-     * Overwrite or implement method commitTransaction()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransaction()
-     */
-    public void commitTransaction()
-        throws Exception
-    {
-        commitTransaction( DEFAULT_DATASOURCE );
     }
 
     /**
@@ -147,49 +94,20 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransaction(java.lang.String)
      */
-    public void commitTransaction( String dataSourceName )
+    public void commitTransaction()
         throws Exception
     {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
+        Transaction transaction = (Transaction) localTransaction.get();
+        if ( transaction != null )
         {
-            Session session = wrapper.getSession( dataSourceName );
+            Session session = getSession();
             if ( session != null )
             {
                 session.flush();
             }
-            Transaction transaction = wrapper.getTransaction( dataSourceName );
             if ( transaction != null )
             {
                 transaction.commit();
-            }
-            Connection dbcon = wrapper.getConnection( dataSourceName );
-            dbcon.commit();
-        }
-    }
-
-    /**
-     * Overwrite or implement method commitTransactions()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#commitTransactions()
-     */
-    public void commitTransactions()
-        throws Exception
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
-        {
-            String[] names = wrapper.getDataSourceNames();
-            for ( int i = 0; i < names.length; i++ )
-            {
-                try
-                {
-                    commitTransaction( names[i] );
-                }
-                catch ( Exception e )
-                {
-                    getLogger().warn( "Can not close hibernate session", e );
-                }
             }
         }
     }
@@ -202,17 +120,9 @@ public class DefaultHibernateService
     public void configure( org.apache.avalon.framework.configuration.Configuration conf )
         throws ConfigurationException
     {
-        Configuration[] props = conf.getChildren( "session-factory" );
-        for ( int i = 0; i < props.length; i++ )
-        {
-            Configuration prop = props[i];
-            String name = prop.getAttribute( "name" );
-            Properties p = ConfigurationUtils.getProperties( prop );
-            String dialect = prop.getAttribute( "dialect" );
-            p.setProperty( "hibernate.dialect", dialect );
-
-            hibernateProperties.put( name, p );
-        }
+        name = conf.getChild( "name" ).getValue();
+        dataSourceServiceRole = conf.getChild( "data-source" ).getAttribute( "role" );
+        hibernateProperties = ConfigurationUtils.getProperties( conf.getChild( "properties" ) );
     }
 
     /**
@@ -222,12 +132,23 @@ public class DefaultHibernateService
      */
     public synchronized void dispose()
     {
-        for ( Iterator i = sessionFactories.values().iterator(); i.hasNext(); )
-        {
-            SessionFactory sf = (SessionFactory) i.next();
-            sf.close();
-        }
-        sessionFactories.clear();
+        closeSession();
+    }
+
+    /**
+     * Overwrite or implement parent method
+     *
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getConnection()
+     */
+    public Connection getConnection()
+        throws Exception
+    {
+        return getSession().connection();
+    }
+
+    public DataSourceService getDataSourceService()
+    {
+        return dataSourceService;
     }
 
     /**
@@ -235,68 +156,35 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getEntityClasses(java.lang.String)
      */
-    public Class[] getEntityClasses( String dataSourceName )
+    public Class[] getEntityClasses()
     {
-        Collection classes = (Collection) entityClasses.get( dataSourceName );
-        return classes == null ? ArrayUtils.EMPTY_CLASS_ARRAY : (Class[]) classes
-            .toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
+        return (Class[]) entityClasses.toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
     }
 
     /**
-     * Overwrite or implement method getSession()
+     * Override method getHibernateConfiguration in class DefaultHibernateHome
+     *
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getHibernateConfiguration(java.lang.String)
+     */
+    public org.hibernate.cfg.Configuration getHibernateConfiguration()
+    {
+        return hibernateConfiguration;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Overwrite or implement parent method
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession()
      */
     public Session getSession()
         throws Exception
     {
-        return getSession( DEFAULT_DATASOURCE );
-    }
-
-    /**
-     * Overwrite or implement method getSession()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(boolean)
-     */
-    public synchronized Session getSession( boolean withTransaction )
-        throws Exception
-    {
-        return getSession( DEFAULT_DATASOURCE, withTransaction );
-    }
-
-    /**
-     * Overwrite or implement method getSession()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(java.lang.String)
-     */
-    public Session getSession( String dataSourceName )
-        throws Exception
-    {
-        return getSession( dataSourceName, true );
-    }
-
-    /**
-     * Override method getConnection in class DefaultHibernateHome
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getConnection(java.lang.String)
-     */
-    public synchronized Connection getConnection( String dataSourceName )
-        throws Exception
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper == null )
-        {
-            wrapper = new SessionWrapper();
-            localSession.set( wrapper );
-        }
-        Connection dbcon = wrapper.getConnection( dataSourceName );
-        if ( dbcon == null )
-        {
-            DataSource dataSource = dataSourceManager.getDataSource( dataSourceName );
-            dbcon = dataSource.getConnection();
-            wrapper.setConnection( dataSourceName, dbcon );
-        }
-        return dbcon;
+        return getSession( true );
     }
 
     /**
@@ -304,39 +192,41 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSession(java.lang.String, boolean)
      */
-    public synchronized Session getSession( String dataSourceName, boolean withTransaction )
+    public synchronized Session getSession( boolean withTransaction )
         throws Exception
     {
-        Connection dbcon = getConnection( dataSourceName );
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        Session session = wrapper.getSession( dataSourceName );
+        Session session = (Session) localSession.get();
         if ( session == null )
         {
-            SessionFactory sf = getSessionFactory( dataSourceName );
-            session = sf.openSession( dbcon );
-            wrapper.setSession( dataSourceName, session );
+            SessionFactory sf = getSessionFactory();
+            if ( dataSourceService == null )
+            {
+                session = sf.openSession();
+            }
+            else
+            {
+                Connection dbcon = dataSourceService.getLocalConnection();
+                session = sf.openSession( dbcon );
+            }
+            localSession.set( session );
         }
         if ( withTransaction )
         {
-            wrapper.enableTransaction( dataSourceName );
+            Transaction transaction = session.beginTransaction();
+            localTransaction.set( transaction );
         }
         return session;
     }
 
     /**
-     * Overwrite or implement method getSessionFactory()
+     * Overwrite or implement parent method
      *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSessionFactory(java.lang.String)
+     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getSessionFactory()
      */
-    public SessionFactory getSessionFactory( String dataSourceName )
+    public SessionFactory getSessionFactory()
         throws NoSuchHibernateConfiguredException
     {
-        SessionFactory sf = (SessionFactory) sessionFactories.get( dataSourceName );
-        if ( sf == null )
-        {
-            throw new NoSuchHibernateConfiguredException( dataSourceName );
-        }
-        return sf;
+        return sessionFactory;
     }
 
     /**
@@ -347,102 +237,39 @@ public class DefaultHibernateService
     public void initialize()
         throws Exception
     {
-        Enumeration enu = getClass().getClassLoader()
-            .getResources( "META-INF/cyclopsgroup/hibernate-entities.properties" );
-        ExtendedProperties props = new ExtendedProperties();
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        Enumeration enu = cl.getResources( "META-INF/cyclopsgroup/hibernate." + getName() + ".cfg.xml" );
+
+        hibernateConfiguration = new org.hibernate.cfg.Configuration();
+        hibernateConfiguration.setProperties( hibernateProperties );
+
         while ( enu.hasMoreElements() )
         {
             URL resource = (URL) enu.nextElement();
-            props.load( resource.openStream() );
+            getLogger().info( "Configure hibernate service [" + name + "] with " + resource );
+            hibernateConfiguration.configure( resource );
         }
 
-        for ( Iterator i = hibernateProperties.keySet().iterator(); i.hasNext(); )
+        sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        if ( StringUtils.isNotEmpty( dataSourceServiceRole ) )
         {
-            String name = (String) i.next();
-
-            org.hibernate.cfg.Configuration c = new org.hibernate.cfg.Configuration();
-            Properties p = (Properties) hibernateProperties.get( name );
-            c.setProperties( p );
-            for ( Iterator j = props.getKeys(); j.hasNext(); )
-            {
-                String key = (String) j.next();
-                String value = (String) props.getString( key );
-
-                if ( StringUtils.equals( value, name ) )
-                {
-                    try
-                    {
-                        Class entityClass = Class.forName( key );
-                        c.addClass( entityClass );
-                        entityClasses.put( value, entityClass );
-                    }
-                    catch ( Exception e )
-                    {
-                        getLogger().warn( "Entity " + key + " is not loaded", e );
-                    }
-                }
-            }
-            hibernateConfigurations.put( name, c );
-            SessionFactory sessionFactory = c.buildSessionFactory();
-            sessionFactories.put( name, sessionFactory );
+            dataSourceService = (DataSourceService) serviceManager.lookup( dataSourceServiceRole );
         }
     }
 
     /**
-     * Overwrite or implement method rollbackTransaction()
+     * Overwrite or implement parent method
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransaction()
      */
     public void rollbackTransaction()
         throws Exception
     {
-        rollbackTransaction( DEFAULT_DATASOURCE );
-    }
-
-    /**
-     * Overwrite or implement method rollbackTransaction()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransaction(java.lang.String)
-     */
-    public void rollbackTransaction( String dataSourceName )
-        throws Exception
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
+        Transaction transaction = (Transaction) localTransaction.get();
+        if ( transaction != null && transaction.isActive() )
         {
-            Transaction transaction = wrapper.getTransaction( dataSourceName );
-            if ( transaction != null )
-            {
-                transaction.rollback();
-            }
-            Connection dbcon = wrapper.getConnection( dataSourceName );
-            dbcon.rollback();
-        }
-    }
-
-    /**
-     * Overwrite or implement method rollbackTransactions()
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransactions()
-     */
-    public void rollbackTransactions()
-        throws Exception
-    {
-        SessionWrapper wrapper = (SessionWrapper) localSession.get();
-        if ( wrapper != null )
-        {
-            String[] names = wrapper.getDataSourceNames();
-            for ( int i = 0; i < names.length; i++ )
-            {
-                try
-                {
-                    rollbackTransaction( names[i] );
-                }
-                catch ( Exception e )
-                {
-                    getLogger().warn( "Can not close hibernate session", e );
-                }
-            }
+            transaction.rollback();
         }
     }
 
@@ -454,16 +281,6 @@ public class DefaultHibernateService
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        dataSourceManager = (DataSourceManager) serviceManager.lookup( DataSourceManager.ROLE );
-    }
-
-    /**
-     * Override method getHibernateConfiguration in class DefaultHibernateHome
-     *
-     * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getHibernateConfiguration(java.lang.String)
-     */
-    public org.hibernate.cfg.Configuration getHibernateConfiguration( String dataSourceName )
-    {
-        return (org.hibernate.cfg.Configuration) hibernateConfigurations.get( dataSourceName );
+        this.serviceManager = serviceManager;
     }
 }

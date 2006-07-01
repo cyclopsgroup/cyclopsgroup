@@ -2,9 +2,6 @@
 <plexus>
     <load-on-start>
         <component>
-            <role>com.cyclopsgroup.waterview.WaterviewServices</role>
-        </component>
-        <component>
             <role>
                 com.cyclopsgroup.tornado.impl.hsql.StandaloneServer
             </role>
