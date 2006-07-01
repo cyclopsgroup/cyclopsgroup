@@ -28,6 +28,13 @@ public abstract class AbstractHibernateMojoBase
     private String dataSource;
 
     /**
+     * @parameter expression="default"
+     * @description Hibernate name
+     * @required
+     */
+    private String hibernateName;
+
+    /**
      * @parameter expression="${basedir}/src/main/java"
      * @description Directory where pojo java files should go
      * @required
@@ -95,6 +102,11 @@ public abstract class AbstractHibernateMojoBase
     protected String getDataSource()
     {
         return dataSource;
+    }
+
+    protected String getHibernateName()
+    {
+        return hibernateName;
     }
 
     /**

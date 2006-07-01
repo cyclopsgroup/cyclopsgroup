@@ -17,8 +17,8 @@
 package com.cyclopsgroup.tornado.maven;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.hibernate.cfg.Configuration;
 
+import com.cyclopsgroup.tornado.hibernate.HibernateManager;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
 
 /**
@@ -51,7 +51,7 @@ public class GeneratePojoMojo
     public void execute( ServiceManager serviceManager )
         throws Exception
     {
-        HibernateService hibernate = (HibernateService) serviceManager.lookup( HibernateService.ROLE );
-        Configuration conf = hibernate.getHibernateConfiguration( getDataSource() );
+        HibernateManager hibernate = (HibernateManager) serviceManager.lookup( HibernateManager.ROLE );
+        HibernateService hs = hibernate.getHibernateService( getHibernateName() );
     }
 }
