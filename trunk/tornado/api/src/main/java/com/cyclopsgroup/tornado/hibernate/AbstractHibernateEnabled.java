@@ -21,8 +21,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,40 +31,16 @@ public abstract class AbstractHibernateEnabled
     extends AbstractLogEnabled
     implements Serviceable
 {
-    private HibernateService hibernate;
+    private HibernateManager hibernateManager;
 
     /**
      * Get hibernate service
      *
      * @return Hibernate service
      */
-    protected HibernateService getHibernateService()
+    protected HibernateManager getHibernateManager()
     {
-        return hibernate;
-    }
-
-    /**
-     * Get hibernate session
-     *
-     * @return Hibernate session
-     * @throws Exception throw it out
-     */
-    protected Session getHibernateSession()
-        throws Exception
-    {
-        return hibernate.getSession();
-    }
-
-    protected Session getHibernateSession( String name )
-        throws Exception
-    {
-        return hibernate.getSession( name );
-    }
-
-    protected SessionFactory getHibernateSessionFactory( String name )
-        throws Exception
-    {
-        return hibernate.getSessionFactory( name );
+        return hibernateManager;
     }
 
     /**
@@ -77,6 +51,6 @@ public abstract class AbstractHibernateEnabled
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        hibernate = (HibernateService) serviceManager.lookup( HibernateService.ROLE );
+        hibernateManager = (HibernateManager) serviceManager.lookup( HibernateManager.ROLE );
     }
 }

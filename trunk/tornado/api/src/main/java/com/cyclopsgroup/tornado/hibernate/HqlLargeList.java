@@ -37,7 +37,8 @@ import com.cyclopsgroup.waterview.LargeList;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HqlLargeList implements LargeList
+public class HqlLargeList
+    implements LargeList
 {
     private class Parameter
     {
@@ -47,7 +48,7 @@ public class HqlLargeList implements LargeList
 
         private Object value;
 
-        private Parameter(String name, Type type, Object value)
+        private Parameter( String name, Type type, Object value )
         {
             this.name = name;
             this.type = type;
@@ -89,8 +90,6 @@ public class HqlLargeList implements LargeList
 
     private static final String HQL_LIKE = " LIKE :";
 
-    private String dataSource;
-
     private HibernateService hibernate;
 
     private String hql;
@@ -103,24 +102,10 @@ public class HqlLargeList implements LargeList
      * @param hql HQL language
      * @param hibernate Hibernate servcie
      */
-    public HqlLargeList(String hql, HibernateService hibernate)
-    {
-        this(hql, hibernate, HibernateService.DEFAULT_DATASOURCE);
-    }
-
-    /**
-     * Constructor for type QueryTableData
-     *
-     * @param hibernate
-     * @param hql Hibernate query language
-     * @param dataSource Data source name
-     */
-    public HqlLargeList(String hql, HibernateService hibernate,
-            String dataSource)
+    public HqlLargeList( String hql, HibernateService hibernate )
     {
         this.hql = hql;
         this.hibernate = hibernate;
-        this.dataSource = dataSource;
     }
 
     /**return
@@ -131,12 +116,11 @@ public class HqlLargeList implements LargeList
      * @param value Parameter value
      * @throws Exception Throw it out
      */
-    public void addParameter(String name, String type, Object value)
-            throws Exception
+    public void addParameter( String name, String type, Object value )
+        throws Exception
     {
-        Type hibernateType = (Type) Hibernate.class
-                .getField(type.toUpperCase()).get(null);
-        addParameter(name, hibernateType, value);
+        Type hibernateType = (Type) Hibernate.class.getField( type.toUpperCase() ).get( null );
+        addParameter( name, hibernateType, value );
     }
 
     /**
@@ -146,10 +130,10 @@ public class HqlLargeList implements LargeList
      * @param type Parameter type
      * @param value Parameter value
      */
-    public void addParameter(String name, Type type, Object value)
+    public void addParameter( String name, Type type, Object value )
     {
-        Parameter p = new Parameter(name, type, value);
-        parameters.put(name, p);
+        Parameter p = new Parameter( name, type, value );
+        parameters.put( name, p );
     }
 
     /**
@@ -158,16 +142,16 @@ public class HqlLargeList implements LargeList
      * @param attributes Attributes parser
      * @param fieldName Field name
      */
-    public void addStringCriterion(Attributes attributes, String fieldName)
+    public void addStringCriterion( Attributes attributes, String fieldName )
     {
-        String value = attributes.getString(fieldName);
-        if (StringUtils.isEmpty(value))
+        String value = attributes.getString( fieldName );
+        if ( StringUtils.isEmpty( value ) )
         {
             return;
         }
-        hql = new StringBuffer(hql).append(HQL_AND).append(fieldName).append(
-                HQL_LIKE).append(fieldName).toString();
-        addParameter(fieldName, Hibernate.STRING, '%' + value + '%');
+        hql = new StringBuffer( hql ).append( HQL_AND ).append( fieldName ).append( HQL_LIKE ).append( fieldName )
+            .toString();
+        addParameter( fieldName, Hibernate.STRING, '%' + value + '%' );
     }
 
     /**
@@ -175,27 +159,28 @@ public class HqlLargeList implements LargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#getSize()
      */
-    public int getSize() throws Exception
+    public int getSize()
+        throws Exception
     {
         String countQuery = "SELECT COUNT(*) " + hql;
-        Session s = hibernate.getSession(dataSource);
-        Query query = s.createQuery(countQuery);
+        Session s = hibernate.getSession();
+        Query query = s.createQuery( countQuery );
         HashSet parameterNames = new HashSet();
-        CollectionUtils.addAll(parameterNames, query.getNamedParameters());
-        for (Iterator i = parameters.values().iterator(); i.hasNext();)
+        CollectionUtils.addAll( parameterNames, query.getNamedParameters() );
+        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
         {
             Parameter p = (Parameter) i.next();
-            if (parameterNames.contains(p.getName()))
+            if ( parameterNames.contains( p.getName() ) )
             {
-                query.setParameter(p.getName(), p.getValue(), p.getType());
+                query.setParameter( p.getName(), p.getValue(), p.getType() );
             }
         }
         List result = query.list();
-        if (result == null || result.isEmpty())
+        if ( result == null || result.isEmpty() )
         {
             return -1;
         }
-        Integer i = (Integer) result.get(0);
+        Integer i = (Integer) result.get( 0 );
         return i.intValue();
     }
 
@@ -204,51 +189,51 @@ public class HqlLargeList implements LargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator iterate(int startPosition, int maxRecords,
-            Sorting[] sortings) throws Exception
+    public Iterator iterate( int startPosition, int maxRecords, Sorting[] sortings )
+        throws Exception
     {
-        if (StringUtils.isEmpty(hql))
+        if ( StringUtils.isEmpty( hql ) )
         {
-            throw new IllegalStateException("query is still emtpy");
+            throw new IllegalStateException( "query is still emtpy" );
         }
-        Session s = hibernate.getSession(dataSource);
-        StringBuffer sb = new StringBuffer(hql);
+        Session s = hibernate.getSession();
+        StringBuffer sb = new StringBuffer( hql );
 
         boolean first = true;
-        for (int i = 0; i < sortings.length; i++)
+        for ( int i = 0; i < sortings.length; i++ )
         {
             Sorting sorting = sortings[i];
-            if (first)
+            if ( first )
             {
-                sb.append(" ORDER BY ");
+                sb.append( " ORDER BY " );
                 first = false;
             }
             else
             {
-                sb.append(", ");
+                sb.append( ", " );
             }
-            sb.append(sorting.getName());
-            if (sorting.isDescending())
+            sb.append( sorting.getName() );
+            if ( sorting.isDescending() )
             {
-                sb.append(" DESC");
+                sb.append( " DESC" );
             }
         }
 
-        Query q = s.createQuery(sb.toString());
+        Query q = s.createQuery( sb.toString() );
         HashSet parameterNames = new HashSet();
-        CollectionUtils.addAll(parameterNames, q.getNamedParameters());
-        for (Iterator i = parameters.values().iterator(); i.hasNext();)
+        CollectionUtils.addAll( parameterNames, q.getNamedParameters() );
+        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
         {
             Parameter p = (Parameter) i.next();
-            if (parameterNames.contains(p.getName()))
+            if ( parameterNames.contains( p.getName() ) )
             {
-                q.setParameter(p.getName(), p.getValue(), p.getType());
+                q.setParameter( p.getName(), p.getValue(), p.getType() );
             }
         }
-        q.setFirstResult(startPosition);
-        if (maxRecords > 0)
+        q.setFirstResult( startPosition );
+        if ( maxRecords > 0 )
         {
-            q.setMaxResults(maxRecords);
+            q.setMaxResults( maxRecords );
         }
         return q.iterate();
     }
@@ -258,7 +243,7 @@ public class HqlLargeList implements LargeList
      *
      * @param hql The hql to set.
      */
-    public void setHql(String hql)
+    public void setHql( String hql )
     {
         this.hql = hql;
     }

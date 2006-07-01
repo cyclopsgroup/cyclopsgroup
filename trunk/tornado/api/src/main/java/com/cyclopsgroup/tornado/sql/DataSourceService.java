@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.tornado.sql;
 
+import java.sql.Connection;
+
 import javax.sql.DataSource;
 
 /**
@@ -28,10 +30,16 @@ public interface DataSourceService
     /** Empty data source array */
     DataSource[] EMPTY_DATASOURCE_ARRAY = new DataSource[0];
 
+    void closeLocalConnection()
+        throws Exception;
+
     /**
      * Get data source 
      *
      * @return Data source object
      */
     DataSource getDataSource();
+
+    Connection getLocalConnection()
+        throws Exception;
 }

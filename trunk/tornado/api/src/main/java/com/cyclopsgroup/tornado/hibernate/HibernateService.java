@@ -22,7 +22,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.cyclopsgroup.tornado.sql.DataSourceManager;
+import com.cyclopsgroup.tornado.sql.DataSourceService;
 
 /**
  * @author <a href="mailto:jiaqi@evavi.com">Jiaqi Guo</a>
@@ -31,28 +31,10 @@ import com.cyclopsgroup.tornado.sql.DataSourceManager;
  */
 public interface HibernateService
 {
-    /** Default data source name */
-    String DEFAULT_DATASOURCE = DataSourceManager.DEFAULT_DATA_SOURCE;
-
-    /** Role name of this component */
-    String ROLE = HibernateService.class.getName();
-
     /**
      * Close default session
      */
     void closeSession();
-
-    /**
-     * Close given session
-     *
-     * @param dataSourceName Data source name
-     */
-    void closeSession( String dataSourceName );
-
-    /**
-     * Close sessions attached to current thread
-     */
-    void closeSessions();
 
     /**
      * Commit default transaction
@@ -63,21 +45,14 @@ public interface HibernateService
         throws Exception;
 
     /**
-     * Close given transaction
-     *
      * @param dataSourceName Data source name
+     * @return SQL Connection
      * @throws Exception Throw it out
      */
-    void commitTransaction( String dataSourceName )
+    Connection getConnection()
         throws Exception;
 
-    /**
-     * Commit all transactions
-     *
-     * @throws Exception Throw it out
-     */
-    void commitTransactions()
-        throws Exception;
+    DataSourceService getDataSourceService();
 
     /**
      * Get all entity classes
@@ -85,7 +60,7 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @return Entity classes
      */
-    Class[] getEntityClasses( String dataSourceName );
+    Class[] getEntityClasses();
 
     /**
      * Get hibernate configuration
@@ -93,7 +68,9 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @return Configuraton object
      */
-    Configuration getHibernateConfiguration( String dataSourceName );
+    Configuration getHibernateConfiguration();
+
+    String getName();
 
     /**
      * Get current session with transaction support
@@ -115,42 +92,13 @@ public interface HibernateService
         throws Exception;
 
     /**
-     * Get given session
-     *
-     * @param dataSourceName Data source name
-     * @return Hibernate session object
-     * @throws Exception Throw it out
-     */
-    Session getSession( String dataSourceName )
-        throws Exception;
-
-    /**
-     * @param dataSourceName Data source name
-     * @return SQL Connection
-     * @throws Exception Throw it out
-     */
-    Connection getConnection( String dataSourceName )
-        throws Exception;
-
-    /**
-     * Get session with transaction or not
-     *
-     * @param dataSourceName Data source name
-     * @param withTransaction With transaction or not
-     * @return Hibernate session object
-     * @throws Exception Throw it out
-     */
-    Session getSession( String dataSourceName, boolean withTransaction )
-        throws Exception;
-
-    /**
      * Get session factory
      *
      * @param dataSourceName Data source name
      * @return Hibernate session factory
      * @throws NoSuchHibernateConfiguredException Throw it out
      */
-    SessionFactory getSessionFactory( String dataSourceName )
+    SessionFactory getSessionFactory()
         throws NoSuchHibernateConfiguredException;
 
     /**
@@ -159,22 +107,5 @@ public interface HibernateService
      * @throws Exception Throw it out
      */
     void rollbackTransaction()
-        throws Exception;
-
-    /**
-     * Roll back given transaction
-     *
-     * @param dataSourceName Data source name
-     * @throws Exception Throw it out
-     */
-    void rollbackTransaction( String dataSourceName )
-        throws Exception;
-
-    /**
-     * Rollback all transactions
-     *
-     * @throws Exception Throw itout
-     */
-    void rollbackTransactions()
         throws Exception;
 }

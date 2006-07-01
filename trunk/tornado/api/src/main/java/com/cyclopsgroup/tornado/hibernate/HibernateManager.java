@@ -33,6 +33,15 @@ public interface HibernateManager
      */
     String ROLE = HibernateManager.class.getName();
 
+    public void closeSessions()
+        throws Exception;
+
+    public void commitTransaction()
+        throws Exception;
+
+    public HibernateService getDefaultHibernateService()
+        throws NoSuchHibernateConfiguredException;
+
     /**
      * Get hibernate service with given name
      *
@@ -49,4 +58,7 @@ public interface HibernateManager
      * @return Array of string names
      */
     public String[] getServiceNames();
+
+    public void rollbackTransaction()
+        throws Exception;
 }
