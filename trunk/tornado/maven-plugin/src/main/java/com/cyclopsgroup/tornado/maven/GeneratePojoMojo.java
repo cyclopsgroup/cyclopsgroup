@@ -43,6 +43,11 @@ public class GeneratePojoMojo
      */
     private boolean jdk5;
 
+    /**
+     * Overwrite or implement parent method
+     *
+     * @see com.cyclopsgroup.tornado.maven.AbstractHibernateMojoBase#execute(org.apache.avalon.framework.service.ServiceManager)
+     */
     @Override
     public void execute( ServiceManager serviceManager )
         throws Exception
