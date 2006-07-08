@@ -60,7 +60,7 @@ public class HibernatePersistenceService
      *
      * @see com.cyclopsgroup.tornado.persist.PersistenceManager#create(java.lang.Class)
      */
-    public Object create( Class type )
+    public Object create( Class<Object> type )
         throws Exception
     {
         return type.newInstance();
@@ -71,7 +71,7 @@ public class HibernatePersistenceService
      *
      * @see com.cyclopsgroup.tornado.persist.PersistenceManager#create(java.lang.Class, java.io.Serializable)
      */
-    public Object create( Class type, Serializable id )
+    public Object create( Class<Object> type, Serializable id )
         throws Exception
     {
         return create( type );
@@ -82,7 +82,7 @@ public class HibernatePersistenceService
      *
      * @see com.cyclopsgroup.tornado.persist.PersistenceManager#delete(java.lang.Class, java.io.Serializable)
      */
-    public void delete( Class type, Serializable id )
+    public void delete( Class<Object> type, Serializable id )
         throws Exception
     {
         Object entity = find( type, id );
@@ -108,7 +108,7 @@ public class HibernatePersistenceService
      *
      * @see com.cyclopsgroup.tornado.persist.PersistenceManager#find(java.lang.Class, java.io.Serializable)
      */
-    public Object find( Class type, Serializable id )
+    public Object find( Class<Object> type, Serializable id )
         throws Exception
     {
         return getSession().get( type, id );
@@ -130,7 +130,7 @@ public class HibernatePersistenceService
      *
      * @see com.cyclopsgroup.tornado.persist.PersistenceManager#load(java.lang.Class, java.io.Serializable)
      */
-    public Object load( Class type, Serializable id )
+    public Object load( Class<Object> type, Serializable id )
         throws Exception
     {
         return getSession().load( type, id );

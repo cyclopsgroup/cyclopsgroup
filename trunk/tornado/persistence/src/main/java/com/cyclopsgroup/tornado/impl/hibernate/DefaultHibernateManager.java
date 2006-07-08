@@ -18,7 +18,6 @@ package com.cyclopsgroup.tornado.impl.hibernate;
 
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -44,9 +43,9 @@ public class DefaultHibernateManager
     extends AbstractLogEnabled
     implements HibernateManager, Configurable, Serviceable, Initializable
 {
-    private HashSet hibernateServiceRoles = new HashSet();
+    private HashSet<String> hibernateServiceRoles = new HashSet<String>();
 
-    private Hashtable hibernateServices = new Hashtable();
+    private Hashtable<String, HibernateService> hibernateServices = new Hashtable<String, HibernateService>();
 
     private ServiceManager serviceManager;
 
@@ -58,9 +57,8 @@ public class DefaultHibernateManager
     public void closeSessions()
         throws Exception
     {
-        for ( Iterator i = hibernateServices.values().iterator(); i.hasNext(); )
+        for ( HibernateService hs : hibernateServices.values() )
         {
-            HibernateService hs = (HibernateService) i.next();
             hs.closeSession();
         }
     }
@@ -73,9 +71,8 @@ public class DefaultHibernateManager
     public void commitTransaction()
         throws Exception
     {
-        for ( Iterator i = hibernateServices.values().iterator(); i.hasNext(); )
+        for ( HibernateService hs : hibernateServices.values() )
         {
-            HibernateService hs = (HibernateService) i.next();
             hs.commitTransaction();
         }
     }
@@ -116,7 +113,7 @@ public class DefaultHibernateManager
     public HibernateService getHibernateService( String name )
         throws NoSuchHibernateConfiguredException
     {
-        HibernateService hs = (HibernateService) hibernateServices.get( name );
+        HibernateService hs = hibernateServices.get( name );
         if ( hs == null )
         {
             throw new NoSuchHibernateConfiguredException( name );
@@ -131,7 +128,7 @@ public class DefaultHibernateManager
      */
     public String[] getServiceNames()
     {
-        return (String[]) hibernateServices.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return hibernateServices.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -142,9 +139,8 @@ public class DefaultHibernateManager
     public void initialize()
         throws Exception
     {
-        for ( Iterator i = hibernateServiceRoles.iterator(); i.hasNext(); )
+        for ( String role : hibernateServiceRoles )
         {
-            String role = (String) i.next();
             HibernateService service = (HibernateService) serviceManager.lookup( role );
             hibernateServices.put( service.getName(), service );
         }
@@ -158,9 +154,8 @@ public class DefaultHibernateManager
     public void rollbackTransaction()
         throws Exception
     {
-        for ( Iterator i = hibernateServices.values().iterator(); i.hasNext(); )
+        for ( HibernateService hs : hibernateServices.values() )
         {
-            HibernateService hs = (HibernateService) i.next();
             hs.rollbackTransaction();
         }
     }

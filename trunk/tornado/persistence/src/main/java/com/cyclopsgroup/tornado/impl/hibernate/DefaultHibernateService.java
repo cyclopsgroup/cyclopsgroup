@@ -54,15 +54,15 @@ public class DefaultHibernateService
 
     private String dataSourceServiceRole;
 
-    private Vector entityClasses = new Vector();
+    private Vector<Class<Object>> entityClasses = new Vector<Class<Object>>();
 
     private org.hibernate.cfg.Configuration hibernateConfiguration;
 
     private Properties hibernateProperties = new Properties();
 
-    private ThreadLocal localSession = new ThreadLocal();
+    private ThreadLocal<Session> localSession = new ThreadLocal<Session>();
 
-    private ThreadLocal localTransaction = new ThreadLocal();
+    private ThreadLocal<Transaction> localTransaction = new ThreadLocal<Transaction>();
 
     private String name;
 
@@ -75,9 +75,9 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#closeSession()
      */
-    public void closeSession()
+    public synchronized void closeSession()
     {
-        Session session = (Session) localSession.get();
+        Session session = localSession.get();
         if ( session != null )
         {
             if ( session.isOpen() )
@@ -97,7 +97,7 @@ public class DefaultHibernateService
     public void commitTransaction()
         throws Exception
     {
-        Transaction transaction = (Transaction) localTransaction.get();
+        Transaction transaction = localTransaction.get();
         if ( transaction != null )
         {
             Session session = getSession();
@@ -130,7 +130,7 @@ public class DefaultHibernateService
      *
      * @see org.apache.avalon.framework.activity.Disposable#dispose()
      */
-    public synchronized void dispose()
+    public void dispose()
     {
         closeSession();
     }
@@ -158,7 +158,7 @@ public class DefaultHibernateService
      */
     public Class[] getEntityClasses()
     {
-        return (Class[]) entityClasses.toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
+        return entityClasses.toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
     }
 
     /**
@@ -195,7 +195,7 @@ public class DefaultHibernateService
     public synchronized Session getSession( boolean withTransaction )
         throws Exception
     {
-        Session session = (Session) localSession.get();
+        Session session = localSession.get();
         if ( session == null )
         {
             SessionFactory sf = getSessionFactory();
@@ -238,14 +238,14 @@ public class DefaultHibernateService
         throws Exception
     {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        Enumeration enu = cl.getResources( "META-INF/cyclopsgroup/hibernate." + getName() + ".cfg.xml" );
+        Enumeration<URL> enu = cl.getResources( "META-INF/cyclopsgroup/hibernate." + getName() + ".cfg.xml" );
 
         hibernateConfiguration = new org.hibernate.cfg.Configuration();
         hibernateConfiguration.setProperties( hibernateProperties );
 
         while ( enu.hasMoreElements() )
         {
-            URL resource = (URL) enu.nextElement();
+            URL resource = enu.nextElement();
             getLogger().info( "Configure hibernate service [" + name + "] with " + resource );
             hibernateConfiguration.configure( resource );
         }
@@ -263,10 +263,10 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#rollbackTransaction()
      */
-    public void rollbackTransaction()
+    public synchronized void rollbackTransaction()
         throws Exception
     {
-        Transaction transaction = (Transaction) localTransaction.get();
+        Transaction transaction = localTransaction.get();
         if ( transaction != null && transaction.isActive() )
         {
             transaction.rollback();

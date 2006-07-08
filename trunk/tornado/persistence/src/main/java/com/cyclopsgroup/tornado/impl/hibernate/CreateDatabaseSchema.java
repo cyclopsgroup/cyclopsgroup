@@ -47,7 +47,7 @@ public class CreateDatabaseSchema
         throws Exception
     {
         HibernateManager hm = (HibernateManager) serviceManager.lookup( HibernateManager.ROLE );
-        HibernateService hs = (HibernateService) hm.getHibernateService( hibernateName );
+        HibernateService hs = hm.getHibernateService( hibernateName );
 
         Dialect dialect = Dialect.getDialect( hs.getHibernateConfiguration().getProperties() );
         String[] sqls = hs.getHibernateConfiguration().generateSchemaCreationScript( dialect );
