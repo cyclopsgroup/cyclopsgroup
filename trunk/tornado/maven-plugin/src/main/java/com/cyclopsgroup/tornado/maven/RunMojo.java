@@ -70,7 +70,7 @@ public class RunMojo
             container.initialize();
             container.start();
 
-            DefaultContext context = new DefaultContext( new HashMap( System.getProperties() ) );
+            DefaultContext context = new DefaultContext( new HashMap<Object, Object>( ( System.getProperties() ) ) );
 
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             Executable ex = (Executable) cl.loadClass( className ).newInstance();
