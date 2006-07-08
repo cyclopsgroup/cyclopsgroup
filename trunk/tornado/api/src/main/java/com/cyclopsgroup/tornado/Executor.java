@@ -51,6 +51,6 @@ public class Executor
     public void run( Executable executable )
         throws Exception
     {
-        executable.execute( serviceManager, new DefaultContext( new HashMap() ) );
+        executable.execute( serviceManager, new DefaultContext( new HashMap<Object, Object>() ) );
     }
 }

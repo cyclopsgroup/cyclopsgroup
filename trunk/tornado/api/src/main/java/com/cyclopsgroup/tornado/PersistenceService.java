@@ -37,7 +37,7 @@ public interface PersistenceService
      * @return Entity instance
      * @throws Exception Throw it out
      */
-    Object create( Class type )
+    Object create( Class<Object> type )
         throws Exception;
 
     /**
@@ -48,7 +48,17 @@ public interface PersistenceService
      * @return New object
      * @throws Exception Throw it out
      */
-    Object create( Class type, Serializable id )
+    Object create( Class<Object> type, Serializable id )
+        throws Exception;
+
+    /**
+     * Delete object by id
+     *
+     * @param type Entity type
+     * @param id Id of entity
+     * @throws Exception THrow it out
+     */
+    void delete( Class<Object> type, Serializable id )
         throws Exception;
 
     /**
@@ -61,16 +71,6 @@ public interface PersistenceService
         throws Exception;
 
     /**
-     * Delete object by id
-     *
-     * @param type Entity type
-     * @param id Id of entity
-     * @throws Exception THrow it out
-     */
-    void delete( Class type, Serializable id )
-        throws Exception;
-
-    /**
      * Find object by id
      *
      * @param id Id of object
@@ -78,7 +78,7 @@ public interface PersistenceService
      * @return Entity instance or null if not found
      * @throws Exception Throw it out
      */
-    Object find( Class type, Serializable id )
+    Object find( Class<Object> type, Serializable id )
         throws Exception;
 
     /**
@@ -90,7 +90,7 @@ public interface PersistenceService
      * @throws Exception Thrown if no record is found
      * @throws Exception Throw it out
      */
-    Object load( Class type, Serializable id )
+    Object load( Class<Object> type, Serializable id )
         throws Exception;
 
     /**

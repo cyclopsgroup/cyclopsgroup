@@ -18,7 +18,6 @@ package com.cyclopsgroup.tornado.sql;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -47,9 +46,9 @@ public class DataSourceManager
     /** Role name of service */
     public static final String ROLE = DataSourceManager.class.getName();
 
-    private Map dataSourceServices;
+    private Map<String, DataSourceService> dataSourceServices;
 
-    private Map dataSourceRoles;
+    private Map<String, String> dataSourceRoles;
 
     private ServiceManager serviceManager;
 
@@ -61,7 +60,7 @@ public class DataSourceManager
     public void configure( Configuration conf )
         throws ConfigurationException
     {
-        dataSourceRoles = new HashMap();
+        dataSourceRoles = new HashMap<String, String>();
         Configuration[] confs = conf.getChildren( "data-source" );
         for ( int i = 0; i < confs.length; i++ )
         {
@@ -106,7 +105,7 @@ public class DataSourceManager
     public DataSourceService getDataSourceService( String name )
         throws NoSuchDataSourceException
     {
-        DataSourceService service = (DataSourceService) dataSourceServices.get( name );
+        DataSourceService service = dataSourceServices.get( name );
         if ( service == null )
         {
             throw new NoSuchDataSourceException( name );
@@ -122,11 +121,10 @@ public class DataSourceManager
     public void initialize()
         throws Exception
     {
-        dataSourceServices = new Hashtable();
-        for ( Iterator i = dataSourceRoles.keySet().iterator(); i.hasNext(); )
+        dataSourceServices = new Hashtable<String, DataSourceService>();
+        for ( String name : dataSourceServices.keySet() )
         {
-            String name = (String) i.next();
-            String role = (String) dataSourceRoles.get( name );
+            String role = dataSourceRoles.get( name );
             DataSourceService dsf = (DataSourceService) serviceManager.lookup( role );
             dataSourceServices.put( name, dsf );
         }

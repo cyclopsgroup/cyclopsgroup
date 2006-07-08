@@ -12,7 +12,7 @@ public class CriteriaLargeList
 {
     private Criteria criteria;
 
-    public CriteriaLargeList(Criteria criteria)
+    public CriteriaLargeList( Criteria criteria )
     {
         this.criteria = criteria;
     }
@@ -29,23 +29,25 @@ public class CriteriaLargeList
     /**
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    public Iterator<Object> iterate( int startPosition, int maxAmount, Sorting[] sortings )
         throws Exception
     {
         for ( int i = 0; i < sortings.length; i++ )
         {
             Sorting sorting = sortings[i];
-            if(sorting.isDescending())
+            if ( sorting.isDescending() )
             {
-                criteria.addOrder(Order.desc(sorting.getName()));
-            } else {
-                criteria.addOrder(Order.asc(sorting.getName()));
+                criteria.addOrder( Order.desc( sorting.getName() ) );
+            }
+            else
+            {
+                criteria.addOrder( Order.asc( sorting.getName() ) );
             }
         }
-        criteria.setFirstResult(startPosition);
-        if(maxAmount != UNLIMITED_MAX_AMOUNT)
+        criteria.setFirstResult( startPosition );
+        if ( maxAmount != UNLIMITED_MAX_AMOUNT )
         {
-            criteria.setMaxResults(maxAmount);
+            criteria.setMaxResults( maxAmount );
         }
         return criteria.list().iterator();
     }

@@ -94,7 +94,7 @@ public class HqlLargeList
 
     private String hql;
 
-    private Map parameters = new HashMap();
+    private Map<String, Parameter> parameters = new HashMap<String, Parameter>();
 
     /**
      * Constructor for class HQLTabularData
@@ -165,17 +165,18 @@ public class HqlLargeList
         String countQuery = "SELECT COUNT(*) " + hql;
         Session s = hibernate.getSession();
         Query query = s.createQuery( countQuery );
-        HashSet parameterNames = new HashSet();
+        HashSet<String> parameterNames = new HashSet<String>();
         CollectionUtils.addAll( parameterNames, query.getNamedParameters() );
-        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
+
+        for ( Parameter p : parameters.values() )
         {
-            Parameter p = (Parameter) i.next();
             if ( parameterNames.contains( p.getName() ) )
             {
                 query.setParameter( p.getName(), p.getValue(), p.getType() );
             }
         }
-        List result = query.list();
+
+        List<Object> result = query.list();
         if ( result == null || result.isEmpty() )
         {
             return -1;
@@ -189,7 +190,7 @@ public class HqlLargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator iterate( int startPosition, int maxRecords, Sorting[] sortings )
+    public Iterator<Object> iterate( int startPosition, int maxRecords, Sorting[] sortings )
         throws Exception
     {
         if ( StringUtils.isEmpty( hql ) )
@@ -220,11 +221,10 @@ public class HqlLargeList
         }
 
         Query q = s.createQuery( sb.toString() );
-        HashSet parameterNames = new HashSet();
+        HashSet<String> parameterNames = new HashSet<String>();
         CollectionUtils.addAll( parameterNames, q.getNamedParameters() );
-        for ( Iterator i = parameters.values().iterator(); i.hasNext(); )
+        for ( Parameter p : parameters.values() )
         {
-            Parameter p = (Parameter) i.next();
             if ( parameterNames.contains( p.getName() ) )
             {
                 q.setParameter( p.getName(), p.getValue(), p.getType() );

@@ -16,12 +16,12 @@ public abstract class AbstractDataSourceService
     extends AbstractLogEnabled
     implements DataSourceService
 {
-    private ThreadLocal localConnection = new ThreadLocal();
+    private ThreadLocal<Connection> localConnection = new ThreadLocal<Connection>();
 
     public synchronized void closeLocalConnection()
         throws Exception
     {
-        Connection dbcon = (Connection) localConnection.get();
+        Connection dbcon = localConnection.get();
         if ( dbcon == null )
         {
             return;
@@ -43,13 +43,13 @@ public abstract class AbstractDataSourceService
     public Connection getLocalConnection()
         throws Exception
     {
-        Connection dbcon = (Connection) localConnection.get();
+        Connection dbcon = localConnection.get();
         if ( dbcon == null || dbcon.isClosed() )
         {
             DataSource dataSource = getDataSource();
             synchronized ( this )
             {
-                dbcon = (Connection) localConnection.get();
+                dbcon = localConnection.get();
                 if ( dbcon == null || dbcon.isClosed() )
                 {
                     dbcon = dataSource.getConnection();
