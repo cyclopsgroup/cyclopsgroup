@@ -19,7 +19,6 @@ package com.cyclopsgroup.waterview.spi;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Panel content model
  *
@@ -29,41 +28,33 @@ public class PanelContent
 {
     private String name;
 
-    private List views = new ArrayList();
-
-    public void addView(View view)
-    {
-        views.add(view);
-    }
-
-    /**
-     * Get all views in this panel
-     *
-     * @return View array
-     */
-    public View[] getViews()
-    {
-        return (View[]) views.toArray(View.EMPTY_ARRAY);
-    }
-
-    /**
-     * Get modifiable view list
-     *
-     * @return Modifiable list of views
-     */
-    public List getViewList()
-    {
-        return views;
-    }
+    private List<View> views = new ArrayList<View>();
 
     /**
      * Constructor for class PanelContent
      *
      * @param name
      */
-    public PanelContent(String name)
+    public PanelContent( String name )
     {
         this.name = name;
+    }
+
+    public void addView( View view )
+    {
+        views.add( view );
+    }
+
+    /**
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    public Object clone()
+        throws CloneNotSupportedException
+    {
+        PanelContent pc = new PanelContent( name );
+        pc.views.addAll( getViews() );
+        return pc;
     }
 
     /**
@@ -77,13 +68,12 @@ public class PanelContent
     }
 
     /**
-     * @see java.lang.Object#clone()
+     * Get all views in this panel
+     *
+     * @return View array
      */
-    public Object clone()
-        throws CloneNotSupportedException
+    public List<View> getViews()
     {
-        PanelContent pc = new PanelContent(name);
-        pc.views.addAll(getViewList());
-        return pc;
+        return views;
     }
 }

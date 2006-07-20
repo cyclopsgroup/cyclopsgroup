@@ -39,9 +39,6 @@ public interface View
         }
     };
 
-    /** Empty array */
-    View[] EMPTY_ARRAY = new View[0];
-
     /**
      * Render the window with runtime information
      *

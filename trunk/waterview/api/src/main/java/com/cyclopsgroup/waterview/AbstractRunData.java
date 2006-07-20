@@ -25,7 +25,6 @@ import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.collections.MultiHashMap;
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Abstract base runtime class
@@ -108,16 +107,10 @@ public abstract class AbstractRunData
      *
      * @see com.cyclopsgroup.waterview.RunData#getMessages()
      */
-    public String[] getMessages()
+    public List<String> getMessages()
     {
-        List messages = (List) getSessionContext().get( MESSAGES_NAME );
-        if ( messages == null )
-        {
-            return ArrayUtils.EMPTY_STRING_ARRAY;
-        }
-        String[] ret = (String[]) messages.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
-        messages.clear();
-        return ret;
+        List<String> messages = (List) getSessionContext().get( MESSAGES_NAME );
+        return messages;
     }
 
     /**

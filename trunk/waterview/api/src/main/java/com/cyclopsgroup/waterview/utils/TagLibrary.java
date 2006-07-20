@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.utils;
 
+import org.apache.commons.jelly.Tag;
+
 /**
  * Clib tag library
  * 
@@ -31,11 +33,9 @@ public class TagLibrary
      */
     public void registerPackage( TagPackage pkg )
     {
-        String[] tagNames = pkg.getTagNames();
-        for ( int i = 0; i < tagNames.length; i++ )
+        for ( String tagName : pkg.getTagNames() )
         {
-            String tagName = tagNames[i];
-            Class tagClass = pkg.getTagClass( tagName );
+            Class<Tag> tagClass = pkg.getTagClass( tagName );
             registerTag( tagName, tagClass );
         }
     }

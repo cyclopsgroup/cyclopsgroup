@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -33,14 +34,14 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 public class MapAttributes
     extends Attributes
 {
-    private Map map;
+    private Map<String, String> map;
 
     /**
      * Constructor for class MapValueParser
      *
      * @param map Given map content
      */
-    public MapAttributes( Map map )
+    public MapAttributes( Map<String, String> map )
     {
         this.map = map;
     }
@@ -50,9 +51,21 @@ public class MapAttributes
      *
      * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
+    @Override
     public void add( String name, String value )
     {
         getMap().put( name, value );
+    }
+
+    /**
+     * Override method doGetAttributeNames in class MapValueParser
+     *
+     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
+     */
+    @Override
+    protected Set<String> doGetAttributeNames()
+    {
+        return getMap().keySet();
     }
 
     /**
@@ -60,6 +73,7 @@ public class MapAttributes
      *
      * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
+    @Override
     protected String doGetValue( String name )
         throws Exception
     {
@@ -72,7 +86,7 @@ public class MapAttributes
         {
             return TypeUtils.toString( object );
         }
-        Iterator it = TypeUtils.iterate( object );
+        Iterator<Object> it = TypeUtils.iterate( object );
         if ( it.hasNext() )
         {
             return TypeUtils.toString( it.next() );
@@ -85,6 +99,7 @@ public class MapAttributes
      *
      * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
+    @Override
     protected String[] doGetValues( String name )
         throws Exception
     {
@@ -93,7 +108,7 @@ public class MapAttributes
         {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        ArrayList values = new ArrayList();
+        ArrayList<String> values = new ArrayList<String>();
         CollectionUtils.addAll( values, TypeUtils.iterate( object ) );
         String[] ret = new String[values.size()];
         for ( int i = 0; i < ret.length; i++ )
@@ -109,7 +124,7 @@ public class MapAttributes
      *
      * @return Map object
      */
-    public Map getMap()
+    public Map<String, String> getMap()
     {
         return map;
     }
@@ -119,18 +134,9 @@ public class MapAttributes
      *
      * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
+    @Override
     public void remove( String name )
     {
         getMap().remove( name );
-    }
-
-    /**
-     * Override method doGetAttributeNames in class MapValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
-     */
-    protected String[] doGetAttributeNames()
-    {
-        return (String[]) getMap().keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 }

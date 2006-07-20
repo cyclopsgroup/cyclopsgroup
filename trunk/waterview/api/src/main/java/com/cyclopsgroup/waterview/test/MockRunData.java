@@ -17,8 +17,8 @@ public class MockRunData
 
     public MockRunData()
     {
-        setSessionContext( new DefaultContext( new HashMap() ) );
-        setRequestContext( new DefaultContext( new HashMap() ) );
+        setSessionContext( new DefaultContext( new HashMap<String, Object>() ) );
+        setRequestContext( new DefaultContext( new HashMap<String, Object>() ) );
     }
 
     /**

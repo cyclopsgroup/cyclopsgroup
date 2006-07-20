@@ -26,7 +26,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  * Comparator based on a property
  */
 public class BeanPropertyComparator
-    implements Comparator
+    implements Comparator<Object>
 {
     private String propertyName;
 
@@ -49,8 +49,8 @@ public class BeanPropertyComparator
     {
         try
         {
-            Comparable p1 = (Comparable) PropertyUtils.getProperty( o1, propertyName );
-            Comparable p2 = (Comparable) PropertyUtils.getProperty( o2, propertyName );
+            Comparable<Object> p1 = (Comparable<Object>) PropertyUtils.getProperty( o1, propertyName );
+            Comparable<Object> p2 = (Comparable<Object>) PropertyUtils.getProperty( o2, propertyName );
             return p1.compareTo( p2 );
         }
         catch ( Exception e )

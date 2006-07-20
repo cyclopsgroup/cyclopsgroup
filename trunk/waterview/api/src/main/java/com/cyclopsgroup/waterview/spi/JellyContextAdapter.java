@@ -66,7 +66,7 @@ public class JellyContextAdapter
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    public Iterator<String> keys()
     {
         return jellyContext.getVariableNames();
     }

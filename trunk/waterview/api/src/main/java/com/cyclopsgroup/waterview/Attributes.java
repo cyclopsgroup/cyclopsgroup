@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -34,9 +35,9 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 public abstract class Attributes
 {
 
-    private static HashSet booleanFalseValues = new HashSet();
+    private static HashSet<String> booleanFalseValues = new HashSet<String>();
 
-    private static HashSet booleanTrueValues = new HashSet();
+    private static HashSet<String> booleanTrueValues = new HashSet<String>();
 
     static
     {
@@ -82,7 +83,7 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    protected abstract String[] doGetAttributeNames();
+    protected abstract Set<String> doGetAttributeNames();
 
     /**
      * Internally get string value
@@ -528,7 +529,7 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    public String[] names()
+    public Set<String> names()
     {
         return doGetAttributeNames();
     }
@@ -561,10 +562,8 @@ public abstract class Attributes
     public Properties toProperties()
     {
         Properties p = new Properties();
-        String[] names = names();
-        for ( int i = 0; i < names.length; i++ )
+        for ( String name : names() )
         {
-            String name = names[i];
             p.setProperty( name, getString( name ) );
         }
         return p;

@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.spi;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 
 /**
  * Page model is the model mapped to a particular URI
@@ -32,7 +31,7 @@ public class Page
 
     private Layout layout;
 
-    private Hashtable panelContents = new Hashtable();
+    private Hashtable<String, PanelContent> panelContents = new Hashtable<String, PanelContent>();
 
     /**
      * Add panel content object
@@ -42,6 +41,23 @@ public class Page
     public void addPanelContent( PanelContent panelContent )
     {
         panelContents.put( panelContent.getName(), panelContent );
+    }
+
+    /**
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    public Object clone()
+        throws CloneNotSupportedException
+    {
+        Page page = new Page();
+        page.setLayout( layout );
+        for ( PanelContent pc : panelContents.values() )
+        {
+            PanelContent pcCopy = (PanelContent) pc.clone();
+            page.addPanelContent( pcCopy );
+        }
+        return page;
     }
 
     /**
@@ -62,7 +78,7 @@ public class Page
      */
     public PanelContent getPanelContent( String panelName )
     {
-        return (PanelContent) panelContents.get( panelName );
+        return panelContents.get( panelName );
     }
 
     /**
@@ -73,22 +89,5 @@ public class Page
     public void setLayout( Layout layout )
     {
         this.layout = layout;
-    }
-
-    /**
-     * @see java.lang.Object#clone()
-     */
-    public Object clone()
-        throws CloneNotSupportedException
-    {
-        Page page = new Page();
-        page.setLayout( layout );
-        for ( Iterator i = panelContents.values().iterator(); i.hasNext(); )
-        {
-            PanelContent pc = (PanelContent) i.next();
-            PanelContent pcCopy = (PanelContent) pc.clone();
-            page.addPanelContent( pcCopy );
-        }
-        return page;
     }
 }

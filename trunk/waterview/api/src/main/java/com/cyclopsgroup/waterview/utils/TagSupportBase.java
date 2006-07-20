@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.utils;
 
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public abstract class TagSupportBase
 {
     private static final String DIGEST_ALGORITHM = "SHA";
 
-    private static final URL[] EMPTY_URL_ARRAY = new URL[0];
+    private static final List<URL> EMPTY_URL_LIST = Collections.EMPTY_LIST;
 
     private static final String SCRIPT_RESOURCE_NAME = TagSupportBase.class.getName() + "/scriptresource";
 
@@ -55,10 +56,10 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
-                scriptResources = new LinkedList();
+                scriptResources = new LinkedList<URL>();
                 context.setVariable( SCRIPT_RESOURCE_NAME, scriptResources );
             }
             scriptResources.add( resource );
@@ -119,11 +120,9 @@ public abstract class TagSupportBase
             {
                 ex = new JellyTagException( e );
             }
-            URL[] scriptResources = getScriptResources();
             StringBuffer sb = new StringBuffer();
-            for ( int i = 0; i < scriptResources.length; i++ )
+            for ( URL url : getScriptResources() )
             {
-                URL url = scriptResources[i];
                 sb.append( ">" ).append( url.toString() );
             }
             ex.setFileName( sb.toString() );
@@ -136,14 +135,10 @@ public abstract class TagSupportBase
      *
      * @return URL of script resource
      */
-    protected URL[] getScriptResources()
+    protected List<URL> getScriptResources()
     {
-        List scriptResources = (List) getContext().getVariable( SCRIPT_RESOURCE_NAME );
-        if ( scriptResources == null )
-        {
-            return EMPTY_URL_ARRAY;
-        }
-        return (URL[]) scriptResources.toArray( EMPTY_URL_ARRAY );
+        List<URL> scriptResources = (List<URL>) getContext().getVariable( SCRIPT_RESOURCE_NAME );
+        return scriptResources == null ? EMPTY_URL_LIST : scriptResources;
     }
 
     /**
@@ -182,10 +177,8 @@ public abstract class TagSupportBase
             throw new IllegalArgumentException( "tagId attribute is required for " + this + " to get unique ID" );
         }
         StringBuffer s = new StringBuffer( getTagId() ).append( '@' );
-        URL[] scriptResources = getScriptResources();
-        for ( int i = 0; i < scriptResources.length; i++ )
+        for ( URL resource : getScriptResources() )
         {
-            URL resource = scriptResources[i];
             s.append( "->" ).append( resource );
         }
         MessageDigest digest = MessageDigest.getInstance( DIGEST_ALGORITHM );

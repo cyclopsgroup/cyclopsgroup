@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -78,7 +79,7 @@ public interface RunData
     /**
      * @return Array of messages
      */
-    String[] getMessages();
+    List<String> getMessages();
 
     /**
      * Get mime type of given path

@@ -24,7 +24,7 @@ import java.util.Iterator;
  *
  * Large list that can be accessed partially
  */
-public interface LargeList
+public interface LargeList<T>
 {
     /** Sorting option */
     public interface Sorting
@@ -71,6 +71,6 @@ public interface LargeList
      * @return Iterator of result
      * @throws Exception Throw it out
      */
-    Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
         throws Exception;
 }

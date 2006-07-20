@@ -16,10 +16,10 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * HashMap based request value parser
@@ -29,41 +29,45 @@ import org.apache.commons.lang.ArrayUtils;
 class MapParameters
     extends Parameters
 {
-    private Properties content = new Properties();
+    private HashMap<String, String> content = new HashMap<String, String>();
+
+    /**
+     * Overwrite or implement method add()
+     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void add( String name, String value )
+    {
+        content.put( name, value );
+    }
 
     /**
      * Override method doGetAttributeNames in class MapRequestValueParser
      *
      * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
-    protected String[] doGetAttributeNames()
+    @Override
+    protected Set<String> doGetAttributeNames()
     {
-        return (String[]) content.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
-    }
-
-    /**
-     * Overwrite or implement method add()
-     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
-     */
-    public void add( String name, String value )
-    {
-        content.setProperty( name, value );
+        return content.keySet();
     }
 
     /**
      * Overwrite or implement method doGetValue()
      * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
+    @Override
     protected String doGetValue( String name )
         throws Exception
     {
-        return content.getProperty( name );
+        return content.get( name );
     }
 
     /**
      * Overwrite or implement method doGetValues()
      * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
+    @Override
     protected String[] doGetValues( String name )
         throws Exception
     {
@@ -75,6 +79,7 @@ class MapParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
+    @Override
     public FileItem getFileItem( String name )
     {
         return null;
@@ -85,6 +90,7 @@ class MapParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
+    @Override
     public FileItem[] getFileItems( String name )
     {
         return EMPTY_FILEITEM_ARRAY;
@@ -94,6 +100,7 @@ class MapParameters
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
+    @Override
     public void remove( String name )
     {
         content.remove( name );

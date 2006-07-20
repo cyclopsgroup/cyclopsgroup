@@ -25,13 +25,6 @@ public class WaterviewTestCase
         return data;
     }
 
-    protected void setUp()
-        throws Exception
-    {
-        super.setUp();
-        
-    }
-
     /**
      * Get the file path of custom plexus configuration
      * 
@@ -45,6 +38,7 @@ public class WaterviewTestCase
     /**
      * @see org.codehaus.plexus.PlexusTestCase#getCustomConfiguration()
      */
+    @Override
     protected InputStream getCustomConfiguration()
         throws Exception
     {
