@@ -40,7 +40,7 @@ public class PanelContentTag
 
     private String name;
 
-    private List views;
+    private List<View> views;
 
     /**
      * Getter method for name
@@ -67,6 +67,7 @@ public class PanelContentTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
+    @Override
     public void processTag( XMLOutput output )
         throws Exception
     {
@@ -80,14 +81,14 @@ public class PanelContentTag
             panelContent = new PanelContent( getName() );
             page.addPanelContent( panelContent );
         }
-        views = new ArrayList();
+        views = new ArrayList<View>();
         invokeBody( output );
 
         if ( !isAppend() )
         {
-            panelContent.getViewList().clear();
+            panelContent.getViews().clear();
         }
-        panelContent.getViewList().addAll( views );
+        panelContent.getViews().addAll( views );
     }
 
     /**

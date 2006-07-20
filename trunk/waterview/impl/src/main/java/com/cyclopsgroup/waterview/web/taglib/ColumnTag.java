@@ -129,7 +129,7 @@ public class ColumnTag
         TableTag tableTag = (TableTag) requireInside( TableTag.class );
         if ( tableTag.isTableNew() )
         {
-            Class columnType = TypeUtils.getType( getType() );
+            Class columnType = (Class) TypeUtils.getType( getType() );
             Table table = tableTag.getTable();
             column = new Column( getName(), columnType );
             table.addColumn( column );

@@ -186,7 +186,7 @@ public class FieldTag
         formTag.addFieldTag( this );
         if ( formTag.isFormNew() )
         {
-            field = new Field( getName(), TypeUtils.getType( getType() ) );
+            field = new Field( getName(), (Class) TypeUtils.getType( getType() ) );
             field.setTitle( getTitle() );
             field.setRequired( isRequired() );
             field.setPassword( isPassword() );
@@ -288,7 +288,7 @@ public class FieldTag
         throws ClassNotFoundException
     {
         this.type = type;
-        this.fieldType = TypeUtils.getNonePrimitiveType( type );
+        this.fieldType = (Class) TypeUtils.getNonePrimitiveType( type );
         if ( fieldType == null )
         {
             throw new ClassNotFoundException( type );
