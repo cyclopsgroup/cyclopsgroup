@@ -109,7 +109,7 @@ public abstract class AbstractRunData
      */
     public List<String> getMessages()
     {
-        List<String> messages =List.class.cast( getSessionContext().get( MESSAGES_NAME ) );
+        List<String> messages = List.class.cast( getSessionContext().get( MESSAGES_NAME ) );
         return messages;
     }
 
@@ -177,7 +177,7 @@ public abstract class AbstractRunData
      */
     public Path[] getPaths( String pathInstruction )
     {
-        Collection ps = (Collection) paths.get( pathInstruction );
+        Collection<Path> ps = (Collection<Path>) paths.get( pathInstruction );
         return ps == null || ps.isEmpty() ? Path.EMPTY_ARRAY : (Path[]) ps.toArray( Path.EMPTY_ARRAY );
     }
 
