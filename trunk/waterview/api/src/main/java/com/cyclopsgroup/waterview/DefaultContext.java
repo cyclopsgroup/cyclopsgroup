@@ -30,7 +30,7 @@ import org.apache.commons.collections.iterators.IteratorChain;
 public class DefaultContext
     implements Context
 {
-    private Map content = new HashMap();
+    private Map<String, Object> content = new HashMap<String, Object>();
 
     private Context parent;
 
@@ -39,7 +39,7 @@ public class DefaultContext
      * 
      * @param content Content of this context
      */
-    public DefaultContext( Map content )
+    public DefaultContext( Map<String, Object> content )
     {
         this( content, null );
     }
@@ -50,7 +50,7 @@ public class DefaultContext
      * @param content Content of this context
      * @param parent Parent context
      */
-    public DefaultContext( Map content, Context parent )
+    public DefaultContext( Map<String, Object> content, Context parent )
     {
         this.content = content;
         this.parent = parent;
@@ -75,7 +75,7 @@ public class DefaultContext
      *
      * @return HashMap content
      */
-    public Map getContent()
+    public Map<String, Object> getContent()
     {
         return content;
     }
@@ -84,7 +84,7 @@ public class DefaultContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    public Iterator<String> keys()
     {
         if ( parent == null )
         {

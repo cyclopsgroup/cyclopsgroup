@@ -16,7 +16,9 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.fileupload.FileItem;
@@ -68,10 +70,16 @@ class MapParameters
      * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
     @Override
-    protected String[] doGetValues( String name )
+    protected List<String> doGetValues( String name )
         throws Exception
     {
-        return new String[] { doGetValue( name ) };
+        String s = doGetValue( name );
+        List<String> ret = new ArrayList<String>( 1 );
+        if ( s != null )
+        {
+            ret.add( s );
+        }
+        return ret;
     }
 
     /**

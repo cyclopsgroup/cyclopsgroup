@@ -19,6 +19,7 @@ package com.cyclopsgroup.waterview;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -102,7 +103,7 @@ public abstract class Attributes
      * @return String array value of attribute
      * @throws Exception Throw it out
      */
-    protected abstract String[] doGetValues( String name )
+    protected abstract List<String> doGetValues( String name )
         throws Exception;
 
     /**
@@ -115,14 +116,14 @@ public abstract class Attributes
     public Object get( String name )
         throws Exception
     {
-        String[] values = doGetValues( name );
-        if ( values == null || values.length == 0 )
+        List<String> values = doGetValues( name );
+        if ( values == null || values.isEmpty() )
         {
             return null;
         }
-        if ( values.length == 1 )
+        if ( values.size() == 1 )
         {
-            return values[0];
+            return values.get( 0 );
         }
         return values;
     }
@@ -349,11 +350,11 @@ public abstract class Attributes
     {
         try
         {
-            String[] values = doGetValues( name );
-            int[] ret = new int[values.length];
-            for ( int i = 0; i < values.length; i++ )
+            List<String> values = doGetValues( name );
+            int[] ret = new int[values.size()];
+            int i = 0;
+            for ( String value : values )
             {
-                String value = values[i];
                 try
                 {
                     ret[i] = Integer.parseInt( value );
@@ -361,6 +362,10 @@ public abstract class Attributes
                 catch ( Exception ignored )
                 {
                     ret[i] = defaultValue;
+                }
+                finally
+                {
+                    i++;
                 }
             }
             return ret;
@@ -423,11 +428,11 @@ public abstract class Attributes
     {
         try
         {
-            String[] values = doGetValues( name );
-            long[] ret = new long[values.length];
-            for ( int i = 0; i < values.length; i++ )
+            List<String> values = doGetValues( name );
+            long[] ret = new long[values.size()];
+            int i = 0;
+            for ( String value : values )
             {
-                String value = values[i];
                 try
                 {
                     ret[i] = Long.parseLong( value );
@@ -435,6 +440,10 @@ public abstract class Attributes
                 catch ( Exception e )
                 {
                     ret[i] = defaultValue;
+                }
+                finally
+                {
+                    i++;
                 }
             }
             return ret;
@@ -498,16 +507,7 @@ public abstract class Attributes
     {
         try
         {
-            String[] values = doGetValues( name );
-            for ( int i = 0; i < values.length; i++ )
-            {
-                String value = values[i];
-                if ( value == null )
-                {
-                    values[i] = defaultValue;
-                }
-            }
-            return values;
+            return doGetValues( name ).toArray( ArrayUtils.EMPTY_STRING_ARRAY );
         }
         catch ( Exception e )
         {

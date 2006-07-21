@@ -45,7 +45,7 @@ public class DummyContext
      *
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    public Iterator<String> keys()
     {
         return Collections.EMPTY_LIST.iterator();
     }

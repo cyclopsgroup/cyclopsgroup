@@ -81,7 +81,7 @@ public class CollectionLargeList<T>
                 }
             }
             chain.addComparator( HashCodeComparator.INSTANCE );
-            sortedResult = new TreeSet<T>( chain );
+            sortedResult = new TreeSet<T>( (Collection<T>) chain );
             sortedResult.addAll( collection );
         }
         Iterator<T> it = sortedResult.iterator();

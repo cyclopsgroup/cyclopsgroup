@@ -109,7 +109,7 @@ public abstract class AbstractRunData
      */
     public List<String> getMessages()
     {
-        List<String> messages = (List) getSessionContext().get( MESSAGES_NAME );
+        List<String> messages =List.class.cast( getSessionContext().get( MESSAGES_NAME ) );
         return messages;
     }
 

@@ -18,11 +18,11 @@ package com.cyclopsgroup.waterview;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.utils.TypeUtils;
 
@@ -100,23 +100,18 @@ public class MapAttributes
      * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
     @Override
-    protected String[] doGetValues( String name )
+    protected List<String> doGetValues( String name )
         throws Exception
     {
+        List<String> s = new ArrayList<String>();
         Object object = getMap().get( name );
         if ( object == null )
         {
-            return ArrayUtils.EMPTY_STRING_ARRAY;
+            return s;
         }
-        ArrayList<String> values = new ArrayList<String>();
-        CollectionUtils.addAll( values, TypeUtils.iterate( object ) );
-        String[] ret = new String[values.size()];
-        for ( int i = 0; i < ret.length; i++ )
-        {
-            Object value = values.get( i );
-            ret[i] = TypeUtils.toString( value );
-        }
-        return ret;
+
+        CollectionUtils.addAll( s, TypeUtils.iterate( object ) );
+        return s;
     }
 
     /**

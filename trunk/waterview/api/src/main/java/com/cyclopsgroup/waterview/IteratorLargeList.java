@@ -26,19 +26,19 @@ import com.cyclopsgroup.waterview.utils.FixedSizeIterator;
  *
  * Iterator implemented large list
  */
-public class IteratorLargeList
-    implements LargeList
+public class IteratorLargeList<T>
+    implements LargeList<T>
 {
     private boolean disposed = false;
 
-    private Iterator iterator;
+    private Iterator<T> iterator;
 
     /**
      * Constructor for class IteratorLargeList
      *
      * @param iterator Iterator object
      */
-    public IteratorLargeList( Iterator iterator )
+    public IteratorLargeList( Iterator<T> iterator )
     {
         this.iterator = iterator;
     }
@@ -59,7 +59,7 @@ public class IteratorLargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    public Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
         throws Exception
     {
         //Make sure this object can only be used for one time
@@ -80,6 +80,6 @@ public class IteratorLargeList
         {
             return iterator;
         }
-        return new FixedSizeIterator( iterator, maxAmount );
+        return new FixedSizeIterator<T>( iterator, maxAmount );
     }
 }

@@ -218,6 +218,7 @@ public class Link
      *
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString()
     {
         StringBuffer url = new StringBuffer( data.getPageBaseUrl() ).append( requestPath );
