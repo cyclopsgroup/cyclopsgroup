@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.Parameters;
 
@@ -47,12 +47,12 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
-    protected String[] doGetAttributeNames()
+    protected Set<String> doGetAttributeNames()
     {
-        HashSet names = new HashSet();
+        HashSet<String> names = new HashSet<String>();
         CollectionUtils.addAll( names, httpServletRequest.getParameterNames() );
         names.addAll( extra.keySet() );
-        return (String[]) names.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return names;
     }
 
     /**
@@ -70,6 +70,7 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
      */
+    @Override
     public void add( String name, String value )
     {
         extra.put( name, value );
@@ -80,6 +81,7 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#doGetValue(java.lang.String)
      */
+    @Override
     protected String doGetValue( String name )
         throws Exception
     {
@@ -100,17 +102,17 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues( String name )
+    @Override
+    protected List<String> doGetValues( String name )
         throws Exception
     {
-        String[] ret = httpServletRequest.getParameterValues( name );
+        List<String> list = new ArrayList<String>();
+        CollectionUtils.addAll( list, httpServletRequest.getParameterValues( name ) );
         if ( extra.containsKey( name ) )
         {
-            List list = new ArrayList( (Collection) extra.get( name ) );
-            CollectionUtils.addAll( list, ret );
-            ret = (String[]) list.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+            list.addAll( (Collection) extra.get( name ) );
         }
-        return ret;
+        return list;
     }
 
     /**
@@ -118,6 +120,7 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
+    @Override
     public FileItem getFileItem( String name )
     {
         return null;
@@ -128,6 +131,7 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
+    @Override
     public FileItem[] getFileItems( String name )
     {
         return EMPTY_FILEITEM_ARRAY;
@@ -138,6 +142,7 @@ public class ServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#remove(java.lang.String)
      */
+    @Override
     public void remove( String name )
     {
         extra.remove( name );

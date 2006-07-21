@@ -16,9 +16,11 @@
  */
 package com.cyclopsgroup.waterview.servlet;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +28,6 @@ import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.waterview.Parameters;
 
@@ -48,9 +49,9 @@ public class MultipartServletRequestParameters
      * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
      */
     @Override
-    protected String[] doGetAttributeNames()
+    protected Set<String> doGetAttributeNames()
     {
-        return (String[]) content.keySet().toArray( ArrayUtils.EMPTY_OBJECT_ARRAY );
+        return content.keySet();
     }
 
     /**
@@ -91,23 +92,28 @@ public class MultipartServletRequestParameters
      * Overwrite or implement method doGetValue()
      * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
      */
+    @Override
     protected String doGetValue( String name )
         throws Exception
     {
-        String[] values = doGetValues( name );
-        return values.length == 0 ? null : values[0];
+        List<String> values = doGetValues( name );
+        return values.isEmpty() ? null : values.get( 0 );
     }
 
     /**
      * Overwrite or implement method doGetValues()
      * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
      */
-    protected String[] doGetValues( String name )
+    @Override
+    protected List<String> doGetValues( String name )
         throws Exception
     {
-        Collection values = (Collection) content.get( name );
-        return values == null ? ArrayUtils.EMPTY_STRING_ARRAY : (String[]) values
-            .toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        Collection<String> values = (Collection<String>) content.get( name );
+        if ( values instanceof List )
+        {
+            return (List<String>) values;
+        }
+        return new ArrayList<String>( values );
     }
 
     /**
@@ -115,6 +121,7 @@ public class MultipartServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
+    @Override
     public FileItem getFileItem( String name )
     {
         FileItem[] items = getFileItems( name );
@@ -126,6 +133,7 @@ public class MultipartServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
+    @Override
     public FileItem[] getFileItems( String name )
     {
         Collection items = (Collection) fileItems.get( name );
@@ -136,6 +144,7 @@ public class MultipartServletRequestParameters
      * Overwrite or implement method remove()
      * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
      */
+    @Override
     public void remove( String name )
     {
         content.remove( name );
