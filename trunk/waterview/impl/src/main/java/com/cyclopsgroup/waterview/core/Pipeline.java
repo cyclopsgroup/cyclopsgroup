@@ -17,7 +17,6 @@
 package com.cyclopsgroup.waterview.core;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -44,9 +43,9 @@ public class Pipeline
 {
     private ServiceManager serviceManager;
 
-    private transient List valveRoles;
+    private transient List<String> valveRoles;
 
-    private Vector valves = new Vector();
+    private Vector<Valve> valves = new Vector<Valve>();
 
     /**
      * Add valve
@@ -66,7 +65,7 @@ public class Pipeline
     public void configure( Configuration conf )
         throws ConfigurationException
     {
-        valveRoles = new ArrayList();
+        valveRoles = new ArrayList<String>();
         Configuration[] confs = conf.getChild( "valves" ).getChildren( "valve" );
         for ( int i = 0; i < confs.length; i++ )
         {
@@ -97,10 +96,9 @@ public class Pipeline
     public void initialize()
         throws Exception
     {
-        valves = new Vector();
-        for ( Iterator i = valveRoles.iterator(); i.hasNext(); )
+        valves = new Vector<Valve>();
+        for ( String valveRole: valveRoles )
         {
-            String valveRole = (String) i.next();
             Valve valve = (Valve) serviceManager.lookup( valveRole );
             valves.add( valve );
         }
