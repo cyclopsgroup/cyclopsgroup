@@ -48,7 +48,6 @@ public class GeneratePojoMojo
      *
      * @see com.cyclopsgroup.tornado.maven.AbstractHibernateMojoBase#execute(org.apache.avalon.framework.service.ServiceManager)
      */
-    @Override
     public void execute( ServiceManager serviceManager )
         throws Exception
     {
