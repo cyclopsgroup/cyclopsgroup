@@ -18,7 +18,6 @@ package com.cyclopsgroup.tornado.maven;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.HashMap;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -70,7 +69,7 @@ public class RunMojo
             container.initialize();
             container.start();
 
-            DefaultContext context = new DefaultContext( new HashMap<Object, Object>( ( System.getProperties() ) ) );
+            DefaultContext context = new DefaultContext( System.getProperties() );
 
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             Executable ex = (Executable) cl.loadClass( className ).newInstance();

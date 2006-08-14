@@ -16,7 +16,10 @@
  */
 package com.cyclopsgroup.tornado.maven;
 
+import java.io.File;
+
 import org.apache.avalon.framework.service.ServiceManager;
+import org.hibernate.tool.hbm2x.POJOExporter;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateManager;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
@@ -44,6 +47,19 @@ public class GeneratePojoMojo
     private boolean jdk5;
 
     /**
+     * @expression="src/main/java"
+     * @description The directory where POJOs are generated
+     * @required
+     */
+    private File pojoDirectory;
+
+    /**
+     * @expression="Pojo"
+     * @description Template path for POJO generation
+     */
+    private String templateName;
+
+    /**
      * Overwrite or implement parent method
      *
      * @see com.cyclopsgroup.tornado.maven.AbstractHibernateMojoBase#execute(org.apache.avalon.framework.service.ServiceManager)
@@ -53,5 +69,12 @@ public class GeneratePojoMojo
     {
         HibernateManager hibernate = (HibernateManager) serviceManager.lookup( HibernateManager.ROLE );
         HibernateService hs = hibernate.getHibernateService( getHibernateName() );
+
+        POJOExporter exporter = new POJOExporter( hs.getHibernateConfiguration(), pojoDirectory );
+        exporter.getProperties().setProperty( "jdk5", Boolean.valueOf( jdk5 ).toString() );
+        exporter.getProperties().setProperty( "ejb3", Boolean.valueOf( ejb3 ).toString() );
+        exporter.setTemplateName( templateName );
+        
+        exporter.start();
     }
 }
