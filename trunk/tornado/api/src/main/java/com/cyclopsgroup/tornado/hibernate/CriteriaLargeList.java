@@ -49,6 +49,7 @@ public class CriteriaLargeList
         {
             criteria.setMaxResults( maxAmount );
         }
-        return criteria.list().iterator();
+        Iterator<Object> iterator = criteria.list().iterator();
+        return iterator;
     }
 }

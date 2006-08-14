@@ -176,7 +176,7 @@ public class HqlLargeList
             }
         }
 
-        List<Object> result = query.list();
+        List<Object> result = List.class.cast( query.list() );
         if ( result == null || result.isEmpty() )
         {
             return -1;
