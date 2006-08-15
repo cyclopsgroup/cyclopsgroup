@@ -34,4 +34,16 @@
 	    <scope>runtime</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.cyclopsgroup.tornado</groupId>
+                <artifactId>tornado-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <goalPrefix>tornado</goalPrefix>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
