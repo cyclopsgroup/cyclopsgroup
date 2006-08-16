@@ -39,6 +39,7 @@ import org.mortbay.jetty.Server;
 public class RunJettyMojo
     extends AbstractMojo
 {
+    private static final URL[] EMPTY_URL_ARRAY = new URL[0];
 
     /**
      * @parameter expression="${project}"
@@ -65,12 +66,12 @@ public class RunJettyMojo
                 + " is invalid, check your jettyXml parameter" );
         }
 
-        List urls = new ArrayList();
+        List<URL> urls = new ArrayList<URL>();
         try
         {
-            for ( Iterator i = project.getTestClasspathElements().iterator(); i.hasNext(); )
+            for ( Iterator<String> i = project.getTestClasspathElements().iterator(); i.hasNext(); )
             {
-                File pathElement = new File( (String) i.next() );
+                File pathElement = new File( i.next() );
                 urls.add( pathElement.toURL() );
             }
         }
@@ -79,11 +80,15 @@ public class RunJettyMojo
             throw new MojoExecutionException( "Dependency problem", e );
         }
 
-        final URLClassLoader classLoader = new URLClassLoader( (URL[]) urls.toArray( new URL[0] ), getClass()
+        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( EMPTY_URL_ARRAY ), getClass()
             .getClassLoader() );
 
         Thread thread = new Thread()
         {
+            /**
+             * @see java.lang.Thread#run()
+             */
+            @Override
             public void run()
             {
                 try
