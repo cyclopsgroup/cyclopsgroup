@@ -20,7 +20,6 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -69,9 +68,9 @@ public class RunJettyMojo
         List<URL> urls = new ArrayList<URL>();
         try
         {
-            for ( Iterator<String> i = project.getTestClasspathElements().iterator(); i.hasNext(); )
+            for ( Object pathString : project.getTestClasspathElements() )
             {
-                File pathElement = new File( i.next() );
+                File pathElement = new File( String.class.cast( pathString ) );
                 urls.add( pathElement.toURL() );
             }
         }

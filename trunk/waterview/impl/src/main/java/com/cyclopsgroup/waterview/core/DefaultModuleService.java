@@ -16,8 +16,10 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -26,7 +28,6 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
@@ -53,11 +54,11 @@ public class DefaultModuleService
 
     private String defaultPackageAlias = "waterview";
 
-    private Hashtable dynaViewFactories = new Hashtable();
+    private Map<String, DynaViewFactory> dynaViewFactories = new Hashtable<String, DynaViewFactory>();
 
-    private Hashtable layouts = new Hashtable();
+    private Map<String, Layout> layouts = new Hashtable<String, Layout>();
 
-    private Hashtable packageNames = new Hashtable();
+    private Map<String, String> packageNames = new Hashtable<String, String>();
 
     /**
      * Override or implement method of parent class or interface
@@ -95,12 +96,11 @@ public class DefaultModuleService
         throws Exception
     {
         DynaViewFactory viewFactory = null;
-        for ( Iterator i = dynaViewFactories.keySet().iterator(); i.hasNext(); )
+        for ( String pattern : dynaViewFactories.keySet() )
         {
-            String pattern = (String) i.next();
             if ( Pattern.matches( '^' + pattern + '$', viewPath ) )
             {
-                viewFactory = (DynaViewFactory) dynaViewFactories.get( pattern );
+                viewFactory = dynaViewFactories.get( pattern );
                 break;
             }
         }
@@ -144,7 +144,7 @@ public class DefaultModuleService
      */
     public Layout getLayout( String name )
     {
-        return (Layout) layouts.get( name );
+        return layouts.get( name );
     }
 
     /**
@@ -152,9 +152,9 @@ public class DefaultModuleService
      *
      * @see com.cyclopsgroup.waterview.spi.ModuleService#getPackageAliases()
      */
-    public String[] getPackageAliases()
+    public List<String> getPackageAliases()
     {
-        return (String[]) packageNames.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return new ArrayList<String>( packageNames.keySet() );
     }
 
     /**
@@ -170,7 +170,7 @@ public class DefaultModuleService
         }
         if ( packageNames.containsKey( aliasOrPackage ) )
         {
-            return (String) packageNames.get( aliasOrPackage );
+            return packageNames.get( aliasOrPackage );
         }
         return aliasOrPackage;
     }
@@ -193,17 +193,16 @@ public class DefaultModuleService
     public Path parsePath( String modulePath )
     {
         String packageAlias = defaultPackageAlias;
-        String packageName = (String) packageNames.get( packageAlias );
+        String packageName = packageNames.get( packageAlias );
         if ( StringUtils.isEmpty( modulePath ) )
         {
             return new DefaultPath( packageName, packageAlias, "/Index.jelly" );
         }
         String path = modulePath;
         String[] parts = StringUtils.split( modulePath, '/' );
-        for ( Iterator i = packageNames.keySet().iterator(); i.hasNext(); )
+        for ( String alias : packageNames.keySet() )
         {
-            String alias = (String) i.next();
-            String name = (String) packageNames.get( alias );
+            String name = packageNames.get( alias );
             if ( StringUtils.equals( parts[0], alias ) || StringUtils.equals( parts[0], name ) )
             {
                 packageName = name;

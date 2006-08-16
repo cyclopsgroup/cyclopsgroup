@@ -32,14 +32,14 @@ public class DefaultPipelineContext
 {
     private int position = 0;
 
-    private List valves;
+    private List<Valve> valves;
 
     /**
      * Constructor for class DefaultPipelineContext
      *
      * @param valveList List of valves
      */
-    public DefaultPipelineContext( List valveList )
+    public DefaultPipelineContext( List<Valve> valveList )
     {
         valves = valveList;
     }
@@ -83,7 +83,7 @@ public class DefaultPipelineContext
         {
             return;
         }
-        Valve valve = (Valve) valves.get( position );
+        Valve valve = valves.get( position );
         valve.invoke( data, this );
     }
 

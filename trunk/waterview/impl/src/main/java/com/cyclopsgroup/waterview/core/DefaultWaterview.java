@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview.core;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -44,9 +43,11 @@ public class DefaultWaterview
     extends AbstractLogEnabled
     implements Waterview, Configurable, Initializable, Serviceable
 {
-    private transient Map pipelineRoles = ListOrderedMap.decorate( new HashMap() );
+    @SuppressWarnings("unchecked")
+    private transient Map<String, String> pipelineRoles = ListOrderedMap.decorate( new HashMap<String, String>() );
 
-    private Map pipelines = ListOrderedMap.decorate( new Hashtable() );
+    @SuppressWarnings("unchecked")
+    private Map<String, Pipeline> pipelines = ListOrderedMap.decorate( new Hashtable<String, Pipeline>() );
 
     private ServiceManager serviceManager;
 
@@ -76,7 +77,7 @@ public class DefaultWaterview
      */
     public Pipeline getPipeline( String pattern )
     {
-        return (Pipeline) pipelines.get( pattern );
+        return pipelines.get( pattern );
     }
 
     /**
@@ -88,9 +89,8 @@ public class DefaultWaterview
         throws Exception
     {
         Pipeline pipeline = null;
-        for ( Iterator i = pipelines.keySet().iterator(); i.hasNext(); )
+        for ( String pattern : pipelines.keySet() )
         {
-            String pattern = (String) i.next();
             if ( Pattern.matches( '^' + pattern + '$', data.getRequestPath() ) )
             {
                 pipeline = getPipeline( pattern );
@@ -115,11 +115,9 @@ public class DefaultWaterview
     public void initialize()
         throws Exception
     {
-        for ( Iterator i = pipelineRoles.keySet().iterator(); i.hasNext(); )
+        for ( String pattern : pipelineRoles.keySet() )
         {
-            String pattern = (String) i.next();
-
-            String role = (String) pipelineRoles.get( pattern );
+            String role = pipelineRoles.get( pattern );
             Pipeline pipeline = (Pipeline) serviceManager.lookup( role );
             registerPipeline( pattern, pipeline );
         }

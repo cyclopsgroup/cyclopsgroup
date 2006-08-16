@@ -45,7 +45,6 @@ public class ParseURLValve
     extends AbstractLogEnabled
     implements Valve, Serviceable
 {
-
     static class Part
     {
         private String instruction;
@@ -68,6 +67,7 @@ public class ParseURLValve
             return path;
         }
 
+        @Override
         public String toString()
         {
             return instruction + ':' + path;
@@ -75,7 +75,7 @@ public class ParseURLValve
     }
 
     static class PartIterator
-        implements Iterator
+        implements Iterator<Part>
     {
         private static final Pattern INSTRUCTION_PATTERN = Pattern.compile( "\\/\\![a-zA-Z0-9]+\\!" );
 
@@ -107,7 +107,7 @@ public class ParseURLValve
          *
          * @see java.util.Iterator#next()
          */
-        public Object next()
+        public Part next()
         {
             if ( !hasNext )
             {
@@ -144,10 +144,10 @@ public class ParseURLValve
         throws Exception
     {
         //Iterate every part of request
-        Iterator parts = new PartIterator( data.getRequestPath() );
-        for ( Iterator i = parts; i.hasNext(); )
+        Iterator<Part> parts = new PartIterator( data.getRequestPath() );
+        while ( parts.hasNext() )
         {
-            Part part = (Part) i.next();
+            Part part = parts.next();
             Path path = moduleService.parsePath( part.getPath() );
 
             //Add path of each part into data object
@@ -160,7 +160,7 @@ public class ParseURLValve
         //Set it to default view if nothing is specified to display
         String page = pagePath == null ? "/waterview/Index.jelly" : pagePath.getFullPath();
         data.setPage( page );
-        
+
         //Set the corresponding page object
         data.setPageObject( moduleService.createDefaultPage( data ) );
 

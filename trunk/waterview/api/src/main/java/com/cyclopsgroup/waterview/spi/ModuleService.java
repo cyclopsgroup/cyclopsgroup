@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.util.List;
+
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Path;
 
@@ -60,7 +62,7 @@ public interface ModuleService
      *
      * @return Package aliases
      */
-    String[] getPackageAliases();
+    List<String> getPackageAliases();
 
     /**
      * Get full package name

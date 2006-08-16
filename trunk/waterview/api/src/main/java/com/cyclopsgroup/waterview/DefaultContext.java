@@ -84,6 +84,7 @@ public class DefaultContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
+    @SuppressWarnings("unchecked")
     public Iterator<String> keys()
     {
         if ( parent == null )
@@ -123,6 +124,7 @@ public class DefaultContext
      *
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString()
     {
         StringBuffer sb = new StringBuffer( '{' );

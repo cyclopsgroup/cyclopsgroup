@@ -37,24 +37,25 @@ import com.cyclopsgroup.waterview.spi.Waterview;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class JellyScriptsRunner {
-	/**
-	 * Main entry to run a script
-	 *
-	 * @param args
-	 *            Script paths
-	 * @throws Exception
-	 *             Throw it out
-	 */
-	public static final void main(String[] args) throws Exception {
-		List scripts = new ArrayList();
+public class JellyScriptsRunner
+{
+    /**
+     * Main entry to run a script
+     *
+     * @param args
+     *            Script paths
+     * @throws Exception
+     *             Throw it out
+     */
+    public static final void main(String[] args) throws Exception {
+		List<URL> scripts = new ArrayList<URL>();
 		for (int i = 0; i < args.length; i++) {
 			String path = args[i];
 			File file = new File(path);
 			if (file.isFile()) {
 				scripts.add(file.toURL());
 			} else {
-				Enumeration enu = JellyScriptsRunner.class.getClassLoader()
+				Enumeration<URL> enu = JellyScriptsRunner.class.getClassLoader()
 						.getResources(path);
 				CollectionUtils.addAll(scripts, enu);
 			}

@@ -66,6 +66,7 @@ public class JellyContextAdapter
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
+    @SuppressWarnings("unchecked")
     public Iterator<String> keys()
     {
         return jellyContext.getVariableNames();

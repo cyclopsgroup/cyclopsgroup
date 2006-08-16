@@ -184,10 +184,10 @@ final class DefaultActionContext
      */
     public synchronized void addMessage( String message )
     {
-        List messages = (List) sessionContext.get( RunData.MESSAGES_NAME );
+        List<String> messages = (List<String>) sessionContext.get( RunData.MESSAGES_NAME );
         if ( messages == null )
         {
-            messages = new LinkedList();
+            messages = new LinkedList<String>();
             sessionContext.put( RunData.MESSAGES_NAME, messages );
         }
         messages.add( message );

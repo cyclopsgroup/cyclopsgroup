@@ -16,19 +16,25 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.util.Collections;
 import java.util.Iterator;
+
+import org.apache.commons.collections.iterators.ArrayIterator;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Dummy fake context
  */
+
 public class DummyContext
     implements Context
 {
     /** static instance */
     public static final DummyContext INSTANCE = new DummyContext();
+
+    @SuppressWarnings("unchecked")
+    private static final Iterator<String> EMPTY_STRING_ITERATOR = new ArrayIterator( ArrayUtils.EMPTY_STRING_ARRAY );
 
     /**
      * Overwrite or implement method get()
@@ -47,7 +53,7 @@ public class DummyContext
      */
     public Iterator<String> keys()
     {
-        return Collections.EMPTY_LIST.iterator();
+        return EMPTY_STRING_ITERATOR;
     }
 
     /**

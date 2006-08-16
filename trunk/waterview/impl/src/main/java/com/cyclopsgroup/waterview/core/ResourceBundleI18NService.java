@@ -17,7 +17,7 @@
  */
 package com.cyclopsgroup.waterview.core;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -44,7 +44,7 @@ public class ResourceBundleI18NService
     extends AbstractLogEnabled
     implements I18NService, Configurable, Initializable, Serviceable
 {
-    private Vector resourceKeys = new Vector();
+    private List<String> resourceKeys = new Vector<String>();
 
     private ModuleService modules;
 
@@ -56,9 +56,8 @@ public class ResourceBundleI18NService
     public String translate( String key, Locale locale )
         throws Exception
     {
-        for ( Iterator i = resourceKeys.iterator(); i.hasNext(); )
+        for ( String resourceKey : resourceKeys )
         {
-            String resourceKey = (String) i.next();
             try
             {
                 ResourceBundle rb = ResourceBundle.getBundle( resourceKey, locale );
@@ -85,10 +84,8 @@ public class ResourceBundleI18NService
     public void initialize()
         throws Exception
     {
-        String[] packageAiases = modules.getPackageAliases();
-        for ( int i = 0; i < packageAiases.length; i++ )
+        for ( String packageAlias : modules.getPackageAliases() )
         {
-            String packageAlias = packageAiases[i];
             String packageName = modules.getPackageName( packageAlias );
             resourceKeys.add( packageName + ".ResourceBundle" );
         }

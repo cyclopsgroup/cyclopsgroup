@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -101,7 +102,7 @@ public class JellyEngine
 
     private ServiceManager serviceManager;
 
-    private Hashtable tagLibraries = new Hashtable();
+    private Map<String, TagLibrary> tagLibraries = new Hashtable<String, TagLibrary>();
 
     /**
      * Override or implement method of parent class or interface
@@ -131,9 +132,9 @@ public class JellyEngine
     public JellyContext createJellyContext( com.cyclopsgroup.waterview.Context context )
     {
         JellyContext jc = new JellyContext( getGlobalContext() );
-        for ( Iterator i = context.keys(); i.hasNext(); )
+        for ( Iterator<String> i = context.keys(); i.hasNext(); )
         {
-            String name = (String) i.next();
+            String name = i.next();
             Object value = context.get( name );
             jc.setVariable( name, value );
         }
@@ -292,20 +293,19 @@ public class JellyEngine
         deftaglib.registerPackage( (TagPackage) Class.forName( DEFINITION_TAG_PACKAGE ).newInstance() );
         jc.registerTagLibrary( DEFINITION_TAGLIB_URL, deftaglib );
 
-        Enumeration e = getClass().getClassLoader().getResources( "META-INF/cyclopsgroup/waterview.xml" );
+        Enumeration<URL> e = getClass().getClassLoader().getResources( "META-INF/cyclopsgroup/waterview.xml" );
         while ( e.hasMoreElements() )
         {
-            URL resource = (URL) e.nextElement();
+            URL resource = e.nextElement();
             getLogger().info( "Load definition from " + resource );
             jc.runScript( resource, XMLOutput.createDummyXMLOutput() );
         }
 
         globalContext = new JellyContext();
         globalContext.setVariables( initProperties );
-        for ( Iterator i = tagLibraries.keySet().iterator(); i.hasNext(); )
+        for ( String uri : tagLibraries.keySet() )
         {
-            String uri = (String) i.next();
-            TagLibrary taglib = (TagLibrary) tagLibraries.get( uri );
+            TagLibrary taglib = tagLibraries.get( uri );
             globalContext.registerTagLibrary( uri, taglib );
         }
         globalContext.setVariable( SERVICE_MANAGER, serviceManager );
@@ -331,7 +331,7 @@ public class JellyEngine
      */
     public synchronized void registerTagPackage( String uri, TagPackage tagPackage )
     {
-        TagLibrary ctl = (TagLibrary) tagLibraries.get( uri );
+        TagLibrary ctl = tagLibraries.get( uri );
         if ( ctl == null )
         {
             ctl = new TagLibrary();
