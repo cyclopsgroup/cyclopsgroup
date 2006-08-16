@@ -37,8 +37,8 @@ import com.cyclopsgroup.waterview.LargeList;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  */
-public class HqlLargeList
-    implements LargeList
+public class HqlLargeList<T>
+    implements LargeList<T>
 {
     private class Parameter
     {
@@ -159,6 +159,7 @@ public class HqlLargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#getSize()
      */
+    @SuppressWarnings("unchecked")
     public int getSize()
         throws Exception
     {
@@ -176,7 +177,7 @@ public class HqlLargeList
             }
         }
 
-        List<Object> result = List.class.cast( query.list() );
+        List<T> result = query.list();
         if ( result == null || result.isEmpty() )
         {
             return -1;
@@ -190,7 +191,8 @@ public class HqlLargeList
      *
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator<Object> iterate( int startPosition, int maxRecords, Sorting[] sortings )
+    @SuppressWarnings("unchecked")
+    public Iterator<T> iterate( int startPosition, int maxRecords, Sorting[] sortings )
         throws Exception
     {
         if ( StringUtils.isEmpty( hql ) )

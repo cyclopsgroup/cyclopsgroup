@@ -7,8 +7,8 @@ import org.hibernate.criterion.Order;
 
 import com.cyclopsgroup.waterview.LargeList;
 
-public class CriteriaLargeList
-    implements LargeList
+public class CriteriaLargeList<T>
+    implements LargeList<T>
 {
     private Criteria criteria;
 
@@ -29,7 +29,8 @@ public class CriteriaLargeList
     /**
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator<Object> iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    @SuppressWarnings("unchecked")
+    public Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
         throws Exception
     {
         for ( int i = 0; i < sortings.length; i++ )
@@ -49,7 +50,6 @@ public class CriteriaLargeList
         {
             criteria.setMaxResults( maxAmount );
         }
-        Iterator<Object> iterator = criteria.list().iterator();
-        return iterator;
+        return criteria.list().iterator();
     }
 }
