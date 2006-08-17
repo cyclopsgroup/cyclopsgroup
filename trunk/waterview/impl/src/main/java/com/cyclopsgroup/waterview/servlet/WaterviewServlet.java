@@ -20,7 +20,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Properties;
 
 import javax.servlet.ServletConfig;
@@ -79,6 +78,7 @@ public class WaterviewServlet
      *
      * @see javax.servlet.Servlet#destroy()
      */
+    @Override
     public void destroy()
     {
         try
@@ -97,6 +97,7 @@ public class WaterviewServlet
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
+    @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
@@ -176,6 +177,7 @@ public class WaterviewServlet
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
+    @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
@@ -200,6 +202,7 @@ public class WaterviewServlet
      *
      * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
      */
+    @Override
     public void init( ServletConfig config )
         throws ServletException
     {
@@ -210,10 +213,10 @@ public class WaterviewServlet
         Properties initProperties = new Properties();
         initProperties.setProperty( "basedir", basedir );
         initProperties.setProperty( "plexus.home", basedir );
-        Enumeration i = config.getInitParameterNames();
+        Enumeration<String> i = config.getInitParameterNames();
         while ( i.hasMoreElements() )
         {
-            String key = (String) i.nextElement();
+            String key = i.nextElement();
             String value = config.getInitParameter( key );
             initProperties.setProperty( key, value );
         }
@@ -227,9 +230,8 @@ public class WaterviewServlet
                 container.setConfigurationResource( new FileReader( descriptorPath ) );
             }
             serviceManager = new ServiceManagerAdapter( container );
-            for ( Iterator j = initProperties.keySet().iterator(); j.hasNext(); )
+            for ( Object initPropertyName : initProperties.keySet() )
             {
-                String initPropertyName = (String) j.next();
                 container.addContextValue( initPropertyName, initProperties.get( initPropertyName ) );
             }
 

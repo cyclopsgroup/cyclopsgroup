@@ -16,66 +16,11 @@
  */
 package com.cyclopsgroup.waterview.web;
 
-import org.apache.commons.lang.enums.Enum;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Column sorting status
  */
-public final class ColumnSort
-    extends Enum
-{
-    /**
-     * Generated serial ID
-     */
-    private static final long serialVersionUID = 5183468517358245865L;
-
-    /** Ascendingly sorted */
-    public static ColumnSort ASC = new ColumnSort( "asc" );
-
-    /** Descendingly sorted */
-    public static ColumnSort DESC = new ColumnSort( "desc" );
-
-    /** Sorting is disabled */
-    public static ColumnSort DISABLED = new ColumnSort( "disabled" );
-
-    /** Sortable but not sorted */
-    public static ColumnSort UNSORTED = new ColumnSort( "unsorted" );
-
-    /**
-     * Value of a given string
-     *
-     * @param value String value
-     * @return ColumnSort object
-     */
-    public static ColumnSort valueOf( String value )
-    {
-        ColumnSort sort = (ColumnSort) getEnum( ColumnSort.class, value );
-        if ( sort == null )
-        {
-            throw new IllegalArgumentException( value + " is not a legal column sort option" );
-        }
-        return sort;
-    }
-
-    /**
-     * Constructor for class ColumnSort
-     *
-     * @param name Name of enum
-     */
-    private ColumnSort( String name )
-    {
-        super( name );
-    }
-
-    /**
-     * Overwrite or implement method toString()
-     *
-     * @see java.lang.Object#toString()
-     */
-    public String toString()
-    {
-        return getName();
-    }
+public enum ColumnSort {
+    asc, desc, disabled, unsorted;
 }

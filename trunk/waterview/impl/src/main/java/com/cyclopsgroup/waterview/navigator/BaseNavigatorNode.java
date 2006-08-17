@@ -53,11 +53,7 @@ public abstract class BaseNavigatorNode
         return false;
     }
 
-    /**
-     * Overwrite or implement method toString()
-     *
-     * @see java.lang.Object#toString()
-     */
+    @Override
     public String toString()
     {
         return "node:" + getPage();

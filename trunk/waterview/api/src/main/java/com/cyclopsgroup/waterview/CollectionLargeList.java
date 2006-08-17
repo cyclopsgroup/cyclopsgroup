@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -61,16 +62,15 @@ public class CollectionLargeList<T>
      *
      * @see com.cyclopsgroup.waterview.IteratorLargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception
     {
         Collection<T> sortedResult = collection;
-        if ( sortings != null && sortings.length > 0 )
+        if ( sortings != null && !sortings.isEmpty() )
         {
             ComparatorChain chain = new ComparatorChain();
-            for ( int i = 0; i < sortings.length; i++ )
+            for ( Sorting sorting : sortings )
             {
-                Sorting sorting = sortings[i];
                 if ( sorting.isDescending() )
                 {
                     chain.addComparator( new BeanPropertyComparator( sorting.getName() ), true );

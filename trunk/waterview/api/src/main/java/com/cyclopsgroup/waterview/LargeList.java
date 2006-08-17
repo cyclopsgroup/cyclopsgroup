@@ -18,6 +18,7 @@
 package com.cyclopsgroup.waterview;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -71,6 +72,6 @@ public interface LargeList<T>
      * @return Iterator of result
      * @throws Exception Throw it out
      */
-    Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception;
 }

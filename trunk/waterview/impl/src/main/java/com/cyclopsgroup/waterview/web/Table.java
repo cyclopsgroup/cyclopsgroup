@@ -41,7 +41,7 @@ public class Table
     /** Undefined page size */
     public static final int UNDEFINED_PAGE_SIZE = -1;
 
-    private Map columns = ListOrderedMap.decorate(new HashMap());
+    private Map<String, Column> columns = ListOrderedMap.decorate( new HashMap<String, Column>() );
 
     private String id;
 
@@ -51,14 +51,14 @@ public class Table
 
     private static final int UNKNOW_PAGE = -1;
 
-    private Set sortedColumns = ListOrderedSet.decorate(new HashSet());
+    private Set sortedColumns = ListOrderedSet.decorate( new HashSet() );
 
     /**
      * Constructor for class Table
      *
      * @param id Unique table id
      */
-    public Table(String id)
+    public Table( String id )
     {
         this.id = id;
     }
@@ -68,9 +68,9 @@ public class Table
      *
      * @param column Column to add
      */
-    public void addColumn(Column column)
+    public void addColumn( Column column )
     {
-        columns.put(column.getName(), column);
+        columns.put( column.getName(), column );
     }
 
     /**
@@ -79,9 +79,9 @@ public class Table
      * @param name Name of the column
      * @return Column object
      */
-    public Column getColumn(String name)
+    public Column getColumn( String name )
     {
-        return (Column) columns.get(name);
+        return columns.get( name );
     }
 
     /**
@@ -89,10 +89,9 @@ public class Table
      *
      * @return Array of column names
      */
-    public String[] getColumnNames()
+    public List<String> getColumnNames()
     {
-        return (String[]) columns.keySet().toArray(
-                ArrayUtils.EMPTY_STRING_ARRAY);
+        return new ArrayList<String>( columns.keySet() );
     }
 
     /**
@@ -100,9 +99,9 @@ public class Table
      *
      * @return Array of all columns
      */
-    public Column[] getColumns()
+    public List<Column> getColumns()
     {
-        return (Column[]) columns.values().toArray(Column.EMPTY_ARRAY);
+        return new ArrayList<Column>( columns.values() );
     }
 
     /**
@@ -120,14 +119,15 @@ public class Table
      * @return Page count
      * @throws Exception Throw it out
      */
-    public int getPageCount(int size) throws Exception
+    public int getPageCount( int size )
+        throws Exception
     {
-        if (size < 0)
+        if ( size < 0 )
         {
             return UNKNOW_PAGE;
         }
         int pageCount = size / getPageSize();
-        if (size % getPageSize() > 0)
+        if ( size % getPageSize() > 0 )
         {
             pageCount++;
         }
@@ -161,7 +161,7 @@ public class Table
      */
     public String[] getSortedColumns()
     {
-        return (String[]) sortedColumns.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+        return (String[]) sortedColumns.toArray( ArrayUtils.EMPTY_STRING_ARRAY );
     }
 
     /**
@@ -171,16 +171,16 @@ public class Table
      * @return Iterator of data
      * @throws Exception Throw it out
      */
-    public Iterator iterate(LargeList tabularData) throws Exception
+    public Iterator iterate( LargeList tabularData )
+        throws Exception
     {
         String[] sortedColumns = getSortedColumns();
-        List sortings = new ArrayList();
-        for (int i = 0; i < sortedColumns.length; i++)
+        List<Sorting> sortings = new ArrayList<Sorting>();
+        for ( int i = 0; i < sortedColumns.length; i++ )
         {
             String columnName = sortedColumns[i];
-            final Column column = getColumn(columnName);
-            if (column.getSort() == ColumnSort.ASC
-                    || column.getSort() == ColumnSort.DESC)
+            final Column column = getColumn( columnName );
+            if ( column.getSort() == ColumnSort.asc || column.getSort() == ColumnSort.desc )
             {
                 Sorting s = new Sorting()
                 {
@@ -192,23 +192,20 @@ public class Table
 
                     public boolean isDescending()
                     {
-                        return column.getSort() == ColumnSort.DESC;
+                        return column.getSort() == ColumnSort.desc;
                     }
 
                 };
-                sortings.add(s);
+                sortings.add( s );
             }
         }
-        Sorting[] sorts = (Sorting[]) sortings.toArray(Sorting.EMPTY_ARRAY);
-
-        if (getPageSize() == UNDEFINED_PAGE_SIZE)
+        if ( getPageSize() == UNDEFINED_PAGE_SIZE )
         {
-            return tabularData
-                    .iterate(0, LargeList.UNLIMITED_MAX_AMOUNT, sorts);
+            return tabularData.iterate( 0, LargeList.UNLIMITED_MAX_AMOUNT, sortings );
         }
 
         int startPosition = getPageIndex() * getPageSize();
-        return tabularData.iterate(startPosition, getPageSize(), sorts);
+        return tabularData.iterate( startPosition, getPageSize(), sortings );
     }
 
     /**
@@ -216,7 +213,7 @@ public class Table
      *
      * @param pageIndex Page index
      */
-    public void setPageIndex(int pageIndex)
+    public void setPageIndex( int pageIndex )
     {
         this.pageIndex = pageIndex;
     }
@@ -226,7 +223,7 @@ public class Table
      *
      * @param pageSize The pageSize to set.
      */
-    public void setPageSize(int pageSize)
+    public void setPageSize( int pageSize )
     {
         this.pageSize = pageSize;
     }
@@ -236,9 +233,9 @@ public class Table
      *
      * @param columnName Column name
      */
-    public void sortOn(String columnName)
+    public void sortOn( String columnName )
     {
-        sortedColumns.add(columnName);
+        sortedColumns.add( columnName );
     }
 
     /**
@@ -246,8 +243,8 @@ public class Table
      *
      * @param columnName Name of column
      */
-    public void unsortOn(String columnName)
+    public void unsortOn( String columnName )
     {
-        sortedColumns.remove(columnName);
+        sortedColumns.remove( columnName );
     }
 }

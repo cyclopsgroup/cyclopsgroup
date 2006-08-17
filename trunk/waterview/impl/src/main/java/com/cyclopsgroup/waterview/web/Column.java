@@ -26,11 +26,11 @@ public class Column
     /** Empty column array */
     public static final Column[] EMPTY_ARRAY = new Column[0];
 
-    private ColumnDisplay display = ColumnDisplay.OPTIONAL;
+    private ColumnDisplay display = ColumnDisplay.optional;
 
     private String name;
 
-    private ColumnSort sort = ColumnSort.DISABLED;
+    private ColumnSort sort = ColumnSort.disabled;
 
     private Class type;
 

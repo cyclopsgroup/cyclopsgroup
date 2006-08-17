@@ -43,10 +43,9 @@ public class FormValidation
     {
         String formId = data.getParameters().getString( "form_id" );
         Form form = (Form) data.getSessionContext().get( formId );
-        Field[] fiels = form.getFields();
-        for ( int i = 0; i < fiels.length; i++ )
+
+        for ( Field field : form.getFields().values() )
         {
-            Field field = fiels[i];
             String value = data.getParameters().getString( field.getName() );
             field.setValue( value );
             field.validate();

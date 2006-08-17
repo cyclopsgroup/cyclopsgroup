@@ -23,6 +23,7 @@ import org.apache.commons.collections.CollectionUtils;
 
 import com.cyclopsgroup.waterview.Link;
 import com.cyclopsgroup.waterview.Path;
+import com.cyclopsgroup.waterview.core.ParseURLValve.Part;
 import com.cyclopsgroup.waterview.core.ParseURLValve.PartIterator;
 import com.cyclopsgroup.waterview.jelly.JellyEngine;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
@@ -61,12 +62,12 @@ public class ParseURLValveTest
         } );
         //assertEquals("/ddd.jelly", runtime.getPage());
 
-        Path[] actions = data.getPaths( Link.INSTRUCTION_DO );
+        List<Path> actions = data.getPaths( Link.INSTRUCTION_DO );
 
-        assertEquals( 3, actions.length );
-        assertEquals( "/aaa", actions[0].getPath() );
-        assertEquals( "/bbb/BAction", actions[1].getPath() );
-        assertEquals( "/ccc", actions[2].getPath() );
+        assertEquals( 3, actions.size() );
+        assertEquals( "/aaa", actions.get( 0 ).getPath() );
+        assertEquals( "/bbb/BAction", actions.get( 1 ).getPath() );
+        assertEquals( "/ccc", actions.get( 2 ).getPath() );
     }
 
     public void testSomethingStupid()
@@ -74,7 +75,7 @@ public class ParseURLValveTest
         String path = "/!do!/aaa/!do!/bbb/BAction/!do!/ccc/!show!/ddd.jelly";
 
         PartIterator pi = new PartIterator( path );
-        List result = new ArrayList();
+        List<Part> result = new ArrayList<Part>();
         CollectionUtils.addAll( result, pi );
 
         assertEquals( 4, result.size() );

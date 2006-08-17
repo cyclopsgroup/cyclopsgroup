@@ -36,11 +36,11 @@ public class ColumnTag
 {
     private Column column;
 
-    private String display = ColumnDisplay.OPTIONAL.getName();
+    private String display = ColumnDisplay.optional.name();
 
     private String name;
 
-    private String sort = ColumnSort.DISABLED.getName();
+    private String sort = ColumnSort.disabled.name();
 
     private String title = StringUtils.EMPTY;
 
@@ -121,6 +121,7 @@ public class ColumnTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
+    @Override
     protected void processTag( XMLOutput output )
         throws Exception
     {
@@ -136,7 +137,7 @@ public class ColumnTag
             column.setDisplay( ColumnDisplay.valueOf( getDisplay() ) );
             ColumnSort sort = ColumnSort.valueOf( getSort() );
             column.setSort( sort );
-            if ( sort == ColumnSort.ASC || sort == ColumnSort.DESC )
+            if ( sort == ColumnSort.asc || sort == ColumnSort.desc )
             {
                 table.sortOn( getName() );
             }

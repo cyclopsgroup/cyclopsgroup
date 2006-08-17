@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -64,10 +64,8 @@ public class MultipartServletRequestParameters
     public MultipartServletRequestParameters( HttpServletRequest request, FileUploadBase fileUpload )
         throws FileUploadException
     {
-        List files = fileUpload.parseRequest( request );
-        for ( Iterator i = files.iterator(); i.hasNext(); )
+        for ( FileItem fileItem : (List<FileItem>) fileUpload.parseRequest( request ) )
         {
-            FileItem fileItem = (FileItem) i.next();
             if ( fileItem.isFormField() )
             {
                 add( fileItem.getFieldName(), fileItem.getString() );
@@ -124,8 +122,8 @@ public class MultipartServletRequestParameters
     @Override
     public FileItem getFileItem( String name )
     {
-        FileItem[] items = getFileItems( name );
-        return items.length == 0 ? null : items[0];
+        Collection<FileItem> items = getFileItems( name );
+        return items.size() == 0 ? null : items.iterator().next();
     }
 
     /**
@@ -133,11 +131,12 @@ public class MultipartServletRequestParameters
      *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public FileItem[] getFileItems( String name )
+    public Collection<FileItem> getFileItems( String name )
     {
-        Collection items = (Collection) fileItems.get( name );
-        return items == null ? EMPTY_FILEITEM_ARRAY : (FileItem[]) items.toArray( EMPTY_FILEITEM_ARRAY );
+        Collection<FileItem> items = (Collection<FileItem>) fileItems.get( name );
+        return items == null ? Collections.EMPTY_SET : items;
     }
 
     /**

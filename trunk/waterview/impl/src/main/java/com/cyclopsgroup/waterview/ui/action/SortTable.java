@@ -53,24 +53,24 @@ public class SortTable
 
         String columnName = data.getParameters().getString( "table_column_name" );
         Column column = table.getColumn( columnName );
-        if ( column == null || column.getSort() == ColumnSort.DISABLED )
+        if ( column == null || column.getSort() == ColumnSort.disabled )
         {
             redirectBack( data, context );
             return;
         }
 
-        if ( column.getSort() == ColumnSort.ASC )
+        if ( column.getSort() == ColumnSort.asc )
         {
-            column.setSort( ColumnSort.DESC );
+            column.setSort( ColumnSort.desc );
         }
-        else if ( column.getSort() == ColumnSort.DESC )
+        else if ( column.getSort() == ColumnSort.desc )
         {
-            column.setSort( ColumnSort.UNSORTED );
+            column.setSort( ColumnSort.unsorted );
             table.unsortOn( columnName );
         }
-        else if ( column.getSort() == ColumnSort.UNSORTED )
+        else if ( column.getSort() == ColumnSort.unsorted )
         {
-            column.setSort( ColumnSort.ASC );
+            column.setSort( ColumnSort.asc );
             table.sortOn( columnName );
         }
 

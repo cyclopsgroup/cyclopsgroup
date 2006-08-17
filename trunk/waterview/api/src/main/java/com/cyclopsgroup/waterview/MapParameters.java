@@ -17,6 +17,8 @@
 package com.cyclopsgroup.waterview;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -99,9 +101,9 @@ class MapParameters
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
     @Override
-    public FileItem[] getFileItems( String name )
+    public Collection<FileItem> getFileItems( String name )
     {
-        return EMPTY_FILEITEM_ARRAY;
+        return Collections.EMPTY_SET;
     }
 
     /**

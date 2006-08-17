@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.util.Collection;
+
 import org.apache.commons.fileupload.FileItem;
 
 /**
@@ -48,5 +50,5 @@ public abstract class Parameters
      * @param name Name of variable
      * @return File item array FileItem array
      */
-    public abstract FileItem[] getFileItems( String name );
+    public abstract Collection<FileItem> getFileItems( String name );
 }

@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.core;
 
+import java.util.List;
+
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.Serviceable;
 
@@ -46,18 +48,16 @@ public class ResolveActionsValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        Path[] actionPaths = data.getPaths( Link.INSTRUCTION_DO );
-        if ( actionPaths.length == 0 )
+        List<Path> actionPaths = data.getPaths( Link.INSTRUCTION_DO );
+        if ( actionPaths.isEmpty() )
         {
             context.invokeNextValve( data );
             return;
         }
 
         DefaultActionContext actionContext = new DefaultActionContext( data );
-        for ( int i = 0; i < actionPaths.length; i++ )
+        for ( Path path:actionPaths )
         {
-            Path path = actionPaths[i];
-
             String className = path.getPackage() + ACTION_SUFFIX + path.getPathWithoutExtension().replace( '/', '.' );
             Action action = null;
             try

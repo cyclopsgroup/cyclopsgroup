@@ -28,7 +28,7 @@ import org.apache.commons.collections.map.ListOrderedMap;
  */
 public class Form
 {
-    private Map fields = ListOrderedMap.decorate( new HashMap() );
+    private Map<String, Field> fields = ListOrderedMap.decorate( new HashMap<String, Field>() );
 
     private String id;
 
@@ -42,35 +42,14 @@ public class Form
         this.id = id;
     }
 
-    /**
-     * Add a field to form
-     *
-     * @param field Field object
-     */
+    public Map<String, Field> getFields()
+    {
+        return fields;
+    }
+
     public void addField( Field field )
     {
         fields.put( field.getName(), field );
-    }
-
-    /**
-     * Get field with given name
-     *
-     * @param fieldName Field name
-     * @return Field object
-     */
-    public Field getField( String fieldName )
-    {
-        return (Field) fields.get( fieldName );
-    }
-
-    /**
-     * Get all fields
-     *
-     * @return Field array
-     */
-    public Field[] getFields()
-    {
-        return (Field[]) fields.values().toArray( Field.EMPTY_ARRAY );
     }
 
     /**

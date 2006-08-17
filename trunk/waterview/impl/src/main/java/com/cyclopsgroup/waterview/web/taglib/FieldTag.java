@@ -198,7 +198,7 @@ public class FieldTag
         }
         else
         {
-            field = formTag.getForm().getField( getName() );
+            field = formTag.getForm().getFields().get( getName() );
         }
 
         invokeBody( output );

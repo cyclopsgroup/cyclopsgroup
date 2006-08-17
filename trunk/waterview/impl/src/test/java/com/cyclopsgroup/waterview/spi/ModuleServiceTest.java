@@ -17,6 +17,7 @@ public class ModuleServiceTest
     /**
      * @see org.codehaus.plexus.PlexusTestCase#setUp()
      */
+    @Override
     protected void setUp()
         throws Exception
     {

@@ -57,7 +57,7 @@ public class HttpSessionContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    public Iterator<String> keys()
     {
         return new EnumerationIterator( httpSession.getAttributeNames() );
     }

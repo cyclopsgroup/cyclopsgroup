@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.servlet;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -132,9 +133,9 @@ public class ServletRequestParameters
      * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
      */
     @Override
-    public FileItem[] getFileItems( String name )
+    public Collection<FileItem> getFileItems( String name )
     {
-        return EMPTY_FILEITEM_ARRAY;
+        return Collections.EMPTY_SET;
     }
 
     /**

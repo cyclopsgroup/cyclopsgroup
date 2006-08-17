@@ -1,5 +1,7 @@
 package com.cyclopsgroup.waterview.spi;
 
+import java.util.List;
+
 import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RunData;
 
@@ -32,4 +34,8 @@ public interface RunDataSpi
      * @param path Path object
      */
     void setPath( String instruction, Path path );
+
+    Path getPath( String pathInstruction );
+
+    List<Path> getPaths( String pathInstruction );
 }

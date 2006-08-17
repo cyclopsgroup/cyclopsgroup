@@ -45,13 +45,14 @@ public class InterpolationFilterWriterTest
              *
              * @see com.cyclopsgroup.waterview.utils.InterpolationFilterWriter#interpolate(java.lang.String)
              */
+            @Override
             protected String interpolate( String name )
                 throws Exception
             {
                 return "[a]";
             }
         };
-        writer.write( (int) '%' );
+        writer.write( Integer.valueOf( '%' ) );
         writer.write( "aa" );
         writer.write( "%missing,haha, %xyz%100%abc," );
         System.out.println( s.toString() );

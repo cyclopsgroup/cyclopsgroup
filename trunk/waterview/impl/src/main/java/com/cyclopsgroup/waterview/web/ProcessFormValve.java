@@ -67,10 +67,8 @@ public class ProcessFormValve
         }
 
         boolean hasError = false;
-        Field[] fields = form.getFields();
-        for ( int i = 0; i < fields.length; i++ )
+        for ( Field field : form.getFields().values() )
         {
-            Field field = fields[i];
             field.setValue( params.getString( field.getName() ) );
             field.validate();
             if ( field.isPassword() )
@@ -99,7 +97,7 @@ public class ProcessFormValve
             {
                 String fieldName = (String) i.next();
                 String errorMessage = formErrors.getProperty( fieldName );
-                Field field = form.getField( fieldName );
+                Field field = form.getFields().get( fieldName );
                 if ( field != null )
                 {
                     field.setInvalid( true );

@@ -51,10 +51,11 @@ public class PipelineTest
          *
          * @see com.cyclopsgroup.waterview.spi.Valve#invoke(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.spi.PipelineContext)
          */
+        @SuppressWarnings("unchecked")
         public void invoke( RunDataSpi data, PipelineContext context )
             throws Exception
         {
-            List contents = (List) data.getRequestContext().get( "contents" );
+            List<String> contents = (List<String>) data.getRequestContext().get( "contents" );
             contents.add( value );
             context.invokeNextValve( data );
         }
@@ -70,16 +71,15 @@ public class PipelineTest
     {
         Pipeline pipeline = new Pipeline();
         MockRunData data = createRunData();
-        List contents = new ArrayList();
+        List<String> contents = new ArrayList<String>();
         data.getRequestContext().put( "contents", contents );
         pipeline.addValve( new TestValve( "aaa" ) );
         pipeline.addValve( new TestValve( "bbb" ) );
         pipeline.addValve( new TestValve( "ccc" ) );
         pipeline.processRunData( data );
         assertEquals( 3, contents.size() );
-        Object[] c = contents.toArray();
-        assertEquals( "aaa", c[0] );
-        assertEquals( "bbb", c[1] );
-        assertEquals( "ccc", c[2] );
+        assertEquals( "aaa", contents.get( 0 ) );
+        assertEquals( "bbb", contents.get( 1 ) );
+        assertEquals( "ccc", contents.get( 2 ) );
     }
 }

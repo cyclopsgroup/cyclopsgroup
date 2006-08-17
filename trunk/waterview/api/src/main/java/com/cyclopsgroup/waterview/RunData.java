@@ -110,10 +110,6 @@ public interface RunData
      */
     Path getPage();
 
-    Path getPath( String pathInstruction );
-
-    Path[] getPaths( String pathInstruction );
-
     /**
      * Base url for page
      *

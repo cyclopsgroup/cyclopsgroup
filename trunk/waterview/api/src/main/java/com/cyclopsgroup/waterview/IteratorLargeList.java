@@ -18,7 +18,9 @@
 package com.cyclopsgroup.waterview;
 
 import java.util.Iterator;
+import java.util.List;
 
+import com.cyclopsgroup.waterview.LargeList.Sorting;
 import com.cyclopsgroup.waterview.utils.FixedSizeIterator;
 
 /**
@@ -59,7 +61,7 @@ public class IteratorLargeList<T>
      *
      * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception
     {
         //Make sure this object can only be used for one time

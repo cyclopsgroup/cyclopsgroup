@@ -30,7 +30,7 @@ import org.apache.commons.collections.iterators.IteratorChain;
 public class DefaultContext
     implements Context
 {
-    private Map<String, Object> content = new HashMap<String, Object>();
+    private Map<String, ?> content = new HashMap<String, Object>();
 
     private Context parent;
 
@@ -39,7 +39,7 @@ public class DefaultContext
      * 
      * @param content Content of this context
      */
-    public DefaultContext( Map content )
+    public DefaultContext( Map<String, ?> content )
     {
         this( content, null );
     }
@@ -50,7 +50,7 @@ public class DefaultContext
      * @param content Content of this context
      * @param parent Parent context
      */
-    public DefaultContext( Map content, Context parent )
+    public DefaultContext( Map<String, ?> content, Context parent )
     {
         this.content = content;
         this.parent = parent;
@@ -75,7 +75,7 @@ public class DefaultContext
      *
      * @return HashMap content
      */
-    public Map<String, Object> getContent()
+    public Map<String, ?> getContent()
     {
         return content;
     }
@@ -106,7 +106,7 @@ public class DefaultContext
         }
         else
         {
-            content.put( name, variable );
+            ( (Map<String, Object>) content ).put( name, variable );
         }
     }
 

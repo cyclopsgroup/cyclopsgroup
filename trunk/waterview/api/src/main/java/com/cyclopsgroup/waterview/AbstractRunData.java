@@ -18,7 +18,7 @@ package com.cyclopsgroup.waterview;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -107,9 +107,10 @@ public abstract class AbstractRunData
      *
      * @see com.cyclopsgroup.waterview.RunData#getMessages()
      */
+    @SuppressWarnings("unchecked")
     public List<String> getMessages()
     {
-        List<String> messages = List.class.cast( getSessionContext().get( MESSAGES_NAME ) );
+        List<String> messages = (List<String>) getSessionContext().get( MESSAGES_NAME );
         return messages;
     }
 
@@ -168,17 +169,18 @@ public abstract class AbstractRunData
      */
     public Path getPath( String pathInstruction )
     {
-        Path[] ps = getPaths( pathInstruction );
-        return ps.length == 0 ? null : ps[0];
+        List<Path> ps = getPaths( pathInstruction );
+        return ps.isEmpty() ? null : ps.get( 0 );
     }
 
     /**
      * @see com.cyclopsgroup.waterview.RunData#getPaths(java.lang.String)
      */
-    public Path[] getPaths( String pathInstruction )
+    @SuppressWarnings("unchecked")
+    public List<Path> getPaths( String pathInstruction )
     {
-        Collection<Path> ps = (Collection<Path>) paths.get( pathInstruction );
-        return ps == null || ps.isEmpty() ? Path.EMPTY_ARRAY : (Path[]) ps.toArray( Path.EMPTY_ARRAY );
+        List<Path> ps = (List<Path>) paths.get( pathInstruction );
+        return ps == null ? Collections.EMPTY_LIST : ps;
     }
 
     /**
