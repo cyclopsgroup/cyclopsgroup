@@ -39,7 +39,7 @@ public class DefaultContext
      * 
      * @param content Content of this context
      */
-    public DefaultContext( Map<String, Object> content )
+    public DefaultContext( Map content )
     {
         this( content, null );
     }
@@ -50,7 +50,7 @@ public class DefaultContext
      * @param content Content of this context
      * @param parent Parent context
      */
-    public DefaultContext( Map<String, Object> content, Context parent )
+    public DefaultContext( Map content, Context parent )
     {
         this.content = content;
         this.parent = parent;
