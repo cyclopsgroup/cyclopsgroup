@@ -18,8 +18,6 @@ package com.cyclopsgroup.tornado.maven;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
