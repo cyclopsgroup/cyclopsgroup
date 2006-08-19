@@ -76,12 +76,12 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
                 return;
             }
-            URL last = (URL) scriptResources.getLast();
+            URL last = scriptResources.getLast();
             if ( last.sameFile( resource ) )
             {
                 scriptResources.removeLast();

@@ -35,7 +35,7 @@ public class TagLibrary
     {
         for ( String tagName : pkg.getTagNames() )
         {
-            Class<Tag> tagClass = pkg.getTagClass( tagName );
+            Class<? extends Tag> tagClass = pkg.getTagClass( tagName );
             registerTag( tagName, tagClass );
         }
     }
@@ -45,6 +45,7 @@ public class TagLibrary
      *
      * @see org.apache.commons.jelly.TagLibrary#registerTag(java.lang.String, java.lang.Class)
      */
+    @Override
     public void registerTag( String name, Class type )
     {
         super.registerTag( name, type );

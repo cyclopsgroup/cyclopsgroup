@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.utils;
 
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.jelly.Tag;
@@ -31,7 +32,7 @@ public class TagPackage
     /** Empty array */
     public static final TagPackage[] EMPTY_ARRAY = new TagPackage[0];
 
-    private Hashtable<String, Class> tagClasses = new Hashtable<String, Class>();
+    private Map<String, Class<? extends Tag>> tagClasses = new Hashtable<String, Class<? extends Tag>>();
 
     /**
      * Add a tag class into repository
@@ -39,7 +40,7 @@ public class TagPackage
      * @param name Tag name
      * @param tagClass Tag class
      */
-    public void addTag( String name, Class tagClass )
+    public void addTag( String name, Class<? extends Tag> tagClass )
     {
         tagClasses.put( name, tagClass );
     }
@@ -50,7 +51,7 @@ public class TagPackage
      * @param name Tag name
      * @return Tag class
      */
-    public Class<Tag> getTagClass( String name )
+    public Class<? extends Tag> getTagClass( String name )
     {
         return tagClasses.get( name );
     }
