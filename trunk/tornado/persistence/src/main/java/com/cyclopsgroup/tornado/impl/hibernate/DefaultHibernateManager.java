@@ -18,6 +18,7 @@ package com.cyclopsgroup.tornado.impl.hibernate;
 
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Set;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -27,7 +28,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.ArrayUtils;
 
 import com.cyclopsgroup.tornado.hibernate.HibernateManager;
 import com.cyclopsgroup.tornado.hibernate.HibernateService;
@@ -126,9 +126,9 @@ public class DefaultHibernateManager
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateManager#getServiceNames()
      */
-    public String[] getServiceNames()
+    public Set<String> getServiceNames()
     {
-        return hibernateServices.keySet().toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+        return hibernateServices.keySet();
     }
 
     /**

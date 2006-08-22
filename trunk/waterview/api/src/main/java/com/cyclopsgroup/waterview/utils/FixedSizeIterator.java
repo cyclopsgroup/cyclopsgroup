@@ -28,7 +28,7 @@ import org.apache.commons.collections.iterators.AbstractIteratorDecorator;
  */
 public class FixedSizeIterator<T>
     extends AbstractIteratorDecorator
-{
+    {
     private int size;
 
     private int index = 0;
@@ -49,6 +49,7 @@ public class FixedSizeIterator<T>
      *
      * @see org.apache.commons.collections.iterators.AbstractIteratorDecorator#next()
      */
+    @SuppressWarnings("unchecked")
     @Override
     public T next()
     {

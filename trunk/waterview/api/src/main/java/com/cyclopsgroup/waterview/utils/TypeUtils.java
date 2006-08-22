@@ -338,7 +338,8 @@ public final class TypeUtils
      * @param items Could be any object
      * @return Iteartor object of it
      */
-    public static Iterator<Object> iterate( Object items )
+    @SuppressWarnings("unchecked")
+    public static Iterator iterate( Object items )
     {
         if ( items instanceof Collection )
         {
@@ -354,7 +355,7 @@ public final class TypeUtils
         }
         else if ( items instanceof Object[] )
         {
-            return new ArrayIterator( (Object[]) items );
+            return new ArrayIterator( items );
         }
         else
         {

@@ -19,8 +19,9 @@ package com.cyclopsgroup.tornado.impl.hibernate;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Properties;
-import java.util.Vector;
+import java.util.Set;
 
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
@@ -30,7 +31,6 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,7 +54,7 @@ public class DefaultHibernateService
 
     private String dataSourceServiceRole;
 
-    private Vector<Class<Object>> entityClasses = new Vector<Class<Object>>();
+    private Set<Class<?>> entityClasses = new HashSet<Class<?>>();
 
     private org.hibernate.cfg.Configuration hibernateConfiguration;
 
@@ -156,9 +156,9 @@ public class DefaultHibernateService
      *
      * @see com.cyclopsgroup.tornado.hibernate.HibernateService#getEntityClasses(java.lang.String)
      */
-    public Class[] getEntityClasses()
+    public Set<Class<?>> getEntityClasses()
     {
-        return entityClasses.toArray( ArrayUtils.EMPTY_CLASS_ARRAY );
+        return entityClasses;
     }
 
     /**

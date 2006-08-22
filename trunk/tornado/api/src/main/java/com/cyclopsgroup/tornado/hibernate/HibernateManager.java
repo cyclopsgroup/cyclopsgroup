@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.tornado.hibernate;
 
+import java.util.Set;
+
 import com.cyclopsgroup.tornado.sql.DataSourceManager;
 
 /**
@@ -57,7 +59,7 @@ public interface HibernateManager
      *
      * @return Array of string names
      */
-    public String[] getServiceNames();
+    public Set<String> getServiceNames();
 
     public void rollbackTransaction()
         throws Exception;

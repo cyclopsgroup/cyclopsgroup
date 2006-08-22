@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview.utils;
 
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ public abstract class TagSupportBase
 {
     private static final String DIGEST_ALGORITHM = "SHA";
 
-    private static final List<URL> EMPTY_URL_LIST = Collections.EMPTY_LIST;
+    private static final List<URL> EMPTY_URL_LIST = Collections.unmodifiableList( new ArrayList<URL>() );
 
     private static final String SCRIPT_RESOURCE_NAME = TagSupportBase.class.getName() + "/scriptresource";
 
@@ -135,6 +136,7 @@ public abstract class TagSupportBase
      *
      * @return URL of script resource
      */
+    @SuppressWarnings("unchecked")
     protected List<URL> getScriptResources()
     {
         List<URL> scriptResources = (List<URL>) getContext().getVariable( SCRIPT_RESOURCE_NAME );
@@ -217,7 +219,7 @@ public abstract class TagSupportBase
      * @return Parent tag
      * @throws JellyTagException Throw it if requirement is not met
      */
-    protected final Tag requireInside( Class parentTagClass )
+    protected final Tag requireInside( Class<? extends Tag> parentTagClass )
         throws JellyTagException
     {
         Tag parent = findAncestorWithClass( parentTagClass );
@@ -235,7 +237,7 @@ public abstract class TagSupportBase
      * @throws JellyTagException Throw it out if not matched
      * @return Parent tag
      */
-    protected final Tag requireParent( Class parentTagClass )
+    protected final Tag requireParent( Class<? extends Tag> parentTagClass )
         throws JellyTagException
     {
         if ( !parentTagClass.isAssignableFrom( getParent().getClass() ) )

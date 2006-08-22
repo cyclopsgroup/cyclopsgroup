@@ -17,6 +17,7 @@
 package com.cyclopsgroup.tornado.hibernate;
 
 import java.sql.Connection;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,7 +61,7 @@ public interface HibernateService
      * @param dataSourceName Data source name
      * @return Entity classes
      */
-    Class[] getEntityClasses();
+    Set<Class<?>> getEntityClasses();
 
     /**
      * Get hibernate configuration

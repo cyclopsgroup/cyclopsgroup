@@ -18,7 +18,8 @@ import org.apache.commons.lang.enums.Enum;
  * 
  * Adapter to do backward conversion in commons-beanutils converter
  */
-class StringConverterAdapter implements Converter
+class StringConverterAdapter
+    implements Converter
 {
     private StringConverter converter = new StringConverter();
 
@@ -27,19 +28,20 @@ class StringConverterAdapter implements Converter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    public Object convert(Class type, Object value)
+    @SuppressWarnings("unchecked")
+    public Object convert( Class type, Object value )
     {
-        if (type == String.class && value != null)
+        if ( type == String.class && value != null )
         {
-            if (value instanceof Date)
+            if ( value instanceof Date )
             {
-                return DateConverter.FORMAT.format(value);
+                return DateConverter.FORMAT.format( value );
             }
-            if (value instanceof Enum)
+            if ( value instanceof Enum )
             {
-                return ((Enum) value).getName();
+                return ( (Enum) value ).getName();
             }
         }
-        return converter.convert(type, value);
+        return converter.convert( type, value );
     }
 }

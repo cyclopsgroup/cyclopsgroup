@@ -45,6 +45,7 @@ public class TagLibrary
      *
      * @see org.apache.commons.jelly.TagLibrary#registerTag(java.lang.String, java.lang.Class)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void registerTag( String name, Class type )
     {

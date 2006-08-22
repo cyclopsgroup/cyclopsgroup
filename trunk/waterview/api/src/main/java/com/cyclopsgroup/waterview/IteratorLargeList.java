@@ -20,7 +20,6 @@ package com.cyclopsgroup.waterview;
 import java.util.Iterator;
 import java.util.List;
 
-import com.cyclopsgroup.waterview.LargeList.Sorting;
 import com.cyclopsgroup.waterview.utils.FixedSizeIterator;
 
 /**
