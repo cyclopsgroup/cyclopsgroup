@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.Tag;
+
 import com.cyclopsgroup.waterview.LargeList;
 
 /**
@@ -24,18 +26,19 @@ import com.cyclopsgroup.waterview.LargeList;
  * Tag that can contain a table and data
  */
 public interface TableControlTag
+    extends Tag
 {
     /**
      * Set table tag
      *
      * @param tableTag TableTag to set
      */
-    void setTableTag(TableTag tableTag);
+    void setTableTag( TableTag tableTag );
 
     /**
      * Set tabular data
      *
      * @param tabularData Tabular data to set
      */
-    void setTabularData(LargeList tabularData);
+    void setTabularData( LargeList tabularData );
 }

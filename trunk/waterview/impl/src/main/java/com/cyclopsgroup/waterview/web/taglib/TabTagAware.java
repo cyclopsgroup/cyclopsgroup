@@ -17,12 +17,15 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.Tag;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Tag which can handle tab tag
  */
 public interface TabTagAware
+    extends Tag
 {
     /**
      * Handle tabtag

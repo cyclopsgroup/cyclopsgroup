@@ -7,12 +7,15 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import org.apache.commons.jelly.Tag;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
  * Container of form tag
  */
 public interface FormControlTag
+    extends Tag
 {
     /**
      * Handle form tag
