@@ -186,13 +186,8 @@ public class HqlLargeList<T>
         return i.intValue();
     }
 
-    /**
-     * Overwrite or implement method iterate()
-     *
-     * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
-     */
     @SuppressWarnings("unchecked")
-    public Iterator<T> iterate( int startPosition, int maxRecords, Sorting[] sortings )
+    public Iterator<T> iterate( int startPosition, int maxRecords, List<Sorting> sortings )
         throws Exception
     {
         if ( StringUtils.isEmpty( hql ) )
@@ -203,9 +198,8 @@ public class HqlLargeList<T>
         StringBuffer sb = new StringBuffer( hql );
 
         boolean first = true;
-        for ( int i = 0; i < sortings.length; i++ )
+        for ( Sorting sorting : sortings )
         {
-            Sorting sorting = sortings[i];
             if ( first )
             {
                 sb.append( " ORDER BY " );

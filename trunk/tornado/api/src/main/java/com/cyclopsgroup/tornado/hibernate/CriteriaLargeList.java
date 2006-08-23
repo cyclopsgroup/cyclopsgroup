@@ -1,6 +1,7 @@
 package com.cyclopsgroup.tornado.hibernate;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
@@ -26,16 +27,12 @@ public class CriteriaLargeList<T>
         return UNKNOWN_SIZE;
     }
 
-    /**
-     * @see com.cyclopsgroup.waterview.LargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
-     */
     @SuppressWarnings("unchecked")
-    public Iterator<T> iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception
     {
-        for ( int i = 0; i < sortings.length; i++ )
+        for ( Sorting sorting : sortings )
         {
-            Sorting sorting = sortings[i];
             if ( sorting.isDescending() )
             {
                 criteria.addOrder( Order.desc( sorting.getName() ) );
