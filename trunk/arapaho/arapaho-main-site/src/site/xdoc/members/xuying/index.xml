@@ -2,7 +2,15 @@
 <document>
     <properties>
         <title>Xuying Zhao</title>
-        <properties email="xuyingzhao@gmail.com">xuying zhao</properties>
+        <properties email="xuyingzhao@gmail.com">
+            xuying zhao
+        </properties>
     </properties>
-    <body></body>
+    <body>
+        <section name="Xuying Zhao">
+            <p>
+                <a href="cv.html">CV</a>
+            </p>
+        </section>
+    </body>
 </document>

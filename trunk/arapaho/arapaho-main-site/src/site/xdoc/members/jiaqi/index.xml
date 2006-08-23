@@ -7,24 +7,11 @@
         </properties>
     </properties>
     <body>
-        <section name="Me">
+        <section name="Jiaqi Guo">
             <p>
-                My name is Jiaqi Guo and I'm an expert of Java open source. CyclopsGroup.com is the portfolio of my open
-                source projects. You may find my resume
-                <a href="resume.html">here</a>
-                if you are interested.
+                CyclopsGroup.com is the portfolio of Jiaqi Guo, who is a
+                big fan of Java open source world.
             </p>
-        </section>
-        <section name="Rencet talk (chinese language)">
-            <p>
-                <a href="blog.html">More talk..</a>
-                |
-                <a href="mailto:jiaqi.guo@gmail.com">Send mail..</a>
-            </p>
-            <script language="javascript" src="../../js/rsscontrol.js" />
-            <script language="javascript">
-                <![CDATA[ displayRss('http://cyclops-group.sourceforge.net/members/jiaqi/atom.xml'); ]]>
-            </script>
         </section>
     </body>
 </document>
