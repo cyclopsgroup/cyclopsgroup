@@ -57,6 +57,7 @@ public class HttpSessionContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
+    @SuppressWarnings("unchecked")
     public Iterator<String> keys()
     {
         return new EnumerationIterator( httpSession.getAttributeNames() );

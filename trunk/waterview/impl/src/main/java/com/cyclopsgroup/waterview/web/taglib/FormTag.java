@@ -60,9 +60,11 @@ public class FormTag
 
     private Script bodyScript;
 
-    private Set buttonTags = ListOrderedSet.decorate( new HashSet() );
+    @SuppressWarnings("unchecked")
+    private Set<SubmitTag> buttonTags = ListOrderedSet.decorate( new HashSet<SubmitTag>() );
 
-    private Map fieldTags = ListOrderedMap.decorate( new HashMap() );
+    @SuppressWarnings("unchecked")
+    private Map<String, FieldTag> fieldTags = ListOrderedMap.decorate( new HashMap<String, FieldTag>() );
 
     private Form form;
 
@@ -118,7 +120,7 @@ public class FormTag
      *
      * @return Submit tags
      */
-    public Set getButtonTags()
+    public Set<SubmitTag> getButtonTags()
     {
         return buttonTags;
     }
@@ -131,7 +133,7 @@ public class FormTag
      */
     public FieldTag getFieldTag( String fieldName )
     {
-        return (FieldTag) fieldTags.get( fieldName );
+        return fieldTags.get( fieldName );
     }
 
     /**
@@ -175,6 +177,7 @@ public class FormTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
+    @Override
     protected void processTag( XMLOutput output )
         throws Exception
     {

@@ -17,6 +17,8 @@
  */
 package com.cyclopsgroup.waterview.web.taglib;
 
+import java.util.List;
+
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.XMLOutput;
 
@@ -37,16 +39,17 @@ public class RenderTreeChildrenTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
+    @Override
     protected void processTag( XMLOutput output )
         throws Exception
     {
         TreeTag tree = (TreeTag) getContext().getVariable( TreeTag.TREE_TAG );
         RuntimeTreeNode runtimeNode = (RuntimeTreeNode) getContext().getVariable( TreeTag.CURRENT_RUNTIME_NODE );
         JellyContext jc = new JellyContext( getContext() );
-        Node[] nodes = runtimeNode.getChildrenNodes();
-        for ( int i = 0; i < nodes.length; i++ )
+        List<Node> nodes = runtimeNode.getChildrenNodes();
+        for ( Node n : nodes )
         {
-            RuntimeTreeNode node = (RuntimeTreeNode) nodes[i];
+            RuntimeTreeNode node = RuntimeTreeNode.class.cast( n );
             jc.setVariable( tree.getVar(), tree.isRuntime() ? node : node.getContent() );
             jc.setVariable( TreeTag.CURRENT_RUNTIME_NODE, node );
             tree.getBody().run( jc, output );

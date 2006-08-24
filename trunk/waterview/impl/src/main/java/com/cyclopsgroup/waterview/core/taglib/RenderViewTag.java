@@ -48,12 +48,13 @@ public class RenderViewTag
      *
      * @see com.cyclopsgroup.waterview.utils.TagSupportBase#processTag(org.apache.commons.jelly.XMLOutput)
      */
+    @Override
     protected void processTag( XMLOutput output )
         throws Exception
     {
         requireAttribute( "view" );
         JellyContextAdapter adapter = new JellyContextAdapter( getContext() );
-        DefaultContext ctx = new DefaultContext( new HashMap(), adapter );
+        DefaultContext ctx = new DefaultContext( new HashMap<String, Object>(), adapter );
         getView().render( getRunData(), ctx );
     }
 

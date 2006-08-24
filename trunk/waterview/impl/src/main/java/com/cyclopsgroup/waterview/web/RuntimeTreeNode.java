@@ -16,15 +16,17 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.RunData;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -37,7 +39,8 @@ public class RuntimeTreeNode
     /** Empty array */
     public static final RuntimeTreeNode[] EMPTY_ARRAY = new RuntimeTreeNode[0];
 
-    private Map children = ListOrderedMap.decorate( new HashMap() );
+    @SuppressWarnings("unchecked")
+    private Map<String, Node> children = ListOrderedMap.decorate( new HashMap<String, Node>() );
 
     private boolean expanded;
 
@@ -89,7 +92,7 @@ public class RuntimeTreeNode
      * @return Array of result
      * @throws Exception
      */
-    protected Node[] doFilter( Node[] nodes, RunData data )
+    protected List<Node> doFilter( List<Node> nodes, RunData data )
         throws Exception
     {
         return nodes;
@@ -109,10 +112,10 @@ public class RuntimeTreeNode
             return;
         }
         //TODO handle the none static node scenario
-        Node[] childNodes = doFilter( node.getChildrenNodes(), data );
-        for ( int i = 0; i < childNodes.length; i++ )
+        List<Node> childNodes = doFilter( node.getChildrenNodes(), data );
+        for ( Node child : childNodes )
         {
-            StaticNode node = (StaticNode) childNodes[i];
+            StaticNode node = StaticNode.class.cast( child );
             RuntimeTreeNode n = doCreateChild( node );
             children.put( n.getNodeId(), n );
         }
@@ -134,9 +137,9 @@ public class RuntimeTreeNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public Node[] getChildrenNodes()
+    public List<Node> getChildrenNodes()
     {
-        return (Node[]) children.values().toArray( Node.EMPTY_ARRAY );
+        return new ArrayList<Node>( children.values() );
     }
 
     /**
@@ -157,7 +160,7 @@ public class RuntimeTreeNode
      */
     public RuntimeTreeNode getNodeById( String nodeId )
     {
-        LinkedList buffer = new LinkedList();
+        LinkedList<Node> buffer = new LinkedList<Node>();
         buffer.addLast( this );
         while ( !buffer.isEmpty() )
         {

@@ -25,9 +25,6 @@ import com.cyclopsgroup.waterview.Attributes;
  */
 public interface Node
 {
-    /** Empty array */
-    Node[] EMPTY_ARRAY = new Node[0];
-
     /**
      * Get attributes of it
      *

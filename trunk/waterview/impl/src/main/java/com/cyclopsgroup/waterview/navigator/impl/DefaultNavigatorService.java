@@ -17,10 +17,12 @@
 package com.cyclopsgroup.waterview.navigator.impl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
@@ -52,13 +54,13 @@ public class DefaultNavigatorService
 {
     private static final String NODE_RUNTIME_NAME = DefaultNavigatorService.class.getName();
 
-    private Map pageIndex;
+    private Map<String, NavigatorNode> pageIndex;
 
     private MultiMap parentPathIndex;
 
     private String path;
 
-    private Map pathIndex;
+    private Map<String, NavigatorNode> pathIndex;
 
     private DefaultNavigatorNode rootNode;
 
@@ -102,10 +104,15 @@ public class DefaultNavigatorService
         return new RuntimeTreeNode( null, getRootNode() );
     }
 
-    Collection getChildren( String path )
+    List<Node> getChildren( String path )
     {
         Collection c = (Collection) parentPathIndex.get( path );
-        return c == null ? Collections.EMPTY_SET : c;
+        if ( c == null )
+        {
+            return Collections.EMPTY_LIST;
+        }
+
+        return new ArrayList<Node>( c );
     }
 
     /**
@@ -115,7 +122,7 @@ public class DefaultNavigatorService
      */
     public NavigatorNode getNodeByPage( String page )
     {
-        return (NavigatorNode) pageIndex.get( page );
+        return pageIndex.get( page );
     }
 
     /**
@@ -130,7 +137,7 @@ public class DefaultNavigatorService
         {
             return null;
         }
-        return (NavigatorNode) pathIndex.get( path );
+        return pathIndex.get( path );
     }
 
     /**
@@ -156,11 +163,11 @@ public class DefaultNavigatorService
         {
             root = doCreateRuntimeRoot( data );
             root.expand( data );
-            Node[] children = root.getChildrenNodes();
-            for ( int i = 0; i < children.length; i++ )
+            List<Node> children = root.getChildrenNodes();
+            for ( Node n : children )
             {
                 //TODO handle dynamic node
-                StaticNode child = (StaticNode) children[i];
+                StaticNode child = StaticNode.class.cast( n );
                 ( (RuntimeTreeNode) child ).expand( data );
             }
             data.getSessionContext().put( NODE_RUNTIME_NAME, root );
@@ -188,9 +195,9 @@ public class DefaultNavigatorService
         JellyContext jc = new JellyContext();
         jc.setVariable( DefaultNavigatorService.class.getName(), this );
         jc.registerTagLibrary( "http://waterview.cyclopsgroup.com/navigator", new NavigatorTagLibrary() );
-        for ( Enumeration en = getClass().getClassLoader().getResources( path ); en.hasMoreElements(); )
+        for ( Enumeration<URL> en = getClass().getClassLoader().getResources( path ); en.hasMoreElements(); )
         {
-            URL resource = (URL) en.nextElement();
+            URL resource = en.nextElement();
             getLogger().info( "Reading navigation from " + resource );
             jc.runScript( resource, XMLOutput.createDummyXMLOutput() );
         }
@@ -200,10 +207,10 @@ public class DefaultNavigatorService
     private void populateNode( NavigatorNode node )
     {
         node.getParentNodes();
-        Node[] nodes = node.getChildrenNodes();
-        for ( int i = 0; i < nodes.length; i++ )
+        List<Node> nodes = node.getChildrenNodes();
+        for ( Node n : nodes )
         {
-            NavigatorNode child = (NavigatorNode) nodes[i];
+            NavigatorNode child = NavigatorNode.class.cast( n );
             populateNode( child );
         }
     }

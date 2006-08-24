@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.ui.layout;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.BaseServiceable;
@@ -46,16 +48,16 @@ public class DefaultLayout
     {
         NavigatorService navigator = (NavigatorService) lookup( NavigatorService.ROLE );
         RuntimeTreeNode root = navigator.getRuntimeNode( data );
-        Node[] tabNodes = root.getChildrenNodes();
+        List<Node> tabNodes = root.getChildrenNodes();
         context.put( "tabNodes", tabNodes );
 
         context.put( "navigator", navigator );
         context.put( "currentNavigatorNode", navigator.getNodeByPage( data.getPage().getFullPath() ) );
 
         RuntimeTreeNode selectedNode = null;
-        for ( int i = 0; i < tabNodes.length; i++ )
+        for ( Node tabNode : tabNodes )
         {
-            RuntimeTreeNode runtimeNode = (RuntimeTreeNode) tabNodes[i];
+            RuntimeTreeNode runtimeNode = RuntimeTreeNode.class.cast( tabNode );
             NavigatorNode node = (NavigatorNode) runtimeNode.getContent();
             if ( !StringUtils.equals( node.getPage(), data.getPage().getFullPath() ) )
             {

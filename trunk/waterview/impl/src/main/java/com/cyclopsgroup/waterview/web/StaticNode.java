@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import java.util.List;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -29,5 +31,5 @@ public interface StaticNode
      *
      * @return Children nodes
      */
-    Node[] getChildrenNodes();
+    List<Node> getChildrenNodes();
 }

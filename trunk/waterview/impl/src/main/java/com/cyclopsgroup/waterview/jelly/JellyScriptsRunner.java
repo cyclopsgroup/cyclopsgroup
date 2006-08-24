@@ -89,16 +89,15 @@ public class JellyScriptsRunner
         JellyEngine je = (JellyEngine) container.lookup( JellyEngine.ROLE );
         JellyContext jc = new JellyContext( je.getGlobalContext() );
         XMLOutput output = XMLOutput.createXMLOutput( System.out );
-        for ( Iterator i = scripts.iterator(); i.hasNext(); )
+        for ( URL script : scripts )
         {
-            URL script = (URL) i.next();
             System.out.print( "Running script " + script );
             ExtendedProperties ep = new ExtendedProperties();
             ep.putAll( initProperties );
             ep.load( script.openStream() );
-            for ( Iterator j = ep.getKeys( "script" ); j.hasNext(); )
+            for ( Iterator<String> j = ep.getKeys( "script" ); j.hasNext(); )
             {
-                String name = (String) j.next();
+                String name = j.next();
                 if ( name.endsWith( ".file" ) )
                 {
                     File file = new File( ep.getString( name ) );
@@ -110,10 +109,10 @@ public class JellyScriptsRunner
                 }
                 else if ( name.endsWith( ".resource" ) )
                 {
-                    Enumeration k = JellyScriptsRunner.class.getClassLoader().getResources( ep.getString( name ) );
+                    Enumeration<URL> k = JellyScriptsRunner.class.getClassLoader().getResources( ep.getString( name ) );
                     while ( j != null && k.hasMoreElements() )
                     {
-                        URL s = (URL) k.nextElement();
+                        URL s = k.nextElement();
                         System.out.println( "Running jelly script " + s );
                         jc.runScript( s, output );
                     }

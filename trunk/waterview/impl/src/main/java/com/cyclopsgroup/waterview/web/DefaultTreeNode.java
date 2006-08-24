@@ -16,13 +16,15 @@
  */
 package com.cyclopsgroup.waterview.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 
-import com.cyclopsgroup.waterview.MapAttributes;
 import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.MapAttributes;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -34,7 +36,7 @@ public class DefaultTreeNode
 {
     private Attributes attributes = new MapAttributes( new HashMap() );
 
-    private Map children = ListOrderedMap.decorate( new HashMap() );
+    private Map<String, Node> children = ListOrderedMap.decorate( new HashMap() );
 
     private boolean end;
 
@@ -79,9 +81,9 @@ public class DefaultTreeNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public Node[] getChildrenNodes()
+    public List<Node> getChildrenNodes()
     {
-        return (Node[]) children.values().toArray( EMPTY_ARRAY );
+        return new ArrayList<Node>( children.values() );
     }
 
     /**

@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
+import java.util.List;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * 
@@ -31,7 +33,7 @@ public abstract class BaseNavigatorNode
      */
     public boolean isEnd()
     {
-        return getChildrenNodes().length == 0;
+        return getChildrenNodes().isEmpty();
     }
 
     /**
@@ -41,10 +43,9 @@ public abstract class BaseNavigatorNode
      */
     public boolean isParent( String page )
     {
-        NavigatorNode[] parents = getParentNodes();
-        for ( int i = 0; i < parents.length; i++ )
+        List<NavigatorNode> parents = getParentNodes();
+        for ( NavigatorNode parent : parents )
         {
-            NavigatorNode parent = parents[i];
             if ( parent.getPage().equals( page ) )
             {
                 return true;

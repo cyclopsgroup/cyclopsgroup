@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview.navigator;
 
+import java.util.List;
+
 import com.cyclopsgroup.waterview.web.StaticNode;
 
 /**
@@ -26,9 +28,6 @@ import com.cyclopsgroup.waterview.web.StaticNode;
 public interface NavigatorNode
     extends StaticNode
 {
-    /** Empty nodes */
-    NavigatorNode[] EMPTY_ARRAY = new NavigatorNode[0];
-
     /**
      * Get description of node
      *
@@ -48,7 +47,7 @@ public interface NavigatorNode
      *
      * @return Array of parent nodes
      */
-    NavigatorNode[] getParentNodes();
+    List<NavigatorNode> getParentNodes();
 
     /**
      * Get title of node

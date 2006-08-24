@@ -16,10 +16,12 @@
  */
 package com.cyclopsgroup.waterview.navigator.impl;
 
+import java.util.List;
+
 import org.codehaus.plexus.PlexusTestCase;
 
-import com.cyclopsgroup.waterview.navigator.NavigatorService;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
+import com.cyclopsgroup.waterview.navigator.NavigatorService;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -39,7 +41,7 @@ public class DefaultNavigatorHomeTest
     {
         NavigatorService nav = (NavigatorService) lookup( NavigatorService.ROLE );
         NavigatorNode node = nav.getNodeByPage( "/waterview/system/status/SessionDump.jelly" );
-        NavigatorNode[] path = node.getParentNodes();
-        assertEquals( 3, path.length );
+        List<NavigatorNode> path = node.getParentNodes();
+        assertEquals( 3, path.size() );
     }
 }

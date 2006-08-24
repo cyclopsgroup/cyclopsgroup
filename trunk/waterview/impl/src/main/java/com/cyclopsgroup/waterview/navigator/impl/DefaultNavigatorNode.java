@@ -21,11 +21,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.MapAttributes;
 import com.cyclopsgroup.waterview.Attributes;
+import com.cyclopsgroup.waterview.MapAttributes;
 import com.cyclopsgroup.waterview.navigator.BaseNavigatorNode;
 import com.cyclopsgroup.waterview.navigator.NavigatorNode;
 import com.cyclopsgroup.waterview.web.Node;
@@ -48,11 +47,11 @@ class DefaultNavigatorNode
 
     static final String TITLE_NAME = "title";
 
-    private Attributes attributes = new MapAttributes( new HashMap() );
+    private Attributes attributes = new MapAttributes( new HashMap<String, String>() );
 
-    private DefaultNavigatorService navigatorHome;
+    private DefaultNavigatorService defaultNavigatorService;
 
-    private NavigatorNode[] parentNodes;
+    private List<NavigatorNode> parentNodes;
 
     private String parentPath;
 
@@ -79,7 +78,7 @@ class DefaultNavigatorNode
             }
         }
         this.parentPath = parentPath;
-        this.navigatorHome = nav;
+        this.defaultNavigatorService = nav;
     }
 
     /**
@@ -97,10 +96,9 @@ class DefaultNavigatorNode
      *
      * @see com.cyclopsgroup.waterview.web.StaticNode#getChildrenNodes()
      */
-    public Node[] getChildrenNodes()
+    public List<Node> getChildrenNodes()
     {
-        Collection nodes = navigatorHome.getChildren( path );
-        return (Node[]) nodes.toArray( Node.EMPTY_ARRAY );
+        return  defaultNavigatorService.getChildren( path );
     }
 
     /**
@@ -144,7 +142,7 @@ class DefaultNavigatorNode
      */
     public Node getParentNode()
     {
-        return navigatorHome.getNodeByPath( parentPath );
+        return defaultNavigatorService.getNodeByPath( parentPath );
     }
 
     /**
@@ -152,18 +150,16 @@ class DefaultNavigatorNode
      *
      * @see com.cyclopsgroup.waterview.navigator.NavigatorNode#getParentNodes()
      */
-    public synchronized NavigatorNode[] getParentNodes()
+    public synchronized List<NavigatorNode> getParentNodes()
     {
         if ( parentNodes == null )
         {
-            List parents = new ArrayList();
+            parentNodes = new ArrayList<NavigatorNode>();
             NavigatorNode parent = (NavigatorNode) getParentNode();
             if ( parent != null )
             {
-                CollectionUtils.addAll( parents, parent.getParentNodes() );
-                parents.add( parent );
+                parentNodes.addAll( parent.getParentNodes() );
             }
-            parentNodes = (NavigatorNode[]) parents.toArray( NavigatorNode.EMPTY_ARRAY );
         }
         return parentNodes;
     }

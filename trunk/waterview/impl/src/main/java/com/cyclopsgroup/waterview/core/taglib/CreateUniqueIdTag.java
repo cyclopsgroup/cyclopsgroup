@@ -42,6 +42,7 @@ public class CreateUniqueIdTag
         return var;
     }
 
+    @Override
     protected void processTag( XMLOutput output )
         throws Exception
     {
