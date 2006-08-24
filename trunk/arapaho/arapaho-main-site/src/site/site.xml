@@ -59,7 +59,7 @@
         <menu name="Links">
             <item name="sf.net home"
                 href="http://sourceforge.net/projects/cyclops-group" />
-            <item name="cvs"
+            <item name="source code"
                 href="http://fisheye3.cenqua.com/viewrep/cyclops-group/" />
         </menu>
     </body>
