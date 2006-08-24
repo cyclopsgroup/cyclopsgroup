@@ -14,10 +14,10 @@
     <packaging>jar</packaging>
     <description>The site skin for CyclopsGroup.com</description>
     <scm>
-        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-skin-default</connection>
+        <connection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-skin-default</connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-skin-default
+            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-skin-default
         </developerConnection>
-        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho/arapaho-skin-default</url>
+        <url>http://fisheye3.cenqua.com/browse/cyclops-group/trunk/arapaho/arapaho-skin-default</url>
     </scm>
 </project>

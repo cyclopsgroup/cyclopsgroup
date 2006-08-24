@@ -25,8 +25,8 @@
         <module>arapaho-project</module>
     </modules>
     <scm>
-        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho</connection>
-        <developerConnection>scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho</developerConnection>
-        <url>http://svn.sourceforge.net/viewcvs.py/cyclops-group/trunk/arapaho</url>
+        <connection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho</connection>
+        <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho</developerConnection>
+        <url>http://fisheye3.cenqua.com/browse/cyclops-group/trunk/arapaho</url>
     </scm>
 </project>
