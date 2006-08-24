@@ -16,7 +16,6 @@
             <item name="course list"
                 href="http://www.cyclopsgroup.com/projects/courselist" />
         </links>
-
         <head>
             <script language="javascript"
                 src="http://www.google-analytics.com/urchin.js"
@@ -29,7 +28,6 @@
                 ]]>
             </script>
         </head>
-
         <menu name="Content">
             <item name="home" href="/index.html" />
             <item name="projects" href="/projects.html" />

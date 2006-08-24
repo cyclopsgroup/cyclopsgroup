@@ -15,8 +15,8 @@
     <description>The website of CyclopsGroup.com</description>
     <url>http://www.cyclopsgroup.com/</url>
     <scm>
-        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-main-site</connection>
-        <developerConnection>scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/arapaho/arapaho-main-site</developerConnection>
+        <connection>scm:svn:svn://svn.sourceforge.net/svn/cyclops-group/trunk/arapaho/arapaho-main-site</connection>
+        <developerConnection>scm:svn:https://svn.sourceforge.net/svn/cyclops-group/trunk/arapaho/arapaho-main-site</developerConnection>
         <url>http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/arapaho/arapaho-main-site</url>
     </scm>
     <distributionManagement>
