@@ -76,7 +76,7 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-project-base</connection>
+        <connection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-project-base</connection>
         <developerConnection>
             scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-project-base
         </developerConnection>
