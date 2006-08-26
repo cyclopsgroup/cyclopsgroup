@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.cyclopsgroup.whisperer</groupId>
+        <artifactId>whisperer-project-base</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>whisperer-smtp-proxy</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Whisperer SMTP proxy</name>
+    <description>
+        A generic SMTP proxy
+    </description>
+    <url>http://www.cyclopsgroup.com/projects/whisperer</url>
+    <dependencies>
+        <dependency>
+            <groupId>james</groupId>
+            <artifactId>james</artifactId>
+            <version>3.0a1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cyclopsgroup.arapaho</groupId>
+            <artifactId>arapaho-dependency-plexus</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+</project>
