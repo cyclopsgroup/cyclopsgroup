@@ -18,6 +18,7 @@
     </description>
     <modules>
         <module>arapaho-dependency-jetty</module>
+	<module>arapaho-dependency-plexus</module>
         <module>arapaho-project-base</module>
         <module>arapaho-skin-default</module>
         <module>arapaho-main-site</module>
