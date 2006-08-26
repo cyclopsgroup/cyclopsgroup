@@ -73,11 +73,11 @@ public class CollectionLargeList<T>
             {
                 if ( sorting.isDescending() )
                 {
-                    chain.addComparator( new BeanPropertyComparator( sorting.getName() ), true );
+                    chain.addComparator( new BeanPropertyComparator<T>( sorting.getName() ), true );
                 }
                 else
                 {
-                    chain.addComparator( new BeanPropertyComparator( sorting.getName() ) );
+                    chain.addComparator( new BeanPropertyComparator<T>( sorting.getName() ) );
                 }
             }
             chain.addComparator( HashCodeComparator.INSTANCE );

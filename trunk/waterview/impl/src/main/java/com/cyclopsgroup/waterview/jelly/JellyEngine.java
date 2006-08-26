@@ -263,9 +263,10 @@ public class JellyEngine
                         {
                             s.run( context, output );
                         }
-                        catch ( JellyTagException e )
+                        catch ( Exception e )
                         {
-                            throw e;
+                            JellyTagException je = new JellyTagException(e);
+                            je.setFileName( resource.getFile() );
                         }
                         finally
                         {

@@ -28,7 +28,7 @@ import org.apache.commons.collections.iterators.AbstractIteratorDecorator;
  */
 public class FixedSizeIterator<T>
     extends AbstractIteratorDecorator
-    {
+{
     private int size;
 
     private int index = 0;

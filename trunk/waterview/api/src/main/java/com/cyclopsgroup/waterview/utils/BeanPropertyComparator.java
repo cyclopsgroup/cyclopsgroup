@@ -59,5 +59,4 @@ public class BeanPropertyComparator<T>
             return 0;
         }
     }
-
 }
