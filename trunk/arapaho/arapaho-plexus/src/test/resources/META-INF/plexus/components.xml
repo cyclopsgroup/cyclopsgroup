@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.arapaho.plexus.Component</role>
+            <implementation>com.cyclopsgroup.arapaho.plexus.Component</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <test-value>abc</test-value>
+            </configuration>
+        </component>
+    </components>
+</plexus>
