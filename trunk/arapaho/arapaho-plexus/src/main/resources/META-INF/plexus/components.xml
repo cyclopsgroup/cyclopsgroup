@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>com.cyclopsgroup.arapaho.plexus.MBeanServerHome</role>
+            <implementation>
+                com.cyclopsgroup.arapaho.plexus.DefaultMBeanServerHome
+            </implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+            <configuration>
+                <domain>com.cyclopsgroup</domain>
+            </configuration>
+        </component>
+        <component>
+            <role>com.cyclopsgroup.arapaho.plexus.MBeanRegistry</role>
+            <implementation>com.cyclopsgroup.arapaho.plexus.MBeanRegistry</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
+    </components>
+</plexus>
