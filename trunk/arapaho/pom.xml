@@ -18,8 +18,8 @@
     </description>
     <modules>
         <module>arapaho-dependency-jetty</module>
-	<module>arapaho-dependency-plexus</module>
         <module>arapaho-project-base</module>
+        <module>arapaho-lib-avalon</module>
         <module>arapaho-skin-default</module>
         <module>arapaho-main-site</module>
         <module>arapaho-maven-plugin</module>
