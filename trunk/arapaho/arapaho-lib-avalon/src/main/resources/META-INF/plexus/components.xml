@@ -11,10 +11,5 @@
                 <domain>com.cyclopsgroup</domain>
             </configuration>
         </component>
-        <component>
-            <role>com.cyclopsgroup.arapaho.avalon.impl.MBeanRegistry</role>
-            <implementation>com.cyclopsgroup.arapaho.avalon.impl.MBeanRegistry</implementation>
-            <lifecycle-handler>avalon</lifecycle-handler>
-        </component>
     </components>
 </plexus>

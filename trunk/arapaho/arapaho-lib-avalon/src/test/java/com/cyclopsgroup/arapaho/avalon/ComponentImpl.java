@@ -5,6 +5,7 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 
+@MBeanClass
 public class ComponentImpl
     implements Configurable, Initializable, Component
 {
@@ -14,33 +15,43 @@ public class ComponentImpl
 
     private String testValue;
 
+    /**
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
     public void configure( Configuration conf )
         throws ConfigurationException
     {
         testValue = conf.getChild( "test-value" ).getValue();
     }
 
+    /**
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
     public void initialize()
         throws Exception
     {
         initialized = true;
     }
 
+    @MBeanAttribute
     public boolean isInitialized()
     {
         return initialized;
     }
 
+    @MBeanAttribute
     public String getTestValue()
     {
         return testValue;
     }
 
+    @MBeanAttribute
     public void setTestValue( String testValue )
     {
         this.testValue = testValue;
     }
 
+    @MBeanOperation
     public void reset()
     {
         initialized = false;

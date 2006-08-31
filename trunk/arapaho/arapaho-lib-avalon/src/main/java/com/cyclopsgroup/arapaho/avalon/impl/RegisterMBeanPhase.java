@@ -10,6 +10,7 @@ import org.codehaus.plexus.component.manager.ComponentManager;
 import org.codehaus.plexus.lifecycle.phase.AbstractPhase;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.PhaseExecutionException;
 
+import com.cyclopsgroup.arapaho.avalon.MBeanClass;
 import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
 public class RegisterMBeanPhase
@@ -22,7 +23,7 @@ public class RegisterMBeanPhase
         throws PhaseExecutionException
     {
         String role = manager.getComponentDescriptor().getRole();
-        if ( role.equals( MBeanServerHome.ROLE ) || role.equals( MBeanRegistry.ROLE ) )
+        if ( role.equals( MBeanServerHome.ROLE ) )
         {
             return;
         }
@@ -33,17 +34,16 @@ public class RegisterMBeanPhase
             MBeanServerHome mbeanServerHome = (MBeanServerHome) manager.getContainer().lookup( MBeanServerHome.ROLE );
             MBeanServer mbeanServer = mbeanServerHome.getMBeanServer();
 
+            ObjectName name = new ObjectName( mbeanServerHome.getDomain(), "key", componentKey );
             if ( component instanceof DynamicMBean )
             {
                 log.debug( "Register " + componentKey + " to mbean server directly since it implements DynamicMBean:"
                     + component );
-                mbeanServer
-                    .registerMBean( component, new ObjectName( mbeanServerHome.getDomain(), "key", componentKey ) );
+                mbeanServer.registerMBean( component, name );
             }
-            else
+            else if ( component.getClass().getAnnotation( MBeanClass.class ) != null )
             {
-                MBeanRegistry registry = (MBeanRegistry) manager.getContainer().lookup( MBeanRegistry.ROLE );
-                registry.register( component, componentKey );
+                mbeanServer.registerMBean( new DynamicMBeanAdapter( component ), name );
             }
         }
         catch ( Exception e )
