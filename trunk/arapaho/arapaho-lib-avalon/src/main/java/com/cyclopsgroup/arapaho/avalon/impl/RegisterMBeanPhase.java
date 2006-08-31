@@ -1,4 +1,4 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon.impl;
 
 import javax.management.DynamicMBean;
 import javax.management.MBeanServer;
@@ -9,6 +9,8 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.component.manager.ComponentManager;
 import org.codehaus.plexus.lifecycle.phase.AbstractPhase;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.PhaseExecutionException;
+
+import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
 public class RegisterMBeanPhase
     extends AbstractPhase

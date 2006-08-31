@@ -1,4 +1,4 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon.impl;
 
 import java.util.HashSet;
 import java.util.Set;

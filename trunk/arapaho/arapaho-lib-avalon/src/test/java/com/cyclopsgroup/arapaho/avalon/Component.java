@@ -1,4 +1,4 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon;
 
 
 public interface Component

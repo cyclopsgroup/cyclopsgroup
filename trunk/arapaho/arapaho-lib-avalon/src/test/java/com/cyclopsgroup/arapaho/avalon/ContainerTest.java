@@ -1,4 +1,4 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon;
 
 import org.codehaus.plexus.PlexusTestCase;
 

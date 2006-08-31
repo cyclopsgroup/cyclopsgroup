@@ -1,6 +1,8 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon;
 
 import org.codehaus.plexus.PlexusTestCase;
+
+import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
 public class MBeanServerHomeTest
     extends PlexusTestCase

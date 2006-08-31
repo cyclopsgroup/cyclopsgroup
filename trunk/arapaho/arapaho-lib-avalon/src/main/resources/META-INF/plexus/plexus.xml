@@ -28,7 +28,7 @@
                     <phase
                         implementation='org.codehaus.plexus.personality.avalon.lifecycle.phase.StartPhase' />
                     <phase
-                        implementation='com.cyclopsgroup.arapaho.plexus.RegisterMBeanPhase' />
+                        implementation='com.cyclopsgroup.arapaho.avalon.impl.RegisterMBeanPhase' />
                 </begin-segment>
                 <suspend-segment>
                     <phase

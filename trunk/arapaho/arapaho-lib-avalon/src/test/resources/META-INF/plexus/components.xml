@@ -2,8 +2,8 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.arapaho.plexus.Component</role>
-            <implementation>com.cyclopsgroup.arapaho.plexus.ComponentImpl</implementation>
+            <role>com.cyclopsgroup.arapaho.avalon.Component</role>
+            <implementation>com.cyclopsgroup.arapaho.avalon.ComponentImpl</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
                 <test-value>abc</test-value>

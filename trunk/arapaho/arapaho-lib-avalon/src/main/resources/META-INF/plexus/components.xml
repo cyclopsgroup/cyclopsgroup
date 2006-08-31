@@ -2,9 +2,9 @@
 <plexus>
     <components>
         <component>
-            <role>com.cyclopsgroup.arapaho.plexus.MBeanServerHome</role>
+            <role>com.cyclopsgroup.arapaho.avalon.MBeanServerHome</role>
             <implementation>
-                com.cyclopsgroup.arapaho.plexus.DefaultMBeanServerHome
+                com.cyclopsgroup.arapaho.avalon.impl.DefaultMBeanServerHome
             </implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
             <configuration>
@@ -12,8 +12,8 @@
             </configuration>
         </component>
         <component>
-            <role>com.cyclopsgroup.arapaho.plexus.MBeanRegistry</role>
-            <implementation>com.cyclopsgroup.arapaho.plexus.MBeanRegistry</implementation>
+            <role>com.cyclopsgroup.arapaho.avalon.impl.MBeanRegistry</role>
+            <implementation>com.cyclopsgroup.arapaho.avalon.impl.MBeanRegistry</implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
     </components>

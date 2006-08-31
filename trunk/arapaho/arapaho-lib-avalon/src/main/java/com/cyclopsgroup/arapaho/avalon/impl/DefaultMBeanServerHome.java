@@ -1,4 +1,4 @@
-package com.cyclopsgroup.arapaho.plexus;
+package com.cyclopsgroup.arapaho.avalon.impl;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
@@ -8,6 +8,8 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+
+import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
 public class DefaultMBeanServerHome
     extends AbstractLogEnabled
