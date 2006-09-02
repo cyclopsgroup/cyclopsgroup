@@ -24,9 +24,8 @@
         </dependency>
         <dependency>
             <groupId>com.cyclopsgroup.arapaho</groupId>
-            <artifactId>arapaho-dependency-plexus</artifactId>
+            <artifactId>arapaho-lib-avalon</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>pom</type>
         </dependency>
     </dependencies>
 </project>
