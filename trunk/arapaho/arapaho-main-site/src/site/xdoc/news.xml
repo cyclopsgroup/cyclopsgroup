@@ -9,12 +9,8 @@
             <p>
                 <script language="javascript" src="js/rsscontrol.js" />
                 <script language="javascript">
-                    <![CDATA[displayRss('http://sourceforge.net/export/rss2_projnews.php?group_id=91358');]]>
+                    <![CDATA[displayRss('http://groups.google.com/group/cyclopsgroup-news/feed/rss_v2_0_msgs.xml?num=25');]]>
                 </script>
-                <a
-                    href="http://sourceforge.net/projects/cyclops-group">
-                    More..
-                </a>
             </p>
         </section>
     </body>
