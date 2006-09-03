@@ -1,5 +1,6 @@
 package com.cyclopsgroup.whisperer.smtpproxy;
 
+import org.apache.avalon.cornerstone.services.threads.ThreadManager;
 import org.apache.james.services.DNSServer;
 import org.codehaus.plexus.PlexusTestCase;
 
@@ -10,5 +11,6 @@ public class EnvironmentTest
         throws Exception
     {
         assertNotNull( lookup( DNSServer.ROLE ) );
+        assertNotNull( lookup( ThreadManager.ROLE ) );
     }
 }

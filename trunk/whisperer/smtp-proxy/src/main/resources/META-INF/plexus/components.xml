@@ -23,5 +23,10 @@
             </implementation>
             <lifecycle-handler>avalon</lifecycle-handler>
         </component>
+        <component>
+            <role>org.apache.avalon.cornerstone.services.threads.ThreadManager</role>
+            <implementation>org.apache.avalon.cornerstone.blocks.threads.DefaultThreadManager</implementation>
+            <lifecycle-handler>avalon</lifecycle-handler>
+        </component>
     </components>
 </plexus>
