@@ -49,7 +49,7 @@ class DynamicMBeanAdapter
 
     private MBeanInfo mbeanInfo;
 
-    DynamicMBeanAdapter( Object component, String componentKey )
+    public DynamicMBeanAdapter( Object component, String componentKey )
         throws IntrospectionException
     {
         if ( component == null )

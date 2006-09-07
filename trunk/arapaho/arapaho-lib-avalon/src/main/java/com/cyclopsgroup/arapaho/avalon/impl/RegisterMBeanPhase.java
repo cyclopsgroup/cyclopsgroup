@@ -49,12 +49,13 @@ public class RegisterMBeanPhase
             }
             else if ( component.getClass().getAnnotation( MBeanClass.class ) != null )
             {
+                log.debug( "Register " + componentKey + " to mbean server through an adapter" );
+
                 mbeanServer.registerMBean( new DynamicMBeanAdapter( component, componentKey ), name );
             }
         }
         catch ( Exception e )
         {
-            e.printStackTrace();
             log.warn( "Can't register mbean " + component + ", key=" + componentKey, e );
         }
     }
