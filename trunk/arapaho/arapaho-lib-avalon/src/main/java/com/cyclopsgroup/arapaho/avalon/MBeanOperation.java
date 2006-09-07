@@ -28,5 +28,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface MBeanOperation {
-
+    /**
+     * @return Description of operation
+     */
+    String value();
 }

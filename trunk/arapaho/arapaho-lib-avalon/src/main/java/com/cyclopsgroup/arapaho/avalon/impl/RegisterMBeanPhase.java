@@ -13,6 +13,12 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.PhaseExecutionExce
 import com.cyclopsgroup.arapaho.avalon.MBeanClass;
 import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
+/**
+ * Plexus phase where avalon components are registered as MBean
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ */
 public class RegisterMBeanPhase
     extends AbstractPhase
 {
@@ -43,7 +49,7 @@ public class RegisterMBeanPhase
             }
             else if ( component.getClass().getAnnotation( MBeanClass.class ) != null )
             {
-                mbeanServer.registerMBean( new DynamicMBeanAdapter( component ), name );
+                mbeanServer.registerMBean( new DynamicMBeanAdapter( component, componentKey ), name );
             }
         }
         catch ( Exception e )

@@ -11,6 +11,12 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
 import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
+/**
+ * Default implementation of MBeanServerHome where MBeanServer instance is simply created from factory
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ */
 public class DefaultMBeanServerHome
     extends AbstractLogEnabled
     implements MBeanServerHome, Initializable, Configurable
@@ -29,12 +35,18 @@ public class DefaultMBeanServerHome
         return mbeanServer;
     }
 
+    /**
+     * @see org.apache.avalon.framework.activity.Initializable#initialize()
+     */
     public void initialize()
         throws Exception
     {
-        mbeanServer = MBeanServerFactory.newMBeanServer( domain );
+        mbeanServer = MBeanServerFactory.createMBeanServer( domain );
     }
 
+    /**
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
     public void configure( Configuration conf )
         throws ConfigurationException
     {

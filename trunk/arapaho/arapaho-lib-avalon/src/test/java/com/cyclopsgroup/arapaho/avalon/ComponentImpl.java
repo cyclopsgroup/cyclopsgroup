@@ -5,7 +5,7 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 
-@MBeanClass
+@MBeanClass("Testing purpose only component implementation")
 public class ComponentImpl
     implements Configurable, Initializable, Component
 {
@@ -51,7 +51,7 @@ public class ComponentImpl
         this.testValue = testValue;
     }
 
-    @MBeanOperation
+    @MBeanOperation("Reset the values")
     public void reset()
     {
         initialized = false;

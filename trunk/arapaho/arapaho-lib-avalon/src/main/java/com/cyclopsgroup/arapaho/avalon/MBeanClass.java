@@ -15,4 +15,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface MBeanClass {
+    /**
+     * @return Description of the mbean class
+     */
+    String value();
 }
