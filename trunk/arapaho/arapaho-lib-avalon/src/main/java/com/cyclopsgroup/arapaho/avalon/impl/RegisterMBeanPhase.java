@@ -10,7 +10,6 @@ import org.codehaus.plexus.component.manager.ComponentManager;
 import org.codehaus.plexus.lifecycle.phase.AbstractPhase;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.PhaseExecutionException;
 
-import com.cyclopsgroup.arapaho.avalon.MBeanClass;
 import com.cyclopsgroup.arapaho.avalon.MBeanServerHome;
 
 /**
@@ -24,7 +23,9 @@ public class RegisterMBeanPhase
 {
     private Log log = LogFactory.getLog( getClass() );
 
-    @Override
+    /**
+     * @see org.codehaus.plexus.lifecycle.phase.AbstractPhase#execute(java.lang.Object, org.codehaus.plexus.component.manager.ComponentManager)
+     */
     public void execute( Object component, ComponentManager manager )
         throws PhaseExecutionException
     {
@@ -46,12 +47,6 @@ public class RegisterMBeanPhase
                 log.debug( "Register " + componentKey + " to mbean server directly since it implements DynamicMBean:"
                     + component );
                 mbeanServer.registerMBean( component, name );
-            }
-            else if ( component.getClass().getAnnotation( MBeanClass.class ) != null )
-            {
-                log.debug( "Register " + componentKey + " to mbean server through an adapter" );
-
-                mbeanServer.registerMBean( new DynamicMBeanAdapter( component, componentKey ), name );
             }
         }
         catch ( Exception e )
