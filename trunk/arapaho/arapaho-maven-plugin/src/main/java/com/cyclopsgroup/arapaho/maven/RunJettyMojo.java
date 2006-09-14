@@ -20,6 +20,7 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -65,12 +66,13 @@ public class RunJettyMojo
                 + " is invalid, check your jettyXml parameter" );
         }
 
-        List<URL> urls = new ArrayList<URL>();
+        List urls = new ArrayList();
         try
         {
-            for ( Object pathString : project.getTestClasspathElements() )
+            for ( Iterator i = project.getTestClasspathElements().iterator(); i.hasNext(); )
             {
-                File pathElement = new File( String.class.cast( pathString ) );
+                String pathString = (String) i.next();
+                File pathElement = new File( pathString );
                 urls.add( pathElement.toURL() );
             }
         }
@@ -79,7 +81,7 @@ public class RunJettyMojo
             throw new MojoExecutionException( "Dependency problem", e );
         }
 
-        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( EMPTY_URL_ARRAY ), getClass()
+        final URLClassLoader classLoader = new URLClassLoader( (URL[]) urls.toArray( EMPTY_URL_ARRAY ), getClass()
             .getClassLoader() );
 
         Thread thread = new Thread()
@@ -87,7 +89,6 @@ public class RunJettyMojo
             /**
              * @see java.lang.Thread#run()
              */
-            @Override
             public void run()
             {
                 try
