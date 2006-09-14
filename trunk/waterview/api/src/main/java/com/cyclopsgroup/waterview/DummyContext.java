@@ -33,8 +33,7 @@ public class DummyContext
     /** static instance */
     public static final DummyContext INSTANCE = new DummyContext();
 
-    @SuppressWarnings("unchecked")
-    private static final Iterator<String> EMPTY_STRING_ITERATOR = new ArrayIterator( ArrayUtils.EMPTY_STRING_ARRAY );
+    private static final Iterator EMPTY_STRING_ITERATOR = new ArrayIterator( ArrayUtils.EMPTY_STRING_ARRAY );
 
     /**
      * Overwrite or implement method get()
@@ -51,7 +50,7 @@ public class DummyContext
      *
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator<String> keys()
+    public Iterator keys()
     {
         return EMPTY_STRING_ITERATOR;
     }

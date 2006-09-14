@@ -22,7 +22,8 @@ package com.cyclopsgroup.waterview;
  *
  * Default implementation of select option
  */
-public final class DefaultSelectOption implements SelectOption
+public final class DefaultSelectOption
+    implements SelectOption
 {
     private String name;
 
@@ -33,9 +34,9 @@ public final class DefaultSelectOption implements SelectOption
      *
      * @param name Name to display
      */
-    public DefaultSelectOption(String name)
+    public DefaultSelectOption( String name )
     {
-        this(name, name);
+        this( name, name );
     }
 
     /**
@@ -44,7 +45,7 @@ public final class DefaultSelectOption implements SelectOption
      * @param name Name
      * @param title Title
      */
-    public DefaultSelectOption(String name, String title)
+    public DefaultSelectOption( String name, String title )
     {
         this.name = name;
         this.title = title;
@@ -75,7 +76,6 @@ public final class DefaultSelectOption implements SelectOption
      *
      * @see java.lang.Object#toString()
      */
-    @Override
     public String toString()
     {
         return getName() + ":" + getTitle();
