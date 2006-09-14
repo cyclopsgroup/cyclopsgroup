@@ -28,7 +28,6 @@ class StringConverterAdapter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    @SuppressWarnings("unchecked")
     public Object convert( Class type, Object value )
     {
         if ( type == String.class && value != null )

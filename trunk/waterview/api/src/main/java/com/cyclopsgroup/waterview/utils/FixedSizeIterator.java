@@ -26,7 +26,7 @@ import org.apache.commons.collections.iterators.AbstractIteratorDecorator;
  *
  * Iterator with a max size
  */
-public class FixedSizeIterator<T>
+public class FixedSizeIterator
     extends AbstractIteratorDecorator
 {
     private int size;
@@ -38,7 +38,6 @@ public class FixedSizeIterator<T>
      *
      * @see org.apache.commons.collections.iterators.AbstractIteratorDecorator#hasNext()
      */
-    @Override
     public boolean hasNext()
     {
         return index < size && super.hasNext();
@@ -49,11 +48,9 @@ public class FixedSizeIterator<T>
      *
      * @see org.apache.commons.collections.iterators.AbstractIteratorDecorator#next()
      */
-    @SuppressWarnings("unchecked")
-    @Override
-    public T next()
+    public Object next()
     {
-        T object = (T) super.next();
+        Object object = super.next();
         index++;
         return object;
     }
@@ -64,7 +61,7 @@ public class FixedSizeIterator<T>
      * @param iterator Wrapped iterator
      * @param size Max size
      */
-    public FixedSizeIterator( Iterator<T> iterator, int size )
+    public FixedSizeIterator( Iterator iterator, int size )
     {
         super( iterator );
         this.size = size;

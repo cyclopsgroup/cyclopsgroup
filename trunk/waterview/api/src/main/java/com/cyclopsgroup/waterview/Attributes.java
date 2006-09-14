@@ -19,10 +19,10 @@ package com.cyclopsgroup.waterview;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Properties;
-import java.util.Set;
 
+import org.apache.commons.collections.iterators.ArrayIterator;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -36,9 +36,9 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 public abstract class Attributes
 {
 
-    private static HashSet<String> booleanFalseValues = new HashSet<String>();
+    private static final HashSet booleanFalseValues = new HashSet();
 
-    private static HashSet<String> booleanTrueValues = new HashSet<String>();
+    private static final HashSet booleanTrueValues = new HashSet();
 
     static
     {
@@ -84,7 +84,7 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    protected abstract Set<String> doGetAttributeNames();
+    protected abstract String[] doGetAttributeNames();
 
     /**
      * Internally get string value
@@ -103,7 +103,7 @@ public abstract class Attributes
      * @return String array value of attribute
      * @throws Exception Throw it out
      */
-    protected abstract List<String> doGetValues( String name )
+    protected abstract String[] doGetValues( String name )
         throws Exception;
 
     /**
@@ -116,14 +116,14 @@ public abstract class Attributes
     public Object get( String name )
         throws Exception
     {
-        List<String> values = doGetValues( name );
-        if ( values == null || values.isEmpty() )
+        String[] values = doGetValues( name );
+        if ( values == null || values.length > 0 )
         {
             return null;
         }
-        if ( values.size() == 1 )
+        if ( values.length == 1 )
         {
-            return values.get( 0 );
+            return values[0];
         }
         return values;
     }
@@ -350,22 +350,17 @@ public abstract class Attributes
     {
         try
         {
-            List<String> values = doGetValues( name );
-            int[] ret = new int[values.size()];
-            int i = 0;
-            for ( String value : values )
+            String[] values = doGetValues( name );
+            int[] ret = new int[values.length];
+            for ( int i = 0; i < values.length; i++ )
             {
                 try
                 {
-                    ret[i] = Integer.parseInt( value );
+                    ret[i] = Integer.parseInt( values[i] );
                 }
                 catch ( Exception ignored )
                 {
                     ret[i] = defaultValue;
-                }
-                finally
-                {
-                    i++;
                 }
             }
             return ret;
@@ -428,22 +423,17 @@ public abstract class Attributes
     {
         try
         {
-            List<String> values = doGetValues( name );
-            long[] ret = new long[values.size()];
-            int i = 0;
-            for ( String value : values )
+            String[] values = doGetValues( name );
+            long[] ret = new long[values.length];
+            for ( int i = 0; i < values.length; i++ )
             {
                 try
                 {
-                    ret[i] = Long.parseLong( value );
+                    ret[i] = Long.parseLong( values[i] );
                 }
                 catch ( Exception e )
                 {
                     ret[i] = defaultValue;
-                }
-                finally
-                {
-                    i++;
                 }
             }
             return ret;
@@ -507,7 +497,7 @@ public abstract class Attributes
     {
         try
         {
-            return doGetValues( name ).toArray( ArrayUtils.EMPTY_STRING_ARRAY );
+            return doGetValues( name );
         }
         catch ( Exception e )
         {
@@ -529,9 +519,9 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    public Set<String> names()
+    public Iterator names()
     {
-        return doGetAttributeNames();
+        return new ArrayIterator( doGetAttributeNames() );
     }
 
     /**
@@ -562,8 +552,9 @@ public abstract class Attributes
     public Properties toProperties()
     {
         Properties p = new Properties();
-        for ( String name : names() )
+        for ( Iterator i = names(); i.hasNext(); )
         {
+            String name = (String) i.next();
             p.setProperty( name, getString( name ) );
         }
         return p;

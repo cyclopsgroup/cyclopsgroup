@@ -39,7 +39,6 @@ class DateConverter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
-    @SuppressWarnings("unchecked")
     public Object convert( Class type, Object object )
     {
         if ( object == null )

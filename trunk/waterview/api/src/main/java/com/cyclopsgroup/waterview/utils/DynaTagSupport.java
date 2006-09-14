@@ -18,6 +18,7 @@
 package com.cyclopsgroup.waterview.utils;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.jelly.DynaTag;
 import org.apache.commons.jelly.JellyTagException;
@@ -32,14 +33,14 @@ public abstract class DynaTagSupport
     extends TagSupportBase
     implements DynaTag
 {
-    private HashMap<String, Object> attributeMap = new HashMap<String, Object>();
+    private final Map attributeMap = new HashMap();
 
     /**
      * Getter method for property attributeMap
      *
      * @return Returns the attributeMap.
      */
-    public HashMap<String, Object> getAttributeMap()
+    public Map getAttributeMap()
     {
         return attributeMap;
     }
@@ -49,7 +50,7 @@ public abstract class DynaTagSupport
      *
      * @see org.apache.commons.jelly.DynaTag#getAttributeType(java.lang.String)
      */
-    public Class<Object> getAttributeType( String name )
+    public Class getAttributeType( String name )
         throws JellyTagException
     {
         return Object.class;

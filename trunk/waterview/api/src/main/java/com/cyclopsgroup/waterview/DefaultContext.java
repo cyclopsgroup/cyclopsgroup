@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ import org.apache.commons.collections.iterators.IteratorChain;
 public class DefaultContext
     implements Context
 {
-    private Map<String, ?> content = new HashMap<String, Object>();
+    private Map content;
 
     private Context parent;
 
@@ -39,7 +38,7 @@ public class DefaultContext
      * 
      * @param content Content of this context
      */
-    public DefaultContext( Map<String, ?> content )
+    public DefaultContext( Map content )
     {
         this( content, null );
     }
@@ -50,7 +49,7 @@ public class DefaultContext
      * @param content Content of this context
      * @param parent Parent context
      */
-    public DefaultContext( Map<String, ?> content, Context parent )
+    public DefaultContext( Map content, Context parent )
     {
         this.content = content;
         this.parent = parent;
@@ -75,7 +74,7 @@ public class DefaultContext
      *
      * @return HashMap content
      */
-    public Map<String, ?> getContent()
+    public Map getContent()
     {
         return content;
     }
@@ -84,8 +83,7 @@ public class DefaultContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    @SuppressWarnings("unchecked")
-    public Iterator<String> keys()
+    public Iterator keys()
     {
         if ( parent == null )
         {
@@ -106,7 +104,7 @@ public class DefaultContext
         }
         else
         {
-            ( (Map<String, Object>) content ).put( name, variable );
+            content.put( name, variable );
         }
     }
 
@@ -124,7 +122,6 @@ public class DefaultContext
      *
      * @see java.lang.Object#toString()
      */
-    @Override
     public String toString()
     {
         StringBuffer sb = new StringBuffer( '{' );

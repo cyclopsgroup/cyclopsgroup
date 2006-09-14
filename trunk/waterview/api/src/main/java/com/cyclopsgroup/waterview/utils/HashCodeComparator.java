@@ -24,7 +24,7 @@ import java.util.Comparator;
  * Comparator based on hashcode
  */
 public class HashCodeComparator
-    implements Comparator<Object>
+    implements Comparator
 {
     /** Static instance */
     public static final HashCodeComparator INSTANCE = new HashCodeComparator();

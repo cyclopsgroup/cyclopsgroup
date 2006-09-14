@@ -18,8 +18,6 @@ package com.cyclopsgroup.waterview.utils;
 
 import java.net.URL;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public abstract class TagSupportBase
 {
     private static final String DIGEST_ALGORITHM = "SHA";
 
-    private static final List<URL> EMPTY_URL_LIST = Collections.unmodifiableList( new ArrayList<URL>() );
+    private static final URL[] EMPTY_URL_ARRAY = new URL[0];
 
     private static final String SCRIPT_RESOURCE_NAME = TagSupportBase.class.getName() + "/scriptresource";
 
@@ -57,10 +55,10 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
-                scriptResources = new LinkedList<URL>();
+                scriptResources = new LinkedList();
                 context.setVariable( SCRIPT_RESOURCE_NAME, scriptResources );
             }
             scriptResources.add( resource );
@@ -77,12 +75,12 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
                 return;
             }
-            URL last = scriptResources.getLast();
+            URL last = (URL) scriptResources.getLast();
             if ( last.sameFile( resource ) )
             {
                 scriptResources.removeLast();
@@ -121,9 +119,11 @@ public abstract class TagSupportBase
             {
                 ex = new JellyTagException( e );
             }
+            URL[] scriptResources = getScriptResources();
             StringBuffer sb = new StringBuffer();
-            for ( URL url : getScriptResources() )
+            for ( int i = 0; i < scriptResources.length; i++ )
             {
+                URL url = scriptResources[i];
                 sb.append( ">" ).append( url.toString() );
             }
             ex.setFileName( sb.toString() );
@@ -136,11 +136,14 @@ public abstract class TagSupportBase
      *
      * @return URL of script resource
      */
-    @SuppressWarnings("unchecked")
-    protected List<URL> getScriptResources()
+    protected URL[] getScriptResources()
     {
-        List<URL> scriptResources = (List<URL>) getContext().getVariable( SCRIPT_RESOURCE_NAME );
-        return scriptResources == null ? EMPTY_URL_LIST : scriptResources;
+        List scriptResources = (List) getContext().getVariable( SCRIPT_RESOURCE_NAME );
+        if ( scriptResources == null )
+        {
+            return EMPTY_URL_ARRAY;
+        }
+        return (URL[]) scriptResources.toArray( EMPTY_URL_ARRAY );
     }
 
     /**
@@ -179,8 +182,10 @@ public abstract class TagSupportBase
             throw new IllegalArgumentException( "tagId attribute is required for " + this + " to get unique ID" );
         }
         StringBuffer s = new StringBuffer( getTagId() ).append( '@' );
-        for ( URL resource : getScriptResources() )
+        URL[] scriptResources = getScriptResources();
+        for ( int i = 0; i < scriptResources.length; i++ )
         {
+            URL resource = scriptResources[i];
             s.append( "->" ).append( resource );
         }
         MessageDigest digest = MessageDigest.getInstance( DIGEST_ALGORITHM );
@@ -219,7 +224,7 @@ public abstract class TagSupportBase
      * @return Parent tag
      * @throws JellyTagException Throw it if requirement is not met
      */
-    protected final Tag requireInside( Class<? extends Tag> parentTagClass )
+    protected final Tag requireInside( Class parentTagClass )
         throws JellyTagException
     {
         Tag parent = findAncestorWithClass( parentTagClass );
@@ -237,7 +242,7 @@ public abstract class TagSupportBase
      * @throws JellyTagException Throw it out if not matched
      * @return Parent tag
      */
-    protected final Tag requireParent( Class<? extends Tag> parentTagClass )
+    protected final Tag requireParent( Class parentTagClass )
         throws JellyTagException
     {
         if ( !parentTagClass.isAssignableFrom( getParent().getClass() ) )

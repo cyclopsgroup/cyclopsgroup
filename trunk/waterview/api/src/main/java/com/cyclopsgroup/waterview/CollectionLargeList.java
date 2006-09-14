@@ -18,7 +18,6 @@ package com.cyclopsgroup.waterview;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -32,17 +31,17 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
  *
  * Collection implemented large list
  */
-public class CollectionLargeList<T>
-    implements LargeList<T>
+public class CollectionLargeList
+    implements LargeList
 {
-    private Collection<T> collection;
+    private Collection collection;
 
     /**
      * Constructor for type CollectionTableData
      *
      * @param collection Collecton of data
      */
-    public CollectionLargeList( Collection<T> collection )
+    public CollectionLargeList( Collection collection )
     {
         this.collection = collection;
     }
@@ -62,29 +61,30 @@ public class CollectionLargeList<T>
      *
      * @see com.cyclopsgroup.waterview.IteratorLargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
+    public Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
         throws Exception
     {
-        Collection<T> sortedResult = collection;
-        if ( sortings != null && !sortings.isEmpty() )
+        Collection sortedResult = collection;
+        if ( sortings != null && sortings.length > 0 )
         {
             ComparatorChain chain = new ComparatorChain();
-            for ( Sorting sorting : sortings )
+            for ( int i = 0; i < sortings.length; i++ )
             {
+                Sorting sorting = sortings[i];
                 if ( sorting.isDescending() )
                 {
-                    chain.addComparator( new BeanPropertyComparator<T>( sorting.getName() ), true );
+                    chain.addComparator( new BeanPropertyComparator( sorting.getName() ), true );
                 }
                 else
                 {
-                    chain.addComparator( new BeanPropertyComparator<T>( sorting.getName() ) );
+                    chain.addComparator( new BeanPropertyComparator( sorting.getName() ) );
                 }
             }
             chain.addComparator( HashCodeComparator.INSTANCE );
-            sortedResult = new TreeSet<T>( (Collection<T>) chain );
+            sortedResult = new TreeSet( chain );
             sortedResult.addAll( collection );
         }
-        Iterator<T> it = sortedResult.iterator();
+        Iterator it = sortedResult.iterator();
         if ( startPosition > 0 )
         {
             for ( int i = 0; i < startPosition; i++ )
@@ -96,6 +96,6 @@ public class CollectionLargeList<T>
         {
             return it;
         }
-        return new FixedSizeIterator<T>( it, maxAmount );
+        return new FixedSizeIterator( it, maxAmount );
     }
 }
