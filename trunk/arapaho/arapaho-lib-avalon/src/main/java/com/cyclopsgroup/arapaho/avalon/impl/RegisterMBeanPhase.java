@@ -26,6 +26,7 @@ public class RegisterMBeanPhase
     /**
      * @see org.codehaus.plexus.lifecycle.phase.AbstractPhase#execute(java.lang.Object, org.codehaus.plexus.component.manager.ComponentManager)
      */
+    @Override
     public void execute( Object component, ComponentManager manager )
         throws PhaseExecutionException
     {
