@@ -17,6 +17,7 @@
 package com.cyclopsgroup.waterview.utils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -42,9 +43,9 @@ public final class TypeUtils
 {
     private static final ConvertUtilsBean convertUtils = new ConvertUtilsBean();
 
-    private static final Map nonePrimitiveTypeMap = new Hashtable();
+    private static final Map<Type, Class<? extends Object>> nonePrimitiveTypeMap = new Hashtable<Type, Class<? extends Object>>();
 
-    private static final Map typeMap = new Hashtable();
+    private static final Map<String, Type> typeMap = new Hashtable<String, Type>();
 
     static
     {
@@ -78,9 +79,10 @@ public final class TypeUtils
      * @param type Given destination type
      * @return Converted object
      */
-    public static Object convert( String expression, Class type )
+    @SuppressWarnings("unchecked")
+    public static <T> T convert( String expression, Class<T> type )
     {
-        return getConvertUtils().convert( expression, type );
+        return (T) getConvertUtils().convert( expression, type );
     }
 
     /**
@@ -90,9 +92,10 @@ public final class TypeUtils
      * @param type Type name
      * @return Converted object
      */
+    @SuppressWarnings("unchecked")
     public static Object convert( String expression, String type )
     {
-        return convert( expression, getType( type ) );
+        return convert( expression, getNonePrimitiveType( getType( type ) ) );
     }
 
     /**
@@ -102,20 +105,20 @@ public final class TypeUtils
      * @param size Size of group
      * @return List of groups
      */
-    public static List createGroup( Object anyCollection, int size )
+    public static List<List<Object>> createGroup( Object anyCollection, int size )
     {
         if ( size < 1 )
         {
             throw new IllegalArgumentException( "Size can not be smaller than 1" );
         }
-        List ret = new ArrayList();
-        List group = null;
-        for ( Iterator i = iterate( anyCollection ); i.hasNext(); )
+        List<List<Object>> ret = new ArrayList<List<Object>>();
+        List<Object> group = null;
+        for ( Iterator<Object> i = iterate( anyCollection ); i.hasNext(); )
         {
             Object item = i.next();
             if ( group == null )
             {
-                group = new ArrayList( size );
+                group = new ArrayList<Object>( size );
             }
             group.add( item );
             if ( group.size() == size )
@@ -138,29 +141,27 @@ public final class TypeUtils
      * @param size Size of group
      * @return List of groups
      */
-    public static List createVerticalGroup( Object items, int size )
+    public static List<List<Object>> createVerticalGroup( Object items, int size )
     {
-        Iterator ite = iterate( items );
-        List list = new ArrayList();
+        Iterator<Object> ite = iterate( items );
+        List<Object> list = new ArrayList<Object>();
         CollectionUtils.addAll( list, ite );
         int length = list.size() / size;
         if ( list.size() % size > 0 )
         {
             length++;
         }
-        List[] bags = new List[length];
+        List<List<Object>> ret = new ArrayList<List<Object>>( length );
         for ( int i = 0; i < length; i++ )
         {
-            bags[i] = new ArrayList();
+            ret.add( new ArrayList<Object>() );
         }
         for ( int i = 0; i < list.size(); i++ )
         {
             Object item = list.get( i );
-            List bag = bags[i % length];
+            List<Object> bag = ret.get( i % length );
             bag.add( i / length, item );
         }
-        List ret = new ArrayList();
-        CollectionUtils.addAll( ret, bags );
         return ret;
     }
 
@@ -188,6 +189,7 @@ public final class TypeUtils
          *
          * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(java.lang.Object, java.lang.String, java.lang.Object)
          */
+        @Override
         public void setProperty( Object object, String name, Object value )
             throws IllegalAccessException, InvocationTargetException
         {
@@ -206,6 +208,7 @@ public final class TypeUtils
          *
          * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperty(java.lang.Object, java.lang.String, java.lang.Object)
          */
+        @Override
         public void copyProperty( Object object, String name, Object value )
             throws IllegalAccessException, InvocationTargetException
         {
@@ -235,14 +238,14 @@ public final class TypeUtils
      * @param type Type
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType( Class type )
+    public static Class<? extends Object> getNonePrimitiveType( Type type )
     {
-        Class ret = (Class) nonePrimitiveTypeMap.get( type );
-        if ( ret == null )
+        Class<? extends Object> ret = nonePrimitiveTypeMap.get( type );
+        if ( ret == null && type instanceof Class )
         {
-            ret = type;
+            return (Class<? extends Object>) type;
         }
-        return ret;
+        throw new IllegalArgumentException( "Unknown type " + type );
     }
 
     /**
@@ -251,9 +254,9 @@ public final class TypeUtils
      * @param typeName Type name
      * @return None primitive type
      */
-    public static Class getNonePrimitiveType( String typeName )
+    public static Class<? extends Object> getNonePrimitiveType( String typeName )
     {
-        Class type = getType( typeName );
+        Type type = getType( typeName );
         return getNonePrimitiveType( type );
     }
 
@@ -263,9 +266,9 @@ public final class TypeUtils
      * @param typeName Name of type
      * @return Type class
      */
-    public static Class getType( String typeName )
+    public static Type getType( String typeName )
     {
-        Class type = (Class) typeMap.get( typeName );
+        Type type = typeMap.get( typeName );
         if ( type == null )
         {
             try
@@ -302,15 +305,16 @@ public final class TypeUtils
      * @param items Could be any object
      * @return Iteartor object of it
      */
-    public static Iterator iterate( Object items )
+    @SuppressWarnings("unchecked")
+    public static Iterator<Object> iterate( Object items )
     {
         if ( items instanceof Collection )
         {
-            return ( (Collection) items ).iterator();
+            return ( (Collection<Object>) items ).iterator();
         }
         else if ( items instanceof Iterator )
         {
-            return (Iterator) items;
+            return (Iterator<Object>) items;
         }
         else if ( items instanceof Enumeration )
         {
@@ -322,7 +326,7 @@ public final class TypeUtils
         }
         else
         {
-            List ret = new ArrayList( 1 );
+            List<Object> ret = new ArrayList<Object>( 1 );
             ret.add( items );
             return ret.iterator();
         }
@@ -334,7 +338,7 @@ public final class TypeUtils
      * @param name Type name
      * @param type Type class
      */
-    public static void registerType( String name, Class type )
+    public static void registerType( String name, Type type )
     {
         typeMap.put( name, type );
     }

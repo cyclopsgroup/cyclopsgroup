@@ -33,14 +33,14 @@ public abstract class DynaTagSupport
     extends TagSupportBase
     implements DynaTag
 {
-    private final Map attributeMap = new HashMap();
+    private final Map<String, Object> attributeMap = new HashMap<String, Object>();
 
     /**
      * Getter method for property attributeMap
      *
      * @return Returns the attributeMap.
      */
-    public Map getAttributeMap()
+    public Map<String, Object> getAttributeMap()
     {
         return attributeMap;
     }
@@ -50,7 +50,7 @@ public abstract class DynaTagSupport
      *
      * @see org.apache.commons.jelly.DynaTag#getAttributeType(java.lang.String)
      */
-    public Class getAttributeType( String name )
+    public Class<Object> getAttributeType( String name )
         throws JellyTagException
     {
         return Object.class;

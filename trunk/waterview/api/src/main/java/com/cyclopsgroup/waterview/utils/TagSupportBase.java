@@ -55,10 +55,10 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
-                scriptResources = new LinkedList();
+                scriptResources = new LinkedList<URL>();
                 context.setVariable( SCRIPT_RESOURCE_NAME, scriptResources );
             }
             scriptResources.add( resource );
@@ -75,12 +75,12 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList scriptResources = (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
                 return;
             }
-            URL last = (URL) scriptResources.getLast();
+            URL last = scriptResources.getLast();
             if ( last.sameFile( resource ) )
             {
                 scriptResources.removeLast();
@@ -138,12 +138,12 @@ public abstract class TagSupportBase
      */
     protected URL[] getScriptResources()
     {
-        List scriptResources = (List) getContext().getVariable( SCRIPT_RESOURCE_NAME );
+        List<URL> scriptResources = (List<URL>) getContext().getVariable( SCRIPT_RESOURCE_NAME );
         if ( scriptResources == null )
         {
             return EMPTY_URL_ARRAY;
         }
-        return (URL[]) scriptResources.toArray( EMPTY_URL_ARRAY );
+        return scriptResources.toArray( EMPTY_URL_ARRAY );
     }
 
     /**
@@ -224,7 +224,7 @@ public abstract class TagSupportBase
      * @return Parent tag
      * @throws JellyTagException Throw it if requirement is not met
      */
-    protected final Tag requireInside( Class parentTagClass )
+    protected final Tag requireInside( Class<? extends Tag> parentTagClass )
         throws JellyTagException
     {
         Tag parent = findAncestorWithClass( parentTagClass );
@@ -242,7 +242,7 @@ public abstract class TagSupportBase
      * @throws JellyTagException Throw it out if not matched
      * @return Parent tag
      */
-    protected final Tag requireParent( Class parentTagClass )
+    protected final Tag requireParent( Class<? extends Tag> parentTagClass )
         throws JellyTagException
     {
         if ( !parentTagClass.isAssignableFrom( getParent().getClass() ) )

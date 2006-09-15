@@ -20,9 +20,10 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
-import org.apache.commons.collections.iterators.ArrayIterator;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -36,9 +37,9 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
 public abstract class Attributes
 {
 
-    private static final HashSet booleanFalseValues = new HashSet();
+    private static final Set<String> booleanFalseValues = new HashSet<String>();
 
-    private static final HashSet booleanTrueValues = new HashSet();
+    private static final Set<String> booleanTrueValues = new HashSet<String>();
 
     static
     {
@@ -84,7 +85,7 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    protected abstract String[] doGetAttributeNames();
+    protected abstract Set<String> doGetAttributeNames();
 
     /**
      * Internally get string value
@@ -103,7 +104,7 @@ public abstract class Attributes
      * @return String array value of attribute
      * @throws Exception Throw it out
      */
-    protected abstract String[] doGetValues( String name )
+    protected abstract List<String> doGetValues( String name )
         throws Exception;
 
     /**
@@ -116,14 +117,14 @@ public abstract class Attributes
     public Object get( String name )
         throws Exception
     {
-        String[] values = doGetValues( name );
-        if ( values == null || values.length > 0 )
+        List<String> values = doGetValues( name );
+        if ( values == null || values.isEmpty() )
         {
             return null;
         }
-        if ( values.length == 1 )
+        if ( values.size() == 1 )
         {
-            return values[0];
+            return values.get( 0 );
         }
         return values;
     }
@@ -350,13 +351,13 @@ public abstract class Attributes
     {
         try
         {
-            String[] values = doGetValues( name );
-            int[] ret = new int[values.length];
-            for ( int i = 0; i < values.length; i++ )
+            List<String> values = doGetValues( name );
+            int[] ret = new int[values.size()];
+            for ( int i = 0; i < values.size(); i++ )
             {
                 try
                 {
-                    ret[i] = Integer.parseInt( values[i] );
+                    ret[i] = Integer.parseInt( values.get( i ) );
                 }
                 catch ( Exception ignored )
                 {
@@ -423,13 +424,13 @@ public abstract class Attributes
     {
         try
         {
-            String[] values = doGetValues( name );
-            long[] ret = new long[values.length];
-            for ( int i = 0; i < values.length; i++ )
+            List<String> values = doGetValues( name );
+            long[] ret = new long[values.size()];
+            for ( int i = 0; i < values.size(); i++ )
             {
                 try
                 {
-                    ret[i] = Long.parseLong( values[i] );
+                    ret[i] = Long.parseLong( values.get( i ) );
                 }
                 catch ( Exception e )
                 {
@@ -497,7 +498,7 @@ public abstract class Attributes
     {
         try
         {
-            return doGetValues( name );
+            return doGetValues( name ).toArray( ArrayUtils.EMPTY_STRING_ARRAY );
         }
         catch ( Exception e )
         {
@@ -519,9 +520,9 @@ public abstract class Attributes
     /**
      * @return Array of attribute names
      */
-    public Iterator names()
+    public Iterator<String> names()
     {
-        return new ArrayIterator( doGetAttributeNames() );
+        return doGetAttributeNames().iterator();
     }
 
     /**
@@ -552,9 +553,8 @@ public abstract class Attributes
     public Properties toProperties()
     {
         Properties p = new Properties();
-        for ( Iterator i = names(); i.hasNext(); )
+        for ( String name : doGetAttributeNames() )
         {
-            String name = (String) i.next();
             p.setProperty( name, getString( name ) );
         }
         return p;

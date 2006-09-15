@@ -16,6 +16,8 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.util.List;
+
 import org.apache.commons.fileupload.FileItem;
 
 /**
@@ -26,11 +28,6 @@ import org.apache.commons.fileupload.FileItem;
 public abstract class Parameters
     extends Attributes
 {
-    /**
-     * Comment for <code>EMPTY_FILEITEM_ARRAY</code>
-     */
-    public static final FileItem[] EMPTY_FILEITEM_ARRAY = new FileItem[0];
-
     /** Name of it in context */
     public static final String NAME = "params";
 
@@ -48,5 +45,5 @@ public abstract class Parameters
      * @param name Name of variable
      * @return File item array FileItem array
      */
-    public abstract FileItem[] getFileItems( String name );
+    public abstract List<FileItem> getFileItems( String name );
 }

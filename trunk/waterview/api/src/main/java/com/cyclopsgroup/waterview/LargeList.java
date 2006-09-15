@@ -18,20 +18,18 @@
 package com.cyclopsgroup.waterview;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * Large list that can be accessed partially
  */
-public interface LargeList
+public interface LargeList<T>
 {
     /** Sorting option */
     public interface Sorting
     {
-        /** Empty array */
-        Sorting[] EMPTY_ARRAY = new Sorting[0];
-
         /**
          * Get sorting name
          *
@@ -71,6 +69,6 @@ public interface LargeList
      * @return Iterator of result
      * @throws Exception Throw it out
      */
-    Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception;
 }

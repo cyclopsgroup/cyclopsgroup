@@ -76,7 +76,7 @@ public interface ActionContext
      *
      * @param url Target url
      */
-    void setTargetUrl( String url );
+    void setRedirection( RedirectionTarget url );
 
     /**
      * @param message Message to add

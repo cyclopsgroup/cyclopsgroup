@@ -77,11 +77,6 @@ public interface RunData
     Locale getLocale();
 
     /**
-     * @return Array of messages
-     */
-    List<String> getMessages();
-
-    /**
      * Get mime type of given path
      *
      * @param fileName Name of file

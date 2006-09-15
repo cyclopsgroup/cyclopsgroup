@@ -16,10 +16,9 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.util.Collections;
 import java.util.Iterator;
-
-import org.apache.commons.collections.iterators.ArrayIterator;
-import org.apache.commons.lang.ArrayUtils;
+import java.util.List;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,7 +32,7 @@ public class DummyContext
     /** static instance */
     public static final DummyContext INSTANCE = new DummyContext();
 
-    private static final Iterator EMPTY_STRING_ITERATOR = new ArrayIterator( ArrayUtils.EMPTY_STRING_ARRAY );
+    private static final List<String> EMPTY_STRING_LIST = Collections.emptyList();
 
     /**
      * Overwrite or implement method get()
@@ -50,9 +49,9 @@ public class DummyContext
      *
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    public Iterator<String> keys()
     {
-        return EMPTY_STRING_ITERATOR;
+        return EMPTY_STRING_LIST.iterator();
     }
 
     /**

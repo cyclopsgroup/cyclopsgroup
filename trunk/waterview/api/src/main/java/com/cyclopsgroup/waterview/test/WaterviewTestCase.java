@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.codehaus.plexus.PlexusTestCase;
-
-import com.cyclopsgroup.waterview.utils.ServiceManagerAdapter;
+import org.codehaus.plexus.component.repository.exception.ComponentLifecycleException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 
 public class WaterviewTestCase
     extends PlexusTestCase
@@ -21,7 +23,38 @@ public class WaterviewTestCase
     protected MockRunData createRunData()
     {
         MockRunData data = new MockRunData();
-        data.setServiceManager( new ServiceManagerAdapter( getContainer() ) );
+        data.setServiceManager( new ServiceManager()
+        {
+
+            public boolean hasService( String key )
+            {
+                return getContainer().hasComponent( key );
+            }
+
+            public Object lookup( String key )
+                throws ServiceException
+            {
+                try
+                {
+                    return getContainer().lookup( key );
+                }
+                catch ( ComponentLookupException e )
+                {
+                    throw new ServiceException( key, "lookup component error", e );
+                }
+            }
+
+            public void release( Object component )
+            {
+                try
+                {
+                    getContainer().release( component );
+                }
+                catch ( ComponentLifecycleException e )
+                {
+                }
+            }
+        } );
         return data;
     }
 

@@ -11,7 +11,6 @@ import java.util.Date;
 
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.StringConverter;
-import org.apache.commons.lang.enums.Enum;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -28,6 +27,7 @@ class StringConverterAdapter
      *
      * @see org.apache.commons.beanutils.Converter#convert(java.lang.Class, java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     public Object convert( Class type, Object value )
     {
         if ( type == String.class && value != null )
@@ -38,7 +38,7 @@ class StringConverterAdapter
             }
             if ( value instanceof Enum )
             {
-                return ( (Enum) value ).getName();
+                return ( (Enum) value ).name();
             }
         }
         return converter.convert( type, value );

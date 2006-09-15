@@ -18,6 +18,7 @@ package com.cyclopsgroup.waterview;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -31,17 +32,17 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
  *
  * Collection implemented large list
  */
-public class CollectionLargeList
-    implements LargeList
+public class CollectionLargeList<T>
+    implements LargeList<T>
 {
-    private Collection collection;
+    private Collection<T> collection;
 
     /**
      * Constructor for type CollectionTableData
      *
      * @param collection Collecton of data
      */
-    public CollectionLargeList( Collection collection )
+    public CollectionLargeList( Collection<T> collection )
     {
         this.collection = collection;
     }
@@ -61,16 +62,16 @@ public class CollectionLargeList
      *
      * @see com.cyclopsgroup.waterview.IteratorLargeList#iterate(int, int, com.cyclopsgroup.waterview.LargeList.Sorting[])
      */
-    public Iterator iterate( int startPosition, int maxAmount, Sorting[] sortings )
+    @SuppressWarnings("unchecked")
+    public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception
     {
-        Collection sortedResult = collection;
-        if ( sortings != null && sortings.length > 0 )
+        Collection<T> sortedResult = collection;
+        if ( sortings != null && !sortings.isEmpty() )
         {
             ComparatorChain chain = new ComparatorChain();
-            for ( int i = 0; i < sortings.length; i++ )
+            for ( Sorting sorting : sortings )
             {
-                Sorting sorting = sortings[i];
                 if ( sorting.isDescending() )
                 {
                     chain.addComparator( new BeanPropertyComparator( sorting.getName() ), true );
@@ -80,11 +81,11 @@ public class CollectionLargeList
                     chain.addComparator( new BeanPropertyComparator( sorting.getName() ) );
                 }
             }
-            chain.addComparator( HashCodeComparator.INSTANCE );
-            sortedResult = new TreeSet( chain );
+            chain.addComparator( new HashCodeComparator<T>() );
+            sortedResult = new TreeSet<T>( chain );
             sortedResult.addAll( collection );
         }
-        Iterator it = sortedResult.iterator();
+        Iterator<T> it = sortedResult.iterator();
         if ( startPosition > 0 )
         {
             for ( int i = 0; i < startPosition; i++ )

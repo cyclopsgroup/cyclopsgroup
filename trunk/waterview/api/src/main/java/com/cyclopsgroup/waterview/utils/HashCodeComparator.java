@@ -23,18 +23,15 @@ import java.util.Comparator;
  * 
  * Comparator based on hashcode
  */
-public class HashCodeComparator
-    implements Comparator
+public class HashCodeComparator<T>
+    implements Comparator<T>
 {
-    /** Static instance */
-    public static final HashCodeComparator INSTANCE = new HashCodeComparator();
-
     /**
      * Overwrite or implement method compare()
      *
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
      */
-    public int compare( Object o1, Object o2 )
+    public int compare( T o1, T o2 )
     {
         return o1.hashCode() - o2.hashCode();
     }

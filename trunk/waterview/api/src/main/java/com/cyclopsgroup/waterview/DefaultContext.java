@@ -29,7 +29,7 @@ import org.apache.commons.collections.iterators.IteratorChain;
 public class DefaultContext
     implements Context
 {
-    private Map content;
+    private Map<String, Object> content;
 
     private Context parent;
 
@@ -38,6 +38,7 @@ public class DefaultContext
      * 
      * @param content Content of this context
      */
+    @SuppressWarnings("unchecked")
     public DefaultContext( Map content )
     {
         this( content, null );
@@ -49,6 +50,7 @@ public class DefaultContext
      * @param content Content of this context
      * @param parent Parent context
      */
+    @SuppressWarnings("unchecked")
     public DefaultContext( Map content, Context parent )
     {
         this.content = content;
@@ -74,7 +76,7 @@ public class DefaultContext
      *
      * @return HashMap content
      */
-    public Map getContent()
+    public Map<String, Object> getContent()
     {
         return content;
     }
@@ -83,7 +85,8 @@ public class DefaultContext
      * Overwrite or implement method keys()
      * @see com.cyclopsgroup.waterview.Context#keys()
      */
-    public Iterator keys()
+    @SuppressWarnings("unchecked")
+    public Iterator<String> keys()
     {
         if ( parent == null )
         {
@@ -122,6 +125,7 @@ public class DefaultContext
      *
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString()
     {
         StringBuffer sb = new StringBuffer( '{' );

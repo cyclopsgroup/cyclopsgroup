@@ -41,7 +41,7 @@ public interface Context
      *
      * @return Iterator of variable names
      */
-    Iterator keys();
+    Iterator<String> keys();
 
     /**
      * Put vriable into context
