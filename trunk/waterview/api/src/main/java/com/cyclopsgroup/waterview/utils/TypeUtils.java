@@ -241,7 +241,11 @@ public final class TypeUtils
     public static Class<? extends Object> getNonePrimitiveType( Type type )
     {
         Class<? extends Object> ret = nonePrimitiveTypeMap.get( type );
-        if ( ret == null && type instanceof Class )
+        if ( ret != null )
+        {
+            return ret;
+        }
+        if ( type instanceof Class )
         {
             return (Class<? extends Object>) type;
         }

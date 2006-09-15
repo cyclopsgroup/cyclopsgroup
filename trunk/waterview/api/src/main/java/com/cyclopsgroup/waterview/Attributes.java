@@ -194,7 +194,7 @@ public abstract class Attributes
     {
         try
         {
-            Date date = (Date) TypeUtils.convert( doGetValue( name ), Date.class );
+            Date date = TypeUtils.convert( doGetValue( name ), Date.class );
             if ( date == null )
             {
                 date = defaultValue;

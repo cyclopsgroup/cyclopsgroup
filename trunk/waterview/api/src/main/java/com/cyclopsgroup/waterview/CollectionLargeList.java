@@ -35,14 +35,14 @@ import com.cyclopsgroup.waterview.utils.HashCodeComparator;
 public class CollectionLargeList<T>
     implements LargeList<T>
 {
-    private Collection<T> collection;
+    private Collection<? extends T> collection;
 
     /**
      * Constructor for type CollectionTableData
      *
      * @param collection Collecton of data
      */
-    public CollectionLargeList( Collection<T> collection )
+    public CollectionLargeList( Collection<? extends T> collection )
     {
         this.collection = collection;
     }
@@ -66,7 +66,7 @@ public class CollectionLargeList<T>
     public Iterator<T> iterate( int startPosition, int maxAmount, List<Sorting> sortings )
         throws Exception
     {
-        Collection<T> sortedResult = collection;
+        Collection<T> sortedResult = (Collection<T>) collection;
         if ( sortings != null && !sortings.isEmpty() )
         {
             ComparatorChain chain = new ComparatorChain();

@@ -18,4 +18,10 @@ public class TypeUtilsTest
     {
         assertNotNull( TypeUtils.getConvertUtils() );
     }
+
+    public void testConvert()
+    {
+        assertEquals( 3, (int) TypeUtils.convert( "3", Integer.TYPE ) );
+        assertEquals( 1.0, Double.class.cast( TypeUtils.convert( "1.0", "double" ) ) );
+    }
 }

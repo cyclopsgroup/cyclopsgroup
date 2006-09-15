@@ -55,7 +55,7 @@ public abstract class TagSupportBase
     {
         synchronized ( context )
         {
-            LinkedList<URL> scriptResources = (LinkedList<URL>) context.getVariable( SCRIPT_RESOURCE_NAME );
+            LinkedList<URL> scriptResources = (LinkedList<URL>) (LinkedList) context.getVariable( SCRIPT_RESOURCE_NAME );
             if ( scriptResources == null )
             {
                 scriptResources = new LinkedList<URL>();

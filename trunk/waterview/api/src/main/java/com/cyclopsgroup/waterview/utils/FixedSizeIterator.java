@@ -64,7 +64,7 @@ public class FixedSizeIterator<T>
      * @param iterator Wrapped iterator
      * @param size Max size
      */
-    public FixedSizeIterator( Iterator<T> iterator, int size )
+    public FixedSizeIterator( Iterator<? extends T> iterator, int size )
     {
         super( iterator );
         this.size = size;
