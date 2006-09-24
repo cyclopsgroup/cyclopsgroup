@@ -56,7 +56,6 @@ public class RunMojo
      *
      * @see org.apache.maven.plugin.Mojo#execute()
      */
-    @SuppressWarnings("unchecked")
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
