@@ -50,13 +50,13 @@
     </dependencies>
     <scm>
         <connection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-plexus
+            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-avalon
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-plexus
+            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-avalon
         </developerConnection>
         <url>
-            http://fisheye3.cenqua.com/browse/cyclops-group/trunk/arapaho/arapaho-plexus
+            http://fisheye3.cenqua.com/browse/cyclops-group/trunk/arapaho/arapaho-lib-avalon
         </url>
     </scm>
 </project>
