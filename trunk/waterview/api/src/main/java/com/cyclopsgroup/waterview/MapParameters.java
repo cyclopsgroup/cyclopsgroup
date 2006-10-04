@@ -30,7 +30,7 @@ import org.apache.commons.fileupload.FileItem;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
-class MapParameters
+public class MapParameters
     extends Parameters
 {
     private final Map<String, String> content = new HashMap<String, String>();

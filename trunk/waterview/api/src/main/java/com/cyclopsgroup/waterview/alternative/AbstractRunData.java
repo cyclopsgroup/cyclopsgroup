@@ -14,17 +14,19 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.alternative;
 
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.commons.collections.MultiHashMap;
+
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.Parameters;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
+import com.cyclopsgroup.waterview.spi.WaterviewSpi;
 
 /**
  * Abstract base runtime class
@@ -32,7 +34,7 @@ import org.apache.commons.collections.MultiHashMap;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo </a>
  */
 public abstract class AbstractRunData
-    implements RunData
+    implements RunDataSpi
 {
     private String applicationBaseUrl;
 
@@ -40,19 +42,9 @@ public abstract class AbstractRunData
 
     private Locale locale = Locale.getDefault();
 
-    private PrintWriter output;
-
-    private OutputStream outputStream;
-
-    private Path page;
-
     private String pageBaseUrl;
 
-    private MultiHashMap paths = new MultiHashMap();
-
     private String queryString;
-
-    private String redirectUrl;
 
     private String refererUrl;
 
@@ -62,15 +54,22 @@ public abstract class AbstractRunData
 
     private String requestPath;
 
+    private final List<Request> requests = new ArrayList<Request>();
+
     private ServiceManager serviceManager;
 
     private Context sessionContext;
 
     private String sessionId;
 
-    private boolean stopped;
-
     private TimeZone timeZone = TimeZone.getDefault();
+
+    private final WaterviewSpi waterview;
+
+    protected AbstractRunData( WaterviewSpi waterview )
+    {
+        this.waterview = waterview;
+    }
 
     /**
      * Override or implement method of parent class or interface
@@ -103,48 +102,6 @@ public abstract class AbstractRunData
     }
 
     /**
-     * Override method getMessages in class AbstractRuntimeData
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getMessages()
-     */
-    @SuppressWarnings("unchecked")
-    public List<String> getMessages()
-    {
-        List<String> messages = (List<String>) getSessionContext().get( MESSAGES_NAME );
-        return messages;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getOutput()
-     */
-    public PrintWriter getOutput()
-    {
-        return output;
-    }
-
-    /**
-     * Overwrite or implement method getOutputStream()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getOutputStream()
-     */
-    public OutputStream getOutputStream()
-    {
-        return outputStream;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getPage()
-     */
-    public Path getPage()
-    {
-        return page;
-    }
-
-    /**
      * Override or implement method of parent class or interface
      *
      * @see com.cyclopsgroup.waterview.RunData#getPageBaseUrl()
@@ -165,25 +122,6 @@ public abstract class AbstractRunData
     }
 
     /**
-     * @see com.cyclopsgroup.waterview.RunData#getPath(java.lang.String)
-     */
-    public Path getPath( String pathInstruction )
-    {
-        List<Path> ps = getPaths( pathInstruction );
-        return ps.isEmpty() ? null : ps.get( 0 );
-    }
-
-    /**
-     * @see com.cyclopsgroup.waterview.RunData#getPaths(java.lang.String)
-     */
-    @SuppressWarnings("unchecked")
-    public List<Path> getPaths( String pathInstruction )
-    {
-        List<Path> ps = (List<Path>) paths.get( pathInstruction );
-        return ps == null ? Collections.EMPTY_LIST : ps;
-    }
-
-    /**
      * Getter method for property queryString
      *
      * @return Returns the queryString.
@@ -191,16 +129,6 @@ public abstract class AbstractRunData
     public String getQueryString()
     {
         return queryString;
-    }
-
-    /**
-     * Overwrite or implement method getRedirectUrl()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#getRedirectUrl()
-     */
-    public String getRedirectUrl()
-    {
-        return redirectUrl;
     }
 
     /**
@@ -230,6 +158,11 @@ public abstract class AbstractRunData
     public String getRequestPath()
     {
         return requestPath;
+    }
+
+    public List<Request> getRequests()
+    {
+        return requests;
     }
 
     /**
@@ -271,14 +204,9 @@ public abstract class AbstractRunData
         return timeZone;
     }
 
-    /**
-     * Overwrite or implement method isStopped()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#isStopped()
-     */
-    public boolean isStopped()
+    public WaterviewSpi getWaterview()
     {
-        return stopped;
+        return waterview;
     }
 
     /**
@@ -289,10 +217,6 @@ public abstract class AbstractRunData
     public void setApplicationBaseUrl( String applicationBaseUrl )
     {
         this.applicationBaseUrl = applicationBaseUrl;
-        if ( getRequestContext() != null )
-        {
-            getRequestContext().put( "applicationBase", applicationBaseUrl );
-        }
     }
 
     /**
@@ -316,37 +240,6 @@ public abstract class AbstractRunData
     }
 
     /**
-     * Setter method for output
-     *
-     * @param output The output to set.
-     */
-    public void setOutput( PrintWriter output )
-    {
-        this.output = output;
-    }
-
-    /**
-     * Setter method for property outputStream
-     *
-     * @param outputStream The outputStream to set.
-     */
-    public void setOutputStream( OutputStream outputStream )
-    {
-        this.outputStream = outputStream;
-    }
-
-    /**
-     * Overwrite or implement method setPage()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#setPage(com.cyclopsgroup.waterview.Path)
-     */
-    public void setPage( Path page )
-    {
-        getRequestContext().put( PAGE_NAME, page );
-        this.page = page;
-    }
-
-    /**
      * Setter method for pageBaseUrl
      *
      * @param pageBaseUrl The pageBaseUrl to set.
@@ -354,10 +247,6 @@ public abstract class AbstractRunData
     public void setPageBaseUrl( String pageBaseUrl )
     {
         this.pageBaseUrl = pageBaseUrl;
-        if ( getRequestContext() != null )
-        {
-            getRequestContext().put( "pageBase", pageBaseUrl );
-        }
     }
 
     /**
@@ -371,17 +260,6 @@ public abstract class AbstractRunData
     }
 
     /**
-     * Set a path
-     * 
-     * @param pathInstruction Path instruction without decorator, like display, get...
-     * @param path Path object
-     */
-    public void setPath( String pathInstruction, Path path )
-    {
-        paths.put( pathInstruction, path );
-    }
-
-    /**
      * Setter method for property queryString
      *
      * @param queryString The queryString to set.
@@ -389,16 +267,6 @@ public abstract class AbstractRunData
     public void setQueryString( String queryString )
     {
         this.queryString = queryString;
-    }
-
-    /**
-     * Overwrite or implement method setRedirectUrl()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#setRedirectUrl(java.lang.String)
-     */
-    public void setRedirectUrl( String url )
-    {
-        redirectUrl = url;
     }
 
     /**
@@ -467,15 +335,5 @@ public abstract class AbstractRunData
     public void setTimeZone( TimeZone timeZone )
     {
         this.timeZone = timeZone;
-    }
-
-    /**
-     * Overwrite or implement method stop()
-     *
-     * @see com.cyclopsgroup.waterview.RunData#stop()
-     */
-    public void stop()
-    {
-        stopped = true;
     }
 }

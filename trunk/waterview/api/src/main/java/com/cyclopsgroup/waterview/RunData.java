@@ -16,9 +16,9 @@
  */
 package com.cyclopsgroup.waterview;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -89,21 +89,16 @@ public interface RunData
      *
      * @return PrintWriter object for http response
      */
-    PrintWriter getOutput();
+    PrintWriter getOutput()
+        throws IOException;
 
     /**
      * Get output stream
      *
      * @return Output stream
      */
-    OutputStream getOutputStream();
-
-    /**
-     * Method getRenderTemplate() in class WebRuntime
-     *
-     * @return Render template
-     */
-    Path getPage();
+    OutputStream getOutputStream()
+        throws IOException;
 
     /**
      * Base url for page
@@ -125,13 +120,6 @@ public interface RunData
      * @return Query string
      */
     String getQueryString();
-
-    /**
-     * Get URL to redirect
-     *
-     * @return Redirect URL
-     */
-    String getRedirectUrl();
 
     /**
      * Get url of referer
@@ -183,13 +171,6 @@ public interface RunData
     TimeZone getTimeZone();
 
     /**
-     * Is the pipeline stopped
-     *
-     * @return True if pipeline is stopped
-     */
-    boolean isStopped();
-
-    /**
      * Set locale
      *
      * @param locale Locale to set
@@ -202,30 +183,4 @@ public interface RunData
      * @param contentType Content type
      */
     void setOutputContentType( String contentType );
-
-    /**
-     * Set page with Page model
-     *
-     * @param page Page path
-     */
-    void setPage( Path page );
-
-    /**
-     * Set page to render
-     *
-     * @param page Page path
-     * @throws Exception Throw it out
-     */
-    void setPage( String page )
-        throws Exception;
-
-    /**
-     * @param url URL to redirect
-     */
-    void setRedirectUrl( String url );
-
-    /**
-     * Stop the pipeline
-     */
-    void stop();
 }

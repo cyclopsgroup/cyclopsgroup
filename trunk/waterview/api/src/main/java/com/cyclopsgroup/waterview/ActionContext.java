@@ -65,13 +65,6 @@ public interface ActionContext
     void fail( Throwable throwable );
 
     /**
-     * Get link which lead it to the target
-     *
-     * @return Link object
-     */
-    Link getTargetLink();
-
-    /**
      * Url to which it's going to redirect
      *
      * @param url Target url

@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.io.IOException;
+
+import com.cyclopsgroup.waterview.ExecutionException;
 
 /**
  * Runtime pipeline context
@@ -31,5 +34,9 @@ public interface PipelineContext
      * @throws Exception Just throw it out
      */
     void invokeNextValve( RunDataSpi data )
-        throws Exception;
+        throws ExecutionException, IOException;
+
+    boolean isStopped();
+
+    void stop();
 }

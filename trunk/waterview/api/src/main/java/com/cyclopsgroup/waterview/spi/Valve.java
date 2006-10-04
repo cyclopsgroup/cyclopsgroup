@@ -16,6 +16,9 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.io.IOException;
+
+import com.cyclopsgroup.waterview.ExecutionException;
 
 /**
  * Valve for pipeline
@@ -25,11 +28,6 @@ package com.cyclopsgroup.waterview.spi;
 public interface Valve
 {
     /**
-     * Empty valve array
-     */
-    Valve[] EMPTY_ARRAY = new Valve[0];
-
-    /**
      * Invoke the valve
      *
      * @param data Page runtime object
@@ -37,5 +35,5 @@ public interface Valve
      * @throws Exception Throw it out
      */
     void invoke( RunDataSpi data, PipelineContext context )
-        throws Exception;
+        throws ExecutionException, IOException;
 }

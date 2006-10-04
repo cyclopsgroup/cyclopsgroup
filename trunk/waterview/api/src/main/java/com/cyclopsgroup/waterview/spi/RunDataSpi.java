@@ -2,7 +2,6 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.List;
 
-import com.cyclopsgroup.waterview.Path;
 import com.cyclopsgroup.waterview.RunData;
 
 /**
@@ -13,29 +12,14 @@ import com.cyclopsgroup.waterview.RunData;
 public interface RunDataSpi
     extends RunData
 {
-    /**
-     * Get page object
-     *
-     * @return Page object
-     */
-    Page getPageObject();
+    interface Request
+    {
+        String getPackageAlias();
 
-    /**
-     * Set page object
-     *
-     * @param page Page object
-     */
-    void setPageObject( Page page );
+        String getRequestPath();
+    }
 
-    /**
-     * Set path with instruction
-     * 
-     * @param instruction Instruction name
-     * @param path Path object
-     */
-    void setPath( String instruction, Path path );
+    List<Request> getRequests();
 
-    Path getPath( String pathInstruction );
-
-    List<Path> getPaths( String pathInstruction );
+    WaterviewSpi getWaterview();
 }

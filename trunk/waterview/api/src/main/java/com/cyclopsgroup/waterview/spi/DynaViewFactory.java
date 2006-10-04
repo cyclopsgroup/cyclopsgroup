@@ -16,7 +16,6 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
-import com.cyclopsgroup.waterview.Path;
 
 /**
  * Dynamic view factory
@@ -25,13 +24,4 @@ import com.cyclopsgroup.waterview.Path;
  */
 public interface DynaViewFactory
 {
-    /**
-     * Dynamically create View with view path
-     *
-     * @param path Requested path
-     * @return View object
-     * @throws Exception Throw it out
-     */
-    View createView( Path path )
-        throws Exception;
 }
