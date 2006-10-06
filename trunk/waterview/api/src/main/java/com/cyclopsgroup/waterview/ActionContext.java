@@ -69,7 +69,7 @@ public interface ActionContext
      *
      * @param url Target url
      */
-    void setRedirection( RedirectionTarget url );
+    //void setRedirection( RedirectionTarget url );
 
     /**
      * @param message Message to add

@@ -62,12 +62,6 @@ public class ActionRequestResolver
 
         }
 
-        public void setRedirection( RedirectionTarget url )
-        {
-            // TODO Auto-generated method stub
-
-        }
-
     }
 
     /**
