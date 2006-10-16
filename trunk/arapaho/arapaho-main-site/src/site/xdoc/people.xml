@@ -11,11 +11,10 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Resources</th>
                 </tr>
                 <tr>
                     <td>
-                        <a href="members/jiaqi/">jiaqi</a>
+                        <a href="members/jiaqi/index.html">jiaqi</a>
                     </td>
                     <td>Jiaqi Guo</td>
                     <td>
@@ -23,20 +22,10 @@
                             jiaqi.guo@gmail.com
                         </a>
                     </td>
-                    <td>
-                        <a href="members/jiaqi/blog.html">Blog</a>
-                        ,
-                        <a href="members/jiaqi/resume.html">resume</a>
-                        ,
-                        <a
-                            href="http://groups.google.com/group/dengyunsheng">
-                            secondary school friends
-                        </a>
-                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="members/xuying/">xuying</a>
+                        <a href="http://utd.edu/~xuying.zhao">xuying</a>
                     </td>
                     <td>Xuying Zhao</td>
                     <td>
@@ -44,15 +33,10 @@
                             xuyingzhao@gmail.com
                         </a>
                     </td>
-                    <td>
-                        <a href="members/xuying/blog.html">Blog</a>
-                        ,
-                        <a href="members/xuying/cv.html">cv</a>
-                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="members/crazytmac/blog.html">
+                        <a href="http://chinajoeblack.spaces.live.com">
                             crazytmac
                         </a>
                     </td>
@@ -61,9 +45,6 @@
                         <a href="mailto:crazytmac@gmail.com">
                             crazytmac@gmail.com
                         </a>
-                    </td>
-                    <td>
-                        <a href="members/crazytmac/blog.html">Blog</a>
                     </td>
                 </tr>
             </table>

@@ -7,8 +7,7 @@
     </bannerLeft>
     <body>
         <links>
-            <item name="home"
-                href="http://www.cyclopsgroup.com/index.html" />
+            <item name="home" href="http://www.cyclopsgroup.com/index.html" />
             <item name="waterview"
                 href="http://www.cyclopsgroup.com/projects/waterview" />
             <item name="tornado"
@@ -35,25 +34,7 @@
             <item name="news" href="/news.html" />
             <item name="discussion"
                 href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html" />
-            <item name="people" href="/people.html" collapse="true">
-                <item name="jiaqi" href="/members/jiaqi/index.html"
-                    collapse="true">
-                    <item name="resume"
-                        href="/members/jiaqi/resume.html" />
-                    <item name="talk" href="/members/jiaqi/blog.html" />
-                </item>
-                <item name="xuying" href="/members/xuying/index.html"
-                    collapse="true">
-                    <item name="cv" href="/members/xuying/cv.html" />
-                    <item name="teaching"
-                        href="/members/xuying/teaching.html" />
-                    <item name="research"
-                        href="/members/xuying/research.html" />
-                    <item name="talk" href="/members/xuying/blog.html" />
-                </item>
-                <item name="crazytmac"
-                    href="http://spaces.msn.com/chinajoeblack" />
-            </item>
+            <item name="people" href="/people.html" />
             <item name="about" href="/about.html" />
         </menu>
         <menu name="Links">
