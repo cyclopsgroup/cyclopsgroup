@@ -1,0 +1,13 @@
+body {
+    margin: 0px;
+}
+
+body,input,textarea,th,td,select {
+    font-family: "Bitstream Vera Sans", Verdana, Helvetica;
+    font-size: 80%;
+    color: #7D7C7C;
+}
+
+div.clearBreak {
+    clear: both;
+}

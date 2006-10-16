@@ -1,0 +1,76 @@
+#documentWrapper {
+    text-align: center;
+}
+
+#documentContent {
+    width: 860px;
+    margin: 0px auto;
+    text-align: left;
+}
+
+#contentBanner {
+    height: 300px;
+    background: url('../images/banner_bg.jpg') no-repeat right;
+    color: white;
+}
+
+#contentBanner>div {
+    padding: 120px 600px 10px 30px
+}
+
+#contentBanner div.navigationLink {
+    padding: 5px 20px 5px 20px;
+    background-color: white;
+    margin: 10px;
+    -moz-opacity: .25;
+    opacity: .25;
+    -moz-border-radius: .75em;
+    border-radius: .75em;
+}
+
+#selectedNavigationLink {
+    -moz-opacity: .5 !important;
+    opacity: .5 !important;
+}
+
+#contentBanner div.navigationLink a:link,#contentBanner div.navigationLink a:visited
+    {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;;
+    font-weight: bold;
+}
+
+#mainContent {
+    float: left;
+    width: 60%;
+}
+
+#sideContent {
+    float: right;
+    width: 36%;
+}
+
+#contentBody h2,#contentBody h3 {
+    border-width: 0px 0px 1px 0px;
+    border-style: dashed;
+    border-color: #BFBFBF;
+}
+
+#mainContent>h2,#mainContent>h3,#mainContent a:link,#mainContent a:visited
+    {
+    color: #8196B5;
+}
+
+#sideContent>h2,#mainContent>h3,#sideContent a:link,#sideContent a:visited
+    {
+    color: #E49107;
+}
+
+#contentFooter {
+    padding: 6px;
+    border-width: 1px 0px 0px 0px;
+    border-style: dashed;
+    border-color: #BFBFBF;;
+    border-width: 1px 0px 0px 0px;
+}
