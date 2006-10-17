@@ -14,21 +14,25 @@
     color: white;
 }
 
-#contentBanner div {
+#contentBanner #navigationLinks {
     padding: 120px 600px 10px 30px
 }
 
+/* This is the transparent box */
 #contentBanner div.navigationLink {
-    padding: 5px 20px 5px 20px;
-    background-color: white;
+    width: 220px;
     margin: 10px;
-    -moz-opacity: .25;
-    opacity: .25;
-    -moz-border-radius: .75em;
+    background-color: #fff;
+    padding: 5px 20px 5px 20px;
+    filter: alpha(opacity=25);
+    opacity: 0.25;
+    -moz-opacity:0.25;
     border-radius: .75em;
+    -moz-border-radius: .75em;
 }
 
 #selectedNavigationLink {
+    filter: alpha(opacity=50);
     -moz-opacity: .5 !important;
     opacity: .5 !important;
 }
