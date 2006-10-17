@@ -11,3 +11,11 @@ body,input,textarea,th,td,select {
 div.clearBreak {
     clear: both;
 }
+
+h1,h2,h3,h4,h5,h6,h7 {
+    font-weight: normal;
+}
+
+#contentBody {
+    padding: 10px;
+}

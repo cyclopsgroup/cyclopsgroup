@@ -14,7 +14,7 @@
     color: white;
 }
 
-#contentBanner>div {
+#contentBanner div {
     padding: 120px 600px 10px 30px
 }
 
@@ -57,12 +57,12 @@
     border-color: #BFBFBF;
 }
 
-#mainContent>h2,#mainContent>h3,#mainContent a:link,#mainContent a:visited
+#mainContent h2,#mainContent h3,#mainContent a:link,#mainContent a:visited
     {
     color: #8196B5;
 }
 
-#sideContent>h2,#sideContent>h3,#sideContent a:link,#sideContent a:visited
+#sideContent h2,#sideContent h3,#sideContent a:link,#sideContent a:visited
     {
     color: #E49107;
 }
