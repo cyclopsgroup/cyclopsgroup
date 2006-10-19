@@ -23,15 +23,15 @@
     margin: 10px;
     background-color: #fff;
     padding: 5px 20px 5px 20px;
-    filter: alpha(opacity=25);
+    filter: alpha(opacity =         25);
     opacity: 0.25;
-    -moz-opacity:0.25;
+    -moz-opacity: 0.25;
     border-radius: .75em;
     -moz-border-radius: .75em;
 }
 
 #selectedNavigationLink {
-    filter: alpha(opacity=50);
+    filter: alpha(opacity =         50);
     -moz-opacity: .5 !important;
     opacity: .5 !important;
 }
@@ -58,6 +58,14 @@
     border-width: 0px 0px 1px 0px;
     border-style: dashed;
     border-color: #BFBFBF;
+}
+
+#contentBody input.pushButton {
+    color: #8196B5;
+    font-weight: bold;
+    background-color: white;
+    border: solid #8196B5 2px;;
+    background-color: white;
 }
 
 #mainContent h2,#mainContent h3,#mainContent a:link,#mainContent a:visited
