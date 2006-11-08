@@ -1,3 +1,7 @@
+body {
+    background-color: #DCFFBC;   
+}
+
 #documentWrapper {
     text-align: center;
 }
@@ -6,6 +10,7 @@
     width: 860px;
     margin: 0px auto;
     text-align: left;
+    background-color: white;
 }
 
 #contentBanner {
@@ -23,7 +28,7 @@
     margin: 10px;
     background-color: #fff;
     padding: 5px 20px 5px 20px;
-    filter: alpha(opacity =         25);
+    filter: alpha(opacity =           25);
     opacity: 0.25;
     -moz-opacity: 0.25;
     border-radius: .75em;
@@ -31,7 +36,7 @@
 }
 
 #selectedNavigationLink {
-    filter: alpha(opacity =         50);
+    filter: alpha(opacity =           50);
     -moz-opacity: .5 !important;
     opacity: .5 !important;
 }
