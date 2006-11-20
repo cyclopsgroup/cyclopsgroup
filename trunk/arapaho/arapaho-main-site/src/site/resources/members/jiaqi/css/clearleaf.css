@@ -1,5 +1,5 @@
 body {
-    background-color: #DCFFBC;   
+    background-color: #f0fdd5;   
 }
 
 #documentWrapper {
@@ -11,6 +11,9 @@ body {
     margin: 0px auto;
     text-align: left;
     background-color: white;
+    border-width: 0px 2px 0px 2px;
+    border-color: #639e4d;
+    border-style: solid;
 }
 
 #contentBanner {

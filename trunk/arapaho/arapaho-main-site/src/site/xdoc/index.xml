@@ -1,195 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-    <properties>
-        <title>Home</title>
-        <properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
-    </properties>
-    <body>
-        <section name="What is it">
-            <p>
-                The goal of Cyclops Group is to contribute simple
-                software to the open source world. The Cyclops Group is
-                an open source software foundation focusing on common,
-                abstract, simple and high quality java software that
-                solves complex problems in the real world.
-            </p>
-            <p>
-                In a spontaneously evolved software world, open source
-                is the power of evolution. We believe that the most
-                innovative solution for real business problem can only
-                be created in the free open envrionment.
-            </p>
-        </section>
-        <section name="Recent news">
-            <p>
-                <script language="javascript" src="js/rsscontrol.js" />
-                <script language="javascript">
-                    <![CDATA[displayRss('http://groups.google.com/group/cyclopsgroup-news/feed/rss_v2_0_msgs.xml?num=5');]]>
-                </script>
-            </p>
-        </section>
-        <section name="Get me involved">
-            <p>
-                A couple of google user groups are available for Cyclops
-                Group. You may want to join if you want to keep being
-                updated.
-            </p>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Readonly</th>
-                    <th />
-                    <th />
-                    <th>Archive</th>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-discussion">
-                            Discussion
-                        </a>
-                    </td>
-                    <td>
-                        The general discussion group. Anonymous posts
-                        are allowed.
-                    </td>
-                    <td>No</td>
-                    <td>
-                        <a
-                            href="mailto:cyclopsgroup-discussion@googlegroups.com">
-                            Post
-                        </a>
-                    </td>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">
-                            Join
-                        </a>
-                    </td>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-discussion">
-                            GoogleGroup.com
-                        </a>
-                        ,
-                        <a
-                            href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html">
-                            Nabble.com
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-news">
-                            News
-                        </a>
-                    </td>
-                    <td>News and annoncement of cyclops group</td>
-                    <td>Yes</td>
-                    <td />
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-news/subscribe">
-                            Join
-                        </a>
-                    </td>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-news">
-                            GoogleGroup.com
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-support">
-                            Support
-                        </a>
-                    </td>
-                    <td>Support for Cyclops Group projects</td>
-                    <td>No</td>
-                    <td>
-                        <a
-                            href="mailto:cyclopsgroup-support@googlegroups.com">
-                            Post
-                        </a>
-                    </td>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-support/subscribe">
-                            Join
-                        </a>
-                    </td>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/cyclopsgroup-support">
-                            GoogleGroup.com
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </section>
-        <section name="Other resources">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Language</th>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://fisheye3.cenqua.com/viewrep/cyclops-group/">
-                            Browse Source Repository
-                        </a>
-                    </td>
-                    <td>English</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://sourceforge.net/projects/cyclops-group">
-                            CyclopsGroup sourceforge project summary
-                        </a>
-                    </td>
-                    <td>English</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="http://spaces.msn.com/chinajoeblack">
-                            Crazy TMac's personal blog
-                        </a>
-                    </td>
-                    <td>Chinese</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="members/jiaqi/blog.html">
-                            Jiaqi's personal blog
-                        </a>
-                    </td>
-                    <td>Chinese</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a
-                            href="http://groups.google.com/group/dengyunsheng">
-                            Jiaqi's secondary school friends
-                        </a>
-                    </td>
-                    <td>Chinese</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="members/xuying/blog.html">
-                            Xuying's personal blog
-                        </a>
-                    </td>
-                    <td>English</td>
-                </tr>
-            </table>
-        </section>
-    </body>
+	<properties>
+		<title>Home</title>
+		<properties email="jiaqi.guo@gmail.com">Jiaqi Guo</properties>
+	</properties>
+	<body>
+		<section name="What is it">
+			<p>
+				The goal of Cyclops Group is to contribute simple
+				software to the open source. Cyclops Group is an open
+				source software foundation focusing on common, abstract,
+				simple and high quality java software that solves
+				complex problems in the real world.
+			</p>
+			<p>
+				In a spontaneously evolved software world, open source
+				is the power of evolution. We believe that the most
+				innovative solution for real business problem can only
+				be created in a free open envrionment.
+			</p>
+		</section>
+		<section name="Recent news">
+			<p>
+				<script language="javascript" src="js/rsscontrol.js" />
+				<script language="javascript">
+					<![CDATA[displayRss('http://groups.google.com/group/cyclopsgroup-news/feed/rss_v2_0_msgs.xml?num=5');]]>
+				</script>
+			</p>
+		</section>
+		<section name="Get me involved">
+			<p>
+				Here're several google user groups. You may want to join
+				if you want to keep being updated.
+			</p>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Readonly</th>
+					<th />
+					<th />
+					<th>Archive</th>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-discussion">
+							Discussion
+						</a>
+					</td>
+					<td>The general discussion group.</td>
+					<td>No</td>
+					<td>
+						<a
+							href="mailto:cyclopsgroup-discussion@googlegroups.com">
+							Post
+						</a>
+					</td>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">
+							Join
+						</a>
+					</td>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-discussion">
+							GoogleGroup.com
+						</a>
+						,
+						<a
+							href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html">
+							Nabble.com
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-news">
+							News
+						</a>
+					</td>
+					<td>News and annoncement of cyclops group</td>
+					<td>Yes</td>
+					<td />
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-news/subscribe">
+							Join
+						</a>
+					</td>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-news">
+							GoogleGroup.com
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-support">
+							Support
+						</a>
+					</td>
+					<td>Support for Cyclops Group projects</td>
+					<td>No</td>
+					<td>
+						<a
+							href="mailto:cyclopsgroup-support@googlegroups.com">
+							Post
+						</a>
+					</td>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-support/subscribe">
+							Join
+						</a>
+					</td>
+					<td>
+						<a
+							href="http://groups.google.com/group/cyclopsgroup-support">
+							GoogleGroup.com
+						</a>
+					</td>
+				</tr>
+			</table>
+		</section>
+		<section name="Other resources">
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Language</th>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://fisheye3.cenqua.com/viewrep/cyclops-group/">
+							Browse Source Repository
+						</a>
+					</td>
+					<td>English</td>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://sourceforge.net/projects/cyclops-group">
+							CyclopsGroup sourceforge project summary
+						</a>
+					</td>
+					<td>English</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://spaces.msn.com/chinajoeblack">
+							Crazy TMac's personal blog
+						</a>
+					</td>
+					<td>Chinese</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="members/jiaqi/index.html">
+							Jiaqi's home page
+						</a>
+					</td>
+					<td>English</td>
+				</tr>
+				<tr>
+					<td>
+						<a
+							href="http://groups.google.com/group/dengyunsheng">
+							Jiaqi's secondary school friends
+						</a>
+					</td>
+					<td>Chinese</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://utdallas.edu/~xuying.zhao">
+							Xuying's home page
+						</a>
+					</td>
+					<td>English</td>
+				</tr>
+			</table>
+		</section>
+	</body>
 </document>
