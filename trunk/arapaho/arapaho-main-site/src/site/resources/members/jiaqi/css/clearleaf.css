@@ -1,8 +1,11 @@
 body {
-    background-color: #f0fdd5;   
+    margin: 0px;
 }
 
 #documentWrapper {
+    background-image: url('../images/bg.gif');
+    background-repeat: repeat-y;
+    background-position: top center;
     text-align: center;
 }
 
@@ -11,9 +14,6 @@ body {
     margin: 0px auto;
     text-align: left;
     background-color: white;
-    border-width: 0px 2px 0px 2px;
-    border-color: #639e4d;
-    border-style: solid;
 }
 
 #contentBanner {
@@ -88,8 +88,9 @@ body {
 
 #contentFooter {
     padding: 6px;
-    border-width: 1px 0px 0px 0px;
-    border-style: dashed;
-    border-color: #BFBFBF;;
-    border-width: 1px 0px 0px 0px;
+    background: #8C8C8C;
+}
+
+#contentFooter div, #contentFooter td {
+    color: white;
 }
