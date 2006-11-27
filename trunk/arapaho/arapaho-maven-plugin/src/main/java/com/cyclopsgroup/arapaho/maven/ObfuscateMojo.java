@@ -13,7 +13,7 @@ import org.apache.maven.plugin.MojoFailureException;
 
 /**
  * @description Obfuscate generated jar file
- * @author <a href="mailto:jiaqi@amazon.com">jiaqi</a>
+ * @author <a href="mailto:jiaqi.guo@gmail.com">jiaqi</a>
  * @goal obfuscate
  */
 public class ObfuscateMojo
@@ -59,18 +59,20 @@ public class ObfuscateMojo
 
         ClassLoader cl = new URLClassLoader( new URL[] { retroJar } );
 
+        File tempFile = new File( SystemUtils.getJavaIoTmpDir(), "obfuscated.jar" );
         try
         {
             Class<? extends Object> retroGuardClass = cl.loadClass( "RetroGuard" );
             Method mainMethod = retroGuardClass.getMethod( "main", new Class[] { String[].class } );
-
-            File tempFile = new File( SystemUtils.getJavaIoTmpDir(), "obfuscated.jar" );
             mainMethod.invoke( null, new Object[] { jarFile, tempFile.getAbsoluteFile(), script, retroLog } );
-
         }
         catch ( Exception e )
         {
             throw new MojoExecutionException( "Run obfuscation failed", e );
+        }
+        finally
+        {
+            tempFile.delete();
         }
     }
 }
