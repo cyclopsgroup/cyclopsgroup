@@ -130,9 +130,9 @@
     </pluginRepositories>
     <repositories>
         <repository>
-            <id>ibiblio.release</id>
-            <name>ibiblio</name>
-            <url>http://ibiblio.org/maven2</url>
+            <id>maven.repository.default</id>
+            <name>Default Ibiblio Repository</name>
+            <url>http://repo1.maven.org/maven2</url>
         </repository>
         <repository>
             <id>cyclopsgroup.repository.sourceforge</id>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cyclopsgroup.laputa</groupId>
+		<artifactId>laputa-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>laputa-identity-server</artifactId>
+	<packaging>jar</packaging>
+	<name>Laputa Identity Server</name>
+	<version>1.0-SNAPSHOT</version>
+	<scm>
+		<connection>
+			scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-server
+		</connection>
+		<developerConnection>
+			scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-server
+		</developerConnection>
+		<url>
+			http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/arapaho/laputa/laputa-identity-server
+		</url>
+	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>com.cyclopsgroup.laputa</groupId>
+			<artifactId>laputa-identity-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>
