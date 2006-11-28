@@ -5,15 +5,11 @@ package com.cyclopsgroup.waterview;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public interface ViewContext
+    extends Context
 {
-    /**
-     * Get run data context
-     *
-     * @return Run data
-     */
-    RunData getRunData();
+    String getPackage();
 
-    Context getContext();
+    String getPath();
 
     /**
      * Get unique ID for this view in current page
@@ -21,4 +17,8 @@ public interface ViewContext
      * @return A unique string to identify this view
      */
     String getViewId();
+
+    void setPackage( String packageAlias );
+
+    void setPath( String path );
 }

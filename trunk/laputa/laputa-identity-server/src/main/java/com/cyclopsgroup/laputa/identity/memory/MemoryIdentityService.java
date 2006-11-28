@@ -6,6 +6,11 @@ import com.cyclopsgroup.laputa.identity.Identity;
 import com.cyclopsgroup.laputa.identity.IdentityService;
 import com.cyclopsgroup.laputa.identity.NoSuchUserException;
 
+/**
+ * Implementation of IdentityService which manages users in memory 
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class MemoryIdentityService
     implements IdentityService
 {
@@ -30,9 +35,9 @@ public class MemoryIdentityService
         return AuthenticationResult.SUCCESSFUL;
     }
 
-    public Identity getIdentity( String identityToken )
+    public Identity getIdentity( String ticket )
     {
-        return identities.get( identityToken );
+        return identities.get( ticket );
     }
 
     public String signIn( String userName )

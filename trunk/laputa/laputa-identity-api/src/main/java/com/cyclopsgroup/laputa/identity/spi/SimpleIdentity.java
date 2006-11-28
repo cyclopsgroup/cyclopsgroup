@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import com.cyclopsgroup.laputa.identity.Identity;
 
+/**
+ * A simple implementation of Identity
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ */
 public class SimpleIdentity
     implements Identity, Serializable
 {
-    private static final long serialVersionUID = 5106821401019346692L;
-
     private String userName;
 
     public SimpleIdentity( String userName )

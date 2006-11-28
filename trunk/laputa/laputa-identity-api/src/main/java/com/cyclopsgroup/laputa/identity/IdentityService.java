@@ -9,16 +9,16 @@ public interface IdentityService
     AuthenticationResult authenticate( String userName, String password );
 
     /**
-     * @param identityToken Identity token for current user
+     * @param ticket Identity token for current user
      * @return Identity object. Null if token is invalid or expired
      */
-    Identity getIdentity( String identityToken );
+    Identity getIdentity( String ticket );
 
     /**
      * Sign in as an user
      * 
      * @param userName Change current use to be specified one
-     * @return A token to identify current user
+     * @return Ticket associated with login session
      */
     String signIn( String userName )
         throws NoSuchUserException;
@@ -26,7 +26,7 @@ public interface IdentityService
     /**
      * Sign out given user token
      * 
-     * @param subjectToken
+     * @param ticket Ticket to sign out
      */
-    void signOut( String identityToken );
+    void signOut( String ticket );
 }

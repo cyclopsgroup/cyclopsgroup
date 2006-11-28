@@ -24,4 +24,11 @@
             http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/laputa/laputa-identity-api
         </url>
     </scm>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+    </dependencies>
 </project>

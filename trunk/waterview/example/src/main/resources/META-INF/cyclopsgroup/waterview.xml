@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Waterview>
-    <ModulePackage name="waterview-example" package="com.cyclopsgroup.waterview.example.ui">
-        <View name="page1" path="Page1.jelly" title="Page1" description="Page1" hidden="true" />
-        <Layout name="layout1" />
-        <IconSet name="iconset1" />
-        <Style name="style1" />
-    </ModulePackage>
+    <Package name="waterview-example"
+        packageName="com.cyclopsgroup.waterview.example.ui">
+        <Layout name="default"
+            className="com.cyclopsgroup.waterview.example.ui.layout.DefaultLayout" />
+        <Icons name="default" description="Default example icons" />
+        <Theme name="default" />
+    </Package>
 </Waterview>

@@ -16,11 +16,6 @@
     <inceptionYear>2002</inceptionYear>
     <dependencies>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>4.1.4</version>
-        </dependency>
-        <dependency>
             <groupId>com.cyclopsgroup.arapaho</groupId>
             <artifactId>arapaho-dependency-jetty</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -31,6 +26,18 @@
             <groupId>com.cyclopsgroup.waterview</groupId>
             <artifactId>waterview-api</artifactId>
             <version>2.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cyclopsgroup.waterview</groupId>
+            <artifactId>waterview-renderer-marmalade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.cyclopsgroup.waterview</groupId>
+            <artifactId>waterview-skin-default</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -78,41 +85,14 @@
             <version>2.3</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-        </dependency>
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.8</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-            <version>1.0-alpha-9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-avalon-personality</artifactId>
-            <version>0.13</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>plexus</groupId>
-                    <artifactId>plexus-container-default</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>sun.jdk</groupId>
             <artifactId>tools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.4</version>
         </dependency>
     </dependencies>
 </project>

@@ -28,7 +28,7 @@ public class PanelContent
 {
     private String name;
 
-    private List<View> views = new ArrayList<View>();
+    private List<ViewProvider> views = new ArrayList<ViewProvider>();
 
     /**
      * Constructor for class PanelContent
@@ -40,7 +40,7 @@ public class PanelContent
         this.name = name;
     }
 
-    public void addView( View view )
+    public void addView( ViewProvider view )
     {
         views.add( view );
     }
@@ -72,7 +72,7 @@ public class PanelContent
      *
      * @return View array
      */
-    public List<View> getViews()
+    public List<ViewProvider> getViews()
     {
         return views;
     }

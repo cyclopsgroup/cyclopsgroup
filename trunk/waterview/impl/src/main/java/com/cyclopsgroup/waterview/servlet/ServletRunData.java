@@ -28,7 +28,7 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.AbstractRunData;
+import com.cyclopsgroup.waterview.alternative.AbstractRunData;
 import com.cyclopsgroup.waterview.spi.I18NService;
 import com.cyclopsgroup.waterview.spi.ModuleService;
 import com.cyclopsgroup.waterview.spi.Page;

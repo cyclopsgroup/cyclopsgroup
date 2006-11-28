@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>arapaho-project</artifactId>
+        <artifactId>cyclopsgroup-project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.cyclopsgroup.waterview</groupId>
@@ -14,21 +15,34 @@
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2006</inceptionYear>
     <scm>
-        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview</connection>
+        <connection>
+            scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview
+        </connection>
         <developerConnection>
             scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview
         </developerConnection>
-        <url>http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/waterview</url>
+        <url>
+            http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/waterview
+        </url>
     </scm>
     <modules>
         <module>api</module>
+        <module>example</module>
         <module>impl</module>
+        <module>launcher-avalon</module>
+        <module>renderer-jelly</module>
+        <module>renderer-marmalade</module>
+        <module>renderer-velocity</module>
+        <module>skin-deepblue</module>
+        <module>skin-default</module>
     </modules>
     <repositories>
         <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>ibiblio.release</id> 
+            <name>ibiblio</name>
+            <url>http://ibiblio.org/maven2</url>
+        </repository>
+        <repository>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -39,7 +53,9 @@
     <distributionManagement>
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
-            <url>scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/waterview</url>
+            <url>
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/waterview
+            </url>
         </site>
     </distributionManagement>
 </project>

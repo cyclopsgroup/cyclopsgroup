@@ -7,6 +7,6 @@ import java.io.IOException;
  */
 public interface View
 {
-    void render( ViewContext viewContext )
+    void render( RunData data, ViewContext viewContext )
         throws IOException;
 }
