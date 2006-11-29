@@ -33,7 +33,7 @@ public class DBIdentityServiceTest
         conf.setProperty( "hibernate.cache.provider_class", "org.hibernate.cache.HashtableCacheProvider" );
         conf.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
         conf.setProperty( "hibernate.show_sql", "true" );
-        conf.addAnnotatedClass( User.class );
+        conf.configure( getClass().getResource( "hibernate.xml" ) );
         sessionFactory = conf.buildSessionFactory();
 
         User user = new User();
