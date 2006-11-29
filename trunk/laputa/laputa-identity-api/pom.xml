@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.cyclopsgroup.laputa</groupId>
-        <artifactId>laputa-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <artifactId>laputa-identity-api</artifactId>
-    <packaging>jar</packaging>
-    <name>Laputa Identity Service API</name>
-    <version>1.0-SNAPSHOT</version>
-    <scm>
-        <connection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-api
-        </connection>
-        <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-api
-        </developerConnection>
-        <url>
-            http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/laputa/laputa-identity-api
-        </url>
-    </scm>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-    </dependencies>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cyclopsgroup.laputa</groupId>
+		<artifactId>laputa-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>laputa-identity-api</artifactId>
+	<packaging>jar</packaging>
+	<name>Laputa Identity Service API</name>
+	<version>1.0-SNAPSHOT</version>
+	<scm>
+		<connection>
+			scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-api
+		</connection>
+		<developerConnection>
+			scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-api
+		</developerConnection>
+		<url>
+			http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/laputa/laputa-identity-api
+		</url>
+	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-kernel</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
 </project>
