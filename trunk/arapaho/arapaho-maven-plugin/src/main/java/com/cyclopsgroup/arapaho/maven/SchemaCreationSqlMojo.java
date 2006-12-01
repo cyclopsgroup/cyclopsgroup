@@ -10,15 +10,15 @@ import org.hibernate.dialect.Dialect;
 /**
  * @description Generate hibernate schema
  * @author <a href="mailto:jiaqi.guo@gmail.com>jiaqi</a>
- * @goal generate-hibernate-schema
+ * @goal schema-create
  * @requiresDependencyResolution runtime
  */
-public class GenerateHibernateSchemaMojo
+public class SchemaCreationSqlMojo
     extends AbstractHibernateMojo
 {
     /**
      * @description Path of output sql file 
-     * @parameter expression="${basedir}/target/sql/schema.sql"
+     * @parameter expression="${basedir}/target/sql/create-tables.sql"
      * @required
      */
     private File output;

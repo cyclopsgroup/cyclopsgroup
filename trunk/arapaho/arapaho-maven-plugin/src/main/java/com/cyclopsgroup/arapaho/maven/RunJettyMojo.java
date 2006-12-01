@@ -17,10 +17,6 @@
 package com.cyclopsgroup.arapaho.maven;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -39,17 +35,17 @@ public class RunJettyMojo
     extends AbstractMojo
 {
     /**
+     * @parameter expression="${basedir}/src/test/config/jetty.xml"
+     * @required
+     */
+    private String jettyXml;
+
+    /**
      * @parameter expression="${project}"
      * @readonly
      * @required
      */
     private MavenProject project;
-
-    /**
-     * @parameter expression="${basedir}/src/test/config/jetty.xml"
-     * @required
-     */
-    private String jettyXml;
 
     /**
      * @see org.apache.maven.plugin.Mojo#execute()
@@ -62,23 +58,6 @@ public class RunJettyMojo
             throw new MojoExecutionException( "Jetty xml file " + jettyXml
                 + " is invalid, check your jettyXml parameter" );
         }
-
-        List<URL> urls = new ArrayList<URL>();
-        try
-        {
-            for ( Object pathString : project.getTestClasspathElements() )
-            {
-                File pathElement = new File( (String) pathString );
-                urls.add( pathElement.toURL() );
-            }
-        }
-        catch ( Exception e )
-        {
-            throw new MojoExecutionException( "Dependency problem", e );
-        }
-
-        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( Constants.EMPTY_URL_ARRAY ), getClass()
-            .getClassLoader() );
 
         Thread thread = new Thread()
         {
@@ -96,14 +75,14 @@ public class RunJettyMojo
             }
         };
 
-        thread.setContextClassLoader( classLoader );
-
-        thread.start();
         try
         {
+            ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project.getTestClasspathElements() );
+            thread.setContextClassLoader( classLoader );
+            thread.start();
             thread.join();
         }
-        catch ( InterruptedException e )
+        catch ( Exception e )
         {
             getLog().info( "The thread is interruptted" );
         }

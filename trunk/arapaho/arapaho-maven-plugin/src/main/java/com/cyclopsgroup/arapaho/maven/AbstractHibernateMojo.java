@@ -3,7 +3,6 @@ package com.cyclopsgroup.arapaho.maven;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -44,28 +43,19 @@ public abstract class AbstractHibernateMojo
     protected void doExecute()
         throws Exception
     {
-        List<URL> urls = new ArrayList<URL>();
-        for ( Object pathString : project.getRuntimeClasspathElements() )
-        {
-            File pathElement = new File( (String) pathString );
-            urls.add( pathElement.toURL() );
-        }
+        final ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project.getRuntimeClasspathElements() );
 
-        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( Constants.EMPTY_URL_ARRAY ), getClass()
-            .getClassLoader() );
-
-        final AnnotationConfiguration config = new AnnotationConfiguration();
-
-        List<String> allConfigFiles = new ArrayList<String>( configFiles );
+        List<String> allConfigFilePaths = new ArrayList<String>( configFiles );
         if ( StringUtils.isNotEmpty( configFile ) )
         {
-            allConfigFiles.add( configFile );
+            allConfigFilePaths.add( configFile );
         }
 
-        for ( String filePath : configFiles )
+        final List<URL> allConfigFiles = new ArrayList<URL>();
+        allConfigFiles.add( AbstractHibernateMojo.class.getResource( "default-hibernate.properties" ) );
+        for ( String filePath : allConfigFilePaths )
         {
             filePath = filePath.trim();
-
             if ( filePath.startsWith( RESOURCE_PREFIX ) )
             {
                 String resourcePath = filePath.substring( RESOURCE_PREFIX.length() );
@@ -76,7 +66,7 @@ public abstract class AbstractHibernateMojo
                 }
                 else
                 {
-                    populateConfiguration( config, resource );
+                    allConfigFiles.add( resource );
                 }
             }
             else
@@ -84,7 +74,7 @@ public abstract class AbstractHibernateMojo
                 File file = new File( filePath );
                 if ( file.exists() )
                 {
-                    populateConfiguration( config, file.toURL() );
+                    allConfigFiles.add( file.toURL() );
                 }
                 else
                 {
@@ -92,6 +82,9 @@ public abstract class AbstractHibernateMojo
                 }
             }
         }
+
+        final AnnotationConfiguration config = new AnnotationConfiguration();
+
         Thread thread = new Thread()
         {
             @Override
@@ -99,6 +92,11 @@ public abstract class AbstractHibernateMojo
             {
                 try
                 {
+                    for ( URL resource : allConfigFiles )
+                    {
+                        populateConfiguration( config, resource );
+                    }
+                    config.setProperties( System.getProperties() );
                     doExecute( config );
                 }
                 catch ( Exception e )
