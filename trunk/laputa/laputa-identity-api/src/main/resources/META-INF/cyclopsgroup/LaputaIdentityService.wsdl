@@ -87,12 +87,40 @@
 			<soap:operation
 				soapAction="http://www.cyclopsgroup.org/identity/webservice/authenticate" />
 			<wsdl:input>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
+				<soap:body use="literal" />
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="signIn">
+			<soap:operation
+				soapAction="http://www.cyclopsgroup.org/identity/webservice/signIn" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="signOut">
+			<soap:operation
+				soapAction="http://www.cyclopsgroup.org/identity/webservice/signOut" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getIdentity">
+			<soap:operation
+				soapAction="http://www.cyclopsgroup.org/identity/webservice/getIdentity" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>
