@@ -38,8 +38,6 @@ import org.mortbay.jetty.Server;
 public class RunJettyMojo
     extends AbstractMojo
 {
-    private static final URL[] EMPTY_URL_ARRAY = new URL[0];
-
     /**
      * @parameter expression="${project}"
      * @readonly
@@ -79,7 +77,7 @@ public class RunJettyMojo
             throw new MojoExecutionException( "Dependency problem", e );
         }
 
-        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( EMPTY_URL_ARRAY ), getClass()
+        final URLClassLoader classLoader = new URLClassLoader( urls.toArray( Constants.EMPTY_URL_ARRAY ), getClass()
             .getClassLoader() );
 
         Thread thread = new Thread()
