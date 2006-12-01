@@ -6,6 +6,11 @@ public interface IdentityService
         DISABLED_USER, ERROR, NO_SUCH_USER, SUCCESSFUL, WRONG_PASSWORD;
     }
 
+    /**
+     * Name of the attribute for authenticated user
+     */
+    String USER_ATTRIBUTE_NAME = "authenticatedUser";
+
     AuthenticationResult authenticate( String userName, String password );
 
     /**

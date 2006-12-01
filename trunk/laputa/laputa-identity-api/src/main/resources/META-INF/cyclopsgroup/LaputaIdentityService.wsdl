@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="service"
+	targetNamespace="http://www.cyclopsgroup.com/identity"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://www.cyclopsgroup.org/identity"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://www.cyclopsgroup.org/identity">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.cyclopsgroup.org/identity">
+			<xsd:element name="username" type="xsd:string" />
+			<xsd:element name="credential">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:username" />
+						<xsd:element name="password" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="identity">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:username" />
+						<xsd:element name="language" type="xsd:string" />
+						<xsd:element name="country" type="xsd:string" />
+						<xsd:element name="timezone" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="authentication-result"
+				type="xsd:string">
+				<xsd:simpleType>
+					<xsd:restriction>
+						<xsd:enumeration value="SUCCESSFUL" />
+						<xsd:enumeration value="NO_SUCH_USER" />
+						<xsd:enumeration value="DISABLED_USER" />
+						<xsd:enumeration value="WRONG_PASSWORD" />
+						<xsd:enumeration value="ERROR" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ticket" type="tns:ticket" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="authenticateRequest">
+		<wsdl:part name="credential" type="tns:credential" />
+	</wsdl:message>
+	<wsdl:message name="authenticateResponse">
+		<wsdl:part name="authenticationResult"
+			type="tns:authentication-result" />
+	</wsdl:message>
+	<wsdl:message name="signInRequest">
+		<wsdl:part name="username" type="tns:username" />
+	</wsdl:message>
+	<wsdl:message name="ticket">
+		<wsdl:part name="ticket" type="tns:ticket" />
+	</wsdl:message>
+	<wsdl:message name="identity">
+		<wsdl:part name="identity" element="tns:identity" />
+	</wsdl:message>
+
+	<wsdl:portType name="IdentityServicePortType">
+		<wsdl:operation name="authenticate">
+			<wsdl:input message="authenticateRequest" />
+			<wsdl:output message="authenticateResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="signIn">
+			<wsdl:input message="signInRequest" />
+			<wsdl:output message="ticket" />
+		</wsdl:operation>
+		<wsdl:operation name="signOut">
+			<wsdl:input message="ticket" />
+		</wsdl:operation>
+		<wsdl:operation name="getIdentity">
+			<wsdl:input message="ticket" />
+			<wsdl:output message="identity" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="IdentityServiceBinding"
+		type="tns:IdentityServicePortType">
+		<soap:binding style="document"
+			transport="http://www.cyclopsgroup.org/identity/webservice" />
+		<wsdl:operation name="authenticate">
+			<soap:operation
+				soapAction="http://www.cyclopsgroup.org/identity/webservice/authenticate" />
+			<wsdl:input>
+				<soap:body use="literal"
+					namespace="http://www.cyclopsgroup.org/identity" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"
+					namespace="http://www.cyclopsgroup.org/identity" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="IdentityService">
+		<wsdl:port name="webservice"
+			binding="tns:IdentityServiceBinding" />
+	</wsdl:service>
+</wsdl:definitions>
