@@ -43,7 +43,8 @@ public abstract class AbstractHibernateMojo
     protected void doExecute()
         throws Exception
     {
-        final ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project.getRuntimeClasspathElements() );
+        final ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project
+            .getRuntimeClasspathElements() );
 
         List<String> allConfigFilePaths = new ArrayList<String>( configFiles );
         if ( StringUtils.isNotEmpty( configFile ) )
@@ -132,12 +133,14 @@ public abstract class AbstractHibernateMojo
     {
         if ( configResource.getFile().endsWith( ".properties" ) )
         {
+            getLog().info( "Setting properties for hibernate with file :" + configResource );
             Properties props = new Properties();
             props.load( configResource.openStream() );
             config.setProperties( props );
         }
         else
         {
+            getLog().info( "Configuring hibernate with file :" + configResource );
             config.configure( configResource );
         }
     }

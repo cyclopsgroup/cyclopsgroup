@@ -38,6 +38,7 @@ public class User
 
     private String userName;
 
+    @Column(length = 5)
     public String getCountry()
     {
         return country;
@@ -70,7 +71,7 @@ public class User
 
     @Column(name = "user_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getUserId()
     {
         return userId;
