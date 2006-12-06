@@ -1,7 +1,8 @@
 package com.cyclopsgroup.laputa.identity.ws.client;
 
-import java.net.URL;
 import java.rmi.RemoteException;
+
+import org.apache.axis2.AxisFault;
 
 import com.cyclopsgroup.laputa.identity.Identity;
 import com.cyclopsgroup.laputa.identity.IdentityService;
@@ -10,33 +11,22 @@ import com.cyclopsgroup.laputa.identity.NoSuchUserException;
 public class IdentityServiceWebServiceClient
     implements IdentityService
 {
-    private URL serviceEndPoint;
+    private IdentityServiceStub stub;
 
-    private IdentityServiceStub serviceStub;
-
-    public IdentityServiceWebServiceClient( URL serviceEndPoint )
+    public IdentityServiceWebServiceClient( String serviceEndPoint )
+        throws AxisFault
     {
-        this.serviceEndPoint = serviceEndPoint;
-        try
-        {
-            this.serviceStub = new IdentityServiceStub( serviceEndPoint.toExternalForm() );
-        }
-        catch ( RemoteException e )
-        {
-            handleRemoteException( e );
-            throw new RuntimeException( e );
-        }
+        stub = new IdentityServiceStub( serviceEndPoint );
     }
 
     public AuthenticationResult authenticate( String userName, String password )
     {
+        IdentityServiceStub.Credential c = new IdentityServiceStub.Credential();
+        c.setUsername( userName );
+        c.setPassword( password );
         try
         {
-            IdentityServiceStub.Credential credentialMessage = new IdentityServiceStub.Credential();
-            credentialMessage.setUsername( userName );
-            credentialMessage.setPassword( password );
-            IdentityServiceStub.AuthenticationResult result = serviceStub.authenticate( credentialMessage );
-            return AuthenticationResult.valueOf( result.getValue() );
+            return AuthenticationResult.valueOf( stub.authenticate( c ).getValue() );
         }
         catch ( RemoteException e )
         {
@@ -47,12 +37,11 @@ public class IdentityServiceWebServiceClient
 
     public Identity getIdentity( String ticket )
     {
+        IdentityServiceStub.Ticket t = new IdentityServiceStub.Ticket();
+        t.setTicket( ticket );
         try
         {
-            IdentityServiceStub.Ticket ticketMessage = new IdentityServiceStub.Ticket();
-            ticketMessage.setTicket( ticket );
-            IdentityServiceStub.Identity identityMessage = serviceStub.getIdentity( ticketMessage );
-            return new IdentityStub( identityMessage );
+            return new IdentityStub( stub.getIdentity( t ) );
         }
         catch ( RemoteException e )
         {
@@ -61,12 +50,7 @@ public class IdentityServiceWebServiceClient
         }
     }
 
-    public URL getServiceEndPoint()
-    {
-        return serviceEndPoint;
-    }
-
-    protected void handleRemoteException( Throwable e )
+    protected void handleRemoteException( RemoteException e )
     {
         throw new RuntimeException( e );
     }
@@ -74,11 +58,11 @@ public class IdentityServiceWebServiceClient
     public String signIn( String userName )
         throws NoSuchUserException
     {
+        IdentityServiceStub.Username u = new IdentityServiceStub.Username();
+        u.setUsername( userName );
         try
         {
-            IdentityServiceStub.Username user = new IdentityServiceStub.Username();
-            user.setUsername( userName );
-            return serviceStub.signIn( user ).getTicket();
+            return stub.signIn( u ).getTicket();
         }
         catch ( RemoteException e )
         {
@@ -86,21 +70,18 @@ public class IdentityServiceWebServiceClient
             {
                 throw (NoSuchUserException) e.getCause();
             }
-            else
-            {
-                handleRemoteException( e );
-                return null;
-            }
+            handleRemoteException( e );
+            return null;
         }
     }
 
     public void signOut( String ticket )
     {
+        IdentityServiceStub.Ticket t = new IdentityServiceStub.Ticket();
+        t.setTicket( ticket );
         try
         {
-            IdentityServiceStub.Ticket ticketMessage = new IdentityServiceStub.Ticket();
-            ticketMessage.setTicket( ticket );
-            serviceStub.signOut( ticketMessage );
+            stub.signOut( t );
         }
         catch ( RemoteException e )
         {
