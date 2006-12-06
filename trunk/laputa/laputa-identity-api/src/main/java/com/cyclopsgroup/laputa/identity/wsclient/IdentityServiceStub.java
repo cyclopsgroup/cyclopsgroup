@@ -133,17 +133,19 @@
         
                     /**
                     * Auto generated method signature
-                    * @see com.cyclopsgroup.laputa.identity.client.IdentityService#authenticate
+                    * @see com.cyclopsgroup.laputa.identity.wsclient.IdentityService#authenticate
+                        * @param param0
+                    
                     */
-                    public void authenticate(
+                    public com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult authenticate(
 
-                    )
+                    com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential param0)
                     throws java.rmi.RemoteException
                     
                     {
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
-              _operationClient.getOptions().setAction("http://www.cyclopsgroup.org/identity:authenticate");
+              _operationClient.getOptions().setAction("urn:authenticate");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
@@ -151,11 +153,14 @@
               // create SOAP envelope with that payload
               org.apache.axiom.soap.SOAPEnvelope env = null;
                     
-                                    //Style is taken to be "document". No input parameters
-                                    org.apache.axiom.soap.SOAPFactory factory = getFactory(_operationClient.getOptions().getSoapVersionURI());
-                                    env = factory.getDefaultEnvelope();
-                                    env.getBody().addChild(factory.createOMElement("authenticate", "", ""));
-                                
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    param0,
+                                                    optimizeContent(new javax.xml.namespace.QName("",
+                                                    "authenticate")));
+                                                
         //adding SOAP headers
          _serviceClient.addHeadersToEnvelope(env);
         // create message context with that soap envelope
@@ -169,8 +174,18 @@
         _operationClient.execute(true);
 
          
-                return;
-            
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                           java.lang.Object object = fromOM(
+                                        _returnEnv.getBody().getFirstElement() ,
+                                        com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult.class,
+                                         getEnvelopeNamespaces(_returnEnv));
+                           _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                           return (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult)object;
+                    
          }catch(org.apache.axis2.AxisFault f){
             org.apache.axiom.om.OMElement faultElt = f.getDetail();
             if (faultElt!=null){
@@ -221,17 +236,19 @@
             
                     /**
                     * Auto generated method signature
-                    * @see com.cyclopsgroup.laputa.identity.client.IdentityService#signIn
+                    * @see com.cyclopsgroup.laputa.identity.wsclient.IdentityService#signIn
+                        * @param param2
+                    
                     */
-                    public void signIn(
+                    public com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket signIn(
 
-                    )
+                    com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username param2)
                     throws java.rmi.RemoteException
                     
                     {
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
-              _operationClient.getOptions().setAction("http://www.cyclopsgroup.org/identity:signIn");
+              _operationClient.getOptions().setAction("urn:signIn");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
@@ -239,11 +256,14 @@
               // create SOAP envelope with that payload
               org.apache.axiom.soap.SOAPEnvelope env = null;
                     
-                                    //Style is taken to be "document". No input parameters
-                                    org.apache.axiom.soap.SOAPFactory factory = getFactory(_operationClient.getOptions().getSoapVersionURI());
-                                    env = factory.getDefaultEnvelope();
-                                    env.getBody().addChild(factory.createOMElement("signIn", "", ""));
-                                
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    param2,
+                                                    optimizeContent(new javax.xml.namespace.QName("",
+                                                    "signIn")));
+                                                
         //adding SOAP headers
          _serviceClient.addHeadersToEnvelope(env);
         // create message context with that soap envelope
@@ -257,8 +277,18 @@
         _operationClient.execute(true);
 
          
-                return;
-            
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                           java.lang.Object object = fromOM(
+                                        _returnEnv.getBody().getFirstElement() ,
+                                        com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.class,
+                                         getEnvelopeNamespaces(_returnEnv));
+                           _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                           return (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket)object;
+                    
          }catch(org.apache.axis2.AxisFault f){
             org.apache.axiom.om.OMElement faultElt = f.getDetail();
             if (faultElt!=null){
@@ -309,7 +339,7 @@
              
                 
                 public void  signOut(
-                 
+                 com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket param4
 
                 ) throws java.rmi.RemoteException
                 
@@ -318,18 +348,21 @@
 
                 
                 org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
-                _operationClient.getOptions().setAction("http://www.cyclopsgroup.org/identity:signOut");
+                _operationClient.getOptions().setAction("urn:signOut");
                 _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
                 
                 org.apache.axiom.soap.SOAPEnvelope env = null;
 
                 
-                                                    //Style is taken to be "document". No input parameters
-                                                    org.apache.axiom.soap.SOAPFactory factory = getFactory(_operationClient.getOptions().getSoapVersionURI());
-                                                    env = factory.getDefaultEnvelope();
-                                                    env.getBody().addChild(factory.createOMElement("signOut", "", ""));
-                                                
+                                                    //Style is Doc.
+                                                    
+                                                                    
+                                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                                    param4,
+                                                                    optimizeContent(new javax.xml.namespace.QName("",
+                                                                    "signOut")));
+                                                                
 
               //adding SOAP headers
          _serviceClient.addHeadersToEnvelope(env);
@@ -347,17 +380,19 @@
             
                     /**
                     * Auto generated method signature
-                    * @see com.cyclopsgroup.laputa.identity.client.IdentityService#getIdentity
+                    * @see com.cyclopsgroup.laputa.identity.wsclient.IdentityService#getIdentity
+                        * @param param5
+                    
                     */
                     public com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Identity getIdentity(
 
-                    )
+                    com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket param5)
                     throws java.rmi.RemoteException
                     
                     {
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
-              _operationClient.getOptions().setAction("http://www.cyclopsgroup.org/identity:getIdentity");
+              _operationClient.getOptions().setAction("urn:getIdentity");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
@@ -365,11 +400,14 @@
               // create SOAP envelope with that payload
               org.apache.axiom.soap.SOAPEnvelope env = null;
                     
-                                    //Style is taken to be "document". No input parameters
-                                    org.apache.axiom.soap.SOAPFactory factory = getFactory(_operationClient.getOptions().getSoapVersionURI());
-                                    env = factory.getDefaultEnvelope();
-                                    env.getBody().addChild(factory.createOMElement("getIdentity", "", ""));
-                                
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    param5,
+                                                    optimizeContent(new javax.xml.namespace.QName("",
+                                                    "getIdentity")));
+                                                
         //adding SOAP headers
          _serviceClient.addHeadersToEnvelope(env);
         // create message context with that soap envelope
@@ -474,958 +512,98 @@
         return false;
     }
      //http://live.cyclopsgroup.org/webservice/identity
-        public static class ExtensionMapper{
-
-          public static java.lang.Object getTypeObject(java.lang.String namespaceURI,
-                                                       java.lang.String typeName,
-                                                       javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-
-              
-             throw new java.lang.RuntimeException("Unsupported type " + namespaceURI + " " + typeName);
-          }
-
-        }
-    
-        public static class Username
-        implements org.apache.axis2.databinding.ADBBean{
-        
-                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.cyclopsgroup.org/identity",
-                "username",
-                "ns1");
-
-            
-
-                        /**
-                        * field for Username
-                        */
-
-                        protected java.lang.String localUsername ;
-                        
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getUsername(){
-                               return localUsername;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Username
-                               */
-                               public void setUsername(java.lang.String param){
-                            
-                                    this.localUsername=param;
-                            
-
-                               }
-                            
-
-     
-     
-     /**
-     *
-     * @param parentQName
-     * @param factory
-     * @return org.apache.axiom.om.OMElement
-     */
-    public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory){
-
-
-        org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
-
-         public void serialize(
-                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-            
-                
-                //We can safely assume an element has only one type associated with it
-                
-                            java.lang.String namespace = "http://www.cyclopsgroup.org/identity";
-                            java.lang.String localName = "username";
-                        
-                            if (! namespace.equals("")) {
-                                java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-                                if (prefix == null) {
-                                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-
-                                    xmlWriter.writeStartElement(prefix, localName, namespace);
-                                    xmlWriter.writeNamespace(prefix, namespace);
-                                    xmlWriter.setPrefix(prefix, namespace);
-
-                                } else {
-                                    xmlWriter.writeStartElement(namespace, localName);
-                                }
-
-                            } else {
-                                xmlWriter.writeStartElement(localName);
-                            }
-                            
-                                          if (localUsername==null){
-                                            
-                                                     throw new RuntimeException("testValue cannot be null !!");
-                                                
-                                         }else{
-                                        
-                                                       xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
-                                            
-                                         }
-                                    
-                       xmlWriter.writeEndElement();
-                    
-
-        }
-
-         /**
-          * Util method to write an attribute with the ns prefix
-          */
-          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-              if (xmlWriter.getPrefix(namespace) == null) {
-                       xmlWriter.writeNamespace(prefix, namespace);
-                       xmlWriter.setPrefix(prefix, namespace);
-
-              }
-
-              xmlWriter.writeAttribute(namespace,attName,attValue);
-
-         }
-
-         /**
-          * Util method to write an attribute without the ns prefix
-          */
-          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-    	  	  if (namespace.equals(""))
-        	  {
-        		  xmlWriter.writeAttribute(attName,attValue);
-        	  }
-        	  else
-        	  {
-                  registerPrefix(xmlWriter, namespace);
-                  xmlWriter.writeAttribute(namespace,attName,attValue);
-              }
-          }
-
-         /**
-         * Register a namespace prefix
-         */
-         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
-                java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-                if (prefix == null) {
-                    prefix = createPrefix();
-
-                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
-                        prefix = createPrefix();
-                    }
-
-                    xmlWriter.writeNamespace(prefix, namespace);
-                    xmlWriter.setPrefix(prefix, namespace);
-                }
-
-                return prefix;
-            }
-
-         /**
-          * Create a prefix
-          */
-          private java.lang.String createPrefix() {
-                return "ns" + (int)Math.random();
-          }
-        };
-
-        
-               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
-               MY_QNAME,factory,dataSource);
-            
-    }
-
-  
-        /**
-        * databinding method to get an XML representation of this object
-        *
-        */
-        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
-
-
-        
-                
-                //We can safely assume an element has only one type associated with it
-                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-                            new java.lang.Object[]{
-                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername)
-                            },
-                            null);
-
-        }
-
-  
-
-     /**
-      *  Factory class that keeps the parse method
-      */
-    public static class Factory{
-
-
-        /**
-        * static method to create the object
-        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-        * Postcondition: If this object is an element, the reader is positioned at its end element
-        *                If this object is a complex type, the reader is positioned at the end element of its outer element
-        */
-        public static Username parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            Username object = new Username();
-            int event;
-            try {
-                
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
-
-                
-
-                
-                // Note all attributes that were handled. Used to differ normal attributes
-                // from anyAttributes.
-                java.util.Vector handledAttributes = new java.util.Vector();
-                
-
-                boolean isReaderMTOMAware = false;
-                
-                try{
-                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
-                }catch(java.lang.IllegalArgumentException e){
-                  isReaderMTOMAware = false;
-                }
-
-
-                   
-                while(!reader.isEndElement()) {
-                    if (reader.isStartElement() ){
-                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity","username").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setUsername(
-                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                              }  // End of if for expected property start element
-                            
-                             else{
-                                        // A start element we are not expecting indicates an invalid parameter was passed
-                                        throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
-                             }
-                          
-                             } else reader.next();  
-                            }  // end of while loop
-                        
-
-
-            } catch (javax.xml.stream.XMLStreamException e) {
-                throw new java.lang.Exception(e);
-            }
-
-            return object;
-        }
-
-        }//end of factory class
-
-        
-
-        }
-           
-          
-        public static class Ticket
-        implements org.apache.axis2.databinding.ADBBean{
-        
-                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.cyclopsgroup.org/identity",
-                "ticket",
-                "ns1");
-
-            
-
-                        /**
-                        * field for Ticket
-                        */
-
-                        protected java.lang.String localTicket ;
-                        
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getTicket(){
-                               return localTicket;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Ticket
-                               */
-                               public void setTicket(java.lang.String param){
-                            
-                                    this.localTicket=param;
-                            
-
-                               }
-                            
-
-     
-     
-     /**
-     *
-     * @param parentQName
-     * @param factory
-     * @return org.apache.axiom.om.OMElement
-     */
-    public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory){
-
-
-        org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
-
-         public void serialize(
-                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-            
-                
-                //We can safely assume an element has only one type associated with it
-                
-                            java.lang.String namespace = "http://www.cyclopsgroup.org/identity";
-                            java.lang.String localName = "ticket";
-                        
-                            if (! namespace.equals("")) {
-                                java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-                                if (prefix == null) {
-                                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-
-                                    xmlWriter.writeStartElement(prefix, localName, namespace);
-                                    xmlWriter.writeNamespace(prefix, namespace);
-                                    xmlWriter.setPrefix(prefix, namespace);
-
-                                } else {
-                                    xmlWriter.writeStartElement(namespace, localName);
-                                }
-
-                            } else {
-                                xmlWriter.writeStartElement(localName);
-                            }
-                            
-                                          if (localTicket==null){
-                                            
-                                                     throw new RuntimeException("testValue cannot be null !!");
-                                                
-                                         }else{
-                                        
-                                                       xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTicket));
-                                            
-                                         }
-                                    
-                       xmlWriter.writeEndElement();
-                    
-
-        }
-
-         /**
-          * Util method to write an attribute with the ns prefix
-          */
-          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-              if (xmlWriter.getPrefix(namespace) == null) {
-                       xmlWriter.writeNamespace(prefix, namespace);
-                       xmlWriter.setPrefix(prefix, namespace);
-
-              }
-
-              xmlWriter.writeAttribute(namespace,attName,attValue);
-
-         }
-
-         /**
-          * Util method to write an attribute without the ns prefix
-          */
-          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-    	  	  if (namespace.equals(""))
-        	  {
-        		  xmlWriter.writeAttribute(attName,attValue);
-        	  }
-        	  else
-        	  {
-                  registerPrefix(xmlWriter, namespace);
-                  xmlWriter.writeAttribute(namespace,attName,attValue);
-              }
-          }
-
-         /**
-         * Register a namespace prefix
-         */
-         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
-                java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-                if (prefix == null) {
-                    prefix = createPrefix();
-
-                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
-                        prefix = createPrefix();
-                    }
-
-                    xmlWriter.writeNamespace(prefix, namespace);
-                    xmlWriter.setPrefix(prefix, namespace);
-                }
-
-                return prefix;
-            }
-
-         /**
-          * Create a prefix
-          */
-          private java.lang.String createPrefix() {
-                return "ns" + (int)Math.random();
-          }
-        };
-
-        
-               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
-               MY_QNAME,factory,dataSource);
-            
-    }
-
-  
-        /**
-        * databinding method to get an XML representation of this object
-        *
-        */
-        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
-
-
-        
-                
-                //We can safely assume an element has only one type associated with it
-                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
-                            new java.lang.Object[]{
-                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
-                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTicket)
-                            },
-                            null);
-
-        }
-
-  
-
-     /**
-      *  Factory class that keeps the parse method
-      */
-    public static class Factory{
-
-
-        /**
-        * static method to create the object
-        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-        * Postcondition: If this object is an element, the reader is positioned at its end element
-        *                If this object is a complex type, the reader is positioned at the end element of its outer element
-        */
-        public static Ticket parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            Ticket object = new Ticket();
-            int event;
-            try {
-                
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
-
-                
-
-                
-                // Note all attributes that were handled. Used to differ normal attributes
-                // from anyAttributes.
-                java.util.Vector handledAttributes = new java.util.Vector();
-                
-
-                boolean isReaderMTOMAware = false;
-                
-                try{
-                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
-                }catch(java.lang.IllegalArgumentException e){
-                  isReaderMTOMAware = false;
-                }
-
-
-                   
-                while(!reader.isEndElement()) {
-                    if (reader.isStartElement() ){
-                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity","ticket").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setTicket(
-                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                              }  // End of if for expected property start element
-                            
-                             else{
-                                        // A start element we are not expecting indicates an invalid parameter was passed
-                                        throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
-                             }
-                          
-                             } else reader.next();  
-                            }  // end of while loop
-                        
-
-
-            } catch (javax.xml.stream.XMLStreamException e) {
-                throw new java.lang.Exception(e);
-            }
-
-            return object;
-        }
-
-        }//end of factory class
-
-        
-
-        }
-           
-          
-        public static class Credential
-        implements org.apache.axis2.databinding.ADBBean{
-        
-                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.cyclopsgroup.org/identity",
-                "credential",
-                "ns1");
-
-            
-
-                        /**
-                        * field for Username
-                        */
-
-                        protected java.lang.String localUsername ;
-                        
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getUsername(){
-                               return localUsername;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Username
-                               */
-                               public void setUsername(java.lang.String param){
-                            
-                                    this.localUsername=param;
-                            
-
-                               }
-                            
-
-                        /**
-                        * field for Password
-                        */
-
-                        protected java.lang.String localPassword ;
-                        
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getPassword(){
-                               return localPassword;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Password
-                               */
-                               public void setPassword(java.lang.String param){
-                            
-                                    this.localPassword=param;
-                            
-
-                               }
-                            
-
-     
-     
-     /**
-     *
-     * @param parentQName
-     * @param factory
-     * @return org.apache.axiom.om.OMElement
-     */
-    public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory){
-
-
-        org.apache.axiom.om.OMDataSource dataSource =
-                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
-
-         public void serialize(
-                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-            
-                
-
-                java.lang.String prefix = parentQName.getPrefix();
-                java.lang.String namespace = parentQName.getNamespaceURI();
-
-                if (namespace != null) {
-                    java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-                    if (writerPrefix != null) {
-                        xmlWriter.writeStartElement(namespace, parentQName.getLocalPart());
-                    } else {
-                        if (prefix == null) {
-                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                        }
-
-                        xmlWriter.writeStartElement(prefix, parentQName.getLocalPart(), namespace);
-                        xmlWriter.writeNamespace(prefix, namespace);
-                        xmlWriter.setPrefix(prefix, namespace);
-                    }
-                } else {
-                    xmlWriter.writeStartElement(parentQName.getLocalPart());
-                }
-
-                
-               
-                                    namespace = "http://www.cyclopsgroup.org/identity";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-
-                                            xmlWriter.writeStartElement(prefix,"username", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"username");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("username");
-                                    }
-                                
-
-                                          if (localUsername==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new RuntimeException("username cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-
-                                            xmlWriter.writeStartElement(prefix,"password", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"password");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("password");
-                                    }
-                                
-
-                                          if (localPassword==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new RuntimeException("password cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                   
-               xmlWriter.writeEndElement();
-            
-            
-
-        }
-
-         /**
-          * Util method to write an attribute with the ns prefix
-          */
-          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-              if (xmlWriter.getPrefix(namespace) == null) {
-                       xmlWriter.writeNamespace(prefix, namespace);
-                       xmlWriter.setPrefix(prefix, namespace);
-
-              }
-
-              xmlWriter.writeAttribute(namespace,attName,attValue);
-
-         }
-
-         /**
-          * Util method to write an attribute without the ns prefix
-          */
-          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
-                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
-    	  	  if (namespace.equals(""))
-        	  {
-        		  xmlWriter.writeAttribute(attName,attValue);
-        	  }
-        	  else
-        	  {
-                  registerPrefix(xmlWriter, namespace);
-                  xmlWriter.writeAttribute(namespace,attName,attValue);
-              }
-          }
-
-         /**
-         * Register a namespace prefix
-         */
-         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
-                java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-                if (prefix == null) {
-                    prefix = createPrefix();
-
-                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
-                        prefix = createPrefix();
-                    }
-
-                    xmlWriter.writeNamespace(prefix, namespace);
-                    xmlWriter.setPrefix(prefix, namespace);
-                }
-
-                return prefix;
-            }
-
-         /**
-          * Create a prefix
-          */
-          private java.lang.String createPrefix() {
-                return "ns" + (int)Math.random();
-          }
-        };
-
-        
-               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
-               MY_QNAME,factory,dataSource);
-            
-    }
-
-  
-        /**
-        * databinding method to get an XML representation of this object
-        *
-        */
-        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
-
-
-        
-                 java.util.ArrayList elementList = new java.util.ArrayList();
-                 java.util.ArrayList attribList = new java.util.ArrayList();
-
-                
-                             elementList.add(new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity",
-                                                                      "username"));
-                            
-                                        if (localUsername != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
-                                        } else {
-                                           throw new RuntimeException("username cannot be null!!");
-                                        }
-                                    
-                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "password"));
-                            
-                                        if (localPassword != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
-                                        } else {
-                                           throw new RuntimeException("password cannot be null!!");
-                                        }
-                                    
-
-                return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
-            
-            
-
-        }
-
-  
-
-     /**
-      *  Factory class that keeps the parse method
-      */
-    public static class Factory{
-
-
-        /**
-        * static method to create the object
-        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-        * Postcondition: If this object is an element, the reader is positioned at its end element
-        *                If this object is a complex type, the reader is positioned at the end element of its outer element
-        */
-        public static Credential parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            Credential object = new Credential();
-            int event;
-            try {
-                
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
-
-                
-                if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","type")!=null){
-                  java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                        "type");
-                  if (fullTypeName!=null){
-                    java.lang.String nsPrefix = fullTypeName.substring(0,fullTypeName.indexOf(":"));
-                    nsPrefix = nsPrefix==null?"":nsPrefix;
-
-                    java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
-                    if (!"credential".equals(type)){
-                        //find namespace for the prefix
-                        java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                        return (Credential)ExtensionMapper.getTypeObject(
-                             nsUri,type,reader);
-                      }
-
-                  }
-
-                }
-                
-
-                
-                // Note all attributes that were handled. Used to differ normal attributes
-                // from anyAttributes.
-                java.util.Vector handledAttributes = new java.util.Vector();
-                
-
-                boolean isReaderMTOMAware = false;
-                
-                try{
-                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
-                }catch(java.lang.IllegalArgumentException e){
-                  isReaderMTOMAware = false;
-                }
-
-
-                
-                    
-                    reader.next();
-                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity","username").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setUsername(
-                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                            
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","password").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setPassword(
-                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                            
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
-                                }
-                              
-                            while (!reader.isStartElement() && !reader.isEndElement())
-                                reader.next();
-                            if (reader.isStartElement())
-                                // A start element we are not expecting indicates a trailing invalid property
-                                throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
-                        
-
-
-            } catch (javax.xml.stream.XMLStreamException e) {
-                throw new java.lang.Exception(e);
-            }
-
-            return object;
-        }
-
-        }//end of factory class
-
-        
-
-        }
-           
-          
         public static class AuthenticationResult
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.cyclopsgroup.org/identity",
+                "http://www.cyclopsgroup.org/identity/message",
                 "authentication-result",
                 "ns1");
 
             
 
+                        /**
+                        * field for AuthenticationResult
+                        */
+
+                        protected java.lang.String localAuthenticationResult ;
+                        
+                        private static java.util.HashMap _table_ = new java.util.HashMap();
+
+                        // Constructor
+                        protected AuthenticationResult(java.lang.String value) {
+                            localAuthenticationResult = value;
+                            
+                                           _table_.put(localAuthenticationResult, this);
+                                       
+
+                        }
+
+                        
+                            public static final java.lang.String _SUCCESSFUL =
+                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString("SUCCESSFUL");
+                        
+                            public static final java.lang.String _NO_SUCH_USER =
+                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString("NO_SUCH_USER");
+                        
+                            public static final java.lang.String _DISABLED_USER =
+                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString("DISABLED_USER");
+                        
+                            public static final java.lang.String _WRONG_PASSWORD =
+                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString("WRONG_PASSWORD");
+                        
+                            public static final java.lang.String _ERROR =
+                                org.apache.axis2.databinding.utils.ConverterUtil.convertToString("ERROR");
+                        
+                            public static final AuthenticationResult SUCCESSFUL =
+                                new AuthenticationResult(_SUCCESSFUL);
+                        
+                            public static final AuthenticationResult NO_SUCH_USER =
+                                new AuthenticationResult(_NO_SUCH_USER);
+                        
+                            public static final AuthenticationResult DISABLED_USER =
+                                new AuthenticationResult(_DISABLED_USER);
+                        
+                            public static final AuthenticationResult WRONG_PASSWORD =
+                                new AuthenticationResult(_WRONG_PASSWORD);
+                        
+                            public static final AuthenticationResult ERROR =
+                                new AuthenticationResult(_ERROR);
+                        
+
+                            public java.lang.String getValue() { return localAuthenticationResult;}
+                            public static AuthenticationResult fromValue(java.lang.String value)
+                                  throws java.lang.IllegalArgumentException {
+                                AuthenticationResult enumeration = (AuthenticationResult)
+                            
+                                           _table_.get(value);
+                                       
+
+                                if (enumeration==null) throw new java.lang.IllegalArgumentException();
+                                return enumeration;
+                            }
+                            public static AuthenticationResult fromString(java.lang.String value)
+                                  throws java.lang.IllegalArgumentException {
+                                try {
+                                   
+                                           return fromValue(new java.lang.String(value));
+                                       
+
+                                } catch (java.lang.Exception e) {
+                                    throw new java.lang.IllegalArgumentException();
+                                }
+                            }
+                            public boolean equals(java.lang.Object obj) {return (obj == this);}
+                            public int hashCode() { return toString().hashCode();}
+                            public java.lang.String toString() {
+                            
+                                    return localAuthenticationResult.toString();
+                                
+
+                            }
+
+                        
+
      
      
      /**
@@ -1469,6 +647,19 @@
 
                 
                
+
+                                          if (localAuthenticationResult==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new RuntimeException("authentication-result cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAuthenticationResult));
+                                            
+                                          }
+                                    
                    
                xmlWriter.writeEndElement();
             
@@ -1554,6 +745,15 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                 
+                             elementList.add(new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message",
+                                                                      "authentication-result"));
+                            
+                                        if (localAuthenticationResult != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAuthenticationResult));
+                                        } else {
+                                           throw new RuntimeException("authentication-result cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1577,7 +777,7 @@
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
         public static AuthenticationResult parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            AuthenticationResult object = new AuthenticationResult();
+            AuthenticationResult object = null;
             int event;
             try {
                 
@@ -1620,7 +820,17 @@
                 }
 
 
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement()  || reader.hasText()){
                 
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                    object = AuthenticationResult.fromString(content);
+                                    
+                             } else reader.next();  
+                            }  // end of while loop
+                        
 
 
             } catch (javax.xml.stream.XMLStreamException e) {
@@ -1637,11 +847,23 @@
         }
            
           
+        public static class ExtensionMapper{
+
+          public static java.lang.Object getTypeObject(java.lang.String namespaceURI,
+                                                       java.lang.String typeName,
+                                                       javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+
+              
+             throw new java.lang.RuntimeException("Unsupported type " + namespaceURI + " " + typeName);
+          }
+
+        }
+    
         public static class Identity
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.cyclopsgroup.org/identity",
+                "http://www.cyclopsgroup.org/identity/message",
                 "identity",
                 "ns1");
 
@@ -1806,7 +1028,7 @@
 
                 
                
-                                    namespace = "http://www.cyclopsgroup.org/identity";
+                                    namespace = "http://www.cyclopsgroup.org/identity/message";
                                     if (! namespace.equals("")) {
                                         prefix = xmlWriter.getPrefix(namespace);
 
@@ -2027,7 +1249,7 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                 
-                             elementList.add(new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity",
+                             elementList.add(new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message",
                                                                       "username"));
                             
                                         if (localUsername != null){
@@ -2136,7 +1358,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity","username").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message","username").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
@@ -2231,6 +1453,968 @@
         }
            
           
+        public static class Credential
+        implements org.apache.axis2.databinding.ADBBean{
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.cyclopsgroup.org/identity/message",
+                "credential",
+                "ns1");
+
+            
+
+                        /**
+                        * field for Username
+                        */
+
+                        protected java.lang.String localUsername ;
+                        
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getUsername(){
+                               return localUsername;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Username
+                               */
+                               public void setUsername(java.lang.String param){
+                            
+                                    this.localUsername=param;
+                            
+
+                               }
+                            
+
+                        /**
+                        * field for Password
+                        */
+
+                        protected java.lang.String localPassword ;
+                        
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getPassword(){
+                               return localPassword;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Password
+                               */
+                               public void setPassword(java.lang.String param){
+                            
+                                    this.localPassword=param;
+                            
+
+                               }
+                            
+
+     
+     
+     /**
+     *
+     * @param parentQName
+     * @param factory
+     * @return org.apache.axiom.om.OMElement
+     */
+    public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory){
+
+
+        org.apache.axiom.om.OMDataSource dataSource =
+                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
+
+         public void serialize(
+                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+            
+                
+
+                java.lang.String prefix = parentQName.getPrefix();
+                java.lang.String namespace = parentQName.getNamespaceURI();
+
+                if (namespace != null) {
+                    java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+                    if (writerPrefix != null) {
+                        xmlWriter.writeStartElement(namespace, parentQName.getLocalPart());
+                    } else {
+                        if (prefix == null) {
+                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                        }
+
+                        xmlWriter.writeStartElement(prefix, parentQName.getLocalPart(), namespace);
+                        xmlWriter.writeNamespace(prefix, namespace);
+                        xmlWriter.setPrefix(prefix, namespace);
+                    }
+                } else {
+                    xmlWriter.writeStartElement(parentQName.getLocalPart());
+                }
+
+                
+               
+                                    namespace = "http://www.cyclopsgroup.org/identity/message";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+
+                                            xmlWriter.writeStartElement(prefix,"username", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"username");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("username");
+                                    }
+                                
+
+                                          if (localUsername==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new RuntimeException("username cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+
+                                            xmlWriter.writeStartElement(prefix,"password", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"password");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("password");
+                                    }
+                                
+
+                                          if (localPassword==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new RuntimeException("password cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                   
+               xmlWriter.writeEndElement();
+            
+            
+
+        }
+
+         /**
+          * Util method to write an attribute with the ns prefix
+          */
+          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+              if (xmlWriter.getPrefix(namespace) == null) {
+                       xmlWriter.writeNamespace(prefix, namespace);
+                       xmlWriter.setPrefix(prefix, namespace);
+
+              }
+
+              xmlWriter.writeAttribute(namespace,attName,attValue);
+
+         }
+
+         /**
+          * Util method to write an attribute without the ns prefix
+          */
+          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+    	  	  if (namespace.equals(""))
+        	  {
+        		  xmlWriter.writeAttribute(attName,attValue);
+        	  }
+        	  else
+        	  {
+                  registerPrefix(xmlWriter, namespace);
+                  xmlWriter.writeAttribute(namespace,attName,attValue);
+              }
+          }
+
+         /**
+         * Register a namespace prefix
+         */
+         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
+                java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+                if (prefix == null) {
+                    prefix = createPrefix();
+
+                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
+                        prefix = createPrefix();
+                    }
+
+                    xmlWriter.writeNamespace(prefix, namespace);
+                    xmlWriter.setPrefix(prefix, namespace);
+                }
+
+                return prefix;
+            }
+
+         /**
+          * Create a prefix
+          */
+          private java.lang.String createPrefix() {
+                return "ns" + (int)Math.random();
+          }
+        };
+
+        
+               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
+               MY_QNAME,factory,dataSource);
+            
+    }
+
+  
+        /**
+        * databinding method to get an XML representation of this object
+        *
+        */
+        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
+
+
+        
+                 java.util.ArrayList elementList = new java.util.ArrayList();
+                 java.util.ArrayList attribList = new java.util.ArrayList();
+
+                
+                             elementList.add(new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message",
+                                                                      "username"));
+                            
+                                        if (localUsername != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
+                                        } else {
+                                           throw new RuntimeException("username cannot be null!!");
+                                        }
+                                    
+                             elementList.add(new javax.xml.namespace.QName("",
+                                                                      "password"));
+                            
+                                        if (localPassword != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
+                                        } else {
+                                           throw new RuntimeException("password cannot be null!!");
+                                        }
+                                    
+
+                return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
+            
+            
+
+        }
+
+  
+
+     /**
+      *  Factory class that keeps the parse method
+      */
+    public static class Factory{
+
+
+        /**
+        * static method to create the object
+        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+        * Postcondition: If this object is an element, the reader is positioned at its end element
+        *                If this object is a complex type, the reader is positioned at the end element of its outer element
+        */
+        public static Credential parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            Credential object = new Credential();
+            int event;
+            try {
+                
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                
+                if (reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","type")!=null){
+                  java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                        "type");
+                  if (fullTypeName!=null){
+                    java.lang.String nsPrefix = fullTypeName.substring(0,fullTypeName.indexOf(":"));
+                    nsPrefix = nsPrefix==null?"":nsPrefix;
+
+                    java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
+                    if (!"credential".equals(type)){
+                        //find namespace for the prefix
+                        java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
+                        return (Credential)ExtensionMapper.getTypeObject(
+                             nsUri,type,reader);
+                      }
+
+                  }
+
+                }
+                
+
+                
+                // Note all attributes that were handled. Used to differ normal attributes
+                // from anyAttributes.
+                java.util.Vector handledAttributes = new java.util.Vector();
+                
+
+                boolean isReaderMTOMAware = false;
+                
+                try{
+                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
+                }catch(java.lang.IllegalArgumentException e){
+                  isReaderMTOMAware = false;
+                }
+
+
+                
+                    
+                    reader.next();
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message","username").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setUsername(
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                            
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","password").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPassword(
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                            
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
+                                }
+                              
+                            while (!reader.isStartElement() && !reader.isEndElement())
+                                reader.next();
+                            if (reader.isStartElement())
+                                // A start element we are not expecting indicates a trailing invalid property
+                                throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
+                        
+
+
+            } catch (javax.xml.stream.XMLStreamException e) {
+                throw new java.lang.Exception(e);
+            }
+
+            return object;
+        }
+
+        }//end of factory class
+
+        
+
+        }
+           
+          
+        public static class Ticket
+        implements org.apache.axis2.databinding.ADBBean{
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.cyclopsgroup.org/identity/message",
+                "ticket",
+                "ns1");
+
+            
+
+                        /**
+                        * field for Ticket
+                        */
+
+                        protected java.lang.String localTicket ;
+                        
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getTicket(){
+                               return localTicket;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Ticket
+                               */
+                               public void setTicket(java.lang.String param){
+                            
+                                    this.localTicket=param;
+                            
+
+                               }
+                            
+
+     
+     
+     /**
+     *
+     * @param parentQName
+     * @param factory
+     * @return org.apache.axiom.om.OMElement
+     */
+    public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory){
+
+
+        org.apache.axiom.om.OMDataSource dataSource =
+                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
+
+         public void serialize(
+                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+            
+                
+                //We can safely assume an element has only one type associated with it
+                
+                            java.lang.String namespace = "http://www.cyclopsgroup.org/identity/message";
+                            java.lang.String localName = "ticket";
+                        
+                            if (! namespace.equals("")) {
+                                java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+                                if (prefix == null) {
+                                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+
+                                    xmlWriter.writeStartElement(prefix, localName, namespace);
+                                    xmlWriter.writeNamespace(prefix, namespace);
+                                    xmlWriter.setPrefix(prefix, namespace);
+
+                                } else {
+                                    xmlWriter.writeStartElement(namespace, localName);
+                                }
+
+                            } else {
+                                xmlWriter.writeStartElement(localName);
+                            }
+                            
+                                          if (localTicket==null){
+                                            
+                                                     throw new RuntimeException("testValue cannot be null !!");
+                                                
+                                         }else{
+                                        
+                                                       xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTicket));
+                                            
+                                         }
+                                    
+                       xmlWriter.writeEndElement();
+                    
+
+        }
+
+         /**
+          * Util method to write an attribute with the ns prefix
+          */
+          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+              if (xmlWriter.getPrefix(namespace) == null) {
+                       xmlWriter.writeNamespace(prefix, namespace);
+                       xmlWriter.setPrefix(prefix, namespace);
+
+              }
+
+              xmlWriter.writeAttribute(namespace,attName,attValue);
+
+         }
+
+         /**
+          * Util method to write an attribute without the ns prefix
+          */
+          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+    	  	  if (namespace.equals(""))
+        	  {
+        		  xmlWriter.writeAttribute(attName,attValue);
+        	  }
+        	  else
+        	  {
+                  registerPrefix(xmlWriter, namespace);
+                  xmlWriter.writeAttribute(namespace,attName,attValue);
+              }
+          }
+
+         /**
+         * Register a namespace prefix
+         */
+         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
+                java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+                if (prefix == null) {
+                    prefix = createPrefix();
+
+                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
+                        prefix = createPrefix();
+                    }
+
+                    xmlWriter.writeNamespace(prefix, namespace);
+                    xmlWriter.setPrefix(prefix, namespace);
+                }
+
+                return prefix;
+            }
+
+         /**
+          * Create a prefix
+          */
+          private java.lang.String createPrefix() {
+                return "ns" + (int)Math.random();
+          }
+        };
+
+        
+               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
+               MY_QNAME,factory,dataSource);
+            
+    }
+
+  
+        /**
+        * databinding method to get an XML representation of this object
+        *
+        */
+        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
+
+
+        
+                
+                //We can safely assume an element has only one type associated with it
+                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
+                            new java.lang.Object[]{
+                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
+                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTicket)
+                            },
+                            null);
+
+        }
+
+  
+
+     /**
+      *  Factory class that keeps the parse method
+      */
+    public static class Factory{
+
+
+        /**
+        * static method to create the object
+        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+        * Postcondition: If this object is an element, the reader is positioned at its end element
+        *                If this object is a complex type, the reader is positioned at the end element of its outer element
+        */
+        public static Ticket parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            Ticket object = new Ticket();
+            int event;
+            try {
+                
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                
+
+                
+                // Note all attributes that were handled. Used to differ normal attributes
+                // from anyAttributes.
+                java.util.Vector handledAttributes = new java.util.Vector();
+                
+
+                boolean isReaderMTOMAware = false;
+                
+                try{
+                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
+                }catch(java.lang.IllegalArgumentException e){
+                  isReaderMTOMAware = false;
+                }
+
+
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement() ){
+                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message","ticket").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setTicket(
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                              }  // End of if for expected property start element
+                            
+                             else{
+                                        // A start element we are not expecting indicates an invalid parameter was passed
+                                        throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
+                             }
+                          
+                             } else reader.next();  
+                            }  // end of while loop
+                        
+
+
+            } catch (javax.xml.stream.XMLStreamException e) {
+                throw new java.lang.Exception(e);
+            }
+
+            return object;
+        }
+
+        }//end of factory class
+
+        
+
+        }
+           
+          
+        public static class Username
+        implements org.apache.axis2.databinding.ADBBean{
+        
+                public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+                "http://www.cyclopsgroup.org/identity/message",
+                "username",
+                "ns1");
+
+            
+
+                        /**
+                        * field for Username
+                        */
+
+                        protected java.lang.String localUsername ;
+                        
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getUsername(){
+                               return localUsername;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Username
+                               */
+                               public void setUsername(java.lang.String param){
+                            
+                                    this.localUsername=param;
+                            
+
+                               }
+                            
+
+     
+     
+     /**
+     *
+     * @param parentQName
+     * @param factory
+     * @return org.apache.axiom.om.OMElement
+     */
+    public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory){
+
+
+        org.apache.axiom.om.OMDataSource dataSource =
+                       new org.apache.axis2.databinding.ADBDataSource(this,parentQName){
+
+         public void serialize(
+                                  javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
+            
+                
+                //We can safely assume an element has only one type associated with it
+                
+                            java.lang.String namespace = "http://www.cyclopsgroup.org/identity/message";
+                            java.lang.String localName = "username";
+                        
+                            if (! namespace.equals("")) {
+                                java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+                                if (prefix == null) {
+                                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+
+                                    xmlWriter.writeStartElement(prefix, localName, namespace);
+                                    xmlWriter.writeNamespace(prefix, namespace);
+                                    xmlWriter.setPrefix(prefix, namespace);
+
+                                } else {
+                                    xmlWriter.writeStartElement(namespace, localName);
+                                }
+
+                            } else {
+                                xmlWriter.writeStartElement(localName);
+                            }
+                            
+                                          if (localUsername==null){
+                                            
+                                                     throw new RuntimeException("testValue cannot be null !!");
+                                                
+                                         }else{
+                                        
+                                                       xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
+                                            
+                                         }
+                                    
+                       xmlWriter.writeEndElement();
+                    
+
+        }
+
+         /**
+          * Util method to write an attribute with the ns prefix
+          */
+          private void writeAttribute(java.lang.String prefix,java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+              if (xmlWriter.getPrefix(namespace) == null) {
+                       xmlWriter.writeNamespace(prefix, namespace);
+                       xmlWriter.setPrefix(prefix, namespace);
+
+              }
+
+              xmlWriter.writeAttribute(namespace,attName,attValue);
+
+         }
+
+         /**
+          * Util method to write an attribute without the ns prefix
+          */
+          private void writeAttribute(java.lang.String namespace,java.lang.String attName,
+                                      java.lang.String attValue,javax.xml.stream.XMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException{
+    	  	  if (namespace.equals(""))
+        	  {
+        		  xmlWriter.writeAttribute(attName,attValue);
+        	  }
+        	  else
+        	  {
+                  registerPrefix(xmlWriter, namespace);
+                  xmlWriter.writeAttribute(namespace,attName,attValue);
+              }
+          }
+
+         /**
+         * Register a namespace prefix
+         */
+         private java.lang.String registerPrefix(javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace) throws javax.xml.stream.XMLStreamException {
+                java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+                if (prefix == null) {
+                    prefix = createPrefix();
+
+                    while (xmlWriter.getNamespaceContext().getNamespaceURI(prefix) != null) {
+                        prefix = createPrefix();
+                    }
+
+                    xmlWriter.writeNamespace(prefix, namespace);
+                    xmlWriter.setPrefix(prefix, namespace);
+                }
+
+                return prefix;
+            }
+
+         /**
+          * Create a prefix
+          */
+          private java.lang.String createPrefix() {
+                return "ns" + (int)Math.random();
+          }
+        };
+
+        
+               return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
+               MY_QNAME,factory,dataSource);
+            
+    }
+
+  
+        /**
+        * databinding method to get an XML representation of this object
+        *
+        */
+        public javax.xml.stream.XMLStreamReader getPullParser(javax.xml.namespace.QName qName){
+
+
+        
+                
+                //We can safely assume an element has only one type associated with it
+                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(MY_QNAME,
+                            new java.lang.Object[]{
+                            org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT,
+                            org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername)
+                            },
+                            null);
+
+        }
+
+  
+
+     /**
+      *  Factory class that keeps the parse method
+      */
+    public static class Factory{
+
+
+        /**
+        * static method to create the object
+        * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+        *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+        * Postcondition: If this object is an element, the reader is positioned at its end element
+        *                If this object is a complex type, the reader is positioned at the end element of its outer element
+        */
+        public static Username parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            Username object = new Username();
+            int event;
+            try {
+                
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                
+
+                
+                // Note all attributes that were handled. Used to differ normal attributes
+                // from anyAttributes.
+                java.util.Vector handledAttributes = new java.util.Vector();
+                
+
+                boolean isReaderMTOMAware = false;
+                
+                try{
+                  isReaderMTOMAware = java.lang.Boolean.TRUE.equals(reader.getProperty(org.apache.axiom.om.OMConstants.IS_DATA_HANDLERS_AWARE));
+                }catch(java.lang.IllegalArgumentException e){
+                  isReaderMTOMAware = false;
+                }
+
+
+                   
+                while(!reader.isEndElement()) {
+                    if (reader.isStartElement() ){
+                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://www.cyclopsgroup.org/identity/message","username").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setUsername(
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                              }  // End of if for expected property start element
+                            
+                             else{
+                                        // A start element we are not expecting indicates an invalid parameter was passed
+                                        throw new java.lang.RuntimeException("Unexpected subelement " + reader.getLocalName());
+                             }
+                          
+                             } else reader.next();  
+                            }  // end of while loop
+                        
+
+
+            } catch (javax.xml.stream.XMLStreamException e) {
+                throw new java.lang.Exception(e);
+            }
+
+            return object;
+        }
+
+        }//end of factory class
+
+        
+
+        }
+           
+          
+            private  org.apache.axiom.om.OMElement  toOM(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential param, boolean optimizeContent){
+            
+                     return param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential.MY_QNAME,
+                                  org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult param, boolean optimizeContent){
+            
+                     return param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult.MY_QNAME,
+                                  org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username param, boolean optimizeContent){
+            
+                     return param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username.MY_QNAME,
+                                  org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket param, boolean optimizeContent){
+            
+                     return param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.MY_QNAME,
+                                  org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Identity param, boolean optimizeContent){
             
                      return param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Identity.MY_QNAME,
@@ -2239,6 +2423,39 @@
 
             }
         
+
+                            
+                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential param, boolean optimizeContent){
+                        org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                             
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential.MY_QNAME,factory));
+                                
+                         return emptyEnvelope;
+                        }
+
+                        
+
+                            
+                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username param, boolean optimizeContent){
+                        org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                             
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username.MY_QNAME,factory));
+                                
+                         return emptyEnvelope;
+                        }
+
+                        
+
+                            
+                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket param, boolean optimizeContent){
+                        org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                             
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.MY_QNAME,factory));
+                                
+                         return emptyEnvelope;
+                        }
+
+                        
 
 
         /**
@@ -2256,6 +2473,48 @@
 
         try {
         
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Credential.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.AuthenticationResult.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Username.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.class.equals(type)){
+                
+                           return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Ticket.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
                 if (com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Identity.class.equals(type)){
                 
                            return com.cyclopsgroup.laputa.identity.wsclient.IdentityServiceStub.Identity.Factory.parse(param.getXMLStreamReaderWithoutCaching());

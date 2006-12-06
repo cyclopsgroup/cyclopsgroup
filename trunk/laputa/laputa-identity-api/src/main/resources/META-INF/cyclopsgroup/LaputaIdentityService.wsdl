@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="service"
 	targetNamespace="http://www.cyclopsgroup.org/identity"
-	xmlns:ids="http://www.cyclopsgroup.org/identity"
-	xmlns:msg="http://www.cyclopsgroup.org/identity/message"
+	xmlns:axis2="http://www.cyclopsgroup.org/identity"
+	xmlns:ns="http://www.cyclopsgroup.org/identity/message"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns="http://schemas.xmlsoap.org/wsdl/">
 	<types>
@@ -12,7 +12,7 @@
 			<element name="credential">
 				<complexType>
 					<sequence>
-						<element ref="msg:username" />
+						<element ref="ns:username" />
 						<element name="password" type="string" />
 					</sequence>
 				</complexType>
@@ -20,7 +20,7 @@
 			<element name="identity">
 				<complexType>
 					<sequence>
-						<element ref="msg:username" />
+						<element ref="ns:username" />
 						<element name="language" type="string" />
 						<element name="country" type="string" />
 						<element name="timezone" type="string" />
@@ -29,7 +29,7 @@
 			</element>
 			<element name="authentication-result">
 				<simpleType>
-					<restriction>
+					<restriction base="string">
 						<enumeration value="SUCCESSFUL" />
 						<enumeration value="NO_SUCH_USER" />
 						<enumeration value="DISABLED_USER" />
@@ -42,47 +42,46 @@
 		</schema>
 	</types>
 	<message name="authenticateRequest">
-		<part name="credential" type="msg:credential" />
+		<part name="part1" element="ns:credential" />
 	</message>
 	<message name="authenticateResponse">
-		<part name="authenticationResult"
-			type="msg:authentication-result" />
+		<part name="part1" element="ns:authentication-result" />
 	</message>
 	<message name="signInRequest">
-		<part name="username" type="msg:username" />
+		<part name="part1" element="ns:username" />
 	</message>
-	<message name="ticket">
-		<part name="ticket" type="msg:ticket" />
+	<message name="ticketMessage">
+		<part name="part1" element="ns:ticket" />
 	</message>
-	<message name="identity">
-		<part name="identity" element="msg:identity" />
+	<message name="identityMessage">
+		<part name="part1" element="ns:identity" />
 	</message>
 
 	<portType name="IdentityServicePortType">
 		<operation name="authenticate">
-			<input message="authenticateRequest" />
-			<output message="authenticateResponse" />
+			<input message="axis2:authenticateRequest" />
+			<output message="axis2:authenticateResponse" />
 		</operation>
 		<operation name="signIn">
-			<input message="signInRequest" />
-			<output message="ticket" />
+			<input message="axis2:signInRequest" />
+			<output message="axis2:ticketMessage" />
 		</operation>
 		<operation name="signOut">
-			<input message="ticket" />
+			<input message="axis2:ticketMessage" />
 		</operation>
 		<operation name="getIdentity">
-			<input message="ticket" />
-			<output message="identity" />
+			<input message="axis2:ticketMessage" />
+			<output message="axis2:identityMessage" />
 		</operation>
 	</portType>
 
 	<binding name="IdentityServiceBinding"
-		type="ids:IdentityServicePortType">
-		<soap:binding style="document"
-			transport="http://live.cyclopsgroup.org/webservice/identity" />
+		type="axis2:IdentityServicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
 		<operation name="authenticate">
 			<soap:operation style="document"
-				soapAction="http://www.cyclopsgroup.org/identity:authenticate" />
+				soapAction="urn:authenticate" />
 			<input>
 				<soap:body use="literal"
 					namespace="http://www.cyclopsgroup.org/identity" />
@@ -93,8 +92,7 @@
 			</output>
 		</operation>
 		<operation name="signIn">
-			<soap:operation style="document"
-				soapAction="http://www.cyclopsgroup.org/identity:signIn" />
+			<soap:operation style="document" soapAction="urn:signIn" />
 			<input>
 				<soap:body use="literal"
 					namespace="http://www.cyclopsgroup.org/identity" />
@@ -105,8 +103,7 @@
 			</output>
 		</operation>
 		<operation name="signOut">
-			<soap:operation style="document"
-				soapAction="http://www.cyclopsgroup.org/identity:signOut" />
+			<soap:operation style="document" soapAction="urn:signOut" />
 			<input>
 				<soap:body use="literal"
 					namespace="http://www.cyclopsgroup.org/identity" />
@@ -118,7 +115,7 @@
 		</operation>
 		<operation name="getIdentity">
 			<soap:operation style="document"
-				soapAction="http://www.cyclopsgroup.org/identity:getIdentity" />
+				soapAction="urn:getIdentity" />
 			<input>
 				<soap:body use="literal"
 					namespace="http://www.cyclopsgroup.org/identity" />
@@ -131,7 +128,8 @@
 	</binding>
 
 	<service name="IdentityService">
-		<port name="webservice" binding="ids:IdentityServiceBinding">
+		<port name="webservice"
+			binding="axis2:IdentityServiceBinding">
 			<soap:address
 				location="http://live.cyclopsgroup.org/webservice/identity" />
 		</port>
