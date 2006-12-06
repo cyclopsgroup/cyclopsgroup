@@ -21,7 +21,7 @@
 			scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/laputa/laputa-identity-server
 		</developerConnection>
 		<url>
-			http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/arapaho/laputa/laputa-identity-server
+			http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/laputa/laputa-identity-server
 		</url>
 	</scm>
 	<dependencies>
