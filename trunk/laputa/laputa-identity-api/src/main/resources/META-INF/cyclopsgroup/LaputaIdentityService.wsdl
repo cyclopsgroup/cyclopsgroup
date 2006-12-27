@@ -39,6 +39,13 @@
 				</simpleType>
 			</element>
 			<element name="ticket" type="string" />
+			<element name="no-such-user">
+				<complexType>
+					<sequence>
+						<element ref="ns:username" />
+					</sequence>
+				</complexType>
+			</element>
 		</schema>
 	</types>
 	<message name="authenticateRequest">
@@ -56,6 +63,9 @@
 	<message name="identityMessage">
 		<part name="part1" element="ns:identity" />
 	</message>
+	<message name="noSuchUserError">
+		<part name="part1" element="ns:no-such-user" />
+	</message>
 
 	<portType name="IdentityServicePortType">
 		<operation name="authenticate">
@@ -65,6 +75,7 @@
 		<operation name="signIn">
 			<input message="axis2:signInRequest" />
 			<output message="axis2:ticketMessage" />
+			<fault name="error" message="axis2:noSuchUserError" />
 		</operation>
 		<operation name="signOut">
 			<input message="axis2:ticketMessage" />
