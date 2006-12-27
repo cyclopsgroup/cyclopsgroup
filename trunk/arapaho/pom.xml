@@ -18,6 +18,7 @@
         <url>http://dev.cyclopsgroup.org/issues</url>
     </issueManagement>
     <modules>
+        <module>arapaho-lib-hibernate</module>
         <module>arapaho-main-site</module>
         <module>arapaho-maven-plugin</module>
         <module>cyclopsgroup-project</module>

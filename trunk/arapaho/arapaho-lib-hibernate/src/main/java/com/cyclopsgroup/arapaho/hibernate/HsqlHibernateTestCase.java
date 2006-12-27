@@ -1,12 +1,8 @@
 package com.cyclopsgroup.arapaho.hibernate;
 
-import java.util.Properties;
-
 import junit.framework.TestCase;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 
 /**
  * Base test case with in-memory hsql support
@@ -17,42 +13,32 @@ import org.hibernate.cfg.Configuration;
 public class HsqlHibernateTestCase
     extends TestCase
 {
+    private HibernateService hibernateService;
+
     protected SessionFactory sessionFactory;
 
-    /**
-     * Create hibernate config
-     * Add your hibernate cfg files by overriding this method
-     * 
-     * @return Hibernate configuration object
-     * @throws Exception
-     */
-    protected Configuration createHibernateConfiguration()
+    protected HibernateService createHibernateService()
         throws Exception
     {
-        Properties props = new Properties();
-        props.load( HsqlHibernateTestCase.class.getResourceAsStream( "test-hsql-hibernate.properties" ) );
-        AnnotationConfiguration conf = new AnnotationConfiguration();
-        conf.setProperties( props );
-        return conf;
-    }
-
-    /**
-     * Create new hibernate SessionFactory object
-     * 
-     * @return Session factory object
-     * @throws Exception
-     */
-    protected SessionFactory createSessionFactory()
-        throws Exception
-    {
-        return createHibernateConfiguration().buildSessionFactory();
+        DefaultHibernateService dhs = new DefaultHibernateService();
+        dhs.setProperty( "hibernate.dialect", "org.hibernate.dialect.HSQLDialect" );
+        dhs.setProperty( "hibernate.connection.driver_class", "org.hsqldb.jdbcDriver" );
+        dhs.setProperty( "hibernate.connection.url", "jdbc:hsqldb:mem:test" );
+        dhs.setProperty( "hibernate.connection.username", "sa" );
+        dhs.setProperty( "hibernate.connection.pool_size", "1" );
+        dhs.setProperty( "hibernate.connection.autocommit", "true" );
+        dhs.setProperty( "hibernate.cache.provider_class", "org.hibernate.cache.HashtableCacheProvider" );
+        dhs.setProperty( "hibernate.hbm2ddl.auto", "create-drop" );
+        dhs.setProperty( "hibernate.show_sql", "true" );
+        return dhs;
     }
 
     @Override
     protected void setUp()
         throws Exception
     {
-        sessionFactory = createSessionFactory();
+        hibernateService = createHibernateService();
+        sessionFactory = hibernateService.createSessionFactory();
     }
 
     @Override

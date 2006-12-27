@@ -31,6 +31,11 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>com.cyclopsgroup.arapaho</groupId>
+			<artifactId>arapaho-lib-hibernate</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate</artifactId>
 			<version>3.2.0.ga</version>
@@ -53,19 +58,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.cyclopsgroup.arapaho</groupId>
-				<artifactId>arapaho-maven-plugin</artifactId>
-				<configuration>
-					<configFiles>
-						<configFile>
-							resource:com/cyclopsgroup/laputa/identity/db/hibernate.xml
-						</configFile>
-					</configFiles>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

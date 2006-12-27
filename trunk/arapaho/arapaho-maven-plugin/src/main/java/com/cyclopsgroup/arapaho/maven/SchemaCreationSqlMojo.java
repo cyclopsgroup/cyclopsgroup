@@ -10,7 +10,7 @@ import org.hibernate.dialect.Dialect;
 /**
  * @description Generate hibernate schema
  * @author <a href="mailto:jiaqi.guo@gmail.com>jiaqi</a>
- * @goal schema-create
+ * @goal generate-hibernate-schema
  * @requiresDependencyResolution runtime
  */
 public class SchemaCreationSqlMojo
@@ -42,5 +42,6 @@ public class SchemaCreationSqlMojo
         }
         out.flush();
         out.close();
+        getLog().info( "Schema to create database is created at " + output.getAbsolutePath() );
     }
 }

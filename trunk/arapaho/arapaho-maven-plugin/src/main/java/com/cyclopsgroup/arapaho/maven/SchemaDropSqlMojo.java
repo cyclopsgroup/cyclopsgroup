@@ -10,7 +10,7 @@ import org.hibernate.dialect.Dialect;
 /**
  * @description Generate hibernate schema
  * @author <a href="mailto:jiaqi.guo@gmail.com>jiaqi</a>
- * @goal schema-drop
+ * @goal generate-hibernate-drop-sql
  * @requiresDependencyResolution runtime
  */
 public class SchemaDropSqlMojo
@@ -42,5 +42,6 @@ public class SchemaDropSqlMojo
         }
         out.flush();
         out.close();
+        getLog().info( "Sql to drop tables is generated to " + output.getAbsolutePath() );
     }
 }
