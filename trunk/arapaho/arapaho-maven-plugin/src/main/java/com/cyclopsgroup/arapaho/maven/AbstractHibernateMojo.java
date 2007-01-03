@@ -9,7 +9,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import com.cyclopsgroup.arapaho.hibernate.DefaultHibernateService;
+import com.cyclopsgroup.arapaho.hibernate.SimpleHibernateProvider;
 
 /**
  * @author <a href="mailto:jiaqi@amazon.com>jiaqi</a>
@@ -47,14 +47,14 @@ public abstract class AbstractHibernateMojo
             {
                 try
                 {
-                    DefaultHibernateService hibernateService;
+                    SimpleHibernateProvider hibernateService;
                     if ( StringUtils.isEmpty( hibernateMeta ) )
                     {
-                        hibernateService = new DefaultHibernateService();
+                        hibernateService = new SimpleHibernateProvider();
                     }
                     else
                     {
-                        hibernateService = new DefaultHibernateService( hibernateMeta );
+                        hibernateService = new SimpleHibernateProvider( hibernateMeta );
                     }
                     hibernateService.setProperties( hibernateProperties.toURL() );
                     hibernateService.setProperties( System.getProperties() );
