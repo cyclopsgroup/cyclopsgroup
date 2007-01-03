@@ -13,14 +13,14 @@ import org.hibernate.SessionFactory;
 public class HsqlHibernateTestCase
     extends TestCase
 {
-    private HibernateService hibernateService;
+    private HibernateProvider hibernateInstance;
 
     protected SessionFactory sessionFactory;
 
-    protected HibernateService createHibernateService()
+    protected HibernateProvider createHibernateService()
         throws Exception
     {
-        DefaultHibernateService dhs = new DefaultHibernateService();
+        SimpleHibernateProvider dhs = new SimpleHibernateProvider();
         dhs.setProperty( "hibernate.dialect", "org.hibernate.dialect.HSQLDialect" );
         dhs.setProperty( "hibernate.connection.driver_class", "org.hsqldb.jdbcDriver" );
         dhs.setProperty( "hibernate.connection.url", "jdbc:hsqldb:mem:test" );
@@ -37,8 +37,8 @@ public class HsqlHibernateTestCase
     protected void setUp()
         throws Exception
     {
-        hibernateService = createHibernateService();
-        sessionFactory = hibernateService.createSessionFactory();
+        hibernateInstance = createHibernateService();
+        sessionFactory = hibernateInstance.createSessionFactory();
     }
 
     @Override

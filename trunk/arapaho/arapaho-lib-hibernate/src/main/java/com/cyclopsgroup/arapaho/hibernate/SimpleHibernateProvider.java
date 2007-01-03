@@ -16,8 +16,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
-public class DefaultHibernateService
-    implements HibernateService
+public class SimpleHibernateProvider
+    implements HibernateProvider
 {
     public static final String DEFAULT_CONFIG_PATH = "META-INF/cyclopsgroup/hibernate.properties";
 
@@ -25,19 +25,19 @@ public class DefaultHibernateService
 
     private Log logger = LogFactory.getLog( getClass() );
 
-    public DefaultHibernateService()
+    public SimpleHibernateProvider()
         throws IOException
     {
         this( DEFAULT_CONFIG_PATH );
     }
 
-    public DefaultHibernateService( ExtendedProperties props )
+    public SimpleHibernateProvider( ExtendedProperties props )
         throws IOException
     {
         populateExtendedProperties( props, new HashSet<String>() );
     }
 
-    public DefaultHibernateService( String props )
+    public SimpleHibernateProvider( String props )
         throws IOException
     {
         Enumeration<URL> propsResources = Thread.currentThread().getContextClassLoader().getResources( props );
@@ -50,7 +50,7 @@ public class DefaultHibernateService
         }
     }
 
-    public DefaultHibernateService( URL props )
+    public SimpleHibernateProvider( URL props )
         throws IOException
     {
         ExtendedProperties ep = new ExtendedProperties();
@@ -64,7 +64,7 @@ public class DefaultHibernateService
     }
 
     /**
-     * @see com.cyclopsgroup.arapaho.hibernate.HibernateService#createSessionFactory()
+     * @see com.cyclopsgroup.arapaho.hibernate.HibernateProvider#createSessionFactory()
      */
     public SessionFactory createSessionFactory()
     {
@@ -72,7 +72,7 @@ public class DefaultHibernateService
     }
 
     /**
-     * @see com.cyclopsgroup.arapaho.hibernate.HibernateService#getConfiguration()
+     * @see com.cyclopsgroup.arapaho.hibernate.HibernateProvider#getConfiguration()
      */
     public Configuration getConfiguration()
     {
@@ -130,9 +130,12 @@ public class DefaultHibernateService
 
     public void setProperties( Properties props )
     {
-        for ( Object name : props.keySet() )
+        if ( props != null )
         {
-            config.setProperty( name.toString(), props.getProperty( name.toString() ) );
+            for ( Object name : props.keySet() )
+            {
+                config.setProperty( name.toString(), props.getProperty( name.toString() ) );
+            }
         }
     }
 

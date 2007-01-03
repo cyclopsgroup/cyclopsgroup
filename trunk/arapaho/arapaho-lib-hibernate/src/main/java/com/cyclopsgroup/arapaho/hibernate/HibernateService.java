@@ -1,11 +1,31 @@
 package com.cyclopsgroup.arapaho.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
+/**
+ * Hibernate service facade
+ *
+ * @author <a href="mailto:jiaqi@amazon.com>jiaqi</a>
+ *
+ */
 public interface HibernateService
 {
-    Configuration getConfiguration();
+    String DEFAULT_HIBERNATE = "default";
 
-    SessionFactory createSessionFactory();
+    String ROLE = HibernateService.class.getName();
+
+    String SESSION_ID_KEY = HibernateService.class.getName() + "/sessionId";
+
+    void closeSession( long sessionId );
+
+    HibernateProvider getHibernateProvider( String hibernateName );
+
+    Session getSession( long sessionId );
+
+    SessionFactory getSessionFactory();
+
+    SessionFactory getSessionFactory( String hibernateName );
+
+    long openSession( String hibernateName );
 }
