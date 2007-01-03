@@ -21,14 +21,23 @@ public class DefaultMBeanServerHome
     extends AbstractLogEnabled
     implements MBeanServerHome, Initializable, Configurable
 {
+    private String domain;
+
+    private MBeanServer mbeanServer;
+
+    /**
+     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
+     */
+    public void configure( Configuration conf )
+        throws ConfigurationException
+    {
+        domain = conf.getChild( "domain" ).getValue( "plexus-container" );
+    }
+
     public String getDomain()
     {
         return domain;
     }
-
-    private MBeanServer mbeanServer;
-
-    private String domain;
 
     public MBeanServer getMBeanServer()
     {
@@ -42,14 +51,5 @@ public class DefaultMBeanServerHome
         throws Exception
     {
         mbeanServer = MBeanServerFactory.createMBeanServer( domain );
-    }
-
-    /**
-     * @see org.apache.avalon.framework.configuration.Configurable#configure(org.apache.avalon.framework.configuration.Configuration)
-     */
-    public void configure( Configuration conf )
-        throws ConfigurationException
-    {
-        domain = conf.getChild( "domain" ).getValue( "plexus" );
     }
 }

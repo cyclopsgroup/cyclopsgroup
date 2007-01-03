@@ -10,5 +10,6 @@ public class MBeanServerHomeTest
     {
         MBeanServerHome home = (MBeanServerHome) lookup( MBeanServerHome.ROLE );
         assertNotNull( home );
+
     }
 }
