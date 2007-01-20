@@ -45,7 +45,9 @@ public class SimpleHibernateProvider
         while ( propsResources.hasMoreElements() )
         {
             ExtendedProperties ep = new ExtendedProperties();
-            ep.load( propsResources.nextElement().openStream() );
+            URL propsResource = propsResources.nextElement();
+            logger.info( "Reading meta file " + propsResource );
+            ep.load( propsResource.openStream() );
             populateExtendedProperties( ep, populatedFiles );
         }
     }
