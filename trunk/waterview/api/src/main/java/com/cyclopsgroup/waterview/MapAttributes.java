@@ -48,33 +48,18 @@ public class MapAttributes
         this.map = map;
     }
 
-    /**
-     * Overwrite or implement method in MapValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
-     */
     @Override
-    public void add( String name, String value )
+    public void doAddAttribute( String name, String value )
     {
         getMap().put( name, value );
     }
 
-    /**
-     * Override method doGetAttributeNames in class MapValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
-     */
     @Override
     protected Set<String> doGetAttributeNames()
     {
         return getMap().keySet();
     }
 
-    /**
-     * Overwrite or implement method in MapValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
-     */
     @Override
     protected String doGetValue( String name )
         throws Exception
@@ -114,6 +99,12 @@ public class MapAttributes
         return Collections.unmodifiableList( s );
     }
 
+    @Override
+    public void doRemoveAttribute( String name )
+    {
+        getMap().remove( name );
+    }
+
     /**
      * Get map object
      *
@@ -122,16 +113,5 @@ public class MapAttributes
     public Map<String, Object> getMap()
     {
         return map;
-    }
-
-    /**
-     * Overwrite or implement method in MapValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
-     */
-    @Override
-    public void remove( String name )
-    {
-        getMap().remove( name );
     }
 }

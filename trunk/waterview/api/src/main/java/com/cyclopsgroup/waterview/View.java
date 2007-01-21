@@ -2,11 +2,25 @@ package com.cyclopsgroup.waterview;
 
 import java.io.IOException;
 
+import org.apache.avalon.framework.service.ServiceManager;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public interface View
+public abstract class View
 {
-    void render( RunData data, ViewContext viewContext )
+    private ServiceManager serviceManager;
+
+    public ServiceManager getServiceManager()
+    {
+        return serviceManager;
+    }
+
+    public abstract void render( RunData data, ViewContext viewContext )
         throws IOException;
+
+    public void setServiceManager( ServiceManager serviceManager )
+    {
+        this.serviceManager = serviceManager;
+    }
 }

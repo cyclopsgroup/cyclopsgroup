@@ -33,38 +33,22 @@ import org.apache.commons.fileupload.FileItem;
 public class MapParameters
     extends Parameters
 {
-    private final Map<String, String> content = new HashMap<String, String>();
-
-    /**
-     * Comment for <code>EMPTY_FILEITEM_ARRAY</code>
-     */
     public static final List<FileItem> EMPTY_FILEITEM_LIST = Collections.unmodifiableList( new ArrayList<FileItem>() );
 
-    /**
-     * Overwrite or implement method add()
-     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
-     */
+    private final Map<String, String> content = new HashMap<String, String>();
+
     @Override
-    public void add( String name, String value )
+    public void doAddAttribute( String name, String value )
     {
         content.put( name, value );
     }
 
-    /**
-     * Override method doGetAttributeNames in class MapRequestValueParser
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#doGetAttributeNames()
-     */
     @Override
     protected Set<String> doGetAttributeNames()
     {
         return content.keySet();
     }
 
-    /**
-     * Overwrite or implement method doGetValue()
-     * @see com.cyclopsgroup.waterview.Attributes#doGetValue(java.lang.String)
-     */
     @Override
     protected String doGetValue( String name )
         throws Exception
@@ -72,10 +56,6 @@ public class MapParameters
         return content.get( name );
     }
 
-    /**
-     * Overwrite or implement method doGetValues()
-     * @see com.cyclopsgroup.waterview.Attributes#doGetValues(java.lang.String)
-     */
     @Override
     protected List<String> doGetValues( String name )
         throws Exception
@@ -89,35 +69,21 @@ public class MapParameters
         return ret;
     }
 
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
-     */
+    @Override
+    public void doRemoveAttribute( String name )
+    {
+        content.remove( name );
+    }
+
     @Override
     public FileItem getFileItem( String name )
     {
         return null;
     }
 
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Parameters#getFileItems(java.lang.String)
-     */
     @Override
     public List<FileItem> getFileItems( String name )
     {
         return EMPTY_FILEITEM_LIST;
-    }
-
-    /**
-     * Overwrite or implement method remove()
-     * @see com.cyclopsgroup.waterview.Attributes#remove(java.lang.String)
-     */
-    @Override
-    public void remove( String name )
-    {
-        content.remove( name );
     }
 }

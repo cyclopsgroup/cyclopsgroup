@@ -80,7 +80,12 @@ public abstract class Attributes
      * @param name Name of the attribute
      * @param value
      */
-    public abstract void add( String name, String value );
+    public void add( String name, String value )
+    {
+        doAddAttribute( name, value );
+    }
+
+    protected abstract void doAddAttribute( String name, String value );
 
     /**
      * @return Array of attribute names
@@ -106,6 +111,8 @@ public abstract class Attributes
      */
     protected abstract List<String> doGetValues( String name )
         throws Exception;
+
+    public abstract void doRemoveAttribute( String name );
 
     /**
      * Simple get method
@@ -530,7 +537,10 @@ public abstract class Attributes
      *
      * @param name Name of the attribute
      */
-    public abstract void remove( String name );
+    public void remove( String name )
+    {
+        doRemoveAttribute( name );
+    }
 
     /**
      * Set a value

@@ -16,13 +16,17 @@
  */
 package com.cyclopsgroup.waterview;
 
+import org.apache.avalon.framework.service.ServiceManager;
+
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
  * An action to run
  */
-public interface Action
+public abstract class Action
 {
+    private ServiceManager serviceManager;
+
     /**
      * Run action
      *
@@ -30,6 +34,16 @@ public interface Action
      * @param context Action context interface
      * @throws Exception Throw it out
      */
-    void execute( RunData data, ActionContext context )
+    public abstract void execute( RunData data, ActionContext context )
         throws Exception;
+
+    public ServiceManager getServiceManager()
+    {
+        return serviceManager;
+    }
+
+    public void setServiceManager( ServiceManager serviceManager )
+    {
+        this.serviceManager = serviceManager;
+    }
 }

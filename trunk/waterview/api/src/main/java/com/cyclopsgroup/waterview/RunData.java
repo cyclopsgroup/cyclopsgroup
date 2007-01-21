@@ -22,8 +22,6 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apache.avalon.framework.service.ServiceManager;
-
 /**
  * Runtime objects
  *
@@ -141,13 +139,6 @@ public interface RunData
      * @return Path in request
      */
     String getRequestPath();
-
-    /**
-     * Method getComponentManager() in class UIRuntime
-     *
-     * @return Service manager instance
-     */
-    ServiceManager getServiceManager();
 
     /**
      * Get session scope context

@@ -30,6 +30,11 @@ public interface ActionContext
     String FAIL_MESSAGE = "failMessage";
 
     /**
+     * @param message Message to add
+     */
+    void addMessage( String message );
+
+    /**
      * Error because an input is not correct
      *
      * @param inputName Name of input
@@ -38,7 +43,7 @@ public interface ActionContext
     void error( String inputName, String errorMessage );
 
     /**
-     * Mark this action to be failed
+     * Stop the action
      */
     void fail();
 
@@ -63,16 +68,4 @@ public interface ActionContext
      * @param throwable Throwable object
      */
     void fail( Throwable throwable );
-
-    /**
-     * Url to which it's going to redirect
-     *
-     * @param url Target url
-     */
-    //void setRedirection( RedirectionTarget url );
-
-    /**
-     * @param message Message to add
-     */
-    void addMessage( String message );
 }

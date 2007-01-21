@@ -1,17 +1,16 @@
-package com.cyclopsgroup.waterview.alternative;
+package com.cyclopsgroup.waterview.spi;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-import com.cyclopsgroup.waterview.spi.WaterviewSpi;
 
 public class MockRunData
     extends AbstractRunData
 {
     private PrintWriter output;
 
-    public MockRunData( WaterviewSpi waterview, Writer output )
+    public MockRunData( Waterview waterview, Writer output )
     {
         super( waterview );
         if ( output instanceof PrintWriter )

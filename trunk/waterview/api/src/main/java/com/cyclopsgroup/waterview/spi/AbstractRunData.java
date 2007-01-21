@@ -14,7 +14,7 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.alternative;
+package com.cyclopsgroup.waterview.spi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Parameters;
-import com.cyclopsgroup.waterview.spi.RunDataSpi;
-import com.cyclopsgroup.waterview.spi.WaterviewSpi;
 
 /**
  * Abstract base runtime class
@@ -64,9 +62,9 @@ public abstract class AbstractRunData
 
     private TimeZone timeZone = TimeZone.getDefault();
 
-    private final WaterviewSpi waterview;
+    private final Waterview waterview;
 
-    protected AbstractRunData( WaterviewSpi waterview )
+    protected AbstractRunData( Waterview waterview )
     {
         this.waterview = waterview;
     }
@@ -204,7 +202,7 @@ public abstract class AbstractRunData
         return timeZone;
     }
 
-    public WaterviewSpi getWaterview()
+    public Waterview getWaterview()
     {
         return waterview;
     }

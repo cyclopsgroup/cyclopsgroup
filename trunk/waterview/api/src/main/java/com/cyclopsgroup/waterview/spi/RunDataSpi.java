@@ -21,5 +21,5 @@ public interface RunDataSpi
 
     List<Request> getRequests();
 
-    WaterviewSpi getWaterview();
+    Waterview getWaterview();
 }
