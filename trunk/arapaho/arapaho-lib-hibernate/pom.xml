@@ -16,11 +16,6 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
-            <groupId>com.cyclopsgroup.arapaho</groupId>
-            <artifactId>arapaho-lib-avalon</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
             <version>3.2.0.ga</version>
@@ -44,10 +39,10 @@
     </dependencies>
     <scm>
         <connection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-hibernate
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-hibernate
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-hibernate
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-lib-hibernate
         </developerConnection>
         <url>
             http://fisheye3.cenqua.com/browse/cyclops-group/trunk/arapaho/arapaho-lib-hibernate
