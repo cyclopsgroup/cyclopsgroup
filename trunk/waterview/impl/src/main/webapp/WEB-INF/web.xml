@@ -7,7 +7,7 @@
     <servlet>
         <servlet-name>waterview</servlet-name>
         <servlet-class>
-            com.cyclopsgroup.waterview.impl.servlet.WaterviewServlet
+            com.cyclopsgroup.waterview.impl.servlet.SpringWaterviewServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>

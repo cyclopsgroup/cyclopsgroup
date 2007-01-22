@@ -34,6 +34,7 @@ public class SpringContainer
 
     public synchronized void dispose()
     {
+        applicationContext.stop();
         applicationContext.close();
         applicationContext = null;
         initialized = false;
@@ -46,6 +47,10 @@ public class SpringContainer
 
     public Object getBean( String beanId )
     {
+        if ( applicationContext == null )
+        {
+            throw new IllegalStateException( "Spring container is not initialized yet" );
+        }
         return applicationContext.getBean( beanId );
     }
 
@@ -85,6 +90,8 @@ public class SpringContainer
                 return configResources;
             }
         };
+        applicationContext.refresh();
+        applicationContext.start();
     }
 
     public boolean isInitialized()

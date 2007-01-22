@@ -51,7 +51,6 @@ public class RenderPageValve
 
     public RenderPageValve( String layoutPath, ResourceRegistry resourceRegistry )
     {
-        super();
         this.layoutPath = layoutPath;
         this.resourceRegistry = resourceRegistry;
     }

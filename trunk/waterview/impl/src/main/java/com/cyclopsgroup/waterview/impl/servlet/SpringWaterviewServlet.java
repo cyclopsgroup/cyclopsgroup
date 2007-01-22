@@ -2,6 +2,7 @@ package com.cyclopsgroup.waterview.impl.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 
 import javax.servlet.ServletException;
@@ -35,7 +36,6 @@ public class SpringWaterviewServlet
 
             return (T) container.getBean( serviceRole );
         }
-
     };
 
     @Override
@@ -55,7 +55,8 @@ public class SpringWaterviewServlet
     protected void doHandleException( HttpServletRequest req, HttpServletResponse resp, Exception ex )
         throws ServletException, IOException
     {
-        ex.printStackTrace( resp.getWriter() );
+        ex.printStackTrace( new PrintWriter( resp.getOutputStream() ) );
+        resp.getOutputStream().flush();
     }
 
     protected void doHandleRequest( HttpServletRequest req, HttpServletResponse resp )
@@ -90,22 +91,40 @@ public class SpringWaterviewServlet
     public void init()
         throws ServletException
     {
-        String springConfig = getServletConfig().getInitParameter( "spring.config" );
-
-        if ( StringUtils.isNotEmpty( springConfig ) )
+        synchronized ( getServletContext() )
         {
+            container = (SpringContainer) getServletContext().getAttribute( "spring.container" );
+            if ( container != null )
+            {
+                return;
+            }
+
+            String springConfig = getServletConfig().getInitParameter( "spring.config" );
+
+            if ( StringUtils.isNotEmpty( springConfig ) )
+            {
+                try
+                {
+                    container = new SpringContainer( new File( springConfig ).toURL() );
+                }
+                catch ( MalformedURLException e )
+                {
+                    throw new ServletException( "Bad spring config path", e );
+                }
+            }
+            else
+            {
+                container = new SpringContainer();
+            }
             try
             {
-                container = new SpringContainer( new File( springConfig ).toURL() );
+                container.initialize();
+                getServletContext().setAttribute( "spring.container", container );
             }
-            catch ( MalformedURLException e )
+            catch ( IOException e )
             {
-                throw new ServletException( "Bad spring config path", e );
+                throw new ServletException( "Initializing spring container failed", e );
             }
-        }
-        else
-        {
-            container = new SpringContainer();
         }
     }
 }

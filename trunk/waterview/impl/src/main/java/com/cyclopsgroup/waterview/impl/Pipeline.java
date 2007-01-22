@@ -70,4 +70,9 @@ public final class Pipeline
         };
         pc.invokeNextValve( runDataSpi );
     }
+
+    public void setValves( List<Valve> valveList )
+    {
+        valves.addAll( valveList );
+    }
 }
