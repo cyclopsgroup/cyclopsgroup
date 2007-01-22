@@ -14,15 +14,23 @@ public class RunActionsValve
     private class AC
         implements ActionContext
     {
-        public void addMessage( String message )
-        {
-            // TODO Auto-generated method stub
+        private RunDataSpi data;
 
+        private String redirectUrl;
+
+        private AC( RunDataSpi data )
+        {
+            this.data = data;
         }
 
-        public void error( String inputName, String errorMessage )
+        public void addInvalidInput( String inputName, String errorMessage )
         {
+            data.getInvalidInputs().add( new RunDataSpi.InvalidInput( inputName, errorMessage ) );
+        }
 
+        public void addMessage( String message )
+        {
+            data.getMessages().add( message );
         }
 
         public void fail()
@@ -43,6 +51,21 @@ public class RunActionsValve
         public void fail( Throwable throwable )
         {
             throw new ActionError( null, throwable );
+        }
+
+        public String getRedirectUrl()
+        {
+            return redirectUrl;
+        }
+
+        public boolean hasInputInput()
+        {
+            return !data.getInvalidInputs().isEmpty();
+        }
+
+        public void setRedirectUrl( String redirectUrl )
+        {
+            this.redirectUrl = redirectUrl;
         }
     }
 
@@ -95,18 +118,24 @@ public class RunActionsValve
                 String className = resourceRegistry.getFullClassName( actionName );
                 Action action = (Action) Class.forName( className ).newInstance();
                 action.setServiceManager( getServiceManager() );
-                action.execute( data, new AC() );
+                action.execute( data, new AC( data ) );
             }
             catch ( ActionError e )
             {
+                data.setError( e.throwable );
+                data.setErrorMessage( e.message );
                 context.stop();
                 break;
             }
             catch ( Exception e )
             {
-
+                data.setError( e );
+                data.setErrorMessage( "Running action " + actionName + " failed" );
+                context.stop();
+                break;
             }
         }
+        context.invokeNextValve( data );
     }
 
     public void setServiceManager( ServiceManager serviceManager )

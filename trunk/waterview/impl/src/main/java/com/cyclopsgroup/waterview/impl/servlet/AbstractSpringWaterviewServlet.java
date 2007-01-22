@@ -1,9 +1,7 @@
 package com.cyclopsgroup.waterview.impl.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +15,7 @@ import com.cyclopsgroup.waterview.ServiceManager;
 import com.cyclopsgroup.waterview.ServiceNotFoundException;
 import com.cyclopsgroup.waterview.spi.Waterview;
 
-public class SpringWaterviewServlet
+public abstract class AbstractSpringWaterviewServlet
     extends HttpServlet
 {
     private SpringContainer container;
@@ -37,6 +35,11 @@ public class SpringWaterviewServlet
             return (T) container.getBean( serviceRole );
         }
     };
+
+    private Waterview waterview;
+
+    protected abstract SpringContainer createSpringContainer()
+        throws ServletException;
 
     @Override
     public void destroy()
@@ -62,7 +65,6 @@ public class SpringWaterviewServlet
     protected void doHandleRequest( HttpServletRequest req, HttpServletResponse resp )
         throws Exception
     {
-        Waterview waterview = serviceManager.getService( Waterview.class );
         RunData data = new ServletRunData( waterview, getServletContext(), req, resp );
         waterview.processRunData( data );
     }
@@ -85,50 +87,44 @@ public class SpringWaterviewServlet
         {
             doHandleException( req, resp, e );
         }
+        finally
+        {
+            resp.getOutputStream().flush();
+        }
     }
 
     @Override
     public void init()
         throws ServletException
     {
-        synchronized ( getServletContext() )
+        container = createSpringContainer();
+        String webappDir = getServletContext().getRealPath( "" );
+        container.setProperty( "webapp.dir", webappDir );
+        container.setProperty( "basedir", webappDir );
+        container.addStaticBean( ServiceManager.class.getName(), serviceManager );
+        try
         {
-            container = (SpringContainer) getServletContext().getAttribute( "spring.container" );
-            if ( container != null )
-            {
-                return;
-            }
+            container.initialize();
+            getServletContext().setAttribute( "spring.container", container );
+        }
+        catch ( IOException e )
+        {
+            throw new ServletException( "Initializing spring container failed", e );
+        }
 
-            String springConfig = getServletConfig().getInitParameter( "spring.config" );
+        String waterviewBeanId = getServletConfig().getInitParameter( "waterview.bean" );
+        if ( StringUtils.isEmpty( waterviewBeanId ) )
+        {
+            waterviewBeanId = Waterview.class.getName();
+        }
 
-            if ( StringUtils.isNotEmpty( springConfig ) )
-            {
-                try
-                {
-                    container = new SpringContainer( new File( springConfig ).toURL() );
-                }
-                catch ( MalformedURLException e )
-                {
-                    throw new ServletException( "Bad spring config path", e );
-                }
-            }
-            else
-            {
-                container = new SpringContainer();
-            }
-            String webappDir = getServletContext().getRealPath( "" );
-            container.setProperty( "webapp.dir", webappDir );
-            container.setProperty( "basedir", webappDir );
-            container.addStaticBean( ServiceManager.class.getName(), serviceManager );
-            try
-            {
-                container.initialize();
-                getServletContext().setAttribute( "spring.container", container );
-            }
-            catch ( IOException e )
-            {
-                throw new ServletException( "Initializing spring container failed", e );
-            }
+        try
+        {
+            waterview = serviceManager.getService( waterviewBeanId );
+        }
+        catch ( ServiceNotFoundException e )
+        {
+            throw new ServletException( "Waterview bean [" + waterviewBeanId + "] is not defined in spring container" );
         }
     }
 }

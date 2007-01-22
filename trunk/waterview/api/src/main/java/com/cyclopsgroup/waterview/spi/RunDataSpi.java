@@ -2,6 +2,7 @@ package com.cyclopsgroup.waterview.spi;
 
 import java.util.List;
 
+import com.cyclopsgroup.waterview.DynamicLink;
 import com.cyclopsgroup.waterview.RunData;
 
 /**
@@ -12,14 +13,40 @@ import com.cyclopsgroup.waterview.RunData;
 public interface RunDataSpi
     extends RunData
 {
-    interface Request
+    public class InvalidInput
     {
-        String getPackageAlias();
+        private String errorMessage;
 
-        String getRequestPath();
+        private String inputName;
+
+        public InvalidInput( String inputName, String errorMessage )
+        {
+            this.inputName = inputName;
+            this.errorMessage = errorMessage;
+        }
+
+        public String getErrorMessage()
+        {
+            return errorMessage;
+        }
+
+        public String getInputName()
+        {
+            return inputName;
+        }
     }
 
-    List<Request> getRequests();
+    Throwable getError();
 
-    Waterview getWaterview();
+    String getErrorMessage();
+
+    List<InvalidInput> getInvalidInputs();
+
+    List<String> getMessages();
+
+    void setError( Throwable e );
+
+    void setErrorMessage( String errorMessage );
+
+    void setLink( DynamicLink link );
 }

@@ -28,7 +28,6 @@ public class ServletRunData
                            HttpServletResponse response )
         throws FileUploadException, IOException
     {
-        super( waterview );
         servletRequest = request;
         servletResponse = response;
         servletContext = ctx;

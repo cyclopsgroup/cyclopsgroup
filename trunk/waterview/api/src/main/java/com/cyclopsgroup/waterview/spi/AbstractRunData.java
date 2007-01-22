@@ -26,6 +26,7 @@ import java.util.Queue;
 import java.util.TimeZone;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.DynamicLink;
 import com.cyclopsgroup.waterview.Parameters;
 
 /**
@@ -40,9 +41,19 @@ public abstract class AbstractRunData
 
     private String applicationBaseUrl;
 
+    private Throwable error;
+
+    private String errorMessage;
+
     private String inputContentType;
 
+    private List<InvalidInput> invalidInputs = new ArrayList<InvalidInput>();
+
+    private DynamicLink link;
+
     private Locale locale = Locale.getDefault();
+
+    private List<String> messages = new ArrayList<String>();
 
     private PrintWriter output;
 
@@ -60,20 +71,11 @@ public abstract class AbstractRunData
 
     private String requestPath;
 
-    private final List<Request> requests = new ArrayList<Request>();
-
     private Context sessionContext;
 
     private String sessionId;
 
     private TimeZone timeZone = TimeZone.getDefault();
-
-    private final Waterview waterview;
-
-    protected AbstractRunData( Waterview waterview )
-    {
-        this.waterview = waterview;
-    }
 
     public Queue<String> getActionQueue()
     {
@@ -90,6 +92,16 @@ public abstract class AbstractRunData
         return applicationBaseUrl;
     }
 
+    public Throwable getError()
+    {
+        return error;
+    }
+
+    public String getErrorMessage()
+    {
+        return errorMessage;
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -100,6 +112,16 @@ public abstract class AbstractRunData
         return inputContentType;
     }
 
+    public List<InvalidInput> getInvalidInputs()
+    {
+        return invalidInputs;
+    }
+
+    public DynamicLink getLink()
+    {
+        return link;
+    }
+
     /**
      * Override or implement method of parent class or interface
      *
@@ -108,6 +130,11 @@ public abstract class AbstractRunData
     public Locale getLocale()
     {
         return locale;
+    }
+
+    public List<String> getMessages()
+    {
+        return messages;
     }
 
     public PrintWriter getOutput()
@@ -179,11 +206,6 @@ public abstract class AbstractRunData
         return requestPath;
     }
 
-    public List<Request> getRequests()
-    {
-        return requests;
-    }
-
     /**
      * Override or implement method of parent class or interface
      *
@@ -213,11 +235,6 @@ public abstract class AbstractRunData
         return timeZone;
     }
 
-    public Waterview getWaterview()
-    {
-        return waterview;
-    }
-
     /**
      * Setter method for applicationBaseUrl
      *
@@ -228,6 +245,16 @@ public abstract class AbstractRunData
         this.applicationBaseUrl = applicationBaseUrl;
     }
 
+    public void setError( Throwable error )
+    {
+        this.error = error;
+    }
+
+    public void setErrorMessage( String errorMessage )
+    {
+        this.errorMessage = errorMessage;
+    }
+
     /**
      * Setter method for inputContentType
      *
@@ -236,6 +263,11 @@ public abstract class AbstractRunData
     public void setInputContentType( String inputContentType )
     {
         this.inputContentType = inputContentType;
+    }
+
+    public void setLink( DynamicLink link )
+    {
+        this.link = link;
     }
 
     /**

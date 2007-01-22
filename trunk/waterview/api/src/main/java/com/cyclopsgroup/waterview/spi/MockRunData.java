@@ -7,9 +7,8 @@ import java.io.Writer;
 public class MockRunData
     extends AbstractRunData
 {
-    public MockRunData( Waterview waterview, Writer output )
+    public MockRunData( Writer output )
     {
-        super( waterview );
         if ( output instanceof PrintWriter )
         {
             setOutput( (PrintWriter) output );
@@ -18,23 +17,6 @@ public class MockRunData
         {
             setOutput( new PrintWriter( output ) );
         }
-    }
-
-    public void addRequest( final String packageAlias, final String requestPath )
-    {
-        getRequests().add( new Request()
-        {
-
-            public String getPackageAlias()
-            {
-                return packageAlias;
-            }
-
-            public String getRequestPath()
-            {
-                return requestPath;
-            }
-        } );
     }
 
     public String getMimeType( String fileName )
