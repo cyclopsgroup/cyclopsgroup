@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.core.io.Resource;
@@ -22,6 +27,8 @@ public class SpringContainer
 
     private Properties initProperties = new Properties();
 
+    private Map<String, Object> staticBeans = new HashMap<String, Object>();
+
     public SpringContainer()
     {
         this( null );
@@ -30,6 +37,11 @@ public class SpringContainer
     public SpringContainer( URL config )
     {
         this.config = config;
+    }
+
+    public void addStaticBean( String beanId, Object bean )
+    {
+        staticBeans.put( beanId, bean );
     }
 
     public synchronized void dispose()
@@ -89,7 +101,28 @@ public class SpringContainer
             {
                 return configResources;
             }
+
+            @Override
+            protected void postProcessBeanFactory( ConfigurableListableBeanFactory beanFactory )
+                throws BeansException
+            {
+                if ( !initProperties.isEmpty() )
+                {
+                    PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
+                    configurer.setProperties( initProperties );
+                    configurer.postProcessBeanFactory( beanFactory );
+                }
+
+                if ( !staticBeans.isEmpty() )
+                {
+                    for ( String beanId : staticBeans.keySet() )
+                    {
+                        beanFactory.registerSingleton( beanId, staticBeans.get( beanId ) );
+                    }
+                }
+            }
         };
+
         applicationContext.refresh();
         applicationContext.start();
     }

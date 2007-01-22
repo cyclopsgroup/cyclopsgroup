@@ -116,6 +116,10 @@ public class SpringWaterviewServlet
             {
                 container = new SpringContainer();
             }
+            String webappDir = getServletContext().getRealPath( "" );
+            container.setProperty( "webapp.dir", webappDir );
+            container.setProperty( "basedir", webappDir );
+            container.addStaticBean( ServiceManager.class.getName(), serviceManager );
             try
             {
                 container.initialize();
