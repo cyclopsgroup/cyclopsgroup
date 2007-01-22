@@ -26,9 +26,6 @@ import java.util.Locale;
  */
 public interface I18NService
 {
-    /** Role name of service */
-    String ROLE = I18NService.class.getName();
-
     /**
      * Translate a key into localized message
      *

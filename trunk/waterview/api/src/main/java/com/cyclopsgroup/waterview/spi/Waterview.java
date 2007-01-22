@@ -6,9 +6,9 @@ import com.cyclopsgroup.waterview.RunData;
 
 public interface Waterview
 {
-    String ROLE = Waterview.class.getName();
-
     FileUpload getFileUpload();
+
+    I18NService getI18NService();
 
     void processRunData( RunData data )
         throws Exception;

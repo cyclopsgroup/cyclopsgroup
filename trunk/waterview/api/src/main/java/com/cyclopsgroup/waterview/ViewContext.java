@@ -1,24 +1,28 @@
 package com.cyclopsgroup.waterview;
 
+import java.util.HashMap;
+
 /**
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public interface ViewContext
-    extends Context
+public class ViewContext
+    extends DefaultContext
 {
-    String getPackage();
+    private String templatePath;
 
-    String getPath();
+    public ViewContext( Context parent )
+    {
+        super( new HashMap<String, Object>(), parent );
+    }
 
-    /**
-     * Get unique ID for this view in current page
-     *
-     * @return A unique string to identify this view
-     */
-    String getViewId();
+    public String getTemplatePath()
+    {
+        return templatePath;
+    }
 
-    void setPackage( String packageAlias );
-
-    void setPath( String path );
+    public void setTemplatePath( String templatePath )
+    {
+        this.templatePath = templatePath;
+    }
 }

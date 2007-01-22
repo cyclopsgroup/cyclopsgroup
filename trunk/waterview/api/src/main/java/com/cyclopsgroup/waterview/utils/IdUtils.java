@@ -1,11 +1,12 @@
 /* ==========================================================================
  * Copyright 2002-2005 Cyclops Group Community
- * 
- * Licensed under the Open Software License, Version 2.1 (the "License");
+ *
+ * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
+ * (CDDL) Version 1.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://opensource.org/licenses/osl-2.1.php
+ *      http://www.opensource.org/licenses/cddl1.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,34 +15,39 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview;
+package com.cyclopsgroup.waterview.utils;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * An action to run
+ * ID related utilities
  */
-public abstract class Action
+public final class IdUtils
 {
-    private ServiceManager serviceManager;
+    private static int rollingNumber = 0;
 
     /**
-     * Run action
+     * Create new string id
      *
-     * @param data Runtime data
-     * @param context Action context interface
-     * @throws Exception Throw it out
+     * @return String id
      */
-    public abstract void execute( RunData data, ActionContext context )
-        throws Exception;
-
-    public ServiceManager getServiceManager()
+    public static long newLongId()
     {
-        return serviceManager;
+        synchronized ( IdUtils.class )
+        {
+            rollingNumber = ( rollingNumber + 1 ) % 1024768;
+        }
+        long number = System.currentTimeMillis() * 1024768 + rollingNumber;
+        return number;
     }
 
-    public void setServiceManager( ServiceManager serviceManager )
+    /**
+     * New unique string id
+     *
+     * @return String ID
+     */
+    public static String newStringId()
     {
-        this.serviceManager = serviceManager;
+        return "t" + newLongId();
     }
 }

@@ -16,12 +16,14 @@
  */
 package com.cyclopsgroup.waterview.spi;
 
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Queue;
 import java.util.TimeZone;
-
-import org.apache.avalon.framework.service.ServiceManager;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.Parameters;
@@ -34,11 +36,17 @@ import com.cyclopsgroup.waterview.Parameters;
 public abstract class AbstractRunData
     implements RunDataSpi
 {
+    private Queue<String> actionQueue = new LinkedList<String>();
+
     private String applicationBaseUrl;
 
     private String inputContentType;
 
     private Locale locale = Locale.getDefault();
+
+    private PrintWriter output;
+
+    private OutputStream outputStream;
 
     private String pageBaseUrl;
 
@@ -54,8 +62,6 @@ public abstract class AbstractRunData
 
     private final List<Request> requests = new ArrayList<Request>();
 
-    private ServiceManager serviceManager;
-
     private Context sessionContext;
 
     private String sessionId;
@@ -67,6 +73,11 @@ public abstract class AbstractRunData
     protected AbstractRunData( Waterview waterview )
     {
         this.waterview = waterview;
+    }
+
+    public Queue<String> getActionQueue()
+    {
+        return actionQueue;
     }
 
     /**
@@ -97,6 +108,16 @@ public abstract class AbstractRunData
     public Locale getLocale()
     {
         return locale;
+    }
+
+    public PrintWriter getOutput()
+    {
+        return output;
+    }
+
+    public OutputStream getOutputStream()
+    {
+        return outputStream;
     }
 
     /**
@@ -166,16 +187,6 @@ public abstract class AbstractRunData
     /**
      * Override or implement method of parent class or interface
      *
-     * @see com.cyclopsgroup.waterview.RunData#getServiceManager()
-     */
-    public ServiceManager getServiceManager()
-    {
-        return serviceManager;
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
      * @see com.cyclopsgroup.waterview.RunData#getSessionContext()
      */
     public Context getSessionContext()
@@ -237,6 +248,16 @@ public abstract class AbstractRunData
         this.locale = locale;
     }
 
+    public void setOutput( PrintWriter output )
+    {
+        this.output = output;
+    }
+
+    public void setOutputStream( OutputStream outputStream )
+    {
+        this.outputStream = outputStream;
+    }
+
     /**
      * Setter method for pageBaseUrl
      *
@@ -294,16 +315,6 @@ public abstract class AbstractRunData
     public void setRequestPath( String requestPath )
     {
         this.requestPath = requestPath;
-    }
-
-    /**
-     * Setter method for serviceManager
-     *
-     * @param serviceManager The serviceManager to set.
-     */
-    public void setServiceManager( ServiceManager serviceManager )
-    {
-        this.serviceManager = serviceManager;
     }
 
     /**

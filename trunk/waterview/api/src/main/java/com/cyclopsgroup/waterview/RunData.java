@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Locale;
+import java.util.Queue;
 import java.util.TimeZone;
 
 /**
@@ -52,6 +53,11 @@ public interface RunData
 
     /** Name of service manager in context */
     String SERVICE_MANAGER_NAME = "serviceManager";
+
+    /**
+     * @return Mutable List of action names
+     */
+    Queue<String> getActionQueue();
 
     /**
      * Get base url for this waterview application
