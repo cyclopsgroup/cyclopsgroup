@@ -30,13 +30,9 @@ import com.cyclopsgroup.waterview.utils.TypeUtils;
  * Action to change the variable in session
  */
 public class ChangeSessionAttribute
-    implements Action
+    extends Action
 {
-    /**
-     * Overwrite or implement method execute()
-     *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
-     */
+    @Override
     public void execute( RunData data, ActionContext context )
         throws Exception
     {

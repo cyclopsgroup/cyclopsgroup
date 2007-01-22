@@ -1,12 +1,11 @@
 /* ==========================================================================
- * Copyright 2002-2005 Cyclops Group Community
- * 
- * Licensed under the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE
- * (CDDL) Version 1.0 (the "License");
+ * Copyright 2002-2006 Cyclops Group Community
+ *
+ * Licensed under the Open Software License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.opensource.org/licenses/cddl1.txt
+ *      http://opensource.org/licenses/osl-2.1.php
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +14,26 @@
  *  limitations under the License.
  * =========================================================================
  */
-package com.cyclopsgroup.waterview.ui.action;
+package com.cyclopsgroup.waterview.impl;
 
-import com.cyclopsgroup.waterview.Action;
-import com.cyclopsgroup.waterview.ActionContext;
 import com.cyclopsgroup.waterview.RunData;
+import com.cyclopsgroup.waterview.spi.RunDataSpi;
 
 /**
+ * Abstract based class for implementation of waterview with pipeline
+ * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  *
- * Action to change tab
  */
-public class ChangeTab
-    extends Action
+public abstract class AbstractPipelineBasedWaterview
+    extends AbstractWaterview
 {
-    @Override
-    public void execute( RunData data, ActionContext context )
+
+    protected abstract Pipeline getPipeline( RunData data );
+
+    public void processRunData( RunData data )
         throws Exception
     {
-        //context.setTargetUrl( data.getRefererUrl() );
-        String key = data.getParameters().getString( "tab_name_key" );
-        data.getSessionContext().put( key, data.getParameters().getString( "tab_name" ) );
+        getPipeline( data ).run( (RunDataSpi) data );
     }
 }

@@ -31,13 +31,9 @@ import com.cyclopsgroup.waterview.RunData;
  * Action to change locale
  */
 public class ChangeLocale
-    implements Action
+    extends Action
 {
-    /**
-     * Overwrite or implement method execute()
-     *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
-     */
+    @Override
     public void execute( RunData data, ActionContext context )
         throws Exception
     {

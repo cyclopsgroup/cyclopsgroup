@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:w="waterview:core">
+    <head>
+        <title>Page: ${data.title}</title>
+    </head>
+    <body>
+        <w:RenderView view="${page.getView('body')}" />
+    </body>
+</html>

@@ -18,14 +18,14 @@ public class ViewOnlyLayout
     private static final String VIEW = "/view";
 
     /**
-     * @see com.cyclopsgroup.waterview.spi.Layout#render(com.cyclopsgroup.waterview.spi.RunDataSpi, com.cyclopsgroup.waterview.spi.Page)
+     * @see com.cyclopsgroup.waterview.spi.Layout#preRender(com.cyclopsgroup.waterview.spi.RunDataSpi, com.cyclopsgroup.waterview.spi.Page)
      */
-    public void render( RunDataSpi data, Page page )
+    public void preRender( RunDataSpi data, Page page )
         throws Exception
     {
         ModuleService moduleService = (ModuleService) data.getServiceManager().lookup( ModuleService.ROLE );
         String path = '/' + data.getPage().getPackageAlias() + VIEW + data.getPage().getPath();
         View view = moduleService.createDynaView( path );
-        view.render( data, data.getRequestContext() );
+        view.preRender( data, data.getRequestContext() );
     }
 }

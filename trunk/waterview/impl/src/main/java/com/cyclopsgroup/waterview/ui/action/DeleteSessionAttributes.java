@@ -26,13 +26,9 @@ import com.cyclopsgroup.waterview.RunData;
  *
  */
 public class DeleteSessionAttributes
-    implements Action
+    extends Action
 {
-    /**
-     * Override method execute in class DeleteSessionAttributes
-     *
-     * @see com.cyclopsgroup.waterview.Action#execute(com.cyclopsgroup.waterview.RunData, com.cyclopsgroup.waterview.ActionContext)
-     */
+    @Override
     public void execute( RunData data, ActionContext context )
         throws Exception
     {

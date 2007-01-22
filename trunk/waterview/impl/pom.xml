@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -16,28 +17,9 @@
     <inceptionYear>2002</inceptionYear>
     <dependencies>
         <dependency>
-            <groupId>com.cyclopsgroup.arapaho</groupId>
-            <artifactId>arapaho-dependency-jetty</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.cyclopsgroup.waterview</groupId>
             <artifactId>waterview-api</artifactId>
             <version>2.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.cyclopsgroup.waterview</groupId>
-            <artifactId>waterview-renderer-marmalade</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.cyclopsgroup.waterview</groupId>
-            <artifactId>waterview-skin-default</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -65,11 +47,6 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.1</version>
@@ -93,6 +70,11 @@
         <dependency>
             <groupId>sun.jdk</groupId>
             <artifactId>tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>2.0.2</version>
         </dependency>
     </dependencies>
 </project>

@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import com.cyclopsgroup.waterview.RunData;
-import com.cyclopsgroup.waterview.alternative.AbstractPipelineBasedWaterview;
-import com.cyclopsgroup.waterview.alternative.Pipeline;
 
 public class MultiPipelineWaterview
     extends AbstractPipelineBasedWaterview

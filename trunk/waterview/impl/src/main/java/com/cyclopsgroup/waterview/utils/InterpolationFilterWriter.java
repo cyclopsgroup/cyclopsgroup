@@ -109,11 +109,7 @@ public abstract class InterpolationFilterWriter
     protected abstract String interpolate( String name )
         throws Exception;
 
-    /**
-     * Overwrite or implement method write()
-     *
-     * @see java.io.FilterWriter#write(char[], int, int)
-     */
+    @Override
     public void write( char[] cbuf, int off, int len )
         throws IOException
     {
@@ -131,11 +127,7 @@ public abstract class InterpolationFilterWriter
         }
     }
 
-    /**
-     * Overwrite or implement method write()
-     *
-     * @see java.io.FilterWriter#write(int)
-     */
+    @Override
     public void write( int c )
         throws IOException
     {
@@ -172,11 +164,7 @@ public abstract class InterpolationFilterWriter
         }
     }
 
-    /**
-     * Overwrite or implement method write()
-     *
-     * @see java.io.FilterWriter#write(java.lang.String, int, int)
-     */
+    @Override
     public void write( String str, int off, int len )
         throws IOException
     {
@@ -198,7 +186,7 @@ public abstract class InterpolationFilterWriter
     {
         for ( int i = 0; i < chars.length; i++ )
         {
-            write( (int) chars[i] );
+            write( chars[i] );
         }
     }
 }

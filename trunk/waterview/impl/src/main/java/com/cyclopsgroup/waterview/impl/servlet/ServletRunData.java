@@ -4,29 +4,34 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadBase;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang.StringUtils;
 
-import com.cyclopsgroup.waterview.alternative.AbstractRunData;
-import com.cyclopsgroup.waterview.spi.WaterviewSpi;
+import com.cyclopsgroup.waterview.spi.AbstractRunData;
+import com.cyclopsgroup.waterview.spi.Waterview;
 
 public class ServletRunData
     extends AbstractRunData
 {
+    private final ServletContext servletContext;
+
     private final HttpServletRequest servletRequest;
 
     private final HttpServletResponse servletResponse;
 
-    public ServletRunData( WaterviewSpi waterview, HttpServletRequest request, HttpServletResponse response,
-                           FileUpload fileUpload )
+    public ServletRunData( Waterview waterview, ServletContext ctx, HttpServletRequest request,
+                           HttpServletResponse response )
+        throws FileUploadException, IOException
     {
         super( waterview );
         servletRequest = request;
         servletResponse = response;
+        servletContext = ctx;
 
         setQueryString( request.getQueryString() );
         setRefererUrl( request.getHeader( "referer" ) );
@@ -43,36 +48,25 @@ public class ServletRunData
 
         if ( FileUploadBase.isMultipartContent( servletRequest ) )
         {
-
+            setParams( new MultipartServletRequestParameters( servletRequest, waterview.getFileUpload() ) );
         }
         else
         {
-
+            setParams( new ServletRequestParameters( request ) );
         }
+
+        OutputStream outputStream = response.getOutputStream();
+        setOutputStream( outputStream );
+        setOutput( new PrintWriter( outputStream ) );
     }
 
     public String getMimeType( String fileName )
     {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public PrintWriter getOutput()
-        throws IOException
-    {
-        return servletResponse.getWriter();
-    }
-
-    public OutputStream getOutputStream()
-        throws IOException
-    {
-        return servletResponse.getOutputStream();
+        return servletContext.getMimeType( fileName );
     }
 
     public void setOutputContentType( String contentType )
     {
-        // TODO Auto-generated method stub
-
+        servletResponse.setContentType( contentType );
     }
-
 }

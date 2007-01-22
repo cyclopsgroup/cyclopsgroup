@@ -53,13 +53,8 @@ public class ServletRequestParameters
         httpServletRequest = request;
     }
 
-    /**
-     * Overwrite or implement method add()
-     *
-     * @see com.cyclopsgroup.waterview.Attributes#add(java.lang.String, java.lang.String)
-     */
     @Override
-    public void add( String name, String value )
+    public void doAddAttribute( String name, String value )
     {
         //Kind of heavy. But who cares since add method is called rarely
         List<String> values = extra.putIfAbsent( name, new ArrayList<String>() );
@@ -125,6 +120,17 @@ public class ServletRequestParameters
     /**
      * Override or implement method of parent class or interface
      *
+     * @see com.cyclopsgroup.waterview.Parameters#remove(java.lang.String)
+     */
+    @Override
+    public void doRemoveAttribute( String name )
+    {
+        extra.remove( name );
+    }
+
+    /**
+     * Override or implement method of parent class or interface
+     *
      * @see com.cyclopsgroup.waterview.Parameters#getFileItem(java.lang.String)
      */
     @Override
@@ -142,16 +148,5 @@ public class ServletRequestParameters
     public List<FileItem> getFileItems( String name )
     {
         return Collections.emptyList();
-    }
-
-    /**
-     * Override or implement method of parent class or interface
-     *
-     * @see com.cyclopsgroup.waterview.Parameters#remove(java.lang.String)
-     */
-    @Override
-    public void remove( String name )
-    {
-        extra.remove( name );
     }
 }
