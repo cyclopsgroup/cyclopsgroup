@@ -29,12 +29,6 @@
         <module>api</module>
         <module>example</module>
         <module>impl</module>
-        <module>launcher-avalon</module>
-        <module>renderer-jelly</module>
-        <module>renderer-marmalade</module>
-        <module>renderer-velocity</module>
-        <module>skin-deepblue</module>
-        <module>skin-default</module>
     </modules>
     <repositories>
         <repository>

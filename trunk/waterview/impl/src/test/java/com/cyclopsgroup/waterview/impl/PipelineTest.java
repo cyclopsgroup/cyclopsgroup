@@ -1,12 +1,10 @@
 package com.cyclopsgroup.waterview.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.cyclopsgroup.waterview.ExecutionException;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -28,7 +26,7 @@ public class PipelineTest
         }
 
         public void invoke( RunDataSpi data, PipelineContext context )
-            throws ExecutionException, IOException
+            throws Exception
         {
             values.add( id );
             context.invokeNextValve( data );

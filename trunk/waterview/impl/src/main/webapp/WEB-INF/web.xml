@@ -7,16 +7,12 @@
     <servlet>
         <servlet-name>waterview</servlet-name>
         <servlet-class>
-            com.cyclopsgroup.waterview.servlet.WaterviewServlet
+            com.cyclopsgroup.waterview.impl.servlet.WaterviewServlet
         </servlet-class>
-        <init-param>
-            <param-name>plexus.descriptor</param-name>
-            <param-value>WEB-INF/waterview-components.xml</param-value>
-        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>waterview</servlet-name>
-        <url-pattern>/servlet/waterview/*</url-pattern>
+        <url-pattern>/portal/*</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,11 +1,15 @@
 package com.cyclopsgroup.waterview.impl.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.ServiceManager;
@@ -37,16 +41,8 @@ public class SpringWaterviewServlet
     @Override
     public void destroy()
     {
-        // TODO Auto-generated method stub
-        super.destroy();
-    }
-
-    @Override
-    public void init()
-        throws ServletException
-    {
-        // TODO Auto-generated method stub
-        super.init();
+        container.dispose();
+        container = null;
     }
 
     @Override
@@ -87,6 +83,29 @@ public class SpringWaterviewServlet
         catch ( Exception e )
         {
             doHandleException( req, resp, e );
+        }
+    }
+
+    @Override
+    public void init()
+        throws ServletException
+    {
+        String springConfig = getServletConfig().getInitParameter( "spring.config" );
+
+        if ( StringUtils.isNotEmpty( springConfig ) )
+        {
+            try
+            {
+                container = new SpringContainer( new File( springConfig ).toURL() );
+            }
+            catch ( MalformedURLException e )
+            {
+                throw new ServletException( "Bad spring config path", e );
+            }
+        }
+        else
+        {
+            container = new SpringContainer();
         }
     }
 }

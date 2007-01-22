@@ -64,7 +64,7 @@ public class SpringContainer
         initialized = true;
         List<UrlResource> allConfigs = new ArrayList<UrlResource>();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        for ( Enumeration<URL> en = classLoader.getResources( "META-INF/cyclopsgroup/spring.xml" ); en
+        for ( Enumeration<URL> en = classLoader.getResources( "META-INF/cyclopsgroup/spring-beans.xml" ); en
             .hasMoreElements(); )
         {
             URL metaConfig = en.nextElement();
