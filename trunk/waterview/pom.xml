@@ -29,6 +29,8 @@
         <module>api</module>
         <module>example</module>
         <module>impl</module>
+        <module>marmalade</module>
+        <module>velocity</module>
     </modules>
     <repositories>
         <repository>
