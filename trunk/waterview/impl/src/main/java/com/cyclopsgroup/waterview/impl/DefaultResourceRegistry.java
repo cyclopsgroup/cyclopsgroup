@@ -19,11 +19,6 @@ public class DefaultResourceRegistry
         packages.put( packageAlias, packageName );
     }
 
-    public void setPackages( Map<String, String> packageMap )
-    {
-        packages.putAll( packageMap );
-    }
-
     public String getFullClassName( String shortPath )
     {
         // TODO Auto-generated method stub
@@ -36,6 +31,7 @@ public class DefaultResourceRegistry
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public List<String> getPackageAliases()
     {
         return packages.asList();
@@ -44,6 +40,11 @@ public class DefaultResourceRegistry
     public String getPackageName( String packageAlias )
     {
         return (String) packages.get( packageAlias );
+    }
+
+    public void setPackages( Map<String, String> packageMap )
+    {
+        packages.putAll( packageMap );
     }
 
 }

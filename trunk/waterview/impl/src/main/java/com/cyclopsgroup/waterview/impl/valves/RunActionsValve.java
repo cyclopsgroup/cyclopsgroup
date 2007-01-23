@@ -58,7 +58,7 @@ public class RunActionsValve
             return redirectUrl;
         }
 
-        public boolean hasInputInput()
+        public boolean hasInvalidInput()
         {
             return !data.getInvalidInputs().isEmpty();
         }

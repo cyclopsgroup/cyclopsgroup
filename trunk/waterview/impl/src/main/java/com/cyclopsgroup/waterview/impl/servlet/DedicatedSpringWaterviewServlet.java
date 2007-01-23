@@ -28,10 +28,6 @@ public class DedicatedSpringWaterviewServlet
                 throw new ServletException( "Bad spring config path", e );
             }
         }
-        else
-        {
-            return new SpringContainer();
-        }
+        return new SpringContainer();
     }
-
 }

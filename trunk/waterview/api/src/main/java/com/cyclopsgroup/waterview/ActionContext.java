@@ -71,7 +71,7 @@ public interface ActionContext
 
     String getRedirectUrl();
 
-    boolean hasInputInput();
+    boolean hasInvalidInput();
 
     void setRedirectUrl( String redirectUrl );
 }
