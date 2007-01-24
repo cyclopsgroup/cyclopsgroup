@@ -60,4 +60,12 @@ public class DynamicLink
     {
         return this;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuffer sb = new StringBuffer( applicationBase );
+        clear();
+        return sb.toString();
+    }
 }

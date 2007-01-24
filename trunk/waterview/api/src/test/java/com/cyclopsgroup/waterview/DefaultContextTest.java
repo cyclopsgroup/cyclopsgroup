@@ -1,24 +1,12 @@
 package com.cyclopsgroup.waterview;
 
-import junit.framework.JUnit4TestAdapter;
-
-import org.junit.Test;
+import junit.framework.TestCase;
 
 public class DefaultContextTest
+    extends TestCase
 {
-    private void testType( Class<?> c )
+    public void testCast()
     {
-
-    }
-
-    @Test
-    public void cast()
-    {
-        testType( String.class );
-    }
-
-    public static junit.framework.Test suite()
-    {
-        return new JUnit4TestAdapter( DefaultContextTest.class );
+        //TODO Add something here
     }
 }
