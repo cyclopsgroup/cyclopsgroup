@@ -11,10 +11,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 			ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />
 		<constructor-arg index="1">
 			<props>
-				<prop key="resource.loader">classpath,file</prop>
-				<prop key="classpath.resource.loader.class">
-					org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-				</prop>
+				<prop key="resource.loader">file</prop>
 				<prop key="file.resource.loader.class">
 					org.apache.velocity.runtime.resource.loader.FileResourceLoader
 				</prop>

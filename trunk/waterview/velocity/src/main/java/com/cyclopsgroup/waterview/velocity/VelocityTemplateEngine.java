@@ -15,6 +15,8 @@ public class VelocityTemplateEngine
 {
     private VelocityEngine velocityEngine;
 
+    private static final String INTERNAL_RESOURCE_LOADER = "__registry__";
+
     public VelocityTemplateEngine( Properties velocityProperties, ResourceRegistry resourceRegistry )
     {
         velocityEngine = new VelocityEngine();
@@ -25,7 +27,8 @@ public class VelocityTemplateEngine
 
     protected void addInternalResourceLoaderConfig( ExtendedProperties props, ResourceRegistry resourceRegistry )
     {
-        //TODO do something
+        props.addProperty( "resource.loader", INTERNAL_RESOURCE_LOADER );
+        
     }
 
     public VelocityEngine getVelocityEngine()
