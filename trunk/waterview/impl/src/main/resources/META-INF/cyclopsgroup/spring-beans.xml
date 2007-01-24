@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
-    <bean id="com.cyclopsgroup.waterview.spi.Waterview"
-        class="com.cyclopsgroup.waterview.impl.SinglePipelineWaterview">
-        <constructor-arg index="0"
-            ref="com.cyclopsgroup.waterview.impl.Pipeline.default" />
-    </bean>
-    <bean id="com.cyclopsgroup.waterview.impl.Pipeline.default"
-        class="com.cyclopsgroup.waterview.impl.Pipeline">
-        <property name="valves">
-            <list>
-                <ref
-                    bean="com.cyclopsgroup.waterview.impl.valves.RenderPageValve" />
-            </list>
-        </property>
-    </bean>
-    <bean id="com.cyclopsgroup.waterview.impl.valves.RenderPageValve"
-        class="com.cyclopsgroup.waterview.impl.valves.RenderPageValve">
-        <constructor-arg index="0" value="/waterview/layout/DefaultLayout.mmld" />
-        <constructor-arg index="1"
-            ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />
-        <property name="serviceManager"
-            ref="com.cyclopsgroup.waterview.ServiceManager" />
-    </bean>
+	<bean id="com.cyclopsgroup.waterview.spi.Waterview"
+		class="com.cyclopsgroup.waterview.impl.SinglePipelineWaterview">
+		<constructor-arg index="0">
+			<bean class="com.cyclopsgroup.waterview.impl.Pipeline">
+				<property name="valves">
+					<list>
+						<ref
+							bean="com.cyclopsgroup.waterview.impl.valves.RenderPageValve" />
+					</list>
+				</property>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.cyclopsgroup.waterview.impl.valves.RenderPageValve"
+		class="com.cyclopsgroup.waterview.impl.valves.RenderPageValve">
+		<constructor-arg index="0"
+			value="/waterview/layout/DefaultLayout.mmld" />
+		<constructor-arg index="1"
+			ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />
+		<property name="serviceManager"
+			ref="com.cyclopsgroup.waterview.ServiceManager" />
+	</bean>
 </beans>

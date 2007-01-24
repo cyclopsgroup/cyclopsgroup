@@ -1,10 +1,13 @@
 package com.cyclopsgroup.waterview.velocity;
 
 import java.io.Writer;
+import java.util.Properties;
 
+import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.spi.ResourceRegistry;
 import com.cyclopsgroup.waterview.spi.TemplateEngine;
 
 public class VelocityTemplateEngine
@@ -12,9 +15,28 @@ public class VelocityTemplateEngine
 {
     private VelocityEngine velocityEngine;
 
-    public VelocityTemplateEngine( VelocityEngine velocity )
+    public VelocityTemplateEngine( Properties velocityProperties, ResourceRegistry resourceRegistry )
     {
-        velocityEngine = velocity;
+        velocityEngine = new VelocityEngine();
+        ExtendedProperties props = ExtendedProperties.convertProperties( velocityProperties );
+        addInternalResourceLoaderConfig( props, resourceRegistry );
+        velocityEngine.setExtendedProperties( props );
+    }
+
+    protected void addInternalResourceLoaderConfig( ExtendedProperties props, ResourceRegistry resourceRegistry )
+    {
+        //TODO do something
+    }
+
+    public VelocityEngine getVelocityEngine()
+    {
+        return velocityEngine;
+    }
+
+    public void init()
+        throws Exception
+    {
+        velocityEngine.init();
     }
 
     public void mergeTemplate( String templatePath, Context context, Writer output )

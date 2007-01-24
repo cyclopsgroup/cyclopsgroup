@@ -94,15 +94,16 @@ public class RenderPageValve
         {
 
         }
-        viewContext.put( "templatePath", viewContext.getTemplatePath() );
+
+        String path = viewContext.getTemplatePath();
+        viewContext.put( "templatePath", path );
         viewContext.put( "renderer", new ViewRenderer( data, viewContext ) );
         for ( String pattern : templateEngines.keySet() )
         {
-            if ( Pattern.matches( pattern, viewContext.getTemplatePath() ) )
+            if ( Pattern.matches( pattern, path ) )
             {
-                String fullPath = resourceRegistry.getFullResourcePath( viewContext.getTemplatePath() );
                 TemplateEngine engine = templateEngines.get( pattern );
-                engine.mergeTemplate( fullPath, viewContext, data.getOutput() );
+                engine.mergeTemplate( path, viewContext, data.getOutput() );
                 data.getOutput().flush();
                 break;
             }
