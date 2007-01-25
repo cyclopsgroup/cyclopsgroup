@@ -16,10 +16,10 @@
     <inceptionYear>2006</inceptionYear>
     <scm>
         <connection>
-            scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview
+            scm:svn:svn://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/waterview
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/waterview
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/waterview
         </developerConnection>
         <url>
             http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/waterview
@@ -34,7 +34,7 @@
     </modules>
     <repositories>
         <repository>
-            <id>ibiblio.release</id> 
+            <id>ibiblio.org</id>
             <name>ibiblio</name>
             <url>http://ibiblio.org/maven2</url>
         </repository>
@@ -42,7 +42,7 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-            <id>cyclopsgroup.repository.sourceforge</id>
+            <id>cyclopsgroup.org</id>
             <url>http://cyclops-group.sourceforge.net/m2</url>
         </repository>
     </repositories>
