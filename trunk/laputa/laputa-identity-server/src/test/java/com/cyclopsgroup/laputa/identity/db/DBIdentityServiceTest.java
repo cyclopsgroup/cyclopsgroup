@@ -2,7 +2,7 @@ package com.cyclopsgroup.laputa.identity.db;
 
 import org.hibernate.Session;
 
-import com.cyclopsgroup.arapaho.hibernate.HsqlHibernateTestCase;
+import com.cyclopsgroup.arapaho.test.HsqlHibernateTestCase;
 import com.cyclopsgroup.laputa.identity.Identity;
 import com.cyclopsgroup.laputa.identity.NoSuchUserException;
 import com.cyclopsgroup.laputa.identity.IdentityService.AuthenticationResult;

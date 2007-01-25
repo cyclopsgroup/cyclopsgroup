@@ -38,7 +38,7 @@ public class User
 
     private String userName;
 
-    @Column(length = 5)
+    @Column(nullable = false, length = 5)
     public String getCountry()
     {
         return country;
@@ -88,7 +88,6 @@ public class User
         return disabled;
     }
 
-    @Column(nullable = false, length = 5)
     public void setCountry( String country )
     {
         this.country = country;

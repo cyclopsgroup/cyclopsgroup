@@ -53,6 +53,7 @@ public class DBIdentityService
         return si;
     }
 
+    @SuppressWarnings("unchecked")
     private User findUser( String userName )
     {
         User user = null;
@@ -61,10 +62,10 @@ public class DBIdentityService
         {
             Query query = session.getNamedQuery( User.class.getName() + ".findByName" );
             query.setString( "userName", userName );
-            Iterator i = query.iterate();
+            Iterator<User> i = query.iterate();
             if ( i.hasNext() )
             {
-                user = (User) i.next();
+                user = i.next();
             }
             return user;
         }

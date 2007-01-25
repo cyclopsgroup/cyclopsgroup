@@ -1,148 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="service"
-	targetNamespace="http://www.cyclopsgroup.org/identity"
-	xmlns:axis2="http://www.cyclopsgroup.org/identity"
-	xmlns:ns="http://www.cyclopsgroup.org/identity/message"
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns="http://schemas.xmlsoap.org/wsdl/">
-	<types>
-		<schema xmlns="http://www.w3.org/2001/XMLSchema"
-			targetNamespace="http://www.cyclopsgroup.org/identity/message">
-			<element name="username" type="string" />
-			<element name="credential">
-				<complexType>
-					<sequence>
-						<element ref="ns:username" />
-						<element name="password" type="string" />
-					</sequence>
-				</complexType>
-			</element>
-			<element name="identity">
-				<complexType>
-					<sequence>
-						<element ref="ns:username" />
-						<element name="language" type="string" />
-						<element name="country" type="string" />
-						<element name="timezone" type="string" />
-					</sequence>
-				</complexType>
-			</element>
-			<element name="authentication-result">
-				<simpleType>
-					<restriction base="string">
-						<enumeration value="SUCCESSFUL" />
-						<enumeration value="NO_SUCH_USER" />
-						<enumeration value="DISABLED_USER" />
-						<enumeration value="WRONG_PASSWORD" />
-						<enumeration value="ERROR" />
-					</restriction>
-				</simpleType>
-			</element>
-			<element name="ticket" type="string" />
-			<element name="no-such-user">
-				<complexType>
-					<sequence>
-						<element ref="ns:username" />
-					</sequence>
-				</complexType>
-			</element>
-		</schema>
-	</types>
-	<message name="authenticateRequest">
-		<part name="part1" element="ns:credential" />
-	</message>
-	<message name="authenticateResponse">
-		<part name="part1" element="ns:authentication-result" />
-	</message>
-	<message name="signInRequest">
-		<part name="part1" element="ns:username" />
-	</message>
-	<message name="ticketMessage">
-		<part name="part1" element="ns:ticket" />
-	</message>
-	<message name="identityMessage">
-		<part name="part1" element="ns:identity" />
-	</message>
-	<message name="noSuchUserError">
-		<part name="part1" element="ns:no-such-user" />
-	</message>
+    targetNamespace="http://laputa.cyclopsgroup.org/identity/ws/client"
+    xmlns:axis2="http://laputa.cyclopsgroup.org/identity/ws/client"
+    xmlns:ns="http://laputa.cyclopsgroup.org/identity/ws/client"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://laputa.cyclopsgroup.org/identity/ws/client">
+            <element name="username" type="string" />
+            <element name="credential">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:username" />
+                        <element name="password" type="string" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="identity">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:username" />
+                        <element name="language" type="string" />
+                        <element name="country" type="string" />
+                        <element name="timezone" type="string" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="authentication-result">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="SUCCESSFUL" />
+                        <enumeration value="NO_SUCH_USER" />
+                        <enumeration value="DISABLED_USER" />
+                        <enumeration value="WRONG_PASSWORD" />
+                        <enumeration value="ERROR" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ticket" type="string" />
+            <element name="no-such-user">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:username" />
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </types>
+    <message name="authenticateRequest">
+        <part name="part1" element="ns:credential" />
+    </message>
+    <message name="authenticateResponse">
+        <part name="part1" element="ns:authentication-result" />
+    </message>
+    <message name="signInRequest">
+        <part name="part1" element="ns:username" />
+    </message>
+    <message name="ticketMessage">
+        <part name="part1" element="ns:ticket" />
+    </message>
+    <message name="identityMessage">
+        <part name="part1" element="ns:identity" />
+    </message>
+    <message name="noSuchUserError">
+        <part name="part1" element="ns:no-such-user" />
+    </message>
 
-	<portType name="IdentityServicePortType">
-		<operation name="authenticate">
-			<input message="axis2:authenticateRequest" />
-			<output message="axis2:authenticateResponse" />
-		</operation>
-		<operation name="signIn">
-			<input message="axis2:signInRequest" />
-			<output message="axis2:ticketMessage" />
-			<fault name="error" message="axis2:noSuchUserError" />
-		</operation>
-		<operation name="signOut">
-			<input message="axis2:ticketMessage" />
-		</operation>
-		<operation name="getIdentity">
-			<input message="axis2:ticketMessage" />
-			<output message="axis2:identityMessage" />
-		</operation>
-	</portType>
+    <portType name="IdentityServicePortType">
+        <operation name="authenticate">
+            <input message="axis2:authenticateRequest" />
+            <output message="axis2:authenticateResponse" />
+        </operation>
+        <operation name="signIn">
+            <input message="axis2:signInRequest" />
+            <output message="axis2:ticketMessage" />
+            <fault name="error" message="axis2:noSuchUserError" />
+        </operation>
+        <operation name="signOut">
+            <input message="axis2:ticketMessage" />
+        </operation>
+        <operation name="getIdentity">
+            <input message="axis2:ticketMessage" />
+            <output message="axis2:identityMessage" />
+        </operation>
+    </portType>
 
-	<binding name="IdentityServiceBinding"
-		type="axis2:IdentityServicePortType">
-		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
-			style="document" />
-		<operation name="authenticate">
-			<soap:operation style="document"
-				soapAction="urn:authenticate" />
-			<input>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</input>
-			<output>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</output>
-		</operation>
-		<operation name="signIn">
-			<soap:operation style="document" soapAction="urn:signIn" />
-			<input>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</input>
-			<output>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</output>
-		</operation>
-		<operation name="signOut">
-			<soap:operation style="document" soapAction="urn:signOut" />
-			<input>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</input>
-			<output>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</output>
-		</operation>
-		<operation name="getIdentity">
-			<soap:operation style="document"
-				soapAction="urn:getIdentity" />
-			<input>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</input>
-			<output>
-				<soap:body use="literal"
-					namespace="http://www.cyclopsgroup.org/identity" />
-			</output>
-		</operation>
-	</binding>
+    <binding name="IdentityServiceBinding"
+        type="axis2:IdentityServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+            style="document" />
+        <operation name="authenticate">
+            <soap:operation style="document" soapAction="urn:authenticate" />
+            <input>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </input>
+            <output>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </output>
+        </operation>
+        <operation name="signIn">
+            <soap:operation style="document" soapAction="urn:signIn" />
+            <input>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </input>
+            <output>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </output>
+        </operation>
+        <operation name="signOut">
+            <soap:operation style="document" soapAction="urn:signOut" />
+            <input>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </input>
+            <output>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </output>
+        </operation>
+        <operation name="getIdentity">
+            <soap:operation style="document" soapAction="urn:getIdentity" />
+            <input>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </input>
+            <output>
+                <soap:body use="literal"
+                    namespace="http://www.cyclopsgroup.org/identity" />
+            </output>
+        </operation>
+    </binding>
 
-	<service name="IdentityService">
-		<port name="webservice"
-			binding="axis2:IdentityServiceBinding">
-			<soap:address
-				location="http://live.cyclopsgroup.org/webservice/identity" />
-		</port>
-	</service>
+    <service name="IdentityService">
+        <port name="webservice" binding="axis2:IdentityServiceBinding">
+            <soap:address
+                location="http://live.cyclopsgroup.org/webservice/identity" />
+        </port>
+    </service>
 </definitions>

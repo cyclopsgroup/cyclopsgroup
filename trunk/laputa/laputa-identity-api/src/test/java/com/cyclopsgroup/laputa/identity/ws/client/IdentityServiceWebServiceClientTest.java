@@ -8,7 +8,6 @@ public class IdentityServiceWebServiceClientTest
     public void testDummy()
         throws Exception
     {
-        IdentityServiceWebServiceClient client = new IdentityServiceWebServiceClient( "local://localhost:8080" );
-        client.authenticate( "test", "test" );
+
     }
 }
