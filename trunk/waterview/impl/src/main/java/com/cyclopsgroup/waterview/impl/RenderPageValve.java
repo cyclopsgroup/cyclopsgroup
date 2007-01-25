@@ -1,4 +1,4 @@
-package com.cyclopsgroup.waterview.impl.valves;
+package com.cyclopsgroup.waterview.impl;
 
 import java.io.Writer;
 import java.util.Map;
@@ -23,6 +23,15 @@ import com.cyclopsgroup.waterview.spi.Valve;
 public class RenderPageValve
     implements Valve
 {
+    public class HttpError404
+        extends Exception
+    {
+        private HttpError404( String path )
+        {
+            super( "Resource " + path + " not found!" );
+        }
+    }
+
     public class ViewRenderer
     {
         private Context context;
@@ -123,7 +132,7 @@ public class RenderPageValve
         }
         if ( !renderred )
         {
-            throw new Http404Exception( templatePath );
+            throw new HttpError404( path );
         }
     }
 

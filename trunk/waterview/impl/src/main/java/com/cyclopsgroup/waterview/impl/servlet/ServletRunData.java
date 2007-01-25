@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.DefaultContext;
@@ -44,10 +43,6 @@ public class ServletRunData
 
         Context requestContext = new DefaultContext( new HashMap<String, Object>(), new ServletRequestContext( request ) );
         setRequestContext( requestContext );
-
-        //Request path
-        String requestPath = request.getPathInfo();
-        setRequestPath( requestPath == null ? StringUtils.EMPTY : requestPath );
 
         if ( FileUploadBase.isMultipartContent( servletRequest ) )
         {

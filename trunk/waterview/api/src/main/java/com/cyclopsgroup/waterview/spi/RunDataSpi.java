@@ -44,9 +44,13 @@ public interface RunDataSpi
 
     List<String> getMessages();
 
+    void setApplicationBaseUrl( String applicationBaseUrl );
+
     void setError( Throwable e );
 
     void setErrorMessage( String errorMessage );
 
     void setLink( DynamicLink link );
+
+    void setRequestPath( String requestPath );
 }

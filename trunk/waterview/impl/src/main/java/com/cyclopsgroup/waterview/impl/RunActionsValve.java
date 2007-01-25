@@ -1,4 +1,4 @@
-package com.cyclopsgroup.waterview.impl.valves;
+package com.cyclopsgroup.waterview.impl;
 
 import com.cyclopsgroup.waterview.Action;
 import com.cyclopsgroup.waterview.ActionContext;

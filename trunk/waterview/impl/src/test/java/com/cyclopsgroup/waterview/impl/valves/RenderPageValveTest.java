@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.DefaultContext;
+import com.cyclopsgroup.waterview.impl.RenderPageValve;
 import com.cyclopsgroup.waterview.spi.DefaultResourceRegistry;
 import com.cyclopsgroup.waterview.spi.TemplateEngine;
 

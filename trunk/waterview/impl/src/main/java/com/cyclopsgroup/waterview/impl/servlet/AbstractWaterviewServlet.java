@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RunData;
+import com.cyclopsgroup.waterview.impl.Constants;
 import com.cyclopsgroup.waterview.spi.Waterview;
 
 public abstract class AbstractWaterviewServlet
     extends HttpServlet
+    implements Constants
 {
     @Override
     protected void doGet( HttpServletRequest req, HttpServletResponse resp )
@@ -34,11 +36,11 @@ public abstract class AbstractWaterviewServlet
     {
         RunData data = new ServletRunData( getWaterview(), getServletContext(), req, resp );
         Context requestContext = data.getRequestContext();
-        requestContext.put( "httpRequest", req );
-        requestContext.put( "httpResponse", resp );
-        requestContext.put( "servletContext", getServletContext() );
-        requestContext.put( "servletConfig", getServletConfig() );
-        requestContext.put( "data", data );
+        requestContext.put( HTTP_REQUEST, req );
+        requestContext.put( HTTP_RESPONSE, resp );
+        requestContext.put( SERVLET_CONTEXT, getServletContext() );
+        requestContext.put( SERVLET_CONFIG, getServletConfig() );
+        requestContext.put( DATA, data );
         getWaterview().processRunData( data );
     }
 

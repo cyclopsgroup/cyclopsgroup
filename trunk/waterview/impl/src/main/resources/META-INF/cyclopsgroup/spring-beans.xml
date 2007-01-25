@@ -19,9 +19,9 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                 <property name="valves">
                     <list>
                         <ref
-                            bean="com.cyclopsgroup.waterview.impl.valves.ResolveUrlValve" />
+                            bean="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve" />
                         <ref
-                            bean="com.cyclopsgroup.waterview.impl.valves.RenderPageValve" />
+                            bean="com.cyclopsgroup.waterview.impl.RenderPageValve" />
                     </list>
                 </property>
             </bean>
@@ -29,8 +29,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     </bean>
     <bean id="com.cyclopsgroup.waterview.ServiceManager"
         class="com.cyclopsgroup.waterview.impl.spring.SpringServiceManager" />
-    <bean id="com.cyclopsgroup.waterview.impl.valves.RenderPageValve"
-        class="com.cyclopsgroup.waterview.impl.valves.RenderPageValve">
+    <bean id="com.cyclopsgroup.waterview.impl.RenderPageValve"
+        class="com.cyclopsgroup.waterview.impl.RenderPageValve">
         <constructor-arg index="0" value="/waterview/layout/DefaultLayout.vm" />
         <constructor-arg index="1"
             ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />
@@ -43,6 +43,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
             </map>
         </property>
     </bean>
-    <bean id="com.cyclopsgroup.waterview.impl.valves.ResolveUrlValve"
-        class="com.cyclopsgroup.waterview.impl.valves.ResolveUrlValve" />
+    <bean id="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve"
+        class="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve" />
 </beans>
