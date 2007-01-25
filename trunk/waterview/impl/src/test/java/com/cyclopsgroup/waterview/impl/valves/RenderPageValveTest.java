@@ -39,7 +39,7 @@ public class RenderPageValveTest
         throws Exception
     {
         StringWriter output = new StringWriter();
-        rpv.renderPage( null, "a/X.vm", new DefaultContext( new HashMap() ), output );
+        rpv.renderPage( null, "a/X.vm", new DefaultContext( new HashMap<String, Object>() ), output );
         output.flush();
         assertEquals( "?a/X.vm?", output.toString() );
     }

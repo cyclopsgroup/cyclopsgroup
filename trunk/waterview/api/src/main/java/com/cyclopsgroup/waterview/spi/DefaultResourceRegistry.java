@@ -34,7 +34,7 @@ public class DefaultResourceRegistry
         }
         else if ( StringUtils.isNotEmpty( defaultPackageAlias ) )
         {
-            packageName = (String) packageMap.get( defaultPackageAlias );
+            packageName = packageMap.get( defaultPackageAlias );
             if ( packageName == null )
             {
                 throw new PackageNotDefinedException( packageAlias );
@@ -96,6 +96,7 @@ public class DefaultResourceRegistry
         }
     }
 
+    @SuppressWarnings("unchecked")
     public String getFullResourcePath( String shortPath )
         throws PackageNotDefinedException
     {

@@ -24,9 +24,8 @@ public abstract class AbstractSpringWaterviewServlet
 
     private ServiceManager serviceManager = new ServiceManager()
     {
-        @SuppressWarnings("unchecked")
         @Override
-        public <T> T getService( String serviceRole )
+        public Object getService( String serviceRole )
             throws ServiceNotFoundException
         {
             if ( container == null )
@@ -34,7 +33,7 @@ public abstract class AbstractSpringWaterviewServlet
                 throw new IllegalStateException( "Servlet is not ready, container is still null" );
             }
 
-            return (T) container.getBean( serviceRole );
+            return container.getBean( serviceRole );
         }
     };
 
@@ -127,7 +126,7 @@ public abstract class AbstractSpringWaterviewServlet
 
         try
         {
-            waterview = serviceManager.getService( waterviewBeanId );
+            waterview = (Waterview) serviceManager.getService( waterviewBeanId );
         }
         catch ( ServiceNotFoundException e )
         {

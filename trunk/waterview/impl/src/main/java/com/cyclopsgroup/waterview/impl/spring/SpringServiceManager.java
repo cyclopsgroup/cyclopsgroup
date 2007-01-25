@@ -15,12 +15,12 @@ public class SpringServiceManager
     private BeanFactory beanFactory;
 
     @Override
-    public <T> T getService( String serviceRole )
+    public Object getService( String serviceRole )
         throws ServiceNotFoundException
     {
         try
         {
-            return (T) beanFactory.getBean( serviceRole );
+            return beanFactory.getBean( serviceRole );
         }
         catch ( NoSuchBeanDefinitionException e )
         {
