@@ -29,9 +29,21 @@ import org.apache.commons.collections.iterators.AbstractIteratorDecorator;
 public class FixedSizeIterator<T>
     extends AbstractIteratorDecorator
 {
+    private int index = 0;
+
     private int size;
 
-    private int index = 0;
+    /**
+     * Constructor for class FixedSizeIterator
+     *
+     * @param iterator Wrapped iterator
+     * @param size Max size
+     */
+    public FixedSizeIterator( Iterator<T> iterator, int size )
+    {
+        super( iterator );
+        this.size = size;
+    }
 
     /**
      * Overwrite or implement method hasNext()
@@ -53,20 +65,8 @@ public class FixedSizeIterator<T>
     @Override
     public T next()
     {
-        Object object = super.next();
+        T object = (T) super.next();
         index++;
-        return (T) object;
-    }
-
-    /**
-     * Constructor for class FixedSizeIterator
-     *
-     * @param iterator Wrapped iterator
-     * @param size Max size
-     */
-    public FixedSizeIterator( Iterator<? extends T> iterator, int size )
-    {
-        super( iterator );
-        this.size = size;
+        return object;
     }
 }

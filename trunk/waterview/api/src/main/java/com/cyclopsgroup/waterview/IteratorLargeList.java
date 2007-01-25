@@ -32,14 +32,14 @@ public class IteratorLargeList<T>
 {
     private boolean disposed = false;
 
-    private Iterator<? extends T> iterator;
+    private Iterator<T> iterator;
 
     /**
      * Constructor for class IteratorLargeList
      *
      * @param iterator Iterator object
      */
-    public IteratorLargeList( Iterator<? extends T> iterator )
+    public IteratorLargeList( Iterator<T> iterator )
     {
         this.iterator = iterator;
     }
@@ -80,7 +80,7 @@ public class IteratorLargeList<T>
         }
         if ( maxAmount == UNLIMITED_MAX_AMOUNT )
         {
-            return (Iterator<T>) iterator;
+            return iterator;
         }
         return new FixedSizeIterator<T>( iterator, maxAmount );
     }
