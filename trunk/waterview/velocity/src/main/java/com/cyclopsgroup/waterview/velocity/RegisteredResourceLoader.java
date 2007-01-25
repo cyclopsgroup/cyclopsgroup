@@ -8,6 +8,9 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import com.cyclopsgroup.waterview.spi.DefaultResourceRegistry;
+import com.cyclopsgroup.waterview.spi.PackageNotDefinedException;
+
 public class RegisteredResourceLoader
     extends ClasspathResourceLoader
 {
@@ -17,23 +20,23 @@ public class RegisteredResourceLoader
     public synchronized InputStream getResourceStream( String name )
         throws ResourceNotFoundException
     {
-        for ( String alias : packageMap.keySet() )
+        try
         {
-            if ( name.startsWith( alias + '/' ) || name.startsWith( '/' + alias + '/' ) )
-            {
-
-            }
+            return super.getResourceStream( DefaultResourceRegistry.getFullResourcePath( packageMap, name, null ) );
         }
-        return super.getResourceStream( name );
+        catch ( PackageNotDefinedException e )
+        {
+            throw new ResourceNotFoundException( "Resource " + name + " is not found" );
+        }
     }
 
     @Override
     public void init( ExtendedProperties configuration )
     {
         super.init( configuration );
-        for ( String alias : configuration.getStringArray( "alias" ) )
+        for ( String alias : configuration.getStringArray( "aliases" ) )
         {
-            String packageName = configuration.getString( alias );
+            String packageName = configuration.getString( "package." + alias );
             packageMap.put( alias, packageName.replace( '.', '/' ) );
         }
     }

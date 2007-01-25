@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.impl.spring.SpringContainer;
+
 public class SharedSpringWaterviewServlet
     extends AbstractSpringWaterviewServlet
 {

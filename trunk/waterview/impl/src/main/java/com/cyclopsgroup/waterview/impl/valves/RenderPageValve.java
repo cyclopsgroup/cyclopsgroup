@@ -1,5 +1,6 @@
 package com.cyclopsgroup.waterview.impl.valves;
 
+import java.io.Writer;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -37,7 +38,16 @@ public class RenderPageValve
         public void renderView( String templatePath )
             throws Exception
         {
-            renderPage( data, templatePath, context );
+            try
+            {
+                renderPage( data, templatePath, context, data.getOutput() );
+            }
+            catch ( Exception e )
+            {
+                data.getOutput().print( "<pre>" );
+                e.printStackTrace( data.getOutput() );
+                data.getOutput().print( "</pre>" );
+            }
         }
     }
 
@@ -73,10 +83,11 @@ public class RenderPageValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        renderPage( data, layoutPath, data.getRequestContext() );
+        renderPage( data, layoutPath, data.getRequestContext(), data.getOutput() );
+        context.invokeNextValve( data );
     }
 
-    public void renderPage( RunDataSpi data, String templatePath, Context context )
+    public void renderPage( RunDataSpi data, String templatePath, Context context, Writer output )
         throws Exception
     {
         ViewContext viewContext = new ViewContext( context );
@@ -98,15 +109,21 @@ public class RenderPageValve
         String path = viewContext.getTemplatePath();
         viewContext.put( "templatePath", path );
         viewContext.put( "renderer", new ViewRenderer( data, viewContext ) );
+        boolean renderred = false;
         for ( String pattern : templateEngines.keySet() )
         {
-            if ( Pattern.matches( pattern, path ) )
+            if ( Pattern.matches( '^' + pattern + '$', path ) )
             {
                 TemplateEngine engine = templateEngines.get( pattern );
-                engine.mergeTemplate( path, viewContext, data.getOutput() );
-                data.getOutput().flush();
+                engine.mergeTemplate( path, viewContext, output );
+                output.flush();
+                renderred = true;
                 break;
             }
+        }
+        if ( !renderred )
+        {
+            throw new Http404Exception( templatePath );
         }
     }
 

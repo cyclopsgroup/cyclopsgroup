@@ -1,0 +1,8 @@
+<html>
+  <head>
+    <title>Waterview: $data</title>
+  </head>
+  <body>
+    $renderer.renderView($data.requestPath)
+  </body>
+</html>

@@ -4,11 +4,16 @@ import java.util.List;
 
 public interface ResourceRegistry
 {
-    String getFullClassName( String shortPath );
+    String getDefaultPackageAlias();
 
-    String getFullResourcePath( String shortPath );
+    String getFullClassName( String shortPath )
+        throws PackageNotDefinedException;
+
+    String getFullResourcePath( String shortPath )
+        throws PackageNotDefinedException;
 
     List<String> getPackageAliases();
 
-    String getPackageName( String packageAlias );
+    String getPackageName( String packageAlias )
+        throws PackageNotDefinedException;
 }

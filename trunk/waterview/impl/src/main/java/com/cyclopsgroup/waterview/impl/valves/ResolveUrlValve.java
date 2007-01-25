@@ -4,12 +4,13 @@ import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
 
-public class ParseURLValve
+public class ResolveUrlValve
     implements Valve
 {
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
+        System.out.println( data.getRequestPath() );
         context.invokeNextValve( data );
     }
 }

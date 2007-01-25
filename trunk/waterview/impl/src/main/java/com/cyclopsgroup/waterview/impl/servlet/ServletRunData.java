@@ -3,6 +3,7 @@ package com.cyclopsgroup.waterview.impl.servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Context;
+import com.cyclopsgroup.waterview.DefaultContext;
 import com.cyclopsgroup.waterview.spi.AbstractRunData;
 import com.cyclopsgroup.waterview.spi.Waterview;
 
@@ -39,7 +42,8 @@ public class ServletRunData
         setSessionContext( new HttpSessionContext( request.getSession() ) );
         setSessionId( request.getSession().getId() );
 
-        setRequestContext( new ServletRequestContext( request ) );
+        Context requestContext = new DefaultContext( new HashMap<String, Object>(), new ServletRequestContext( request ) );
+        setRequestContext( requestContext );
 
         //Request path
         String requestPath = request.getPathInfo();

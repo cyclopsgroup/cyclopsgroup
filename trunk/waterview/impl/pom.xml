@@ -22,6 +22,11 @@
 			<version>2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>com.cyclopsgroup.waterview</groupId>
+			<artifactId>waterview-velocity</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.7.0</version>

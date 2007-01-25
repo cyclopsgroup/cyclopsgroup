@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.RunData;
 import com.cyclopsgroup.waterview.ServiceManager;
 import com.cyclopsgroup.waterview.ServiceNotFoundException;
+import com.cyclopsgroup.waterview.impl.spring.SpringContainer;
 import com.cyclopsgroup.waterview.spi.Waterview;
 
 public abstract class AbstractSpringWaterviewServlet
@@ -66,6 +68,12 @@ public abstract class AbstractSpringWaterviewServlet
         throws Exception
     {
         RunData data = new ServletRunData( waterview, getServletContext(), req, resp );
+        Context requestContext = data.getRequestContext();
+        requestContext.put( "httpRequest", req );
+        requestContext.put( "httpResponse", resp );
+        requestContext.put( "servletContext", getServletContext() );
+        requestContext.put( "servletConfig", getServletConfig() );
+        requestContext.put( "data", data );
         waterview.processRunData( data );
     }
 
@@ -101,7 +109,6 @@ public abstract class AbstractSpringWaterviewServlet
         String webappDir = getServletContext().getRealPath( "" );
         container.setProperty( "webapp.dir", webappDir );
         container.setProperty( "basedir", webappDir );
-        container.addStaticBean( ServiceManager.class.getName(), serviceManager );
         try
         {
             container.initialize();

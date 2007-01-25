@@ -1,13 +1,11 @@
-package com.cyclopsgroup.waterview.impl.servlet;
+package com.cyclopsgroup.waterview.impl.spring;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.springframework.beans.BeansException;
@@ -28,8 +26,6 @@ public class SpringContainer
 
     private Properties initProperties = new Properties();
 
-    private Map<String, Object> staticBeans = new HashMap<String, Object>();
-
     public SpringContainer()
     {
         this( null );
@@ -39,11 +35,6 @@ public class SpringContainer
     {
         this.config = config;
         initProperties.setProperty( "basedir", new File( "" ).getAbsolutePath() );
-    }
-
-    public void addStaticBean( String beanId, Object bean )
-    {
-        staticBeans.put( beanId, bean );
     }
 
     public synchronized void dispose()
@@ -113,14 +104,6 @@ public class SpringContainer
                     PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
                     configurer.setProperties( initProperties );
                     configurer.postProcessBeanFactory( beanFactory );
-                }
-
-                if ( !staticBeans.isEmpty() )
-                {
-                    for ( String beanId : staticBeans.keySet() )
-                    {
-                        beanFactory.registerSingleton( beanId, staticBeans.get( beanId ) );
-                    }
                 }
             }
         };
