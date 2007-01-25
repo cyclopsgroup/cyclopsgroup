@@ -13,14 +13,14 @@
     <packaging>pom</packaging>
     <name>Cyclops Group</name>
     <version>1.0-SNAPSHOT</version>
-    <description>The website of CyclopsGroup.com</description>
-    <url>http://www.cyclopsgroup.com/</url>
+    <description>The website of CyclopsGroup.org</description>
+    <url>http://www.cyclopsgroup.org</url>
     <scm>
         <connection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-main-site
+            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-main-site
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-main-site
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/trunk/arapaho/arapaho-main-site
         </developerConnection>
         <url>
             http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/arapaho/arapaho-main-site
