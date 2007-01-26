@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<span xmlns:j="jelly:core">
-    <j:set var="fieldClass" value="waterviewFormInput" />
-    <j:if test="${field.invalid}">
-        <j:set var="fieldClass" value="waterviewFormInvalidInput" />
-    </j:if>
-    <input type="text" name="${field.name}" value="${field.value}" size="${fieldTag.getSize()}" class="${fieldClass}"
-        title="${field.errorMessage}" />
-</span>

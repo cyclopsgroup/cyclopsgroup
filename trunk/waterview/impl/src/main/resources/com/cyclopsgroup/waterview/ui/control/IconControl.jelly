@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<img src="${controlTag.url}" width="${controlTag.getSize()}" height="${controlSet.getSize()}" alt="${controlTag.alt}"
-    align="absbottom" border="0" class="waterviewIcon" />
