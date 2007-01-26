@@ -1,10 +1,12 @@
 package com.cyclopsgroup.waterview.impl.servlet;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.cyclopsgroup.waterview.impl.Constants;
+import com.cyclopsgroup.waterview.impl.HttpError;
 import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.Valve;
@@ -53,7 +55,23 @@ public class ResolveUrlValve
         data.setRequestPath( getRequestPath( request ) );
 
         System.out.println( data.getRequestPath() + "@" + data.getApplicationBaseUrl() );
-        context.invokeNextValve( data );
+
+        try
+        {
+            context.invokeNextValve( data );
+        }
+        catch ( HttpError e )
+        {
+            HttpServletResponse response = (HttpServletResponse) data.getRequestContext().get( HTTP_RESPONSE );
+            if ( StringUtils.isEmpty( e.getErrorMessage() ) )
+            {
+                response.sendError( e.getStatusCode() );
+            }
+            else
+            {
+                response.sendError( e.getStatusCode(), e.getErrorMessage() );
+            }
+        }
     }
 
     public boolean isWithServletPath()

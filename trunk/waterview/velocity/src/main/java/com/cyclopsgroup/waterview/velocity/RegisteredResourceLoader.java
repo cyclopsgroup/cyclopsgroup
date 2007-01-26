@@ -8,7 +8,7 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import com.cyclopsgroup.waterview.spi.DefaultResourceRegistry;
+import com.cyclopsgroup.waterview.spi.MultiPackageResourceRegistry;
 import com.cyclopsgroup.waterview.spi.PackageNotDefinedException;
 
 public class RegisteredResourceLoader
@@ -22,7 +22,7 @@ public class RegisteredResourceLoader
     {
         try
         {
-            return super.getResourceStream( DefaultResourceRegistry.getFullResourcePath( packageMap, name, null ) );
+            return super.getResourceStream( MultiPackageResourceRegistry.getFullResourcePath( packageMap, name, null ) );
         }
         catch ( PackageNotDefinedException e )
         {

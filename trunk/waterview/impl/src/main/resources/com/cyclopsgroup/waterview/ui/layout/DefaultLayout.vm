@@ -3,6 +3,10 @@
     <title>Waterview: $data</title>
   </head>
   <body>
-    $renderer.renderView($data.requestPath)
+    #if( $data.requestPath.startsWith( "/layout/" ) )
+      Can't render another layout $data.requestPath
+    #else
+      $renderer.renderView($data.requestPath)
+    #end
   </body>
 </html>

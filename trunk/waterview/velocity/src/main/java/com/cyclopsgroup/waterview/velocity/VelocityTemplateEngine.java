@@ -1,5 +1,6 @@
 package com.cyclopsgroup.waterview.velocity;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Properties;
 
@@ -7,11 +8,14 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.ResourceNotFoundException;
 
 import com.cyclopsgroup.waterview.Context;
 import com.cyclopsgroup.waterview.spi.PackageNotDefinedException;
+import com.cyclopsgroup.waterview.spi.RenderTemplateException;
 import com.cyclopsgroup.waterview.spi.ResourceRegistry;
 import com.cyclopsgroup.waterview.spi.TemplateEngine;
+import com.cyclopsgroup.waterview.spi.TemplateNotFoundException;
 
 public class VelocityTemplateEngine
     implements TemplateEngine
@@ -56,9 +60,29 @@ public class VelocityTemplateEngine
     }
 
     public void mergeTemplate( String templatePath, Context context, Writer output )
-        throws Exception
+        throws TemplateNotFoundException, RenderTemplateException, IOException
     {
         VelocityContextAdapter velocityContext = new VelocityContextAdapter( context );
-        velocityEngine.mergeTemplate( templatePath, velocityContext, output );
+        try
+        {
+            velocityEngine.mergeTemplate( templatePath, velocityContext, output );
+        }
+        catch ( ResourceNotFoundException e )
+        {
+            throw new TemplateNotFoundException( templatePath );
+        }
+        catch ( IOException e )
+        {
+            throw e;
+        }
+        catch ( Exception e )
+        {
+            throw new RenderTemplateException( e );
+        }
+    }
+
+    public boolean templateExists( String templatePath )
+    {
+        return velocityEngine.templateExists( templatePath );
     }
 }

@@ -13,6 +13,7 @@ import com.cyclopsgroup.waterview.spi.PipelineContext;
 import com.cyclopsgroup.waterview.spi.ResourceRegistry;
 import com.cyclopsgroup.waterview.spi.RunDataSpi;
 import com.cyclopsgroup.waterview.spi.TemplateEngine;
+import com.cyclopsgroup.waterview.spi.TemplateNotFoundException;
 import com.cyclopsgroup.waterview.spi.Valve;
 
 /**
@@ -24,11 +25,11 @@ public class RenderPageValve
     implements Valve
 {
     public class HttpError404
-        extends Exception
+        extends HttpError
     {
         private HttpError404( String path )
         {
-            super( "Resource " + path + " not found!" );
+            super( 404, "Resource " + path + " not found!" );
         }
     }
 
@@ -60,17 +61,14 @@ public class RenderPageValve
         }
     }
 
-    private String layoutPath;
-
     private ResourceRegistry resourceRegistry;
 
     private ServiceManager serviceManager;
 
     private Map<String, TemplateEngine> templateEngines = new ConcurrentHashMap<String, TemplateEngine>();
 
-    public RenderPageValve( String layoutPath, ResourceRegistry resourceRegistry )
+    public RenderPageValve( ResourceRegistry resourceRegistry )
     {
-        this.layoutPath = layoutPath;
         this.resourceRegistry = resourceRegistry;
     }
 
@@ -92,7 +90,7 @@ public class RenderPageValve
     public void invoke( RunDataSpi data, PipelineContext context )
         throws Exception
     {
-        renderPage( data, layoutPath, data.getRequestContext(), data.getOutput() );
+        renderPage( data, data.getRequestPath(), data.getRequestContext(), data.getOutput() );
         context.invokeNextValve( data );
     }
 
@@ -124,7 +122,14 @@ public class RenderPageValve
             if ( Pattern.matches( '^' + pattern + '$', path ) )
             {
                 TemplateEngine engine = templateEngines.get( pattern );
-                engine.mergeTemplate( path, viewContext, output );
+                try
+                {
+                    engine.mergeTemplate( path, viewContext, output );
+                }
+                catch ( TemplateNotFoundException e )
+                {
+                    throw new HttpError404( path );
+                }
                 output.flush();
                 renderred = true;
                 break;

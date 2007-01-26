@@ -4,7 +4,7 @@
     xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
     <bean id="com.cyclopsgroup.waterview.spi.ResourceRegistry"
-        class="com.cyclopsgroup.waterview.spi.DefaultResourceRegistry">
+        class="com.cyclopsgroup.waterview.spi.MultiPackageResourceRegistry">
         <property name="packages">
             <map>
                 <entry key="waterview" value="com.cyclopsgroup.waterview.ui" />
@@ -21,7 +21,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                         <ref
                             bean="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve" />
                         <ref
-                            bean="com.cyclopsgroup.waterview.impl.RenderPageValve" />
+                            bean="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve" />
                     </list>
                 </property>
             </bean>
@@ -29,8 +29,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     </bean>
     <bean id="com.cyclopsgroup.waterview.ServiceManager"
         class="com.cyclopsgroup.waterview.impl.spring.SpringServiceManager" />
-    <bean id="com.cyclopsgroup.waterview.impl.RenderPageValve"
-        class="com.cyclopsgroup.waterview.impl.RenderPageValve">
+    <bean id="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve"
+        class="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve">
         <constructor-arg index="0" value="/waterview/layout/DefaultLayout.vm" />
         <constructor-arg index="1"
             ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />

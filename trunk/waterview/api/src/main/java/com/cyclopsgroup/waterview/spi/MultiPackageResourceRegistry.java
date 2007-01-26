@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:jiaqi@amazon.com>jiaqi</a>
  *
  */
-public class DefaultResourceRegistry
+public class MultiPackageResourceRegistry
     implements ResourceRegistry
 {
     public static String getFullResourcePath( Map<String, String> packageMap, String requestPath,

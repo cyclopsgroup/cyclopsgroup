@@ -7,12 +7,12 @@ import com.cyclopsgroup.waterview.spi.PackageNotDefinedException;
 public class DefaultResourceRegistryTest
     extends TestCase
 {
-    private DefaultResourceRegistry drr;
+    private MultiPackageResourceRegistry drr;
 
     @Override
     protected void setUp()
     {
-        drr = new DefaultResourceRegistry();
+        drr = new MultiPackageResourceRegistry();
         drr.addPackage( "a", "a.a.a" );
         drr.addPackage( "b", "b.b.b" );
     }
