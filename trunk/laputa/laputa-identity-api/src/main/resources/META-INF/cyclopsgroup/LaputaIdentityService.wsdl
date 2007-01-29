@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="service"
-    targetNamespace="http://laputa.cyclopsgroup.org/identity/ws/client"
-    xmlns:axis2="http://laputa.cyclopsgroup.org/identity/ws/client"
-    xmlns:ns="http://laputa.cyclopsgroup.org/identity/ws/client"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    targetNamespace="http://laputa.cyclopsgroup.com/identity/ws/client"
+    xmlns:axis2="http://laputa.cyclopsgroup.com/identity/ws/client"
+    xmlns:ns="http://laputa.cyclopsgroup.com/identity/ws/client"
+    xmlns:soap="http://schemas.xmlsoap.com/wsdl/soap/"
     xmlns="http://schemas.xmlsoap.org/wsdl/">
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="http://laputa.cyclopsgroup.org/identity/ws/client">
+            targetNamespace="http://laputa.cyclopsgroup.com/identity/ws/client">
             <element name="username" type="string" />
             <element name="credential">
                 <complexType>
