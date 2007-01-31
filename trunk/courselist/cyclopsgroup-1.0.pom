@@ -8,7 +8,7 @@
     <currentVersion>SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group</name>
-        <url>http://www.cyclopsgroup.com</url>
+        <url>http://www.cyclopsgroup.org</url>
         <logo>/images/cyclopsgroup_logo.gif</logo>
     </organization>
     <inceptionYear>2004</inceptionYear>
@@ -18,9 +18,8 @@
     <description>Sample project</description>
     <shortDescription>Sample proect</shortDescription>
     <url>${pom.organization.url}/projects/${pom.artifactId}</url>
-    <issueTrackingUrl>http://www.cyclopsgroup.com/issues</issueTrackingUrl>
-    <siteAddress>${maven.cyclopsgroup.site.address}</siteAddress>
-    <siteDirectory>${maven.cyclopsgroup.site.directory}/projects/${pom.artifactId}</siteDirectory>
+    <siteAddress>shell.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/c/cy/cyclops-group/htdocs/projects/${pom.artifactId}</siteDirectory>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/cyclops-group:${pom.artifactId}</connection>
         <developerConnection>
@@ -117,7 +116,7 @@
         <report>maven-tasklist-plugin</report>
         <report>maven-pmd-plugin</report>
         <report>maven-simian-plugin</report>
-        <report>maven-clover-plugin</report>
+        <!--<report>maven-clover-plugin</report>-->
         <report>maven-license-plugin</report>
     </reports>
     <properties />

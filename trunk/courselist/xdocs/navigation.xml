@@ -17,10 +17,7 @@
             <item name="About us" href="/team-list.html" />
         </menu>
         <links>
-            <item name="Live Demo" href="http://demo.cyclopsgroup.com/courselist" />
-            <item name="View CVS" href="http://cvs.cyclopsgroup.com/viewrep/cyclops-group/courselist" />
-            <item name="Change Log" href="http://cvs.cyclopsgroup.com/changelog/cyclops-group/courselist" />
-            <item name="Search Source" href="http://cvs.cyclopsgroup.com/search/cyclops-group/courselist" />
+            <item name="Live Demo" href="http://demo.cyclopsgroup.org/courselist" />
             <item name="PDF Document" href="courselist.pdf" />
             <item name="introcution Slides" href="overview.ppt" />
         </links>

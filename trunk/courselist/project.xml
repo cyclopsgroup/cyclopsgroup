@@ -8,7 +8,7 @@
     <currentVersion>1.0-SNAPSHOT</currentVersion>
     <organization>
         <name>Cyclops Group Software Foundation</name>
-        <url>http://www.cyclopsgroup.com</url>
+        <url>http://www.cyclopsgroup.org</url>
         <logo>/images/cyclopsgroup_logo.png</logo>
     </organization>
     <inceptionYear>2005</inceptionYear>
@@ -19,7 +19,6 @@
             <id>jiaqi</id>
             <email>jiaqi.guo@gmail.com</email>
             <organization>Cyclops Group</organization>
-            <url>http://www.cyclopsgroup.com/kb/display/jiaqi</url>
             <timezone>-6</timezone>
         </developer>
         <developer>
@@ -107,7 +106,7 @@
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>waterview</artifactId>
             <version>2.0-b3</version>
-            <url>http://www.cyclopsgroup.com/projects/waterview</url>
+            <url>http://www.cyclopsgroup.org/projects/waterview</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -116,7 +115,7 @@
             <groupId>com.cyclopsgroup</groupId>
             <artifactId>tornado</artifactId>
             <version>3.0-b1</version>
-            <url>http://www.cyclopsgroup.com/projects/tornado</url>
+            <url>http://www.cyclopsgroup.org/projects/tornado</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
