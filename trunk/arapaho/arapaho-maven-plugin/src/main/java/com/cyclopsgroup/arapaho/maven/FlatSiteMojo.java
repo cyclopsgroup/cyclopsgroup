@@ -8,6 +8,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 
 /**
  * 
@@ -55,8 +56,7 @@ public class FlatSiteMojo
 
         Properties props = new Properties();
         props.setProperty( "resource.loader", "__file__" );
-        props.setProperty( "__file__.resource.loader.class",
-                           "org.apache.velocity.runtime.resource.loader.FileResourceLoader" );
+        props.setProperty( "__file__.resource.loader.class", FileResourceLoader.class.getName() );
         props.setProperty( "__file__.resource.loader.path", flatsiteDirectory.getAbsolutePath() );
 
         VelocityEngine velocity = new VelocityEngine();
