@@ -1,0 +1,59 @@
+<div>
+    <div id="mainContent">
+        <h2>Photos</h2>
+        <h3>Sandbox</h3>
+        <p>
+            <a href="http://flickr.com/photos/guojiaqi/tags/photography/">
+                http://flickr.com/photos/guojiaqi/tags/photography/
+            </a>
+            ,
+            <a
+                href="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200">
+                RSS
+            </a>
+        </p>
+        #macro(thumbnail $link $thumbnailUrl)
+        <td>
+            <a href="$link">
+                <img src="$thumbnailUrl" border="0" />
+            </a>
+        </td>
+        #end
+        <table width="100%" border="0" cellspacing="20" align="center">
+            <tr>
+                #thumbnail("http://flickr.com/photos/guojiaqi/373034494" "http://farm1.static.flickr.com/150/373034494_7df79f9c99_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/373034501" "http://farm1.static.flickr.com/135/373034501_f275686f70_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/373034488" "http://farm1.static.flickr.com/187/373034488_93c6bae0c5_t.jpg")
+            </tr>
+            <tr>
+                #thumbnail("http://flickr.com/photos/guojiaqi/373034490" "http://farm1.static.flickr.com/186/373034490_3892908eaa_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/373034498" "http://farm1.static.flickr.com/163/373034498_33eddbae6b_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/349765431" "http://farm1.static.flickr.com/127/349765431_8883e3fa81_t.jpg")
+            </tr>
+            <tr>
+                #thumbnail("http://flickr.com/photos/guojiaqi/349762771" "http://farm1.static.flickr.com/156/349762771_d08035990f_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/348681704" "http://farm1.static.flickr.com/164/348681704_851248daa8_t.jpg")
+                #thumbnail("http://flickr.com/photos/guojiaqi/305434062" "http://farm1.static.flickr.com/115/305434062_9454f26b15_t.jpg")
+            </tr>
+        </table>
+    </div>
+    <div id="sideContent">
+        <h2>Links for more</h2>
+        <ul>
+            <li>
+                <a href="http://flickr.com/photos/guojiaqi">Flickr 1</a>
+            </li>
+            <li>
+                <a href="http://flickr.com/photos/jiiaqi">Flickr 2</a>
+            </li>
+            <li>
+                <a href="http://public.fotki.com/crazytmac">Fotki</a>
+            </li>
+            <li>
+                <a href="http://picasaweb.google.com/crazytmac">
+                    Google Picasa
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

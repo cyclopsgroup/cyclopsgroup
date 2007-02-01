@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <title>Jiaqi Guo's home</title>
-        <meta name="description" content="Jiaqi Guo's home page" />
+        <title>$title</title>
+        <meta name="description" content="$description" />
         <meta name="keywords"
             content="Jiaqi Guo, Home, Java, Open Source, Software, Programming, CyclopsGroup" />
-        <link rel="stylesheet" href="css/display.css" media="screen" />
-        <link rel="stylesheet" href="css/print.css" media="print" />
+        <link rel="stylesheet" href="$basedir/css/display.css" media="screen" />
+        <link rel="stylesheet" href="$basedir/css/print.css" media="print" />
         <script type="text/javascript"
             src="http://www.google-analytics.com/urchin.js">
         </script>
@@ -25,22 +25,24 @@
             <div id="documentContent">
                 <div id="contentBanner">
                     <div id="navigationLinks">
+                        <![CDATA[
                         #macro(navigationLink $link $linkTitle)
                             #if($link == $htmlPath)
                                 <div class="navigationLink"
                                     id="selectedNavigationLink">
-                                    <a href="$link">$linkTitle</a>
+                                    <a href="$basedir/$link">$linkTitle</a>
                                 </div>
                             #else
                                 <div class="navigationLink">
-                                    <a href="$link">$linkTitle</a>
+                                    <a href="$basedir/$link">$linkTitle</a>
                                 </div>
                             #end
                         #end
+                        ]]>
                         #navigationLink("index.html" "About")
                         #navigationLink("blog.html" "Blog")
                         #navigationLink("resume.html" "Resume")
-                        #navigationLink("contact.html" "Contact")
+                        #navigationLink("photos.html" "Photos")
                     </div>
                 </div>
                 <div class="clearBreak"></div>
