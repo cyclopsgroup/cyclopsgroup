@@ -51,7 +51,14 @@
                 <div id="contentFooter">
                     <table width="100%" border="0">
                         <tr>
-                            <td>2006 CyclopsGroup.com. All rights reserved</td>
+                            <td>
+                                2007 CyclopsGroup.org. All rights reserved. (
+                                <a
+                                    href="http://fisheye3.cenqua.com/browse/cyclops-group/trunk/website/jiaqi/src/flatsite/$templatePath?r=HEAD">
+                                    View Source
+                                </a>
+                                )
+                            </td>
                             <td align="right">
                                 <table border="0">
                                     <tr>

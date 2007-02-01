@@ -19,43 +19,19 @@
             action="http://www.pollpub.com/remote-what-do-you-want-to-find-out-in-this-website.aspx"
             method="post">
             <ul>
+                #macro(option $optionId $optionTitle)
                 <li>
-                    <input id="r5477" type="radio" name="groupVote"
-                        value="5477" />
-                    <label for="r5477">What kind of job do I do</label>
+                    <input id="r${optionId}" type="radio" name="groupVote"
+                        value="${optionId}" />
+                    <label for="r${optionId}">$optionTitle</label>
                 </li>
-                <li>
-                    <input id="r5478" type="radio" name="groupVote"
-                        value="5478" />
-                    <label for="r5478">
-                        How to send SPAM to my personal emailbox
-                    </label>
-                </li>
-                <li>
-                    <input id="r5479" type="radio" name="groupVote"
-                        value="5479" />
-                    <label for="r5479">
-                        What is my purpose of making this website
-                    </label>
-                </li>
-                <li>
-                    <input id="r5480" type="radio" name="groupVote"
-                        value="5480" />
-                    <label for="r5480">Did I write anything yesterday</label>
-                </li>
-                <li>
-                    <input id="r5481" type="radio" name="groupVote"
-                        value="5481" />
-                    <label for="r5481">
-                        Is this website just an eye candy with garbage or worthy
-                        to dig in
-                    </label>
-                </li>
-                <li>
-                    <input id="r5482" type="radio" name="groupVote"
-                        value="5482" />
-                    <label for="r5482">How to hack this website</label>
-                </li>
+                #end
+                #option("5477" "What kind of job do I do")
+                #option("5478" "How to send SPAM to my personal emailbox")
+                #option("5479" "What is my purpose of making this website")
+                #option("5480" "Did I write anything yesterday")
+                #option("5481" "Is this website just  an eye candy with garbage or worthy to dig in")
+                #option("5482" "Seriously, how to hack this website")
             </ul>
             <p>
                 <input type="submit" class="pushButton"

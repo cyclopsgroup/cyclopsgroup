@@ -1,7 +1,6 @@
 <div>
     <div id="mainContent">
         <h2>Photos</h2>
-        <h3>Sandbox</h3>
         <p>
             <a href="http://flickr.com/photos/guojiaqi/tags/photography/">
                 http://flickr.com/photos/guojiaqi/tags/photography/
@@ -13,13 +12,13 @@
             </a>
         </p>
         #macro(thumbnail $link $thumbnailUrl)
-        <td>
+        <td align="center">
             <a href="$link">
                 <img src="$thumbnailUrl" border="0" />
             </a>
         </td>
         #end
-        <table width="100%" border="0" cellspacing="20" align="center">
+        <table width="100%" border="0" cellspacing="20">
             <tr>
                 #thumbnail("http://flickr.com/photos/guojiaqi/373034494" "http://farm1.static.flickr.com/150/373034494_7df79f9c99_t.jpg")
                 #thumbnail("http://flickr.com/photos/guojiaqi/373034501" "http://farm1.static.flickr.com/135/373034501_f275686f70_t.jpg")
