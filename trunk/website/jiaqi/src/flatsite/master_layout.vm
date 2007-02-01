@@ -25,19 +25,22 @@
             <div id="documentContent">
                 <div id="contentBanner">
                     <div id="navigationLinks">
-                        <div class="navigationLink"
-                            id="selectedNavigationLink">
-                            <a href="index.html">About</a>
-                        </div>
-                        <div class="navigationLink">
-                            <a href="blog.html">Blog</a>
-                        </div>
-                        <div class="navigationLink">
-                            <a href="resume.html">Resume</a>
-                        </div>
-                        <div class="navigationLink">
-                            <a href="contact.html">Contact</a>
-                        </div>
+                        #macro(navigationLink $link $linkTitle)
+                            #if($link == $htmlPath)
+                                <div class="navigationLink"
+                                    id="selectedNavigationLink">
+                                    <a href="$link">$linkTitle</a>
+                                </div>
+                            #else
+                                <div class="navigationLink">
+                                    <a href="$link">$linkTitle</a>
+                                </div>
+                            #end
+                        #end
+                        #navigationLink("index.html" "About")
+                        #navigationLink("blog.html" "Blog")
+                        #navigationLink("resume.html" "Resume")
+                        #navigationLink("contact.html" "Contact")
                     </div>
                 </div>
                 <div class="clearBreak"></div>
@@ -61,7 +64,7 @@
                                         <td>
                                             <a
                                                 href="http://sourceforge.net/donate/index.php?group_id=91358">
-                                                <img border="0"
+                                                <img
                                                     alt="Donate to Cyclops Group"
                                                     src="http://images.sourceforge.net/images/project-support.jpg" />
                                             </a>

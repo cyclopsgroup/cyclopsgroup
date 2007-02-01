@@ -145,6 +145,8 @@ public class FlatSiteMojo
         context.put( "pom", project );
         context.put( "title", project.getName() );
         context.put( "description", project.getDescription() );
+        context.put( "templatePath", templatePath );
+        context.put( "htmlPath", mergePath( fileDirectory, htmlFileName ) );
 
         String basedir;
         if ( StringUtils.isEmpty( fileDirectory ) )
