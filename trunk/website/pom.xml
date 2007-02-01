@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.cyclopsgroup.arapaho</groupId>
+        <artifactId>cyclopsgroup-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.cyclopsgroup.website</groupId>
+    <artifactId>website-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>cyclopsgroup.org</name>
+    <version>1.0-SNAPSHOT</version>
+    <inceptionYear>2007</inceptionYear>
+    <scm>
+        <connection>
+            scm:svn:svn://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/website
+        </connection>
+        <developerConnection>
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/website
+        </developerConnection>
+        <url>
+            http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/waterview
+        </url>
+    </scm>
+    <modules>
+        <module>jiaqi</module>
+    </modules>
+    <repositories>
+        <repository>
+            <id>ibiblio.org</id>
+            <name>ibiblio</name>
+            <url>http://ibiblio.org/maven2</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>cyclopsgroup.org</id>
+            <url>http://cyclops-group.sourceforge.net/m2</url>
+        </repository>
+    </repositories>
+    
+</project>

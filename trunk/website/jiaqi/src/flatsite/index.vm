@@ -1,0 +1,97 @@
+<div>
+    <div id="mainContent">
+        <h2>About me</h2>
+        <p>
+            My name is Jiaqi Guo and I was born and grew up in a small town,
+            Yanliang, in Xi'an China. In the last 10 years I've migrated across
+            Zhejiang, Shanghai, Texas, Virgina and Washington. Right now I work
+            in Seattle and live in Bellevue, Washington.
+        </p>
+        <p>
+            I'm a big fan of Java programming and open source projects while my
+            interest towards software is not limited to Java.
+            <a href="http://cyclops-group.sourceforge.net">CyclopsGroup</a>
+            is my code portfolio.
+        </p>
+        <h2>Quick vote</h2>
+        <p>What do you want to find out in this website</p>
+        <form
+            action="http://www.pollpub.com/remote-what-do-you-want-to-find-out-in-this-website.aspx"
+            method="post">
+            <ul>
+                <li>
+                    <input id="r5477" type="radio" name="groupVote"
+                        value="5477" />
+                    <label for="r5477">What kind of job do I do</label>
+                </li>
+                <li>
+                    <input id="r5478" type="radio" name="groupVote"
+                        value="5478" />
+                    <label for="r5478">
+                        How to send SPAM to my personal emailbox
+                    </label>
+                </li>
+                <li>
+                    <input id="r5479" type="radio" name="groupVote"
+                        value="5479" />
+                    <label for="r5479">
+                        What is my purpose of making this website
+                    </label>
+                </li>
+                <li>
+                    <input id="r5480" type="radio" name="groupVote"
+                        value="5480" />
+                    <label for="r5480">Did I write anything yesterday</label>
+                </li>
+                <li>
+                    <input id="r5481" type="radio" name="groupVote"
+                        value="5481" />
+                    <label for="r5481">
+                        Is this website just an eye candy with garbage or worthy
+                        to dig in
+                    </label>
+                </li>
+                <li>
+                    <input id="r5482" type="radio" name="groupVote"
+                        value="5482" />
+                    <label for="r5482">How to hack this website</label>
+                </li>
+            </ul>
+            <p>
+                <input type="submit" class="pushButton"
+                    value='Vote and see result!' />
+            </p>
+        </form>
+        <p></p>
+    </div>
+    <div id="sideContent">
+        <h2>Latest updates</h2>
+        <p>
+            [20/15/2006] Website is completely redesigned. New theme is inspired
+            by
+            <a href="http://www.deviantart.com/deviation/40788653/">
+                intravero
+            </a>
+            from
+            <a href="http://deviantart.com">deviantart.com</a>
+            .
+        </p>
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="http://cyclopsgroup.org">Back to cyclopsgroup.org</a>
+            </li>
+            <li>
+                <a href="http://public.fotki.com/crazytmac">Photos of trail</a>
+            </li>
+            <li>
+                <a href="http://utd.edu/~xuying.zhao">Xuying's home page</a>
+            </li>
+            <li>
+                <a href="http://chinajoeblack.spaces.live.com">
+                    Crazy TMac's MSN space
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
