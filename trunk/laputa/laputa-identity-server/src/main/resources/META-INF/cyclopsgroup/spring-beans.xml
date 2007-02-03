@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean id="com.cyclopsgroup.laputa.identity.IdentityService"
+        class="com.cyclopsgroup.laputa.identity.db.DBIdentityService">
+        <constructor-arg index="0">
+            <bean
+                class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+                <property name="configLocation"
+                    value="classpath:com/cyclopsgroup/laputa/identity/db/hibernate.xml" />
+                <property name="hibernateProperties">
+                    <props>
+                        <prop key="hibernate.dialect">
+                            org.hibernate.dialect.HSQLDialect
+                        </prop>
+                        <prop key="hibernate.connection.driver_class">
+                            org.hsqldb.jdbcDriver
+                        </prop>
+                        <prop key="hibernate.connection.url">
+                            jdbc:hsqldb:mem:test
+                        </prop>
+                        <prop key="hibernate.connection.username">sa</prop>
+                        <prop key="hibernate.connection.pool_size">5</prop>
+                        <prop key="hibernate.connection.autocommit">true</prop>
+                        <prop key="hibernate.cache.provider_class">
+                            org.hibernate.cache.NoCacheProvider
+                        </prop>
+                        <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                        <prop key="hibernate.show_sql">true</prop>
+                    </props>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

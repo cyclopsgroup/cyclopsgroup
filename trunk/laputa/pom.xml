@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -14,15 +15,17 @@
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2006</inceptionYear>
     <scm>
-        <connection>scm:svn:svn://svn.sourceforge.net:/svn/cyclops-group/trunk/laputa</connection>
+        <connection>
+            scm:svn:svn://cyclops-group.svn.sourceforge.net:/svn/cyclops-group/trunk/laputa
+        </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net:/svn/cyclops-group/trunk/laputa
+            scm:svn:https://cyclops-group.svn.sourceforge.net:/svn/cyclops-group/trunk/laputa
         </developerConnection>
         <url>http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/laputa</url>
     </scm>
     <modules>
-    	<module>laputa-identity-api</module>
-    	<module>laputa-identity-server</module>
+        <module>laputa-identity-api</module>
+        <module>laputa-identity-server</module>
         <module>laputa-portal</module>
     </modules>
     <repositories>
@@ -43,7 +46,29 @@
     <distributionManagement>
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
-            <url>scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/laputa</url>
+            <url>
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/laputa
+            </url>
         </site>
     </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty6-plugin</artifactId>
+                <configuration>
+                    <goalPrefix>jetty6</goalPrefix>
+                    <useTestClasspath>true</useTestClasspath>
+                    <connectors>
+                        <connector
+                            implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>5000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <contextPath>/</contextPath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
