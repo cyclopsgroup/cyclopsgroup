@@ -11,13 +11,13 @@ public final class ClassLoaderUtils
 {
     private static URL[] EMPTY_URL_ARRAY = new URL[0];
 
-    public static ClassLoader createProjectClassLoader( List classpathElements )
+    public static ClassLoader createProjectClassLoader( List<String> classpathElements )
         throws MalformedURLException
     {
         return createProjectClassLoader( classpathElements, ClassLoaderUtils.class.getClassLoader() );
     }
 
-    public static ClassLoader createProjectClassLoader( List classpathElements, ClassLoader parent )
+    public static ClassLoader createProjectClassLoader( List<String> classpathElements, ClassLoader parent )
         throws MalformedURLException
     {
         List<URL> urls = new ArrayList<URL>();

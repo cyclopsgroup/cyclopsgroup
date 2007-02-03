@@ -22,7 +22,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import org.mortbay.jetty.Server;
+import org.mortbay.xml.XmlConfiguration;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -66,7 +66,7 @@ public class RunJettyMojo
             {
                 try
                 {
-                    Server.main( new String[] { jettyXml } );
+                    XmlConfiguration.main( new String[] { jettyXml } );
                 }
                 catch ( Exception e )
                 {
@@ -77,10 +77,12 @@ public class RunJettyMojo
 
         try
         {
-            ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project.getTestClasspathElements() );
+            ClassLoader classLoader = ClassLoaderUtils.createProjectClassLoader( project.getTestClasspathElements(),
+                                                                                 null );
             thread.setContextClassLoader( classLoader );
             thread.start();
             thread.join();
+            getLog().info( "Finished!" );
         }
         catch ( Exception e )
         {
