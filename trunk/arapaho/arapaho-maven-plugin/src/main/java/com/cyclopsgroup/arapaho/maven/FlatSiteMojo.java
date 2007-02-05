@@ -61,6 +61,36 @@ public class FlatSiteMojo
 
     private XmlTool xmltool = new XmlTool();
 
+    private void copyDirectory( File fromDirectory, File toDirectory )
+        throws IOException
+    {
+        if ( !fromDirectory.isDirectory() )
+        {
+            return;
+        }
+        if ( !toDirectory.isDirectory() )
+        {
+            getLog().info( "Making directory " + toDirectory );
+            toDirectory.mkdirs();
+        }
+        for ( File file : fromDirectory.listFiles() )
+        {
+            if ( file.getName().charAt( 0 ) == '.' )
+            {
+                continue;
+            }
+            else if ( file.isDirectory() )
+            {
+                copyDirectory( file, new File( toDirectory, file.getName() ) );
+            }
+            else
+            {
+                getLog().info( "Copy file from " + file + " into " + toDirectory );
+                FileUtils.copyFileToDirectory( file, toDirectory );
+            }
+        }
+    }
+
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
@@ -85,11 +115,7 @@ public class FlatSiteMojo
             velocityEngine.setProperty( "file.resource.loader.path", flatsiteSourceDirectory.getAbsolutePath() );
             velocityEngine.init();
             generateSiteDirectory( "" );
-            File resourceDirectory = new File( flatsiteSourceDirectory, "resources" );
-            if ( resourceDirectory.isDirectory() )
-            {
-                FileUtils.copyDirectory( resourceDirectory, flatsiteOutputDirectory );
-            }
+            copyDirectory( new File( flatsiteSourceDirectory, "resources" ), flatsiteOutputDirectory );
         }
         catch ( Exception e )
         {
