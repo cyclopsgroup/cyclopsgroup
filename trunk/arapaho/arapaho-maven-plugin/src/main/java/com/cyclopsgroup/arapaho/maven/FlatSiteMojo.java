@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Properties;
 
+import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -15,7 +15,6 @@ import org.apache.maven.project.MavenProject;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
-import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 
 /**
  * 
@@ -40,7 +39,7 @@ public class FlatSiteMojo
     private File flatsiteSourceDirectory;
 
     /**
-     * @parameter expression="master_layout.vm"
+     * @parameter expression="default_layout.vm"
      * @required
      */
     private String layout;
@@ -52,20 +51,13 @@ public class FlatSiteMojo
      */
     private MavenProject project;
 
-    private VelocityEngine velocityEngine;
+    /**
+     * @parameter expression=".vm"
+     * @required
+     */
+    private String templateSuffix;
 
-    private void copySiteFile( File sourceFile, String directory )
-        throws IOException
-    {
-        File destDirectory = new File( flatsiteOutputDirectory, directory );
-        if ( !destDirectory.isDirectory() )
-        {
-            getLog().info( "Making directory " + destDirectory );
-            destDirectory.mkdirs();
-        }
-        getLog().info( "Copying file " + sourceFile + " to directory " + destDirectory );
-        FileUtils.copyFileToDirectory( sourceFile, destDirectory );
-    }
+    private VelocityEngine velocityEngine;
 
     public void execute()
         throws MojoExecutionException, MojoFailureException
@@ -81,16 +73,21 @@ public class FlatSiteMojo
             flatsiteOutputDirectory.mkdirs();
         }
 
-        Properties props = new Properties();
-        props.setProperty( "resource.loader", "__file__" );
-        props.setProperty( "__file__.resource.loader.class", FileResourceLoader.class.getName() );
-        props.setProperty( "__file__.resource.loader.path", flatsiteSourceDirectory.getAbsolutePath() );
-
-        velocityEngine = new VelocityEngine();
         try
         {
-            velocityEngine.init( props );
+            ExtendedProperties props = new ExtendedProperties();
+            props.load( getClass().getResourceAsStream( "flatsite-velocity.properties" ) );
+            getLog().info( props.getString( "file.resource.loader.path" ) );
+            velocityEngine = new VelocityEngine();
+            velocityEngine.setExtendedProperties( props );
+            velocityEngine.setProperty( "file.resource.loader.path", flatsiteSourceDirectory.getAbsolutePath() );
+            velocityEngine.init();
             generateSiteDirectory( "" );
+            File resourceDirectory = new File( flatsiteSourceDirectory, "resources" );
+            if ( resourceDirectory.isDirectory() )
+            {
+                FileUtils.copyDirectory( resourceDirectory, flatsiteOutputDirectory );
+            }
         }
         catch ( Exception e )
         {
@@ -101,7 +98,7 @@ public class FlatSiteMojo
     private void generateSiteDirectory( String relativeDirectory )
         throws IOException
     {
-        File currentSourceDirectory = new File( flatsiteSourceDirectory, relativeDirectory );
+        File currentSourceDirectory = new File( flatsiteSourceDirectory, "content/" + relativeDirectory );
         File[] files = currentSourceDirectory.listFiles();
         for ( File file : files )
         {
@@ -113,31 +110,27 @@ public class FlatSiteMojo
             {
                 generateSiteDirectory( mergePath( relativeDirectory, file.getName() ) );
             }
-            else if ( file.getName().endsWith( "_layout.vm" ) )
-            {
-                continue;
-            }
-            else if ( file.getName().endsWith( ".vm" ) )
+            else if ( file.getName().endsWith( templateSuffix ) )
             {
                 generateSiteFile( relativeDirectory, file.getName() );
             }
             else
             {
-                copySiteFile( file, relativeDirectory );
+                getLog().warn( "Ignore resource " + file + " since it's not a velicity template" );
             }
         }
     }
 
     private void generateSiteFile( String fileDirectory, String fileName )
     {
-        String templatePath = mergePath( fileDirectory, fileName );
+        String templatePath = "content/" + mergePath( fileDirectory, fileName );
         File destDirectory = new File( flatsiteOutputDirectory, fileDirectory );
         if ( !destDirectory.isDirectory() )
         {
             getLog().info( "Making directory " + destDirectory );
             destDirectory.mkdirs();
         }
-        String htmlFileName = fileName.substring( 0, fileName.length() - 3 ) + ".html";
+        String htmlFileName = fileName.substring( 0, fileName.length() - templateSuffix.length() ) + ".html";
         File htmlFile = new File( destDirectory, htmlFileName );
 
         Context context = new VelocityContext();
@@ -170,7 +163,7 @@ public class FlatSiteMojo
             StringWriter bodyWriter = new StringWriter();
             velocityEngine.mergeTemplate( templatePath, context, bodyWriter );
 
-            String layoutTemplatePath = (String) context.get( "layout" );
+            String layoutTemplatePath = "layout/" + (String) context.get( "layout" );
             String body = bodyWriter.toString();
             context.put( "body", body );
 
