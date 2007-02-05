@@ -59,6 +59,8 @@ public class FlatSiteMojo
 
     private VelocityEngine velocityEngine;
 
+    private XmlTool xmltool = new XmlTool();
+
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
@@ -140,6 +142,8 @@ public class FlatSiteMojo
         context.put( "description", project.getDescription() );
         context.put( "templatePath", templatePath );
         context.put( "htmlPath", mergePath( fileDirectory, htmlFileName ) );
+        context.put( "xmltool", xmltool );
+        context.put( "sourceDirectory", flatsiteSourceDirectory.getAbsolutePath() );
 
         String basedir;
         if ( StringUtils.isEmpty( fileDirectory ) )
