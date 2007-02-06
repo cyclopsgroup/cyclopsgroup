@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.DateFormat;
+import java.util.Date;
 
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.io.FileUtils;
@@ -169,6 +171,9 @@ public class FlatSiteMojo
         context.put( "templatePath", templatePath );
         context.put( "htmlPath", mergePath( fileDirectory, htmlFileName ) );
         context.put( "xmltool", xmltool );
+        context.put( "now", new Date() );
+        context.put( "dateFormat", DateFormat.getDateInstance() );
+        context.put( "timeFormat", DateFormat.getTimeInstance() );
         context.put( "sourceDirectory", flatsiteSourceDirectory.getAbsolutePath() );
 
         String basedir;

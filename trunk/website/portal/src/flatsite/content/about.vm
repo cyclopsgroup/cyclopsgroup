@@ -1,0 +1,84 @@
+<div>
+    <h2>About the foundation</h2>
+    <p>
+        Cyclops Group software foundation is started late in 2002 by
+        <a href="members/jiaqi/">Jiaqi Guo</a>
+        . Please feel free to send email to
+        <a href="mailto:cyclopsgroup@gmail.com">cyclopsgroup@gmail.com</a>
+        or
+        <a
+            href="http://groups.google.com/group/cyclopsgroup-discussion/subscribe">
+            join our discussion group
+        </a>
+        to share your ideas .
+    </p>
+    <h2>Powered By</h2>
+    <p>
+        There are a lot of items that can be called &quot;Powered By&quot;. For
+        example, my old Pentium MMX 200 desktop, my tiny shabby apartment and my
+        favourite chinese restaurant.
+    </p>
+    <p>Here's a list of things working behind the scene.</p>
+    <table class="bodyTable">
+        <tr>
+            <td>
+                <a href="http://sourceforge.net/projects/cyclops-group">
+                    SourceForge.net
+                </a>
+            </td>
+            <td>
+                Source code is maintained in sourceforge.net under cyclops-group
+                project.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://maven.apache.org">Apache Maven</a>
+            </td>
+            <td>As major building tool for source code and website.</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://www.urbancode.com/products/anthillpro">
+                    Anthill
+                </a>
+            </td>
+            <td>
+                Anthill pro is the continous building engine for Cyclops Group
+                projects.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://maven.apache.org/continuum/">Continuum</a>
+            </td>
+            <td>
+                After most projects are migrated into maven2 umbrella, Continuum
+                is replacing Anthill little by little.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://eclipse.org">Eclipse</a>
+            </td>
+            <td>Favourite JAVA IDE.</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://www.cenqua.com">Cenqua</a>
+            </td>
+            <td>
+                <a href="http://www.cenqua.com/clover">Clover</a>
+                takes care of code coverage report. Cenqua provides a free
+                <a href="http://www.cenqua.com/fisheye">Fisheye</a>
+                hosting.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="http://www.google.com">Google</a>
+            </td>
+            <td>Analytics, GoogleGroup, AdSense services.</td>
+        </tr>
+    </table>
+</div>

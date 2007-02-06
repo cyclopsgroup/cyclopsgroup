@@ -1,0 +1,79 @@
+<div>
+    <h2>Major projects</h2>
+    <p>
+        This is a full list of projects founded and hosted in Cyclops Group. Not
+        all of these projects are under active development. Please follow the
+        link to find out the detail of each project.
+    </p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="projects/waterview">waterview</a>
+            </td>
+            <td>
+                Componentized web application framework based on Plexus,
+                commons-jelly and Velocity.
+            </td>
+            <td>2.0 release is scheduled</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="projects/courselist">courselist</a>
+            </td>
+            <td>
+                A simple academic web application which maintains a list of
+                college courses.
+            </td>
+            <td>Under development</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="projects/laputa">laputa</a>
+            </td>
+            <td>
+                Will be a group of web applications on top of waterview project
+            </td>
+            <td>Just started</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="projects/tornado">tornado</a>
+            </td>
+            <td>
+                Tornado is a web application framework, an enriched servlet of
+                Apache Jakarta Turbine.
+            </td>
+            <td>First version is released</td>
+        </tr>
+        <tr>
+            <td>arapaho</td>
+            <td>Tools to support CyclopsGroup.com project development.</td>
+            <td>Going well</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="projects/levistone">levistone</a>
+            </td>
+            <td>
+                A database access interface higher than JDBC. Very similar to
+                Apache Torque.
+            </td>
+            <td>
+                Dead long time ago. After hibernate, JDO and JPA became popular.
+            </td>
+        </tr>
+        <tr>
+            <td>nimbus</td>
+            <td>
+                The portal website for the next generation of cyclopsgroup
+                website
+            </td>
+            <td>Planning</td>
+        </tr>
+    </table>
+</div>

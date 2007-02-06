@@ -1,0 +1,27 @@
+/* @import url(pngfix.css); */
+
+.wiki-content h1 {
+    font-size: 13pt;
+    color: #FF9933;
+    background-color: transparent;
+    border-color: #C4C4C4;
+    border-style: dashed;
+    border-width: 0px 0px 2px 0px;
+}
+
+.blogpost .blogHeading {
+    font-size: 11pt;
+}
+
+#PageBannerTable {
+    background-color: #1D54A6;
+    color: white;
+}
+
+#PageBannerTable a, #PageBannerTable .pageTitle, #PageBannerTable .smallText {
+    color: white;
+}
+
+#PageContentSideBar {
+    padding: 10px;
+}

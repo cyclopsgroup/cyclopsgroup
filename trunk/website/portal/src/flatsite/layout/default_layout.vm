@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <title>$title</title>
+        <link rel="stylesheet" href="$basedir/css/site.css" type="text/css"
+            media="screen" />
+        <link rel="stylesheet" href="$basedir/css/print.css" type="text/css"
+            media="print" />
+        <script type="text/javascript"
+            src="http://www.google-analytics.com/urchin.js">
+        </script>
+        <script type="text/javascript">
+            <![CDATA[
+            _uacct = "UA-76203-1";
+            urchinTracker();
+        ]]>
+        </script>
+    </head>
+    <body>
+        <div id="documentWrapper">
+            <div id="documentContent">
+                <table width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td width="25%"></td>
+                            <td width="50%"></td>
+                            <td width="25%"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" id="banner">
+                                <a href="http://www.cyclopsgroup.org"
+                                    id="bannerLeft">
+                                    <img
+                                        src="${basedir}/images/cyclopsgroup_logo.gif"
+                                        alt="CyclopsGroup.org" border="0" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="breadcrumbs">
+                                Last Published: $dateFormat.format($now)
+                            </td>
+                            <td class="breadcrumbs" colspan="2" align="right">
+                                <a href="index.html">home</a>
+                                |
+                                <a href="projects/waterview">waterview</a>
+                                |
+                                <a href="projects/tornado">tornado</a>
+                                |
+                                <a href="projects/courselist">courselist</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="bodycolumn">
+                                <div id="bodycontent">$body</div>
+                            </td>
+                            <td valign="top">
+                                <div id="rightcolumn">
+                                    <div id="navcolumn">
+                                        #macro(navlink $link $linkTitle)
+                                        <li>
+                                            #if($htmlPath==$link)
+                                            <strong>$linkTitle</strong>
+                                            #else
+                                            <a href="$basedir/$link">
+                                                $linkTitle
+                                            </a>
+                                            #end
+                                        </li>
+                                        #end
+                                        <h5>Content</h5>
+                                        <ul>
+                                            #navlink("index.html" "home")
+                                            #navlink("projects.html" "projects")
+                                            #navlink("downloads.html" "downloads")
+                                            #navlink("news.html" "news")
+                                            #navlink("people.html" "people")
+                                            <li>
+                                                <a
+                                                    href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html">
+                                                    discussion
+                                                </a>
+                                            </li>
+                                            #navlink("about.html" "about")
+                                        </ul>
+                                        <h5>Links</h5>
+                                        <ul>
+                                            <li>
+                                                <a
+                                                    href="http://sourceforge.net/projects/cyclops-group">
+                                                    sf.net home
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="http://fisheye3.cenqua.com/viewrep/cyclops-group/">
+                                                    source code
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="footer">&nbsp;</td>
+                            <td colspan="2" align="right">dd</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
