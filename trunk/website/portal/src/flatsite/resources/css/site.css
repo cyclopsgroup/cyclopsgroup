@@ -1,7 +1,12 @@
 @import url("site-base.css");
 
 #documentWrapper {
+    text-align: center;
+}
+
+#documentContent {
     width: 920px;
+    text-align: left;
 }
 
 a:link {
@@ -55,7 +60,7 @@ table.bodyTable tr.b td {
 #rightcolumn {
     background-color: #C4C4C4;
     color: white;
-    width: 20%;
+    margin: 30px 0px 30px 20px;
 }
 
 #navcolumn {
@@ -92,8 +97,4 @@ table.bodyTable tr.b td {
 
 #bodycolumn {
     background-color: white;
-}
-
-#footer {
-    border-color: #C4C4C4;
 }

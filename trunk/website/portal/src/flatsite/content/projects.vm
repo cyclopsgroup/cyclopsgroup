@@ -5,7 +5,7 @@
         all of these projects are under active development. Please follow the
         link to find out the detail of each project.
     </p>
-    <table>
+    <table class="bodyTable" width="100%">
         <tr>
             <th>Name</th>
             <th>Description</th>

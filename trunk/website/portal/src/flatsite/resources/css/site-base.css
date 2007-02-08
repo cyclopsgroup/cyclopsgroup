@@ -1,6 +1,5 @@
 body {
-    font-family: 'Lucida Grande', 'Bitstream Vera Sans', Verdana, Arial,
-        Sans-Serif;
+    font-family: 'Lucida Grande', 'Bitstream Vera Sans', Verdana, Arial, Sans-Serif;
     color: #333333;
     background-color: white;
 }
@@ -96,6 +95,8 @@ a:link,a:visited {
 
 #navcolumn li {
     background-image: none;
+    list-style-image: none;
+    list-style-position: outside;
 }
 
 #rightcolumn h5 {
@@ -104,9 +105,6 @@ a:link,a:visited {
     padding: 10px;
 }
 
-#footer {
+.footer {
     padding: 10px;
-    border-width: 2px 0px 0px 0px;
-    border-style: dashed;
-    border-color: #666666;
 }

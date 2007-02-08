@@ -1,6 +1,6 @@
 <div>
     <h2>Members</h2>
-    <table class="bodyTable" widht="100%">
+    <table class="bodyTable" width="100%">
         <tr>
             <th>ID</th>
             <th>Name</th>

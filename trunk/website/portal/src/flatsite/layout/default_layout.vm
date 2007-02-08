@@ -54,7 +54,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" id="bodycolumn">
+                            <td colspan="2" id="bodycolumn" valign="top">
                                 <div id="bodycontent">$body</div>
                             </td>
                             <td valign="top">
@@ -77,7 +77,7 @@
                                             #navlink("projects.html" "projects")
                                             #navlink("downloads.html" "downloads")
                                             #navlink("news.html" "news")
-                                            #navlink("people.html" "people")
+                                            #navlink("people.html"  "people")
                                             <li>
                                                 <a
                                                     href="http://www.nabble.com/CyclopsGroup.com-Discussion-Mail-List-f13972.html">
@@ -106,8 +106,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td id="footer">&nbsp;</td>
-                            <td colspan="2" align="right">dd</td>
+                            <td class="footer">&nbsp;</td>
+                            <td class="footer" colspan="2" align="right">dd</td>
                         </tr>
                     </tbody>
                 </table>
