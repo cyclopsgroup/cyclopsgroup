@@ -6,6 +6,7 @@
 
 #documentContent {
     width: 920px;
+    margin: 0px auto;
     text-align: left;
 }
 
@@ -34,7 +35,7 @@ table.bodyTable th {
 }
 
 table.bodyTable tr.b td {
-    background-color: #DDDDDD;
+    background-color: #EFEFEF;
 }
 
 #banner {
@@ -79,7 +80,7 @@ table.bodyTable tr.b td {
 #rightcolumn h5 {
     background-color: #9ABBE2;
     color: white;
-    margin-right: 20px;
+    margin: 10px 20px 6px 0px;
 }
 
 #rightcolumn a {
@@ -91,8 +92,13 @@ table.bodyTable tr.b td {
     color: white;
 }
 
-#rightcolumn #search form {
-    padding: 5px;
+#navcolumn ul {
+    padding-left: 10px;
+    margin: 0px;
+}
+
+#navcolumn li {
+    list-style-type: none;
 }
 
 #bodycolumn {

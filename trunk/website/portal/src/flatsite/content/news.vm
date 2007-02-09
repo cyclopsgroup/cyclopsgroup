@@ -1,1 +1,15 @@
-<div></div>
+<div>
+    <h2>Latest news</h2>
+    <p>All news are broadcast through SourceForge.net, <a href="http://sourceforge.net/export/rss2_projnews.php?group_id=91358">RSS</a>.</p>
+    <![CDATA[
+    #set($rss=$xmltool.parseUrl("http://sourceforge.net/export/rss2_projnews.php?group_id=91358"))
+    #set($items=$rss.selectNodes("//channel/item"))
+    #set($trclass="a")
+    ]]>
+    #foreach($item in $items)
+        <p>&nbsp;</p>
+        <p><b>$item.elementText("title")</b></p>
+        <p>$item.elementText("description")</p>
+        <div align="right"><small>Publish at $item.elementText("pubDate") by $item.elementText("author"), <a href="$item.elementText('link')">Detail...</a></small></div>
+    #end
+</div>

@@ -1,45 +1,95 @@
 <div>
     <h2>Members</h2>
+    <p>
+        The following is a list of developers with commit privileges that have
+        directly contributed to the project in one way or another.
+    </p>
     <table class="bodyTable" width="100%">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        <tr>
-            <td>
-                <a href="members/jiaqi/index.html">jiaqi</a>
-            </td>
-            <td>Jiaqi Guo</td>
-            <td>
-                <a href="mailto:jiaqi.guo@gmail.com">jiaqi.guo@gmail.com</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="http://utd.edu/~xuying.zhao">xuying</a>
-            </td>
-            <td>Xuying Zhao</td>
-            <td>
-                <a href="mailto:xuyingzhao@gmail.com">xuyingzhao@gmail.com</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="http://chinajoeblack.spaces.live.com">crazytmac</a>
-            </td>
-            <td>Crazy TMac</td>
-            <td>
-                <a href="mailto:crazytmac@gmail.com">crazytmac@gmail.com</a>
-            </td>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="a">
+                <td>
+                    <a href="members/jiaqi/index.html">jiaqi</a>
+                </td>
+                <td>Jiaqi Guo</td>
+                <td>
+                    <a href="mailto:jiaqi.guo@gmail.com">jiaqi.guo@gmail.com</a>
+                </td>
+            </tr>
+            <tr class="b">
+                <td>
+                    <a href="http://utd.edu/~xuying.zhao">xuying</a>
+                </td>
+                <td>Xuying Zhao</td>
+                <td>
+                    <a href="mailto:xuyingzhao@gmail.com">
+                        xuyingzhao@gmail.com
+                    </a>
+                </td>
+            </tr>
+            <tr class="a">
+                <td>
+                    <a href="http://chinajoeblack.spaces.live.com">crazytmac</a>
+                </td>
+                <td>Crazy TMac</td>
+                <td>
+                    <a href="mailto:crazytmac@gmail.com">crazytmac@gmail.com</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
     <h2>Contributors</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
+    <p>
+        Following people has participated and committed code in at least one
+        project in CyclopsGroup.org.
+    </p>
+    <table class="bodyTable" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="a">
+                <td>chrismenken</td>
+                <td>Chris Menken</td>
+                <td>
+                    <a href="mailto:cpm022000@utdallas.edu">
+                        cpm022000@utdallas.edu
+                    </a>
+                </td>
+            </tr>
+            <tr class="b">
+                <td>javiscline</td>
+                <td>Javis Cline</td>
+                <td>
+                    <a href="mailto:jrc032000@utdallas.edu">
+                        jrc032000@utdallas.edu
+                    </a>
+                </td>
+            </tr>
+            <tr class="a">
+                <td>jchristin</td>
+                <td>John Christin</td>
+                <td>
+                    <a href="mailto:jchristin@gmail.com">jchristin@gmail.com</a>
+                </td>
+            </tr>
+            <tr class="b">
+                <td>joshallen</td>
+                <td>Josh Allen</td>
+                <td>
+                    <a href="mailto:hoopsjosh@gmail.com">hoopsjosh@gmail.com</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>

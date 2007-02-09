@@ -31,7 +31,7 @@
                 project.
             </td>
         </tr>
-        <tr>
+        <tr class="b">
             <td>
                 <a href="http://maven.apache.org">Apache Maven</a>
             </td>
@@ -48,7 +48,7 @@
                 projects.
             </td>
         </tr>
-        <tr>
+        <tr class="b">
             <td>
                 <a href="http://maven.apache.org/continuum/">Continuum</a>
             </td>
@@ -63,7 +63,7 @@
             </td>
             <td>Favourite JAVA IDE.</td>
         </tr>
-        <tr>
+        <tr class="b">
             <td>
                 <a href="http://www.cenqua.com">Cenqua</a>
             </td>
