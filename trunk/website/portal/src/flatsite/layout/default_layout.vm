@@ -18,6 +18,7 @@
             urchinTracker();
         ]]>
         </script>
+        <script type="text/javascript" src="$basedir/js/globalutils.js"></script>
     </head>
     <body>
         <div id="documentWrapper">
