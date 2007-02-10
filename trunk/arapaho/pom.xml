@@ -21,7 +21,6 @@
         <module>arapaho-lib-avalon</module>
         <module>arapaho-lib-hibernate</module>
         <module>arapaho-lib-test</module>
-        <module>arapaho-main-site</module>
         <module>arapaho-maven-plugin</module>
         <module>cyclopsgroup-project</module>
     </modules>
