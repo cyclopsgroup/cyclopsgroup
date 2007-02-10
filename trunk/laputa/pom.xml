@@ -27,6 +27,7 @@
         <module>laputa-identity-api</module>
         <module>laputa-identity-server</module>
         <module>laputa-portal</module>
+        <module>laputa-web-utils</module>
     </modules>
     <repositories>
         <repository>
