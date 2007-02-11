@@ -17,7 +17,8 @@
             <item name="About us" href="/team-list.html" />
         </menu>
         <links>
-            <item name="Live Demo" href="http://courselist.s42.eatj.com/courselist" />
+            <item name="Live Demo" href="http://demo.cyclopsgroup.com/courselist" />
+            <item name="View Source Code" href="http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/courselist" />
             <item name="PDF Document" href="courselist.pdf" />
             <item name="introcution Slides" href="overview.ppt" />
         </links>
