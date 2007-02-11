@@ -12,10 +12,20 @@
         business problem can only be created in free open envrionment.
     </p>
     <h2>Latest news</h2>
-    <script language="javascript">
-        transformXml("http://sourceforge.net/export/rss2_projnews.php?group_id=91358",
-        "http://www.cyclopsgroup.org/displayrss.xslt");
-    </script>
+    <![CDATA[
+    #set($rss=$xmltool.parseUrl("http://sourceforge.net/export/rss2_projnews.php?group_id=91358"))
+    #set($items=$rss.selectNodes("//channel/item"))
+    #set($trclass="a")
+    ]]>
+    <ul>
+        #foreach($item in $items)
+        <li>
+            <a href="$item.elementText('link')">$item.elementText("title")</a>
+            -
+            <small>$item.elementText("pubDate")</small>
+        </li>
+        #end
+    </ul>
     <p>
         <a
             href="http://sourceforge.net/export/rss2_projnews.php?group_id=91358">
@@ -25,16 +35,21 @@
         <a href="news.html">More details...</a>
     </p>
     <h2>Recent code changes</h2>
-    <script language="javascript">
-        transformXml("http://feeds.feedburner.com/Cyclopsgroup-changelogGoogleGroup",
-        "http://www.cyclopsgroup.org/displayrss.xslt");
-    </script>
+    <![CDATA[
+    #set($rss=$xmltool.parseUrl("http://feeds.feedburner.com/Cyclopsgroup-changelogGoogleGroup"))
+    #set($items=$rss.selectNodes("//channel/item"))
+    #set($trclass="a")
+    ]]>
+    <ul>
+        #foreach($item in $items)
+        <li>
+            <a href="$item.elementText('link')">$item.elementText("title")</a>
+            -
+            <small>$item.elementText("pubDate")</small>
+        </li>
+        #end
+    </ul>
     <p>
-        <a
-            href="http://feeds.feedburner.com/Cyclopsgroup-changelogGoogleGroup">
-            RSS
-        </a>
-        ,
         <a href="http://groups.google.com/group/cyclopsgroup-changelog">
             More details...
         </a>
