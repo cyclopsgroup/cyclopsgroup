@@ -3,6 +3,12 @@ package com.cyclopsgroup.laputa.webutils;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * This writer output each line of another Writer within javascript document.writeln function
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ *
+ */
 public class JavascriptEscapingWriter
     extends Writer
 {
