@@ -26,7 +26,7 @@ public class EatjRemoteControl
         PosixParser parser = new PosixParser();
         CommandLine cli = parser.parse( opts, args );
 
-        if ( cli.hasOption( "h" ) )
+        if ( cli.hasOption( "h" ) || !cli.hasOption( "p" ) )
         {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp( "ccc", opts );

@@ -14,6 +14,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 
 /**
@@ -37,6 +38,13 @@ public class UberjarMojo
      * @required
      */
     private MavenProject project;
+
+    /**
+     * @parameter expression="${plugin}"
+     * @readonly
+     * @required
+     */
+    private PluginDescriptor plugin;
 
     /**
      * @parameter expression="${basedir}/target/${project.artifactId}-uber-${project.version}.jar"
@@ -95,10 +103,12 @@ public class UberjarMojo
             uberjarFile.getParentFile().mkdirs();
         }
 
+        //Create string writer for classworlds.conf
         StringWriter classworldsConfigContent = new StringWriter();
         PrintWriter classworldsConfig = new PrintWriter( classworldsConfigContent );
         classworldsConfig.println( "main is " + mainClass + " from app" );
         classworldsConfig.println( "[app]" + SystemUtils.LINE_SEPARATOR );
+
         try
         {
             FileOutputStream fileOutput = new FileOutputStream( uberjarFile );
@@ -116,14 +126,18 @@ public class UberjarMojo
                     getLog().info( "Ignore " + dependency + " since it's not a file" );
                 }
             }
+
+            //Add classworlds.conf into uberjar
             addFileEntry( output, artifactJarFile, "WORLDS-INF/lib/" + artifactJarFile.getName() );
             classworldsConfig.println( "  ${classworlds.lib}/" + artifactJarFile.getName() );
+            getLog().info( "Adding " + "WORLDS-INF/conf/classworlds.conf" );
             ZipEntry configEntry = new ZipEntry( "WORLDS-INF/conf/classworlds.conf" );
             configEntry.setSize( classworldsConfig.toString().length() );
             configEntry.setTime( System.currentTimeMillis() );
             output.putNextEntry( configEntry );
             classworldsConfig.flush();
             output.write( classworldsConfigContent.toString().getBytes() );
+
             output.flush();
             output.close();
         }
