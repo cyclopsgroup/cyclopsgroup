@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -40,6 +43,13 @@ public class UberjarMojo
      * @required
      */
     private File uberjarFile;
+
+    /**
+     * @parameter
+     * @required
+     * @description Name of the executable main class
+     */
+    private String mainClass;
 
     private void addFileEntry( JarOutputStream output, File file, String name )
         throws IOException
@@ -85,6 +95,10 @@ public class UberjarMojo
             uberjarFile.getParentFile().mkdirs();
         }
 
+        StringWriter classworldsConfigContent = new StringWriter();
+        PrintWriter classworldsConfig = new PrintWriter( classworldsConfigContent );
+        classworldsConfig.println( "main is " + mainClass + " from app" );
+        classworldsConfig.println( "[app]" + SystemUtils.LINE_SEPARATOR );
         try
         {
             FileOutputStream fileOutput = new FileOutputStream( uberjarFile );
@@ -95,9 +109,21 @@ public class UberjarMojo
                 if ( dependency.isFile() )
                 {
                     addFileEntry( output, dependency, "WORLDS-INF/lib/" + dependency.getName() );
+                    classworldsConfig.println( "  ${classworlds.lib}/" + dependency.getName() );
+                }
+                else
+                {
+                    getLog().info( "Ignore " + dependency + " since it's not a file" );
                 }
             }
             addFileEntry( output, artifactJarFile, "WORLDS-INF/lib/" + artifactJarFile.getName() );
+            classworldsConfig.println( "  ${classworlds.lib}/" + artifactJarFile.getName() );
+            ZipEntry configEntry = new ZipEntry( "WORLDS-INF/conf/classworlds.conf" );
+            configEntry.setSize( classworldsConfig.toString().length() );
+            configEntry.setTime( System.currentTimeMillis() );
+            output.putNextEntry( configEntry );
+            classworldsConfig.flush();
+            output.write( classworldsConfigContent.toString().getBytes() );
             output.flush();
             output.close();
         }
