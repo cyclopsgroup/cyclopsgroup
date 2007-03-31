@@ -60,6 +60,7 @@
                     <mainClass>
                         com.cyclopsgroup.laputa.webutils.EatjRemoteControl
                     </mainClass>
+                    <uberjarFile>${basedir}/target/eatj.jar</uberjarFile>
                 </configuration>
             </plugin>
         </plugins>
