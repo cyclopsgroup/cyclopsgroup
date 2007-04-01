@@ -12,6 +12,8 @@ import com.cyclopsgroup.waterview.impl.spring.SpringContainer;
 public class DedicatedSpringWaterviewServlet
     extends AbstractSpringWaterviewServlet
 {
+    private static final long serialVersionUID = 1L;
+
     @Override
     protected SpringContainer createSpringContainer()
         throws ServletException
