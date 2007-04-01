@@ -27,6 +27,8 @@ public class RenderPageValve
     public class HttpError404
         extends HttpError
     {
+        private static final long serialVersionUID = 1L;
+
         private HttpError404( String path )
         {
             super( 404, "Resource " + path + " not found!" );

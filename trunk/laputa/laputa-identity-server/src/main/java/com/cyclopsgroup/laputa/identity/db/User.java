@@ -22,6 +22,8 @@ import javax.persistence.UniqueConstraint;
 public class User
     implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private String country = Locale.getDefault().getCountry();
 
     private Date createdDate = new Date();

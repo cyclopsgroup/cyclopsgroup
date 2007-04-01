@@ -3,6 +3,8 @@ package com.cyclopsgroup.waterview.impl;
 public class HttpError
     extends Error
 {
+    private static final long serialVersionUID = 1L;
+
     private String errorMessage;
 
     private int statusCode;

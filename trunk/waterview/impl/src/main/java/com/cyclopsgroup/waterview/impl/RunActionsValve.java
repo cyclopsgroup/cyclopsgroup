@@ -72,6 +72,8 @@ public class RunActionsValve
     private class ActionError
         extends Error
     {
+        private static final long serialVersionUID = 1L;
+
         private String message;
 
         private Throwable throwable;
