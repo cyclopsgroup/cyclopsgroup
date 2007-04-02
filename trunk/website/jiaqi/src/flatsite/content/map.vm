@@ -1,0 +1,50 @@
+<div>
+    <script
+        src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAANa1GfVbbfT8lsHBl2cCLwhRUUmft2R-MhfEHSBI1DlJS1CV7vRRiB-a6fUTmQHkrhxvyUVxiElEDEQ"
+        type="text/javascript">
+    </script>
+    <div id="mainContent">
+        <h2>Seattle</h2>
+        <div id="mapSeattleDiv" style="height: 540px"></div>
+        <p/>
+    </div>
+    <script language="javascript">
+        //<![CDATA[
+        var icon = new GIcon();
+        icon.image = "http://www.cyclopsgroup.org/members/jiaqi/images/photo.png";
+        icon.iconSize = new GSize(22, 22);
+        icon.iconAnchor = new GPoint(6, 20);
+        icon.infoWindowAnchor = new GPoint(5, 1);
+
+        function addMarker(map, lat, lug, title)
+        {
+            var marker = new GMarker(new GLatLng(lat, lug), icon);
+            GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml( title );
+            });
+            map.addOverlay(marker);
+        }
+
+        if (GBrowserIsCompatible()) {
+            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
+            seattleMap.addControl(new GSmallMapControl());
+            seattleMap.setCenter(new GLatLng(47.528619,-122.1175), 10);
+            
+            //Downtown
+            addMarker(seattleMap, 47.604022, -122.339888, '<a href="http://picasaweb.google.com/crazytmac/SeattleCity" title="Seattle Downtown"><img src="http://farm1.static.flickr.com/156/407572274_dea3d8f39a_s.jpg" /> <img src="http://farm1.static.flickr.com/127/349765431_8883e3fa81_s.jpg" /></a>');
+            //Redmond
+            addMarker(seattleMap, 47.659693, -122.110419, '<img src="http://farm1.static.flickr.com/187/373034488_93c6bae0c5_s.jpg" />');
+            //Bellevue downtown
+            addMarker(seattleMap, 47.659867,-122.11072, '<img src="http://farm1.static.flickr.com/41/431776094_d2653c9d6c_s.jpg" /> <img src="http://farm1.static.flickr.com/180/431776100_257c8b02d0_s.jpg" />');
+            //Hamilton viewpoint part
+            addMarker(seattleMap, 47.592229, -122.385743, '<img src="http://farm1.static.flickr.com/149/431808420_bc19e07d5a_s.jpg" /> <img src="http://farm1.static.flickr.com/185/431808416_408049f777_s.jpg" width="75" height="75" alt="dscn5675" />');
+            //Kanasket Palmer
+            addMarker(seattleMap, 47.316803, -121.897044, '<img src="http://farm1.static.flickr.com/207/443211243_f593a5bbba_s.jpg" />');
+        }
+        else
+        {
+            alert("Browser doesn't support Google map");
+        }
+        //]]>
+    </script>
+</div>
