@@ -70,6 +70,7 @@
             #set($photoDoc=$xmltool.parseFile($photoXml))
             #foreach($location in $photoDoc.rootElement.elements("location"))
                 #set($text=$location.elementText("description").trim())
+                #set($href="")
                 #set($href=$location.attributeValue("href"))
                 #if($href != "")
                     #set($text="$text<br/><a href=\"$href\">More...</a>")
