@@ -70,4 +70,12 @@
                 href="http://www.flickr.com/photos/guojiaqi/373034501" />
         </photos>
     </location>
+    <location latitude="47.712129" longitude="-122.377321">
+        <description>Shoreline</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/187/407557983_5e73609d10_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/407557983" />
+        </photos>
+    </location>
 </locations>
