@@ -1,18 +1,51 @@
 <div>
+    <script
+        src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAANa1GfVbbfT8lsHBl2cCLwhRUUmft2R-MhfEHSBI1DlJS1CV7vRRiB-a6fUTmQHkrhxvyUVxiElEDEQ"
+        type="text/javascript">
+    </script>
     <div id="mainContent">
-        <h2>Photos</h2>
+        <h2>Washington, evergreen state</h2>
+        <div id="mapSeattleDiv" style="height: 540px"></div>
+        <p />
+    </div>
+    <div id="sideContent">
+        #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
+        <h2>
+            Albums at
+            <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
+        </h2>
+        #set($rss=$xmltool.parseUrl($rssurl))
+        #set($items=$rss.selectNodes("//channel/item"))
+        <ul>
+            #foreach($item in $items)
+            <li>
+                <a href="$item.elementText('link')">
+                    $item.elementText("title")
+                </a>
+            </li>
+            #end
+        </ul>
+        <h2>Links for more</h2>
+        <ul>
+            <li>
+                <a href="http://flickr.com/photos/jiiaqi">
+                    More photos from flickr.com
+                </a>
+            </li>
+            <li>
+                <a href="http://public.fotki.com/crazytmac">
+                    Photos from fotki.com
+                </a>
+            </li>
+        </ul>
+        <h2>Lastest photos</h2>
+        <![CDATA[
         #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
-        <p>
-            <a href="http://flickr.com/photos/guojiaqi/tags/photography/">
-                http://flickr.com/photos/guojiaqi/tags/photography/
-            </a>
-            ,
-            <a href="$rssurl">RSS</a>
-        </p>
         #set($rss=$xmltool.parseUrl($rssurl))
         #set($items=$rss.selectNodes("//channel/item"))
         #set($groups=$xmltool.groupBy($items, 3))
-        <table width="100%" cellspacing="20" border="0">
+        ]]>
+        <table cellspacing="20" border="0">
             #foreach($group in $groups)
             <tr>
                 #foreach($item in $group)
@@ -30,38 +63,59 @@
             #end
         </table>
     </div>
-    <div id="sideContent">
-        <h2>Links for more</h2>
-        <ul>
-            <li>
-                <a href="http://flickr.com/photos/jiiaqi">
-                    More photos from flickr.com
-                </a>
-            </li>
-            <li>
-                <a href="http://public.fotki.com/crazytmac">
-                    Photos from fotki.com
-                </a>
-            </li>
-        </ul>
-        #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
-        <h2>
-            Albums at
-            <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
-        </h2>
-        #set($rss=$xmltool.parseUrl($rssurl))
-        #set($items=$rss.selectNodes("//channel/item"))
-        <ul>
-            #foreach($item in $items)
-            <li>
-                <a href="$item.elementText('link')">
-                    $item.elementText("title")
-                </a>
-            </li>
+    <script language="javascript">
+        //<![CDATA[
+        ## Macro to parse xml file and generate javascript that add Markers to given map
+        #macro(addMarkersToMap $photoXml $mapVariable)
+            #set($photoDoc=$xmltool.parseFile($photoXml))
+            #foreach($location in $photoDoc.rootElement.elements("location"))
+                #set($text=$location.elementText("description").trim())
+                #set($href=$location.attributeValue("href"))
+                #if($href != "")
+                    #set($text="$text<br/><a href=\"$href\">More...</a>")
+                #end
+                
+                #set($html="")
+                #foreach($photo in $location.element("photos").elements("flickr-photo"))
+                    #set($thumbnailUrl=$photo.attributeValue("thumbnail"))
+                    #set($imageUrl=$photo.attributeValue("href"))
+                    #set($html="$html<td><a href=\"$imageUrl\"><img src=\"$thumbnailUrl\" width=\"75\" height=\"75\" /></a></td>")
+                #end
+                #set($html="<table><tr>${html}<td width=\"80\" valign=\"top\"><small>$text</small></td></tr></table>")
+                
+                addMarker($mapVariable, $location.attributeValue("latitude"), $location.attributeValue("longitude"), '$html');
             #end
-        </ul>
-        <p>
-            <a href="$rssurl">RSS</a>
-        </p>
-    </div>
+        #end
+        
+        
+        var icon = new GIcon();
+        icon.image = "http://www.cyclopsgroup.org/members/jiaqi/images/photo.png";
+        icon.iconSize = new GSize(22, 22);
+        icon.iconAnchor = new GPoint(6, 20);
+        icon.infoWindowAnchor = new GPoint(5, 1);
+
+        function addMarker(map, lat, lug, html)
+        {
+            var marker = new GMarker(new GLatLng(lat, lug), icon);
+            GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml( html );
+            });
+            map.addOverlay(marker);
+        }
+        
+        
+
+        if (GBrowserIsCompatible()) {
+            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
+            seattleMap.addControl(new GSmallMapControl());
+            seattleMap.setCenter(new GLatLng(47.528619,-122.1175), 10);
+            
+            #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
+        }
+        else
+        {
+            alert("Browser doesn't support Google map");
+        }
+        //]]>
+    </script>
 </div>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locations>
+    <location latitude="47.604022" longitude="-122.339888"
+        href="http://picasaweb.google.com/crazytmac/SeattleCity">
+        <description>
+            Seattle city downtown, piers and cruise in Elliot bay
+        </description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/156/407572274_dea3d8f39a_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/407572274" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/127/349765431_8883e3fa81_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/349765431" />
+        </photos>
+    </location>
+    <location latitude="47.659693" longitude="-122.110419">
+        <description>Marymoor Park, Redmond</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/187/373034488_93c6bae0c5_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/373034488" />
+        </photos>
+    </location>
+    <location latitude="47.316803" longitude="-121.897044">
+        <description>Kanaskat Palmer state park, Black Diamond</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/207/443211243_f593a5bbba_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/443211243" />
+        </photos>
+    </location>
+    <location latitude="47.592229" longitude="-122.385743">
+        <description>
+            Hamilton Viewpoint park, the best place to take a walk in dawn
+        </description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/149/431808420_bc19e07d5a_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/431808420" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/185/431808416_408049f777_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/431808416" />
+        </photos>
+    </location>
+    <location latitude="47.613584" longitude="-122.199426">
+        <description>Bellevue downtown</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/180/431776100_257c8b02d0_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/431776100" />
+        </photos>
+    </location>
+    <location latitude="47.558631" longitude="-122.062311">
+        <description>Lake Sammamish state park</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/124/417917990_b01d2d1a6b_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/417917990" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/155/417917987_4101a7c655_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/417917987" />
+        </photos>
+    </location>
+    <location latitude="47.536993" longitude="-122.134709">
+        <description>Cougar Mountain regional wildland park</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/135/373034501_f275686f70_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/373034501" />
+        </photos>
+    </location>
+</locations>
