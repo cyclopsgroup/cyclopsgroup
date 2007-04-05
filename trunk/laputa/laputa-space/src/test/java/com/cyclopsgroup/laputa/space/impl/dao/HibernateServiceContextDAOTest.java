@@ -1,10 +1,10 @@
 package com.cyclopsgroup.laputa.space.impl.dao;
 
-import com.cyclopsgroup.laputa.space.impl.HsqlHibernateTestCase;
+import com.cyclopsgroup.laputa.space.impl.IntegrationTestCase;
 import com.cyclopsgroup.laputa.space.pojo.SpaceServiceContext;
 
 public class HibernateServiceContextDAOTest
-    extends HsqlHibernateTestCase
+    extends IntegrationTestCase
 {
     private HibernateServiceContextDAO dao;
 

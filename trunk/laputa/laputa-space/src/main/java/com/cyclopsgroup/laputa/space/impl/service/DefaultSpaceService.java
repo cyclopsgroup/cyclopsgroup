@@ -29,7 +29,7 @@ public class DefaultSpaceService
         return serviceContextDao.findByUserAccount( userAccountId ) != null;
     }
 
-    public void saveChanges( SpaceServiceContext ctx )
+    public void doSaveChanges( SpaceServiceContext ctx )
     {
         serviceContextDao.save( ctx );
     }

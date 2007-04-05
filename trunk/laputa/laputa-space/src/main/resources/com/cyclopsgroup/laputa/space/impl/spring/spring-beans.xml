@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:a="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+    <!-- 
+        Following beans are requried
+        com.cyclopsgroup.laputa.SessionFactory
+        com.cyclopsgroup.laputa.HibernateSessionInterceptor
+    -->
+    <bean id="com.cyclopsgroup.laputa.space.dao.ServiceContextDAO"
+        class="com.cyclopsgroup.laputa.space.impl.dao.HibernateServiceContextDAO" />
+
+    <bean
+        class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>
+                    com.cyclopsgroup.laputa.space.dao.ServiceContextDAO
+                </value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>com.cyclopsgroup.laputa.HibernateSessionInterceptor</value>
+            </list>
+        </property>
+    </bean>
+</beans>

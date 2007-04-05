@@ -7,4 +7,6 @@ public interface ServiceContextDAO
     SpaceServiceContext findByUserAccount( long userAccountId );
 
     void save( SpaceServiceContext ctx );
+
+    String echo( String msg );
 }

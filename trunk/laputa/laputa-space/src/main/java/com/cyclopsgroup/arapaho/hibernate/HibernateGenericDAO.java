@@ -6,6 +6,7 @@ import java.lang.reflect.ParameterizedType;
 import org.hibernate.Session;
 
 public class HibernateGenericDAO<T, K extends Serializable>
+    implements SessionAware
 {
     private Class<T> entityClass;
 
@@ -18,6 +19,11 @@ public class HibernateGenericDAO<T, K extends Serializable>
         entityClass = (Class<T>) ( (ParameterizedType) getClass().getGenericSuperclass() ).getActualTypeArguments()[0];
 
         primaryKeyClass = (Class<K>) ( (ParameterizedType) getClass().getGenericSuperclass() ).getActualTypeArguments()[1];
+    }
+
+    public String echo( String msg )
+    {
+        return msg;
     }
 
     public Class<T> getEntityClass()
@@ -41,7 +47,7 @@ public class HibernateGenericDAO<T, K extends Serializable>
 
     public void save( T entity )
     {
-        getPrimaryKeyClass().cast( getSession().save( entity ) );
+        getSession().save( entity );
     }
 
     public void setSession( Session session )
