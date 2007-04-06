@@ -5,7 +5,7 @@ import java.lang.reflect.ParameterizedType;
 
 import org.hibernate.Session;
 
-public class HibernateGenericDAO<T, K extends Serializable>
+public abstract class BaseHibernateGeneticDAO<T, K extends Serializable>
     implements SessionAware
 {
     private Class<T> entityClass;
@@ -14,11 +14,16 @@ public class HibernateGenericDAO<T, K extends Serializable>
 
     private Session session;
 
-    protected HibernateGenericDAO()
+    protected BaseHibernateGeneticDAO()
     {
         entityClass = (Class<T>) ( (ParameterizedType) getClass().getGenericSuperclass() ).getActualTypeArguments()[0];
 
         primaryKeyClass = (Class<K>) ( (ParameterizedType) getClass().getGenericSuperclass() ).getActualTypeArguments()[1];
+    }
+
+    public void delete( T entity )
+    {
+        getSession().delete( entity );
     }
 
     public String echo( String msg )

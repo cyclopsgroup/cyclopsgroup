@@ -7,7 +7,7 @@ import com.cyclopsgroup.laputa.space.pojo.SpacePage;
 import com.cyclopsgroup.laputa.space.pojo.SpaceServiceContext;
 import com.cyclopsgroup.laputa.space.pojo.SpaceViewlet;
 
-public class IntegrationTestCase
+public abstract class IntegrationTestCase
     extends ApplicationContextTestCase
 {
     @Override

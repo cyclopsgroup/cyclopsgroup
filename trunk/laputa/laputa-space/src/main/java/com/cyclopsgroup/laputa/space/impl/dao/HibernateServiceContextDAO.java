@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-import com.cyclopsgroup.arapaho.hibernate.HibernateGenericDAO;
+import com.cyclopsgroup.arapaho.hibernate.BaseHibernateGeneticDAO;
 import com.cyclopsgroup.laputa.space.dao.ServiceContextDAO;
 import com.cyclopsgroup.laputa.space.pojo.SpaceServiceContext;
 
 public class HibernateServiceContextDAO
-    extends HibernateGenericDAO<SpaceServiceContext, Long>
+    extends BaseHibernateGeneticDAO<SpaceServiceContext, Long>
     implements ServiceContextDAO
 {
 
