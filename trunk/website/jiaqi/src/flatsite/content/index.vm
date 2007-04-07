@@ -3,47 +3,26 @@
         <h2>About me</h2>
         <p>
             My name is Jiaqi Guo and I was born and grew up in a small town,
-            Yanliang, in Xi'an China. In the last 10 years I've migrated across
-            Zhejiang, Shanghai, Texas, Virgina and Washington. Right now I work
-            in Seattle and live in Bellevue, Washington.
+            Yanliang, in Xi'an, China. In the last 10 years I've moved across
+            Zhejiang, Shanghai in China, Texas, Virgina and Washington in USA.
+            Right now I work in Seattle and live in Bellevue, Washington.
         </p>
         <p>
-            I'm a big fan of Java programming and open source projects while my
-            interest towards software is not limited to Java.
-            <a href="http://cyclops-group.sourceforge.net">CyclopsGroup</a>
+            I'm a big fan of Java software development and open source projects
+            while my interest towards software is not limited to Java.
+            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
             is my code portfolio.
         </p>
-        <h2>Quick vote</h2>
-        <p>What do you want to find out in this website</p>
-        <form
-            action="http://www.pollpub.com/remote-what-do-you-want-to-find-out-in-this-website.aspx"
-            method="post">
-            <ul>
-                #macro(option $optionId $optionTitle)
-                <li>
-                    <input id="r${optionId}" type="radio" name="groupVote"
-                        value="${optionId}" />
-                    <label for="r${optionId}">$optionTitle</label>
-                </li>
-                #end
-                #option("5477" "What kind of job do I do")
-                #option("5478" "How to send SPAM to my personal emailbox")
-                #option("5479" "What is my purpose of making this website")
-                #option("5480" "Did I write anything yesterday")
-                #option("5481" "Is this website just  an eye candy with garbage or worthy to dig in")
-                #option("5482" "Seriously, how to hack this website")
-            </ul>
-            <p>
-                <input type="submit" class="pushButton"
-                    value='Vote and see result!' />
-            </p>
-        </form>
-        <p></p>
     </div>
     <div id="sideContent">
         <h2>Latest updates</h2>
         <p>
-            [20/15/2006] Website is completely redesigned. New theme is inspired
+            [04/06/2007] Calling Google Map API to display photos.
+            <a href="photos.html">Check it out</a>
+            , you won't be disappointed.
+        </p>
+        <p>
+            [12/15/2006] Website is completely redesigned. New theme is inspired
             by
             <a href="http://www.deviantart.com/deviation/40788653/">
                 intravero
