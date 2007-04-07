@@ -9,13 +9,15 @@
         <p />
     </div>
     <div id="sideContent">
-        #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
         <h2>
             Albums at
             <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
         </h2>
-        #set($rss=$xmltool.parseUrl($rssurl))
-        #set($items=$rss.selectNodes("//channel/item"))
+        <!--
+            #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
+            #set($rss=$xmltool.parseUrl($rssurl))
+            #set($items=$rss.selectNodes("//channel/item"))
+        -->
         <ul>
             #foreach($item in $items)
             <li>
@@ -39,12 +41,12 @@
             </li>
         </ul>
         <h2>Lastest photos</h2>
-        <![CDATA[
-        #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
-        #set($rss=$xmltool.parseUrl($rssurl))
-        #set($items=$rss.selectNodes("//channel/item"))
-        #set($groups=$xmltool.groupBy($items, 3))
-        ]]>
+        <!-- 
+            #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
+            #set($rss=$xmltool.parseUrl($rssurl))
+            #set($items=$rss.selectNodes("//channel/item"))
+            #set($groups=$xmltool.groupBy($items, 3))
+        -->
         <table cellspacing="20" border="0">
             #foreach($group in $groups)
             <tr>
@@ -103,12 +105,11 @@
             });
             map.addOverlay(marker);
         }
-        
-        
 
         if (GBrowserIsCompatible()) {
             var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
             seattleMap.addControl(new GSmallMapControl());
+            seattleMap.addControl(new GMapTypeControl());
             seattleMap.setCenter(new GLatLng(47.528619,-122.1175), 10);
             
             #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
