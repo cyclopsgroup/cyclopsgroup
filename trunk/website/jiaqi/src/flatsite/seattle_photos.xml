@@ -78,4 +78,18 @@
                 href="http://flickr.com/photos/guojiaqi/407557983" />
         </photos>
     </location>
+    <location latitude="47.506302" longitude="-121.741476"
+        href="http://picasaweb.google.com/crazytmac/MountLittleSi">
+        <description>
+            Mount Little Si in North Bend, one hour hike with evelation of 480m.
+        </description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/236/450359523_4957b35b47_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/450359523" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/205/450359525_f06ca3981a_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/450359525" />
+        </photos>
+    </location>
 </locations>

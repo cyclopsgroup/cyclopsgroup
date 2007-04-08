@@ -110,7 +110,7 @@
             var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
             seattleMap.addControl(new GSmallMapControl());
             seattleMap.addControl(new GMapTypeControl());
-            seattleMap.setCenter(new GLatLng(47.528619,-122.1175), 10);
+            seattleMap.setCenter(new GLatLng(47.528619,-122.059565), 10);
             
             #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
         }
