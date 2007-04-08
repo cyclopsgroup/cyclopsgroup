@@ -32,15 +32,15 @@
     </location>
     <location latitude="47.592229" longitude="-122.385743">
         <description>
-            Hamilton Viewpoint park, the best place to take a walk in dawn
+            Hamilton Viewpoint park
         </description>
         <photos>
             <flickr-photo
-                thumbnail="http://farm1.static.flickr.com/149/431808420_bc19e07d5a_s.jpg"
-                href="http://flickr.com/photos/guojiaqi/431808420" />
+                thumbnail="http://farm1.static.flickr.com/187/426231962_8afd874af4_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/426231962" />
             <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/185/431808416_408049f777_s.jpg"
-                href="http://flickr.com/photos/guojiaqi/431808416" />
+                href="http://www.flickr.com/photos/guojiaqi/431808416" />
         </photos>
     </location>
     <location latitude="47.613584" longitude="-122.199426">
@@ -81,15 +81,12 @@
     <location latitude="47.506302" longitude="-121.741476"
         href="http://picasaweb.google.com/crazytmac/MountLittleSi">
         <description>
-            Mount Little Si in North Bend, one hour hike with evelation of 480m.
+            Mount Little Si in North Bend, one hour hike with elevation of 480m.
         </description>
         <photos>
             <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/236/450359523_4957b35b47_s.jpg"
                 href="http://www.flickr.com/photos/guojiaqi/450359523" />
-            <flickr-photo
-                thumbnail="http://farm1.static.flickr.com/205/450359525_f06ca3981a_s.jpg"
-                href="http://www.flickr.com/photos/guojiaqi/450359525" />
         </photos>
     </location>
 </locations>
