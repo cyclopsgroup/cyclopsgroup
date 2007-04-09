@@ -5,5 +5,20 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-    <import resource="com/cyclopsgroup/laputa/portal/spring-beans.xml" />
+    <bean id="com.cyclopsgroup.arapaho.spring.VecocityEngine"
+        class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="overrideLogging" value="true" />
+        <property name="preferFileSystemAccess" value="true" />
+        <property name="resourceLoaderPath" value="." />
+        <property name="velocityProperties">
+            <props>
+                <prop key="tools.view.servlet.layout.directory">
+                    WEB-INF/velocity/layout/
+                </prop>
+                <prop key="tools.view.servlet.layout.default.template">
+                    master_content_layout.vm
+                </prop>
+            </props>
+        </property>
+    </bean>
 </beans>
