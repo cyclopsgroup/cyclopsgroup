@@ -3,6 +3,7 @@ package com.cyclopsgroup.arapaho.spring;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
@@ -14,7 +15,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class SpringAwareVelocityLayoutServlet
     extends VelocityLayoutServlet
 {
-    private static final String VELOCITY_ENGINE_BEAN_NAME = "com.cyclopsgroup.arapaho.spring.VecocityEngine";
+    private static final String DEFAULT_VELOCITY_ENGINE_BEAN = VelocityEngine.class.getName();
+
+    private static final String VELOCITY_BEAN_PARAMETER = "velocity.engine.bean";
+
+    private String velocityEngineBeanName;
 
     @Override
     public Template getTemplate( String name )
@@ -33,11 +38,23 @@ public class SpringAwareVelocityLayoutServlet
     }
 
     @Override
+    public void init( ServletConfig config )
+        throws ServletException
+    {
+        velocityEngineBeanName = config.getInitParameter( VELOCITY_BEAN_PARAMETER );
+        if ( StringUtils.isEmpty( velocityEngineBeanName ) )
+        {
+            velocityEngineBeanName = DEFAULT_VELOCITY_ENGINE_BEAN;
+        }
+        super.init( config );
+    }
+
+    @Override
     protected void initVelocity( ServletConfig config )
         throws ServletException
     {
         WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext( getServletContext() );
-        VelocityEngine velocity = (VelocityEngine) ctx.getBean( VELOCITY_ENGINE_BEAN_NAME );
+        VelocityEngine velocity = (VelocityEngine) ctx.getBean( velocityEngineBeanName );
         setVelocityEngine( velocity );
     }
 }

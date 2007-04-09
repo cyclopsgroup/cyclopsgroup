@@ -1,4 +1,6 @@
 <div>
     <p>Hello world</p>
     <p>$request</p>
+    <p>body : $magicName</p>
+    <p>$link.contextURL</p>
 </div>

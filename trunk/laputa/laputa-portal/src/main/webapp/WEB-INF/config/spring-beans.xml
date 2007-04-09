@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-    <bean id="com.cyclopsgroup.arapaho.spring.VecocityEngine"
+    <bean id="com.cyclopsgroup.laputa.VelocityEngine"
         class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
         <property name="overrideLogging" value="true" />
         <property name="preferFileSystemAccess" value="true" />
@@ -20,5 +20,10 @@
                 </prop>
             </props>
         </property>
+    </bean>
+
+    <bean name="/action/index"
+        class="com.cyclopsgroup.laputa.portal.ui.Index">
+        <constructor-arg value="helloboy" />
     </bean>
 </beans>

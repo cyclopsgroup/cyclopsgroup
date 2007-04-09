@@ -3,34 +3,28 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
+    <!-- 
+        Global spring configuration
+    -->
     <context-param>
         <description>Spring config for the whole servlet context</description>
         <param-name>contextConfigLocation</param-name>
         <param-value>WEB-INF/config/spring-beans.xml</param-value>
     </context-param>
-
-    <filter>
-        <filter-name>struts2</filter-name>
-        <filter-class>
-            org.apache.struts2.dispatcher.FilterDispatcher
-        </filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>struts2</filter-name>
-        <url-pattern>*</url-pattern>
-    </filter-mapping>
-
     <servlet>
         <description>
             This servlet will never be called by any http requests
         </description>
-        <servlet-name>__spring_context_loader</servlet-name>
+        <servlet-name>__spring_context_loader__</servlet-name>
         <servlet-class>
             org.springframework.web.context.ContextLoaderServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- 
+        Velocity layout based servlet with spring integration
+    -->
     <servlet>
         <servlet-name>velocity</servlet-name>
         <servlet-class>
@@ -40,6 +34,10 @@
             <param-name>org.apache.velocity.toolbox</param-name>
             <param-value>/WEB-INF/config/velocity-toolbox.xml</param-value>
         </init-param>
+        <init-param>
+            <param-name>velocity.engine.bean</param-name>
+            <param-value>com.cyclopsgroup.laputa.VelocityEngine</param-value>
+        </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -47,8 +45,24 @@
         <url-pattern>*.vm</url-pattern>
     </servlet-mapping>
 
+    <!-- 
+        Struts 1
+    -->
+    <servlet>
+        <servlet-name>struts</servlet-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/config/struts-config.xml</param-value>
+        </init-param>
+        <load-on-startup>10</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>struts</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.html, index.jsp, index.vm</welcome-file>
     </welcome-file-list>
-
 </web-app>
