@@ -17,10 +17,12 @@
         //<![CDATA[
             _uacct = "UA-76203-1";
             urchinTracker();
+            
+            document.onload = function() {};
         //]]>
         </script>
     </head>
-    <body>
+    <body onload="document.onload()">
         <div id="documentWrapper">
             <div id="documentContent">
                 <div id="contentBanner">

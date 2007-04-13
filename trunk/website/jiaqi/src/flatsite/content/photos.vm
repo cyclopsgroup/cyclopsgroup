@@ -106,18 +106,20 @@
             map.addOverlay(marker);
         }
 
-        if (GBrowserIsCompatible()) {
-            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
-            seattleMap.addControl(new GSmallMapControl());
-            seattleMap.addControl(new GMapTypeControl());
-            seattleMap.setCenter(new GLatLng(47.528619,-122.059565), 10);
-            
-            #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
-        }
-        else
-        {
-            alert("Browser doesn't support Google map");
-        }
+        document.onload = function() {
+	        if (GBrowserIsCompatible()) {
+	            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
+	            seattleMap.addControl(new GSmallMapControl());
+	            seattleMap.addControl(new GMapTypeControl());
+	            seattleMap.setCenter(new GLatLng(47.528619,-122.059565), 10);
+	            
+	            #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
+	        }
+	        else
+	        {
+	            alert("Browser doesn't support Google map");
+	        }
+	    };
         //]]>
     </script>
 </div>
