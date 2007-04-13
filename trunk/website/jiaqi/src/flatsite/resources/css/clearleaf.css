@@ -22,16 +22,16 @@ body {
     color: white;
 }
 
-#contentBanner #navigationLinks {
-    padding: 120px 600px 10px 30px
+#navigationLinks {
+    padding: 120px 0px 0px 30px;
 }
 
-#contentBanner div.navigationLink {
+div.navigationLink {
     width: 160px;
-    margin: 10px;
+    margin: 10px 0px 10px 0px;
     background-color: #fff;
     padding: 5px 20px 5px 20px;
-    filter: alpha(opacity =           25);
+    filter: alpha(opacity =  25);
     opacity: 0.25;
     -moz-opacity: 0.25;
     border-radius: .75em;
@@ -39,7 +39,7 @@ body {
 }
 
 #selectedNavigationLink {
-    filter: alpha(opacity =           50);
+    filter: alpha(opacity =  50);
     -moz-opacity: .5 !important;
     opacity: .5 !important;
 }
