@@ -54,12 +54,16 @@ div.navigationLink {
 
 #mainContent {
     float: left;
-    width: 60%;
+    width: 64%;
 }
 
 #sideContent {
     float: right;
-    width: 36%;
+    width: 32%;
+    border-width: 0px 0px 0px 1px;
+    padding: 0px 0px 0px 10px;
+    border-color: #BFBFBF;
+    border-style: dashed;
 }
 
 #contentBody h2,#contentBody h3 {

@@ -54,7 +54,7 @@
                 <td>
                     <a href="$item.elementText('link')">
                         #set($thumbnail=$item.selectSingleNode('media:thumbnail'))
-                        <img src="$thumbnail.attribute('url').value" border="0"
+                        <img src="$thumbnail.attribute('url').value"
                             width="$thumbnail.attribute('width').value"
                             height="$thumbnail.attribute('height').value"
                             alt="$item.elementText('title') from flickr.com" />
@@ -65,7 +65,7 @@
             #end
         </table>
     </div>
-    <script language="javascript">
+    <script type="text/javascript">
         //<![CDATA[
         ## Macro to parse xml file and generate javascript that add Markers to given map
         #macro(addMarkersToMap $photoXml $mapVariable)

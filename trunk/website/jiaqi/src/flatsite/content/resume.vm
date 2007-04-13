@@ -17,7 +17,7 @@
             <li>
                 Experienced in full lifecycle of software development including
                 requirement analysis, architect, development, code reviewing,
-                testing, supporting, and quality assurance.
+                testing, supporting, and QA.
             </li>
             <li>
                 Good team player and leader, good at helping the team achieve
@@ -99,7 +99,9 @@
                 Portal and ERWin, etc.
             </li>
         </ul>
-        <h4 name="IndustryExperience">Industry Experience</h4>
+        <h4>
+            <a name="IndustryExperience">Industry Experience</a>
+        </h4>
         <ul>
             <li>Hands-on payment/financial system knowledge</li>
             <li>
@@ -126,81 +128,92 @@
         <h4>
             <a name="AmazonCom">Amazon.com</a>
         </h4>
-        <p>4/2005 ~ the present. Seattle, WA. Tech lead</p>
         <p>
-            Responsibility:
-            <ul>
-                <li>Lead and mentor the team</li>
-                <li>Key software architect and development</li>
-                <li>Support and revise numerous systems</li>
-            </ul>
+            4/2005 ~ the present. Seattle, WA. Tech lead. Payment transaction
+            and collection systems.
         </p>
-        <p>
-            Major technology
-            <ul>
-                <li>
-                    Web Service, Springframework, Hibernate, ANT, JavaEE, Jetty
-                    and Mina
-                </li>
-                <li>Perl and Shell scripting, configuration management</li>
-                <li>Amazon infrastructure</li>
-            </ul>
-        </p>
+        <p>- Responsibility:</p>
+        <ul>
+            <li>Lead and mentor the team</li>
+            <li>Key software architect and development</li>
+            <li>Support and revise numerous systems</li>
+        </ul>
+
+        <p>- Major technology</p>
+        <ul>
+            <li>
+                Web Service, Springframework, Hibernate, ANT, JavaEE, Jetty and
+                Mina
+            </li>
+            <li>Perl and Shell scripting, configuration management</li>
+            <li>Amazon infrastructure</li>
+        </ul>
+
         <h4>
             <a name="EvaviInc">Evavi Inc.</a>
         </h4>
-        <p>4/2004~4/2006. Dallas, TX. Tech lead</p>
         <p>
-            Responsibility:
-            <ul>
-                <li>Lead and mentor the team</li>
-                <li>Key software architect and development</li>
-            </ul>
+            4/2004~4/2006. Dallas, TX. Tech lead. Manufacturing and scheduling
+            optimization systems for logistics and retail industries.
         </p>
-        <p>
-            Major technology
-            <ul>
-                <li>
-                    Avalon/Plexus, Hibernate, Drools, Maven, Jelly/Marmalade,
-                    Jess, Jasperreports and JGroup
-                </li>
-                <li>Weblogic, JBOSS and Tomcat</li>
-            </ul>
-        </p>
+        <p>- Responsibility:</p>
+        <ul>
+            <li>Lead and mentor the team</li>
+            <li>Key software architect and development</li>
+        </ul>
+
+        <p>- Major technology</p>
+        <ul>
+            <li>
+                Avalon/Plexus, Hibernate, Drools, Maven, Jelly/Marmalade, Jess,
+                Drools, Werkflow, JBPM, Jasperreports and JGroup
+            </li>
+            <li>Cruisecontrol, Anthill and Continuum with Ant and Maven</li>
+            <li>Weblogic, JBOSS and Tomcat</li>
+        </ul>
+
         <h4>
             <a name="vTradExInformationTechnology">
                 vTradEx Information Technology
             </a>
         </h4>
-        <p>3/2001~7/2003. Shanghai, China. Sr. Software Consultant</p>
         <p>
-            Responsibility:
-            <ul>
-                <li>Lead and mentor the team</li>
-                <li>Key software architect and development</li>
-                <li>Project management</li>
-                <li>Quality assurance</li>
-            </ul>
+            3/2001~7/2003. Shanghai, China. Sr. Software Consultant of
+            transportation, storage and scheduling optimization systems.
         </p>
-        <p>
-            Marjor technology
-            <ul>
-                <li>Turbine, Torque, Maven, Avalon, Jetspeed and EJB</li>
-                <li>Tomcat and Jboss</li>
-                <li>CA datamining products</li>
-            </ul>
-        </p>
+        <p>- Responsibility</p>
+        <ul>
+            <li>Lead and mentor the team</li>
+            <li>Key software architect and development</li>
+            <li>Project management</li>
+            <li>Quality assurance</li>
+        </ul>
+        <p>- Marjor technology</p>
+        <ul>
+            <li>Turbine, Torque, Maven, Avalon, Drools, Jetspeed and EJB</li>
+            <li>CruiseControl with Ant and Maven</li>
+            <li>Tomcat and Jboss</li>
+            <li>CA datamining products</li>
+            <li>ILog products</li>
+        </ul>
+
         <h4>
             <a name="EigenetSoftware">Eigenet Software</a>
         </h4>
-        <p>7/2000~3/2001. Shanghai, China. Software Engineer</p>
         <p>
-            Responsibility:
-            <ul>
-                <li>Product management</li>
-                <li>Python and Java ERP software development</li>
-            </ul>
+            7/2000~3/2001. Shanghai, China. Software Engineer of ERP and CRM
+            systems for Microelectronics manufacturers.
         </p>
+        <p>- Responsibility:</p>
+        <ul>
+            <li>Product management</li>
+            <li>Python and Java ERP software development</li>
+        </ul>
+        <p>- Major Technology</p>
+        <ul>
+            <li>J2EE, XMLRPC</li>
+            <li>ZOPE and Python</li>
+        </ul>
 
         <h3>
             <a name="Education">Education</a>
