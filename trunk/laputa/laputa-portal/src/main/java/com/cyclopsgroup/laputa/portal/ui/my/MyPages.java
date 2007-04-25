@@ -1,4 +1,4 @@
-package com.cyclopsgroup.laputa.portal.ui;
+package com.cyclopsgroup.laputa.portal.ui.my;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,23 +10,16 @@ import org.apache.struts.action.ActionMapping;
 
 import com.cyclopsgroup.laputa.portal.Constants;
 
-public class Index
+public class MyPages
     extends Action
 {
-    private String name;
-
-    public Index( String name )
-    {
-        this.name = name;
-    }
-
     @Override
     public ActionForward execute( ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                   HttpServletResponse response )
         throws Exception
     {
-        request.setAttribute( "magicName", name );
-        System.out.println( name );
+        long userId = -1;
+
         return mapping.findForward( Constants.FORWARD_OK );
     }
 }

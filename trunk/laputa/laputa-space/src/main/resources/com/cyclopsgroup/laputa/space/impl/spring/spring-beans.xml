@@ -9,6 +9,12 @@
         com.cyclopsgroup.laputa.SessionFactory
         com.cyclopsgroup.laputa.HibernateSessionInterceptor
     -->
+    <bean id="com.cyclopsgroup.laputa.space.SpaceService"
+        class="com.cyclopsgroup.laputa.space.impl.service.DefaultSpaceService">
+        <constructor-arg
+            ref="com.cyclopsgroup.laputa.space.dao.ServiceContextDAO" />
+    </bean>
+
     <bean id="com.cyclopsgroup.laputa.space.dao.ServiceContextDAO"
         class="com.cyclopsgroup.laputa.space.impl.dao.HibernateServiceContextDAO" />
 
@@ -23,7 +29,9 @@
         </property>
         <property name="interceptorNames">
             <list>
-                <value>com.cyclopsgroup.laputa.HibernateSessionInterceptor</value>
+                <value>
+                    com.cyclopsgroup.laputa.HibernateSessionInterceptor
+                </value>
             </list>
         </property>
     </bean>

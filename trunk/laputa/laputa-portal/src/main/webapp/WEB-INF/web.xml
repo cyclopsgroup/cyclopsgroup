@@ -9,7 +9,9 @@
     <context-param>
         <description>Spring config for the whole servlet context</description>
         <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/config/spring-beans.xml</param-value>
+        <param-value>
+            classpath:/com/cyclopsgroup/laputa/portal/spring-beans.xml
+        </param-value>
     </context-param>
     <servlet>
         <description>

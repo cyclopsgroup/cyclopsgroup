@@ -1,0 +1,69 @@
+body {
+    background-color: white;
+    color: #535353;
+}
+
+#contentBanner {
+    background-image: url('../images/banner_bg.jpg');
+    color: white;
+}
+
+#contentBannerLinks {
+    border-width: 1px 0px 1px 0px;
+    border-style: dashed;
+    border-color: AFAFAF;
+    padding: 0px;
+    filter: alpha(opacity =  80);
+    opacity: 0.8;
+    -moz-opacity: 0.8;
+}
+
+.contentBannerLinkCell {
+    width: 80px;
+    border-width: 0px 1px 0px 0px;
+    border-style: dashed;
+    border-color: AFAFAF;
+    text-align: center;
+    padding: 2px;
+    font-weight: bold;
+}
+
+#selectedBannerLinkCell {
+    background-color: white;
+    color: black;
+    filter: alpha(opacity =  50);
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+}
+
+#contentBody {
+    background-color: #eeeeee;
+}
+
+#contentFooter {
+    background-color: #8c8c8c;
+    color: white;
+}
+
+.sideBar {
+    border: 1px white solid;
+    background-color: #DFDFDF;
+    border-radius: .75em;
+    -moz-border-radius: .75em;
+}
+
+.sideBarBanner {
+    font-weight: bold;
+    padding: 6px;
+    border-width: 0px 0px 1px 0px;
+    border-color: white;
+    border-style: solid;
+}
+
+.sideBarContent {
+    padding: 6px;
+}
+
+.sideBarItem {
+    padding: 6px;
+}

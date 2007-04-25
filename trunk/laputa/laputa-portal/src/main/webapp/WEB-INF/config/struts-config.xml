@@ -4,8 +4,11 @@
           "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <struts-config>
     <action-mappings>
-        <action path="/action/index">
-            <forward name="success" path="/index.vm" />
+        <action path="/index">
+            <forward name="ok" path="/index.vm" />
+        </action>
+        <action path="/my/mypages">
+            <forward name="ok" path="/my/mypages.vm" />
         </action>
     </action-mappings>
     <controller

@@ -1,6 +1,7 @@
 package com.cyclopsgroup.laputa.space.pojo;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -19,6 +21,8 @@ import javax.persistence.UniqueConstraint;
 @NamedQuery(name = "findServiceContextByUserAccountId", query = "SELECT c FROM SpaceServiceContext c WHERE userAccountId = :userAccountId")
 public class SpaceServiceContext
 {
+    public static final String QUERY_BY_USER_ACCOUNT = "findServiceContextByUserAccountId";
+
     private String description;
 
     private boolean disabled;
@@ -27,7 +31,7 @@ public class SpaceServiceContext
 
     private long id;
 
-    private Collection<SpacePage> pages;
+    private List<SpacePage> pages;
 
     private String title;
 
@@ -51,7 +55,8 @@ public class SpaceServiceContext
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceContext")
-    public Collection<SpacePage> getPages()
+    @OrderBy("position")
+    public List<SpacePage> getPages()
     {
         return pages;
     }
@@ -107,7 +112,7 @@ public class SpaceServiceContext
         this.id = id;
     }
 
-    public void setPages( Collection<SpacePage> pages )
+    public void setPages( List<SpacePage> pages )
     {
         this.pages = pages;
     }

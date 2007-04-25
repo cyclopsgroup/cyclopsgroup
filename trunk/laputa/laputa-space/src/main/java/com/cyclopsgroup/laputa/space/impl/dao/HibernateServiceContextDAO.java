@@ -16,7 +16,7 @@ public class HibernateServiceContextDAO
     @SuppressWarnings("unchecked")
     public SpaceServiceContext findByUserAccount( long userAccountId )
     {
-        Query query = getSession().getNamedQuery( "findServiceContextByUserAccountId" );
+        Query query = getSession().getNamedQuery( SpaceServiceContext.QUERY_BY_USER_ACCOUNT );
         query.setParameter( "userAccountId", userAccountId );
         List<SpaceServiceContext> contexts = query.list();
         if ( contexts.isEmpty() )
