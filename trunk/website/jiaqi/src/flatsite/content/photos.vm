@@ -1,9 +1,69 @@
 <div>
+    <div id="sideContent">
+        <h2>Lastest photos</h2>
+        <!-- 
+            #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
+            #set($rss=$xmltool.parseUrl($rssurl))
+            #set($items=$rss.selectNodes("//channel/item"))
+            #set($groups=$xmltool.groupBy($items, 3))
+        -->
+        <table cellspacing="10" border="0">
+            #foreach($group in $groups)
+            <tr>
+                #foreach($item in $group)
+                <td>
+                    <a href="$item.elementText('link')">
+                        #set($thumbnail=$item.selectSingleNode('media:thumbnail'))
+                        <img src="$thumbnail.attribute('url').value"
+                            width="$thumbnail.attribute('width').value"
+                            height="$thumbnail.attribute('height').value"
+                            alt="$item.elementText('title') from flickr.com" />
+                    </a>
+                </td>
+                #end
+            </tr>
+            #end
+        </table>
+        <p>
+            <a href="http://www.flickr.com/photos/guojiaqi">More...</a>
+        </p>
+        <h2>
+            Albums at
+            <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
+        </h2>
+        <!--
+            #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
+            #set($rss=$xmltool.parseUrl($rssurl))
+            #set($items=$rss.selectNodes("//channel/item"))
+        -->
+        <ul>
+            #foreach($item in $items)
+            <li>
+                <a href="$item.elementText('link')">
+                    $item.elementText("title")
+                </a>
+            </li>
+            #end
+        </ul>
+        <h2>Even more</h2>
+        <ul>
+            <li>
+                <a href="http://flickr.com/photos/jiiaqi">
+                    Other photos from flickr.com
+                </a>
+            </li>
+            <li>
+                <a href="http://public.fotki.com/crazytmac">
+                    Other photos from fotki.com
+                </a>
+            </li>
+        </ul>
+    </div>
     <script
         src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAANa1GfVbbfT8lsHBl2cCLwhRUUmft2R-MhfEHSBI1DlJS1CV7vRRiB-a6fUTmQHkrhxvyUVxiElEDEQ"
         type="text/javascript">
     </script>
-    <div id="mainContent">
+    <div id="mainContent" style="width:540px">
         <h2>Washington, evergreen state</h2>
         <div id="mapSeattleDiv" style="height: 540px"></div>
         <p />
@@ -65,64 +125,4 @@
 	    };
         //]]>
     </script>
-    <div id="sideContent">
-        <h2>Lastest photos</h2>
-        <!-- 
-            #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
-            #set($rss=$xmltool.parseUrl($rssurl))
-            #set($items=$rss.selectNodes("//channel/item"))
-            #set($groups=$xmltool.groupBy($items, 3))
-        -->
-        <table cellspacing="10" border="0">
-            #foreach($group in $groups)
-            <tr>
-                #foreach($item in $group)
-                <td>
-                    <a href="$item.elementText('link')">
-                        #set($thumbnail=$item.selectSingleNode('media:thumbnail'))
-                        <img src="$thumbnail.attribute('url').value"
-                            width="$thumbnail.attribute('width').value"
-                            height="$thumbnail.attribute('height').value"
-                            alt="$item.elementText('title') from flickr.com" />
-                    </a>
-                </td>
-                #end
-            </tr>
-            #end
-        </table>
-        <p>
-            <a href="http://www.flickr.com/photos/guojiaqi">More...</a>
-        </p>
-        <h2>
-            Albums at
-            <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
-        </h2>
-        <!--
-            #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
-            #set($rss=$xmltool.parseUrl($rssurl))
-            #set($items=$rss.selectNodes("//channel/item"))
-        -->
-        <ul>
-            #foreach($item in $items)
-            <li>
-                <a href="$item.elementText('link')">
-                    $item.elementText("title")
-                </a>
-            </li>
-            #end
-        </ul>
-        <h2>Even more</h2>
-        <ul>
-            <li>
-                <a href="http://flickr.com/photos/jiiaqi">
-                    Other photos from flickr.com
-                </a>
-            </li>
-            <li>
-                <a href="http://public.fotki.com/crazytmac">
-                    Other photos from fotki.com
-                </a>
-            </li>
-        </ul>
-    </div>
 </div>

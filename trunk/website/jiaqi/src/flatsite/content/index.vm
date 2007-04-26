@@ -1,19 +1,4 @@
 <div>
-    <div id="mainContent">
-        <h2>About me</h2>
-        <p>
-            My name is Jiaqi Guo and I was born and grew up in a small town,
-            Yanliang, in Xi'an, China. In the last 10 years I've moved across
-            Zhejiang, Shanghai in China, Texas, Virgina and Washington in USA.
-            Right now I work in Seattle and live in Bellevue, Washington.
-        </p>
-        <p>
-            I'm a big fan of Java software development and open source projects
-            while my interest towards software is not limited to Java.
-            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
-            is my code portfolio.
-        </p>
-    </div>
     <div id="sideContent">
         <h2>Latest updates</h2>
         <p>
@@ -45,5 +30,20 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div id="mainContent">
+        <h2>About me</h2>
+        <p>
+            My name is Jiaqi Guo and I was born and grew up in a small town,
+            Yanliang, in Xi'an, China. In the last 10 years I've moved across
+            Zhejiang, Shanghai in China, Texas, Virgina and Washington in USA.
+            Right now I work in Seattle and live in Bellevue, Washington.
+        </p>
+        <p>
+            I'm a big fan of Java software development and open source projects
+            while my interest towards software is not limited to Java.
+            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
+            is my code portfolio.
+        </p>
     </div>
 </div>
