@@ -32,6 +32,53 @@
         </ul>
     </div>
     <div id="mainContent">
+        <h2>Zen of programming</h2>
+        <p>
+            Beautiful is better than ugly
+            <br />
+            Explicit is better than implicit
+            <br />
+            Simple is better than complex
+            <br />
+            Complex is better than complicated
+            <br />
+            Flat is better than nested
+            <br />
+            Sparse is better than dense
+            <br />
+            Readability counts
+            <br />
+            Special cases aren't special enough to break the rules
+            <br />
+            Although practicality beats purity
+            <br />
+            Errors should never pass silently
+            <br />
+            Unless explicitly silenced
+            <br />
+            In the face of ambiguity, refuse the temptation to guess
+            <br />
+            There should be one -- and preferably only one -- obvious way to do
+            it
+            <br />
+            Now it better than never
+            <br />
+            Although never is often better than *right* now
+            <br />
+            If the implementation is hard to explain, it's a bad idea
+            <br />
+            If the implementation is easy to explain, it may be a good idea
+            <br />
+            Namespaces are one honking great idea -- let's do more of those!
+        </p>
+        <p>
+            <small>
+                quoted from a T-shirt in
+                <a href="http://pycon.org">PyCon</a>
+                , Washington DC, 2004. It talks about Python but it can also
+                apply to other language very well.
+            </small>
+        </p>
         <h2>About me</h2>
         <p>
             My name is Jiaqi Guo and I was born and grew up in a small town,
