@@ -31,9 +31,7 @@
         </photos>
     </location>
     <location latitude="47.592229" longitude="-122.385743">
-        <description>
-            Hamilton Viewpoint park
-        </description>
+        <description>Hamilton Viewpoint park</description>
         <photos>
             <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/187/426231962_8afd874af4_s.jpg"
@@ -87,6 +85,30 @@
             <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/236/450359523_4957b35b47_s.jpg"
                 href="http://www.flickr.com/photos/guojiaqi/450359523" />
+        </photos>
+    </location>
+    <location latitude="47.805502" longitude="-121.57711"
+        href="http://picasaweb.google.com/crazytmac/LakeScerene">
+        <description>Lake Senere</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/201/478070459_efa8819647_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/478070459/" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/211/478070451_1a6a2049b9_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/478070451" />
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/169/478070449_75788496db_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/478070449" />
+        </photos>
+    </location>
+    <location latitude="46.789189" longitude="-121.736841"
+        href="http://picasaweb.google.com/crazytmac/MontRainier">
+        <description>Mount Rainier</description>
+        <photos>
+            <flickr-photo
+                thumbnail="http://farm1.static.flickr.com/142/407562250_7791e00979_s.jpg"
+                href="http://flickr.com/photos/guojiaqi/407562250/" />
         </photos>
     </location>
 </locations>

@@ -65,7 +65,7 @@
     </script>
     <div id="mainContent" style="width:540px">
         <h2>Washington, evergreen state</h2>
-        <div id="mapSeattleDiv" style="height: 540px"></div>
+        <div id="mapSeattleDiv" style="height: 720px"></div>
         <p />
     </div>
     <script type="text/javascript">
@@ -114,7 +114,7 @@
 	            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
 	            seattleMap.addControl(new GSmallMapControl());
 	            seattleMap.addControl(new GMapTypeControl());
-	            seattleMap.setCenter(new GLatLng(47.528619,-122.059565), 10);
+	            seattleMap.setCenter(new GLatLng(47.38545,-122.072182), 9);
 	            
 	            #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
 	        }
