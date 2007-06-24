@@ -7,11 +7,14 @@
         </description>
         <photos>
             <flickr-photo
-                thumbnail="http://farm1.static.flickr.com/156/407572274_dea3d8f39a_s.jpg"
-                href="http://flickr.com/photos/guojiaqi/407572274" />
-            <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/127/349765431_8883e3fa81_s.jpg"
                 href="http://flickr.com/photos/guojiaqi/349765431" />
+            <flickr-photo
+                thumbnail="http://farm2.static.flickr.com/1082/578343582_adfdbd5f71_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/578343582" />
+            <flickr-photo
+                thumbnail="http://farm2.static.flickr.com/1316/578343620_385e54d487_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/578343620" />
         </photos>
     </location>
     <location latitude="47.659693" longitude="-122.110419">
