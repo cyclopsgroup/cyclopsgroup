@@ -29,7 +29,9 @@
         </p>
         <h2>
             Albums at
-            <a href="http://picasaweb.google.com/crazytmac">Google Picasa</a>
+            <a href="http://picasaweb.google.com/crazytmac">
+                Google Picasa
+            </a>
         </h2>
         <!--
             #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
