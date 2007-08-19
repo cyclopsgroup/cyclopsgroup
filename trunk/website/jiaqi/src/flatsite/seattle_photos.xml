@@ -82,12 +82,15 @@
     <location latitude="47.506302" longitude="-121.741476"
         href="http://picasaweb.google.com/crazytmac/MountLittleSi">
         <description>
-            Mount Little Si in North Bend, one hour hike with elevation of 480m.
+            Mount Si and Little Si in North Bend, one hour hike with elevation of 480m.
         </description>
         <photos>
             <flickr-photo
                 thumbnail="http://farm1.static.flickr.com/236/450359523_4957b35b47_s.jpg"
                 href="http://www.flickr.com/photos/guojiaqi/450359523" />
+            <flickr-photo
+                thumbnail="http://farm2.static.flickr.com/1018/881652177_ea04bde2c4_s.jpg"
+                href="http://www.flickr.com/photos/guojiaqi/881652177" />
         </photos>
     </location>
     <location latitude="47.805502" longitude="-121.57711"
