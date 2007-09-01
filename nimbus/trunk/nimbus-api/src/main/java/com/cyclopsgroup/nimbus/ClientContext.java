@@ -115,14 +115,15 @@ public abstract class ClientContext
 
     public Object createClientProxy( final String serviceClientId, Class<?> serviceInterface )
     {
+        InvocationHandler handler = new InvocationHandler()
+        {
+            public Object invoke( Object proxy, Method method, Object[] args )
+                throws Throwable
+            {
+                return ClientContext.this.call( serviceClientId, method.getName(), args );
+            }
+        };
         return Proxy.newProxyInstance( Thread.currentThread().getContextClassLoader(),
-                                       new Class<?>[] { serviceInterface }, new InvocationHandler()
-                                       {
-                                           public Object invoke( Object proxy, Method method, Object[] args )
-                                               throws Throwable
-                                           {
-                                               return ClientContext.this.call( serviceClientId, method.getName(), args );
-                                           }
-                                       } );
+                                       new Class<?>[] { serviceInterface }, handler );
     }
 }
