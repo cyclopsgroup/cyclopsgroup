@@ -2,6 +2,11 @@ package com.cyclopsgroup.nimbus;
 
 import junit.framework.TestCase;
 
+/**
+ * @author jiaqi
+ * 
+ * @version $Id:$
+ */
 public class HelloTest
     extends TestCase
 {
