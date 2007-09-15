@@ -7,11 +7,5 @@
             content="text/html; charset=utf-8" />
         <title>Laputa:</title>
     </head>
-    <body>
-        #if($request.servletPath.startsWith("/layout/"))
-        <h2>
-            <font color="red">Don't access layout directly</font>
-        </h2>
-        #else #parse($request.servletPath) #end
-    </body>
+    <body>#parse("view${request.servletPath}")</body>
 </html>

@@ -6,7 +6,7 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-public class TemplateResourceLoader
+public class VelocityTemplateResourceLoader
     extends ClasspathResourceLoader
 {
     private String templatePrefix;
