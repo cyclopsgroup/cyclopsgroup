@@ -1,4 +1,4 @@
-package com.cyclopsgroup.laputa.pojo;
+package com.cyclopsgroup.laputa.server.pojo;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.cyclopsgroup.laputa.pojo;
+package com.cyclopsgroup.laputa.server.pojo;
 
 import java.util.Date;
 
@@ -31,6 +31,9 @@ public class UserWidget
 
     @Column( name = "title", nullable = false, length = 64 )
     private String title;
+
+    @Column( name = "version", nullable = false )
+    private int version;
 
     @Column( name = "widget_detail", length = 256 )
     private String widgetDetail;
@@ -70,6 +73,11 @@ public class UserWidget
     public String getTitle()
     {
         return title;
+    }
+
+    public int getVersion()
+    {
+        return version;
     }
 
     public String getWidgetDetail()
@@ -115,6 +123,11 @@ public class UserWidget
     public void setTitle( String title )
     {
         this.title = title;
+    }
+
+    public void setVersion( int version )
+    {
+        this.version = version;
     }
 
     public void setWidgetDetail( String widgetDetail )
