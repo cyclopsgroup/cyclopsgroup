@@ -3,9 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
     lang="en-US">
     <head>
-        <meta http-equiv="Content-Type"
-            content="text/html; charset=utf-8" />
+        #parse("layout/html_headers.vm")
         <title>Laputa:</title>
     </head>
-    <body>#parse("view${request.servletPath}")</body>
+    <body>
+        <div id="documentBodyWrapper">
+            <div id="documentBody">
+                #parse("view${request.servletPath}")
+            </div>
+        </div>
+    </body>
 </html>
