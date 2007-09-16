@@ -36,6 +36,9 @@ public class PortalService
     @Column( name = "service_id" )
     private long serviceId;
 
+    @Column( name = "service_name", nullable = false, length = 32 )
+    private String serviceName;
+
     @Column( name = "service_state", nullable = false, length = 16 )
     @Enumerated( EnumType.STRING )
     private ServiceState serviceState;
@@ -74,6 +77,11 @@ public class PortalService
     public long getServiceId()
     {
         return serviceId;
+    }
+
+    public String getServiceName()
+    {
+        return serviceName;
     }
 
     public ServiceState getServiceState()
@@ -119,6 +127,11 @@ public class PortalService
     public void setServiceId( long serviceId )
     {
         this.serviceId = serviceId;
+    }
+
+    public void setServiceName( String serviceName )
+    {
+        this.serviceName = serviceName;
     }
 
     public void setServiceState( ServiceState serviceState )

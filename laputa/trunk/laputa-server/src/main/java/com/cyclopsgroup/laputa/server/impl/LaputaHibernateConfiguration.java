@@ -4,8 +4,10 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 import com.cyclopsgroup.laputa.server.pojo.PortalService;
 import com.cyclopsgroup.laputa.server.pojo.PortalServiceEvent;
-import com.cyclopsgroup.laputa.server.pojo.UserWidget;
-import com.cyclopsgroup.laputa.server.pojo.UserWidgetEvent;
+import com.cyclopsgroup.laputa.server.pojo.Widget;
+import com.cyclopsgroup.laputa.server.pojo.WidgetEvent;
+import com.cyclopsgroup.laputa.server.pojo.WidgetTemplate;
+import com.cyclopsgroup.laputa.server.pojo.WidgetType;
 import com.cyclopsgroup.laputa.widget.raw.RawWidgetDetail;
 
 public class LaputaHibernateConfiguration
@@ -15,10 +17,12 @@ public class LaputaHibernateConfiguration
 
     public LaputaHibernateConfiguration()
     {
+        addAnnotatedClass( WidgetType.class );
+        addAnnotatedClass( WidgetTemplate.class );
         addAnnotatedClass( PortalService.class );
         addAnnotatedClass( PortalServiceEvent.class );
-        addAnnotatedClass( UserWidget.class );
-        addAnnotatedClass( UserWidgetEvent.class );
+        addAnnotatedClass( Widget.class );
+        addAnnotatedClass( WidgetEvent.class );
         addAnnotatedClass( RawWidgetDetail.class );
     }
 }

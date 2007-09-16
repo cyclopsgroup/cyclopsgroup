@@ -1,9 +1,13 @@
 package com.cyclopsgroup.laputa.server.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class UserWidgetEvent
+@Entity
+@Table( name = "cg_laputa_widget_event" )
+public class WidgetEvent
 {
     @Column( name = "description", length = 512 )
     private String description;
@@ -24,7 +28,7 @@ public class UserWidgetEvent
     @Column( name = "title", nullable = false, length = 64 )
     private String title;
 
-    private UserWidget userWidget;
+    private Widget userWidget;
 
     @Column( name = "widget_detail", length = 256 )
     private String widgetDetail;
@@ -59,7 +63,7 @@ public class UserWidgetEvent
         return title;
     }
 
-    public UserWidget getUserWidget()
+    public Widget getUserWidget()
     {
         return userWidget;
     }
@@ -99,7 +103,7 @@ public class UserWidgetEvent
         this.title = title;
     }
 
-    public void setUserWidget( UserWidget userWidget )
+    public void setUserWidget( Widget userWidget )
     {
         this.userWidget = userWidget;
     }

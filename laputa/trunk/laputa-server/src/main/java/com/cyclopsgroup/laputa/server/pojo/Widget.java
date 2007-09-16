@@ -10,8 +10,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table( name = "cg_laputa_user_widget" )
-public class UserWidget
+@Table( name = "cg_laputa_widget" )
+public class Widget
 {
     @Column( name = "created_date", nullable = false )
     @Temporal( TemporalType.TIMESTAMP )
