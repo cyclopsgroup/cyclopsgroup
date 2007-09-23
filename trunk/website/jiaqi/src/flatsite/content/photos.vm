@@ -77,26 +77,16 @@
     </div>
     <script type="text/javascript">
         //<![CDATA[
+        
+        #set($rssurl="http://api.flickr.com/services/feeds/geo/?id=68975111@N00&lang=en-us&tags=photography&format=rss_200")
+        #set($rss=$xmltool.parseUrl($rssurl))
+        
         ## Macro to parse xml file and generate javascript that add Markers to given map
-        #macro(addMarkersToMap $photoXml $mapVariable)
-            #set($photoDoc=$xmltool.parseFile($photoXml))
-            #foreach($location in $photoDoc.rootElement.elements("location"))
-                #set($text=$location.elementText("description").trim())
-                #set($href="")
-                #set($href=$location.attributeValue("href"))
-                #if($href != "")
-                    #set($text="$text<br/><a href=\"$href\">More...</a>")
-                #end
-                
-                #set($html="")
-                #foreach($photo in $location.element("photos").elements("flickr-photo"))
-                    #set($thumbnailUrl=$photo.attributeValue("thumbnail"))
-                    #set($imageUrl=$photo.attributeValue("href"))
-                    #set($html="$html<td><a href=\"$imageUrl\"><img src=\"$thumbnailUrl\" width=\"75\" height=\"75\" /></a></td>")
-                #end
-                #set($html="<table><tr>${html}<td width=\"80\" valign=\"top\"><small>$text</small></td></tr></table>")
-                
-                addMarker($mapVariable, $location.attributeValue("latitude"), $location.attributeValue("longitude"), '$html');
+        #macro(addMarkersToMap $mapVariable)
+            #foreach($item in $rss.selectNodes("//channel/item"))
+                #set($geoPoint = $item.element("Point"))
+                #set($thumbnail = $item.element("thumbnail"))
+                addMarker($mapVariable, $geoPoint.elementText("lat"), $geoPoint.elementText("long"), '<a href="${item.elementText('link')}"><img src="${thumbnail.attributeValue('url')}" alt="${item.elementText('title')}"></a>');
             #end
         #end
         
@@ -123,7 +113,7 @@
 	            seattleMap.addControl(new GMapTypeControl());
 	            seattleMap.setCenter(new GLatLng(47.38545,-122.072182), 9);
 	            
-	            #addMarkersToMap("$sourceDirectory/seattle_photos.xml" "seattleMap")
+	            #addMarkersToMap("seattleMap")
 	        }
 	        else
 	        {
