@@ -1,0 +1,43 @@
+<div>
+    #set($layout = "index_layout.vm")
+    <table width="800" bgcolor="#BBB">
+        <tr>
+            <td width="68%" background="images/bg-rotation/00.jpg"></td>
+            <td width="32%" valign="top" bgcolor="white">
+                <ul>
+                    <li>CyclopsGroup.org</li>
+                    <li>News and announcement</li>
+                    <li>Downloads</li>
+                </ul>
+                <div>Projects</div>
+                <ul>
+                    <li>Laputa</li>
+                    <li>Waterview</li>
+                    <li>Nimbus</li>
+                    <li>Arapaho</li>
+                </ul>
+                <div>Members</div>
+                <ul>
+                    <li>Jiaqi Guo</li>
+                    <li>Xuying Zhao</li>
+                </ul>
+                <div>Powered by</div>
+                <ul>
+                    <li>SourceForge.net</li>
+                    <li>Apache Maven</li>
+                    <li>Anthill</li>
+                    <li>Atlassian</li>
+                </ul>
+                <div>&nbsp;
+                </div>
+                <div style="padding: 10px">
+                    <table width="100%" height="160" bgcolor="#DDD">
+                        <tr>
+                            <td bgcolor="white"></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="content-type"
+            content="text/html;charset=utf-8" />
+        <title>$title</title>
+        <meta name="description" content="$description" />
+        <meta name="keywords"
+            content="Jiaqi Guo, Home, Java, Open Source, Software, Programming, CyclopsGroup" />
+        <link rel="stylesheet" href="$basedir/css/display.css"
+            media="screen" />
+        <link rel="stylesheet" href="$basedir/css/print.css"
+            media="print" />
+        <script type="text/javascript"
+            src="http://www.google-analytics.com/urchin.js">
+        </script>
+        <script type="text/javascript">
+        //<![CDATA[
+            _uacct = "UA-76203-1";
+            urchinTracker();
+            document.onload = function() {};
+        //]]>
+        </script>
+    </head>
+    <body onload="document.onload()">$body</body>
+</html>
