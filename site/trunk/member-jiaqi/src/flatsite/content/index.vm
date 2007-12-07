@@ -1,0 +1,112 @@
+<div>
+    <div id="sideContent">
+        <h2>Latest updates</h2>
+        <p>
+            [04/06/2007] Calling Google Map API to display photos.
+            <a href="photos.html">Check it out</a>
+            , you won't be disappointed.
+        </p>
+        <p>
+            [12/15/2006] Website is completely redesigned. New theme is
+            inspired by
+            <a href="http://www.deviantart.com/deviation/40788653/">
+                intravero
+            </a>
+            from
+            <a href="http://deviantart.com">deviantart.com</a>
+            .
+        </p>
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="http://cyclopsgroup.org">
+                    Back to cyclopsgroup.org
+                </a>
+            </li>
+            <li>
+                <a href="http://utd.edu/~xuying.zhao">
+                    Xuying's home page
+                </a>
+            </li>
+            <li>
+                <a href="http://chinajoeblack.spaces.live.com">
+                    Crazy TMac's MSN space
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="mainContent">
+        <h2>What is it about?</h2>
+        <h3>God says</h3>
+        <p>
+            When you do things right, people won't be sure you've done
+            anything at all.
+        </p>
+        <p>
+            <small>-- by God, in Godfellas, Futurama</small>
+        </p>
+        <h3>Zen of programming</h3>
+        <p>
+            Beautiful is better than ugly
+            <br />
+            Explicit is better than implicit
+            <br />
+            Simple is better than complex
+            <br />
+            Complex is better than complicated
+            <br />
+            Flat is better than nested
+            <br />
+            Sparse is better than dense
+            <br />
+            Readability counts
+            <br />
+            Special cases aren't special enough to break the rules
+            <br />
+            Although practicality beats purity
+            <br />
+            Errors should never pass silently
+            <br />
+            Unless explicitly silenced
+            <br />
+            In the face of ambiguity, refuse the temptation to guess
+            <br />
+            There should be one -- and preferably only one -- obvious
+            way to do it
+            <br />
+            Now it better than never
+            <br />
+            Although never is often better than *right* now
+            <br />
+            If the implementation is hard to explain, it's a bad idea
+            <br />
+            If the implementation is easy to explain, it may be a good
+            idea
+            <br />
+            Namespaces are one honking great idea -- let's do more of
+            those!
+        </p>
+        <p>
+            <small>
+                -- quoted from a T-shirt in
+                <a href="http://pycon.org">PyCon</a>
+                , Washington DC, 2004. It talks about Python but it can
+                also apply to other language very well.
+            </small>
+        </p>
+        <h2>About me</h2>
+        <p>
+            I was born and grew up in a small town in Xi'an, China. In
+            the last 10 years I've moved across Zhejiang, Shanghai in
+            China, Texas, Virgina and Washington in USA. Right now I
+            work in Seattle and live in Bellevue, Washington.
+        </p>
+        <p>
+            I'm a big fan of Java software development and open source
+            projects while my interest towards software is not limited
+            to Java.
+            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
+            is my code portfolio.
+        </p>
+    </div>
+</div>
