@@ -1,6 +1,6 @@
 <div>
     <div id="sideContent">
-        <h2>Lastest photos</h2>
+        <h2>Lastest 20 photos</h2>
         <!-- 
             #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
             #set($rss=$xmltool.parseUrl($rssurl))
@@ -47,30 +47,25 @@
             </li>
             #end
         </ul>
-        <h2>Even more</h2>
-        <ul>
-            <li>
-                <a href="http://crazytmac.deviantart.com">
-                    crazytmac.deviantart.com
-                </a>
-            </li>
-            <li>
-                <a href="http://flickr.com/photos/jiiaqi">
-                    Other photos from flickr.com
-                </a>
-            </li>
-            <li>
-                <a href="http://public.fotki.com/crazytmac">
-                    Other photos from fotki.com
-                </a>
-            </li>
-        </ul>
+        <h2>
+            <a href="http://crazytmac.deviantart.com">
+                photos at deviantart.com
+            </a>
+        </h2>
     </div>
     <script
         src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAANa1GfVbbfT8lsHBl2cCLwhRUUmft2R-MhfEHSBI1DlJS1CV7vRRiB-a6fUTmQHkrhxvyUVxiElEDEQ"
         type="text/javascript">
     </script>
     <div id="mainContent" style="width:540px">
+        <h2>Photo slide show</h2>
+        <div>
+            <iframe
+                src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
+                align="middle" frameborder="0" height="450" width="100%"
+                scrolling="no">
+            </iframe>
+        </div>
         <h2>Washington, evergreen state</h2>
         <div id="mapSeattleDiv" style="height: 720px"></div>
         <p />
