@@ -8,11 +8,13 @@
 export JAVA_HOME=/opt/local/sun/jdk
 export CATALINA_HOME=/opt/local/apache/apache-tomcat
 export CATALINA_BASE=/opt/var/tomcat
+export CATALINA_OPTS="-Dcom.sun.management.jmxremote.port=8081 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 
 start(){
+  echo Running sudo -u www-data $CATALINA_HOME/bin/startup.sh
   sudo -u www-data $CATALINA_HOME/bin/startup.sh
   RETVAL=$?
-  echo
+  echo Tomcat service is started
 }
 
 stop(){
