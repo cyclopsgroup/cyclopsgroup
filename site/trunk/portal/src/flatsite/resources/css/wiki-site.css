@@ -1,0 +1,41 @@
+div#header
+{
+    background-color: black;
+    color: white;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    border-color: #999;
+}
+div#header a
+{
+    color: white;
+    background-color: black !important;
+}
+div#header h1
+{
+    padding: 20px;
+}
+
+div#content-wrap
+{
+    border-width: 1px 0px 0px 0px;
+    border-style: solid;
+    border-color: #666;
+}
+
+div#footer
+{
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: #999;
+}
+
+div#footer, div#license-area
+{
+    background-color: black;
+    color: white;
+}
+div#footer a, div#license-area a
+{
+    color: white;
+}

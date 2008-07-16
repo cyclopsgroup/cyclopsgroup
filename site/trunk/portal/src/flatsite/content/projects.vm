@@ -1,0 +1,102 @@
+<div>
+    <h2>Major projects</h2>
+    <p>
+        There are(or used to be) many projects under CyclopsGroup.org
+        but many of them merged into others or turned out to be
+        ridiculous.
+    </p>
+    <table class="bodyTable" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Conclusion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="b">
+                <td>
+                    <a href="projects/jmxterm">jmxterm</a>
+                </td>
+                <td>Command line based</td>
+                <td>The first version 0.1 has been released</td>
+                <td>Usable</td>
+            </tr>
+            <tr class="a">
+                <td>
+                    <a href="projects/waterview">waterview</a>
+                </td>
+                <td>
+                    Componentized web application framework based on
+                    Plexus, commons-jelly and Velocity.
+                </td>
+                <td>
+                    A few 1.0.x were released. It's under 2.0 version
+                    now but project is sort of frozen.
+                </td>
+                <td>Idea turned out to be too ambitious</td>
+            </tr>
+            <tr class="b">
+                <td>
+                    <a href="projects/courselist">courselist</a>
+                </td>
+                <td>
+                    As a one semester classroom project, courselist is a
+                    small academic web application which maintains a
+                    list of college courses. It depends on waterview and
+                    tornado projects, as well as plexus and hibernate.
+                    The project ceased after semester was over.
+                </td>
+                <td>1.0 has been released</td>
+                <td>Successful</td>
+            </tr>
+            <tr class="a">
+                <td>
+                    <a href="projects/laputa">laputa</a>
+                </td>
+                <td>
+                    Will be a group of web applications on top of
+                    waterview project
+                </td>
+                <td>Just started</td>
+                <td>Direction isn't clear</td>
+            </tr>
+            <tr class="b">
+                <td>
+                    <a href="projects/tornado">tornado</a>
+                </td>
+                <td>
+                    Tornado is a web application framework, an enriched
+                    servlet of Apache Jakarta Turbine.
+                </td>
+                <td>2.0 has been released</td>
+                <td>Idea turned out to be too ambitious</td>
+            </tr>
+            <tr class="a">
+                <td>arapaho</td>
+                <td>
+                    Tools to support CyclopsGroup.com project
+                    development.
+                </td>
+                <td>Going well</td>
+                <td>Usable only by CyclopsGroup.org itself</td>
+            </tr>
+            <tr class="b">
+                <td>
+                    <a href="projects/levistone">levistone</a>
+                </td>
+                <td>
+                    A database access interface higher than JDBC. Very
+                    similar to Apache Torque.
+                </td>
+                <td>
+                    The project mimics Apache Torque and went dead long
+                    time ago. Soon Hibernate, JDO and JPA became
+                    popular.
+                </td>
+                <td>Ridiculous idea</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

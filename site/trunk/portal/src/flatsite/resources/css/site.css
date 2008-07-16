@@ -1,0 +1,115 @@
+@import url("site-base.css");
+
+#documentWrapper {
+    text-align: center;
+}
+
+#documentContent {
+    width: 920px;
+    margin: 0px auto;
+    text-align: left;
+}
+
+a:link {
+    color: #6699CC;
+}
+
+a:visited {
+    color: #7987A7;
+}
+
+#bodycontent h2 {
+    color: #FF9934;
+    border-color: #C4C4C4;
+}
+
+#bodycontent h3,#bodycontent h4,#bodycontent h5 {
+    color: #666666;
+}
+
+table.bodyTable th {
+    background: url('title_bar_bg.png');
+    color: white;
+    font-size: smaller;
+    padding: 3px;
+}
+
+table.bodyTable tr.b td {
+    background-color: #EFEFEF;
+}
+
+#banner {
+    background-color: #1D54A6;
+    background-image: url('banner_bg.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    border-color: #73A1D6;
+    color: white;
+    padding-left: 20px;
+    height: 80px;
+}
+
+.breadcrumbs {
+    background-color: #1F5195;
+    color: white;
+}
+
+.breadcrumbs a {
+    color: white;
+}
+
+#rightcolumn {
+    background-color: #C4C4C4;
+    color: white;
+    margin: 30px 0px 30px 20px;
+}
+
+#navcolumn {
+    background-color: #6898D1;
+    background-image: url('side_bar_bg.png');
+    background-repeat: repeat-y;
+    background-position: right;
+    position: relative;
+    top: -3px;
+    left: -3px;
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: #1F5195;
+}
+
+#rightcolumn h5 {
+    background-color: #9ABBE2;
+    color: white;
+    margin: 10px 20px 6px 0px;
+}
+
+#rightcolumn a {
+    color: #B5D7FF;
+    letter-spacing: 2px;
+}
+
+#rightcolumn a:hover {
+    color: white;
+}
+
+#navcolumn ul {
+    padding-left: 10px;
+    margin: 0px;
+}
+
+#navcolumn li {
+    list-style-type: none;
+}
+
+#bodycolumn {
+    background-color: white;
+}
+
+.roundBoxDiv {
+    border-width: 2px;
+    border-color: #C4C4C4;
+    border-style: solid;
+    padding: 10px;
+    border-radius: .75em;
+    -moz-border-radius: .75em;
+}

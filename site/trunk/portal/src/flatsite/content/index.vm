@@ -1,43 +1,61 @@
 <div>
-    #set($layout = "index_layout.vm")
-    <table width="800" bgcolor="#BBB">
+    <h2>What is CyclopsGroup.org</h2>
+    <p>
+        CyclopsGroup.org is an open source software foundation focusing
+        on abstract, simple and high quality java software.
+    </p>
+    <p>
+        In a spontaneously evolved software world, open source is the
+        power of evolution. We believe that the most innovative solution
+        for real business problem can only be created in free open
+        environment.
+    </p>
+    <h2>jmxterm-0.1 just released</h2>
+    <p>
+        The first usable version of
+        <a href="projects/jmxterm">jmxterm(JMX Terminal)</a>
+        project 0.1 was released on July 17 2009.
+    </p>
+    <table width="100%" cellspacing="10">
         <tr>
-            <td width="68%" background="images/bg-rotation/00.jpg"></td>
-            <td width="32%" valign="top" bgcolor="white">
-                <ul>
-                    <li>CyclopsGroup.org</li>
-                    <li>News and announcement</li>
-                    <li>Downloads</li>
-                </ul>
-                <div>Projects</div>
-                <ul>
-                    <li>Laputa</li>
-                    <li>Waterview</li>
-                    <li>Nimbus</li>
-                    <li>Arapaho</li>
-                </ul>
-                <div>Members</div>
-                <ul>
-                    <li>Jiaqi Guo</li>
-                    <li>Xuying Zhao</li>
-                </ul>
-                <div>Powered by</div>
-                <ul>
-                    <li>SourceForge.net</li>
-                    <li>Apache Maven</li>
-                    <li>Anthill</li>
-                    <li>Atlassian</li>
-                </ul>
-                <div>&nbsp;
+            <td valign="top">
+                <div class="roundBoxDiv"
+                    style="background-color: #729FCF; height:278px">
+                    <p>
+                        <a href="projects/jmxterm">
+                            <img
+                                src="http://cyclopsgroup.org/projects/jmxterm/images/logo.png"
+                                border="0" alt="Go to jmxterm project" />
+                        </a>
+                    </p>
+                    <p style="color: white">
+
+                        <a href="projects/jmxterm"
+                            style="color: white">
+                            jmxterm
+                        </a>
+                        is a command line based interactive JMX client
+                        software. It's designed to allow user to access
+                        JMX from command line without graphical
+                        environment. In another word, it's a command
+                        line based jconsole.
+                    </p>
+                    <p style="color: white">
+                        More details:
+                        <a href="projects/jmxterm"
+                            style="color: white">
+                            http://cyclopsgroup.org/projects/jmxterm
+                        </a>
+                        .
+                    </p>
                 </div>
-                <div style="padding: 10px">
-                    <table width="100%" height="160" bgcolor="#DDD">
-                        <tr>
-                            <td bgcolor="white"></td>
-                        </tr>
-                    </table>
-                </div>
+            </td>
+            <td>
+                <script type="text/javascript" language="javascript"
+                    src="http://s3.polldaddy.com/p/786149.js">
+                </script>
             </td>
         </tr>
     </table>
+
 </div>
