@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>cyclopsgroup-master</artifactId>
+    <name>cyclopsgroup-master</name>
+    <version>0.1</version>
+    <description>Base POM for cyclopsgroup projects</description>
+    <url>http://www.cyclopsgroup.org</url>
+    <packaging>pom</packaging>
+    <inceptionYear>2003</inceptionYear>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <issueManagement>
+        <system>sourceforge</system>
+        <url>http://sourceforge.net/tracker/?group_id=91358</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <id>jiaqi</id>
+            <email>jiaqi.guo@gmail.com</email>
+            <name>Jiaqi Guo</name>
+            <timezone>-6</timezone>
+            <url>http://www.cyclopsgroup.org/members/jiaqi</url>
+        </developer>
+    </developers>
+    <distributionManagement>
+        <repository>
+            <id>cyclopsgroup.server.sourceforge</id>
+            <url>
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/m2
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>cyclopsgroup.server.sourceforge</id>
+            <url>
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/m2
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
