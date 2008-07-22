@@ -36,14 +36,27 @@
         <repository>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/m2
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2
             </url>
         </repository>
         <snapshotRepository>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/m2
+                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2
             </url>
         </snapshotRepository>
     </distributionManagement>
+    <profiles>
+        <profile>
+            <id>release.public</id>
+            <distributionManagement>
+                <repository>
+                    <id>cyclopsgroup.server.sourceforge</id>
+                    <url>
+                        scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
+                    </url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
