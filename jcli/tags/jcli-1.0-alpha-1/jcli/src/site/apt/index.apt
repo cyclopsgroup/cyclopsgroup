@@ -1,0 +1,3 @@
+JCLI - Java annotation based command line argument parser
+
+  JCLI is a small Java library that parses argument array and pass result to POJO annotated with predefined annotations.
