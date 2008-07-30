@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="JMXTERM: Command line based interative JMX client">
+    <bannerLeft>
+        <name>jmxterm - JMX terminal</name>
+        <src>images/logo.png</src>
+        <href>index.html</href>
+    </bannerLeft>
+    <bannerRight>
+        <src>
+            http://cyclops-group.sourceforge.net/images/cyclopsgroup_logo.png
+        </src>
+    </bannerRight>
+    <body>
+        <head>
+            <script type="text/javascript"
+                src="http://www.google-analytics.com/urchin.js">
+            </script>
+            <script type="text/javascript">
+                <![CDATA[
+                    _uacct = "UA-76203-1";
+                    urchinTracker();
+                ]]>
+            </script>
+        </head>
+        <links>
+            <item name="cyclopsgroup.org"
+                href="http://www.cyclopsgroup.org/" />
+            <item name="wiki" href="http://wiki.cyclopsgroup.org" />
+            <item name="sf.net/cyclops-group"
+                href="http://sourceforge.net/projects/cyclops-group" />
+        </links>
+        <menu name="JMXTERM">
+            <item name="Introduction" href="index.html" />
+            <item name="Download and Run" href="download.html" />
+            <item name="1 Minute Tutorial" href="tutorial.html" />
+            <item name="User Manual" href="manual.html" />
+            <item name="What do you think" href="feedback.html" />
+            <item name="Source Code" href="sourcecode.html"
+                collapse="true">
+                <item name="Browse Fisheye"
+                    href="http://fisheye3.atlassian.com/browse/cyclops-group/jmxterm" />
+                <item name="Search Fisheye"
+                    href="http://fisheye3.atlassian.com/search/cyclops-group/jmxterm" />
+                <item name="Change Log"
+                    href="http://fisheye3.atlassian.com/changelog/cyclops-group/jmxterm" />
+                <item name="Activity Chart"
+                    href="http://fisheye3.atlassian.com/chart/cyclops-group/jmxterm" />
+            </item>
+            <item name="Release note" href="release/index.html"
+                collapse="true">
+                <item name="0.2" href="release/0.2.html" />
+            </item>
+        </menu>
+        <menu ref="reports" />
+    </body>
+</project>
