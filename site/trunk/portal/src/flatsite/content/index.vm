@@ -10,11 +10,17 @@
         for real business problem can only be created in free open
         environment.
     </p>
-    <h2>jmxterm-0.1 just released</h2>
+    <h2>jmxterm-0.2 is released</h2>
     <p>
-        The first usable version of
+        CyclopsGroup.org released
         <a href="projects/jmxterm">jmxterm(JMX Terminal)</a>
-        project 0.1 was released on July 17 2009.
+        project 0.2 version on July 30 2008. 0.2 version in much more
+        reliable comparing to previous 0.1 version. Many bugs were
+        fixed, the project is better tested and documented and a few new
+        feature were introduced. 0.2 version is definitely preferred
+        over version 0.1. Please check out
+        <a href="projects/jmxterm/release/0.2.html">release note</a>
+        for more detail.
     </p>
     <table width="100%" cellspacing="10">
         <tr>
