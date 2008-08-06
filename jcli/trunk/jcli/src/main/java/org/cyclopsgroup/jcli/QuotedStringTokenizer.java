@@ -56,6 +56,29 @@ public class QuotedStringTokenizer
     }
 
     /**
+     * Escape given string value
+     * 
+     * @param value String value
+     * @return Escaped result
+     */
+    public String escape( String value )
+    {
+        if ( value == null )
+        {
+            return null;
+        }
+        if ( value.indexOf( delimiter ) == -1 && value.indexOf( quotation ) == -1 )
+        {
+            return value;
+        }
+        if ( value.indexOf( quotation ) == -1 )
+        {
+            return quotation + value + quotation;
+        }
+        return quotation + value.replaceAll( "\\" + quotation, "\\" + quotation + "\\" + quotation ) + quotation;
+    }
+
+    /**
      * Parse given string into segments
      * 
      * @param input Given string input

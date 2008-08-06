@@ -4,11 +4,12 @@ import java.beans.PropertyDescriptor;
 import java.util.Collection;
 
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.cyclopsgroup.jcli.annotation.Option;
 
 /**
  * Definition of an option
- *
+ * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class OptionDefinition
@@ -74,5 +75,14 @@ public class OptionDefinition
     public final boolean isMultiValue()
     {
         return multiValue;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String toString()
+    {
+        return new ToStringBuilder( this ).append( option ).append( "flag", flag ).append( "multi", multiValue ).toString();
     }
 }

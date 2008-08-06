@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang.StringUtils;
-import org.cyclopsgroup.jcli.SampleBean;
+import org.cyclopsgroup.jcli.ExampleNormalBean;
 import org.cyclopsgroup.jcli.SampleBeanWithMultiValueOption;
 import org.cyclopsgroup.jcli.SampleBeanWithSimpleArgument;
 import org.cyclopsgroup.jcli.annotation.CliParser;
@@ -34,7 +34,7 @@ public abstract class CliParserVerifier
         throws IntrospectionException
     {
         CliParser parser = createCliParser();
-        SampleBean b = new SampleBean();
+        ExampleNormalBean b = new ExampleNormalBean();
         parser.parse( StringUtils.split( "--tint 34123 -f 00907 -b 3453 34 52345", ' ' ), b );
         assertEquals( "00907", b.getStringField1() );
         assertEquals( 34123, b.getIntField() );
@@ -84,7 +84,7 @@ public abstract class CliParserVerifier
         CliParser parser = createCliParser();
         StringWriter stringOutput = new StringWriter();
         PrintWriter output = new PrintWriter( stringOutput );
-        parser.printUsage( SampleBean.class, output );
+        parser.printUsage( ExampleNormalBean.class, output );
         output.flush();
         String result = stringOutput.toString();
         assertTrue( result.indexOf( "sample [-2 <val>] [-b] -f <val> [-i <val>]" ) != -1 );
