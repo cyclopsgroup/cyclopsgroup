@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -59,6 +60,14 @@ public class JakartaCommonsCliParser
     {
         Validate.notNull( jcParser, "jcParser can't be NULL" );
         this.jcParser = jcParser;
+    }
+
+    /**
+     * Default implementation with {@link GnuParser}
+     */
+    public JakartaCommonsCliParser()
+    {
+        this( new GnuParser() );
     }
 
     /**

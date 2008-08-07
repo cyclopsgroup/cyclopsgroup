@@ -8,6 +8,11 @@ import org.cyclopsgroup.jcli.spi.CliParserVerifier;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * Test case of {@link JakartaCommonsCliParser}
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class JakartaCommonsCliParserTest
     extends CliParserVerifier
 {
@@ -17,6 +22,9 @@ public class JakartaCommonsCliParserTest
         return new JakartaCommonsCliParser( new GnuParser() );
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     @Test
     @Ignore( "This test doesn't parse because apache commons-cli 1.1 doesn't know to parse multi value option" )

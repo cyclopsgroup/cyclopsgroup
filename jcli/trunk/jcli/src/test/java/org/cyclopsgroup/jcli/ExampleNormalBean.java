@@ -1,5 +1,6 @@
 package org.cyclopsgroup.jcli;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -14,7 +15,46 @@ import org.cyclopsgroup.jcli.annotation.Option;
  */
 @Cli( name = "sample", description = "A test" )
 public class ExampleNormalBean
+    implements AutoCompletable
 {
+    /**
+     * @inheritDoc
+     */
+    public List<String> suggestArgument( String partialArgument )
+    {
+        if ( partialArgument == null )
+        {
+            return Arrays.asList( "11111", "22222", "33333" );
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public List<String> suggestOption( String optionName, String partialOption )
+    {
+        if ( partialOption != null )
+        {
+            return null;
+        }
+        if ( optionName.equals( "i" ) )
+        {
+            return Arrays.asList( "1", "2", "3", "4" );
+        }
+        else if ( optionName.equals( "f" ) )
+        {
+            return Arrays.asList( "aaaa", "bbbb", "cccc" );
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     private boolean booleanField;
 
     private int intField;

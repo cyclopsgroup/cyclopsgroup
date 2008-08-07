@@ -31,12 +31,10 @@ class ArgumentsInspector
         if ( argument.startsWith( "--" ) )
         {
             state = ArgumentsInspectorState.LONG_OPTION;
-            currentValue = argument.substring( 2 );
         }
         else if ( argument.startsWith( "-" ) )
         {
             state = ArgumentsInspectorState.OPTION;
-            currentValue = argument.substring( 1 );
         }
         else
         {
@@ -72,8 +70,8 @@ class ArgumentsInspector
                 default:
                     throw new IllegalStateException();
             }
-            currentValue = argument;
         }
+        currentValue = argument;
     }
 
     void end()
@@ -106,7 +104,7 @@ class ArgumentsInspector
     {
         for ( OptionDefinition o : cli.getOptions().values() )
         {
-            if ( StringUtils.equals( o.getOption().longName(), longName ) )
+            if ( o.getOption().longName() != null && StringUtils.equals( "--" + o.getOption().longName(), longName ) )
             {
                 return o;
             }
@@ -116,7 +114,7 @@ class ArgumentsInspector
 
     private OptionDefinition findOptionByName( String name )
     {
-        return cli.getOptions().get( name );
+        return cli.getOptions().get( name.substring( 1 ) );
     }
 
     OptionDefinition getCurrentOption()

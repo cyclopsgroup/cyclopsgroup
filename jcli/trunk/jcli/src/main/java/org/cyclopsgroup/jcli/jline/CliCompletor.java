@@ -2,6 +2,7 @@ package org.cyclopsgroup.jcli.jline;
 
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jline.Completor;
@@ -12,6 +13,7 @@ import org.cyclopsgroup.jcli.AutoCompletable;
 import org.cyclopsgroup.jcli.QuotedStringTokenizer;
 import org.cyclopsgroup.jcli.spi.CliDefinition;
 import org.cyclopsgroup.jcli.spi.CliUtils;
+import org.cyclopsgroup.jcli.spi.OptionDefinition;
 
 /**
  * JLine completor implemented with JCli
@@ -21,6 +23,23 @@ import org.cyclopsgroup.jcli.spi.CliUtils;
 public class CliCompletor
     implements Completor
 {
+    private static List<String> filterList( List<String> list, String prefix )
+    {
+        if ( StringUtils.isEmpty( prefix ) )
+        {
+            return list;
+        }
+        List<String> results = new ArrayList<String>();
+        for ( String item : list )
+        {
+            if ( item.startsWith( prefix ) )
+            {
+                results.add( item );
+            }
+        }
+        return results;
+    }
+
     private final CliDefinition cli;
 
     private final AutoCompletable completable;
@@ -28,17 +47,35 @@ public class CliCompletor
     private final QuotedStringTokenizer tokenizer;
 
     /**
-     * @param completable Entyped AutoCompletable implementation
+     * @param cliBean Entyped AutoCompletable implementation or an normal bean
      * @param tokenizer Tokenizer for argument parsing
      * @throws IntrospectionException
      */
-    public CliCompletor( final AutoCompletable completable, final QuotedStringTokenizer tokenizer )
+    public CliCompletor( final Object cliBean, final QuotedStringTokenizer tokenizer )
         throws IntrospectionException
     {
-        Validate.notNull( completable, "AutoCompletable can't be NULL" );
+        Validate.notNull( cliBean, "Cli bean can't be NULL" );
         Validate.notNull( tokenizer, "String tokenizer can't be NULL" );
-        this.completable = completable;
-        cli = CliUtils.defineCli( completable.getClass() );
+        cli = CliUtils.defineCli( cliBean.getClass() );
+        if ( cliBean instanceof AutoCompletable )
+        {
+            this.completable = (AutoCompletable) cliBean;
+        }
+        else
+        {
+            this.completable = new AutoCompletable()
+            {
+                public List<String> suggestArgument( String partialArgument )
+                {
+                    return Collections.emptyList();
+                }
+
+                public List<String> suggestOption( String optionName, String partialOption )
+                {
+                    return Collections.emptyList();
+                }
+            };
+        }
         this.tokenizer = tokenizer;
     }
 
@@ -48,7 +85,6 @@ public class CliCompletor
     @SuppressWarnings( "unchecked" )
     public int complete( final String command, final int cursor, final List suggestions )
     {
-
         ArgumentsInspector inspector = new ArgumentsInspector( cli );
         if ( StringUtils.isNotEmpty( command ) )
         {
@@ -62,37 +98,90 @@ public class CliCompletor
                 inspector.end();
             }
         }
+        System.err.println( "command=[" + command + "], cursor=" + cursor + ", state=" + inspector.getState().name()
+            + "value=" + inspector.getCurrentValue() );
+        List<String> candidates = new ArrayList<String>();
         switch ( inspector.getState() )
         {
             case READY:
-                break ;
+                for ( OptionDefinition o : inspector.getRemainingOptions() )
+                {
+                    candidates.add( "-" + o.getName() );
+                }
+                Collections.sort( candidates );
+                candidates.addAll( suggestArguments( null ) );
+                break;
             case OPTION:
-                ;
             case LONG_OPTION:
+                candidates.addAll( suggestOptionNames( inspector, inspector.getCurrentValue() ) );
+                break;
             case OPTION_VALUE:
+                candidates.addAll( suggestOptionValue( inspector.getCurrentOption(), inspector.getCurrentValue() ) );
+                break;
             case ARGUMENT:
+                candidates.addAll( suggestArguments( inspector.getCurrentValue() ) );
         }
-        return 0;
+        for ( String candidate : candidates )
+        {
+            suggestions.add( tokenizer.escape( candidate ) );
+        }
+        return command.length() - 1;
     }
 
     private List<String> suggestArguments( String partialArgument )
     {
-        if ( partialArgument == null )
+        List<String> results;
+        if ( StringUtils.isEmpty( partialArgument ) )
         {
-            return completable.suggestArgument( null );
+            results = completable.suggestArgument( null );
         }
-        List<String> results = completable.suggestArgument( partialArgument );
-        if ( results == null )
+        else
         {
-            results = new ArrayList<String>();
-            for ( String arg : completable.suggestArgument( null ) )
+            results = completable.suggestArgument( partialArgument );
+            if ( results == null )
             {
-                if ( arg.startsWith( partialArgument ) )
-                {
-                    results.add( arg );
-                }
+                return filterList( completable.suggestArgument( null ), partialArgument );
             }
         }
+        Collections.sort( results );
+        return results;
+    }
+
+    private List<String> suggestOptionNames( ArgumentsInspector inspector, String value )
+    {
+        List<String> results = new ArrayList<String>();
+        for ( OptionDefinition o : inspector.getRemainingOptions() )
+        {
+            if ( value.startsWith( "--" ) && o.getOption().longName() != null
+                && ( "--" + o.getOption().longName() ).startsWith( value ) )
+            {
+                results.add( "--" + o.getOption().longName() );
+            }
+            else if ( value.startsWith( "-" ) && ( "-" + o.getOption().name() ).startsWith( value ) )
+            {
+                results.add( "-" + o.getOption().name() );
+            }
+        }
+        Collections.sort( results );
+        return results;
+    }
+
+    private List<String> suggestOptionValue( OptionDefinition option, String partialValue )
+    {
+        List<String> results;
+        if ( StringUtils.isEmpty( partialValue ) )
+        {
+            results = completable.suggestOption( option.getName(), null );
+        }
+        else
+        {
+            results = completable.suggestOption( option.getName(), partialValue );
+            if ( results == null )
+            {
+                results = filterList( completable.suggestOption( option.getName(), null ), partialValue );
+            }
+        }
+        Collections.sort( results );
         return results;
     }
 }
