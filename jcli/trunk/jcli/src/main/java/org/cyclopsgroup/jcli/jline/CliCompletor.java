@@ -25,7 +25,7 @@ public class CliCompletor
 {
     private static List<String> filterList( List<String> list, String prefix )
     {
-        if ( StringUtils.isEmpty( prefix ) )
+        if ( StringUtils.isEmpty( prefix ) || list == null )
         {
             return list;
         }
@@ -98,8 +98,8 @@ public class CliCompletor
                 inspector.end();
             }
         }
-        System.err.println( "command=[" + command + "], cursor=" + cursor + ", state=" + inspector.getState().name()
-            + "value=" + inspector.getCurrentValue() );
+        // System.err.println( "command=[" + command + "], cursor=" + cursor + ", state=" + inspector.getState().name()
+        // + ", value=" + inspector.getCurrentValue() );
         List<String> candidates = new ArrayList<String>();
         switch ( inspector.getState() )
         {
@@ -125,7 +125,15 @@ public class CliCompletor
         {
             suggestions.add( tokenizer.escape( candidate ) );
         }
-        return command.length() - 1;
+        if ( StringUtils.isEmpty( command ) )
+        {
+            return 0;
+        }
+        if ( command.endsWith( " " ) )
+        {
+            return cursor;
+        }
+        return command.length() - inspector.getCurrentValue().length();
     }
 
     private List<String> suggestArguments( String partialArgument )
@@ -143,7 +151,14 @@ public class CliCompletor
                 return filterList( completable.suggestArgument( null ), partialArgument );
             }
         }
-        Collections.sort( results );
+        if ( results == null )
+        {
+            results = Collections.emptyList();
+        }
+        else
+        {
+            Collections.sort( results );
+        }
         return results;
     }
 
@@ -181,7 +196,14 @@ public class CliCompletor
                 results = filterList( completable.suggestOption( option.getName(), null ), partialValue );
             }
         }
-        Collections.sort( results );
+        if ( results == null )
+        {
+            results = Collections.emptyList();
+        }
+        else
+        {
+            Collections.sort( results );
+        }
         return results;
     }
 }

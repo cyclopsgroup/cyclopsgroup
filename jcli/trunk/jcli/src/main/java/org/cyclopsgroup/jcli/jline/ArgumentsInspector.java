@@ -81,7 +81,10 @@ class ArgumentsInspector
             case OPTION:
                 currentOption = findOptionByName( currentValue );
             case LONG_OPTION:
-                currentOption = findOptionByLongName( currentValue );
+                if ( state == ArgumentsInspectorState.LONG_OPTION )
+                {
+                    currentOption = findOptionByLongName( currentValue );
+                }
                 if ( currentOption != null && !currentOption.isMultiValue() )
                 {
                     remainingOptions.remove( currentOption );
@@ -98,6 +101,7 @@ class ArgumentsInspector
             default:
                 state = ArgumentsInspectorState.READY;
         }
+        currentValue = null;
     }
 
     private OptionDefinition findOptionByLongName( String longName )

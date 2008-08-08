@@ -10,8 +10,8 @@ import java.io.StringWriter;
 
 import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.jcli.ExampleNormalBean;
-import org.cyclopsgroup.jcli.SampleBeanWithMultiValueOption;
-import org.cyclopsgroup.jcli.SampleBeanWithSimpleArgument;
+import org.cyclopsgroup.jcli.ExampleBeanWithMultiValueOption;
+import org.cyclopsgroup.jcli.ExampleBeanWithSimpleArgument;
 import org.cyclopsgroup.jcli.annotation.CliParser;
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public abstract class CliParserVerifier
         throws IntrospectionException
     {
         CliParser parser = createCliParser();
-        SampleBeanWithMultiValueOption bean = new SampleBeanWithMultiValueOption();
+        ExampleBeanWithMultiValueOption bean = new ExampleBeanWithMultiValueOption();
         parser.parse( StringUtils.split( "-o aaa -o bbb -o ccc" ), bean );
         assertEquals( 3, bean.getOptions().size() );
     }
@@ -67,7 +67,7 @@ public abstract class CliParserVerifier
         throws IntrospectionException
     {
         CliParser parser = createCliParser();
-        SampleBeanWithSimpleArgument bean = new SampleBeanWithSimpleArgument();
+        ExampleBeanWithSimpleArgument bean = new ExampleBeanWithSimpleArgument();
         parser.parse( StringUtils.split( "12345 23456", ' ' ), bean );
         assertEquals( "12345", bean.getArg() );
     }

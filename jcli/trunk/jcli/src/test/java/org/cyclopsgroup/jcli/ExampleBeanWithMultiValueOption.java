@@ -5,16 +5,27 @@ import java.util.List;
 import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.Option;
 
+/**
+ * A testing bean with multi value option
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 @Cli( name = "sample" )
-public class SampleBeanWithMultiValueOption
+public class ExampleBeanWithMultiValueOption
 {
     private List<String> options;
 
+    /**
+     * @return List value of option
+     */
     public final List<String> getOptions()
     {
         return options;
     }
 
+    /**
+     * @param options Option values
+     */
     @Option( name = "o", longName = "option", description = "Multi value option" )
     public final void setOptions( List<String> options )
     {
