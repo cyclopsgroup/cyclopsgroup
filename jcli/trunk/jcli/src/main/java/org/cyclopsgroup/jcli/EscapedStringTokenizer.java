@@ -1,10 +1,5 @@
 package org.cyclopsgroup.jcli;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -77,15 +72,11 @@ public class EscapedStringTokenizer
      * @inheritDoc
      */
     @Override
-    public List<String> parse( String input )
+    public void parse( String input, TokenEventHandler handler )
     {
-        if ( StringUtils.isEmpty( input ) )
-        {
-            return Collections.emptyList();
-        }
-        List<String> results = new ArrayList<String>();
         ProcessingState state = ProcessingState.READY;
         StringBuilder word = null;
+        int wordStart = 0;
         for ( int i = 0; i < input.length(); i++ )
         {
             char c = input.charAt( i );
@@ -98,6 +89,7 @@ public class EscapedStringTokenizer
                     }
                     else
                     {
+                        wordStart = i;
                         word = new StringBuilder();
                         if ( c == escaper )
                         {
@@ -114,7 +106,7 @@ public class EscapedStringTokenizer
                     if ( c == delimiter )
                     {
                         state = ProcessingState.READY;
-                        results.add( word.toString() );
+                        handler.handleWordEvent( word.toString(), wordStart, i, true );
                         word = null;
                     }
                     else if ( c == escaper )
@@ -133,8 +125,7 @@ public class EscapedStringTokenizer
         }
         if ( word != null )
         {
-            results.add( word.toString() );
+            handler.handleWordEvent( word.toString(), wordStart, input.length(), false );
         }
-        return results;
     }
 }

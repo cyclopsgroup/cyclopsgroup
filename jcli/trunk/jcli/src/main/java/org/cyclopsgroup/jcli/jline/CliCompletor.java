@@ -4,6 +4,8 @@ import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import jline.Completor;
 
@@ -86,14 +88,26 @@ public class CliCompletor
     public int complete( final String command, final int cursor, final List suggestions )
     {
         ArgumentsInspector inspector = new ArgumentsInspector( cli );
+        final AtomicBoolean terminated = new AtomicBoolean( true );
+        final AtomicInteger lastWordStart = new AtomicInteger( 0 );
         if ( StringUtils.isNotEmpty( command ) )
         {
-            List<String> args = tokenizer.parse( command );
+            final List<String> args = new ArrayList<String>();
+            tokenizer.parse( command, new StringTokenizer.TokenEventHandler()
+            {
+
+                public void handleWordEvent( String word, int start, int end, boolean t )
+                {
+                    args.add( word );
+                    terminated.set( t );
+                    lastWordStart.set( start );
+                }
+            } );
             for ( String arg : args )
             {
                 inspector.consume( arg );
             }
-            if ( command.charAt( command.length() - 1 ) == ' ' )
+            if ( terminated.get() )
             {
                 inspector.end();
             }
@@ -129,11 +143,11 @@ public class CliCompletor
         {
             return 0;
         }
-        if ( command.endsWith( " " ) )
+        if ( terminated.get() )
         {
             return cursor;
         }
-        return command.length() - inspector.getCurrentValue().length();
+        return lastWordStart.get();
     }
 
     private List<String> suggestArguments( String partialArgument )

@@ -1,11 +1,5 @@
 package org.cyclopsgroup.jcli;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 /**
  * String tokenizer which split string into segments considering quotation and character escaping
  * 
@@ -81,15 +75,11 @@ public class QuotedStringTokenizer
      * @inheritDoc
      */
     @Override
-    public List<String> parse( String input )
+    public void parse( String input, TokenEventHandler handler )
     {
-        if ( StringUtils.trimToNull( input ) == null )
-        {
-            return Collections.emptyList();
-        }
-        List<String> results = new ArrayList<String>();
         ParsingState state = ParsingState.READY;
         StringBuilder buf = null;
+        int wordStart = 0;
         for ( int i = 0; i < input.length(); i++ )
         {
             char c = input.charAt( i );
@@ -104,11 +94,13 @@ public class QuotedStringTokenizer
                     else if ( c == quotation )
                     {
                         state = ParsingState.QUOTED;
+                        wordStart = i;
                         buf = new StringBuilder();
                     }
                     else
                     {
                         state = ParsingState.WORD_STARTED;
+                        wordStart = i;
                         buf = new StringBuilder();
                         buf.append( c );
                     }
@@ -118,7 +110,7 @@ public class QuotedStringTokenizer
                     if ( c == delimiter )
                     {
                         state = ParsingState.READY;
-                        results.add( buf.toString() );
+                        handler.handleWordEvent( buf.toString(), wordStart, i, true );
                         buf = null;
                     }
                     else
@@ -142,7 +134,7 @@ public class QuotedStringTokenizer
                     if ( c == delimiter )
                     {
                         state = ParsingState.READY;
-                        results.add( buf.toString() );
+                        handler.handleWordEvent( buf.toString(), wordStart, i, true );
                         buf = null;
                     }
                     else
@@ -155,8 +147,7 @@ public class QuotedStringTokenizer
         }
         if ( buf != null )
         {
-            results.add( buf.toString() );
+            handler.handleWordEvent( buf.toString(), wordStart, input.length(), false );
         }
-        return results;
     }
 }
