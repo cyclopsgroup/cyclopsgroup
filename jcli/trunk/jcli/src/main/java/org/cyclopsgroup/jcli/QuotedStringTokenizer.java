@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class QuotedStringTokenizer
+    extends StringTokenizer
 {
     private enum ParsingState
     {
@@ -56,11 +57,9 @@ public class QuotedStringTokenizer
     }
 
     /**
-     * Escape given string value
-     * 
-     * @param value String value
-     * @return Escaped result
+     * @inheritDoc
      */
+    @Override
     public String escape( String value )
     {
         if ( value == null )
@@ -79,11 +78,9 @@ public class QuotedStringTokenizer
     }
 
     /**
-     * Parse given string into segments
-     * 
-     * @param input Given string input
-     * @return List of segments
+     * @inheritDoc
      */
+    @Override
     public List<String> parse( String input )
     {
         if ( StringUtils.trimToNull( input ) == null )

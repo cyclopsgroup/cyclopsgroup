@@ -10,7 +10,7 @@ import jline.Completor;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.jcli.AutoCompletable;
-import org.cyclopsgroup.jcli.QuotedStringTokenizer;
+import org.cyclopsgroup.jcli.StringTokenizer;
 import org.cyclopsgroup.jcli.spi.CliDefinition;
 import org.cyclopsgroup.jcli.spi.CliUtils;
 import org.cyclopsgroup.jcli.spi.OptionDefinition;
@@ -44,14 +44,14 @@ public class CliCompletor
 
     private final AutoCompletable completable;
 
-    private final QuotedStringTokenizer tokenizer;
+    private final StringTokenizer tokenizer;
 
     /**
      * @param cliBean Entyped AutoCompletable implementation or an normal bean
      * @param tokenizer Tokenizer for argument parsing
      * @throws IntrospectionException
      */
-    public CliCompletor( final Object cliBean, final QuotedStringTokenizer tokenizer )
+    public CliCompletor( final Object cliBean, final StringTokenizer tokenizer )
         throws IntrospectionException
     {
         Validate.notNull( cliBean, "Cli bean can't be NULL" );
