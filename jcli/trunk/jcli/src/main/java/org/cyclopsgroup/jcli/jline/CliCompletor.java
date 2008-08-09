@@ -148,7 +148,7 @@ public class CliCompletor
             results = completable.suggestArgument( partialArgument );
             if ( results == null )
             {
-                return filterList( completable.suggestArgument( null ), partialArgument );
+                results = filterList( completable.suggestArgument( null ), partialArgument );
             }
         }
         if ( results == null )
