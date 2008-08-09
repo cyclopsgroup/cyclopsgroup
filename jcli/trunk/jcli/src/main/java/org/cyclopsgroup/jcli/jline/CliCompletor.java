@@ -171,6 +171,7 @@ public class CliCompletor
         }
         else
         {
+            results = new ArrayList<String>( results );
             Collections.sort( results );
         }
         return results;
@@ -216,6 +217,7 @@ public class CliCompletor
         }
         else
         {
+            results = new ArrayList<String>( results );
             Collections.sort( results );
         }
         return results;
