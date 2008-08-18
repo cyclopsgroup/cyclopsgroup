@@ -32,7 +32,14 @@
         </links>
         <menu name="JCLI">
             <item name="Home" href="index.html" />
+            <item name="Javadoc" href="apidocs/index.html" />
         </menu>
         <menu ref="reports" />
+        <menu name="Links">
+            <item name="Discussion"
+                href="http://wiki.cyclopsgroup.org/discussion" />
+            <item name="JMXTERM"
+                href="http://www.cyclopsgroup.org/jmxterm" />
+        </menu>
     </body>
 </project>
