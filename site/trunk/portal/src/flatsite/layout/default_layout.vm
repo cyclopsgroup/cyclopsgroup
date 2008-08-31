@@ -97,6 +97,27 @@
                                         <ul>
                                             <li>
                                                 <a
+                                                    href="http://wiki.cyclopsgroup.org/discussion">
+                                                    join discussion
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="http://cyclopsgroup.org/projects/jmxterm/download.html">
+                                                    download jmxterm
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="http://demo.cyclopsgroup.org/courselist/">
+                                                    courselist demo
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="members/jiaqi/">jiaqi's home</a>
+                                            </li>
+                                            <li>
+                                                <a
                                                     href="http://sourceforge.net/projects/cyclops-group">
                                                     sf.net/cyclops-group
                                                 </a>
@@ -104,9 +125,10 @@
                                             <li>
                                                 <a
                                                     href="http://fisheye3.atlassian.com/viewrep/cyclops-group/">
-                                                    source code
+                                                    browse source code
                                                 </a>
                                             </li>
+                                            <li>&nbsp;</li>
                                         </ul>
                                     </div>
                                 </div>

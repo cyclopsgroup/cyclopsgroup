@@ -1,6 +1,6 @@
 
 <VirtualHost *>
   ServerName	demo.cyclopsgroup.org
-  DocumentRoot	/opt/var/www/demo.cylcopsgroup.org
+  DocumentRoot	/var/www
   JkMount       /courselist/* local
 </VirtualHost>
