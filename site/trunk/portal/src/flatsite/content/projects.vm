@@ -19,8 +19,11 @@
                 <td>
                     <a href="projects/jmxterm">jmxterm</a>
                 </td>
-                <td>Command line based</td>
-                <td>The first version 0.1 has been released</td>
+                <td>
+                    Command line based interactive JMX client software.
+                    A command line version of jconsole.
+                </td>
+                <td>1.0 alpha is released</td>
                 <td>Usable</td>
             </tr>
             <tr class="a">
