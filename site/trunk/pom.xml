@@ -15,10 +15,10 @@
     <inceptionYear>2007</inceptionYear>
     <scm>
         <connection>
-            scm:svn:http://svn.sourceforge.net/svn/cyclops-group/site/trunk
+            scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/site/trunk
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svn/cyclops-group/site/trunk
+            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/site/trunk
         </developerConnection>
         <url>
             http://fisheye3.cenqua.com/viewrep/cyclops-group/site/trunk
