@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-master</artifactId>
     <name>cyclopsgroup-master</name>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -23,6 +22,37 @@
         <system>sourceforge</system>
         <url>http://sourceforge.net/tracker/?group_id=91358</url>
     </issueManagement>
+    <mailingLists>
+        <mailingList>
+            <name>CyclopsGroup.org General Discussion</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-discussion</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-discussion</archive>
+        </mailingList>
+        <mailingList>
+            <name>CyclopsGroup.org Projects Support</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-support</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-support</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-support</archive>
+        </mailingList>
+        <mailingList>
+            <name>CyclopsGroup.org News</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-news</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-news</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-news</archive>
+        </mailingList>
+        <mailingList>
+            <name>CyclopsGroup.org Projects Changelog</name>
+            <subscribe>http://groups.google.com/group/cyclopsgroup-changelog</subscribe>
+            <unsubscribe>http://groups.google.com/group/cyclopsgroup-changelog</unsubscribe>
+            <archive>http://groups.google.com/group/cyclopsgroup-changelog</archive>
+        </mailingList>
+    </mailingLists>
+    <scm>
+        <connection>scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</connection>
+        <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</developerConnection>
+        <url>http://fisheye3.atlassian.com/browse/cyclops-group/master/trunk/master</url>
+    </scm>
     <developers>
         <developer>
             <id>jiaqi</id>
@@ -32,20 +62,6 @@
             <url>http://www.cyclopsgroup.org/members/jiaqi</url>
         </developer>
     </developers>
-    <distributionManagement>
-        <repository>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <url>
-                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2
-            </url>
-        </repository>
-        <snapshotRepository>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <url>
-                scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2
-            </url>
-        </snapshotRepository>
-    </distributionManagement>
     <profiles>
         <profile>
             <id>release.public</id>
