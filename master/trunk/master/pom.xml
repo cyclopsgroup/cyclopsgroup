@@ -53,6 +53,22 @@
         <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</developerConnection>
         <url>http://fisheye3.atlassian.com/browse/cyclops-group/master/trunk/master</url>
     </scm>
+    <ciManagement>
+        <system>continuum</system>
+        <url>http://code.cyclopsgroup.org/continuum/</url>
+        <notifiers>
+            <notifier>
+                <type>email</type>
+                <address>cyclopsgroup-changelog@googlegroups.com</address>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+    <distributionManagement>
+        <repository>
+            <id>cyclopsgroup.server.sourceforge</id>
+            <url>scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
+        </repository>
+    </distributionManagement>
     <developers>
         <developer>
             <id>jiaqi</id>
