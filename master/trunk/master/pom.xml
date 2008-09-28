@@ -56,12 +56,6 @@
     <ciManagement>
         <system>continuum</system>
         <url>http://code.cyclopsgroup.org/continuum/</url>
-        <notifiers>
-            <notifier>
-                <type>email</type>
-                <address>cyclopsgroup-changelog@googlegroups.com</address>
-            </notifier>
-        </notifiers>
     </ciManagement>
     <distributionManagement>
         <repository>
