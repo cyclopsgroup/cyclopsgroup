@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-master</artifactId>
-    <name>cyclopsgroup-master</name>
-    <version>0.2-SNAPSHOT</version>
+    <name>CyclopsGroup.org Projects</name>
+    <version>0.2</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
