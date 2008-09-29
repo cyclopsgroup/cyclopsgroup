@@ -6,7 +6,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-master</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.2</version>
+    <version>0.3</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -49,8 +49,8 @@
         </mailingList>
     </mailingLists>
     <scm>
-        <connection>scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</connection>
-        <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</developerConnection>
+        <connection>scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</connection>
+        <developerConnection>scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</developerConnection>
         <url>http://fisheye3.atlassian.com/browse/cyclops-group/master/trunk/master</url>
     </scm>
     <ciManagement>
@@ -60,7 +60,7 @@
     <distributionManagement>
         <repository>
             <id>cyclopsgroup.server.sourceforge</id>
-            <url>scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
+            <url>scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
         </repository>
     </distributionManagement>
     <developers>
@@ -79,7 +79,7 @@
                 <repository>
                     <id>cyclopsgroup.server.sourceforge</id>
                     <url>
-                        scpexe://shell.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
+                        scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
                     </url>
                 </repository>
             </distributionManagement>
