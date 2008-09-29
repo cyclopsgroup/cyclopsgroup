@@ -6,7 +6,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-master</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.3</version>
+    <version>0.2</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -60,7 +60,7 @@
     <distributionManagement>
         <repository>
             <id>cyclopsgroup.server.sourceforge</id>
-            <url>scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
+            <url>sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
         </repository>
     </distributionManagement>
     <developers>
@@ -79,7 +79,7 @@
                 <repository>
                     <id>cyclopsgroup.server.sourceforge</id>
                     <url>
-                        scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
+                        sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
                     </url>
                 </repository>
             </distributionManagement>
