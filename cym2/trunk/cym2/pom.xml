@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-master</artifactId>
+        <version>0.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>cym2</artifactId>
+    <packaging>pom</packaging>
+    <name>CyclopsGroup Maven2 Plugins</name>
+    <version>1.2-alpha-1</version>
+    <scm>
+        <connection>
+            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2
+        </connection>
+        <developerConnection>
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2
+        </developerConnection>
+        <url>
+            http://fisheye3.atlassian.com/browse/cyclops-group/cym2/trunk/cym2
+        </url>
+    </scm>
+    <modules>
+        <module>flatsite</module>
+    </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
