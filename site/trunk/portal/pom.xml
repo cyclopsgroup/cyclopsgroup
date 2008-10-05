@@ -11,7 +11,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>portal-site</artifactId>
     <packaging>pom</packaging>
-    <name>CyclopsGroup.org</name>
+    <name>CyclopsGroup.org Portal Site</name>
     <version>3.0-SNAPSHOT</version>
     <scm>
         <connection>
