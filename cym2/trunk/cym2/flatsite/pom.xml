@@ -13,7 +13,7 @@
     <artifactId>flatsite-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>Flatsite Maven2 Plugin</name>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.2-alpha-1</version>
     <scm>
         <connection>
             scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2/flatsite

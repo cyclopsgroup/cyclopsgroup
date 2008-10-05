@@ -21,7 +21,7 @@
             scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2
         </developerConnection>
         <url>
-            http://fisheye3.atlassian.com/browse/cyclops-group/cym2/trunk/cym2
+            http://fisheye3.atlassian.com/browse/cyclops-group/cym2
         </url>
     </scm>
     <modules>
