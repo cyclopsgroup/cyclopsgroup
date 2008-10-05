@@ -3,22 +3,22 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cyclopsgroup.site</groupId>
-        <artifactId>site</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-site</artifactId>
+        <version>2.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.cyclopsgroup.site</groupId>
-    <artifactId>members-jiaqi</artifactId>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>members-jiaqi-site</artifactId>
     <packaging>pom</packaging>
     <name>Jiaqi's shabby home</name>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <scm>
         <connection>
-            scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/site/trunk/member-jiaqi
+            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/site/trunk/member-jiaqi
         </connection>
         <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/site/trunk/member-jiaqi
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/site/trunk/member-jiaqi
         </developerConnection>
         <url>
             http://fisheye3.atlassian.com/browse/cyclops-group/site
@@ -28,7 +28,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/members/jiaqi
+                sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/members/jiaqi
             </url>
         </site>
     </distributionManagement>

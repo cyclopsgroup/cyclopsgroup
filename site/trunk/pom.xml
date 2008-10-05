@@ -3,15 +3,15 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>cyclopsgroup-project</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-master</artifactId>
+        <version>0.2</version>
     </parent>
-    <groupId>com.cyclopsgroup.site</groupId>
-    <artifactId>site</artifactId>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>cyclopsgroup-site</artifactId>
     <packaging>pom</packaging>
-    <name>cyclopsgroup.org</name>
-    <version>2.0-SNAPSHOT</version>
+    <name>CyclopsGroup.org Sites</name>
+    <version>2.1-SNAPSHOT</version>
     <inceptionYear>2007</inceptionYear>
     <scm>
         <connection>
@@ -28,25 +28,11 @@
         <module>member-jiaqi</module>
         <module>portal</module>
     </modules>
-    <repositories>
-        <repository>
-            <id>ibiblio.org</id>
-            <name>ibiblio</name>
-            <url>http://ibiblio.org/maven2</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>cyclopsgroup.org</id>
-            <url>http://cyclops-group.sourceforge.net/m2</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>
-                <groupId>com.cyclopsgroup.arapaho</groupId>
-                <artifactId>arapaho-maven-plugin</artifactId>
+                <groupId>org.cyclopsgroup</groupId>
+                <artifactId>flatsite-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>package</phase>

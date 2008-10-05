@@ -3,13 +3,13 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cyclopsgroup.site</groupId>
-        <artifactId>site</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-site</artifactId>
+        <version>2.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.cyclopsgroup.site</groupId>
-    <artifactId>portal</artifactId>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>portal-site</artifactId>
     <packaging>pom</packaging>
     <name>CyclopsGroup.org</name>
     <version>3.0-SNAPSHOT</version>
@@ -28,7 +28,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs
+                sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs
             </url>
         </site>
     </distributionManagement>
