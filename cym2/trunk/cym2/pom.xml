@@ -13,6 +13,14 @@
     <packaging>pom</packaging>
     <name>CyclopsGroup Maven2 Plugins</name>
     <version>1.2-SNAPSHOT</version>
+    <inceptionYear>2003</inceptionYear>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <scm>
         <connection>
             scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2
@@ -26,6 +34,7 @@
     </scm>
     <modules>
         <module>flatsite</module>
+        <module>uberjar</module>
     </modules>
     <build>
         <plugins>
