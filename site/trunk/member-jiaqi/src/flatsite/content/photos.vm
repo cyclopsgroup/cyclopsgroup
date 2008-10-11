@@ -1,7 +1,7 @@
 <div>
     <div id="sideContent">
         <h2>Lastest 20 photos</h2>
-        <!-- 
+        <!--
             #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
             #set($rss=$xmltool.parseUrl($rssurl))
             #set($items=$rss.selectNodes("//channel/item"))
@@ -58,7 +58,7 @@
         type="text/javascript">
     </script>
     <div id="mainContent" style="width:540px">
-        <h2>Photo slide show</h2>
+        <h2>Slide Show</h2>
         <div>
             <iframe
                 src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
@@ -72,49 +72,7 @@
     </div>
     <script type="text/javascript">
         //<![CDATA[
-        
-        #set($rssurl="http://api.flickr.com/services/feeds/geo/?id=68975111@N00&lang=en-us&tags=photography&format=rss_200")
-        #set($rss=$xmltool.parseUrl($rssurl))
-        
-        ## Macro to parse xml file and generate javascript that add Markers to given map
-        #macro(addMarkersToMap $mapVariable)
-            #foreach($item in $rss.selectNodes("//channel/item"))
-                #set($geoPoint = $item.element("Point"))
-                #set($thumbnail = $item.element("thumbnail"))
-                addMarker($mapVariable, $geoPoint.elementText("lat"), $geoPoint.elementText("long"), '<a href="${item.elementText('link')}"><img src="${thumbnail.attributeValue('url')}" alt="${item.elementText('title')}"></a>');
-            #end
-        #end
-        
-        
-        var icon = new GIcon();
-        icon.image = "http://www.cyclopsgroup.org/members/jiaqi/images/photo.png";
-        icon.iconSize = new GSize(22, 22);
-        icon.iconAnchor = new GPoint(6, 20);
-        icon.infoWindowAnchor = new GPoint(5, 1);
-
-        function addMarker(map, lat, lug, html)
-        {
-            var marker = new GMarker(new GLatLng(lat, lug), icon);
-            GEvent.addListener(marker, "click", function() {
-                marker.openInfoWindowHtml( html );
-            });
-            map.addOverlay(marker);
-        }
-
-        document.onload = function() {
-	        if (GBrowserIsCompatible()) {
-	            var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
-	            seattleMap.addControl(new GSmallMapControl());
-	            seattleMap.addControl(new GMapTypeControl());
-	            seattleMap.setCenter(new GLatLng(47.38545,-122.072182), 9);
-	            
-	            #addMarkersToMap("seattleMap")
-	        }
-	        else
-	        {
-	            alert("Browser doesn't support Google map");
-	        }
-	    };
+        #parse("include/geo_js.vm")
         //]]>
     </script>
 </div>

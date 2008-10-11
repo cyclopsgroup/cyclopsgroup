@@ -2,6 +2,11 @@
     <div id="sideContent">
         <h2>Latest updates</h2>
         <p>
+            [10/10/2008] Adding a small
+            <a href="forum.html">answer machine</a>
+            for this page.
+        </p>
+        <p>
             [04/06/2007] Calling Google Map API to display photos.
             <a href="photos.html">Check it out</a>
             , you won't be disappointed.
@@ -36,12 +41,38 @@
         </ul>
     </div>
     <div id="mainContent">
-        <h2>What is it about?</h2>
+        <h2>About me</h2>
+        <p>
+            I was born and grew up in a small town in Xi'an, China. In
+            the last 10 years I've moved across Zhejiang, Shanghai in
+            China, Texas, Virgina and Washington in USA. Right now I
+            work and live in Seattle, Washington.
+        </p>
+        <p>
+            I'm a big fan of Java software development and open source
+            projects while my interest towards software is not limited
+            to Java.
+            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
+            is my code portfolio.
+        </p>
+        <h2>Favorite Quotes</h2>
         <h3>God says</h3>
         <p>
-            When you do things right, people won't be sure you've done
-            anything at all.
-        </p>
+            God: Bender, being God isn't easy. If you do too much,
+            people
+            get dependent on you. And if you do nothing, they
+            lose hope.
+            You have to use a light touch, like a safecracker
+            or a
+            pickpocket.</p>
+        <p>
+            Bender: Or a guy who burns down a bar for the insurance
+            money.</p>
+        <p>
+            God: Yes, if he makes it look like an electrical
+            thing. If you
+            do things right, people won't be sure you've done anything
+            at all.</p>
         <p>
             <small>-- by God, in Godfellas, Futurama</small>
         </p>
@@ -90,23 +121,10 @@
             <small>
                 -- quoted from a T-shirt in
                 <a href="http://pycon.org">PyCon</a>
-                , Washington DC, 2004. It talks about Python but it can
-                also apply to other language very well.
+                , Washington DC, 2004. It talks about Python but it
+                applies to other language very well.
             </small>
         </p>
-        <h2>About me</h2>
-        <p>
-            I was born and grew up in a small town in Xi'an, China. In
-            the last 10 years I've moved across Zhejiang, Shanghai in
-            China, Texas, Virgina and Washington in USA. Right now I
-            work in Seattle and live in Bellevue, Washington.
-        </p>
-        <p>
-            I'm a big fan of Java software development and open source
-            projects while my interest towards software is not limited
-            to Java.
-            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
-            is my code portfolio.
-        </p>
+
     </div>
 </div>

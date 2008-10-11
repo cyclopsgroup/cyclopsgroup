@@ -8,13 +8,13 @@
         <meta name="description" content="$description" />
         <meta name="keywords"
             content="Jiaqi Guo, Home, Java, Open Source, Software, Programming, CyclopsGroup" />
-        <link rel="stylesheet" href="$basedir/css/display.css" media="screen" />
+        <link rel="stylesheet" href="$basedir/css/display.css"
+            media="screen" />
         <link rel="stylesheet" href="$basedir/css/print.css" media="print" />
-        <script type="text/javascript"
-            src="http://www.google-analytics.com/urchin.js">
+        <script type="text/javascript" src="http://www.google-analytics.com/urchin.js">
         </script>
         <script type="text/javascript">
-        //<![CDATA[
+            //<![CDATA[
             _uacct = "UA-76203-1";
             urchinTracker();
             
@@ -27,24 +27,7 @@
             <div id="documentContent">
                 <div id="contentBanner">
                     <div id="navigationLinks">
-                        <![CDATA[
-                        #macro(navigationLink $link $linkTitle)
-                            #if($link == $htmlPath)
-                                <div class="navigationLink"
-                                    id="selectedNavigationLink">
-                                    <a href="$basedir/$link">$linkTitle</a>
-                                </div>
-                            #else
-                                <div class="navigationLink">
-                                    <a href="$basedir/$link">$linkTitle</a>
-                                </div>
-                            #end
-                        #end
-                        ]]>
-                        #navigationLink("index.html" "About")
-                        #navigationLink("blog.html" "Blog")
-                        #navigationLink("resume.html" "Resume")
-                        #navigationLink("photos.html" "Photos")
+                        #parse("include/nav_links.vm")
                     </div>
                 </div>
                 <div class="clearBreak"></div>
@@ -54,7 +37,8 @@
                     <table width="100%" border="0">
                         <tr>
                             <td>
-                                2007 CyclopsGroup.org. All rights reserved. (
+                                2007 CyclopsGroup.org. All rights
+                                reserved. (
                                 <a
                                     href="http://fisheye3.cenqua.com/browse/cyclops-group/trunk/website/jiaqi/src/flatsite/$templatePath?r=HEAD">
                                     View Source

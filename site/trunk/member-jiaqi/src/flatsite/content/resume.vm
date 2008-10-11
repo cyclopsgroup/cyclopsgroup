@@ -12,9 +12,6 @@
                         <a href="#Java">Java</a>
                     </li>
                     <li>
-                        <a href="#WebDevelopment">Web Development</a>
-                    </li>
-                    <li>
                         <a href="#Database">Database</a>
                     </li>
                     <li>
@@ -79,31 +76,21 @@
         </h3>
         <ul>
             <li>
-                Extensive knowledge of Java open source as well as JavaEE.
-                Strong self motivation to pursue the cutting-edge technology,
-                never stop learning. Java Open Source guru.
+                Self motivated Java expert with extensive knowledge of
+                Java open source as well as JavaEE. 
+            </li>
+            <li>8 years industry experience of design and develop large
+                scalable multi-tier back-end finantial and logistics
+                software system. </li>
+            <li>
+                Java open source participator. Owner of several Java
+                open source projects including
+                <a href="http://www.cyclopsgroup.org/projects/jmxterm">jmxterm</a>
+                .
             </li>
             <li>
-                Participated in many java open source projects. Founder of Java
-                open source software foundation www.cyclopsgroup.org.
-            </li>
-            <li>
-                Experienced in full lifecycle of software development including
-                requirement analysis, architect, development, code reviewing,
-                testing, supporting, and QA.
-            </li>
-            <li>
-                Good team player and leader, good at helping the team achieve
-                the best performance rather than working alone.
-            </li>
-            <li>
-                Good at developing in an XP way with automatic and continuous
-                testing, documentation, integration and distribution support.
-            </li>
-            <li>Experienced in payment and logistics industry.</li>
-            <li>
-                XP practicer. Experienced in automatic and continuous testing,
-                documentation, integration and releasement.
+                Good team player and leader, good at helping the team
+                achieve the best performance rather than working alone.
             </li>
             <li>SCJP and MCSD certificated.</li>
         </ul>
@@ -115,60 +102,46 @@
         </h4>
         <ul>
             <li>
-                Expert of Maven, Springframework, Hibernate, Velocity, Avalon,
-                Drools, Plexus, Jetty, Tomcat, Ant and Turbine. Strong hands-on
-                knowledge JBPM, Werkflow, Jess, Struts, Jetspeed, Jelly, Mina,
-                Torque, Axis etc.
+                Expert of a number of open source projects such as
+                Maven, Mina, Springframework, Hibernate, Velocity,
+                Avalon,Drools, Plexus, Jetty, Tomcat, Ant and
+                Turbine.Strong hands-on knowledge JBPM, Werkflow, Jess,
+                Struts,Jelly,Torque, Axis etc.
             </li>
             <li>
-                Seven years industry experience of JavaEE development with JSP,
-                Servlet, EJB and JMS, etc. Empirical experience with Weblogic,
-                JBOSS and SunONE products.
+                Eight years industry experience of JavaEE development
+                with JSP, Servlet, EJB and JMS, etc. Empirical
+                experience
+                with Weblogic, JBOSS and SunONE products.
             </li>
             <li>
-                Expert of Java web application/portal framework. Architect of
-                web application software mainframe in two companies in past.
-            </li>
-            <li>
-                Owner of several java open source projects in SourceForge (
-                http://www.cyclopsgroup.org )
+                Strong design skill and experience. Have designed base
+                software foundation for several companies in past.
+                Expert in design large multi-tier salable backend
+                tranaction processing system or web application
+                framework. 
             </li>
             <li>
                 Working with WSAD, Eclipse, JBuilder and IDEA Intellij.
                 Experienced in writing Eclipse plugin.
             </li>
-            <li>
-                Active Java open source communities(including Apache)
-                participator
-            </li>
-        </ul>
-        <h4>
-            <a name="WebDevelopment">Web Development</a>
-        </h4>
-        <ul>
-            <li>
-                Efficient HTML/Javascript/AJAX writer and web designer. Designed
-                following websites: http://www.cyclopsgroup.org ,
-                http://www.zope.org/Members/joeblack,
-                http://www.goldsgym.com.cn, and http://www.agrosquare.com
-            </li>
-            <li>Using PhotoShop and GIMP without any trouble.</li>
         </ul>
         <h4>
             <a name="Database">Database</a>
         </h4>
         <ul>
             <li>
-                Hands-on experienced on Oracle, MySQL, HypersonicSQL and MSSQL
-                databases.
+                Hands-on experienced on Oracle, MySQL, HypersonicSQL and
+                MSSQL databases.
             </li>
             <li>
-                Expert in Java O-R mapping projects and DB tools including
-                Hibernate, Apache Torque and Apache OJB.
+                Expert in Java O-R mapping projects and DB tools
+                including Hibernate, Apache Torque and Apache OJB.
             </li>
             <li>
-                Familiar with several CA data warehouse products including
-                Repository, DecisionBase, Forrest and Tree, InfoBeacon, Harvest,
+                Familiar with several CA data warehouse products
+                including Repository, DecisionBase, Forrest and Tree,
+                InfoBeacon, Harvest,
                 Portal and ERWin, etc.
             </li>
         </ul>
@@ -176,24 +149,34 @@
             <a name="IndustryExperience">Industry Experience</a>
         </h4>
         <ul>
-            <li>Hands-on payment/financial system knowledge</li>
+            <li>Hands-on payment/financial system knowledge.
+                Have directly worked with systems in a number of
+                financial companies including WellsFargo, Chase, Deusche
+                Bank, HSBC</li>
             <li>
                 Logistic: Planning, scheduling, warehouse and related
                 optimization.
             </li>
             <li>
-                Experienced in leading 3 ~ 10 person team, under XP methodology.
+                Experienced in leading 3 ~ 10 person team, following XP
+                methodology.
             </li>
-            <li>ERP and CRM system development experience</li>
+            <li>ERP and CRM system design and development experience
+            </li>
         </ul>
-
         <h4>
             <a name="OtherSkills">Other Skills</a>
         </h4>
         <ul>
             <li>Efficient XML/XSLT/Schema/DTD manipulator</li>
-            <li>Some Python, ZOPE and PLONE development experience</li>
-            <li>Some Perl, C++, VB/ASP, ActiveX development experience.</li>
+            <li>Some Python, ZOPE and PLONE development experience
+            </li>
+            <li>Some Perl, C++, VB/ASP, ActiveX development
+                experience.</li>
+            <li>
+                Efficient HTML/Javascript/AJAX developer and web
+                designer. Using GIMP or Photoshop without proficiently.
+            </li>
         </ul>
         <h3>
             <a name="WorkingExperiance">Working Experience</a>
@@ -202,23 +185,23 @@
             <a name="AmazonCom">Amazon.com</a>
         </h4>
         <p>
-            4/2006 ~ the present. Seattle, WA. Tech lead. Payment transaction
-            and collection systems.
+            4/2006 ~ the present. Seattle, WA. Tech lead. Payment
+            transaction and collection systems.
         </p>
         <p>- Responsibility:</p>
         <ul>
             <li>Lead and mentor the team</li>
-            <li>Key software architect and development</li>
-            <li>Support and revise numerous systems</li>
+            <li>Design and development transactional payments
+                system</li>
         </ul>
-
         <p>- Major technology</p>
         <ul>
             <li>
-                Web Service, Springframework, Hibernate, ANT, JavaEE, Jetty and
-                Mina
+                Web Service, Springframework, Hibernate, JavaEE, Jetty
+                and Mina
             </li>
-            <li>Perl and Shell scripting, configuration management</li>
+            <li>Perl and Shell scripting, configuration management
+            </li>
             <li>Amazon platform and infrastructure</li>
         </ul>
 
@@ -226,22 +209,27 @@
             <a name="EvaviInc">Evavi Inc.</a>
         </h4>
         <p>
-            4/2004~4/2006. Dallas, TX. Tech lead. Manufacturing and scheduling
-            optimization systems for logistics and retail industries.
+            4/2004~4/2006. Dallas, TX. Tech lead. Manufacturing and
+            scheduling
+            optimization systems for logistics and retail
+            industries.
         </p>
         <p>- Responsibility:</p>
         <ul>
             <li>Lead and mentor the team</li>
-            <li>Key software architect and development</li>
+            <li>Design and development company software platform
+            </li>
         </ul>
-
         <p>- Major technology</p>
         <ul>
             <li>
-                Avalon/Plexus, Hibernate, Drools, Maven, Jelly/Marmalade, Jess,
-                Drools, Werkflow, JBPM, Jasperreports and JGroup
+                Avalon/Plexus, Hibernate, Drools, Maven,
+                Jelly/Marmalade, Jess,
+                Drools, Werkflow, JBPM,
+                Jasperreports and JGroup
             </li>
-            <li>Cruisecontrol, Anthill and Continuum with Ant and Maven</li>
+            <li>Cruisecontrol, Anthill and Continuum with
+                Ant and Maven</li>
             <li>Weblogic, JBOSS and Tomcat</li>
         </ul>
 
@@ -263,7 +251,8 @@
         </ul>
         <p>- Marjor technology</p>
         <ul>
-            <li>Turbine, Torque, Maven, Avalon, Drools, Jetspeed and EJB</li>
+            <li>Turbine, Torque, Maven, Avalon, Drools, Jetspeed
+                and EJB</li>
             <li>CruiseControl with Ant and Maven</li>
             <li>Tomcat and Jboss</li>
             <li>CA datamining products</li>
@@ -274,7 +263,8 @@
             <a name="EigenetSoftware">Eigenet Software</a>
         </h4>
         <p>
-            7/2000~3/2001. Shanghai, China. Software Engineer of ERP and CRM
+            7/2000~3/2001. Shanghai, China. Software Engineer of ERP and
+            CRM
             systems for Microelectronics manufacturers.
         </p>
         <p>- Responsibility:</p>
