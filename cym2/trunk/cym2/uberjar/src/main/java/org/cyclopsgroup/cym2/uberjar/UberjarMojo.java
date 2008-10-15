@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -17,6 +15,7 @@ import java.util.jar.JarOutputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -60,13 +59,6 @@ public class UberjarMojo
      * @required
      */
     private MavenProject project;
-
-    /**
-     * List of additional dependency paths in classworlds.conf file
-     * 
-     * @parameter
-     */
-    private List<String> additionalDependencies = Collections.emptyList();
 
     /**
      * Name of generated uberjar file
@@ -156,12 +148,6 @@ public class UberjarMojo
         classworldsConfig.println( "main is " + mainClass + " from app" );
         classworldsConfig.println( "[app]" );
 
-        for ( String additionalDependency : additionalDependencies )
-        {
-            getLog().info( "Adding additional dependency " + additionalDependency );
-            classworldsConfig.println( " load " + additionalDependency );
-        }
-
         try
         {
             FileOutputStream fileOutput = new FileOutputStream( uberjarFile );
@@ -209,9 +195,13 @@ public class UberjarMojo
             output.flush();
             output.close();
         }
-        catch ( Exception e )
+        catch ( IOException e )
         {
             throw new MojoExecutionException( "Execution exception", e );
+        }
+        catch ( DependencyResolutionRequiredException e )
+        {
+            throw new MojoExecutionException( "Dependencies are not resolved, code problem", e );
         }
     }
 }

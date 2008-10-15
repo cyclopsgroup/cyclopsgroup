@@ -12,7 +12,7 @@
     <artifactId>cym2</artifactId>
     <packaging>pom</packaging>
     <name>CyclopsGroup Maven2 Plugins</name>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2-alpha-2</version>
     <inceptionYear>2003</inceptionYear>
     <licenses>
         <license>
