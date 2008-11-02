@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-master</artifactId>
+        <version>0.2</version>
+    </parent>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>laputa</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Laputa</name>
+    <packaging>jar</packaging>
+    <description>Laputa Projects Parent</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>
+            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/laputa/trunk/laputa
+        </connection>
+        <developerConnection>
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/laputa/trunk/laputa
+        </developerConnection>
+        <url>
+            http://fisheye3.atlassian.com/browse/cyclops-group/laputa
+        </url>
+    </scm>
+</project>
