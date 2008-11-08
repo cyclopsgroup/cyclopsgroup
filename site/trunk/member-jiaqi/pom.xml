@@ -28,7 +28,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/members/jiaqi
+                scp://shell.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/members/jiaqi
             </url>
         </site>
     </distributionManagement>

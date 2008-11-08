@@ -1,4 +1,4 @@
-#set($rssurl="http://api.flickr.com/services/feeds/geo/?id=68975111@N00&lang=en-us&tags=photography,washington&format=rss_200")
+#set($rssurl="http://api.flickr.com/services/feeds/geo/?id=68975111@N00&lang=en-us&tags=photography,seattle&format=rss_200")
 #set($rss=$xmltool.parseUrl($rssurl))
 
 ## Macro to parse xml file and generate javascript that add Markers to given map
@@ -30,7 +30,7 @@ document.onload = function() {
         var seattleMap = new GMap2(document.getElementById("mapSeattleDiv"));
         seattleMap.addControl(new GSmallMapControl());
         seattleMap.addControl(new GMapTypeControl());
-        seattleMap.setCenter(new GLatLng(47.38545,-122.072182), 9);
+        seattleMap.setCenter(new GLatLng(47.617562,-122.332077), 14);
         
         #addMarkersToMap("seattleMap")
     }
