@@ -1,51 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.cyclopsgroup.arapaho</groupId>
-        <artifactId>cyclopsgroup-project</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-master</artifactId>
+        <version>0.2</version>
     </parent>
-    <groupId>com.cyclopsgroup.waterview</groupId>
-    <artifactId>waterview-parent</artifactId>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>waterview</artifactId>
     <packaging>pom</packaging>
     <name>Waterview</name>
-    <version>1.0-SNAPSHOT</version>
-    <inceptionYear>2006</inceptionYear>
+    <version>3.0-SNAPSHOT</version>
+    <inceptionYear>2003</inceptionYear>
     <scm>
         <connection>
-            scm:svn:svn://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/waterview
+            scm:svn:svn://cyclops-group.svn.sourceforge.net/svn/cyclops-group/waterview/trunk/waterview
         </connection>
         <developerConnection>
-            scm:svn:https://cyclops-group.svn.sourceforge.net/svn/cyclops-group/trunk/waterview
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svn/cyclops-group/waterview/trunk/waterview
         </developerConnection>
         <url>
-            http://fisheye3.cenqua.com/viewrep/cyclops-group/trunk/waterview
+            http://fisheye3.atlanssian.com/viewrep/cyclops-group/waterview
         </url>
     </scm>
-    <modules>
-        <module>api</module>
-        <module>example</module>
-        <module>impl</module>
-        <module>marmalade</module>
-        <module>velocity</module>
-    </modules>
-    <repositories>
-        <repository>
-            <id>ibiblio.org</id>
-            <name>ibiblio</name>
-            <url>http://ibiblio.org/maven2</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>cyclopsgroup.org</id>
-            <url>http://cyclops-group.sourceforge.net/m2</url>
-        </repository>
-    </repositories>
     <distributionManagement>
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
@@ -74,4 +52,7 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>api</module>
+    </modules>
 </project>
