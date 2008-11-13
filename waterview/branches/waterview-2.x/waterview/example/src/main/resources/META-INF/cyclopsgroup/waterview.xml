@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Waterview>
+    <Package name="waterview-example"
+        packageName="com.cyclopsgroup.waterview.example.ui">
+        <Layout name="default"
+            className="com.cyclopsgroup.waterview.example.ui.layout.DefaultLayout" />
+        <Icons name="default" description="Default example icons" />
+        <Theme name="default" />
+    </Package>
+</Waterview>

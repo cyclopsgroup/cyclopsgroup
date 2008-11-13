@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean id="com.cyclopsgroup.waterview.spi.ResourceRegistry"
+        class="com.cyclopsgroup.waterview.spi.MultiPackageResourceRegistry">
+        <property name="packages">
+            <map>
+                <entry key="waterview" value="com.cyclopsgroup.waterview.ui" />
+            </map>
+        </property>
+        <property name="defaultPackageAlias" value="waterview" />
+    </bean>
+    <bean id="com.cyclopsgroup.waterview.spi.Waterview"
+        class="com.cyclopsgroup.waterview.impl.SinglePipelineWaterview">
+        <constructor-arg index="0">
+            <bean class="com.cyclopsgroup.waterview.impl.Pipeline">
+                <property name="valves">
+                    <list>
+                        <ref
+                            bean="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve" />
+                        <ref
+                            bean="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve" />
+                    </list>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="com.cyclopsgroup.waterview.ServiceManager"
+        class="com.cyclopsgroup.waterview.impl.spring.SpringServiceManager" />
+    <bean id="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve"
+        class="com.cyclopsgroup.waterview.impl.RenderPageWithLayoutValve">
+        <constructor-arg index="0" value="/waterview/layout/DefaultLayout.vm" />
+        <constructor-arg index="1"
+            ref="com.cyclopsgroup.waterview.spi.ResourceRegistry" />
+        <property name="serviceManager"
+            ref="com.cyclopsgroup.waterview.ServiceManager" />
+        <property name="templateEngines">
+            <map>
+                <entry key=".+\.vm$"
+                    value-ref="com.cyclopsgroup.waterview.velocity.VelocityTemplateEngine" />
+            </map>
+        </property>
+    </bean>
+    <bean id="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve"
+        class="com.cyclopsgroup.waterview.impl.servlet.ResolveUrlValve" />
+</beans>

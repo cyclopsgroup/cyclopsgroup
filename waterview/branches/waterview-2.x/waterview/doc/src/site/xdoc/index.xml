@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Waterview Project</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="Overview">
+            <p>
+                Waterview is another java web application framework with
+                a portal-system-like design. The goal of waterview
+                project is to simply the development process of a web
+                based java application. On top of an
+                <a href="http://excalibur.apache.org/">Apache Avalon</a>
+                compliant IOC architecture, waterview solves the common
+                problems that a web application generally faces. For
+                example, page composition, form validation, table/tree
+                display, internationalization and page flow contorl.
+                Therefore before a system is built based on waterview,
+                80% work is already done by the framework and developers
+                will be free to focus on business logic only.
+            </p>
+            <p>
+                The page composition in waterview is very flexible. It's
+                very likely that waterview can be evolved to be a portal
+                but now it's targeted as a web framework instead of an
+                applicaton. Cyclopsgroup
+                <a
+                    href="http://www.cyclopsgroup.com/projects/tornado">
+                    tornado
+                </a>
+                project is a portal application based on waterview.
+            </p>
+            <p>
+                Waterview is under active development now. Any
+                suggestion is welcom. Please feel free to
+                <a href="mailto:jiaqi.guo@gmail.com">shoot me email</a>
+                to share your idea.
+            </p>
+        </section>
+        <section name="Why should I be interested">
+            <p>
+                <b>Easy to use.</b>
+                Waterview doesn't require the developers to know much to
+                work with it. For example, only two java packages are
+                exposed for normal usage. Stuff like form, table and
+                portal are all invisible to developer.Please look at
+                "Get Started" section to find out how to use it.
+            </p>
+            <p>
+                <b>Simple design.</b>
+                The design of waterview is unique, clean, smart and
+                simple.
+            </p>
+            <p>
+                <b>Excellent people.</b>
+                People in Cyclopsgroup foundation are all academic
+                maniac. Many of them are PH.D. from U.S and China. You
+                may find many interesting ideas and phylosophies here.
+            </p>
+        </section>
+        <section name="More Documentation">
+            <p>
+                Many thanks to the support from
+                <a href="http://www.atlassian.com">atlassian</a>
+                , who offers great knowledge sharing tool, confluence to
+                open source developers. More documentation can be found
+                in
+                <a
+                    href="http://www.cyclopsgroup.com/kb/display/waterview">
+                    waterview knownledge base
+                </a>
+                .
+            </p>
+        </section>
+    </body>
+</document>
