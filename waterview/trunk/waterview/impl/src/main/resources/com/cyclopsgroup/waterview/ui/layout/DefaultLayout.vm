@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>Waterview: $data</title>
+  </head>
+  <body>
+    #if( $data.requestPath.startsWith( "/layout/" ) )
+      Can't render another layout $data.requestPath
+    #else
+      $renderer.renderView($data.requestPath)
+    #end
+  </body>
+</html>

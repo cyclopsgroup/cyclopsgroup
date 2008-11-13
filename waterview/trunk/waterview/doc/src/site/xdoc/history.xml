@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Stories and history</title>
+        <author email="jiaqi.guo@gmail.com">Jiaqi Guo</author>
+    </properties>
+    <body>
+        <section name="What does the name mean?">
+            <p>
+                Waterview project was started on August, 2003. At that
+                time I just moved from China to Dallas in Texas. I knew
+                nothing about this new place but the road where I walked
+                everyday. This road is waterview drive. When It was time
+                to name the first open source project I started in U.S.,
+                waterview came to my mind.
+            </p>
+            <p>
+                <img src="images/mapimage.gif" alt="yahoo map" />
+            </p>
+        </section>
+    </body>
+</document>
