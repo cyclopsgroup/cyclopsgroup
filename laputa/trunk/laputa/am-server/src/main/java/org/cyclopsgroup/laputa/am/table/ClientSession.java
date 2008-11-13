@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class UserSession
+public class ClientSession
 {
     private boolean acitve;
 

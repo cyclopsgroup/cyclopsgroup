@@ -11,8 +11,8 @@
     <artifactId>laputa</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Laputa</name>
-    <packaging>jar</packaging>
-    <description>Laputa Projects Parent</description>
+    <packaging>pom</packaging>
+    <description>Laputa Project</description>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
