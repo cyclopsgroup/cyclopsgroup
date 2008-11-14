@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview;
+package org.cyclopsgroup.waterview.annotation;
 
 /**
  * Flag an object as View module
@@ -11,4 +11,9 @@ public @interface View
      * @return Path of template to render this view
      */
     String template();
+
+    /**
+     * @return Name of view
+     */
+    String name();
 }

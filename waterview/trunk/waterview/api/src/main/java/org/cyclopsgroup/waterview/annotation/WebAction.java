@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview;
+package org.cyclopsgroup.waterview.annotation;
 
 /**
  * Flag an object as non-displayable action

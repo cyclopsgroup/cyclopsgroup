@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview;
+package org.cyclopsgroup.waterview.annotation;
 
 /**
  * Flag a Java Bean as form data
