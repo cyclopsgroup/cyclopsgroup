@@ -13,5 +13,5 @@ public interface ActionModule
      * @param context Module context
      * @return Action execution result
      */
-    ActionRedirection executeAction( ModuleContext context );
+    ActionRedirection executeAction( WebContext context );
 }

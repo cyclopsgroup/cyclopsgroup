@@ -1,22 +1,22 @@
 package org.cyclopsgroup.waterview.example;
 
-import org.cyclopsgroup.waterview.ModuleContext;
-import org.cyclopsgroup.waterview.ViewableModule;
-import org.cyclopsgroup.waterview.annotation.WebPage;
+import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.RenderableModule;
+import org.cyclopsgroup.waterview.annotation.Page;
 
 /**
  * A hello world page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@WebPage( name = "helloworld" )
+@Page( name = "helloworld" )
 public class HelloWorld
-    implements ViewableModule
+    implements RenderableModule
 {
     /**
      * @inheritDoc
      */
-    public void beforeRender( ModuleContext context )
+    public void beforeRender( WebContext context )
     {
         context.setVariable( "myName", "Jiaqi" );
     }
