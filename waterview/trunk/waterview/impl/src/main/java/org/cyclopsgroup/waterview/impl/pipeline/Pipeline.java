@@ -9,10 +9,18 @@ import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.ipa.Valve;
 
+/**
+ * Pipeline that executes valves
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class Pipeline
 {
     private final List<Valve> valves;
 
+    /**
+     * @param valves List of valves
+     */
     public Pipeline( List<Valve> valves )
     {
         Validate.notNull( valves, "Valves can't be NULL" );
@@ -20,6 +28,10 @@ public class Pipeline
         this.valves = Collections.unmodifiableList( new ArrayList<Valve>( valves ) );
     }
 
+    /**
+     * @param webContext Web context to invoke
+     * @throws IOException
+     */
     public void invoke( WebContext webContext )
         throws IOException
     {

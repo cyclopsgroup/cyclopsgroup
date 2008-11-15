@@ -4,12 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Context of {@link RenderableModule}
+ * Context of {@link WebModule}
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public interface WebContext
 {
+    /**
+     * @return Redirecion that redirects result to somewhere else
+     */
+    Redirection getRedirection();
+
     /**
      * @return Http servlet request
      */
@@ -27,6 +32,11 @@ public interface WebContext
      * @return Value of variable
      */
     Object getVariable( String name );
+
+    /**
+     * @param redirection Redirecte result to somewhere else
+     */
+    void setRedirection( Redirection redirection );
 
     /**
      * Set variable for module context

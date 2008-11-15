@@ -1,11 +1,8 @@
 package org.cyclopsgroup.waterview.impl.module;
 
-import org.cyclopsgroup.waterview.ActionModule;
-import org.cyclopsgroup.waterview.RenderableModule;
+import org.cyclopsgroup.waterview.WebModule;
 
 public interface ModuleResolver
 {
-    RenderableModule findRenderableModule( String name );
-
-    ActionModule findActionModule( String name );
+    WebModule findModule( String name );
 }

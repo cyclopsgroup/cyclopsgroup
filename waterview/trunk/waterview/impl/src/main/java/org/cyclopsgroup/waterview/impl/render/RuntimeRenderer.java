@@ -1,10 +1,15 @@
-package org.cyclopsgroup.waterview.impl.valve;
+package org.cyclopsgroup.waterview.impl.render;
 
-import org.cyclopsgroup.waterview.RenderableModule;
 import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
-import org.cyclopsgroup.waterview.impl.render.Renderer;
+import org.cyclopsgroup.waterview.ipa.Renderer;
 
+/**
+ * Renderer used in pages
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class RuntimeRenderer
 {
     private final WebContext context;
@@ -13,6 +18,11 @@ public class RuntimeRenderer
 
     private final ModuleResolver resolver;
 
+    /**
+     * @param renderer
+     * @param resolver
+     * @param context
+     */
     public RuntimeRenderer( Renderer renderer, ModuleResolver resolver, WebContext context )
     {
         this.renderer = renderer;
@@ -20,9 +30,12 @@ public class RuntimeRenderer
         this.resolver = resolver;
     }
 
+    /**
+     * @param name Name of view to render
+     */
     public void render( String name )
     {
-        RenderableModule module = resolver.findRenderableModule( name );
+        WebModule module = resolver.findModule( name );
         WebContext childContext = new ChildWebContext( context );
         module.beforeRender( childContext );
         childContext.setVariable( "renderer", new RuntimeRenderer( renderer, resolver, childContext ) );

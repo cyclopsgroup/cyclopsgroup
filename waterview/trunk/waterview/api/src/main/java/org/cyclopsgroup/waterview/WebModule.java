@@ -5,7 +5,7 @@ package org.cyclopsgroup.waterview;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public interface RenderableModule
+public interface WebModule
 {
     /**
      * Prepare the module

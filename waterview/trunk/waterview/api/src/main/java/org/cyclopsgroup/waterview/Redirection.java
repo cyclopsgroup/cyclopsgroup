@@ -5,7 +5,7 @@ package org.cyclopsgroup.waterview;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public abstract class ActionRedirection
+public abstract class Redirection
 {
 
 }

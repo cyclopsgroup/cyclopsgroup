@@ -1,7 +1,7 @@
 package org.cyclopsgroup.waterview.example;
 
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.RenderableModule;
+import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.annotation.Page;
 
 /**
@@ -11,7 +11,7 @@ import org.cyclopsgroup.waterview.annotation.Page;
  */
 @Page( name = "helloworld" )
 public class HelloWorld
-    implements RenderableModule
+    implements WebModule
 {
     /**
      * @inheritDoc

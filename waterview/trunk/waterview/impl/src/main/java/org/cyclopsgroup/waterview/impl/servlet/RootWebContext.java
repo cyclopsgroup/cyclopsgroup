@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.Validate;
+import org.cyclopsgroup.waterview.Redirection;
 import org.cyclopsgroup.waterview.WebContext;
 
 /**
@@ -17,18 +18,33 @@ import org.cyclopsgroup.waterview.WebContext;
 public class RootWebContext
     implements WebContext
 {
+    private Redirection redirection;
+
     private final HttpServletRequest servletRequest;
 
     private final HttpServletResponse servletResponse;
 
     private final Map<String, Object> variables = new HashMap<String, Object>();
 
+    /**
+     * @param servletRequest Http request
+     * @param servletResponse Http response
+     */
     public RootWebContext( HttpServletRequest servletRequest, HttpServletResponse servletResponse )
     {
         Validate.notNull( servletRequest, "Servlet request can't be NULL" );
         Validate.notNull( servletResponse, "Servlet response can't be NULL" );
         this.servletRequest = servletRequest;
         this.servletResponse = servletResponse;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Redirection getRedirection()
+    {
+        return redirection;
     }
 
     /**
@@ -56,6 +72,15 @@ public class RootWebContext
     public Object getVariable( String name )
     {
         return variables.get( name );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void setRedirection( Redirection redirection )
+    {
+        this.redirection = redirection;
     }
 
     /**
