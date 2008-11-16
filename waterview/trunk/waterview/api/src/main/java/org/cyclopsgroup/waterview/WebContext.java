@@ -1,5 +1,7 @@
 package org.cyclopsgroup.waterview;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface WebContext
 {
+    /**
+     * Name of context itself
+     */
+    String CONTEXT_NAME = "context";
+
     /**
      * @return Redirecion that redirects result to somewhere else
      */
@@ -46,4 +53,9 @@ public interface WebContext
      * @return Previous value of variable if there is a previous value
      */
     Object setVariable( String name, Object value );
+
+    /**
+     * @return Set of variable names
+     */
+    Set<String> getVariableNames();
 }

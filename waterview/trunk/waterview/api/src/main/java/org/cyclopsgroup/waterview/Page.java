@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview.annotation;
+package org.cyclopsgroup.waterview;
 
 /**
  * Flag an object as a page
@@ -18,19 +18,9 @@ public @interface Page
     String[] keywords() default {};
 
     /**
-     * @return Path of layout
-     */
-    String layout() default "";
-
-    /**
      * @return Path this web page is mapped to
      */
-    String name();
-
-    /**
-     * @return Path of the template to render this page
-     */
-    String template() default "";
+    String path();
 
     /**
      * @return Title of page

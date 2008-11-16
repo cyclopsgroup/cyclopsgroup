@@ -2,6 +2,7 @@ package org.cyclopsgroup.waterview.impl.servlet;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +73,12 @@ public class RootWebContext
     public Object getVariable( String name )
     {
         return variables.get( name );
+    }
+
+    @Override
+    public Set<String> getVariableNames()
+    {
+        return variables.keySet();
     }
 
     /**

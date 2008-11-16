@@ -1,7 +1,9 @@
 package org.cyclopsgroup.waterview.impl.render;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +20,9 @@ import org.cyclopsgroup.waterview.WebContext;
 public class ChildWebContext
     implements WebContext
 {
-    private final Map<String, Object> variables = new HashMap<String, Object>();
-
     private final WebContext parent;
+
+    private final Map<String, Object> variables = new HashMap<String, Object>();
 
     /**
      * @param parent Parent context
@@ -29,6 +31,15 @@ public class ChildWebContext
     {
         Validate.notNull( parent, "Parent context can't be NULL" );
         this.parent = parent;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Redirection getRedirection()
+    {
+        return parent.getRedirection();
     }
 
     /**
@@ -63,6 +74,26 @@ public class ChildWebContext
      * @inheritDoc
      */
     @Override
+    public Set<String> getVariableNames()
+    {
+        Set<String> names = new HashSet<String>( variables.keySet() );
+        names.addAll( parent.getVariableNames() );
+        return names;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void setRedirection( Redirection redirection )
+    {
+        parent.setRedirection( redirection );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public Object setVariable( String name, Object value )
     {
         if ( value == null )
@@ -73,24 +104,6 @@ public class ChildWebContext
         {
             return variables.put( name, value );
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public Redirection getRedirection()
-    {
-        return parent.getRedirection();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void setRedirection( Redirection redirection )
-    {
-        parent.setRedirection( redirection );
     }
 
 }

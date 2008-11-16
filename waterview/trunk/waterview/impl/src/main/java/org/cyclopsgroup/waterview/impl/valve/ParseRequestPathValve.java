@@ -50,7 +50,7 @@ public class ParseRequestPathValve
         throws IOException
     {
         WebContext wc = context.getWebContext();
-        String pathInfo = wc.getServletRequest().getPathInfo();
+        String pathInfo = wc.getServletRequest().getServletPath();
         Matcher matcher = EXTENSION_PATTERN.matcher( pathInfo );
         List<String> operations = new ArrayList<String>();
         int start = 0;

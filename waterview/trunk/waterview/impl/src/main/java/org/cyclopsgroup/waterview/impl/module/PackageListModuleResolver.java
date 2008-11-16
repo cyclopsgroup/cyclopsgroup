@@ -1,7 +1,5 @@
 package org.cyclopsgroup.waterview.impl.module;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
@@ -15,8 +13,6 @@ import org.cyclopsgroup.waterview.WebModule;
 public class PackageListModuleResolver
     implements ModuleResolver
 {
-    private final List<String> resourcePaths;
-
     private final ClassLoader classLoader;
 
     /**
@@ -37,17 +33,6 @@ public class PackageListModuleResolver
         Validate.notNull( packageNames, "Package names can't be NULL" );
 
         this.classLoader = classLoader;
-        ArrayList<String> resourcePaths = new ArrayList<String>( packageNames.size() );
-        for ( String packageName : packageNames )
-        {
-            String packagePath = packageName.replace( '.', '/' );
-            if ( packagePath.endsWith( "/" ) )
-            {
-                packagePath = packagePath.substring( 0, packagePath.length() - 1 );
-            }
-            resourcePaths.add( packagePath );
-        }
-        this.resourcePaths = Collections.unmodifiableList( resourcePaths );
     }
 
     /**
@@ -59,31 +44,4 @@ public class PackageListModuleResolver
         // TODO Auto-generated method stub
         return null;
     }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String findResource( String path )
-    {
-        Validate.notNull( path, "Path can't be NULL" );
-        for ( String resourcePath : resourcePaths )
-        {
-            String fullPath;
-            if ( path.startsWith( "/" ) )
-            {
-                fullPath = resourcePath + path;
-            }
-            else
-            {
-                fullPath = resourcePath + "/" + path;
-            }
-            if ( classLoader.getResource( fullPath ) != null )
-            {
-                return fullPath;
-            }
-        }
-        return null;
-    }
-
 }

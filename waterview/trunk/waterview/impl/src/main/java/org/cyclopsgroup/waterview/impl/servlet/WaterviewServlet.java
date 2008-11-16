@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.waterview.impl.WebContextProcessor;
+import org.cyclopsgroup.waterview.impl.assembly.DefaultWebContextProcessor;
 
 /**
  * Main servlet for waterview
@@ -22,7 +24,7 @@ public class WaterviewServlet
 
     private static final long serialVersionUID = 1L;
 
-    private final DefaultWebProcessor processor = new DefaultWebProcessor();
+    private WebContextProcessor processor;
 
     /**
      * @inheritDoc
@@ -57,7 +59,6 @@ public class WaterviewServlet
         throws IOException
     {
         RootWebContext context = new RootWebContext( req, resp );
-        LOG.info( "request is " + req.getPathInfo() );
         processor.process( context );
     }
 
@@ -68,7 +69,9 @@ public class WaterviewServlet
     public void init()
         throws ServletException
     {
+        String templatePath = getServletContext().getRealPath( "templates" );
+        LOG.info( "Template root directory is " + templatePath );
+        processor = new DefaultWebContextProcessor( templatePath );
         LOG.info( "Servlet is initialized" );
     }
-
 }

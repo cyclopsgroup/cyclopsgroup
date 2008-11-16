@@ -42,10 +42,10 @@ public class ExtensionBasedRenderer
             if ( template.endsWith( "." + entry.getKey() ) )
             {
                 entry.getValue().render( context, template, output );
-                break;
+                return;
             }
         }
-        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions "
-            + rendererMap.keySet() );
+        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions " +
+            rendererMap.keySet() );
     }
 }

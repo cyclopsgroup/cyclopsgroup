@@ -9,6 +9,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>waterview</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.vm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>waterview</servlet-name>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 </web-app>
