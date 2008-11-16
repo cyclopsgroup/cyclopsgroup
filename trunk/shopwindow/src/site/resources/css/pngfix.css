@@ -1,4 +1,0 @@
-img {
-    /** Stupid patch only because MSIE doesn't support PNG images well */
-    behavior: url('http://www.cyclopsgroup.com/pngbehavior.htc');
-}
