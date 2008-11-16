@@ -3,10 +3,13 @@ package org.cyclopsgroup.waterview.impl.valve;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.waterview.Page;
 import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.render.RuntimePage;
 import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
@@ -25,24 +28,37 @@ public class RenderPageValve
 {
     private static final Log LOG = LogFactory.getLog( RenderPageValve.class );
 
+    private final String defaultLayout;
+
     private final ModuleResolver moduleResolver;
 
     private final Renderer renderer;
 
-    private final String defaultTemplate;
+    private final boolean useLayout;
+
+    public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer )
+    {
+        this( moduleResolver, renderer, false, null );
+    }
 
     /**
      * @param moduleResolver Module resolver
      * @param renderer Template renderer
-     * @param defaultTemplate Default template to render
+     * @param defaultLayout Default template to render
      */
-    public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, String defaultTemplate )
+    public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, boolean useLayout, String defaultLayout )
     {
         Validate.notNull( moduleResolver, "Module resolver can't be NULL" );
         Validate.notNull( renderer, "Renderer can't be NULL" );
         this.moduleResolver = moduleResolver;
         this.renderer = renderer;
-        this.defaultTemplate = defaultTemplate;
+        this.useLayout = useLayout;
+        this.defaultLayout = defaultLayout;
+    }
+
+    public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, String defaultLayout )
+    {
+        this( moduleResolver, renderer, true, defaultLayout );
     }
 
     /**
@@ -69,14 +85,40 @@ public class RenderPageValve
         {
             LOG.info( "These operations are ignored:" + operations.values() );
         }
-        wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, moduleResolver.findModule( page ) ) );
+
+        WebModule pageModule = moduleResolver.findModule( page );
+        String templatePath;
+        if ( useLayout )
+        {
+            String pageSpecificLayout = null;
+            if ( pageModule != null )
+            {
+                Page pageAnnotation = pageModule.getClass().getAnnotation( Page.class );
+                if ( pageAnnotation != null )
+                {
+                    pageSpecificLayout = pageAnnotation.layout();
+                }
+            }
+            templatePath = StringUtils.isEmpty( pageSpecificLayout ) ? defaultLayout : pageSpecificLayout;
+        }
+        else
+        {
+            templatePath = page;
+        }
+        if ( LOG.isDebugEnabled() )
+        {
+            LOG.debug( "Rending template " + templatePath + " for page " + page );
+        }
+
+        wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, pageModule ) );
         wc.setVariable( "request", wc.getServletRequest() );
         wc.setVariable( "response", wc.getServletResponse() );
         RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
         PrintWriter output = wc.getServletResponse().getWriter();
+
         try
         {
-            r.render( defaultTemplate );
+            r.render( templatePath );
         }
         finally
         {

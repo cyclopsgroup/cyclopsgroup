@@ -3,6 +3,7 @@ package org.cyclopsgroup.waterview.impl.velocity;
 import java.io.InputStream;
 
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
@@ -34,6 +35,10 @@ public class DeepClassPathResourceLoader
     {
         super.init( configuration );
         pathPrefix = configuration.getString( "prefix" );
+        if ( StringUtils.isEmpty( pathPrefix ) )
+        {
+            throw new IllegalArgumentException( "prefix property can't be empty" );
+        }
         log.info( "Velocity resource loader path prefix is set to " + pathPrefix );
     }
 }
