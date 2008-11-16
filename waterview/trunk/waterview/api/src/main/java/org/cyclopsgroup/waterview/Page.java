@@ -18,6 +18,11 @@ public @interface Page
     String[] keywords() default {};
 
     /**
+     * @return Render page with specified layout
+     */
+    String layout() default "";
+
+    /**
      * @return Path this web page is mapped to
      */
     String path();
