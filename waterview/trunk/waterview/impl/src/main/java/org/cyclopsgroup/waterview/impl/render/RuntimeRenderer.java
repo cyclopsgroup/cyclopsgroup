@@ -12,6 +12,11 @@ import org.cyclopsgroup.waterview.ipa.Renderer;
  */
 public class RuntimeRenderer
 {
+    /**
+     * Name in context
+     */
+    public static final String NAME = "renderer";
+
     private final WebContext context;
 
     private final Renderer renderer;
@@ -38,6 +43,6 @@ public class RuntimeRenderer
         WebModule module = resolver.findModule( name );
         WebContext childContext = new ChildWebContext( context );
         module.beforeRender( childContext );
-        childContext.setVariable( "renderer", new RuntimeRenderer( renderer, resolver, childContext ) );
+        childContext.setVariable( NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
     }
 }

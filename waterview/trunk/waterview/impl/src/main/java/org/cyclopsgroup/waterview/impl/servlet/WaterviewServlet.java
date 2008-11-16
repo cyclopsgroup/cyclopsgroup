@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * Main servlet for waterview
  * 
@@ -15,7 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 public class WaterviewServlet
     extends HttpServlet
 {
+    private static final Log LOG = LogFactory.getLog( WaterviewServlet.class );
+
     private static final long serialVersionUID = 1L;
+
+    private final DefaultWebProcessor processor = new DefaultWebProcessor();
 
     /**
      * @inheritDoc
@@ -23,8 +30,7 @@ public class WaterviewServlet
     @Override
     public void destroy()
     {
-        // TODO Auto-generated method stub
-        super.destroy();
+        LOG.info( "Servlet is destroyed" );
     }
 
     /**
@@ -34,7 +40,7 @@ public class WaterviewServlet
     protected void doGet( HttpServletRequest req, HttpServletResponse resp )
         throws ServletException, IOException
     {
-        RootWebContext rootContext = new RootWebContext( req, resp );
+        doProcess( req, resp );
     }
 
     /**
@@ -44,8 +50,15 @@ public class WaterviewServlet
     protected void doPost( HttpServletRequest req, HttpServletResponse resp )
         throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        super.doPost( req, resp );
+        doProcess( req, resp );
+    }
+
+    private void doProcess( HttpServletRequest req, HttpServletResponse resp )
+        throws IOException
+    {
+        RootWebContext context = new RootWebContext( req, resp );
+        LOG.info( "request is " + req.getPathInfo() );
+        processor.process( context );
     }
 
     /**
@@ -55,8 +68,7 @@ public class WaterviewServlet
     public void init()
         throws ServletException
     {
-        // TODO Auto-generated method stub
-        super.init();
+        LOG.info( "Servlet is initialized" );
     }
 
 }

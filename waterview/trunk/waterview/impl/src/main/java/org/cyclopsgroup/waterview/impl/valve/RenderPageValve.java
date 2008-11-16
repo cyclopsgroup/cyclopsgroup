@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
+import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.annotation.Layout;
 import org.cyclopsgroup.waterview.annotation.Page;
@@ -12,6 +13,7 @@ import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
 import org.cyclopsgroup.waterview.ipa.Renderer;
 import org.cyclopsgroup.waterview.ipa.Valve;
 import org.cyclopsgroup.waterview.ipa.ValveContext;
+import org.mortbay.log.Log;
 
 /**
  * Valve to render page
@@ -44,7 +46,14 @@ public class RenderPageValve
     public void invoke( ValveContext context )
         throws IOException
     {
-        WebModule pageModule = moduleResolver.findModule( "name" );
+        WebContext wc = context.getWebContext();
+        Operations operations = (Operations) wc.getVariable( Operations.NAME );
+        String page = operations.take();
+        if ( Log.isDebugEnabled() )
+        {
+            Log.debug( "Page is determined: " + page );
+        }
+        WebModule pageModule = moduleResolver.findModule( page );
         String layoutName = "";
         if ( pageModule != null )
         {
@@ -58,8 +67,7 @@ public class RenderPageValve
         WebModule layout = moduleResolver.findModule( layoutName );
         Layout layoutAnnotation = layout.getClass().getAnnotation( Layout.class );
         layout.beforeRender( context.getWebContext() );
-        context.getWebContext().setVariable( "renderer",
-                                             new RuntimeRenderer( renderer, moduleResolver, context.getWebContext() ) );
+        wc.setVariable( RuntimeRenderer.NAME, new RuntimeRenderer( renderer, moduleResolver, context.getWebContext() ) );
         renderer.render( context.getWebContext(), layoutAnnotation.template(),
                          context.getWebContext().getServletResponse().getWriter() );
     }

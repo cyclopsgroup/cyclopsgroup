@@ -4,15 +4,11 @@
     <servlet>
         <servlet-name>waterview</servlet-name>
         <servlet-class>
-            com.cyclopsgroup.waterview.impl.servlet.DedicatedSpringWaterviewServlet</servlet-class>
-        <init-param>
-            <param-name>spring.config</param-name>
-            <param-value>WEB-INF/spring-beans.xml</param-value>
-        </init-param>
+            org.cyclopsgroup.waterview.impl.servlet.WaterviewServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>waterview</servlet-name>
-        <url-pattern>/portal/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>
