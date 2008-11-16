@@ -34,6 +34,7 @@ public class RenderPageValve
     /**
      * @param moduleResolver Module resolver
      * @param renderer Template renderer
+     * @param defaultTemplate Default template to render
      */
     public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, String defaultTemplate )
     {

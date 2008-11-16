@@ -6,6 +6,11 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+/**
+ * ClassPath ResourceLoader that loads resource from deep java package
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class DeepClassPathResourceLoader
     extends ClasspathResourceLoader
 {

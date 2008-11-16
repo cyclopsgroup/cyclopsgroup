@@ -68,6 +68,10 @@ public class RuntimeRenderer
         }
     }
 
+    /**
+     * @param page Page POJO to render
+     * @throws IOException
+     */
     public void render( RuntimePage page )
         throws IOException
     {

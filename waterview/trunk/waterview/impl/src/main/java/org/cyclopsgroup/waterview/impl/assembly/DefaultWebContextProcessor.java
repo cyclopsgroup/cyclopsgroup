@@ -20,11 +20,19 @@ import org.cyclopsgroup.waterview.impl.velocity.VelocityRenderer;
 import org.cyclopsgroup.waterview.ipa.Renderer;
 import org.cyclopsgroup.waterview.ipa.Valve;
 
+/**
+ * A default hard-coded processor implementation
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class DefaultWebContextProcessor
     implements WebContextProcessor
 {
     private final Pipeline pipeline;
 
+    /**
+     * @param templateRoot Path of templates
+     */
     public DefaultWebContextProcessor( String templateRoot )
     {
         List<String> packageNames = Arrays.asList( "org.cyclopsgroup.waterview.impl.web" );
@@ -41,6 +49,10 @@ public class DefaultWebContextProcessor
         pipeline = new Pipeline( valves );
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void process( WebContext context )
         throws IOException
     {

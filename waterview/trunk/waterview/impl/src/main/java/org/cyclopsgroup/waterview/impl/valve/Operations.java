@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Operations
+/**
+ * A POJO to store operations to proceed
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
+class Operations
 {
-    public static final String NAME = "operations";
+    static final String NAME = Operations.class.getName();
 
     private final List<String> unmodifiedValues;
 

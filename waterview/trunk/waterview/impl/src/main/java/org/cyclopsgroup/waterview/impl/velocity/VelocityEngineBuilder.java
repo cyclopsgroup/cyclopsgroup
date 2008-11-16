@@ -7,18 +7,30 @@ import org.apache.commons.lang.Validate;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 
+/**
+ * Class to configure and build {@link VelocityEngine}
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class VelocityEngineBuilder
 {
     private final ExtendedProperties props;
 
     private int sequence = 0;
 
+    /**
+     * Default constructor
+     */
     public VelocityEngineBuilder()
     {
         props = new ExtendedProperties();
         props.setProperty( "input.encoding", "UTF-8" );
     }
 
+    /**
+     * @param prefix Resource path prefix
+     * @return Builder itself
+     */
     public VelocityEngineBuilder addDeepClassPathResourceLoader( String prefix )
     {
         Validate.notNull( prefix, "Prefix can't be NULL" );
@@ -36,6 +48,10 @@ public class VelocityEngineBuilder
         return this;
     }
 
+    /**
+     * @param prefixNames A list of prefix paths
+     * @return Builder itself
+     */
     public VelocityEngineBuilder addDeepClassPathResourceLoaders( List<String> prefixNames )
     {
         for ( String prefix : prefixNames )
@@ -45,6 +61,10 @@ public class VelocityEngineBuilder
         return this;
     }
 
+    /**
+     * @param path Template path in filesystem
+     * @return Builder itself
+     */
     public VelocityEngineBuilder addFileSystemResourceLoader( String path )
     {
         sequence++;
@@ -55,12 +75,20 @@ public class VelocityEngineBuilder
         return this;
     }
 
+    /**
+     * @param name Name of property to add
+     * @param value Value of property to add
+     * @return Builder itself
+     */
     public VelocityEngineBuilder addProperty( String name, String value )
     {
         props.addProperty( name, value );
         return this;
     }
 
+    /**
+     * @return New {@link VelocityEngine} instance
+     */
     public VelocityEngine newEngine()
     {
         VelocityEngine engine = new VelocityEngine();
@@ -81,6 +109,11 @@ public class VelocityEngineBuilder
         return engine;
     }
 
+    /**
+     * @param name Name of property to set
+     * @param value Value of property to set
+     * @return Builder itself
+     */
     public VelocityEngineBuilder setProperty( String name, String value )
     {
         props.setProperty( name, value );

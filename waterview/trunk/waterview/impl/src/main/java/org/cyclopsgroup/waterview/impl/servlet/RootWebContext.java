@@ -75,6 +75,9 @@ public class RootWebContext
         return variables.get( name );
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Set<String> getVariableNames()
     {
