@@ -30,8 +30,6 @@ public class PackageListModuleResolver
     public PackageListModuleResolver( List<String> packageNames, ClassLoader classLoader )
     {
         Validate.notNull( classLoader, "Class loader can't be NULL" );
-        Validate.notNull( packageNames, "Package names can't be NULL" );
-
         this.classLoader = classLoader;
     }
 

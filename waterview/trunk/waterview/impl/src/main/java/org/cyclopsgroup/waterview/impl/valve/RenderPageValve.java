@@ -36,6 +36,12 @@ public class RenderPageValve
 
     private final boolean useLayout;
 
+    /**
+     * Constructor without layout
+     * 
+     * @param moduleResolver Module resolver
+     * @param renderer Renderer to render page
+     */
     public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer )
     {
         this( moduleResolver, renderer, false, null );
@@ -44,6 +50,7 @@ public class RenderPageValve
     /**
      * @param moduleResolver Module resolver
      * @param renderer Template renderer
+     * @param useLayout True if use layout
      * @param defaultLayout Default template to render
      */
     public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, boolean useLayout, String defaultLayout )
@@ -56,6 +63,13 @@ public class RenderPageValve
         this.defaultLayout = defaultLayout;
     }
 
+    /**
+     * Constructor with layout
+     * 
+     * @param moduleResolver Module resolver
+     * @param renderer Renderer to render page
+     * @param defaultLayout Default layout path
+     */
     public RenderPageValve( ModuleResolver moduleResolver, Renderer renderer, String defaultLayout )
     {
         this( moduleResolver, renderer, true, defaultLayout );

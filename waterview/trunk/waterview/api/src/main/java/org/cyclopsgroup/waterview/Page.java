@@ -23,11 +23,6 @@ public @interface Page
     String layout() default "";
 
     /**
-     * @return Path this web page is mapped to
-     */
-    String path();
-
-    /**
      * @return Title of page
      */
     String title() default "";

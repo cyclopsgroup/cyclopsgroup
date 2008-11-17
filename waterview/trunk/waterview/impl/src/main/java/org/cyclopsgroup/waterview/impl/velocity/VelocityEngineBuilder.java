@@ -38,13 +38,7 @@ public class VelocityEngineBuilder
         String loaderId = "loader" + sequence;
         props.addProperty( "resource.loader", loaderId );
         props.addProperty( loaderId + ".resource.loader.class", DeepClassPathResourceLoader.class.getName() );
-
-        String path = prefix.replace( '.', '/' );
-        if ( !path.endsWith( "/" ) )
-        {
-            path += "/";
-        }
-        props.addProperty( loaderId + ".resource.loader.prefix", path );
+        props.addProperty( loaderId + ".resource.loader.prefix", prefix );
         return this;
     }
 

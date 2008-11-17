@@ -1,6 +1,5 @@
 package org.cyclopsgroup.waterview.impl.web;
 
-import org.cyclopsgroup.waterview.View;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.WebModule;
 
@@ -9,7 +8,6 @@ import org.cyclopsgroup.waterview.WebModule;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@View( path = "/_layout_/default_layout.vm" )
 public class DefaultLayout
     implements WebModule
 {

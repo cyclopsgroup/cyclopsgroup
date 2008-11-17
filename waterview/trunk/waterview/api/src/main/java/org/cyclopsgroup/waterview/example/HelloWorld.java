@@ -1,6 +1,5 @@
 package org.cyclopsgroup.waterview.example;
 
-import org.cyclopsgroup.waterview.Page;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.WebModule;
 
@@ -9,7 +8,6 @@ import org.cyclopsgroup.waterview.WebModule;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Page( path = "helloworld" )
 public class HelloWorld
     implements WebModule
 {

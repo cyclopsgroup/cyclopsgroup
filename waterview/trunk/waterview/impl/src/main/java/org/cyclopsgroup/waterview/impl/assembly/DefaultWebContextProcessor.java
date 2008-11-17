@@ -35,12 +35,11 @@ public class DefaultWebContextProcessor
      */
     public DefaultWebContextProcessor( String templateRoot )
     {
-        List<String> packageNames = Arrays.asList( "org.cyclopsgroup.waterview.impl.web" );
-        ModuleResolver moduleResolver = new PackageListModuleResolver( packageNames );
+        ModuleResolver moduleResolver = new PackageListModuleResolver( null );
         Map<String, Renderer> rendererMap = new HashMap<String, Renderer>();
         VelocityEngineBuilder veb = new VelocityEngineBuilder();
         veb.addFileSystemResourceLoader( templateRoot );
-        veb.addDeepClassPathResourceLoaders( packageNames );
+        veb.addDeepClassPathResourceLoaders( Arrays.asList( "waterview/template/" ) );
         rendererMap.put( "vm", new VelocityRenderer( veb.newEngine() ) );
         Renderer renderer = new ExtensionBasedRenderer( rendererMap );
         List<Valve> valves = new ArrayList<Valve>();

@@ -6,8 +6,10 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.lang.Validate;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.ipa.Renderer;
+import org.cyclopsgroup.waterview.ipa.TemplateNotFoundException;
 
 /**
  * Velocity implementation of renderer
@@ -51,6 +53,10 @@ public class VelocityRenderer
         try
         {
             velocityEngine.mergeTemplate( template, encoding, new VelocityContextAdapter( context ), output );
+        }
+        catch ( ResourceNotFoundException e )
+        {
+            throw new TemplateNotFoundException( "Template not found", e, template );
         }
         catch ( IOException e )
         {

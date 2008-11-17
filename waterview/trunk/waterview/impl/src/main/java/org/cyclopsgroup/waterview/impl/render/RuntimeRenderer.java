@@ -56,6 +56,7 @@ public class RuntimeRenderer
         PrintWriter output = context.getServletResponse().getWriter();
         try
         {
+            output.flush();
             renderer.render( childContext, path, output );
         }
         catch ( Exception e )
