@@ -71,8 +71,8 @@
         type="text/javascript">
     </script>
     <script type="text/javascript">
-        //<![CDATA[
-        #parse("include/geo_js.vm")
-        //]]>
+        <![CDATA[
+            #parse("include/geo_js.vm")
+        ]]>
     </script>
 </div>

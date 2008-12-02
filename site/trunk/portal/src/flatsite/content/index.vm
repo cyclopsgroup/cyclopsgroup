@@ -20,9 +20,8 @@
     </p>
     <table width="100%" cellspacing="10">
         <tr>
-            <td valign="top">
-                <div class="roundBoxDiv"
-                    style="background-color: #729FCF; height:292px">
+            <td>
+                <div class="roundBoxDiv" style="background-color: #729FCF; height:292px">
                     <p>
                         <a href="projects/jmxterm">
                             <img
@@ -32,8 +31,7 @@
                     </p>
                     <p style="color: white">
 
-                        <a href="projects/jmxterm"
-                            style="color: white">
+                        <a href="projects/jmxterm" style="color: white">
                             jmxterm
                         </a>
                         is a command line based interactive JMX client
@@ -44,20 +42,13 @@
                     </p>
                     <p style="color: white">
                         More details:
-                        <a href="projects/jmxterm"
-                            style="color: white">
+                        <a href="projects/jmxterm" style="color: white">
                             http://cyclopsgroup.org/projects/jmxterm
                         </a>
                         .
                     </p>
                 </div>
             </td>
-            <td>
-                <script type="text/javascript" language="javascript"
-                    src="http://s3.polldaddy.com/p/786149.js">
-                </script>
-            </td>
         </tr>
     </table>
-
 </div>

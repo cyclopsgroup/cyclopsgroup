@@ -2,7 +2,8 @@
     <h2>Major projects</h2>
     <p>
         There are(or used to be) many projects under CyclopsGroup.org
-        but many of them merged into others or turned out to be
+        but
+        many of them merged into others or turned out to be
         ridiculous.
     </p>
     <table class="bodyTable" width="100%">
@@ -11,7 +12,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Status</th>
-                <th>Conclusion</th>
+                <th>Result</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,7 @@
                     A command line version of jconsole.
                 </td>
                 <td>1.0 alpha is released</td>
-                <td>Usable</td>
+                <td>OK</td>
             </tr>
             <tr class="a">
                 <td>
@@ -52,7 +53,7 @@
                     The project ceased after semester was over.
                 </td>
                 <td>1.0 has been released</td>
-                <td>Successful</td>
+                <td>OK</td>
             </tr>
             <tr class="a">
                 <td>
@@ -99,6 +100,14 @@
                     popular.
                 </td>
                 <td>Ridiculous idea</td>
+            </tr>
+            <tr class="a">
+                <td>
+                    <a href="projects/jcli">jcli</a>
+                </td>
+                <td>A small command line argument parsing framework
+                    with annotations</td>
+                <td>OK</td>
             </tr>
         </tbody>
     </table>
