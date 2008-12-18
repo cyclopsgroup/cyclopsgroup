@@ -1,6 +1,5 @@
 package org.cyclopsgroup.waterview.impl.module;
 
-import org.cyclopsgroup.waterview.WebModule;
 
 /**
  * Interface to resolve module

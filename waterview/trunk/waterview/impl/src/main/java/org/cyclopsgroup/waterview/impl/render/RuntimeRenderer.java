@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
+import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.ipa.Renderer;
 
 /**
@@ -49,7 +49,7 @@ public class RuntimeRenderer
         childContext.setVariable( SELF_NAME, new RuntimeView( path, module ) );
         if ( module != null )
         {
-            module.beforeRender( childContext );
+            module.render( childContext );
         }
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
         childContext.setVariable( WebContext.CONTEXT_NAME, context );

@@ -1,8 +1,8 @@
 package org.cyclopsgroup.waterview.impl.valve;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.WebModule;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
+import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.ipa.Valve;
 import org.cyclopsgroup.waterview.ipa.ValveContext;
 
@@ -32,6 +32,6 @@ public class ExecuteActionValve
     public void invoke( ValveContext context )
     {
         WebModule action = moduleResolver.findModule( "name" );
-        action.beforeRender( context.getWebContext() );
+        action.render( context.getWebContext() );
     }
 }

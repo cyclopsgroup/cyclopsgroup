@@ -1,7 +1,7 @@
 package org.cyclopsgroup.waterview.impl.render;
 
 import org.cyclopsgroup.waterview.Page;
-import org.cyclopsgroup.waterview.WebModule;
+import org.cyclopsgroup.waterview.impl.module.WebModule;
 
 /**
  * Page pojo used at runtime for rendering

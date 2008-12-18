@@ -1,20 +1,20 @@
 package org.cyclopsgroup.waterview.example;
 
+import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.WebModule;
 
 /**
  * A hello world page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
+@Module( path = "/helloworld" )
 public class HelloWorld
-    implements WebModule
 {
     /**
-     * @inheritDoc
+     * @param context Web context
      */
-    public void beforeRender( WebContext context )
+    public void render( WebContext context )
     {
         context.setVariable( "myName", "Jiaqi" );
     }

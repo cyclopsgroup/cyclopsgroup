@@ -1,6 +1,6 @@
 package org.cyclopsgroup.waterview.impl.render;
 
-import org.cyclopsgroup.waterview.WebModule;
+import org.cyclopsgroup.waterview.impl.module.WebModule;
 
 /**
  * Runtime view POJO used for view rendering

@@ -3,7 +3,6 @@ package org.cyclopsgroup.waterview.impl.module;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.WebModule;
 
 /**
  * Module resolver based on a list of packages
