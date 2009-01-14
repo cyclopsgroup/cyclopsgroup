@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview.ipa;
+package org.cyclopsgroup.waterview.spi;
 
 import java.io.IOException;
 import java.io.Writer;

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.ipa.Renderer;
+import org.cyclopsgroup.waterview.spi.Renderer;
 
 /**
  * Renderer based on extension

@@ -10,8 +10,8 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.ipa.Valve;
-import org.cyclopsgroup.waterview.ipa.ValveContext;
+import org.cyclopsgroup.waterview.spi.Valve;
+import org.cyclopsgroup.waterview.spi.ValveContext;
 
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>

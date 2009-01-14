@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
-import org.cyclopsgroup.waterview.ipa.Renderer;
+import org.cyclopsgroup.waterview.spi.Renderer;
 
 /**
  * Renderer used in pages

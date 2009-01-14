@@ -11,16 +11,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.waterview.impl.WebContextProcessor;
 import org.cyclopsgroup.waterview.impl.assembly.DefaultWebContextProcessor;
+import org.cyclopsgroup.waterview.spi.ComponentResolver;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * Main servlet for waterview
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class WaterviewServlet
+public class SpringWaterviewServlet
     extends HttpServlet
 {
-    private static final Log LOG = LogFactory.getLog( WaterviewServlet.class );
+    private static final Log LOG = LogFactory.getLog( SpringWaterviewServlet.class );
 
     private static final long serialVersionUID = 1L;
 
@@ -71,7 +73,9 @@ public class WaterviewServlet
     {
         String templatePath = getServletContext().getRealPath( "templates" );
         LOG.info( "Template root directory is " + templatePath );
-        processor = new DefaultWebContextProcessor( templatePath );
+        ComponentResolver componentResolver =
+            new SpringComponentResolver( WebApplicationContextUtils.getWebApplicationContext( getServletContext() ) );
+        processor = new DefaultWebContextProcessor( templatePath, componentResolver );
         LOG.info( "Servlet is initialized" );
     }
 }

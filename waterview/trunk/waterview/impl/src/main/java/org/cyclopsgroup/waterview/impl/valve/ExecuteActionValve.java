@@ -3,8 +3,8 @@ package org.cyclopsgroup.waterview.impl.valve;
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
-import org.cyclopsgroup.waterview.ipa.Valve;
-import org.cyclopsgroup.waterview.ipa.ValveContext;
+import org.cyclopsgroup.waterview.spi.Valve;
+import org.cyclopsgroup.waterview.spi.ValveContext;
 
 /**
  * Valve that execute an action

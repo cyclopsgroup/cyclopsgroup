@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.ipa.Valve;
-import org.cyclopsgroup.waterview.ipa.ValveContext;
+import org.cyclopsgroup.waterview.spi.Valve;
+import org.cyclopsgroup.waterview.spi.ValveContext;
 
 /**
  * Default implementation of valve context

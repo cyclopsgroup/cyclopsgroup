@@ -7,18 +7,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.WebContextProcessor;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
-import org.cyclopsgroup.waterview.impl.module.PackageListModuleResolver;
 import org.cyclopsgroup.waterview.impl.pipeline.Pipeline;
 import org.cyclopsgroup.waterview.impl.render.ExtensionBasedRenderer;
 import org.cyclopsgroup.waterview.impl.valve.ParseRequestPathValve;
 import org.cyclopsgroup.waterview.impl.valve.RenderPageValve;
 import org.cyclopsgroup.waterview.impl.velocity.VelocityEngineBuilder;
 import org.cyclopsgroup.waterview.impl.velocity.VelocityRenderer;
-import org.cyclopsgroup.waterview.ipa.Renderer;
-import org.cyclopsgroup.waterview.ipa.Valve;
+import org.cyclopsgroup.waterview.spi.ComponentResolver;
+import org.cyclopsgroup.waterview.spi.Renderer;
+import org.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * A default hard-coded processor implementation
@@ -33,9 +34,10 @@ public class DefaultWebContextProcessor
     /**
      * @param templateRoot Path of templates
      */
-    public DefaultWebContextProcessor( String templateRoot )
+    public DefaultWebContextProcessor( String templateRoot, ComponentResolver resolver )
     {
-        ModuleResolver moduleResolver = new PackageListModuleResolver( null );
+        Validate.notNull( resolver, "Component resolver can't be NULL" );
+        ModuleResolver moduleResolver = new ModuleResolver( resolver );
         Map<String, Renderer> rendererMap = new HashMap<String, Renderer>();
         VelocityEngineBuilder veb = new VelocityEngineBuilder();
         veb.addFileSystemResourceLoader( templateRoot );

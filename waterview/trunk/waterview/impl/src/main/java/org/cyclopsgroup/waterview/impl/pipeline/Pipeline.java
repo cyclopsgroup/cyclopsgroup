@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.ipa.Valve;
+import org.cyclopsgroup.waterview.spi.Valve;
 
 /**
  * Pipeline that executes valves

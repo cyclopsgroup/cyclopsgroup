@@ -1,4 +1,4 @@
 /**
  * Implementation provider API
  */
-package org.cyclopsgroup.waterview.ipa;
+package org.cyclopsgroup.waterview.spi;

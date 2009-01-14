@@ -13,9 +13,9 @@ import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.impl.render.RuntimePage;
 import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
-import org.cyclopsgroup.waterview.ipa.Renderer;
-import org.cyclopsgroup.waterview.ipa.Valve;
-import org.cyclopsgroup.waterview.ipa.ValveContext;
+import org.cyclopsgroup.waterview.spi.Renderer;
+import org.cyclopsgroup.waterview.spi.Valve;
+import org.cyclopsgroup.waterview.spi.ValveContext;
 
 /**
  * Valve to render page
