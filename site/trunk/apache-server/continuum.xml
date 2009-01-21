@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/continuum">
+    <Resource name="jdbc/users" auth="Container" type="javax.sql.DataSource"
+        username="dev" password="dev" driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/continuum?autoReconnect=true" />
+    <Resource name="jdbc/continuum" auth="Container" type="javax.sql.DataSource"
+        username="dev" password="dev" driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/continuum?autoReconnect=true" />
+    <Resource name="mail/Session" auth="Container" type="javax.mail.Session"
+        mail.smtp.host="mail.broadstripe.net" />
+</Context>

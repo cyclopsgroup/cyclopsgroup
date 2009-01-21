@@ -1,0 +1,5 @@
+@import url('./wiki-document-base.css') all;
+
+@import url('./wiki-display-base.css') screen;
+
+@import url('./wiki-display.css') screen;

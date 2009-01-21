@@ -1,0 +1,119 @@
+body
+{
+    color: #666666;
+    background: #CCCCCC;
+}
+
+a:link, a:visited
+{
+    color: #e86c22;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    color: #999999;
+}
+
+div#container-wrap
+{
+    background: url('../images/body-bg.png') repeat-y top center;
+    text-align: center;
+}
+
+div#container
+{
+    width: 980px;
+    margin: 0px auto;
+    text-align: left;
+    background: #192c4e;
+}
+
+div#header
+{
+    background: url('../images/header-bg.png') repeat-x;
+    color: white;
+    border-width: 0px 0px 10px 0px;
+    border-color: #33589a;
+    border-style: solid;
+}
+
+div#header a:link, div#header a:visited
+{
+    color: #a1b7cf;
+}
+
+div#header a:hover
+{
+    color: white;
+}
+div#header h1
+{
+    padding: 120px 180px 0px 0px;
+    background: url('../images/cyclopsgroup-logo.png') no-repeat 30px 30px;
+}
+
+div#header h1 span, div#header h2 span
+{
+    display: none;
+}
+
+div#top-bar, div#account-options
+{
+    background: #33589a;
+}
+
+div#top-bar a
+{
+    padding: 5px 15px 5px 15px;
+    font-weight: bold;
+}
+
+div#top-bar a:hover
+{
+    background: transparent;
+}
+
+div#search-top-box input.button
+{
+    background-color: #3366cc;
+    border: #99ccff 2px solid;
+    font-weight: bold;
+    color: white;
+}
+
+div#content-wrap
+{
+    background: white url('../images/content-bg.png') no-repeat top center;
+    margin: 0px 20px 20px 20px;
+    padding: 80px 10px 10px 10px;
+}
+
+div#page-title
+{
+    color: white;
+    border-style: none;
+    margin-bottom: 50px;
+}
+
+div#side-bar
+{
+    margin-top: 50px;
+    border-width: 0px 1px 0px 0px;
+    border-style: dashed;
+    border-color: #999999;
+}
+
+div#footer, div#license-area
+{
+    color: white;
+}
+div#footer a, div#license-area a
+{
+    color: #a1b7cf;
+}
+
+div#license-area
+{
+    padding-bottom: 60px;
+}
+
