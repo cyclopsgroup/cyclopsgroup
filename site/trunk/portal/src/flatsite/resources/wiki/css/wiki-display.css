@@ -95,6 +95,13 @@ div#page-title
     margin-bottom: 50px;
 }
 
+div#page-content h1
+{
+    border-width: 0px 0px 1px 0px;
+    border-style: dashed;
+    border-color: #999;
+}
+
 div#side-bar
 {
     margin-top: 50px;
