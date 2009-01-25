@@ -2,7 +2,7 @@
     <table width="100%" class="content" cellspacing="0">
         <tr>
             <td />
-            <td colspan="2" style="font-size: medium">
+            <td colspan="2">
                 <h2 class="underlined">What is CyclopsGroup.org</h2>
                 <p>
                     CyclopsGroup.org is an open source software
@@ -24,8 +24,8 @@
                 <p>
                     <a href="http://wiki.cyclopsgroup.org">
                         <b>
-                            <u>&gt;&gt;&gt; Find out more details in our WIKI
-                                site ...</u>
+                            &gt;&gt;&gt; Find out more details in our WIKI
+                                site &lt;&lt;&lt;
                         </b>
                     </a>
                 </p>
@@ -46,23 +46,14 @@
             </td>
         </tr>
         <tr>
-            <td width="33%" class="reverse">
+            <td style="width: 33%" class="reverse">
                 <h3>Documentation</h3>
                 <p>
                     <a href="http://wiki.cyclopsgroup.org">Find out details in our WIKI site:
                         http://wiki.cyclopsgroup.org</a>
                 </p>
-                <h3>Google Search</h3>
-                <form action="http://www.google.com/search">
-                    <p>
-                        <input type="hidden" name="sitesearch"
-                            value="cyclopsgroup.org" />
-                        <input type="text" name="q" size="18" />
-                        <input type="submit" value="Go" />
-                    </p>
-                </form>
             </td>
-            <td width="33%" class="reverse">
+            <td style="width: 33%" class="reverse">
                 <h3>Support</h3>
                 <p>
                     Bugs and questions are tracked in launchpad.net.
@@ -76,8 +67,8 @@
                     </a>
                 </p>
             </td>
-            <td width="34%" class="reverse">
-                <h3>Links</h3>
+            <td style="width: 34%" class="reverse">
+                <h3>Contents</h3>
                 <ul>
                     <li>
                         <a href="http://wiki.cyclopsgroup.org">Wiki site with more details</a>
@@ -86,6 +77,40 @@
                         <a href="http://wiki.cyclopsgroup.org/discussion">Join discussion in Wiki site</a>
                     </li>
                     <li>
+                        <a href="http://wiki.cyclopsgroup.org/projects">All projects</a>
+                    </li>
+                    <li><a href="http://demo.cyclopsgroup.org/courselist">Demo site of project courselist</a></li>
+                    <li><a href="http://code.cyclopsgroup.org/continuum/">Continuum build dashboard</a></li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="reverse">
+                            <h3>Google Search</h3>
+                <form action="http://www.google.com/search">
+                    <p>
+                        <input type="hidden" name="sitesearch"
+                            value="cyclopsgroup.org" />
+                        <input type="text" name="q" size="18" />
+                        <input type="submit" value="Go" />
+                    </p>
+                </form>
+            </td>
+            <td class="reverse">
+                <h3>Projects</h3>
+                <ul>
+                    <li>
+                        <a href="projects/jmxterm">Jmxterm command line JMX client</a>
+                    </li>
+                    <li><a href="projects/jcli">Jcli command line parser</a></li>
+                    <li><a href="projects/courselist">Course list course management system</a></li>
+                    <li><a href="projects/waterview">Waterview web application frameworkd</a></li> 
+                </ul>
+            </td>
+            <td class="reverse">
+                <h3>External Links</h3>
+                <ul>
+                    <li>
                         <a
                             href="http://sourceforge.net/projects/cyclops-group">Project home in
                             sourceforge.net
@@ -93,19 +118,12 @@
                     </li>
                     <li>
                         <a
-                            href="http://fisheye3.atlassian.com/browse/cyclops-group">Browse source code directory
-                            </a>
-                    </li>
-                    <li>
-                        <a
                             href="http://sourceforge.net/project/showfiles.php?group_id=91358">All downloads</a>
                     </li>
                     <li>
-                        <a href="projects/jmxterm">Jmxterm open source project
+                        <a
+                            href="http://fisheye3.atlassian.com/browse/cyclops-group">Browse source code directory
                             </a>
-                    </li>
-                    <li>
-                        <a href="http://wiki.cyclopsgroup.org/projects">All projects</a>
                     </li>
                     <li>
                         Meet

@@ -3,6 +3,7 @@
 body {
 	margin: 0px;
 	padding: 0px;
+	color: #999;
 }
 
 h1, h2, h3 {
@@ -11,22 +12,33 @@ h1, h2, h3 {
 }
 
 .underlined {
-	border-width: 0px 0px 2px 0px;
+	border-width: 0px 0px 1px 0px;
 	border-style: dashed;
 	border-color: #ccc;
 }
 
 a {
-	color: #e5690d;
+	color: #666;
+}
+
+a:hover {
+	color: black;
 }
 
 .reverse {
-    background: #0b0803;
-	color: white;
+    background: black;
+}
+
+.reverse a {
+	color: #ccc;
+}
+
+.reverse a:hover {
+    color: white;
 }
 
 .reverse h1, .reverse h2, .reverse h3 {
-	color: #729fcf;
+
 	font-weight: bold;
 }
 
