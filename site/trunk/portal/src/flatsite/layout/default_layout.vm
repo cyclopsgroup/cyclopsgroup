@@ -21,127 +21,31 @@
     <body>
         <div id="documentWrapper">
             <div id="documentContent">
-                <table width="100%" cellspacing="0">
-                    <tbody>
+                <div id="contentHeader">
+                    <table width="100%" id="contentHeaderTable">
                         <tr>
-                            <td colspan="3" id="banner">
-                                <a href="http://www.cyclopsgroup.org"
-                                    id="bannerLeft">
-                                    <img
-                                        src="${basedir}/images/cyclopsgroup_logo.gif"
-                                        alt="CyclopsGroup.org" />
-                                </a>
+                            <td></td>
+                            <td align="right">
+                                <img src="images/cyclopsgroup_logo.png"
+                                    alt="CyclopsGroup.org" />
                             </td>
                         </tr>
+                    </table>
+                </div>
+                <div id="contentBody">
+                    <div id="bodyWrapper">$body</div>
+                </div>
+                <div id="contentFooter" class="reverse">
+                    <table width="100%" id="contentFooterTable">
                         <tr>
-                            <td class="breadcrumbs">
-                                Last Published:
-                                $dateFormat.format($now)
+                            <td align="left">
+                                All rights reserved, 2002 ~ 2009,
+                                Cyclops Group.
+                                <br />
+                                Last published:$dateFormat.format($now)
                             </td>
-                            <td class="breadcrumbs" colspan="2"
-                                align="right">
-                                <a href="index.html">home</a>
-                                |
-                                <a href="projects/jmxterm">jmxterm</a>
-                                |
-                                <a href="projects/jcli">jcli</a>
-                                |
-                                <a href="projects/waterview">waterview</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="bodycolumn" valign="top">
-                                <div id="bodycontent">$body</div>
-                            </td>
-                            <td valign="top">
-                                <![CDATA[
-                                #macro(navlink $link $linkTitle)
-                                    #if($htmlPath==$link)
-                                    <strong>$linkTitle</strong>
-                                    #else
-                                    <a href="$basedir/$link">
-                                        $linkTitle
-                                    </a>
-                                    #end
-                                #end
-                                ]]>
-                                <div id="rightcolumn">
-                                    <div id="navcolumn">
-                                        <h5>Content</h5>
-                                        <ul>
-                                            <li>
-                                                #navlink("index.html" "home")
-                                            </li>
-                                            <li>
-                                                #navlink("news.html" "news")
-                                            </li>
-                                            <li>
-                                                #navlink("projects.html" "projects")
-                                            </li>
-                                            <li>
-                                                #navlink("downloads.html" "downloads")
-                                            </li>
-                                            <li>
-                                                #navlink("people.html" "people")
-                                            </li>
-                                            <li>
-                                                #navlink("about.html" "about")
-                                            </li>
-                                        </ul>
-                                        <h5>Links</h5>
-                                        <ul>
-                                            <li>
-                                                <a
-                                                    href="http://n2.nabble.com/CyclopsGroup.org-f1320264.html">
-                                                    join discussion
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="http://cyclopsgroup.org/projects/jmxterm/download.html">
-                                                    download
-                                                    jmxterm
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="http://demo.cyclopsgroup.org/courselist/">
-                                                    courselist demo
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="members/jiaqi/">jiaqi's
-                                                    home</a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="http://sourceforge.net/projects/cyclops-group">
-                                                    sf.net/cyclops-group
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a
-                                                    href="http://fisheye3.atlassian.com/viewrep/cyclops-group/">
-                                                    browse source
-                                                    code
-                                                </a>
-                                            </li>
-                                            <li>&nbsp;
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="footer">
-                                All rights reserved, 2002 ~
-                                2008,
-                                Cyclops Group. Last published:
-                                $dateFormat.format($now)
-                            </td>
-                            <td class="footer" colspan="2" align="right">
-                                <table border="0">
+                            <td align="right">
+                                <table>
                                     <tr>
                                         <td>
                                             <a href="http://sourceforge.net"
@@ -180,13 +84,8 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="width:50%"></td>
-                            <td style="width:28%"></td>
-                            <td style="width:22%"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     </body>

@@ -1,0 +1,17 @@
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: small;
+}
+
+img {
+    border: 0px none;
+}
+
+table.content td {
+    vertical-align: top;
+    padding: 10px;
+}
+
+a {
+	text-decoration: none;
+}

@@ -11,19 +11,8 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>portal-site</artifactId>
     <packaging>pom</packaging>
-    <name>CyclopsGroup.org Portal Site</name>
+    <name>CyclopsGroup.org</name>
     <version>3.0-SNAPSHOT</version>
-    <scm>
-        <connection>
-            scm:svn:http://svn.sourceforge.net/svnroot/cyclops-group/site/trunk/portal
-        </connection>
-        <developerConnection>
-            scm:svn:https://svn.sourceforge.net/svnroot/cyclops-group/site/trunk/portal
-        </developerConnection>
-        <url>
-            http://fisheye3.atlassian.com/browse/cyclops-group/site
-        </url>
-    </scm>
     <distributionManagement>
         <site>
             <id>cyclopsgroup.server.sourceforge</id>

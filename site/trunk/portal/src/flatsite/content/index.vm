@@ -1,53 +1,120 @@
 <div>
-    <h2>What is CyclopsGroup.org</h2>
-    <p>
-        CyclopsGroup.org is an open source software foundation focusing
-        on abstract, simple and high quality java software.
-    </p>
-    <p>
-        In a spontaneously evolved software world, open source is the
-        power of evolution. We believe that the most innovative solution
-        for real business problem can only be created in free open
-        environment.
-    </p>
-    <h2>jmxterm-1.0 alhpa is released</h2>
-    <p>
-        CyclopsGroup.org released
-        <a href="projects/jmxterm">jmxterm(JMX Terminal)</a>
-        project 1.0 alpha version on Aug 2008. Please check out
-        <a href="projects/jmxterm/release/index.html">release note</a>
-        for more detail.
-    </p>
-    <table width="100%" cellspacing="10">
+    <table width="100%" class="content" cellspacing="0">
         <tr>
-            <td>
-                <div class="roundBoxDiv" style="background-color: #729FCF; height:292px">
+            <td />
+            <td colspan="2" style="font-size: medium">
+                <h2 class="underlined">What is CyclopsGroup.org</h2>
+                <p>
+                    CyclopsGroup.org is an open source software
+                    foundation focusing
+                    on abstract, simple and high
+                    quality java software.
+                </p>
+                <p>
+                    In a spontaneously evolved software world, open
+                    source is the
+                    power of evolution. We believe that
+                    the
+                    most innovative solution
+                    for real business
+                    problem can
+                    only be created in free open
+                    environment.
+                </p>
+                <p>
+                    <a href="http://wiki.cyclopsgroup.org">
+                        <b>
+                            <u>&gt;&gt;&gt; Find out more details in our WIKI
+                                site ...</u>
+                        </b>
+                    </a>
+                </p>
+                <h2 class="underlined">Jmxterm open source project</h2>
+                <p>Jmxterm is an interactive command line based
+                    JMX client. It supports tab auto completion, command
+                    history browsing and integration with scripting
+                    language such as PERL and SHELL.</p>
+                <p>
+                    Jmxterm is an
+                    project under active development. Find
+                    out more details in
+                    <a href="projects/jmxterm">project home page</a>
+                    and
+                    <a href="http://wiki.cyclopsgroup.org/jmxterm">WIKI site</a>
+                    .
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="33%" class="reverse">
+                <h3>Documentation</h3>
+                <p>
+                    <a href="http://wiki.cyclopsgroup.org">Find out details in our WIKI site:
+                        http://wiki.cyclopsgroup.org</a>
+                </p>
+                <h3>Google Search</h3>
+                <form action="http://www.google.com/search">
                     <p>
-                        <a href="projects/jmxterm">
-                            <img
-                                src="http://cyclopsgroup.org/projects/jmxterm/images/logo.png"
-                                border="0" alt="Go to jmxterm project" />
-                        </a>
+                        <input type="hidden" name="sitesearch"
+                            value="cyclopsgroup.org" />
+                        <input type="text" name="q" size="18" />
+                        <input type="submit" value="Go" />
                     </p>
-                    <p style="color: white">
-
-                        <a href="projects/jmxterm" style="color: white">
-                            jmxterm
+                </form>
+            </td>
+            <td width="33%" class="reverse">
+                <h3>Support</h3>
+                <p>
+                    Bugs and questions are tracked in launchpad.net.
+                    <a href="http://launchpad.net/jmxterm">Get support for Jmxterm project</a>
+                </p>
+                <p>
+                    <a href="http://launchpad.net/jmxterm">
+                        <img
+                            src="https://launchpad.net/@@/launchpad-logo-and-name-hierarchy.png"
+                            alt="Jmxterm project in launchpad.net" />
+                    </a>
+                </p>
+            </td>
+            <td width="34%" class="reverse">
+                <h3>Links</h3>
+                <ul>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org">Wiki site with more details</a>
+                    </li>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org/discussion">Join discussion in Wiki site</a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://sourceforge.net/projects/cyclops-group">Project home in
+                            sourceforge.net
                         </a>
-                        is a command line based interactive JMX client
-                        software. It's designed to allow user to access
-                        JMX from command line without graphical
-                        environment. In another word, it's a command
-                        line based jconsole.
-                    </p>
-                    <p style="color: white">
-                        More details:
-                        <a href="projects/jmxterm" style="color: white">
-                            http://cyclopsgroup.org/projects/jmxterm
-                        </a>
-                        .
-                    </p>
-                </div>
+                    </li>
+                    <li>
+                        <a
+                            href="http://fisheye3.atlassian.com/browse/cyclops-group">Browse source code directory
+                            </a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://sourceforge.net/project/showfiles.php?group_id=91358">All downloads</a>
+                    </li>
+                    <li>
+                        <a href="projects/jmxterm">Jmxterm open source project
+                            </a>
+                    </li>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org/projects">All projects</a>
+                    </li>
+                    <li>
+                        Meet
+                        <a href="members/jiaqi">Jiaqi</a>
+                        and
+                        <a
+                            href="http://web2.business.nd.edu/Faculty/faculty_bio_dmpage.cfm?who=xzhao1">Xuying</a>
+                    </li>
+                </ul>
             </td>
         </tr>
     </table>
