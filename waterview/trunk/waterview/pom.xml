@@ -15,7 +15,7 @@
     <inceptionYear>2003</inceptionYear>
     <scm>
         <connection>
-            scm:svn:svn://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/waterview/trunk/waterview
+            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/waterview/trunk/waterview
         </connection>
         <developerConnection>
             scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/waterview/trunk/waterview
