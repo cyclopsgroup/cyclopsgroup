@@ -15,10 +15,10 @@
     <inceptionYear>2003</inceptionYear>
     <scm>
         <connection>
-            scm:svn:svn://cyclops-group.svn.sourceforge.net/svn/cyclops-group/waterview/trunk/waterview
+            scm:svn:svn://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/waterview/trunk/waterview
         </connection>
         <developerConnection>
-            scm:svn:https://cyclops-group.svn.sourceforge.net/svn/cyclops-group/waterview/trunk/waterview
+            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/waterview/trunk/waterview
         </developerConnection>
         <url>
             http://fisheye3.atlanssian.com/viewrep/cyclops-group/waterview
