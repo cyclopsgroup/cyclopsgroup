@@ -1,4 +1,4 @@
-package org.cyclopsgroup.wearj;
+package wearj;
 
 import java.math.BigDecimal;
 

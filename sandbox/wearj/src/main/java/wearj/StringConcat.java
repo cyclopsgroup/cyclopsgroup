@@ -1,4 +1,4 @@
-package org.cyclopsgroup.wearj;
+package wearj;
 
 import org.cyclopsgroup.jemf.TestMethod;
 import org.cyclopsgroup.jemf.TestObject;
@@ -6,23 +6,23 @@ import org.cyclopsgroup.jemf.TestObject;
 public class StringConcat
     extends TestObject
 {
-    private final String name;
+    private final int n;
 
-    public StringConcat( String name )
+    public StringConcat( int n )
     {
-        this.name = name;
+        this.n = n;
     }
 
     @TestMethod
     public String operators()
     {
-        return "Hello " + "number " + name;
+        return "Hello " + "number " + n;
     }
 
     @TestMethod
     public String stringBuilder()
     {
-        return new StringBuilder( "Hello " ).append( "number " ).append( name ).toString();
+        return new StringBuilder( "Hello " ).append( "number " ).append( n ).toString();
     }
 
     @TestMethod
@@ -30,19 +30,19 @@ public class StringConcat
     {
         String s = "Hello ";
         s += "number ";
-        s += name;
+        s += n;
         return s;
     }
 
     @TestMethod
     public String concat()
     {
-        return "Hello ".concat( "number " ).concat( name );
+        return "Hello ".concat( "number " ).concat( "" + n );
     }
 
     @TestMethod
     public String stringFormat()
     {
-        return String.format( "Hello number %s", name );
+        return String.format( "Hello number %s", n );
     }
 }

@@ -6,9 +6,15 @@ public class PrintingTestListener
     extends NoOpTestListener
 {
     @Override
+    public void objectStarts( Object testObject )
+    {
+        System.out.println( "[Start test " + testObject + "]" );
+    }
+
+    @Override
     public void methodLoopEnds( long result, Object lastReturnedValue, Method testMethod, Object testObject )
     {
-        System.out.println( "Method " + testMethod.getName() + " ends with " + result + " nano seconds, returning " +
+        System.out.println( " Method " + testMethod.getName() + " ends with " + result + " nano seconds, returning " +
             lastReturnedValue );
     }
 }
