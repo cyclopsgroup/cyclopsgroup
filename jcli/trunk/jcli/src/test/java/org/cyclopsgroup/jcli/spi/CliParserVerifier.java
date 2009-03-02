@@ -9,10 +9,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang.StringUtils;
-import org.cyclopsgroup.jcli.ExampleNormalBean;
+import org.cyclopsgroup.jcli.CliParser;
 import org.cyclopsgroup.jcli.ExampleBeanWithMultiValueOption;
 import org.cyclopsgroup.jcli.ExampleBeanWithSimpleArgument;
-import org.cyclopsgroup.jcli.annotation.CliParser;
+import org.cyclopsgroup.jcli.ExampleNormalBean;
 import org.junit.Test;
 
 /**
@@ -22,6 +22,9 @@ import org.junit.Test;
  */
 public abstract class CliParserVerifier
 {
+    /**
+     * @return New instance of a CliParser
+     */
     protected abstract CliParser createCliParser();
 
     /**

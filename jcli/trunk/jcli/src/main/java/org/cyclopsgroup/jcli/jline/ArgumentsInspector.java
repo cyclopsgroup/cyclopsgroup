@@ -8,6 +8,11 @@ import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.jcli.spi.CliDefinition;
 import org.cyclopsgroup.jcli.spi.OptionDefinition;
 
+/**
+ * Class that consumes arguments
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 class ArgumentsInspector
 {
     private final CliDefinition cli;
@@ -20,12 +25,18 @@ class ArgumentsInspector
 
     private ArgumentsInspectorState state = ArgumentsInspectorState.READY;
 
+    /**
+     * @param cli CLI definition
+     */
     ArgumentsInspector( CliDefinition cli )
     {
         this.cli = cli;
         remainingOptions = new HashSet<OptionDefinition>( cli.getOptions().values() );
     }
 
+    /**
+     * @param argument Argument to consume
+     */
     void consume( String argument )
     {
         if ( argument.startsWith( "--" ) )
@@ -74,6 +85,9 @@ class ArgumentsInspector
         currentValue = argument;
     }
 
+    /**
+     * End the process 
+     */
     void end()
     {
         switch ( state )
@@ -121,21 +135,33 @@ class ArgumentsInspector
         return cli.getOptions().get( name.substring( 1 ) );
     }
 
+    /**
+     * @return The option being processed currently
+     */
     OptionDefinition getCurrentOption()
     {
         return currentOption;
     }
 
+    /**
+     * @return Current value
+     */
     String getCurrentValue()
     {
         return currentValue;
     }
 
+    /**
+     * @return Set of remaining options
+     */
     Set<OptionDefinition> getRemainingOptions()
     {
         return Collections.unmodifiableSet( remainingOptions );
     }
 
+    /**
+     * @return Current parsing state
+     */
     ArgumentsInspectorState getState()
     {
         return state;

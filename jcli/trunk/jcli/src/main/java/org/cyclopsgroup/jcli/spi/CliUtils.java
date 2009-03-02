@@ -34,14 +34,20 @@ public final class CliUtils
      * 
      * @param beanType Type of Java bean
      * @return CliDefinition object
-     * @throws IntrospectionException Thrown when class structure has problem
      */
     public static CliDefinition defineCli( Class<?> beanType )
-        throws IntrospectionException
     {
         Cli cliAnnotation = beanType.getAnnotation( Cli.class );
         Validate.notNull( cliAnnotation, "Type " + beanType + " has to be annotated with @Cli" );
-        BeanInfo beanInfo = Introspector.getBeanInfo( beanType );
+        BeanInfo beanInfo;
+        try
+        {
+            beanInfo = Introspector.getBeanInfo( beanType );
+        }
+        catch ( IntrospectionException e )
+        {
+            throw new RuntimeException( "Bean " + beanType + " is not correctly defined", e );
+        }
         CliDefinition cliDefinition = new CliDefinition( cliAnnotation );
         for ( PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors() )
         {

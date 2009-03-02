@@ -3,7 +3,7 @@ package org.cyclopsgroup.jcli.jccli;
 import java.beans.IntrospectionException;
 
 import org.apache.commons.cli.GnuParser;
-import org.cyclopsgroup.jcli.annotation.CliParser;
+import org.cyclopsgroup.jcli.CliParser;
 import org.cyclopsgroup.jcli.spi.CliParserVerifier;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,6 +16,9 @@ import org.junit.Test;
 public class JakartaCommonsCliParserTest
     extends CliParserVerifier
 {
+    /**
+     * @inheritDoc
+     */
     @Override
     protected CliParser createCliParser()
     {

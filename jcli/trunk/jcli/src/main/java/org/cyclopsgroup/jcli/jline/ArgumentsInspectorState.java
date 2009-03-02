@@ -1,5 +1,10 @@
 package org.cyclopsgroup.jcli.jline;
 
+/**
+ * Internal inspection state
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 enum ArgumentsInspectorState
 {
     /**

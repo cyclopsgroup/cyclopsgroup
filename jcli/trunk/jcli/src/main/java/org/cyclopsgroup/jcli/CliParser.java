@@ -1,4 +1,4 @@
-package org.cyclopsgroup.jcli.annotation;
+package org.cyclopsgroup.jcli;
 
 import java.beans.IntrospectionException;
 import java.io.PrintWriter;
@@ -7,10 +7,9 @@ import java.io.PrintWriter;
  * Parser that parse string array argument and pass result to given Java bean
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * @deprecated Use {@link org.cyclopsgroup.jcli.CliParser} instead
  */
-@Deprecated
-public interface CliParser
+@SuppressWarnings("deprecation")
+public interface CliParser extends org.cyclopsgroup.jcli.annotation.CliParser
 {
     /**
      * Parse arguments and pass result to given Java bean
