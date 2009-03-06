@@ -30,6 +30,8 @@ public class ClientSession
 
     private DateTime lastAuthenticationDate;
 
+    private String macAddress;
+
     private String sessionId;
 
     private DateTime startDate;
@@ -68,6 +70,15 @@ public class ClientSession
     public final DateTime getLastAuthenticationDate()
     {
         return lastAuthenticationDate;
+    }
+
+    /**
+     * @return Value of field macAddress
+     */
+    @Column( name = "mac_address", length = 16 )
+    public final String getMacAddress()
+    {
+        return macAddress;
     }
 
     /**
@@ -162,6 +173,14 @@ public class ClientSession
     public final void setLastAuthenticationDate( DateTime lastAuthenticationDate )
     {
         this.lastAuthenticationDate = lastAuthenticationDate;
+    }
+
+    /**
+     * @param macAddress Value of field macAddress to set
+     */
+    public final void setMacAddress( String macAddress )
+    {
+        this.macAddress = macAddress;
     }
 
     /**
