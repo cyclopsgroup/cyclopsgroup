@@ -21,7 +21,7 @@ public class SpringWaterviewServlet
     @Override
     protected WebContextProcessor createWebContextProcessor()
     {
-        String templatePath = getServletContext().getRealPath( "templates" );
+        String templatePath = getServletContext().getRealPath( "" );
         ComponentResolver componentResolver =
             new SpringComponentResolver( WebApplicationContextUtils.getWebApplicationContext( getServletContext() ) );
         return new DefaultWebContextProcessor( templatePath, componentResolver );
