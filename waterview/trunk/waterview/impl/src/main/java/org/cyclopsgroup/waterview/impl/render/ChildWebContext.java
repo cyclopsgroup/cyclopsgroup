@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.cyclopsgroup.waterview.Redirection;
 import org.cyclopsgroup.waterview.WebContext;
 
@@ -22,15 +23,18 @@ public class ChildWebContext
 {
     private final WebContext parent;
 
+    private final String path;
+
     private final Map<String, Object> variables = new HashMap<String, Object>();
 
     /**
      * @param parent Parent context
      */
-    public ChildWebContext( WebContext parent )
+    public ChildWebContext( WebContext parent, String path )
     {
         Validate.notNull( parent, "Parent context can't be NULL" );
         this.parent = parent;
+        this.path = path;
     }
 
     /**
@@ -104,6 +108,15 @@ public class ChildWebContext
         {
             return variables.put( name, value );
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String toString()
+    {
+        return new ToStringBuilder( this ).append( "path", path ).append( "parent", parent ).toString();
     }
 
 }

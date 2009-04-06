@@ -45,14 +45,14 @@ public class RuntimeRenderer
         throws IOException
     {
         WebModule module = resolver.findModule( path );
-        WebContext childContext = new ChildWebContext( context );
+        WebContext childContext = new ChildWebContext( context, path );
         childContext.setVariable( SELF_NAME, new RuntimeView( path, module ) );
         if ( module != null )
         {
             module.render( childContext );
         }
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
-        childContext.setVariable( WebContext.CONTEXT_NAME, context );
+        childContext.setVariable( WebContext.CONTEXT_NAME, childContext );
         PrintWriter output = context.getServletResponse().getWriter();
         try
         {
