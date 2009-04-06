@@ -61,7 +61,9 @@ public class RuntimeRenderer
         }
         catch ( Exception e )
         {
+            output.print( "<pre class=\"errorTraceStack\">" );
             e.printStackTrace( output );
+            output.print( "</pre>" );
         }
         finally
         {
