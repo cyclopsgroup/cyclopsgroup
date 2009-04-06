@@ -1,4 +1,4 @@
-package org.cyclopsgroup.waterview.impl;
+package org.cyclopsgroup.waterview.impl.assembly;
 
 import java.io.IOException;
 

@@ -26,6 +26,7 @@ public class ModuleResolver
      */
     public WebModule findModule( String name )
     {
-        return new WebModuleAdapter( resolver.findComponent( Object.class, name ) );
+        Object module =  resolver.findComponent( Object.class, name );
+        return module == null? null: new WebModuleAdapter(module);
     }
 }

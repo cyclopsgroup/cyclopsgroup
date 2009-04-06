@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.WebContext;
-import org.cyclopsgroup.waterview.impl.WebContextProcessor;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.pipeline.Pipeline;
 import org.cyclopsgroup.waterview.impl.render.ExtensionBasedRenderer;

@@ -4,6 +4,8 @@ import java.io.InputStream;
 
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
@@ -15,6 +17,7 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 public class DeepClassPathResourceLoader
     extends ClasspathResourceLoader
 {
+    private static final Log LOG = LogFactory.getLog(DeepClassPathResourceLoader.class);
     private String pathPrefix;
 
     /**
@@ -35,10 +38,20 @@ public class DeepClassPathResourceLoader
     {
         super.init( configuration );
         pathPrefix = configuration.getString( "prefix" );
-        if ( StringUtils.isEmpty( pathPrefix ) )
+        if ( StringUtils.isEmpty(pathPrefix) )
         {
-            throw new IllegalArgumentException( "prefix property can't be empty" );
+            LOG.warn( "prefix property is empty" );
+            pathPrefix = StringUtils.EMPTY;
         }
         log.info( "Velocity resource loader path prefix is set to " + pathPrefix );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean resourceExists( String path )
+    {
+        return super.resourceExists( pathPrefix + path );
     }
 }

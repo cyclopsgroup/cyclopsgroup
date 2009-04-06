@@ -1,9 +1,12 @@
 package org.cyclopsgroup.waterview.impl.velocity;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.Validate;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 
@@ -14,6 +17,8 @@ import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
  */
 public class VelocityEngineBuilder
 {
+    private static final Log LOG = LogFactory.getLog( VelocityEngineBuilder.class );
+
     private final ExtendedProperties props;
 
     private int sequence = 0;
@@ -56,6 +61,19 @@ public class VelocityEngineBuilder
     }
 
     /**
+     * @param properties
+     * @return Builder itself
+     */
+    public VelocityEngineBuilder setProperties( Properties properties )
+    {
+        for ( Object name : properties.keySet() )
+        {
+            props.setProperty( (String) name, properties.getProperty( (String) name ) );
+        }
+        return this;
+    }
+
+    /**
      * @param path Template path in filesystem
      * @return Builder itself
      */
@@ -88,19 +106,16 @@ public class VelocityEngineBuilder
         VelocityEngine engine = new VelocityEngine();
         engine.setExtendedProperties( props );
         engine.setProperty( "runtime.log.logsystem", new JclLogChute() );
+        LOG.info( "Initializing VelocityEngine with properties: " + props );
         try
         {
             engine.init();
-        }
-        catch ( RuntimeException e )
-        {
-            throw e;
+            return engine;
         }
         catch ( Exception e )
         {
             throw new RuntimeException( "Velocity engine intialization failed", e );
         }
-        return engine;
     }
 
     /**
