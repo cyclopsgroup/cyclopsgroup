@@ -1,21 +1,23 @@
 package org.cyclopsgroup.waterview.impl.web;
 
 import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Page;
 import org.cyclopsgroup.waterview.WebContext;
 
 /**
- * Internal default layout
+ * Index home page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Module(path="_layout_/default_layout.vm")
-public class DefaultLayout
+@Module( path = "/index.vm" )
+@Page( title = "Waterivew", description = "Welcome to waterview" )
+public class Index
 {
     /**
      * @param context Current web context
      */
     public void render( WebContext context )
     {
-        context.setVariable( "layoutVariable", "HelloWorld" );
+        context.setVariable( "indexVariable", "This is it" );
     }
 }

@@ -5,6 +5,11 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.log.LogChute;
 
+/**
+ * Internal implementation of velocity specific logging
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 class JclLogChute
     implements LogChute
 {

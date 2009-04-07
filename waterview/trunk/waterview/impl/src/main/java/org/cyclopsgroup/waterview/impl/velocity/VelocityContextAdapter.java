@@ -4,6 +4,11 @@ import org.apache.commons.lang.Validate;
 import org.apache.velocity.context.Context;
 import org.cyclopsgroup.waterview.WebContext;
 
+/**
+ * Internal implementatino of a Velocity context that uses a given WebContext
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 class VelocityContextAdapter
     implements Context
 {

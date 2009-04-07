@@ -29,6 +29,7 @@ public class ChildWebContext
 
     /**
      * @param parent Parent context
+     * @param path Path of resource this context is about
      */
     public ChildWebContext( WebContext parent, String path )
     {

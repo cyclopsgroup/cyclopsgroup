@@ -8,15 +8,22 @@ import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.WebContext;
 
+/**
+ * Internal adapter that implements WebModule
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class WebModuleAdapter
     implements WebModule
 {
     private static final Class<?>[] METHOD_PARAMETER_TYPES = new Class<?>[] { WebContext.class };
 
-    private final Object object;
+    private final Module definition;
 
     private final Method method;
 
+    private final Object object;
+    
     /**
      * @param object Object to invoke upon
      * @throws IllegalArgumentException Thrown when object is not annotated with right Annotation, method doesn't exist
@@ -28,28 +35,36 @@ public class WebModuleAdapter
         Validate.notNull( object, "Internal object can't be NULL" );
         this.object = object;
 
-        Module module = object.getClass().getAnnotation( Module.class );
-        if ( module == null )
+        definition = object.getClass().getAnnotation( Module.class );
+        if ( definition == null )
         {
             throw new IllegalArgumentException( "Class " + object.getClass() + " is not annotated with " + Module.class );
         }
         try
         {
-            method = object.getClass().getMethod( module.method(), METHOD_PARAMETER_TYPES );
+            method = object.getClass().getMethod( definition.method(), METHOD_PARAMETER_TYPES );
         }
         catch ( SecurityException e )
         {
-            throw new IllegalArgumentException( "Method " + module.method() + " of " + object + " isn't accessible", e );
+            throw new IllegalArgumentException( "Method " + definition.method() + " of " + object + " isn't accessible", e );
         }
         catch ( NoSuchMethodException e )
         {
-            throw new IllegalArgumentException( "Method " + module.method() + "(WebContext) doesn't exist", e );
+            throw new IllegalArgumentException( "Method " + definition.method() + "(WebContext) doesn't exist", e );
         }
         if ( ( method.getModifiers() & Modifier.PUBLIC ) == 0 )
         {
-            throw new IllegalArgumentException( "Method " + module.method() + "(WebContext) of " + object +
+            throw new IllegalArgumentException( "Method " + definition.method() + "(WebContext) of " + object +
                 " is not public" );
         }
+    }
+
+    /**
+     * @return Value of field definition
+     */
+    public final Module getDefinition()
+    {
+        return definition;
     }
 
     /**

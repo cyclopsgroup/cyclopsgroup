@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean name="moduleResolver"
+        class="org.cyclopsgroup.waterview.impl.module.SpringPackageModuleResolver">
+        <constructor-arg>
+            <list>
+                <value>org.cyclopsgroup.waterview.impl
+                </value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean name="velocityRenderer"
+        class="org.cyclopsgroup.waterview.impl.servlet.ServletVelocityRendererFactory">
+        <property name="classPathPrefix" value="waterview/template/" />
+    </bean>
+    <bean name="renderer"
+        class="org.cyclopsgroup.waterview.impl.render.ExtensionBasedRenderer">
+        <constructor-arg>
+            <map>
+                <entry key="vm" value-ref="velocityRenderer" />
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean name="pipeline.parseRequest"
+        class="org.cyclopsgroup.waterview.impl.valve.ParseRequestPathValve">
+        <constructor-arg value="/index.vm" />
+    </bean>
+    <bean name="pipeline.renderPage"
+        class="org.cyclopsgroup.waterview.impl.valve.RenderPageValve">
+        <constructor-arg ref="moduleResolver" />
+        <constructor-arg ref="renderer" />
+        <constructor-arg value="_layout_/default_layout.vm" />
+    </bean>
+
+    <bean name="simpleWebContextProcessor"
+        class="org.cyclopsgroup.waterview.impl.assembly.PipelineWebContextProcessor">
+        <constructor-arg>
+            <list>
+                <ref bean="pipeline.parseRequest" />
+                <ref bean="pipeline.renderPage" />
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

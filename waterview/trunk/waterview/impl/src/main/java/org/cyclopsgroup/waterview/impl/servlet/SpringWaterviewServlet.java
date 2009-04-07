@@ -1,8 +1,7 @@
 package org.cyclopsgroup.waterview.impl.servlet;
 
-import org.cyclopsgroup.waterview.impl.assembly.DefaultWebContextProcessor;
 import org.cyclopsgroup.waterview.impl.assembly.WebContextProcessor;
-import org.cyclopsgroup.waterview.spi.ComponentResolver;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
@@ -21,9 +20,7 @@ public class SpringWaterviewServlet
     @Override
     protected WebContextProcessor createWebContextProcessor()
     {
-        String templatePath = getServletContext().getRealPath( "" );
-        ComponentResolver componentResolver =
-            new SpringComponentResolver( WebApplicationContextUtils.getWebApplicationContext( getServletContext() ) );
-        return new DefaultWebContextProcessor( templatePath, componentResolver );
+        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext( getServletContext() );
+        return (WebContextProcessor) context.getBean( "simpleWebContextProcessor" );
     }
 }

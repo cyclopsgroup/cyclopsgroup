@@ -1,4 +1,4 @@
-package com.cyclopsgroup.waterview.velocity;
+package org.cyclopsgroup.waterview.impl.velocity;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -6,10 +6,13 @@ import java.util.Properties;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
-import org.cyclopsgroup.waterview.impl.velocity.DeepClassPathResourceLoader;
-import org.cyclopsgroup.waterview.impl.velocity.VelocityEngineBuilder;
 import org.junit.Test;
 
+/**
+ * Test case of {@link VelocityEngineBuilder}
+ * 
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 public class VelocityEngineBuilderTest
 {
     /**
