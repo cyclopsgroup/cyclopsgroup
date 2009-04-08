@@ -36,7 +36,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     </bean>
 
     <bean name="simpleWebContextProcessor"
-        class="org.cyclopsgroup.waterview.impl.assembly.PipelineWebContextProcessor">
+        class="org.cyclopsgroup.waterview.impl.pipeline.Pipeline">
         <constructor-arg>
             <list>
                 <ref bean="pipeline.parseRequest" />

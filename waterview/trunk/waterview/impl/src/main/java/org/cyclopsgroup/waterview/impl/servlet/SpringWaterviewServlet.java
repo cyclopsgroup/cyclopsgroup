@@ -1,6 +1,6 @@
 package org.cyclopsgroup.waterview.impl.servlet;
 
-import org.cyclopsgroup.waterview.impl.assembly.WebContextProcessor;
+import org.cyclopsgroup.waterview.impl.pipeline.WebContextProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 

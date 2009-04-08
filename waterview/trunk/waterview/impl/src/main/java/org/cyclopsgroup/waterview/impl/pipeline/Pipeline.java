@@ -14,7 +14,7 @@ import org.cyclopsgroup.waterview.spi.Valve;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class Pipeline
+public class Pipeline implements WebContextProcessor
 {
     private final List<Valve> valves;
 
@@ -29,13 +29,13 @@ public class Pipeline
     }
 
     /**
-     * @param webContext Web context to invoke
-     * @throws IOException
+     * @inheritDoc
      */
-    public void invoke( WebContext webContext )
+    @Override
+    public void process( WebContext webContext )
         throws IOException
     {
         DefaultValveContext context = new DefaultValveContext( valves, webContext );
-        context.invokeNext( context );
+        context.invokeNext( );
     }
 }

@@ -19,10 +19,9 @@ public interface ValveContext
     /**
      * Invoke next valve
      * 
-     * @param context Web context
      * @return True if there is next valve
      * @throws IOException
      */
-    boolean invokeNext( ValveContext context )
+    boolean invokeNext()
         throws IOException;
 }

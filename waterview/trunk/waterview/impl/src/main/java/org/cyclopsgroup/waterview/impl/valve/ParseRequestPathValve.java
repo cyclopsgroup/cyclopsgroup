@@ -73,6 +73,6 @@ public class ParseRequestPathValve
             LOG.debug( "From requested " + pathInfo + ", waterview figures out operations: " + operations );
         }
         wc.setVariable( Operations.NAME, new Operations( operations ) );
-        context.invokeNext( context );
+        context.invokeNext();
     }
 }

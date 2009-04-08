@@ -18,6 +18,6 @@ public class Index
      */
     public void render( WebContext context )
     {
-        context.setVariable( "indexVariable", "This is it" );
+        context.setVariable( "indexVariable", "fromIndex" );
     }
 }

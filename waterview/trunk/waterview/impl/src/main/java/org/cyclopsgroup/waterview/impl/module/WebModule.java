@@ -13,4 +13,9 @@ public interface WebModule
      * @param context Current web context
      */
     void render(WebContext context);
+    
+    /**
+     * @return Path this module is mapped to
+     */
+    String getPath();
 }

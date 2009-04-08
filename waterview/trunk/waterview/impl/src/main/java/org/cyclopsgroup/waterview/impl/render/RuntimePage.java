@@ -1,6 +1,8 @@
 package org.cyclopsgroup.waterview.impl.render;
 
-import org.cyclopsgroup.waterview.Page;
+import java.util.List;
+
+import org.cyclopsgroup.waterview.impl.module.PageModule;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 
 /**
@@ -11,12 +13,13 @@ import org.cyclopsgroup.waterview.impl.module.WebModule;
 public class RuntimePage
     extends RuntimeView
 {
+    private static final PageModule NULL = new NullPageModule();
     /**
      * Variable name of this runtime page
      */
     public static final String PAGE_NAME = "page";
 
-    private final Page annotation;
+    private final PageModule page;
 
     /**
      * @param path Requested path
@@ -25,14 +28,7 @@ public class RuntimePage
     public RuntimePage( String path, WebModule module )
     {
         super( path, module );
-        if ( module == null )
-        {
-            this.annotation = null;
-        }
-        else
-        {
-            this.annotation = module.getClass().getAnnotation( Page.class );
-        }
+        page = ( module instanceof PageModule) ? (PageModule)module: NULL;
     }
 
     /**
@@ -40,15 +36,15 @@ public class RuntimePage
      */
     public String getDescription()
     {
-        return annotation == null ? null : annotation.description();
+        return page.getDescription();
     }
 
     /**
      * @return Page keywords
      */
-    public String[] getKeywords()
+    public List<String> getKeywords()
     {
-        return annotation == null ? null : annotation.keywords();
+        return page.getKeywords();
     }
 
     /**
@@ -56,6 +52,6 @@ public class RuntimePage
      */
     public String getTitle()
     {
-        return annotation == null ? null : annotation.title();
+        return page.getTitle();
     }
 }

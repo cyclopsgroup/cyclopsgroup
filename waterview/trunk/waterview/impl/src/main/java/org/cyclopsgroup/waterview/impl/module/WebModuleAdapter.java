@@ -13,7 +13,7 @@ import org.cyclopsgroup.waterview.WebContext;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class WebModuleAdapter
+class WebModuleAdapter
     implements WebModule
 {
     private static final Class<?>[] METHOD_PARAMETER_TYPES = new Class<?>[] { WebContext.class };
@@ -29,7 +29,7 @@ public class WebModuleAdapter
      * @throws IllegalArgumentException Thrown when object is not annotated with right Annotation, method doesn't exist
      *             or not accessible
      */
-    public WebModuleAdapter( Object object )
+    WebModuleAdapter( Object object )
         throws IllegalArgumentException
     {
         Validate.notNull( object, "Internal object can't be NULL" );
@@ -65,6 +65,15 @@ public class WebModuleAdapter
     public final Module getDefinition()
     {
         return definition;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getPath()
+    {
+        return definition.path();
     }
 
     /**

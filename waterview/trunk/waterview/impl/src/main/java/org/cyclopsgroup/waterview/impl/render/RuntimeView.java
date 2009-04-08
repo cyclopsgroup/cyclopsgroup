@@ -26,7 +26,7 @@ public class RuntimeView
     /**
      * @return Attached module
      */
-    public WebModule getModule()
+    public final WebModule getModule()
     {
         return module;
     }
@@ -34,7 +34,7 @@ public class RuntimeView
     /**
      * @return Path of view
      */
-    public String getPath()
+    public final String getPath()
     {
         return path;
     }

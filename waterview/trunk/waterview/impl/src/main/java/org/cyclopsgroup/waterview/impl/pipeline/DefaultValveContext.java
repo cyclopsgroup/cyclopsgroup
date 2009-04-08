@@ -47,13 +47,13 @@ public class DefaultValveContext
      * @inheritDoc
      */
     @Override
-    public boolean invokeNext( ValveContext context )
+    public boolean invokeNext()
         throws IOException
     {
         if ( valveIterator.hasNext() )
         {
             Valve next = valveIterator.next();
-            next.invoke( context );
+            next.invoke( this );
             return true;
         }
         else

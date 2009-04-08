@@ -16,6 +16,6 @@ public class DefaultLayout
      */
     public void render( WebContext context )
     {
-        context.setVariable( "layoutVariable", "HelloWorld" );
+        context.setVariable( "layoutVariable", "fromDefaultLayout" );
     }
 }

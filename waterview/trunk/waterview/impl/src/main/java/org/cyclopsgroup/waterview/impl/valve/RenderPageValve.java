@@ -7,9 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyclopsgroup.waterview.Page;
 import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
+import org.cyclopsgroup.waterview.impl.module.PageModule;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.impl.render.RuntimePage;
 import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
@@ -87,7 +87,7 @@ public class RenderPageValve
         if ( operations.values().isEmpty() )
         {
             LOG.info( "No page to render, exit" );
-            context.invokeNext( context );
+            context.invokeNext();
             return;
         }
         String page = operations.take();
@@ -100,17 +100,16 @@ public class RenderPageValve
             LOG.info( "These operations are ignored:" + operations.values() );
         }
 
-        WebModule pageModule = moduleResolver.findModule( page );
+        WebModule webModule = moduleResolver.findModule( page );
         String templatePath;
         if ( useLayout )
         {
             String pageSpecificLayout = null;
-            if ( pageModule != null )
+            if ( webModule != null )
             {
-                Page pageAnnotation = pageModule.getClass().getAnnotation( Page.class );
-                if ( pageAnnotation != null )
+                if ( webModule instanceof PageModule )
                 {
-                    pageSpecificLayout = pageAnnotation.layout();
+                    pageSpecificLayout = ( (PageModule) webModule ).getLayout();
                 }
             }
             templatePath = StringUtils.isEmpty( pageSpecificLayout ) ? defaultLayout : pageSpecificLayout;
@@ -123,16 +122,15 @@ public class RenderPageValve
         {
             LOG.debug( "Rending template " + templatePath + " for page " + page );
         }
-
-        wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, pageModule ) );
+        wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, webModule ) );
         wc.setVariable( "request", wc.getServletRequest() );
         wc.setVariable( "response", wc.getServletResponse() );
         RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
         PrintWriter output = wc.getServletResponse().getWriter();
-
         try
         {
             r.render( templatePath );
+            context.invokeNext();
         }
         finally
         {
