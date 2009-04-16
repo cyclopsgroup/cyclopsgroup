@@ -103,9 +103,6 @@ public class RootWebContext
         {
             return variables.remove( name );
         }
-        else
-        {
-            return variables.put( name, value );
-        }
+        return variables.put( name, value );
     }
 }

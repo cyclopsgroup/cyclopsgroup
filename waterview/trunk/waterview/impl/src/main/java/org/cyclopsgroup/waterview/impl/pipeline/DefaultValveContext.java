@@ -56,9 +56,6 @@ public class DefaultValveContext
             next.invoke( this );
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }

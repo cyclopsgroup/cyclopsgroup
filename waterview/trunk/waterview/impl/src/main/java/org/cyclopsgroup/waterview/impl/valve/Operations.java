@@ -11,12 +11,18 @@ import java.util.List;
  */
 class Operations
 {
+    /**
+     * Variable name of operation
+     */
     static final String NAME = Operations.class.getName();
 
     private final List<String> unmodifiedValues;
 
     private final List<String> values;
 
+    /**
+     * @param operations List of operation names
+     */
     public Operations( List<String> operations )
     {
         this.values = new ArrayList<String>( operations );

@@ -16,6 +16,9 @@ class PageModuleAdapter
 {
     private final Page page;
 
+    /**
+     * @param module User defined module
+     */
     PageModuleAdapter( Object module )
     {
         super( module );
