@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.cyclopsgroup.waterview.WebContext;
 
 /**
- * The processor interface servlet calls
+ * General interface that can process given web context. This interface is called by Servlet to process request.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

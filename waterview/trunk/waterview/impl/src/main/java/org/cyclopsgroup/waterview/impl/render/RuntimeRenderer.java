@@ -9,7 +9,7 @@ import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.spi.Renderer;
 
 /**
- * Renderer used in pages
+ * Renderer used in pages. This object is the {@literal $renderer} that developer can refer in template.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

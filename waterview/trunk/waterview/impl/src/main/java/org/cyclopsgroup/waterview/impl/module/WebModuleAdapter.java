@@ -9,7 +9,7 @@ import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.WebContext;
 
 /**
- * Internal adapter that implements WebModule
+ * Internal adapter that implements {@literal WebModule}. Internally it takes a POJO annotated with {@link Module}.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

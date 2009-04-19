@@ -12,7 +12,8 @@ import org.cyclopsgroup.waterview.Redirection;
 import org.cyclopsgroup.waterview.WebContext;
 
 /**
- * Class is not thread safe
+ * This implementation of {@link WebContext} takes given http servlet request and response when request and response are
+ * received at the first place. It's the root of all other {@link WebContext} implementations at runtime.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

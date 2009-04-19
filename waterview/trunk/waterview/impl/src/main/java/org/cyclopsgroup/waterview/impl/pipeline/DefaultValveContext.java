@@ -10,7 +10,7 @@ import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
 
 /**
- * Default implementation of valve context
+ * Default implementation of {@link ValveContext}. It's used to pass objects across valves in pipeline.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

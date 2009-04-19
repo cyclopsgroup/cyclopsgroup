@@ -3,7 +3,7 @@ package org.cyclopsgroup.waterview.impl.render;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 
 /**
- * Runtime view POJO used for view rendering
+ * Runtime view POJO used for view rendering. This object is {@literal $page} that developer could reference in template
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

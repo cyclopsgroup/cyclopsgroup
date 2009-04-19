@@ -12,7 +12,7 @@ import org.cyclopsgroup.waterview.spi.Renderer;
 import org.cyclopsgroup.waterview.spi.TemplateNotFoundException;
 
 /**
- * Velocity implementation of renderer
+ * Velocity implementation of {@link Renderer}.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

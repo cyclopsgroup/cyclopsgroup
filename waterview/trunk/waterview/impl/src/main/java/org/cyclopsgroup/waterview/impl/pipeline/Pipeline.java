@@ -10,7 +10,7 @@ import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Valve;
 
 /**
- * Pipeline that executes valves
+ * Pipeline that executes a list of valves in order
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

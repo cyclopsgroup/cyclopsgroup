@@ -6,8 +6,9 @@ import java.util.List;
 import org.cyclopsgroup.waterview.Page;
 
 /**
- * Adapter for {@link PageModule}
- *
+ * Adapter for {@link PageModule}. It takes a POJO annotated with {@link Page} annotation and expose {@link PageModule}
+ * interface.
+ * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 class PageModuleAdapter

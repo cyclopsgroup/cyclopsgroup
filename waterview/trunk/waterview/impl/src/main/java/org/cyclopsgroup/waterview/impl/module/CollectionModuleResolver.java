@@ -13,7 +13,8 @@ import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.Page;
 
 /**
- * Interface to resolve module
+ * This implementation collects a given collection of module objects, POJO annotated with {@link Module} annotation, and
+ * build a map of {@link WebModule} objects based on annotation parameters.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
@@ -25,7 +26,7 @@ public class CollectionModuleResolver
     private final Map<String, WebModule> webModules;
 
     /**
-     * @param modules Collection of all modules
+     * @param modules Given collection of all exiting module instances
      */
     public CollectionModuleResolver( Collection<Object> modules )
     {
@@ -54,6 +55,7 @@ public class CollectionModuleResolver
 
     /**
      * @param modules Arrays of modules
+     * @see #CollectionModuleResolver(Collection)
      */
     public CollectionModuleResolver( Object... modules )
     {
@@ -61,11 +63,9 @@ public class CollectionModuleResolver
     }
 
     /**
-     * Find module mapped to given name
-     * 
-     * @param name Module name
-     * @return Module class or null if not found
+     * @inheritDoc
      */
+    @Override
     public WebModule findModule( String name )
     {
         return webModules.get( name );

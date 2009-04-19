@@ -11,7 +11,9 @@ import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Renderer;
 
 /**
- * Renderer based on extension
+ * This {@link Renderer} renders template with a map of other implementations, where key is the extension of request
+ * path. For example, to render {@literal page.vm}, it uses the {@link Renderer} implementation associated to key
+ * {@literal vm}.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
@@ -45,7 +47,7 @@ public class ExtensionBasedRenderer
                 return;
             }
         }
-        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions " +
-            rendererMap.keySet() );
+        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions "
+            + rendererMap.keySet() );
     }
 }

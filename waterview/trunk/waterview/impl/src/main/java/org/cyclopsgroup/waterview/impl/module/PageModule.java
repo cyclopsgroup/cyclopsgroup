@@ -3,8 +3,9 @@ package org.cyclopsgroup.waterview.impl.module;
 import java.util.List;
 
 /**
- * Module for a page
- *
+ * A module richer than {@link WebModule}. On top of information related to a resource, this module provides extra
+ * information specific to a given request path.
+ * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public interface PageModule
@@ -14,17 +15,17 @@ public interface PageModule
      * @return Tile of page
      */
     String getTitle();
-    
+
     /**
      * @return Description of page longer than title
      */
     String getDescription();
-    
+
     /**
      * @return List of keywords
      */
     List<String> getKeywords();
-    
+
     /**
      * @return Path of layout if it's defined
      */
