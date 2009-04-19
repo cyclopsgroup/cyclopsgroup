@@ -4,20 +4,21 @@
     <listener>
         <display-name>Log4jConfigListener</display-name>
         <listener-class>
-            org.springframework.web.util.Log4jConfigListener
-        </listener-class>
+            org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
     <listener>
         <display-name>SpringContextListener</display-name>
         <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+            org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>waterview</servlet-name>
         <servlet-class>
-            org.cyclopsgroup.waterview.impl.servlet.SpringWaterviewServlet
-        </servlet-class>
+            org.cyclopsgroup.waterview.impl.servlet.SpringWaterviewServlet</servlet-class>
+        <init-param>
+            <param-name>contextProcessorBean</param-name>
+            <param-value>waterview.SimpleContextProcessor</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

@@ -12,6 +12,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class SpringWaterviewServlet
     extends AbstractWaterviewServlet
 {
+    private static final String BEAN_NAME_PARAM = "contextProcessorBean";
+
+    private static final String DEFAULT_BEAN_NAME = "waterview.ContextProcessor";
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -20,7 +24,11 @@ public class SpringWaterviewServlet
     @Override
     protected WebContextProcessor createWebContextProcessor()
     {
+        String beanName = this.getServletConfig().getInitParameter( BEAN_NAME_PARAM);
+        if(beanName == null) {
+            beanName = DEFAULT_BEAN_NAME;
+        }
         ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext( getServletContext() );
-        return (WebContextProcessor) context.getBean( "simpleWebContextProcessor" );
+        return (WebContextProcessor) context.getBean( beanName );
     }
 }
