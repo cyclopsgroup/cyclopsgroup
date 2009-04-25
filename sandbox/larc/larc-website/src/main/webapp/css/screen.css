@@ -1,1 +1,44 @@
 @import url('./base-font.css');
+
+div.contentWrapper {
+	text-align: center;
+}
+
+div.contentBody {
+	max-width: 960px;
+	margin: auto;
+	text-align: left;
+}
+
+div.clear{
+  clear:both;
+  visibility: hidden;
+}
+
+div#headerWrapper {
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	border-color: #ccc;
+}
+
+div#footerWrapper {
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: #ccc;
+}
+div#bodyLeft {
+	float: left;
+	width: 75%;
+	overflow: auto;
+}
+div#bodyRight {
+	margin-left: 76%;
+	width: 24%;
+}
+
+div#headerLeft {
+	fload: left;
+}
+div#headerRight {
+	float: right;
+}

@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        <li>
+            <a href="${request.contextPath}/index.vm">Home</a>
+        </li>
+        <li>
+            <a href="${request.contextPath}/add_event.vm">Add Event</a>
+        </li>
+    </ul>
+</div>

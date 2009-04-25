@@ -4,5 +4,6 @@
         <p>Eventine.com is bla bla bla</p>
     </div>
     <div id="bodyRight">
+        $renderer.render("/_layout_/home_links.vm")
     </div>
 </div>
