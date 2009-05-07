@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table( name = "larc_event", uniqueConstraints = { @UniqueConstraint( columnNames = { "secure_entity_id" } ) } )
-public class Event
+@Table( name = "larc_event_definition", uniqueConstraints = { @UniqueConstraint( columnNames = { "secure_entity_id" } ) } )
+public class EventDefinition
 {
     @Column( name = "description", length = 4000 )
     private String description;
