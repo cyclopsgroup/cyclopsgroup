@@ -23,91 +23,12 @@ import org.cyclopsgroup.gallerian.spi.RepositoryProviderFactory;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class ServerSideContentListingService
-    implements ContentListingService
+    implements ContentListingService, ServerSideContentListingServiceMBean
 {
     private final ConcurrentMap<String, RepositoryProvider> providers =
         new ConcurrentHashMap<String, RepositoryProvider>();
 
-    private RepositoryProvider getProvider( String name )
-    {
-        Validate.notNull( name, "Repository name can't be NULL" );
-        RepositoryProvider provider = providers.get( name );
-        if ( provider == null )
-        {
-            throw new IllegalArgumentException( "Repository name " + name + " doesn't exist" );
-        }
-        return provider;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public Content getContent( String repositoryName, String path )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Content getContent( String repositoryName, String folderPath, String name )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Folder getFolder( String repositoryName, String path )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public ListingOptions getOptions( String sessionId )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public List<ContentRepository> getRepositories()
-    {
-        List<ContentRepository> repositories = new ArrayList<ContentRepository>(providers.size());
-        for(Map.Entry<String, RepositoryProvider> entry: providers.entrySet())
-        {
-            repositories.add( newContentRepository( entry.getValue(), entry.getKey() ) );
-        }
-        return repositories;
-    }
-
-    @Override
-    public List<Content> listContents( String repositoryName, String path, String sessionId )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Folder> listFolders( String repositoryName, String path, String sessionId )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    private ContentRepository newContentRepository( RepositoryProvider provider, String name )
-    {
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public ContentRepository registerRepository( String name, String uri )
+    private RepositoryProvider doRegisterRepository( String name, String uri )
     {
         Validate.notNull( name, "Name can't be NULL" );
         RepositoryProviderFactory providerFactory = null;
@@ -130,9 +51,121 @@ public class ServerSideContentListingService
         {
             throw new IllegalArgumentException( "Name " + name + " already exists" );
         }
-        return newContentRepository( provider, name );
+        return provider;
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Content getContent( String repositoryName, String path )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Content getContent( String repositoryName, String folderPath, String name )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Folder getFolder( String repositoryName, String path )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public ListingOptions getOptions( String sessionId )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private RepositoryProvider getProvider( String name )
+    {
+        Validate.notNull( name, "Repository name can't be NULL" );
+        RepositoryProvider provider = providers.get( name );
+        if ( provider == null )
+        {
+            throw new IllegalArgumentException( "Repository name " + name + " doesn't exist" );
+        }
+        return provider;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public List<ContentRepository> getRepositories()
+    {
+        List<ContentRepository> repositories = new ArrayList<ContentRepository>( providers.size() );
+        for ( Map.Entry<String, RepositoryProvider> entry : providers.entrySet() )
+        {
+            repositories.add( newContentRepository( entry.getValue(), entry.getKey() ) );
+        }
+        return repositories;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public List<Content> listContents( String repositoryName, String path, String sessionId )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public List<Folder> listFolders( String repositoryName, String path, String sessionId )
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    private ContentRepository newContentRepository( RepositoryProvider provider, String name )
+    {
+        return null;
+    }
+   
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void register(String name, String uri)
+    {
+        doRegisterRepository(name, uri);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public ContentRepository registerRepository( String name, String uri )
+    {
+        return newContentRepository( doRegisterRepository( name, uri ), name );
+    }
+
+    /**
+     * @inheritDoc
+     */
     @Override
     public void setOptions( String sessionId, ListingOptions options )
     {
