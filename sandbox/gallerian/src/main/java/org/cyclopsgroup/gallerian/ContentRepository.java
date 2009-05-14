@@ -3,6 +3,11 @@ package org.cyclopsgroup.gallerian;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Repository object
+ *
+ * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ */
 @XmlRootElement( name = "ContentRepository" )
 public class ContentRepository
 {
