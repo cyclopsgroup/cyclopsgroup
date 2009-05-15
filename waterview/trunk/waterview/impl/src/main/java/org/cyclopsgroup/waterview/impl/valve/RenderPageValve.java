@@ -123,8 +123,6 @@ public class RenderPageValve
             LOG.debug( "Rending template " + templatePath + " for page " + page );
         }
         wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, webModule ) );
-        wc.setVariable( "request", wc.getServletRequest() );
-        wc.setVariable( "response", wc.getServletResponse() );
         RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
         PrintWriter output = wc.getServletResponse().getWriter();
         try
