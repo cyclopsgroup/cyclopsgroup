@@ -19,6 +19,9 @@ public class ContentRepository
     
     @XmlElement
     private Folder root;
+    
+    @XmlElement
+    private String uri;
 
     public final String getDescription()
     {
@@ -35,6 +38,11 @@ public class ContentRepository
         return root;
     }
 
+    public final String getUri()
+    {
+        return uri;
+    }
+
     public final void setDescription( String description )
     {
         this.description = description;
@@ -48,5 +56,10 @@ public class ContentRepository
     public final void setRoot( Folder root )
     {
         this.root = root;
+    }
+
+    public final void setUri( String uri )
+    {
+        this.uri = uri;
     }
 }
