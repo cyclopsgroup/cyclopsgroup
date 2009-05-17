@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <import
+        resource="classpath:org/cyclopsgroup/gallerian/serv/gallerian-server.xml" />
+    <bean name="gallerian.SetGlobalVariablesValve"
+        class="org.cyclopsgroup.waterview.impl.valve.SetGlobalVariablesValve">
+        <property name="variables">
+            <map>
+                <entry key="contentListingService" value-ref="gallerian.ContentListingService" />
+            </map>
+        </property>
+    </bean>
+    <bean name="gallerian.ModuleResolver"
+        class="org.cyclopsgroup.waterview.impl.module.SpringPackageModuleResolver">
+        <constructor-arg>
+            <list>
+                <value>org.cyclopsgroup.gallerian.web
+                </value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean name="gallerian.VelocityRenderer"
+        class="org.cyclopsgroup.waterview.impl.servlet.ServletVelocityRendererFactory">
+        <property name="classPathPrefix" value="gallerian/template/" />
+    </bean>
+    <bean name="gallerian.Renderer"
+        class="org.cyclopsgroup.waterview.impl.render.ExtensionBasedRenderer">
+        <constructor-arg>
+            <map>
+                <entry key="vm" value-ref="gallerian.VelocityRenderer" />
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean name="gallerian.ParseRequestValve"
+        class="org.cyclopsgroup.waterview.impl.valve.ParseRequestPathValve">
+        <constructor-arg value="/index.vm" />
+    </bean>
+    <bean name="gallerian.RenderPageValve"
+        class="org.cyclopsgroup.waterview.impl.valve.RenderPageValve">
+        <constructor-arg ref="gallerian.ModuleResolver" />
+        <constructor-arg ref="gallerian.Renderer" />
+        <constructor-arg value="_layout_/default_layout.vm" />
+    </bean>
+
+    <bean name="gallerian.ContextProcessor" class="org.cyclopsgroup.waterview.impl.pipeline.Pipeline">
+        <constructor-arg>
+            <list>
+                <ref bean="gallerian.SetGlobalVariablesValve" />
+                <ref bean="gallerian.ParseRequestValve" />
+                <ref bean="gallerian.RenderPageValve" />
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

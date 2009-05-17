@@ -20,16 +20,25 @@ public class Content
     @XmlElement
     private long size;
 
+    /**
+     * @return Last update timestamp
+     */
     public final long getLastUpdated()
     {
         return lastUpdated;
     }
 
+    /**
+     * @return Name of content
+     */
     public final String getName()
     {
         return name;
     }
 
+    /**
+     * @return
+     */
     public final long getSize()
     {
         return size;

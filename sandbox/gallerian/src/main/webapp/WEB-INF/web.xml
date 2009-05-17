@@ -17,7 +17,7 @@
             org.cyclopsgroup.waterview.impl.servlet.SpringWaterviewServlet</servlet-class>
         <init-param>
             <param-name>contextProcessorBean</param-name>
-            <param-value>waterview.SimpleContextProcessor</param-value>
+            <param-value>gallerian.ContextProcessor</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

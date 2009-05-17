@@ -6,4 +6,5 @@
     <p>page = $page</p>
     <p>renderer = $renderer</p>
     <p>ddd $layoutVariable $indexVariable</p>
+    <p>$contentListingService</p>
 </div>

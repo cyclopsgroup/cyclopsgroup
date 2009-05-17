@@ -15,13 +15,4 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
             </map>
         </property>
     </bean>
-    <bean name="waterview.SimpleContextProcessor" class="org.cyclopsgroup.waterview.impl.pipeline.Pipeline">
-        <constructor-arg>
-            <list>
-                <ref bean="waterview.SetGlobalVariablesValve" />
-                <ref bean="waterview.ParseRequestValve" />
-                <ref bean="waterview.RenderPageValve" />
-            </list>
-        </constructor-arg>
-    </bean>
 </beans>
