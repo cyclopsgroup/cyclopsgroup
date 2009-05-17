@@ -1,21 +1,20 @@
 package org.cyclopsgroup.waterview.impl.web;
 
 import org.cyclopsgroup.waterview.Module;
-import org.cyclopsgroup.waterview.WebContext;
 
 /**
  * Internal default layout
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Module(path="_layout_/default_layout.vm")
 public class DefaultLayout
 {
     /**
-     * @param context Current web context
+     * @return A string
      */
-    public void render( WebContext context )
+    @Module(path="_layout_/default_layout.vm", returnVariable = "layoutVariable")
+    public String render()
     {
-        context.setVariable( "layoutVariable", "fromDefaultLayout" );
+        return "fromDefaultLayout";
     }
 }

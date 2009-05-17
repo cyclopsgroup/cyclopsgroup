@@ -7,9 +7,9 @@ import java.nio.charset.Charset;
 import org.apache.commons.lang.Validate;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Renderer;
 import org.cyclopsgroup.waterview.spi.TemplateNotFoundException;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Velocity implementation of {@link Renderer}.
@@ -19,9 +19,17 @@ import org.cyclopsgroup.waterview.spi.TemplateNotFoundException;
 public class VelocityRenderer
     implements Renderer
 {
+    private final String encoding;
+
     private final VelocityEngine velocityEngine;
 
-    private final String encoding;
+    /**
+     * @param velocityEngine VelocityEngine instance
+     */
+    public VelocityRenderer( VelocityEngine velocityEngine )
+    {
+        this( velocityEngine, Charset.forName( "UTF-8" ) );
+    }
 
     /**
      * @param velocityEngine Velocity engine
@@ -36,11 +44,12 @@ public class VelocityRenderer
     }
 
     /**
-     * @param velocityEngine VelocityEngine instance
+     * @inheritDoc
      */
-    public VelocityRenderer( VelocityEngine velocityEngine )
+    @Override
+    public boolean acceptTemplate( String template )
     {
-        this( velocityEngine, Charset.forName( "UTF-8" ) );
+        return template.endsWith( ".vm" );
     }
 
     /**

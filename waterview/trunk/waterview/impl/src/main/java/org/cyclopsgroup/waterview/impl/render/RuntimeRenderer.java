@@ -3,10 +3,10 @@ package org.cyclopsgroup.waterview.impl.render;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.spi.Renderer;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Renderer used in pages. This object is the {@literal $renderer} that developer can refer in template.
@@ -54,12 +54,12 @@ public class RuntimeRenderer
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
         childContext.setVariable( WebContext.CONTEXT_NAME, childContext );
         PrintWriter output = context.getServletResponse().getWriter();
+        output.flush();
         try
         {
-            output.flush();
             renderer.render( childContext, path, output );
         }
-        catch ( Exception e )
+        catch ( Throwable e )
         {
             output.print( "<pre class=\"errorTraceStack\">" );
             e.printStackTrace( output );

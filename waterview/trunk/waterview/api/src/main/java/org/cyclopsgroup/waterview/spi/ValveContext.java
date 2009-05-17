@@ -1,8 +1,7 @@
 package org.cyclopsgroup.waterview.spi;
 
 import java.io.IOException;
-
-import org.cyclopsgroup.waterview.WebContext;
+import java.util.List;
 
 /**
  * Context across all valves
@@ -12,10 +11,15 @@ import org.cyclopsgroup.waterview.WebContext;
 public interface ValveContext
 {
     /**
+     * @return List of web actions to execute in this pipeline
+     */
+    List<String> getActions();
+    
+    /**
      * @return Web context for processing
      */
     WebContext getWebContext();
-
+    
     /**
      * Invoke next valve
      * 
@@ -24,4 +28,9 @@ public interface ValveContext
      */
     boolean invokeNext()
         throws IOException;
+    
+    /**
+     * @param actions List of web actions to execute in this pipeline
+     */
+    void setActions(List<String> actions);
 }

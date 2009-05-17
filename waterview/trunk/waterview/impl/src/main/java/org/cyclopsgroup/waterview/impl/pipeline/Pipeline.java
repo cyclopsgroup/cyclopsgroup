@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Valve;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Pipeline that executes a list of valves in order

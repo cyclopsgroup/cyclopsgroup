@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.waterview.PageRedirection;
 import org.cyclopsgroup.waterview.impl.pipeline.WebContextProcessor;
 
 /**
@@ -59,6 +60,11 @@ public abstract class AbstractWaterviewServlet
     {
         RootWebContext context = new RootWebContext( req, resp );
         processor.process( context );
+        PageRedirection redirection = context.getRedirection();
+        if(redirection != null)
+        {
+            redirection.redirect( req, resp );
+        }
     }
 
     /**

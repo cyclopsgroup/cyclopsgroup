@@ -2,8 +2,8 @@ package org.cyclopsgroup.waterview.impl.render;
 
 import java.util.List;
 
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.module.PageModule;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Implementation of {@link PageModule} without any value

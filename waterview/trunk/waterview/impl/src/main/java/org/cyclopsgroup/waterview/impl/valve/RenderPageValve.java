@@ -2,12 +2,13 @@ package org.cyclopsgroup.waterview.impl.valve;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.PageModule;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
@@ -16,6 +17,7 @@ import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
 import org.cyclopsgroup.waterview.spi.Renderer;
 import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Valve to render page
@@ -83,23 +85,36 @@ public class RenderPageValve
         throws IOException
     {
         WebContext wc = context.getWebContext();
-        Operations operations = (Operations) wc.getVariable( Operations.NAME );
-        if ( operations.values().isEmpty() )
+        List<String> actions = context.getActions();
+
+        String page = null;
+
+        for ( Iterator<String> i = actions.iterator(); i.hasNext(); )
+        {
+            String action = i.next();
+            if ( renderer.acceptTemplate( action ) )
+            {
+                if ( page == null )
+                {
+                    page = action;
+                }
+                else if ( LOG.isDebugEnabled() )
+                {
+                    LOG.debug( "Ignore action " + action );
+                }
+                i.remove();
+            }
+        }
+        if ( page == null )
         {
             LOG.info( "No page to render, exit" );
             context.invokeNext();
             return;
         }
-        String page = operations.take();
         if ( LOG.isDebugEnabled() )
         {
             LOG.debug( "Page is determined: " + page );
         }
-        if ( !operations.values().isEmpty() )
-        {
-            LOG.info( "These operations are ignored:" + operations.values() );
-        }
-
         WebModule webModule = moduleResolver.findModule( page );
         String templatePath;
         if ( useLayout )

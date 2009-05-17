@@ -5,6 +5,7 @@ import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Valve that execute an action
@@ -31,7 +32,11 @@ public class ExecuteActionValve
     @Override
     public void invoke( ValveContext context )
     {
-        WebModule action = moduleResolver.findModule( "name" );
-        action.render( context.getWebContext() );
+        WebContext wc = context.getWebContext();
+        for ( String action : context.getActions() )
+        {
+            WebModule module = moduleResolver.findModule( action );
+            module.render( wc );
+        }
     }
 }

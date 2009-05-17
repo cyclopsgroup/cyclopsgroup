@@ -1,5 +1,6 @@
 package org.cyclopsgroup.waterview.impl.module;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.Page;
 
@@ -21,8 +20,6 @@ import org.cyclopsgroup.waterview.Page;
 public class CollectionModuleResolver
     implements ModuleResolver
 {
-    private static final Log LOG = LogFactory.getLog( CollectionModuleResolver.class );
-
     private final Map<String, WebModule> webModules;
 
     /**
@@ -34,21 +31,23 @@ public class CollectionModuleResolver
         HashMap<String, WebModule> ms = new HashMap<String, WebModule>( modules.size() );
         for ( Object module : modules )
         {
-            if ( !module.getClass().isAnnotationPresent( Module.class ) )
+            for(Method method : module.getClass().getMethods())
             {
-                LOG.warn( "Module " + module + " is not annotated with " + Module.class );
-                continue;
+                if(!method.isAnnotationPresent( Module.class ))
+                {
+                    continue;
+                }
+                WebModuleAdapter adapter;
+                if ( method.isAnnotationPresent( Page.class ) )
+                {
+                    adapter = new PageModuleAdapter( module, method );
+                }
+                else
+                {
+                    adapter = new WebModuleAdapter( module, method );
+                }
+                ms.put( adapter.getDefinition().path(), adapter );
             }
-            WebModuleAdapter adapter;
-            if ( module.getClass().isAnnotationPresent( Page.class ) )
-            {
-                adapter = new PageModuleAdapter( module );
-            }
-            else
-            {
-                adapter = new WebModuleAdapter( module );
-            }
-            ms.put( adapter.getDefinition().path(), adapter );
         }
         webModules = Collections.unmodifiableMap( ms );
     }

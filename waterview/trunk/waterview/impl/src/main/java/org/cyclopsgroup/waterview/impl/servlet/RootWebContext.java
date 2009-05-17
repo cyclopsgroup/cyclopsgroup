@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.Redirection;
-import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.PageRedirection;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * This implementation of {@link WebContext} takes given http servlet request and response when request and response are
@@ -20,7 +20,7 @@ import org.cyclopsgroup.waterview.WebContext;
 public class RootWebContext
     implements WebContext
 {
-    private Redirection redirection;
+    private PageRedirection redirection;
 
     private final HttpServletRequest servletRequest;
 
@@ -44,7 +44,16 @@ public class RootWebContext
      * @inheritDoc
      */
     @Override
-    public Redirection getRedirection()
+    public String getContextPath()
+    {
+        return servletRequest.getContextPath();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public PageRedirection getRedirection()
     {
         return redirection;
     }
@@ -89,7 +98,7 @@ public class RootWebContext
      * @inheritDoc
      */
     @Override
-    public void setRedirection( Redirection redirection )
+    public void setRedirection( PageRedirection redirection )
     {
         this.redirection = redirection;
     }

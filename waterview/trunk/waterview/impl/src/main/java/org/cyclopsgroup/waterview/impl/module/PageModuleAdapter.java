@@ -1,5 +1,6 @@
 package org.cyclopsgroup.waterview.impl.module;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,15 +20,12 @@ class PageModuleAdapter
 
     /**
      * @param module User defined module
+     * @param method Method to invoke upon
      */
-    PageModuleAdapter( Object module )
+    PageModuleAdapter( Object module, Method method )
     {
-        super( module );
-        page = module.getClass().getAnnotation( Page.class );
-        if ( page == null )
-        {
-            throw new IllegalArgumentException( "Module " + module + " is not annotated with " + Page.class );
-        }
+        super( module, method );
+        page = method.getAnnotation( Page.class );
     }
 
     /**
@@ -65,5 +63,4 @@ class PageModuleAdapter
     {
         return page.title();
     }
-
 }

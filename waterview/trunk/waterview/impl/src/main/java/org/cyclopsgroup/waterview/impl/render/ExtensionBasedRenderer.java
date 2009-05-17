@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Renderer;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * This {@link Renderer} renders template with a map of other implementations, where key is the extension of request
@@ -36,6 +36,22 @@ public class ExtensionBasedRenderer
      * @inheritDoc
      */
     @Override
+    public boolean acceptTemplate( String template )
+    {
+        for ( String extension : rendererMap.keySet() )
+        {
+            if ( template.endsWith( "." + extension ) )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void render( WebContext context, String template, Writer output )
         throws IOException
     {
@@ -47,7 +63,7 @@ public class ExtensionBasedRenderer
                 return;
             }
         }
-        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions "
-            + rendererMap.keySet() );
+        throw new UnresolvableTemplateException( "Template " + template + " doesn't isn't recogonized by extensions " +
+            rendererMap.keySet() );
     }
 }

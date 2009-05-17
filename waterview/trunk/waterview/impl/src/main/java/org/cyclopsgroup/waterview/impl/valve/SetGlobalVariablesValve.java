@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import org.cyclopsgroup.waterview.WebContext;
 import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Valve to set basic global variables

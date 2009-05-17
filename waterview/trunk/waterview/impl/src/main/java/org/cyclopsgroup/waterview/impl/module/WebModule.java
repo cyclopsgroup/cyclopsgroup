@@ -1,6 +1,6 @@
 package org.cyclopsgroup.waterview.impl.module;
 
-import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Internally used interface for rendering something

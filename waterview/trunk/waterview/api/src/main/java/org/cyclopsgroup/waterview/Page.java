@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Target( ElementType.TYPE )
+@Target( ElementType.METHOD )
 @Retention( RetentionPolicy.RUNTIME )
 public @interface Page
 {

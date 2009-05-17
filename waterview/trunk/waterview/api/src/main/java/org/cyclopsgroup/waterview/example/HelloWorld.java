@@ -1,21 +1,21 @@
 package org.cyclopsgroup.waterview.example;
 
 import org.cyclopsgroup.waterview.Module;
-import org.cyclopsgroup.waterview.WebContext;
 
 /**
  * A hello world page
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Module( path = "/helloworld" )
+
 public class HelloWorld
 {
     /**
-     * @param context Web context
+     * @return Name to say hello to
      */
-    public void render( WebContext context )
+    @Module( path = "/helloworld", returnVariable = "myName" )
+    public String render()
     {
-        context.setVariable( "myName", "Jiaqi" );
+        return "Jiaqi";
     }
 }

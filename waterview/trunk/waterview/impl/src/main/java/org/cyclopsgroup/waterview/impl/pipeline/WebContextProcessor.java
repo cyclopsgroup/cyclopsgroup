@@ -2,7 +2,7 @@ package org.cyclopsgroup.waterview.impl.pipeline;
 
 import java.io.IOException;
 
-import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * General interface that can process given web context. This interface is called by Servlet to process request.

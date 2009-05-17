@@ -2,7 +2,7 @@ package org.cyclopsgroup.waterview.impl.velocity;
 
 import org.apache.commons.lang.Validate;
 import org.apache.velocity.context.Context;
-import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Internal implementatino of a Velocity context that uses a given WebContext

@@ -6,21 +6,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Identify a class as web module
+ * Value comes from one of parameter
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Target( ElementType.METHOD )
+@Target( ElementType.PARAMETER )
 @Retention( RetentionPolicy.RUNTIME )
-public @interface Module
+public @interface InputParameter
 {
     /**
-     * @return Absolute path of module
+     * @return Name of parameter
      */
-    String path();
-    
-    /**
-     * @return Name of returned variable
-     */
-    String returnVariable() default "";
+    String name();
 }

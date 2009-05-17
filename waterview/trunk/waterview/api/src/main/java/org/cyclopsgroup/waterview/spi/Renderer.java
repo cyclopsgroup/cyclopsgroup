@@ -3,13 +3,19 @@ package org.cyclopsgroup.waterview.spi;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.cyclopsgroup.waterview.WebContext;
-
 /**
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public interface Renderer
 {
+    /**
+     * Verify if template path is accepted by this renderer
+     * 
+     * @param template Path of template
+     * @return True if template is acceptable
+     */
+    boolean acceptTemplate(String template);
+    
     /**
      * Merge context and template into given output
      * 

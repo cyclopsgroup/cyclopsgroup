@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.cyclopsgroup.waterview.Redirection;
-import org.cyclopsgroup.waterview.WebContext;
+import org.cyclopsgroup.waterview.PageRedirection;
+import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
  * Child context that wraps given parent
@@ -42,7 +42,16 @@ public class ChildWebContext
      * @inheritDoc
      */
     @Override
-    public Redirection getRedirection()
+    public String getContextPath()
+    {
+        return parent.getContextPath();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public PageRedirection getRedirection()
     {
         return parent.getRedirection();
     }
@@ -90,7 +99,7 @@ public class ChildWebContext
      * @inheritDoc
      */
     @Override
-    public void setRedirection( Redirection redirection )
+    public void setRedirection( PageRedirection redirection )
     {
         parent.setRedirection( redirection );
     }

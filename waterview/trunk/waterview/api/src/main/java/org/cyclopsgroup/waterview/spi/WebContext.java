@@ -1,9 +1,12 @@
-package org.cyclopsgroup.waterview;
+package org.cyclopsgroup.waterview.spi;
 
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.PageRedirection;
 
 /**
  * Context of {@link Module}
@@ -18,9 +21,14 @@ public interface WebContext
     String CONTEXT_NAME = "context";
 
     /**
+     * @return Path of current servlet context
+     */
+    String getContextPath();
+
+    /**
      * @return Redirecion that redirects result to somewhere else
      */
-    Redirection getRedirection();
+    PageRedirection getRedirection();
 
     /**
      * @return Http servlet request
@@ -41,10 +49,15 @@ public interface WebContext
     Object getVariable( String name );
 
     /**
+     * @return Set of variable names
+     */
+    Set<String> getVariableNames();
+
+    /**
      * @param redirection Redirecte result to somewhere else
      */
-    void setRedirection( Redirection redirection );
-
+    void setRedirection( PageRedirection redirection );
+    
     /**
      * Set variable for module context
      * 
@@ -53,9 +66,4 @@ public interface WebContext
      * @return Previous value of variable if there is a previous value
      */
     Object setVariable( String name, Object value );
-
-    /**
-     * @return Set of variable names
-     */
-    Set<String> getVariableNames();
 }
