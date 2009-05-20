@@ -18,4 +18,9 @@ public @interface InputParameter
      * @return Name of parameter
      */
     String name();
+    
+    /**
+     * @return Type of parameter
+     */
+    InputParameterType type() default InputParameterType.PARAMETER;
 }

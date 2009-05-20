@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
@@ -139,7 +141,9 @@ public class RenderPageValve
         }
         wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, webModule ) );
         RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
-        PrintWriter output = wc.getServletResponse().getWriter();
+        HttpServletResponse response = wc.getServletResponse();
+        response.addHeader( "content-type", "text/html;charset=UTF-8" );
+        PrintWriter output = response.getWriter();
         try
         {
             r.render( templatePath );

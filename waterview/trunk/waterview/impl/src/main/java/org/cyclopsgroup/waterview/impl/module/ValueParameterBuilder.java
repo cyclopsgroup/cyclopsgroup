@@ -14,6 +14,7 @@ class ValueParameterBuilder
     extends ParameterBuilder
 {
     private final InputParameter annotation;
+
     private final Class<?> type;
 
     /**
@@ -32,17 +33,28 @@ class ValueParameterBuilder
     @Override
     Object buildParameter( WebContext context )
     {
-        String[] paramValues = context.getServletRequest().getParameterValues( annotation.name() );
-        if ( ArrayUtils.isEmpty( paramValues ) )
+        switch ( annotation.type() )
         {
-            return null;
+            case PARAMETER:
+                String[] paramValues = context.getServletRequest().getParameterValues( annotation.name() );
+                if ( ArrayUtils.isEmpty( paramValues ) )
+                {
+                    return null;
+                }
+                if ( type.isArray() )
+                {
+                    // TODO implement array conversion
+                    throw new UnsupportedOperationException( "Array is not supported yet" );
+                }
+                // TODO consider more use cases
+                return ConvertUtils.convert( paramValues[0], type );
+            case VARIABLE:
+                return context.getVariable( annotation.name() );
+            case HEADER:
+                String value = context.getServletRequest().getHeader( annotation.name() );
+                return ConvertUtils.convert( value, type );
+            default:
+                throw new AssertionError( "Invalid type " + annotation.type() );
         }
-        if ( type.isArray() )
-        {
-            // TODO implement array conversion
-            throw new UnsupportedOperationException( "Array is not supported yet" );
-        }
-        // TODO consider more use cases
-        return ConvertUtils.convert( paramValues[0], type );
     }
 }

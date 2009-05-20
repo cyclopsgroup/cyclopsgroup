@@ -46,10 +46,9 @@ public class RuntimeRenderer
     {
         WebModule module = resolver.findModule( path );
         WebContext childContext = new ChildWebContext( context, path );
-        childContext.setVariable( SELF_NAME, new RuntimeView( path, module ) );
         if ( module != null )
         {
-            module.render( childContext );
+            childContext.setVariable( SELF_NAME, new RuntimeView( path, module ) );
         }
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
         childContext.setVariable( WebContext.CONTEXT_NAME, childContext );
@@ -57,6 +56,11 @@ public class RuntimeRenderer
         output.flush();
         try
         {
+            if ( module != null )
+            {
+
+                module.render( childContext );
+            }
             renderer.render( childContext, path, output );
         }
         catch ( Throwable e )
