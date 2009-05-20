@@ -7,5 +7,8 @@ package org.cyclopsgroup.gallerian.spi;
  */
 public interface RepositoryProvider
 {
-    
+    /**
+     * @return URI of repository
+     */
+    String getUri();
 }

@@ -13,11 +13,23 @@ class VfsRepositoryProvider
 {
     private final FileObject file;
 
+    private final String uri;
+    
     /**
      * @param file VFS file object
      */
-    VfsRepositoryProvider( FileObject file )
+    VfsRepositoryProvider( FileObject file, String uri )
     {
         this.file = file;
+        this.uri = uri;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public final String getUri()
+    {
+        return uri;
     }
 }

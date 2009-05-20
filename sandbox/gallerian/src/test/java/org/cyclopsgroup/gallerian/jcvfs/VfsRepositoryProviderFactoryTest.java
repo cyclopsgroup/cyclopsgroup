@@ -1,5 +1,7 @@
 package org.cyclopsgroup.gallerian.jcvfs;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
 import org.apache.commons.vfs.FileSystemException;
@@ -17,5 +19,6 @@ public class VfsRepositoryProviderFactoryTest
         RepositoryProviderFactory factory = new VfsRepositoryProviderFactory();
 
         RepositoryProvider provider = factory.createProvider( "vfs:" + srcDir );
+        assertNotNull( "vfs:" + srcDir + " isn't accepted", provider );
     }
 }

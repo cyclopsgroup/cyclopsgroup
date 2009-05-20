@@ -7,4 +7,6 @@
     <p>renderer = $renderer</p>
     <p>ddd $layoutVariable $indexVariable</p>
     <p>$contentListingService</p>
+    
+    <p>path = $contentPath</p>
 </div>

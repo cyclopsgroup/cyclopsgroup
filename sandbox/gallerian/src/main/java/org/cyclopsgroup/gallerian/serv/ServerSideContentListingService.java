@@ -53,7 +53,7 @@ public class ServerSideContentListingService
         }
         return provider;
     }
-
+    
     /**
      * @inheritDoc
      */
@@ -138,13 +138,16 @@ public class ServerSideContentListingService
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     private ContentRepository newContentRepository( RepositoryProvider provider, String name )
     {
-        return null;
+        ContentRepository repo = new ContentRepository();
+        repo.setName( name );
+        repo.setUri( provider.getUri() );
+        repo.setDescription( provider.getUri() );
+        return repo;
     }
-   
-
+    
     /**
      * @inheritDoc
      */
@@ -153,6 +156,7 @@ public class ServerSideContentListingService
     {
         doRegisterRepository(name, uri);
     }
+   
 
     /**
      * @inheritDoc
@@ -171,6 +175,17 @@ public class ServerSideContentListingService
     {
         // TODO Auto-generated method stub
 
+    }
+
+    /**
+     * @param uris Map of repositories to register
+     */
+    public void setInitialRepositories(Map<String, String> uris)
+    {
+        for(Map.Entry<String, String> entry:uris.entrySet())
+        {
+            registerRepository(entry.getKey(), entry.getValue());
+        }
     }
 
 }

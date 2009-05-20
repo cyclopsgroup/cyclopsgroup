@@ -35,9 +35,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         </constructor-arg>
     </bean>
     <bean name="gallerian.ParseRequestValve"
-        class="org.cyclopsgroup.waterview.impl.valve.ParseRequestPathValve">
-        <constructor-arg value="/index.vm" />
-    </bean>
+        class="org.cyclopsgroup.gallerian.web.ParseRequestValve" />
     <bean name="gallerian.RenderPageValve"
         class="org.cyclopsgroup.waterview.impl.valve.RenderPageValve">
         <constructor-arg ref="gallerian.ModuleResolver" />

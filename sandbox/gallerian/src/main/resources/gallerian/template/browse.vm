@@ -1,0 +1,15 @@
+<div>
+    <h2>$contentPath</h2>
+    <p>
+        #if( ! $contents.isRoot )
+        <span class="topFolderLink">
+            <a href="../browse.vm" title="Goto upper level">..</a>
+        </span>
+        #end
+        #foreach($dir in $contents.dirs)
+        <span class="topFolderLink">
+            <a href="$dir.name/browse.vm" title="$dir.description">$dir.name</a>
+        </span>
+        #end
+    </p>
+</div>

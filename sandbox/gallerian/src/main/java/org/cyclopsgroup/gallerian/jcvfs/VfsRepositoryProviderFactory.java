@@ -37,7 +37,7 @@ public class VfsRepositoryProviderFactory
         try
         {
             FileObject file = fsManager.resolveFile( uri.substring( URI_PREFIX.length() ) );
-            return new VfsRepositoryProvider(file);
+            return new VfsRepositoryProvider(file, uri);
         }
         catch ( FileSystemException e )
         {

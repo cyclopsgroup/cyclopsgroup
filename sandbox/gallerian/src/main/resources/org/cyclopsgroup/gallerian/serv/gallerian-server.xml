@@ -4,7 +4,14 @@
     xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <bean name="gallerian.ContentListingService"
-        class="org.cyclopsgroup.gallerian.serv.ServerSideContentListingService" />
+        class="org.cyclopsgroup.gallerian.serv.ServerSideContentListingService">
+        <property name="initialRepositories">
+            <map>
+                <entry key="home" value="vfs:/home/jiaqi" />
+                <entry key="opt" value="vfs:/opt" />
+            </map>
+        </property>
+    </bean>
     <bean class="org.springframework.jmx.export.MBeanExporter"
         lazy-init="false">
         <property name="beans">
