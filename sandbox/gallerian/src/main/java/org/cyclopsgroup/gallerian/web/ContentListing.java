@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.gallerian.ContentListingService;
+import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.InputParameter;
 import org.cyclopsgroup.waterview.InputParameterType;
 import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Page;
 
 /**
  * Web module that does content listing
@@ -33,7 +37,7 @@ public class ContentListing
      * @param path Content path
      * @return Map of results
      */
-    @Module( path = "/browse.vm", returnVariable = "contents" )
+    @Module( path = "/browse.do", template = "/browse.vm", returnVariable = "contents" )
     public Map<String, Object> browse(
                                        @InputParameter( name = "contentPath", type = InputParameterType.VARIABLE ) String path )
     {
@@ -47,14 +51,29 @@ public class ContentListing
         {
             String subPath = REPOSITORY_NAME.matcher( path ).replaceFirst( "" );
             String repository = path.substring( 1, path.length() - subPath.length() );
-            if(StringUtils.isEmpty( subPath ))
+            if ( StringUtils.isEmpty( subPath ) )
             {
                 subPath = "/";
             }
             result.put( "dirs", listing.listFolders( repository, subPath, null ) );
             result.put( "isRoot", Boolean.FALSE );
-            result.put( "files", listing.listContents( repository, subPath, null ));
+            result.put( "files", listing.listContents( repository, subPath, null ) );
         }
         return result;
+    }
+
+    /**
+     * Stream content to http response
+     * 
+     * @param path Path of content
+     * @param response Http servlet response to stream content to
+     */
+    @Module( path = "/download.do" )
+    @Page( raw = true )
+    public void download(
+                          @InputParameter( name = "contentPath", type = InputParameterType.VARIABLE ) String path,
+                          @InputParameter( name = Constants.SERVLET_RESPONSE, type = InputParameterType.VARIABLE ) HttpServletResponse response )
+    {
+
     }
 }

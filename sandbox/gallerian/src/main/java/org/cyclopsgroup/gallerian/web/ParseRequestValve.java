@@ -33,9 +33,9 @@ public class ParseRequestValve
         this.startPath = startPath;
     }
 
-    private static final String BROWSE_ACTION = "/browse.vm";
+    private static final String BROWSE_ACTION = "/browse.do";
 
-    private static final String DOWNLOAD_ACTION = "/download.vm";
+    private static final String DOWNLOAD_ACTION = "/download.do";
 
     private static final String DEFAULT_START_PATH = "/c/";
 
