@@ -2,6 +2,7 @@ package org.cyclopsgroup.waterview.impl.render;
 
 import java.util.List;
 
+import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.impl.module.PageModule;
 import org.cyclopsgroup.waterview.spi.WebContext;
 
@@ -10,9 +11,18 @@ import org.cyclopsgroup.waterview.spi.WebContext;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-class NullPageModule
+public class NullPageModule
     implements PageModule
 {
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getContentType()
+    {
+        return Constants.DEFAULT_CONTENT_TYPE;
+    }
+
     /**
      * @inheritDoc
      */
@@ -44,6 +54,24 @@ class NullPageModule
      * @inheritDoc
      */
     @Override
+    public String getPath()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getTemplate()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public String getTitle()
     {
         return null;
@@ -53,9 +81,9 @@ class NullPageModule
      * @inheritDoc
      */
     @Override
-    public String getPath()
+    public boolean isRaw()
     {
-        return null;
+        return false;
     }
 
     /**

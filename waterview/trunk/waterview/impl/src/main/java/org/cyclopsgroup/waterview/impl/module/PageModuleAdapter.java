@@ -26,6 +26,19 @@ class PageModuleAdapter
     {
         super( module, method );
         page = method.getAnnotation( Page.class );
+        if ( page == null )
+        {
+            throw new IllegalArgumentException( "Method " + method + " is not annotated with @Page" );
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getContentType()
+    {
+        return page.contentType();
     }
 
     /**
@@ -62,5 +75,14 @@ class PageModuleAdapter
     public String getTitle()
     {
         return page.title();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean isRaw()
+    {
+        return page.raw();
     }
 }

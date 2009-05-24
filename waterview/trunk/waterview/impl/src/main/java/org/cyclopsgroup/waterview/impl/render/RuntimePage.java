@@ -14,6 +14,7 @@ public class RuntimePage
     extends RuntimeView
 {
     private static final PageModule NULL = new NullPageModule();
+
     /**
      * Variable name of this runtime page
      */
@@ -28,7 +29,7 @@ public class RuntimePage
     public RuntimePage( String path, WebModule module )
     {
         super( path, module );
-        page = ( module instanceof PageModule) ? (PageModule)module: NULL;
+        page = ( module instanceof PageModule ) ? (PageModule) module : NULL;
     }
 
     /**

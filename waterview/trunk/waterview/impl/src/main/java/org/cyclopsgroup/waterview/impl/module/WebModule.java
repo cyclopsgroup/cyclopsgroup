@@ -18,4 +18,9 @@ public interface WebModule
      * @return Path this module is mapped to
      */
     String getPath();
+    
+    /**
+     * @return Specific template path
+     */
+    String getTemplate();
 }

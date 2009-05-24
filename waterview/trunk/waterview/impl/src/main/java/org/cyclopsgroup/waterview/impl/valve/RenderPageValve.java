@@ -2,7 +2,6 @@ package org.cyclopsgroup.waterview.impl.valve;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.PageModule;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
+import org.cyclopsgroup.waterview.impl.render.NullPageModule;
 import org.cyclopsgroup.waterview.impl.render.RuntimePage;
 import org.cyclopsgroup.waterview.impl.render.RuntimeRenderer;
 import org.cyclopsgroup.waterview.spi.Renderer;
@@ -30,6 +30,8 @@ public class RenderPageValve
     implements Valve
 
 {
+    private static final PageModule DEFAULT_PAGE = new NullPageModule();
+
     private static final Log LOG = LogFactory.getLog( RenderPageValve.class );
 
     private final String defaultLayout;
@@ -88,65 +90,53 @@ public class RenderPageValve
     {
         WebContext wc = context.getWebContext();
         List<String> actions = context.getActions();
-
-        String page = null;
-
-        for ( Iterator<String> i = actions.iterator(); i.hasNext(); )
+        if ( actions.isEmpty() )
         {
-            String action = i.next();
-            if ( renderer.acceptTemplate( action ) )
-            {
-                if ( page == null )
-                {
-                    page = action;
-                }
-                else if ( LOG.isDebugEnabled() )
-                {
-                    LOG.debug( "Ignore action " + action );
-                }
-                i.remove();
-            }
+            throw new IllegalStateException( "No action is specified" );
         }
+
+        String page = actions.remove( actions.size() - 1 );
         if ( page == null )
         {
-            LOG.info( "No page to render, exit" );
-            context.invokeNext();
-            return;
+            throw new IllegalStateException( "Last action is NULL" );
         }
         if ( LOG.isDebugEnabled() )
         {
             LOG.debug( "Page is determined: " + page );
         }
         WebModule webModule = moduleResolver.findModule( page );
-        String templatePath;
+        PageModule pageModule = ( webModule!= null && webModule instanceof PageModule ) ? (PageModule) webModule : DEFAULT_PAGE;
+        HttpServletResponse response = wc.getServletResponse();
+        response.setContentType( pageModule.getContentType() );
+        
+        // Direct render for raw page
+        if(pageModule.isRaw())
+        {
+            pageModule.render( wc );
+            context.invokeNext();
+            return;
+        }
+
+        String layoutTempalte;
         if ( useLayout )
         {
-            String pageSpecificLayout = null;
-            if ( webModule != null )
-            {
-                if ( webModule instanceof PageModule )
-                {
-                    pageSpecificLayout = ( (PageModule) webModule ).getLayout();
-                }
-            }
-            templatePath = StringUtils.isEmpty( pageSpecificLayout ) ? defaultLayout : pageSpecificLayout;
+            String pageSpecificLayout = pageModule.getLayout();
+            layoutTempalte = StringUtils.isEmpty( pageSpecificLayout ) ? defaultLayout : pageSpecificLayout;
         }
         else
         {
-            templatePath = page;
+            layoutTempalte = page;
         }
         if ( LOG.isDebugEnabled() )
         {
-            LOG.debug( "Rending template " + templatePath + " for page " + page );
+            LOG.debug( "Rending template " + layoutTempalte + " for page " + page );
         }
         wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, webModule ) );
         RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
-        HttpServletResponse response = wc.getServletResponse();
-        response.addHeader( "content-type", "text/html;charset=UTF-8" );
         PrintWriter output = response.getWriter();
         try
         {
-            r.render( templatePath );
+            r.render( layoutTempalte );
             context.invokeNext();
         }
         finally

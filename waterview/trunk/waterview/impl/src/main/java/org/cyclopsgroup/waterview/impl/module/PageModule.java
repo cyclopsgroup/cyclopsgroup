@@ -12,9 +12,9 @@ public interface PageModule
     extends WebModule
 {
     /**
-     * @return Tile of page
+     * @return MIME content type
      */
-    String getTitle();
+    String getContentType();
 
     /**
      * @return Description of page longer than title
@@ -30,4 +30,14 @@ public interface PageModule
      * @return Path of layout if it's defined
      */
     String getLayout();
+    
+    /**
+     * @return Tile of page
+     */
+    String getTitle();
+    
+    /**
+     * @return True if it takes care of entire rendering work
+     */
+    boolean isRaw();
 }

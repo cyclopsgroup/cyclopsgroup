@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
 import org.cyclopsgroup.waterview.spi.WebContext;
@@ -26,8 +27,8 @@ public class SetGlobalVariablesValve
         throws IOException
     {
         WebContext wc = context.getWebContext();
-        wc.setVariable( "request", wc.getServletRequest() );
-        wc.setVariable( "response", wc.getServletResponse() );
+        wc.setVariable( Constants.REQUEST, wc.getServletRequest() );
+        wc.setVariable( Constants.RESPONSE, wc.getServletResponse() );
         for(Map.Entry<String, Object> entry:variables.entrySet())
         {
             wc.setVariable( entry.getKey(), entry.getValue() );

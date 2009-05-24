@@ -20,9 +20,9 @@ class WebModuleAdapter
     private final Method method;
 
     private final Object object;
-    
+
     private final ParametersBuilder parametersBuilder;
-    
+
     /**
      * @param object Object to invoke upon
      * @param method Method to invoke upon
@@ -35,7 +35,7 @@ class WebModuleAdapter
         this.object = object;
         this.method = method;
         definition = method.getAnnotation( Module.class );
-        parametersBuilder = new ParametersBuilder(method);
+        parametersBuilder = new ParametersBuilder( method );
     }
 
     /**
@@ -59,6 +59,15 @@ class WebModuleAdapter
      * @inheritDoc
      */
     @Override
+    public String getTemplate()
+    {
+        return definition.template();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void render( WebContext context )
     {
         Object[] parameters = parametersBuilder.createParameters( context );
@@ -75,7 +84,7 @@ class WebModuleAdapter
         {
             throw new RuntimeException( "Invocation of " + method + " on " + object + " failed", e );
         }
-        if(StringUtils.isNotEmpty( definition.returnVariable() ))
+        if ( StringUtils.isNotEmpty( definition.returnVariable() ) )
         {
             context.setVariable( definition.returnVariable(), result );
         }

@@ -3,6 +3,7 @@ package org.cyclopsgroup.waterview.impl.render;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.spi.Renderer;
@@ -46,9 +47,14 @@ public class RuntimeRenderer
     {
         WebModule module = resolver.findModule( path );
         WebContext childContext = new ChildWebContext( context, path );
+        String templatePath = path;
         if ( module != null )
         {
             childContext.setVariable( SELF_NAME, new RuntimeView( path, module ) );
+            if(StringUtils.isNotEmpty( module.getTemplate() ))
+            {
+                templatePath = module.getTemplate();
+            }
         }
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
         childContext.setVariable( WebContext.CONTEXT_NAME, childContext );
@@ -58,10 +64,9 @@ public class RuntimeRenderer
         {
             if ( module != null )
             {
-
                 module.render( childContext );
             }
-            renderer.render( childContext, path, output );
+            renderer.render( childContext, templatePath, output );
         }
         catch ( Throwable e )
         {
