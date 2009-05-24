@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.PageRedirection;
 import org.cyclopsgroup.waterview.impl.pipeline.WebContextProcessor;
 
@@ -59,9 +60,14 @@ public abstract class AbstractWaterviewServlet
         throws IOException
     {
         RootWebContext context = new RootWebContext( req, resp );
+        context.setVariable( Constants.SERVLET_REQUEST, req );
+        context.setVariable( Constants.SERVLET_RESPONSE, resp );
+        context.setVariable( Constants.SERVLET_CONFIG, getServletConfig() );
+        context.setVariable( Constants.SERVLET_CONTEXT, getServletContext() );
+        context.setVariable( Constants.CONTEXT, context );
         processor.process( context );
         PageRedirection redirection = context.getRedirection();
-        if(redirection != null)
+        if ( redirection != null )
         {
             redirection.redirect( req, resp );
         }

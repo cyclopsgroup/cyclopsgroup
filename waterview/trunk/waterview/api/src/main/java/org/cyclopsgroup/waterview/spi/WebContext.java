@@ -16,11 +16,6 @@ import org.cyclopsgroup.waterview.PageRedirection;
 public interface WebContext
 {
     /**
-     * Name of context itself
-     */
-    String CONTEXT_NAME = "context";
-
-    /**
      * @return Path of current servlet context
      */
     String getContextPath();

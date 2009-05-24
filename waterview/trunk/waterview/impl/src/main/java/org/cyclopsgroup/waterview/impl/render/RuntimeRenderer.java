@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.impl.module.ModuleResolver;
 import org.cyclopsgroup.waterview.impl.module.WebModule;
 import org.cyclopsgroup.waterview.spi.Renderer;
@@ -57,7 +58,7 @@ public class RuntimeRenderer
             }
         }
         childContext.setVariable( RENDERER_NAME, new RuntimeRenderer( renderer, resolver, childContext ) );
-        childContext.setVariable( WebContext.CONTEXT_NAME, childContext );
+        childContext.setVariable( Constants.CONTEXT, childContext );
         PrintWriter output = context.getServletResponse().getWriter();
         output.flush();
         try

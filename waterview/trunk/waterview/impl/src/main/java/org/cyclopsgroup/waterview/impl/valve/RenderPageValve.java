@@ -105,12 +105,17 @@ public class RenderPageValve
             LOG.debug( "Page is determined: " + page );
         }
         WebModule webModule = moduleResolver.findModule( page );
-        PageModule pageModule = ( webModule!= null && webModule instanceof PageModule ) ? (PageModule) webModule : DEFAULT_PAGE;
+        PageModule pageModule =
+            ( webModule != null && webModule instanceof PageModule ) ? (PageModule) webModule : DEFAULT_PAGE;
         HttpServletResponse response = wc.getServletResponse();
-        response.setContentType( pageModule.getContentType() );
-        
+
+        if ( StringUtils.isNotEmpty( pageModule.getContentType() ) )
+        {
+            response.setContentType( pageModule.getContentType() );
+        }
+
         // Direct render for raw page
-        if(pageModule.isRaw())
+        if ( pageModule.isRaw() )
         {
             pageModule.render( wc );
             context.invokeNext();
