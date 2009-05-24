@@ -27,6 +27,22 @@ class VfsFileProvider
      * @inheritDoc
      */
     @Override
+    public String getDescription()
+    {
+        try
+        {
+            return fileObject.getURL().toString();
+        }
+        catch ( FileSystemException e )
+        {
+            throw new VfsRuntimeException("Can't get descriptoin of " + fileObject, e);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public long getLastUpdate()
     {
         try

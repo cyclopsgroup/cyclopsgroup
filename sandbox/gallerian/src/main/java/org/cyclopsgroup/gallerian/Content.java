@@ -12,14 +12,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Content
 {
     @XmlElement
+    private String description;
+
+    @XmlElement
     private long lastUpdated;
 
     @XmlElement
     private String name;
-    
+
     @XmlElement
     private long size;
-
+    
+    /**
+     * @return Value of field description
+     */
+    public final String getDescription()
+    {
+        return description;
+    }
+    
     /**
      * @return Last update timestamp
      */
@@ -42,6 +53,14 @@ public class Content
     public final long getSize()
     {
         return size;
+    }
+
+    /**
+     * @param description Value of field description to set
+     */
+    public final void setDescription( String description )
+    {
+        this.description = description;
     }
 
     public final void setLastUpdated( long lastUpdated )

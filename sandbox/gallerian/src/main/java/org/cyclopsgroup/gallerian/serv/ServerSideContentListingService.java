@@ -185,6 +185,7 @@ public class ServerSideContentListingService
         content.setName( file.getName() );
         content.setLastUpdated( file.getLastUpdate() );
         content.setSize( file.getSize() );
+        content.setDescription( file.getDescription() );
         return content;
     }
 

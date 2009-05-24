@@ -26,4 +26,9 @@ public interface FileProvider
      * @return Number of bytes in file
      */
     long getSize();
+    
+    /**
+     * @return Description of content
+     */
+    String getDescription();
 }

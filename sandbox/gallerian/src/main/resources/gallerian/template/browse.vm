@@ -19,7 +19,7 @@
     <p>
         #foreach($file in $contents.files)
         <span class="fileLink">
-            <a href="$file.name" title="$file.path">$file.name</a>
+            <a href="$file.name" title="$file.description">$file.name</a>
         </span>
         #end
     </p>
