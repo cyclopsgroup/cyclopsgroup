@@ -23,4 +23,9 @@ public @interface Module
      * @return Name of returned variable
      */
     String returnVariable() default "";
+    
+    /**
+     * @return Customized template path. When template is not specified, the action name is used as template path
+     */
+    String template() default "";
 }

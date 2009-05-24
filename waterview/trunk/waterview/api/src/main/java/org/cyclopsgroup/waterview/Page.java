@@ -15,6 +15,11 @@ import java.lang.annotation.Target;
 public @interface Page
 {
     /**
+     * @return MIME content type of this page
+     */
+    String contentType() default Constants.DEFAULT_CONTENT_TYPE;
+
+    /**
      * @return Detail description of this page
      */
     String description() default "";
@@ -28,6 +33,11 @@ public @interface Page
      * @return Render page with specified layout
      */
     String layout() default "";
+    
+    /**
+     * @return Set it to true if module take care of entire rendering process
+     */
+    boolean raw() default false;
 
     /**
      * @return Title of page
