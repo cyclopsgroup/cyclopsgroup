@@ -1,0 +1,27 @@
+body,input,textarea,th,td,select {
+    font-family: "Bitstream Vera Sans", Verdana, Helvetica;
+    font-size: 80%;
+}
+
+.clearBreak {
+    clear: both;
+}
+
+h1,h2,h3 {
+    font-weight: normal;
+}
+
+img {
+    border-width: 0px;
+}
+
+span.folderLink {
+	display: inline-block;
+	width: 132px;
+}
+
+span.fileLink {
+	display: inline-block;
+	width: 184px;
+	height: 60px;
+}

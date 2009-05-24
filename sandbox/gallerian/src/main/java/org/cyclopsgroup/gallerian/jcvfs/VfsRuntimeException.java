@@ -12,6 +12,10 @@ class VfsRuntimeException
 {
     private static final long serialVersionUID = 3789892477261854525L;
 
+    /**
+     * @param description Verbal description of error
+     * @param e Included error cause
+     */
     VfsRuntimeException( String description, FileSystemException e )
     {
         super( description + ": " + e.getMessage(), e );

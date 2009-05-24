@@ -9,24 +9,26 @@ import org.cyclopsgroup.gallerian.spi.RepositoryProviderFactory;
 
 /**
  * Implementation of {@link RepositoryProviderFactory} using Jakarta commons VFS
- *
+ * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class VfsRepositoryProviderFactory
     implements RepositoryProviderFactory
 {
     private static final String URI_PREFIX = "vfs:";
+
     private final FileSystemManager fsManager;
-    
+
     /**
      * Default constructor that instantiate file system manager
+     * 
      * @throws FileSystemException If file system can't be instantiate
      */
-    public VfsRepositoryProviderFactory() throws FileSystemException
+    public VfsRepositoryProviderFactory()
+        throws FileSystemException
     {
         this.fsManager = VFS.getManager();
     }
-    
 
     /**
      * @inheritDoc
@@ -37,14 +39,13 @@ public class VfsRepositoryProviderFactory
         try
         {
             FileObject file = fsManager.resolveFile( uri.substring( URI_PREFIX.length() ) );
-            return new VfsRepositoryProvider(file, uri);
+            return new VfsRepositoryProvider( file, uri, fsManager );
         }
         catch ( FileSystemException e )
         {
-            throw new VfsRuntimeException("Can't create provider with uri " + uri, e);
+            throw new VfsRuntimeException( "Can't create provider with uri " + uri, e );
         }
     }
-
 
     /**
      * @inheritDoc

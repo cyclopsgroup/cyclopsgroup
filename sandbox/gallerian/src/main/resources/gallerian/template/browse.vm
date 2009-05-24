@@ -1,15 +1,27 @@
 <div>
-    <h2>$contentPath</h2>
+    <h2>Browse folder: $contentPath</h2>
     <p>
         #if( ! $contents.isRoot )
-        <span class="topFolderLink">
-            <a href="../browse.vm" title="Goto upper level">..</a>
+        <span class="folderLink">
+            <a href="../" title="Goto upper level">..</a>
         </span>
         #end
         #foreach($dir in $contents.dirs)
-        <span class="topFolderLink">
-            <a href="$dir.name/browse.vm" title="$dir.description">$dir.name</a>
+        <span class="folderLink">
+            <a href="$dir.name/" title="$dir.description">$dir.name</a>
         </span>
         #end
     </p>
+    #if($contents.files.empty)
+    <h2>No content is found</h2>
+    #else
+    <h2>Content</h2>
+    <p>
+        #foreach($file in $contents.files)
+        <span class="fileLink">
+            <a href="$file.name" title="$file.path">$file.name</a>
+        </span>
+        #end
+    </p>
+    #end
 </div>

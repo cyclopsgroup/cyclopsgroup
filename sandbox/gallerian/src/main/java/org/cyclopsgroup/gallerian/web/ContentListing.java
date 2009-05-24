@@ -46,9 +46,14 @@ public class ContentListing
         else
         {
             String subPath = REPOSITORY_NAME.matcher( path ).replaceFirst( "" );
-            String repository = path.substring( path.length() - subPath.length() );
+            String repository = path.substring( 1, path.length() - subPath.length() );
+            if(StringUtils.isEmpty( subPath ))
+            {
+                subPath = "/";
+            }
             result.put( "dirs", listing.listFolders( repository, subPath, null ) );
             result.put( "isRoot", Boolean.FALSE );
+            result.put( "files", listing.listContents( repository, subPath, null ));
         }
         return result;
     }

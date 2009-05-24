@@ -3,8 +3,6 @@ package org.cyclopsgroup.gallerian.web;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.waterview.spi.Valve;
@@ -19,10 +17,29 @@ import org.cyclopsgroup.waterview.spi.WebContext;
 public class ParseRequestValve
     implements Valve
 {
-    private static final Pattern ACTION_PATTERN = Pattern.compile( "\\/\\w+\\.\\w+$" );
+    /**
+     * @return Value of field startPath
+     */
+    public final String getStartPath()
+    {
+        return startPath;
+    }
 
-    private static final String DEFAULT_ACTION = "/browse.vm";
-    private static final String DOWNLOAD_ACTION = "/download.do";
+    /**
+     * @param startPath Value of field startPath to set
+     */
+    public final void setStartPath( String startPath )
+    {
+        this.startPath = startPath;
+    }
+
+    private static final String BROWSE_ACTION = "/browse.vm";
+
+    private static final String DOWNLOAD_ACTION = "/download.vm";
+
+    private static final String DEFAULT_START_PATH = "/c/";
+
+    private String startPath = DEFAULT_START_PATH;
 
     /**
      * @inheritDoc
@@ -32,43 +49,47 @@ public class ParseRequestValve
         throws IOException
     {
         WebContext wc = context.getWebContext();
-        String pathInfo = wc.getServletRequest().getServletPath();
+
+        String pathInfo =
+            wc.getServletRequest().getServletPath() + StringUtils.trimToEmpty( wc.getServletRequest().getPathInfo() );
 
         String action;
-        String contentPath;
+
         if ( StringUtils.isEmpty( pathInfo ) )
         {
-            action = DEFAULT_ACTION;
-            contentPath = "";
+            throw new IllegalStateException( "Path info is NULL" );
         }
-        else
+        else if ( pathInfo.startsWith( startPath ) )
         {
-            Matcher matcher = ACTION_PATTERN.matcher( pathInfo );
-            if ( matcher.find() )
+            String contentPath = pathInfo.substring( startPath.length() );
+
+            if ( pathInfo.endsWith( "/" ) )
             {
-                String name = matcher.group();
-                if(name.endsWith( ".vm" ))
-                {
-                    contentPath = StringUtils.substring( pathInfo, 0, pathInfo.length() - name.length() );
-                    action = name;
-                }
-                else {
-                    contentPath = pathInfo;
-                    action = DOWNLOAD_ACTION;
-                }
+                action = BROWSE_ACTION;
             }
             else
             {
-                action = DEFAULT_ACTION;
-                contentPath = pathInfo;
+                action = DOWNLOAD_ACTION;
             }
+            if ( StringUtils.isEmpty( contentPath ) )
+            {
+                contentPath = "/";
+            }
+            else if ( contentPath.charAt( contentPath.length() - 1 ) == '/' )
+            {
+                contentPath = contentPath.substring( 0, contentPath.length() - 1 );
+            }
+            if ( contentPath.charAt( 0 ) != '/' )
+            {
+                contentPath = "/" + contentPath;
+            }
+            wc.setVariable( "contentPath", contentPath );
         }
-        context.setActions( new ArrayList<String>(Arrays.asList( action )) );
-        if(StringUtils.isEmpty( contentPath ))
+        else
         {
-            contentPath = "/";
+            action = pathInfo;
         }
-        wc.setVariable( "contentPath", contentPath );
+        context.setActions( new ArrayList<String>( Arrays.asList( action ) ) );
         context.invokeNext();
     }
 }

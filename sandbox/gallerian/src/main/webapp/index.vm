@@ -1,12 +1,7 @@
 <div>
-    <h2>Welcome to Waterview</h2>
+    <h2>Welcome to Waterview: <a href="c/">Go!!!</a></h2>
     <p>request = $request, cookies = $request.cookies</p>
     <p>response = $response</p>
     <p>context = $context</p>
     <p>page = $page</p>
-    <p>renderer = $renderer</p>
-    <p>ddd $layoutVariable $indexVariable</p>
-    <p>$contentListingService</p>
-    
-    <p>path = $contentPath</p>
 </div>
