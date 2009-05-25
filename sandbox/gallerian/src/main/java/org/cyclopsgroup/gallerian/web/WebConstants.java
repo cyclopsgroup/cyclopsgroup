@@ -1,6 +1,5 @@
 package org.cyclopsgroup.gallerian.web;
 
-
 /**
  * Constants used in web application
  * 
@@ -12,4 +11,9 @@ final class WebConstants
      * Path of selected content
      */
     static final String CONTENT_PATH = "contentPath";
+
+    /**
+     * Path of select content type
+     */
+    static final String CONTENT_TYPE = "contentType";
 }

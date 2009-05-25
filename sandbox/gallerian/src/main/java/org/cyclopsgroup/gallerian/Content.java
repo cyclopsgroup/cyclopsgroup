@@ -21,7 +21,13 @@ public class Content
     private long lastUpdated;
 
     @XmlElement
+    private String mimeType;
+
+    @XmlElement
     private String name;
+
+    @XmlElement
+    private boolean previewable;
 
     @XmlElement
     private long size;
@@ -33,7 +39,7 @@ public class Content
     {
         return description;
     }
-    
+
     /**
      * @return Value of field id
      */
@@ -51,13 +57,21 @@ public class Content
     }
     
     /**
+     * @return Value of field mimeType
+     */
+    public final String getMimeType()
+    {
+        return mimeType;
+    }
+
+    /**
      * @return Name of content
      */
     public final String getName()
     {
         return name;
     }
-
+    
     /**
      * @return Number of bytes in this content
      */
@@ -65,7 +79,15 @@ public class Content
     {
         return size;
     }
-
+    
+    /**
+     * @return Value of field previewable
+     */
+    public final boolean isPreviewable()
+    {
+        return previewable;
+    }
+    
     /**
      * @param description Value of field description to set
      */
@@ -91,11 +113,27 @@ public class Content
     }
 
     /**
+     * @param mimeType Value of field mimeType to set
+     */
+    public final void setMimeType( String mimeType )
+    {
+        this.mimeType = mimeType;
+    }
+
+    /**
      * @param name Base name of content
      */
     public final void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * @param previewable Value of field previewable to set
+     */
+    public final void setPreviewable( boolean previewable )
+    {
+        this.previewable = previewable;
     }
 
     /**

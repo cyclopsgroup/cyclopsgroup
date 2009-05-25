@@ -16,7 +16,6 @@ import org.cyclopsgroup.waterview.InputParameter;
 import org.cyclopsgroup.waterview.InputParameterType;
 import org.cyclopsgroup.waterview.Module;
 import org.cyclopsgroup.waterview.Page;
-import org.mortbay.log.Log;
 
 /**
  * Web module for streaming
@@ -27,6 +26,13 @@ public class ContentStreaming
 {
     private static final Pattern REPOSITORY_NAME = Pattern.compile( "^\\/\\w+" );
 
+    private static ContentId getContentId( String path )
+    {
+        String contentPath = REPOSITORY_NAME.matcher( path ).replaceFirst( "" );
+        String repository = path.substring( 1, path.length() - contentPath.length() );
+        return new ContentId( contentPath, repository );
+    }
+
     private final ContentStreamService streaming;
 
     /**
@@ -35,13 +41,6 @@ public class ContentStreaming
     public ContentStreaming( ContentStreamService streaming )
     {
         this.streaming = streaming;
-    }
-
-    private static ContentId getContentId( String path )
-    {
-        String contentPath = REPOSITORY_NAME.matcher( path ).replaceFirst( "" );
-        String repository = path.substring( 1, path.length() - contentPath.length() );
-        return new ContentId( contentPath, repository );
     }
 
     /**
@@ -73,9 +72,35 @@ public class ContentStreaming
             }
             else
             {
-                Log.info( "content type of " + path + " is " + contentType );
                 response.addHeader( "content-type", contentType );
             }
+            IOUtils.copy( content, response.getOutputStream() );
+            response.getOutputStream().flush();
+        }
+        finally
+        {
+            content.close();
+        }
+    }
+
+    /**
+     * Display icon image
+     * 
+     * @param contentType Given MIME type
+     * @param response HTTP response
+     * @throws IOException If network IO or file system fails
+     */
+    @Module( path = "/icon.do" )
+    @Page( raw = true )
+    public void icon(
+                      @InputParameter( name = WebConstants.CONTENT_TYPE, type = InputParameterType.VARIABLE ) String contentType,
+                      @InputParameter( name = Constants.SERVLET_RESPONSE, type = InputParameterType.VARIABLE ) HttpServletResponse response )
+        throws IOException
+    {
+        response.addHeader( "content-type", streaming.getIconMimeType() );
+        InputStream content = streaming.openIcon( contentType );
+        try
+        {
             IOUtils.copy( content, response.getOutputStream() );
             response.getOutputStream().flush();
         }
@@ -92,17 +117,16 @@ public class ContentStreaming
      * @param response HTTP servlet response to stream content to
      * @throws IOException If network IO fails
      */
-    @Module( path = "/icon.do" )
+    @Module( path = "/thumbnail.do" )
     @Page( raw = true )
-    public void icon(
-                      @InputParameter( name = WebConstants.CONTENT_PATH, type = InputParameterType.VARIABLE ) String path,
-                      @InputParameter( name = Constants.SERVLET_RESPONSE, type = InputParameterType.VARIABLE ) HttpServletResponse response )
+    public void thumbnail(
+                           @InputParameter( name = WebConstants.CONTENT_PATH, type = InputParameterType.VARIABLE ) String path,
+                           @InputParameter( name = Constants.SERVLET_RESPONSE, type = InputParameterType.VARIABLE ) HttpServletResponse response )
         throws IOException
     {
         ContentId contentId = getContentId( path );
-        String contentType = streaming.getIconMimeType( contentId );
-        response.addHeader( "content-type", contentType );
-        InputStream content = streaming.openIcon( contentId );
+        response.addHeader( "content-type", streaming.getThumbnailMimeType() );
+        InputStream content = streaming.openThumbnail( contentId );
         try
         {
             IOUtils.copy( content, response.getOutputStream() );

@@ -2,14 +2,22 @@ package org.cyclopsgroup.gallerian.serv;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.servlet.ServletContext;
 
 import org.cyclopsgroup.gallerian.ContentId;
 import org.cyclopsgroup.gallerian.ContentStreamService;
+import org.cyclopsgroup.gallerian.Dimension;
 import org.cyclopsgroup.gallerian.spi.FileProvider;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.ServletContextAware;
 
 /**
@@ -18,28 +26,23 @@ import org.springframework.web.context.ServletContextAware;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class LocalContentStreamService
-    implements ContentStreamService, ServletContextAware
+    implements ContentStreamService, ServletContextAware, InitializingBean
 {
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getIconMimeType( ContentId id )
-    {
-        FileProvider file = listing.getFileProvider( id.getRepositoryName(), id.getPath() );
-        String contentMimeType = servletContext.getMimeType( id.getPath() );
-        if ( contentMimeType.equals( "image/jpeg" ) && file.getSize() < sizeThreshold )
-        {
-            return contentMimeType;
-        }
-        return servletContext.getMimeType( "x." + iconExtension );
-    }
-
     private static final String DEFAULT_ICON_EXTENSION = "png";
+
+    private static final int DEFAULT_ICON_HEIGHT = 72;
+
+    private static final int DEFAULT_ICON_WIDTH = 96;
 
     private String iconDirectory = new File( "./images" ).getAbsolutePath();
 
     private String iconExtension = DEFAULT_ICON_EXTENSION;
+
+    private int iconHeight = DEFAULT_ICON_HEIGHT;
+
+    private String iconMimeType;
+
+    private int iconWidth = DEFAULT_ICON_WIDTH;
 
     private final ServerSideContentListingService listing;
 
@@ -47,12 +50,27 @@ public class LocalContentStreamService
 
     private long sizeThreshold = 5 * 1024768L;
 
+    private ThumbnailStudio thumbnailStudio;
+
+    private ExecutorService threadPool = Executors.newFixedThreadPool( 5 );
+
     /**
      * @param listing Server side listing service
      */
     public LocalContentStreamService( ServerSideContentListingService listing )
     {
         this.listing = listing;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void afterPropertiesSet()
+        throws Exception
+    {
+        iconMimeType = servletContext.getMimeType( "x." + iconExtension );
+        thumbnailStudio = new ThumbnailStudio( iconWidth, iconHeight );
     }
 
     /**
@@ -64,11 +82,38 @@ public class LocalContentStreamService
     }
 
     /**
+     * @inheritDoc
+     */
+    @Override
+    public String getIconMimeType()
+    {
+        return iconMimeType;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Dimension getIconSize()
+    {
+        return new Dimension( iconWidth, iconHeight );
+    }
+
+    /**
      * @return Value of field sizeThreshold
      */
     public final long getSizeThreshold()
     {
         return sizeThreshold;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getThumbnailMimeType()
+    {
+        return "image/jpeg";
     }
 
     /**
@@ -90,35 +135,8 @@ public class LocalContentStreamService
      * @inheritDoc
      */
     @Override
-    public InputStream openIcon( ContentId id )
-        throws IOException
-    {
-        FileProvider file = listing.getFileProvider( id.getRepositoryName(), id.getPath() );
-        String contentType = servletContext.getMimeType( id.getPath() );
-        if ( contentType.equals( "image/jpeg" ) && file.getSize() < sizeThreshold )
-        {
-            return openThumbnailIcon( file );
-        }
-        return openMappedIcon( contentType );
-    }
-
-    private InputStream openThumbnailIcon( FileProvider file )
-        throws IOException
-    {
-        ThumbnailStudio s = new ThumbnailStudio();
-        InputStream in = file.open();
-        try
-        {
-            return s.openThumbnail( in, "jpeg" );
-        }
-        finally
-        {
-            in.close();
-        }
-    }
-
-    private InputStream openMappedIcon( String contentType )
-        throws IOException
+    public InputStream openIcon( String contentType )
+        throws FileNotFoundException
     {
         File iconDir = new File( iconDirectory );
         File icon;
@@ -138,6 +156,46 @@ public class LocalContentStreamService
     }
 
     /**
+     * @inheritDoc
+     */
+    @Override
+    public InputStream openThumbnail( ContentId id )
+        throws IOException
+    {
+        final FileProvider file = listing.getFileProvider( id.getRepositoryName(), id.getPath() );
+        Callable<InputStream> task = new Callable<InputStream>()
+        {
+            @Override
+            public InputStream call()
+                throws IOException
+            {
+                InputStream in = file.open();
+                try
+                {
+                    return thumbnailStudio.openThumbnail( in, "jpeg" );
+                }
+                finally
+                {
+                    in.close();
+                }
+            }
+        };
+        Future<InputStream> future = threadPool.submit( task );
+        try
+        {
+            return future.get();
+        }
+        catch ( InterruptedException e )
+        {
+            throw new RuntimeException( "Thread is interrupted", e );
+        }
+        catch ( ExecutionException e )
+        {
+            throw new IOException( "Couldn't open thumbnail for " + id, e );
+        }
+    }
+
+    /**
      * @param iconDirectory Value of field iconDirectory to set
      */
     public final void setIconDirectory( String iconDirectory )
@@ -151,6 +209,22 @@ public class LocalContentStreamService
     public final void setIconExtension( String iconType )
     {
         this.iconExtension = iconType;
+    }
+
+    /**
+     * @param iconHeight Value of field iconHeght to set
+     */
+    public final void setIconHeight( int iconHeight )
+    {
+        this.iconHeight = iconHeight;
+    }
+
+    /**
+     * @param iconWidth Value of field iconWidth to set
+     */
+    public final void setIconWidth( int iconWidth )
+    {
+        this.iconWidth = iconWidth;
     }
 
     /**

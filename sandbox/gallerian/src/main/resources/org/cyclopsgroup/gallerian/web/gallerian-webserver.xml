@@ -9,7 +9,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         class="org.cyclopsgroup.waterview.impl.valve.SetGlobalVariablesValve">
         <property name="variables">
             <map>
-                <entry key="contentListingService" value-ref="gallerian.ContentListingService" />
+                <entry key="listing" value-ref="gallerian.ContentListingService" />
+                <entry key="streaming" value-ref="gellerian.ContentStreamService" />
             </map>
         </property>
     </bean>
@@ -17,8 +18,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         class="org.cyclopsgroup.waterview.impl.module.SpringPackageModuleResolver">
         <constructor-arg>
             <list>
-                <value>org.cyclopsgroup.gallerian.web
-                </value>
+                <value>org.cyclopsgroup.gallerian.web</value>
             </list>
         </constructor-arg>
     </bean>

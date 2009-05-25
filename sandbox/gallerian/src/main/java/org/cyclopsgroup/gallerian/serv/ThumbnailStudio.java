@@ -11,13 +11,8 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 class ThumbnailStudio
 {
-    private static final Log LOG = LogFactory.getLog( ThumbnailStudio.class );
-
     private static class Obs
         implements ImageObserver
     {
@@ -43,19 +38,23 @@ class ThumbnailStudio
         }
     }
 
-    private final int maxHeight = 60;
+    private final int maxHeight;
 
-    private final int maxWidth = 60;
+    private final int maxWidth;
+
+    ThumbnailStudio( int maxHeight, int maxWidth )
+    {
+        this.maxHeight = maxHeight;
+        this.maxWidth = maxWidth;
+    }
 
     InputStream openThumbnail( InputStream sourceFile, String type )
         throws IOException
     {
-        LOG.info( "DISPLAY=" + System.getenv( "DISPLAY" ) );
-
         BufferedImage source = ImageIO.read( sourceFile );
         int width = maxWidth;
         int height = maxHeight;
-        Image image = source.getScaledInstance( width, height, Image.SCALE_FAST );
+        Image image = source.getScaledInstance( width, height, Image.SCALE_SMOOTH );
         BufferedImage target = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
         CountDownLatch latch = new CountDownLatch( 1 );
         target.getGraphics().drawImage( image, 0, 0, new Obs( latch ) );
@@ -70,6 +69,7 @@ class ThumbnailStudio
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         ImageIO.write( target, type, output );
         output.flush();
-        return new ByteArrayInputStream( output.toByteArray() );
+        byte[] bytes = output.toByteArray();
+        return new ByteArrayInputStream( bytes );
     }
 }

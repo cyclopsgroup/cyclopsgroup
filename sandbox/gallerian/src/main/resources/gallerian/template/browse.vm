@@ -23,18 +23,23 @@
                 <tr>
                     <td>
                         <a href="$file.name" title="$file.description">
-                            <img src="$file.name?icon.do" border="0"
-                                width="60" heigth="60" />
+                            #if($file.previewable)
+                            <img src="$file.name?thumbnail.do"
+                                width="$streaming.iconSize.width"
+                                height="$streaming.iconSize.height"
+                                border="0" alt="Click to see detail" />
+                            #else
+                            <img
+                                src="$servletRequest.contextPath/type/$file.mimeType?icon.do"
+                                border="0" width="$streaming.iconSize.height"
+                                height="$streaming.iconSize.height" alt="MIME type: $file.mimeType" />
+                            #end
                         </a>
                     </td>
-                    <td valign="top">
-                        <p>
-                            <b>$file.name</b>
-                            <br />
-                            $file.size bytes
-                            <br />
-                            <a href="$file.name?download.do">open</a>
-                        </p>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <a href="$file.name?download.do">$file.name</a>
                     </td>
                 </tr>
             </table>

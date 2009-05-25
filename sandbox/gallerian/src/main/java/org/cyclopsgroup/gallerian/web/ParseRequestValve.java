@@ -19,29 +19,83 @@ import org.cyclopsgroup.waterview.spi.WebContext;
 public class ParseRequestValve
     implements Valve
 {
+    private static final String BROWSE_ACTION = "/browse.do";
+
+    private static final String DEFAULT_CONTNET_PATH = "/c/";
+
+    private static final String DEFAULT_TYPE_PATH = "/type/";
+
+    private static final String DOWNLOAD_ACTION = "/download.do";
+
+    private static final String ICON_ACTION = "/icon.do";
+
+    private String startContentPath = DEFAULT_CONTNET_PATH;
+
+    private String startTypePath = DEFAULT_TYPE_PATH;
+
+    private String determineContentAction( String pathInfo, HttpServletRequest request, WebContext context )
+    {
+        String contentPath = pathInfo.substring( startContentPath.length() );
+        String action;
+        if ( pathInfo.endsWith( "/" ) )
+        {
+            action = BROWSE_ACTION;
+        }
+        else if ( StringUtils.isNotEmpty( request.getQueryString() ) )
+        {
+            action = "/" + request.getQueryString();
+        }
+        else
+        {
+            action = DOWNLOAD_ACTION;
+        }
+        if ( StringUtils.isEmpty( contentPath ) )
+        {
+            contentPath = "/";
+        }
+        else if ( contentPath.charAt( contentPath.length() - 1 ) == '/' )
+        {
+            contentPath = contentPath.substring( 0, contentPath.length() - 1 );
+        }
+        if ( contentPath.charAt( 0 ) != '/' )
+        {
+            contentPath = "/" + contentPath;
+        }
+        context.setVariable( WebConstants.CONTENT_PATH, contentPath );
+        return action;
+    }
+
+    private String determineTypeAction( String pathInfo, HttpServletRequest request, WebContext context )
+    {
+        String contentType = pathInfo.substring( startTypePath.length() );
+        context.setVariable( WebConstants.CONTENT_TYPE, contentType );
+        String action;
+        if ( StringUtils.isEmpty( request.getQueryString() ) )
+        {
+            action = ICON_ACTION;
+        }
+        else
+        {
+            action = request.getQueryString();
+        }
+        return "/" + action;
+    }
+
     /**
      * @return Value of field startPath
      */
-    public final String getStartPath()
+    public final String getStartContentPath()
     {
-        return startPath;
+        return startContentPath;
     }
 
     /**
-     * @param startPath Value of field startPath to set
+     * @return Value of field startTypePath
      */
-    public final void setStartPath( String startPath )
+    public final String getStartTypePath()
     {
-        this.startPath = startPath;
+        return startTypePath;
     }
-
-    private static final String BROWSE_ACTION = "/browse.do";
-
-    private static final String DEFAULT_ACTION = "/download.do";
-
-    private static final String DEFAULT_START_PATH = "/c/";
-
-    private String startPath = DEFAULT_START_PATH;
 
     /**
      * @inheritDoc
@@ -61,35 +115,13 @@ public class ParseRequestValve
         {
             throw new IllegalStateException( "Path info is NULL" );
         }
-        else if ( pathInfo.startsWith( startPath ) )
+        else if ( pathInfo.startsWith( startContentPath ) )
         {
-            String contentPath = pathInfo.substring( startPath.length() );
-
-            if ( pathInfo.endsWith( "/" ) )
-            {
-                action = BROWSE_ACTION;
-            }
-            else if(StringUtils.isNotEmpty( request.getQueryString() ))
-            {
-                action = "/" + request.getQueryString();
-            }
-            else
-            {
-                action = DEFAULT_ACTION;
-            }
-            if ( StringUtils.isEmpty( contentPath ) )
-            {
-                contentPath = "/";
-            }
-            else if ( contentPath.charAt( contentPath.length() - 1 ) == '/' )
-            {
-                contentPath = contentPath.substring( 0, contentPath.length() - 1 );
-            }
-            if ( contentPath.charAt( 0 ) != '/' )
-            {
-                contentPath = "/" + contentPath;
-            }
-            wc.setVariable( WebConstants.CONTENT_PATH, contentPath );
+            action = determineContentAction( pathInfo, request, wc );
+        }
+        else if ( pathInfo.startsWith( startTypePath ) )
+        {
+            action = determineTypeAction( pathInfo, request, wc );
         }
         else
         {
@@ -97,5 +129,21 @@ public class ParseRequestValve
         }
         context.setActions( new ArrayList<String>( Arrays.asList( action ) ) );
         context.invokeNext();
+    }
+
+    /**
+     * @param startPath Value of field startPath to set
+     */
+    public final void setStartContentPath( String startPath )
+    {
+        this.startContentPath = startPath;
+    }
+
+    /**
+     * @param startTypePath Value of field startTypePath to set
+     */
+    public final void setStartTypePath( String startTypePath )
+    {
+        this.startTypePath = startTypePath;
     }
 }

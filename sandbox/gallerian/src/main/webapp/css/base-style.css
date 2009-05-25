@@ -23,5 +23,6 @@ span.folderLink {
 span.fileLink {
 	display: inline-block;
 	width: 184px;
-	height: 60px;
+	padding: 10px 0px 10px 0px;
+	vertical-align: bottom;
 }

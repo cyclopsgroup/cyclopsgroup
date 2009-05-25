@@ -21,19 +21,30 @@ public interface ContentStreamService
         throws IOException;
 
     /**
-     * Open stream of icon
+     * Open stream of icon for a content type
      * 
-     * @param id Id of content
+     * @param contentType MIME content type
      * @return Input stream of icon
      * @throws IOException If network or filesystem fails
      */
-    InputStream openIcon( ContentId id )
+    InputStream openIcon( String contentType )
+        throws IOException;
+
+    InputStream openThumbnail( ContentId id )
         throws IOException;
 
     /**
-     * @param id Content ID
      * @return MIME type of icon
      */
-    String getIconMimeType( ContentId id );
+    String getIconMimeType();
 
+    /**
+     * @return Thumbnail MIME type
+     */
+    String getThumbnailMimeType();
+
+    /**
+     * @return Size of icon
+     */
+    Dimension getIconSize();
 }

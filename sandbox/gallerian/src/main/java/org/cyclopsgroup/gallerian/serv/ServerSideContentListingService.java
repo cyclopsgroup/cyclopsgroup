@@ -9,6 +9,9 @@ import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import javax.servlet.ServletContext;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.gallerian.Content;
 import org.cyclopsgroup.gallerian.ContentId;
@@ -20,6 +23,7 @@ import org.cyclopsgroup.gallerian.spi.FileProvider;
 import org.cyclopsgroup.gallerian.spi.FolderProvider;
 import org.cyclopsgroup.gallerian.spi.RepositoryProvider;
 import org.cyclopsgroup.gallerian.spi.RepositoryProviderFactory;
+import org.springframework.web.context.ServletContextAware;
 
 /**
  * Default implementation of {@link ContentListingService} that takes advantage of {@link RepositoryProviderFactory}
@@ -27,15 +31,20 @@ import org.cyclopsgroup.gallerian.spi.RepositoryProviderFactory;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class ServerSideContentListingService
-    implements ContentListingService, ServerSideContentListingServiceMBean
+    implements ContentListingService, ServerSideContentListingServiceMBean, ServletContextAware
 {
-
     private static final ContentComparator CONTENT_COMPARATOR = new ContentComparator();
+
+    private static final long DEFAULT_PREVIEW_SIZE_THRESHOLD = 1048578L * 2;
 
     private static final FolderComparator FOLDER_COMPARATOR = new FolderComparator();
 
+    private long previewSizeThreshold = DEFAULT_PREVIEW_SIZE_THRESHOLD;
+    
     private final ConcurrentMap<String, RepositoryProvider> providers =
         new ConcurrentHashMap<String, RepositoryProvider>();
+
+    private ServletContext servletContext;
 
     private RepositoryProvider doRegisterRepository( String name, String uri )
     {
@@ -62,25 +71,7 @@ public class ServerSideContentListingService
         }
         return provider;
     }
-
-    /**
-     * @param repositoryName Name of repository
-     * @param path Full path of file starting with slash
-     * @return File provider instance
-     */
-    FileProvider getFileProvider( String repositoryName, String path )
-    {
-        Validate.notNull( path, "Path can't be NULL" );
-        Validate.notNull( repositoryName, "Must specify a repository" );
-        RepositoryProvider repo = getRespositoryProvider( repositoryName );
-        FileProvider file = repo.findFile( path );
-        if ( file == null )
-        {
-            throw new IllegalArgumentException( "No such file " + path + " in repository " + repositoryName );
-        }
-        return file;
-    }
-
+    
     /**
      * @inheritDoc
      */
@@ -98,6 +89,24 @@ public class ServerSideContentListingService
     public Content getContent( String repositoryName, String folderPath, String name )
     {
         return getContent( repositoryName, folderPath + "/" + name );
+    }
+
+    /**
+     * @param repositoryName Name of repository
+     * @param path Full path of file starting with slash
+     * @return File provider instance
+     */
+    FileProvider getFileProvider( String repositoryName, String path )
+    {
+        Validate.notNull( path, "Path can't be NULL" );
+        Validate.notNull( repositoryName, "Must specify a repository" );
+        RepositoryProvider repo = getRespositoryProvider( repositoryName );
+        FileProvider file = repo.findFile( path );
+        if ( file == null )
+        {
+            throw new IllegalArgumentException( "No such file " + path + " in repository " + repositoryName );
+        }
+        return file;
     }
 
     /**
@@ -134,6 +143,14 @@ public class ServerSideContentListingService
     {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    /**
+     * @return Value of field previewSizeThreshold
+     */
+    public final long getPreviewSizeThreshold()
+    {
+        return previewSizeThreshold;
     }
 
     /**
@@ -217,6 +234,14 @@ public class ServerSideContentListingService
         id.setPath( file.getPath() );
         id.setRepositoryName( repositoryName );
         content.setId( id );
+        
+        String mimeType = servletContext.getMimeType( file.getPath() );
+        if(StringUtils.isEmpty( mimeType ))
+        {
+            mimeType = "unknown";
+        }
+        content.setMimeType( mimeType );
+        content.setPreviewable( content.getSize() < previewSizeThreshold && mimeType.startsWith( "image/" ) );
         return content;
     }
 
@@ -274,6 +299,23 @@ public class ServerSideContentListingService
     {
         // TODO Auto-generated method stub
 
+    }
+
+    /**
+     * @param previewSizeThreshold Value of field previewSizeThreshold to set
+     */
+    public final void setPreviewSizeThreshold( long previewSizeThreshold )
+    {
+        this.previewSizeThreshold = previewSizeThreshold;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void setServletContext( ServletContext context )
+    {
+        this.servletContext = context;
     }
 
 }
