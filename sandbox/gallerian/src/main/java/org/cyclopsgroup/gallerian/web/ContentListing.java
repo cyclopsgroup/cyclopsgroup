@@ -4,15 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.gallerian.ContentListingService;
-import org.cyclopsgroup.waterview.Constants;
 import org.cyclopsgroup.waterview.InputParameter;
 import org.cyclopsgroup.waterview.InputParameterType;
 import org.cyclopsgroup.waterview.Module;
-import org.cyclopsgroup.waterview.Page;
 
 /**
  * Web module that does content listing
@@ -60,20 +56,5 @@ public class ContentListing
             result.put( "files", listing.listContents( repository, subPath, null ) );
         }
         return result;
-    }
-
-    /**
-     * Stream content to http response
-     * 
-     * @param path Path of content
-     * @param response Http servlet response to stream content to
-     */
-    @Module( path = "/download.do" )
-    @Page( raw = true )
-    public void download(
-                          @InputParameter( name = "contentPath", type = InputParameterType.VARIABLE ) String path,
-                          @InputParameter( name = Constants.SERVLET_RESPONSE, type = InputParameterType.VARIABLE ) HttpServletResponse response )
-    {
-
     }
 }

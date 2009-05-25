@@ -1,5 +1,7 @@
 package org.cyclopsgroup.gallerian.jcvfs;
 
+import java.io.InputStream;
+
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
 import org.cyclopsgroup.gallerian.spi.FileProvider;
@@ -68,6 +70,22 @@ class VfsFileProvider
         catch ( FileSystemException e )
         {
             throw new VfsRuntimeException("Can't get size of " + fileObject, e);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public InputStream open()
+    {
+        try
+        {
+            return fileObject.getContent().getInputStream();
+        }
+        catch ( FileSystemException e )
+        {
+            throw new VfsRuntimeException("Can't get open InputStream of " + fileObject, e);
         }
     }
 

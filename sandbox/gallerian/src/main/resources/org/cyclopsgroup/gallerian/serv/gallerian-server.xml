@@ -12,6 +12,12 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
             </map>
         </property>
     </bean>
+    <bean name="gellerian.ContentStreamService"
+        class="org.cyclopsgroup.gallerian.serv.LocalContentStreamService">
+        <constructor-arg ref="gallerian.ContentListingService" />
+        <property name="iconDirectory"
+            value="/home/jiaqi/.icons/OSX/scalable/mimetypes" />
+    </bean>
     <bean class="org.springframework.jmx.export.MBeanExporter"
         lazy-init="false">
         <property name="beans">

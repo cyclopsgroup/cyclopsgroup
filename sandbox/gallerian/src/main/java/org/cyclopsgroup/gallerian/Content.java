@@ -15,6 +15,9 @@ public class Content
     private String description;
 
     @XmlElement
+    private ContentId id;
+
+    @XmlElement
     private long lastUpdated;
 
     @XmlElement
@@ -22,7 +25,7 @@ public class Content
 
     @XmlElement
     private long size;
-    
+
     /**
      * @return Value of field description
      */
@@ -32,13 +35,21 @@ public class Content
     }
     
     /**
+     * @return Value of field id
+     */
+    public final ContentId getId()
+    {
+        return id;
+    }
+    
+    /**
      * @return Last update timestamp
      */
     public final long getLastUpdated()
     {
         return lastUpdated;
     }
-
+    
     /**
      * @return Name of content
      */
@@ -48,7 +59,7 @@ public class Content
     }
 
     /**
-     * @return
+     * @return Number of bytes in this content
      */
     public final long getSize()
     {
@@ -63,16 +74,33 @@ public class Content
         this.description = description;
     }
 
+    /**
+     * @param id Value of field id to set
+     */
+    public final void setId( ContentId id )
+    {
+        this.id = id;
+    }
+
+    /**
+     * @param lastUpdated Timestamp of last update
+     */
     public final void setLastUpdated( long lastUpdated )
     {
         this.lastUpdated = lastUpdated;
     }
 
+    /**
+     * @param name Base name of content
+     */
     public final void setName( String name )
     {
         this.name = name;
     }
 
+    /**
+     * @param size Number of bytes in content
+     */
     public final void setSize( long size )
     {
         this.size = size;

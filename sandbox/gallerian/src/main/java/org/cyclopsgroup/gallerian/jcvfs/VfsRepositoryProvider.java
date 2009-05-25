@@ -47,11 +47,21 @@ class VfsRepositoryProvider
         try
         {
             fileObject = fileSystem.resolveFile( rootFolder.fileObject, "." + path );
+            if ( !fileObject.exists() )
+            {
+                throw new IllegalArgumentException( "File " + path + " in " + this + " doesn't exist" );
+            }
+            if ( fileObject.getType() != FileType.FILE )
+            {
+                throw new IllegalArgumentException( "File " + path + " in " + this + " is not a file, but " +
+                    fileObject.getType() );
+            }
         }
         catch ( FileSystemException e )
         {
             throw new VfsRuntimeException( "Can't find folder " + path + " in " + this, e );
         }
+
         return new VfsFileProvider( path, fileObject, this );
     }
 
@@ -65,6 +75,15 @@ class VfsRepositoryProvider
         try
         {
             fileObject = fileSystem.resolveFile( rootFolder.fileObject, "." + path );
+            if ( !fileObject.exists() )
+            {
+                throw new IllegalArgumentException( "Folder " + path + " in " + this + " doesn't exist" );
+            }
+            if ( fileObject.getType() != FileType.FOLDER )
+            {
+                throw new IllegalArgumentException( "Folder " + path + " in " + this + " is not a folder, but " +
+                    fileObject.getType() );
+            }
         }
         catch ( FileSystemException e )
         {

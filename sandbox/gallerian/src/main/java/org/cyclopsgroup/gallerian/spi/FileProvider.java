@@ -1,5 +1,7 @@
 package org.cyclopsgroup.gallerian.spi;
 
+import java.io.InputStream;
+
 /**
  * Interface that describes a file
  * 
@@ -31,4 +33,9 @@ public interface FileProvider
      * @return Description of content
      */
     String getDescription();
+    
+    /**
+     * @return Input stream of file content
+     */
+    InputStream open();
 }

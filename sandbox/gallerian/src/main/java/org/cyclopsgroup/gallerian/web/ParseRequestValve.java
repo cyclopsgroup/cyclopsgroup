@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.waterview.spi.Valve;
 import org.cyclopsgroup.waterview.spi.ValveContext;
@@ -35,7 +37,7 @@ public class ParseRequestValve
 
     private static final String BROWSE_ACTION = "/browse.do";
 
-    private static final String DOWNLOAD_ACTION = "/download.do";
+    private static final String DEFAULT_ACTION = "/download.do";
 
     private static final String DEFAULT_START_PATH = "/c/";
 
@@ -50,8 +52,8 @@ public class ParseRequestValve
     {
         WebContext wc = context.getWebContext();
 
-        String pathInfo =
-            wc.getServletRequest().getServletPath() + StringUtils.trimToEmpty( wc.getServletRequest().getPathInfo() );
+        HttpServletRequest request = wc.getServletRequest();
+        String pathInfo = request.getServletPath() + StringUtils.trimToEmpty( wc.getServletRequest().getPathInfo() );
 
         String action;
 
@@ -67,9 +69,13 @@ public class ParseRequestValve
             {
                 action = BROWSE_ACTION;
             }
+            else if(StringUtils.isNotEmpty( request.getQueryString() ))
+            {
+                action = "/" + request.getQueryString();
+            }
             else
             {
-                action = DOWNLOAD_ACTION;
+                action = DEFAULT_ACTION;
             }
             if ( StringUtils.isEmpty( contentPath ) )
             {
@@ -83,7 +89,7 @@ public class ParseRequestValve
             {
                 contentPath = "/" + contentPath;
             }
-            wc.setVariable( "contentPath", contentPath );
+            wc.setVariable( WebConstants.CONTENT_PATH, contentPath );
         }
         else
         {

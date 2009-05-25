@@ -19,7 +19,25 @@
     <p>
         #foreach($file in $contents.files)
         <span class="fileLink">
-            <a href="$file.name" title="$file.description">$file.name</a>
+            <table border="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <a href="$file.name" title="$file.description">
+                            <img src="$file.name?icon.do" border="0"
+                                width="60" heigth="60" />
+                        </a>
+                    </td>
+                    <td valign="top">
+                        <p>
+                            <b>$file.name</b>
+                            <br />
+                            $file.size bytes
+                            <br />
+                            <a href="$file.name?download.do">open</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
         </span>
         #end
     </p>

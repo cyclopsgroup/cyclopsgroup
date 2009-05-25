@@ -1,6 +1,7 @@
 package org.cyclopsgroup.gallerian.serv;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.gallerian.Content;
+import org.cyclopsgroup.gallerian.ContentId;
 import org.cyclopsgroup.gallerian.ContentListingService;
 import org.cyclopsgroup.gallerian.ContentRepository;
 import org.cyclopsgroup.gallerian.Folder;
@@ -27,6 +29,11 @@ import org.cyclopsgroup.gallerian.spi.RepositoryProviderFactory;
 public class ServerSideContentListingService
     implements ContentListingService, ServerSideContentListingServiceMBean
 {
+
+    private static final ContentComparator CONTENT_COMPARATOR = new ContentComparator();
+
+    private static final FolderComparator FOLDER_COMPARATOR = new FolderComparator();
+
     private final ConcurrentMap<String, RepositoryProvider> providers =
         new ConcurrentHashMap<String, RepositoryProvider>();
 
@@ -57,13 +64,31 @@ public class ServerSideContentListingService
     }
 
     /**
+     * @param repositoryName Name of repository
+     * @param path Full path of file starting with slash
+     * @return File provider instance
+     */
+    FileProvider getFileProvider( String repositoryName, String path )
+    {
+        Validate.notNull( path, "Path can't be NULL" );
+        Validate.notNull( repositoryName, "Must specify a repository" );
+        RepositoryProvider repo = getRespositoryProvider( repositoryName );
+        FileProvider file = repo.findFile( path );
+        if ( file == null )
+        {
+            throw new IllegalArgumentException( "No such file " + path + " in repository " + repositoryName );
+        }
+        return file;
+    }
+
+    /**
      * @inheritDoc
      */
     @Override
     public Content getContent( String repositoryName, String path )
     {
-        // TODO Auto-generated method stub
-        return null;
+        FileProvider file = getFileProvider( repositoryName, path );
+        return newContent( file, repositoryName );
     }
 
     /**
@@ -72,8 +97,7 @@ public class ServerSideContentListingService
     @Override
     public Content getContent( String repositoryName, String folderPath, String name )
     {
-        // TODO Auto-generated method stub
-        return null;
+        return getContent( repositoryName, folderPath + "/" + name );
     }
 
     /**
@@ -150,9 +174,10 @@ public class ServerSideContentListingService
         {
             if ( file.getName().charAt( 0 ) != '.' )
             {
-                result.add( newContent( file ) );
+                result.add( newContent( file, repositoryName ) );
             }
         }
+        Collections.sort( result, CONTENT_COMPARATOR );
         return result;
     }
 
@@ -176,16 +201,22 @@ public class ServerSideContentListingService
                 result.add( newFolder( folder ) );
             }
         }
+        Collections.sort( result, FOLDER_COMPARATOR );
         return result;
     }
 
-    private Content newContent( FileProvider file )
+    private Content newContent( FileProvider file, String repositoryName )
     {
         Content content = new Content();
         content.setName( file.getName() );
         content.setLastUpdated( file.getLastUpdate() );
         content.setSize( file.getSize() );
         content.setDescription( file.getDescription() );
+
+        ContentId id = new ContentId();
+        id.setPath( file.getPath() );
+        id.setRepositoryName( repositoryName );
+        content.setId( id );
         return content;
     }
 

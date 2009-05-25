@@ -6,4 +6,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     <bean class="org.cyclopsgroup.gallerian.web.ContentListing">
         <constructor-arg ref="gallerian.ContentListingService" />
     </bean>
+    <bean class="org.cyclopsgroup.gallerian.web.ContentStreaming">
+        <constructor-arg ref="gellerian.ContentStreamService" />
+    </bean>
 </beans>
