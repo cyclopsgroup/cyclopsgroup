@@ -115,13 +115,29 @@ public class RenderPageValve
         }
 
         // Direct render for raw page
-        if ( pageModule.isRaw() )
+        try
         {
-            pageModule.render( wc );
-            context.invokeNext();
-            return;
+            if ( pageModule.isRaw() )
+            {
+                renderRaw( response, context, pageModule );
+            }
+            else
+            {
+                renderLayout( response, context, pageModule, page );
+            }
         }
+        catch ( Throwable e )
+        {
+            response.addHeader( "content-type", "text/plain" );
+            PrintWriter output = new PrintWriter( response.getWriter(), true );
+            e.printStackTrace( output );
+            output.flush();
+        }
+    }
 
+    private void renderLayout( HttpServletResponse response, ValveContext context, PageModule pageModule, String page )
+        throws IOException
+    {
         String layoutTempalte;
         if ( useLayout )
         {
@@ -136,8 +152,8 @@ public class RenderPageValve
         {
             LOG.debug( "Rending template " + layoutTempalte + " for page " + page );
         }
-        wc.setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, webModule ) );
-        RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, wc );
+        context.getWebContext().setVariable( RuntimePage.PAGE_NAME, new RuntimePage( page, pageModule ) );
+        RuntimeRenderer r = new RuntimeRenderer( renderer, moduleResolver, context.getWebContext() );
         PrintWriter output = response.getWriter();
         try
         {
@@ -148,5 +164,12 @@ public class RenderPageValve
         {
             output.flush();
         }
+    }
+
+    private void renderRaw( HttpServletResponse response, ValveContext context, PageModule pageModule )
+        throws IOException
+    {
+        pageModule.render( context.getWebContext() );
+        context.invokeNext();
     }
 }
