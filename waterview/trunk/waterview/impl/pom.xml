@@ -42,10 +42,10 @@
             <version>1.6-beta2</version>
         </dependency>
         <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<version>4.5</version>
-        	<scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmock</groupId>
@@ -54,9 +54,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        	<groupId>commons-beanutils</groupId>
-        	<artifactId>commons-beanutils</artifactId>
-        	<version>1.8.0</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -73,16 +73,10 @@
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty6-plugin</artifactId>
+                <artifactId>maven-jetty-plugin</artifactId>
                 <configuration>
-                    <goalPrefix>jetty6</goalPrefix>
-                    <useTestClasspath>true</useTestClasspath>
-                    <connectors>
-                        <connector
-                            implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8080</port>
-                        </connector>
-                    </connectors>
+                    <goalPrefix>jetty</goalPrefix>
+                    <jettyConfig>src/test/config/jetty.xml</jettyConfig>
                     <contextPath>/</contextPath>
                 </configuration>
             </plugin>
