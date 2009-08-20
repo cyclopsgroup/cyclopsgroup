@@ -1,78 +1,75 @@
 <div>
-    <div id="sideContent">
-        <h2>
-            Lastest 20 photos on
-            <a href="http://flickr.com/photos/guojiaqi">Flickr</a>
-        </h2>
-        <!--
-            #set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
-            #set($rss=$xmltool.parseUrl($rssurl))
-            #set($items=$rss.selectNodes("//channel/item"))
-            #set($groups=$xmltool.groupBy($items, 3))
-        -->
-        <table cellspacing="10" border="0">
-            #foreach($group in $groups)
-            <tr>
-                #foreach($item in $group)
-                <td>
-                    <a href="$item.elementText('link')">
-                        #set($thumbnail=$item.selectSingleNode('media:thumbnail'))
-                        <img src="$thumbnail.attribute('url').value"
-                            width="$thumbnail.attribute('width').value"
-                            height="$thumbnail.attribute('height').value"
-                            alt="$item.elementText('title') from flickr.com" />
-                    </a>
-                </td>
-                #end
-            </tr>
-            #end
-        </table>
-        <h2>
-            <a href="http://crazytmac.deviantart.com">
-                Photos on deviantart.com
-            </a>
-        </h2>
-        <h2>
-            Albums at
-            <a href="http://picasaweb.google.com/crazytmac">
-                Google Picasa
-            </a>
-        </h2>
-        <!--
-            #set($rssurl="http://picasaweb.google.com/data/feed/base/user/crazytmac?category=album&alt=rss")
-            #set($rss=$xmltool.parseUrl($rssurl))
-            #set($items=$rss.selectNodes("//channel/item"))
-        -->
-        <ul>
-            #foreach($item in $items)
-            <li>
-                <a href="$item.elementText('link')">
-                    $item.elementText("title")
-                </a>
-            </li>
-            #end
-        </ul>
-    </div>
-    <div id="mainContent" style="width:540px">
-        <h2>Slide Show</h2>
-        <div>
-            <iframe
-                src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
-                align="middle" frameborder="0" height="480" width="100%"
-                scrolling="no">
-            </iframe>
-        </div>
-        <h2>Washington, evergreen state</h2>
-        <div id="mapSeattleDiv" style="height: 720px"></div>
-        <p />
-    </div>
-    <script
-        src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAANa1GfVbbfT8lsHBl2cCLwhRUUmft2R-MhfEHSBI1DlJS1CV7vRRiB-a6fUTmQHkrhxvyUVxiElEDEQ"
-        type="text/javascript">
-    </script>
-    <script type="text/javascript">
-        <![CDATA[
-            #parse("include/geo_js.vm")
-        ]]>
-    </script>
+	<div id="sideContent">
+		<h2>
+			Lastest 20 photos on
+			<a href="http://flickr.com/photos/guojiaqi">Flickr</a>
+		</h2>
+		<!--
+			#set($rssurl="http://api.flickr.com/services/feeds/photos_public.gne?id=68975111@N00&tags=photography&format=rss_200")
+			#set($rss=$xmltool.parseUrl($rssurl))
+			#set($items=$rss.selectNodes("//channel/item"))
+			#set($groups=$xmltool.groupBy($items, 3))
+		-->
+		<table cellspacing="10" border="0">
+			#foreach($group in $groups)
+			<tr>
+				#foreach($item in $group)
+				<td>
+					<a href="$item.elementText('link')">
+						#set($thumbnail=$item.selectSingleNode('media:thumbnail'))
+						<img src="$thumbnail.attribute('url').value" width="$thumbnail.attribute('width').value"
+							height="$thumbnail.attribute('height').value" alt="$item.elementText('title') from flickr.com" />
+					</a>
+				</td>
+				#end
+			</tr>
+			#end
+		</table>
+	</div>
+	<div id="mainContent" style="width:540px">
+		<h2>Flickr Slide Show</h2>
+		<div>
+			<iframe
+				src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
+				align="middle" frameborder="0" height="480" width="100%" scrolling="no">
+			</iframe>
+		</div>
+		<h2>More details</h2>
+		<table border="0" width="100%" style="text-align: center">
+			<tr>
+				<td>
+					<a href="http://crazytmac.deviantart.com/">
+						<img
+							src="http://farm3.static.flickr.com/2221/3839301234_2f60a1035b_o.png"
+							alt="DeviantArt.com" />
+					</a>
+				</td>
+				<td>
+					<a href="http://picasaweb.google.com/crazytmac">
+						<img src="http://lh5.ggpht.com/s/v/55.10/img/logo/pwa-en_US.gif"
+							border="0" alt="PicasaWeb" />
+					</a>
+				</td>
+				<td>
+					<a href="http://www.flickr.com/photos/guojiaqi">
+						<img src="http://l.yimg.com/g/images/flickr_logo.gif" border="0"
+							alt="Flickr" />
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="http://crazytmac.deviantart.com/">DeviantArt</a>
+				</td>
+				<td>
+					<a href="http://picasaweb.google.com/crazytmac">PicasaWeb</a>
+				</td>
+				<td>
+					<a href="http://www.flickr.com/photos/guojiaqi">Flickr
+					</a>
+				</td>
+
+			</tr>
+		</table>
+	</div>
 </div>

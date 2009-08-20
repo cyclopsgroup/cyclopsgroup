@@ -1,137 +1,75 @@
 <div>
-    <div id="sideContent">
-        <h2>Latest updates</h2>
-        <p>
-            [10/10/2008] Adding a small
-            <a href="forum.html">answer machine</a>
-            for this page.
-        </p>
-        <p>
-            [04/06/2007] Calling Google Map API to display photos.
-            <a href="photos.html">Check it out</a>
-            , you won't be disappointed.
-        </p>
-        <p>
-            [12/15/2006] Website is completely redesigned. New theme is
-            inspired by
-            <a href="http://www.deviantart.com/deviation/40788653/">
-                intravero
+	<div id="sideContent">
+		<h2>Latest updates</h2>
+		<p>
+			[10/10/2008] Adding a small
+			<a href="forum.html">answer machine</a>
+			for this page.
+		</p>
+		<p>
+			[12/15/2006] Website is completely redesigned. New theme is
+			inspired
+			by
+			<a href="http://www.deviantart.com/deviation/40788653/">
+				intravero
             </a>
-            from
-            <a href="http://deviantart.com">deviantart.com</a>
-            .
-        </p>
-        <h2>Links</h2>
-        <ul>
-            <li>
-                <a href="http://cyclopsgroup.org">
-                    Back to cyclopsgroup.org
+			from
+			<a href="http://deviantart.com">deviantart.com</a>
+			.
+		</p>
+		<h2>Several Friends</h2>
+		<ul>
+			<li>
+				<a href="http://cyclopsgroup.org">
+					Back to cyclopsgroup.org
                 </a>
-            </li>
-            <li>
-                <a href="http://utd.edu/~xuying.zhao">
-                    Xuying's home page
+			</li>
+			<li>
+				<a href="http://utd.edu/~xuying.zhao">
+					Xuying's home page
                 </a>
-            </li>
-            <li>
-                <a href="http://chinajoeblack.spaces.live.com">
-                    Crazy TMac's MSN space
+			</li>
+			<li>
+				<a href="http://chinajoeblack.spaces.live.com">
+					Crazy TMac's MSN space
                 </a>
-            </li>
-        </ul>
-    </div>
-    <div id="mainContent">
-        <h2>About me</h2>
-        <p>
-            I was born and grew up in a small town in Xi'an, China. In
-            the last 10 years I've moved across Zhejiang, Shanghai in
-            China, Texas, Virgina and Washington in USA. Now I work and
-            live in Seattle, Washington.
+			</li>
+		</ul>
+		<p>
+			<a href="http://www.imsdb.com/transcripts/Futurama-Godfellas.html">
+				<img
+					src="http://farm4.static.flickr.com/3474/3839219124_16a46da337_o.jpg"
+					border="0" alt="Futurama - Godfellas" />
+			</a>
+		</p>
+	</div>
+	<div id="mainContent">
+		<h2>"Do Things Right"</h2>
+		<center>GOD</center>
+		<p style="margin-left: 80px">Bender, being God isn't easy. If you do too much, people
+			get dependent on you. And if you do nothing, they lose hope. You have
+			to use a light touch, like a safecracker or a pickpocket.</p>
+		<center>BENDER</center>
+		<p style="margin-left: 80px">Or a guy who burns down a bar for the insurance money.</p>
+		<center>GOD</center>
+		<p style="margin-left: 80px">
+			Yes, if he makes it look like an electrical thing. If you
+			do things right, people won't be sure you've done anything at all.
+		</p>
+		<p>
+			<small>-- by God, in Godfellas, Futurama</small>
+		</p>
+		<h2>About Jiaqi (&#37101;&#20339;&#29734;)</h2>
+		<p>
+			I was born in Yanliang, a small town of in Xi'an, China. In last 15
+			years I've lived in Xi'an, Hangzhou, Shanghai in China, Dallas, DC
+			and Seattle in United States. In my professional career I'm a
+			software engineer expert in Java and open source projects, while my
+			interests also include photography, cinematography and travel.
         </p>
-        <p>
-            I'm a big fan of Java software development and open source
-            projects while my interest towards software is not limited
-            to Java.
-            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
-            is my code portfolio.
-        </p>
-        <p>
-            Contact me with
-            <a href="mailto:jiaqi.guo@gmail.com">jiaqi.guo@gmail.com</a>
-            or
-            <a href="forum.html">my new answer machine</a>
-            .
-        </p>
-        <h2>Favorite Quotes</h2>
-        <h3>God says</h3>
-        <p>
-            God: Bender, being God isn't easy. If you do too much,
-            people
-            get dependent on you. And if you do nothing, they
-            lose hope.
-            You have to use a light touch, like a safecracker
-            or a
-            pickpocket.</p>
-        <p>
-            Bender: Or a guy who burns down a bar for the insurance
-            money.</p>
-        <p>
-            God: Yes, if he makes it look like an electrical
-            thing. If you
-            do things right, people won't be sure you've done anything
-            at all.</p>
-        <p>
-            <small>-- by God, in Godfellas, Futurama</small>
-        </p>
-        <h3>Zen of programming</h3>
-        <p>
-            Beautiful is better than ugly
-            <br />
-            Explicit is better than implicit
-            <br />
-            Simple is better than complex
-            <br />
-            Complex is better than complicated
-            <br />
-            Flat is better than nested
-            <br />
-            Sparse is better than dense
-            <br />
-            Readability counts
-            <br />
-            Special cases aren't special enough to break the rules
-            <br />
-            Although practicality beats purity
-            <br />
-            Errors should never pass silently
-            <br />
-            Unless explicitly silenced
-            <br />
-            In the face of ambiguity, refuse the temptation to guess
-            <br />
-            There should be one -- and preferably only one -- obvious
-            way to do it
-            <br />
-            Now it better than never
-            <br />
-            Although never is often better than *right* now
-            <br />
-            If the implementation is hard to explain, it's a bad idea
-            <br />
-            If the implementation is easy to explain, it may be a good
-            idea
-            <br />
-            Namespaces are one honking great idea -- let's do more of
-            those!
-        </p>
-        <p>
-            <small>
-                -- quoted from a T-shirt in
-                <a href="http://pycon.org">PyCon</a>
-                , Washington DC, 2004. It talks about Python but it
-                applies to other language very well.
-            </small>
-        </p>
-
-    </div>
+		<p>
+			<a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
+			is a portfolio of my nonprofessional work.
+		</p>
+	</div>
 </div>

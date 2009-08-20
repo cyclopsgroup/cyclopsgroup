@@ -17,7 +17,7 @@
             //<![CDATA[
             _uacct = "UA-76203-1";
             urchinTracker();
-            
+
             document.onload = function() {};
         //]]>
         </script>
@@ -37,8 +37,8 @@
                     <table width="100%" border="0">
                         <tr>
                             <td>
-                                2003~2008 CyclopsGroup.org. All rights
-                                reserved. 
+                                2003~2009 CyclopsGroup.org. All rights
+                                reserved.
                             </td>
                             <td align="right">
                                 <table border="0">
