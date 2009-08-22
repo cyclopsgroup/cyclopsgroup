@@ -10,13 +10,12 @@ import java.lang.annotation.Target;
  * Annotation that marks another annotation as a conversion flag
  */
 @Documented
-@Target(ElementType.ANNOTATION_TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Target( ElementType.ANNOTATION_TYPE )
+@Retention( RetentionPolicy.RUNTIME )
 public @interface ConversionSupported
 {
     /**
      * @return Type of converter factory that manages converter
      */
-    @SuppressWarnings( "unchecked" )
     Class<? extends ConverterFactory> factoryType();
 }
