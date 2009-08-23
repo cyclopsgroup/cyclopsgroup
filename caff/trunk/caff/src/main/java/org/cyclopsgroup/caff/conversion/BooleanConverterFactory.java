@@ -18,13 +18,17 @@ public class BooleanConverterFactory
 
         private final BooleanField field;
 
-        @Override
+        /**
+         * @inheritDoc
+         */
         public Boolean fromCharacters( CharSequence text )
         {
             return text.toString().equals( field.yes() );
         }
 
-        @Override
+        /**
+         * @inheritDoc
+         */
         public CharSequence toCharacters( Boolean value )
         {
             return value ? field.yes() : field.no();
@@ -35,7 +39,6 @@ public class BooleanConverterFactory
      * @inheritDoc
      */
     @SuppressWarnings( "unchecked" )
-    @Override
     public <T> Converter<T> getConverterFor( Class<T> valueType, Object hint )
     {
         return (Converter<T>) new BooleanConverter( (BooleanField) hint );

@@ -9,7 +9,6 @@ import java.lang.reflect.Modifier;
  * Implementation of value holder based on reader and writer methods
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
- *
  * @param <T> Type of property
  */
 class PropertyValueReference<T>
@@ -40,7 +39,9 @@ class PropertyValueReference<T>
         writer = nullIfNotPublic( descriptor.getWriteMethod() );
     }
 
-    @Override
+    /**
+     * @inheritDoc
+     */
     public final String getName()
     {
         return name;
@@ -49,7 +50,6 @@ class PropertyValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public boolean isReadable()
     {
         return reader != null;
@@ -58,7 +58,6 @@ class PropertyValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public boolean isWritable()
     {
         return writer != null;
@@ -68,7 +67,6 @@ class PropertyValueReference<T>
      * @inheritDoc
      */
     @SuppressWarnings( "unchecked" )
-    @Override
     public T readValue( Object owner )
     {
         if ( reader == null )
@@ -92,7 +90,6 @@ class PropertyValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public void writeValue( T value, Object owner )
     {
         if ( writer == null )

@@ -33,7 +33,6 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public String getName()
     {
         return field.getName();
@@ -42,7 +41,6 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public boolean isReadable()
     {
         return true;
@@ -51,7 +49,6 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public boolean isWritable()
     {
         return !Modifier.isFinal( field.getModifiers() );
@@ -61,7 +58,6 @@ class FieldValueReference<T>
      * @inheritDoc
      */
     @SuppressWarnings( "unchecked" )
-    @Override
     public T readValue( Object owner )
         throws AccessFailureException
     {
@@ -78,7 +74,6 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    @Override
     public void writeValue( T value, Object owner )
         throws AccessFailureException
     {

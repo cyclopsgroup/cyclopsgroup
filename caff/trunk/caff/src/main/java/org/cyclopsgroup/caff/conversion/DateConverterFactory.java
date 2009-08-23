@@ -20,10 +20,6 @@ public class DateConverterFactory
             formatter = new SimpleDateFormat( format );
         }
 
-        /**
-         * @inheritDoc
-         */
-        @Override
         public Date fromCharacters( CharSequence text )
         {
             try
@@ -36,7 +32,6 @@ public class DateConverterFactory
             }
         }
 
-        @Override
         public CharSequence toCharacters( Date value )
         {
             return formatter.format( value );
@@ -47,7 +42,6 @@ public class DateConverterFactory
      * @inheritDoc
      */
     @SuppressWarnings( "unchecked" )
-    @Override
     public <T> Converter<T> getConverterFor( Class<T> valueType, Object hint )
     {
         String format = ( (DateField) hint ).format();

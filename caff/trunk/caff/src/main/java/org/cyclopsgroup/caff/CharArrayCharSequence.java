@@ -1,5 +1,10 @@
 package org.cyclopsgroup.caff;
 
+/**
+ * CharSequence implementation based on a char array
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class CharArrayCharSequence
     implements CharSequence
 {
@@ -9,11 +14,19 @@ public class CharArrayCharSequence
 
     private final int start;
 
+    /**
+     * @param chars Char array of the whole content
+     */
     public CharArrayCharSequence( char[] chars )
     {
         this( chars, 0, chars.length );
     }
 
+    /**
+     * @param chars Char array that contains the content
+     * @param start Start position of content
+     * @param length Length of content
+     */
     public CharArrayCharSequence( char[] chars, int start, int length )
     {
         this.chars = chars;
@@ -24,7 +37,6 @@ public class CharArrayCharSequence
     /**
      * @inheritDoc
      */
-    @Override
     public char charAt( int index )
     {
         if ( index >= length )
@@ -37,7 +49,6 @@ public class CharArrayCharSequence
     /**
      * @inheritDoc
      */
-    @Override
     public int length()
     {
         return chars.length - start;
@@ -46,7 +57,6 @@ public class CharArrayCharSequence
     /**
      * @inheritDoc
      */
-    @Override
     public CharSequence subSequence( int start, int end )
     {
         if ( end > this.length )
