@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Documented
 @Target( ElementType.ANNOTATION_TYPE )
 @Retention( RetentionPolicy.RUNTIME )
-public @interface ConversionSupported
+public @interface ConversionSupport
 {
     /**
      * @return Type of converter factory that manages converter

@@ -18,5 +18,5 @@ public enum TrimPolicy
     /**
      * When value is too long, throw {@link IllegalArgumentException} instead of truncating
      */
-    DISALLOWED;
+    DISALLOW;
 }
