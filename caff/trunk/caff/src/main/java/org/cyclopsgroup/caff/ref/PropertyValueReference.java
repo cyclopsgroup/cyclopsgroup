@@ -1,4 +1,4 @@
-package org.cyclopsgroup.caff.raw;
+package org.cyclopsgroup.caff.ref;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,8 +12,8 @@ import java.lang.reflect.Modifier;
  *
  * @param <T> Type of property
  */
-class PropertyValueHolder<T>
-    implements ValueHolder<T>
+class PropertyValueReference<T>
+    implements ValueReference<T>
 {
     private static Method nullIfNotPublic( Method method )
     {
@@ -33,7 +33,7 @@ class PropertyValueHolder<T>
     /**
      * @param descriptor Property descriptor of property
      */
-    PropertyValueHolder( PropertyDescriptor descriptor )
+    PropertyValueReference( PropertyDescriptor descriptor )
     {
         name = descriptor.getName();
         reader = nullIfNotPublic( descriptor.getReadMethod() );

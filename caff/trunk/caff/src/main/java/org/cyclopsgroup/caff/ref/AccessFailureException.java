@@ -1,4 +1,4 @@
-package org.cyclopsgroup.caff.raw;
+package org.cyclopsgroup.caff.ref;
 
 /**
  * Runtime exception for read/write failures

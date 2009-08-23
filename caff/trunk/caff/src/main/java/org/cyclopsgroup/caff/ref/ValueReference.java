@@ -1,4 +1,4 @@
-package org.cyclopsgroup.caff.raw;
+package org.cyclopsgroup.caff.ref;
 
 /**
  * Interface that allow to read a value from given owner or write value to owner
@@ -7,7 +7,7 @@ package org.cyclopsgroup.caff.raw;
  *
  * @param <T> Type of value to read
  */
-public interface ValueHolder<T>
+public interface ValueReference<T>
 {
     /**
      * @return A unique name for this holder
