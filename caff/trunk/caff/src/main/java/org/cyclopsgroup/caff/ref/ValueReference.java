@@ -5,7 +5,7 @@ package org.cyclopsgroup.caff.ref;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  *
- * @param <T> Type of value to read
+ * @param <T> Type of value to get and set
  */
 public interface ValueReference<T>
 {
