@@ -4,7 +4,6 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cyclopsgroup.caff.conversion.AnnotatedConverter;
-import org.cyclopsgroup.caff.conversion.ConversionSupport;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.conversion.NullFriendlyConverter;
 import org.cyclopsgroup.caff.conversion.SimpleConverter;
@@ -52,16 +50,12 @@ class FixLengthImpl<T>
 
     private static <T> Converter<T> createConverter( AccessibleObject access, Class<T> valueType )
     {
-        Converter<T> c = null;
-        for ( Annotation a : access.getAnnotations() )
+        Converter<T> c;
+        if ( AnnotatedConverter.isConversionSupported( access ) )
         {
-            if ( a.annotationType().isAnnotationPresent( ConversionSupport.class ) )
-            {
-                c = new AnnotatedConverter<T>( valueType, a );
-                break;
-            }
+            c = new AnnotatedConverter<T>( valueType, access );
         }
-        if ( c == null )
+        else
         {
             c = new SimpleConverter<T>( valueType );
         }
