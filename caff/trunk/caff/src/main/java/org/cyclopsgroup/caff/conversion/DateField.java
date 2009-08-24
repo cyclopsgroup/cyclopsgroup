@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
  * Mark a field that is converted as date type
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
- *
  */
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention( RetentionPolicy.RUNTIME )
+@Target( { ElementType.FIELD, ElementType.METHOD } )
+@ConversionSupport( factoryType = DateConverterFactory.class )
 public @interface DateField
 {
     /**

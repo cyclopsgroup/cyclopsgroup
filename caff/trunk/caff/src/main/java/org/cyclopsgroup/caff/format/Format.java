@@ -6,26 +6,21 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import org.cyclopsgroup.caff.CharArrayCharSequence;
+
 /**
  * Base class that knows how to format/parse beans
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  * @param <T> Type of bean to format or parse
  */
 public abstract class Format<T>
 {
-    static Reader createCharSequenceReader( CharSequence content )
-    {
-        char[] chars = new char[content.length()];
-        for ( int i = 0; i < content.length(); i++ )
-        {
-            chars[i] = content.charAt( i );
-        }
-        return new CharArrayReader( chars );
-    }
-
     private final Class<T> beanType;
 
+    /**
+     * @param beanType Type of bean to format or parse
+     */
     protected Format( Class<T> beanType )
     {
         if ( beanType == null )
@@ -35,6 +30,9 @@ public abstract class Format<T>
         this.beanType = beanType;
     }
 
+    /**
+     * @return A new instance of bean
+     */
     T createBean()
     {
         try
@@ -52,9 +50,9 @@ public abstract class Format<T>
     }
 
     /**
-     * @param object
-     * @return
-     * @throws IOException
+     * @param object Object to print
+     * @return Char array of output
+     * @throws IOException If IO operation fails
      */
     public char[] formatToCharArray( T object )
         throws IOException
@@ -78,7 +76,7 @@ public abstract class Format<T>
 
     /**
      * Parse given
-     * 
+     *
      * @param content
      * @return New instance of bean
      * @throws IOException
@@ -86,7 +84,7 @@ public abstract class Format<T>
     public T parse( CharSequence content )
         throws IOException
     {
-        return parse( createCharSequenceReader( content ) );
+        return parse( new CharArrayReader( CharArrayCharSequence.sequenceToArray( content ) ) );
     }
 
     /**
@@ -102,9 +100,19 @@ public abstract class Format<T>
         return bean;
     }
 
+    /**
+     * @param object Bean object to populate
+     * @param reader Input of values
+     * @throws IOException If IO operation fails
+     */
     public abstract void populate( T object, Reader reader )
         throws IOException;
 
+    /**
+     * @param object Object to print out
+     * @param output Output to print to
+     * @throws IOException If operation fails
+     */
     public abstract void print( T object, Writer output )
         throws IOException;
 }

@@ -25,7 +25,7 @@ public class ABean
     /**
      * A public string field
      */
-    @FixLengthField( position = 21, length = 10 )
+    @FixLengthField( start = 21, length = 10 )
     public String lastName;
 
     private boolean retired;
@@ -33,7 +33,7 @@ public class ABean
     /**
      * @return A integer age
      */
-    @FixLengthField( position = 0, length = 3, align = AlignPolicy.RIGHT, fill = '0' )
+    @FixLengthField( start = 0, length = 3, align = AlignPolicy.RIGHT, fill = '0' )
     public int getAge()
     {
         return age;
@@ -43,7 +43,7 @@ public class ABean
      * @return A date field
      */
     @DateField( format = "yyyyMMdd" )
-    @FixLengthField( position = 3, length = 8 )
+    @FixLengthField( start = 3, length = 8 )
     public Date getBirthDay()
     {
         return birthDay;
@@ -52,7 +52,7 @@ public class ABean
     /**
      * @return A string field
      */
-    @FixLengthField( position = 11, length = 10 )
+    @FixLengthField( start = 11, length = 10 )
     public String getFirstName()
     {
         return firstName;
@@ -62,27 +62,39 @@ public class ABean
      * @return A boolean field
      */
     @BooleanField( yes = "1", no = "0" )
-    @FixLengthField( position = 21, length = 1 )
+    @FixLengthField( start = 21, length = 1 )
     public boolean isRetired()
     {
         return retired;
     }
 
+    /**
+     * @param age A integer field
+     */
     public void setAge( int age )
     {
         this.age = age;
     }
 
+    /**
+     * @param birthDay A date field
+     */
     public void setBirthDay( Date birthDay )
     {
         this.birthDay = birthDay;
     }
 
+    /**
+     * @param firstName A string field
+     */
     public void setFirstName( String firstName )
     {
         this.firstName = firstName;
     }
 
+    /**
+     * @param retired A boolean field
+     */
     public void setRetired( boolean retired )
     {
         this.retired = retired;

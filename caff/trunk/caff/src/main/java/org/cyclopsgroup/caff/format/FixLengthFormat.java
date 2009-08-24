@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import org.cyclopsgroup.caff.CharArrayCharSequence;
+
 /**
  * Format implementation that parse and format fix length fields
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @param <T> Type of bean to format/parse
  */
 public class FixLengthFormat<T>
     extends Format<T>
 {
-    private final char fill;
-
-    private final int length;
+    private final FixLengthImpl<T> impl;
 
     /**
      * @param beanType Type of bean
@@ -22,13 +23,7 @@ public class FixLengthFormat<T>
     public FixLengthFormat( Class<T> beanType )
     {
         super( beanType );
-        FixLengthType annotation = beanType.getAnnotation( FixLengthType.class );
-        if ( annotation == null )
-        {
-            throw new IllegalArgumentException( "Type " + beanType + " isn't annotated with " + FixLengthType.class );
-        }
-        fill = annotation.fill();
-        length = annotation.length();
+        impl = new FixLengthImpl<T>( beanType );
     }
 
     /**
@@ -38,16 +33,37 @@ public class FixLengthFormat<T>
     public void populate( T object, Reader reader )
         throws IOException
     {
-        char[] line = new char[length];
+        char[] line = new char[impl.type.length()];
         reader.read( line );
-        populate( object, line );
+        populate( object, new CharArrayCharSequence( line ) );
     }
-    
-    
 
-    private void populate( T object, char[] line )
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public T parse( CharSequence content )
     {
-        
+        T bean = createBean();
+        populate( bean, content );
+        return bean;
+    }
+
+    private void populate( T object, CharSequence line )
+    {
+        impl.populate( object, line );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public T parse( Reader reader )
+        throws IOException
+    {
+        char[] line = new char[impl.type.length()];
+        reader.read( line );
+        return parse( new CharArrayCharSequence( line ) );
     }
 
     /**

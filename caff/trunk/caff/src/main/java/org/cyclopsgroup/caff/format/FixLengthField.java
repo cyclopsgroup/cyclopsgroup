@@ -35,7 +35,7 @@ public @interface FixLengthField
     /**
      * @return 0 based starting position of field
      */
-    int position();
+    int start();
 
     /**
      * @return Handle the value that is longer than limit

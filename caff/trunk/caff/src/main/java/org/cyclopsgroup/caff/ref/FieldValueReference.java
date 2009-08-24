@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
  * @param <T> Type of value
  */
 class FieldValueReference<T>
-    implements ValueReference<T>
+    extends ValueReference<T>
 {
     /**
      * @param field Reflection field object
@@ -21,9 +21,9 @@ class FieldValueReference<T>
         {
             throw new NullPointerException( "Field can't be NULL" );
         }
-        if ( Modifier.isPublic( field.getModifiers() ) )
+        if ( !Modifier.isPublic( field.getModifiers() ) )
         {
-            throw new IllegalArgumentException( "Only public field can be directly referenced" );
+            throw new IllegalArgumentException( "Only public field can be directly referenced: " + field );
         }
         this.field = field;
     }
@@ -33,6 +33,7 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
+    @Override
     public String getName()
     {
         return field.getName();
@@ -41,6 +42,7 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
+    @Override
     public boolean isReadable()
     {
         return true;
@@ -49,6 +51,7 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
+    @Override
     public boolean isWritable()
     {
         return !Modifier.isFinal( field.getModifiers() );
@@ -57,13 +60,13 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "unchecked" )
-    public T readValue( Object owner )
+    @Override
+    public Object readValue( T owner )
         throws AccessFailureException
     {
         try
         {
-            return (T) field.get( owner );
+            return field.get( owner );
         }
         catch ( IllegalAccessException e )
         {
@@ -74,7 +77,8 @@ class FieldValueReference<T>
     /**
      * @inheritDoc
      */
-    public void writeValue( T value, Object owner )
+    @Override
+    public void writeValue( Object value, T owner )
         throws AccessFailureException
     {
         try

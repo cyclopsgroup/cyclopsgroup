@@ -15,9 +15,12 @@ public class DateConverterFactory
     {
         private final SimpleDateFormat formatter;
 
+        private final String format;
+
         private DateConverter( String format )
         {
             formatter = new SimpleDateFormat( format );
+            this.format = format;
         }
 
         public Date fromCharacters( CharSequence text )
@@ -28,7 +31,7 @@ public class DateConverterFactory
             }
             catch ( ParseException e )
             {
-                throw new RuntimeException( "Can't parse " + text + " as a date", e );
+                throw new ConversionFailureException( "Can't parse " + text + " as a date in " + format, e );
             }
         }
 

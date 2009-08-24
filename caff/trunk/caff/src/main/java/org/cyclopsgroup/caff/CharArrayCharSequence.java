@@ -1,7 +1,7 @@
 package org.cyclopsgroup.caff;
 
 /**
- * CharSequence implementation based on a char array
+ * CharSequence implementation based on a char array. This class is immutable and threadsafe
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
@@ -14,12 +14,21 @@ public class CharArrayCharSequence
 
     private final int start;
 
+    private static char[] createCopy( char[] chars )
+    {
+        char[] copy = new char[chars.length];
+        System.arraycopy( chars, 0, copy, 0, chars.length );
+        return copy;
+    }
+
     /**
+     * Create new instance for given char[]. This constructor does defensive copy for char[] input.
+     *
      * @param chars Char array of the whole content
      */
     public CharArrayCharSequence( char[] chars )
     {
-        this( chars, 0, chars.length );
+        this( createCopy( chars ), 0, chars.length );
     }
 
     /**
@@ -27,8 +36,12 @@ public class CharArrayCharSequence
      * @param start Start position of content
      * @param length Length of content
      */
-    public CharArrayCharSequence( char[] chars, int start, int length )
+    private CharArrayCharSequence( char[] chars, int start, int length )
     {
+        if ( start + length > chars.length )
+        {
+            throw new IndexOutOfBoundsException( "Length " + length + " overflow" );
+        }
         this.chars = chars;
         this.start = start;
         this.length = length;
@@ -51,7 +64,7 @@ public class CharArrayCharSequence
      */
     public int length()
     {
-        return chars.length - start;
+        return length;
     }
 
     /**
@@ -59,14 +72,43 @@ public class CharArrayCharSequence
      */
     public CharSequence subSequence( int start, int end )
     {
-        if ( end > this.length )
+        if ( end < start )
         {
-            throw new IndexOutOfBoundsException( "End " + end + " exceeds limit " + this.length );
+            throw new IndexOutOfBoundsException( "Invalid input start=" + start + ", end=" + end );
         }
-        if ( end > start )
+        if ( start == 0 && end == length )
         {
-            throw new IllegalArgumentException( "Invalid input start=" + start + ", end=" + end );
+            return this;
         }
         return new CharArrayCharSequence( chars, this.start + start, end - start );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String toString()
+    {
+        return new String( chars, start, length );
+    }
+
+    /**
+     * Utility method to converter {@link CharSequence} to char array
+     *
+     * @param seq Given sequence object
+     * @return An array that has same content
+     */
+    public static char[] sequenceToArray( CharSequence seq )
+    {
+        if ( seq == null )
+        {
+            throw new NullPointerException( "CharSequence can't be NULL" );
+        }
+        char[] chars = new char[seq.length()];
+        for ( int i = 0; i < seq.length(); i++ )
+        {
+            chars[i] = seq.charAt( i );
+        }
+        return chars;
     }
 }
