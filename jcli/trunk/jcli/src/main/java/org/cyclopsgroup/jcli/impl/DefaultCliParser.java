@@ -9,7 +9,7 @@ import org.cyclopsgroup.jcli.spi.CliUtils;
 
 /**
  * Default internal implementation of {@link CliParser}
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class DefaultCliParser
@@ -25,7 +25,6 @@ public class DefaultCliParser
     /**
      * @inheritDoc
      */
-    @Override
     public boolean parse( String[] args, Object bean )
     {
         CliDefinition cliDefinition = CliUtils.defineCli( bean.getClass() );
@@ -46,7 +45,6 @@ public class DefaultCliParser
     /**
      * @inheritDoc
      */
-    @Override
     public void printUsage( Class<?> beanType, PrintWriter output )
         throws IntrospectionException
     {
