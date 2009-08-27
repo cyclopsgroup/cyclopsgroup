@@ -7,9 +7,8 @@
 			for this page.
 		</p>
 		<p>
-			[12/15/2006] Website is completely redesigned. New theme is
-			inspired
-			by
+			[12/15/2006] Website is completely redesigned, again. New theme is
+			inspired by
 			<a href="http://www.deviantart.com/deviation/40788653/">
 				intravero
             </a>
@@ -17,7 +16,29 @@
 			<a href="http://deviantart.com">deviantart.com</a>
 			.
 		</p>
-		<h2>Several Friends</h2>
+		<h2>My Projects</h2>
+		<ul>
+			<li>
+				<a href="http://wiki.cyclopsgroup.org/jmxterm">Jmxterm</a>
+				- Interactive command line JMX client
+			</li>
+			<li>
+				<a href="http://www.cyclopsgroup.org/projects/jcli">Jcli</a>
+				- Annotation based command line parser
+			</li>
+			<li>
+				<a href="http://www.cyclopsgroup.org/projects/courselist">Courselist</a>
+				- A small web application that manages course schedule and
+				enrollment
+				in college
+			</li>
+			<li>
+				<a href="http://www.cyclopsgroup.org/projects/waterview">Waterview</a>
+				- Java web application and portal framework that supports Velocity,
+				Jelly and JSP syntax
+			</li>
+		</ul>
+		<h2>Links</h2>
 		<ul>
 			<li>
 				<a href="http://cyclopsgroup.org">
@@ -53,23 +74,55 @@
 		<p style="margin-left: 80px">Or a guy who burns down a bar for the insurance money.</p>
 		<center>GOD</center>
 		<p style="margin-left: 80px">
-			Yes, if he makes it look like an electrical thing. If you
-			do things right, people won't be sure you've done anything at all.
+			Yes, if he makes it look like an electrical thing.
+			<b>If you
+				do things right, people won't be sure you've done anything
+				at all</b>
+			.
 		</p>
 		<p>
 			<small>-- by God, in Godfellas, Futurama</small>
 		</p>
-		<h2>About Jiaqi (&#37101;&#20339;&#29734;)</h2>
+		<h2>About Jiaqi Guo (&#37101;&#20339;&#29734;)</h2>
 		<p>
-			I was born in Yanliang, a small town of in Xi'an, China. In last 15
-			years I've lived in Xi'an, Hangzhou, Shanghai in China, Dallas, DC
-			and Seattle in United States. In my professional career I'm a
-			software engineer expert in Java and open source projects, while my
-			interests also include photography, cinematography and travel.
+			I am Jiaqi(pronounced as Jar Key), a kid grown up in Yanliang, a
+			small town of in city
+			Xi'an, a town few people in same city ever heard
+			of. In last 15 years of
+			<a href="resume.html">career building</a>
+			,
+			I've moved over Hangzhou, Shanghai, Shenzhen in
+			China, Dallas, DC and
+			Seattle in United States.
+		</p>
+		<p>In my professional career I'm
+			a software engineer enthusiastic in
+			Java and a number of open source
+			projects, while my interests also
+			include photography, cinematography
+			and travel.
         </p>
 		<p>
 			<a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
 			is a portfolio of my nonprofessional work.
+		</p>
+		<h2>This web site</h2>
+		<p>
+			There are more than one page in this small web site. You can find a
+			<a href="blog.html">blog</a>
+			and
+			<a href="photos.html">a few photos</a>
+			here
+			.
+		</p>
+		<p>
+			Once a while random thoughts hits my mind, and when I talk to
+			friends
+			about my thoughts, often they feel bored, annoyed or even
+			offended. To
+			me, such experience constitutes the need for a
+			<a href="blog.html">blog</a>
+			.
 		</p>
 	</div>
 </div>
