@@ -60,19 +60,25 @@
 			<a href="http://www.imsdb.com/transcripts/Futurama-Godfellas.html">
 				<img
 					src="http://farm4.static.flickr.com/3474/3839219124_16a46da337_o.jpg"
-					border="0" alt="Futurama - Godfellas" />
+					alt="Futurama - Godfellas" />
 			</a>
 		</p>
 	</div>
 	<div id="mainContent">
 		<h2>"Do Things Right"</h2>
-		<center>GOD</center>
+		<p style="text-align: center">
+			GOD
+		</p>
 		<p style="margin-left: 80px">Bender, being God isn't easy. If you do too much, people
 			get dependent on you. And if you do nothing, they lose hope. You have
 			to use a light touch, like a safecracker or a pickpocket.</p>
-		<center>BENDER</center>
+		<p style="text-align: center">
+			BENDER
+		</p>
 		<p style="margin-left: 80px">Or a guy who burns down a bar for the insurance money.</p>
-		<center>GOD</center>
+		<p style="text-align: center">
+			GOD
+		</p>
 		<p style="margin-left: 80px">
 			Yes, if he makes it look like an electrical thing.
 			<b>If you

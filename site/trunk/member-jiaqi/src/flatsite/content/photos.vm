@@ -31,7 +31,7 @@
 		<div>
 			<iframe
 				src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
-				align="middle" frameborder="0" height="480" width="100%" scrolling="no">
+				frameborder="0" height="480" width="100%" scrolling="no">
 			</iframe>
 		</div>
 		<h2>More details</h2>
@@ -47,12 +47,12 @@
 				<td>
 					<a href="http://picasaweb.google.com/crazytmac">
 						<img src="https://www.google.com/accounts/lh2/picasaweblogo-en_US.gif"
-							border="0" alt="PicasaWeb" />
+							alt="PicasaWeb" />
 					</a>
 				</td>
 				<td>
 					<a href="http://www.flickr.com/photos/guojiaqi">
-						<img src="http://l.yimg.com/g/images/flickr_logo.gif" border="0"
+						<img src="http://l.yimg.com/g/images/flickr_logo.gif"
 							alt="Flickr" />
 					</a>
 				</td>
