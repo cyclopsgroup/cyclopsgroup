@@ -1,6 +1,10 @@
 package org.cyclopsgroup.caff.format;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.cyclopsgroup.caff.ABean;
 import org.junit.Test;
@@ -12,19 +16,38 @@ import org.junit.Test;
  */
 public class FixLengthImplTest
 {
-    private FixLengthImpl<ABean> impl;
-
     /**
      * Verify result of populate
      */
     @Test
     public void testPopulate()
     {
-        impl = new FixLengthImpl<ABean>( ABean.class );
+    	FixLengthImpl<ABean> impl = new FixLengthImpl<ABean>( ABean.class );
         ABean bean = new ABean();
         impl.populate( bean, "03519691122Bender    Rod       1" );
         assertEquals( 35, bean.getAge() );
         assertEquals( "Bender", bean.getFirstName() );
         assertEquals( "Rod", bean.lastName );
+        assertTrue(bean.isRetired());
+    }
+
+    /**
+     * Verify printing result
+     *
+     * FIXME Verification isn't completed because printing logic isn't finished
+     *
+     * @throws ParseException Should never happen
+     */
+    @Test
+    public void testPrint() throws ParseException
+    {
+    	FixLengthImpl<ABean> impl = new FixLengthImpl<ABean>( ABean.class );
+    	ABean bean = new ABean();
+    	bean.setAge(35);
+    	bean.setBirthDay(new SimpleDateFormat("yyyyyMMdd").parse("19871204"));
+    	bean.setFirstName("Bender");
+    	bean.lastName = "Rod";
+    	char[] output = impl.print(bean);
+    	System.out.println(new String(output));
     }
 }

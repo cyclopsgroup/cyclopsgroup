@@ -48,7 +48,8 @@ class FixLengthImpl<T>
         return access;
     }
 
-    private static <T> Converter<T> createConverter( AccessibleObject access, Class<T> valueType )
+    @SuppressWarnings( "unchecked" )
+    private static <T> Converter<Object> createConverter( AccessibleObject access, Class<T> valueType )
     {
         Converter<T> c;
         if ( AnnotatedConverter.isConversionSupported( access ) )
@@ -59,12 +60,12 @@ class FixLengthImpl<T>
         {
             c = new SimpleConverter<T>( valueType );
         }
-        return new NullFriendlyConverter<T>( c );
+        return (Converter<Object>) new NullFriendlyConverter<T>( c );
     }
 
     private class Slot
     {
-        private final Converter<?> converter;
+        private final Converter<Object> converter;
 
         private final FixLengthField field;
 
@@ -72,7 +73,7 @@ class FixLengthImpl<T>
 
         private final ValueReference<T> reference;
 
-        private Slot( FixLengthField field, Converter<?> converter, ValueReference<T> reference )
+        private Slot( FixLengthField field, Converter<Object> converter, ValueReference<T> reference )
         {
             this.field = field;
             this.converter = converter;
@@ -173,5 +174,35 @@ class FixLengthImpl<T>
             Object value = slot.converter.fromCharacters( content );
             slot.reference.writeValue( value, bean );
         }
+    }
+
+    /**
+     * Print bean into given char array
+     *
+     * FIXME It's not completely working yet
+     *
+     * @param bean Bean to print
+     * @return Char array of result
+     */
+    char[] print( T bean )
+    {
+        char[] output = new char[type.length()];
+        Arrays.fill( output, type.fill() );
+        for ( Slot slot : slots.values() )
+        {
+            if ( !slot.reference.isReadable() )
+            {
+                continue;
+            }
+            Object value = slot.reference.readValue( bean );
+            CharSequence content = slot.converter.toCharacters( value );
+            if ( content.length() > slot.field.length() )
+            {
+                content = slot.field.trim().trim( content, slot.field.length(), slot.field.align() );
+            }
+            slot.field.align().fill( content, output, slot.field.start(), slot.field.length(), slot.fill );
+
+        }
+        return output;
     }
 }

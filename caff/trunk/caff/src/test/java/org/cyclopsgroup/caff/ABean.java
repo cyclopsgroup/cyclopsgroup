@@ -13,7 +13,7 @@ import org.cyclopsgroup.caff.format.FixLengthType;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@FixLengthType( length = 22 )
+@FixLengthType( length = 32)
 public class ABean
 {
     private int age;
@@ -62,7 +62,7 @@ public class ABean
      * @return A boolean field
      */
     @BooleanField( yes = "1", no = "0" )
-    @FixLengthField( start = 21, length = 1 )
+    @FixLengthField( start = 31, length = 1 )
     public boolean isRetired()
     {
         return retired;

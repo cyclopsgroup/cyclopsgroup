@@ -74,6 +74,10 @@ public class SimpleConverter<T>
                 throw new IllegalArgumentException( "Type " + type + " is not supported by " + getClass() );
             }
         }
+        else if(type.isEnum())
+        {
+        	proxy = (Converter<T>) new EnumConverter(type);
+        }
         else
         {
             proxy = (Converter<T>) new SimpleReflectiveConverter( type );

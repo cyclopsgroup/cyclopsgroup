@@ -10,70 +10,66 @@ import org.cyclopsgroup.caff.CharArrayCharSequence;
  * Format implementation that parse and format fix length fields
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- * @param <T> Type of bean to format/parse
+ * @param <T>
+ *            Type of bean to format/parse
  */
-public class FixLengthFormat<T>
-    extends Format<T>
-{
-    private final FixLengthImpl<T> impl;
+public class FixLengthFormat<T> extends Format<T> {
+	private final FixLengthImpl<T> impl;
 
-    /**
-     * @param beanType Type of bean
-     */
-    public FixLengthFormat( Class<T> beanType )
-    {
-        super( beanType );
-        impl = new FixLengthImpl<T>( beanType );
-    }
+	/**
+	 * @param beanType
+	 *            Type of bean
+	 */
+	public FixLengthFormat(Class<T> beanType) {
+		super(beanType);
+		impl = new FixLengthImpl<T>(beanType);
+	}
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void populate( T object, Reader reader )
-        throws IOException
-    {
-        char[] line = new char[impl.type.length()];
-        reader.read( line );
-        populate( object, new CharArrayCharSequence( line ) );
-    }
+	@Override
+	public char[] formatToCharArray(T object){
+		return impl.print(object);
+	}
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public T parse( CharSequence content )
-    {
-        T bean = createBean();
-        populate( bean, content );
-        return bean;
-    }
+	/**
+	 * @inheritDoc
+	 */
+	@Override
+	public T parse(CharSequence content) {
+		T bean = createBean();
+		populate(bean, content);
+		return bean;
+	}
 
-    private void populate( T object, CharSequence line )
-    {
-        impl.populate( object, line );
-    }
+	/**
+	 * @inheritDoc
+	 */
+	@Override
+	public T parse(Reader reader) throws IOException {
+		char[] line = new char[impl.type.length()];
+		reader.read(line);
+		return parse(new CharArrayCharSequence(line));
+	}
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public T parse( Reader reader )
-        throws IOException
-    {
-        char[] line = new char[impl.type.length()];
-        reader.read( line );
-        return parse( new CharArrayCharSequence( line ) );
-    }
+	private void populate(T object, CharSequence line) {
+		impl.populate(object, line);
+	}
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void print( T object, Writer output )
-        throws IOException
-    {
-        // TODO Auto-generated method stub
+	/**
+	 * @inheritDoc
+	 */
+	@Override
+	public void populate(T object, Reader reader) throws IOException {
+		char[] line = new char[impl.type.length()];
+		reader.read(line);
+		populate(object, new CharArrayCharSequence(line));
+	}
 
-    }
+	/**
+	 * @inheritDoc
+	 */
+	@Override
+	public void print(T object, Writer out) throws IOException {
+		char[] output = impl.print(object);
+		out.write(output);
+	}
 }
