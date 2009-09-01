@@ -71,7 +71,7 @@ public enum AlignPolicy
                 {
                     c = empty;
                 }
-                dest[start + length - 1] = c;
+                dest[start + length - i - 1] = c;
             }
         }
     };
