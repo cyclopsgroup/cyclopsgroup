@@ -6,7 +6,7 @@ package org.cyclopsgroup.caff.format;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public class InvalidTypeException
-    extends RuntimeException
+    extends FormatException
 {
     private static final long serialVersionUID = 1013242349732621546L;
 

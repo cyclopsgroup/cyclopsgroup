@@ -177,9 +177,7 @@ class FixLengthImpl<T>
     }
 
     /**
-     * Print bean into given char array
-     *
-     * FIXME It's not completely working yet
+     * Print bean into given char array FIXME It's not completely working yet
      *
      * @param bean Bean to print
      * @return Char array of result
