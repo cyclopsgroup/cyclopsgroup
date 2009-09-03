@@ -55,5 +55,4 @@ public class EnumConverter<T extends Enum<T>>
     {
         return valueToString.get( value );
     }
-
 }
