@@ -29,6 +29,7 @@ public class FixLengthImplTest
         assertEquals( "Bender", bean.getFirstName() );
         assertEquals( "Rod", bean.lastName );
         assertTrue(bean.isRetired());
+        assertEquals( "1969-11-22", new SimpleDateFormat("yyyy-MM-dd").format( bean.getBirthDay()));
     }
 
     /**
@@ -44,10 +45,10 @@ public class FixLengthImplTest
     	FixLengthImpl<ABean> impl = new FixLengthImpl<ABean>( ABean.class );
     	ABean bean = new ABean();
     	bean.setAge(35);
-    	bean.setBirthDay(new SimpleDateFormat("yyyyyMMdd").parse("19871204"));
+    	bean.setBirthDay(new SimpleDateFormat("yyyyMMdd").parse("19871204"));
     	bean.setFirstName("Bender");
     	bean.lastName = "Rod";
     	char[] output = impl.print(bean);
-    	System.out.println(new String(output));
+    	assertEquals("03519871204Bender    Rod       0", new String(output).trim());
     }
 }
