@@ -33,7 +33,7 @@ public abstract class Format<T>
     /**
      * @return A new instance of bean
      */
-    T createBean()
+    final T createBean()
     {
         try
         {
