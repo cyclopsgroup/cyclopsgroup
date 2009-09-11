@@ -6,10 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cyclopsgroup.caff.conversion.AnnotatedConverter;
 import org.cyclopsgroup.caff.conversion.Converter;
-import org.cyclopsgroup.caff.conversion.NullFriendlyConverter;
-import org.cyclopsgroup.caff.conversion.SimpleConverter;
+import org.cyclopsgroup.caff.conversion.NullFriendlyAnnotatedConverter;
 import org.cyclopsgroup.caff.ref.ValueReference;
 import org.cyclopsgroup.caff.ref.ValueReferenceScanner;
 
@@ -21,21 +19,6 @@ import org.cyclopsgroup.caff.ref.ValueReferenceScanner;
  */
 class FixLengthImpl<T>
 {
-    @SuppressWarnings( "unchecked" )
-    private static <T> Converter<Object> createConverter( AccessibleObject access, Class<T> valueType )
-    {
-        Converter<T> c;
-        if ( AnnotatedConverter.isConversionSupported( access ) )
-        {
-            c = new AnnotatedConverter<T>( valueType, access );
-        }
-        else
-        {
-            c = new SimpleConverter<T>( valueType );
-        }
-        return (Converter<Object>) new NullFriendlyConverter<T>( c );
-    }
-
     private class Slot
     {
         private final Converter<Object> converter;
@@ -78,9 +61,12 @@ class FixLengthImpl<T>
         ValueReferenceScanner<T> scanner = new ValueReferenceScanner<T>( beanType );
         scanner.scanForAnnotation( FixLengthField.class, new ValueReferenceScanner.Listener<T, FixLengthField>()
         {
+            @SuppressWarnings( "unchecked" )
             public void handleReference( ValueReference<T> reference, FixLengthField hint, AccessibleObject access )
             {
-                Slot slot = new Slot( hint, createConverter( access, reference.getType() ), reference );
+                Slot slot =
+                    new Slot( hint, new NullFriendlyAnnotatedConverter<Object>( (Class<Object>) reference.getType(),
+                                                                                access ), reference );
                 slots.put( reference.getName(), slot );
             }
         } );
