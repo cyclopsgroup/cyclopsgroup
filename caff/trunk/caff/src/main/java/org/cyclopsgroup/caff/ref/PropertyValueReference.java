@@ -27,6 +27,8 @@ class PropertyValueReference<T>
 
     private final Method reader;
 
+    private final Class<?> type;
+
     private final Method writer;
 
     /**
@@ -37,6 +39,7 @@ class PropertyValueReference<T>
         name = descriptor.getName();
         reader = nullIfNotPublic( descriptor.getReadMethod() );
         writer = nullIfNotPublic( descriptor.getWriteMethod() );
+        type = descriptor.getPropertyType();
     }
 
     /**
@@ -46,6 +49,15 @@ class PropertyValueReference<T>
     public final String getName()
     {
         return name;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Class<?> getType()
+    {
+        return type;
     }
 
     /**

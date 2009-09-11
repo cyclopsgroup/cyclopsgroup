@@ -12,6 +12,8 @@ import java.lang.reflect.Modifier;
 class FieldValueReference<T>
     extends ValueReference<T>
 {
+    private final Field field;
+
     /**
      * @param field Reflection field object
      */
@@ -28,8 +30,6 @@ class FieldValueReference<T>
         this.field = field;
     }
 
-    private final Field field;
-
     /**
      * @inheritDoc
      */
@@ -37,6 +37,15 @@ class FieldValueReference<T>
     public String getName()
     {
         return field.getName();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Class<?> getType()
+    {
+        return field.getType();
     }
 
     /**

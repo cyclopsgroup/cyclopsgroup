@@ -13,6 +13,11 @@ public @interface CSVField
     boolean alwaysQuote() default false;
 
     /**
+     * @return Max number of characters the field can contain. Default value is -1 which means field length is unlimited
+     */
+    int maxLength() default -1;
+
+    /**
      * @return Zero based position of field
      */
     int position();

@@ -1,11 +1,6 @@
 package org.cyclopsgroup.caff.format;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,6 +11,7 @@ import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.conversion.NullFriendlyConverter;
 import org.cyclopsgroup.caff.conversion.SimpleConverter;
 import org.cyclopsgroup.caff.ref.ValueReference;
+import org.cyclopsgroup.caff.ref.ValueReferenceScanner;
 
 /**
  * Internal actual fix-length algorithm
@@ -25,29 +21,6 @@ import org.cyclopsgroup.caff.ref.ValueReference;
  */
 class FixLengthImpl<T>
 {
-    private static <T> AccessibleObject findAnnotatedAccess( PropertyDescriptor desc, Class<T> type )
-    {
-        Field field;
-        try
-        {
-            field = type.getClass().getField( desc.getName() );
-        }
-        catch ( Throwable e )
-        {
-            field = null;
-        }
-        AccessibleObject access = null;
-        for ( AccessibleObject a : Arrays.asList( (AccessibleObject) desc.getReadMethod(), desc.getWriteMethod(), field ) )
-        {
-            if ( a != null && a.isAnnotationPresent( FixLengthField.class ) )
-            {
-                access = a;
-                break;
-            }
-        }
-        return access;
-    }
-
     @SuppressWarnings( "unchecked" )
     private static <T> Converter<Object> createConverter( AccessibleObject access, Class<T> valueType )
     {
@@ -101,53 +74,16 @@ class FixLengthImpl<T>
         }
         this.type = type;
 
-        BeanInfo beanInfo;
-        try
+        final Map<String, Slot> slots = new HashMap<String, Slot>();
+        ValueReferenceScanner<T> scanner = new ValueReferenceScanner<T>( beanType );
+        scanner.scanForAnnotation( FixLengthField.class, new ValueReferenceScanner.Listener<T, FixLengthField>()
         {
-            beanInfo = Introspector.getBeanInfo( beanType );
-        }
-        catch ( IntrospectionException e )
-        {
-            throw new RuntimeException( "Can't get bean info of " + beanType );
-        }
-
-        Map<String, Slot> slots = new HashMap<String, Slot>();
-        for ( PropertyDescriptor desc : beanInfo.getPropertyDescriptors() )
-        {
-            AccessibleObject access = findAnnotatedAccess( desc, beanType );
-            if ( access == null )
+            public void handleReference( ValueReference<T> reference, FixLengthField hint, AccessibleObject access )
             {
-                continue;
+                Slot slot = new Slot( hint, createConverter( access, reference.getType() ), reference );
+                slots.put( reference.getName(), slot );
             }
-            ValueReference<T> reference;
-            if ( access instanceof Field )
-            {
-                reference = ValueReference.instanceOf( (Field) access );
-            }
-            else
-            {
-                reference = ValueReference.instanceOf( desc );
-            }
-            Slot slot =
-                new Slot( access.getAnnotation( FixLengthField.class ),
-                          createConverter( access, desc.getPropertyType() ), reference );
-            slots.put( desc.getName(), slot );
-        }
-        for ( Field f : beanType.getFields() )
-        {
-            if ( slots.containsKey( f.getName() ) )
-            {
-                continue;
-            }
-            FixLengthField field = f.getAnnotation( FixLengthField.class );
-            if ( field == null )
-            {
-                continue;
-            }
-            ValueReference<T> reference = ValueReference.instanceOf( f );
-            Slot slot = new Slot( field, createConverter( f, f.getType() ), reference );
-            slots.put( f.getName(), slot );
-        }
+        } );
         this.slots = Collections.unmodifiableMap( slots );
     }
 

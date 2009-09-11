@@ -8,6 +8,8 @@ import org.cyclopsgroup.caff.CharIterator;
 /**
  * A general class that knows how to parse CSV syntax
  *
+ * TODO Trailing white space isn't handled yet
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public abstract class CSVParser
@@ -27,6 +29,16 @@ public abstract class CSVParser
             handleField( position, buffer );
             buffer.clear();
             position++;
+        }
+
+        private void move( ParsingState newState )
+        {
+            state = newState;
+        }
+
+        private void append( char ch )
+        {
+            buffer.append( ch );
         }
     }
 
@@ -59,11 +71,11 @@ public abstract class CSVParser
                             context.notifyField();
                             break;
                         case '\"':
-                            context.state = ParsingState.QUOTING;
+                            context.move( ParsingState.QUOTING );
                             break;
                         default:
-                            context.state = ParsingState.WORD;
-                            context.buffer.append( ch );
+                            context.move( ParsingState.WORD );
+                            context.append( ch );
                     }
                     break;
                 case WORD:
@@ -71,20 +83,20 @@ public abstract class CSVParser
                     {
                         case ',':
                             context.notifyField();
-                            context.state = ParsingState.START;
+                            context.move( ParsingState.START );
                             break;
                         default:
-                            context.buffer.append( ch );
+                            context.append( ch );
                     }
                     break;
                 case QUOTING:
                     switch ( ch )
                     {
                         case '"':
-                            context.state = ParsingState.ESCAPING;
+                            context.move( ParsingState.ESCAPING );
                             break;
                         default:
-                            context.buffer.append( ch );
+                            context.append( ch );
                     }
                     break;
                 case ESCAPING:
@@ -92,11 +104,11 @@ public abstract class CSVParser
                     {
                         case ',':
                             context.notifyField();
-                            context.state = ParsingState.START;
+                            context.move( ParsingState.START );
                             break;
                         default:
-                            context.buffer.append( ch );
-                            context.state = ParsingState.QUOTING;
+                            context.append( ch );
+                            context.move( ParsingState.QUOTING );
                     }
                     break;
                 default:

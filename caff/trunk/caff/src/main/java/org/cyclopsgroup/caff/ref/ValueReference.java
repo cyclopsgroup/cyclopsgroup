@@ -37,6 +37,11 @@ public abstract class ValueReference<T>
     public abstract String getName();
 
     /**
+     * @return Type of value
+     */
+    public abstract Class<?> getType();
+
+    /**
      * @return True if value really is readable
      */
     public abstract boolean isReadable();

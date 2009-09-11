@@ -44,6 +44,15 @@ public class CSVParserTest
     }
 
     /**
+     * Verify double quote is correctly recognized
+     */
+    @Test
+    public void testDoubleQuote()
+    {
+        parseAndVerify( "a, \"bb\",\"ccc\",d", "a", "bb", "ccc", "d" );
+    }
+
+    /**
      * Verify normal case without quoting or escaping
      */
     @Test
@@ -52,9 +61,12 @@ public class CSVParserTest
         parseAndVerify( "a, bb,ccc,d", "a", "bb", "ccc", "d" );
     }
 
+    /**
+     * Verify escape character is taking effect
+     */
     @Test
-    public void testDoubleQuote()
+    public void testEscaping()
     {
-        //parseAndVerify( "a, \"bb\",\"ccc\" ,d", "a", "bb", "ccc", "d" );
+        parseAndVerify( "a, b\"b, \"c\"\"\", \"d\"\"d\"", "a", "b\"b", "c\"", "d\"d" );
     }
 }
