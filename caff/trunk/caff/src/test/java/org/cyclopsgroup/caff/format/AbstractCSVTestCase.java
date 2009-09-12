@@ -44,4 +44,20 @@ public abstract class AbstractCSVTestCase
         assertEquals( "Rod", bean.lastName );
         assertEquals( "Ben\"der", bean.getFirstName() );
     }
+
+    /**
+     * Verify printing code logic with a normal case
+     *
+     * @throws IOException Allows IOException
+     */
+    @Test
+    public void testPrintNormally()
+        throws IOException
+    {
+        CSVBean bean = new CSVBean();
+        bean.lastName = "Rod";
+        bean.setFirstName( "Bender" );
+        bean.setAge( 35 );
+        assertEquals( "Rod,Bender,,35,", toString( bean ) );
+    }
 }
