@@ -90,6 +90,10 @@ class FieldValueReference<T>
     public void writeValue( Object value, T owner )
         throws AccessFailureException
     {
+        if ( value == null && field.getType().isPrimitive() )
+        {
+            return;
+        }
         try
         {
             field.set( owner, value );

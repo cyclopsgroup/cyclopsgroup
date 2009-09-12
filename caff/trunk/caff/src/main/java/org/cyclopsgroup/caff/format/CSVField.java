@@ -1,10 +1,19 @@
 package org.cyclopsgroup.caff.format;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Flag field as a CSV field
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
+@Documented
+@Retention( RetentionPolicy.RUNTIME )
+@Target( { ElementType.FIELD, ElementType.METHOD } )
 public @interface CSVField
 {
     /**

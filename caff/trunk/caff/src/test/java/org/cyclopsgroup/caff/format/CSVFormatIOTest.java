@@ -1,19 +1,20 @@
 package org.cyclopsgroup.caff.format;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
-
-import org.cyclopsgroup.caff.CharIterator;
+import java.io.Writer;
 
 /**
- * Test that covers {@link CSVImpl}
+ * A test that verifies {@link FixLengthFormat} dealing with {@link Reader} and {@link Writer}
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class CSVImplTest
+public class CSVFormatIOTest
     extends AbstractCSVTestCase
 {
-    private final CSVImpl<CSVBean> impl = new CSVImpl<CSVBean>( CSVBean.class );
+    private final Format<CSVBean> format = Formats.newCSVFormat( CSVBean.class );
 
     /**
      * @inheritDoc
@@ -22,9 +23,7 @@ public class CSVImplTest
     protected CSVBean fromString( String string )
         throws IOException
     {
-        CSVBean bean = new CSVBean();
-        impl.populate( bean, CharIterator.valueOf( string ) );
-        return bean;
+        return format.parse( new StringReader( string ) );
     }
 
     /**
@@ -35,7 +34,7 @@ public class CSVImplTest
         throws IOException
     {
         StringWriter out = new StringWriter();
-        impl.print( bean, out );
+        format.print( bean, out );
         return out.toString();
     }
 }

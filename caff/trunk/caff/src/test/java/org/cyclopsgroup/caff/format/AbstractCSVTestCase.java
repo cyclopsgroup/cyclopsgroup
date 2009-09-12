@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,19 +17,31 @@ public abstract class AbstractCSVTestCase
 {
     /**
      * Parse a normal CSV string
-     * FIXME This isn't working yet.
      *
-     * @throws IOException
+     * @throws IOException Allows IOException
      */
     @Test
-    @Ignore
     public void testParseNormally()
         throws IOException
     {
         CSVBean bean = fromString( "Rod,Bender,,35,19781204" );
         assertEquals( "Rod", bean.lastName );
-        assertEquals( "Beander", bean.getFirstName() );
+        assertEquals( "Bender", bean.getFirstName() );
         assertEquals( 35, bean.getAge() );
-        assertEquals( "1978-12-04", new SimpleDateFormat( "yyyy-YY-dd" ).format( bean.getBirthDay() ) );
+        assertEquals( "1978-12-04", new SimpleDateFormat( "yyyy-MM-dd" ).format( bean.getBirthDay() ) );
+    }
+
+    /**
+     * Verify quoting and escaping
+     *
+     * @throws IOException Allows IOException
+     */
+    @Test
+    public void testWithEscaping()
+        throws IOException
+    {
+        CSVBean bean = fromString( "Rod, \"Ben\"\"der\",,," );
+        assertEquals( "Rod", bean.lastName );
+        assertEquals( "Ben\"der", bean.getFirstName() );
     }
 }

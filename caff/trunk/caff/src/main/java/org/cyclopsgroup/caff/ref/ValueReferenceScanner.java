@@ -8,6 +8,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A class that iterate through all property descriptors and fields and look for possible value references.
@@ -47,8 +48,8 @@ public class ValueReferenceScanner<T>
         this.beanType = beanType;
     }
 
-    private AccessibleObject findAnnotatedAccess( PropertyDescriptor desc,
-                                                  Class<? extends Annotation> expectedAnnotation )
+    private <H extends Annotation> AccessibleObject findAnnotatedAccess( PropertyDescriptor desc,
+                                                                         Class<H> expectedAnnotation )
     {
         Field field;
         try
@@ -59,16 +60,16 @@ public class ValueReferenceScanner<T>
         {
             field = null;
         }
-        AccessibleObject access = null;
-        for ( AccessibleObject a : Arrays.asList( (AccessibleObject) desc.getReadMethod(), desc.getWriteMethod(), field ) )
+        List<AccessibleObject> accesses =
+            Arrays.asList( (AccessibleObject) desc.getReadMethod(), desc.getWriteMethod(), field );
+        for ( AccessibleObject access : accesses )
         {
-            if ( a != null && a.isAnnotationPresent( expectedAnnotation ) )
+            if ( access != null && access.isAnnotationPresent( expectedAnnotation ) )
             {
-                access = a;
-                break;
+                return access;
             }
         }
-        return access;
+        return null;
     }
 
     /**

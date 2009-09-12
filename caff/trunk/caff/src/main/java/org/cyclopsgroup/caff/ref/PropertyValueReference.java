@@ -112,9 +112,18 @@ class PropertyValueReference<T>
         {
             throw new IllegalStateException( "Property " + name + " isn't writable" );
         }
+        if ( value == null && type.isPrimitive() )
+        {
+            return;
+        }
         try
         {
             writer.invoke( owner, value );
+        }
+        catch ( IllegalArgumentException e )
+        {
+            throw new IllegalArgumentException( "Can't set property " + name + " of object " + owner + " to " + value,
+                                                e );
         }
         catch ( IllegalAccessException e )
         {

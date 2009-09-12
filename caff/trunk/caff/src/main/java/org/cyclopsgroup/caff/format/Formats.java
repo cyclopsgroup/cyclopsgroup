@@ -22,4 +22,16 @@ public final class Formats
     {
         return new FixLengthFormat<T>( beanType );
     }
+
+    /**
+     * Create new text format for CSV syntax
+     *
+     * @param <T> Type of bean
+     * @param beanType Type of bean
+     * @return CSV implementation of format
+     */
+    public static <T> Format<T> newCSVFormat( Class<T> beanType )
+    {
+        return new CSVFormat<T>( beanType );
+    }
 }
