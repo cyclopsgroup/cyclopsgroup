@@ -26,7 +26,7 @@ public abstract class CharIterator
      * @param seq Char sequence as input
      * @return A implementation to read {@link CharSequence}
      */
-    public static CharIterator valueOf( final CharSequence seq )
+    public static CharIterator instanceOf( final CharSequence seq )
     {
         return new CharIterator()
         {
@@ -50,7 +50,7 @@ public abstract class CharIterator
      *
      * @throws IOException Allows reading exception from {@link Reader}
      */
-    public static CharIterator valueOf( final Reader reader )
+    public static CharIterator instanceOf( final Reader reader )
         throws IOException
     {
         return new CharIterator()

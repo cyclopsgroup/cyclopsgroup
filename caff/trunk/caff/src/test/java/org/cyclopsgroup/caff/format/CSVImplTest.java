@@ -23,7 +23,7 @@ public class CSVImplTest
         throws IOException
     {
         CSVBean bean = new CSVBean();
-        impl.populate( bean, CharIterator.valueOf( string ) );
+        impl.populate( bean, CharIterator.instanceOf( string ) );
         return bean;
     }
 

@@ -30,7 +30,7 @@ public class CSVParserTest
         };
         try
         {
-            parser.parse( CharIterator.valueOf( input ) );
+            parser.parse( CharIterator.instanceOf( input ) );
         }
         catch ( IOException e )
         {

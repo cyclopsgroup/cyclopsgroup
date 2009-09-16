@@ -33,7 +33,7 @@ public class CSVFormat<T>
     public T parse( CharSequence content ) throws IOException
     {
         T bean = createBean();
-        impl.populate( bean, CharIterator.valueOf( content ) );
+        impl.populate( bean, CharIterator.instanceOf( content ) );
         return bean;
     }
 
@@ -44,7 +44,7 @@ public class CSVFormat<T>
     public void populate( T bean, Reader reader )
         throws IOException
     {
-        impl.populate( bean, CharIterator.valueOf( reader ) );
+        impl.populate( bean, CharIterator.instanceOf( reader ) );
     }
 
     /**
