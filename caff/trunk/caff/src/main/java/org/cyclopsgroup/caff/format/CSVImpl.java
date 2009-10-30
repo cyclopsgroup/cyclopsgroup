@@ -48,6 +48,9 @@ class CSVImpl<T>
 
     private final Map<Integer, Slot> slots;
 
+    /**
+     * @param beanType Type of bean to parse or format
+     */
     CSVImpl( final Class<T> beanType )
     {
         CSVType typeAnnotation = beanType.getAnnotation( CSVType.class );
@@ -77,6 +80,11 @@ class CSVImpl<T>
         this.slots = Collections.unmodifiableMap( slots );
     }
 
+    /**
+     * @param bean Bean to parse
+     * @param in Char iterator of input
+     * @throws IOException If IO writing fails
+     */
     void populate( final T bean, CharIterator in )
         throws IOException
     {
@@ -96,6 +104,11 @@ class CSVImpl<T>
         parser.parse( in );
     }
 
+    /**
+     * @param bean Bean to format
+     * @param out Output writer
+     * @throws IOException If writing fails
+     */
     void print( T bean, Writer out )
         throws IOException
     {
