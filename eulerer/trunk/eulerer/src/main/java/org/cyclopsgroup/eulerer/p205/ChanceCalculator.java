@@ -10,28 +10,37 @@ public class ChanceCalculator
 
     private final int faces;
 
+    private final long total;
+
     public ChanceCalculator( int faces, int dices )
     {
+        if ( faces <= 0 || dices <= 0 )
+        {
+            throw new IllegalArgumentException( String.format( "Invalid input value %d, %d", faces, dices ) );
+        }
         this.faces = faces;
         this.dices = dices;
+        this.total = BigInteger.valueOf( faces ).pow( dices ).longValue();
         this.chances = new Chance[faces * dices];
         for ( int i = 0; i < chances.length; i++ )
         {
-            chances[i] = new Chance();
+            chances[i] = new Chance( total );
         }
         buildChance( 0, 0 );
-
     }
 
+    /**
+     * Adjust less and more of each chance
+     */
     void calculate()
     {
         int rest = BigInteger.valueOf( faces ).pow( dices ).intValue();
         int less = 0;
         for ( Chance c : chances )
         {
-            rest -= c.getValue();
-            less += c.getValue();
-            c.setLessAndMore( less, rest );
+            rest -= c.value();
+            less += c.value();
+            c.adjust( less, rest );
         }
     }
 
@@ -39,7 +48,7 @@ public class ChanceCalculator
     {
         if ( dice == dices )
         {
-            chances[start - 1].increase();
+            chances[start - 1].increaseValue();
             return;
         }
         for ( int i = 1; i <= faces; i++ )

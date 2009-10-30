@@ -2,33 +2,38 @@ package org.cyclopsgroup.eulerer.p205;
 
 public class Chance
 {
-    private int less;
+    private long less;
 
-    private int more;
+    private long more;
 
     private int value;
 
-    public final int getLess()
+    Chance( long total )
+    {
+        more = total;
+    }
+
+    public final long less()
     {
         return less;
     }
 
-    public final int getMore()
+    public final long more()
     {
         return more;
     }
 
-    public final int getValue()
+    public final int value()
     {
         return value;
     }
 
-    void increase()
+    void increaseValue()
     {
         value++;
     }
 
-    void setLessAndMore( int less, int more )
+    void adjust( long less, long more )
     {
         this.less = less;
         this.more = more;

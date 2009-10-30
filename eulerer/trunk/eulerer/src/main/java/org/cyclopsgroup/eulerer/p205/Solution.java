@@ -20,12 +20,12 @@ public class Solution
         long win = 0, lose = 0, draw = 0;
         for ( int i = 1; i <= 36; i++ )
         {
-            int c = colin.chanceOf( i ).getValue();
+            int c = colin.chanceOf( i ).value();
             Chance p = peter.chanceOf( i );
 
-            win += p.getLess() * c;
-            draw += p.getValue() * c;
-            lose += p.getMore() * c;
+            win += p.less() * c;
+            draw += p.value() * c;
+            lose += p.more() * c;
         }
         System.out.println( "win=" + win + " lose=" + lose + " draw=" + draw );
     }
