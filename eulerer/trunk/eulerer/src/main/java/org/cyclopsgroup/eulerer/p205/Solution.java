@@ -2,32 +2,21 @@ package org.cyclopsgroup.eulerer.p205;
 
 
 /**
- * Solution of problem 205
+ * Adapter that referencing {@link DiceGame}
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public class Solution
+    implements Runnable
 {
+    private final DiceGame game = new DiceGame();
+
     /**
-     * @param args Dull command line arguments
+     * @inheritDoc
      */
-    public static void main( String[] args )
+    @Override
+    public void run()
     {
-        ChanceCalculator peter = new ChanceCalculator( 4, 9 );
-        peter.adjustPositions();
-        ChanceCalculator colin = new ChanceCalculator( 6, 6 );
-
-        // Consider colin
-        long win = 0, lose = 0, draw = 0;
-        for ( int i = 1; i <= 36; i++ )
-        {
-            int c = colin.chanceOf( i ).value();
-            Chance p = peter.chanceOf( i );
-
-            win += p.less() * c;
-            draw += p.value() * c;
-            lose += p.greater() * c;
-        }
-        System.out.println( "win=" + win + " lose=" + lose + " draw=" + draw );
+        game.comparePeterAndColin();
     }
 }
