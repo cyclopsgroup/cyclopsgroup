@@ -9,7 +9,7 @@ public class Solution
     @Override
     public void run()
     {
-        HighwayDragon d = new HighwayDragon( 10 );
+        HeighwayDragon d = new HeighwayDragon( 10 );
         d.traverseFor( 500L );
         System.out.println( d.position() );
     }

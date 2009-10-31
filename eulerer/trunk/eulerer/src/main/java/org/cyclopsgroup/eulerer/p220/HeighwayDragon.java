@@ -1,6 +1,6 @@
 package org.cyclopsgroup.eulerer.p220;
 
-public class HighwayDragon
+public class HeighwayDragon
 {
     private Coordinate coordinate = new Coordinate();
 
@@ -10,7 +10,7 @@ public class HighwayDragon
 
     private long step;
 
-    public HighwayDragon( int maxLevels )
+    public HeighwayDragon( int maxLevels )
     {
         if ( maxLevels < 0 )
         {
@@ -59,13 +59,13 @@ public class HighwayDragon
                     direction = direction.turnRight();
                     break;
                 case 'a':
-                    if ( level < maxLevels )
+                    if ( level < maxLevels  )
                     {
                         traverseFor( steps, level + 1, "aRbFR" );
                     }
                     break;
                 case 'b':
-                    if ( level < maxLevels )
+                    if ( level < maxLevels  )
                     {
                         traverseFor( steps, level + 1, "LFaLb" );
                     }
