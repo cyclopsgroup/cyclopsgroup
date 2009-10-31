@@ -2,6 +2,11 @@ package org.cyclopsgroup.eulerer.p205;
 
 import java.math.BigInteger;
 
+/**
+ * Based on number of faces and dices, calculate chance of of each possible value
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class ChanceCalculator
 {
     private final Chance[] chances;
@@ -12,6 +17,10 @@ public class ChanceCalculator
 
     private final long total;
 
+    /**
+     * @param faces Number of faces for each dice
+     * @param dices Number of total dices
+     */
     public ChanceCalculator( int faces, int dices )
     {
         if ( faces <= 0 || dices <= 0 )
@@ -24,23 +33,23 @@ public class ChanceCalculator
         this.chances = new Chance[faces * dices];
         for ( int i = 0; i < chances.length; i++ )
         {
-            chances[i] = new Chance( total );
+            chances[i] = new Chance();
         }
         buildChance( 0, 0 );
     }
 
     /**
-     * Adjust less and more of each chance
+     * Adjust position of each chance so that each chance knows chance of being less or greater
      */
-    void calculate()
+    void adjustPositions()
     {
-        int rest = BigInteger.valueOf( faces ).pow( dices ).intValue();
-        int less = 0;
+        long rest = total;
+        long less = 0;
         for ( Chance c : chances )
         {
             rest -= c.value();
+            c.position( less, rest );
             less += c.value();
-            c.adjust( less, rest );
         }
     }
 
@@ -57,17 +66,14 @@ public class ChanceCalculator
         }
     }
 
+    /**
+     * Chance of being equal to given value
+     *
+     * @param value Given value to compare to
+     * @return Chance for this value
+     */
     Chance chanceOf( int value )
     {
         return chances[value - 1];
-    }
-
-    public void print()
-    {
-        int line = 0;
-        for ( Chance chance : chances )
-        {
-            System.out.println( ++line + "=" + chance );
-        }
     }
 }

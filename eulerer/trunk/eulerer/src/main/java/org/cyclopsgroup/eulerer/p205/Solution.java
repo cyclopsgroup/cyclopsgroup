@@ -1,5 +1,6 @@
 package org.cyclopsgroup.eulerer.p205;
 
+
 /**
  * Solution of problem 205
  *
@@ -13,7 +14,7 @@ public class Solution
     public static void main( String[] args )
     {
         ChanceCalculator peter = new ChanceCalculator( 4, 9 );
-        peter.calculate();
+        peter.adjustPositions();
         ChanceCalculator colin = new ChanceCalculator( 6, 6 );
 
         // Consider colin
@@ -25,7 +26,7 @@ public class Solution
 
             win += p.less() * c;
             draw += p.value() * c;
-            lose += p.more() * c;
+            lose += p.greater() * c;
         }
         System.out.println( "win=" + win + " lose=" + lose + " draw=" + draw );
     }
