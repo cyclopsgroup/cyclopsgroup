@@ -1,5 +1,10 @@
 package org.cyclopsgroup.eulerer.p220;
 
+/**
+ * Solution for problem 220
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class Solution
     implements Runnable
 {
@@ -9,8 +14,8 @@ public class Solution
     @Override
     public void run()
     {
-        HeighwayDragon d = new HeighwayDragon( 10 );
-        d.traverseFor( 500L );
-        System.out.println( d.position() );
+        HeighwayDragon d = new HeighwayDragon( 50 );
+        d.traverseFor( 1000000000000L );
+        System.out.println( d.getTraveler().getCoordinate() );
     }
 }

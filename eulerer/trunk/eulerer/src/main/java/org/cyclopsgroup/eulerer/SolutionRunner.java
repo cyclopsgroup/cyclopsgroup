@@ -2,9 +2,14 @@ package org.cyclopsgroup.eulerer;
 
 import java.math.BigDecimal;
 
+/**
+ * Main class that runs all solutions and prints summary
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class SolutionRunner
 {
-    public void execute()
+    private void execute()
     {
         for ( int i = 1; i < 1000; i++ )
         {
@@ -40,6 +45,9 @@ public class SolutionRunner
         }
     }
 
+    /**
+     * @param args Command line args
+     */
     public static void main( String[] args )
     {
         new SolutionRunner().execute();

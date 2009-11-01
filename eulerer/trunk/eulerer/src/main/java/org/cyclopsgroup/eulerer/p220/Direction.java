@@ -1,70 +1,69 @@
 package org.cyclopsgroup.eulerer.p220;
 
+/**
+ * Enumerate four directions
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public enum Direction
 {
-    DOWN, LEFT, RIGHT, UP;
-
     /**
-     * @param cord Change coordinate by stepping forward
+     * Y--
      */
-    public void stepForward( Coordinate cord )
+    DOWN( 2 ),
+    /**
+     * X--
+     */
+    LEFT( 3 ),
+    /**
+     * X++
+     */
+    RIGHT( 1 ),
+    /**
+     * Y++
+     */
+    UP( 0 );
+
+    private static final Direction[] VALUE_INDEX = new Direction[] { UP, RIGHT, DOWN, LEFT };
+
+    private final int value;
+
+    private Direction( int value )
     {
-        switch ( this )
-        {
-            case UP:
-                cord.y++;
-                break;
-            case RIGHT:
-                cord.x++;
-                break;
-            case DOWN:
-                cord.y--;
-                break;
-            case LEFT:
-                cord.x--;
-                break;
-            default:
-                throw new AssertionError( "Unexpected direction " + this );
-        }
+        this.value = value;
     }
 
     /**
-     * @return New direction after turning left
+     * Turn direction clock wise for given number of times
+     *
+     * @param v Number of turns
+     * @return New direction after turning
      */
-    public Direction turnLeft()
+    public Direction add( int v )
     {
-        switch ( this )
+        if ( v == 0 )
         {
-            case UP:
-                return LEFT;
-            case RIGHT:
-                return UP;
-            case DOWN:
-                return RIGHT;
-            case LEFT:
-                return DOWN;
-            default:
-                throw new AssertionError( "Unexpected direction " + this );
+            return this;
         }
+        int index = ( v + value ) % 4;
+        if ( index < 0 )
+        {
+            index += 4;
+        }
+        return VALUE_INDEX[index];
     }
 
     /**
-     * @return New direction after turning right
+     * @param dir New direction
+     * @return To get to the new direction, number of clock wise turns to take
      */
-    public Direction turnRight()
+    public int minus( Direction dir )
     {
-        switch ( this )
+        int result = value - dir.value;
+        if ( result < 0 )
         {
-            case UP:
-                return RIGHT;
-            case RIGHT:
-                return DOWN;
-            case DOWN:
-                return LEFT;
-            case LEFT:
-                return UP;
-            default:
-                throw new AssertionError( "Unexpected direction " + this );
+            result += 4;
         }
+        return result;
     }
 }

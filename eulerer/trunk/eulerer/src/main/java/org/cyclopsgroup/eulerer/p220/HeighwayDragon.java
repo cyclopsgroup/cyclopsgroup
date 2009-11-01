@@ -1,15 +1,37 @@
 package org.cyclopsgroup.eulerer.p220;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Class that traverse and remember location. Implemented in a brutal force solution that takes time linear to number of
+ * steps
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class HeighwayDragon
 {
-    private Coordinate coordinate = new Coordinate();
+    @SuppressWarnings( "serial" )
+    private static class TerminationSignal
+        extends Error
+    {
+    }
 
-    private Direction direction = Direction.UP;
+    private static final char[] INITIAL_PLAN = "Fa".toCharArray();
+
+    private static final char[] PLAN_A = "aRbFR".toCharArray();
+
+    private static final char[] PLAN_B = "LFaLb".toCharArray();
+
+    private Map<String, Path> cachedPaths = new HashMap<String, Path>();
 
     private final int maxLevels;
 
-    private long step;
+    private Traveler traveler = new Traveler();
 
+    /**
+     * @param maxLevels Number of order, or levels 'a' and 'b' are expanded
+     */
     public HeighwayDragon( int maxLevels )
     {
         if ( maxLevels < 0 )
@@ -17,67 +39,98 @@ public class HeighwayDragon
             throw new IllegalArgumentException( "Invalid input " + maxLevels + " level" );
         }
         this.maxLevels = maxLevels;
-        reset();
     }
 
-    private void reset()
+    private void expandSubstitution( long maxSteps, int level, char substitution )
     {
-        direction = Direction.UP;
-        coordinate = new Coordinate();
-        step = 0;
-    }
-
-    public void traverseFor( long steps )
-    {
-        reset();
-        traverseFor( steps, 0, "Fa" );
-    }
-
-    private void traverseFor( long steps, int level, String plan )
-    {
-        if ( steps <= 0 )
+        if ( level >= maxLevels )
         {
-            throw new IllegalArgumentException( "Invalid steps " + steps );
+            return;
         }
-        for ( int i = 0; i < plan.length(); i++ )
+        String pathKey = level + "-" + substitution;
+
+        // If it's a known path and path doesn't exceed max steps, return result directly
+        Path path = cachedPaths.get( pathKey );
+        if ( path != null && path.steps + traveler.getSteps() <= maxSteps )
         {
-            char ch = plan.charAt( i );
+            traveler.walk( path );
+            return;
+        }
+
+        // If path is unknown, cache it
+        Traveler from = traveler.clone();
+        switch ( substitution )
+        {
+            case 'a':
+                traverseFor( maxSteps, level + 1, PLAN_A );
+                break;
+            case 'b':
+                traverseFor( maxSteps, level + 1, PLAN_B );
+                break;
+            default:
+                throw new AssertionError( "Unknown substitution" );
+        }
+        if ( path != null )
+        {
+            return;
+        }
+        path = traveler.pathFrom( from );
+        cachedPaths.put( pathKey, path );
+    }
+
+    /**
+     * @return Current location
+     */
+    public final Traveler getTraveler()
+    {
+        return traveler;
+    }
+
+    /**
+     * @param maxSteps Traverse for given number of steps
+     */
+    public void traverseFor( long maxSteps )
+    {
+        if ( maxSteps <= 0 )
+        {
+            throw new IllegalArgumentException( "Invalid steps " + maxSteps );
+        }
+        try
+        {
+            traverseFor( maxSteps, 0, INITIAL_PLAN );
+        }
+        catch ( TerminationSignal t )
+        {
+            return;
+        }
+    }
+
+    private void traverseFor( final long maxSteps, int level, char[] plan )
+    {
+        for ( char ch : plan )
+        {
             switch ( ch )
             {
                 case 'F':
-                    direction.stepForward( coordinate );
-                    step++;
-                    if ( step == steps )
-                    {
-                        return;
-                    }
+                    traveler.stepForward();
                     break;
                 case 'L':
-                    direction = direction.turnLeft();
+                    traveler.turnLeft();
                     break;
                 case 'R':
-                    direction = direction.turnRight();
+                    traveler.turnRight();
                     break;
                 case 'a':
-                    if ( level < maxLevels  )
-                    {
-                        traverseFor( steps, level + 1, "aRbFR" );
-                    }
-                    break;
                 case 'b':
-                    if ( level < maxLevels  )
-                    {
-                        traverseFor( steps, level + 1, "LFaLb" );
-                    }
+                    expandSubstitution( maxSteps, level, ch );
                     break;
                 default:
                     throw new AssertionError( "Unknown plan " + ch );
             }
+            if ( maxSteps == traveler.getSteps() )
+            {
+                throw new TerminationSignal();
+            }
         }
-    }
-
-    public Coordinate position()
-    {
-        return coordinate;
     }
 }
