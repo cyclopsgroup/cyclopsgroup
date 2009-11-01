@@ -29,5 +29,6 @@ class DiceGame
         }
         System.out.printf( "Peter: win=%d, lose=%d, draw=%d, chance to win=%1.7fl", win, lose, draw,
                            ( win / (double) ( win + lose + draw ) ) );
+        System.out.println();
     }
 }

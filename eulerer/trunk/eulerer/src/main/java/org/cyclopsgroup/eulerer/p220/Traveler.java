@@ -67,7 +67,8 @@ public class Traveler
      */
     Path pathFrom( Traveler from )
     {
-        return new Path( Coordinate.rotateFrom( from.direction, new Coordinate( x - from.x, y - from.y ) ),
+        int back = Direction.UP.minus( from.direction );
+        return new Path( getCoordinate().rotate( back ).minus( from.getCoordinate().rotate( back ) ),
                          direction.minus( from.direction ), steps - from.steps );
     }
 
@@ -118,7 +119,7 @@ public class Traveler
     void walk( Path path )
     {
         steps += path.steps;
-        Coordinate c = Coordinate.rotateBy( direction, path.offset );
+        Coordinate c = path.offset.rotate( direction.minus( Direction.UP ) );
         x += c.x;
         y += c.y;
         direction = direction.add( path.turns );

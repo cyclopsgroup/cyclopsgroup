@@ -35,11 +35,11 @@ public class SolutionRunner
             {
                 throw new RuntimeException( "Solution " + solutionType + "can't be instantiated", e );
             }
+            System.out.println();
             System.out.println( ">>>>>> Runnining solution of problem " + i );
             long start = System.nanoTime();
             solution.run();
             long elapsed = System.nanoTime() - start;
-            System.out.println();
             System.out.println( "<<<<<< Solution " + i + " took " + BigDecimal.valueOf( elapsed ).movePointLeft( 6 )
                 + " ms" );
         }

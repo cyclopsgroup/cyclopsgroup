@@ -49,54 +49,43 @@ public class Coordinate
     }
 
     /**
+     * @param delta Delta to minus
+     * @return New cooridate
+     */
+    public Coordinate minus( Coordinate delta )
+    {
+        return new Coordinate( x - delta.x, y - delta.y );
+    }
+
+    /**
+     * Rotate coordination and return new coordination
+     *
+     * @param rotate Number of clock wise turns
+     * @return Offset considering source direction
+     */
+    public Coordinate rotate( int rotate )
+    {
+        switch ( rotate )
+        {
+            case 0:
+                return new Coordinate( x, y );
+            case 1:
+                return new Coordinate( y, -x );
+            case 2:
+                return new Coordinate( -x, -y );
+            case 3:
+                return new Coordinate( -y, x );
+            default:
+                throw new AssertionError( "Unexpected rotation " + rotate );
+        }
+    }
+
+    /**
      * @inheritDoc
      */
     @Override
     public String toString()
     {
         return x + "," + y;
-    }
-
-    /**
-     * @param direction Direction of source
-     * @param offset Offset disregarding direction of source
-     * @return Offset considering source direction
-     */
-    static Coordinate rotateBy( Direction direction, Coordinate offset )
-    {
-        switch ( direction )
-        {
-            case UP:
-                return new Coordinate( offset.x, offset.y );
-            case RIGHT:
-                return new Coordinate( offset.y, -offset.x );
-            case DOWN:
-                return new Coordinate( -offset.x, -offset.y );
-            case LEFT:
-                return new Coordinate( -offset.y, offset.x );
-            default:
-                throw new AssertionError( "Unexpected direction " + direction );
-        }
-    }
-
-    /**
-     * @param direction Direction of source
-     * @param offset Offset considering direction of source
-     * @return Offset disregarding source direction
-     */
-    static Coordinate rotateFrom( Direction direction, Coordinate offset )
-    {
-        switch ( direction )
-        {
-            case UP:
-            case DOWN:
-                return rotateBy( direction, offset );
-            case LEFT:
-                return rotateBy( Direction.RIGHT, offset );
-            case RIGHT:
-                return rotateBy( Direction.LEFT, offset );
-            default:
-                throw new AssertionError( "Unexpected direction " + direction );
-        }
     }
 }
