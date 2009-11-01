@@ -101,8 +101,11 @@ public class HeighwayDragon
         }
         catch ( TerminationSignal t )
         {
+            // The last step is taken, return expectedly
             return;
         }
+        // The last step has not been taken
+        throw new IllegalArgumentException( maxLevels + " levels plan doesn't have " + maxSteps + " steps" );
     }
 
     private void traverseFor( final long maxSteps, int level, char[] plan )
@@ -129,6 +132,8 @@ public class HeighwayDragon
             }
             if ( maxSteps == traveler.getSteps() )
             {
+                // An error that tells last step is take can interrupt all recursions nicely
+                // This is slightly easier than returning a value
                 throw new TerminationSignal();
             }
         }

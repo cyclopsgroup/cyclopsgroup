@@ -55,6 +55,13 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>org.cyclopsgroup.eulerer.SolutionRunner</mainClass>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<developers>
