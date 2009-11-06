@@ -36,7 +36,7 @@ public class HeighwayDragon
      */
     public HeighwayDragon( int maxLevels )
     {
-        Validate.isTrue( maxLevels > 0, "Invalid number of max levels " + maxLevels );
+        Validate.isTrue( maxLevels >= 0, "Invalid number of max levels " + maxLevels );
         this.maxLevels = maxLevels;
     }
 
