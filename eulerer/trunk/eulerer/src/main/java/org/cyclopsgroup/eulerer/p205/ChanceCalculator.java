@@ -2,6 +2,8 @@ package org.cyclopsgroup.eulerer.p205;
 
 import java.math.BigInteger;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * Based on number of faces and dices, calculate chance of of each possible value
  *
@@ -11,7 +13,7 @@ public class ChanceCalculator
 {
     private final Chance[] chances;
 
-    private final int dices;
+    private final int dice;
 
     private final int faces;
 
@@ -19,18 +21,16 @@ public class ChanceCalculator
 
     /**
      * @param faces Number of faces for each dice
-     * @param dices Number of total dices
+     * @param dice Number of total dices
      */
-    public ChanceCalculator( int faces, int dices )
+    public ChanceCalculator( int faces, int dice )
     {
-        if ( faces <= 0 || dices <= 0 )
-        {
-            throw new IllegalArgumentException( String.format( "Invalid input value %d, %d", faces, dices ) );
-        }
+        Validate.isTrue( faces > 0, "Invalid faces " + faces );
+        Validate.isTrue( dice > 0, "Invalid number of dice " + dice );
         this.faces = faces;
-        this.dices = dices;
-        this.total = BigInteger.valueOf( faces ).pow( dices ).longValue();
-        this.chances = new Chance[faces * dices];
+        this.dice = dice;
+        this.total = BigInteger.valueOf( faces ).pow( dice ).longValue();
+        this.chances = new Chance[faces * dice];
         for ( int i = 0; i < chances.length; i++ )
         {
             chances[i] = new Chance();
@@ -53,16 +53,16 @@ public class ChanceCalculator
         }
     }
 
-    private void buildChance( int start, int dice )
+    private void buildChance( int start, int die )
     {
-        if ( dice == dices )
+        if ( die == dice )
         {
             chances[start - 1].increaseValue();
             return;
         }
         for ( int i = 1; i <= faces; i++ )
         {
-            buildChance( start + i, dice + 1 );
+            buildChance( start + i, die + 1 );
         }
     }
 

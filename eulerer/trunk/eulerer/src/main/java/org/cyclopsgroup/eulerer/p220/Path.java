@@ -31,7 +31,7 @@ public class Path
      * @param turns Number of turns it takes
      * @param steps Number of steps it takes
      */
-    public Path( Coordinate offset, int turns, long steps )
+    Path( Coordinate offset, int turns, long steps )
     {
         this.offset = offset;
         this.steps = steps;

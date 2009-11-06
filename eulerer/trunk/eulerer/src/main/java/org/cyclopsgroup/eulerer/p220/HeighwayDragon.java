@@ -3,6 +3,8 @@ package org.cyclopsgroup.eulerer.p220;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * Class that traverse and remember location. Implemented in a brutal force solution that takes time linear to number of
  * steps
@@ -34,10 +36,7 @@ public class HeighwayDragon
      */
     public HeighwayDragon( int maxLevels )
     {
-        if ( maxLevels < 0 )
-        {
-            throw new IllegalArgumentException( "Invalid input " + maxLevels + " level" );
-        }
+        Validate.isTrue( maxLevels > 0, "Invalid number of max levels " + maxLevels );
         this.maxLevels = maxLevels;
     }
 
@@ -91,6 +90,8 @@ public class HeighwayDragon
      */
     public void traverseFor( long maxSteps )
     {
+        Validate.isTrue( maxSteps > 0, "Invalid number of max steps " + maxSteps );
+
         if ( maxSteps <= 0 )
         {
             throw new IllegalArgumentException( "Invalid steps " + maxSteps );
