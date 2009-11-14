@@ -15,7 +15,7 @@ public class HeighwayDragon
 {
     @SuppressWarnings( "serial" )
     private static class TerminationSignal
-        extends Error
+        extends Throwable
     {
     }
 
@@ -41,6 +41,7 @@ public class HeighwayDragon
     }
 
     private void expandSubstitution( long maxSteps, int level, char substitution )
+        throws TerminationSignal
     {
         if ( level >= maxLevels )
         {
@@ -110,6 +111,7 @@ public class HeighwayDragon
     }
 
     private void traverseFor( final long maxSteps, int level, char[] plan )
+        throws TerminationSignal
     {
         for ( char ch : plan )
         {
