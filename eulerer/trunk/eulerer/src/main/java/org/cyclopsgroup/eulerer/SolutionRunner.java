@@ -35,6 +35,10 @@ public class SolutionRunner
             {
                 throw new RuntimeException( "Solution " + solutionType + "can't be instantiated", e );
             }
+            catch ( ClassCastException e )
+            {
+                continue;
+            }
             System.out.println();
             System.out.println( ">>>>>> Runnining solution of problem " + i );
             long start = System.nanoTime();

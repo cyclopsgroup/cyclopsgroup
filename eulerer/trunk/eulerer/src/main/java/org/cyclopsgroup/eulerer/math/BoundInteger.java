@@ -63,6 +63,8 @@ public class BoundInteger
     }
 
     /**
+     * TODO This implementation can be further improved
+     *
      * @param v Value to multiply
      * @return Multiplying result
      */
@@ -74,7 +76,7 @@ public class BoundInteger
 
     /**
      * @param power Number of power
-     * @return Result
+     * @return Result of power
      */
     public BoundInteger power( int power )
     {
