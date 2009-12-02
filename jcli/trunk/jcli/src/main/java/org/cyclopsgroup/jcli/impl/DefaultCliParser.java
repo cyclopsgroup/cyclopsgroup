@@ -56,5 +56,4 @@ public class DefaultCliParser
     {
         this.strict = strict;
     }
-
 }

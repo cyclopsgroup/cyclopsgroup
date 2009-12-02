@@ -9,7 +9,7 @@ import org.cyclopsgroup.jcli.annotation.Option;
 
 /**
  * Definition of an option
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class OptionDefinition
@@ -23,7 +23,7 @@ public class OptionDefinition
     private final Option option;
 
     /**
-     * @param option Option deifinition
+     * @param option Option definition
      * @param descriptor PropertyDescriptor for property associated to this option
      */
     public OptionDefinition( Option option, PropertyDescriptor descriptor )
