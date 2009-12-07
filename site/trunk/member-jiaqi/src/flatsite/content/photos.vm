@@ -67,13 +67,17 @@
             I've been using this camera in last 3 years and I'm still
             pretty satisfied with it.
         </p>
-        <h2>Slide Show</h2>
-        <div>
-            <iframe
-                src="http://www.flickr.com/slideShow/index.gne?user_id=68975111@N00&amp;tags=photography"
-                frameborder="0" height="480" width="100%" scrolling="no">
-            </iframe>
-        </div>
+        <iframe width="520" height="360" frameborder="0"
+            scrolling="no" marginheight="0" marginwidth="0"
+            src="http://www.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;source=embed&amp;msa=0&amp;msid=106941097698600281540.00047a1a7cbb88d3acb17&amp;ll=47.612875,-122.349243&amp;spn=0.04166,0.089264&amp;z=13&amp;output=embed"></iframe>
+        <br />
+        <small>
+            View
+            <a
+                href="http://www.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;source=embed&amp;msa=0&amp;msid=106941097698600281540.00047a1a7cbb88d3acb17&amp;ll=47.612875,-122.349243&amp;spn=0.04166,0.089264&amp;z=13"
+                style="color:#0000FF;text-align:left">Seattle Photos</a>
+            in a larger map
+        </small>
         <h2>Galleries</h2>
         <table border="0" width="100%" style="text-align: center">
             <tr>
