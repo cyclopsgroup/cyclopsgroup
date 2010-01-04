@@ -15,7 +15,7 @@ public class FiarGame
 
     private String gameId;
 
-    private FiarGameState gameState;
+    private FiarGameState gameState = FiarGameState.PENDING;
 
     private int height;
 

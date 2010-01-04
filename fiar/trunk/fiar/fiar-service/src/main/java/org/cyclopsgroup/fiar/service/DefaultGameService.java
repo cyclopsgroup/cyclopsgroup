@@ -24,6 +24,9 @@ public class DefaultGameService
         this.userService = userService;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Game createGame( String sessionId, DateTime requestDate )
     {
@@ -36,11 +39,14 @@ public class DefaultGameService
         return game;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public int getGameVersion( String sessionId, String gameId )
     {
-        // TODO Auto-generated method stub
-        return 0;
+        FiarGame game = storage.loadGame( gameId );
+        return game.getVersion();
     }
 
     @Override
