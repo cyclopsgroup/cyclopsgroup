@@ -2,9 +2,17 @@ package org.cyclopsgroup.fiar;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.joda.time.DateTime;
+
 @XmlRootElement( name = "Move Result" )
-public class MoveResult
+public class Move
 {
+    private DateTime moveTime;
+
+    private String playerId;
+
+    private PlayerRole playerRole;
+
     private int previousVersion;
 
     private int version;
@@ -13,9 +21,20 @@ public class MoveResult
 
     private int y;
 
-    private String playerId;
+    public DateTime getMoveTime()
+    {
+        return moveTime;
+    }
 
-    private PlayerColor playerColor;
+    public String getPlayerId()
+    {
+        return playerId;
+    }
+
+    public PlayerRole getPlayerRole()
+    {
+        return playerRole;
+    }
 
     public final int getPreviousVersion()
     {
@@ -35,6 +54,21 @@ public class MoveResult
     public final int getY()
     {
         return y;
+    }
+
+    public void setMoveTime( DateTime moveTime )
+    {
+        this.moveTime = moveTime;
+    }
+
+    public void setPlayerId( String playerId )
+    {
+        this.playerId = playerId;
+    }
+
+    public void setPlayerRole( PlayerRole playerColor )
+    {
+        this.playerRole = playerColor;
     }
 
     public final void setPreviousVersion( int previousVersion )

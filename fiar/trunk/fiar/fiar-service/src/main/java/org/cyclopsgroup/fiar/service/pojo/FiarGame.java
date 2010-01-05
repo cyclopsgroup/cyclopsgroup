@@ -1,4 +1,4 @@
-package org.cyclopsgroup.fiar.service;
+package org.cyclopsgroup.fiar.service.pojo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,11 @@ public class FiarGame
 
     private String creatorId;
 
+    private String defensePlayerId;
+
     private String gameId;
+
+    private String gameName;
 
     private FiarGameState gameState = FiarGameState.PENDING;
 
@@ -21,12 +25,23 @@ public class FiarGame
 
     private List<FiarGameMove> moves = new ArrayList<FiarGameMove>();
 
+    private FiarGamePlayer nextMovePlayer = FiarGamePlayer.OFFENSE;
+
+    private String offensePlayerId;
+
     private int version;
 
     private int width;
 
     public FiarGame()
     {
+    }
+
+    public void addMove( FiarGameMove move )
+    {
+        moves.add( move );
+        version++;
+        move.setVersion( version );
     }
 
     public final DateTime getCreationDate()
@@ -39,9 +54,19 @@ public class FiarGame
         return creatorId;
     }
 
+    public final String getDefensePlayerId()
+    {
+        return defensePlayerId;
+    }
+
     public final String getGameId()
     {
         return gameId;
+    }
+
+    public final String getGameName()
+    {
+        return gameName;
     }
 
     public final FiarGameState getGameState()
@@ -57,6 +82,16 @@ public class FiarGame
     public final List<FiarGameMove> getMoves()
     {
         return moves;
+    }
+
+    public final FiarGamePlayer getNextMovePlayer()
+    {
+        return nextMovePlayer;
+    }
+
+    public final String getOffensePlayerId()
+    {
+        return offensePlayerId;
     }
 
     public final int getVersion()
@@ -79,9 +114,19 @@ public class FiarGame
         this.creatorId = creatorId;
     }
 
+    public final void setDefensePlayerId( String defensePlayerId )
+    {
+        this.defensePlayerId = defensePlayerId;
+    }
+
     public final void setGameId( String gameId )
     {
         this.gameId = gameId;
+    }
+
+    public final void setGameName( String gameName )
+    {
+        this.gameName = gameName;
     }
 
     public final void setGameState( FiarGameState gameState )
@@ -97,6 +142,16 @@ public class FiarGame
     public final void setMoves( List<FiarGameMove> moves )
     {
         this.moves = moves;
+    }
+
+    public final void setNextMovePlayer( FiarGamePlayer nextMovePlayer )
+    {
+        this.nextMovePlayer = nextMovePlayer;
+    }
+
+    public final void setOffensePlayerId( String offensePlayerId )
+    {
+        this.offensePlayerId = offensePlayerId;
     }
 
     public final void setVersion( int version )

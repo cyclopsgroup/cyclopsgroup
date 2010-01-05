@@ -11,9 +11,19 @@
     <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-    <jaxrs:server id="gameService" address="/">
+    <jaxrs:server id="restfulService" address="/">
         <jaxrs:serviceBeans>
-            <bean class="org.cyclopsgroup.fiar.service.DefaultGameService" />
+            <ref bean="gameService" />
         </jaxrs:serviceBeans>
     </jaxrs:server>
+
+    <bean id="gameService" class="org.cyclopsgroup.fiar.service.DefaultGameService">
+        <constructor-arg>
+            <bean class="org.cyclopsgroup.fiar.service.mem.HashMapGameStorage" />
+        </constructor-arg>
+        <constructor-arg>
+            <bean
+                class="org.cyclopsgroup.fiar.service.mem.ConstantUserSessionService" />
+        </constructor-arg>
+    </bean>
 </beans>

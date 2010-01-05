@@ -1,4 +1,4 @@
-package org.cyclopsgroup.fiar.service;
+package org.cyclopsgroup.fiar.service.pojo;
 
 /**
  * Possible state of game

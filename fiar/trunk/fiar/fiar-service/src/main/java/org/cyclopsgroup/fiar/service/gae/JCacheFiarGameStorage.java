@@ -7,8 +7,8 @@ import javax.cache.CacheException;
 import javax.cache.CacheManager;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.fiar.service.FiarGame;
 import org.cyclopsgroup.fiar.service.FiarGameStorage;
+import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 
 /**
  * Implementation of storage using JCache
@@ -47,5 +47,13 @@ public class JCacheFiarGameStorage
     public void storeGame( FiarGame game )
     {
         gameCache.put( game.getGameId(), game );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void updateGame( FiarGame game )
+    {
     }
 }

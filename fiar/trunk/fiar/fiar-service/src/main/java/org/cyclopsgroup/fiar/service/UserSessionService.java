@@ -1,6 +1,6 @@
 package org.cyclopsgroup.fiar.service;
 
-public interface UserService
+public interface UserSessionService
 {
     String getUserOfSession( String sessionId );
 }

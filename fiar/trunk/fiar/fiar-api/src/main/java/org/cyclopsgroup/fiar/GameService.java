@@ -6,8 +6,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import org.joda.time.DateTime;
-
 /**
  * API exposed for player to play game
  *
@@ -22,9 +20,9 @@ public interface GameService
      * @return The game user creates
      */
     @GET
-    @Path( "/{sessionId}/create" )
+    @Path( "/{sessionId}/create/{name}" )
     @Produces( "text/xml" )
-    Game createGame( @PathParam( "sessionId" ) String sessionId, @QueryParam( "requestDate" ) DateTime requestDate );
+    Game createGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "name" ) String gameName );
 
     /**
      * Get the latest version of a game
@@ -49,7 +47,7 @@ public interface GameService
     @GET
     @Path( "/{sessionId}/{gameId}/moves" )
     @Produces( "text/xml" )
-    MoveResults getMoves( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
+    Moves getMoves( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
                           int fromVersion );
 
     /**
@@ -76,6 +74,6 @@ public interface GameService
     @GET
     @Path( "/{sessionId}/{gameId}/move" )
     @Produces( "text/xml" )
-    MoveResult makeMove( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
+    Move makeMove( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
                          @QueryParam( "version" ) int version, @QueryParam( "x" ) int x, @QueryParam( "y" ) int y );
 }
