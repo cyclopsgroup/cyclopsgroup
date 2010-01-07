@@ -1,10 +1,12 @@
 package org.cyclopsgroup.fiar;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.joda.time.DateTime;
 
-@XmlRootElement( name = "Move Result" )
+@XmlRootElement( name = "Move" )
 public class Move
 {
     private DateTime moveTime;
@@ -21,36 +23,44 @@ public class Move
 
     private int y;
 
+    @XmlJavaTypeAdapter( DateTimeAdapter.class )
+    @XmlElement
     public DateTime getMoveTime()
     {
         return moveTime;
     }
 
+    @XmlElement
     public String getPlayerId()
     {
         return playerId;
     }
 
+    @XmlElement
     public PlayerRole getPlayerRole()
     {
         return playerRole;
     }
 
+    @XmlElement
     public final int getPreviousVersion()
     {
         return previousVersion;
     }
 
+    @XmlElement
     public final int getVersion()
     {
         return version;
     }
 
+    @XmlElement
     public final int getX()
     {
         return x;
     }
 
+    @XmlElement
     public final int getY()
     {
         return y;

@@ -2,6 +2,7 @@ package org.cyclopsgroup.fiar;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.joda.time.DateTime;
 
@@ -23,6 +24,8 @@ public class Game
 
     private String gameName;
 
+    private GameState gameState;
+
     private int version;
 
     @XmlElement
@@ -31,6 +34,7 @@ public class Game
         return board;
     }
 
+    @XmlJavaTypeAdapter( DateTimeAdapter.class )
     @XmlElement
     public final DateTime getCreationTime()
     {
@@ -53,6 +57,12 @@ public class Game
     public final String getGameName()
     {
         return gameName;
+    }
+
+    @XmlElement
+    public final GameState getGameState()
+    {
+        return gameState;
     }
 
     public final int getVersion()
@@ -83,6 +93,11 @@ public class Game
     public final void setGameName( String name )
     {
         this.gameName = name;
+    }
+
+    public final void setGameState( GameState gameState )
+    {
+        this.gameState = gameState;
     }
 
     public final void setVersion( int version )

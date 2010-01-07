@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+@SuppressWarnings( "serial" )
 public class FiarGame
     implements Serializable
 {
@@ -29,20 +30,11 @@ public class FiarGame
 
     private String offensePlayerId;
 
+    private int previousVersion;
+
     private int version;
 
     private int width;
-
-    public FiarGame()
-    {
-    }
-
-    public void addMove( FiarGameMove move )
-    {
-        moves.add( move );
-        version++;
-        move.setVersion( version );
-    }
 
     public final DateTime getCreationDate()
     {
@@ -92,6 +84,11 @@ public class FiarGame
     public final String getOffensePlayerId()
     {
         return offensePlayerId;
+    }
+
+    public final int getPreviousVersion()
+    {
+        return previousVersion;
     }
 
     public final int getVersion()
@@ -152,6 +149,11 @@ public class FiarGame
     public final void setOffensePlayerId( String offensePlayerId )
     {
         this.offensePlayerId = offensePlayerId;
+    }
+
+    public final void setPreviousVersion( int previousVersion )
+    {
+        this.previousVersion = previousVersion;
     }
 
     public final void setVersion( int version )

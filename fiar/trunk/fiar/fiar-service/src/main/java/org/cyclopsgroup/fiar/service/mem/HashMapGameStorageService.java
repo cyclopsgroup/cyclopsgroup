@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.cyclopsgroup.fiar.service.FiarGameStorage;
+import org.cyclopsgroup.fiar.service.GameStorageService;
 import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 
 /**
@@ -12,8 +12,8 @@ import org.cyclopsgroup.fiar.service.pojo.FiarGame;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public class HashMapGameStorage
-    implements FiarGameStorage
+public class HashMapGameStorageService
+    implements GameStorageService
 {
     @Override
     public void updateGame( FiarGame game )

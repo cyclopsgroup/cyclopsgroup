@@ -1,14 +1,18 @@
 package org.cyclopsgroup.fiar.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cyclopsgroup.fiar.Game;
+import org.cyclopsgroup.fiar.GameBoard;
 import org.cyclopsgroup.fiar.GameService;
+import org.cyclopsgroup.fiar.GameState;
 import org.cyclopsgroup.fiar.Move;
 import org.cyclopsgroup.fiar.Moves;
 import org.cyclopsgroup.fiar.PlayerRole;
 import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 import org.cyclopsgroup.fiar.service.pojo.FiarGameMove;
 import org.cyclopsgroup.fiar.service.pojo.FiarGamePlayer;
-import org.cyclopsgroup.fiar.service.pojo.FiarGameState;
 import org.joda.time.DateTime;
 
 /**
@@ -27,29 +31,56 @@ public class DefaultGameService
         g.setGameId( game.getGameId() );
         g.setGameName( game.getGameName() );
         g.setVersion( game.getVersion() );
+        GameState state;
+        switch ( game.getGameState() )
+        {
+            case PENDING:
+                state = GameState.PENDING;
+                break;
+            case ONGOING:
+                state = GameState.ONGOING;
+                break;
+            case EXPIRED:
+                state = GameState.EXPIRED;
+                break;
+            case FINISHED:
+                state = GameState.FINISHED;
+                break;
+            default:
+                throw new AssertionError( "Unexpected state " + game.getGameState() );
+        }
+        g.setGameState( state );
+        GameBoard board = new GameBoard();
+        board.setWidth( game.getWidth() );
+        board.setHeight( game.getHeight() );
+        g.setBoard( board );
         return g;
     }
 
-    private static Move toMove( FiarGameMove move, int previousVersion )
+    private static Move toMove( FiarGameMove move )
     {
         Move m = new Move();
         m.setMoveTime( move.getMoveDate() );
         m.setPlayerRole( move.getPlayer() == FiarGamePlayer.OFFENSE ? PlayerRole.OFFENSE : PlayerRole.DEFENSE );
+        m.setPlayerId( move.getUserId() );
+        m.setPreviousVersion( move.getPreviousVersion() );
         m.setVersion( move.getVersion() );
         m.setX( move.getX() );
         m.setY( move.getY() );
-        m.setPreviousVersion( previousVersion );
         return m;
     }
 
-    private final FiarGameStorage storage;
+    private final GameManager manager;
+
+    private final GameStorageService storage;
 
     private final UserSessionService userService;
 
-    public DefaultGameService( FiarGameStorage storage, UserSessionService userService )
+    public DefaultGameService( GameStorageService storage, UserSessionService userService )
     {
-        this.storage = storage;
         this.userService = userService;
+        this.storage = storage;
+        this.manager = new GameManager();
     }
 
     /**
@@ -95,13 +126,36 @@ public class DefaultGameService
         return game.getVersion();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Moves getMoves( String sessionId, String gameId, int fromVersion )
     {
-        // TODO Auto-generated method stub
-        return null;
+        FiarGame game = storage.loadGame( gameId );
+        if ( game == null )
+        {
+            throw new NoSuchGameException( "Game " + gameId + " doesn't exist" );
+        }
+        List<Move> list = new ArrayList<Move>();
+        int version = 0;
+        for ( FiarGameMove m : manager.getMovesFrom( fromVersion, game ) )
+        {
+            version = Math.max( version, m.getVersion() );
+            list.add( toMove( m ) );
+        }
+
+        Moves moves = new Moves();
+        moves.setGameId( gameId );
+        moves.setPreviousVersion( fromVersion );
+        moves.setVersion( version );
+        moves.setResults( list );
+        return moves;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void joinGame( String sessionId, String gameId )
     {
@@ -111,17 +165,7 @@ public class DefaultGameService
         {
             throw new NoSuchGameException( "Game " + gameId + " doesn't exist" );
         }
-        synchronized ( game )
-        {
-            if ( game.getGameState() != FiarGameState.PENDING )
-            {
-                throw new IllegalStateException( "User can join only when state of game is PENDING. Current state is "
-                    + game.getGameState() );
-            }
-            game.setDefensePlayerId( userId );
-            game.setGameState( FiarGameState.ONGOING );
-            game.setVersion( game.getVersion() + 1 );
-        }
+        manager.joinGame( game, userId );
         storage.updateGame( game );
     }
 
@@ -133,28 +177,14 @@ public class DefaultGameService
     {
         String userId = userService.getUserOfSession( sessionId );
         FiarGame game = storage.loadGame( gameId );
-        int previousVersion;
-        FiarGameMove move;
-        synchronized ( game )
-        {
-            if ( game.getGameState() != FiarGameState.ONGOING )
-            {
-                throw new IllegalStateException( "Move can only be made when state is ONGING. Current state is "
-                    + game.getGameState() );
-            }
-            if ( !game.getNextMovePlayer().getUserIdOf( game ).equals( userId ) )
-            {
-                throw new IllegalStateException( "It's not " + userId + "'s turn to make move" );
-            }
-            previousVersion = game.getVersion();
-            move = new FiarGameMove();
-            move.setMoveDate( new DateTime() );
-            move.setPlayer( game.getNextMovePlayer() );
-            move.setUserId( userId );
-            move.setX( x );
-            move.setY( y );
-            game.addMove( move );
-        }
-        return toMove( move, previousVersion );
+        FiarGameMove move = new FiarGameMove();
+        move.setMoveDate( new DateTime() );
+        move.setPreviousVersion( version );
+        move.setUserId( userId );
+        move.setX( x );
+        move.setY( y );
+        manager.addMove( game, move );
+        storage.updateGame( game );
+        return toMove( move );
     }
 }

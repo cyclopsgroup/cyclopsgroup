@@ -7,7 +7,7 @@ import javax.cache.CacheException;
 import javax.cache.CacheManager;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.fiar.service.FiarGameStorage;
+import org.cyclopsgroup.fiar.service.GameStorageService;
 import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 
 /**
@@ -15,15 +15,15 @@ import org.cyclopsgroup.fiar.service.pojo.FiarGame;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public class JCacheFiarGameStorage
-    implements FiarGameStorage
+public class JCacheGameStorageService
+    implements GameStorageService
 {
     private final Cache gameCache;
 
     /**
      * @throws CacheException If cache can't be created
      */
-    public JCacheFiarGameStorage()
+    public JCacheGameStorageService()
         throws CacheException
     {
         gameCache = CacheManager.getInstance().getCacheFactory().createCache( Collections.emptyMap() );

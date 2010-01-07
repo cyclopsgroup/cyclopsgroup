@@ -2,7 +2,7 @@ package org.cyclopsgroup.fiar.service;
 
 import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 
-public interface FiarGameStorage
+public interface GameStorageService
 {
     FiarGame loadGame( String gameId );
 

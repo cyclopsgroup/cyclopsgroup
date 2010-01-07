@@ -4,12 +4,20 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
+/**
+ * A move in game
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
+@SuppressWarnings( "serial" )
 public class FiarGameMove
     implements Serializable
 {
     private DateTime moveDate;
 
     private FiarGamePlayer player;
+
+    private int previousVersion;
 
     private String userId;
 
@@ -27,6 +35,11 @@ public class FiarGameMove
     public final FiarGamePlayer getPlayer()
     {
         return player;
+    }
+
+    public final int getPreviousVersion()
+    {
+        return previousVersion;
     }
 
     public final String getUserId()
@@ -57,6 +70,11 @@ public class FiarGameMove
     public final void setPlayer( FiarGamePlayer player )
     {
         this.player = player;
+    }
+
+    public final void setPreviousVersion( int previousVersion )
+    {
+        this.previousVersion = previousVersion;
     }
 
     public final void setUserId( String userId )

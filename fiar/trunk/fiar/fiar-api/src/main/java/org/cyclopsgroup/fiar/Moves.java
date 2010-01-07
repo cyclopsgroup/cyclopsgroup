@@ -28,7 +28,7 @@ public class Moves
         return previousVersion;
     }
 
-    @XmlElement
+    @XmlElement( name = "move" )
     public final List<Move> getResults()
     {
         return results;

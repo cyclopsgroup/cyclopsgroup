@@ -1,5 +1,6 @@
 package org.cyclopsgroup.fiar;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -48,7 +49,7 @@ public interface GameService
     @Path( "/{sessionId}/{gameId}/moves" )
     @Produces( "text/xml" )
     Moves getMoves( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
-                          int fromVersion );
+                    @DefaultValue( "0" ) @QueryParam( "version" ) int fromVersion );
 
     /**
      * Join an open game
@@ -75,5 +76,5 @@ public interface GameService
     @Path( "/{sessionId}/{gameId}/move" )
     @Produces( "text/xml" )
     Move makeMove( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
-                         @QueryParam( "version" ) int version, @QueryParam( "x" ) int x, @QueryParam( "y" ) int y );
+                   @QueryParam( "version" ) int version, @QueryParam( "x" ) int x, @QueryParam( "y" ) int y );
 }
