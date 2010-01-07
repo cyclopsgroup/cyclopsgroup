@@ -26,6 +26,18 @@ public interface GameService
     Game createGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "name" ) String gameName );
 
     /**
+     * Abort and remove game
+     *
+     * @param sessionId Id of current session
+     * @param gameId Id of game to play
+     * @return True if game existed
+     */
+    @GET
+    @Path( "/{sessionId}/{gameId}/destroy" )
+    @Produces( "text/plain" )
+    boolean destroyGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
+
+    /**
      * Get the latest version of a game
      *
      * @param sessionId Id of current session

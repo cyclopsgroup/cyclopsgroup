@@ -15,12 +15,16 @@ import org.cyclopsgroup.fiar.service.pojo.FiarGame;
 public class HashMapGameStorageService
     implements GameStorageService
 {
-    @Override
-    public void updateGame( FiarGame game )
-    {
-    }
-
     private final Map<String, FiarGame> games = new ConcurrentHashMap<String, FiarGame>();
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean deleteGame( String gameId )
+    {
+        return games.remove( gameId ) != null;
+    }
 
     /**
      * @inheritDoc
@@ -38,5 +42,10 @@ public class HashMapGameStorageService
     public void storeGame( FiarGame game )
     {
         games.put( game.getGameId(), game );
+    }
+
+    @Override
+    public void updateGame( FiarGame game )
+    {
     }
 }

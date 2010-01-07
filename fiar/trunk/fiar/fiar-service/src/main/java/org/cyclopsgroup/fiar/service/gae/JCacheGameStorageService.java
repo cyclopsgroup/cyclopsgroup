@@ -33,6 +33,15 @@ public class JCacheGameStorageService
      * @inheritDoc
      */
     @Override
+    public boolean deleteGame( String gameId )
+    {
+        return gameCache.remove( gameId ) != null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public FiarGame loadGame( String gameId )
     {
         Validate.notNull( gameId, "Game ID can't be NULL" );

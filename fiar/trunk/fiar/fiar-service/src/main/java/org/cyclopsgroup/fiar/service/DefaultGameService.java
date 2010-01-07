@@ -116,6 +116,25 @@ public class DefaultGameService
      * @inheritDoc
      */
     @Override
+    public boolean destroyGame( String sessionId, String gameId )
+    {
+        FiarGame game = storage.loadGame( gameId );
+        if ( game == null )
+        {
+            return false;
+        }
+        String userId = userService.getUserOfSession( sessionId );
+        if ( !userId.equals( game.getCreatorId() ) )
+        {
+            throw new IllegalStateException( "Only creator can destroy game" );
+        }
+        return storage.deleteGame( gameId );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public int getGameVersion( String sessionId, String gameId )
     {
         FiarGame game = storage.loadGame( gameId );
