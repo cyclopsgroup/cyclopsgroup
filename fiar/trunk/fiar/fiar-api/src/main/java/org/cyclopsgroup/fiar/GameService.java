@@ -12,7 +12,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@Path( "/game" )
+@Path( "/" )
 public interface GameService
 {
     /**

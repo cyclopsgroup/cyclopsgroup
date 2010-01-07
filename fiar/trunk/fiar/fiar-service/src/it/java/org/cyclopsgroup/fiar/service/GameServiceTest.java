@@ -12,6 +12,6 @@ public class GameServiceTest
     @Override
     protected GameService createGameService()
     {
-        return JAXRSClientFactory.create( "http://localhost:8080/fiar-service", GameService.class );
+        return JAXRSClientFactory.create( "http://localhost:8080/fiar-service/game", GameService.class );
     }
 }

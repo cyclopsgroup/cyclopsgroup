@@ -11,7 +11,7 @@
     <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-    <jaxrs:server id="restService" address="/">
+    <jaxrs:server id="restService" address="/game">
         <jaxrs:serviceBeans>
             <ref bean="gameService" />
         </jaxrs:serviceBeans>
