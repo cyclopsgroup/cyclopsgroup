@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-@SuppressWarnings( "serial" )
 public class FiarGame
     implements Serializable
 {
+    private static final long serialVersionUID = 1196069906317471250L;
+
     private DateTime creationDate;
 
     private String creatorId;

@@ -9,10 +9,11 @@ import org.joda.time.DateTime;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@SuppressWarnings( "serial" )
 public class FiarGameMove
     implements Serializable
 {
+    private static final long serialVersionUID = -4759818334918145209L;
+
     private DateTime moveDate;
 
     private FiarGamePlayer player;
