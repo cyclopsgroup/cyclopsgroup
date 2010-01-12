@@ -68,11 +68,12 @@ public interface GameService
      *
      * @param sessionId Id of current session
      * @param gameId Id of the game to join
+     * @return The version of join operation
      */
     @GET
     @Path( "/{sessionId}/{gameId}/join" )
     @Produces( "text/plain" )
-    void joinGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
+    int joinGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
 
     /**
      * Make a move in game

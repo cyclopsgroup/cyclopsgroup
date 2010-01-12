@@ -55,7 +55,7 @@ public class JCacheGameStorageService
     @Override
     public void storeGame( FiarGame game )
     {
-        gameCache.put( game.getGameId(), game );
+        gameCache.put( "game:" + game.getGameId(), game );
     }
 
     /**
@@ -64,5 +64,6 @@ public class JCacheGameStorageService
     @Override
     public void updateGame( FiarGame game )
     {
+        storeGame( game );
     }
 }

@@ -176,7 +176,7 @@ public class DefaultGameService
      * @inheritDoc
      */
     @Override
-    public void joinGame( String sessionId, String gameId )
+    public int joinGame( String sessionId, String gameId )
     {
         String userId = userService.getUserOfSession( sessionId );
         FiarGame game = storage.loadGame( gameId );
@@ -184,8 +184,9 @@ public class DefaultGameService
         {
             throw new NoSuchGameException( "Game " + gameId + " doesn't exist" );
         }
-        manager.joinGame( game, userId );
+        int version = manager.joinGame( game, userId );
         storage.updateGame( game );
+        return version;
     }
 
     /**

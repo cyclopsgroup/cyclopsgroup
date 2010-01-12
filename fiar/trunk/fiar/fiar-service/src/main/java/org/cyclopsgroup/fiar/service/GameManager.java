@@ -40,13 +40,14 @@ class GameManager
         }
     }
 
-    void joinGame( FiarGame game, String userId )
+    int joinGame( FiarGame game, String userId )
     {
+        int version;
         synchronized ( game )
         {
             if ( game.getGameState() == FiarGameState.ONGOING && game.getDefensePlayerId().equals( userId ) )
             {
-                return;
+                return game.getVersion();
             }
             if ( game.getGameState() != FiarGameState.PENDING )
             {
@@ -55,8 +56,10 @@ class GameManager
             }
             game.setDefensePlayerId( userId );
             game.setGameState( FiarGameState.ONGOING );
-            game.setVersion( game.getVersion() + 1 );
+            version = game.getVersion() + 1;
+            game.setVersion( version );
         }
+        return version;
     }
 
     List<FiarGameMove> getMovesFrom( int startVersion, FiarGame game )
