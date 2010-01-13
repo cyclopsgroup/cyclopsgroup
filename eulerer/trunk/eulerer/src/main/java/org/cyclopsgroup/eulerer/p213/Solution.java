@@ -25,6 +25,12 @@ public class Solution
     @Override
     public void run()
     {
+        System.out.println( "This is not working out yet" );
+    }
+
+    @SuppressWarnings( "unused" )
+    private void doRun()
+    {
         Calculator c = new Calculator( 30, 30 );
         Matrix<Double> result = c.calculate();
         final AtomicReference<Double> d = new AtomicReference<Double>( 0.0 );
