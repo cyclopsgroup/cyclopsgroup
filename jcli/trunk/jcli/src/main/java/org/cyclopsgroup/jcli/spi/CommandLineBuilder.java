@@ -4,6 +4,8 @@ import java.util.List;
 
 public final class CommandLineBuilder
 {
+    private static final String FLAG_VALUE = Boolean.TRUE.toString();
+
     private final CommandLine cl = new CommandLine();
 
     public CommandLine toCommandLine()
@@ -24,13 +26,33 @@ public final class CommandLineBuilder
         }
     }
 
-    public void withOptionForLongName( String name, String value )
+    public void withLongFlag( String name )
+    {
+        withLongOption( name, FLAG_VALUE );
+    }
+
+    public void withLongOption( String name, String value )
     {
         cl.addOptionValue( name, value, false );
     }
 
-    public void withOptionForShortName( String name, String value )
+    public void withShortFlag( String name )
+    {
+        withShortOption( name, FLAG_VALUE );
+    }
+
+    public void withShortOption( String name, String value )
     {
         cl.addOptionValue( name, value, true );
+    }
+
+    public void withUnexpectedLongOption( String name )
+    {
+
+    }
+
+    public void withUnexpectedShortOption( String name )
+    {
+
     }
 }
