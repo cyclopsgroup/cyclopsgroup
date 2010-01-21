@@ -25,6 +25,6 @@ class DefaultArgumentProcessor<T>
     {
         DefaultParsingContext context = new DefaultParsingContext( beanType );
         CommandLine cli = parser.parse( arguments, context );
-        
+
     }
 }
