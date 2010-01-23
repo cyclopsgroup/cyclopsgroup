@@ -99,16 +99,16 @@ public abstract class GameServiceVerifier
         int oldVersion = version;
         service.makeMove( "jiaqi", game.getGameId(), version, 0, 0 );
 
-        Moves moves = service.getMoves( "joe", game.getGameId(), version );
+        Moves moves = service.getMoves( game.getGameId(), version );
         assertEquals( 1, moves.getResults().size() );
 
         version = service.getGameVersion( "xuying", game.getGameId() );
         service.makeMove( "xuying", game.getGameId(), version, 1, 1 );
         service.makeMove( "xuying", game.getGameId(), version, 1, 1 );
-        moves = service.getMoves( "joe", game.getGameId(), version );
+        moves = service.getMoves( game.getGameId(), version );
         assertEquals( 1, moves.getResults().size() );
 
-        moves = service.getMoves( "joe", game.getGameId(), oldVersion );
+        moves = service.getMoves( game.getGameId(), oldVersion );
         assertEquals( 2, moves.getResults().size() );
     }
 }

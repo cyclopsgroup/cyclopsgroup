@@ -22,8 +22,6 @@ public class Game
 
     private String gameId;
 
-    private String gameName;
-
     private GameState gameState;
 
     private int version;
@@ -51,12 +49,6 @@ public class Game
     public final String getGameId()
     {
         return gameId;
-    }
-
-    @XmlElement
-    public final String getGameName()
-    {
-        return gameName;
     }
 
     @XmlElement
@@ -88,11 +80,6 @@ public class Game
     public final void setGameId( String gameId )
     {
         this.gameId = gameId;
-    }
-
-    public final void setGameName( String name )
-    {
-        this.gameName = name;
     }
 
     public final void setGameState( GameState gameState )

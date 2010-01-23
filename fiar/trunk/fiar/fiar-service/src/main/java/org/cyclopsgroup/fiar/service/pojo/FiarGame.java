@@ -19,8 +19,6 @@ public class FiarGame
 
     private String gameId;
 
-    private String gameName;
-
     private FiarGameState gameState = FiarGameState.PENDING;
 
     private int height;
@@ -55,11 +53,6 @@ public class FiarGame
     public final String getGameId()
     {
         return gameId;
-    }
-
-    public final String getGameName()
-    {
-        return gameName;
     }
 
     public final FiarGameState getGameState()
@@ -120,11 +113,6 @@ public class FiarGame
     public final void setGameId( String gameId )
     {
         this.gameId = gameId;
-    }
-
-    public final void setGameName( String gameName )
-    {
-        this.gameName = gameName;
     }
 
     public final void setGameState( FiarGameState gameState )

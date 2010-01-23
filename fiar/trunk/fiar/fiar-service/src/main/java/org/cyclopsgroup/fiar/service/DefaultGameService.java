@@ -29,7 +29,6 @@ public class DefaultGameService
         g.setCreationTime( game.getCreationDate() );
         g.setCreatorId( game.getCreatorId() );
         g.setGameId( game.getGameId() );
-        g.setGameName( game.getGameName() );
         g.setVersion( game.getVersion() );
         GameState state;
         switch ( game.getGameState() )
@@ -87,10 +86,9 @@ public class DefaultGameService
      * @inheritDoc
      */
     @Override
-    public Game createGame( String sessionId, String gameName )
+    public Game createGame( String sessionId, String gameId )
     {
         String userId = userService.getUserOfSession( sessionId );
-        String gameId = userId + "-" + gameName;
         FiarGame game;
         synchronized ( storage )
         {
@@ -104,7 +102,6 @@ public class DefaultGameService
             game.setCreatorId( userId );
             game.setOffensePlayerId( userId );
             game.setGameId( gameId );
-            game.setGameName( gameName );
             game.setHeight( 11 );
             game.setWidth( 11 );
             storage.storeGame( game );
@@ -149,7 +146,7 @@ public class DefaultGameService
      * @inheritDoc
      */
     @Override
-    public Moves getMoves( String sessionId, String gameId, int fromVersion )
+    public Moves getMoves( String gameId, int fromVersion )
     {
         FiarGame game = storage.loadGame( gameId );
         if ( game == null )

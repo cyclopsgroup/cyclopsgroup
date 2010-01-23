@@ -1,7 +1,10 @@
 package org.cyclopsgroup.fiar;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,10 +23,10 @@ public interface GameService
      * @param requestDate
      * @return The game user creates
      */
-    @GET
-    @Path( "/{sessionId}/create/{name}" )
+    @PUT
+    @Path( "/games/{gameId}" )
     @Produces( "text/xml" )
-    Game createGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "name" ) String gameName );
+    Game createGame( @QueryParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
 
     /**
      * Abort and remove game
@@ -32,10 +35,10 @@ public interface GameService
      * @param gameId Id of game to play
      * @return True if game existed
      */
-    @GET
-    @Path( "/{sessionId}/{gameId}/destroy" )
+    @DELETE
+    @Path( "/games/{gameId}" )
     @Produces( "text/plain" )
-    boolean destroyGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
+    boolean destroyGame( @QueryParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
 
     /**
      * Get the latest version of a game
@@ -45,7 +48,7 @@ public interface GameService
      * @return Version of the game
      */
     @GET
-    @Path( "/{sessionId}/{gameId}/version" )
+    @Path( "/games/{gameId}/version" )
     @Produces( "text/plain" )
     int getGameVersion( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
 
@@ -58,10 +61,9 @@ public interface GameService
      * @return List of moves
      */
     @GET
-    @Path( "/{sessionId}/{gameId}/moves" )
+    @Path( "/{gameId}/moves" )
     @Produces( "text/xml" )
-    Moves getMoves( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
-                    @DefaultValue( "0" ) @QueryParam( "version" ) int fromVersion );
+    Moves getMoves( @PathParam( "gameId" ) String gameId, @DefaultValue( "0" ) @QueryParam( "version" ) int fromVersion );
 
     /**
      * Join an open game
@@ -70,10 +72,10 @@ public interface GameService
      * @param gameId Id of the game to join
      * @return The version of join operation
      */
-    @GET
-    @Path( "/{sessionId}/{gameId}/join" )
+    @POST
+    @Path( "/{gameId}/join" )
     @Produces( "text/plain" )
-    int joinGame( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
+    int joinGame( @QueryParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
 
     /**
      * Make a move in game
@@ -85,9 +87,9 @@ public interface GameService
      * @param y Vertical coordinate of move
      * @return Result of this move
      */
-    @GET
-    @Path( "/{sessionId}/{gameId}/move" )
+    @POST
+    @Path( "/{gameId}/move" )
     @Produces( "text/xml" )
-    Move makeMove( @PathParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
+    Move makeMove( @QueryParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId,
                    @QueryParam( "version" ) int version, @QueryParam( "x" ) int x, @QueryParam( "y" ) int y );
 }
