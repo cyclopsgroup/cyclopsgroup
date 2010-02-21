@@ -1,5 +1,6 @@
 package org.cyclopsgroup.jcli;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.cyclopsgroup.jcli.spi.CommandLine;
@@ -22,7 +23,7 @@ public class GnuParser
      * @inheritDoc
      */
     @Override
-    public CommandLine parse( String[] arguments, ParsingContext context )
+    public CommandLine parse( List<String> arguments, ParsingContext context )
     {
         CommandLineBuilder builder = new CommandLineBuilder();
         boolean expectingOptionValue = false;

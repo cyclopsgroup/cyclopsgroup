@@ -1,5 +1,7 @@
 package org.cyclopsgroup.jcli.spi;
 
+import java.util.List;
+
 /**
  * Implementation of this interface is aware of syntax of command arguments
  *
@@ -12,5 +14,5 @@ public interface CommandLineParser
      * @param context Parsing context
      * @return Command line with values to pass to bean
      */
-    CommandLine parse( String[] arguments, ParsingContext context );
+    CommandLine parse( List<String> arguments, ParsingContext context );
 }

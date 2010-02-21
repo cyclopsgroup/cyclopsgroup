@@ -15,7 +15,7 @@ public class UserControlTest
     {
         ArgumentProcessor<UserControl> p = ArgumentProcessor.newInstance( UserControl.class, new GnuParser() );
         UserControl c = new UserControl();
-        p.process( new String[] { "-a", "ADD", "john" }, c );
+        p.process( Arrays.asList( "-a", "ADD", "john" ), c );
         assertEquals( UserControlAction.ADD, c.getAction() );
         assertEquals( Arrays.asList( "john" ), c.getUserNames() );
     }

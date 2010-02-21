@@ -1,5 +1,8 @@
 package org.cyclopsgroup.jcli;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
 /**
@@ -29,5 +32,16 @@ public abstract class ArgumentProcessor<T>
      * @param arguments List of arguments
      * @param bean Bean to pass values to
      */
-    public abstract void process( String[] arguments, T bean );
+    public abstract void process( List<String> arguments, T bean );
+
+    /**
+     * Process argument array and pass values to given bean
+     *
+     * @param arguments Arary of arguments
+     * @param bean Bean to pass values to
+     */
+    public void process( String[] arguments, T bean )
+    {
+        process( Arrays.asList( arguments ), bean );
+    }
 }

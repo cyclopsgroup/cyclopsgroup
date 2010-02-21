@@ -147,7 +147,7 @@ class DefaultArgumentProcessor<T>
      * @inheritDoc
      */
     @Override
-    public void process( String[] arguments, T bean )
+    public void process( List<String> arguments, T bean )
     {
         CommandLine cli = parser.parse( arguments, context );
         Map<String, List<String>> multiValues = new HashMap<String, List<String>>();
