@@ -45,14 +45,4 @@ public final class CommandLineBuilder
     {
         cl.addOptionValue( name, value, true );
     }
-
-    public void withUnexpectedLongOption( String name )
-    {
-
-    }
-
-    public void withUnexpectedShortOption( String name )
-    {
-
-    }
 }

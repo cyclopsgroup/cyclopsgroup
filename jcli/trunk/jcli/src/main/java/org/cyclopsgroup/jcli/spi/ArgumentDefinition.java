@@ -7,9 +7,11 @@ import org.cyclopsgroup.jcli.annotation.Argument;
 
 /**
  * Definition of an argument
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @deprecated Not used anymore
  */
+@Deprecated
 public class ArgumentDefinition
 {
     private final Argument argument;

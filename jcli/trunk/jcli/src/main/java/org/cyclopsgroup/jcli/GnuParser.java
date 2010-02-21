@@ -48,7 +48,7 @@ public class GnuParser
                 Option opt = context.optionWithLongName( optionName );
                 if ( opt == null )
                 {
-                    builder.withUnexpectedLongOption( optionName );
+                    builder.withArgument( arg );
                 }
                 else if ( opt.isFlag() )
                 {
@@ -66,7 +66,7 @@ public class GnuParser
                 Option opt = context.optionWithShortName( optionName );
                 if ( opt == null )
                 {
-                    builder.withUnexpectedShortOption( optionName );
+                    builder.withArgument( arg );
                 }
                 else if ( opt.isFlag() )
                 {

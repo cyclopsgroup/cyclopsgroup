@@ -11,7 +11,9 @@ import org.cyclopsgroup.jcli.annotation.Option;
  * Definition of an option
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @deprecated Replaced by {@link Option}
  */
+@Deprecated
 public class OptionDefinition
 {
     private final PropertyDescriptor descriptor;

@@ -20,9 +20,11 @@ import org.cyclopsgroup.jcli.annotation.Option;
 
 /**
  * Utilities for CLI package
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @deprecated Replaced by impl package
  */
+@Deprecated
 public final class CliUtils
 {
     private static final String ERROR_MESSAGE = "Couldn't set value %s to %s#%s";
@@ -31,7 +33,7 @@ public final class CliUtils
 
     /**
      * Get {@link CliDefinition} out of given Java bean annotated with {@link Cli}
-     * 
+     *
      * @param beanType Type of Java bean
      * @return CliDefinition object
      */
@@ -73,7 +75,7 @@ public final class CliUtils
 
     /**
      * Get annotation from either writer or reader of a Java property
-     * 
+     *
      * @param <A> Type of annotation
      * @param descriptor Field descriptor from which annotation is searched
      * @param type Type of annotation
@@ -95,7 +97,7 @@ public final class CliUtils
 
     /**
      * Set single value to given Java property
-     * 
+     *
      * @param bean Java bean
      * @param prop Property of Java bean
      * @param value Value to set
@@ -124,7 +126,7 @@ public final class CliUtils
 
     /**
      * Set single String value to given Java property
-     * 
+     *
      * @param bean Java bean
      * @param prop Property of Java bean
      * @param value Value to set
@@ -145,7 +147,7 @@ public final class CliUtils
 
     /**
      * Set array of values to given Java property
-     * 
+     *
      * @param bean Java bean
      * @param prop Property of Java bean
      * @param values String array of values to set

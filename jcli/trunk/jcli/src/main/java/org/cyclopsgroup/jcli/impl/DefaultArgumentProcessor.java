@@ -163,19 +163,20 @@ class DefaultArgumentProcessor<T>
                 ( (SingleValueReference<T>) ref ).setValue( bean, ov.value );
                 continue;
             }
-            List<String> values = multiValues.get( ov.name );
+            String optionName;
+            if ( ov.shortName )
+            {
+                optionName = ov.name;
+            }
+            else
+            {
+                optionName = context.optionWithLongName( ov.name ).getName();
+            }
+            List<String> values = multiValues.get( optionName );
             if ( values == null )
             {
                 values = new ArrayList<String>();
-                if ( ov.shortName )
-                {
-                    multiValues.put( ov.name, values );
-                }
-                else
-                {
-                    multiValues.put( context.optionWithLongName( ov.name ).getName(), values );
-                }
-
+                multiValues.put( optionName, values );
             }
             values.add( ov.value );
         }

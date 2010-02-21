@@ -9,9 +9,11 @@ import org.cyclopsgroup.jcli.annotation.Cli;
 
 /**
  * Command level definition
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
+ * @deprecated Not used anymore
  */
+@Deprecated
 public class CliDefinition
 {
     private ArgumentDefinition argument;
@@ -30,7 +32,7 @@ public class CliDefinition
 
     /**
      * Add a definition of option
-     * 
+     *
      * @param opt Option definition to add
      */
     public void addOption( OptionDefinition opt )
