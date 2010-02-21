@@ -1,9 +1,11 @@
 package org.cyclopsgroup.jcli;
 
+import java.util.regex.Pattern;
+
 import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineBuilder;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
-import org.cyclopsgroup.jcli.spi.OptionDefinition;
+import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
 /**
@@ -12,6 +14,10 @@ import org.cyclopsgroup.jcli.spi.ParsingContext;
 public class GnuParser
     implements CommandLineParser
 {
+    private static final Pattern LONG_OPTION = Pattern.compile( "^--\\w+$" );
+
+    private static final Pattern SHORT_OPTION = Pattern.compile( "^-\\w+$" );
+
     /**
      * @inheritDoc
      */
@@ -36,14 +42,10 @@ public class GnuParser
                 }
                 expectingOptionValue = false;
             }
-            else if ( !arg.startsWith( "-" ) || arg.startsWith( "---" ) || arg.equals( "-" ) || arg.equals( "--" ) )
-            {
-                builder.withArgument( arg );
-            }
-            else if ( arg.startsWith( "--" ) )
+            else if ( LONG_OPTION.matcher( arg ).matches() )
             {
                 optionName = arg.substring( 2 );
-                OptionDefinition opt = context.optionWithLongName( optionName );
+                Option opt = context.optionWithLongName( optionName );
                 if ( opt == null )
                 {
                     builder.withUnexpectedLongOption( optionName );
@@ -58,10 +60,10 @@ public class GnuParser
                     shortOption = false;
                 }
             }
-            else if ( arg.startsWith( "-" ) )
+            else if ( SHORT_OPTION.matcher( arg ).matches() )
             {
                 optionName = arg.substring( 1 );
-                OptionDefinition opt = context.optionWithLongName( optionName );
+                Option opt = context.optionWithShortName( optionName );
                 if ( opt == null )
                 {
                     builder.withUnexpectedShortOption( optionName );
@@ -78,7 +80,7 @@ public class GnuParser
             }
             else
             {
-                throw new AssertionError( "Unexpected argument " + arg );
+                builder.withArgument( arg );
             }
         }
         return builder.toCommandLine();

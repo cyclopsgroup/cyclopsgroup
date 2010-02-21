@@ -4,6 +4,12 @@ import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.ArgumentProcessorFactory;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
+/**
+ * Default implementation of {@link ArgumentProcessorFactory}
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ * @see {@link DefaultArgumentProcessor}
+ */
 public class DefaultArgumentProcessorFactory
     extends ArgumentProcessorFactory
 {

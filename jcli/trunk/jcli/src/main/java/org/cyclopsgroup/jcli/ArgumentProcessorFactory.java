@@ -5,8 +5,16 @@ import java.util.ServiceLoader;
 
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
+/**
+ * Factory class for {@link ArguemntProcessor}
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public abstract class ArgumentProcessorFactory
 {
+    /**
+     * @return Instance of ArgumentProcessorFactory. The implementation is determined by {@link ServiceLoader}
+     */
     static ArgumentProcessorFactory getInstance()
     {
         Iterator<ArgumentProcessorFactory> factories = ServiceLoader.load( ArgumentProcessorFactory.class ).iterator();
@@ -18,5 +26,14 @@ public abstract class ArgumentProcessorFactory
             + " from service loader" );
     }
 
+    /**
+     * Create new instance of {@link ArgumentProcessor}. The implementation of factory needs to implement this method to
+     * create customized argument processor
+     *
+     * @param <T> Type of bean to process
+     * @param beanType Type of bean to process
+     * @param parser Command line parser that is aware of command line syntax
+     * @return Instance of argument processor implementation
+     */
     protected abstract <T> ArgumentProcessor<T> newProcessor( Class<T> beanType, CommandLineParser parser );
 }

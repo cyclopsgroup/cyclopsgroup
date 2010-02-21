@@ -1,29 +1,33 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.cyclopsgroup.jcli.spi.CliDefinition;
-import org.cyclopsgroup.jcli.spi.CliUtils;
-import org.cyclopsgroup.jcli.spi.OptionDefinition;
+import java.util.List;
+import java.util.Map;
+
+import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
-class DefaultParsingContext
+class DefaultParsingContext<T>
     implements ParsingContext
 {
-    private final CliDefinition cli;
+    private final List<AnnotationOption> options;
 
-    DefaultParsingContext( Class<?> beanType )
+    private final Map<String, Reference<T>> referenceMap;
+
+    DefaultParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap, List<AnnotationOption> options )
     {
-        cli = CliUtils.defineCli( beanType );
+        this.options = options;
+        this.referenceMap = referenceMap;
     }
 
     /**
      * @inheritDoc
      */
     @Override
-    public OptionDefinition optionWithLongName( String longName )
+    public Option optionWithLongName( String longName )
     {
-        for ( OptionDefinition o : cli.getOptions().values() )
+        for ( Option o : options )
         {
-            if ( o.getOption().longName().equals( longName ) )
+            if ( o.getLongName().equals( longName ) )
             {
                 return o;
             }
@@ -35,15 +39,31 @@ class DefaultParsingContext
      * @inheritDoc
      */
     @Override
-    public OptionDefinition optionWithShortName( String shortName )
+    public Option optionWithShortName( String shortName )
     {
-        for ( OptionDefinition o : cli.getOptions().values() )
+        for ( Option o : options )
         {
-            if ( o.getOption().name().equals( shortName ) )
+            if ( o.getName().equals( shortName ) )
             {
                 return o;
             }
         }
         return null;
+    }
+
+    Reference<T> lookupReference( String name, boolean isLongName )
+    {
+        if ( isLongName )
+        {
+            for ( Reference<T> r : referenceMap.values() )
+            {
+                if ( r.longName.equals( name ) )
+                {
+                    return r;
+                }
+            }
+            return null;
+        }
+        return referenceMap.get( name );
     }
 }

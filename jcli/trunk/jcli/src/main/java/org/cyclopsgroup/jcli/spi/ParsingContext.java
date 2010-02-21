@@ -1,9 +1,8 @@
 package org.cyclopsgroup.jcli.spi;
 
-
 public interface ParsingContext
 {
-    OptionDefinition optionWithShortName( String shortName );
+    Option optionWithShortName( String shortName );
 
-    OptionDefinition optionWithLongName( String longName );
+    Option optionWithLongName( String longName );
 }
