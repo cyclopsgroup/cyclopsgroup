@@ -5,7 +5,7 @@ package org.cyclopsgroup.caff.conversion;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public class ConversionFailureException
+public class ConversionFailedException
     extends RuntimeException
 {
     private static final long serialVersionUID = 6702759460929375871L;
@@ -14,8 +14,16 @@ public class ConversionFailureException
      * @param message Descriptive message
      * @param cause Root cause
      */
-    public ConversionFailureException( String message, Throwable cause )
+    public ConversionFailedException( String message, Throwable cause )
     {
         super( message, cause );
+    }
+
+    /**
+     * @param message Message without a root cause
+     */
+    public ConversionFailedException( String message )
+    {
+        super( message );
     }
 }

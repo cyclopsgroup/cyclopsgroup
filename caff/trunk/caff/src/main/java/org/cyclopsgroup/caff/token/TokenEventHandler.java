@@ -10,5 +10,5 @@ public interface TokenEventHandler
     /**
      * @param event Event that tells a token is found
      */
-    void handleWordEvent( TokenEvent event );
+    void handleEvent( TokenEvent event );
 }

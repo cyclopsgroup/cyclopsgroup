@@ -51,15 +51,15 @@ public class SimpleReflectiveConverter<T>
         }
         catch ( InstantiationException e )
         {
-            throw new ConversionFailureException( "Can't call " + type + "(String) with " + text, e );
+            throw new ConversionFailedException( "Can't call " + type + "(String) with " + text, e );
         }
         catch ( IllegalAccessException e )
         {
-            throw new ConversionFailureException( "Can't call " + type + "(String) with " + text, e );
+            throw new ConversionFailedException( "Can't call " + type + "(String) with " + text, e );
         }
         catch ( InvocationTargetException e )
         {
-            throw new ConversionFailureException( "Can't call " + type + "(String) with " + text, e );
+            throw new ConversionFailedException( "Can't call " + type + "(String) with " + text, e );
         }
     }
 
@@ -71,11 +71,11 @@ public class SimpleReflectiveConverter<T>
         }
         catch ( IllegalAccessException e )
         {
-            throw new ConversionFailureException( "Can't call " + type + ".toString() on " + value, e );
+            throw new ConversionFailedException( "Can't call " + type + ".toString() on " + value, e );
         }
         catch ( InvocationTargetException e )
         {
-            throw new ConversionFailureException( "Can't call " + type + ".toString() on " + value, e );
+            throw new ConversionFailedException( "Can't call " + type + ".toString() on " + value, e );
         }
     }
 }

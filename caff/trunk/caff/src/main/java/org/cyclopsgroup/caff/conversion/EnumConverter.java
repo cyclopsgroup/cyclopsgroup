@@ -11,7 +11,6 @@ import org.cyclopsgroup.caff.NormalizedValue;
  * Converter that converts enum
  *
  * @author jiaqi
- *
  * @param <T> Type of enum to convert from/to
  */
 public class EnumConverter<T extends Enum<T>>
@@ -45,7 +44,12 @@ public class EnumConverter<T extends Enum<T>>
      */
     public T fromCharacters( CharSequence text )
     {
-        return stringToValue.get( text.toString() );
+        T result = stringToValue.get( text.toString() );
+        if ( result == null )
+        {
+            throw new ConversionFailedException( "Value " + text + " is unknown" );
+        }
+        return result;
     }
 
     /**

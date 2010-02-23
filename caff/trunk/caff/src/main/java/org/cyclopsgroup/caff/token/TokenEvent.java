@@ -5,15 +5,15 @@ package org.cyclopsgroup.caff.token;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-public class TokenEvent
+public final class TokenEvent
 {
     private final int end;
 
-    private boolean quoted;
+    private final boolean quoted;
 
     private final int start;
 
-    private boolean terminated;
+    private final boolean terminated;
 
     private final String token;
 
@@ -22,19 +22,36 @@ public class TokenEvent
      *
      * @param token Value of token
      * @param start Zero based start position
-     * @param end One based last character position
+     * @param end Zero based last character position
+     * @parma terminated True if token is terminated explicitly
      */
-    public TokenEvent( String token, int start, int end )
+    TokenEvent( String token, int start, int end, boolean terminated )
+    {
+        this( token, start, end, terminated, false );
+    }
+
+    /**
+     * Constructor that requires token, start positoion and end position
+     *
+     * @param token Value of token
+     * @param start Zero based start position
+     * @param end Zero based last character position
+     * @parma terminated True if token is terminated explicitly
+     * @param quoted True if word is quoted
+     */
+    TokenEvent( String token, int start, int end, boolean terminated, boolean quoted )
     {
         this.token = token;
         this.start = start;
         this.end = end;
+        this.terminated = terminated;
+        this.quoted = quoted;
     }
 
     /**
      * @return One based position of last character in token
      */
-    public final int getEnd()
+    public int getEnd()
     {
         return end;
     }
@@ -42,7 +59,7 @@ public class TokenEvent
     /**
      * @return Zero based start position of token
      */
-    public final int getStart()
+    public int getStart()
     {
         return start;
     }
@@ -50,7 +67,7 @@ public class TokenEvent
     /**
      * @return Value of token
      */
-    public final String getToken()
+    public String getToken()
     {
         return token;
     }
@@ -58,7 +75,7 @@ public class TokenEvent
     /**
      * @return True if token is explicitly quoted
      */
-    public final boolean isQuoted()
+    public boolean isQuoted()
     {
         return quoted;
     }
@@ -66,24 +83,8 @@ public class TokenEvent
     /**
      * @return True if token is explicitly terminated
      */
-    public final boolean isTerminated()
+    public boolean isTerminated()
     {
         return terminated;
-    }
-
-    /**
-     * @param quoted True if token is explicitly quoted
-     */
-    public final void setQuoted( boolean quoted )
-    {
-        this.quoted = quoted;
-    }
-
-    /**
-     * @param terminated True if token is explicitly terminated
-     */
-    public final void setTerminated( boolean terminated )
-    {
-        this.terminated = terminated;
     }
 }

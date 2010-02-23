@@ -31,7 +31,7 @@ public class DateConverterFactory
             }
             catch ( ParseException e )
             {
-                throw new ConversionFailureException( "Can't parse " + text + " as a date in " + format, e );
+                throw new ConversionFailedException( "Can't parse " + text + " as a date in " + format, e );
             }
         }
 

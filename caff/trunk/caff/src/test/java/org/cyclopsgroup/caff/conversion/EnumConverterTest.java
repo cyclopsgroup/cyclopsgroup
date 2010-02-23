@@ -1,7 +1,6 @@
 package org.cyclopsgroup.caff.conversion;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
 import java.lang.annotation.RetentionPolicy;
@@ -25,7 +24,16 @@ public class EnumConverterTest
         Converter<NormalizedEnum> c = new EnumConverter<NormalizedEnum>( NormalizedEnum.class );
         assertSame( NormalizedEnum.Y, c.fromCharacters( "2" ) );
         assertEquals( "2", c.toCharacters( NormalizedEnum.Y ).toString() );
-        assertNull(c.fromCharacters( "100" ));
+    }
+
+    /**
+     * Verify that conversion failure causes a {@link ConversionFailedException} when dealing with normalized enum
+     */
+    @Test( expected = ConversionFailedException.class )
+    public void testConvertWithInvalidEnum()
+    {
+        Converter<NormalizedEnum> c = new EnumConverter<NormalizedEnum>( NormalizedEnum.class );
+        c.fromCharacters( "100" );
     }
 
     /**
@@ -37,6 +45,15 @@ public class EnumConverterTest
         Converter<RetentionPolicy> c = new EnumConverter<RetentionPolicy>( RetentionPolicy.class );
         assertSame( RetentionPolicy.RUNTIME, c.fromCharacters( "RUNTIME" ) );
         assertEquals( "RUNTIME", c.toCharacters( RetentionPolicy.RUNTIME ).toString() );
-        assertNull( c.fromCharacters( "NONEXIST" ) );
+    }
+
+    /**
+     * Verify that conversion failure causes a {@link ConversionFailedException}
+     */
+    @Test( expected = ConversionFailedException.class )
+    public void testConverWithInvalidInput()
+    {
+        Converter<RetentionPolicy> c = new EnumConverter<RetentionPolicy>( RetentionPolicy.class );
+        c.fromCharacters( "XYZ" );
     }
 }
