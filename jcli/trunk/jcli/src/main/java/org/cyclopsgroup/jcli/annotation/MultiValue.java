@@ -18,11 +18,6 @@ import java.util.ArrayList;
 public @interface MultiValue
 {
     /**
-     * @return Type of value in list
-     */
-    Class<?> valueType() default String.class;
-
-    /**
      * @return Type of list that contains values
      */
     Class<?> listType() default ArrayList.class;
@@ -31,4 +26,14 @@ public @interface MultiValue
      * @return Max number of values in list. By default it's -1 that means unlimited
      */
     int maxValues() default -1;
+
+    /**
+     * @return Minimal number of values in list. By default it's 0
+     */
+    int minValues() default 0;
+
+    /**
+     * @return Type of value in list
+     */
+    Class<?> valueType() default String.class;
 }
