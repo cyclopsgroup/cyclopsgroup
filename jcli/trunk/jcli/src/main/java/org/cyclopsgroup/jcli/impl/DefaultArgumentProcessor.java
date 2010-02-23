@@ -78,12 +78,6 @@ class DefaultArgumentProcessor<T>
 
         Class<?> valueType = descriptor.getPropertyType();
 
-        Argument argument = getAnnotation( descriptor, Argument.class );
-        if ( argument != null )
-        {
-            valueType = argument.type();
-        }
-
         MultiValue multiValue = getAnnotation( descriptor, MultiValue.class );
         if ( multiValue != null )
         {
@@ -98,10 +92,6 @@ class DefaultArgumentProcessor<T>
         if ( multiValue != null )
         {
             return new MultiValueReference<T>( beanType, converter, reference, longName, multiValue.listType() );
-        }
-        if ( argument != null && List.class.isAssignableFrom( descriptor.getPropertyType() ) )
-        {
-            return new MultiValueReference<T>( beanType, converter, reference, longName, ArrayList.class );
         }
         return new SingleValueReference<T>( beanType, converter, reference, longName );
     }

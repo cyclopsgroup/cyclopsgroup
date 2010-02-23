@@ -1,16 +1,18 @@
 package org.cyclopsgroup.jcli;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
+import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
 
 /**
  * Example bean for testing purpose
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Cli( name = "sample", description = "A test" )
@@ -144,6 +146,7 @@ public class ExampleNormalBean
     /**
      * @param values Arguments
      */
+    @MultiValue( listType = ArrayList.class )
     @Argument
     public final void setValues( List<String> values )
     {

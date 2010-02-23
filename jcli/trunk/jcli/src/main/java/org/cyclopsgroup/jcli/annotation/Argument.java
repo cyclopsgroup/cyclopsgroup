@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * This annotation marks a property as non-option argument or arguments. Type of this property can be array, List or
  * single value.
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
@@ -26,14 +26,4 @@ public @interface Argument
      * @return Name of argument displayed in usage
      */
     String displayName() default "";
-
-    /**
-     * @return Minimal number of expected arguments
-     */
-    int requires() default 0;
-
-    /**
-     * @return Type of argument element
-     */
-    Class<?> type() default String.class;
 }
