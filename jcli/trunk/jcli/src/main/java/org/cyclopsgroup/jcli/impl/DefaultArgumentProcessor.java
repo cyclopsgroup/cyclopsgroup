@@ -135,6 +135,9 @@ class DefaultArgumentProcessor<T>
         return context;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void printHelp( PrintWriter out )
         throws IOException

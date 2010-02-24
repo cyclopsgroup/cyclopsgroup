@@ -13,7 +13,7 @@ public enum AlignPolicy
     LEFT
     {
         @Override
-        protected CharSequence trim( CharSequence input, char empty )
+        CharSequence trim( CharSequence input, char empty )
         {
             int lengthToKeep = input.length();
             while ( lengthToKeep > 0 && input.charAt( lengthToKeep - 1 ) == empty )
@@ -24,7 +24,7 @@ public enum AlignPolicy
         }
 
         @Override
-        protected void fill( CharSequence src, char[] dest, int start, int length, char empty )
+        void fill( CharSequence src, char[] dest, int start, int length, char empty )
         {
             for ( int i = 0; i < length; i++ )
             {
@@ -47,7 +47,7 @@ public enum AlignPolicy
     RIGHT
     {
         @Override
-        protected CharSequence trim( CharSequence input, char empty )
+        CharSequence trim( CharSequence input, char empty )
         {
             int start = 0;
             while ( start < input.length() && input.charAt( start ) == empty )
@@ -58,7 +58,7 @@ public enum AlignPolicy
         }
 
         @Override
-        protected void fill( CharSequence src, char[] dest, int start, int length, char empty )
+        void fill( CharSequence src, char[] dest, int start, int length, char empty )
         {
             for ( int i = 0; i < length; i++ )
             {
@@ -83,7 +83,7 @@ public enum AlignPolicy
      * @param empty Character that stands for empty
      * @return Trimmed result
      */
-    protected abstract CharSequence trim( CharSequence input, char empty );
+    abstract CharSequence trim( CharSequence input, char empty );
 
     /**
      * Fill content into given char array
@@ -94,5 +94,5 @@ public enum AlignPolicy
      * @param length Length of slot to fill in char array
      * @param empty Empty character to fill
      */
-    protected abstract void fill( CharSequence src, char[] dest, int start, int length, char empty );
+    abstract void fill( CharSequence src, char[] dest, int start, int length, char empty );
 }

@@ -13,7 +13,7 @@ public enum TrimPolicy
     FORWARD
     {
         @Override
-        protected CharSequence trim( CharSequence src, int length, AlignPolicy align )
+        CharSequence trim( CharSequence src, int length, AlignPolicy align )
         {
             if ( src.length() <= length )
             {
@@ -40,7 +40,7 @@ public enum TrimPolicy
     REVERSE
     {
         @Override
-        protected CharSequence trim( CharSequence src, int length, AlignPolicy align )
+        CharSequence trim( CharSequence src, int length, AlignPolicy align )
         {
             if ( src.length() <= length )
             {
@@ -67,7 +67,7 @@ public enum TrimPolicy
     DISALLOW
     {
         @Override
-        public CharSequence trim( CharSequence src, int length, AlignPolicy align )
+        CharSequence trim( CharSequence src, int length, AlignPolicy align )
         {
             if ( src.length() <= length )
             {
@@ -85,5 +85,5 @@ public enum TrimPolicy
      * @param align Alignment option
      * @return Truncated result
      */
-    protected abstract CharSequence trim( CharSequence src, int length, AlignPolicy align );
+    abstract CharSequence trim( CharSequence src, int length, AlignPolicy align );
 }
