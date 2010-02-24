@@ -129,4 +129,29 @@ public class QuotedValueTokenizer
                                                  state == ParsingState.QUOTED ) );
         }
     }
+
+    public String escape( String output )
+    {
+        int d = output.indexOf( delimiter );
+        int q = output.indexOf( quotation );
+
+        if ( d == -1 && q == -1 )
+        {
+            return output;
+        }
+        StringBuffer sb = new StringBuffer().append( quotation );
+        for ( int i = 0, j = 0; i < output.length(); )
+        {
+            j = output.indexOf( quotation, i );
+            if ( j == -1 )
+            {
+                sb.append( output.substring( i ) );
+                break;
+            }
+            sb.append( output.substring( i, j ) ).append( quotation ).append( output.charAt( j ) );
+            i = ++j;
+        }
+        sb.append( quotation );
+        return sb.toString();
+    }
 }

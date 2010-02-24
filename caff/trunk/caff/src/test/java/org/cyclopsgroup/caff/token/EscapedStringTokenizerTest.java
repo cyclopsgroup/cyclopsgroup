@@ -16,7 +16,7 @@ import org.junit.Test;
 public class EscapedStringTokenizerTest
 {
 
-    private void parseAndVerifyResult( String expression, List<String> expectedResult )
+    private void parseAndVerify( String expression, List<String> expectedResult )
     {
         final List<String> result = new ArrayList<String>();
         new EscapingValueTokenizer().parse( expression, new TokenEventHandler()
@@ -32,12 +32,29 @@ public class EscapedStringTokenizerTest
     @Test
     public void testParseWithoutEscaping()
     {
-        parseAndVerifyResult( "a b  c d   ", Arrays.asList( "a", "b", "c", "d" ) );
+        parseAndVerify( "a b  c d   ", Arrays.asList( "a", "b", "c", "d" ) );
     }
 
     @Test
     public void testParseWithEscaping()
     {
-        parseAndVerifyResult( " a b\\ c \\\\e ", Arrays.asList( "a", "b c", "\\e" ) );
+        parseAndVerify( " a b\\ c \\\\e ", Arrays.asList( "a", "b c", "\\e" ) );
+    }
+
+    public void escapeAndVerify( String expression, String expected )
+    {
+        assertEquals( expected, new EscapingValueTokenizer().escape( expression ) );
+    }
+
+    @Test
+    public void testEscapeUnnecessarily()
+    {
+        escapeAndVerify( "abc", "abc" );
+    }
+
+    @Test
+    public void testEscapeNormally()
+    {
+        escapeAndVerify( "  a\\ b\\", "\\ \\ a\\\\\\ b\\\\" );
     }
 }

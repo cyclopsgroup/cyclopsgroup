@@ -10,7 +10,12 @@ import org.junit.Test;
 
 public class QuotedValueTokenizerTest
 {
-    private void parseAndVerifyResult( String expression, List<String> expectedResult )
+    private void escapeAndVerify( String expression, String expected )
+    {
+        assertEquals( expected, new QuotedValueTokenizer().escape( expression ) );
+    }
+
+    private void parseAndVerify( String expression, List<String> expectedResult )
     {
         final List<String> result = new ArrayList<String>();
         new QuotedValueTokenizer().parse( expression, new TokenEventHandler()
@@ -23,13 +28,31 @@ public class QuotedValueTokenizerTest
         assertEquals( expectedResult, result );
     }
 
+    @Test
+    public void testEscapeUnnecessarily()
+    {
+        escapeAndVerify( "abc", "abc" );
+    }
+
+    @Test
+    public void testEscapeWithDelimiterOnly()
+    {
+        escapeAndVerify( "ab c", "\"ab c\"" );
+    }
+
+    @Test
+    public void testEscapeWithQuotation()
+    {
+        escapeAndVerify( "ab \"c\"", "\"ab \"\"c\"\"\"" );
+    }
+
     /**
      * Verify parsing works without quoting
      */
     @Test
     public void testParseWithoutQuoting()
     {
-        parseAndVerifyResult( "a b  c d   ", Arrays.asList( "a", "b", "c", "d" ) );
+        parseAndVerify( "a b  c d   ", Arrays.asList( "a", "b", "c", "d" ) );
     }
 
     /**
@@ -38,6 +61,6 @@ public class QuotedValueTokenizerTest
     @Test
     public void testParsingWithQuoting()
     {
-        parseAndVerifyResult( "a \"b\" \"c\"\"\"  \"d\"\"e\"  ", Arrays.asList( "a", "b", "c\"", "d\"e" ) );
+        parseAndVerify( "a \"b\" \"c\"\"\"  \"d\"\"e\"  ", Arrays.asList( "a", "b", "c\"", "d\"e" ) );
     }
 }

@@ -47,6 +47,39 @@ public class EscapingValueTokenizer
     }
 
     /**
+     * @inheritDoc
+     */
+    public String escape( String output )
+    {
+        if ( output.indexOf( escaper ) == -1 && output.indexOf( delimiter ) == -1 )
+        {
+            return output;
+        }
+        StringBuffer sb = new StringBuffer();
+        for ( int i = 0, j = 0; i < output.length(); )
+        {
+            int e = output.indexOf( escaper, i );
+            int d = output.indexOf( delimiter, i );
+            if ( e == -1 && d == -1 )
+            {
+                sb.append( output.substring( i ) );
+                break;
+            }
+            if ( e >= 0 && d >= 0 )
+            {
+                j = Math.min( e, d );
+            }
+            else
+            {
+                j = Math.max( e, d );
+            }
+            sb.append( output.substring( i, j ) ).append( escaper ).append( output.charAt( j ) );
+            i = ++j;
+        }
+        return sb.toString();
+    }
+
+    /**
      * @return Delimiter character
      */
     public final char getDelimiter()
