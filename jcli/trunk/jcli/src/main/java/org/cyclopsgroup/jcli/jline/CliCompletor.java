@@ -11,15 +11,17 @@ import jline.Completor;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
+import org.cyclopsgroup.caff.token.TokenEvent;
+import org.cyclopsgroup.caff.token.TokenEventHandler;
+import org.cyclopsgroup.caff.token.ValueTokenizer;
 import org.cyclopsgroup.jcli.AutoCompletable;
-import org.cyclopsgroup.jcli.StringTokenizer;
 import org.cyclopsgroup.jcli.spi.CliDefinition;
 import org.cyclopsgroup.jcli.spi.CliUtils;
 import org.cyclopsgroup.jcli.spi.OptionDefinition;
 
 /**
  * JLine completor implemented with JCli
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class CliCompletor
@@ -46,14 +48,14 @@ public class CliCompletor
 
     private final AutoCompletable completable;
 
-    private final StringTokenizer tokenizer;
+    private final ValueTokenizer tokenizer;
 
     /**
      * @param cliBean Entyped AutoCompletable implementation or an normal bean
      * @param tokenizer Tokenizer for argument parsing
      * @throws IntrospectionException
      */
-    public CliCompletor( final Object cliBean, final StringTokenizer tokenizer )
+    public CliCompletor( final Object cliBean, final ValueTokenizer tokenizer )
         throws IntrospectionException
     {
         Validate.notNull( cliBean, "Cli bean can't be NULL" );
@@ -93,14 +95,14 @@ public class CliCompletor
         if ( StringUtils.isNotEmpty( command ) )
         {
             final List<String> args = new ArrayList<String>();
-            tokenizer.parse( command, new StringTokenizer.TokenEventHandler()
+            tokenizer.parse( command, new TokenEventHandler()
             {
 
-                public void handleWordEvent( String word, int start, int end, boolean t )
+                public void handleEvent( TokenEvent ev )
                 {
-                    args.add( word );
-                    terminated.set( t );
-                    lastWordStart.set( start );
+                    args.add( ev.getToken() );
+                    terminated.set( ev.isTerminated() );
+                    lastWordStart.set( ev.getStart() );
                 }
             } );
             for ( String arg : args )

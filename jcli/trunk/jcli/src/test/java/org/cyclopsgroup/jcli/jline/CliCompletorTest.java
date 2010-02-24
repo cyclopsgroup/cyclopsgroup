@@ -7,14 +7,14 @@ import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cyclopsgroup.caff.token.QuotedValueTokenizer;
 import org.cyclopsgroup.jcli.ExampleNormalBean;
-import org.cyclopsgroup.jcli.QuotedStringTokenizer;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test case for {@link CliCompletor}
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class CliCompletorTest
@@ -25,14 +25,14 @@ public class CliCompletorTest
 
     /**
      * Set up completor to test
-     * 
+     *
      * @throws IntrospectionException
      */
     @Before
     public void setUp()
         throws IntrospectionException
     {
-        cc = new CliCompletor( new ExampleNormalBean(), new QuotedStringTokenizer() );
+        cc = new CliCompletor( new ExampleNormalBean(), new QuotedValueTokenizer() );
         candidates = new ArrayList<String>();
     }
 

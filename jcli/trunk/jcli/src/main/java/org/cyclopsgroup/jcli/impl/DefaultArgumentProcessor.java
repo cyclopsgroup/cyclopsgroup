@@ -4,6 +4,8 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -131,6 +133,14 @@ class DefaultArgumentProcessor<T>
     DefaultParsingContext<T> getContext()
     {
         return context;
+    }
+
+    @Override
+    public void printHelp( PrintWriter out )
+        throws IOException
+    {
+        // TODO Auto-generated method stub
+
     }
 
     /**

@@ -19,6 +19,14 @@ public class DefaultArgumentProcessorFactory
     @Override
     protected <T> ArgumentProcessor<T> newProcessor( Class<T> beanType, CommandLineParser parser )
     {
-        return new DefaultArgumentProcessor<T>( beanType, parser );
+        try
+        {
+            return new DefaultArgumentProcessor<T>( beanType, parser );
+        }
+        catch ( RuntimeException e )
+        {
+            throw new RuntimeException( "Can't create argument processor for type " + beanType + " with parser "
+                + parser, e );
+        }
     }
 }

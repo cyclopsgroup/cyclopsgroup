@@ -1,5 +1,7 @@
 package org.cyclopsgroup.jcli;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +29,18 @@ public abstract class ArgumentProcessor<T>
     }
 
     /**
+     * Create new instance with default parser, a {@link GnuParser}
+     *
+     * @param <T> Type of the bean
+     * @param beanType Type of the bean
+     * @return Instance of an implementation of argument processor
+     */
+    public static <T> ArgumentProcessor<T> newInstance( Class<T> beanType )
+    {
+        return newInstance( beanType, new GnuParser() );
+    }
+
+    /**
      * Process argument list and pass values to given bean
      *
      * @param arguments List of arguments
@@ -44,4 +58,11 @@ public abstract class ArgumentProcessor<T>
     {
         process( Arrays.asList( arguments ), bean );
     }
+
+    /**
+     * @param out Output to print help message to
+     * @throws IOException Allows IO errors
+     */
+    public abstract void printHelp( PrintWriter out )
+        throws IOException;
 }
