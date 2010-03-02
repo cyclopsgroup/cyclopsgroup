@@ -1,4 +1,4 @@
 /**
- * Annotations in this packages makes Java POJO parse'able by {@link CliParser}.
+ * Annotations that defines command line syntax
  */
 package org.cyclopsgroup.jcli.annotation;

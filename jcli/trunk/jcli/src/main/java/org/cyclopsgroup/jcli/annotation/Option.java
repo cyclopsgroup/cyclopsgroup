@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Option of command
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
