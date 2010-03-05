@@ -8,17 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyclopsgroup.caff.format.Format;
+import org.cyclopsgroup.caff.format.Formats;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 import org.cyclopsgroup.jcli.spi.Option;
+import org.cyclopsgroup.jcli.spi.ParsingContext;
 
 class DefaultArgumentProcessor<T>
     extends ArgumentProcessor<T>
 {
     static final String ARGUMENT_REFERNCE_NAME = "----arguments----";
 
-    private final DefaultParsingContext<T> context;
+    private final AnnotationParsingContext<T> context;
 
     private final CommandLineParser parser;
 
@@ -28,7 +31,16 @@ class DefaultArgumentProcessor<T>
         context = new ParsingContextBuilder<T>( beanType ).build();
     }
 
-    DefaultParsingContext<T> getContext()
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public ParsingContext createParsingContext()
+    {
+        return context;
+    }
+
+    AnnotationParsingContext<T> getContext()
     {
         return context;
     }
@@ -40,20 +52,32 @@ class DefaultArgumentProcessor<T>
     public void printHelp( PrintWriter out )
         throws IOException
     {
-        out.println( "name:  " + context.cli().getName() );
-        out.println( "usage: " + context.cli().getName() + "<OPTIONS>" + "[ARGUMENTS]" );
-        if ( !StringUtils.isBlank( context.cli().getDescription() ) )
+        out.println( "[USAGE] " + context.cli().getName() + ( context.options().isEmpty() ? "" : " <OPTIONS>" )
+            + ( context.argument() == null ? "" : " <ARGS>" ) );
+        if ( StringUtils.isNotBlank( context.cli().getDescription() ) )
         {
-            out.println( context.cli().getDescription() );
+            out.println( "[DESCRIPTION]" );
+            out.println( "  " + context.cli().getDescription() );
         }
-        for ( Option option : context.options() )
+        if ( !context.options().isEmpty() )
         {
-            out.println( String.format( " -%s --%s %s %s", option.getName(), option.getLongName(), option.isFlag() ? ""
-                            : "<" + option.getDisplayName() + ">", option.getDescription() ) );
+            out.println( "[OPTIONS]" );
+            Format<OptionHelp> helpFormat = Formats.newFixLengthFormat( OptionHelp.class );
+            for ( Option option : context.options() )
+            {
+                String line = helpFormat.formatToString( new OptionHelp( option ) ).trim();
+                out.println( "  " + line );
+            }
+        }
+        if ( context.argument() != null )
+        {
+            out.println( "[ARGS]" );
+            out.println( "  <" + context.argument().getDisplayName() + ">... " + context.argument().getDescription() );
         }
         if ( !StringUtils.isBlank( context.cli().getNote() ) )
         {
-            out.println( "note:  " + context.cli().getNote() );
+            out.println( "[NOTE]" );
+            out.println( "  " + context.cli().getNote() );
         }
     }
 

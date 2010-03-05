@@ -1,5 +1,7 @@
 package org.cyclopsgroup.jcli.impl;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.cyclopsgroup.jcli.annotation.Option;
 
 class AnnotationOption
@@ -7,12 +9,24 @@ class AnnotationOption
 {
     private final boolean flag;
 
+    private final boolean multiValue;
+
     private final Option option;
 
-    AnnotationOption( Option option, boolean flag )
+    AnnotationOption( Option option, boolean flag, boolean multiValue )
     {
         this.option = option;
         this.flag = flag;
+        this.multiValue = multiValue;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        return EqualsBuilder.reflectionEquals( this, obj );
     }
 
     /**
@@ -64,9 +78,27 @@ class AnnotationOption
      * @inheritDoc
      */
     @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode( this );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public boolean isFlag()
     {
         return flag;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public boolean isMultiValue()
+    {
+        return multiValue;
     }
 
     /**
@@ -77,4 +109,5 @@ class AnnotationOption
     {
         return option.required();
     }
+
 }

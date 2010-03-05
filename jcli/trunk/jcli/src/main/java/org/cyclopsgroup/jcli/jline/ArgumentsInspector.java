@@ -4,34 +4,33 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.cyclopsgroup.jcli.spi.CliDefinition;
-import org.cyclopsgroup.jcli.spi.OptionDefinition;
+import org.cyclopsgroup.jcli.spi.Option;
+import org.cyclopsgroup.jcli.spi.ParsingContext;
 
 /**
  * Class that consumes arguments
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 class ArgumentsInspector
 {
-    private final CliDefinition cli;
+    private final ParsingContext context;
 
-    private OptionDefinition currentOption;
+    private Option currentOption;
 
     private String currentValue;
 
-    private final Set<OptionDefinition> remainingOptions;
+    private final Set<Option> remainingOptions;
 
     private ArgumentsInspectorState state = ArgumentsInspectorState.READY;
 
     /**
-     * @param cli CLI definition
+     * @param context Parsing context
      */
-    ArgumentsInspector( CliDefinition cli )
+    ArgumentsInspector( ParsingContext context )
     {
-        this.cli = cli;
-        remainingOptions = new HashSet<OptionDefinition>( cli.getOptions().values() );
+        this.context = context;
+        remainingOptions = new HashSet<Option>( context.options() );
     }
 
     /**
@@ -55,11 +54,11 @@ class ArgumentsInspector
                     state = ArgumentsInspectorState.ARGUMENT;
                     break;
                 case OPTION:
-                    currentOption = findOptionByName( currentValue );
+                    currentOption = context.optionWithShortName( currentValue.substring( 1 ) );
                 case LONG_OPTION:
                     if ( state == ArgumentsInspectorState.LONG_OPTION )
                     {
-                        currentOption = findOptionByLongName( currentValue );
+                        currentOption = context.optionWithLongName( currentValue.substring( 2 ) );
                     }
                     if ( currentOption != null && !currentOption.isMultiValue() )
                     {
@@ -86,18 +85,18 @@ class ArgumentsInspector
     }
 
     /**
-     * End the process 
+     * End the process
      */
     void end()
     {
         switch ( state )
         {
             case OPTION:
-                currentOption = findOptionByName( currentValue );
+                currentOption = context.optionWithShortName( currentValue.substring( 1 ) );
             case LONG_OPTION:
                 if ( state == ArgumentsInspectorState.LONG_OPTION )
                 {
-                    currentOption = findOptionByLongName( currentValue );
+                    currentOption = context.optionWithLongName( currentValue.substring( 2 ) );
                 }
                 if ( currentOption != null && !currentOption.isMultiValue() )
                 {
@@ -118,27 +117,10 @@ class ArgumentsInspector
         currentValue = null;
     }
 
-    private OptionDefinition findOptionByLongName( String longName )
-    {
-        for ( OptionDefinition o : cli.getOptions().values() )
-        {
-            if ( o.getOption().longName() != null && StringUtils.equals( "--" + o.getOption().longName(), longName ) )
-            {
-                return o;
-            }
-        }
-        return null;
-    }
-
-    private OptionDefinition findOptionByName( String name )
-    {
-        return cli.getOptions().get( name.substring( 1 ) );
-    }
-
     /**
      * @return The option being processed currently
      */
-    OptionDefinition getCurrentOption()
+    Option getCurrentOption()
     {
         return currentOption;
     }
@@ -154,7 +136,7 @@ class ArgumentsInspector
     /**
      * @return Set of remaining options
      */
-    Set<OptionDefinition> getRemainingOptions()
+    Set<Option> getRemainingOptions()
     {
         return Collections.unmodifiableSet( remainingOptions );
     }

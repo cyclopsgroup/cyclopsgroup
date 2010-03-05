@@ -44,6 +44,6 @@ class AnnotationCli
     @Override
     public String getNote()
     {
-        return cli.name();
+        return cli.note();
     }
 }

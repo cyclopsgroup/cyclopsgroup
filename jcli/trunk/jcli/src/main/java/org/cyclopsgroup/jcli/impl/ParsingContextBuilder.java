@@ -22,57 +22,14 @@ import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
 
+/**
+ * Internal builder to create instance of {@link AnnotationParsingContext}
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ * @param <T> Type of bean to parse
+ */
 class ParsingContextBuilder<T>
 {
-    private final Class<T> beanType;
-
-    ParsingContextBuilder( Class<T> beanType )
-    {
-        this.beanType = beanType;
-    }
-
-    DefaultParsingContext<T> build()
-    {
-        List<AnnotationOption> options = new ArrayList<AnnotationOption>();
-        Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
-        Cli cliAnnotation = beanType.getAnnotation( Cli.class );
-        Validate.notNull( cliAnnotation, "Type " + beanType + " has to be annotated with @Cli" );
-        BeanInfo beanInfo;
-        try
-        {
-            beanInfo = Introspector.getBeanInfo( beanType );
-        }
-        catch ( IntrospectionException e )
-        {
-            throw new RuntimeException( "Bean " + beanType + " is not correctly defined", e );
-        }
-        for ( PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors() )
-        {
-            Method writer = descriptor.getWriteMethod();
-            if ( writer == null )
-            {
-                continue;
-            }
-            Option option = getAnnotation( descriptor, Option.class );
-            if ( option != null )
-            {
-                boolean flag =
-                    ( descriptor.getPropertyType() == Boolean.TYPE || descriptor.getPropertyType() == Boolean.class );
-                options.add( new AnnotationOption( option, flag ) );
-                references.put( option.name(), createReference( beanType, descriptor, option.longName() ) );
-                continue;
-            }
-            Argument argument = getAnnotation( descriptor, Argument.class );
-            if ( argument != null )
-            {
-                references.put( DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME,
-                                createReference( beanType, descriptor, DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME ) );
-                continue;
-            }
-        }
-        return new DefaultParsingContext<T>( beanType, references, options, new AnnotationCli( cliAnnotation ) );
-    }
-
     @SuppressWarnings( "unchecked" )
     private static <T> Reference<T> createReference( Class<T> beanType, PropertyDescriptor descriptor, String longName )
     {
@@ -118,5 +75,58 @@ class ParsingContextBuilder<T>
             a = descriptor.getReadMethod().getAnnotation( type );
         }
         return a;
+    }
+
+    private final Class<T> beanType;
+
+    ParsingContextBuilder( Class<T> beanType )
+    {
+        this.beanType = beanType;
+    }
+
+    AnnotationParsingContext<T> build()
+    {
+        List<AnnotationOption> options = new ArrayList<AnnotationOption>();
+        Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
+        Cli cliAnnotation = beanType.getAnnotation( Cli.class );
+        Validate.notNull( cliAnnotation, "Type " + beanType + " has to be annotated with @Cli" );
+        BeanInfo beanInfo;
+        try
+        {
+            beanInfo = Introspector.getBeanInfo( beanType );
+        }
+        catch ( IntrospectionException e )
+        {
+            throw new RuntimeException( "Bean " + beanType + " is not correctly defined", e );
+        }
+        Argument argument = null;
+        for ( PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors() )
+        {
+            Method writer = descriptor.getWriteMethod();
+            if ( writer == null )
+            {
+                continue;
+            }
+            Option option = getAnnotation( descriptor, Option.class );
+            if ( option != null )
+            {
+                boolean flag =
+                    ( descriptor.getPropertyType() == Boolean.TYPE || descriptor.getPropertyType() == Boolean.class );
+                boolean multiValue = getAnnotation( descriptor, MultiValue.class ) != null;
+                options.add( new AnnotationOption( option, flag, multiValue ) );
+                references.put( option.name(), createReference( beanType, descriptor, option.longName() ) );
+                continue;
+            }
+            Argument arg = getAnnotation( descriptor, Argument.class );
+            if ( arg != null )
+            {
+                argument = arg;
+                references.put( DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME,
+                                createReference( beanType, descriptor, DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME ) );
+                continue;
+            }
+        }
+        return new AnnotationParsingContext<T>( beanType, references, options, new AnnotationCli( cliAnnotation ),
+                                                argument == null ? null : new AnnotationArgument( argument ) );
     }
 }

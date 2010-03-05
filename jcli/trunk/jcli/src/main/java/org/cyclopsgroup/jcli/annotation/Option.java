@@ -29,7 +29,7 @@ public @interface Option
     /**
      * @return Display name of option
      */
-    String displayName() default "val";
+    String displayName() default "value";
 
     /**
      * @return Long option name specified with double dash

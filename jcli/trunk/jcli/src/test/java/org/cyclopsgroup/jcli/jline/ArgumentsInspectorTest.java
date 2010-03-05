@@ -4,15 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.beans.IntrospectionException;
 
+import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.ExampleNormalBean;
-import org.cyclopsgroup.jcli.spi.CliDefinition;
-import org.cyclopsgroup.jcli.spi.CliUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test case of {@link ArgumentsInspector}
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class ArgumentsInspectorTest
@@ -21,15 +20,14 @@ public class ArgumentsInspectorTest
 
     /**
      * Setup object to test
-     * 
+     *
      * @throws IntrospectionException
      */
     @Before
     public void setUp()
         throws IntrospectionException
     {
-        CliDefinition cli = CliUtils.defineCli( ExampleNormalBean.class );
-        ins = new ArgumentsInspector( cli );
+        ins = new ArgumentsInspector( ArgumentProcessor.newInstance( ExampleNormalBean.class ).createParsingContext() );
     }
 
     /**

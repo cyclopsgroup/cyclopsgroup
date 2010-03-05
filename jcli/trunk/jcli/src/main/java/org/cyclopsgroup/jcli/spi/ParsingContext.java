@@ -10,10 +10,19 @@ import java.util.List;
 public interface ParsingContext
 {
     /**
-     * @param shortName Name of option
-     * @return Option model. NULL if it doesn't exist
+     * @return Command line model
      */
-    Option optionWithShortName( String shortName );
+    Cli cli();
+
+    /**
+     * @return Argument model
+     */
+    Argument argument();
+
+    /**
+     * @return List of all options
+     */
+    List<Option> options();
 
     /**
      * @param longName Long name of option
@@ -22,12 +31,8 @@ public interface ParsingContext
     Option optionWithLongName( String longName );
 
     /**
-     * @return List of all options
+     * @param shortName Name of option
+     * @return Option model. NULL if it doesn't exist
      */
-    List<Option> options();
-
-    /**
-     * @return Command line model
-     */
-    Cli cli();
+    Option optionWithShortName( String shortName );
 }

@@ -14,10 +14,10 @@ import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.caff.token.TokenEvent;
 import org.cyclopsgroup.caff.token.TokenEventHandler;
 import org.cyclopsgroup.caff.token.ValueTokenizer;
+import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.AutoCompletable;
-import org.cyclopsgroup.jcli.spi.CliDefinition;
-import org.cyclopsgroup.jcli.spi.CliUtils;
-import org.cyclopsgroup.jcli.spi.OptionDefinition;
+import org.cyclopsgroup.jcli.spi.Option;
+import org.cyclopsgroup.jcli.spi.ParsingContext;
 
 /**
  * JLine completor implemented with JCli
@@ -44,7 +44,7 @@ public class CliCompletor
         return results;
     }
 
-    private final CliDefinition cli;
+    private final ParsingContext context;
 
     private final AutoCompletable completable;
 
@@ -56,11 +56,10 @@ public class CliCompletor
      * @throws IntrospectionException
      */
     public CliCompletor( final Object cliBean, final ValueTokenizer tokenizer )
-        throws IntrospectionException
     {
         Validate.notNull( cliBean, "Cli bean can't be NULL" );
         Validate.notNull( tokenizer, "String tokenizer can't be NULL" );
-        cli = CliUtils.defineCli( cliBean.getClass() );
+        context = ArgumentProcessor.newInstance( cliBean.getClass() ).createParsingContext();
         if ( cliBean instanceof AutoCompletable )
         {
             this.completable = (AutoCompletable) cliBean;
@@ -89,7 +88,7 @@ public class CliCompletor
     @SuppressWarnings( "unchecked" )
     public int complete( final String command, final int cursor, final List suggestions )
     {
-        ArgumentsInspector inspector = new ArgumentsInspector( cli );
+        ArgumentsInspector inspector = new ArgumentsInspector( context );
         final AtomicBoolean terminated = new AtomicBoolean( true );
         final AtomicInteger lastWordStart = new AtomicInteger( 0 );
         if ( StringUtils.isNotEmpty( command ) )
@@ -120,7 +119,7 @@ public class CliCompletor
         switch ( inspector.getState() )
         {
             case READY:
-                for ( OptionDefinition o : inspector.getRemainingOptions() )
+                for ( Option o : inspector.getRemainingOptions() )
                 {
                     candidates.add( "-" + o.getName() );
                 }
@@ -182,23 +181,22 @@ public class CliCompletor
     private List<String> suggestOptionNames( ArgumentsInspector inspector, String value )
     {
         List<String> results = new ArrayList<String>();
-        for ( OptionDefinition o : inspector.getRemainingOptions() )
+        for ( Option o : inspector.getRemainingOptions() )
         {
-            if ( value.startsWith( "--" ) && o.getOption().longName() != null
-                && ( "--" + o.getOption().longName() ).startsWith( value ) )
+            if ( value.startsWith( "--" ) && o.getLongName() != null && ( "--" + o.getLongName() ).startsWith( value ) )
             {
-                results.add( "--" + o.getOption().longName() );
+                results.add( "--" + o.getLongName() );
             }
-            else if ( value.startsWith( "-" ) && ( "-" + o.getOption().name() ).startsWith( value ) )
+            else if ( value.startsWith( "-" ) && ( "-" + o.getName() ).startsWith( value ) )
             {
-                results.add( "-" + o.getOption().name() );
+                results.add( "-" + o.getName() );
             }
         }
         Collections.sort( results );
         return results;
     }
 
-    private List<String> suggestOptionValue( OptionDefinition option, String partialValue )
+    private List<String> suggestOptionValue( Option option, String partialValue )
     {
         List<String> results;
         if ( StringUtils.isEmpty( partialValue ) )

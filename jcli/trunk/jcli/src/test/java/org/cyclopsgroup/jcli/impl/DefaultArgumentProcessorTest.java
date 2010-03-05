@@ -5,6 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ServiceLoader;
 
 import org.cyclopsgroup.jcli.ArgumentProcessor;
@@ -47,5 +50,16 @@ public class DefaultArgumentProcessorTest
         assertEquals( "f", b.getName() );
         assertEquals( "field1", b.getLongName() );
         assertEquals( "field1", b.getLongName() );
+    }
+
+    /**
+     * @throws IOException
+     */
+    @Test
+    public void testPrintHelp()
+        throws IOException
+    {
+        ArgumentProcessor<ExampleNormalBean> p = ArgumentProcessor.newInstance( ExampleNormalBean.class, null );
+        p.printHelp( new PrintWriter( new OutputStreamWriter( System.out ), true ) );
     }
 }

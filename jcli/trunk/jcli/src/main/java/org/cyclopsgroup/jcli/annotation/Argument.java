@@ -25,5 +25,5 @@ public @interface Argument
     /**
      * @return Name of argument displayed in usage
      */
-    String displayName() default "";
+    String displayName() default "arg";
 }

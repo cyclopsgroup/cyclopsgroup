@@ -38,6 +38,11 @@ public interface Option
     boolean isFlag();
 
     /**
+     * @return True if there can be more than one of this option
+     */
+    boolean isMultiValue();
+
+    /**
      * @return True if option is required
      */
     boolean isRequired();

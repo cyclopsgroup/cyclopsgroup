@@ -4,16 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.cyclopsgroup.jcli.spi.Argument;
 import org.cyclopsgroup.jcli.spi.Cli;
 import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
-class DefaultParsingContext<T>
+class AnnotationParsingContext<T>
     implements ParsingContext
 {
-    private final List<AnnotationOption> options;
+    private final AnnotationArgument argument;
 
     private final AnnotationCli cli;
+
+    private final List<AnnotationOption> options;
 
     private final Map<String, Reference<T>> referenceMap;
 
@@ -23,12 +26,22 @@ class DefaultParsingContext<T>
      * @param options List options
      * @param cli Command line model
      */
-    DefaultParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap, List<AnnotationOption> options,
-                           AnnotationCli cli )
+    AnnotationParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap, List<AnnotationOption> options,
+                           AnnotationCli cli, AnnotationArgument argument )
     {
         this.options = options;
         this.referenceMap = referenceMap;
         this.cli = cli;
+        this.argument = argument;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Argument argument()
+    {
+        return argument;
     }
 
     /**

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
+import org.cyclopsgroup.jcli.spi.ParsingContext;
 
 /**
  * The facade class that parses arguments and sets values to given bean
@@ -15,6 +16,18 @@ import org.cyclopsgroup.jcli.spi.CommandLineParser;
  */
 public abstract class ArgumentProcessor<T>
 {
+    /**
+     * Create new instance with default parser, a {@link GnuParser}
+     *
+     * @param <T> Type of the bean
+     * @param beanType Type of the bean
+     * @return Instance of an implementation of argument processor
+     */
+    public static <T> ArgumentProcessor<T> newInstance( Class<T> beanType )
+    {
+        return newInstance( beanType, new GnuParser() );
+    }
+
     /**
      * Create new instance with given bean type and command line parser that describes command line sytnax
      *
@@ -29,16 +42,16 @@ public abstract class ArgumentProcessor<T>
     }
 
     /**
-     * Create new instance with default parser, a {@link GnuParser}
-     *
-     * @param <T> Type of the bean
-     * @param beanType Type of the bean
-     * @return Instance of an implementation of argument processor
+     * @return Implementation of parsing context
      */
-    public static <T> ArgumentProcessor<T> newInstance( Class<T> beanType )
-    {
-        return newInstance( beanType, new GnuParser() );
-    }
+    public abstract ParsingContext createParsingContext();
+
+    /**
+     * @param out Output to print help message to
+     * @throws IOException Allows IO errors
+     */
+    public abstract void printHelp( PrintWriter out )
+        throws IOException;
 
     /**
      * Process argument list and pass values to given bean
@@ -58,11 +71,4 @@ public abstract class ArgumentProcessor<T>
     {
         process( Arrays.asList( arguments ), bean );
     }
-
-    /**
-     * @param out Output to print help message to
-     * @throws IOException Allows IO errors
-     */
-    public abstract void printHelp( PrintWriter out )
-        throws IOException;
 }
