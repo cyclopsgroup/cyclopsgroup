@@ -3,6 +3,7 @@ package org.cyclopsgroup.jcli.example;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.MultiValue;
@@ -45,5 +46,12 @@ public class UserControl
     public String toString()
     {
         return ToStringBuilder.reflectionToString( this );
+    }
+
+    public static void main( String[] args )
+    {
+        UserControl control = new UserControl();
+        ArgumentProcessor.newInstance( UserControl.class ).process( args, control );
+        System.out.println( control );
     }
 }
