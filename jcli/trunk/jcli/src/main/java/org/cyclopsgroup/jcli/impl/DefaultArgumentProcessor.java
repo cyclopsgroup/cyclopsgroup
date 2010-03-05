@@ -52,7 +52,8 @@ class DefaultArgumentProcessor<T>
     public void printHelp( PrintWriter out )
         throws IOException
     {
-        out.println( "[USAGE] " + context.cli().getName() + ( context.options().isEmpty() ? "" : " <OPTIONS>" )
+        out.println( "[USAGE]" );
+        out.println( "  " + context.cli().getName() + ( context.options().isEmpty() ? "" : " <OPTIONS>" )
             + ( context.argument() == null ? "" : " <ARGS>" ) );
         if ( StringUtils.isNotBlank( context.cli().getDescription() ) )
         {
