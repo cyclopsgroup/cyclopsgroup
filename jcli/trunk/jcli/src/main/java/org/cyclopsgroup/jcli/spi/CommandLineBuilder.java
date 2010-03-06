@@ -23,31 +23,37 @@ public final class CommandLineBuilder
 
     /**
      * @param argument Add an argument expression
+     * @return Builder itself
      */
-    public void withArgument( String argument )
+    public CommandLineBuilder withArgument( String argument )
     {
         cl.addArgument( argument );
+        return this;
     }
 
     /**
      * @param arguments Add a list of arguments
+     * @return Builder itself
      */
-    public void withArguments( Collection<String> arguments )
+    public CommandLineBuilder withArguments( Collection<String> arguments )
     {
         for ( String arg : arguments )
         {
             withArgument( arg );
         }
+        return this;
     }
 
     /**
      * Add a flag option with its long name
      *
      * @param name Long name of the flag option to add
+     * @return Builder itself
      */
-    public void withLongFlag( String name )
+    public CommandLineBuilder withLongFlag( String name )
     {
         withLongOption( name, FLAG_VALUE );
+        return this;
     }
 
     /**
@@ -55,20 +61,24 @@ public final class CommandLineBuilder
      *
      * @param name Long name of the option to add
      * @param value Value of the option to add
+     * @return Builder itself
      */
-    public void withLongOption( String name, String value )
+    public CommandLineBuilder withLongOption( String name, String value )
     {
         cl.addOptionValue( name, value, false );
+        return this;
     }
 
     /**
      * Add a flag option with its short name
      *
      * @param name Short name of option to add
+     * @return Builder itself
      */
-    public void withShortFlag( String name )
+    public CommandLineBuilder withShortFlag( String name )
     {
         withShortOption( name, FLAG_VALUE );
+        return this;
     }
 
     /**
@@ -76,9 +86,11 @@ public final class CommandLineBuilder
      *
      * @param name Short name of the option to add
      * @param value Value of option to add
+     * @return Builder itself
      */
-    public void withShortOption( String name, String value )
+    public CommandLineBuilder withShortOption( String name, String value )
     {
         cl.addOptionValue( name, value, true );
+        return this;
     }
 }
