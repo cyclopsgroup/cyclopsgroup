@@ -8,8 +8,16 @@ import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.GnuParser;
 import org.junit.Test;
 
+/**
+ * A test using {@link UserControl} as an example bean
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class UserControlTest
 {
+    /**
+     * Verify user control parsing is correct
+     */
     @Test
     public void testWithSingleUser()
     {

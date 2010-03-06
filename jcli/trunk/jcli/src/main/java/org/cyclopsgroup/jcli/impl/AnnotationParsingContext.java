@@ -25,9 +25,10 @@ class AnnotationParsingContext<T>
      * @param referenceMap Map of references
      * @param options List options
      * @param cli Command line model
+     * @param argument Argument definition
      */
-    AnnotationParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap, List<AnnotationOption> options,
-                           AnnotationCli cli, AnnotationArgument argument )
+    AnnotationParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap,
+                              List<AnnotationOption> options, AnnotationCli cli, AnnotationArgument argument )
     {
         this.options = options;
         this.referenceMap = referenceMap;
@@ -53,6 +54,13 @@ class AnnotationParsingContext<T>
         return cli;
     }
 
+    /**
+     * Find reference with given name of option or argument
+     *
+     * @param name Name of option or argument
+     * @param isLongName True if name is a long name
+     * @return Reference that matches name or NULL
+     */
     Reference<T> lookupReference( String name, boolean isLongName )
     {
         if ( isLongName )

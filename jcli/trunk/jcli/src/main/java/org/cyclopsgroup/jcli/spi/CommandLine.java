@@ -17,10 +17,19 @@ public final class CommandLine
      */
     public static final class OptionValue
     {
+        /**
+         * Name of command line option it detects
+         */
         public final String name;
 
+        /**
+         * True if option name is a short name
+         */
         public final boolean shortName;
 
+        /**
+         * Detected value
+         */
         public final String value;
 
         OptionValue( String name, String value, boolean shortName )
