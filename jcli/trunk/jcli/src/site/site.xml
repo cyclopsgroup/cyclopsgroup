@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project
-    name="JCLI - Java annotation based command line argument parser">
+<project name="JCLI - Java annotation based command line argument parser">
     <bannerLeft>
         <name>JCLI</name>
         <src>images/logo.png</src>
@@ -8,7 +7,7 @@
     </bannerLeft>
     <bannerRight>
         <src>
-            http://cyclops-group.sourceforge.net/images/cyclopsgroup_logo.png
+            http://cyclops-group.sourceforge.net/wiki/images/cyclopsgroup-logo.png
         </src>
     </bannerRight>
     <body>
@@ -24,22 +23,22 @@
             </script>
         </head>
         <links>
-            <item name="cyclopsgroup.org"
-                href="http://www.cyclopsgroup.org/" />
-            <item name="wiki" href="http://wiki.cyclopsgroup.org" />
+            <item name="cyclopsgroup.org" href="http://www.cyclopsgroup.org/" />
+            <item name="wiki" href="http://wiki.cyclopsgroup.org/jcli" />
             <item name="sf.net/cyclops-group"
                 href="http://sourceforge.net/projects/cyclops-group" />
         </links>
         <menu name="JCLI">
             <item name="Home" href="index.html" />
+            <item name="Documentation Wiki" href="http://wiki.cyclopsgroup.org/jcli" />
             <item name="Javadoc" href="apidocs/index.html" />
         </menu>
         <menu ref="reports" />
         <menu name="Links">
-            <item name="Discussion"
-                href="http://wiki.cyclopsgroup.org/discussion" />
-            <item name="JMXTERM"
-                href="http://www.cyclopsgroup.org/jmxterm" />
+            <item name="Discussion" href="http://wiki.cyclopsgroup.org/discussion" />
+            <item name="Jmxterm"
+                href="http://www.cyclopsgroup.org/projects/jmxterm" />
+            <item name="Jiaqi Guo" href="http://www.cyclopsgroup.org/members/jiaqi" />
         </menu>
     </body>
 </project>
