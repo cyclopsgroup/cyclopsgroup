@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
-@Target( ElementType.METHOD )
+@Target( { ElementType.METHOD, ElementType.FIELD } )
 @Retention( RetentionPolicy.RUNTIME )
 public @interface Option
 {

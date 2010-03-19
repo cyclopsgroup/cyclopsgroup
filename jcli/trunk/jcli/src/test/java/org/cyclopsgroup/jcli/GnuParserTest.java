@@ -116,4 +116,16 @@ public class GnuParserTest
         assertEquals( "-3", b.getStringFIeld2() );
         assertEquals( Arrays.asList( "-1", "--1", "-4" ), b.getValues() );
     }
+
+    /**
+     * Verify bean without Cli annotation is acceptable
+     */
+    @Test
+    public void testWithoutCli()
+    {
+        ArgumentProcessor<BeanWithoutCli> p = ArgumentProcessor.newInstance( BeanWithoutCli.class, new GnuParser() );
+        BeanWithoutCli b = new BeanWithoutCli();
+        p.process( new String[] { "-a", "aaaaa" }, b );
+        assertEquals( "aaaaa", b.optionA );
+    }
 }

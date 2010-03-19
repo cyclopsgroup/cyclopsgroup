@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
-@Target( ElementType.METHOD )
+@Target( { ElementType.METHOD, ElementType.FIELD } )
 @Retention( RetentionPolicy.RUNTIME )
 public @interface MultiValue
 {

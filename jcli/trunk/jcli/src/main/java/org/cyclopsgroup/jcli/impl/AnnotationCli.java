@@ -12,12 +12,15 @@ class AnnotationCli
 {
     private final Cli cli;
 
+    private final boolean undefined;
+
     /**
      * @param cli Annotation cli
      */
     AnnotationCli( Cli cli )
     {
         this.cli = cli;
+        this.undefined = cli == null;
     }
 
     /**
@@ -26,7 +29,7 @@ class AnnotationCli
     @Override
     public String getDescription()
     {
-        return cli.description();
+        return undefined ? null : cli.description();
     }
 
     /**
@@ -35,7 +38,7 @@ class AnnotationCli
     @Override
     public String getName()
     {
-        return cli.name();
+        return undefined ? null : cli.name();
     }
 
     /**
@@ -44,6 +47,6 @@ class AnnotationCli
     @Override
     public String getNote()
     {
-        return cli.note();
+        return undefined ? null : cli.note();
     }
 }

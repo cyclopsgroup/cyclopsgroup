@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.caff.conversion.AnnotatedConverter;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.conversion.NullFriendlyConverter;
@@ -89,7 +88,6 @@ class ParsingContextBuilder<T>
         List<AnnotationOption> options = new ArrayList<AnnotationOption>();
         Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
         Cli cliAnnotation = beanType.getAnnotation( Cli.class );
-        Validate.notNull( cliAnnotation, "Type " + beanType + " has to be annotated with @Cli" );
         BeanInfo beanInfo;
         try
         {
