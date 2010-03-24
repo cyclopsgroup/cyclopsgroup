@@ -1,7 +1,6 @@
 package org.cyclopsgroup.jcli;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineBuilder;
@@ -15,10 +14,6 @@ import org.cyclopsgroup.jcli.spi.ParsingContext;
 public class GnuParser
     implements CommandLineParser
 {
-    private static final Pattern LONG_OPTION = Pattern.compile( "^--\\w+$" );
-
-    private static final Pattern SHORT_OPTION = Pattern.compile( "^-\\w+$" );
-
     /**
      * @inheritDoc
      */
@@ -43,7 +38,7 @@ public class GnuParser
                 }
                 expectingOptionValue = false;
             }
-            else if ( LONG_OPTION.matcher( arg ).matches() )
+            else if ( arg.startsWith( "--" ) )
             {
                 optionName = arg.substring( 2 );
                 Option opt = context.optionWithLongName( optionName );
@@ -61,7 +56,7 @@ public class GnuParser
                     shortOption = false;
                 }
             }
-            else if ( SHORT_OPTION.matcher( arg ).matches() )
+            else if ( arg.startsWith( "-" ) )
             {
                 optionName = arg.substring( 1 );
                 Option opt = context.optionWithShortName( optionName );

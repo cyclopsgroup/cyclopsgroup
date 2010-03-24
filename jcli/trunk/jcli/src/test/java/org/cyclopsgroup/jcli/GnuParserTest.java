@@ -35,6 +35,18 @@ public class GnuParserTest
     }
 
     /**
+     * Verify that long option name with dash is acceptable
+     */
+    @Test
+    public void testLongOptionWithDash()
+    {
+        ArgumentProcessor<BeanWithoutCli> p = ArgumentProcessor.newInstance( BeanWithoutCli.class, new GnuParser() );
+        BeanWithoutCli b = new BeanWithoutCli();
+        p.process( new String[] { "--with-dash", "x" }, b );
+        assertEquals( "x", b.optionWithDash );
+    }
+
+    /**
      * Verify empty arguments doesn't reset default arguments
      */
     @Test
