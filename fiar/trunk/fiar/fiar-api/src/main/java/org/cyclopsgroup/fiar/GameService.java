@@ -4,6 +4,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,7 +23,7 @@ public interface GameService
      * @param requestDate
      * @return The game user creates
      */
-    @GET
+    @PUT
     @Path( "/games/{gameId}" )
     @Produces( "text/xml" )
     Game createGame( @QueryParam( "sessionId" ) String sessionId, @PathParam( "gameId" ) String gameId );
