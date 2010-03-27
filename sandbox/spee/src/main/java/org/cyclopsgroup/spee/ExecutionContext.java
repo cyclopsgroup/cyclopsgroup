@@ -1,25 +1,37 @@
 package org.cyclopsgroup.spee;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public interface ExecutionContext
 {
+    void abortWith( Serializable message );
+
+    ExecutionEngine getEngine();
+
+    ExecutionEngineContext getEngineContext();
+
     String getId();
 
-    void abortWith(Object message);
+    Map<String, Serializable> getVariables();
 
-    EngineContext getEngineContext();
+    void notifyWith( Notification notification );
 
-    Map<String, Object> getVariables();
+    void notifyWith( Notification notification, long timeToLive, TimeUnit unit );
 
-    void notifyWith(Object message);
+    <T extends Serializable> FlowFuture<T> startFlow( Flow<T> flow );
 
-    void notifyWith(Object message, long timeToLive, TimeUnit unit);
+    Notification waitFor( Serializable condition )
+        throws AbortException;
 
-    <T> T waitFor(Predicate<T> predicate) throws AbortException;
+    Notification waitFor( Serializable condition, long timeout, TimeUnit unit )
+        throws AbortException;
 
-    <T> T waitFor(Predicate<T> predicate, long timeout, TimeUnit unit) throws AbortException;
+    Notification waitFor( List<Serializable> conditions )
+        throws AbortException;
 
-    <T> FlowFuture<T> startFlow(Flow<T> flow);
+    Notification waitFor( List<Serializable> conditions, long timeout, TimeUnit unit )
+        throws AbortException;
 }

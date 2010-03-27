@@ -1,17 +1,22 @@
 package org.cyclopsgroup.spee;
 
-public class AbortException extends RuntimeException
+import java.io.Serializable;
+
+public class AbortException
+    extends ExecutionException
 {
-    private final Object notification;
-    
-    public AbortException(Object notification, String description)
+    private static final long serialVersionUID = 1L;
+
+    private final Serializable message;
+
+    public AbortException( Serializable message, String description )
     {
-        super("Flow is aborted: " + description + "! notification=" + notification);
-        this.notification = notification;
+        super( "Flow is aborted: " + description + "! message=" + message );
+        this.message = message;
     }
-    
-    public final Object getNotification()
+
+    public final Serializable getErrorMessage()
     {
-        return notification;
+        return message;
     }
 }
