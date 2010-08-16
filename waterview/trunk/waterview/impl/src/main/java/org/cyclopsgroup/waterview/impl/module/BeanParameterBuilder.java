@@ -1,6 +1,6 @@
 package org.cyclopsgroup.waterview.impl.module;
 
-import org.cyclopsgroup.waterview.InputBean;
+import org.cyclopsgroup.waterview.Parameters;
 import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
@@ -11,7 +11,7 @@ import org.cyclopsgroup.waterview.spi.WebContext;
 class BeanParameterBuilder
     extends ParameterBuilder
 {
-    private final InputBean annotation;
+    private final Parameters annotation;
 
     private final Class<?> type;
 
@@ -19,7 +19,7 @@ class BeanParameterBuilder
      * @param annotation Annotation associated with parameter
      * @param type Type of Java bean
      */
-    BeanParameterBuilder( InputBean annotation, Class<?> type )
+    BeanParameterBuilder( Parameters annotation, Class<?> type )
     {
         this.annotation = annotation;
         this.type = type;

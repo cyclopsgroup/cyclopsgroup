@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Mapping;
 import org.cyclopsgroup.waterview.Page;
 
 /**
- * This implementation collects a given collection of module objects, POJO annotated with {@link Module} annotation, and
+ * This implementation collects a given collection of module objects, POJO annotated with {@link Mapping} annotation, and
  * build a map of {@link WebModule} objects based on annotation parameters.
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
@@ -33,7 +33,7 @@ public class CollectionModuleResolver
         {
             for(Method method : module.getClass().getMethods())
             {
-                if(!method.isAnnotationPresent( Module.class ))
+                if(!method.isAnnotationPresent( Mapping.class ))
                 {
                     continue;
                 }

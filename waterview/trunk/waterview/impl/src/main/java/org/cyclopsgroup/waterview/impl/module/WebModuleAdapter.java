@@ -3,19 +3,18 @@ package org.cyclopsgroup.waterview.impl.module;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.StringUtils;
-import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Mapping;
 import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
- * Internal adapter that implements {@literal WebModule}. Internally it takes a POJO annotated with {@link Module}.
- * 
+ * Internal adapter that implements {@literal WebModule}. Internally it takes a POJO annotated with {@link Mapping}.
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 class WebModuleAdapter
     implements WebModule
 {
-    private final Module definition;
+    private final Mapping definition;
 
     private final Method method;
 
@@ -34,14 +33,14 @@ class WebModuleAdapter
     {
         this.object = object;
         this.method = method;
-        definition = method.getAnnotation( Module.class );
+        definition = method.getAnnotation( Mapping.class );
         parametersBuilder = new ParametersBuilder( method );
     }
 
     /**
      * @return Value of field definition
      */
-    public final Module getDefinition()
+    public final Mapping getDefinition()
     {
         return definition;
     }
@@ -83,10 +82,6 @@ class WebModuleAdapter
         catch ( InvocationTargetException e )
         {
             throw new RuntimeException( "Invocation of " + method + " on " + object + " failed", e );
-        }
-        if ( StringUtils.isNotEmpty( definition.returnVariable() ) )
-        {
-            context.setVariable( definition.returnVariable(), result );
         }
     }
 }

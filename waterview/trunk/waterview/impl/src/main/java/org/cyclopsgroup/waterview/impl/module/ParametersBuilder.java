@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.cyclopsgroup.waterview.InputBean;
-import org.cyclopsgroup.waterview.InputParameter;
+import org.cyclopsgroup.waterview.Parameters;
+import org.cyclopsgroup.waterview.Parameter;
 import org.cyclopsgroup.waterview.spi.WebContext;
 
 /**
@@ -34,14 +34,14 @@ class ParametersBuilder
             ParameterBuilder builder = null;
             for ( Annotation annotation : annotations )
             {
-                if ( annotation instanceof InputParameter )
+                if ( annotation instanceof Parameter )
                 {
-                    builder = new ValueParameterBuilder( (InputParameter) annotation, paramType );
+                    builder = new ValueParameterBuilder( (Parameter) annotation, paramType );
                     break;
                 }
-                if ( annotation instanceof InputBean )
+                if ( annotation instanceof Parameters )
                 {
-                    builder = new BeanParameterBuilder( (InputBean) annotation, paramType );
+                    builder = new BeanParameterBuilder( (Parameters) annotation, paramType );
                     break;
                 }
             }

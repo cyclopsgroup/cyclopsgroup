@@ -6,21 +6,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Value comes from one of parameter
- * 
+ * Value comes from a set of parameters
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Target( ElementType.PARAMETER )
 @Retention( RetentionPolicy.RUNTIME )
-public @interface InputParameter
+public @interface Parameters
 {
-    /**
-     * @return Name of parameter
-     */
-    String name();
-    
     /**
      * @return Type of parameter
      */
-    InputParameterType type() default InputParameterType.PARAMETER;
+    ParameterType type() default ParameterType.QUERY;
 }

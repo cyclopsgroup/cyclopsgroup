@@ -5,11 +5,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Mapping;
 import org.cyclopsgroup.waterview.PageRedirection;
 
 /**
- * Context of {@link Module}
+ * Context of {@link Mapping}
  * 
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */

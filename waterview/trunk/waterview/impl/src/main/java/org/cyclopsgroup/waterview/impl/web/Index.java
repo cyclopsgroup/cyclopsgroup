@@ -1,22 +1,21 @@
 package org.cyclopsgroup.waterview.impl.web;
 
-import org.cyclopsgroup.waterview.Module;
+import org.cyclopsgroup.waterview.Mapping;
 import org.cyclopsgroup.waterview.Page;
 
 /**
  * Index home page
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-
+@Mapping( path = "/index.vm" )
 public class Index
 {
     /**
      * @return A string
      */
-    @Module( path = "/index.vm", returnVariable="indexVariable" )
     @Page( title = "Waterivew", description = "Welcome to waterview" )
-    public String render( )
+    public String render()
     {
         return "fromIndex";
     }
