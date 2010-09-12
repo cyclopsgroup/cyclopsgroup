@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Flag an object as a page
- * 
+ *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Target( ElementType.METHOD )
@@ -17,7 +17,7 @@ public @interface Page
     /**
      * @return MIME content type of this page
      */
-    String contentType() default Constants.DEFAULT_CONTENT_TYPE;
+    String contentType() default "text/html";
 
     /**
      * @return Detail description of this page
@@ -33,7 +33,7 @@ public @interface Page
      * @return Render page with specified layout
      */
     String layout() default "";
-    
+
     /**
      * @return Set it to true if module take care of entire rendering process
      */

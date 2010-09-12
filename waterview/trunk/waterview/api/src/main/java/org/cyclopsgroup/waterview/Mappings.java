@@ -11,7 +11,5 @@ import java.lang.annotation.Target;
 @Target( { ElementType.TYPE, ElementType.PACKAGE } )
 public @interface Mappings
 {
-    String path() default "";
-
-    Class<?>[] modules();
+    Class<?>[] value();
 }
