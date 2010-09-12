@@ -12,6 +12,8 @@ public class User
 
     private String emailAddress;
 
+    private String password;
+
     private String userId;
 
     private String userName;
@@ -26,6 +28,12 @@ public class User
     public final String getEmailAddress()
     {
         return emailAddress;
+    }
+
+    @XmlElement
+    public final String getPassword()
+    {
+        return password;
     }
 
     @XmlElement
@@ -48,6 +56,11 @@ public class User
     public final void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
+    }
+
+    public final void setPassword( String password )
+    {
+        this.password = password;
     }
 
     public final void setUserId( String userId )
