@@ -12,7 +12,6 @@ public class DefaultSessionService
     public UserSession getSession( String sessionId )
     {
         UserSession session = new UserSession();
-
         return session;
     }
 

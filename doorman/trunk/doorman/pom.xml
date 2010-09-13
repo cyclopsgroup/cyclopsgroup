@@ -10,7 +10,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>doorman</artifactId>
     <packaging>pom</packaging>
-    <name>Waterview</name>
+    <name>Doorman</name>
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2010</inceptionYear>
     <scm>
