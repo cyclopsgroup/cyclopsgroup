@@ -21,7 +21,7 @@
             scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/doorman/trunk/doorman
         </developerConnection>
         <url>
-            http://fisheye3.atlanssian.com/viewrep/cyclops-group/waterview
+            http://fisheye3.atlanssian.com/viewrep/cyclops-group/doorman
         </url>
     </scm>
     <distributionManagement>
