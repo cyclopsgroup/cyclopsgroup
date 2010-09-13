@@ -6,12 +6,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 @Path( "session" )
 public interface SessionService
 {
     @GET
     @Path( "/{sessionId}" )
+    @Produces( "application/xml" )
     UserSession getSession( @PathParam( "sessionId" ) String sessionId );
 
     @POST
@@ -29,5 +31,6 @@ public interface SessionService
 
     @PUT
     @Path( "/{sessionId}" )
+    @Produces( "application/xml" )
     UserSession startSession( @PathParam( "sessionId" ) String sessionId, UserSessionAttributes attributes );
 }
