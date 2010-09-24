@@ -37,4 +37,11 @@ public class DefaultSessionService
 
         return session;
     }
+
+    @Override
+    public void confirmSignUp( String sessionId, String token )
+    {
+        // TODO Auto-generated method stub
+
+    }
 }

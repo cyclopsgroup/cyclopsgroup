@@ -25,7 +25,7 @@ public class StoredUser
 
     private String userName;
 
-    private String userState;
+    private StoredUserState userState;
 
     private Timestamp lastModified;
 
@@ -66,7 +66,7 @@ public class StoredUser
         return userId;
     }
 
-    @Column( name = "user_name", nullable = false, length = 32 )
+    @Column( name = "user_name", nullable = false, length = 64 )
     public final String getUserName()
     {
         return userName;
@@ -74,7 +74,7 @@ public class StoredUser
 
     @Column( name = "user_state", nullable = false, length = 8 )
     @Enumerated( EnumType.STRING )
-    public final String getUserState()
+    public final StoredUserState getUserState()
     {
         return userState;
     }
@@ -104,7 +104,7 @@ public class StoredUser
         this.userName = userName;
     }
 
-    public final void setUserState( String userState )
+    public final void setUserState( StoredUserState userState )
     {
         this.userState = userState;
     }

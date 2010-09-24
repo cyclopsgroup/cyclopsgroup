@@ -11,6 +11,10 @@ import javax.ws.rs.Produces;
 @Path( "session" )
 public interface SessionService
 {
+    @POST
+    @Path( "/{sessionId}/confirm" )
+    void confirmSignUp( String sessionId, String token );
+
     @GET
     @Path( "/{sessionId}" )
     @Produces( "application/xml" )
