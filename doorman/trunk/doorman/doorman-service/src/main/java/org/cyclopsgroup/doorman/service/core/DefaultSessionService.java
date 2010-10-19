@@ -4,10 +4,27 @@ import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
+import org.cyclopsgroup.doorman.service.dao.DAOFactory;
+import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 
+/**
+ * Default implementation of session service
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class DefaultSessionService
     implements SessionService
 {
+    /**
+     * @param daoFactory Factory instance that creates necessary DAOs
+     */
+    public DefaultSessionService( DAOFactory daoFactory )
+    {
+        this.userSessionDao = daoFactory.createUserSessionDAO();
+    }
+
+    private final UserSessionDAO userSessionDao;
+
     @Override
     public UserSession getSession( String sessionId )
     {
