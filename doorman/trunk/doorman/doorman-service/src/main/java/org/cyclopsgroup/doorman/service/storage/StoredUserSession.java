@@ -74,8 +74,8 @@ public class StoredUserSession
 
     }
 
-    @ManyToOne( optional = false, fetch = FetchType.EAGER )
-    @JoinColumn( name = "user_id", nullable = false, updatable = false )
+    @ManyToOne( optional = true, fetch = FetchType.EAGER )
+    @JoinColumn( name = "user_id", nullable = true )
     public final StoredUser getUser()
     {
         return user;
@@ -102,7 +102,7 @@ public class StoredUserSession
         this.ipAddress = ipAddress;
     }
 
-    public final void setLastActivity( Timestamp lastModified )
+    public final void setLastModified( Timestamp lastModified )
     {
         this.lastModified = lastModified;
     }

@@ -73,13 +73,12 @@ public class SessionInjectionFilter
             LOG.info( "Found cookie " + sessionIdCookie );
             if ( sessionIdCookie != null )
             {
-                session = service.getSession( sessionIdCookie.getName() );
+                session = service.getSession( sessionIdCookie.getValue() );
             }
 
             if ( session == null || sessionIdCookie == null )
             {
                 String sessionId = UUID.randomUUID().toString();
-
                 UserSessionAttributes attributes = new UserSessionAttributes();
                 attributes.setAcceptLanguage( req.getHeader( "Accept-Language" ) );
                 attributes.setUserAgent( req.getHeader( "User-Agent" ) );
