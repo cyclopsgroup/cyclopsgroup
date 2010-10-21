@@ -8,17 +8,9 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
     <context:annotation-config />
-    <tx:annotation-driven transaction-manager="org.cyclopsgroup.doorman.TransactionManager" />
+    <context:component-scan base-package="org.cyclopsgroup.doorman.service" />
 
-    <bean id="org.cyclopsgroup.doorman.SessionFactory"
-        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="org.cyclopsgroup.doorman.DataSource" />
-        <property name="annotatedPackages">
-            <list>
-                <value>org.cyclospgroup.doorman.service.storage</value>
-            </list>
-        </property>
-    </bean>
+    <tx:annotation-driven transaction-manager="org.cyclopsgroup.doorman.TransactionManager" />
 
     <bean id="org.cyclopsgroup.doorman.TransactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">

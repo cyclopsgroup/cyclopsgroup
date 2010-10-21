@@ -2,6 +2,8 @@ package org.cyclopsgroup.doorman.service.hibernate;
 
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,12 @@ public class HibernateUserSessionDAO
     extends HibernateDaoSupport
     implements UserSessionDAO
 {
+    @Autowired
+    public HibernateUserSessionDAO( SessionFactory sessionFactory )
+    {
+        setSessionFactory( sessionFactory );
+    }
+
     /**
      * @inheritDoc
      */
