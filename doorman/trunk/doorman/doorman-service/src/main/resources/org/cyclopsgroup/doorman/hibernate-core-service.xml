@@ -17,4 +17,21 @@
         <property name="sessionFactory"
             ref="org.cyclopsgroup.doorman.SessionFactory" />
     </bean>
+    <bean id="org.cyclopsgroup.doorman.HSQLSessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="packagesToScan"
+            value="org.cyclopsgroup.doorman.service.storage" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.connection.driver_class">org.hsqldb.jdbc.JDBCDriver</prop>
+                <prop key="hibernate.connection.url">jdbc:hsqldb:mem:cg-doorman</prop>
+                <prop key="hibernate.connection.username">sa</prop>
+                <prop key="hibernate.connection.password"></prop>
+                <prop key="hibernate.connection.pool_size">3</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

@@ -1,6 +1,6 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

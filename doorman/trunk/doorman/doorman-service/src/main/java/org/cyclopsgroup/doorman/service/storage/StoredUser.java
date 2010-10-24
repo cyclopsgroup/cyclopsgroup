@@ -1,6 +1,6 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,16 +27,16 @@ public class StoredUser
 
     private StoredUserState userState;
 
-    private Timestamp lastModified;
+    private Date lastModified;
 
     @Column( name = "last_modified" )
     @Temporal( TemporalType.TIMESTAMP )
-    public final Timestamp getLastModified()
+    public final Date getLastModified()
     {
         return lastModified;
     }
 
-    public final void setLastModified( Timestamp lastModified )
+    public final void setLastModified( Date lastModified )
     {
         this.lastModified = lastModified;
     }

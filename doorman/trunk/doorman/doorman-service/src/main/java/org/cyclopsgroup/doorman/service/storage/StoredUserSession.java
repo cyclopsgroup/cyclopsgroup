@@ -1,7 +1,6 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,7 @@ public class StoredUserSession
 
     private String ipAddress;
 
-    private Timestamp lastModified;
+    private Date lastModified;
 
     private Date lastVerification;
 
@@ -54,12 +53,12 @@ public class StoredUserSession
 
     @Column( name = "last_activity", nullable = false )
     @Temporal( TemporalType.TIMESTAMP )
-    public final Timestamp getLastModified()
+    public final Date getLastModified()
     {
         return lastModified;
     }
 
-    @Column( name = "last_verification", nullable = false )
+    @Column( name = "last_verification" )
     @Temporal( TemporalType.DATE )
     public final Date getLastVerification()
     {
@@ -102,7 +101,7 @@ public class StoredUserSession
         this.ipAddress = ipAddress;
     }
 
-    public final void setLastModified( Timestamp lastModified )
+    public final void setLastModified( Date lastModified )
     {
         this.lastModified = lastModified;
     }

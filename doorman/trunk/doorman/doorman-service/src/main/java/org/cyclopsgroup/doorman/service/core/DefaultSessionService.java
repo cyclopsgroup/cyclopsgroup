@@ -1,8 +1,5 @@
 package org.cyclopsgroup.doorman.service.core;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
@@ -42,7 +39,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserSession getSession( String sessionId )
     {
         StoredUserSession s = userSessionDao.load( sessionId );
@@ -82,13 +79,11 @@ public class DefaultSessionService
     {
         Validate.notNull( sessionId, "Session ID can't be NULL" );
 
-        DateTime nowDateTime = new DateTime( DateTimeZone.UTC );
-        long now = nowDateTime.getMillis();
-
+        DateTime now = new DateTime( DateTimeZone.UTC );
         StoredUserSession s = new StoredUserSession();
         s.setSessionId( sessionId );
-        s.setCreationDate( new Date( now ) );
-        s.setLastModified( new Timestamp( now ) );
+        s.setCreationDate( now.toDate() );
+        s.setLastModified( now.toDate() );
         if ( attributes != null )
         {
             s.setAcceptLanguage( attributes.getAcceptLanguage() );
@@ -100,8 +95,8 @@ public class DefaultSessionService
         UserSession session = new UserSession();
         session.setAttributes( attributes );
         session.setSessionId( sessionId );
-        session.setCreationDate( nowDateTime );
-        session.setLastActivity( nowDateTime );
+        session.setCreationDate( now );
+        session.setLastActivity( now );
         return session;
     }
 
