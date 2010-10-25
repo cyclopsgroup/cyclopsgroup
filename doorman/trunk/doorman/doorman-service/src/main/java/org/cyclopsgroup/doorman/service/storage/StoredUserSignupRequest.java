@@ -28,80 +28,80 @@ public class StoredUserSignupRequest
     private String userName;
 
     @Column( name = "display_name", nullable = false, length = 64 )
-    public final String getDisplayName()
+    public String getDisplayName()
     {
         return displayName;
     }
 
     @Column( name = "email_address", nullable = false, length = 256 )
-    public final String getEmailAddress()
+    public String getEmailAddress()
     {
         return emailAddress;
     }
 
     @Column( name = "password", nullable = false, length = 32 )
-    public final String getPassword()
+    public String getPassword()
     {
         return password;
     }
 
     @Column( name = "request_date", nullable = false )
     @Temporal( TemporalType.DATE )
-    public final Date getRequestDate()
+    public Date getRequestDate()
     {
         return requestDate;
     }
 
     @Id
     @Column( name = "request_id", length = 32 )
-    public final String getRequestId()
+    public String getRequestId()
     {
         return requestId;
     }
 
     @Column( name = "request_token", nullable = false, length = 64 )
-    public final String getRequestToken()
+    public String getRequestToken()
     {
         return requestToken;
     }
 
     @Column( name = "user_name", nullable = false, length = 64 )
-    public final String getUserName()
+    public String getUserName()
     {
         return userName;
     }
 
-    public final void setDisplayName( String displayName )
+    public void setDisplayName( String displayName )
     {
         this.displayName = displayName;
     }
 
-    public final void setEmailAddress( String emailAddress )
+    public void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
     }
 
-    public final void setPassword( String password )
+    public void setPassword( String password )
     {
         this.password = password;
     }
 
-    public final void setRequestDate( Date requestDate )
+    public void setRequestDate( Date requestDate )
     {
         this.requestDate = requestDate;
     }
 
-    public final void setRequestId( String requestId )
+    public void setRequestId( String requestId )
     {
         this.requestId = requestId;
     }
 
-    public final void setRequestToken( String requestToken )
+    public void setRequestToken( String requestToken )
     {
         this.requestToken = requestToken;
     }
 
-    public final void setUserName( String userName )
+    public void setUserName( String userName )
     {
         this.userName = userName;
     }

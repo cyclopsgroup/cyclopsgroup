@@ -31,8 +31,8 @@ public class HibernateUserSessionDAO
      * @inheritDoc
      */
     @Override
-    public StoredUserSession load( String sessionId )
+    public StoredUserSession findById( String sessionId )
     {
-        return (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
+        return (StoredUserSession) getHibernateTemplate().get( StoredUserSession.class, sessionId );
     }
 }

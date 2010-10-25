@@ -33,41 +33,41 @@ public class StoredUserSession
     private String userAgent;
 
     @Column( name = "accept_language", length = 8 )
-    public final String getAcceptLanguage()
+    public String getAcceptLanguage()
     {
         return acceptLanguage;
     }
 
     @Column( name = "creation_date", nullable = false )
     @Temporal( TemporalType.DATE )
-    public final Date getCreationDate()
+    public Date getCreationDate()
     {
         return creationDate;
     }
 
     @Column( name = "id_address", length = 16 )
-    public final String getIpAddress()
+    public String getIpAddress()
     {
         return ipAddress;
     }
 
     @Column( name = "last_activity", nullable = false )
     @Temporal( TemporalType.TIMESTAMP )
-    public final Date getLastModified()
+    public Date getLastModified()
     {
         return lastModified;
     }
 
     @Column( name = "last_verification" )
     @Temporal( TemporalType.DATE )
-    public final Date getLastVerification()
+    public Date getLastVerification()
     {
         return lastVerification;
     }
 
     @Id
     @Column( name = "session_id", nullable = false, length = 32 )
-    public final String getSessionId()
+    public String getSessionId()
     {
         return sessionId;
 
@@ -75,53 +75,53 @@ public class StoredUserSession
 
     @ManyToOne( optional = true, fetch = FetchType.EAGER )
     @JoinColumn( name = "user_id", nullable = true )
-    public final StoredUser getUser()
+    public StoredUser getUser()
     {
         return user;
     }
 
     @Column( name = "user_agent", length = 32 )
-    public final String getUserAgent()
+    public String getUserAgent()
     {
         return userAgent;
     }
 
-    public final void setAcceptLanguage( String acceptLanguage )
+    public void setAcceptLanguage( String acceptLanguage )
     {
         this.acceptLanguage = acceptLanguage;
     }
 
-    public final void setCreationDate( Date creationDate )
+    public void setCreationDate( Date creationDate )
     {
         this.creationDate = creationDate;
     }
 
-    public final void setIpAddress( String ipAddress )
+    public void setIpAddress( String ipAddress )
     {
         this.ipAddress = ipAddress;
     }
 
-    public final void setLastModified( Date lastModified )
+    public void setLastModified( Date lastModified )
     {
         this.lastModified = lastModified;
     }
 
-    public final void setLastVerification( Date lastVerification )
+    public void setLastVerification( Date lastVerification )
     {
         this.lastVerification = lastVerification;
     }
 
-    public final void setSessionId( String sessionId )
+    public void setSessionId( String sessionId )
     {
         this.sessionId = sessionId;
     }
 
-    public final void setUser( StoredUser user )
+    public void setUser( StoredUser user )
     {
         this.user = user;
     }
 
-    public final void setUserAgent( String userAgent )
+    public void setUserAgent( String userAgent )
     {
         this.userAgent = userAgent;
     }

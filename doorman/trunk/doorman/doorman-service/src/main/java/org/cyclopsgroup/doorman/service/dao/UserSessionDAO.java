@@ -6,5 +6,5 @@ public interface UserSessionDAO
 {
     void createNew( StoredUserSession session );
 
-    StoredUserSession load( String sessionId );
+    StoredUserSession findById( String sessionId );
 }

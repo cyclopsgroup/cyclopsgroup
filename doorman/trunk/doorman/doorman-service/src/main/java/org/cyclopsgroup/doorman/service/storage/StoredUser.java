@@ -31,80 +31,80 @@ public class StoredUser
 
     @Column( name = "last_modified" )
     @Temporal( TemporalType.TIMESTAMP )
-    public final Date getLastModified()
+    public Date getLastModified()
     {
         return lastModified;
     }
 
-    public final void setLastModified( Date lastModified )
+    public void setLastModified( Date lastModified )
     {
         this.lastModified = lastModified;
     }
 
     @Column( name = "display_name", nullable = false, length = 64 )
-    public final String getDisplayName()
+    public String getDisplayName()
     {
         return displayName;
     }
 
     @Column( name = "email_address", nullable = false, length = 256 )
-    public final String getEmailAddress()
+    public String getEmailAddress()
     {
         return emailAddress;
     }
 
     @Column( name = "password", nullable = false, length = 32 )
-    public final String getPassword()
+    public String getPassword()
     {
         return password;
     }
 
     @Id
     @Column( name = "user_id", nullable = false, length = 32 )
-    public final String getUserId()
+    public String getUserId()
     {
         return userId;
     }
 
     @Column( name = "user_name", nullable = false, length = 64 )
-    public final String getUserName()
+    public String getUserName()
     {
         return userName;
     }
 
     @Column( name = "user_state", nullable = false, length = 8 )
     @Enumerated( EnumType.STRING )
-    public final StoredUserState getUserState()
+    public StoredUserState getUserState()
     {
         return userState;
     }
 
-    public final void setDisplayName( String displayName )
+    public void setDisplayName( String displayName )
     {
         this.displayName = displayName;
     }
 
-    public final void setEmailAddress( String emailAddress )
+    public void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
     }
 
-    public final void setPassword( String password )
+    public void setPassword( String password )
     {
         this.password = password;
     }
 
-    public final void setUserId( String userId )
+    public void setUserId( String userId )
     {
         this.userId = userId;
     }
 
-    public final void setUserName( String userName )
+    public void setUserName( String userName )
     {
         this.userName = userName;
     }
 
-    public final void setUserState( StoredUserState userState )
+    public void setUserState( StoredUserState userState )
     {
         this.userState = userState;
     }

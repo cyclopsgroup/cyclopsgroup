@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.doorman.api.SessionService;
@@ -70,10 +71,12 @@ public class SessionInjectionFilter
                     }
                 }
             }
-            LOG.info( "Found cookie " + sessionIdCookie );
+            LOG.info( "Found cookie " + ToStringBuilder.reflectionToString( sessionIdCookie ) );
             if ( sessionIdCookie != null )
             {
                 session = service.getSession( sessionIdCookie.getValue() );
+                LOG.info( "Found existing session from session service: "
+                    + ToStringBuilder.reflectionToString( session ) );
             }
 
             if ( session == null || sessionIdCookie == null )
@@ -84,7 +87,8 @@ public class SessionInjectionFilter
                 attributes.setUserAgent( req.getHeader( "User-Agent" ) );
                 attributes.setIpAddress( req.getRemoteAddr() );
 
-                LOG.info( "Start new session for " + sessionId + " with attributes" + attributes );
+                LOG.info( "Start new session for " + sessionId + " with attributes "
+                    + ToStringBuilder.reflectionToString( attributes ) );
                 session = service.startSession( sessionId, attributes );
                 sessionIdCookie = new Cookie( "sessionId", sessionId );
             }
@@ -105,7 +109,7 @@ public class SessionInjectionFilter
         String name = config.getInitParameter( "sessionServiceName" );
         if ( StringUtils.isBlank( name ) )
         {
-            name = "sessionServiceName";
+            name = SessionService.class.getName();
         }
         LOG.info( "Name of SessionService in context is " + name );
         WebApplicationContext applicationContext =

@@ -23,7 +23,7 @@ public class SessionServiceTest
 
         UserSession session = service.getSession( "111" );
         assertEquals( "111", session.getSessionId() );
-        // assertEquals( "en_US", session.getAttributes().getAcceptLanguage() );
-        // assertEquals( "test", session.getAttributes().getUserAgent() );
+        assertEquals( "en_US", session.getAttributes().getAcceptLanguage() );
+        assertEquals( "test", session.getAttributes().getUserAgent() );
     }
 }

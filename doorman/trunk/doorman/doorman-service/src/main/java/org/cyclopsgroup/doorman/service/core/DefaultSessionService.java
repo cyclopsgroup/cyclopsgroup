@@ -42,7 +42,11 @@ public class DefaultSessionService
     @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserSession getSession( String sessionId )
     {
-        StoredUserSession s = userSessionDao.load( sessionId );
+        StoredUserSession s = userSessionDao.findById( sessionId );
+        if ( s == null )
+        {
+            return null;
+        }
         UserSession session = new UserSession();
         session.setCreationDate( new DateTime( s.getCreationDate(), DateTimeZone.UTC ) );
         session.setLastActivity( new DateTime( s.getLastModified(), DateTimeZone.UTC ) );
