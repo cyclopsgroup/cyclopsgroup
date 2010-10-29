@@ -20,10 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@Service( "org.cyclopsgroup.doorman.api.SessionService" )
+@Service( DefaultSessionService.SERVICE_NAME )
 public class DefaultSessionService
     implements SessionService
 {
+    private static final String SERVICE_NAME = "org.cyclopsgroup.doorman.api.SessionService";
+
     /**
      * @param daoFactory Factory instance that creates necessary DAOs
      */
@@ -39,7 +41,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public UserSession getSession( String sessionId )
     {
         StoredUserSession s = userSessionDao.findById( sessionId );
