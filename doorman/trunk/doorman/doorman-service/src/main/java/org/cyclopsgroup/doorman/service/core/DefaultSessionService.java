@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DefaultSessionService
     implements SessionService
 {
-    private static final String SERVICE_NAME = "org.cyclopsgroup.doorman.api.SessionService";
+    static final String SERVICE_NAME = "org.cyclopsgroup.doorman.api.SessionService";
 
     /**
      * @param daoFactory Factory instance that creates necessary DAOs
