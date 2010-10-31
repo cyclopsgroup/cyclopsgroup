@@ -35,7 +35,9 @@ public class SessionInjectionFilter
 {
     private static final Log LOG = LogFactory.getLog( SessionInjectionFilter.class );
 
-    private static final String USER_SESSION_NAME = UserSession.class.getName();
+    private static final String DEFAULT_SESSION_ATTRIBUTE_NAME = UserSession.class.getName();
+
+    private String sessionAttributeName = DEFAULT_SESSION_ATTRIBUTE_NAME;
 
     private SessionService service;
 
@@ -56,7 +58,7 @@ public class SessionInjectionFilter
     {
         HttpServletRequest req = (HttpServletRequest) request;
 
-        UserSession session = (UserSession) req.getSession().getAttribute( USER_SESSION_NAME );
+        UserSession session = (UserSession) req.getSession().getAttribute( DEFAULT_SESSION_ATTRIBUTE_NAME );
         if ( session == null )
         {
             LOG.info( "Looking for sessionId cookie from request cookies: " + Arrays.toString( req.getCookies() ) );
@@ -92,7 +94,7 @@ public class SessionInjectionFilter
                 session = service.startSession( sessionId, attributes );
                 sessionIdCookie = new Cookie( "sessionId", sessionId );
             }
-            req.getSession().setAttribute( USER_SESSION_NAME, session );
+            req.getSession().setAttribute( sessionAttributeName, session );
             sessionIdCookie.setMaxAge( 24 * 3600 );
             ( (HttpServletResponse) response ).addCookie( sessionIdCookie );
         }
@@ -106,14 +108,21 @@ public class SessionInjectionFilter
     public void init( FilterConfig config )
         throws ServletException
     {
-        String name = config.getInitParameter( "sessionServiceName" );
-        if ( StringUtils.isBlank( name ) )
-        {
-            name = SessionService.class.getName();
-        }
+        String name = getParameter( config, "sessionServiceName", SessionService.class.getName() );
         LOG.info( "Name of SessionService in context is " + name );
         WebApplicationContext applicationContext =
             WebApplicationContextUtils.getRequiredWebApplicationContext( config.getServletContext() );
         service = (SessionService) applicationContext.getBean( name, SessionService.class );
+        sessionAttributeName = getParameter( config, "sessionAttributeName", DEFAULT_SESSION_ATTRIBUTE_NAME );
+    }
+
+    private static String getParameter( FilterConfig config, String paramName, String defaultValue )
+    {
+        String value = config.getInitParameter( paramName );
+        if ( StringUtils.isBlank( value ) )
+        {
+            value = defaultValue;
+        }
+        return value;
     }
 }
