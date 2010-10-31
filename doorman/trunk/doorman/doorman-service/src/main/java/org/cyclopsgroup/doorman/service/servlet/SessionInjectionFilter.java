@@ -58,7 +58,7 @@ public class SessionInjectionFilter
     {
         HttpServletRequest req = (HttpServletRequest) request;
 
-        UserSession session = (UserSession) req.getSession().getAttribute( DEFAULT_SESSION_ATTRIBUTE_NAME );
+        UserSession session = (UserSession) req.getSession().getAttribute( sessionAttributeName );
         if ( session == null )
         {
             LOG.info( "Looking for sessionId cookie from request cookies: " + Arrays.toString( req.getCookies() ) );
@@ -114,6 +114,7 @@ public class SessionInjectionFilter
             WebApplicationContextUtils.getRequiredWebApplicationContext( config.getServletContext() );
         service = (SessionService) applicationContext.getBean( name, SessionService.class );
         sessionAttributeName = getParameter( config, "sessionAttributeName", DEFAULT_SESSION_ATTRIBUTE_NAME );
+        LOG.info( "Attribute name for user session in HttpSession is " + sessionAttributeName );
     }
 
     private static String getParameter( FilterConfig config, String paramName, String defaultValue )
