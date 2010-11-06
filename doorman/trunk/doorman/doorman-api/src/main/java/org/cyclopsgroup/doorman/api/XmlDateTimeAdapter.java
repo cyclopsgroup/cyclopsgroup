@@ -6,6 +6,11 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+/**
+ * Adapter to convert {@link DateTime} back and forth for JAXB
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class XmlDateTimeAdapter
     extends XmlAdapter<String, DateTime>
 {

@@ -3,6 +3,7 @@ package org.cyclopsgroup.doorman.service.core;
 import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
+import org.cyclopsgroup.doorman.api.UserOperationResult;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
@@ -61,19 +62,31 @@ public class DefaultSessionService
         return session;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void signIn( String sessionId, String user, String password )
+    public UserOperationResult signIn( String sessionId, String user, String password )
     {
+        return UserOperationResult.SUCCESSFUL;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void signOut( String sessionId )
+    public UserOperationResult signOut( String sessionId )
     {
+        return UserOperationResult.SUCCESSFUL;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void signUp( String sessionId, User user )
+    public UserOperationResult signUp( String sessionId, User user )
     {
+        return UserOperationResult.SUCCESSFUL;
     }
 
     /**
@@ -106,10 +119,12 @@ public class DefaultSessionService
         return session;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
-    public void confirmSignUp( String sessionId, String token )
+    public UserOperationResult confirmSignUp( String sessionId, String token )
     {
-        // TODO Auto-generated method stub
-
+        return UserOperationResult.SUCCESSFUL;
     }
 }
