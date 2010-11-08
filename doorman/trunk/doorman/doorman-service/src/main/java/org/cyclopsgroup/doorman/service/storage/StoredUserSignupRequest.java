@@ -5,14 +5,24 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
+/**
+ * Table that stored sign up request that has not been finished yet
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 @Entity
-@Table( name = "user_signup_request" )
+@Table( name = "user_signup_request", uniqueConstraints = { @UniqueConstraint( columnNames = { "request_token" } ) } )
+@NamedQuery( name = StoredUserSignupRequest.QUERY_BY_TOKEN, query = "FROM StoredUserSignupRequest WHERE requestToken = :token" )
 public class StoredUserSignupRequest
 {
+    public static final String QUERY_BY_TOKEN = "findUserSignupRequestByToken";
+
     private String displayName;
 
     private String emailAddress;

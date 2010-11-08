@@ -15,6 +15,8 @@ public class User
 {
     private String displayName;
 
+    private String domainName;
+
     private String emailAddress;
 
     private String password;
@@ -30,6 +32,15 @@ public class User
     public final String getDisplayName()
     {
         return displayName;
+    }
+
+    /**
+     * @return Name of domain this user is associated with
+     */
+    @XmlElement
+    public final String getDomainName()
+    {
+        return domainName;
     }
 
     /**
@@ -74,6 +85,11 @@ public class User
     public final void setDisplayName( String displayName )
     {
         this.displayName = displayName;
+    }
+
+    public final void setDomainName( String domainName )
+    {
+        this.domainName = domainName;
     }
 
     /**

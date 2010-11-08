@@ -20,7 +20,7 @@ public enum UserOperationResult
      */
     IDENTITY_EXISTED,
     /**
-     * Expected user doesn't exist
+     * Expected identity doesn't exist
      */
-    NO_SUCH_USER;
+    NO_SUCH_IDENTITY;
 }

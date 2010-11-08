@@ -7,17 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table( name = "dm_user" )
+@Table( name = "dm_user", uniqueConstraints = { @UniqueConstraint( columnNames = { "user_name" } ),
+    @UniqueConstraint( columnNames = { "email_address" } ) } )
+@NamedQuery( name = StoredUser.QUERY_BY_NAME, query = "FROM StoredUser WHERE userName = :userName" )
 public class StoredUser
 {
+    public static final String QUERY_BY_NAME = "findUserByName";
+
     private String displayName;
 
+    private String domainName;
+
     private String emailAddress;
+
+    private Date lastModified;
 
     private String password;
 
@@ -27,30 +37,29 @@ public class StoredUser
 
     private StoredUserState userState;
 
-    private Date lastModified;
-
-    @Column( name = "last_modified" )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getLastModified()
-    {
-        return lastModified;
-    }
-
-    public void setLastModified( Date lastModified )
-    {
-        this.lastModified = lastModified;
-    }
-
     @Column( name = "display_name", nullable = false, length = 64 )
     public String getDisplayName()
     {
         return displayName;
     }
 
+    @Column( name = "domain_name", length = 32 )
+    public final String getDomainName()
+    {
+        return domainName;
+    }
+
     @Column( name = "email_address", nullable = false, length = 256 )
     public String getEmailAddress()
     {
         return emailAddress;
+    }
+
+    @Column( name = "last_modified" )
+    @Temporal( TemporalType.TIMESTAMP )
+    public Date getLastModified()
+    {
+        return lastModified;
     }
 
     @Column( name = "password", nullable = false, length = 32 )
@@ -84,9 +93,19 @@ public class StoredUser
         this.displayName = displayName;
     }
 
+    public final void setDomainName( String domainName )
+    {
+        this.domainName = domainName;
+    }
+
     public void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
+    }
+
+    public void setLastModified( Date lastModified )
+    {
+        this.lastModified = lastModified;
     }
 
     public void setPassword( String password )
