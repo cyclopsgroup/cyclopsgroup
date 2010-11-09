@@ -12,13 +12,14 @@ import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserOperationResult;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
+import org.cyclopsgroup.doorman.api.UserSignUpResponse;
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
+import org.cyclopsgroup.doorman.service.dao.DataOperationException;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
-import org.cyclopsgroup.doorman.service.hibernate.DataOperationException;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
-import org.cyclopsgroup.doorman.service.storage.StoredUserSignupRequest;
+import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,14 +150,14 @@ public class DefaultSessionService
      */
     @Override
     @Transactional( isolation = Isolation.SERIALIZABLE )
-    public UserOperationResult signUp( String sessionId, User user )
+    public UserSignUpResponse signUp( String sessionId, User user )
     {
         StoredUser existingUser = userDao.findByName( user.getUserName() );
         if ( existingUser != null )
         {
-            return UserOperationResult.IDENTITY_EXISTED;
+            return new UserSignUpResponse( UserOperationResult.IDENTITY_EXISTED, null );
         }
-        StoredUserSignupRequest request = new StoredUserSignupRequest();
+        StoredUserSignUpRequest request = new StoredUserSignUpRequest();
         request.setDisplayName( user.getDisplayName() );
         request.setEmailAddress( user.getEmailAddress() );
         request.setPassword( user.getPassword() );
@@ -168,7 +169,7 @@ public class DefaultSessionService
         userDao.saveSignupRequest( request );
 
         LOG.info( "Sign up request " + id + " is saved" );
-        return UserOperationResult.SUCCESSFUL;
+        return new UserSignUpResponse( UserOperationResult.SUCCESSFUL, id );
     }
 
     /**

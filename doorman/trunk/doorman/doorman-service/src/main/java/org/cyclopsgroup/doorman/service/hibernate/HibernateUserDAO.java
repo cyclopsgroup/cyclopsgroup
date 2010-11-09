@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.cyclopsgroup.doorman.api.UserOperationResult;
+import org.cyclopsgroup.doorman.service.dao.DataOperationException;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
-import org.cyclopsgroup.doorman.service.storage.StoredUserSignupRequest;
+import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,16 @@ public class HibernateUserDAO
     @Override
     public StoredUser createUser( String requestToken, String domainName )
     {
-        List<StoredUserSignupRequest> requests =
-            getHibernateTemplate().findByNamedQuery( StoredUserSignupRequest.QUERY_BY_TOKEN,
-                                                     new Object[] { requestToken } );
+        List<StoredUserSignUpRequest> requests =
+            getHibernateTemplate().findByNamedQuery( StoredUserSignUpRequest.QUERY_BY_TOKEN, requestToken );
         if ( requests.isEmpty() )
         {
             throw new DataOperationException( UserOperationResult.NO_SUCH_IDENTITY, "Token " + requestToken
                 + " doesn't exist" );
         }
-        StoredUserSignupRequest request = requests.get( 0 );
+        StoredUserSignUpRequest request = requests.get( 0 );
         List<StoredUser> users =
-            getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME, new Object[] { request.getUserName() } );
+            getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME, request.getUserName() );
         if ( !users.isEmpty() )
         {
             throw new DataOperationException( UserOperationResult.IDENTITY_EXISTED, "User " + request.getUserName()
@@ -84,7 +84,7 @@ public class HibernateUserDAO
      * @inheritDoc
      */
     @Override
-    public void saveSignupRequest( StoredUserSignupRequest request )
+    public void saveSignupRequest( StoredUserSignUpRequest request )
     {
         getHibernateTemplate().save( request );
     }

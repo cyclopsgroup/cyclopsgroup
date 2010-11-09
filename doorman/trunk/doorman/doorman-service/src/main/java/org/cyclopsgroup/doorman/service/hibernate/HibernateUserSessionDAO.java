@@ -3,17 +3,24 @@ package org.cyclopsgroup.doorman.service.hibernate;
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
-import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
 
+/**
+ * Hibernate implementation of user session DAO
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 @Service
 public class HibernateUserSessionDAO
     extends HibernateDaoSupport
     implements UserSessionDAO
 {
+    /**
+     * @param sessionFactory Hibernate session factory
+     */
     @Autowired
     public HibernateUserSessionDAO( SessionFactory sessionFactory )
     {
@@ -45,7 +52,7 @@ public class HibernateUserSessionDAO
     public void updateUser( String sessionId, StoredUser user )
     {
         StoredUserSession session =
-            (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId, LockMode.WRITE );
+            (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
         session.setUser( user );
         getHibernateTemplate().update( session );
     }

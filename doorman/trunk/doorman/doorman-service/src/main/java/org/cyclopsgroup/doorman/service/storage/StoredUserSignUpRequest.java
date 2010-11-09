@@ -18,9 +18,12 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table( name = "user_signup_request", uniqueConstraints = { @UniqueConstraint( columnNames = { "request_token" } ) } )
-@NamedQuery( name = StoredUserSignupRequest.QUERY_BY_TOKEN, query = "FROM StoredUserSignupRequest WHERE requestToken = :token" )
-public class StoredUserSignupRequest
+@NamedQuery( name = StoredUserSignUpRequest.QUERY_BY_TOKEN, query = "FROM StoredUserSignUpRequest WHERE requestToken = ?" )
+public class StoredUserSignUpRequest
 {
+    /**
+     * Name of the query that looks for request based on token
+     */
     public static final String QUERY_BY_TOKEN = "findUserSignupRequestByToken";
 
     private String displayName;
@@ -37,24 +40,36 @@ public class StoredUserSignupRequest
 
     private String userName;
 
+    /**
+     * @return Display name of user
+     */
     @Column( name = "display_name", nullable = false, length = 64 )
     public String getDisplayName()
     {
         return displayName;
     }
 
+    /**
+     * @return Email address of user
+     */
     @Column( name = "email_address", nullable = false, length = 256 )
     public String getEmailAddress()
     {
         return emailAddress;
     }
 
+    /**
+     * @return Password of new user
+     */
     @Column( name = "password", nullable = false, length = 32 )
     public String getPassword()
     {
         return password;
     }
 
+    /**
+     * @return Timestamp of request
+     */
     @Column( name = "request_date", nullable = false )
     @Temporal( TemporalType.DATE )
     public Date getRequestDate()
@@ -62,6 +77,9 @@ public class StoredUserSignupRequest
         return requestDate;
     }
 
+    /**
+     * @return Unique identifier of signup request
+     */
     @Id
     @Column( name = "request_id", length = 32 )
     public String getRequestId()
@@ -69,48 +87,75 @@ public class StoredUserSignupRequest
         return requestId;
     }
 
+    /**
+     * @return A secret token to finish sign up process
+     */
     @Column( name = "request_token", nullable = false, length = 64 )
     public String getRequestToken()
     {
         return requestToken;
     }
 
+    /**
+     * @return Name of user to sign up
+     */
     @Column( name = "user_name", nullable = false, length = 64 )
     public String getUserName()
     {
         return userName;
     }
 
+    /**
+     * @param displayName {@link #getDisplayName()}
+     */
     public void setDisplayName( String displayName )
     {
         this.displayName = displayName;
     }
 
+    /**
+     * @param emailAddress {@link #getEmailAddress()}
+     */
     public void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     * @param password {@link #getPassword()}
+     */
     public void setPassword( String password )
     {
         this.password = password;
     }
 
+    /**
+     * @param requestDate {@link #getRequestDate()}
+     */
     public void setRequestDate( Date requestDate )
     {
         this.requestDate = requestDate;
     }
 
+    /**
+     * @param requestId {@link #getRequestId()}
+     */
     public void setRequestId( String requestId )
     {
         this.requestId = requestId;
     }
 
+    /**
+     * @param requestToken {@link #getRequestToken()}
+     */
     public void setRequestToken( String requestToken )
     {
         this.requestToken = requestToken;
     }
 
+    /**
+     * @param userName {@link #getUserName()}
+     */
     public void setUserName( String userName )
     {
         this.userName = userName;

@@ -70,7 +70,7 @@ public interface SessionService
      */
     @POST
     @Path( "/{sessionId}/signup" )
-    UserOperationResult signUp( String sessionId, User user );
+    UserSignUpResponse signUp( String sessionId, User user );
 
     /**
      * Start a new session with given ID

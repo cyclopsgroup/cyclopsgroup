@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table( name = "dm_user", uniqueConstraints = { @UniqueConstraint( columnNames = { "user_name" } ),
     @UniqueConstraint( columnNames = { "email_address" } ) } )
-@NamedQuery( name = StoredUser.QUERY_BY_NAME, query = "FROM StoredUser WHERE userName = :userName" )
+@NamedQuery( name = StoredUser.QUERY_BY_NAME, query = "FROM StoredUser WHERE userName = ?" )
 public class StoredUser
 {
     /**

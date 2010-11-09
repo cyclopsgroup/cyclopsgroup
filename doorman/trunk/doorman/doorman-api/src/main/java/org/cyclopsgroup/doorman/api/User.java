@@ -87,6 +87,9 @@ public class User
         this.displayName = displayName;
     }
 
+    /**
+     * @param domainName {@link #getDomainName()}
+     */
     public final void setDomainName( String domainName )
     {
         this.domainName = domainName;
