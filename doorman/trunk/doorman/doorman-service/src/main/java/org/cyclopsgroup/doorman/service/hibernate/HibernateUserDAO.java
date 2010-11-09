@@ -13,11 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
 
+/**
+ * Hibernate based implementation of user DAO
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 @Service
 public class HibernateUserDAO
     extends HibernateDaoSupport
     implements UserDAO
 {
+    /**
+     * @param sessionFactory Hibernate session factory
+     */
     @Autowired
     public HibernateUserDAO( SessionFactory sessionFactory )
     {

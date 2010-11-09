@@ -7,16 +7,20 @@ import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class SessionServiceTest
 {
-
     private SessionService service;
 
+    /**
+     * Prepare the testing service implementation
+     */
     @Before
     public void setUpService()
     {
@@ -24,10 +28,12 @@ public class SessionServiceTest
         service = (SessionService) context.getBean( SessionService.class.getName() );
     }
 
+    /**
+     * Start a session and get it
+     */
     @Test
     public void testStartAndGet()
     {
-
         UserSessionAttributes attributes = new UserSessionAttributes();
         attributes.setAcceptLanguage( "en_US" );
         attributes.setUserAgent( "test" );
@@ -39,8 +45,10 @@ public class SessionServiceTest
         assertEquals( "test", session.getAttributes().getUserAgent() );
     }
 
+    /**
+     * Verify sign up process
+     */
     @Test
-    @Ignore
     public void testSignup()
     {
         User user = new User();
