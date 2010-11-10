@@ -10,13 +10,15 @@ import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
+@ContextConfiguration( locations = { "classpath:unit-test-context.xml" } )
 public class SessionServiceTest
+    extends AbstractJUnit4SpringContextTests
 {
     private SessionService service;
 
@@ -26,8 +28,7 @@ public class SessionServiceTest
     @Before
     public void setUpService()
     {
-        ApplicationContext context = new ClassPathXmlApplicationContext( "unit-test-context.xml" );
-        service = (SessionService) context.getBean( SessionService.class.getName() );
+        service = (SessionService) applicationContext.getBean( SessionService.class.getName() );
     }
 
     private static UserSessionAttributes newAttributes()
@@ -56,7 +57,7 @@ public class SessionServiceTest
      * Verify sign up process
      */
     @Test
-    public void testSignup()
+    public void testSignUp()
     {
         service.startSession( "test-session", newAttributes() );
 

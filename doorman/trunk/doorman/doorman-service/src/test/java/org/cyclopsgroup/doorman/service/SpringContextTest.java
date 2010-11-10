@@ -2,18 +2,25 @@ package org.cyclopsgroup.doorman.service;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.cyclopsgroup.doorman.api.SessionService;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+/**
+ * A dummy test that verifies configuration xml file
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
+@ContextConfiguration( locations = { "classpath:unit-test-context.xml" } )
 public class SpringContextTest
+    extends AbstractJUnit4SpringContextTests
 {
+    /**
+     * A dummy test that verifies context is created successfully
+     */
     @Test
     public void testContext()
     {
-        ApplicationContext context = new ClassPathXmlApplicationContext( "unit-test-context.xml" );
-        SessionService service = (SessionService) context.getBean( SessionService.class.getName() );
-        assertNotNull( service );
+        assertNotNull( applicationContext );
     }
 }
