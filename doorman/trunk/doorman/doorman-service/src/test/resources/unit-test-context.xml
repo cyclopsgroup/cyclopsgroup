@@ -5,6 +5,8 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <alias name="org.cyclopsgroup.doorman.HSQLSessionFactory"
         alias="org.cyclopsgroup.doorman.SessionFactory" />
+    <alias name="org.cyclopsgroup.doorman.TransactionManager"
+        alias="transactionManager" />
     <import
         resource="classpath:org/cyclopsgroup/doorman/hibernate-core-service.xml" />
 </beans>

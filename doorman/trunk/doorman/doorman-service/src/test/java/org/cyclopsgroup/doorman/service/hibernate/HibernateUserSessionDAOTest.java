@@ -12,11 +12,11 @@ import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 @ContextConfiguration( locations = { "classpath:unit-test-context.xml" } )
 public class HibernateUserSessionDAOTest
-    extends AbstractJUnit4SpringContextTests
+    extends AbstractTransactionalJUnit4SpringContextTests
 {
     private HibernateUserSessionDAO dao;
 
@@ -26,6 +26,7 @@ public class HibernateUserSessionDAOTest
         SessionFactory sf = (SessionFactory) applicationContext.getBean( "org.cyclopsgroup.doorman.SessionFactory" );
         dao = new HibernateUserSessionDAO( sf );
         dao.getHibernateTemplate().setAllowCreate( true );
+
     }
 
     @Test
@@ -40,16 +41,20 @@ public class HibernateUserSessionDAOTest
         session.setSessionId( UUID.randomUUID().toString() );
         session.setUserAgent( "ua" );
         dao.getHibernateTemplate().save( session );
+        dao.getHibernateTemplate().flush();
 
         StoredUser user = new StoredUser();
         user.setDisplayName( "haha" );
         user.setEmailAddress( "x@cyclopsgroup.org" );
         user.setLastModified( new Date() );
         user.setPassword( "pass" );
-        user.setUserId( UUID.randomUUID().toString() );
-        user.setUserName( "x@cyclopsgroup.org" );
+
+        String id = UUID.randomUUID().toString();
+        user.setUserId( id );
+        user.setUserName( id + "@cyclopsgroup.org" );
         user.setUserState( StoredUserState.ACTIVE );
         dao.getHibernateTemplate().save( user );
+        dao.getHibernateTemplate().flush();
 
         assertNull( session.getUser() );
 

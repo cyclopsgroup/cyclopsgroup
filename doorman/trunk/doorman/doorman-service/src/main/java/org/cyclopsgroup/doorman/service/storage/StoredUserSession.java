@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -73,8 +72,8 @@ public class StoredUserSession
 
     }
 
-    @ManyToOne( optional = true, fetch = FetchType.EAGER )
-    @JoinColumn( name = "user_id", nullable = true )
+    @ManyToOne( optional = true )
+    @JoinColumn( name = "user_id" )
     public StoredUser getUser()
     {
         return user;

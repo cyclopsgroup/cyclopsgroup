@@ -43,21 +43,21 @@ public class HibernateUserDAOTest
     @Test
     public void testCreateUser()
     {
+        String id = UUID.randomUUID().toString();
         StoredUserSignUpRequest request = new StoredUserSignUpRequest();
         request.setDisplayName( "haha" );
-        request.setEmailAddress( "y@cyclopsgroup.org" );
+        request.setEmailAddress( id + "@cyclopsgroup.org" );
         request.setPassword( "pass" );
-        request.setUserName( "y@cyclopsgroup.org" );
+        request.setUserName( id + "@cyclopsgroup.org" );
         request.setRequestDate( new Date() );
 
-        String token = UUID.randomUUID().toString();
-        request.setRequestId( token );
-        request.setRequestToken( token );
+        request.setRequestId( id );
+        request.setRequestToken( id );
 
         dao.getHibernateTemplate().save( request );
-        dao.createUser( token, null );
+        dao.createUser( id, null );
 
-        StoredUser user = dao.findByName( "y@cyclopsgroup.org" );
+        StoredUser user = dao.findByName( id + "@cyclopsgroup.org" );
         assertNotNull( user );
         assertEquals( "pass", user.getPassword() );
     }
@@ -68,22 +68,24 @@ public class HibernateUserDAOTest
     @Test
     public void testFindByName()
     {
-        StoredUser user = dao.findByName( "x@cyclopsgroup.org" );
+        String id = UUID.randomUUID().toString();
+
+        StoredUser user = dao.findByName( id + "@cyclopsgroup.org" );
         assertNull( user );
 
         user = new StoredUser();
         user.setDisplayName( "haha" );
-        user.setEmailAddress( "x@cyclopsgroup.org" );
+        user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setLastModified( new Date() );
         user.setPassword( "pass" );
         user.setUserId( UUID.randomUUID().toString() );
-        user.setUserName( "x@cyclopsgroup.org" );
+        user.setUserName( id + "@cyclopsgroup.org" );
         user.setUserState( StoredUserState.ACTIVE );
 
         dao.getHibernateTemplate().save( user );
         dao.getHibernateTemplate().flush();
 
-        user = dao.findByName( "x@cyclopsgroup.org" );
+        user = dao.findByName( id + "@cyclopsgroup.org" );
         assertNotNull( user );
         assertEquals( "pass", user.getPassword() );
     }

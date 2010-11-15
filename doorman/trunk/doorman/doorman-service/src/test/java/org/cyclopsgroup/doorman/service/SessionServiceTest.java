@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.UUID;
+
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserSession;
@@ -45,10 +47,11 @@ public class SessionServiceTest
     @Test
     public void testStartAndGet()
     {
-        service.startSession( "111", newAttributes() );
+        String id = UUID.randomUUID().toString();
+        service.startSession( id, newAttributes() );
 
-        UserSession session = service.getSession( "111" );
-        assertEquals( "111", session.getSessionId() );
+        UserSession session = service.getSession( id );
+        assertEquals( id, session.getSessionId() );
         assertEquals( "en_US", session.getAttributes().getAcceptLanguage() );
         assertEquals( "test", session.getAttributes().getUserAgent() );
     }
@@ -59,20 +62,21 @@ public class SessionServiceTest
     @Test
     public void testSignUp()
     {
-        service.startSession( "test-session", newAttributes() );
+        String id = UUID.randomUUID().toString();
+        service.startSession( id, newAttributes() );
 
         User user = new User();
         user.setDisplayName( "Jiaqi" );
-        user.setEmailAddress( "jiaqi@amazon.com" );
+        user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setPassword( "password" );
-        user.setUserName( "jiaqi@amazon.com" );
-        String token = service.signUp( "test-session", user ).getToken();
+        user.setUserName( id + "@cyclopsgroup.org" );
+        String token = service.signUp( id, user ).getToken();
 
-        UserSession s = service.getSession( "test-session" );
+        UserSession s = service.getSession( id );
         assertNull( s.getUser() );
 
-        service.confirmSignUp( "test-session", token );
-        s = service.getSession( "test-session" );
+        service.confirmSignUp( id, token );
+        s = service.getSession( id );
         user = s.getUser();
         assertNotNull( user );
         assertEquals( "Jiaqi", user.getDisplayName() );
