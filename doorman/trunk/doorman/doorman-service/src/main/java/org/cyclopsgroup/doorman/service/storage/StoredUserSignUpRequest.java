@@ -81,7 +81,7 @@ public class StoredUserSignUpRequest
      * @return Unique identifier of signup request
      */
     @Id
-    @Column( name = "request_id", length = 32 )
+    @Column( name = "request_id", length = 64 )
     public String getRequestId()
     {
         return requestId;
