@@ -37,7 +37,11 @@ public class SessionInjectionFilter
 
     private static final String DEFAULT_SESSION_ATTRIBUTE_NAME = UserSession.class.getName();
 
+    private static final String DEFAULT_SESSION_ID_COOKIE_NAME = "stickySessionId";
+
     private String sessionAttributeName = DEFAULT_SESSION_ATTRIBUTE_NAME;
+
+    private String sessionIdCookieName = DEFAULT_SESSION_ID_COOKIE_NAME;
 
     private SessionService service;
 
@@ -67,7 +71,7 @@ public class SessionInjectionFilter
             {
                 for ( Cookie c : req.getCookies() )
                 {
-                    if ( c.getName().equals( "sessionId" ) )
+                    if ( c.getName().equals( sessionIdCookieName ) )
                     {
                         sessionIdCookie = c;
                     }
@@ -92,7 +96,7 @@ public class SessionInjectionFilter
                 LOG.info( "Start new session for " + sessionId + " with attributes "
                     + ToStringBuilder.reflectionToString( attributes ) );
                 session = service.startSession( sessionId, attributes );
-                sessionIdCookie = new Cookie( "sessionId", sessionId );
+                sessionIdCookie = new Cookie( sessionIdCookieName, sessionId );
             }
             req.getSession().setAttribute( sessionAttributeName, session );
             sessionIdCookie.setMaxAge( 24 * 3600 );
@@ -114,7 +118,9 @@ public class SessionInjectionFilter
             WebApplicationContextUtils.getRequiredWebApplicationContext( config.getServletContext() );
         service = (SessionService) applicationContext.getBean( name, SessionService.class );
         sessionAttributeName = getParameter( config, "sessionAttributeName", DEFAULT_SESSION_ATTRIBUTE_NAME );
-        LOG.info( "Attribute name for user session in HttpSession is " + sessionAttributeName );
+        sessionIdCookieName = getParameter( config, "sessionIdCookieName", DEFAULT_SESSION_ID_COOKIE_NAME );
+        LOG.info( "Attribute name for user session in HttpSession is " + sessionAttributeName
+            + ", cookie name for sticky session Id is " + sessionIdCookieName );
     }
 
     private static String getParameter( FilterConfig config, String paramName, String defaultValue )
