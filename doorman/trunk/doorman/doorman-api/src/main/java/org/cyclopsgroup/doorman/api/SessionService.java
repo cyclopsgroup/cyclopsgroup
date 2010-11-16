@@ -24,8 +24,8 @@ public interface SessionService
      * @return Opeation result
      */
     @POST
-    @Path( "/{sessionId}/confirm" )
-    UserOperationResult confirmSignUp( String sessionId, String token );
+    @Path( "/{sessionId}/confirm/{token}" )
+    UserOperationResult confirmSignUp( @PathParam( "sessionId" ) String sessionId, @PathParam( "token" ) String token );
 
     /**
      * Get details of current session
@@ -47,8 +47,8 @@ public interface SessionService
      * @return Operation result
      */
     @POST
-    @Path( "/{sessionId}/signin" )
-    UserOperationResult signIn( @PathParam( "sessionId" ) String sessionId, @FormParam( "user" ) String user,
+    @Path( "/{sessionId}/user/{user}" )
+    UserOperationResult signIn( @PathParam( "sessionId" ) String sessionId, @PathParam( "user" ) String user,
                                 @FormParam( "password" ) String password );
 
     /**
@@ -58,7 +58,7 @@ public interface SessionService
      * @return Operation result
      */
     @POST
-    @Path( "/{sessionId}/signout" )
+    @Path( "/{sessionId}/user/signout" )
     UserOperationResult signOut( @PathParam( "sessionId" ) String sessionId );
 
     /**
@@ -69,7 +69,7 @@ public interface SessionService
      * @return Sign up operation result
      */
     @POST
-    @Path( "/{sessionId}/signup" )
+    @Path( "/{sessionId}/user/signup" )
     UserSignUpResponse signUp( String sessionId, User user );
 
     /**
