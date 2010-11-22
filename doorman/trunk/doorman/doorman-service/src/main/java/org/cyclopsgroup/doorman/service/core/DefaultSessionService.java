@@ -20,6 +20,7 @@ import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
+import org.cyclopsgroup.doorman.service.storage.StoredUserState;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,7 +151,7 @@ public class DefaultSessionService
      */
     @Override
     @Transactional( isolation = Isolation.SERIALIZABLE )
-    public UserSignUpResponse signUp( String sessionId, User user )
+    public UserSignUpResponse requestSignUp( String sessionId, User user )
     {
         StoredUser existingUser = userDao.findByName( user.getUserName() );
         if ( existingUser != null )
@@ -200,5 +201,33 @@ public class DefaultSessionService
         session.setCreationDate( now );
         session.setLastActivity( now );
         return session;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    @Transactional( isolation = Isolation.SERIALIZABLE )
+    public UserOperationResult signUp( String sessionId, User user )
+    {
+        Date now = new Date();
+        StoredUser existing = userDao.findByName( user.getUserName() );
+        if ( existing != null )
+        {
+            return UserOperationResult.IDENTITY_EXISTED;
+        }
+
+        String uid = UUID.randomUUID().toString();
+        StoredUser u = new StoredUser();
+        u.setDisplayName( user.getDisplayName() );
+        u.setEmailAddress( user.getEmailAddress() );
+        u.setLastModified( now );
+        u.setPassword( user.getPassword() );
+        u.setUserId( uid );
+        u.setUserName( user.getUserName() );
+        u.setUserState( StoredUserState.ACTIVE );
+        userDao.createUser( u );
+        userSessionDao.updateUser( sessionId, u );
+        return UserOperationResult.SUCCESSFUL;
     }
 }

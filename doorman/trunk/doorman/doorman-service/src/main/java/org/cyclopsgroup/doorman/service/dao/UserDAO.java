@@ -22,6 +22,14 @@ public interface UserDAO
         throws DataOperationException;
 
     /**
+     * Create new user object directly
+     *
+     * @param user User object to create
+     * @return Created user
+     */
+    void createUser( StoredUser user );
+
+    /**
      * Find user with given user name
      *
      * @param userName Given user name

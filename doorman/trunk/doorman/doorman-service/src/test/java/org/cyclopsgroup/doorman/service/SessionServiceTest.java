@@ -60,6 +60,32 @@ public class SessionServiceTest
      * Verify sign up process
      */
     @Test
+    public void testRequestSignUpAndConfirm()
+    {
+        String id = UUID.randomUUID().toString();
+        service.startSession( id, newAttributes() );
+
+        User user = new User();
+        user.setDisplayName( "Jiaqi" );
+        user.setEmailAddress( id + "@cyclopsgroup.org" );
+        user.setPassword( "password" );
+        user.setUserName( id + "@cyclopsgroup.org" );
+        String token = service.requestSignUp( id, user ).getToken();
+
+        UserSession s = service.getSession( id );
+        assertNull( s.getUser() );
+
+        service.confirmSignUp( id, token );
+        s = service.getSession( id );
+        user = s.getUser();
+        assertNotNull( user );
+        assertEquals( "Jiaqi", user.getDisplayName() );
+    }
+
+    /**
+     * Verify user sign up process
+     */
+    @Test
     public void testSignUp()
     {
         String id = UUID.randomUUID().toString();
@@ -70,15 +96,10 @@ public class SessionServiceTest
         user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setPassword( "password" );
         user.setUserName( id + "@cyclopsgroup.org" );
-        String token = service.signUp( id, user ).getToken();
+
+        service.signUp( id, user );
 
         UserSession s = service.getSession( id );
-        assertNull( s.getUser() );
-
-        service.confirmSignUp( id, token );
-        s = service.getSession( id );
-        user = s.getUser();
-        assertNotNull( user );
-        assertEquals( "Jiaqi", user.getDisplayName() );
+        assertEquals( id + "@cyclopsgroup.org", s.getUser().getUserName() );
     }
 }

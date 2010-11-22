@@ -36,6 +36,15 @@ public class HibernateUserDAO
     /**
      * @inheritDoc
      */
+    @Override
+    public void createUser( StoredUser user )
+    {
+        getHibernateTemplate().save( user );
+    }
+
+    /**
+     * @inheritDoc
+     */
     @SuppressWarnings( "unchecked" )
     @Override
     public StoredUser createUser( String requestToken, String domainName )

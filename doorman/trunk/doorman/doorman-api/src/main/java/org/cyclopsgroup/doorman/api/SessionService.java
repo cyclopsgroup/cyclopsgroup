@@ -62,15 +62,27 @@ public interface SessionService
     UserOperationResult signOut( @PathParam( "sessionId" ) String sessionId );
 
     /**
-     * Sign up a new user
+     * Create request for new user sign up. Request needs to be confirmed, {@link #confirmSignUp(String, String)},
+     * before user is created
      *
      * @param sessionId Current session ID
      * @param user User details
      * @return Sign up operation result
      */
     @POST
+    @Path( "/{sessionId}/user/request" )
+    UserSignUpResponse requestSignUp( @PathParam( "sessionId" ) String sessionId, User user );
+
+    /**
+     * Sign up new user directly with request/confirm process
+     *
+     * @param sessionId Current user session Id
+     * @param user User request to sign up
+     * @return Operation result
+     */
+    @POST
     @Path( "/{sessionId}/user/signup" )
-    UserSignUpResponse signUp( String sessionId, User user );
+    UserOperationResult signUp( @PathParam( "sessionId" ) String sessionId, User user );
 
     /**
      * Start a new session with given ID

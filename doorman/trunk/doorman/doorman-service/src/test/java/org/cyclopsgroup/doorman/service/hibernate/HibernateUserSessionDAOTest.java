@@ -14,12 +14,20 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+/**
+ * Test cases for {@link hibernateUserSessionDAO}
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 @ContextConfiguration( locations = { "classpath:unit-test-context.xml" } )
 public class HibernateUserSessionDAOTest
     extends AbstractTransactionalJUnit4SpringContextTests
 {
     private HibernateUserSessionDAO dao;
 
+    /**
+     * Prepare testing DAO
+     */
     @Before
     public void setUpDao()
     {
@@ -29,6 +37,9 @@ public class HibernateUserSessionDAOTest
 
     }
 
+    /**
+     * Test update session
+     */
     @Test
     public void testUpdateSession()
     {
