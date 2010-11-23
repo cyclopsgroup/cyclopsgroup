@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 @Entity
-@Table( name = "dm_user_session" )
+@Table( name = "dm_session" )
 public class StoredUserSession
 {
     private String acceptLanguage;

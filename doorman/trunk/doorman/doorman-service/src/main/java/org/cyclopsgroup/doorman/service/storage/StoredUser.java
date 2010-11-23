@@ -66,7 +66,7 @@ public class StoredUser
     /**
      * @return Email address of the user
      */
-    @Column( name = "email_address", nullable = false, length = 256 )
+    @Column( name = "email_address", nullable = false, length = 64 )
     public String getEmailAddress()
     {
         return emailAddress;

@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 @Entity
-@Table( name = "user_signup_request", uniqueConstraints = { @UniqueConstraint( columnNames = { "request_token" } ) } )
+@Table( name = "dm_signup_request", uniqueConstraints = { @UniqueConstraint( columnNames = { "request_token" } ) } )
 @NamedQuery( name = StoredUserSignUpRequest.QUERY_BY_TOKEN, query = "FROM StoredUserSignUpRequest WHERE requestToken = ?" )
 public class StoredUserSignUpRequest
 {
