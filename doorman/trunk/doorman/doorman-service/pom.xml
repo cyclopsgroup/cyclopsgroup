@@ -147,6 +147,26 @@
                     </systemProperties>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>hibernate3-maven-plugin</artifactId>
+                <configuration>
+                    <componentProperties>
+                        <configurationfile>src/main/config/hibernate-build-cfg.xml</configurationfile>
+                        <scan-classes>false</scan-classes>
+                        <packagename>org.cyclopsgroup.doorman.service.storage</packagename>
+                        <scan-classes>true</scan-classes>
+                        <outputfilename>schema-ddl.sql</outputfilename>
+                    </componentProperties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.9</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 </project>
