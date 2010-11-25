@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!--
+        MYSQL configuration for running instance
+    -->
+    <bean id="org.cyclopsgroup.doorman.SessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="packagesToScan"
+            value="org.cyclopsgroup.doorman.service.storage" />
+        <property name="dataSource"
+            ref="org.cyclopsgroup.doorman.MySQLDataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="org.cyclopsgroup.doorman.MySQLDataSource"
+        destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/meydenbauer" />
+        <property name="username" value="dev" />
+        <property name="password" value="dev" />
+    </bean>
+</beans>

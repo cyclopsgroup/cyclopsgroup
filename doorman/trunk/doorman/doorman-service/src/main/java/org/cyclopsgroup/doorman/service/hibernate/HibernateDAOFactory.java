@@ -1,12 +1,10 @@
 package org.cyclopsgroup.doorman.service.hibernate;
 
-import javax.annotation.Resource;
-
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class HibernateDAOFactory
     implements DAOFactory
 {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     /**
      * @inheritDoc
@@ -41,9 +39,8 @@ public class HibernateDAOFactory
     /**
      * @param sessionFactory Hibernate session factory
      */
-    @Required
-    @Resource( name = "org.cyclopsgroup.doorman.SessionFactory" )
-    public void setSessionFactory( SessionFactory sessionFactory )
+    @Autowired
+    public HibernateDAOFactory( SessionFactory sessionFactory )
     {
         this.sessionFactory = sessionFactory;
     }
