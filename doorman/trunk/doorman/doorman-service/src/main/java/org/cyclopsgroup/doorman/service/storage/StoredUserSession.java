@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table( name = "dm_session" )
+@org.hibernate.annotations.Entity( dynamicUpdate = true )
 public class StoredUserSession
 {
     private String acceptLanguage;
@@ -40,7 +41,7 @@ public class StoredUserSession
     /**
      * @return Accept language from browser
      */
-    @Column( name = "accept_language", length = 8 )
+    @Column( name = "accept_language", length = 16 )
     public String getAcceptLanguage()
     {
         return acceptLanguage;
@@ -109,7 +110,7 @@ public class StoredUserSession
     /**
      * @return {@link #getUserAgent()}
      */
-    @Column( name = "user_agent", length = 32 )
+    @Column( name = "user_agent", length = 128 )
     public String getUserAgent()
     {
         return userAgent;

@@ -22,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 @Table( name = "dm_user", uniqueConstraints = { @UniqueConstraint( columnNames = { "user_name" } ),
     @UniqueConstraint( columnNames = { "email_address" } ) } )
 @NamedQuery( name = StoredUser.QUERY_BY_NAME, query = "FROM StoredUser WHERE userName = ?" )
+@org.hibernate.annotations.Entity( dynamicUpdate = true )
 public class StoredUser
 {
     /**

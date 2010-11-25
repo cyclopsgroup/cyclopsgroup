@@ -26,6 +26,21 @@ public class UserSession
     private User user;
 
     /**
+     * Pass all values to another object
+     *
+     * @param other Another user session object
+     */
+    public void copyTo( UserSession other )
+    {
+        other.setAttributes( attributes );
+        other.setCreationDate( creationDate );
+        other.setLastActivity( lastActivity );
+        other.setLastVerification( lastVerification );
+        other.setSessionId( sessionId );
+        other.setUser( user );
+    }
+
+    /**
      * @return Attributes attached to session
      */
     @XmlElement
