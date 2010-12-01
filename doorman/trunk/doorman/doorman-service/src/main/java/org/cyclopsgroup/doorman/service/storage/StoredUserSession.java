@@ -110,7 +110,7 @@ public class StoredUserSession
     /**
      * @return {@link #getUserAgent()}
      */
-    @Column( name = "user_agent", length = 128 )
+    @Column( name = "user_agent", length = 256 )
     public String getUserAgent()
     {
         return userAgent;
