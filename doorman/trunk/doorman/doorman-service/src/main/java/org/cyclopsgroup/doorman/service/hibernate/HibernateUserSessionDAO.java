@@ -1,9 +1,13 @@
 package org.cyclopsgroup.doorman.service.hibernate;
 
+import java.util.Date;
+
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -29,6 +33,7 @@ class HibernateUserSessionDAO
     @Override
     public void createNew( StoredUserSession session )
     {
+        session.setCreationDate( new DateTime().withZone( DateTimeZone.UTC ).toDate() );
         getHibernateTemplate().save( session );
     }
 
@@ -50,6 +55,12 @@ class HibernateUserSessionDAO
         StoredUserSession session =
             (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
         session.setUser( user );
+        Date now = new DateTime().withZone( DateTimeZone.UTC ).toDate();
+        session.setLastModified( now );
+        if ( user != null )
+        {
+            session.setLastVerification( now );
+        }
         getHibernateTemplate().update( session );
     }
 }

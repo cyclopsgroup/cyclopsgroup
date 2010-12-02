@@ -9,7 +9,10 @@ import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
+import org.cyclopsgroup.doorman.service.storage.StoredUserType;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -35,6 +38,10 @@ class HibernateUserDAO
     @Override
     public void createUser( StoredUser user )
     {
+        Date now = new DateTime().withZone( DateTimeZone.UTC ).toDate();
+        user.setLastModified( now );
+        user.setCreationDate( now );
+        user.setUserType( StoredUserType.LOCAL );
         getHibernateTemplate().save( user );
     }
 
@@ -43,7 +50,7 @@ class HibernateUserDAO
      */
     @SuppressWarnings( "unchecked" )
     @Override
-    public StoredUser createUser( String requestToken, String domainName )
+    public StoredUser createUser( String requestToken )
     {
         List<StoredUserSignUpRequest> requests =
             getHibernateTemplate().findByNamedQuery( StoredUserSignUpRequest.QUERY_BY_TOKEN, requestToken );
@@ -62,13 +69,15 @@ class HibernateUserDAO
         }
         StoredUser user = new StoredUser();
         user.setDisplayName( request.getDisplayName() );
-        user.setDomainName( domainName );
+        user.setDomainName( request.getDomainName() );
         user.setEmailAddress( request.getEmailAddress() );
         user.setLastModified( new Date() );
         user.setPassword( request.getPassword() );
         user.setUserId( request.getRequestId() );
         user.setUserName( request.getUserName() );
         user.setUserState( StoredUserState.ACTIVE );
+        user.setUserType( StoredUserType.LOCAL );
+        user.setCreationDate( new DateTime().withZone( DateTimeZone.UTC ).toDate() );
         getHibernateTemplate().save( user );
         getHibernateTemplate().deleteAll( requests );
         return user;
@@ -91,6 +100,7 @@ class HibernateUserDAO
     @Override
     public void saveSignupRequest( StoredUserSignUpRequest request )
     {
+        request.setRequestDate( new DateTime().withZone( DateTimeZone.UTC ).toDate() );
         getHibernateTemplate().save( request );
     }
 }

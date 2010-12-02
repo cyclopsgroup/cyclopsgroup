@@ -1,6 +1,5 @@
 package org.cyclopsgroup.doorman.service.core;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
@@ -65,7 +64,7 @@ public class DefaultSessionService
         StoredUser user;
         try
         {
-            user = userDao.createUser( token, null );
+            user = userDao.createUser( token );
         }
         catch ( DataOperationException e )
         {
@@ -162,11 +161,11 @@ public class DefaultSessionService
         request.setDisplayName( user.getDisplayName() );
         request.setEmailAddress( user.getEmailAddress() );
         request.setPassword( user.getPassword() );
-        request.setRequestDate( new Date() );
         String id = UUID.randomUUID().toString();
         request.setRequestId( id );
         request.setRequestToken( id );
         request.setUserName( user.getUserName() );
+        request.setDomainName( "cyclopsgroup.org" );
         userDao.saveSignupRequest( request );
 
         LOG.info( "Sign up request " + id + " is saved" );
@@ -210,7 +209,6 @@ public class DefaultSessionService
     @Transactional( isolation = Isolation.SERIALIZABLE )
     public UserOperationResult signUp( String sessionId, User user )
     {
-        Date now = new Date();
         StoredUser existing = userDao.findByName( user.getUserName() );
         if ( existing != null )
         {
@@ -221,7 +219,7 @@ public class DefaultSessionService
         StoredUser u = new StoredUser();
         u.setDisplayName( user.getDisplayName() );
         u.setEmailAddress( user.getEmailAddress() );
-        u.setLastModified( now );
+        u.setDomainName( user.getDomainName() );
         u.setPassword( user.getPassword() );
         u.setUserId( uid );
         u.setUserName( user.getUserName() );

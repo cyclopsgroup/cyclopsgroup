@@ -30,6 +30,8 @@ public class StoredUser
      */
     public static final String QUERY_BY_NAME = "findUserByName";
 
+    private Date creationDate;
+
     private String displayName;
 
     private String domainName;
@@ -46,6 +48,18 @@ public class StoredUser
 
     private StoredUserState userState;
 
+    private StoredUserType userType;
+
+    /**
+     * @return Creation date
+     */
+    @Column( name = "creation_date", nullable = false )
+    @Temporal( TemporalType.TIMESTAMP )
+    public final Date getCreationDate()
+    {
+        return creationDate;
+    }
+
     /**
      * @return Display name of user
      */
@@ -58,7 +72,7 @@ public class StoredUser
     /**
      * @return Domain name which indicates where the user was registered in the very beginning
      */
-    @Column( name = "domain_name", length = 32 )
+    @Column( name = "domain_name", length = 32, nullable = false )
     public String getDomainName()
     {
         return domainName;
@@ -119,6 +133,24 @@ public class StoredUser
     public StoredUserState getUserState()
     {
         return userState;
+    }
+
+    /**
+     * @return Type of user
+     */
+    @Column( name = "user_type", nullable = false, length = 8 )
+    @Enumerated( EnumType.STRING )
+    public final StoredUserType getUserType()
+    {
+        return userType;
+    }
+
+    /**
+     * @param creationDate {@link #getCreationDate()}
+     */
+    public final void setCreationDate( Date creationDate )
+    {
+        this.creationDate = creationDate;
     }
 
     /**
@@ -183,5 +215,13 @@ public class StoredUser
     public void setUserState( StoredUserState userState )
     {
         this.userState = userState;
+    }
+
+    /**
+     * @param userType {@link #getUserType()}
+     */
+    public final void setUserType( StoredUserType userType )
+    {
+        this.userType = userType;
     }
 }

@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
+import org.cyclopsgroup.doorman.service.storage.StoredUserType;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,12 +51,12 @@ public class HibernateUserDAOTest
         request.setPassword( "pass" );
         request.setUserName( id + "@cyclopsgroup.org" );
         request.setRequestDate( new Date() );
-
+        request.setDomainName( "cyclopsgroup.org" );
         request.setRequestId( id );
         request.setRequestToken( id );
 
         dao.getHibernateTemplate().save( request );
-        dao.createUser( id, null );
+        dao.createUser( id );
 
         StoredUser user = dao.findByName( id + "@cyclopsgroup.org" );
         assertNotNull( user );
@@ -81,7 +82,9 @@ public class HibernateUserDAOTest
         user.setUserId( UUID.randomUUID().toString() );
         user.setUserName( id + "@cyclopsgroup.org" );
         user.setUserState( StoredUserState.ACTIVE );
-
+        user.setDomainName( "cyclopsgroup.org" );
+        user.setCreationDate( new Date() );
+        user.setUserType( StoredUserType.LOCAL );
         dao.getHibernateTemplate().save( user );
         dao.getHibernateTemplate().flush();
 

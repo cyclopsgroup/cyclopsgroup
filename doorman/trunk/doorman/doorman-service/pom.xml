@@ -150,7 +150,7 @@
                 <artifactId>hibernate3-maven-plugin</artifactId>
                 <configuration>
                     <componentProperties>
-                        <configurationfile>src/main/config/hibernate-build-cfg.xml</configurationfile>
+                        <configurationfile>${user.home}/local-db-hibernate-cfg.xml</configurationfile>
                         <scan-classes>false</scan-classes>
                         <packagename>org.cyclopsgroup.doorman.service.storage</packagename>
                         <scan-classes>true</scan-classes>

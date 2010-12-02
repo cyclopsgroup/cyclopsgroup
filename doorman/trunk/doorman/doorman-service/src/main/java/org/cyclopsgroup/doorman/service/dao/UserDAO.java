@@ -14,11 +14,10 @@ public interface UserDAO
      * Finish signup and create user with given token
      *
      * @param requestToken Secret token to finish signup process
-     * @param domainName A domain name that indicates the origin of user
      * @return User model that is created
      * @throws DataOperationException When common exception happens and specific result is expected to return
      */
-    StoredUser createUser( String requestToken, String domainName )
+    StoredUser createUser( String requestToken )
         throws DataOperationException;
 
     /**

@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
+import org.cyclopsgroup.doorman.service.storage.StoredUserType;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +65,9 @@ public class HibernateUserSessionDAOTest
         user.setUserId( id );
         user.setUserName( id + "@cyclopsgroup.org" );
         user.setUserState( StoredUserState.ACTIVE );
+        user.setCreationDate( new Date() );
+        user.setDomainName( "cyclopsgroup.org" );
+        user.setUserType( StoredUserType.LOCAL );
         dao.getHibernateTemplate().save( user );
         dao.getHibernateTemplate().flush();
 

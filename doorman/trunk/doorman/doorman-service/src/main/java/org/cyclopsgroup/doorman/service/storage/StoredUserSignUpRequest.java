@@ -28,6 +28,8 @@ public class StoredUserSignUpRequest
 
     private String displayName;
 
+    private String domainName;
+
     private String emailAddress;
 
     private String password;
@@ -47,6 +49,15 @@ public class StoredUserSignUpRequest
     public String getDisplayName()
     {
         return displayName;
+    }
+
+    /**
+     * @return Domain name which indicates where the user was registered in the very beginning
+     */
+    @Column( name = "domain_name", length = 32, nullable = false )
+    public final String getDomainName()
+    {
+        return domainName;
     }
 
     /**
@@ -71,7 +82,7 @@ public class StoredUserSignUpRequest
      * @return Timestamp of request
      */
     @Column( name = "request_date", nullable = false )
-    @Temporal( TemporalType.DATE )
+    @Temporal( TemporalType.TIMESTAMP )
     public Date getRequestDate()
     {
         return requestDate;
@@ -111,6 +122,14 @@ public class StoredUserSignUpRequest
     public void setDisplayName( String displayName )
     {
         this.displayName = displayName;
+    }
+
+    /**
+     * @param domainName {@link #getDomainName()}
+     */
+    public final void setDomainName( String domainName )
+    {
+        this.domainName = domainName;
     }
 
     /**

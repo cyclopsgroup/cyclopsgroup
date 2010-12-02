@@ -51,7 +51,7 @@ public class StoredUserSession
      * @return Creation date of session
      */
     @Column( name = "creation_date", nullable = false )
-    @Temporal( TemporalType.DATE )
+    @Temporal( TemporalType.TIMESTAMP )
     public Date getCreationDate()
     {
         return creationDate;
@@ -69,7 +69,7 @@ public class StoredUserSession
     /**
      * @return Last modified time of session
      */
-    @Column( name = "last_activity", nullable = false )
+    @Column( name = "last_modified", nullable = false )
     @Temporal( TemporalType.TIMESTAMP )
     public Date getLastModified()
     {
@@ -80,7 +80,7 @@ public class StoredUserSession
      * @return Time stamp of last authenticatino
      */
     @Column( name = "last_verification" )
-    @Temporal( TemporalType.DATE )
+    @Temporal( TemporalType.TIMESTAMP )
     public Date getLastVerification()
     {
         return lastVerification;

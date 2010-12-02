@@ -70,6 +70,7 @@ public class SessionServiceTest
         user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setPassword( "password" );
         user.setUserName( id + "@cyclopsgroup.org" );
+        user.setDomainName( "cyclopsgroup.org" );
         String token = service.requestSignUp( id, user ).getToken();
 
         UserSession s = service.getSession( id );
@@ -96,6 +97,7 @@ public class SessionServiceTest
         user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setPassword( "password" );
         user.setUserName( id + "@cyclopsgroup.org" );
+        user.setDomainName( "cyclopsgroup.org" );
 
         service.signUp( id, user );
 
