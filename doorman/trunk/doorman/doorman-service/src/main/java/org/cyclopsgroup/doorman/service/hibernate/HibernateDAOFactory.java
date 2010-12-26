@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@Service
+@Service( "doormanHibernateDAOFactory" )
 public class HibernateDAOFactory
     implements DAOFactory
 {
