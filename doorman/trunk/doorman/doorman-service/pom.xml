@@ -154,7 +154,7 @@
                         <scan-classes>false</scan-classes>
                         <packagename>org.cyclopsgroup.doorman.service.storage</packagename>
                         <scan-classes>true</scan-classes>
-                        <outputfilename>schema-ddl.sql</outputfilename>
+                        <outputfilename>doorman-schema-ddl.sql</outputfilename>
                     </componentProperties>
                 </configuration>
                 <dependencies>
