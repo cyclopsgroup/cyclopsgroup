@@ -18,11 +18,12 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyclopsgroup.doorman.api.SessionService;
+import org.cyclopsgroup.doorman.api.UnauthenticatedError;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.util.NestedServletException;
 
 /**
  * A filter that figures out user session based on local cookie, create session if it doesn't exist, and store session
@@ -33,17 +34,21 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class SessionInjectionFilter
     implements Filter
 {
+    private static final String DEFAULT_CONTEXT_BEAN = "sessionInjectionFilterContext";
+
     private static final Log LOG = LogFactory.getLog( SessionInjectionFilter.class );
 
-    private static final String DEFAULT_SESSION_ATTRIBUTE_NAME = UserSession.class.getName();
+    private static String getParameter( FilterConfig config, String paramName, String defaultValue )
+    {
+        String value = config.getInitParameter( paramName );
+        if ( StringUtils.isBlank( value ) )
+        {
+            value = defaultValue;
+        }
+        return value;
+    }
 
-    private static final String DEFAULT_SESSION_ID_COOKIE_NAME = "stickySessionId";
-
-    private String sessionAttributeName = DEFAULT_SESSION_ATTRIBUTE_NAME;
-
-    private String sessionIdCookieName = DEFAULT_SESSION_ID_COOKIE_NAME;
-
-    private SessionService service;
+    private SessionInjectionFilterContext context;
 
     /**
      * @inheritDoc
@@ -61,8 +66,7 @@ public class SessionInjectionFilter
         throws IOException, ServletException
     {
         HttpServletRequest req = (HttpServletRequest) request;
-
-        UserSession session = (UserSession) req.getSession().getAttribute( sessionAttributeName );
+        UserSession session = (UserSession) req.getSession().getAttribute( context.getSessionAttribute() );
         if ( session == null )
         {
             LOG.info( "Looking for sessionId cookie from request cookies: " + Arrays.toString( req.getCookies() ) );
@@ -71,7 +75,7 @@ public class SessionInjectionFilter
             {
                 for ( Cookie c : req.getCookies() )
                 {
-                    if ( c.getName().equals( sessionIdCookieName ) )
+                    if ( c.getName().equals( context.getSessionIdCookie() ) )
                     {
                         sessionIdCookie = c;
                     }
@@ -80,7 +84,7 @@ public class SessionInjectionFilter
             LOG.info( "Found cookie " + ToStringBuilder.reflectionToString( sessionIdCookie ) );
             if ( sessionIdCookie != null )
             {
-                session = service.getSession( sessionIdCookie.getValue() );
+                session = context.getSessionService().getSession( sessionIdCookie.getValue() );
                 LOG.info( "Found existing session from session service: "
                     + ToStringBuilder.reflectionToString( session ) );
             }
@@ -95,41 +99,65 @@ public class SessionInjectionFilter
 
                 LOG.info( "Start new session for " + sessionId + " with attributes "
                     + ToStringBuilder.reflectionToString( attributes ) );
-                session = service.startSession( sessionId, attributes );
-                sessionIdCookie = new Cookie( sessionIdCookieName, sessionId );
+                session = context.getSessionService().startSession( sessionId, attributes );
+                sessionIdCookie = new Cookie( context.getSessionIdCookie(), sessionId );
             }
-            req.getSession().setAttribute( sessionAttributeName, session );
+            req.getSession().setAttribute( context.getSessionAttribute(), session );
             sessionIdCookie.setMaxAge( 24 * 3600 );
             ( (HttpServletResponse) response ).addCookie( sessionIdCookie );
         }
-        chain.doFilter( request, response );
+        try
+        {
+            chain.doFilter( request, response );
+        }
+        catch ( UnauthenticatedError e )
+        {
+            redirectToSignInUrl( req, (HttpServletResponse) response );
+        }
+        catch ( NestedServletException e )
+        {
+            if ( e.getCause() instanceof UnauthenticatedError )
+            {
+                redirectToSignInUrl( req, (HttpServletResponse) response );
+            }
+            else
+            {
+                throw e;
+            }
+        }
     }
 
     /**
      * @inheritDoc
      */
     @Override
-    public void init( FilterConfig config )
+    public void init( FilterConfig filterConfig )
         throws ServletException
     {
-        String name = getParameter( config, "sessionServiceName", SessionService.class.getName() );
-        LOG.info( "Name of SessionService in context is " + name );
+        String name = getParameter( filterConfig, "contextBean", DEFAULT_CONTEXT_BEAN );
+        LOG.info( "Name of filter context bean in context is " + name );
         WebApplicationContext applicationContext =
-            WebApplicationContextUtils.getRequiredWebApplicationContext( config.getServletContext() );
-        service = (SessionService) applicationContext.getBean( name, SessionService.class );
-        sessionAttributeName = getParameter( config, "sessionAttributeName", DEFAULT_SESSION_ATTRIBUTE_NAME );
-        sessionIdCookieName = getParameter( config, "sessionIdCookieName", DEFAULT_SESSION_ID_COOKIE_NAME );
-        LOG.info( "Attribute name for user session in HttpSession is " + sessionAttributeName
-            + ", cookie name for sticky session Id is " + sessionIdCookieName );
+            WebApplicationContextUtils.getRequiredWebApplicationContext( filterConfig.getServletContext() );
+        context =
+            (SessionInjectionFilterContext) applicationContext.getBean( name, SessionInjectionFilterContext.class );
     }
 
-    private static String getParameter( FilterConfig config, String paramName, String defaultValue )
+    private void redirectToSignInUrl( HttpServletRequest req, HttpServletResponse resp )
+        throws IOException
     {
-        String value = config.getInitParameter( paramName );
-        if ( StringUtils.isBlank( value ) )
+        StringBuffer url = req.getRequestURL();
+        if ( StringUtils.isNotBlank( req.getQueryString() ) )
         {
-            value = defaultValue;
+            url.append( "?" + req.getQueryString() );
         }
-        return value;
+
+        String signInUrl = context.getSignInUrl();
+        if ( signInUrl.indexOf( "{contextPath}" ) != -1 )
+        {
+            signInUrl = StringUtils.replace( signInUrl, "{contextPath}", req.getContextPath() );
+        }
+
+        LOG.info( "Request to " + url + " failed since user isn't authenticated yet. Redirect to " + signInUrl );
+        resp.sendRedirect( signInUrl + "?redirectTo=" + resp.encodeRedirectURL( url.toString() ) );
     }
 }

@@ -77,6 +77,21 @@ public class UserSession
     }
 
     /**
+     * @return User POJO, which is never NULL. If user isn't authenticated yet, a {@link UnauthenticatedError} is thrown
+     * @throws UnauthenticatedError When user is not authenticated
+     */
+    public User getRequiredUser()
+        throws UnauthenticatedError
+    {
+        User u = user;
+        if ( u == null )
+        {
+            throw new UnauthenticatedError();
+        }
+        return u;
+    }
+
+    /**
      * @return Id of this session
      */
     @XmlElement

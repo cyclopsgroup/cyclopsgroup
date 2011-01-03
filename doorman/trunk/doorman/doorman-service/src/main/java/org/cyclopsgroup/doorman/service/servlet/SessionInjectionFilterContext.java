@@ -1,5 +1,6 @@
 package org.cyclopsgroup.doorman.service.servlet;
 
+import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.UserSession;
 
 /**
@@ -8,7 +9,7 @@ import org.cyclopsgroup.doorman.api.UserSession;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  * @see {@link SessionInjectionFilter}
  */
-public class SessionInjectionFilterConfig
+public class SessionInjectionFilterContext
 {
     private static final String DEFAULT_SESSION_ATTRIBUTE = UserSession.class.getName();
 
@@ -18,12 +19,24 @@ public class SessionInjectionFilterConfig
 
     private String sessionIdCookie = DEFAULT_SESSION_ID_COOKIE;
 
-    private String signInUrl;
+    private final SessionService sessionService;
+
+    private final String signInUrl;
+
+    /**
+     * @param sessionService Session service interface
+     * @param signInUrl URL to redirect to to sign in
+     */
+    public SessionInjectionFilterContext( SessionService sessionService, String signInUrl )
+    {
+        this.sessionService = sessionService;
+        this.signInUrl = signInUrl;
+    }
 
     /**
      * @return Name of session attribute that stores user session
      */
-    public final String getSessionAttribute()
+    final String getSessionAttribute()
     {
         return sessionAttribute;
     }
@@ -31,15 +44,20 @@ public class SessionInjectionFilterConfig
     /**
      * @return Name of cookie that stores session ID
      */
-    public final String getSessionIdCookie()
+    final String getSessionIdCookie()
     {
         return sessionIdCookie;
+    }
+
+    final SessionService getSessionService()
+    {
+        return sessionService;
     }
 
     /**
      * @return When destination requires user identity, page is redirected to this URL to let user sign in
      */
-    public final String getSignInUrl()
+    final String getSignInUrl()
     {
         return signInUrl;
     }
@@ -59,13 +77,4 @@ public class SessionInjectionFilterConfig
     {
         this.sessionIdCookie = sessionIdCookie;
     }
-
-    /**
-     * @param signInUrl {@link #getSignInUrl()}
-     */
-    public final void setSignInUrl( String signInUrl )
-    {
-        this.signInUrl = signInUrl;
-    }
-
 }
