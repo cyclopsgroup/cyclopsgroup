@@ -150,14 +150,11 @@ public class SessionInjectionFilter
         {
             url.append( "?" + req.getQueryString() );
         }
-
         String signInUrl = context.getSignInUrl();
         if ( signInUrl.indexOf( "{contextPath}" ) != -1 )
         {
             signInUrl = StringUtils.replace( signInUrl, "{contextPath}", req.getContextPath() );
         }
-
-        LOG.info( "Request to " + url + " failed since user isn't authenticated yet. Redirect to " + signInUrl );
         resp.sendRedirect( signInUrl + "?redirectTo=" + resp.encodeRedirectURL( url.toString() ) );
     }
 }
