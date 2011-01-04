@@ -8,6 +8,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Test of {@link QuotedValueTokenizer}
+ *
+ * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
+ */
 public class QuotedValueTokenizerTest
 {
     private void escapeAndVerify( String expression, String expected )
@@ -28,18 +33,27 @@ public class QuotedValueTokenizerTest
         assertEquals( expectedResult, result );
     }
 
+    /**
+     * Test without escaping
+     */
     @Test
     public void testEscapeUnnecessarily()
     {
         escapeAndVerify( "abc", "abc" );
     }
 
+    /**
+     * Test with delimiter escaped
+     */
     @Test
     public void testEscapeWithDelimiterOnly()
     {
         escapeAndVerify( "ab c", "\"ab c\"" );
     }
 
+    /**
+     * Test with quotation escaped
+     */
     @Test
     public void testEscapeWithQuotation()
     {

@@ -29,29 +29,41 @@ public class EscapedStringTokenizerTest
         assertEquals( expectedResult, result );
     }
 
+    /**
+     * Test with simple characters without escaping
+     */
     @Test
     public void testParseWithoutEscaping()
     {
         parseAndVerify( "a b  c d   ", Arrays.asList( "a", "b", "c", "d" ) );
     }
 
+    /**
+     * Test with back slash escaping
+     */
     @Test
     public void testParseWithEscaping()
     {
         parseAndVerify( " a b\\ c \\\\e ", Arrays.asList( "a", "b c", "\\e" ) );
     }
 
-    public void escapeAndVerify( String expression, String expected )
+    private void escapeAndVerify( String expression, String expected )
     {
         assertEquals( expected, new EscapingValueTokenizer().escape( expression ) );
     }
 
+    /**
+     * Test without actually escaping
+     */
     @Test
     public void testEscapeUnnecessarily()
     {
         escapeAndVerify( "abc", "abc" );
     }
 
+    /**
+     * Test escaping
+     */
     @Test
     public void testEscapeNormally()
     {
