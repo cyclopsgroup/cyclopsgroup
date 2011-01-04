@@ -32,13 +32,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@Service( DefaultSessionService.SERVICE_NAME )
+@Service
 public class DefaultSessionService
     implements SessionService
 {
     private static final Log LOG = LogFactory.getLog( DefaultSessionService.class );
-
-    static final String SERVICE_NAME = "org.cyclopsgroup.doorman.api.SessionService";
 
     private final UserDAO userDao;
 

@@ -30,7 +30,7 @@ public class SessionServiceTest
     @Before
     public void setUpService()
     {
-        service = (SessionService) applicationContext.getBean( SessionService.class.getName() );
+        service = (SessionService) applicationContext.getBeansOfType( SessionService.class ).values().iterator().next();
     }
 
     private static UserSessionAttributes newAttributes()

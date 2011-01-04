@@ -3,11 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-    <alias name="org.cyclopsgroup.doorman.TransactionManager"
-        alias="transactionManager" />
-    <alias name="org.cyclopsgroup.doorman.HSQLDataSource" alias="dataSource" />
     <import
         resource="classpath:org/cyclopsgroup/doorman/hsql-hibernate-support.xml" />
     <import
         resource="classpath:org/cyclopsgroup/doorman/hibernate-core-service.xml" />
+    <alias name="org.cyclopsgroup.doorman.TransactionManager"
+        alias="transactionManager" />
 </beans>

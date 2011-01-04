@@ -34,7 +34,8 @@ public class HibernateUserDAOTest
     @Before
     public void setUpDao()
     {
-        SessionFactory sf = (SessionFactory) applicationContext.getBean( "org.cyclopsgroup.doorman.SessionFactory" );
+        SessionFactory sf =
+            (SessionFactory) applicationContext.getBeansOfType( SessionFactory.class ).values().iterator().next();
         dao = new HibernateUserDAO( sf );
     }
 
