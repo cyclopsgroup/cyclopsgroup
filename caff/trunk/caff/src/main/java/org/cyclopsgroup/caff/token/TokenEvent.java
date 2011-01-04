@@ -23,7 +23,7 @@ public final class TokenEvent
      * @param token Value of token
      * @param start Zero based start position
      * @param end Zero based last character position
-     * @parma terminated True if token is terminated explicitly
+     * @param terminated True if token is terminated explicitly
      */
     TokenEvent( String token, int start, int end, boolean terminated )
     {
@@ -36,7 +36,7 @@ public final class TokenEvent
      * @param token Value of token
      * @param start Zero based start position
      * @param end Zero based last character position
-     * @parma terminated True if token is terminated explicitly
+     * @param terminated True if token is terminated explicitly
      * @param quoted True if word is quoted
      */
     TokenEvent( String token, int start, int end, boolean terminated, boolean quoted )
