@@ -47,7 +47,7 @@ public interface SessionService
      * @return Operation result
      */
     @POST
-    @Path( "/{sessionId}/user/{user}" )
+    @Path( "/{sessionId}/user/signin" )
     UserOperationResult signIn( @PathParam( "sessionId" ) String sessionId, @PathParam( "user" ) String user,
                                 @FormParam( "password" ) String password );
 

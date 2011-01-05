@@ -42,6 +42,8 @@ public class StoredUser
 
     private String password;
 
+    private String timeZoneId;
+
     private String userId;
 
     private String userName;
@@ -104,6 +106,15 @@ public class StoredUser
     public String getPassword()
     {
         return password;
+    }
+
+    /**
+     * @return Time zone user lives in
+     */
+    @Column( name = "time_zone_id", length = 32 )
+    public String getTimeZoneId()
+    {
+        return timeZoneId;
     }
 
     /**
@@ -191,6 +202,14 @@ public class StoredUser
     public void setPassword( String password )
     {
         this.password = password;
+    }
+
+    /**
+     * @param timeZoneId Time zone user lives in
+     */
+    public void setTimeZoneId( String timeZoneId )
+    {
+        this.timeZoneId = timeZoneId;
     }
 
     /**

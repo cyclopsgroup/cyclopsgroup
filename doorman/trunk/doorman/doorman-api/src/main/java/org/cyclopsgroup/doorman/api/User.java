@@ -21,6 +21,8 @@ public class User
 
     private String password;
 
+    private String timeZoneId;
+
     private String userId;
 
     private String userName;
@@ -59,6 +61,15 @@ public class User
     public final String getPassword()
     {
         return password;
+    }
+
+    /**
+     * @return ID of the time zone user lives in
+     */
+    @XmlElement
+    public final String getTimeZoneId()
+    {
+        return timeZoneId;
     }
 
     /**
@@ -109,6 +120,14 @@ public class User
     public final void setPassword( String password )
     {
         this.password = password;
+    }
+
+    /**
+     * @param timeZoneId Id of the time zone user lives in
+     */
+    public final void setTimeZoneId( String timeZoneId )
+    {
+        this.timeZoneId = timeZoneId;
     }
 
     /**
