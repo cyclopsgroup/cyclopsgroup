@@ -121,7 +121,7 @@ public class StoredUser
      * @return Internal user identifier of user
      */
     @Id
-    @Column( name = "user_id", nullable = false, length = 64 )
+    @Column( name = "user_id", nullable = false, length = 32 )
     public String getUserId()
     {
         return userId;

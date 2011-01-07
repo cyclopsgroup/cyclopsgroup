@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.UUID;
 
+import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserSession;
@@ -47,7 +48,7 @@ public class SessionServiceTest
     @Test
     public void testStartAndGet()
     {
-        String id = UUID.randomUUID().toString();
+        String id = UUIDUtils.randomStringId();
         service.startSession( id, newAttributes() );
 
         UserSession session = service.getSession( id );

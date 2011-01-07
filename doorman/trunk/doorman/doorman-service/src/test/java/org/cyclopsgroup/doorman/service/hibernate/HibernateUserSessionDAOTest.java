@@ -3,8 +3,8 @@ package org.cyclopsgroup.doorman.service.hibernate;
 import static org.junit.Assert.assertNull;
 
 import java.util.Date;
-import java.util.UUID;
 
+import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
@@ -50,7 +50,7 @@ public class HibernateUserSessionDAOTest
         session.setIpAddress( "127.0.0.1" );
         session.setLastModified( new Date() );
         session.setLastVerification( new Date() );
-        session.setSessionId( UUID.randomUUID().toString() );
+        session.setSessionId( UUIDUtils.randomStringId() );
         session.setUserAgent( "ua" );
         dao.getHibernateTemplate().save( session );
         dao.getHibernateTemplate().flush();
@@ -61,7 +61,7 @@ public class HibernateUserSessionDAOTest
         user.setLastModified( new Date() );
         user.setPassword( "pass" );
 
-        String id = UUID.randomUUID().toString();
+        String id = UUIDUtils.randomStringId();
         user.setUserId( id );
         user.setUserName( id + "@cyclopsgroup.org" );
         user.setUserState( StoredUserState.ACTIVE );

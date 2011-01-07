@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import java.util.Date;
 import java.util.UUID;
 
+import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
@@ -45,7 +46,7 @@ public class HibernateUserDAOTest
     @Test
     public void testCreateUser()
     {
-        String id = UUID.randomUUID().toString();
+        String id = UUIDUtils.randomStringId();
         StoredUserSignUpRequest request = new StoredUserSignUpRequest();
         request.setDisplayName( "haha" );
         request.setEmailAddress( id + "@cyclopsgroup.org" );

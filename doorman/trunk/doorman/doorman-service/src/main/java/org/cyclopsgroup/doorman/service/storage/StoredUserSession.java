@@ -90,7 +90,7 @@ public class StoredUserSession
      * @return Primary key of session
      */
     @Id
-    @Column( name = "session_id", nullable = false, length = 64 )
+    @Column( name = "session_id", nullable = false, length = 32 )
     public String getSessionId()
     {
         return sessionId;

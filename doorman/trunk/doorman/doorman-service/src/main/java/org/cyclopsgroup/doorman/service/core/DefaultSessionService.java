@@ -1,11 +1,10 @@
 package org.cyclopsgroup.doorman.service.core;
 
-import java.util.UUID;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserOperationResult;
@@ -159,7 +158,7 @@ public class DefaultSessionService
         request.setDisplayName( user.getDisplayName() );
         request.setEmailAddress( user.getEmailAddress() );
         request.setPassword( user.getPassword() );
-        String id = UUID.randomUUID().toString();
+        String id = UUIDUtils.randomStringId();
         request.setRequestId( id );
         request.setRequestToken( id );
         request.setUserName( user.getUserName() );
@@ -213,7 +212,7 @@ public class DefaultSessionService
             return UserOperationResult.IDENTITY_EXISTED;
         }
 
-        String uid = UUID.randomUUID().toString();
+        String uid = UUIDUtils.randomStringId();
         StoredUser u = new StoredUser();
         u.setDisplayName( user.getDisplayName() );
         u.setEmailAddress( user.getEmailAddress() );

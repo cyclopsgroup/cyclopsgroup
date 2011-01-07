@@ -2,7 +2,6 @@ package org.cyclopsgroup.doorman.service.servlet;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.UUID;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,6 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.UnauthenticatedError;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
@@ -91,7 +91,7 @@ public class SessionInjectionFilter
 
             if ( session == null || sessionIdCookie == null )
             {
-                String sessionId = UUID.randomUUID().toString();
+                String sessionId = UUIDUtils.randomStringId();
                 UserSessionAttributes attributes = new UserSessionAttributes();
                 attributes.setAcceptLanguage( req.getHeader( "Accept-Language" ) );
                 attributes.setUserAgent( req.getHeader( "User-Agent" ) );
