@@ -1,7 +1,5 @@
 package org.cyclopsgroup.caff.util;
 
-import org.apache.commons.lang.Validate;
-
 /**
  * Utilities around byte
  *
@@ -19,11 +17,17 @@ public final class ByteUtils
      * @param value Value to write, it can be any long value
      * @param dest Destination byte array value is written to
      * @param offset The starting point of where the value is written
+     * @throws IllegalArgumentException When input byte array doesn't have enough space to write a long
      */
     public static void writeLong( long value, byte[] dest, int offset )
+        throws IllegalArgumentException
     {
-        Validate.isTrue( dest.length >= offset + 8,
-                         "Destination byte array does not have enough space to write long from offset " + offset );
+        if ( dest.length < offset + 8 )
+        {
+            throw new IllegalArgumentException(
+                                                "Destination byte array does not have enough space to write long from offset "
+                                                    + offset );
+        }
         long t = value;
         for ( int i = offset; i < offset + 8; i++ )
         {
@@ -38,10 +42,15 @@ public final class ByteUtils
      * @param src Source byte array value is read from
      * @param offset The starting point where value is read from
      * @return The long value
+     * @throws IllegalArgumentException When the length of input byte array conflicts offset
      */
     public static long readLong( byte[] src, int offset )
+        throws IllegalArgumentException
     {
-        Validate.isTrue( src.length > offset, "There's nothing to read in src from offset " + offset );
+        if ( src.length < offset )
+        {
+            throw new IllegalArgumentException( "There's nothing to read in src from offset " + offset );
+        }
 
         long r = 0;
         for ( int i = offset, j = 0; i < src.length && j < 64; i++, j += 8 )
