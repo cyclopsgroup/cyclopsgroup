@@ -4,6 +4,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserOperationResult;
 import org.cyclopsgroup.doorman.api.UserService;
@@ -12,6 +13,8 @@ import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Server side implementation of user service
@@ -37,25 +40,27 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public UserOperationResult authenticate( String userName, String secureCredential )
     {
         StoredUser u = userDao.findByName( userName );
         if ( u == null )
         {
-            throw new WebApplicationException( Response.status( Status.NOT_FOUND ).entity(
-                                                                                           "User " + userName
-                                                                                               + " not found" ).build() );
+            return UserOperationResult.NO_SUCH_IDENTITY;
         }
         String password = u.getPassword();
-
-
-        return UserOperationResult.SUCCESSFUL;
+        if ( StringUtils.equals( password, secureCredential ) )
+        {
+            return UserOperationResult.SUCCESSFUL;
+        }
+        return UserOperationResult.AUTHENTICATION_FAILURE;
     }
 
     /**
      * @inheritDoc
      */
     @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public User getUser( String userName )
     {
         StoredUser u = userDao.findByName( userName );
@@ -74,4 +79,18 @@ public class DefaultUserService
         return user;
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    public UserOperationResult ping( String userName )
+    {
+        StoredUser u = userDao.findByName( userName );
+        if ( u == null )
+        {
+            return UserOperationResult.NO_SUCH_IDENTITY;
+        }
+        return UserOperationResult.SUCCESSFUL;
+    }
 }

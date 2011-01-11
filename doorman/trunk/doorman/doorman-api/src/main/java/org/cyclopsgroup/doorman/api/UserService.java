@@ -34,4 +34,14 @@ public interface UserService
     @POST
     @Path( "/{userName}/authenticate" )
     UserOperationResult authenticate( String userName, String secureCredential );
+
+    /**
+     * A light weight operation to check the status of user
+     *
+     * @param userName Name of user to check
+     * @return Ping result
+     */
+    @GET
+    @Path( "/{userName}/ping" )
+    UserOperationResult ping( @PathParam( "userName" ) String userName );
 }
