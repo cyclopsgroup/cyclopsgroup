@@ -103,4 +103,13 @@ class HibernateUserDAO
         request.setRequestDate( new DateTime().withZone( DateTimeZone.UTC ).toDate() );
         getHibernateTemplate().save( request );
     }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void saveUser( StoredUser user )
+    {
+        getHibernateTemplate().update( user );
+    }
 }

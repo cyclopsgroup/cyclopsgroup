@@ -11,6 +11,8 @@ import org.cyclopsgroup.doorman.api.UserService;
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -92,5 +94,25 @@ public class DefaultUserService
             return UserOperationResult.NO_SUCH_IDENTITY;
         }
         return UserOperationResult.SUCCESSFUL;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void update( String userName, User user )
+    {
+        StoredUser u = userDao.findByName( userName );
+        if ( u == null )
+        {
+            throw new WebApplicationException( Response.status( Status.NOT_FOUND ).entity(
+                                                                                           "User " + userName
+                                                                                               + " not found" ).build() );
+        }
+        u.setDisplayName( user.getDisplayName() );
+        u.setEmailAddress( user.getEmailAddress() );
+        u.setLastModified( new DateTime().toDateTime( DateTimeZone.UTC ).toDate() );
+        u.setTimeZoneId( user.getTimeZoneId() );
+        userDao.saveUser( u );
     }
 }

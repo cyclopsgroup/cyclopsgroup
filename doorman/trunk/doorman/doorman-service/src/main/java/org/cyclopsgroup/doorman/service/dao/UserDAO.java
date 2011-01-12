@@ -44,4 +44,9 @@ public interface UserDAO
      */
     void saveSignupRequest( StoredUserSignUpRequest request )
         throws DataOperationException;
+
+    /**
+     * @param user User to update
+     */
+    void saveUser( StoredUser user );
 }

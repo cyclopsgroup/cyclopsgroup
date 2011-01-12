@@ -2,6 +2,7 @@ package org.cyclopsgroup.doorman.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -13,16 +14,6 @@ import javax.ws.rs.PathParam;
 @Path( "user" )
 public interface UserService
 {
-    /**
-     * Get user based on ID
-     *
-     * @param userName Login name of user to get
-     * @return User object. When User is not found, 404 should be returned
-     */
-    @GET
-    @Path( "/{userName}" )
-    User getUser( @PathParam( "userName" ) String userName );
-
     /**
      * Authenticate user with given credential. The meaning of credential is a protocol between caller and service,
      * which this interface doesn't know.
@@ -36,6 +27,16 @@ public interface UserService
     UserOperationResult authenticate( String userName, String secureCredential );
 
     /**
+     * Get user based on ID
+     *
+     * @param userName Login name of user to get
+     * @return User object. When User is not found, 404 should be returned
+     */
+    @GET
+    @Path( "/{userName}" )
+    User getUser( @PathParam( "userName" ) String userName );
+
+    /**
      * A light weight operation to check the status of user
      *
      * @param userName Name of user to check
@@ -44,4 +45,14 @@ public interface UserService
     @GET
     @Path( "/{userName}/ping" )
     UserOperationResult ping( @PathParam( "userName" ) String userName );
+
+    /**
+     * Update user information
+     *
+     * @param userName Name of user to update
+     * @param user User object with new information
+     */
+    @PUT
+    @Path( "/{userName}" )
+    void update( @PathParam( "userName" ) String userName, User user );
 }
