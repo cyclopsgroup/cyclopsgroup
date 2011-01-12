@@ -118,7 +118,7 @@ public class DefaultSessionService
     @Transactional( isolation = Isolation.SERIALIZABLE )
     public UserOperationResult signIn( String sessionId, String userName, String password )
     {
-        StoredUser u = userDao.findByName( userName );
+        StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
             return UserOperationResult.NO_SUCH_IDENTITY;
@@ -149,7 +149,7 @@ public class DefaultSessionService
     @Transactional( isolation = Isolation.SERIALIZABLE )
     public UserSignUpResponse requestSignUp( String sessionId, User user )
     {
-        StoredUser existingUser = userDao.findByName( user.getUserName() );
+        StoredUser existingUser = userDao.findByNameOrId( user.getUserName() );
         if ( existingUser != null )
         {
             return new UserSignUpResponse( UserOperationResult.IDENTITY_EXISTED, null );
@@ -206,7 +206,7 @@ public class DefaultSessionService
     @Transactional( isolation = Isolation.SERIALIZABLE )
     public UserOperationResult signUp( String sessionId, User user )
     {
-        StoredUser existing = userDao.findByName( user.getUserName() );
+        StoredUser existing = userDao.findByNameOrId( user.getUserName() );
         if ( existing != null )
         {
             return UserOperationResult.IDENTITY_EXISTED;

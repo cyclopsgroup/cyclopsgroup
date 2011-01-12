@@ -21,14 +21,14 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table( name = "dm_user", uniqueConstraints = { @UniqueConstraint( columnNames = { "user_name" } ),
     @UniqueConstraint( columnNames = { "email_address" } ) } )
-@NamedQuery( name = StoredUser.QUERY_BY_NAME, query = "FROM StoredUser WHERE userName = ?" )
+@NamedQuery( name = StoredUser.QUERY_BY_NAME_OR_ID, query = "FROM StoredUser WHERE userName = ? OR userId = ?" )
 @org.hibernate.annotations.Entity( dynamicUpdate = true )
 public class StoredUser
 {
     /**
      * Name of the query that looks for user based on given user name
      */
-    public static final String QUERY_BY_NAME = "findUserByName";
+    public static final String QUERY_BY_NAME_OR_ID = "findUserByNameOrId";
 
     private Date creationDate;
 

@@ -11,6 +11,14 @@ import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 public interface UserDAO
 {
     /**
+     * Create new user object directly
+     *
+     * @param user User object to create
+     * @return Created user
+     */
+    void createUser( StoredUser user );
+
+    /**
      * Finish signup and create user with given token
      *
      * @param requestToken Secret token to finish signup process
@@ -21,20 +29,12 @@ public interface UserDAO
         throws DataOperationException;
 
     /**
-     * Create new user object directly
+     * Find user with given user name or unique ID
      *
-     * @param user User object to create
-     * @return Created user
-     */
-    void createUser( StoredUser user );
-
-    /**
-     * Find user with given user name
-     *
-     * @param userName Given user name
+     * @param nameOrId Given user name or ID
      * @return User model or NULL if no such user is found
      */
-    StoredUser findByName( String userName );
+    StoredUser findByNameOrId( String nameOrId );
 
     /**
      * Create and save new signup request

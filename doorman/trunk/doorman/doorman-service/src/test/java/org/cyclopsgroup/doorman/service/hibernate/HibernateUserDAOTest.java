@@ -60,7 +60,7 @@ public class HibernateUserDAOTest
         dao.getHibernateTemplate().save( request );
         dao.createUser( id );
 
-        StoredUser user = dao.findByName( id + "@cyclopsgroup.org" );
+        StoredUser user = dao.findByNameOrId( id + "@cyclopsgroup.org" );
         assertNotNull( user );
         assertEquals( "pass", user.getPassword() );
     }
@@ -73,7 +73,7 @@ public class HibernateUserDAOTest
     {
         String id = UUID.randomUUID().toString();
 
-        StoredUser user = dao.findByName( id + "@cyclopsgroup.org" );
+        StoredUser user = dao.findByNameOrId( id + "@cyclopsgroup.org" );
         assertNull( user );
 
         user = new StoredUser();
@@ -90,7 +90,7 @@ public class HibernateUserDAOTest
         dao.getHibernateTemplate().save( user );
         dao.getHibernateTemplate().flush();
 
-        user = dao.findByName( id + "@cyclopsgroup.org" );
+        user = dao.findByNameOrId( id + "@cyclopsgroup.org" );
         assertNotNull( user );
         assertEquals( "pass", user.getPassword() );
     }

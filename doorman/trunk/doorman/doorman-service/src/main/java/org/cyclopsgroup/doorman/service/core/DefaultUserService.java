@@ -45,7 +45,7 @@ public class DefaultUserService
     @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public UserOperationResult authenticate( String userName, String secureCredential )
     {
-        StoredUser u = userDao.findByName( userName );
+        StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
             return UserOperationResult.NO_SUCH_IDENTITY;
@@ -65,12 +65,11 @@ public class DefaultUserService
     @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public User getUser( String userName )
     {
-        StoredUser u = userDao.findByName( userName );
+        StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
-            throw new WebApplicationException( Response.status( Status.NOT_FOUND ).entity(
-                                                                                           "User " + userName
-                                                                                               + " not found" ).build() );
+            Response error = Response.status( Status.NOT_FOUND ).entity( "User " + userName + " not found" ).build();
+            throw new WebApplicationException( error );
         }
         User user = new User();
         user.setDisplayName( u.getDisplayName() );
@@ -88,7 +87,7 @@ public class DefaultUserService
     @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
     public UserOperationResult ping( String userName )
     {
-        StoredUser u = userDao.findByName( userName );
+        StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
             return UserOperationResult.NO_SUCH_IDENTITY;
@@ -102,7 +101,7 @@ public class DefaultUserService
     @Override
     public void update( String userName, User user )
     {
-        StoredUser u = userDao.findByName( userName );
+        StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
             throw new WebApplicationException( Response.status( Status.NOT_FOUND ).entity(

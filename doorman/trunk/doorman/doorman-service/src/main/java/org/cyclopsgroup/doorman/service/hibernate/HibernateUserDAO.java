@@ -61,7 +61,8 @@ class HibernateUserDAO
         }
         StoredUserSignUpRequest request = requests.get( 0 );
         List<StoredUser> users =
-            getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME, request.getUserName() );
+            getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME_OR_ID,
+                                                     new Object[] { request.getUserName(), null } );
         if ( !users.isEmpty() )
         {
             throw new DataOperationException( UserOperationResult.IDENTITY_EXISTED, "User " + request.getUserName()
@@ -88,9 +89,11 @@ class HibernateUserDAO
      */
     @SuppressWarnings( "unchecked" )
     @Override
-    public StoredUser findByName( String userName )
+    public StoredUser findByNameOrId( String nameOrId )
     {
-        List<StoredUser> users = getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME, userName );
+        List<StoredUser> users =
+            getHibernateTemplate().findByNamedQuery( StoredUser.QUERY_BY_NAME_OR_ID,
+                                                     new Object[] { nameOrId, nameOrId } );
         return users.isEmpty() ? null : users.get( 0 );
     }
 
