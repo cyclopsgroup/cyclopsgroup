@@ -6,6 +6,7 @@ import java.util.Arrays;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -112,13 +113,13 @@ public class SessionInjectionFilter
         }
         catch ( UnauthenticatedError e )
         {
-            redirectToSignInUrl( req, (HttpServletResponse) response );
+            forwardToSignInUrl( req, (HttpServletResponse) response );
         }
         catch ( NestedServletException e )
         {
             if ( e.getCause() instanceof UnauthenticatedError )
             {
-                redirectToSignInUrl( req, (HttpServletResponse) response );
+                forwardToSignInUrl( req, (HttpServletResponse) response );
             }
             else
             {
@@ -142,8 +143,8 @@ public class SessionInjectionFilter
             (SessionInjectionFilterContext) applicationContext.getBean( name, SessionInjectionFilterContext.class );
     }
 
-    private void redirectToSignInUrl( HttpServletRequest req, HttpServletResponse resp )
-        throws IOException
+    private void forwardToSignInUrl( HttpServletRequest req, HttpServletResponse resp )
+        throws IOException, ServletException
     {
         StringBuffer url = req.getRequestURL();
         if ( StringUtils.isNotBlank( req.getQueryString() ) )
@@ -155,6 +156,15 @@ public class SessionInjectionFilter
         {
             signInUrl = StringUtils.replace( signInUrl, "{contextPath}", req.getContextPath() );
         }
-        resp.sendRedirect( signInUrl + "?redirectTo=" + resp.encodeRedirectURL( url.toString() ) );
+        if ( context.isRedirectingToUrl() )
+        {
+            resp.sendRedirect( signInUrl + "?redirectTo=" + resp.encodeRedirectURL( url.toString() ) );
+            return;
+        }
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher( signInUrl );
+        ParameterOverridingRequest request = new ParameterOverridingRequest( req );
+        request.setParameter( "redirectTo", url.toString() );
+        dispatcher.forward( request, resp );
     }
 }

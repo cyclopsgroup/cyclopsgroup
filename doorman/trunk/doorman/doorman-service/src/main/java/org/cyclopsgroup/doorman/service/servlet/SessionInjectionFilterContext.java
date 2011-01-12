@@ -15,6 +15,8 @@ public class SessionInjectionFilterContext
 
     private static final String DEFAULT_SESSION_ID_COOKIE = "doormanSessionId";
 
+    private boolean redirectingToUrl;
+
     private String sessionAttribute = DEFAULT_SESSION_ATTRIBUTE;
 
     private String sessionIdCookie = DEFAULT_SESSION_ID_COOKIE;
@@ -60,6 +62,22 @@ public class SessionInjectionFilterContext
     final String getSignInUrl()
     {
         return signInUrl;
+    }
+
+    /**
+     * @return True if sign in URL is redirected instead of forwarded
+     */
+    public final boolean isRedirectingToUrl()
+    {
+        return redirectingToUrl;
+    }
+
+    /**
+     * @param redirectingToUrl True if sign in URL is redirected instead of forwarded
+     */
+    public final void setRedirectingToUrl( boolean redirectingToUrl )
+    {
+        this.redirectingToUrl = redirectingToUrl;
     }
 
     /**
