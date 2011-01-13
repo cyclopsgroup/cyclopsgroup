@@ -92,6 +92,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+            </extension>
+        </extensions>
     </build>
     <reporting>
         <plugins>
@@ -134,7 +140,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/caff
+                scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/caff
             </url>
         </site>
     </distributionManagement>
