@@ -28,6 +28,20 @@ public class User
     private String userName;
 
     /**
+     * @param other Another user object to copy to
+     */
+    public void copyTo( User other )
+    {
+        other.displayName = displayName;
+        other.domainName = domainName;
+        other.emailAddress = emailAddress;
+        other.password = password;
+        other.timeZoneId = timeZoneId;
+        other.userId = userId;
+        other.userName = userName;
+    }
+
+    /**
      * @return Display name of user
      */
     @XmlElement

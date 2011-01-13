@@ -99,17 +99,18 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
+    @Transactional( isolation = Isolation.REPEATABLE_READ )
     public void update( String userName, User user )
     {
         StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
         {
-            throw new WebApplicationException( Response.status( Status.NOT_FOUND ).entity(
-                                                                                           "User " + userName
-                                                                                               + " not found" ).build() );
+            Response error = Response.status( Status.NOT_FOUND ).entity( "User " + userName + " not found" ).build();
+            throw new WebApplicationException( error );
         }
         u.setDisplayName( user.getDisplayName() );
         u.setEmailAddress( user.getEmailAddress() );
+        u.setUserName( user.getUserName() );
         u.setLastModified( new DateTime().toDateTime( DateTimeZone.UTC ).toDate() );
         u.setTimeZoneId( user.getTimeZoneId() );
         userDao.saveUser( u );

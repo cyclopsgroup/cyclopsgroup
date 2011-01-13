@@ -106,9 +106,38 @@ public class DefaultSessionService
             user.setEmailAddress( u.getEmailAddress() );
             user.setUserId( u.getUserId() );
             user.setUserName( u.getUserName() );
+            user.setTimeZoneId( u.getTimeZoneId() );
             session.setUser( user );
         }
         return session;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    @Transactional( isolation = Isolation.SERIALIZABLE )
+    public UserSignUpResponse requestSignUp( String sessionId, User user )
+    {
+        StoredUser existingUser = userDao.findByNameOrId( user.getUserName() );
+        if ( existingUser != null )
+        {
+            return new UserSignUpResponse( UserOperationResult.IDENTITY_EXISTED, null );
+        }
+        StoredUserSignUpRequest request = new StoredUserSignUpRequest();
+        request.setDisplayName( user.getDisplayName() );
+        request.setEmailAddress( user.getEmailAddress() );
+        request.setPassword( user.getPassword() );
+        String id = UUIDUtils.randomStringId();
+        request.setRequestId( id );
+        request.setRequestToken( id );
+        request.setUserName( user.getUserName() );
+        request.setDomainName( "cyclopsgroup.org" );
+        request.setTimeZoneId( user.getTimeZoneId() );
+        userDao.saveSignupRequest( request );
+
+        LOG.info( "Sign up request " + id + " is saved" );
+        return new UserSignUpResponse( UserOperationResult.SUCCESSFUL, id );
     }
 
     /**
@@ -147,26 +176,27 @@ public class DefaultSessionService
      */
     @Override
     @Transactional( isolation = Isolation.SERIALIZABLE )
-    public UserSignUpResponse requestSignUp( String sessionId, User user )
+    public UserOperationResult signUp( String sessionId, User user )
     {
-        StoredUser existingUser = userDao.findByNameOrId( user.getUserName() );
-        if ( existingUser != null )
+        StoredUser existing = userDao.findByNameOrId( user.getUserName() );
+        if ( existing != null )
         {
-            return new UserSignUpResponse( UserOperationResult.IDENTITY_EXISTED, null );
+            return UserOperationResult.IDENTITY_EXISTED;
         }
-        StoredUserSignUpRequest request = new StoredUserSignUpRequest();
-        request.setDisplayName( user.getDisplayName() );
-        request.setEmailAddress( user.getEmailAddress() );
-        request.setPassword( user.getPassword() );
-        String id = UUIDUtils.randomStringId();
-        request.setRequestId( id );
-        request.setRequestToken( id );
-        request.setUserName( user.getUserName() );
-        request.setDomainName( "cyclopsgroup.org" );
-        userDao.saveSignupRequest( request );
 
-        LOG.info( "Sign up request " + id + " is saved" );
-        return new UserSignUpResponse( UserOperationResult.SUCCESSFUL, id );
+        String uid = UUIDUtils.randomStringId();
+        StoredUser u = new StoredUser();
+        u.setDisplayName( user.getDisplayName() );
+        u.setEmailAddress( user.getEmailAddress() );
+        u.setDomainName( user.getDomainName() );
+        u.setPassword( user.getPassword() );
+        u.setUserId( uid );
+        u.setUserName( user.getUserName() );
+        u.setUserState( StoredUserState.ACTIVE );
+        u.setTimeZoneId( user.getTimeZoneId() );
+        userDao.createUser( u );
+        userSessionDao.updateUser( sessionId, u );
+        return UserOperationResult.SUCCESSFUL;
     }
 
     /**
@@ -197,32 +227,5 @@ public class DefaultSessionService
         session.setCreationDate( now );
         session.setLastActivity( now );
         return session;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
-    public UserOperationResult signUp( String sessionId, User user )
-    {
-        StoredUser existing = userDao.findByNameOrId( user.getUserName() );
-        if ( existing != null )
-        {
-            return UserOperationResult.IDENTITY_EXISTED;
-        }
-
-        String uid = UUIDUtils.randomStringId();
-        StoredUser u = new StoredUser();
-        u.setDisplayName( user.getDisplayName() );
-        u.setEmailAddress( user.getEmailAddress() );
-        u.setDomainName( user.getDomainName() );
-        u.setPassword( user.getPassword() );
-        u.setUserId( uid );
-        u.setUserName( user.getUserName() );
-        u.setUserState( StoredUserState.ACTIVE );
-        userDao.createUser( u );
-        userSessionDao.updateUser( sessionId, u );
-        return UserOperationResult.SUCCESSFUL;
     }
 }

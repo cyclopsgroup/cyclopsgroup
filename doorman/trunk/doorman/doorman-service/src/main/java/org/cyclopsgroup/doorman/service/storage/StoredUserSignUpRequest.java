@@ -40,6 +40,8 @@ public class StoredUserSignUpRequest
 
     private String requestToken;
 
+    private String timeZoneId;
+
     private String userName;
 
     /**
@@ -108,6 +110,15 @@ public class StoredUserSignUpRequest
     }
 
     /**
+     * @return Time zone user lives in
+     */
+    @Column( name = "time_zone_id", length = 32 )
+    public String getTimeZoneId()
+    {
+        return timeZoneId;
+    }
+
+    /**
      * @return Name of user to sign up
      */
     @Column( name = "user_name", nullable = false, length = 64 )
@@ -170,6 +181,14 @@ public class StoredUserSignUpRequest
     public void setRequestToken( String requestToken )
     {
         this.requestToken = requestToken;
+    }
+
+    /**
+     * @param timeZoneId Time zone user lives in
+     */
+    public void setTimeZoneId( String timeZoneId )
+    {
+        this.timeZoneId = timeZoneId;
     }
 
     /**
