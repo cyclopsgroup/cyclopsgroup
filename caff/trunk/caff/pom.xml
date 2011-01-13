@@ -140,7 +140,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                scp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/caff
+                sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/htdocs/projects/caff
             </url>
         </site>
     </distributionManagement>
