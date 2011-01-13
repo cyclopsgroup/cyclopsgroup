@@ -10,7 +10,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>caff</artifactId>
     <name>caff</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.2</version>
     <description>Java conversion and formatting framework</description>
     <url>http://www.cyclopsgroup.org/projects/caff</url>
     <licenses>
