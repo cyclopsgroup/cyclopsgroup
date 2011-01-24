@@ -26,6 +26,12 @@ public interface UserSessionDAO
     StoredUserSession findById( String sessionId );
 
     /**
+     * @param sessionId ID of session to ping
+     * @return The user session object it pings
+     */
+    StoredUserSession pingSession( String sessionId );
+
+    /**
      * Update user session with given user
      *
      * @param sessionId User session ID

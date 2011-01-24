@@ -76,18 +76,23 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserSession getSession( String sessionId )
     {
-        StoredUserSession s = userSessionDao.findById( sessionId );
+        StoredUserSession s = userSessionDao.pingSession( sessionId );
         if ( s == null )
         {
             return null;
         }
+        return createUserSession( s );
+    }
+
+    private static UserSession createUserSession( StoredUserSession s )
+    {
         UserSession session = new UserSession();
         session.setCreationDate( new DateTime( s.getCreationDate(), DateTimeZone.UTC ) );
         session.setLastActivity( new DateTime( s.getLastModified(), DateTimeZone.UTC ) );
-        session.setSessionId( sessionId );
+        session.setSessionId( s.getSessionId() );
 
         // Set attributes
         UserSessionAttributes attributes = new UserSessionAttributes();
@@ -110,6 +115,21 @@ public class DefaultSessionService
             session.setUser( user );
         }
         return session;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED )
+    public UserSession pingSession( String sessionId )
+    {
+        StoredUserSession session = userSessionDao.pingSession( sessionId );
+        if ( session == null )
+        {
+            throw new IllegalStateException( "Session " + sessionId + " doesn't exist" );
+        }
+        return createUserSession( session );
     }
 
     /**
@@ -194,6 +214,7 @@ public class DefaultSessionService
         u.setUserName( user.getUserName() );
         u.setUserState( StoredUserState.ACTIVE );
         u.setTimeZoneId( user.getTimeZoneId() );
+
         userDao.createUser( u );
         userSessionDao.updateUser( sessionId, u );
         return UserOperationResult.SUCCESSFUL;
@@ -208,11 +229,8 @@ public class DefaultSessionService
     {
         Validate.notNull( sessionId, "Session ID can't be NULL" );
 
-        DateTime now = new DateTime( DateTimeZone.UTC );
         StoredUserSession s = new StoredUserSession();
         s.setSessionId( sessionId );
-        s.setCreationDate( now.toDate() );
-        s.setLastModified( now.toDate() );
         if ( attributes != null )
         {
             s.setAcceptLanguage( attributes.getAcceptLanguage() );
@@ -220,12 +238,6 @@ public class DefaultSessionService
             s.setUserAgent( attributes.getUserAgent() );
         }
         userSessionDao.createNew( s );
-
-        UserSession session = new UserSession();
-        session.setAttributes( attributes );
-        session.setSessionId( sessionId );
-        session.setCreationDate( now );
-        session.setLastActivity( now );
-        return session;
+        return createUserSession( s );
     }
 }

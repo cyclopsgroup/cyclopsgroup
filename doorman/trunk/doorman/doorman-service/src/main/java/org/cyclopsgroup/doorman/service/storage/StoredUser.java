@@ -30,6 +30,8 @@ public class StoredUser
      */
     public static final String QUERY_BY_NAME_OR_ID = "findUserByNameOrId";
 
+    private String countryCode;
+
     private Date creationDate;
 
     private String displayName;
@@ -38,7 +40,11 @@ public class StoredUser
 
     private String emailAddress;
 
+    private String languageCode;
+
     private Date lastModified;
+
+    private Date lastVisit;
 
     private String password;
 
@@ -51,6 +57,15 @@ public class StoredUser
     private StoredUserState userState;
 
     private StoredUserType userType;
+
+    /**
+     * @return Country code of country that user prefers
+     */
+    @Column( name = "country_code", length = 8, nullable = false )
+    public String getCountryCode()
+    {
+        return countryCode;
+    }
 
     /**
      * @return Creation date
@@ -90,6 +105,15 @@ public class StoredUser
     }
 
     /**
+     * @return Language code of language that user prefers
+     */
+    @Column( name = "language_code", length = 8, nullable = false )
+    public String getLanguageCode()
+    {
+        return languageCode;
+    }
+
+    /**
      * @return Last modified timestamp of user
      */
     @Column( name = "last_modified" )
@@ -97,6 +121,16 @@ public class StoredUser
     public Date getLastModified()
     {
         return lastModified;
+    }
+
+    /**
+     * @return Last visit time of the user
+     */
+    @Column( name = "last_visit" )
+    @Temporal( TemporalType.TIMESTAMP )
+    public Date getLastVisit()
+    {
+        return lastVisit;
     }
 
     /**
@@ -111,7 +145,7 @@ public class StoredUser
     /**
      * @return Time zone user lives in
      */
-    @Column( name = "time_zone_id", length = 32 )
+    @Column( name = "time_zone_id", nullable = false, length = 32 )
     public String getTimeZoneId()
     {
         return timeZoneId;
@@ -157,6 +191,14 @@ public class StoredUser
     }
 
     /**
+     * @param countryCode {@link #getCountryCode()}
+     */
+    public void setCountryCode( String countryCode )
+    {
+        this.countryCode = countryCode;
+    }
+
+    /**
      * @param creationDate {@link #getCreationDate()}
      */
     public final void setCreationDate( Date creationDate )
@@ -189,11 +231,27 @@ public class StoredUser
     }
 
     /**
+     * @param languageCode {@link #getLanguageCode()}
+     */
+    public void setLanguageCode( String languageCode )
+    {
+        this.languageCode = languageCode;
+    }
+
+    /**
      * @param lastModified {@link #getLastModified()}
      */
     public void setLastModified( Date lastModified )
     {
         this.lastModified = lastModified;
+    }
+
+    /**
+     * @param lastVisit {@link #getLastVisit()}
+     */
+    public void setLastVisit( Date lastVisit )
+    {
+        this.lastVisit = lastVisit;
     }
 
     /**

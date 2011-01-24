@@ -3,6 +3,9 @@ package org.cyclopsgroup.doorman.api;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.joda.time.DateTime;
 
 /**
  * Model of a registered user
@@ -13,11 +16,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class User
 {
+    private String countryCode;
+
+    private DateTime creationDate;
+
     private String displayName;
 
     private String domainName;
 
     private String emailAddress;
+
+    private String languageCode;
+
+    private DateTime lastVisit;
 
     private String password;
 
@@ -39,6 +50,25 @@ public class User
         other.timeZoneId = timeZoneId;
         other.userId = userId;
         other.userName = userName;
+    }
+
+    /**
+     * @return Country code of country user lives
+     */
+    @XmlElement
+    public final String getCountryCode()
+    {
+        return countryCode;
+    }
+
+    /**
+     * @return Creation date of user
+     */
+    @XmlElement
+    @XmlJavaTypeAdapter( XmlDateTimeAdapter.class )
+    public final DateTime getCreationDate()
+    {
+        return creationDate;
     }
 
     /**
@@ -66,6 +96,24 @@ public class User
     public final String getEmailAddress()
     {
         return emailAddress;
+    }
+
+    /**
+     * @return Language code of language that user prefers
+     */
+    public final String getLanguageCode()
+    {
+        return languageCode;
+    }
+
+    /**
+     * @return Date time of user's last visit
+     */
+    @XmlElement
+    @XmlJavaTypeAdapter( XmlDateTimeAdapter.class )
+    public DateTime getLastVisit()
+    {
+        return lastVisit;
     }
 
     /**
@@ -105,6 +153,22 @@ public class User
     }
 
     /**
+     * @param countryCode {@link #getCountryCode()}
+     */
+    public final void setCountryCode( String countryCode )
+    {
+        this.countryCode = countryCode;
+    }
+
+    /**
+     * @param creationDate {@link #getCreationDate()}
+     */
+    public void setCreationDate( DateTime creationDate )
+    {
+        this.creationDate = creationDate;
+    }
+
+    /**
      * @param displayName {@link #getDisplayName()}
      */
     public final void setDisplayName( String displayName )
@@ -126,6 +190,22 @@ public class User
     public final void setEmailAddress( String emailAddress )
     {
         this.emailAddress = emailAddress;
+    }
+
+    /**
+     * @param languageCode {@link #getLanguageCode()}
+     */
+    public final void setLanguageCode( String languageCode )
+    {
+        this.languageCode = languageCode;
+    }
+
+    /**
+     * @param lastVisit {@link #getLastVisit()}
+     */
+    public void setLastVisit( DateTime lastVisit )
+    {
+        this.lastVisit = lastVisit;
     }
 
     /**

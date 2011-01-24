@@ -10,8 +10,6 @@ import java.util.UUID;
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
-import org.cyclopsgroup.doorman.service.storage.StoredUserState;
-import org.cyclopsgroup.doorman.service.storage.StoredUserType;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,17 +74,7 @@ public class HibernateUserDAOTest
         StoredUser user = dao.findByNameOrId( id + "@cyclopsgroup.org" );
         assertNull( user );
 
-        user = new StoredUser();
-        user.setDisplayName( "haha" );
-        user.setEmailAddress( id + "@cyclopsgroup.org" );
-        user.setLastModified( new Date() );
-        user.setPassword( "pass" );
-        user.setUserId( UUID.randomUUID().toString() );
-        user.setUserName( id + "@cyclopsgroup.org" );
-        user.setUserState( StoredUserState.ACTIVE );
-        user.setDomainName( "cyclopsgroup.org" );
-        user.setCreationDate( new Date() );
-        user.setUserType( StoredUserType.LOCAL );
+        user = Utils.createStoredUser( id );
         dao.getHibernateTemplate().save( user );
         dao.getHibernateTemplate().flush();
 

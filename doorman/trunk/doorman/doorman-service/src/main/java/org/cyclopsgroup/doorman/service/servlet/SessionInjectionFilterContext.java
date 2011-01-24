@@ -1,5 +1,6 @@
 package org.cyclopsgroup.doorman.service.servlet;
 
+import org.apache.commons.lang.Validate;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.UserSession;
 
@@ -13,11 +14,15 @@ public class SessionInjectionFilterContext
 {
     private static final String DEFAULT_SESSION_ATTRIBUTE = UserSession.class.getName();
 
+    private static final int DEFAULT_SESSION_CHECKING_INTERVAL = 300;
+
     private static final String DEFAULT_SESSION_ID_COOKIE = "doormanSessionId";
 
     private boolean redirectingToUrl;
 
     private String sessionAttribute = DEFAULT_SESSION_ATTRIBUTE;
+
+    private int sessionCheckingInterval = DEFAULT_SESSION_CHECKING_INTERVAL;
 
     private String sessionIdCookie = DEFAULT_SESSION_ID_COOKIE;
 
@@ -41,6 +46,16 @@ public class SessionInjectionFilterContext
     final String getSessionAttribute()
     {
         return sessionAttribute;
+    }
+
+    /**
+     * Interval in seconds between which session is checked against server
+     *
+     * @return Seconds of interval
+     */
+    public final int getSessionCheckingInterval()
+    {
+        return sessionCheckingInterval;
     }
 
     /**
@@ -86,6 +101,15 @@ public class SessionInjectionFilterContext
     public final void setSessionAttribute( String sessionAttribute )
     {
         this.sessionAttribute = sessionAttribute;
+    }
+
+    /**
+     * @param sessionCheckingInterval {@link #getSessionCheckingInterval()}
+     */
+    public final void setSessionCheckingInterval( int sessionCheckingInterval )
+    {
+        Validate.isTrue( sessionCheckingInterval > 0, "Invalid interval value " + sessionCheckingInterval );
+        this.sessionCheckingInterval = sessionCheckingInterval;
     }
 
     /**

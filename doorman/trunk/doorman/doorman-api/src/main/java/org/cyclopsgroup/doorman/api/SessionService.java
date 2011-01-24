@@ -6,7 +6,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 
 /**
  * The facade service that manages user authentication, session management and user management
@@ -35,8 +34,29 @@ public interface SessionService
      */
     @GET
     @Path( "/{sessionId}" )
-    @Produces( "application/xml" )
     UserSession getSession( @PathParam( "sessionId" ) String sessionId );
+
+    /**
+     * Update existing session
+     *
+     * @param sessionId ID of session to update
+     * @return Current user session
+     */
+    @POST
+    @Path( "/{sessionId}/ping" )
+    UserSession pingSession( @PathParam( "sessionId" ) String sessionId );
+
+    /**
+     * Create request for new user sign up. Request needs to be confirmed, {@link #confirmSignUp(String, String)},
+     * before user is created
+     *
+     * @param sessionId Current session ID
+     * @param user User details
+     * @return Sign up operation result
+     */
+    @POST
+    @Path( "/{sessionId}/user/request" )
+    UserSignUpResponse requestSignUp( @PathParam( "sessionId" ) String sessionId, User user );
 
     /**
      * Sign in and associated user with current session
@@ -62,18 +82,6 @@ public interface SessionService
     UserOperationResult signOut( @PathParam( "sessionId" ) String sessionId );
 
     /**
-     * Create request for new user sign up. Request needs to be confirmed, {@link #confirmSignUp(String, String)},
-     * before user is created
-     *
-     * @param sessionId Current session ID
-     * @param user User details
-     * @return Sign up operation result
-     */
-    @POST
-    @Path( "/{sessionId}/user/request" )
-    UserSignUpResponse requestSignUp( @PathParam( "sessionId" ) String sessionId, User user );
-
-    /**
      * Sign up new user directly with request/confirm process
      *
      * @param sessionId Current user session Id
@@ -93,6 +101,5 @@ public interface SessionService
      */
     @PUT
     @Path( "/{sessionId}" )
-    @Produces( "application/xml" )
     UserSession startSession( @PathParam( "sessionId" ) String sessionId, UserSessionAttributes attributes );
 }

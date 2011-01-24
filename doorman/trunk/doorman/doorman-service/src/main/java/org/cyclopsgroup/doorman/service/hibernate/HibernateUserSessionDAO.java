@@ -31,9 +31,39 @@ class HibernateUserSessionDAO
      * @inheritDoc
      */
     @Override
+    public StoredUserSession pingSession( String sessionId )
+    {
+        StoredUserSession session = (StoredUserSession) getHibernateTemplate().get( StoredUserSession.class, sessionId );
+        if ( session == null )
+        {
+            return null;
+        }
+
+        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        session.setLastModified( now );
+        StoredUser user = session.getUser();
+        if ( user != null )
+        {
+            session.getUser().setLastVisit( now );
+        }
+        getHibernateTemplate().update( session );
+        return session;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void createNew( StoredUserSession session )
     {
-        session.setCreationDate( new DateTime().withZone( DateTimeZone.UTC ).toDate() );
+        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        session.setCreationDate( now );
+        session.setLastModified( now );
+        StoredUser user = session.getUser();
+        if ( user != null )
+        {
+            session.getUser().setLastVisit( now );
+        }
         getHibernateTemplate().save( session );
     }
 
@@ -55,11 +85,12 @@ class HibernateUserSessionDAO
         StoredUserSession session =
             (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
         session.setUser( user );
-        Date now = new DateTime().withZone( DateTimeZone.UTC ).toDate();
+        Date now = new DateTime( DateTimeZone.UTC ).toDate();
         session.setLastModified( now );
         if ( user != null )
         {
             session.setLastVerification( now );
+            user.setLastVisit( now );
         }
         getHibernateTemplate().update( session );
     }

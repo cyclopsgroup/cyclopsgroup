@@ -22,6 +22,7 @@ import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.UnauthenticatedError;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
+import org.joda.time.DateTime;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.util.NestedServletException;
@@ -66,9 +67,11 @@ public class SessionInjectionFilter
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
         throws IOException, ServletException
     {
+        DateTime now = new DateTime();
         HttpServletRequest req = (HttpServletRequest) request;
         UserSession session = (UserSession) req.getSession().getAttribute( context.getSessionAttribute() );
-        if ( session == null )
+        if ( session == null
+            || session.getLastActivity().plusSeconds( context.getSessionCheckingInterval() ).isBefore( now ) )
         {
             LOG.info( "Looking for sessionId cookie from request cookies: " + Arrays.toString( req.getCookies() ) );
             Cookie sessionIdCookie = null;
@@ -103,8 +106,10 @@ public class SessionInjectionFilter
                 session = context.getSessionService().startSession( sessionId, attributes );
                 sessionIdCookie = new Cookie( context.getSessionIdCookie(), sessionId );
             }
+
+            session.setLastActivity( now ); // FIXME This value should come from database
             req.getSession().setAttribute( context.getSessionAttribute(), session );
-            sessionIdCookie.setMaxAge( 24 * 3600 );
+            sessionIdCookie.setMaxAge( 7 * 24 * 3600 );
             ( (HttpServletResponse) response ).addCookie( sessionIdCookie );
         }
         try

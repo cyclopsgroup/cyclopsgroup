@@ -137,6 +137,9 @@ public class DefaultUserService
         u.setUserName( user.getUserName() );
         u.setLastModified( new DateTime().toDateTime( DateTimeZone.UTC ).toDate() );
         u.setTimeZoneId( user.getTimeZoneId() );
+
+        u.setCountryCode( user.getCountryCode() );
+        u.setLanguageCode( user.getLanguageCode() );
         userDao.saveUser( u );
     }
 }
