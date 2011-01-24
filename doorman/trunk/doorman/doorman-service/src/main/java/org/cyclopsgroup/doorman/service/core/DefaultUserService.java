@@ -1,13 +1,18 @@
 package org.cyclopsgroup.doorman.service.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang.StringUtils;
+import org.cyclopsgroup.doorman.api.ListUserRequest;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserOperationResult;
 import org.cyclopsgroup.doorman.api.UserService;
+import org.cyclopsgroup.doorman.api.Users;
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
@@ -63,7 +68,7 @@ public class DefaultUserService
      */
     @Override
     @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
-    public User getUser( String userName )
+    public User get( String userName )
     {
         StoredUser u = userDao.findByNameOrId( userName );
         if ( u == null )
@@ -78,6 +83,25 @@ public class DefaultUserService
         user.setUserId( u.getUserId() );
         user.setUserName( u.getUserName() );
         return user;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    public Users list( ListUserRequest request )
+    {
+        List<User> users = new ArrayList<User>( request.getUserNames().size() );
+        for ( String userName : request.getUserNames() )
+        {
+            User user = get( userName );
+            if ( user != null )
+            {
+                users.add( user );
+            }
+        }
+        return new Users( users );
     }
 
     /**

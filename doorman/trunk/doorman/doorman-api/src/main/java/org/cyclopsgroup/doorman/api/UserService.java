@@ -34,7 +34,17 @@ public interface UserService
      */
     @GET
     @Path( "/{userName}" )
-    User getUser( @PathParam( "userName" ) String userName );
+    User get( @PathParam( "userName" ) String userName );
+
+    /**
+     * Get a list of users
+     *
+     * @param request Request to list user
+     * @return List of users
+     */
+    @POST
+    @Path( "/list" )
+    Users list( ListUserRequest request );
 
     /**
      * A light weight operation to check the status of user
