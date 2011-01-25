@@ -16,8 +16,6 @@ import org.cyclopsgroup.doorman.api.Users;
 import org.cyclopsgroup.doorman.service.dao.DAOFactory;
 import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -135,7 +133,6 @@ public class DefaultUserService
         u.setDisplayName( user.getDisplayName() );
         u.setEmailAddress( user.getEmailAddress() );
         u.setUserName( user.getUserName() );
-        u.setLastModified( new DateTime().toDateTime( DateTimeZone.UTC ).toDate() );
         u.setTimeZoneId( user.getTimeZoneId() );
 
         u.setCountryCode( user.getCountryCode() );

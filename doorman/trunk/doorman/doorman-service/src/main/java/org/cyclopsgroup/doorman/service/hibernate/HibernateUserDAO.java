@@ -135,6 +135,7 @@ class HibernateUserDAO
     @Override
     public void saveUser( StoredUser user )
     {
+        user.setLastModified( now() );
         getHibernateTemplate().update( user );
     }
 }
