@@ -15,13 +15,13 @@
     <inceptionYear>2010</inceptionYear>
     <scm>
         <connection>
-            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/doorman/trunk/doorman
+            scm:git:git://github.com/jiaqi/cyclopsgroup
         </connection>
         <developerConnection>
-            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/doorman/trunk/doorman
+            scm:git:git://github.com/jiaqi/cyclopsgroup
         </developerConnection>
         <url>
-            http://fisheye3.atlanssian.com/viewrep/cyclops-group/doorman
+            https://github.com/jiaqi/cyclopsgroup
         </url>
     </scm>
     <distributionManagement>
