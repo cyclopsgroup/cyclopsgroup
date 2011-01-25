@@ -26,6 +26,11 @@ class HibernateUserDAO
     extends HibernateDaoSupport
     implements UserDAO
 {
+    private static Date now()
+    {
+        return new DateTime( DateTimeZone.UTC ).toLocalDateTime().toDateTime().toDate();
+    }
+
     /**
      * @param sessionFactory Hibernate session factory
      */
@@ -44,7 +49,7 @@ class HibernateUserDAO
         user.setCountryCode( Locale.getDefault().getCountry() );
         user.setLanguageCode( Locale.getDefault().getLanguage() );
 
-        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        Date now = now();
         user.setLastModified( now );
         user.setCreationDate( now );
         user.setLastVisit( now );
@@ -86,7 +91,7 @@ class HibernateUserDAO
         user.setUserState( StoredUserState.ACTIVE );
         user.setUserType( StoredUserType.LOCAL );
 
-        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        Date now = now();
         user.setCreationDate( now );
         user.setLastModified( now );
         user.setLastVisit( now );
@@ -120,7 +125,7 @@ class HibernateUserDAO
     @Override
     public void saveSignupRequest( StoredUserSignUpRequest request )
     {
-        request.setRequestDate( new DateTime( DateTimeZone.UTC ).toDate() );
+        request.setRequestDate( now() );
         getHibernateTemplate().save( request );
     }
 

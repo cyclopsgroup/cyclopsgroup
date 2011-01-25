@@ -19,6 +19,11 @@ class HibernateUserSessionDAO
     extends HibernateDaoSupport
     implements UserSessionDAO
 {
+    private static Date now()
+    {
+        return new DateTime( DateTimeZone.UTC ).toLocalDateTime().toDateTime().toDate();
+    }
+
     /**
      * @param sessionFactory Hibernate session factory
      */
@@ -39,7 +44,7 @@ class HibernateUserSessionDAO
             return null;
         }
 
-        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        Date now = now();
         session.setLastModified( now );
         StoredUser user = session.getUser();
         if ( user != null )
@@ -56,7 +61,7 @@ class HibernateUserSessionDAO
     @Override
     public void createNew( StoredUserSession session )
     {
-        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        Date now = now();
         session.setCreationDate( now );
         session.setLastModified( now );
         StoredUser user = session.getUser();
@@ -85,7 +90,7 @@ class HibernateUserSessionDAO
         StoredUserSession session =
             (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
         session.setUser( user );
-        Date now = new DateTime( DateTimeZone.UTC ).toDate();
+        Date now = now();
         session.setLastModified( now );
         if ( user != null )
         {
