@@ -55,7 +55,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserOperationResult confirmSignUp( String sessionId, String token )
     {
         StoredUser user;
@@ -136,7 +136,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserSignUpResponse requestSignUp( String sessionId, User user )
     {
         StoredUser existingUser = userDao.findByNameOrId( user.getUserName() );
@@ -164,7 +164,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserOperationResult signIn( String sessionId, String userName, String password )
     {
         StoredUser u = userDao.findByNameOrId( userName );
@@ -195,7 +195,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserOperationResult signUp( String sessionId, User user )
     {
         StoredUser existing = userDao.findByNameOrId( user.getUserName() );
@@ -224,7 +224,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.SERIALIZABLE )
+    @Transactional( isolation = Isolation.READ_COMMITTED )
     public UserSession startSession( String sessionId, UserSessionAttributes attributes )
     {
         Validate.notNull( sessionId, "Session ID can't be NULL" );
