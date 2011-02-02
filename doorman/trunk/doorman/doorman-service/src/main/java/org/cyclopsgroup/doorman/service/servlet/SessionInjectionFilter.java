@@ -90,7 +90,9 @@ public class SessionInjectionFilter
             {
                 session = context.getSessionService().getSession( sessionIdCookie.getValue() );
                 LOG.info( "Found existing session from session service: "
-                    + ToStringBuilder.reflectionToString( session ) );
+                    + ToStringBuilder.reflectionToString( session ) + ", user="
+                    + ToStringBuilder.reflectionToString( session.getUser() ) + ", attributes="
+                    + ToStringBuilder.reflectionToString( session.getAttributes() ) );
             }
 
             if ( session == null || sessionIdCookie == null )

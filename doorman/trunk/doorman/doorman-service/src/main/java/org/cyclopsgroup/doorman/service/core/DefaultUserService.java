@@ -74,13 +74,7 @@ public class DefaultUserService
             Response error = Response.status( Status.NOT_FOUND ).entity( "User " + userName + " not found" ).build();
             throw new WebApplicationException( error );
         }
-        User user = new User();
-        user.setDisplayName( u.getDisplayName() );
-        user.setDomainName( u.getDomainName() );
-        user.setEmailAddress( u.getEmailAddress() );
-        user.setUserId( u.getUserId() );
-        user.setUserName( u.getUserName() );
-        return user;
+        return ServiceUtils.createUser( u );
     }
 
     /**
@@ -130,13 +124,7 @@ public class DefaultUserService
             Response error = Response.status( Status.NOT_FOUND ).entity( "User " + userName + " not found" ).build();
             throw new WebApplicationException( error );
         }
-        u.setDisplayName( user.getDisplayName() );
-        u.setEmailAddress( user.getEmailAddress() );
-        u.setUserName( user.getUserName() );
-        u.setTimeZoneId( user.getTimeZoneId() );
-
-        u.setCountryCode( user.getCountryCode() );
-        u.setLanguageCode( user.getLanguageCode() );
+        ServiceUtils.copyUser( user, u );
         userDao.saveUser( u );
     }
 }

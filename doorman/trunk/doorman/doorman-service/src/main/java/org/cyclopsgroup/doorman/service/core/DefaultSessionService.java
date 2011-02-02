@@ -105,14 +105,7 @@ public class DefaultSessionService
         StoredUser u = s.getUser();
         if ( u != null )
         {
-            User user = new User();
-            user.setDisplayName( u.getDisplayName() );
-            user.setDomainName( u.getDomainName() );
-            user.setEmailAddress( u.getEmailAddress() );
-            user.setUserId( u.getUserId() );
-            user.setUserName( u.getUserName() );
-            user.setTimeZoneId( u.getTimeZoneId() );
-            session.setUser( user );
+            session.setUser( ServiceUtils.createUser( u ) );
         }
         return session;
     }
@@ -206,15 +199,10 @@ public class DefaultSessionService
 
         String uid = UUIDUtils.randomStringId();
         StoredUser u = new StoredUser();
-        u.setDisplayName( user.getDisplayName() );
-        u.setEmailAddress( user.getEmailAddress() );
-        u.setDomainName( user.getDomainName() );
         u.setPassword( user.getPassword() );
         u.setUserId( uid );
-        u.setUserName( user.getUserName() );
         u.setUserState( StoredUserState.ACTIVE );
-        u.setTimeZoneId( user.getTimeZoneId() );
-
+        ServiceUtils.copyUser( user, u );
         userDao.createUser( u );
         userSessionDao.updateUser( sessionId, u );
         return UserOperationResult.SUCCESSFUL;
