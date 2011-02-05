@@ -19,8 +19,8 @@ import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -90,8 +90,8 @@ public class DefaultSessionService
     private static UserSession createUserSession( StoredUserSession s )
     {
         UserSession session = new UserSession();
-        session.setCreationDate( new DateTime( s.getCreationDate(), DateTimeZone.UTC ) );
-        session.setLastActivity( new DateTime( s.getLastModified(), DateTimeZone.UTC ) );
+        session.setCreationDate( new LocalDateTime( s.getCreationDate() ).toDateTime( DateTimeZone.UTC ) );
+        session.setLastActivity( new LocalDateTime( s.getLastModified() ).toDateTime( DateTimeZone.UTC ) );
         session.setSessionId( s.getSessionId() );
 
         // Set attributes
