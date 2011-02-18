@@ -2,8 +2,8 @@ package org.cyclopsgroup.doorman.service.core;
 
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 
 class ServiceUtils
 {
@@ -22,12 +22,12 @@ class ServiceUtils
     {
         User user = new User();
         user.setCountryCode( u.getCountryCode() );
-        user.setCreationDate( new DateTime( u.getCreationDate(), DateTimeZone.UTC ) );
+        user.setCreationDate( new LocalDateTime( u.getCreationDate() ).toDateTime( DateTimeZone.UTC ) );
         user.setDisplayName( u.getDisplayName() );
         user.setDomainName( u.getDomainName() );
         user.setEmailAddress( u.getEmailAddress() );
         user.setLanguageCode( u.getLanguageCode() );
-        user.setLastVisit( new DateTime( u.getLastVisit(), DateTimeZone.UTC ) );
+        user.setLastVisit( new LocalDateTime( u.getLastVisit() ).toDateTime( DateTimeZone.UTC ) );
         user.setTimeZoneId( u.getTimeZoneId() );
         user.setUserId( u.getUserId() );
         user.setUserName( u.getUserName() );
