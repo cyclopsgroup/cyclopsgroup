@@ -1,7 +1,5 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,9 +7,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 /**
  * POJO of a user in database
@@ -32,7 +31,7 @@ public class StoredUser
 
     private String countryCode;
 
-    private Date creationDate;
+    private DateTime creationDate;
 
     private String displayName;
 
@@ -42,9 +41,9 @@ public class StoredUser
 
     private String languageCode;
 
-    private Date lastModified;
+    private DateTime lastModified;
 
-    private Date lastVisit;
+    private DateTime lastVisit;
 
     private String password;
 
@@ -71,8 +70,8 @@ public class StoredUser
      * @return Creation date
      */
     @Column( name = "creation_date", nullable = false )
-    @Temporal( TemporalType.TIMESTAMP )
-    public final Date getCreationDate()
+    @Type( type = "datetime" )
+    public final DateTime getCreationDate()
     {
         return creationDate;
     }
@@ -117,8 +116,8 @@ public class StoredUser
      * @return Last modified timestamp of user
      */
     @Column( name = "last_modified" )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getLastModified()
+    @Type( type = "datetime" )
+    public DateTime getLastModified()
     {
         return lastModified;
     }
@@ -127,8 +126,8 @@ public class StoredUser
      * @return Last visit time of the user
      */
     @Column( name = "last_visit" )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getLastVisit()
+    @Type( type = "datetime" )
+    public DateTime getLastVisit()
     {
         return lastVisit;
     }
@@ -201,7 +200,7 @@ public class StoredUser
     /**
      * @param creationDate {@link #getCreationDate()}
      */
-    public final void setCreationDate( Date creationDate )
+    public final void setCreationDate( DateTime creationDate )
     {
         this.creationDate = creationDate;
     }
@@ -241,7 +240,7 @@ public class StoredUser
     /**
      * @param lastModified {@link #getLastModified()}
      */
-    public void setLastModified( Date lastModified )
+    public void setLastModified( DateTime lastModified )
     {
         this.lastModified = lastModified;
     }
@@ -249,7 +248,7 @@ public class StoredUser
     /**
      * @param lastVisit {@link #getLastVisit()}
      */
-    public void setLastVisit( Date lastVisit )
+    public void setLastVisit( DateTime lastVisit )
     {
         this.lastVisit = lastVisit;
     }

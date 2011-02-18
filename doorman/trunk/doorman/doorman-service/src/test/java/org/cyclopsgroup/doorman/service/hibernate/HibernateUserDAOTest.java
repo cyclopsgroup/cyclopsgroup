@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
@@ -50,7 +50,7 @@ public class HibernateUserDAOTest
         request.setEmailAddress( id + "@cyclopsgroup.org" );
         request.setPassword( "pass" );
         request.setUserName( id + "@cyclopsgroup.org" );
-        request.setRequestDate( new Date() );
+        request.setRequestDate( new DateTime() );
         request.setDomainName( "cyclopsgroup.org" );
         request.setRequestId( id );
         request.setRequestToken( id );

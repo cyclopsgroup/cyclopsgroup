@@ -2,12 +2,11 @@ package org.cyclopsgroup.doorman.service.hibernate;
 
 import static org.junit.Assert.assertNull;
 
-import java.util.Date;
-
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
@@ -44,10 +43,10 @@ public class HibernateUserSessionDAOTest
     {
         StoredUserSession session = new StoredUserSession();
         session.setAcceptLanguage( "us" );
-        session.setCreationDate( new Date() );
+        session.setCreationDate( new DateTime() );
         session.setIpAddress( "127.0.0.1" );
-        session.setLastModified( new Date() );
-        session.setLastVerification( new Date() );
+        session.setLastModified( new DateTime() );
+        session.setLastVerification( new DateTime() );
         session.setSessionId( UUIDUtils.randomStringId() );
         session.setUserAgent( "ua" );
         dao.getHibernateTemplate().save( session );

@@ -1,15 +1,14 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 /**
  * Table that stored sign up request that has not been finished yet
@@ -34,7 +33,7 @@ public class StoredUserSignUpRequest
 
     private String password;
 
-    private Date requestDate;
+    private DateTime requestDate;
 
     private String requestId;
 
@@ -84,8 +83,8 @@ public class StoredUserSignUpRequest
      * @return Timestamp of request
      */
     @Column( name = "request_date", nullable = false )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getRequestDate()
+    @Type( type = "datetime" )
+    public DateTime getRequestDate()
     {
         return requestDate;
     }
@@ -162,7 +161,7 @@ public class StoredUserSignUpRequest
     /**
      * @param requestDate {@link #getRequestDate()}
      */
-    public void setRequestDate( Date requestDate )
+    public void setRequestDate( DateTime requestDate )
     {
         this.requestDate = requestDate;
     }

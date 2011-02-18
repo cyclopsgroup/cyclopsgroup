@@ -16,6 +16,8 @@
         class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="packagesToScan"
             value="org.cyclopsgroup.doorman.service.storage" />
+        <property name="annotatedPackages"
+            value="org.cyclopsgroup.doorman.service.storage" />
         <property name="dataSource"
             ref="org.cyclopsgroup.doorman.HSQLDataSource" />
         <property name="hibernateProperties">

@@ -1,6 +1,5 @@
 package org.cyclopsgroup.doorman.service.hibernate;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -14,7 +13,6 @@ import org.cyclopsgroup.doorman.service.storage.StoredUserState;
 import org.cyclopsgroup.doorman.service.storage.StoredUserType;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -26,11 +24,6 @@ class HibernateUserDAO
     extends HibernateDaoSupport
     implements UserDAO
 {
-    private static Date now()
-    {
-        return new DateTime( DateTimeZone.UTC ).toLocalDateTime().toDateTime().toDate();
-    }
-
     /**
      * @param sessionFactory Hibernate session factory
      */
@@ -49,7 +42,7 @@ class HibernateUserDAO
         user.setCountryCode( Locale.getDefault().getCountry() );
         user.setLanguageCode( Locale.getDefault().getLanguage() );
 
-        Date now = now();
+        DateTime now = new DateTime();
         user.setLastModified( now );
         user.setCreationDate( now );
         user.setLastVisit( now );
@@ -91,7 +84,7 @@ class HibernateUserDAO
         user.setUserState( StoredUserState.ACTIVE );
         user.setUserType( StoredUserType.LOCAL );
 
-        Date now = now();
+        DateTime now = new DateTime();
         user.setCreationDate( now );
         user.setLastModified( now );
         user.setLastVisit( now );
@@ -125,7 +118,7 @@ class HibernateUserDAO
     @Override
     public void saveSignupRequest( StoredUserSignUpRequest request )
     {
-        request.setRequestDate( now() );
+        request.setRequestDate( new DateTime() );
         getHibernateTemplate().save( request );
     }
 
@@ -135,7 +128,7 @@ class HibernateUserDAO
     @Override
     public void saveUser( StoredUser user )
     {
-        user.setLastModified( now() );
+        user.setLastModified( new DateTime() );
         getHibernateTemplate().update( user );
     }
 }

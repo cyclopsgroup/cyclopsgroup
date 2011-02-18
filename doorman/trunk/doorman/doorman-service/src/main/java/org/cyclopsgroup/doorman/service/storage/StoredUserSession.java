@@ -1,7 +1,5 @@
 package org.cyclopsgroup.doorman.service.storage;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,8 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 /**
  * Java POJO of user session
@@ -24,13 +23,13 @@ public class StoredUserSession
 {
     private String acceptLanguage;
 
-    private Date creationDate;
+    private DateTime creationDate;
 
     private String ipAddress;
 
-    private Date lastModified;
+    private DateTime lastModified;
 
-    private Date lastVerification;
+    private DateTime lastVerification;
 
     private String sessionId;
 
@@ -48,11 +47,11 @@ public class StoredUserSession
     }
 
     /**
-     * @return Creation date of session
+     * @return Creation DateTime of session
      */
     @Column( name = "creation_date", nullable = false )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getCreationDate()
+    @Type( type = "datetime" )
+    public DateTime getCreationDate()
     {
         return creationDate;
     }
@@ -70,8 +69,8 @@ public class StoredUserSession
      * @return Last modified time of session
      */
     @Column( name = "last_modified", nullable = false )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getLastModified()
+    @Type( type = "datetime" )
+    public DateTime getLastModified()
     {
         return lastModified;
     }
@@ -80,8 +79,8 @@ public class StoredUserSession
      * @return Time stamp of last authenticatino
      */
     @Column( name = "last_verification" )
-    @Temporal( TemporalType.TIMESTAMP )
-    public Date getLastVerification()
+    @Type( type = "datetime" )
+    public DateTime getLastVerification()
     {
         return lastVerification;
     }
@@ -127,7 +126,7 @@ public class StoredUserSession
     /**
      * @param creationDate {@link #getCreationDate()}
      */
-    public void setCreationDate( Date creationDate )
+    public void setCreationDate( DateTime creationDate )
     {
         this.creationDate = creationDate;
     }
@@ -143,7 +142,7 @@ public class StoredUserSession
     /**
      * @param lastModified {@link #getLastModified()}
      */
-    public void setLastModified( Date lastModified )
+    public void setLastModified( DateTime lastModified )
     {
         this.lastModified = lastModified;
     }
@@ -151,7 +150,7 @@ public class StoredUserSession
     /**
      * @param lastVerification {@link #getLastVerification()}
      */
-    public void setLastVerification( Date lastVerification )
+    public void setLastVerification( DateTime lastVerification )
     {
         this.lastVerification = lastVerification;
     }

@@ -1,13 +1,10 @@
 package org.cyclopsgroup.doorman.service.hibernate;
 
-import java.util.Date;
-
 import org.cyclopsgroup.doorman.service.dao.UserSessionDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -19,11 +16,6 @@ class HibernateUserSessionDAO
     extends HibernateDaoSupport
     implements UserSessionDAO
 {
-    private static Date now()
-    {
-        return new DateTime( DateTimeZone.UTC ).toLocalDateTime().toDateTime().toDate();
-    }
-
     /**
      * @param sessionFactory Hibernate session factory
      */
@@ -44,7 +36,7 @@ class HibernateUserSessionDAO
             return null;
         }
 
-        Date now = now();
+        DateTime now = new DateTime();
         session.setLastModified( now );
         StoredUser user = session.getUser();
         if ( user != null )
@@ -61,7 +53,7 @@ class HibernateUserSessionDAO
     @Override
     public void createNew( StoredUserSession session )
     {
-        Date now = now();
+        DateTime now = new DateTime();
         session.setCreationDate( now );
         session.setLastModified( now );
         StoredUser user = session.getUser();
@@ -90,7 +82,7 @@ class HibernateUserSessionDAO
         StoredUserSession session =
             (StoredUserSession) getHibernateTemplate().load( StoredUserSession.class, sessionId );
         session.setUser( user );
-        Date now = now();
+        DateTime now = new DateTime();
         session.setLastModified( now );
         if ( user != null )
         {
