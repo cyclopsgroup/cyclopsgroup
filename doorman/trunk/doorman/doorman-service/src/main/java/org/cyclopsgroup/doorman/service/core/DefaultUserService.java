@@ -18,7 +18,6 @@ import org.cyclopsgroup.doorman.service.dao.UserDAO;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -45,7 +44,7 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( readOnly = true )
     public UserOperationResult authenticate( String userName, String secureCredential )
     {
         StoredUser u = userDao.findByNameOrId( userName );
@@ -65,7 +64,7 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( readOnly = true )
     public User get( String userName )
     {
         StoredUser u = userDao.findByNameOrId( userName );
@@ -81,7 +80,7 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( readOnly = true )
     public Users list( ListUserRequest request )
     {
         List<User> users = new ArrayList<User>( request.getUserNames().size() );
@@ -100,7 +99,7 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED, readOnly = true )
+    @Transactional( readOnly = true )
     public UserOperationResult ping( String userName )
     {
         StoredUser u = userDao.findByNameOrId( userName );
@@ -115,7 +114,7 @@ public class DefaultUserService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.REPEATABLE_READ )
+    @Transactional
     public void update( String userName, User user )
     {
         StoredUser u = userDao.findByNameOrId( userName );

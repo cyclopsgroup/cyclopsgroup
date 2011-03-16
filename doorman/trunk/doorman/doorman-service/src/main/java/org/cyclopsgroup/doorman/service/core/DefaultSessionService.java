@@ -23,7 +23,6 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -55,7 +54,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserOperationResult confirmSignUp( String sessionId, String token )
     {
         StoredUser user;
@@ -76,7 +75,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserSession getSession( String sessionId )
     {
         StoredUserSession s = userSessionDao.pingSession( sessionId );
@@ -114,7 +113,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserSession pingSession( String sessionId )
     {
         StoredUserSession session = userSessionDao.pingSession( sessionId );
@@ -129,7 +128,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserSignUpResponse requestSignUp( String sessionId, User user )
     {
         StoredUser existingUser = userDao.findByNameOrId( user.getUserName() );
@@ -157,7 +156,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserOperationResult signIn( String sessionId, String userName, String password )
     {
         StoredUser u = userDao.findByNameOrId( userName );
@@ -177,7 +176,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserOperationResult signOut( String sessionId )
     {
         userSessionDao.updateUser( sessionId, null );
@@ -188,7 +187,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserOperationResult signUp( String sessionId, User user )
     {
         StoredUser existing = userDao.findByNameOrId( user.getUserName() );
@@ -212,7 +211,7 @@ public class DefaultSessionService
      * @inheritDoc
      */
     @Override
-    @Transactional( isolation = Isolation.READ_COMMITTED )
+    @Transactional
     public UserSession startSession( String sessionId, UserSessionAttributes attributes )
     {
         Validate.notNull( sessionId, "Session ID can't be NULL" );
