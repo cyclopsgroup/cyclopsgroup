@@ -194,8 +194,8 @@ public class DefaultSessionService
                     PropertyUtils.copyProperties( mail, emailSettings );
                 }
                 mail.setTo( Arrays.asList( user.getEmailAddress() ) );
-                mail.setSubject( "Your registration of user " + user.getUserName() + " from " + domainName );
-                mail.setMsg( "" );
+                mail.setSubject( "Account registration " + user.getUserName() + " from " + domainName );
+                mail.setMsg( "Your registration code is " + id );
             }
             catch ( Exception e )
             {
