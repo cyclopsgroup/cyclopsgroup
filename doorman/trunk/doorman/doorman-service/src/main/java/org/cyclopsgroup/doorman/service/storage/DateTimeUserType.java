@@ -123,7 +123,7 @@ public class DateTimeUserType
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings( "rawtypes" )
     @Override
     public Class returnedClass()
     {

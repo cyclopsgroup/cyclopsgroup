@@ -38,7 +38,7 @@ class ParameterOverridingRequest
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings( "rawtypes" )
     @Override
     public Map getParameterMap()
     {
@@ -48,7 +48,7 @@ class ParameterOverridingRequest
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings( "rawtypes" )
     @Override
     public Enumeration getParameterNames()
     {

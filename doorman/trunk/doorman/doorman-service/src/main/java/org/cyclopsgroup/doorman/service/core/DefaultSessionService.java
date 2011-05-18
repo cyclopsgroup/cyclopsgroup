@@ -1,9 +1,14 @@
 package org.cyclopsgroup.doorman.service.core;
 
+import java.util.Arrays;
+
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
@@ -39,6 +44,36 @@ public class DefaultSessionService
     private final UserDAO userDao;
 
     private final UserSessionDAO userSessionDao;
+
+    private Email emailSettings;
+
+    private boolean enableEmail;
+
+    private String domainName = "babieslog.com";
+
+    /**
+     * @param domainName Name of domain under which users are registered
+     */
+    public final void setDomainName( String domainName )
+    {
+        this.domainName = domainName;
+    }
+
+    /**
+     * @param enableEmail True if to send email confirmations
+     */
+    public final void setEnableEmail( boolean enableEmail )
+    {
+        this.enableEmail = enableEmail;
+    }
+
+    /**
+     * @param emailSettings A email where SMTP settings are configured
+     */
+    public final void setEmailSettings( Email emailSettings )
+    {
+        this.emailSettings = emailSettings;
+    }
 
     /**
      * @param daoFactory Factory instance that creates necessary DAOs
@@ -144,10 +179,30 @@ public class DefaultSessionService
         request.setRequestId( id );
         request.setRequestToken( id );
         request.setUserName( user.getUserName() );
-        request.setDomainName( "cyclopsgroup.org" );
+        request.setDomainName( domainName );
         request.setTimeZoneId( user.getTimeZoneId() );
         userDao.saveSignupRequest( request );
 
+        if ( enableEmail )
+        {
+            try
+            {
+                SimpleEmail mail = new SimpleEmail();
+                if ( emailSettings != null )
+                {
+
+                    PropertyUtils.copyProperties( mail, emailSettings );
+                }
+                mail.setTo( Arrays.asList( user.getEmailAddress() ) );
+                mail.setSubject( "Your registration of user " + user.getUserName() + " from " + domainName );
+                mail.setMsg( "" );
+            }
+            catch ( Exception e )
+            {
+                throw new RuntimeException( "Can't sending email with settings " + emailSettings, e );
+            }
+
+        }
         LOG.info( "Sign up request " + id + " is saved" );
         return new UserSignUpResponse( UserOperationResult.SUCCESSFUL, id );
     }
@@ -198,6 +253,7 @@ public class DefaultSessionService
 
         String uid = UUIDUtils.randomStringId();
         StoredUser u = new StoredUser();
+        u.setDomainName( domainName );
         u.setPassword( user.getPassword() );
         u.setUserId( uid );
         u.setUserState( StoredUserState.ACTIVE );
