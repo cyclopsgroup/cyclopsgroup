@@ -5,16 +5,16 @@
     <parent>
         <groupId>org.cyclopsgroup</groupId>
         <artifactId>cym2</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cyclopsgroup</groupId>
-    <artifactId>uberjar-maven-plugin</artifactId>
-    <packaging>maven-plugin</packaging>
-    <name>UberJar Maven2 Plugin</name>
-    <version>1.2-SNAPSHOT</version>
-    <inceptionYear>2007</inceptionYear>
+    <artifactId>awss3-wagon-provider</artifactId>
+    <packaging>jar</packaging>
+    <name>S3 Maven Extension</name>
+    <version>1.0-SNAPSHOT</version>
+    <inceptionYear>2011</inceptionYear>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -24,37 +24,20 @@
     </licenses>
     <scm>
         <connection>
-            scm:git:http://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/uberjar
+            scm:git:http://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
         </connection>
         <developerConnection>
-            scm:git:https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/uberjar
+            scm:git:https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
         </developerConnection>
         <url>
-            https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/uberjar
+            https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
         </url>
     </scm>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <configuration>
-                    <goalPrefix>uberjar</goalPrefix>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
-            <groupId>classworlds</groupId>
-            <artifactId>classworlds</artifactId>
-            <version>1.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>classworlds</groupId>
-            <artifactId>classworlds-boot</artifactId>
-            <version>1.0</version>
-            <scope>runtime</scope>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -67,9 +50,9 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-tools-api</artifactId>
-            <version>2.0</version>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-provider-api</artifactId>
+            <version>1.0-beta-7</version>
         </dependency>
     </dependencies>
 </project>

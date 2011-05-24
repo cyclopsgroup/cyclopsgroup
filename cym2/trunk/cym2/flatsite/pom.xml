@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.cyclopsgroup</groupId>
         <artifactId>cym2</artifactId>
-        <version>1.2-alpha-2</version>
+        <version>1.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
     <artifactId>flatsite-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>Flatsite Maven2 Plugin</name>
-    <version>2.2-alpha-2</version>
+    <version>2.3-SNAPSHOT</version>
     <inceptionYear>2005</inceptionYear>
     <licenses>
         <license>
@@ -24,13 +24,13 @@
     </licenses>
     <scm>
         <connection>
-            scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2/flatsite
+            scm:git:http://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/flatsite
         </connection>
         <developerConnection>
-            scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/cym2/trunk/cym2/flatsite
+            scm:git:https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/flatsite
         </developerConnection>
         <url>
-            http://fisheye3.atlassian.com/browse/cyclops-group/cym2/trunk/cym2/flatsite
+            https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/flatsite
         </url>
     </scm>
     <build>
