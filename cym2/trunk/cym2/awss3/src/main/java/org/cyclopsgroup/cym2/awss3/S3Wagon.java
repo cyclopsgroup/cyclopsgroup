@@ -2,7 +2,10 @@ package org.cyclopsgroup.cym2.awss3;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,20 +15,17 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.maven.wagon.ConnectionException;
+import org.apache.maven.wagon.InputData;
+import org.apache.maven.wagon.OutputData;
 import org.apache.maven.wagon.ResourceDoesNotExistException;
+import org.apache.maven.wagon.StreamWagon;
 import org.apache.maven.wagon.TransferFailedException;
-import org.apache.maven.wagon.Wagon;
 import org.apache.maven.wagon.authentication.AuthenticationException;
 import org.apache.maven.wagon.authentication.AuthenticationInfo;
 import org.apache.maven.wagon.authorization.AuthorizationException;
-import org.apache.maven.wagon.events.SessionListener;
-import org.apache.maven.wagon.events.TransferListener;
 import org.apache.maven.wagon.proxy.ProxyInfo;
-import org.apache.maven.wagon.proxy.ProxyInfoProvider;
-import org.apache.maven.wagon.repository.Repository;
+import org.apache.maven.wagon.resource.Resource;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
@@ -38,6 +38,7 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 /**
@@ -46,25 +47,84 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public class S3Wagon
-    implements Wagon
+    extends StreamWagon
 {
-    private static final Log LOG = LogFactory.getLog( S3Wagon.class );
-
-    private AmazonS3 s3;
-
-    private Repository repository;
-
-    private int timeout;
-
-    private final Set<SessionListener> sessionListeners = new HashSet<SessionListener>();
-
-    private final Set<TransferListener> transferListeners = new HashSet<TransferListener>();
-
-    private boolean interactive;
+    private String bucketName;
 
     private String keyPrefix;
 
-    private String bucketName;
+    private AmazonS3 s3;
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void closeConnection()
+        throws ConnectionException
+    {
+    }
+
+    private void doPutFromStream( InputStream in, File inFile, String destination, long contentLength, long lastModified )
+    {
+        Resource resource = new Resource( destination );
+        firePutInitiated( resource, inFile );
+        String key = keyPrefix + destination;
+        ObjectMetadata meta = new ObjectMetadata();
+        if ( contentLength != -1 )
+        {
+            meta.setContentLength( contentLength );
+        }
+        meta.setLastModified( new Date( lastModified ) );
+        try
+        {
+            fireTransferDebug( "Uploading file " + inFile + " to  key " + key + " in S3 bucket " + bucketName );
+            firePutStarted( resource, inFile );
+            s3.putObject( bucketName, key, in, meta );
+            s3.setObjectAcl( bucketName, key, CannedAccessControlList.PublicRead );
+            firePutCompleted( resource, inFile );
+        }
+        finally
+        {
+            IOUtils.closeQuietly( in );
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void fillInputData( InputData in )
+        throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException
+    {
+        fireTransferDebug( "Filling input data" );
+        String key = keyPrefix + in.getResource().getName();
+        S3Object object;
+        try
+        {
+            object = s3.getObject( bucketName, key );
+        }
+        catch ( AmazonServiceException e )
+        {
+            if ( e.getStatusCode() == 404 )
+            {
+                throw new ResourceDoesNotExistException( "Key " + key + " does not exist in S3 bucket " + bucketName );
+            }
+            throw new TransferFailedException( "Can't get object " + key + " from S4 bucket " + bucketName, e );
+        }
+        in.getResource().setContentLength( object.getObjectMetadata().getContentLength() );
+        in.getResource().setLastModified( object.getObjectMetadata().getLastModified().getTime() );
+        in.setInputStream( object.getObjectContent() );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void fillOutputData( OutputData out )
+        throws TransferFailedException
+    {
+        throw new UnsupportedOperationException( "This call is not supported" );
+    }
 
     /**
      * @inheritDoc
@@ -72,20 +132,14 @@ public class S3Wagon
     public void get( String resourceName, File destination )
         throws ResourceDoesNotExistException, TransferFailedException
     {
-        s3.getObject( new GetObjectRequest( bucketName, keyPrefix + resourceName ), destination );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public boolean getIfNewer( String resourceName, File destination, long timestamp )
-        throws ResourceDoesNotExistException, TransferFailedException
-    {
+        Resource resource = new Resource( resourceName );
+        fireGetInitiated( resource, destination );
         String key = keyPrefix + resourceName;
-        ObjectMetadata meta;
         try
         {
-            meta = s3.getObjectMetadata( bucketName, key );
+            fireGetStarted( resource, destination );
+            s3.getObject( new GetObjectRequest( bucketName, key ), destination );
+            fireGetCompleted( resource, destination );
         }
         catch ( AmazonServiceException e )
         {
@@ -95,45 +149,171 @@ public class S3Wagon
             }
             throw new TransferFailedException( "Getting metadata of key " + key + "failed", e );
         }
-        if ( meta.getLastModified().getTime() <= timestamp )
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @SuppressWarnings( "rawtypes" )
+    public List getFileList( String destinationDirectory )
+        throws TransferFailedException, ResourceDoesNotExistException
+    {
+        String path = keyPrefix + destinationDirectory;
+        if ( !path.endsWith( "/" ) )
+        {
+            path += "/";
+        }
+        fireSessionDebug( "Listing objects with prefix " + path + " under bucket " + bucketName );
+        ObjectListing result =
+            s3.listObjects( new ListObjectsRequest().withBucketName( bucketName ).withPrefix( path ).withDelimiter( "/" ) );
+        if ( result.getObjectSummaries().isEmpty() )
+        {
+            throw new ResourceDoesNotExistException( "No keys exist with prefix " + path );
+        }
+        Set<String> results = new HashSet<String>();
+        for ( S3ObjectSummary summary : result.getObjectSummaries() )
+        {
+            String name = StringUtils.removeStart( summary.getKey(), path );
+            if ( name.indexOf( '/' ) == -1 )
+            {
+                results.add( name );
+            }
+            else
+            {
+                results.add( name.substring( 0, name.indexOf( '/' ) ) );
+            }
+        }
+        fireSessionDebug( "Returning result " + results );
+        return new ArrayList<String>( results );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public boolean getIfNewer( String resourceName, File destination, long timestamp )
+        throws ResourceDoesNotExistException, TransferFailedException
+    {
+        ObjectMetadata meta = getRequiredMetadata( resourceName );
+        if ( meta == null )
         {
             return false;
         }
-        s3.getObject( new GetObjectRequest( bucketName, key ), destination );
+        get( resourceName, destination );
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    public void put( File source, String destination )
-        throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException
+    @Override
+    public boolean getIfNewerToStream( String resourceName, OutputStream out, long timestamp )
+        throws ResourceDoesNotExistException, TransferFailedException
     {
-        String key = keyPrefix + destination;
-        ObjectMetadata meta = new ObjectMetadata();
-        meta.setContentLength( source.length() );
-        meta.setLastModified( new Date( source.lastModified() ) );
+        ObjectMetadata meta = getRequiredMetadata( resourceName );
+        if ( meta == null )
+        {
+            return false;
+        }
+        Resource resource = new Resource( resourceName );
+        fireGetInitiated( resource, null );
+        InputStream in = s3.getObject( bucketName, keyPrefix ).getObjectContent();
         try
         {
-            FileInputStream in = new FileInputStream( source );
-            try
-            {
-                System.out.println( "Putting key " + key + " to " + bucketName );
-                s3.putObject( bucketName, key, in, meta );
-                s3.setObjectAcl( bucketName, key, CannedAccessControlList.PublicRead );
-            }
-            finally
-            {
-                IOUtils.closeQuietly( in );
-            }
+            fireGetStarted( resource, null );
+            IOUtils.copy( in, out );
+            out.flush();
+            out.close();
+            fireGetCompleted( resource, null );
+            return true;
         }
         catch ( IOException e )
         {
-            throw new TransferFailedException( "Can't transfer file " + source + " to key " + key, e );
+            throw new TransferFailedException( "Stream copy failed", e );
+        }
+        finally
+        {
+            IOUtils.closeQuietly( in );
+        }
+    }
+
+    private ObjectMetadata getRequiredMetadata( String resourceName )
+        throws ResourceDoesNotExistException, TransferFailedException
+    {
+        String key = keyPrefix + resourceName;
+        try
+        {
+            return s3.getObjectMetadata( bucketName, key );
         }
         catch ( AmazonServiceException e )
         {
-            throw new TransferFailedException( "AWS call failed", e );
+            if ( e.getStatusCode() == 404 )
+            {
+                throw new ResourceDoesNotExistException( "Key " + key + " does not exist in bucket " + bucketName, e );
+            }
+            throw new TransferFailedException( "Getting metadata of key " + key + "failed", e );
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    protected void openConnectionInternal()
+        throws ConnectionException, AuthenticationException
+    {
+        AuthenticationInfo auth = getAuthenticationInfo();
+        if ( auth == null )
+        {
+            throw new AuthenticationException( "S3 access requires authentication information" );
+        }
+        ProxyInfo proxy = getProxyInfo();
+        fireSessionDebug( "Setting up AWS S3 client with source "
+            + ToStringBuilder.reflectionToString( getRepository() ) + ", authentication information and proxy "
+            + ToStringBuilder.reflectionToString( proxy ) );
+        AWSCredentials credentials = new BasicAWSCredentials( auth.getUserName(), auth.getPassword() );
+        ClientConfiguration config = new ClientConfiguration();
+        config.setConnectionTimeout( getTimeout() );
+        config.setSocketTimeout( getTimeout() );
+        fireSessionDebug( "Connect timeout and socket timeout is set to " + getTimeout() + " ms" );
+
+        if ( proxy != null )
+        {
+            config.setProxyDomain( proxy.getNtlmDomain() );
+            config.setProxyHost( proxy.getHost() );
+            config.setProxyPassword( proxy.getPassword() );
+            config.setProxyPort( proxy.getPort() );
+            config.setProxyUsername( proxy.getUserName() );
+            config.setProxyWorkstation( proxy.getNtlmHost() );
+        }
+        fireSessionDebug( "AWS Client config is " + ToStringBuilder.reflectionToString( config ) );
+
+        s3 = new AmazonS3Client( credentials, config );
+        bucketName = getRepository().getHost();
+        fireSessionDebug( "Bucket name is " + bucketName );
+
+        String prefix = StringUtils.trimToEmpty( getRepository().getBasedir() );
+        if ( !prefix.endsWith( "/" ) )
+        {
+            prefix = prefix + "/";
+        }
+        prefix = StringUtils.removeStart( prefix, "/" );
+        keyPrefix = prefix;
+        fireSessionDebug( "Key prefix " + keyPrefix );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public void put( File source, String destination )
+        throws TransferFailedException, ResourceDoesNotExistException
+    {
+        try
+        {
+            doPutFromStream( new FileInputStream( source ), source, destination, source.length(), source.lastModified() );
+        }
+        catch ( FileNotFoundException e )
+        {
+            throw new ResourceDoesNotExistException( "Source file " + source + " does not exist", e );
         }
     }
 
@@ -143,6 +323,46 @@ public class S3Wagon
     public void putDirectory( File sourceDirectory, String destinationDirectory )
         throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException
     {
+        if ( destinationDirectory.equals( "." ) )
+        {
+            destinationDirectory = "";
+        }
+        fireTransferDebug( "Putting " + sourceDirectory + " to " + destinationDirectory + " which is noop" );
+        for ( File file : sourceDirectory.listFiles() )
+        {
+            String dest =
+                StringUtils.isBlank( destinationDirectory ) ? file.getName()
+                                : ( destinationDirectory + "/" + file.getName() );
+            fireTransferDebug( "Putting child element " + file + " to " + dest );
+            if ( file.isDirectory() )
+            {
+                putDirectory( file, dest );
+            }
+            else
+            {
+                put( file, dest );
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void putFromStream( InputStream in, String destination )
+        throws TransferFailedException, ResourceDoesNotExistException
+    {
+        doPutFromStream( in, null, destination, -1, System.currentTimeMillis() );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void putFromStream( InputStream in, String destination, long contentLength, long lastModified )
+        throws TransferFailedException, ResourceDoesNotExistException
+    {
+        doPutFromStream( in, null, destination, contentLength, lastModified );
     }
 
     /**
@@ -170,220 +390,8 @@ public class S3Wagon
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "rawtypes" )
-    public List getFileList( String destinationDirectory )
-        throws TransferFailedException, ResourceDoesNotExistException
-    {
-        String path = keyPrefix + destinationDirectory;
-        if ( !path.endsWith( "/" ) )
-        {
-            path += "/";
-        }
-        ObjectListing result =
-            s3.listObjects( new ListObjectsRequest().withBucketName( bucketName ).withPrefix( path ).withDelimiter( "/" ) );
-        if ( result.getObjectSummaries().isEmpty() )
-        {
-            throw new ResourceDoesNotExistException( "No keys exist with prefix " + path );
-        }
-        Set<String> results = new HashSet<String>();
-        for ( S3ObjectSummary summary : result.getObjectSummaries() )
-        {
-            String name = StringUtils.removeStart( summary.getKey(), path );
-            if ( name.indexOf( '/' ) == -1 )
-            {
-                results.add( name );
-            }
-            else
-            {
-                results.add( name.substring( 0, name.indexOf( '/' ) ) );
-            }
-        }
-        return new ArrayList<String>( results );
-    }
-
-    /**
-     * @inheritDoc
-     */
     public boolean supportsDirectoryCopy()
     {
         return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public Repository getRepository()
-    {
-        return repository;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void connect( Repository source )
-        throws ConnectionException, AuthenticationException
-    {
-        throw new UnsupportedOperationException( "Authentication must be provided" );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void connect( Repository source, ProxyInfo proxyInfo )
-        throws ConnectionException, AuthenticationException
-    {
-        throw new UnsupportedOperationException( "Authentication must be provided" );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void connect( Repository source, ProxyInfoProvider proxyInfoProvider )
-        throws ConnectionException, AuthenticationException
-    {
-        throw new UnsupportedOperationException( "Authentication must be provided" );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void connect( Repository source, AuthenticationInfo authenticationInfo )
-        throws ConnectionException, AuthenticationException
-    {
-        connect( source, authenticationInfo, (ProxyInfo) null );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void connect( Repository source, AuthenticationInfo authenticationInfo, ProxyInfo proxyInfo )
-        throws ConnectionException, AuthenticationException
-    {
-        System.out.println( "Setting up AWS S3 client with source " + ToStringBuilder.reflectionToString( source )
-            + " authentication information " + ToStringBuilder.reflectionToString( authenticationInfo ) + " and proxy "
-            + ToStringBuilder.reflectionToString( proxyInfo ) );
-        AWSCredentials credentials =
-            new BasicAWSCredentials( authenticationInfo.getUserName(), authenticationInfo.getPassword() );
-        ClientConfiguration config = new ClientConfiguration();
-
-        config.setConnectionTimeout( timeout );
-        config.setSocketTimeout( timeout );
-        LOG.info( "Connect timeout and socket timeout is both set to " + timeout + "ms" );
-
-        if ( proxyInfo != null )
-        {
-            config.setProxyDomain( proxyInfo.getNtlmDomain() );
-            config.setProxyHost( proxyInfo.getHost() );
-            config.setProxyPassword( proxyInfo.getPassword() );
-            config.setProxyPort( proxyInfo.getPort() );
-            config.setProxyUsername( proxyInfo.getUserName() );
-            config.setProxyWorkstation( proxyInfo.getNtlmHost() );
-        }
-        System.out.println( "Client config is " + ToStringBuilder.reflectionToString( config ) );
-
-        s3 = new AmazonS3Client( credentials, config );
-        String prefix = StringUtils.trimToEmpty( source.getBasedir() );
-        StringUtils.removeStart( prefix, "/" );
-        if ( StringUtils.isNotEmpty( prefix ) && !prefix.endsWith( "/" ) )
-        {
-            prefix = prefix + "/";
-        }
-        keyPrefix = prefix;
-        System.out.println( "Key prefix " + keyPrefix );
-        repository = source;
-    }
-
-    public void connect( Repository source, AuthenticationInfo authenticationInfo, ProxyInfoProvider proxyInfoProvider )
-        throws ConnectionException, AuthenticationException
-    {
-        connect( source, authenticationInfo, proxyInfoProvider.getProxyInfo( "s3" ) );
-    }
-
-    public void openConnection()
-    {
-    }
-
-    public void disconnect()
-    {
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void setTimeout( int timeoutValue )
-    {
-        this.timeout = timeoutValue;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public int getTimeout()
-    {
-        return timeout;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void addSessionListener( SessionListener listener )
-    {
-        sessionListeners.add( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void removeSessionListener( SessionListener listener )
-    {
-        sessionListeners.remove( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public boolean hasSessionListener( SessionListener listener )
-    {
-        return sessionListeners.contains( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void addTransferListener( TransferListener listener )
-    {
-        transferListeners.add( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void removeTransferListener( TransferListener listener )
-    {
-        transferListeners.remove( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public boolean hasTransferListener( TransferListener listener )
-    {
-        return transferListeners.contains( listener );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public boolean isInteractive()
-    {
-        return interactive;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public void setInteractive( boolean interactive )
-    {
-        this.interactive = interactive;
     }
 }

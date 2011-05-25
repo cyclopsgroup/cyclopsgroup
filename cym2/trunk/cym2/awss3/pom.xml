@@ -50,14 +50,15 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven.wagon</groupId>
             <artifactId>wagon-provider-api</artifactId>
             <version>1.0-beta-7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-provider-test</artifactId>
+            <version>1.0-beta-7</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
