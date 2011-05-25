@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -49,6 +51,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 public class S3Wagon
     extends StreamWagon
 {
+    private final MimetypesFileTypeMap typeMap = new MimetypesFileTypeMap();
+
     private String bucketName;
 
     private String keyPrefix;
@@ -75,6 +79,17 @@ public class S3Wagon
             meta.setContentLength( contentLength );
         }
         meta.setLastModified( new Date( lastModified ) );
+
+        String contentType;
+        if ( destination.endsWith( ".css" ) )
+        {
+            contentType = "text/css";
+        }
+        else
+        {
+            contentType = typeMap.getContentType( destination );
+        }
+        meta.setContentType( contentType );
         try
         {
             fireTransferDebug( "Uploading file " + inFile + " to  key " + key + " in S3 bucket " + bucketName );
