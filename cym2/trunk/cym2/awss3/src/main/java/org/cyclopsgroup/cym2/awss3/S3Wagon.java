@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -59,6 +60,27 @@ public class S3Wagon
 
     private AmazonS3 s3;
 
+    private final Properties mimeTypes;
+
+    /**
+     * @throws IOException Allows IO errors
+     */
+    public S3Wagon()
+        throws IOException
+    {
+        Properties props = new Properties();
+        InputStream in = getClass().getClassLoader().getResourceAsStream( "mimetypes.properties" );
+        try
+        {
+            props.load( in );
+            this.mimeTypes = props;
+        }
+        finally
+        {
+            IOUtils.closeQuietly( in );
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -80,16 +102,26 @@ public class S3Wagon
         }
         meta.setLastModified( new Date( lastModified ) );
 
-        String contentType;
-        if ( destination.endsWith( ".css" ) )
+        int lastDot = destination.lastIndexOf( '.' );
+        String mimeType = null;
+        if ( lastDot != -1 )
         {
-            contentType = "text/css";
+            String ext = destination.substring( lastDot + 1, destination.length() );
+            mimeType = mimeTypes.getProperty( ext );
+        }
+        if ( mimeType == null )
+        {
+            mimeType = typeMap.getContentType( destination );
         }
         else
         {
-            contentType = typeMap.getContentType( destination );
+            fireTransferDebug( "Mime type of " + destination + " is " + mimeType + " according to build-in types" );
         }
-        meta.setContentType( contentType );
+        if ( mimeType != null )
+        {
+            meta.setContentType( mimeType );
+        }
+
         try
         {
             fireTransferDebug( "Uploading file " + inFile + " to  key " + key + " in S3 bucket " + bucketName );

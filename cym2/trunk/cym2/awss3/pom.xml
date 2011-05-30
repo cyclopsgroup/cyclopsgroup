@@ -72,4 +72,31 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <echo>Generating mime type properties file</echo>
+                                <java
+                                    classname="org.cyclopsgroup.cym2.awss3.MimeTypesParser"
+                                    classpathref="maven.compile.classpath">
+                                    <arg
+                                        value="$basedir/target/classes/mimetypes.properties" />
+                                </java>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
