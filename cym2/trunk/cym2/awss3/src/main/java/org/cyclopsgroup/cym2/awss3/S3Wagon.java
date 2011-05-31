@@ -156,6 +156,11 @@ public class S3Wagon
             {
                 throw new ResourceDoesNotExistException( "Key " + key + " does not exist in S3 bucket " + bucketName );
             }
+            else if ( e.getStatusCode() == 403 )
+            {
+                throw new ResourceDoesNotExistException( "403 implies that key " + key + " does not exist in bucket "
+                    + bucketName, e );
+            }
             throw new TransferFailedException( "Can't get object " + key + " from S4 bucket " + bucketName, e );
         }
         in.getResource().setContentLength( object.getObjectMetadata().getContentLength() );
@@ -194,7 +199,12 @@ public class S3Wagon
             {
                 throw new ResourceDoesNotExistException( "Key " + key + " does not exist in bucket " + bucketName, e );
             }
-            throw new TransferFailedException( "Getting metadata of key " + key + "failed", e );
+            else if ( e.getStatusCode() == 403 )
+            {
+                throw new ResourceDoesNotExistException( "403 implies that key " + key + " does not exist in bucket "
+                    + bucketName, e );
+            }
+            throw new TransferFailedException( "Getting metadata of key " + key + " failed", e );
         }
     }
 
