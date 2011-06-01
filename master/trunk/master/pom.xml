@@ -6,7 +6,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-master</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.2</version>
+    <version>0.3</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -48,21 +48,10 @@
             <archive>http://groups.google.com/group/cyclopsgroup-changelog</archive>
         </mailingList>
     </mailingLists>
-    <scm>
-        <connection>scm:svn:http://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</connection>
-        <developerConnection>scm:svn:https://cyclops-group.svn.sourceforge.net/svnroot/cyclops-group/master/trunk/master</developerConnection>
-        <url>http://fisheye3.atlassian.com/browse/cyclops-group/master/trunk/master</url>
-    </scm>
     <ciManagement>
         <system>continuum</system>
         <url>http://code.cyclopsgroup.org/continuum/</url>
     </ciManagement>
-    <distributionManagement>
-        <repository>
-            <id>cyclopsgroup.server.sourceforge</id>
-            <url>sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2</url>
-        </repository>
-    </distributionManagement>
     <developers>
         <developer>
             <id>jiaqi</id>
@@ -72,17 +61,21 @@
             <url>http://www.cyclopsgroup.org/members/jiaqi</url>
         </developer>
     </developers>
-    <profiles>
-        <profile>
-            <id>release.public</id>
-            <distributionManagement>
-                <repository>
-                    <id>cyclopsgroup.server.sourceforge</id>
-                    <url>
-                        sftp://web.sourceforge.net/home/groups/c/cy/cyclops-group/m2-export
-                    </url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <keyname>cyclopsgroup-repository</keyname>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
