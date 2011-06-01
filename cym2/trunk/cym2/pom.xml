@@ -39,6 +39,12 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <keyname>cyclopsgroup-repository</keyname>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
