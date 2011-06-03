@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cyclopsgroup</groupId>
-    <artifactId>awss3-wagon-provider</artifactId>
+    <artifactId>awss3-maven-wagon</artifactId>
     <packaging>jar</packaging>
     <name>S3 Maven Extension</name>
     <description>Maven2 Wagon to support S3 repository</description>
@@ -19,10 +19,10 @@
     <inceptionYear>2011</inceptionYear>
     <scm>
         <connection>
-            scm:git:http://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
+            scm:git:git://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
         </connection>
         <developerConnection>
-            scm:git:https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
+            scm:git:git://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
         </developerConnection>
         <url>
             https://github.com/jiaqi/cyclopsgroup/cym2/trunk/cym2/awss3
