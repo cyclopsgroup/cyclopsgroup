@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
 import org.cyclopsgroup.doorman.service.storage.StoredUserType;
+import org.cyclopsgroup.service.security.PasswordStrategy;
 import org.joda.time.DateTime;
 
 /**
@@ -22,6 +23,7 @@ class Utils
         user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setLastModified( new DateTime() );
         user.setPassword( "pass" );
+        user.setPasswordStrategy( PasswordStrategy.PLAIN );
 
         user.setUserId( id );
         user.setUserName( id + "@cyclopsgroup.org" );

@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
+import org.cyclopsgroup.service.security.PasswordStrategy;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -49,6 +50,7 @@ public class HibernateUserDAOTest
         request.setDisplayName( "haha" );
         request.setEmailAddress( id + "@cyclopsgroup.org" );
         request.setPassword( "pass" );
+        request.setPasswordStrategy( PasswordStrategy.PLAIN );
         request.setUserName( id + "@cyclopsgroup.org" );
         request.setRequestDate( new DateTime() );
         request.setDomainName( "cyclopsgroup.org" );

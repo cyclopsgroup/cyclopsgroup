@@ -7,7 +7,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.lang.StringUtils;
 import org.cyclopsgroup.doorman.api.ListUserRequest;
 import org.cyclopsgroup.doorman.api.User;
 import org.cyclopsgroup.doorman.api.UserOperationResult;
@@ -52,8 +51,7 @@ public class DefaultUserService
         {
             return UserOperationResult.NO_SUCH_IDENTITY;
         }
-        String password = u.getPassword();
-        if ( StringUtils.equals( password, secureCredential ) )
+        if ( u.getPasswordStrategy().match( secureCredential, u.getUserId(), u.getPassword() ) )
         {
             return UserOperationResult.SUCCESSFUL;
         }

@@ -79,6 +79,7 @@ class HibernateUserDAO
         user.setDomainName( request.getDomainName() );
         user.setEmailAddress( request.getEmailAddress() );
         user.setPassword( request.getPassword() );
+        user.setPasswordStrategy( request.getPasswordStrategy() );
         user.setUserId( request.getRequestId() );
         user.setUserName( request.getUserName() );
         user.setUserState( StoredUserState.ACTIVE );

@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.cyclopsgroup.caff.util.UUIDUtils;
 import org.cyclopsgroup.doorman.api.SessionService;
 import org.cyclopsgroup.doorman.api.User;
+import org.cyclopsgroup.doorman.api.UserService;
 import org.cyclopsgroup.doorman.api.UserSession;
 import org.cyclopsgroup.doorman.api.UserSessionAttributes;
 import org.junit.Before;
@@ -67,6 +68,7 @@ public class SessionServiceTest
         service.startSession( id, newAttributes() );
 
         User user = new User();
+        user.setUserId( UUIDUtils.randomStringId() );
         user.setDisplayName( "Jiaqi" );
         user.setEmailAddress( id + "@cyclopsgroup.org" );
         user.setPassword( "password" );
@@ -104,5 +106,9 @@ public class SessionServiceTest
 
         UserSession s = service.getSession( id );
         assertEquals( id + "@cyclopsgroup.org", s.getUser().getUserName() );
+
+        UserService users =
+            (UserService) applicationContext.getBeansOfType( UserService.class ).values().iterator().next();
+        users.authenticate( id + "@cyclopsgroup.org", "password" );
     }
 }

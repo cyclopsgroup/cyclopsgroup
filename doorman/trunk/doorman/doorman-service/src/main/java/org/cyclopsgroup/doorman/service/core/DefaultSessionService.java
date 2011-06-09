@@ -19,6 +19,7 @@ import org.cyclopsgroup.doorman.service.storage.StoredUser;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSession;
 import org.cyclopsgroup.doorman.service.storage.StoredUserSignUpRequest;
 import org.cyclopsgroup.doorman.service.storage.StoredUserState;
+import org.cyclopsgroup.service.security.PasswordStrategy;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class DefaultSessionService
     private final UserSessionDAO userSessionDao;
 
     private final UserSessionConfig config;
+
+    private PasswordStrategy passwordStrategy = PasswordStrategy.MD5;
 
     /**
      * @param daoFactory Factory instance that creates necessary DAOs
@@ -144,8 +147,11 @@ public class DefaultSessionService
         StoredUserSignUpRequest request = new StoredUserSignUpRequest();
         request.setDisplayName( user.getDisplayName() );
         request.setEmailAddress( user.getEmailAddress() );
-        request.setPassword( user.getPassword() );
-        String id = UUIDUtils.randomStringId();
+
+        String id = user.getUserId();
+        request.setPassword( passwordStrategy.encode( user.getPassword(), id ) );
+        request.setPasswordStrategy( passwordStrategy );
+
         request.setRequestId( id );
         request.setRequestToken( id );
         request.setUserName( user.getUserName() );
@@ -205,11 +211,14 @@ public class DefaultSessionService
             return UserOperationResult.IDENTITY_EXISTED;
         }
 
-        String uid = UUIDUtils.randomStringId();
+        String userId = UUIDUtils.randomStringId();
         StoredUser u = new StoredUser();
         u.setDomainName( config.getDomainName() );
-        u.setPassword( user.getPassword() );
-        u.setUserId( uid );
+
+        u.setPassword( passwordStrategy.encode( user.getPassword(), userId ) );
+        u.setPasswordStrategy( passwordStrategy );
+
+        u.setUserId( userId );
         u.setUserState( StoredUserState.ACTIVE );
         ServiceUtils.copyUser( user, u );
         userDao.createUser( u );

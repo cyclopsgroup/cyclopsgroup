@@ -9,6 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.cyclopsgroup.service.security.PasswordStrategy;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -46,6 +47,8 @@ public class StoredUser
     private DateTime lastVisit;
 
     private String password;
+
+    private PasswordStrategy passwordStrategy;
 
     private String timeZoneId;
 
@@ -139,6 +142,16 @@ public class StoredUser
     public String getPassword()
     {
         return password;
+    }
+
+    /**
+     * @return The way password is calculated
+     */
+    @Column( name = "password_strategy", length = 8, nullable = false )
+    @Enumerated( EnumType.STRING )
+    public PasswordStrategy getPasswordStrategy()
+    {
+        return passwordStrategy;
     }
 
     /**
@@ -259,6 +272,14 @@ public class StoredUser
     public void setPassword( String password )
     {
         this.password = password;
+    }
+
+    /**
+     * @param passwordStrategy {@link #getPasswordStrategy()}
+     */
+    public void setPasswordStrategy( PasswordStrategy passwordStrategy )
+    {
+        this.passwordStrategy = passwordStrategy;
     }
 
     /**
