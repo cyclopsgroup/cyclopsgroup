@@ -1,7 +1,7 @@
 package org.cyclopsgroup.doorman.service.core;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.doorman.api.User;
+import org.cyclopsgroup.doorman.api.AbstractUserEventListener;
 import org.cyclopsgroup.doorman.api.UserEventListener;
 
 /**
@@ -14,12 +14,8 @@ public class SimpleUserSessionConfig
 {
     private static final String DEFAULT_DOMAIN_NAME = "default";
 
-    private static final UserEventListener NO_OP_LISTENER = new UserEventListener()
+    private static final UserEventListener NO_OP_LISTENER = new AbstractUserEventListener()
     {
-        @Override
-        public void signUpRequested( String sessionId, User requestedUser )
-        {
-        }
     };
 
     private String domainName = DEFAULT_DOMAIN_NAME;
