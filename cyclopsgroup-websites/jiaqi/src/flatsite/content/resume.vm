@@ -1,0 +1,36 @@
+<div>
+    <div id="sideContent">
+        <p>
+            <a href="http://www.linkedin.com/in/jiaqi">
+                <img
+                    src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png"
+                    width="160" height="33" border="0"
+                    alt="View Jiaqi Guo's profile on LinkedIn" />
+            </a>
+        </p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+    </div>
+    <div id="mainContent">
+        <h2>Resume</h2>
+        <p>To be honest, I absolutely don't have any possibly useful
+            experience. </p>
+        <p>The only thing I've been happily paid to do in last decade,
+            is to
+            design and build large complicated and resource
+            consuming software,
+            that runs on expensive and faulty
+            hardware, to fulfill simple and
+            cheap tasks.</p>
+        <p>&nbsp;
+        </p>
+        <p>
+            <img
+                src="http://farm1.static.flickr.com/48/136980349_95f362bfbd_o.jpg"
+                alt="Will code HTML for food" />
+        </p>
+    </div>
+</div>

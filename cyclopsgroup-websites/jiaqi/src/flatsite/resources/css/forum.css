@@ -1,0 +1,14 @@
+body,input,textarea,th,td,select {
+    font-family: "Bitstream Vera Sans", Verdana, Helvetica;
+    color: #7D7C7C;
+}
+
+img {
+    border-width: 0px;
+}
+
+#forum-title
+{
+    font-weight: normal;
+    color: #8196B5;
+}

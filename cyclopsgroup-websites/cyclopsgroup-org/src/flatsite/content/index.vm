@@ -1,0 +1,169 @@
+<div>
+    <table width="100%" class="content" cellspacing="0">
+        <tr>
+            <td />
+            <td colspan="2">
+                <h2 class="underlined">What is CyclopsGroup.org</h2>
+                <p>
+                    CyclopsGroup.org is an open source software
+                    foundation focusing
+                    on abstract, simple and high
+                    quality java software.
+                </p>
+                <p>
+                    In a spontaneously evolved software world, open
+                    source is the
+                    power of evolution. We believe that
+                    the
+                    most innovative solution
+                    for real business
+                    problem can
+                    only be created in free open
+                    environment.
+                </p>
+                <p>
+                    <a href="http://wiki.cyclopsgroup.org">
+                        <b>
+                            &gt;&gt;&gt; Find out more details in our
+                            WIKI
+                            site &lt;&lt;&lt; </b>
+                    </a>
+                </p>
+                <h2 class="underlined">Jmxterm open source project</h2>
+                <p>Jmxterm is an interactive command line based
+                    JMX
+                    client. It supports tab auto completion, command
+                    history browsing and integration with scripting
+                    language such as PERL and SHELL.</p>
+                <p>
+                    Jmxterm is an
+                    project under active development. Find
+                    out more details in
+                    <a href="projects/jmxterm">project home page</a>
+                    and
+                    <a href="http://wiki.cyclopsgroup.org/jmxterm">WIKI site</a>
+                    .
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 33%" class="reverse">
+                <h3>Documentation</h3>
+                <p>
+                    <a href="http://wiki.cyclopsgroup.org">Find out details in our WIKI site:
+                        http://wiki.cyclopsgroup.org</a>
+                </p>
+                <form action="http://www.google.com/search">
+                    <p>
+                        <input type="hidden" name="sitesearch"
+                            value="cyclopsgroup.org" />
+                        <input type="text" name="q" size="18" />
+                        <input type="submit" value="Go" />
+                    </p>
+                </form>
+            </td>
+            <td style="width: 33%" class="reverse">
+                <h3>Support</h3>
+                <p>
+                    Bugs and questions are tracked in launchpad.net.
+                    <a href="http://launchpad.net/~cyclopsgroup">Get support for Jmxterm project</a>
+                </p>
+                <p>
+                    <a href="http://launchpad.net/~cyclopsgroup">
+                        <img
+                            src="https://launchpad.net/@@/launchpad-logo-and-name-hierarchy.png"
+                            alt="Jmxterm project in launchpad.net" />
+                    </a>
+                </p>
+            </td>
+            <td style="width: 34%" class="reverse">
+                <h3>Contents</h3>
+                <ul>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org">Wiki site with more details</a>
+                    </li>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org/discussion">Join discussion in Wiki site</a>
+                    </li>
+                    <li>
+                        <a href="http://wiki.cyclopsgroup.org/projects">All projects</a>
+                    </li>
+                    <li>
+                        <a href="http://cyclopsgroup.webhop.org/courselist/">Demo site of project courselist</a>
+                    </li>
+                    <li>
+                        <a href="http://code.cyclopsgroup.org/continuum/">Continuum build dashboard</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="reverse">
+                <h3>News</h3>
+                <script
+                    src="http://feeds.feedburner.com/cyclopsgroup/news?format=sigpro"
+                    type="text/javascript"></script>
+                <noscript>
+                    <p>
+                        Subscribe to RSS headline updates from:
+                        <a
+                            href="http://feeds.feedburner.com/cyclopsgroup/news"></a>
+                        <br />
+                        Powered by FeedBurner
+                    </p>
+                </noscript>
+            </td>
+            <td class="reverse">
+                <h3>Projects</h3>
+                <ul>
+                    <li>
+                        <a href="projects/jmxterm">Jmxterm command line JMX client</a>
+                    </li>
+                    <li>
+                        <a href="projects/jcli">JCli command line parser</a>
+                    </li>
+                    <li>
+                        <a href="projects/caff">Conversion and formatting framework
+                        </a>
+                    </li>
+                    <li>
+                        <a href="projects/courselist">Course list course management system
+                        </a>
+                    </li>
+                    <li>
+                        <a href="projects/waterview">Waterview web application frameworkd
+                        </a>
+                    </li>
+                </ul>
+            </td>
+            <td class="reverse">
+                <h3>External Links</h3>
+                <ul>
+                    <li>
+                        <a
+                            href="http://sourceforge.net/projects/cyclops-group">Project home in
+                            sourceforge.net
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://sourceforge.net/projects/cyclops-group/files">All downloads</a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://fisheye3.atlassian.com/browse/cyclops-group">Browse source code directory
+                            </a>
+                    </li>
+                    <li>
+                        Meet
+                        <a href="members/jiaqi">Jiaqi Guo</a>
+                    </li>
+                    <li>
+                        Meet
+                        <a href="http://business.nd.edu/XuyingZhao">Xuying Zhao</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>

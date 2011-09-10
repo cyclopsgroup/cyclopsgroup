@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cyclopsgroup-websites</artifactId>
+        <version>2.2-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <groupId>org.cyclopsgroup</groupId>
+    <artifactId>jiaqi</artifactId>
+    <packaging>pom</packaging>
+    <name>Jiaqi Shabby Home</name>
+    <version>1.2-SNAPSHOT</version>
+    <distributionManagement>
+        <site>
+            <id>cyclopsgroup.server.sourceforge</id>
+            <url>
+                s3://www.cyclopsgroup.org/members/jiaqi
+            </url>
+        </site>
+    </distributionManagement>
+</project>
