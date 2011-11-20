@@ -90,6 +90,10 @@ public class RationalNumber
                                    a.denominator.multiply( b.denominator ) );
     }
 
+    /**
+     * @param b The divisor
+     * @return Result
+     */
     public RationalNumber divide( BigInteger b )
     {
         return new RationalNumber( numerator, denominator.multiply( b ) );
@@ -148,6 +152,10 @@ public class RationalNumber
         return a.add( b.negate() );
     }
 
+    /**
+     * @param b Number to multiply by
+     * @return Result
+     */
     public RationalNumber multiply( BigInteger b )
     {
         return new RationalNumber( numerator.multiply( b ), denominator );

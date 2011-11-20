@@ -19,9 +19,30 @@
                     src='${flickrUrl}'></script>
             </div>
         </div>
-        <div style="clear: both; text-align: right">
-            <a href="http://crazytmac.deviantart.com/gallery">See all...</a>
-        </div>
+        <script language="javascript">
+            // <![CDATA[
+            function refreshElement(id) {
+              var ele = $('#' + id);
+              var content = ele.html();
+              ele.html('');
+
+              alert(content);
+              ele.html(content);
+            }
+        // ]]>
+        </script>
+        <table width="100%">
+            <tr>
+                <td>
+                    <a href="#"
+                        onclick="refreshElement('flickr_badge_wrapper'); return false;">Refresh</a>
+                </td>
+                <td align="right">
+                    <a href="http://crazytmac.deviantart.com/gallery">See all...</a>
+                </td>
+            </tr>
+        </table>
+
         <!-- End of Flickr Badge -->
         <h2>Buy Framed Photos</h2>
         <div align="center">
@@ -48,9 +69,12 @@
         <h2>Taking Photos in Seattle</h2>
         <p>
             Seattle is a beautiful city. For me and many of my friends,
-            it's hard to live in Seattle without becoming a fan of
-            photography. The moment I got my first pay check, was the
-            time to upgrade camera.
+            it's
+            hard to live in Seattle without becoming a fan of
+            photography.
+            The moment I got my first pay check, was the
+            time to upgrade
+            camera.
         </p>
         <p>
             <a
@@ -62,11 +86,16 @@
         </p>
         <p>My camera isn't fancy. An Olympus Evolt E500 Digital SLR with
             14-45mm and 40-150mm Zuiko lenses. It has it's pitfalls:
-            auto focusing is buggy during time, occasionally cheating;
-            slow exposure shows noise worse than competitors. However as
-            long as it I try to be patient enough, it does what I need.
-            I've been using this camera in last 3 years and I'm still
-            pretty satisfied with it.
+            auto
+            focusing is buggy during time, occasionally cheating;
+            slow
+            exposure shows noise worse than competitors. However as
+            long as
+            it I try to be patient enough, it does what I need.
+            I've been
+            using this camera in last 3 years and I'm still
+            pretty satisfied
+            with it.
         </p>
         <iframe width="520" height="360" frameborder="0"
             scrolling="no" marginheight="0" marginwidth="0"

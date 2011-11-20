@@ -13,12 +13,6 @@ import org.cyclopsgroup.eulerer.math.MatrixInspector;
 public class Solution
     implements Runnable
 {
-
-    public static void main( String[] args )
-    {
-        new Solution().run();
-    }
-
     /**
      * @inheritDoc
      */
