@@ -46,22 +46,27 @@ public class Solution
 
         long rangeStart = 99999999999L / 138;
         long rangeEnd = 99999999999L / 137;
+        System.out.println( "Searching numbers between " + rangeStart + " and " + rangeEnd );
 
         PrimeUtils.Context c = new PrimeUtils.Context();
+        int numbers = 0;
         for ( long i = rangeStart; i < rangeEnd; i += MOD )
         {
+            numbers++;
             // Replace tail with previously calculated length tail
             long candidate = (int) ( i - ( i % MOD ) + lengthTail ) + 1;
+
             if ( !PrimeUtils.isPrime( candidate, c ) )
             {
                 continue;
             }
+
             System.out.println( "Checking candidate: " + candidate + " with sum of digits "
                 + ( ( candidate - 1 ) / 2 * 9 ) );
-
             long fifteenDigits = 10000000000000000L / candidate;
             System.out.println( fifteenDigits );
         }
+        System.out.println( numbers + " numbers are verified" );
         return 0;
     }
 }
