@@ -42,7 +42,7 @@ public class Solution
             }
             f = f10;
         }
-        System.out.println( "Last five digits of candidate number is " + ( lengthTail + 1 ) );
+        System.out.println( "Last five digits of result is " + ( lengthTail + 1 ) );
 
         long rangeStart = 99999999999L / 138;
         long rangeEnd = 99999999999L / 137;
