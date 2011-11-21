@@ -56,15 +56,15 @@ public class Solution
             // Replace tail with previously calculated length tail
             long candidate = (int) ( i - ( i % MOD ) + lengthTail ) + 1;
 
+            // Filter out non-prime numbers
             if ( !PrimeUtils.isPrime( candidate, c ) )
             {
                 continue;
             }
 
+            // FIXME How to further filter the result?
             System.out.println( "Checking candidate: " + candidate + " with sum of digits "
                 + ( ( candidate - 1 ) / 2 * 9 ) );
-            long fifteenDigits = 10000000000000000L / candidate;
-            System.out.println( fifteenDigits );
         }
         System.out.println( numbers + " numbers are verified" );
         return 0;
