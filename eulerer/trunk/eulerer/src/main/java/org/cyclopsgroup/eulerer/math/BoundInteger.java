@@ -25,6 +25,16 @@ public class BoundInteger
     }
 
     /**
+     * @param v BigInteger value
+     * @param length Length of digits to keep
+     */
+    public BoundInteger( BigInteger v, int length )
+    {
+        this.bound = new BigInteger( "1" + StringUtils.repeat( "0", length ) );
+        this.value = v.mod( bound );
+    }
+
+    /**
      * @param v Long value
      * @param length Length of digits to bound to
      */
