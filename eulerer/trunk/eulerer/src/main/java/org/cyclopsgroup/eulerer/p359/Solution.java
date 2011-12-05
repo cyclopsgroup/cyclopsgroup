@@ -17,16 +17,7 @@ public class Solution
 
     private static final BigInteger THREE = BigInteger.valueOf( 3 );
 
-    public static void main( String[] args )
-    {
-        new Solution().run();
-    }
-
-    private static BigInteger nextInRow( BigInteger from )
-    {
-        long root = (long) Math.sqrt( from.doubleValue() * 2 ) + 1;
-        return BigInteger.valueOf( root ).pow( 2 ).add( from.negate() );
-    }
+    private static final BigInteger FOUR = BigInteger.valueOf( 4 );
 
     static BigInteger p( long row, long column )
     {
@@ -42,21 +33,29 @@ public class Solution
             BigInteger r = BigInteger.valueOf( row );
             start = r.add( BigInteger.ONE ).divide( TWO ).multiply( r.divide( TWO ).multiply( TWO ) );
         }
+
         if ( column == 1 )
         {
             return start;
         }
-        BigInteger second = nextInRow( start );
-        if ( column == 2 )
+
+        BigInteger firstGap, secondGap;
+        if ( row == 1 )
         {
-            return second;
+            firstGap = TWO;
+            secondGap = THREE;
         }
-        BigInteger third = nextInRow( second );
-        if ( column == 3 )
+        else if ( row % 2 == 0 )
         {
-            return third;
+            firstGap = BigInteger.valueOf( row ).divide( TWO ).multiply( FOUR ).add( BigInteger.ONE );
+            secondGap = TWO;
         }
-        BigInteger gap = third.add( start.negate() );
+        else
+        {
+            firstGap = BigInteger.ONE;
+            secondGap = BigInteger.valueOf( row ).divide( TWO ).multiply( FOUR ).add( TWO );
+        }
+        BigInteger gap = firstGap.add( secondGap );
 
         boolean perfect = column % 2 == 1;
         if ( !perfect )
@@ -70,7 +69,7 @@ public class Solution
         {
             return value;
         }
-        return value.add( second.add( start.negate() ) ).add( chunks.multiply( TWO ) );
+        return value.add( firstGap ).add( chunks.multiply( TWO ) );
         // return nextInRow( value );
     }
 
@@ -95,17 +94,5 @@ public class Solution
             }
         }
         System.out.println( result );
-
-        for ( int i = 1; i < 50; i++ )
-        {
-            int s = 0;
-            for ( int j = 1; j < 5; j++ )
-            {
-                BigInteger v = p( i, j );
-                System.out.print( ( v.intValue() - s ) + " " );
-                s = v.intValue();
-            }
-            System.out.println();
-        }
     }
 }
