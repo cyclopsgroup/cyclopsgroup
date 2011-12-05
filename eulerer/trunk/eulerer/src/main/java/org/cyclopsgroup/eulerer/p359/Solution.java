@@ -24,7 +24,7 @@ public class Solution
 
     private static BigInteger nextInRow( BigInteger from )
     {
-        long root = (long) Math.sqrt( from.floatValue() * 2 ) + 1;
+        long root = (long) Math.sqrt( from.doubleValue() * 2 ) + 1;
         return BigInteger.valueOf( root ).pow( 2 ).add( from.negate() );
     }
 
@@ -32,19 +32,15 @@ public class Solution
     {
         Validate.isTrue( row > 0, "Invalid row  " + row );
         Validate.isTrue( column > 0, "Invalid column  " + column );
-        long s;
+        BigInteger start;
         if ( row == 1 )
         {
-            s = 1;
+            start = BigInteger.ONE;
         }
         else
         {
-            s = ( row + 1 ) / 2 * ( row / 2 ) * 2;
-        }
-        BigInteger start = BigInteger.valueOf( s );
-        if ( column == 1 )
-        {
-            return start;
+            BigInteger r = BigInteger.valueOf( row );
+            start = r.add( BigInteger.ONE ).divide( TWO ).multiply( r.divide( TWO ).multiply( TWO ) );
         }
         if ( column == 1 )
         {
@@ -75,6 +71,7 @@ public class Solution
             return value;
         }
         return value.add( second.add( start.negate() ) ).add( chunks.multiply( TWO ) );
+        // return nextInRow( value );
     }
 
     /**
@@ -98,5 +95,17 @@ public class Solution
             }
         }
         System.out.println( result );
+
+        for ( int i = 1; i < 50; i++ )
+        {
+            int s = 0;
+            for ( int j = 1; j < 5; j++ )
+            {
+                BigInteger v = p( i, j );
+                System.out.print( ( v.intValue() - s ) + " " );
+                s = v.intValue();
+            }
+            System.out.println();
+        }
     }
 }

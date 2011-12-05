@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,6 +15,25 @@ import org.junit.Test;
  */
 public class SolutionTest
 {
+    private static class Tail
+    {
+        private BigInteger value;
+
+        private long length;
+
+        private void append( BigInteger newValue )
+        {
+            length++;
+            value = newValue;
+        }
+
+        private Tail( BigInteger initValue )
+        {
+            length = 1;
+            value = initValue;
+        }
+    }
+
     /**
      * Verify getValue returns the same correct value that computed in brute force
      */
@@ -23,21 +41,22 @@ public class SolutionTest
     public void testPWithCalculatedGrid()
     {
         int maxNumber = 10000;
-        List<List<Integer>> grid = new ArrayList<List<Integer>>();
+        List<Tail> tails = new ArrayList<Tail>();
         for ( int i = 1; i <= maxNumber; i++ )
         {
+            BigInteger bi = BigInteger.valueOf( i );
             boolean merged = false;
             int row = 1;
-            for ( List<Integer> chain : grid )
+            for ( int j = 0; j < tails.size(); j++ )
             {
-                int lastNumber = chain.get( chain.size() - 1 );
-                int root = (int) Math.sqrt( (double) lastNumber + i );
+                Tail tail = tails.get( j );
+                long root = (long) Math.sqrt( tail.value.doubleValue() + i );
 
-                if ( lastNumber + i == root * root )
+                if ( tail.value.add( bi ).equals( BigInteger.valueOf( root ).pow( 2 ) ) )
                 {
-                    chain.add( i );
-                    assertEquals( "Position row=" + row + ", column=" + chain.size() + " unexpected",
-                                  BigInteger.valueOf( i ), Solution.p( row, chain.size() ) );
+                    tail.append( BigInteger.valueOf( i ) );
+                    assertEquals( "Position row=" + row + ", column=" + tail.length + " unexpected", bi,
+                                  Solution.p( row, tail.length ) );
                     merged = true;
                     break;
                 }
@@ -45,25 +64,10 @@ public class SolutionTest
             }
             if ( !merged )
             {
-                grid.add( new ArrayList<Integer>( Collections.singletonList( i ) ) );
-                assertEquals( BigInteger.valueOf( i ), Solution.p( grid.size(), 1 ) );
+                tails.add( new Tail( bi ) );
+                assertEquals( BigInteger.valueOf( i ), Solution.p( tails.size(), 1 ) );
             }
         }
-
-        // for ( List<Integer> row : grid )
-        // {
-        // System.out.println( row );
-        // int previous = 0;
-        // for ( int v : row )
-        // {
-        // if ( previous != 0 )
-        // {
-        // System.out.print( ( v - previous ) + ", " );
-        // }
-        // previous = v;
-        // }
-        // System.out.println();
-        // }
     }
 
     /**
