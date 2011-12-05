@@ -13,6 +13,10 @@ import org.cyclopsgroup.eulerer.math.BoundInteger;
 public class Solution
     implements Runnable
 {
+    private static final BigInteger TWO = BigInteger.valueOf( 2 );
+
+    private static final BigInteger THREE = BigInteger.valueOf( 3 );
+
     public static void main( String[] args )
     {
         new Solution().run();
@@ -65,12 +69,12 @@ public class Solution
         }
         BigInteger chunks = BigInteger.valueOf( ( column - 1 ) / 2 );
         BigInteger value =
-            chunks.multiply( gap ).add( start ).add( chunks.multiply( chunks.add( BigInteger.ONE.negate() ) ).multiply( BigInteger.valueOf( 2 ) ) );
+            chunks.multiply( gap ).add( start ).add( chunks.multiply( chunks.add( BigInteger.ONE.negate() ) ).multiply( TWO ) );
         if ( perfect )
         {
             return value;
         }
-        return nextInRow( value );
+        return value.add( second.add( start.negate() ) ).add( chunks.multiply( TWO ) );
     }
 
     /**
@@ -80,16 +84,14 @@ public class Solution
     public void run()
     {
         BoundInteger result = new BoundInteger( 0, 8 );
-        BigInteger two = BigInteger.valueOf( 2 );
-        BigInteger three = BigInteger.valueOf( 3 );
         for ( int i = 0; i <= 27; i++ )
         {
-            BigInteger left = two.pow( i );
-            BigInteger right = two.pow( 27 - i );
+            BigInteger left = TWO.pow( i );
+            BigInteger right = TWO.pow( 27 - i );
             for ( int j = 0; j <= 12; j++ )
             {
-                BigInteger row = left.multiply( three.pow( j ) );
-                BigInteger column = right.multiply( three.pow( 12 - j ) );
+                BigInteger row = left.multiply( THREE.pow( j ) );
+                BigInteger column = right.multiply( THREE.pow( 12 - j ) );
                 BigInteger value = p( row.longValue(), column.longValue() );
                 System.out.println( "P(" + row + ", " + column + ") = " + value );
                 result = result.add( new BoundInteger( value, 8 ) );

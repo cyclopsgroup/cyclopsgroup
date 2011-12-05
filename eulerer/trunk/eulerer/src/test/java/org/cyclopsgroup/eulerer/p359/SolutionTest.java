@@ -22,7 +22,7 @@ public class SolutionTest
     @Test
     public void testPWithCalculatedGrid()
     {
-        int maxNumber = 100;
+        int maxNumber = 10000;
         List<List<Integer>> grid = new ArrayList<List<Integer>>();
         for ( int i = 1; i <= maxNumber; i++ )
         {
@@ -50,20 +50,20 @@ public class SolutionTest
             }
         }
 
-        for ( List<Integer> row : grid )
-        {
-            System.out.println( row );
-            int previous = 0;
-            for ( int v : row )
-            {
-                if ( previous != 0 )
-                {
-                    System.out.print( ( v - previous ) + ", " );
-                }
-                previous = v;
-            }
-            System.out.println();
-        }
+        // for ( List<Integer> row : grid )
+        // {
+        // System.out.println( row );
+        // int previous = 0;
+        // for ( int v : row )
+        // {
+        // if ( previous != 0 )
+        // {
+        // System.out.print( ( v - previous ) + ", " );
+        // }
+        // previous = v;
+        // }
+        // System.out.println();
+        // }
     }
 
     /**
