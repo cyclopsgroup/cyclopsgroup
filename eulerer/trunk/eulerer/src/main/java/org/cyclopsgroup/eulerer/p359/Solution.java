@@ -89,7 +89,6 @@ public class Solution
                 BigInteger row = left.multiply( THREE.pow( j ) );
                 BigInteger column = right.multiply( THREE.pow( 12 - j ) );
                 BigInteger value = p( row.longValue(), column.longValue() );
-                System.out.println( "P(" + row + ", " + column + ") = " + value );
                 result = result.add( new BoundInteger( value, 8 ) );
             }
         }
