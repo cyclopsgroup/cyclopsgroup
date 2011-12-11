@@ -44,7 +44,7 @@
         </table>
 
         <!-- End of Flickr Badge -->
-        <h2>Buy Framed Photos</h2>
+        <h2>Framed Photos</h2>
         <div align="center">
             <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
                 codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
@@ -66,15 +66,40 @@
         </div>
     </div>
     <div id="mainContent" style="width:540px">
+        <h2>Galleries</h2>
+        <table cellspacing="16">
+            <tr>
+                <td>
+                    <a href="http://crazytmac.deviantart.com" title="Photo Gallery in DeviantArt">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/deviantart_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a
+                        href="https://plus.google.com/photos/105072496396884725624/albums"
+                        title="Photo Archive in Picasaweb">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/picasa_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a href="http://www.flickr.com/guojiaqi" title="Some photos in Flickr">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/flickr_32.png" />
+                    </a>
+                </td>
+            </tr>
+        </table>
         <h2>Taking Photos in Seattle</h2>
         <p>
-            Seattle is a beautiful city. For me and many of my friends,
-            it's
-            hard to live in Seattle without becoming a fan of
-            photography.
-            The moment I got my first pay check, was the
-            time to upgrade
-            camera.
+            Seattle is a beautiful city. It's
+            hard to live in Seattle
+            without loving photography.
+            I upgraded my camera the moment I
+            received the
+            first pay
+            check.
         </p>
         <p>
             <a
@@ -84,18 +109,13 @@
                     alt="Olympus Evolt E500" />
             </a>
         </p>
-        <p>My camera isn't fancy. An Olympus Evolt E500 Digital SLR with
-            14-45mm and 40-150mm Zuiko lenses. It has it's pitfalls:
+        <p>My camera isn't fancy. Olympus Evolt E500 Digital SLR with
+            14-45mm and 40-150mm Zuiko lenses. It has pitfalls:
             auto
             focusing is buggy during time, occasionally cheating;
             slow
-            exposure shows noise worse than competitors. However as
-            long as
-            it I try to be patient enough, it does what I need.
-            I've been
-            using this camera in last 3 years and I'm still
-            pretty satisfied
-            with it.
+            exposure shows noise worse than competitors. However served
+            with enough patience, it does what I need.
         </p>
         <iframe width="520" height="360" frameborder="0"
             scrolling="no" marginheight="0" marginwidth="0"
@@ -108,44 +128,5 @@
                 style="color:#0000FF;text-align:left">Seattle Photos</a>
             in a larger map
         </small>
-        <h2>Galleries</h2>
-        <table border="0" width="100%" style="text-align: center">
-            <tr>
-                <td>
-                    <a href="http://crazytmac.deviantart.com/">
-                        <img
-                            src="http://farm3.static.flickr.com/2221/3839301234_2f60a1035b_o.png"
-                            alt="DeviantArt.com" />
-                    </a>
-                </td>
-                <td>
-                    <a href="http://picasaweb.google.com/crazytmac">
-                        <img
-                            src="https://www.google.com/accounts/lh2/picasaweblogo-en_US.gif"
-                            alt="PicasaWeb" />
-                    </a>
-                </td>
-                <td>
-                    <a href="http://www.flickr.com/photos/guojiaqi">
-                        <img
-                            src="http://l.yimg.com/g/images/flickr_logo.gif"
-                            alt="Flickr" />
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="http://crazytmac.deviantart.com/">DeviantArt</a>
-                </td>
-                <td>
-                    <a href="http://picasaweb.google.com/crazytmac">PicasaWeb</a>
-                </td>
-                <td>
-                    <a href="http://www.flickr.com/photos/guojiaqi">Flickr
-					</a>
-                </td>
-
-            </tr>
-        </table>
     </div>
 </div>

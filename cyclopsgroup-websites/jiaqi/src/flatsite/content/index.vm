@@ -1,6 +1,51 @@
 <div>
     <div id="sideContent">
-        <h2>Blog Updates</h2>
+        <h2>Find me in</h2>
+        <table cellspacing="16">
+            <tr>
+                <td>
+                    <a href="http://blog.cyclopsgroup.org" title="Blog">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/blogger_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a href="http://facebook.com/guojiaqi" title="Facebook">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/facebook_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a href="http://twitter.com/jqguo" title="Twitter">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/twitter_32.png" />
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="http://www.linkedin.com/in/jiaqi" title="Profile">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/linkedin_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a href="http://crazytmac.deviantart.com" title="Photo Gallery in DeviantArt">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/deviantart_32.png" />
+                    </a>
+                </td>
+                <td>
+                    <a
+                        href="https://plus.google.com/photos/105072496396884725624/albums"
+                        title="Photo Archive in Picasaweb">
+                        <img
+                            src="http://www.cyclopsgroup.org/images/networks/picasa_32.png" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <h2>Blog updates</h2>
         <script src="http://feeds.feedburner.com/jiaqiblog?format=sigpro"
             type="text/javascript"></script>
         <noscript>
@@ -11,10 +56,7 @@
                 Powered by FeedBurner
             </p>
         </noscript>
-        <div align="right">
-            <a href="blog.html">More...</a>
-        </div>
-        <h2>Links</h2>
+        <h2>My Family</h2>
         <ul>
             <li>
                 <a href="http://thecoolestgirlontheplanet.blogspot.com/">
@@ -27,23 +69,8 @@
                     Xuying's home page
                 </a>
             </li>
-            <li>
-                <a href="http://chinajoeblack.spaces.live.com">
-                    Crazy TMac's MSN space
-                </a>
-            </li>
-            <li>
-                <a href="http://www.cyclopsgroup.org">Back to CyclopsGroup.org</a>
-            </li>
         </ul>
-        <p>
-            <a href="http://www.twitter.com/jqguo">
-                <img
-                    src="http://twitter-badges.s3.amazonaws.com/follow_me-a.png"
-                    alt="Follow jqguo on Twitter" />
-            </a>
-        </p>
-        <h2>Active Projects</h2>
+        <h2>Ongoing projects</h2>
         <ul>
             <li>
                 <a href="http://wiki.cyclopsgroup.org/jmxterm">Jmxterm</a>
@@ -53,47 +80,56 @@
                 <a href="http://www.cyclopsgroup.org/projects/jcli">Jcli</a>
                 - Annotation based command line parser
             </li>
-            <li>
-                <a href="http://www.cyclopsgroup.org/projects/courselist">Courselist</a>
-                - A small web application that manages course schedule
-                and enrollment in college
-            </li>
-            <li>
-                <a href="http://www.cyclopsgroup.org/projects/waterview">Waterview</a>
-                - Java web application and portal framework that
-                supports Velocity,
-                Jelly and JSP syntax
-            </li>
         </ul>
-        <p>
-            <a
-                href="http://www.imsdb.com/transcripts/Futurama-Godfellas.html">
-                <img
-                    src="http://farm4.static.flickr.com/3474/3839219124_16a46da337_o.jpg"
-                    alt="Futurama - Godfellas" />
-            </a>
-        </p>
+        <div align="right">
+            <a href="https://github.com/jiaqi">More..</a>
+        </div>
     </div>
     <div id="mainContent">
+        <h2>About Me</h2>
+        <p>
+            My name, &#37101;&#20339;&#29734;, is pronounced as
+            &quot;Goo'O, Jar
+            Chee&quot;. I am an software engineer
+            focusing on design and development of solutions written in
+            Java. My work
+            ranges from logistics, finance and retail
+            industries to infrastructure and development platform.
+        </p>
+        <p>
+            Aside from work, I'm intrigued by movie, photography, music
+            and painting.
+            <a href="http://www.cyclopsgroup.org">cyclopsgroup.org</a>
+            is a portfolio of my nonprofessional work.
+        </p>
         <h2>"Do Things Right"</h2>
+        <p>
+            To keep this site away from being serious, here I'm copying
+            a
+            line from Futurama.
+        </p>
         <p style="text-align: center">
             GOD
-		</p>
-        <p style="margin-left: 80px">Bender, being God isn't easy. If you do too much,
+        </p>
+        <p style="margin-left: 80px">
+            Bender, being God isn't easy. If you do too much,
             people
-            get dependent on you. And if you do nothing, they lose
+            get dependent on you.
+            And if you do nothing, they lose
             hope. You have
-            to use a light touch, like a safecracker or a
+            to use a light
+            touch, like a safecracker or a
             pickpocket.</p>
         <p style="text-align: center">
             BENDER
-		</p>
+        </p>
         <p style="margin-left: 80px">Or a guy who burns down a bar for the insurance
             money.</p>
         <p style="text-align: center">
             GOD
-		</p>
+        </p>
         <p style="margin-left: 80px">
+
             Yes, if he makes it look like an electrical thing.
             <b>If you
                 do things right, people won't be sure you've done
@@ -102,57 +138,17 @@
             .
         </p>
         <p>
-            <small>-- by God, in Godfellas, Futurama</small>
-        </p>
-        <h2>About Jiaqi Guo (&#37101;&#20339;&#29734;)</h2>
-        <p>
-            I am Jiaqi(pronounced as Jar Key), a kid grown up in
-            Yanliang, a
-            small town of in city
-            Xi'an, a town few people in
-            same city ever heard
-            of. In last 15 years of
-            <a href="resume.html">career building</a>
-            ,
-            I've moved over Hangzhou, Shanghai, Shenzhen in
-            China,
-            Dallas, DC and
-            Seattle in United States.
-        </p>
-        <p>In my professional career I'm
-            a software engineer enthusiastic
-            in
-            Java and a number of open source
-            projects, while my
-            interests also
-            include photography, painting, cinematography
-            and travel.
+            <small>
+                --
+                <a
+                    href="http://www.imsdb.com/transcripts/Futurama-Godfellas.html">
+                    Godfellas, Futurama</a>
+            </small>
         </p>
         <p>
-            <a href="http://www.cyclopsgroup.org">CyclopsGroup</a>
-            is a portfolio of my nonprofessional work.
-        </p>
-        <h2>This web site</h2>
-        <p>
-            There are more than one page in this small web site. You can
-            find a
-            <a href="blog.html">blog</a>
-            and
-            <a href="photos.html">a few photos</a>
-            here
-            .
-        </p>
-        <p>
-            Once a while random thoughts hits my mind, and when I talk
-            to
-            friends
-            about my thoughts, often they feel bored, annoyed
-            or even
-            offended. To
-            me, such experience constitutes the need
-            for a
-            <a href="blog.html">blog</a>
-            .
+            <img
+                src="http://farm4.static.flickr.com/3474/3839219124_16a46da337_o.jpg"
+                alt="Futurama - Godfellas" />
         </p>
     </div>
 </div>
