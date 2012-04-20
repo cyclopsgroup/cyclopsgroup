@@ -6,9 +6,9 @@ public interface StateMachineEngine
 {
     ExecutionContext getExecution( String executionId );
 
-    void signal( String executionId, String signalName, String description, Object... arguments );
+    void signal( String executionId, String signalName, Object input );
 
-    ExecutionContext startExecution( String executionId, Set<String> tags, String description );
+    ExecutionContext startExecution( String identifier, Set<String> tags );
 
-    void forceTerminate( String executionId, String description );
+    void forceTerminate( String executionId );
 }

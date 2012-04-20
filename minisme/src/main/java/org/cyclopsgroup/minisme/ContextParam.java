@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention( RetentionPolicy.RUNTIME )
-@Target( ElementType.TYPE )
-public @interface StateMachine
+@Target( ElementType.PARAMETER )
+public @interface ContextParam
 {
-    String value() default "";
+    ContextParamType value();
 }

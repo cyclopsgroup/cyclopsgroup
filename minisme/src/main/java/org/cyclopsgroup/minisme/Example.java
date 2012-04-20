@@ -2,7 +2,7 @@ package org.cyclopsgroup.minisme;
 
 import java.util.concurrent.TimeUnit;
 
-@StateMachine( name = "Example" )
+@StateMachine( "Example" )
 public interface Example
 {
     @State( StateType.START )
@@ -23,9 +23,12 @@ public interface Example
     @SingleSelectionTransition( from = Example.PENDING, selections = {
         @SingleSelection( on = "true", to = Example.APPROVED ), @SingleSelection( on = "false", to = Example.DENIED ) } )
     @SignalTrigger( name = "approve" )
-    boolean approveDocument( String documentId, boolean approved, String note );
+    boolean approveDocument( @ContextParam( ContextParamType.IDENTIFIER )
+                             String documentId, @ContextParam( ContextParamType.INPUT )
+                             Object decision );
 
     @DirectTransition( from = Example.PENDING, to = Example.ONHOLD )
     @TimerTrigger( delay = 1, unit = TimeUnit.HOURS )
-    void putOnHold( String documentId );
+    void putOnHold( @ContextParam( ContextParamType.IDENTIFIER )
+                    String documentId );
 }
