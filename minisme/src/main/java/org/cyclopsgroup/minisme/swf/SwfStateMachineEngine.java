@@ -27,6 +27,9 @@ public class SwfStateMachineEngine
         this.domain = domain;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ExecutionContext getExecution( String executionId )
     {
@@ -35,12 +38,18 @@ public class SwfStateMachineEngine
 
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void signal( String executionId, String signalName, Object input )
     {
 
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public ExecutionContext startExecution( String identifier, Set<String> tags )
     {
@@ -49,10 +58,11 @@ public class SwfStateMachineEngine
         return new SimpleExecutionContext( run.getRunId(), identifier, tags, definition.getStartState() );
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void forceTerminate( String executionId )
     {
-        // TODO Auto-generated method stub
-
     }
 }
