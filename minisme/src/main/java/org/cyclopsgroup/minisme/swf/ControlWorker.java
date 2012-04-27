@@ -1,14 +1,13 @@
 package org.cyclopsgroup.minisme.swf;
 
-import java.util.Collection;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyclopsgroup.minisme.provider.StateMachineDefinition;
 import org.cyclopsgroup.minisme.provider.StateMachineDefinitionManager;
 
-import com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow;
 import com.amazonaws.services.simpleworkflow.model.DecisionTask;
+import com.amazonaws.services.simpleworkflow.model.EventType;
+import com.amazonaws.services.simpleworkflow.model.HistoryEvent;
 import com.amazonaws.services.simpleworkflow.model.PollForDecisionTaskRequest;
 import com.amazonaws.services.simpleworkflow.model.RespondDecisionTaskCompletedRequest;
 import com.amazonaws.services.simpleworkflow.model.TaskList;
@@ -20,10 +19,10 @@ public class ControlWorker
 
     private final StateMachineDefinitionManager definitionManager;
 
-    public ControlWorker( AmazonSimpleWorkflow service, String domain, Collection<Object> stateMachines )
+    public ControlWorker( SwfContext context )
     {
-        super( service, domain, "control" );
-        this.definitionManager = new StateMachineDefinitionManager( stateMachines );
+        super( context.getService(), context.getDomain(), "control" );
+        this.definitionManager = context.getDefinitionManager();
     }
 
     /**
@@ -34,7 +33,8 @@ public class ControlWorker
     {
         TaskList taskList = new TaskList().withName( getTaskListToPoll() );
         PollForDecisionTaskRequest poll =
-            new PollForDecisionTaskRequest().withDomain( domain ).withIdentity( getIdentity() ).withTaskList( taskList ).withReverseOrder( true ).withMaximumPageSize( 50 );
+            new PollForDecisionTaskRequest().withDomain( domain ).withIdentity( getIdentity() ).withTaskList( taskList );
+        poll.withReverseOrder( true ).withMaximumPageSize( 50 );
 
         DecisionTask task = service.pollForDecisionTask( poll );
         if ( task.getWorkflowExecution() == null || task.getWorkflowType() == null )
@@ -48,7 +48,31 @@ public class ControlWorker
             LOG.warn( "Unexpected workflow type " + task.getWorkflowType() );
             return false;
         }
+
         RespondDecisionTaskCompletedRequest reply = null;
+
+        for ( HistoryEvent event : task.getEvents() )
+        {
+            if ( event.getEventId() >= task.getStartedEventId() )
+            {
+                continue;
+            }
+            if ( event.getEventId() <= task.getPreviousStartedEventId() )
+            {
+                reply =
+                    new RespondDecisionTaskCompletedRequest().withExecutionContext( "No significant event is found between decision start "
+                        + task.getStartedEventId()
+                        + " and  previous decision start "
+                        + task.getPreviousStartedEventId() );
+            }
+            EventType type = EventType.valueOf( event.getEventType() );
+            switch ( type )
+            {
+                case WorkflowExecutionStarted:
+
+            }
+        }
+
         if ( reply == null )
         {
             LOG.warn( "Decision maker didn't make decision" );

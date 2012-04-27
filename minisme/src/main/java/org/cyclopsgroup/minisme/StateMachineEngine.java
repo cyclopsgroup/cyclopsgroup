@@ -8,7 +8,7 @@ public interface StateMachineEngine
 
     void signal( String executionId, String signalName, Object input );
 
-    ExecutionContext startExecution( String identifier, Set<String> tags );
+    ExecutionContext startExecution( String workflowType, String identifier, Set<String> tags );
 
     void forceTerminate( String executionId );
 }

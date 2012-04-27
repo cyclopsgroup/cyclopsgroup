@@ -7,24 +7,18 @@ import org.cyclopsgroup.minisme.StateMachineEngine;
 import org.cyclopsgroup.minisme.provider.SimpleExecutionContext;
 import org.cyclopsgroup.minisme.provider.StateMachineDefinition;
 
-import com.amazonaws.services.simpleworkflow.AmazonSimpleWorkflow;
 import com.amazonaws.services.simpleworkflow.model.Run;
 import com.amazonaws.services.simpleworkflow.model.StartWorkflowExecutionRequest;
+import com.amazonaws.services.simpleworkflow.model.WorkflowType;
 
 public class SwfStateMachineEngine
     implements StateMachineEngine
 {
-    private final AmazonSimpleWorkflow workflow;
+    private final SwfContext context;
 
-    private final String domain;
-
-    private final StateMachineDefinition definition;
-
-    public SwfStateMachineEngine( Object stateMachine, AmazonSimpleWorkflow workflow, String domain )
+    public SwfStateMachineEngine( SwfContext context )
     {
-        definition = new StateMachineDefinition( stateMachine );
-        this.workflow = workflow;
-        this.domain = domain;
+        this.context = context;
     }
 
     /**
@@ -51,10 +45,12 @@ public class SwfStateMachineEngine
      * @inheritDoc
      */
     @Override
-    public ExecutionContext startExecution( String identifier, Set<String> tags )
+    public ExecutionContext startExecution( String workflowType, String identifier, Set<String> tags )
     {
+        StateMachineDefinition definition = context.getDefinitionManager().getDefinition( workflowType );
+        WorkflowType type = new WorkflowType().withName( definition.getName() ).withVersion( "1.0" );
         Run run =
-            workflow.startWorkflowExecution( new StartWorkflowExecutionRequest().withDomain( domain ).withWorkflowId( identifier ).withTagList( tags ) );
+            context.getService().startWorkflowExecution( new StartWorkflowExecutionRequest().withDomain( context.getDomain() ).withWorkflowType( type ).withWorkflowId( identifier ).withTagList( tags ) );
         return new SimpleExecutionContext( run.getRunId(), identifier, tags, definition.getStartState() );
     }
 

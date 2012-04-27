@@ -11,4 +11,9 @@ public class StateMachineDefinition
     {
         return null;
     }
+
+    public String getName()
+    {
+        return null;
+    }
 }
