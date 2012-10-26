@@ -6,7 +6,7 @@ public class Mark
 {
     public static enum Kind
     {
-        COUNT, VALUE;
+        COUNT, LEVEL;
     }
 
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
@@ -18,7 +18,7 @@ public class Mark
 
     public static Mark ofValue( String name, long value )
     {
-        return new Mark( name, value, Kind.VALUE );
+        return new Mark( name, value, Kind.LEVEL );
     }
 
     private final Kind kind;
