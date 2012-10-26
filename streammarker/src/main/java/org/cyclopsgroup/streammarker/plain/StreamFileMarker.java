@@ -1,10 +1,9 @@
 package org.cyclopsgroup.streammarker.plain;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.Closeable;
 import java.io.IOException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,16 +11,14 @@ import org.cyclopsgroup.streammarker.Mark;
 import org.cyclopsgroup.streammarker.Marker;
 
 public class StreamFileMarker
-    implements Marker
+    implements Marker, Closeable
 {
-    private static final Log LOG = LogFactory.getLog( StreamFileMarker.class );
-
     private class DrawJob
         implements Runnable
     {
-        private final Iterable<Mark> marks;
-
         private final String bucket;
+
+        private final Iterable<Mark> marks;
 
         private final long timestamp = System.currentTimeMillis();
 
@@ -44,33 +41,27 @@ public class StreamFileMarker
         }
     }
 
-    private final Executor background = Executors.newSingleThreadExecutor( new DaemonThreadFactory( "marker-"
-        + hashCode() ) );
+    private static final Log LOG = LogFactory.getLog( StreamFileMarker.class );
 
-    private final File directory;
-
-    private final String fileName;
+    private final ScheduledExecutorService background =
+        Executors.newSingleThreadScheduledExecutor( new DaemonThreadFactory( "marker-" + hashCode() ) );
 
     private final StreamMarksWriter output;
 
-    public StreamFileMarker( File directory, String fileName )
+    public StreamFileMarker( StreamMarksWriter output )
         throws IOException
     {
-        if ( !directory.isDirectory() )
-        {
-            throw new FileNotFoundException( "Directory " + directory + " is not found" );
-        }
-        this.directory = directory;
-        this.fileName = fileName;
+        this.output = output;
     }
 
     /**
-     * @inheritDoc
+     * @throws IOException
      */
     @Override
-    public void draw( String bucket, Mark... marks )
+    public void close()
+        throws IOException
     {
-        draw( bucket, new ArrayIterable<Mark>( marks ) );
+        output.close();
     }
 
     /**
@@ -80,5 +71,14 @@ public class StreamFileMarker
     public void draw( String bucket, Iterable<Mark> marks )
     {
         background.execute( new DrawJob( bucket, marks ) );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public void draw( String bucket, Mark... marks )
+    {
+        draw( bucket, new ArrayIterable<Mark>( marks ) );
     }
 }

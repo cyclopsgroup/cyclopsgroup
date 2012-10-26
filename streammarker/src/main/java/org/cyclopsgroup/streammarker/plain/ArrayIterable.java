@@ -42,6 +42,9 @@ public class ArrayIterable<T>
         this.array = array;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Iterator<T> iterator()
     {

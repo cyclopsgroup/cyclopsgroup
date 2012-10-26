@@ -10,7 +10,7 @@ import org.apache.commons.lang.Validate;
 
 public class Application
 {
-    private String applicatiion = "UndefinedApplication";
+    private String applicationName = "UndefinedApplication";
 
     private final String locationIdentifier;
 
@@ -25,9 +25,9 @@ public class Application
         locationName = InetAddress.getLocalHost().getHostName();
     }
 
-    public final String getApplicatiion()
+    public final String getApplicationName()
     {
-        return applicatiion;
+        return applicationName;
     }
 
     public final String getLocationIdentifier()
@@ -45,10 +45,10 @@ public class Application
         return tags;
     }
 
-    public final void setApplicatiion( String applicatiion )
+    public final void setApplicatiionName( String applicatiion )
     {
         Validate.notNull( locationName, "Application can't be NULL" );
-        this.applicatiion = applicatiion;
+        this.applicationName = applicatiion;
     }
 
     public final void setLocationName( String locationName )

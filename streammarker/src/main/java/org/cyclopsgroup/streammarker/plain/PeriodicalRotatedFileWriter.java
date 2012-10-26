@@ -7,9 +7,9 @@ public class PeriodicalRotatedFileWriter
     extends AbstractRotatedFileWriter
 {
     public PeriodicalRotatedFileWriter( Application application, ScheduledExecutorService scheduler,
-                                        long intervalMillis, long maxIdleMillis, File directory )
+                                        long intervalMillis, File directory )
     {
-        super( application, scheduler, intervalMillis, maxIdleMillis, directory );
+        super( application, scheduler, intervalMillis, directory );
     }
 
     @Override
@@ -18,5 +18,4 @@ public class PeriodicalRotatedFileWriter
         // TODO Auto-generated method stub
         return null;
     }
-
 }

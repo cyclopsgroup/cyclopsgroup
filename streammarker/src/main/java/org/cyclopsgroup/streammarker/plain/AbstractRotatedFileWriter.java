@@ -28,8 +28,6 @@ public abstract class AbstractRotatedFileWriter
 
         private long writes;
 
-        private boolean started;
-
         private Output( File file )
         {
             this.file = file;
@@ -51,6 +49,18 @@ public abstract class AbstractRotatedFileWriter
             }
         }
 
+        private synchronized void flush()
+        {
+            if ( output != null )
+            {
+                if ( LOG.isDebugEnabled() )
+                {
+                    LOG.debug( "Flush writes to file " + file );
+                }
+                output.flush();
+            }
+        }
+
         private synchronized boolean isOpen()
         {
             return output != null;
@@ -61,7 +71,7 @@ public abstract class AbstractRotatedFileWriter
         {
             if ( output != null )
             {
-                throw new IllegalStateException( "File " + file + " is already opened" );
+                throw new IllegalStateException( "Output to " + file + " is already opened" );
             }
             if ( LOG.isDebugEnabled() )
             {
@@ -70,51 +80,56 @@ public abstract class AbstractRotatedFileWriter
             output = new PrintWriter( new FileOutputStream( file, true ) );
         }
 
-        private synchronized void writeLine( String line )
+        private synchronized void writeBody( String body )
             throws IOException
+        {
+            writeLine( String.format( "B:{N:%011d,C:{%s}}", writes++, body ) );
+            lastWrite = System.currentTimeMillis();
+        }
+
+        private void writeHeader()
+        {
+            writeLine( String.format( "H:{I\"%s\",L:\"%s\",A:\"%s\",S:%d}", application.getLocationIdentifier(),
+                                      application.getLocationName(), application.getApplicationName(),
+                                      System.currentTimeMillis() ) );
+        }
+
+        private synchronized void writeLine( String line )
         {
             if ( output == null )
             {
                 throw new IllegalStateException( "File " + file + " is not opened yet" );
             }
-
-            if ( !started )
-            {
-                // FIXME Write header
-                started = true;
-            }
-
-            output.printf( "B:{N:%011d,C:{%s}}", writes++, line );
-            output.println();
-
-            // TODO Optimize the flush
-            output.flush();
-            lastWrite = System.currentTimeMillis();
+            output.println( line );
         }
     }
+
+    private static final long DEFAULT_FLUSH_IN_MILLIS = 1000L;
+
+    private static final long DEFAULT_MAX_IDLE_MILLIS = 30 * 1000L;
 
     private static final Log LOG = LogFactory.getLog( AbstractRotatedFileWriter.class );
 
     private final Application application;
 
-    private long maxIdleMillis;
+    private final File directory;
+
+    private long flushInMillis = DEFAULT_FLUSH_IN_MILLIS;
+
+    private long maxIdleMillis = DEFAULT_MAX_IDLE_MILLIS;
 
     private Output output;
 
     private boolean terminated;
 
-    private final File directory;
-
     protected AbstractRotatedFileWriter( Application application, ScheduledExecutorService scheduler,
-                                         long intervalMillis, long maxIdleMillis, File directory )
+                                         long intervalMillis, File directory )
     {
         Validate.notNull( application, "Application can't be NULL" );
         Validate.notNull( scheduler, "Scheduler can't be NULL" );
         Validate.isTrue( directory.isDirectory(), "Directory " + directory + " is not valid" );
         this.application = application;
         this.directory = directory;
-        this.maxIdleMillis = maxIdleMillis;
-        checkOutput();
         scheduler.scheduleWithFixedDelay( new Runnable()
         {
             public void run()
@@ -126,7 +141,7 @@ public abstract class AbstractRotatedFileWriter
         {
             public void run()
             {
-                AbstractRotatedFileWriter.this.stop();
+                AbstractRotatedFileWriter.this.close();
             }
         } );
     }
@@ -135,21 +150,27 @@ public abstract class AbstractRotatedFileWriter
 
     private synchronized void checkOutput()
     {
-        if ( terminated )
+
+        if ( terminated || output == null || !output.isOpen() || output.lastWrite == 0 )
         {
             return;
         }
-        if ( output == null )
+        long now = System.currentTimeMillis();
+        try
         {
-            output = new Output( new File( directory, calculateFileName() ) );
+            if ( now >= output.lastWrite + flushInMillis )
+            {
+                output.flush();
+                rotateFileIfNecessary();
+            }
+            if ( output.lastWrite + maxIdleMillis < System.currentTimeMillis() )
+            {
+                output.close();
+            }
         }
-        if ( !output.isOpen() )
+        catch ( IOException e )
         {
-            return;
-        }
-        if ( output.lastWrite + maxIdleMillis < System.currentTimeMillis() )
-        {
-            output.close();
+            LOG.error( "Can't rotate file", e );
         }
     }
 
@@ -157,12 +178,7 @@ public abstract class AbstractRotatedFileWriter
      * @inheritDoc
      */
     @Override
-    public void finalize()
-    {
-        stop();
-    }
-
-    private void stop()
+    public synchronized void close()
     {
         terminated = true;
         if ( output != null && output.isOpen() )
@@ -175,16 +191,46 @@ public abstract class AbstractRotatedFileWriter
      * @inheritDoc
      */
     @Override
+    public void finalize()
+    {
+        close();
+    }
+
+    private synchronized void rotateFileIfNecessary()
+        throws IOException
+    {
+        String fileName = calculateFileName();
+        // If a different file is required, close current file first
+        if ( output != null && !output.file.getName().equals( fileName ) )
+        {
+            output.close();
+            output = null;
+        }
+
+        // If there isn't an output available, create one
+        if ( output == null )
+        {
+            output = new Output( new File( directory, fileName ) );
+            output.open();
+            output.writeHeader();
+        }
+        else if ( !output.isOpen() )
+        {
+            output.open();
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
     public synchronized void write( String bucket, long timestamp, Iterable<Mark> marks )
         throws IOException
     {
-        if ( output == null )
+        // If there isn't an output available, create one
+        if ( output == null || !output.isOpen() )
         {
-
-        }
-        if ( !output.isOpen() )
-        {
-            output.open();
+            rotateFileIfNecessary();
         }
         StringBuilder s =
             new StringBuilder( "B:\"" ).append( bucket ).append( "\",T:" ).append( timestamp ).append( ",M:[" );
@@ -203,6 +249,6 @@ public abstract class AbstractRotatedFileWriter
                                      mark.getValue(), StringUtils.join( mark.getTags(), "\",\"" ) ) );
         }
         s.append( "]" );
-        output.writeLine( s.toString() );
+        output.writeBody( s.toString() );
     }
 }
