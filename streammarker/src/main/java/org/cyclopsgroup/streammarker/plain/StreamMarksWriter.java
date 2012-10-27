@@ -8,8 +8,7 @@ import org.cyclopsgroup.streammarker.Mark;
 interface StreamMarksWriter
     extends Closeable
 {
-    void write( String bucket, long timestamp, Iterable<Mark> marks )
-        throws IOException;
+    void write( String bucket, long timestamp, Iterable<Mark> marks );
 
     void close()
         throws IOException;

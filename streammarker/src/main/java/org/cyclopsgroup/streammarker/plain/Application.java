@@ -7,12 +7,13 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.apache.commons.lang.Validate;
+import org.cyclopsgroup.streammarker.Mark;
 
 public class Application
 {
-    private String applicationName = "UndefinedApplication";
+    private final String applicationIdentifier;
 
-    private final String locationIdentifier;
+    private String applicationName = "UndefinedApplication";
 
     private String locationName;
 
@@ -21,18 +22,18 @@ public class Application
     public Application()
         throws IOException
     {
-        locationIdentifier = ManagementFactory.getRuntimeMXBean().getName();
+        applicationIdentifier = ManagementFactory.getRuntimeMXBean().getName();
         locationName = InetAddress.getLocalHost().getHostName();
+    }
+
+    public final String getApplicationIdentifier()
+    {
+        return applicationIdentifier;
     }
 
     public final String getApplicationName()
     {
         return applicationName;
-    }
-
-    public final String getLocationIdentifier()
-    {
-        return locationIdentifier;
     }
 
     public final String getLocationName()
@@ -45,10 +46,11 @@ public class Application
         return tags;
     }
 
-    public final void setApplicatiionName( String applicatiion )
+    public final void setApplicationName( String application )
     {
-        Validate.notNull( locationName, "Application can't be NULL" );
-        this.applicationName = applicatiion;
+        Validate.notNull( application, "Application can't be NULL" );
+        Validate.isTrue( Mark.PATTERN_WORD.matcher( application ).find(), "Invalid application name " + application );
+        this.applicationName = application;
     }
 
     public final void setLocationName( String locationName )
@@ -60,6 +62,11 @@ public class Application
     public final void setTags( Collection<String> tags )
     {
         Validate.notNull( tags, "Tags can't be NULL" );
+        Validate.noNullElements( tags, "Tag value can't be NULL" );
+        for ( String tag : tags )
+        {
+            Validate.isTrue( Mark.PATTERN_WORD.matcher( tag ).find(), "Invalid tag value " + tag );
+        }
         this.tags = tags;
     }
 }
