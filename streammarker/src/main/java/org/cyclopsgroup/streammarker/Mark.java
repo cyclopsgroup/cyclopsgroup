@@ -1,5 +1,8 @@
 package org.cyclopsgroup.streammarker;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.Validate;
@@ -22,8 +25,6 @@ public class Mark
             return value;
         }
     }
-
-    private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     public static final Pattern PATTERN_WORD = Pattern.compile( "^[a-zA-Z]\\w*$" );
 
@@ -66,7 +67,7 @@ public class Mark
 
     private final String name;
 
-    private String[] tags = EMPTY_STRING_ARRAY;
+    private final Set<String> tags = new HashSet<String>();
 
     private final long value;
 
@@ -89,14 +90,28 @@ public class Mark
         return name;
     }
 
-    public final String[] getTags()
+    public final Set<String> getTags()
     {
-        return tags;
+        return Collections.unmodifiableSet( tags );
     }
 
     public final long getValue()
     {
         return value;
+    }
+
+    public Mark tag( Iterable<String> tags )
+    {
+        Validate.notNull( tags, "Tags can't be NULL" );
+        for ( String tag : tags )
+        {
+            Validate.isTrue( PATTERN_WORD.matcher( tag ).find(), "Tag " + tag + " is not valid" );
+        }
+        for ( String tag : tags )
+        {
+            this.tags.add( tag );
+        }
+        return this;
     }
 
     /**
@@ -107,13 +122,6 @@ public class Mark
      */
     public Mark tag( String... tags )
     {
-        Validate.notNull( tags, "Tags can't be NULL" );
-        Validate.noNullElements( tags, "Tag value can't be NULL" );
-        for ( String tag : tags )
-        {
-            Validate.isTrue( PATTERN_WORD.matcher( tag ).find(), "Tag " + tag + " is not valid" );
-        }
-        this.tags = tags;
-        return this;
+        return tag( new ArrayIterable<String>( tags ) );
     }
 }

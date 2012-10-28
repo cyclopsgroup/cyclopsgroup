@@ -212,6 +212,7 @@ class LazyFileWriter
                 }
             }
             output.writeBody( bucket, marks, timestamp, application );
+            session.lastWrite = System.currentTimeMillis();
         }
     }
 }

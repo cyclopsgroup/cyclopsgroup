@@ -8,10 +8,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.cyclopsgroup.streammarker.Application;
+import org.cyclopsgroup.streammarker.ArrayIterable;
 import org.cyclopsgroup.streammarker.Mark;
 import org.cyclopsgroup.streammarker.Marker;
 import org.cyclopsgroup.streammarker.Provider;
-import org.cyclopsgroup.streammarker.utils.ArrayIterable;
 
 public class TextFileMarker
     implements Marker, Closeable

@@ -7,6 +7,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -16,6 +17,7 @@ import org.cyclopsgroup.streammarker.Application;
 import org.cyclopsgroup.streammarker.ConstantProvider;
 import org.cyclopsgroup.streammarker.Mark;
 import org.cyclopsgroup.streammarker.Marker;
+import org.cyclopsgroup.streammarker.Provider;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +66,39 @@ public class TextFileMarkerTest
         throws IOException
     {
         drawAndVerify( true );
+    }
+
+    @Test
+    public void testFileRotation()
+        throws IOException, InterruptedException
+    {
+        Application app = new Application();
+        app.setApplicationName( "UnitTest" );
+
+        final AtomicReference<String> fileName = new AtomicReference<String>();
+        Marker marker = new TextFileMarker( new Provider<File>()
+        {
+            public File provide()
+            {
+                return new File( workingDirectory, fileName.get() );
+            }
+        }, app, true );
+
+        fileName.set( "f1" );
+        marker.draw( "aMetric", Mark.count( "n1" ) );
+        fileName.set( "f2" );
+
+        Thread.sleep( 1100L ); // Cause changes to flush and realize rotation
+        marker.draw( "aMetric", Mark.count( "n1" ) );
+        ( (Closeable) marker ).close();
+
+        File f1 = new File( workingDirectory, "f1" );
+        File f2 = new File( workingDirectory, "f2" );
+        assertTrue( "f1 should exist", f1.exists() );
+        assertTrue( "f2 should exist", f2.exists() );
+
+        assertEquals( "Expect 2 lines in result file " + f1, 2, FileUtils.readLines( f1 ).size() );
+        assertEquals( "Expect 2 lines in result file " + f2, 2, FileUtils.readLines( f2 ).size() );
     }
 
     @Test

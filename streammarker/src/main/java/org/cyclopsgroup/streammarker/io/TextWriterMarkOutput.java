@@ -2,6 +2,7 @@ package org.cyclopsgroup.streammarker.io;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -14,9 +15,9 @@ import org.cyclopsgroup.streammarker.Provider;
 public class TextWriterMarkOutput
     implements MarkOutput
 {
-    private static String setOf( String[] values )
+    private static String setOf( Collection<String> values )
     {
-        if ( values == null || values.length == 0 )
+        if ( values == null || values.isEmpty() )
         {
             return "[]";
         }
