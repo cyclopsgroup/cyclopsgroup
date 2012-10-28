@@ -59,11 +59,11 @@ public class TextWriterMarkOutput
                                   timestamp, s.toString() ) );
     }
 
-    public void writeHeader( Application application )
+    public void writeHeader( String fileId, Application application )
         throws IOException
     {
-        writeLine( String.format( "H:{L:\"%s\",A:\"%s\",S:%d}", application.getLocationName(),
-                                  application.getApplicationName(), System.currentTimeMillis() ) );
+        writeLine( String.format( "H:{L:\"%s\",A:\"%s\",I:\"%s\",S:%d}", application.getLocationName(),
+                                  application.getApplicationName(), fileId, System.currentTimeMillis() ) );
     }
 
     private void writeLine( String line )

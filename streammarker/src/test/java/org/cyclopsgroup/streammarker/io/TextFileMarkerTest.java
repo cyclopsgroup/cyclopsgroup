@@ -35,7 +35,8 @@ public class TextFileMarkerTest
         app.setApplicationName( "UnitTest" );
 
         File outputFile = new File( workingDirectory, "test.log" );
-        Marker marker = new TextFileMarker( ConstantProvider.of( outputFile ), app, blocking );
+        Marker marker =
+            new TextFileMarkerBuilder().to( ConstantProvider.of( outputFile ) ).of( app ).withBlocking( blocking ).build();
         marker.draw( "aMetric", Mark.count( "n1" ), Mark.count( "n2", 10 ) );
 
         ( (Closeable) marker ).close();
@@ -76,19 +77,19 @@ public class TextFileMarkerTest
         app.setApplicationName( "UnitTest" );
 
         final AtomicReference<String> fileName = new AtomicReference<String>();
-        Marker marker = new TextFileMarker( new Provider<File>()
+        Marker marker = new TextFileMarkerBuilder().to( new Provider<File>()
         {
             public File provide()
             {
                 return new File( workingDirectory, fileName.get() );
             }
-        }, app, true );
+        } ).of( app ).withBlocking( true ).withLeastFlushIntervalMillis( 0L ).withCheckIntervalMillis( 200L ).build();
 
         fileName.set( "f1" );
         marker.draw( "aMetric", Mark.count( "n1" ) );
         fileName.set( "f2" );
 
-        Thread.sleep( 1100L ); // Cause changes to flush and realize rotation
+        Thread.sleep( 500L ); // Cause changes to flush and realize rotation
         marker.draw( "aMetric", Mark.count( "n1" ) );
         ( (Closeable) marker ).close();
 

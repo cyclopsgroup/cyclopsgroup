@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -22,15 +23,15 @@ class LazyFileWriter
 {
     private static class Session
     {
-        private final Writer writer;
-
-        private long lastWrite;
+        private boolean appending;
 
         private long lastFlush;
 
+        private long lastWrite;
+
         private File outputFile;
 
-        private boolean appending;
+        private final Writer writer;
 
         private Session( File outputFile )
             throws IOException
@@ -56,11 +57,21 @@ class LazyFileWriter
         }
     }
 
+    static final long DEFAULT_CHECK_INTERVAL = 1000L;
+
+    static final long DEFAULT_LEAST_FLUSH_INTERVAL = 1000L;
+
+    static final long DEFAULT_MAX_IDLE = 10 * 1000L;
+
     private static final Log LOG = LogFactory.getLog( LazyFileWriter.class );
 
-    private MarkOutput output;
+    private final Application application;
 
-    private Session session;
+    private long leastFlushInterval = DEFAULT_LEAST_FLUSH_INTERVAL;
+
+    private long maxIdle = DEFAULT_MAX_IDLE;
+
+    private MarkOutput output;
 
     private final Provider<File> outputFileProvider;
 
@@ -68,15 +79,11 @@ class LazyFileWriter
         Executors.newSingleThreadScheduledExecutor( new DaemonThreadFactory( getClass().getSimpleName() + "-"
             + hashCode() ) );
 
-    private long leastFlushInterval = 1000L;
-
-    private long maxIdle = 10 * 1000L;
-
-    private final Application application;
+    private Session session;
 
     LazyFileWriter( Application application, Provider<File> outputFileProvider )
     {
-        this( application, outputFileProvider, 1000L );
+        this( application, outputFileProvider, DEFAULT_CHECK_INTERVAL );
     }
 
     LazyFileWriter( Application application, Provider<File> outputFileProvider, long checkInterval )
@@ -111,21 +118,21 @@ class LazyFileWriter
             try
             {
                 // For new writes, flush if last flush is earlier than threshold
-                if ( session.lastFlush <= session.lastWrite && session.lastFlush + leastFlushInterval < now )
+                if ( session.lastFlush < session.lastWrite && session.lastFlush + leastFlushInterval < now )
                 {
                     session.writer.flush();
                     session.lastFlush = now;
+                }
 
-                    File expectedFile = outputFileProvider.provide();
-                    if ( !session.outputFile.equals( expectedFile ) )
+                File expectedFile = outputFileProvider.provide();
+                if ( !session.outputFile.equals( expectedFile ) )
+                {
+                    if ( LOG.isDebugEnabled() )
                     {
-                        if ( LOG.isDebugEnabled() )
-                        {
-                            LOG.info( "About to rotate from " + session.outputFile + " to new file " + expectedFile );
-                        }
-                        close();
-                        return;
+                        LOG.info( "About to rotate from " + session.outputFile + " to new file " + expectedFile );
                     }
+                    close();
+                    return;
                 }
 
                 // Close session if it has been idle for longer than threshold
@@ -208,11 +215,17 @@ class LazyFileWriter
                 session = new Session( outputFileProvider.provide() );
                 if ( !session.appending )
                 {
-                    output.writeHeader( application );
+                    output.writeHeader( UUID.randomUUID().toString(), application );
                 }
             }
             output.writeBody( bucket, marks, timestamp, application );
-            session.lastWrite = System.currentTimeMillis();
+            long now = System.currentTimeMillis();
+            session.lastWrite = now;
+            if ( leastFlushInterval == 0 )
+            {
+                session.writer.flush();
+                session.lastFlush = now;
+            }
         }
     }
 }

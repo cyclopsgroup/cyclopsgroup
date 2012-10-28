@@ -7,7 +7,7 @@ import org.cyclopsgroup.streammarker.Mark;
 
 public interface MarkOutput
 {
-    void writeHeader( Application application )
+    void writeHeader( String fileId, Application application )
         throws IOException;
 
     void writeBody( String bucket, Iterable<Mark> marks, long timestamp, Application application )

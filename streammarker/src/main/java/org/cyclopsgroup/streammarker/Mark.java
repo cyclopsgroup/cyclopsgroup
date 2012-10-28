@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.Validate;
 
+/**
+ * Mark is NOT thread safe. It's not supposed to be used across threads
+ */
 public class Mark
 {
     public static enum Kind
@@ -67,7 +70,7 @@ public class Mark
 
     private final String name;
 
-    private final Set<String> tags = new HashSet<String>();
+    private Set<String> tags;
 
     private final long value;
 
@@ -92,6 +95,10 @@ public class Mark
 
     public final Set<String> getTags()
     {
+        if ( tags == null )
+        {
+            return Collections.emptySet();
+        }
         return Collections.unmodifiableSet( tags );
     }
 
@@ -106,6 +113,10 @@ public class Mark
         for ( String tag : tags )
         {
             Validate.isTrue( PATTERN_WORD.matcher( tag ).find(), "Tag " + tag + " is not valid" );
+        }
+        if ( this.tags == null )
+        {
+            this.tags = new HashSet<String>();
         }
         for ( String tag : tags )
         {
