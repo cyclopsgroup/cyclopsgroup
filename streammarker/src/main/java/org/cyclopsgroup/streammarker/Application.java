@@ -1,4 +1,4 @@
-package org.cyclopsgroup.streammarker.plain;
+package org.cyclopsgroup.streammarker;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.apache.commons.lang.Validate;
-import org.cyclopsgroup.streammarker.Mark;
 
 public class Application
 {

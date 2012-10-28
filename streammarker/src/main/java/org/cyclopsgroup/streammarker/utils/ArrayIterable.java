@@ -1,4 +1,4 @@
-package org.cyclopsgroup.streammarker.plain;
+package org.cyclopsgroup.streammarker.utils;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

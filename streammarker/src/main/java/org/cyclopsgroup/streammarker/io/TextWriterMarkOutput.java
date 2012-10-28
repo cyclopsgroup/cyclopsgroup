@@ -6,8 +6,10 @@ import java.io.Writer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.Validate;
+import org.cyclopsgroup.streammarker.Application;
+import org.cyclopsgroup.streammarker.ConstantProvider;
 import org.cyclopsgroup.streammarker.Mark;
-import org.cyclopsgroup.streammarker.plain.Application;
+import org.cyclopsgroup.streammarker.Provider;
 
 public class TextWriterMarkOutput
     implements MarkOutput
@@ -21,26 +23,20 @@ public class TextWriterMarkOutput
         return "[\"" + StringUtils.join( values, "\",\"" ) + "\"]";
     }
 
-    private final WriterProvider writer;
+    private final Provider<Writer> writer;
 
     public TextWriterMarkOutput( final Writer writer )
     {
-        this.writer = new WriterProvider()
-        {
-            public Writer getWriter()
-            {
-                return writer;
-            }
-        };
+        this( ConstantProvider.of( writer ) );
     }
 
-    public TextWriterMarkOutput( WriterProvider writer )
+    public TextWriterMarkOutput( Provider<Writer> writer )
     {
         Validate.notNull( writer, "Writer can't be NULL" );
         this.writer = writer;
     }
 
-    public void writeBody( String bucket, Iterable<Mark> marks, long timestamp, int index, Application application )
+    public void writeBody( String bucket, Iterable<Mark> marks, long timestamp, Application application )
         throws IOException
     {
         StringBuilder s = new StringBuilder();
@@ -58,14 +54,8 @@ public class TextWriterMarkOutput
             s.append( String.format( "{N:\"%s\",K:\"%s\",V:%d,T:%s}", mark.getName(), mark.getKind().getShortName(),
                                      mark.getValue(), setOf( mark.getTags() ) ) );
         }
-        writeLine( String.format( "B:{I:%011d,A:\"%s\",B:\"%s\",T:%d,M:[%s]}", index,
-                                  application.getApplicationIdentifier(), bucket, timestamp, s.toString() ) );
-    }
-
-    public void writeFooter( int lines, Application application )
-        throws IOException
-    {
-        writeLine( String.format( "F:{C:%d,E:%d}", lines, System.currentTimeMillis() ) );
+        writeLine( String.format( "B:{A:\"%s\",B:\"%s\",T:%d,M:[%s]}", application.getApplicationIdentifier(), bucket,
+                                  timestamp, s.toString() ) );
     }
 
     public void writeHeader( Application application )
@@ -78,7 +68,7 @@ public class TextWriterMarkOutput
     private void writeLine( String line )
         throws IOException
     {
-        Writer w = writer.getWriter();
+        Writer w = writer.provide();
         synchronized ( w )
         {
             w.write( line );
