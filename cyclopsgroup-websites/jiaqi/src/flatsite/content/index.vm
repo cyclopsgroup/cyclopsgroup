@@ -88,26 +88,28 @@
     <div id="mainContent">
         <h2>About Me</h2>
         <p>
-            My name, &#37101;&#20339;&#29734;, is pronounced as
-            &quot;Goo'O, Jar
-            Chee&quot;. I am an software engineer
-            focusing on design and development of solutions written in
-            Java. My work
-            ranges from logistics, finance and retail
-            industries to infrastructure and development platform.
+            Named &#37101;&#20339;&#29734;(pronouced as Jar Key), I have
+            been a Java software engineer for over a decade in
+            logistics, finance and cloud computing industries. My recent
+            work varies from system that processes multi-million dollar
+            transactions a day, system that deploys software to million
+            Linux hosts, to open source projects like
+            <a href="../../projects/jmxterm">Jmxterm</a>
+            and
+            <a href="../../projects/jcli">JCli</a>
+            .
         </p>
         <p>
             Aside from work, I'm intrigued by movie, photography, music
             and painting.
-            <a href="http://www.cyclopsgroup.org">cyclopsgroup.org</a>
-            is a portfolio of my nonprofessional work.
+            <a href="http://www.cyclopsgroup.org">This website</a>
+            is a portfolio of my non-professional work.
+        </p>
+        <p>
+            I hate to make this site look serious. Therefore here's a
+            line(one of my favorite) from Futurama.
         </p>
         <h2>"Do Things Right"</h2>
-        <p>
-            To keep this site away from being serious, here I'm copying
-            a
-            line from Futurama.
-        </p>
         <p style="text-align: center">
             GOD
         </p>
@@ -119,12 +121,14 @@
             hope. You have
             to use a light
             touch, like a safecracker or a
-            pickpocket.</p>
+            pickpocket.
+        </p>
         <p style="text-align: center">
             BENDER
         </p>
         <p style="margin-left: 80px">Or a guy who burns down a bar for the insurance
-            money.</p>
+            money.
+        </p>
         <p style="text-align: center">
             GOD
         </p>
@@ -134,7 +138,8 @@
             <b>If you
                 do things right, people won't be sure you've done
                 anything
-                at all</b>
+                at all
+            </b>
             .
         </p>
         <p>
@@ -142,7 +147,8 @@
                 --
                 <a
                     href="http://www.imsdb.com/transcripts/Futurama-Godfellas.html">
-                    Godfellas, Futurama</a>
+                    Godfellas, Futurama
+                </a>
             </small>
         </p>
         <p>

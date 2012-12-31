@@ -12,7 +12,14 @@
                     </div>
                 </div>
                 <div class="clearBreak"></div>
-                <div id="contentBody">$body</div>
+                <div id="contentBody">
+                    <div>$body</div>
+                    <div>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>#include("include/google_adsense.vm")</div>
+                </div>
                 <div class="clearBreak"></div>
                 <div id="contentFooter">
                     #parse("include/footer.vm")
