@@ -13,12 +13,6 @@
         type='text/javascript'></script>
     <script type="text/javascript" src="http://www.google-analytics.com/urchin.js">
     </script>
-    <script type="text/javascript">
-        //<![CDATA[
-            _uacct = "UA-76203-1";
-            urchinTracker();
-
-            document.onload = function() {};
-        //]]>
-    </script>
+    <script type="text/javascript"
+        src="http://www.cyclopsgroup.org/js/google_analytics_boot.js"></script>
 </head>
