@@ -11,12 +11,7 @@
             media="print" />
         <script type="text/javascript" src="http://www.google-analytics.com/urchin.js">
         </script>
-        <script type="text/javascript">
-            <![CDATA[
-            _uacct = "UA-76203-1";
-            urchinTracker();
-        ]]>
-        </script>
+        <script type="text/javascript" src="$basedir/js/google_analytics_boot.js"></script>
     </head>
     <body>
         <div id="documentWrapper">

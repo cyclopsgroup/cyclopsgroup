@@ -46,17 +46,8 @@
                     .
                 </p>
                 <p>
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-4453803635357424";
-/* CyclopsGroupSmallBanner */
-google_ad_slot = "2401902631";
-google_ad_width = 468;
-google_ad_height = 60;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
+                    <script type="text/javascript"
+                        src="$basedir/js/google_ad_small_banner.js"></script>
                 </p>
             </td>
         </tr>
