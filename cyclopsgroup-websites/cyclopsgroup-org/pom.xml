@@ -17,7 +17,7 @@
         <site>
             <id>cyclopsgroup.server.sourceforge</id>
             <url>
-                s3://www.cyclopsgroup.org/
+                s3://www2.cyclopsgroup.org/
             </url>
         </site>
     </distributionManagement>
