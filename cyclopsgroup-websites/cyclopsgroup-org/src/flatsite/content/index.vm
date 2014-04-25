@@ -11,12 +11,10 @@
                     quality java software.
                 </p>
                 <p>
-                    In a spontaneously evolved software world, open
-                    source is the
-                    power of evolution. We believe that
-                    the
+                    We believe that the
                     most innovative solution
-                    for real business
+                    for real
+                    business
                     problem can
                     only be created in free open
                     environment.
@@ -94,12 +92,6 @@
                     <li>
                         <a href="http://wiki.cyclopsgroup.org/projects">All projects</a>
                     </li>
-                    <li>
-                        <a href="http://cyclopsgroup.webhop.org/courselist/">Demo site of project courselist</a>
-                    </li>
-                    <li>
-                        <a href="http://code.cyclopsgroup.org/continuum/">Continuum build dashboard</a>
-                    </li>
                 </ul>
             </td>
         </tr>
@@ -123,6 +115,9 @@
                 <h3>Projects</h3>
                 <ul>
                     <li>
+                        <a href="projects/datamung">AWS RDS backup service</a>
+                    </li>
+                    <li>
                         <a href="projects/jmxterm">Jmxterm command line JMX client</a>
                     </li>
                     <li>
@@ -130,14 +125,6 @@
                     </li>
                     <li>
                         <a href="projects/caff">Conversion and formatting framework
-                        </a>
-                    </li>
-                    <li>
-                        <a href="projects/courselist">Course list course management system
-                        </a>
-                    </li>
-                    <li>
-                        <a href="projects/waterview">Waterview web application frameworkd
                         </a>
                     </li>
                 </ul>
@@ -162,7 +149,7 @@
                     </li>
                     <li>
                         Meet
-                        <a href="members/jiaqi">Jiaqi Guo</a>
+                        <a href="http://jiaqi.cyclopsgroup.org">Jiaqi Guo</a>
                     </li>
                     <li>
                         Meet
