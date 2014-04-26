@@ -1,67 +1,42 @@
-@import url(./base.css);
-
 body {
-	margin: 0px;
-	padding: 0px;
-	color: #999;
+    margin: 0px;
+    padding: 0px;
 }
 
-h1, h2, h3 {
-	color: #0d488e;
-	font-weight: normal;
-}
-
-.underlined {
-	border-width: 0px 0px 1px 0px;
-	border-style: dashed;
-	border-color: #ccc;
+h1,h2,h3 {
+    color: #0d488e;
+    font-weight: normal;
 }
 
 a {
-	color: #666;
+    color: #666;
 }
 
 a:hover {
-	color: black;
+    color: black;
 }
 
 .reverse {
+    color: #999;
     background: black;
 }
 
 .reverse a {
-	color: #ccc;
+    color: #ccc;
 }
 
 .reverse a:hover {
     color: white;
 }
 
-.reverse h1, .reverse h2, .reverse h3 {
-
-	font-weight: bold;
-}
-
-#documentWrapper {
-    text-align: center;
-    background: white url(../images/bg.png) repeat-y center;
+.jumbotron {
+    background-color: transparent;
 }
 
 #documentContent {
-    width: 940px;
-    margin: 0px auto;
-    text-align: left;
     background: white url('../images/home_bg.jpg') no-repeat;
 }
 
-#contentHeaderTable td{
-	padding: 10px;
-}
-
-#contentBody {
-
-}
-
-#contentFooter {
-	padding: 10px 10px 50px 10px;
+#documentFooter {
+    padding: 10px 6px 40px 6px;    
 }
