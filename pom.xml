@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <version>9</version>
     </parent>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-parent</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.4</version>
+    <version>1.0.0-SNAPSHOT</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -27,32 +27,6 @@
         <system>launchpad</system>
         <url>https://launchpad.net/~cyclopsgroup</url>
     </issueManagement>
-    <mailingLists>
-        <mailingList>
-            <name>CyclopsGroup.org General Discussion</name>
-            <subscribe>http://groups.google.com/group/cyclopsgroup-discussion</subscribe>
-            <unsubscribe>http://groups.google.com/group/cyclopsgroup-discussion</unsubscribe>
-            <archive>http://groups.google.com/group/cyclopsgroup-discussion</archive>
-        </mailingList>
-        <mailingList>
-            <name>CyclopsGroup.org Projects Support</name>
-            <subscribe>http://groups.google.com/group/cyclopsgroup-support</subscribe>
-            <unsubscribe>http://groups.google.com/group/cyclopsgroup-support</unsubscribe>
-            <archive>http://groups.google.com/group/cyclopsgroup-support</archive>
-        </mailingList>
-        <mailingList>
-            <name>CyclopsGroup.org News</name>
-            <subscribe>http://groups.google.com/group/cyclopsgroup-news</subscribe>
-            <unsubscribe>http://groups.google.com/group/cyclopsgroup-news</unsubscribe>
-            <archive>http://groups.google.com/group/cyclopsgroup-news</archive>
-        </mailingList>
-        <mailingList>
-            <name>CyclopsGroup.org Projects Changelog</name>
-            <subscribe>http://groups.google.com/group/cyclopsgroup-changelog</subscribe>
-            <unsubscribe>http://groups.google.com/group/cyclopsgroup-changelog</unsubscribe>
-            <archive>http://groups.google.com/group/cyclopsgroup-changelog</archive>
-        </mailingList>
-    </mailingLists>
     <scm>
         <connection>scm:git:git@github.com:jiaqi/cyclopsgroup.git</connection>
         <developerConnection>scm:git:git@github.com:jiaqi/cyclopsgroup.git</developerConnection>
@@ -67,25 +41,29 @@
             <id>jiaqi</id>
             <email>jiaqi@cyclopsgroup.org</email>
             <name>Jiaqi Guo</name>
-            <timezone>-6</timezone>
-            <url>http://www.cyclopsgroup.org/members/jiaqi</url>
+            <timezone>-5</timezone>
+            <url>http://jiaqi.cyclopsgroup.org</url>
         </developer>
     </developers>
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
                 <configuration>
                     <keyname>cyclopsgroup-repository</keyname>
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.cyclopsgroup</groupId>
+                <artifactId>awss3-maven-wagon</artifactId>
+                <version>2.0.0-SNAPSHOT</version>
+            </extension>
+        </extensions>
     </build>
+    <properties>
+        <dist.bucketName>www2.cyclopsgroup.org</dist.bucketName>
+    </properties>
 </project>

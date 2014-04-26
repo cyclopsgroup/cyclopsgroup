@@ -92,16 +92,16 @@
             <h3>Projects</h3>
             <ul>
                 <li>
-                    <a href="projects/datamung">Datamung, AWS RDS backup service</a>
+                    <a href="http://wiki.cyclopsgroup.org/datamung">Datamung, AWS RDS backup service</a>
                 </li>
                 <li>
-                    <a href="projects/jmxterm">Jmxterm command line JMX client</a>
+                    <a href="http://wiki.cyclopsgroup.org/jmxterm">Jmxterm command line JMX client</a>
                 </li>
                 <li>
-                    <a href="projects/jcli">JCli command line parser</a>
+                    <a href="http://wiki.cyclopsgroup.org/jcli">JCli command line parser</a>
                 </li>
                 <li>
-                    <a href="projects/caff">Conversion and formatting framework
+                    <a href="http://wiki.cyclopsgroup.org/caff">Conversion and formatting framework
                         </a>
                 </li>
             </ul>
