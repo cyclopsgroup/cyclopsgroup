@@ -90,7 +90,7 @@
     </build>
     <properties>
         <dist.bucketName>www2.cyclopsgroup.org</dist.bucketName>
-        <dist.server.name>www2.cyclopsgroup.org.s3-website-us-east-1.amazonaws.com</dist.server.name>
+        <dist.server.name>www2.cyclopsgroup.org</dist.server.name>
         <dist.gpg.keyName>cyclopsgroup-repository</dist.gpg.keyName>
         <dist.gpg.passphrase>override-me</dist.gpg.passphrase>
     </properties>
