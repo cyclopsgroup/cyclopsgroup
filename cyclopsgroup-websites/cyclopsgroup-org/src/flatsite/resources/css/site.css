@@ -30,7 +30,14 @@ a:hover {
 }
 
 .jumbotron {
-    background-color: transparent;
+    margin-top: 16px;
+    background-color: white;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+
+.jumbotron p {
+    color: black;
 }
 
 #documentContent {
@@ -38,5 +45,5 @@ a:hover {
 }
 
 #documentFooter {
-    padding: 10px 6px 40px 6px;    
+    padding: 10px 6px 40px 6px;
 }

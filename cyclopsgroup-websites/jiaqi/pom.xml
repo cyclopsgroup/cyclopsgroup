@@ -15,7 +15,7 @@
     <version>1.2-SNAPSHOT</version>
     <distributionManagement>
         <site>
-            <id>cyclopsgroup.server.sourceforge</id>
+            <id>cyclopsgroup.server</id>
             <url>
                 s3://www2.cyclopsgroup.org/members/jiaqi/
             </url>

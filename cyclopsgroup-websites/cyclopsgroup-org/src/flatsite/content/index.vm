@@ -4,7 +4,7 @@
         </div>
         <div class="col-lg-9">
             <div class="jumbotron">
-                <h1 class="underlined">cyclopsgroup.org</h1>
+                <h1>cyclopsgroup.org</h1>
                 <p>
                     CyclopsGroup.org is an open source software
                     foundation
@@ -123,7 +123,10 @@
                 </li>
                 <li>
                     About
-                    <a href="http://jiaqi.cyclopsgroup.org">Jiaqi</a>
+                    <a
+                        href="http://www.cyclopsgroup.org/members/jiaqi/index.html">
+                        Jiaqi
+                    </a>
                 </li>
                 <li>
                     About

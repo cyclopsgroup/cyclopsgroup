@@ -1,3 +1,0 @@
-
-#set($layout="redirect_layout.vm")
-#set($redirectUrl="http://blog.cyclopsgroup.org")
