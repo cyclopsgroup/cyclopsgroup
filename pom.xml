@@ -11,7 +11,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-parent</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.4</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -82,9 +82,9 @@
         </plugins>
     </build>
     <properties>
-        <dist.bucketName>www2.cyclopsgroup.org</dist.bucketName>
-        <dist.server.name>www2.cyclopsgroup.org</dist.server.name>
+        <dist.bucketName>dist.cyclopsgroup.org</dist.bucketName>
+        <dist.server.name>dist.cyclopsgroup.org</dist.server.name>
         <dist.gpg.keyName>cyclopsgroup-repository</dist.gpg.keyName>
-        <dist.gpg.passphrase>override-me</dist.gpg.passphrase>
+        <dist.gpg.passphrase>change-me</dist.gpg.passphrase>
     </properties>
 </project>
