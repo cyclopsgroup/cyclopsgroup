@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.cyclopsgroup</groupId>
+        <artifactId>cloudpave-websites</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>cyclopsgroup-wiki</artifactId>
+    <packaging>pom</packaging>
+    <name>CyclopsGroup Wiki Site</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.cyclopsgroup</groupId>
+                <artifactId>s3upload-maven-plugin</artifactId>
+                <version>2.0.0-SNAPSHOT</version>
+                <configuration>
+                    <server>cyclopsgroup.server</server>
+                    <bucket>cdn2.cloudpave.com</bucket>
+                    <fileSets>
+                        <fileSet>
+                            <directory>src/flatsite/resources</directory>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                            <outputDirectory>cyclopsgroup-wiki-prod</outputDirectory>
+                        </fileSet>
+                    </fileSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

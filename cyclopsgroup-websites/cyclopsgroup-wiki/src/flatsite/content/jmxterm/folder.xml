@@ -1,0 +1,41 @@
+<folder>
+    <title>Jmxterm</title>
+    <pages>
+        <page path="index" title="Jmxterm home"></page>
+        <page path="features" title="What is it and what it is not">
+            An introduction of Jmxterm and
+            list of awesome features
+        </page>
+        <page path="tutorial" title="One minute tutorial">
+            Learn how to use Jmxterm in one
+            minute
+        </page>
+        <page path="manual" title="User manual">
+            A detailed but short user manual
+            of Jmxterm
+        </page>
+        <page path="download" title="Download and run">
+            Download executable Jmxterm
+            artifact and run it in 30 seconds
+        </page>
+        <page path="embed" title="Embed in script language">
+            Jmxterm can be embeded into script
+            language like PERL and SHELL. Learn how to do it from this
+            page.
+        </page>
+        <page path="faq" title="Frequently asked questions">
+            Find answer of your question here.
+        </page>
+        <page path="support" title="Help and support">
+            Have a question? Found a bug?
+            Please
+            don't hesitate to contribute
+            to and help improve
+            Jmxterm.
+        </page>
+        <page path="source" title="Source code and build">
+            Checkout source code from Github
+            and build it from your machine.
+        </page>
+    </pages>
+</folder>

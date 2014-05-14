@@ -1,0 +1,135 @@
+
+<a href="$link.absolute('/jmxterm')">Jmxterm</a>
+&gt;
+
+=What is it and what it is not
+
+<div class="alert alert-warning">
+    Jmxterm is designed with specific goal for specific
+    problem, non-graphical access to MBean server for human. It does't
+    intend to solve problems beyond that.
+</div>
+
+==Jmxterm is
+
+An open source command line based interactive JMX client
+written in Java. It allows user to access a Java MBean server in command
+line console without graphical environment. In another word, it's a
+command line based jconsole. At runtime, Jmxterm implementation relies
+on JDK jconsole library while it doesn't require graphical
+environment(such as X in Linux).
+
+Jmxterm can also be used to integrate
+with non-Java programming language such as PERL or SHELL and allow these
+languages to access Java MBean server programmatically. However as this
+page will point out later, there's no point of using Jmxterm to access
+MBean server programmatically in Java, as Java already provides good
+API.
+
+Here's a list of highlighted features of Jmxterm
+
+==Features
+
+===Standalone
+
+The only runtime dependency of Jmxterm is JDK. The internal
+third party dependencies are wrapped by ready-to-run uberjar. User does
+not need to worry about the setup of dependencies.
+
+Wrapped by uberjar,
+Jmxterm runs out of box with
+<code>java -jar jmxterm-...-uber.jar</code>
+command. No configuration, directory, environment variable or file
+permissions need to be setup ahead of time.
+
+===Platform neutral
+
+Jmxterm
+implementation is platform independent like most Java applications.
+However some features rely on [http://jline.sourceforge.net|JLine] which
+has native implementation that supports major operating systems
+including Windows, Mac OS and most Linux distros.
+
+===Interactive
+
+Unlike
+cmdline-jmxclient, Jmxterm runs interactively. User can do a series of
+short operations in an interactive command line console and system is
+aware of context.
+
+===Self documented
+
+Every command is self documented with
+<code>--help</code>
+option.
+
+===Connect a local PID
+
+Jmxterm is aware of JVM processes running
+on localhost from the same run as user. It is able to connect these
+local processes without requiring process's MBean server to listen to a
+port.
+
+===Password authentication
+
+Jmxterm supports password authentication.
+
+===Embeddable
+
+Jmxterm itself does not support flow control commands but
+it can
+be
+smoothly embedded into scripting languages such as PERL or
+SHELL
+for
+complicated logic.
+
+===Auto completion
+
+Jmxterm interactive command line
+console not only auto-complete
+commands, options with tab key, but also
+name of MBean domain
+and
+MBeans.
+
+===Command history
+
+Powered by
+[http://jline.sourceforge.net|JLine]
+, command history can be browsed
+with up/down
+arrow keys.
+
+===Reporting and active watch
+
+Jmxterm supports
+"watch" function that repeatedly prints out
+value of
+MBean attributes.
+With customizable output format, the
+"watch"
+feature can easily be
+extended for report generation.
+
+===RPM distribution
+
+With support of
+[http://mojo.codehaus.org/rpm-maven-plugin|Maven RPM plugin]
+, Jmxterm
+can be built into RPM package bundle in addition to uberjar. DEB bundle
+is not supported yet but on its way.
+
+<img src="https://listman.redhat.com/g/logo_redhat.png" />
+
+==Jmxterm is NOT
+
+Jmxterm is NOT a layer of Java library to hide JavaSE
+JMX API. Jmxterm is merely a command line tool to allow to access MBean
+server without graphical environment. It's not Jmxterm's intention to
+simplify existing JMX API. To interact with an MBean server
+programmatically in Java, Jmxterm is not a right tool.
+
+Jmxterm is not
+fully compatible to JDK 7 yet. It's compatible to JDK 5 and 6 only. JDK
+7 and 8 support is on its way.

@@ -1,0 +1,30 @@
+<a href="$link.absolute('/datamung')">Datamung</a>
+&gt;
+
+=Get started with demo website
+
+<p>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <big>[http://datamung-demo.cyclopsgroup.org]</big>
+</p>
+
+The demo site is for demo purpose only. It's public available and there's no
+data privacy, everyone's jobs run in one system. There's no data retention, only
+task in last 8 hours are displayed. If you plan to seriously use Datamung in
+your organization, Please take a look at [http://www.cloudpave.com|Cloudpave].
+
+<p>
+    <a href="http://www.cloudpave.com/work" class="btn btn-default">
+        Learn more
+    </a>
+    <a href="http://work.cloudpave.com" class="btn btn-primary">
+        <span class="glyphicon glyphicon-cloud"></span>
+        Get started with Cloudpave
+        &raquo;
+    </a>
+</p>
+
+<p>
+    <a href="http://www.cloudpave.com/work">This page</a>
+    lists all the additional features with comparison to Datamung demo website.
+</p>

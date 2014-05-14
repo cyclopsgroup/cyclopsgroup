@@ -1,0 +1,61 @@
+<a href="$link.absolute('/jmxterm')">Jmxterm</a>
+&gt;
+
+=Help and support
+
+==Report a bug
+
+Please don't hesitate to report bug
+if you find anything annoying in Jmxterm. Jmxterm is a fairly fresh
+project that definitely has great room for improvement. However please
+make sure search bugs and check FAQ before reporting new one. When you
+decide to report a bug, please make sure to include following
+information in the bug description:
+
+* The full error stack trace. Please
+do this. A stack trace is way much more precise than "command X doesn't
+work". To turn on debugging, make sure to run
+<code>option -v verbose</code>.
+* The version of Jmxterm. If you are not using the latest release,
+please try the latest version where there's chance the bug has been
+fixed.
+* The version of JDK. Include the result of java -version in the
+bug detail. For example:
+
+##<![CDATA[
+  ~$ java -version
+  java version "1.6.0_03"
+  Java(TM) SE Runtime Environment (build 1.6.0_03-b05)
+  Java HotSpot(TM) Server VM (build 1.6.0_03-b05, mixed mode)
+  ~$ which java
+  /opt/local/sun/jdk1.6.0_03/bin/java
+##]]>
+
+* Name of operating system. For example
+
+##<![CDATA[
+  ~$ uname -a
+  Linux rattlesnake 2.6.27-9-generic #1 SMP Thu Nov 20 21:57:00 UTC 2008 i686 GNU/Linux
+##]]>
+
+When you are ready, click following button to start reporting a bug
+
+<div>
+    <a href="https://bugs.launchpad.net/jmxterm/+filebug">
+        <img src="https://bugs.launchpad.net/+icing/but-sml-reportabug.gif" />
+    </a>
+</div>
+
+==Ask a question
+
+Question is also an alternative approach to report a bug
+when you are not sure if issue is a bug. Please make sure to search
+[https://answers.launchpad.net/jmxterm|question database] first. Click
+following button to ask a new question.
+
+<div>
+    <a href="https://answers.launchpad.net/jmxterm/+addquestion">
+        <img
+            src="https://answers.launchpad.net/+icing/but-sml-askaquestion.gif" />
+    </a>
+</div>

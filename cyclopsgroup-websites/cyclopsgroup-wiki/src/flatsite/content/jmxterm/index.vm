@@ -1,0 +1,69 @@
+
+#set($layoutTemplate="layout/single_column_layout.vm")
+
+=Jmxterm
+
+Jmxterm is
+a command line based interactive JMX client. It's
+designed to allow user
+to access a Java MBean server from
+command line without graphical
+environment. In another word,
+it's a command line based jconsole.
+
+jmxterm
+is an open source Java project under CyclopsGroup.org.
+
+==Contents
+
+#set($folderDoc=$xml.loadLocalDocument("content/jmxterm/folder.xml"))
+#set($pages=$folderDoc.rootElement.element("pages").elements("page"))
+#foreach($page in $pages)
+#set($pagePath=$page.attributeValue("path"))
+#if($pagePath!="index")
+===$page.attributeValue("title")
+
+<div>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/jmxterm/$pagePath")'>
+        $page.text
+    </a>
+</div>
+
+#end
+#end
+
+==External links
+
+<ul>
+    <li>
+        <a href="http://www.cyclopsgroup.org/projects/jmxterm">
+            Official Jmxterm home page with Javadoc and other
+            project
+            reports.
+            <img src="http://maven.apache.org/images/logos/maven-brewed.png" />
+        </a>
+    </li>
+    <li>
+        <a href="https://launchpad.net/jmxterm">
+            Jmxterm in
+            <img
+                src="https://bugs.launchpad.net/@@/launchpad-logo-and-name-hierarchy.png"
+                alt="launchpad.net" />
+            , click it to report bug
+            or ask
+            question
+        </a>
+    </li>
+    <li>
+        <a href="https://github.com/jiaqi/jmxterm">
+            <img
+                src="https://raw.github.com/github/media/master/octocats/blacktocat-32.png" />
+            Jmxterm source code in Github
+        </a>
+    </li>
+    <li>
+        <a
+            href="http://sourceforge.net/projects/cyclops-group/files/jmxterm/">All downloadable artifacts of Jmxterm</a>
+    </li>
+</ul>

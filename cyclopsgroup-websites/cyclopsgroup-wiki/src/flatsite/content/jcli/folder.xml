@@ -1,0 +1,20 @@
+<folder>
+    <title>JCli</title>
+    <pages>
+        <page path="index" title="JCli home"></page>
+        <page path="about" title="About JCli">
+            A brief introduction of JCli and
+            how to use it in your project
+        </page>
+        <page path="examples" title="Examples">
+            Learn JCli with examples
+        </page>
+        <page path="faq" title="Frequently asked questions">
+            Find answer of your question here
+        </page>
+        <page path="support" title="Help and support">
+            Have a question? Found a bug?
+            Please don't hesitate to contribute and help JCli improve.
+        </page>
+    </pages>
+</folder>

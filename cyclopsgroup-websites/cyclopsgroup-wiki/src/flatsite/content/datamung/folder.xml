@@ -1,0 +1,22 @@
+<folder>
+    <title>Datamung</title>
+    <pages>
+        <page path="index" title="Datamung home"></page>
+        <page path="why" title="Why Datamung?">
+            The purpose of Datamung and what
+            makes it unique and useful
+        </page>
+        <page path="how" title="How is it done?">
+            Learn how to use Jmxterm in one
+            minute
+        </page>
+        <page path="demo" title="Demo website">
+            Try your database in demo website
+            for free
+        </page>
+        <page path="develop" title="Understand more">
+            Learn more, get source code and
+            run Datamung in your own AWS account.
+        </page>
+    </pages>
+</folder>

@@ -1,0 +1,46 @@
+
+#set($layoutTemplate="layout/single_column_layout.vm")
+
+=JCli
+
+JCli is a
+Java annotation driven command line manipulation library.
+In this wiki
+you may find following pages.
+
+==Contents
+
+#set($folderDoc=$xml.loadLocalDocument("content/jcli/folder.xml"))
+#set($pages=$folderDoc.rootElement.element("pages").elements("page"))
+#foreach($page in $pages)
+#set($pagePath=$page.attributeValue("path"))
+#if($pagePath!="index")
+===$page.attributeValue("title")
+
+<div>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/jcli/$pagePath")'>
+        $page.text
+    </a>
+</div>
+
+#end
+#end
+
+==External links
+
+<ul>
+    <li>
+        <a href="http://cyclopsgroup.org/projects/jcli/project-info.html">Maven generated project info</a>
+    </li>
+    <li>
+        <a href="http://cyclopsgroup.org/projects/jcli/project-reports.html">Maven generated project reports</a>
+    </li>
+    <li>
+        <a
+            href="http://www.cyclopsgroup.org/projects/jcli/apidocs/index.html">Javadoc</a>
+    </li>
+    <li>
+        <a href="http://github.com/jiaqi/jcli">JCli in Github</a>
+    </li>
+</ul>

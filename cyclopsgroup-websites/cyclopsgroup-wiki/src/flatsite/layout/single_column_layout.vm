@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    #parse("layout/document_head.vm")
+    <body>
+        #parse("layout/web_banner.vm")
+        <div id="document-body">
+            <div class="container" role="main">$body</div>
+            <div class="container">
+                <h2>Comments</h2>
+                <div class="fb-comments"
+                    data-href="http://wiki.cyclopsgroup.org${requestedPath}"
+                    data-width="540" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+        </div>
+        #parse("layout/web_footer.vm")
+    </body>
+</html>

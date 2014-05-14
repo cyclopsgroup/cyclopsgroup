@@ -1,0 +1,76 @@
+[$link.absolute('jcli')|JCli]
+&gt;
+
+=Examples
+
+===Define your POJO
+
+The POJO doesn't have to extend any class
+or implements any interface. Make sure the fields you want to set or get
+are correctly defined in POJO class.
+public class APojo {
+
+##<![CDATA[
+  private int level;
+  ...
+  public int getLevel() { return level; }
+  public void setLevel( int level ) { this.level = level; }
+  ...
+##]]>
+
+===Annotate the options
+
+Annotation defines which command line option is
+mapped to where. Add annotation around the getter or setter of field, if
+there are any options.
+
+##<![CDATA[
+  ...
+  import org.cyclopsgroup.jcli.annotation.*;
+  ...
+  @Cli(name="test")
+  public class APojo {
+  ...
+  @Option(name = "l", longName = "level", description = "A integer value")
+  public int getLevel() { return level; }
+  ...
+##]]>
+
+===Annotate the argument
+
+Argument is what's left after options are parsed
+from original command line input. It's often a multi-value list.
+
+##<![CDATA[
+  ...
+  private List<String> arguments = new ArrayList<String>();
+  
+  @MultiValue
+  @Argument( description = "Left over arguments" )
+  public List<String> getArguments() { return arguments; }
+  ...
+##]]>
+
+===Parse arguments with ArgumentProcessor
+
+Now the POJO is ready, rules are
+defined. At runtime, use ArgumentProcessor class to parse string array
+and pass result to POJO.
+
+##<![CDATA[
+  import org.cyclopsgroup.jcli.ArgumentProcessor;
+  ...
+  APojo pojo = new APojo();
+  ArgumentProcessor.newInstance( APojo.class ).process( args, pojo );
+  doSomethingWith( pojo.getLevel() );
+  ...
+##]]>
+
+==More
+
+At this point I'm sure you are wondering how complicated cases are
+handled. What happens to customized conversion rule for a field, how to
+define option that can take more than one values, or doesn't take a
+value, what if argument type is not String.
+Please keep your curiosity
+and continue to [faq|FAQ] page.

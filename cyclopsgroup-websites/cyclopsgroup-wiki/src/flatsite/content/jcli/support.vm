@@ -1,0 +1,40 @@
+[$link.absolute('jcli')|JCli]
+&gt;
+
+=Help and support
+
+JCli project manages bug and question in
+<a href="https://bugs.launchpad.net/jcli">
+    <img
+        src="https://bugs.launchpad.net/@@/launchpad-logo-and-name-hierarchy.png" />
+</a>
+
+==Report a bug
+
+JCli is still a toddler, please don't hesitate to report
+bug if you find anything annoying in JCli. However please make sure
+search bugs and check [faq|FAQ] before reporting new one. When you
+decide to report a bug.
+
+When you are ready, click following button to
+start reporting a bug.
+
+<p>
+    <a href="https://bugs.launchpad.net/jcli/+filebug">
+        <img src="https://bugs.launchpad.net/+icing/but-sml-reportabug.gif" />
+    </a>
+</p>
+
+==Ask a question
+
+Question is also an alternative approach to report a bug
+when you are not sure if issue is a bug. Please make sure to search
+[https://answers.launchpad.net/jcli|question&nbsp;database]
+first. Click following button to ask a new question.
+
+<p>
+    <a href="https://answers.launchpad.net/jcli/+addquestion">
+        <img
+            src="https://answers.launchpad.net/+icing/but-sml-askaquestion.gif" />
+    </a>
+</p>

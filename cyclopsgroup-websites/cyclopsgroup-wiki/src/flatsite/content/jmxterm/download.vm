@@ -1,0 +1,31 @@
+
+<a href="$link.absolute('/jmxterm')">Jmxterm</a>
+&gt;
+
+=Download and run
+
+<p>
+    <big>
+        <a
+            href="http://downloads.sourceforge.net/cyclops-group/jmxterm-1.0-alpha-4-uber.jar">
+            <span class="glyphicon glyphicon-save"></span>
+            Download the latest release HERE
+        </a>
+    </big>
+</p>
+
+==Other downloads
+
+* Download
+[http://www.cyclopsgroup.org/projects/jmxterm/jmxterm-1.0-SNAPSHOT-uber.jar|build]
+from the latest code
+* Download for
+[http://sourceforge.net/projects/cyclops-group/files/jmxterm/|all&nbsp;versions]
+
+==Run
+
+Execute
+<code>
+    java -jar jmxterm-&lt;my version&gt;-uber.jar
+</code>
+from command line.

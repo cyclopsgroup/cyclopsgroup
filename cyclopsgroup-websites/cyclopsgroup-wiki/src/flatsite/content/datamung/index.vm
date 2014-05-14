@@ -1,0 +1,134 @@
+#set($layoutTemplate="layout/single_column_layout.vm")
+
+=Datamung
+
+==Introduction
+
+Datamung is a Java open source, web based,
+[http://aws.amazon.com/swf|AWS&nbsp;Simple&nbsp;Workflow]
+driven solution that backs up AWS RDS MySQL database into S3 object by launching
+EC2 instance and running mysqldump command. It makes it possible to replicate
+RDS across regions, VPC, accounts or outside AWS network.
+
+<p>
+    <img
+        src="https://docs.google.com/drawings/d/19FaRhaxvgLuhiuZCpPoePLGdf3eZzpp1AzuFGlOa8m0/pub?w=900&h=300" />
+</p>
+
+Datamung is one of the ten winners of
+[http://techblog.netflix.com/2013/11/netflix-open-source-software-cloud.html|2013&nbsp;Netflix&nbsp;Cloud&nbsp;Prize]
+award. On Nov 14th 2013, during the
+[http://youtu.be/Waq8Y6s1Cjs?t=13m17s|day&nbsp;2&nbsp;keynote&nbsp;session]
+of AWS re:invent conference in Las Vegas, it was announced as the winner of
+datastore integration category. Check out
+[http://blog.cyclopsgroup.org/2013/11/datamung-won-netflix-cloud-prize-award.html|this&nbsp;blog]
+for stories behind scene.
+
+<iframe width="320" height="180" src="//www.youtube.com/embed/Waq8Y6s1Cjs?t=13m17s"
+    frameborder="0" allowfullscreen></iframe>
+
+==Contents
+
+You may find pages below useful depends on what you are looking
+for. To
+learn more about what Datamung is designed to do and why, plase take a
+look at
+[$link.absolute('/datamung/why')|why Datamung] page.
+
+<p class="alert alert-info">
+    If you simply look for a solution to backup RDS database in your
+    organization, the best way is to use
+    <a href="http://work.cloudpave.com">Cloudpave</a>
+    which is a free service built on top of Datamung for serious users. If
+    offers features such as data privacy, personal workspace, task history and
+    task re-run, which Datamung itself can't achieve by design.
+</p>
+
+<p>
+    <a href="http://www.cloudpave.com/work" class="btn btn-default btn-lg">
+        Learn more
+    </a>
+    <a href="http://work.cloudpave.com" class="btn btn-primary btn-lg">
+        <span class="glyphicon glyphicon-cloud"></span>
+        Get started with Cloudpave
+        &raquo;
+    </a>
+</p>
+
+<p>
+    <a href="http://www.cloudpave.com/work">This page</a>
+    lists all the additional features with comparison to Datamung demo website.
+</p>
+
+If you are interested in how Datamung is designed or what to understand what it
+does before letting it run in your own AWS account, please check out
+[$link.absolute('/datamung/how')|how is it done] page.
+
+The
+[$link.absolute('/datamung/demo')|demo website]
+merely intends to show the
+idea of
+Datamung in a visible form rather than code and diagrams. It's not
+designed for
+serious users. However it allows users to try out Datamung quickly.
+
+[$link.absolute('/datamung/develop')|Understand more] page is for people
+who are
+brave enough to dig into the code, go though the trouble and install
+Datamung in
+his own AWS account, or be willing to contribute to Datamung.
+
+===Why
+Datamung?
+
+<p>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/datamung/why")'>
+        The database backup problem Datamung attempts to solve is more
+        complicated than simply running a mysqldump command. This page explains
+        the complication of problem and how Datamung helps in detail.
+    </a>
+</p>
+
+===How is it done?
+
+<p>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/datamung/how")'>
+        Datamung models the backup process with workflows and runs them
+        using AWS SimpleWorkflow. This page talks about what exactly these
+        workflows are.
+    </a>
+</p>
+
+===Demo website
+
+<p>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/datamung/demo")'>
+        If you own RDS MySQL instance and want to try letting Datamung
+        automatically dump database into S3, please visit our demo website. The
+        following page talks about how to use the demo website.
+    </a>
+</p>
+
+<a link="http://datamung-demo.cyclopsgroup.org" class="btn btn-default btn-info">
+    Goto demo site now
+</a>
+
+===Understand more and get involved
+
+<p>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <a href='$link.absolute("/datamung/develop")'>
+        To understand more about the design, component, or to run a copy
+        of Datamung solution under your AWS account, please checkout this
+        page.
+    </a>
+</p>
+
+==Contact me
+
+If you have further questions or ideas, feel free to
+<a href="http://www.github.com/jiaqi">contact me in Github</a>
+, via [mailto:jiaqi@cyclopsgroup.org|email] or leave comments below.
