@@ -4,25 +4,25 @@
             <div class="col-md-6">
                 <p>
                     <a target="github"
-                        href="https://github.com/jiaqi/cloudpave-websites/blob/master/cyclopsgroup-wiki/src/flatsite/$templatePath">
+                        href="https://github.com/jiaqi/cyclopsgroup/blob/master/cyclopsgroup-websites/cyclopsgroup-wiki/src/flatsite/$templatePath">
                         <span class="glyphicon glyphicon-eye-open"></span>
                         Source
                     </a>
                     |
                     <a target="github"
-                        href="https://github.com/jiaqi/cloudpave-websites/edit/master/cyclopsgroup-wiki/src/flatsite/$templatePath">
+                        href="https://github.com/jiaqi/cyclopsgroup/edit/master/cyclopsgroup-websites/cyclopsgroup-wiki/src/flatsite/$templatePath">
                         <span class="glyphicon glyphicon-pencil"></span>
                         Edit
                     </a>
                     |
                     <a target="github"
-                        href="https://github.com/jiaqi/cloudpave-websites/commits/master/cyclopsgroup-wiki/src/flatsite/$templatePath">
+                        href="https://github.com/jiaqi/cyclopsgroup/commits/master/cyclopsgroup-websites/cyclopsgroup-wiki/src/flatsite/$templatePath">
                         <span class="glyphicon glyphicon-list"></span>
                         Revisions
                     </a>
                     |
                     <a target="github"
-                        href="https://github.com/jiaqi/cloudpave-websites/delete/master/cyclopsgroup-wiki/src/flatsite/$templatePath">
+                        href="https://github.com/jiaqi/cyclopsgroup/delete/master/cyclopsgroup-websites/cyclopsgroup-wiki/src/flatsite/$templatePath">
                         <span class="glyphicon glyphicon-trash"></span>
                         Delete
                     </a>
