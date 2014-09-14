@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-java-parent</artifactId>
-    <version>0.5</version>
+    <version>0.6</version>
     <name>CyclopsGroup.org Projects</name>
     <description>Base POM for Java projects in CyclopsGroup.org
     </description>
@@ -69,7 +69,8 @@
                         </plugin>
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>findbugs-maven-plugin
+                            <artifactId>
+                                findbugs-maven-plugin
                             </artifactId>
                         </plugin>
                         <plugin>
@@ -120,7 +121,7 @@
             <extension>
                 <groupId>org.cyclopsgroup</groupId>
                 <artifactId>awss3-maven-wagon</artifactId>
-                <version>1.4.0</version>
+                <version>1.4.1</version>
             </extension>
         </extensions>
     </build>
