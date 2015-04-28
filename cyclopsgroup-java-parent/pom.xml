@@ -6,12 +6,11 @@
     <parent>
         <groupId>org.cyclopsgroup</groupId>
         <artifactId>cyclopsgroup-parent</artifactId>
-        <version>0.4</version>
+        <version>0.6.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-java-parent</artifactId>
-    <version>0.6</version>
     <name>CyclopsGroup.org Projects</name>
     <description>Base POM for Java projects in CyclopsGroup.org
     </description>
@@ -31,7 +30,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.1</version>
                 <configuration>
                     <reportPlugins>
                         <plugin>

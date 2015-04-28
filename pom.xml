@@ -11,7 +11,7 @@
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-parent</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.4</version>
+    <version>0.6.1</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -32,10 +32,6 @@
         <developerConnection>scm:git:git@github.com:jiaqi/cyclopsgroup.git</developerConnection>
         <url>git@github.com:jiaqi/cyclopsgroup.git</url>
     </scm>
-    <ciManagement>
-        <system>continuum</system>
-        <url>http://code.cyclopsgroup.org/continuum/</url>
-    </ciManagement>
     <developers>
         <developer>
             <id>jiaqi</id>
@@ -47,19 +43,28 @@
     </developers>
     <repositories>
         <repository>
-            <id>cyclopsgroup-snapshot</id>
+            <id>cyclopsgroup.snapshot</id>
             <name>CyclopsGroup snapshot repository</name>
             <releases>
                 <enabled>false</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
             </snapshots>
             <url>http://${dist.server.name}/maven/snapshot-repository</url>
+        </repository>
+        <repository>
+            <id>cyclopsgroup.extra</id>
+            <name>CyclopsGroup extra library repository</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>http://${dist.server.name}/maven/extra-repository</url>
         </repository>
     </repositories>
     <distributionManagement>
@@ -73,7 +78,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.6</version>
                 <configuration>
                     <keyname>${dist.gpg.keyName}</keyname>
                     <passphrase>${dist.gpg.passphrase}</passphrase>
