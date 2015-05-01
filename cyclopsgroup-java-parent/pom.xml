@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.cyclopsgroup</groupId>
         <artifactId>cyclopsgroup-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.6.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>org.cyclopsgroup</groupId>
