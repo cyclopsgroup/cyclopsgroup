@@ -119,7 +119,7 @@
         </extensions>
     </build>
     <properties>
-        <jdk.source.version>1.7</jdk.source.version>
-        <jdk.target.version>1.7</jdk.target.version>
+        <jdk.source.version>1.8</jdk.source.version>
+        <jdk.target.version>1.8</jdk.target.version>
     </properties>
 </project>
