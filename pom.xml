@@ -3,15 +3,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-parent</artifactId>
     <name>CyclopsGroup.org Projects</name>
-    <version>0.6.1</version>
+    <version>0.7.0-SNAPSHOT</version>
     <description>Base POM for cyclopsgroup projects</description>
     <url>http://www.cyclopsgroup.org</url>
     <packaging>pom</packaging>
@@ -76,6 +71,7 @@
         </plugins>
     </build>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dist.bucketName>dist.cyclopsgroup.org</dist.bucketName>
         <dist.server.name>dist.cyclopsgroup.org</dist.server.name>
         <dist.gpg.keyName>cyclopsgroup-repository</dist.gpg.keyName>
