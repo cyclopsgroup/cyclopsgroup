@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<span>
-    <input type="submit" onclick="${onclick}" value="${button.title}" title="${button.description}"
-        class="waterviewFormButton" />
-</span>

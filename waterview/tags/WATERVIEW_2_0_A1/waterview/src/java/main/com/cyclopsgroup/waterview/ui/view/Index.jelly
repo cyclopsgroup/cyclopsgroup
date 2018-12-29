@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<w:View xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns="http://waterview.cyclopsgroup.com/html" xmlns:j="jelly:core">
-    <h2>Hello World</h2>
-    <p>Page is ${page}</p>
-    <j:forEach var="i" items="${runtime.actions}">
-        <p>${i}</p>
-    </j:forEach>
-    <b>aaaaaaa</b>
-</w:View>

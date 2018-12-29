@@ -1,6 +1,0 @@
-<div>
-    <h2>Hello world</h2>
-    <p>This is only a test</p>
-    <p>$request</p>
-    <p>$link.contextURL</p>
-</div>

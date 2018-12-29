@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<w:Dummy xmlns:w="http://waterview.cyclopsgroup.com/ui">
-    <form method="${formTag.method}" name="${form.id}" action="${formTag.action}">
-        <w:JellyScript path="/waterview/FormHiddenFields.jelly" />
-        <w:RunScript script="${formTag.body}" />
-    </form>
-</w:Dummy>

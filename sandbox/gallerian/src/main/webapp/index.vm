@@ -1,7 +1,0 @@
-<div>
-    <h2>Welcome to Waterview: <a href="c/">Go!!!</a></h2>
-    <p>request = $request, cookies = $request.cookies</p>
-    <p>response = $response</p>
-    <p>context = $context</p>
-    <p>page = $page</p>
-</div>

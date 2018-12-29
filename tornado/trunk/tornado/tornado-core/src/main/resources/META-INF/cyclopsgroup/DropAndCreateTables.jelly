@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Hibernate xmlns="http://tornado.cyclopsgroup.com/tool">
-    <DropTables />
-    <CreateTables />
-</Hibernate>

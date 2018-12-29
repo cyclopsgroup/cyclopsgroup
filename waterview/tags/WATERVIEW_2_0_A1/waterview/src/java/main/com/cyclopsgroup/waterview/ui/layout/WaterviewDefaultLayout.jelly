@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Layout xmlns="http://waterview.cyclopsgroup.com/ui">
-    <Panel name="body">
-        <SimpleView path="${page}"/>
-    </Panel>
-</Layout>

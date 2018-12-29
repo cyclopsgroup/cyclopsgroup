@@ -1,6 +1,0 @@
-#Sqlfile -> Database map
-#Thu Sep 25 14:07:42 CDT 2003
-a4trim-schema.sql=default
-id-table-schema.sql=default
-a4trim-schema-idtable-init.sql=default
-a4trim-data.sql=default

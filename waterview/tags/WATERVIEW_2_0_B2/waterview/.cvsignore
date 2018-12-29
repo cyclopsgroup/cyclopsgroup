@@ -1,9 +1,0 @@
-target
-.*
-*.log
-Model Folder
-*.md5
-*.iml
-*.ipr
-*.iws
-*.out

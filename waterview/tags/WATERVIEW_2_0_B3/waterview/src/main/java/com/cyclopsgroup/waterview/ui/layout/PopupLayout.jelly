@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns:w="http://waterview.cyclopsgroup.com/ui" xmlns:j="jelly:core">
-    <head>
-        <w:JellyScript path="/waterview/layout/DefaultHtmlHeaders.jelly" />
-    </head>
-    <body>
-        <w:SimpleView path="/${data.page.packageAlias}/view${data.page.path}" title="${mainTitle}" />
-    </body>
-</html>
