@@ -11,7 +11,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>cyclopsgroup-java-parent</artifactId>
-  <version>0.7.2-SNAPSHOT</version>
+  <version>0.7.2</version>
   <name>CyclopsGroup Java OSS</name>
   <description>Base POM for Java projects in CyclopsGroup.org</description>
   <url>http://www.cyclopsgroup.org</url>
