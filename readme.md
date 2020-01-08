@@ -45,6 +45,16 @@ git tag mypackage_v_1_0_1
 git push --tags
 ```
 
+Depend on the platform, the GPG command does not always work smoothly. If it
+doesn't work the output file can be signed manually.
+
+```
+gpg -ab mypackage-1.0.1.jar
+gpg -ab mypackage-sources-1.0.1.jar
+...
+jar cvf bundle.jar mypackage*
+```
+
 ### How to format code
 
 As of now, the 0.7.2 version of Java parent POM requires all Java code to
