@@ -32,10 +32,18 @@ exists in the POM file.
 mvn clean
 mvn -P cg package sources:jar javadoc:jar gpg:sign
 cd target
-jar cvf bundle.jar <package_name>*
+jar cvf bundle.jar mypackage*
 ```
 
 * Upload bundle.jar to oss.sonatype.org, release it.
+* If anything went wrong, fix and repeat the process above.
+* Tag the repository.
+
+```
+git tag --list
+git tag mypackage_v_1_0_1
+git push --tags
+```
 
 ### How to format code
 
