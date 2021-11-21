@@ -24,9 +24,9 @@
     <url>https://github.com/issues</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git@github.com:jiaqi/cyclopsgroup.git</connection>
-    <developerConnection>scm:git:git@github.com:jiaqi/cyclopsgroup.git</developerConnection>
-    <url>git@github.com:jiaqi/cyclopsgroup.git</url>
+    <connection>scm:git:git@github.com:cyclopsgroup/cyclopsgroup.git</connection>
+    <developerConnection>scm:git:git@github.com:cyclopsgroup/cyclopsgroup.git</developerConnection>
+    <url>git@github.com:cyclopsgroup/cyclopsgroup.git</url>
   </scm>
   <modules>
     <module>cyclopsgroup-java-parent</module>
