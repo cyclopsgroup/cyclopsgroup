@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  verify:
+  shared_verify_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
