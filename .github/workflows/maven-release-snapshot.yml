@@ -1,11 +1,10 @@
 name: Maven release snapshot
 
 on:
-  push:
-    branches: [main, snapshot]
+  workflow_call:
 
 jobs:
-  build_and_release:
+  shared_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
