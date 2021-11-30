@@ -28,6 +28,6 @@ jobs:
       - name: Maven
         run: mvn --batch-mode --update-snapshots verify package deploy
         env:
-          AWS_ACCESS_KEY_ID: ${{ inputs.awsAccessKeyId }}
-          AWS_SECRET_KEY: ${{ inputs.awsSecretKey }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.awsAccessKeyId }}
+          AWS_SECRET_KEY: ${{ secrets.awsSecretKey }}
 
