@@ -26,7 +26,7 @@ jobs:
           restore-keys: |
             maven-
       - name: Maven
-        run: mvn --batch-mode --update-snapshots verify package deploy
+        run: mvn --batch-mode --update-snapshots verify package site deploy site:deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.awsAccessKeyId }}
           AWS_SECRET_KEY: ${{ secrets.awsSecretKey }}
