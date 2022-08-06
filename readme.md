@@ -30,7 +30,7 @@ exists in the POM file.
 
 ```
 mvn clean
-mvn -P cg package sources:jar javadoc:jar gpg:sign
+mvn -P cg package source:jar javadoc:jar gpg:sign
 cd target
 jar cvf bundle.jar mypackage*
 ```
