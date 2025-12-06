@@ -7,19 +7,19 @@ jobs:
   shared_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Java8
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '8'
+          java-version: '21'
           distribution: 'zulu'
       - name: Maven cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             maven-
       - name: Maven
-        run: mvn --batch-mode --update-snapshots verify javadoc:javadoc
+        run: mvn --batch-mode --update-snapshots verify site
 

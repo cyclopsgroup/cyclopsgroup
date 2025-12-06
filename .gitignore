@@ -1,4 +1,6 @@
-/target
-.*
+target
+
+.vscode
 .idea
 *.iml
+*.log
